@@ -1,4 +1,6 @@
 Letting::Application.routes.draw do
+  resources :addresses
+
   resources :properties
 
   # The priority is based upon order of creation: first created -> highest priority.
