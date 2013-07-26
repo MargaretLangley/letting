@@ -1,0 +1,7 @@
+Listing
+
+<%= @properties.count %> count
+
+<% @properties.each do |property| %>
+<%= property.human_property_reference %>
+<% end %>
