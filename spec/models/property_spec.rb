@@ -35,7 +35,7 @@ describe Property do
     end
 
     it 'location' do
-      expect(property_with_address.location_addressd.road_no).to eq 3456
+      expect(property_with_address.location_address.road_no).to eq 3456
     end
   end
 
