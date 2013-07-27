@@ -1,7 +1,40 @@
-Listing
+Listing  <%= @properties.count %> count
+<table>
+  <thead>
+    <tr>
+      <th>
+        Property ID
+      </th>
+      <th>
+        Road
+      </th>
+      <th>
+        Town
+      </th>
+      <th>
+        Postcode
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @properties.each do |property| %>
+    <tr>
+      <td>
+        <%= property.human_property_reference %>
+      </td>
+      <td>
+        <%= property.location.road %>
+      </td>
+      <td>
+        <%= property.location.town %>
+      </td>
+      <td>
+        <%= property.location.postcode %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
 
-<%= @properties.count %> count
 
-<% @properties.each do |property| %>
-<%= property.human_property_reference %>
-<% end %>
+
+

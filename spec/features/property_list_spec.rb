@@ -4,12 +4,25 @@ describe Property do
 
 
   it 'listed' do
-    Property.create! human_property_reference: 777
-    Property.create! human_property_reference: 898
-    Property.create! human_property_reference: 8008
+    property1 = Property.create! human_property_reference: 111
+    property1.addresses.create! address_attributes
+
+    property2 = Property.create! human_property_reference: 222
+    property2.addresses.create! address_attributes
+
+    property3 = Property.create! human_property_reference: 333
+    property3.addresses.create! address_attributes
+
     visit '/properties/'
-    expect(page).to have_text '777'
-    expect(page).to have_text '898'
-    expect(page).to have_text '8008'
+    # shows more than one row
+    expect(page).to have_text '111'
+    expect(page).to have_text '222'
+
+    # Displays expected columns
+    expect(page).to have_text '333'
+    expect(page).to have_text 'High Street'
+    expect(page).to have_text 'Dudley'
+    expect(page).to have_text 'DY6 7RA'
+
   end
 end
