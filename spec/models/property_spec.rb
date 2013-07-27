@@ -8,23 +8,34 @@ describe Property do
     expect(property).to be_valid
   end
 
-  context 'Address' do
+  context '#human_property_reference' do
+    it 'validates it is a number' do
+      property.human_property_reference = "Not numbers"
+      expect(property).to_not be_valid
+    end
+    it 'validates it is unique' do
+      property.save
+      expect { Property.create! human_property_reference: 8000 }.to raise_error ActiveRecord::RecordInvalid
+    end
+  end
 
-    let(:property_with_location) do
+  context '#addresses' do
+
+    let(:property_with_address) do
       property.addresses.build address_attributes road_no: 3456
       property
     end
 
-    it 'has array' do
+    it 'as array' do
       expect(property.addresses).to eq []
     end
 
     it 'responds with created addreses' do
-      expect(property_with_location.addresses.map &:road_no).to eq [3456]
+      expect(property_with_address.addresses.map &:road_no).to eq [3456]
     end
 
     it 'location' do
-      expect(property_with_location.location.road_no).to eq 3456
+      expect(property_with_address.location_addressd.road_no).to eq 3456
     end
   end
 

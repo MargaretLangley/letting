@@ -20,16 +20,16 @@ Listing  <%= @properties.count %> count
     <% @properties.each do |property| %>
     <tr>
       <td>
-        <%= property.human_property_reference %>
+        <%= link_to property.human_property_reference, property %>
       </td>
       <td>
-        <%= property.location.road %>
+        <%= property.location_address.road %>
       </td>
       <td>
-        <%= property.location.town %>
+        <%= property.location_address.town %>
       </td>
       <td>
-        <%= property.location.postcode %>
+        <%= property.location_address.postcode %>
       </td>
     </tr>
     <% end %>
