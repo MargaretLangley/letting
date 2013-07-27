@@ -23,6 +23,6 @@ describe Property do
     expect(page).to have_text 'High Street'
     expect(page).to have_text 'Dudley'
     expect(page).to have_text 'DY6 7RA'
-
   end
 end
+

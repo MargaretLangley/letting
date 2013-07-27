@@ -1,14 +1,28 @@
 Letting:
 
 Property
- ☐ Listing
+ ☐ Import
+ ☐ Model
+     ☐ Billing Address
+     ☐ tag
+     ☐ Edit a number of records at once 'A Block'
+     ✔ validates numericality @done (13-07-27 15:13)
+     ✔ validates uniqueness @done (13-07-27 15:13)
+ ☐ Index
    ✔ M @done (13-07-27 11:06)
    ☐ V
+       ☐ IMPROVE: Navigating from list to show currently by clicking human_property_id
    ✔ C @done (13-07-27 11:06)
  ☐ Show
+   ✔ M @done (13-07-27 15:25)
+   ☐ V
+   ✔ C @done (13-07-27 15:25)
+ ☐ Create
    ☐ M
    ☐ V
    ☐ C
- ☐ Create
  ☐ Edit
+   ☐ M
+   ☐ V
+   ☐ C
  ☐ Delete
