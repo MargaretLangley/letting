@@ -7,4 +7,22 @@ class PropertiesController < ApplicationController
   def show
     @property = Property.find params[:id ]
   end
+
+  def edit
+    @property = Property.find params[:id]
+  end
+
+  def update
+    @property = Property.find params[:id]
+    @property.update property_params
+    redirect_to properties_path, notice: 'Property successfully updated!'
+  end
+
+  private
+
+    def property_params
+      params.require(:property).
+        permit(:human_property_reference,
+          location_address_attributes: [:county, :district, :flat_no, :house_name, :road, :road_no, :town, :postcode ] )
+    end
 end

@@ -6,6 +6,9 @@ Listing  <%= @properties.count %> count
         Property ID
       </th>
       <th>
+        No
+      </th>
+      <th>
         Road
       </th>
       <th>
@@ -23,6 +26,9 @@ Listing  <%= @properties.count %> count
         <%= link_to property.human_property_reference, property %>
       </td>
       <td>
+        <%= property.location_address.road_no %>
+      </td>
+      <td>
         <%= property.location_address.road %>
       </td>
       <td>
@@ -31,6 +37,9 @@ Listing  <%= @properties.count %> count
       <td>
         <%= property.location_address.postcode %>
       </td>
+      <td>
+        <%= link_to 'Edit', edit_property_path(property) %>
+      </t>
     </tr>
     <% end %>
   </tbody>

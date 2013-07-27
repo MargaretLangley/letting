@@ -1,0 +1,17 @@
+<h1>Edit</h1>
+
+<%= form_for @property do |f| %>
+<fieldset>
+  <div class='required'>
+    <%= f.label :Property_ID %>
+    <%= f.text_field :human_property_reference %>
+  </div>
+
+  <%= f.fields_for :location_address do |address| %>
+    <%= render partial: 'shared/address', locals: { f: address } %>
+  <% end %>
+  <div>
+    <%= f.submit %>
+  </div>
+</fieldset>
+<% end %>

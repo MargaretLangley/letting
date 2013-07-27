@@ -22,19 +22,11 @@ describe Property do
   context '#addresses' do
 
     let(:property_with_address) do
-      property.addresses.build address_attributes road_no: 3456
+      property.build_location_address address_attributes road_no: 3456
       property
     end
 
-    it 'as array' do
-      expect(property.addresses).to eq []
-    end
-
-    it 'responds with created addreses' do
-      expect(property_with_address.addresses.map &:road_no).to eq [3456]
-    end
-
-    it 'location' do
+    it 'location returns an address' do
       expect(property_with_address.location_address.road_no).to eq 3456
     end
   end

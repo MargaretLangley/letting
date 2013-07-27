@@ -3,6 +3,7 @@ Letting:
 Property
  ☐ Import
  ☐ Model
+     ☐ People
      ☐ Billing Address
      ☐ tag
      ☐ Edit a number of records at once 'A Block'
@@ -22,7 +23,8 @@ Property
    ☐ V
    ☐ C
  ☐ Edit
-   ☐ M
+   ✔ M @done (13-07-28 00:27)
    ☐ V
-   ☐ C
+   ✔ C @done (13-07-28 00:27)
+   ☐ Feature tests need refactoring as shared address
  ☐ Delete
