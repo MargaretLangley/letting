@@ -4,9 +4,7 @@ describe Property do
 
   let(:property) { Property.new human_property_reference: 8000 }
 
-  it 'is valid' do
-    expect(property).to be_valid
-  end
+  it ('is valid') { expect(property).to be_valid }
 
   context '#human_property_reference' do
     it 'validates it is a number' do
@@ -19,17 +17,14 @@ describe Property do
     end
   end
 
-  context '#addresses' do
+  context '::contact' do
 
-    let(:property_with_address) do
-      property.build_location_address address_attributes road_no: 3456
-      property
+    context '#addresses' do
+      it 'location returns an address' do
+        property.build_address address_attributes road_no: 3456
+        expect(property.address.road_no).to eq 3456
+      end
     end
 
-    it 'location returns an address' do
-      expect(property_with_address.location_address.road_no).to eq 3456
-    end
   end
-
-
 end

@@ -4,7 +4,7 @@ describe Property do
 
   it 'edits a property' do
     property = Property.create id: 1, human_property_reference: 8000
-    property.create_location_address address_attributes
+    property.create_address address_attributes
 
     visit '/properties/'
     click_on 'Edit'

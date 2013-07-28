@@ -7,7 +7,7 @@
     <%= f.text_field :human_property_reference %>
   </div>
 
-  <%= f.fields_for :location_address do |address| %>
+  <%= f.fields_for :address do |address| %>
     <%= render partial: 'shared/address', locals: { f: address } %>
   <% end %>
   <div>

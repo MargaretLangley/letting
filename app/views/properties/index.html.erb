@@ -26,16 +26,16 @@ Listing  <%= @properties.count %> count
         <%= link_to property.human_property_reference, property %>
       </td>
       <td>
-        <%= property.location_address.road_no %>
+        <%= property.address.road_no %>
       </td>
       <td>
-        <%= property.location_address.road %>
+        <%= property.address.road %>
       </td>
       <td>
-        <%= property.location_address.town %>
+        <%= property.address.town %>
       </td>
       <td>
-        <%= property.location_address.postcode %>
+        <%= property.address.postcode %>
       </td>
       <td>
         <%= link_to 'Edit', edit_property_path(property) %>

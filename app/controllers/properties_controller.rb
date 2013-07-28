@@ -22,7 +22,7 @@ class PropertiesController < ApplicationController
 
     def property_params
       params.require(:property).
-        permit(:human_property_reference,
-          location_address_attributes: [:county, :district, :flat_no, :house_name, :road, :road_no, :town, :postcode ] )
+        permit :human_property_reference,
+          address_attributes: [:county, :district, :flat_no, :house_name, :road, :road_no, :town, :postcode ]
     end
 end
