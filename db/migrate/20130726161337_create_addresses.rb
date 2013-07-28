@@ -1,7 +1,7 @@
 class CreateAddresses < ActiveRecord::Migration
   def change
     create_table :addresses do |t|
-      t.references :contact, polymorphic: true
+      t.references :addressable, polymorphic: true
       t.string :flat_no
       t.string :house_name
       t.string :road_no
@@ -13,6 +13,6 @@ class CreateAddresses < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :addresses, [:contact_id, :contact_type]
+    add_index :addresses, [:addressable_id, :addressable_type]
   end
 end

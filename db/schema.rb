@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20130726161337) do
   enable_extension "plpgsql"
 
   create_table "addresses", force: true do |t|
-    t.integer  "contact_id"
-    t.string   "contact_type"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
     t.string   "flat_no"
     t.string   "house_name"
     t.string   "road_no"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20130726161337) do
     t.datetime "updated_at"
   end
 
-  add_index "addresses", ["contact_id", "contact_type"], name: "index_addresses_on_contact_id_and_contact_type", using: :btree
+  add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type", using: :btree
 
   create_table "properties", force: true do |t|
     t.integer  "human_property_reference"

@@ -19,8 +19,8 @@ Property.create! [
 
 Address.create! [
   {
-    contact_id: 1,
-    contact_type: 'Property',
+    addressable_id: 1,
+    addressable_type: 'Property',
     road_no: '1',
     road: 'High Street',
     town: 'London',
@@ -28,8 +28,8 @@ Address.create! [
     postcode: 'SW1 1HA'
   },
   {
-    contact_id: 2,
-    contact_type: 'Property',
+    addressable_id: 2,
+    addressable_type: 'Property',
     road_no: '2',
     road: 'High Street',
     town: 'London',
@@ -37,8 +37,8 @@ Address.create! [
     postcode: 'SW2 2HB'
   },
   {
-    contact_id: 3,
-    contact_type: 'Property',
+    addressable_id: 3,
+    addressable_type: 'Property',
     road_no: '3',
     road: 'Green Fields',
     town: 'Suburbaton',
