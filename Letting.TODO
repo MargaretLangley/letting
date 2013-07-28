@@ -2,8 +2,10 @@ Letting:
 
 Property
  ☐ Import
- ☐ Model
-     ☐ People
+ ☐ Model Includes
+     ✔ Entity (People) @done (13-07-28 23:38)
+     ☐ Entity (company)
+     ✔ Address @done (13-07-27)
      ☐ Billing Address
      ☐ tag
      ☐ Edit a number of records at once 'A Block'

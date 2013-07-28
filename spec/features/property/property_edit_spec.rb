@@ -10,7 +10,9 @@ describe Property do
     expect(current_path).to eq '/properties/1/edit'
     expect_property_has_original_attributes
     expect_address_has_original_attributes
+    expect_entity_has_original_attributes
     fill_in_new_address
+    fill_in_new_entity
     click_on 'Update Property'
 
     expect(current_path).to eq '/properties'
@@ -19,12 +21,14 @@ describe Property do
 
     visit '/properties/1'
     expect_new_address
+    expect_new_entity
 
   end
 
   def setup_property_with_address
     property = Property.create id: 1, human_property_reference: 8000
     property.create_address address_attributes
+    property.entities.create person_entity_attributes
   end
 
   def expect_property_has_original_attributes
@@ -40,6 +44,12 @@ describe Property do
     expect(find_field('Town').value).to have_text 'Dudley'
     expect(find_field('County').value).to have_text 'West Midlands'
     expect(find_field('Postcode').value).to have_text 'DY6 7RA'
+  end
+
+  def expect_entity_has_original_attributes
+    expect(find_field('Title').value).to have_text 'Mr'
+    expect(find_field('Initials').value).to have_text 'X Z'
+    expect(find_field('Name').value).to have_text 'Ziou'
   end
 
   def expect_property_data_changed
@@ -61,6 +71,12 @@ describe Property do
     fill_in 'Postcode', with: 'SW1 4HA'
   end
 
+  def fill_in_new_entity
+    fill_in 'Title', with: 'Dr'
+    fill_in 'Initials', with: 'B M'
+    fill_in 'Name', with: 'Zeperello'
+  end
+
   def expect_new_address
     expect(page).to have_text '58'
     expect(page).to have_text 'River Brook'
@@ -69,6 +85,12 @@ describe Property do
     expect(page).to have_text 'London'
     expect(page).to have_text 'Greater'
     expect(page).to have_text 'SW1 4HA'
+  end
+
+  def expect_new_entity
+    expect(page).to have_text 'Dr'
+    expect(page).to have_text 'B M'
+    expect(page).to have_text 'Zeperello'
   end
 
 end

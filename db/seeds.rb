@@ -49,8 +49,24 @@ Address.create! [
 
 Entity.create! [
   {
+    entitieable_id: 1,
+    entitieable_type: 'Property',
     title: 'Mr',
     initials: 'X I',
     name: 'Wu'
+  },
+  {
+    entitieable_id: 2,
+    entitieable_type: 'Property',
+    title: 'Mr',
+    initials: 'G O',
+    name: 'Tigers'
+  },
+  {
+    entitieable_id: 3,
+    entitieable_type: 'Property',
+    title: 'Mr',
+    initials: 'Y O',
+    name: 'Sushi'
   }
 ]

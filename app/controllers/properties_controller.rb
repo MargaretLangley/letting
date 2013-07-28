@@ -23,6 +23,9 @@ class PropertiesController < ApplicationController
     def property_params
       params.require(:property).
         permit :human_property_reference,
-          address_attributes: [:county, :district, :flat_no, :house_name, :road, :road_no, :town, :postcode ]
+          address_attributes: [:county, :district, :flat_no, :house_name, :road, :road_no, :town, :postcode ],
+          entities_attributes: [:id, :title, :initials, :name]
+          # Note for collection of entities you need to return :id as well
+          # Note saw '_destroy' in the attributes
     end
 end
