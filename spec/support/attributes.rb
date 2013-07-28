@@ -11,3 +11,13 @@ def address_attributes overrides = {}
     postcode: 'DY6 7RA'
   }.merge overrides
 end
+
+
+
+def person_entity_attributes overrides = {}
+  {
+    title: 'Mr',
+    initials: 'X Z',
+    name: 'Ziou'
+  }.merge overrides
+end

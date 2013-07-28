@@ -10,3 +10,9 @@
 <%= @property.address.town %>
 <%= @property.address.county %>
 <%= @property.address.postcode %>
+
+<% @property.entities.each do |entity| %>
+  <%= entity.title %>
+  <%= entity.initials %>
+  <%= entity.name %>
+<% end %>

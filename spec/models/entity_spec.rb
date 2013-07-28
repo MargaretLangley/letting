@@ -2,9 +2,19 @@ require 'spec_helper'
 
 describe Entity do
 
-  let(:entity) { Entity.new person_entity_attributes }
+  let(:entity) { Entity.new person_entity_attributes entitieable_id: 1 }
+
   it 'is valid' do
-    expect(Entity.new person_entity_attributes).to be_valid
+    expect(entity).to be_valid
+  end
+
+  it 'must have a reference to a entitieable' do
+    entity.entitieable_id = nil
+    expect(entity).not_to be_valid
+  end
+
+  it 'is associated with a addressable' do
+    expect(entity).to respond_to(:entitieable)
   end
 
   it 'requires a name' do

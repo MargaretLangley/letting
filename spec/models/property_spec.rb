@@ -19,6 +19,17 @@ describe Property do
 
   context '::contact' do
 
+    context '#entities' do
+      it 'has an array of entities' do
+        expect(property.entities).to eq []
+      end
+
+      it "responds with its name after being created" do
+        entity = property.entities.build name: "Mike"
+        expect(entity.name).to eq 'Mike'
+      end
+    end
+
     context '#addresses' do
       it 'location returns an address' do
         property.build_address address_attributes road_no: 3456

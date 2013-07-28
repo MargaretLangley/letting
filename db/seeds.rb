@@ -46,3 +46,11 @@ Address.create! [
     postcode: 'SG3 3SC'
   }
 ]
+
+Entity.create! [
+  {
+    title: 'Mr',
+    initials: 'X I',
+    name: 'Wu'
+  }
+]
