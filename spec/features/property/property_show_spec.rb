@@ -3,9 +3,9 @@ require 'spec_helper'
 describe Property do
 
   it '#shows' do
-    property = Property.create id: 1 , human_property_reference: 1000
-    property.create_address address_attributes
-    property.entities.create person_entity_attributes
+    property = Property.create! id: 1 , human_property_reference: 1000
+    property.create_address! address_attributes
+    property.entities.create! person_entity_attributes
     visit '/properties/'
     click_on '1000'
     expect(current_path).to eq '/properties/1'

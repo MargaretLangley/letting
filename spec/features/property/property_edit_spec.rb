@@ -26,9 +26,9 @@ describe Property do
   end
 
   def setup_property_with_address
-    property = Property.create id: 1, human_property_reference: 8000
-    property.create_address address_attributes
-    property.entities.create person_entity_attributes
+    property = Property.create! id: 1, human_property_reference: 8000
+    property.create_address! address_attributes
+    property.entities.create! person_entity_attributes
   end
 
   def expect_property_has_original_attributes
