@@ -3,7 +3,6 @@
 
 <%= @property.address.flat_no %>
 <%= @property.address.house_name %>
-
 <%= @property.address.road_no %>
 <%= @property.address.road %>
 <%= @property.address.district %>
@@ -16,3 +15,27 @@
   <%= entity.initials %>
   <%= entity.name %>
 <% end %>
+
+<% if @property.separate_billing_address? %>
+  <br/>
+  <%= @property.bill_to.address.flat_no %>
+  <%= @property.bill_to.address.house_name %>
+  <%= @property.bill_to.address.road_no %>
+  <%= @property.bill_to.address.road %>
+  <%= @property.bill_to.address.district %>
+  <%= @property.bill_to.address.town %>
+  <%= @property.bill_to.address.county %>
+  <%= @property.bill_to.address.postcode %>
+  <% if @property.bill_to.entities.any? %>
+    <% @property.bill_to.entities.each do |entity| %>
+      <%= entity.title %>
+      <%= entity.initials %>
+      <%= entity.name %>
+    <% end %>
+  <% else %>
+    No Entities
+  <% end %>
+<% else %>
+ Billing to home address
+<% end %>
+

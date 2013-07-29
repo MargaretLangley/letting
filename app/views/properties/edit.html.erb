@@ -1,23 +1,29 @@
 <h1>Edit</h1>
 
 <%= form_for @property do |f| %>
-<fieldset>
+<fieldset id='contact_property'>
   <div class='required'>
     <%= f.label :Property_ID %>
     <%= f.text_field :human_property_reference %>
   </div>
-
-  <%= f.fields_for :address do |address| %>
-    <%= render partial: 'shared/address', locals: { f: address } %>
+  <%= f.fields_for :address do |builder| %>
+    <%= render partial: 'shared/address', locals: { f: builder, parent: 'property' } %>
   <% end %>
   <% @property.entities.each do |entity| %>
-    <%= f.fields_for :entities, entity do |e_form| %>
-      <%= render partial: 'shared/entity', locals: { f: e_form } %>
+    <%= f.fields_for :entities, entity do |builder| %>
+      <%= render partial: 'shared/entity', locals: { f: builder, parent: 'property' } %>
     <% end %>
   <% end %>
-
-  <div>
-    <%= f.submit %>
-  </div>
 </fieldset>
+
+
+<% if @property.separate_billing_address? %>
+  <%= f.fields_for :billing_profile do |builder| %>
+    <%= render partial: 'billing_profile', locals: { f: builder } %>
+  <% end %>
+<% end %>
+
+<div>
+  <%= f.submit %>
+</div>
 <% end %>

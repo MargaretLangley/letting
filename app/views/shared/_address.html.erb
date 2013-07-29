@@ -1,39 +1,44 @@
-<div class='require'>
-  <%= f.label :flat_no %>
-  <%= f.text_field :flat_no %>
-</div>
+<fieldset id='<%= parent %>_address'>
+  <LEGEND>Address</LEGEND>
+  <div class='require'>
+    <%= f.label :flat_no %>
+    <%= f.text_field :flat_no %>
+  </div>
 
-<div class='require'>
-  <%= f.label :house_name %>
-  <%= f.text_field :house_name %>
-</div>
+  <div class='require'>
+    <%= f.label :house_name %>
+    <%= f.text_field :house_name %>
+  </div>
 
-<div class='require'>
-  <%= f.label :road_no %>
-  <%= f.text_field :road_no %>
-</div>
+  <div class='require'>
+    <%= f.label :road_no %>
+    <%= f.text_field :road_no %>
+  </div>
 
-<div class='require'>
-  <%= f.label :road %>
-  <%= f.text_field :road %>
-</div>
+  <div class='require'>
+    <%= f.label :road %>
+    <%= f.text_field :road %>
+  </div>
 
-<div class='require'>
-  <%= f.label :district %>
-  <%= f.text_field :district %>
-</div>
+  <div class='require'>
+    <%= f.label :district %>
+    <%= f.text_field :district %>
+  </div>
 
-<div class='require'>
-  <%= f.label :town %>
-  <%= f.text_field :town %>
-</div>
+  <div class='require'>
+    <%= f.label :town %>
+    <%= f.text_field :town %>
+  </div>
 
-<div class='require'>
-  <%= f.label :county %>
-  <%= f.text_field :county %>
-</div>
+  <div class='require'>
+    <%= f.label :county %>
+    <%= f.text_field :county %>
+  </div>
 
-<div class='require'>
-  <%= f.label :postcode %>
-  <%= f.text_field :postcode %>
-</div>
+  <div class='require'>
+    <%= f.label :postcode %>
+    <%= f.text_field :postcode %>
+  </div>
+  <%= f.hidden_field :addressable_id %>
+  <%= f.hidden_field :addressable_type %>
+</fieldset>

@@ -8,10 +8,11 @@ describe Address do
     expect(address).to be_valid
   end
 
-  it 'must have a reference to a addressable' do
+  it 'must have a reference to an addressable' do
     address.addressable_id = nil
     expect(address).not_to be_valid
   end
+
 
   it 'is associated with a addressable' do
     expect(address).to respond_to(:addressable)

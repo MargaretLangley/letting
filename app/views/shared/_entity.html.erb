@@ -1,14 +1,18 @@
-<div class='require'>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-</div>
+<fieldset id='<%= parent %>_entity'>
+  <div class='require'>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
 
-<div class='require'>
-  <%= f.label :initials %>
-  <%= f.text_field :initials %>
-</div>
+  <div class='require'>
+    <%= f.label :initials %>
+    <%= f.text_field :initials %>
+  </div>
 
-<div class='require'>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-</div>
+  <div class='require'>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <%= f.hidden_field :entitieable_id %>
+  <%= f.hidden_field :entitieable_type %>
+</fieldset>

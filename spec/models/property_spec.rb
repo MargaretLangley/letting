@@ -38,4 +38,27 @@ describe Property do
     end
 
   end
+
+  context '#bill_to' do
+
+    it 'self when no billing profile' do
+      expect(property.bill_to).to eq property
+    end
+
+    it 'profile when one is set' do
+      property.build_billing_profile.address address_attributes road_no: 3456
+      expect(property.bill_to).to eq property.billing_profile
+    end
+  end
+
+  context '#separate_billing_address?' do
+    it 'false when no billing profile' do
+      expect(property.separate_billing_address?).to be_false
+    end
+
+    it 'false when billing profile' do
+      property.build_billing_profile.address address_attributes road_no: 3456
+      expect(property.separate_billing_address?).to be_true
+    end
+  end
 end

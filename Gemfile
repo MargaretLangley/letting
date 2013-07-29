@@ -58,5 +58,14 @@ group :test do
   gem 'zeus'
 end
 
+group :development, :test do
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem 'pry-rails'
+  gem 'pry-plus'
+end
+
+
+
 
 

@@ -2,11 +2,12 @@ Letting:
 
 Property
  ☐ Import
+ ☐ Js to add new entity
  ☐ Model Includes
      ✔ Entity (People) @done (13-07-28 23:38)
      ☐ Entity (company)
      ✔ Address @done (13-07-27)
-     ☐ Billing Address
+     ✔ Billing Address @done (13-07-30 12:21)
      ☐ tag
      ☐ Edit a number of records at once 'A Block'
      ✔ validates numericality @done (13-07-27 15:13)

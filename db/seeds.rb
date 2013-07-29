@@ -70,3 +70,35 @@ Entity.create! [
     name: 'Sushi'
   }
 ]
+
+BillingProfile.create! [
+  {
+    id: 1,
+    property_id: 1
+  }
+]
+
+Address.create! [
+  {
+    addressable_id: 1,
+    addressable_type: 'BillingProfile',
+    flat_no:  '33',
+    house_name: 'The Oval',
+    road_no:  '207b',
+    road:     'Vauxhall Street',
+    district: 'Kennington',
+    town:     'London',
+    county:   'Greater London',
+    postcode: 'SE11 5SS'
+  }
+]
+
+Entity.create! [
+  {
+    entitieable_id: 1,
+    entitieable_type: 'BillingProfile',
+    title: 'Mr',
+    initials: 'J C',
+    name: 'Laker'
+  }
+]

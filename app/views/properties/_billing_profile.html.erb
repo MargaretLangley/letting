@@ -1,0 +1,13 @@
+<fieldset id='billing_profile'>
+
+<%= f.fields_for :address do |builder| %>
+  <%= render partial: 'shared/address', locals: { f: builder, parent: 'property_billing_profile' } %>
+<% end %>
+
+<% @property.bill_to.entities.each do |entity| %>
+  <%= f.fields_for :entities, entity do |builder| %>
+    <%= render partial: 'shared/entity', locals: { f: builder, parent: 'property_billing_profile' } %>
+  <% end %>
+<% end %>
+
+</fieldset>
