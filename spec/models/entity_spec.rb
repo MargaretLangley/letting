@@ -8,11 +8,6 @@ describe Entity do
     expect(entity).to be_valid
   end
 
-  it 'must have a reference to a entitieable' do
-    entity.entitieable_id = nil
-    expect(entity).not_to be_valid
-  end
-
   it 'is associated with a addressable' do
     expect(entity).to respond_to(:entitieable)
   end

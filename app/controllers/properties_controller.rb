@@ -8,6 +8,24 @@ class PropertiesController < ApplicationController
     @property = Property.find params[:id ]
   end
 
+  def new
+    @property = Property.new
+    @property.build_address
+    @property.entities.build
+    @property.build_billing_profile
+    @property.billing_profile.build_address
+    @property.billing_profile.entities.build
+  end
+
+  def create
+    @property = Property.new property_params
+    if @property.save!
+      redirect_to properties_path, notice: 'Property successfully created!'
+    else
+      fail
+    end
+  end
+
   def edit
     @property = Property.find params[:id]
   end

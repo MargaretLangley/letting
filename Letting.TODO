@@ -6,12 +6,14 @@ Property
  ☐ Model Includes
      ✔ Entity (People) @done (13-07-28 23:38)
      ☐ Entity (company)
+     ☐ Multiple Entities in testing
      ✔ Address @done (13-07-27)
      ✔ Billing Address @done (13-07-30 12:21)
      ☐ tag
      ☐ Edit a number of records at once 'A Block'
      ✔ validates numericality @done (13-07-27 15:13)
      ✔ validates uniqueness @done (13-07-27 15:13)
+     ☐ validates string length
  ☐ Index
    ✔ M @done (13-07-27 11:06)
    ☐ V
@@ -25,9 +27,15 @@ Property
    ☐ M
    ☐ V
    ☐ C
+      ✔ Happy Path @done (13-07-30 18:14)
+      ☐ Fail Save
+          ☐ Fail duplicate Human Property ID
+          ☐ reject billing profile if empty
  ☐ Edit
    ✔ M @done (13-07-28 00:27)
    ☐ V
    ✔ C @done (13-07-28 00:27)
+       ☐ Happy Path @done (13-07-28 00:27)
+       ☐ Fail Save
    ☐ Feature tests need refactoring as shared address
  ☐ Delete
