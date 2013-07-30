@@ -36,6 +36,12 @@ class PropertiesController < ApplicationController
     redirect_to properties_path, notice: 'Property successfully updated!'
   end
 
+  def destroy
+    @property = Property.find(params[:id])
+    @property.destroy
+    redirect_to properties_path, alert: 'Property successfully deleted!'
+  end
+
   private
 
     def property_params

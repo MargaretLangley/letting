@@ -38,7 +38,8 @@ Listing  <%= @properties.count %> count
         <%= property.address.postcode %>
       </td>
       <td>
-        <%= link_to 'Edit', edit_property_path(property) %>
+        <%= link_to 'Edit', edit_property_path(property) %> |
+        <%= link_to 'Delete', property, method: :delete, data: { confirm: 'Are you sure?' } %>
       </t>
     </tr>
     <% end %>
