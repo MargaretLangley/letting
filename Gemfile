@@ -57,6 +57,7 @@ end
 group :test do
   gem 'zeus'
   gem 'simplecov', require: false
+  gem 'database_cleaner', '~> 1.0.1'
 end
 
 group :development, :test do
