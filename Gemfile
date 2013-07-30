@@ -56,6 +56,7 @@ end
 
 group :test do
   gem 'zeus'
+  gem 'simplecov', require: false
 end
 
 group :development, :test do
