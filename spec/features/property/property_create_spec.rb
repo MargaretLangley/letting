@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Property do
 
-  it 'creates a property' do
+  it '#create a property' do
     navigate_to_create_page
     expect(page).to have_text 'New Property'
     fill_form

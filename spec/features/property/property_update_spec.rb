@@ -2,9 +2,8 @@ require 'spec_helper'
 
 describe Property do
 
-  it 'edits a property' do
-
-    setup_property_with_address
+  it '#updates' do
+    property_factory id: 1, human_property_reference: 8000
     visit '/properties'
     click_on 'Edit'
     expect(current_path).to eq '/properties/1/edit'
@@ -16,13 +15,11 @@ describe Property do
 
     visit '/properties/1'
     expect_property_updates
-
   end
 
 
-
-  def setup_property_with_address
-    property = Property.create! id: 1, human_property_reference: 8000
+  def property_factory args = {}
+    property = Property.create! id: args[:id], human_property_reference: args[:human_property_reference]
     property.create_address! address_attributes
     property.entities.create! person_entity_attributes
     property.create_billing_profile.create_address! oval_address_attributes
@@ -68,11 +65,8 @@ describe Property do
         # As long as text for one field is right we know the
         # partial already works in other address code
         expect(find_field('Flat no').value).to have_text '33'
-
-        # expect(find_field('Name').value).to have_text 'Ziou'
       end
     end
-
 
     def expect_property_data_changed
       expect(page).to_not have_text '8000'

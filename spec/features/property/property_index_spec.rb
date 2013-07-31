@@ -2,16 +2,10 @@ require 'spec_helper'
 
 describe Property do
 
-
-  it 'listed' do
-    property1 = Property.create! human_property_reference: 111
-    property1.create_address! address_attributes
-
-    property2 = Property.create! human_property_reference: 222
-    property2.create_address! address_attributes
-
-    property3 = Property.create! human_property_reference: 333
-    property3.create_address! address_attributes
+  it '#index' do
+    property_factory human_property_reference: 111
+    property_factory human_property_reference: 222
+    property_factory human_property_reference: 333
 
     visit '/properties/'
     # shows more than one row
@@ -24,6 +18,13 @@ describe Property do
     expect(page).to have_text 'High Street'
     expect(page).to have_text 'Dudley'
     expect(page).to have_text 'DY6 7RA'
+  end
+
+
+  def property_factory attributes = {}
+    property = Property.create! human_property_reference: attributes[:human_property_reference]
+    property.create_address! address_attributes
+    property
   end
 end
 
