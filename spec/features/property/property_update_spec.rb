@@ -53,7 +53,7 @@ describe Property do
     end
 
     def expect_entity_has_original_attributes
-      within_fieldset 'property_entity' do
+      within_fieldset 'property_entity_0' do
         expect(find_field('Title').value).to have_text 'Mr'
         expect(find_field('Initials').value).to have_text 'X Z'
         expect(find_field('Name').value).to have_text 'Ziou'
@@ -98,7 +98,7 @@ describe Property do
     end
 
     def fill_in_new_entity
-      within_fieldset 'property_entity' do
+      within_fieldset 'property_entity_0' do
         fill_in 'Title', with: 'Dr'
         fill_in 'Initials', with: 'B M'
         fill_in 'Name', with: 'Zeperello'

@@ -43,7 +43,7 @@ describe Property do
     end
 
     def fill_in_property_entities
-      within_fieldset 'property_entity' do
+      within_fieldset 'property_entity_0' do
         fill_in 'Title', with: 'Mr'
         fill_in 'Initials', with: 'D C S'
         fill_in 'Name', with: 'Compton'
