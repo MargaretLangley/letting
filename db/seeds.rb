@@ -10,12 +10,12 @@ end
 
 
 def create_properties
-  create_property
-  create_address
   create_entities
-  create_billing_profile
-  create_billing_profile_address
+  create_address
+  create_property
   create_billing_profile_entity
+  create_billing_profile_address
+  create_billing_profile
 end
 
   def create_property
@@ -98,10 +98,23 @@ end
     BillingProfile.create! [
       {
         id: 1,
+        use_profile: true,
         property_id: 1
+      },
+      {
+        id: 2,
+        use_profile: false,
+        property_id: 2
+      },
+      {
+        id: 3,
+        use_profile: false,
+        property_id: 3
       }
     ]
   end
+
+
 
 
   def create_billing_profile_address

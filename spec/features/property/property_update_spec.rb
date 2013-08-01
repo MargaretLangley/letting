@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Property do
 
   it '#updates' do
-    property_factory id: 1, human_property_reference: 8000
+    property = property_factory id: 1, human_property_reference: 8000
     visit '/properties'
     click_on 'Edit'
     expect(current_path).to eq '/properties/1/edit'
@@ -19,11 +19,14 @@ describe Property do
 
 
   def property_factory args = {}
-    property = Property.create! id: args[:id], human_property_reference: args[:human_property_reference]
-    property.create_address! address_attributes
-    property.entities.create! person_entity_attributes
-    property.create_billing_profile.create_address! oval_address_attributes
-    property.billing_profile.entities.create! oval_person_entity_attributes
+    property = Property.new id: args[:id], human_property_reference: args[:human_property_reference]
+    property.build_address address_attributes
+    property.entities.build person_entity_attributes
+    property.build_billing_profile use_profile: true
+    property.billing_profile.build_address oval_address_attributes
+    property.billing_profile.entities.build oval_person_entity_attributes
+    property.save!
+    property
   end
 
 
@@ -108,7 +111,9 @@ describe Property do
     def fill_in_new_bill_profile
       within_fieldset 'billing_profile' do
         fill_in 'Road', with: 'Middlesex Road'
+      end
 
+      within_fieldset 'property_billing_profile_entity_0' do
         fill_in 'Initials', with: 'G A R'
         fill_in 'Name', with: 'Lock'
       end

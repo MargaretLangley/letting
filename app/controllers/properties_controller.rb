@@ -12,22 +12,24 @@ class PropertiesController < ApplicationController
     @property = Property.new
     @property.build_address
     @property.entities.build
-    @property.build_billing_profile
-    @property.billing_profile.build_address
-    @property.billing_profile.entities.build
+    @property.entities.build
+    @property.build_billing_profile.prepare_for_form
   end
 
   def create
     @property = Property.new property_params
-    if @property.save!
+    if @property.save
       redirect_to properties_path, notice: 'Property successfully created!'
     else
-      fail
+      @property.entities.build
+      @property.entities.build
+      render :new
     end
   end
 
   def edit
     @property = Property.find params[:id]
+    @property.billing_profile.prepare_for_form
   end
 
   def update
@@ -49,7 +51,7 @@ class PropertiesController < ApplicationController
         permit :human_property_reference,
           address_attributes: [:addressable_id, :addressable_type, :county, :district, :flat_no, :house_name, :road, :road_no, :town, :postcode ],
           entities_attributes: [:entitieable_id, :entitieable_type, :id, :title, :initials, :name],
-          billing_profile_attributes: [ :id, :property_id,
+          billing_profile_attributes: [ :id, :property_id, :use_profile,
             address_attributes:  [ :addressable_id, :addressable_type, :county, :district, :flat_no, :house_name, :road, :road_no, :town, :postcode ],
             entities_attributes: [:id, :entitieable_id, :entitieable_type,:title, :initials, :name]
           ]

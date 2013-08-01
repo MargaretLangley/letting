@@ -5,22 +5,47 @@ describe Property do
   it '#create a property' do
     navigate_to_create_page
     expect(page).to have_text 'New Property'
-    fill_form
+    fill_everything
     click_on 'Create Property'
     expect(current_path).to eq '/properties'
     click_on '278'
     verify
   end
 
+  it '#creates a property without billing profile' do
+    navigate_to_create_page
+    fill_in_property
+    fill_in_property_address
+    fill_in_property_entities
+    click_on 'Create Property'
+    expect(current_path).to eq '/properties'
+    click_on '278'
+    expect_property
+    expect_property_address
+    expect_property_entities
+  end
+
+  it '#create handles validation' do
+    pending
+    navigate_to_create_page
+    fill_in_property
+    fill_in_property_address
+    click_on 'Create Property'
+    expect(current_path).to eq '/properties'
+    expect(page).to have_text 'What is happening dude!'
+  end
+
+
   def navigate_to_create_page
     visit '/properties'
     click_on 'Add New Property'
   end
 
-  def fill_form
+  def fill_everything
     fill_in_property
     fill_in_property_address
     fill_in_property_entities
+    fill_in_use_billing_profile
     fill_in_billing_profile_address
     fill_in_billing_profile_entities
   end
@@ -50,6 +75,12 @@ describe Property do
       end
     end
 
+    def fill_in_use_billing_profile
+      within_fieldset 'billing_profile' do
+        check 'Use profile'
+      end
+    end
+
     def fill_in_billing_profile_address
       within_fieldset 'billing_profile' do
         fill_in 'Flat no', with: '555'
@@ -64,7 +95,7 @@ describe Property do
     end
 
     def fill_in_billing_profile_entities
-      within_fieldset 'billing_profile' do
+      within_fieldset 'property_billing_profile_entity_0' do
         fill_in 'Title', with: 'Mr'
         fill_in 'Initials', with: 'K J'
         fill_in 'Name', with: 'Barnett'

@@ -15,10 +15,8 @@
 </fieldset>
 
 
-<% if @property.separate_billing_address? %>
-  <%= f.fields_for :billing_profile do |builder| %>
-    <%= render partial: 'billing_profile', locals: { f: builder } %>
-  <% end %>
+<%= f.fields_for :billing_profile do |builder| %>
+  <%= render partial: 'billing_profile', locals: { f: builder } %>
 <% end %>
 
 <div>

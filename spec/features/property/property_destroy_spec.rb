@@ -13,9 +13,10 @@ describe Property do
 
 
   def property_factory args = {}
-    property = Property.create! human_property_reference: args[:human_property_reference]
-    property.create_address! address_attributes
-    property.entities.create! person_entity_attributes
+    property = Property.new human_property_reference: args[:human_property_reference]
+    property.build_address address_attributes
+    property.entities.build person_entity_attributes
+    property.save!
     property
   end
 end

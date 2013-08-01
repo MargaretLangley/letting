@@ -8,13 +8,40 @@ describe Entity do
     expect(entity).to be_valid
   end
 
-  it 'is associated with a addressable' do
-    expect(entity).to respond_to(:entitieable)
+  context 'associations' do
+    it 'with an entitieable' do
+      expect(entity).to respond_to(:entitieable)
+    end
   end
 
-  it 'requires a name' do
-    entity.name = nil
-    expect(entity).to_not be_valid
+  context 'validation' do
+    it 'requires a name' do
+      entity.name = nil
+      expect(entity).to_not be_valid
+    end
+  end
+
+  context 'methods' do
+
+    context '#empty?' do
+
+      it 'new entity is empty' do
+        entity = Entity.new
+        expect(entity).to be_empty
+      end
+
+      it 'new entity with attribute set is not empty' do
+        entity = Entity.new
+        entity.title = 'Mr'
+        expect(entity).to_not be_empty
+      end
+
+      it 'new entity with ignored attribute set is empty' do
+        entity = Entity.new
+        entity.id = 8
+        expect(entity).to be_empty
+      end
+    end
   end
 end
 
