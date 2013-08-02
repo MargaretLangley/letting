@@ -1,0 +1,79 @@
+/* FORMS */
+
+@import "colors";
+
+
+fieldset {
+  margin: 0 0 2% 0;
+  padding: 3% 4%;
+  background-color: $fieldset-color;
+  border: 0;
+  box-shadow: #aaa 0 0 8px;
+
+h3 {
+  margin-top: 0;
+}
+
+.field {
+  margin-bottom: 1.5%;
+}
+
+.field label {
+   float: left;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width: 30%;
+}
+
+.field.text input {
+   display: inline-block;
+   margin-left: 2%;
+   padding: 3px;
+   width: 65%;
+}
+
+
+
+  input,
+  textarea {
+    font-size:     16px;
+    padding:       10px;
+    border-radius: 6px;
+    box-shadow:    0px;
+    border: 1px solid $subdued-color;
+  }
+
+  div.field_with_errors {
+    label {
+      color: $errors-text-color;
+    }
+    input, textarea {
+      background: $errors-background-color;
+    }
+  }
+
+  p {
+    input {
+      display: inline-block;
+    }
+    a.button {
+      padding: 10px 15px;
+    }
+  }
+}
+
+input[type="submit"] {
+  width: 40%;
+  font-size: 1.5em;
+  border-radius:5px 5px 5px 5px;
+  -moz-border-radius:5px 5px 5px 5px;
+  -webkit-border-radius:5px 5px 5px 5px;
+  box-shadow:0px 0px 0px rgb(0, 0, 0);
+  -moz-box-shadow:0px 0px 0px rgb(0, 0, 0);
+  -webkit-box-shadow:0px 0px 0px rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  background-image:linear-gradient(-90deg, rgb(238, 238, 238), rgb(204, 204, 204));
+  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgb(238, 238, 238)), to(rgb(204, 204, 204)));
+  background-image:-moz-linear-gradient(-90deg, rgb(238, 238, 238), rgb(204, 204, 204));
+}

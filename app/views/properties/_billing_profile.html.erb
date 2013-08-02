@@ -1,7 +1,8 @@
 <fieldset id='billing_profile'>
-<%= f.check_box :use_profile %>
-<%= f.label :use_profile %>
-
+  <fieldset>
+    <%= f.check_box :use_profile %>
+    <%= f.label :use_profile %>
+ </fieldset>
 <%= f.fields_for :address do |builder| %>
   <%= render partial: 'shared/address', locals: { f: builder, parent: 'property_billing_profile' } %>
 <% end %>

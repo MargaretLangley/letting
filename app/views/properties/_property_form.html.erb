@@ -1,0 +1,34 @@
+<%= form_for @property do |f| %>
+  <%= render 'shared/errors', object: @property %>
+  <fieldset id='contact_property'>
+
+    <fieldset id='property'>
+      <div class='field text required'>
+        <h3>Property</h3>
+        <%= f.label :Property_ID %>
+        <%= f.text_field :human_property_reference %>
+      </div>
+    </fieldset>
+
+    <%= f.fields_for :address do |builder| %>
+      <%= render partial: 'shared/address', locals: { f: builder, parent: 'property' } %>
+    <% end %>
+
+    <% @property.entities.each do |entity| %>
+      <%= f.fields_for :entities, entity do |builder| %>
+        <%= render partial: 'shared/entity', locals: { f: builder, parent: 'property' } %>
+      <% end %>
+    <% end %>
+
+  </fieldset>
+
+  <%= f.fields_for :billing_profile do |builder| %>
+    <%= render partial: 'billing_profile', locals: { f: builder } %>
+  <% end %>
+
+  <div>
+    <p>
+      <%= f.submit %>
+    </p>
+  </div>
+<% end %>
