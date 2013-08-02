@@ -53,6 +53,17 @@ describe Property do
   end
 
   context 'Methods' do
+
+    context '#prepare_for_form' do
+      it 'builds required models' do
+        property = Property.new human_property_reference: 8000
+        property.prepare_for_form
+        expect(property.address).to_not be_nil
+        expect(property.entities).to have(2).items
+        expect(property.billing_profile).to_not be_nil
+      end
+    end
+
     context '#bill_to' do
 
       it 'property with no billing profile' do

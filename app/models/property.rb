@@ -10,6 +10,13 @@ class Property < ActiveRecord::Base
   validates :human_property_reference, numericality: true
   validates :human_property_reference, uniqueness: true
 
+  def prepare_for_form
+    self.build_address if self.address.nil?
+    (self.entities.count..1).each { self.entities.build }
+    self.build_billing_profile.prepare_for_form if self.billing_profile.nil?
+    true
+  end
+
   def separate_billing_address
     billing_profile.use_profile
   end

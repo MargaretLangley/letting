@@ -10,10 +10,7 @@ class PropertiesController < ApplicationController
 
   def new
     @property = Property.new
-    @property.build_address
-    @property.entities.build
-    @property.entities.build
-    @property.build_billing_profile.prepare_for_form
+    @property.prepare_for_form
   end
 
   def create
@@ -21,8 +18,7 @@ class PropertiesController < ApplicationController
     if @property.save
       redirect_to properties_path, notice: 'Property successfully created!'
     else
-      @property.entities.build
-      @property.entities.build
+      @property.prepare_for_form
       render :new
     end
   end
