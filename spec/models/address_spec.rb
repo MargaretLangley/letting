@@ -13,7 +13,12 @@ describe Address do
   end
 
   context 'validations' do
-
+    context 'presence' do
+      it('#county')  { address.county =nil; expect(address).not_to be_valid }
+      it('#town')    { address.town =nil; expect(address).not_to be_valid }
+      it('#road')    { address.road =nil; expect(address).not_to be_valid }
+      it('#road_no') { address.road_no =nil; expect(address).not_to be_valid }
+    end
   end
 
   context 'methods' do

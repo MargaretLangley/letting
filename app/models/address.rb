@@ -1,7 +1,7 @@
 class Address < ActiveRecord::Base
   belongs_to :addressable, polymorphic: true
 
-  validates :road, presence: true
+  validates :county, :town, :road, :road_no, presence: true
 
   def empty?
     attributes.except(*ignored_attrs).values.all?( &:blank? )
