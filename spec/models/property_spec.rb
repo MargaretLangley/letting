@@ -13,10 +13,12 @@ describe Property do
 
   context 'Attributes' do
     context '#human_property_reference' do
+
       it 'validates it is a number' do
         property.human_property_reference = "Not numbers"
         expect(property).to_not be_valid
       end
+
       it 'validates it is unique' do
         property.save!
         property.id = nil # dirty way of saving it again

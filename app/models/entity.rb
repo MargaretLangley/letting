@@ -3,8 +3,11 @@ class Entity < ActiveRecord::Base
   validates :name, presence: true
 
   def empty?
-    ignored_attrs = 'id', 'entitieable_id', 'entitieable_type', 'created_at', 'updated_at'
     attributes.except(*ignored_attrs).values.all?( &:blank? )
+  end
+
+  def ignored_attrs
+    ['id', 'entitieable_id', 'entitieable_type', 'created_at', 'updated_at']
   end
 
 end

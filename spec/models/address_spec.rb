@@ -4,9 +4,7 @@ describe Address do
 
   let(:address) { Address.new address_attributes addressable_id: 1}
 
-  it 'valid' do
-    expect(address).to be_valid
-  end
+  it ('valid') { expect(address).to be_valid }
 
   context 'associations' do
     it 'is associated with a addressable' do
@@ -22,24 +20,20 @@ describe Address do
 
     context '#empty?' do
 
-      it 'new address is empty' do
-        address = Address.new
-        expect(address).to be_empty
-      end
+      let(:address) { Address.new }
+
+      it ('new address is empty') { expect(address).to be_empty }
 
       it 'new address with attribute set is not empty' do
-        address = Address.new
         address.town = 'London'
         expect(address).to_not be_empty
       end
 
       it 'new address with ignored attribute set is empty' do
-        address = Address.new
         address.id = 8
         expect(address).to be_empty
       end
 
     end
   end
-
 end
