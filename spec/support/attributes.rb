@@ -2,13 +2,13 @@
 def address_attributes overrides = {}
   {
     flat_no:  '47',
-    house_name: 'Sunny Views',
-    road_no:  '10a',
-    road:     'High Street',
-    district: 'Kingswindford',
-    town:     'Dudley',
+    house_name: 'Hillbank House',
+    road_no:  '294',
+    road:     'Edgbaston Road',
+    district: 'Edgbaston',
+    town:     'Birmingham',
     county:   'West Midlands',
-    postcode: 'DY6 7RA'
+    postcode: 'B5 7QU'
   }.merge overrides
 end
 
@@ -29,8 +29,8 @@ end
 def person_entity_attributes overrides = {}
   {
     title: 'Mr',
-    initials: 'X Z',
-    name: 'Ziou'
+    initials: 'W G',
+    name: 'Grace'
   }.merge overrides
 end
 

@@ -14,10 +14,10 @@ describe Property do
 
     # Displays expected columns
     expect(page).to have_text '333'
-    expect(page).to have_text '10a'
-    expect(page).to have_text 'High Street'
-    expect(page).to have_text 'Dudley'
-    expect(page).to have_text 'DY6 7RA'
+    expect(page).to have_text '294'
+    expect(page).to have_text 'Edgbaston Road'
+    expect(page).to have_text 'Birmingham'
+    expect(page).to have_text 'B5 7QU'
   end
 
 

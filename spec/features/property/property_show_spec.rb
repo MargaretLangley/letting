@@ -13,8 +13,8 @@ describe Property do
     expect_billing_address
 
     expect(page).to have_text 'Mr'
-    expect(page).to have_text 'X Z'
-    expect(page).to have_text 'Ziou'
+    expect(page).to have_text 'W G'
+    expect(page).to have_text 'Grace'
   end
 
 
@@ -31,12 +31,12 @@ describe Property do
 
   def expect_property_address
     expect(page).to have_text '1000'
-    expect(page).to have_text '10a'
-    expect(page).to have_text 'High Street'
-    expect(page).to have_text 'Kingswindford'
-    expect(page).to have_text 'Dudley'
+    expect(page).to have_text '294'
+    expect(page).to have_text 'Edgbaston Road'
+    expect(page).to have_text 'Edgbaston'
+    expect(page).to have_text 'Birmingham'
     expect(page).to have_text 'West Midlands'
-    expect(page).to have_text 'DY6 7RA'
+    expect(page).to have_text 'B5 7QU'
   end
 
   def expect_billing_address

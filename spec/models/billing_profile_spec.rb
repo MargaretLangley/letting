@@ -31,11 +31,11 @@ describe BillingProfile do
       end
 
       it 'check address' do
-        expect(full_profile.address.road).to eq 'High Street'
+        expect(full_profile.address.road).to eq 'Edgbaston Road'
       end
 
       it 'check entities' do
-        expect(full_profile.entities[0].name).to eq 'Ziou'
+        expect(full_profile.entities[0].name).to eq 'Grace'
         expect(full_profile.entities[1].name).to be_nil
       end
 

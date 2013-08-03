@@ -62,21 +62,21 @@ describe Property do
     def expect_address_has_original_attributes
       within_fieldset 'property_address' do
         expect(find_field('Flat no').value).to have_text '47'
-        expect(find_field('House name').value).to have_text 'Sunny Views'
-        expect(find_field('Road no').value).to have_text '10a'
-        expect(find_field('Road').value).to have_text 'High Street'
-        expect(find_field('District').value).to have_text 'Kingswindford'
-        expect(find_field('Town').value).to have_text 'Dudley'
+        expect(find_field('House name').value).to have_text 'Hillbank House'
+        expect(find_field('Road no').value).to have_text '294'
+        expect(find_field('Road').value).to have_text 'Edgbaston Road'
+        expect(find_field('District').value).to have_text 'Edgbaston'
+        expect(find_field('Town').value).to have_text 'Birmingham'
         expect(find_field('County').value).to have_text 'West Midlands'
-        expect(find_field('Postcode').value).to have_text 'DY6 7RA'
+        expect(find_field('Postcode').value).to have_text 'B5 7QU'
       end
     end
 
     def expect_entity_has_original_attributes
       within_fieldset 'property_entity_0' do
         expect(find_field('Title').value).to have_text 'Mr'
-        expect(find_field('Initials').value).to have_text 'X Z'
-        expect(find_field('Name').value).to have_text 'Ziou'
+        expect(find_field('Initials').value).to have_text 'W G'
+        expect(find_field('Name').value).to have_text 'Grace'
       end
     end
 
@@ -91,7 +91,7 @@ describe Property do
     def expect_property_data_changed
       expect(page).to_not have_text '8000'
       expect(page).to have_text '8001'
-      expect(page).to_not have_text '10a'
+      expect(page).to_not have_text '294'
       expect(page).to have_text '11c'
     end
 

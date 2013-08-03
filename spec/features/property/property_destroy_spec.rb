@@ -5,9 +5,9 @@ describe Property do
   it '#destroys a property' do
     property_factory human_property_reference: 9000
     visit '/properties'
-    expect(page).to have_text 'High Street'
+    expect(page).to have_text 'Edgbaston Road'
     expect{ click_on 'Delete'}.to change(Property, :count).by -1
-    expect(page).not_to have_text 'High Street'
+    expect(page).not_to have_text 'Edgbaston Road'
     expect(page).to have_text 'Property successfully deleted!'
   end
 
