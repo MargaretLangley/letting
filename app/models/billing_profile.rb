@@ -6,9 +6,11 @@ class BillingProfile < ActiveRecord::Base
   accepts_nested_attributes_for :address, allow_destroy: true
   validates :entities, :presence => true, if: :use_profile?
 
+  MAX_ENTITIES = 2
+
   def prepare_for_form
     self.build_address if self.address.nil?
-    (self.entities.count..1).each { self.entities.build }
+    (self.entities.size...MAX_ENTITIES).each { self.entities.build }
     true
   end
 

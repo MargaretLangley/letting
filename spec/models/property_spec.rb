@@ -55,17 +55,27 @@ describe Property do
   context 'Methods' do
 
     context '#prepare_for_form' do
-      it 'builds required models' do
+      let(:property) do
         property = Property.new human_property_reference: 8000
         property.prepare_for_form
+        property
+      end
+
+      it 'builds required models' do
         expect(property.address).to_not be_nil
         expect(property.entities).to have(2).items
         expect(property.billing_profile).to_not be_nil
       end
 
+      it 'builds no more than the required models' do
+        property.prepare_for_form  # * 2
+        expect(property.address).to_not be_nil
+        expect(property.entities).to have(2).items
+        expect(property.billing_profile).to_not be_nil
+      end
+
+
       it '#clear_up_after_form destroys unused models' do
-        property = Property.new human_property_reference: 8000
-        property.prepare_for_form
         property.clear_up_after_form
         expect(property.address).to_not be_nil
         expect(property.entities.reject(&:marked_for_destruction?)).to have(0).items

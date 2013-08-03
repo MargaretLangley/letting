@@ -6,6 +6,8 @@ class Property < ActiveRecord::Base
   has_one :billing_profile, dependent: :destroy
   accepts_nested_attributes_for :billing_profile, allow_destroy: true
 
+  MAX_ENTITIES = 2
+
   validates :entities, :presence => true
   validates :human_property_reference, numericality: true
   validates :human_property_reference, uniqueness: true
@@ -13,7 +15,7 @@ class Property < ActiveRecord::Base
 
   def prepare_for_form
     self.build_address if self.address.nil?
-    (self.entities.count..1).each { self.entities.build }
+    (self.entities.size...MAX_ENTITIES).each { self.entities.build }
     self.build_billing_profile if self.billing_profile.nil?
     billing_profile.prepare_for_form
     true
