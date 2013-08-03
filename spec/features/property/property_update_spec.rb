@@ -3,10 +3,8 @@ require 'spec_helper'
 describe Property do
 
   it '#updates' do
-    property = property_factory id: 1, human_property_reference: 8000
-    visit '/properties'
-    click_on 'Edit'
-    expect(current_path).to eq '/properties/1/edit'
+    navigate_to_edit_page
+    validate_on_edit_page
     expect_form_to_be
     fill_in_form
     click_on 'Update Property'
@@ -16,6 +14,17 @@ describe Property do
     visit '/properties/1'
     expect_property_updates
   end
+
+  it '#update handles validation' do
+    navigate_to_edit_page
+    validate_on_edit_page
+    check_use_billing_profile
+    clear_address_road
+    click_on 'Update Property'
+    expect(current_path).to eq '/properties/1'
+    expect(page).to have_text 'The property could not be saved.'
+  end
+
 
 
   def property_factory args = {}
@@ -29,7 +38,15 @@ describe Property do
     property
   end
 
+  def navigate_to_edit_page
+    property = property_factory id: 1, human_property_reference: 8000
+    visit '/properties'
+    click_on 'Edit'
+  end
 
+  def validate_on_edit_page
+    expect(current_path).to eq '/properties/1/edit'
+  end
 
   def expect_form_to_be
     expect_property_has_original_attributes
@@ -81,12 +98,12 @@ describe Property do
 
 
   def fill_in_form
-    fill_in_new_address
-    fill_in_new_entity
-    fill_in_new_bill_profile
+    fill_in_address
+    fill_in_entity
+    fill_in_bill_profile
   end
 
-    def fill_in_new_address
+    def fill_in_address
         fill_in 'property_human_property_reference', with: '8001'
       within_fieldset 'property_address' do
         fill_in 'Flat no', with: '58'
@@ -100,7 +117,7 @@ describe Property do
       end
     end
 
-    def fill_in_new_entity
+    def fill_in_entity
       within_fieldset 'property_entity_0' do
         fill_in 'Title', with: 'Dr'
         fill_in 'Initials', with: 'B M'
@@ -108,17 +125,36 @@ describe Property do
       end
     end
 
-    def fill_in_new_bill_profile
-      within_fieldset 'billing_profile' do
-        fill_in 'Road', with: 'Middlesex Road'
-      end
-
-      within_fieldset 'property_billing_profile_entity_0' do
-        fill_in 'Initials', with: 'G A R'
-        fill_in 'Name', with: 'Lock'
-      end
+    def fill_in_bill_profile
+      check_use_billing_profile
+      fill_in_bill_profile_address
+      fill_in_bill_profile_entity
     end
 
+      def check_use_billing_profile
+        within_fieldset 'billing_profile' do
+          check 'Use profile'
+        end
+      end
+
+      def fill_in_bill_profile_address
+        within_fieldset 'billing_profile' do
+          fill_in 'Road', with: 'Middlesex Road'
+        end
+      end
+
+      def fill_in_bill_profile_entity
+        within_fieldset 'property_billing_profile_entity_0' do
+          fill_in 'Initials', with: 'G A R'
+          fill_in 'Name', with: 'Lock'
+        end
+      end
+
+  def clear_address_road
+    within_fieldset 'property_address' do
+      fill_in 'Road', with: ''
+    end
+  end
 
 
   def expect_properties

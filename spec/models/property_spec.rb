@@ -62,6 +62,15 @@ describe Property do
         expect(property.entities).to have(2).items
         expect(property.billing_profile).to_not be_nil
       end
+
+      it '#clear_up_after_form destroys unused models' do
+        property = Property.new human_property_reference: 8000
+        property.prepare_for_form
+        property.clear_up_after_form
+        expect(property.address).to_not be_nil
+        expect(property.entities.reject(&:marked_for_destruction?)).to have(0).items
+        expect(property.billing_profile).to_not be_nil
+      end
     end
 
     context '#bill_to' do

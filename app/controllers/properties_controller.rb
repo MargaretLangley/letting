@@ -25,13 +25,16 @@ class PropertiesController < ApplicationController
 
   def edit
     @property = Property.find params[:id]
-    @property.billing_profile.prepare_for_form
+    @property.prepare_for_form
   end
 
   def update
     @property = Property.find params[:id]
-    @property.update! property_params
-    redirect_to properties_path, notice: 'Property successfully updated!'
+    if @property.update property_params
+      redirect_to properties_path, notice: 'Property successfully updated!'
+    else
+      render :edit
+    end
   end
 
   def destroy

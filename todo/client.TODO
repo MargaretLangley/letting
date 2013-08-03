@@ -1,0 +1,27 @@
+Letting:
+
+Client
+ ☐ Import
+ ☐ Model
+     ☐ Entity (people)
+     ☐ Entity (company)
+     ☐ Multiple Entities
+     ☐ Address
+     ☐ Validation
+        ☐ human_readable_client_id   unique
+
+ ☐ Actions
+     ☐ Index
+       ☐ V
+       ☐ C
+     ☐ Show
+       ☐ V
+       ☐ C
+     ☐ Create
+       ☐ V
+       ☐ C
+     ☐ Update
+       ☐ V
+       ☐ C
+     ☐ Delete
+       ☐ C

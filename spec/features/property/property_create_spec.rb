@@ -26,13 +26,12 @@ describe Property do
   end
 
   it '#create handles validation' do
-    pending
     navigate_to_create_page
     fill_in_property
     fill_in_property_address
     click_on 'Create Property'
     expect(current_path).to eq '/properties'
-    expect(page).to have_text 'What is happening dude!'
+    expect(page).to have_text 'The property could not be saved.'
   end
 
 

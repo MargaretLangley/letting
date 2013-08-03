@@ -5,8 +5,6 @@ class BillingProfile < ActiveRecord::Base
   has_one :address, class_name: 'Address', dependent: :destroy, as: :addressable
   accepts_nested_attributes_for :address, allow_destroy: true
   validates :entities, :presence => true, if: :use_profile?
-  before_validation :clear_up_after_form
-
 
   def prepare_for_form
     self.build_address if self.address.nil?

@@ -9,12 +9,19 @@ class Property < ActiveRecord::Base
   validates :entities, :presence => true
   validates :human_property_reference, numericality: true
   validates :human_property_reference, uniqueness: true
+  before_validation :clear_up_after_form
 
   def prepare_for_form
     self.build_address if self.address.nil?
     (self.entities.count..1).each { self.entities.build }
-    self.build_billing_profile.prepare_for_form if self.billing_profile.nil?
+    self.build_billing_profile if self.billing_profile.nil?
+    billing_profile.prepare_for_form
     true
+  end
+
+  def clear_up_after_form
+    self.entities.select(&:empty?).each {|entity| mark_entity_for_destruction entity }
+    billing_profile.clear_up_after_form unless self.billing_profile.nil?
   end
 
   def separate_billing_address
@@ -29,4 +36,10 @@ class Property < ActiveRecord::Base
   def bill_to
     billing_profile.use_profile? ? billing_profile : self
   end
+
+  private
+    def mark_entity_for_destruction entity
+      entity.mark_for_destruction
+    end
+
 end
