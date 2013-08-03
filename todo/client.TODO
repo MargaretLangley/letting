@@ -2,13 +2,15 @@ Letting:
 
 Client
  ☐ Import
+ ☐ Seed
  ☐ Model
      ☐ Entity (people)
      ☐ Entity (company)
-     ☐ Multiple Entities
+     ✔ Multiple Entities @done (13-08-03 19:13)
      ☐ Address
+       ☐ Handle nil address as Address::NoAddress
      ☐ Validation
-        ☐ human_readable_client_id   unique
+        ✔ human_readable_client_id   unique @done (13-08-03 19:12)
 
  ☐ Actions
      ☐ Index
