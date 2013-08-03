@@ -2,7 +2,7 @@ Letting:
 
 Client
  ☐ Import
- ☐ Seed
+ ✔ Seed @done (13-08-03)
  ☐ Model
      ☐ Entity (people)
      ☐ Entity (company)
@@ -15,7 +15,7 @@ Client
  ☐ Actions
      ☐ Index
        ☐ V
-       ☐ C
+       ✔ C @done (13-08-03 22:59)
      ☐ Show
        ☐ V
        ☐ C
