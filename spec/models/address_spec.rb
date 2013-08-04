@@ -21,24 +21,10 @@ describe Address do
     end
   end
 
-  context 'methods' do
-
-    context '#empty?' do
-
-      let(:address) { Address.new }
-
-      it ('new address is empty') { expect(address).to be_empty }
-
-      it 'new address with attribute set is not empty' do
-        address.town = 'London'
-        expect(address).to_not be_empty
-      end
-
-      it 'new address with ignored attribute set is empty' do
-        address.id = 8
-        expect(address).to be_empty
-      end
-
-    end
+  context 'methods #empty? new address' do
+    let(:address) { Address.new }
+    it('empty') { expect(address).to be_empty }
+    it('with noted attribute not empty') { address.town = 'Bath'; expect(address).to_not be_empty }
+    it('with ignored attribute empty') { address.id = 8; expect(address).to be_empty}
   end
 end

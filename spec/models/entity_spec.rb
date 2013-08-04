@@ -12,33 +12,17 @@ describe Entity do
     end
   end
 
-  context 'validation' do
-    it 'requires a name' do
-      entity.name = nil
-      expect(entity).to_not be_valid
-    end
+  context 'validations' do
+    it('presence #name') { entity.name = nil; expect(entity).to_not be_valid }
   end
 
-  context 'methods' do
-
-    context '#empty?' do
-      let(:entity) { Entity.new}
-
-      it 'new entity is empty' do
-        expect(entity).to be_empty
-      end
-
-      it 'new entity with attribute set is not empty' do
-        entity.title = 'Mr'
-        expect(entity).to_not be_empty
-      end
-
-      it 'new entity with ignored attribute set is empty' do
-        entity.id = 8
-        expect(entity).to be_empty
-      end
-    end
+  context 'methods #empty? new entity' do
+    let(:entity) { Entity.new }
+    it('empty') { expect(entity).to be_empty }
+    it('with noted attribute not empty') { entity.name = 'Bob'; expect(entity).to_not be_empty }
+    it('with ignored attribute empty') { entity.id = 8; expect(entity).to be_empty}
   end
+
 end
 
 

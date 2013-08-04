@@ -6,7 +6,8 @@ class Address < ActiveRecord::Base
     attributes.except(*ignored_attrs).values.all?( &:blank? )
   end
 
-  def ignored_attrs
-    ['id', 'addressable_id', 'addressable_type', 'created_at', 'updated_at']
-  end
+  private
+    def ignored_attrs
+      ['id', 'addressable_id', 'addressable_type', 'created_at', 'updated_at']
+    end
 end
