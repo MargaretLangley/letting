@@ -11,7 +11,8 @@
  *= require_self
  *= require normalize
  *= require grid
+ *= require layout
+ *= require elements
  *= require lettings
  *= require forms
- *= require layout
  */
