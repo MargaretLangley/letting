@@ -47,8 +47,6 @@ class ClientsController < ApplicationController
 
     def clients_params
       params.require(:client).
-        permit :human_client_id,
-          address_attributes: [:addressable_id, :addressable_type, :county, :district, :flat_no, :house_name, :road, :road_no, :town, :postcode ],
-          entities_attributes: [:entitieable_id, :entitieable_type, :id, :title, :initials, :name]
+        permit :human_client_id, address_attributes: address_params, entities_attributes: entities_params
     end
 end
