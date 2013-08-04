@@ -8,6 +8,21 @@ class ClientsController < ApplicationController
     @client = Client.find params[:id]
   end
 
+  def new
+    @client = Client.new
+    @client.prepare_for_form
+  end
+
+  def create
+    @client = Client.new clients_params
+    if @client.save
+      redirect_to clients_path, notice: 'Client successfully created!'
+    else
+      @client.prepare_for_form
+      render :new
+    end
+  end
+
   def edit
     @client = Client.find params[:id]
   end

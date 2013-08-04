@@ -62,5 +62,29 @@ describe Client do
 
   end
 
+  context '#prepare_for_form' do
+    let(:client) do
+      client = Client.new human_client_id: 8000
+      client.prepare_for_form
+      client
+    end
 
+    it 'builds required models' do
+      expect(client.address).to_not be_nil
+      expect(client.entities).to have(2).items
+    end
+
+    it 'builds no more than the required models' do
+      client.prepare_for_form  # * 2
+      expect(client.address).to_not be_nil
+      expect(client.entities).to have(2).items
+    end
+
+
+    it '#clear_up_after_form destroys unused models' do
+      client.clear_up_after_form
+      expect(client.address).to_not be_nil
+      expect(client.entities.reject(&:marked_for_destruction?)).to have(0).items
+    end
+  end
 end
