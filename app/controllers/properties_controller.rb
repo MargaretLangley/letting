@@ -47,7 +47,7 @@ class PropertiesController < ApplicationController
 
     def property_params
       params.require(:property).
-        permit :human_property_reference,
+        permit :human_property_id,
           address_attributes: [:addressable_id, :addressable_type, :county, :district, :flat_no, :house_name, :road, :road_no, :town, :postcode ],
           entities_attributes: [:entitieable_id, :entitieable_type, :id, :title, :initials, :name],
           billing_profile_attributes: [ :id, :property_id, :use_profile,

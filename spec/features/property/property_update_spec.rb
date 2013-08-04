@@ -28,7 +28,7 @@ describe Property do
 
 
   def property_factory args = {}
-    property = Property.new id: args[:id], human_property_reference: args[:human_property_reference]
+    property = Property.new id: args[:id], human_property_id: args[:human_property_id]
     property.build_address address_attributes
     property.entities.build person_entity_attributes
     property.build_billing_profile use_profile: true
@@ -39,7 +39,7 @@ describe Property do
   end
 
   def navigate_to_edit_page
-    property = property_factory id: 1, human_property_reference: 8000
+    property = property_factory id: 1, human_property_id: 8000
     visit '/properties'
     click_on 'Edit'
   end
@@ -56,7 +56,7 @@ describe Property do
   end
 
     def expect_property_has_original_attributes
-      expect(find_field('property_human_property_reference').value).to have_text '8000'
+      expect(find_field('property_human_property_id').value).to have_text '8000'
     end
 
     def expect_address_has_original_attributes
@@ -104,7 +104,7 @@ describe Property do
   end
 
     def fill_in_address
-        fill_in 'property_human_property_reference', with: '8001'
+        fill_in 'property_human_property_id', with: '8001'
       within_fieldset 'property_address' do
         fill_in 'Flat no', with: '58'
         fill_in 'House name', with: 'River Brook'

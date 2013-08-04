@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Property do
 
   it '#show' do
-    property = property_factory id: 1, human_property_reference: 1000
+    property = property_factory id: 1, human_property_id: 1000
     visit '/properties/'
     click_on '1000'
     expect(current_path).to eq '/properties/1'
@@ -19,7 +19,7 @@ describe Property do
 
 
   def property_factory args = {}
-    property = Property.new id: args[:id], human_property_reference: args[:human_property_reference]
+    property = Property.new id: args[:id], human_property_id: args[:human_property_id]
     property.build_address address_attributes
     property.entities.build person_entity_attributes
     property.build_billing_profile use_profile: true

@@ -89,15 +89,15 @@ end
     Property.create! [
       {
         id: 1,
-        human_property_reference: 1001
+        human_property_id: 1001
       },
       {
         id: 2,
-        human_property_reference: 2002
+        human_property_id: 2002
       },
       {
         id: 3,
-        human_property_reference: 3003
+        human_property_id: 3003
       }
      ]
   end

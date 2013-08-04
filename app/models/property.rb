@@ -9,8 +9,8 @@ class Property < ActiveRecord::Base
   MAX_ENTITIES = 2
 
   validates :entities, :presence => true
-  validates :human_property_reference, numericality: true
-  validates :human_property_reference, uniqueness: true
+  validates :human_property_id, numericality: true
+  validates :human_property_id, uniqueness: true
   before_validation :clear_up_after_form
 
   def prepare_for_form

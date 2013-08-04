@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Property do
 
   let(:property) do
-    property = Property.new human_property_reference: 8000
+    property = Property.new human_property_id: 8000
     property.entities.new person_entity_attributes
     property.build_billing_profile use_profile: false, property_id: property.id
     property
@@ -12,22 +12,22 @@ describe Property do
   it ('#valid?') { expect(property).to be_valid }
 
   context 'validations' do
-    context '#human_property_reference' do
+    context '#human_property_id' do
 
       it 'is present' do
-        property.human_property_reference = nil
+        property.human_property_id = nil
         expect(property).not_to be_valid
       end
 
       it 'validates it is a number' do
-        property.human_property_reference = "Not numbers"
+        property.human_property_id = "Not numbers"
         expect(property).to_not be_valid
       end
 
       it 'validates it is unique' do
         property.save!
         property.id = nil # dirty way of saving it again
-        expect { property.save! human_property_reference: 8000 }.to raise_error ActiveRecord::RecordInvalid
+        expect { property.save! human_property_id: 8000 }.to raise_error ActiveRecord::RecordInvalid
       end
     end
   end
@@ -54,7 +54,7 @@ describe Property do
 
     context '#prepare_for_form' do
       let(:property) do
-        property = Property.new human_property_reference: 8000
+        property = Property.new human_property_id: 8000
         property.prepare_for_form
         property
       end

@@ -50,7 +50,7 @@ describe Property do
   end
 
     def fill_in_property
-      fill_in 'property_human_property_reference', with: '278'
+      fill_in 'property_human_property_id', with: '278'
     end
 
     def fill_in_property_address

@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 20130803143126) do
   add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type", using: :btree
 
   create_table "billing_profiles", force: true do |t|
-    t.boolean  "use_profile", null: false
-    t.integer  "property_id", null: false
+    t.boolean  "use_profile", default: false, null: false
+    t.integer  "property_id",                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20130803143126) do
   end
 
   create_table "entities", force: true do |t|
-    t.integer  "entitieable_id"
-    t.string   "entitieable_type"
+    t.integer  "entitieable_id",   null: false
+    t.string   "entitieable_type", null: false
     t.string   "title"
     t.string   "initials"
     t.string   "name"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20130803143126) do
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
 
   create_table "properties", force: true do |t|
-    t.integer  "human_property_reference"
+    t.integer  "human_property_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

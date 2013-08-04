@@ -3,9 +3,9 @@ require 'spec_helper'
 describe Property do
 
   it '#index' do
-    property_factory human_property_reference: 111
-    property_factory human_property_reference: 222
-    property_factory human_property_reference: 333
+    property_factory human_property_id: 111
+    property_factory human_property_id: 222
+    property_factory human_property_id: 333
 
     visit '/properties/'
     # shows more than one row
@@ -22,7 +22,7 @@ describe Property do
 
 
   def property_factory args = {}
-    property = Property.new human_property_reference: args[:human_property_reference]
+    property = Property.new human_property_id: args[:human_property_id]
     property.build_address address_attributes
     property.entities.build person_entity_attributes
     property.save!

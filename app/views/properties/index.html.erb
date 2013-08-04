@@ -23,7 +23,7 @@ Listing  <%= @properties.count %> count
     <% @properties.each do |property| %>
     <tr>
       <td>
-        <%= link_to property.human_property_reference, property %>
+        <%= link_to property.human_property_id, property %>
       </td>
       <td>
         <%= property.address.road_no %>
