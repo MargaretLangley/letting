@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Property do
 
   it '#updates' do
+    property_factory id: 1, human_property_id: 8000
     navigate_to_edit_page
     validate_on_edit_page
     expect_form_to_be
@@ -16,6 +17,7 @@ describe Property do
   end
 
   it '#update handles validation' do
+    property_factory id: 1, human_property_id: 8000
     navigate_to_edit_page
     validate_on_edit_page
     check_use_billing_profile
@@ -25,21 +27,7 @@ describe Property do
     expect(page).to have_text 'The property could not be saved.'
   end
 
-
-
-  def property_factory args = {}
-    property = Property.new id: args[:id], human_property_id: args[:human_property_id]
-    property.build_address address_attributes
-    property.entities.build person_entity_attributes
-    property.build_billing_profile use_profile: true
-    property.billing_profile.build_address oval_address_attributes
-    property.billing_profile.entities.build oval_person_entity_attributes
-    property.save!
-    property
-  end
-
   def navigate_to_edit_page
-    property = property_factory id: 1, human_property_id: 8000
     visit '/properties'
     click_on 'Edit'
   end

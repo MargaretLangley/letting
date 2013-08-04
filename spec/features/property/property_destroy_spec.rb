@@ -10,13 +10,4 @@ describe Property do
     expect(page).not_to have_text 'Edgbaston Road'
     expect(page).to have_text 'Property successfully deleted!'
   end
-
-
-  def property_factory args = {}
-    property = Property.new human_property_id: args[:human_property_id]
-    property.build_address address_attributes
-    property.entities.build person_entity_attributes
-    property.save!
-    property
-  end
 end

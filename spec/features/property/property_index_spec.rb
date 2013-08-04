@@ -20,7 +20,6 @@ describe Property do
     expect(page).to have_text 'B5 7QU'
   end
 
-
   def property_factory args = {}
     property = Property.new human_property_id: args[:human_property_id]
     property.build_address address_attributes
