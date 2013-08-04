@@ -4,7 +4,7 @@ Client
  ☐ Import
  ✔ Seed @done (13-08-03)
  ☐ Model
-     ☐ Entity (people)
+     ✔ Entity (people) @done (13-08-04 16:47)
      ☐ Entity (company)
      ✔ Multiple Entities @done (13-08-03 19:13)
      ☐ Address
@@ -21,9 +21,9 @@ Client
        ✔ C @done (13-08-04 13:18)
      ☐ Create
        ☐ V
-       ☐ C
+       ✔ C @done (By 13-08-04 16:47)
      ☐ Update
        ☐ V
-       ☐ C
+       ✔ C @done (By 13-08-04 16:47)
      ☐ Delete
-       ☐ C
+       ✔ C @done (By 13-08-04 16:47)
