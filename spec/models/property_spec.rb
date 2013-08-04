@@ -11,8 +11,13 @@ describe Property do
 
   it ('#valid?') { expect(property).to be_valid }
 
-  context 'Attributes' do
+  context 'validations' do
     context '#human_property_reference' do
+
+      it 'is present' do
+        property.human_property_reference = nil
+        expect(property).not_to be_valid
+      end
 
       it 'validates it is a number' do
         property.human_property_reference = "Not numbers"
@@ -28,26 +33,19 @@ describe Property do
   end
 
   context 'Associations' do
-    context '::contact' do
 
-      context '#entities' do
-        it 'has an array of entities' do
-          expect(property).to respond_to(:entities)
-        end
+    context '#entities' do
 
-        it 'has at least one child' do
-          property.entities.destroy_all
-          expect(property).not_to be_valid
-        end
+      it('is entitieable') { expect(property).to respond_to(:entities) }
+
+      it 'has at least one child' do
+        property.entities.destroy_all
+        expect(property).not_to be_valid
       end
+    end
 
-      context '#addresses' do
-        it 'location returns an address' do
-          property.build_address address_attributes road_no: 3456
-          expect(property.address.road_no).to eq 3456
-        end
-      end
-
+    context '#addresses' do
+      it('is addressable') { expect(property).to respond_to :address }
     end
 
   end

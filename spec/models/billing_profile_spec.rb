@@ -119,34 +119,25 @@ describe BillingProfile do
 
   context 'Associations' do
 
-    context '::contact' do
+    context '#entities' do
+      it('is entitieable') { expect(billing_profile).to respond_to(:entities) }
+    end
 
-      context '#entities' do
-        it 'has an array of entities' do
-          expect(billing_profile).to respond_to(:entities)
-        end
+    context '#address' do
+
+      it('is addressable') { expect(billing_profile).to respond_to :address }
+
+      it 'saving nil address does not change address count' do
+        billing_profile.address = nil
+        expect { billing_profile.save! }.to change(Address, :count).by 0
       end
 
-      context '#address' do
-
-        it 'returns address attributes' do
-          billing_profile.build_address address_attributes road_no: 3456
-          expect(billing_profile.address.road_no).to eq 3456
-        end
-
-        it 'is not saved if empty (rejected)' do
-          billing_profile.address = nil
-          expect { billing_profile.save! }.to change(Address, :count).by 0
-        end
-
-        it 'is saved when filled in' do
-          billing_profile.build_address address_attributes
-          expect { billing_profile.save! }.to change(Address, :count).by 1
-        end
-
+      it 'is saved when filled in' do
+        expect { billing_profile.save! }.to change(Address, :count).by 1
       end
 
     end
+
   end
 
 end

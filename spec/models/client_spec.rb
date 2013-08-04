@@ -16,6 +16,11 @@ describe Client do
       expect(client).not_to be_valid
     end
 
+    it 'validates it is a number' do
+      client.human_client_id = "Not numbers"
+      expect(client).to_not be_valid
+    end
+
     it '#human_client_id is unique' do
       client.save!
       expect{ Client.create! human_client_id: 1 }.to raise_error ActiveRecord::RecordInvalid
@@ -29,34 +34,32 @@ describe Client do
 
   context 'Associations' do
 
-    context '::contact' do
+    context '#entities' do
+      it('is entitieable') { expect(client).to respond_to(:entities) }
+    end
 
-      context '#entities' do
-        it 'has an array of entities' do
-          expect(client).to respond_to(:entities)
-        end
+    context '#address' do
+
+      let(:client) do
+        client = Client.new human_client_id: 1
+        client.entities.new person_entity_attributes
+        client.build_address address_attributes road_no: 3456
+        client
       end
 
-      context '#address' do
+      it('is addressable') { expect(client).to respond_to :address }
 
-        it 'returns address attributes' do
-          client.build_address address_attributes road_no: 3456
-          expect(client.address.road_no).to eq 3456
-        end
+      it 'saving nil address does not change address count' do
+        client.address = nil
+        expect { client.save! }.to change(Address, :count).by 0
+      end
 
-        it 'is not saved if empty (rejected)' do
-          client.address = nil
-          expect { client.save! }.to change(Address, :count).by 0
-        end
-
-        it 'is saved when filled in' do
-          client.build_address address_attributes
-          expect { client.save! }.to change(Address, :count).by 1
-        end
-
+      it 'is saved when filled in' do
+        expect { client.save! }.to change(Address, :count).by 1
       end
 
     end
+
   end
 
 
