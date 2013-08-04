@@ -1,0 +1,29 @@
+<%= form_for @client do |f| %>
+  <%= render 'shared/errors', object: @client %>
+  <fieldset id='client'>
+
+    <div class='field text required'>
+      <h3>Client</h3>
+      <%= f.label :Client_ID %>
+      <%= f.text_field :human_client_id %>
+    </div>
+
+    <%= f.fields_for :address do |builder| %>
+      <%= render partial: 'shared/address', locals: { f: builder, parent: 'client' } %>
+    <% end %>
+
+    <% @client.entities.each do |entity| %>
+      <%= f.fields_for :entities, entity do |builder| %>
+        <%= render partial: 'shared/entity', locals: { f: builder, parent: 'client' } %>
+      <% end %>
+    <% end %>
+
+  </fieldset>
+
+
+  <div>
+    <p>
+      <%= f.submit %>
+    </p>
+  </div>
+<% end %>

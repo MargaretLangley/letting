@@ -1,54 +1,51 @@
 require 'spec_helper'
 
-describe Property do
+describe Client do
 
   it '#updates' do
-    property_factory id: 1, human_property_id: 8000
+    client_factory id: 1, human_client_id: 3003
     navigate_to_edit_page
     validate_on_edit_page
     expect_form_to_be
     fill_in_form
-    click_on 'Update Property'
+    click_on 'Update Client'
+    expect_clients
 
-    expect_properties
-
-    visit '/properties/1'
-    expect_property_updates
+    visit '/clients/1'
+    expect_client_updates
   end
 
   it '#update handles validation' do
-    property_factory id: 1, human_property_id: 8000
+    client_factory id: 1, human_client_id: 3003
     navigate_to_edit_page
     validate_on_edit_page
-    check_use_billing_profile
     clear_address_road
-    click_on 'Update Property'
-    expect(current_path).to eq '/properties/1'
-    expect(page).to have_text 'The property could not be saved.'
+    click_on 'Update Client'
+    expect(current_path).to eq '/clients/1'
+    expect(page).to have_text 'The client could not be saved.'
   end
 
   def navigate_to_edit_page
-    visit '/properties/'
+    visit '/clients/'
     click_on 'Edit'
   end
 
   def validate_on_edit_page
-    expect(current_path).to eq '/properties/1/edit'
+    expect(current_path).to eq '/clients/1/edit'
   end
 
   def expect_form_to_be
-    expect_property_has_original_attributes
+    expect_client_has_original_attributes
     expect_address_has_original_attributes
     expect_entity_has_original_attributes
-    expect_bill_profile_has_original_attributes
   end
 
-    def expect_property_has_original_attributes
-      expect(find_field('property_human_property_id').value).to have_text '8000'
+    def expect_client_has_original_attributes
+      expect(find_field('client_human_client_id').value).to have_text '3003'
     end
 
     def expect_address_has_original_attributes
-      within_fieldset 'property_address' do
+      within_fieldset 'client_address' do
         expect(find_field('Flat no').value).to have_text '47'
         expect(find_field('House name').value).to have_text 'Hillbank House'
         expect(find_field('Road no').value).to have_text '294'
@@ -61,32 +58,21 @@ describe Property do
     end
 
     def expect_entity_has_original_attributes
-      within_fieldset 'property_entity_0' do
+      within_fieldset 'client_entity_0' do
         expect(find_field('Title').value).to have_text 'Mr'
         expect(find_field('Initials').value).to have_text 'W G'
         expect(find_field('Name').value).to have_text 'Grace'
       end
     end
 
-    def expect_bill_profile_has_original_attributes
-      within_fieldset 'billing_profile' do
-        # As long as text for one field is right we know the
-        # partial already works in other address code
-        expect(find_field('Flat no').value).to have_text '33'
-      end
-    end
-
-
-
   def fill_in_form
-    fill_in 'property_human_property_id', with: '8001'
+    fill_in 'client_human_client_id', with: '3004'
     fill_in_address
     fill_in_entity
-    fill_in_bill_profile
   end
 
     def fill_in_address
-      within_fieldset 'property_address' do
+       within_fieldset 'client_address' do
         fill_in 'Flat no', with: '58'
         fill_in 'House name', with: 'River Brook'
         fill_in 'Road no', with: '11c'
@@ -99,58 +85,29 @@ describe Property do
     end
 
     def fill_in_entity
-      within_fieldset 'property_entity_0' do
+      within_fieldset 'client_entity_0' do
         fill_in 'Title', with: 'Dr'
         fill_in 'Initials', with: 'B M'
         fill_in 'Name', with: 'Zeperello'
       end
     end
 
-    def fill_in_bill_profile
-      check_use_billing_profile
-      fill_in_bill_profile_address
-      fill_in_bill_profile_entity
-    end
-
-      def check_use_billing_profile
-        within_fieldset 'billing_profile' do
-          check 'Use profile'
-        end
-      end
-
-      def fill_in_bill_profile_address
-        within_fieldset 'billing_profile' do
-          fill_in 'Road', with: 'Middlesex Road'
-        end
-      end
-
-      def fill_in_bill_profile_entity
-        within_fieldset 'property_billing_profile_entity_0' do
-          fill_in 'Initials', with: 'G A R'
-          fill_in 'Name', with: 'Lock'
-        end
-      end
-
-
-  def expect_properties
-    expect(current_path).to eq '/properties'
-    expect(page).to have_text 'Property successfully updated!'
-    expect_property_data_changed
+  def expect_clients
+    expect(current_path).to eq '/clients'
+    expect(page).to have_text 'Client successfully updated!'
+    expect_client_data_changed
   end
 
-    def expect_property_data_changed
-      expect(page).to_not have_text '8000'
-      expect(page).to have_text '8001'
+    def expect_client_data_changed
+      expect(page).to_not have_text '3003'
+      expect(page).to have_text '3004'
       expect(page).to_not have_text '294'
       expect(page).to have_text '11c'
     end
 
-
-
-  def expect_property_updates
+  def expect_client_updates
     expect_new_address
     expect_new_entity
-    expect_new_bill_profile
   end
 
     def expect_new_address
@@ -169,16 +126,9 @@ describe Property do
       expect(page).to have_text 'Zeperello'
     end
 
-    def expect_new_bill_profile
-      expect(page).to have_text 'Middlesex Road'
-      expect(page).to have_text 'G A R'
-      expect(page).to have_text 'Lock'
-    end
-
   def clear_address_road
-    within_fieldset 'property_address' do
+    within_fieldset 'client_address' do
       fill_in 'Road', with: ''
     end
   end
-
 end
