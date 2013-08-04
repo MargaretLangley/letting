@@ -11,6 +11,10 @@ Client
        ☐ Handle nil address as Address::NoAddress
      ☐ Validation
         ✔ human_readable_client_id   unique @done (13-08-03 19:12)
+ ☐ Associations
+   ✔ has_one address @done (Before13-08-04 18:14)
+   ✔ has_many entites @done (before 13-08-04 18:14)
+   ✔ has_many properties @done (13-08-04 18:13)
 
  ☐ Actions
      ☐ Index

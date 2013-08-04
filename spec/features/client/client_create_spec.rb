@@ -33,7 +33,6 @@ describe Client do
   end
 
     def fill_in_client
-      save_and_open_page
       fill_in 'client_human_client_id', with: '278'
     end
 

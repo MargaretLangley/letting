@@ -48,6 +48,12 @@ describe Property do
       it('is addressable') { expect(property).to respond_to :address }
     end
 
+    it 'belongs to a client' do
+      client = client_factory id: 1, human_client_id: 1
+      property = client.properties.new human_property_id: 8000
+      expect(property.client).to eq client
+    end
+
   end
 
   context 'Methods' do

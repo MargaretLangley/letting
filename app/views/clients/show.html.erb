@@ -1,4 +1,4 @@
-
+<h3>Client</h3>
 <%= @client.human_client_id %>
 
 <%= @client.address.flat_no %>
@@ -9,9 +9,27 @@
 <%= @client.address.town %>
 <%= @client.address.county %>
 <%= @client.address.postcode %>
+<br/>
 
 <% @client.entities.each do |entity| %>
   <%= entity.title %>
   <%= entity.initials %>
   <%= entity.name %>
+<% end %>
+
+
+<h3>Properties Owned</h3>
+<% @client.properties.each do |property| %>
+
+  <%= property.human_property_id %>
+
+  <%= property.address.flat_no %>
+  <%= property.address.house_name %>
+  <%= property.address.road_no %>
+  <%= property.address.road %>
+  <%= property.address.district %>
+  <%= property.address.town %>
+  <%= property.address.county %>
+  <%= property.address.postcode %>
+  <br/>
 <% end %>

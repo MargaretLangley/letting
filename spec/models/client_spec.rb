@@ -60,6 +60,11 @@ describe Client do
 
     end
 
+    context '#properties' do
+      it('has properties') { expect(client).to respond_to(:properties) }
+    end
+
+
   end
 
   context '#prepare_for_form' do

@@ -1,4 +1,5 @@
 class Property < ActiveRecord::Base
+  belongs_to :client
   has_many :entities, dependent: :destroy, as: :entitieable
   accepts_nested_attributes_for :entities, allow_destroy: true, reject_if: :all_blank
   has_one :address, class_name: 'Address', dependent: :destroy, as: :addressable
