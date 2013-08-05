@@ -1,31 +1,23 @@
 class BillingProfile < ActiveRecord::Base
   belongs_to :property
-  has_many :entities, dependent: :destroy, as: :entitieable
-  accepts_nested_attributes_for :entities, allow_destroy: true
-  has_one :address, class_name: 'Address', dependent: :destroy, as: :addressable
-  accepts_nested_attributes_for :address, allow_destroy: true
+  include Contact
   validates :entities, :presence => true, if: :use_profile?
 
-  MAX_ENTITIES = 2
-
   def prepare_for_form
-    self.build_address if self.address.nil?
-    (self.entities.size...MAX_ENTITIES).each { self.entities.build }
-    true
+    prepare_contact
   end
 
   def clear_up_after_form
     if use_profile?
-      self.entities.select(&:empty?).each {|entity| mark_entity_for_destruction entity }
+      entities_for_destruction :empty?
     else
-      self.address.mark_for_destruction unless self.address.nil?
-      self.entities.each {|entity| mark_entity_for_destruction entity }
+      address_for_destruction unless self.address.nil?
+      entities_for_destruction :all?
     end
   end
 
-private
-  def mark_entity_for_destruction entity
-    entity.mark_for_destruction
-  end
-
+  private
+    def address_for_destruction
+      self.address.mark_for_destruction
+    end
 end

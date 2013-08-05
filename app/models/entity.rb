@@ -2,6 +2,9 @@ class Entity < ActiveRecord::Base
   belongs_to :entitieable, polymorphic: true
   validates :name, presence: true
 
+  def all?
+    true
+  end
   def empty?
     attributes.except(*ignored_attrs).values.all?( &:blank? )
   end
