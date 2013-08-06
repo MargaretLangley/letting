@@ -1,38 +1,21 @@
+
 <h3>Property</h3>
 <%= @property.human_property_id %>
-
-<%= @property.address.flat_no %>
-<%= @property.address.house_name %>
-<%= @property.address.road_no %>
-<%= @property.address.road %>
-<%= @property.address.district %>
-<%= @property.address.town %>
-<%= @property.address.county %>
-<%= @property.address.postcode %>
-
+<br/>
+<%= render 'show_address', object: @property %>
+<br/>
 <% @property.entities.each do |entity| %>
-  <%= entity.title %>
-  <%= entity.initials %>
-  <%= entity.name %>
+  <%= render 'show_entity', object: entity %>
 <% end %>
 
 <h3>Billing Address</h3>
 
 <% if @property.separate_billing_address? %>
   <br/>
-  <%= @property.bill_to.address.flat_no %>
-  <%= @property.bill_to.address.house_name %>
-  <%= @property.bill_to.address.road_no %>
-  <%= @property.bill_to.address.road %>
-  <%= @property.bill_to.address.district %>
-  <%= @property.bill_to.address.town %>
-  <%= @property.bill_to.address.county %>
-  <%= @property.bill_to.address.postcode %>
+  <%= render 'show_address', object: @property.bill_to %>
   <% if @property.bill_to.entities.any? %>
     <% @property.bill_to.entities.each do |entity| %>
-      <%= entity.title %>
-      <%= entity.initials %>
-      <%= entity.name %>
+    <%= render 'show_entity', object: entity %>
     <% end %>
   <% else %>
     No Entities
