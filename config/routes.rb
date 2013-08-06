@@ -2,6 +2,7 @@ Letting::Application.routes.draw do
 
   root 'properties#index'
 
+  resources :blocks
   resources :addresses
 
   resources :properties

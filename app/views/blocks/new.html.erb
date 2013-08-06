@@ -1,0 +1,16 @@
+<h1>New Block</h1>
+
+<%= form_tag new_block_path, method: "get" do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<% @properties.each do |property| %>
+  <%= property.human_property_id %>
+  <%= property.address.flat_no %>
+  <%= property.address.house_name %>
+  <br/>
+<% end %>
+

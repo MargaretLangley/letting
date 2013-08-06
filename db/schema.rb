@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130804163207) do
+ActiveRecord::Schema.define(version: 20130805170505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 20130804163207) do
     t.datetime "updated_at"
   end
 
+  create_table "blocks", force: true do |t|
+    t.string   "name",       null: false
+    t.integer  "client_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "blocks", ["client_id"], name: "index_blocks_on_client_id", using: :btree
+
   create_table "clients", force: true do |t|
     t.integer  "human_client_id"
     t.datetime "created_at"
@@ -60,9 +69,13 @@ ActiveRecord::Schema.define(version: 20130804163207) do
 
   create_table "properties", force: true do |t|
     t.integer  "human_property_id"
+    t.integer  "block_id"
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "properties", ["block_id"], name: "index_properties_on_block_id", using: :btree
+  add_index "properties", ["client_id"], name: "index_properties_on_client_id", using: :btree
 
 end
