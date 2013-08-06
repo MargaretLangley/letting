@@ -18,7 +18,7 @@ namespace :db do
     'db:drop',
     'db:create',
     'db:migrate',
-    'db:seed', # If after test prepare it seeds test database
+    # db:import If after test prepare it seeds test database
     'db:test:prepare'
   ]
 
