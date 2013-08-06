@@ -1,3 +1,8 @@
+def property_attributes overrides = {}
+  {
+    human_property_id: 2002
+  }.merge overrides
+end
 
 def address_attributes overrides = {}
   {

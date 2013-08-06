@@ -54,6 +54,13 @@ describe Property do
       expect(property.client).to eq client
     end
 
+    it 'belongs to a block' do
+      block = block_factory id: 1, name: 'beechfield', client_id: 1
+      property = block.properties.new human_property_id: 8000
+      expect(property.block).to eq block
+    end
+
+
   end
 
   context 'Methods' do
@@ -110,6 +117,29 @@ describe Property do
         property.separate_billing_address false
         expect(property.separate_billing_address?).to be_false
       end
+    end
+  end
+
+  context 'search by house name' do
+
+    it 'returns only those with that house name' do
+      p1 = property_factory human_property_id: 3000,
+                   address_attributes: { flat_no: 10, house_name: 'Headingly' }
+      p2 = property_factory human_property_id: 3001,
+                   address_attributes: { flat_no: 20, house_name: 'Headingly' }
+      p3 = property_factory human_property_id: 3002,
+                   address_attributes: { flat_no: 10, house_name: 'Vauxall Lane' }
+      expect(Property.all).to eq [p1, p2, p3 ]
+      expect(Property.search_by_house_name 'Headingly').to eq [p1, p2]
+    end
+
+    it 'does not return addresses from other types' do
+      p1 = property_no_billing_profile_factory human_property_id: 3000,
+                   address_attributes: { flat_no: 10, house_name: 'Headingly' }
+      c2 = client_factory human_client_id: 4002,
+                   address_attributes: { flat_no: 10, house_name: 'Headingly' }
+      expect(Address.all.to_a).to eq [p1.address, c2.address]
+      expect(Property.search_by_house_name 'Headingly').to eq [p1]
     end
   end
 
