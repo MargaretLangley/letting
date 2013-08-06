@@ -1,4 +1,5 @@
 class Property < ActiveRecord::Base
+  belongs_to :block
   belongs_to :client
   include Contact
   has_one :billing_profile, dependent: :destroy
@@ -31,6 +32,10 @@ class Property < ActiveRecord::Base
 
   def bill_to
     billing_profile.use_profile? ? billing_profile : self
+  end
+
+  def self.search_by_house_name(search)
+    Property.joins(:address).where("addresses.house_name = ?", search)
   end
 
 end
