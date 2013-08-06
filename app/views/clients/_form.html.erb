@@ -1,12 +1,29 @@
-<div class="grid">
-  <div class="col-2-3">
-     <article class="module">
-       <%= render partial: 'client_form' %>
-     </article>
+<%= form_for @client do |f| %>
+  <%= render 'shared/errors', object: @client %>
+  <fieldset id='client'>
+
+    <div class='field text required'>
+      <h3>Client</h3>
+      <%= f.label :Client_ID %>
+      <%= f.text_field :human_client_id %>
+    </div>
+
+    <%= f.fields_for :address do |builder| %>
+      <%= render partial: 'shared/address', locals: { f: builder, parent: 'client' } %>
+    <% end %>
+
+    <% @client.entities.each do |entity| %>
+      <%= f.fields_for :entities, entity do |builder| %>
+        <%= render partial: 'shared/entity', locals: { f: builder, parent: 'client' } %>
+      <% end %>
+    <% end %>
+
+  </fieldset>
+
+
+  <div>
+    <p>
+      <%= f.submit %>
+    </p>
   </div>
-  <div class="col-1-3">
-    <aside class="module">
-       ADD SIDE BAR HERE
-    </aside>
-  </div>
-</div>
+<% end %>

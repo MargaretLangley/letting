@@ -1,13 +1,36 @@
+<%= form_for @property do |f| %>
+  <%= render 'shared/errors', object: @property %>
+  <fieldset id='contact_property'>
 
-<div class="grid">
-  <div class="col-2-3">
-     <article class="module">
-       <%= render partial: 'property_form' %>
-     </article>
+    <fieldset id='property'>
+      <div class='field text required'>
+        <h3>Property</h3>
+        <%= f.label :Property_ID %>
+        <%= f.text_field :human_property_id %>
+      </div>
+    </fieldset>
+
+    <%= f.fields_for :address do |builder| %>
+      <%= render partial: 'shared/address', locals: { f: builder, parent: 'property' } %>
+    <% end %>
+
+ <a href="#" class="button" onClick="makeItemsVisible('property_entity_1')">Add Person</a>
+
+    <% @property.entities.each do |entity| %>
+      <%= f.fields_for :entities, entity do |builder| %>
+        <%= render partial: 'shared/entity', locals: { f: builder, parent: 'property' } %>
+      <% end %>
+    <% end %>
+
+  </fieldset>
+
+  <%= f.fields_for :billing_profile do |builder| %>
+    <%= render partial: 'billing_profile', locals: { f: builder } %>
+  <% end %>
+
+  <div>
+    <p>
+      <%= f.submit %>
+    </p>
   </div>
-  <div class="col-1-3">
-    <aside class="module">
-       ADD SIDE BAR HERE
-    </aside>
-  </div>
-</div>
+<% end %>
