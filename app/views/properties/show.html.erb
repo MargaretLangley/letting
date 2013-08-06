@@ -1,26 +1,29 @@
+<article>
+  <header>
+    <h3>Property</h3>
+  </header>
+  <p>
+    Property Id <%= @property.human_property_id %>
+  </p>
+  <h3>Address</h3>
+  <%= render 'shared/show_address', object: @property %>
+  <h3>Tenant</h3>
+  <% @property.entities.each do |entity| %>
+    <%= render 'shared/show_entity', object: entity %>
+  <% end %>
 
-<h3>Property</h3>
-<%= @property.human_property_id %>
-<br/>
-<%= render 'show_address', object: @property %>
-<br/>
-<% @property.entities.each do |entity| %>
-  <%= render 'show_entity', object: entity %>
-<% end %>
+  <h3>Billing Address</h3>
 
-<h3>Billing Address</h3>
-
-<% if @property.separate_billing_address? %>
-  <br/>
-  <%= render 'show_address', object: @property.bill_to %>
-  <% if @property.bill_to.entities.any? %>
-    <% @property.bill_to.entities.each do |entity| %>
-    <%= render 'show_entity', object: entity %>
+  <% if @property.separate_billing_address? %>
+    <%= render 'shared/show_address', object: @property.bill_to %>
+    <% if @property.bill_to.entities.any? %>
+      <% @property.bill_to.entities.each do |entity| %>
+      <%= render 'shared/show_entity', object: entity %>
+      <% end %>
+    <% else %>
+      No Entities
     <% end %>
   <% else %>
-    No Entities
+   Billing to home address
   <% end %>
-<% else %>
- Billing to home address
-<% end %>
-
+</article>
