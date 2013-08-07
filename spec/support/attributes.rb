@@ -6,6 +6,7 @@ end
 
 def address_attributes overrides = {}
   {
+    type: 'FlatAddress',
     flat_no:  '47',
     house_name: 'Hillbank House',
     road_no:  '294',
@@ -19,6 +20,7 @@ end
 
 def oval_address_attributes overrides = {}
   {
+    type: 'FlatAddress',
     flat_no:  '33',
     house_name: 'The Oval',
     road_no:  '207b',

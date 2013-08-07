@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def address_params
-    [ :addressable_id, :addressable_type, :county, :district, :flat_no, :house_name, :road, :road_no, :town, :postcode ]
+    [ :addressable_id, :addressable_type, :county, :district, :flat_no, :house_name, :road, :road_no, :town, :type, :postcode ]
   end
 
   def entities_params

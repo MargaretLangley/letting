@@ -28,6 +28,7 @@ private
 
   def fill_in_client_address
      within_fieldset 'client_address' do
+      select 'Flat', from: 'Type'
       fill_in 'Flat no', with: '471'
       fill_in 'House name', with: 'Trent Bridge'
       fill_in 'Road no', with: '63c'

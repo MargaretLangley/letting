@@ -1,5 +1,11 @@
 <fieldset id='<%= parent %>_address'>
   <h3>Address</h3>
+
+  <div class='field text require'>
+    <%= f.label :type %>
+    <%= f.select :type, { 'Flat' => 'FlatAddress', 'House' => 'HouseAddress'}  %>
+  </div>
+
   <div class='field text require'>
     <%= f.label :flat_no %>
     <%= f.text_field :flat_no %>
