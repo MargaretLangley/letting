@@ -5,21 +5,19 @@ describe Property do
   it '#updates' do
     property_factory id: 1, human_property_id: 8000
     navigate_to_edit_page
-    validate_on_edit_page
+    validate_page
     expect_form_to_be
     fill_in_form
     click_on 'Update Property'
-
-    expect_properties
-
-    visit '/properties/1'
+    expect_properties_page
+    navigate_to_property_page
     expect_property_updates
   end
 
   it '#update handles validation' do
     property_factory id: 1, human_property_id: 8000
     navigate_to_edit_page
-    validate_on_edit_page
+    validate_page
     check_use_billing_profile
     clear_address_road
     click_on 'Update Property'
@@ -32,7 +30,7 @@ describe Property do
     click_on 'Edit'
   end
 
-  def validate_on_edit_page
+  def validate_page
     expect(current_path).to eq '/properties/1/edit'
   end
 
@@ -131,8 +129,11 @@ describe Property do
         end
       end
 
+  def navigate_to_property_page
+    visit '/properties/1'
+  end
 
-  def expect_properties
+  def expect_properties_page
     expect(current_path).to eq '/properties'
     expect(page).to have_text 'Property successfully updated!'
     expect_property_data_changed

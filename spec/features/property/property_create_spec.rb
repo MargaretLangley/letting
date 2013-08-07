@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe Property do
 
-  it '#create a property' do
+  it '#create' do
     navigate_to_create_page
-    expect(page).to have_text 'New Property'
-    fill_everything
+    validate_page
+    fill_in_form
     click_on 'Create Property'
-    expect(current_path).to eq '/properties'
-    click_on '278'
-    verify
+    expect_properties_page
+    navigate_to_property_page
+    expect_property_page
   end
 
   it '#creates a property without billing profile' do
@@ -19,7 +19,7 @@ describe Property do
     fill_in_property_entities
     click_on 'Create Property'
     expect(current_path).to eq '/properties'
-    click_on '278'
+    navigate_to_property_page
     expect_property
     expect_property_address
     expect_property_entities
@@ -27,8 +27,7 @@ describe Property do
 
   it '#create handles validation' do
     navigate_to_create_page
-    fill_in_property
-    fill_in_property_address
+    invalidate_page
     click_on 'Create Property'
     expect(current_path).to eq '/properties'
     expect(page).to have_text 'The property could not be saved.'
@@ -40,7 +39,13 @@ describe Property do
     click_on 'Add New Property'
   end
 
-  def fill_everything
+  def validate_page
+    expect(current_path).to eq '/properties/new'
+    expect(page.all('h3', text: 'Address').count).to eq 2
+    expect(page.all('h3', text: 'Person').count).to eq 4
+  end
+
+  def fill_in_form
     fill_in_property
     fill_in_property_address
     fill_in_property_entities
@@ -101,8 +106,20 @@ describe Property do
       end
     end
 
+  def invalidate_page
+    fill_in_property
+    fill_in_property_address
+  end
 
-  def verify
+  def expect_properties_page
+    expect(current_path).to eq '/properties'
+  end
+
+  def navigate_to_property_page
+    click_on '278'
+  end
+
+  def expect_property_page
     expect_property
     expect_property_address
     expect_property_entities
