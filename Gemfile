@@ -70,7 +70,7 @@ group :development, :test do
 end
 
 
-gem :test do
+group :test do
   gem 'rake'
 end
 
