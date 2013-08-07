@@ -27,7 +27,7 @@ task  import_properties: :environment do
 
     property = Property.new human_property_id: human_property_id, client_id: client_id
     property.entities.new title: entity_title, initials: entity_initials, name: entity_name
-    # client.entities.new title: entity_title2, initials: entity_initials, name: entity_name
+    property.entities.new title: entity_title2, initials: entity_initials, name: entity_name
     property.build_address flat_no: flatnum, house_name: housena, road_no: roadno, road: road, district: dist, town: tow, county: count, postcode: postcd
     property.save!
 
