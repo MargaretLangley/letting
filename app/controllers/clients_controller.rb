@@ -25,6 +25,7 @@ class ClientsController < ApplicationController
 
   def edit
     @client = Client.find params[:id]
+    @client.prepare_for_form
   end
 
   def update
