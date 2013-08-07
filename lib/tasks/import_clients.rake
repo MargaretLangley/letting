@@ -65,8 +65,12 @@ task import_clients: :environment do
         client.entities.new title: title2, initials: init2, name: name2
         client.build_address flat_no: flatnum, house_name: housena, road_no: roadno, road: road, district: dist, town: tow, county: count, postcode: postcd
     end
-        # puts client.inspect
-    puts "clientid: #{row[:clientid]} failed" if client.id.nil?
-    puts client.errors.full_messages
+    # puts client.inspect
+
+    unless client.valid?
+      # if id nil client has not been created in the database
+      puts "clientid: #{row[:clientid]} failed"
+      puts client.errors.full_messages
+    end
   end
 end
