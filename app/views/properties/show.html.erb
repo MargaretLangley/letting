@@ -1,43 +1,29 @@
-<h3>Property</h3>
-<%= @property.human_property_id %>
+<article>
+  <header>
+    <h3>Property</h3>
+  </header>
+  <p>
+    Property Id <%= @property.human_property_id %>
+  </p>
+  <h3>Address</h3>
+  <%= render 'shared/show_address', object: @property %>
+  <h3>Tenant</h3>
+  <% @property.entities.each do |entity| %>
+    <%= render 'shared/show_entity', object: entity %>
+  <% end %>
 
-<%= @property.address.flat_no %>
-<%= @property.address.house_name %>
-<%= @property.address.road_no %>
-<%= @property.address.road %>
-<%= @property.address.district %>
-<%= @property.address.town %>
-<%= @property.address.county %>
-<%= @property.address.postcode %>
+  <h3>Billing Address</h3>
 
-<% @property.entities.each do |entity| %>
-  <%= entity.title %>
-  <%= entity.initials %>
-  <%= entity.name %>
-<% end %>
-
-<h3>Billing Address</h3>
-
-<% if @property.separate_billing_address? %>
-  <br/>
-  <%= @property.bill_to.address.flat_no %>
-  <%= @property.bill_to.address.house_name %>
-  <%= @property.bill_to.address.road_no %>
-  <%= @property.bill_to.address.road %>
-  <%= @property.bill_to.address.district %>
-  <%= @property.bill_to.address.town %>
-  <%= @property.bill_to.address.county %>
-  <%= @property.bill_to.address.postcode %>
-  <% if @property.bill_to.entities.any? %>
-    <% @property.bill_to.entities.each do |entity| %>
-      <%= entity.title %>
-      <%= entity.initials %>
-      <%= entity.name %>
+  <% if @property.separate_billing_address? %>
+    <%= render 'shared/show_address', object: @property.bill_to %>
+    <% if @property.bill_to.entities.any? %>
+      <% @property.bill_to.entities.each do |entity| %>
+      <%= render 'shared/show_entity', object: entity %>
+      <% end %>
+    <% else %>
+      No Entities
     <% end %>
   <% else %>
-    No Entities
+   Billing to home address
   <% end %>
-<% else %>
- Billing to home address
-<% end %>
-
+</article>
