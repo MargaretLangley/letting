@@ -34,10 +34,10 @@
         <%= link_to property.human_property_id, property %>
       </td>
       <td class='alnright'>
-        <%= property.address.flat_no %>
+        <%= format_empty_string_as_dash property.address.flat_no %>
       </td>
       <td>
-        <%= property.address.house_name %>
+        <%= format_empty_string_as_dash property.address.house_name %>
       </td>
       <td class='alnright'>
         <%= property.address.road_no %>
