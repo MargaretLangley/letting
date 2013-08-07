@@ -66,11 +66,11 @@ header#page-header {
 
 footer#page-footer {
   color: $secondary-text-color;
-  padding: 20px 25px;
+  background-color: $primary-background-color;
+  padding: 0.5em 0.5em;
 
   p {
     text-align: center;
-    margin-bottom: 10px;
   }
 
   a {
