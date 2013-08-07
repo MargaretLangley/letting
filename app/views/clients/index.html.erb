@@ -3,7 +3,7 @@
 <table>
   <thead>
     <tr>
-      <th>
+      <th class='alnright'>
         ID
       </th>
       <th>
@@ -12,7 +12,7 @@
       <th>
         Name
       </th>
-      <th>
+      <th class='alnright'>
         No
       </th>
       <th>
@@ -29,16 +29,16 @@
   <tbody>
     <% @clients.each do |client| %>
     <tr>
-      <td>
+      <td class='alnright'>
         <%= link_to client.human_client_id, client %>
       </td>
-            <td>
+      <td>
         <%= client.entities.first.initials %>
       </td>
       <td>
         <%= client.entities.first.name %>
       </td>
-      <td>
+      <td class='alnright'>
         <%= client.address.road_no %>
       </td>
       <td>

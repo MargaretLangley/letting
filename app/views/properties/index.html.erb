@@ -4,10 +4,16 @@
 <table>
   <thead>
     <tr>
-      <th>
+      <th class='alnright'>
         ID
       </th>
+      <th class='alnright'>
+        No
+      </th>
       <th>
+        House
+      </th>
+      <th class='alnright'>
         No
       </th>
       <th>
@@ -17,9 +23,6 @@
         Town
       </th>
       <th>
-        Postcode
-      </th>
-      <th>
         Actions
       </th>
     </tr>
@@ -27,10 +30,16 @@
   <tbody>
     <% @properties.each do |property| %>
     <tr>
-      <td>
+      <td class='alnright'>
         <%= link_to property.human_property_id, property %>
       </td>
+      <td class='alnright'>
+        <%= property.address.flat_no %>
+      </td>
       <td>
+        <%= property.address.house_name %>
+      </td>
+      <td class='alnright'>
         <%= property.address.road_no %>
       </td>
       <td>
@@ -38,9 +47,6 @@
       </td>
       <td>
         <%= property.address.town %>
-      </td>
-      <td>
-        <%= property.address.postcode %>
       </td>
       <td>
         <%= link_to 'Edit', edit_property_path(property) %> |
