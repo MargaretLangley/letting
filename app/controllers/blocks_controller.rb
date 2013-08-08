@@ -1,6 +1,6 @@
 class BlocksController < ApplicationController
   def index
-    @blocks = Block.all
+    @blocks = Block.includes(:address).all
   end
 
   def new
