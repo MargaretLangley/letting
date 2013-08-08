@@ -1,5 +1,5 @@
 def block_factory args = {}
-  block = Block.new id: args[:id], name: args[:name], client_id: args[:client_id]
+  block = Block.new id: args[:id], name: args[:name]
   block.save!
   block
 end

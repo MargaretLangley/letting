@@ -54,13 +54,6 @@ describe Property do
       expect(property.client).to eq client
     end
 
-    it 'belongs to a block' do
-      block = block_factory id: 1, name: 'beechfield', client_id: 1
-      property = block.properties.new human_property_id: 8000
-      expect(property.block).to eq block
-    end
-
-
   end
 
   context 'Methods' do

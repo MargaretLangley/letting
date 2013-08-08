@@ -1,5 +1,4 @@
 class Property < ActiveRecord::Base
-  belongs_to :block
   belongs_to :client
   include Contact
   has_one :billing_profile, dependent: :destroy

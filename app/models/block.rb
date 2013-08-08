@@ -1,4 +1,3 @@
 class Block < ActiveRecord::Base
-  has_many :properties
-  validates :client_id, :name, presence: true
+  validates :name, presence: true
 end
