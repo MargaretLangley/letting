@@ -1,0 +1,15 @@
+<%= form_for @block do |f| %>
+  <%= render 'shared/errors', object: @block %>
+  <fieldset id='block'>
+    <div class='field text require'>
+      <%= f.label :matching_properties %>
+      <%= f.text_field :name, readonly: true %>
+    </div>
+    <div class= 'field submit'>
+      <p>
+        <%= f.submit 'Save block', class: 'under-input' %> or
+        <%= link_to 'Cancel block', new_block_path, class: 'button' %>
+      </p>
+    </div>
+  </fieldset>
+<% end %>

@@ -10,28 +10,38 @@ fieldset {
   border: 0;
   box-shadow: #aaa 0 0 8px;
 
-h3 {
-  margin-top: 0;
-}
+  h3 {
+    margin-top: 0;
+  }
 
-.field {
-  margin-bottom: 1.5%;
-}
+  .field {
+    margin-bottom: 1.5%;
+  }
 
-.field label {
-   float: left;
-   overflow: hidden;
-   text-overflow: ellipsis;
-   white-space: nowrap;
-   width: 30%;
-}
+  .field label {
+     float: left;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+     width: 30%;
+  }
 
-.field.text input {
-   display: inline-block;
-   margin-left: 2%;
-   padding: 3px;
-   width: 65%;
-}
+  .field.text input {
+     display: inline-block;
+     margin-left: 2%;
+     padding: 3px;
+     width: 65%;
+  }
+
+  // for horizontal form I want to get a
+  // block lined up under the text inputs
+  // thinking of submit buttons
+  .field.submit {
+    display: inline-block;
+    float: right;
+    width: 68%;
+    white-space: nowrap;
+  }
 
 
 
@@ -54,17 +64,12 @@ h3 {
   }
 
   p {
-    input {
-      display: inline-block;
+      input { display: inline-block; }
+      a.button { padding: 10px 15px; }
     }
-    a.button {
-      padding: 10px 15px;
-    }
-  }
 }
 
-input[type="submit"] {
-  width: 40%;
+@mixin button-base {
   font-size: 1.5em;
   border-radius:5px 5px 5px 5px;
   -moz-border-radius:5px 5px 5px 5px;
@@ -77,3 +82,15 @@ input[type="submit"] {
   background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgb(238, 238, 238)), to(rgb(204, 204, 204)));
   background-image:-moz-linear-gradient(-90deg, rgb(238, 238, 238), rgb(204, 204, 204));
 }
+
+input[type="submit"] {
+  @include button-base;
+  width: 40%;
+}
+
+
+input[type="submit"].under-input {
+  @include button-base;
+  width: 55%;
+}
+
