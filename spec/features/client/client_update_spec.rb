@@ -1,5 +1,6 @@
 require 'spec_helper'
 require_relative 'client_shared'
+require_relative '../shared/entity'
 
 describe Client do
 
@@ -48,9 +49,7 @@ describe Client do
     def expect_entity_has_original_attributes
       expect(page.all('h3', text: 'Person').count).to eq 2
       within_fieldset 'client_entity_0' do
-        expect(find_field('Title').value).to have_text 'Mr'
-        expect(find_field('Initials').value).to have_text 'W G'
-        expect(find_field('Name').value).to have_text 'Grace'
+        expect_entity_wg_grace_by_field
       end
     end
 

@@ -1,5 +1,6 @@
 require 'spec_helper'
 require_relative '../shared/address'
+require_relative '../shared/entity'
 
 describe Property do
 
@@ -68,9 +69,7 @@ describe Property do
 
     def fill_in_property_entities
       within_fieldset 'property_entity_0' do
-        fill_in 'Title', with: 'Mr'
-        fill_in 'Initials', with: 'D C S'
-        fill_in 'Name', with: 'Compton'
+        fill_in_entity_wg_grace
       end
     end
 
@@ -132,9 +131,7 @@ describe Property do
     end
 
     def expect_property_entities
-      expect(page).to have_text 'Mr'
-      expect(page).to have_text 'D C S'
-      expect(page).to have_text 'Compton'
+      expect_entity_wg_grace
     end
 
     def expect_billing_profile_address

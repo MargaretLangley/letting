@@ -1,5 +1,6 @@
 require 'spec_helper'
 require_relative '../shared/address'
+require_relative '../shared/entity'
 
 describe Client do
   it '#show' do
@@ -19,9 +20,7 @@ describe Client do
   end
 
   def expect_client_entity
-    expect(page).to have_text 'Mr'
-    expect(page).to have_text 'W G'
-    expect(page).to have_text 'Grace'
+    expect_entity_wg_grace
   end
 
   def expect_property

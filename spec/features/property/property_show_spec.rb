@@ -1,5 +1,6 @@
 require 'spec_helper'
 require_relative '../shared/address'
+require_relative '../shared/entity'
 
 describe Property do
 
@@ -22,9 +23,7 @@ describe Property do
   end
 
   def expect_property_entity
-    expect(page).to have_text 'Mr'
-    expect(page).to have_text 'W G'
-    expect(page).to have_text 'Grace'
+    expect_entity_wg_grace
   end
 
   def expect_billing_address

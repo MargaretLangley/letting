@@ -1,9 +1,17 @@
 require_relative '../shared/address'
 
 def fill_in_form
-  fill_in_client
-  fill_in_client_address
-  fill_in_client_entity
+
+  fill_in 'client_human_client_id', with: '278'
+
+  within_fieldset 'client_address' do
+    fill_in_address_nottingham
+  end
+
+  within_fieldset 'client_entity_0' do
+    fill_in_entity_wg_grace
+  end
+
 end
 
 def invalidate_page
@@ -17,50 +25,7 @@ def navigate_to_client_page
 end
 
 def expect_client_page
-  expect_client
-  expect_new_address
-  expect_new_entity
+  expect(page).to have_text '278'
+  expect_address_nottingham
+  expect_entity_wg_grace
 end
-
-
-private
-  def fill_in_client
-    fill_in 'client_human_client_id', with: '278'
-  end
-
-  def fill_in_client_address
-    within_fieldset 'client_address' do
-      fill_in_address_nottingham
-    end
-  end
-
-  def fill_in_client_entity
-    within_fieldset 'client_entity_0' do
-      fill_in 'Title', with: 'Mr'
-      fill_in 'Initials', with: 'D C S'
-      fill_in 'Name', with: 'Compton'
-    end
-  end
-
-
-  def expect_client
-    expect(page).to have_text '278'
-  end
-
-  def expect_new_address
-    expect(page).to have_text '471'
-    expect(page).to have_text 'Trent Bridge'
-    expect(page).to have_text '63c'
-    expect(page).to have_text 'Radcliffe Road'
-    expect(page).to have_text 'West Bridgford'
-    expect(page).to have_text 'Nottingham'
-    expect(page).to have_text 'Notts'
-    expect(page).to have_text 'NG2 6AG'
-  end
-
-  def expect_new_entity
-    expect(page).to have_text 'Mr'
-    expect(page).to have_text 'D C S'
-    expect(page).to have_text 'Compton'
-  end
-

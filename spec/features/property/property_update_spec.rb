@@ -1,6 +1,6 @@
 require 'spec_helper'
 require_relative '../shared/address'
-
+require_relative '../shared/entity'
 
 describe Property do
 
@@ -55,9 +55,7 @@ describe Property do
 
     def expect_entity_has_original_attributes
       within_fieldset 'property_entity_0' do
-        expect(find_field('Title').value).to have_text 'Mr'
-        expect(find_field('Initials').value).to have_text 'W G'
-        expect(find_field('Name').value).to have_text 'Grace'
+        expect_entity_wg_grace_by_field
       end
     end
 
@@ -93,9 +91,7 @@ describe Property do
 
     def fill_in_entity
       within_fieldset 'property_entity_0' do
-        fill_in 'Title', with: 'Dr'
-        fill_in 'Initials', with: 'B M'
-        fill_in 'Name', with: 'Zeperello'
+        fill_in_entity_dc_compto
       end
     end
 
@@ -154,9 +150,7 @@ describe Property do
     end
 
     def expect_new_entity
-      expect(page).to have_text 'Dr'
-      expect(page).to have_text 'B M'
-      expect(page).to have_text 'Zeperello'
+      expect_entity_dc_compton
     end
 
     def expect_new_bill_profile

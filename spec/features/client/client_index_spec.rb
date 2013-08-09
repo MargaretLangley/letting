@@ -1,5 +1,4 @@
 require 'spec_helper'
-require_relative '../shared/address'
 
 describe Client do
 
