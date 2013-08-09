@@ -1,5 +1,4 @@
 class Property < ActiveRecord::Base
-  belongs_to :block
   belongs_to :client
   include Contact
   has_one :billing_profile, dependent: :destroy
@@ -35,7 +34,7 @@ class Property < ActiveRecord::Base
   end
 
   def self.search_by_house_name(search)
-    Property.joins(:address).where("addresses.house_name = ?", search)
+    Property.includes(:address).where('addresses.house_name LIKE ?', "#{search}").references(:address)
   end
 
 end

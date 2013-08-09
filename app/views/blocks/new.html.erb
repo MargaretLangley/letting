@@ -1,16 +1,19 @@
 <h1>New Block</h1>
 
-<%= form_tag new_block_path, method: "get" do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
+<% if block_name_has_no_property_matches? %>
+  <%= render partial: 'find_matching_properties' %>
+<% else %>
+  <%= render partial: 'create_block' %>
 <% end %>
 
-<% @properties.each do |property| %>
-  <%= property.human_property_id %>
-  <%= property.address.flat_no %>
-  <%= property.address.house_name %>
-  <br/>
-<% end %>
+<ul>
+<p>
+  <h3>What properties will the block match?</h3>
+  <p>The block name is used to match against the addreses of properties in the system.</p>
 
+    <p>The below table is the group of properties this block matches and will act on. If you use the block to set a charge these are the properties that will be affected.</p>
+<%= render partial: 'properties/index_table', locals: { properties: @properties, show_actions: false } %>
+</p>
+  <% if block_name_has_no_property_matches? %>
+  <p>No properties are matching.</p><p>Enter a value in 'Matching properties' text box.</p>
+  <% end %>

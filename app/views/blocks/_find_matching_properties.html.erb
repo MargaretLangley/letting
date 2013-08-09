@@ -1,0 +1,15 @@
+<%= form_for @block do |f| %>
+  <%= render 'shared/errors', object: @block %>
+  <fieldset id='block'>
+    <div class='field text require'>
+      <%= f.label :matching_properties %>
+      <%= f.text_field :name %>
+    </div>
+    <div class= 'field submit'>
+      <p>
+        <%= f.submit 'Find properties', class: 'under-input' %>
+        <%= f.hidden_field :state, value: 'finding_properties' %>
+      </p>
+    </div>
+  </fieldset>
+<% end %>

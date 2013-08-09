@@ -43,12 +43,9 @@ ActiveRecord::Schema.define(version: 20130805170505) do
 
   create_table "blocks", force: true do |t|
     t.string   "name",       null: false
-    t.integer  "client_id",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "blocks", ["client_id"], name: "index_blocks_on_client_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.integer  "human_client_id"

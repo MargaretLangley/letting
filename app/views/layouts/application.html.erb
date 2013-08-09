@@ -9,15 +9,16 @@
 <body>
 
 <%= render 'layouts/flashes' %>
+<%= render 'layouts/header' %>
 
 
 <div class="grid">
-  <div class="col-2-3">
+  <div class="col-3-4">
      <article class="module">
         <%= yield %>
      </article>
   </div>
-  <div class="col-1-3">
+  <div class="col-1-4">
     <aside class="module">
       <%= render 'layouts/sidebar' %>
     </aside>

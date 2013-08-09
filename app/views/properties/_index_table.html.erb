@@ -1,0 +1,59 @@
+<table>
+  <thead>
+    <tr>
+      <th class='alnright'>
+        ID
+      </th>
+      <th class='alnright'>
+        No
+      </th>
+      <th>
+        House
+      </th>
+      <th class='alnright'>
+        No
+      </th>
+      <th>
+        Road
+      </th>
+      <th>
+        Town
+      </th>
+      <% if show_actions %>
+      <th>
+        Actions
+      </th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% properties.each do |property| %>
+    <tr>
+      <td class='alnright'>
+        <%= link_to property.human_property_id, property %>
+      </td>
+      <td class='alnright'>
+        <%= format_empty_string_as_dash property.address.flat_no %>
+      </td>
+      <td>
+        <%= format_empty_string_as_dash property.address.house_name %>
+      </td>
+      <td class='alnright'>
+        <%= property.address.road_no %>
+      </td>
+      <td>
+        <%= property.address.road %>
+      </td>
+      <td>
+        <%= property.address.town %>
+      </td>
+      <% if show_actions %>
+      <td>
+        <%= link_to 'Edit', edit_property_path(property) %> |
+        <%= link_to 'Delete', property, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
