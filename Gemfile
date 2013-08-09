@@ -68,11 +68,13 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-plus'
   gem 'bullet'
+  gem 'rack-mini-profiler'
 end
 
 
 group :test do
   gem 'rake'
 end
+
 
 
