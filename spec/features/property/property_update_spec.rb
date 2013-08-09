@@ -1,4 +1,6 @@
 require 'spec_helper'
+require_relative '../shared/address'
+
 
 describe Property do
 
@@ -47,14 +49,7 @@ describe Property do
 
     def expect_address_has_original_attributes
       within_fieldset 'property_address' do
-        expect(find_field('Flat no').value).to have_text '47'
-        expect(find_field('House name').value).to have_text 'Hillbank House'
-        expect(find_field('Road no').value).to have_text '294'
-        expect(find_field('Road').value).to have_text 'Edgbaston Road'
-        expect(find_field('District').value).to have_text 'Edgbaston'
-        expect(find_field('Town').value).to have_text 'Birmingham'
-        expect(find_field('County').value).to have_text 'West Midlands'
-        expect(find_field('Postcode').value).to have_text 'B5 7QU'
+        expect_address_edgbaston_by_field
       end
     end
 
@@ -83,17 +78,16 @@ describe Property do
     fill_in_bill_profile
   end
 
+    def fill_in_client_address
+      within_fieldset 'client_address' do
+        fill_in_address_nottingham
+      end
+    end
+
+
     def fill_in_address
       within_fieldset 'property_address' do
-        select 'Flat', from: 'Type'
-        fill_in 'Flat no', with: '58'
-        fill_in 'House name', with: 'River Brook'
-        fill_in 'Road no', with: '11c'
-        fill_in 'Road', with: 'Surrey Road'
-        fill_in 'District', with: 'Merton'
-        fill_in 'Town', with: 'London'
-        fill_in 'County', with: 'Greater'
-        fill_in 'Postcode', with: 'SW1 4HA'
+        fill_in_address_nottingham
       end
     end
 
@@ -144,7 +138,7 @@ describe Property do
       expect(page).to_not have_text '8000'
       expect(page).to have_text '8001'
       expect(page).to_not have_text '294'
-      expect(page).to have_text '11c'
+      expect(page).to have_text '471'
     end
 
 
@@ -156,13 +150,7 @@ describe Property do
   end
 
     def expect_new_address
-      expect(page).to have_text '58'
-      expect(page).to have_text 'River Brook'
-      expect(page).to have_text 'Merton'
-      expect(page).to have_text 'Surrey Road'
-      expect(page).to have_text 'London'
-      expect(page).to have_text 'Greater'
-      expect(page).to have_text 'SW1 4HA'
+      expect_address_nottingham
     end
 
     def expect_new_entity

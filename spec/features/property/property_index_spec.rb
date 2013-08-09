@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../shared/address'
 
 describe Property do
 
@@ -13,12 +14,8 @@ describe Property do
     expect(page).to have_text '222'
 
     # Displays expected columns
-    expect(page).to have_text '47'
-    expect(page).to have_text 'Hillbank House'
     expect(page).to have_text '333'
-    expect(page).to have_text '294'
-    expect(page).to have_text 'Edgbaston Road'
-    expect(page).to have_text 'Birmingham'
+    expect_index_address_edgbaston
   end
 
   def property_factory args = {}

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../shared/address'
 
 describe Property do
 
@@ -58,17 +59,10 @@ describe Property do
       fill_in 'property_human_property_id', with: '278'
     end
 
+
     def fill_in_property_address
       within_fieldset 'property_address' do
-        select  'Flat', from: 'Type'
-        fill_in 'Flat no', with: '471'
-        fill_in 'House name', with: 'Trent Bridge'
-        fill_in 'Road no', with: '63c'
-        fill_in 'Road', with: 'Radcliffe Road'
-        fill_in 'District', with: 'West Bridgford'
-        fill_in 'Town', with: 'Nottingham'
-        fill_in 'County', with: 'Notts'
-        fill_in 'Postcode', with: 'NG2 6AG'
+        fill_in_address_nottingham
       end
     end
 
@@ -134,14 +128,7 @@ describe Property do
     end
 
     def expect_property_address
-      expect(page).to have_text '471'
-      expect(page).to have_text 'Trent Bridge'
-      expect(page).to have_text '63c'
-      expect(page).to have_text 'Radcliffe Road'
-      expect(page).to have_text 'West Bridgford'
-      expect(page).to have_text 'Nottingham'
-      expect(page).to have_text 'Notts'
-      expect(page).to have_text 'NG2 6AG'
+      expect_address_nottingham
     end
 
     def expect_property_entities

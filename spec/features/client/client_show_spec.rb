@@ -1,5 +1,5 @@
-
 require 'spec_helper'
+require_relative '../shared/address'
 
 describe Client do
   it '#show' do
@@ -15,12 +15,7 @@ describe Client do
 
   def expect_client_address
     expect(page).to have_text '3008'
-    expect(page).to have_text '294'
-    expect(page).to have_text 'Edgbaston Road'
-    expect(page).to have_text 'Edgbaston'
-    expect(page).to have_text 'Birmingham'
-    expect(page).to have_text 'West Midlands'
-    expect(page).to have_text 'B5 7QU'
+    expect_address_edgbaston
   end
 
   def expect_client_entity

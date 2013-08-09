@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../shared/address'
 
 describe Property do
 
@@ -29,12 +30,7 @@ describe Property do
 
   def expect_property_address
     expect(page).to have_text '1000'
-    expect(page).to have_text '294'
-    expect(page).to have_text 'Edgbaston Road'
-    expect(page).to have_text 'Edgbaston'
-    expect(page).to have_text 'Birmingham'
-    expect(page).to have_text 'West Midlands'
-    expect(page).to have_text 'B5 7QU'
+    expect_address_edgbaston
   end
 
   def expect_property_entity

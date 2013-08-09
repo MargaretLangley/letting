@@ -1,3 +1,5 @@
+require_relative '../shared/address'
+
 def fill_in_form
   fill_in_client
   fill_in_client_address
@@ -27,16 +29,8 @@ private
   end
 
   def fill_in_client_address
-     within_fieldset 'client_address' do
-      select 'Flat', from: 'Type'
-      fill_in 'Flat no', with: '471'
-      fill_in 'House name', with: 'Trent Bridge'
-      fill_in 'Road no', with: '63c'
-      fill_in 'Road', with: 'Radcliffe Road'
-      fill_in 'District', with: 'West Bridgford'
-      fill_in 'Town', with: 'Nottingham'
-      fill_in 'County', with: 'Notts'
-      fill_in 'Postcode', with: 'NG2 6AG'
+    within_fieldset 'client_address' do
+      fill_in_address_nottingham
     end
   end
 

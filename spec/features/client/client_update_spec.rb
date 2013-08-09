@@ -41,14 +41,7 @@ describe Client do
 
     def expect_address_has_original_attributes
       within_fieldset 'client_address' do
-        expect(find_field('Flat no').value).to have_text '47'
-        expect(find_field('House name').value).to have_text 'Hillbank House'
-        expect(find_field('Road no').value).to have_text '294'
-        expect(find_field('Road').value).to have_text 'Edgbaston Road'
-        expect(find_field('District').value).to have_text 'Edgbaston'
-        expect(find_field('Town').value).to have_text 'Birmingham'
-        expect(find_field('County').value).to have_text 'West Midlands'
-        expect(find_field('Postcode').value).to have_text 'B5 7QU'
+        expect_address_edgbaston_by_field
       end
     end
 
