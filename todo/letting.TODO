@@ -1,7 +1,6 @@
 Letting:
 
 
-
 Resources
   ☐ Blocks
   ☐ Charge Info
@@ -20,3 +19,13 @@ Features:
 
 Style:
   ✔ Listing Style @done (13-08-04 21:32)
+
+Shared Partials:
+Address
+  ☐ Address length validations
+  ☐ Postcode validation
+  ☐ Length of lines shorter for postcode, flat no, road no
+
+Entity
+  ☐ Title, Initials, Name length validations
+  ☐ Length of lines shorter for Title and Intials

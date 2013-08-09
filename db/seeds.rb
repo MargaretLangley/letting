@@ -11,6 +11,9 @@ def generate_seeding
 end
 
 
+  def truncate_tables
+    Rake::Task['db:truncate_all'].invoke
+  end
 
   def seed_clients
     Entity.create! [
@@ -79,29 +82,13 @@ end
     ]
 
     Client.create! [
-      {
-        id: 1,
-        human_client_id: 1
-      },
-      {
-        id: 2,
-        human_client_id: 2
-      },
-      {
-        id: 3,
-        human_client_id: 3
-      }
+      { id: 1, human_client_id: 1 },
+      { id: 2, human_client_id: 2 },
+      { id: 3, human_client_id: 3 }
     ]
   end
 
 
-def truncate_tables
-  ActiveRecord::Base.connection.execute("TRUNCATE TABLE addresses RESTART IDENTITY;")
-  ActiveRecord::Base.connection.execute("TRUNCATE TABLE billing_profiles RESTART IDENTITY;")
-  ActiveRecord::Base.connection.execute("TRUNCATE TABLE clients RESTART IDENTITY;")
-  ActiveRecord::Base.connection.execute("TRUNCATE TABLE entities RESTART IDENTITY;")
-  ActiveRecord::Base.connection.execute("TRUNCATE TABLE properties RESTART IDENTITY;")
-end
 
 def seed_properties
   create_entities
@@ -198,26 +185,10 @@ end
 
   def create_properties
     Property.create! [
-      {
-        id: 1,
-        human_property_id: 1001,
-        client_id: 1
-      },
-      {
-        id: 2,
-        human_property_id: 2002,
-        client_id: 1
-      },
-      {
-        id: 3,
-        human_property_id: 3003,
-        client_id: 2
-      },
-      {
-        id: 4,
-        human_property_id: 4004,
-        client_id: 3
-      }
+      { id: 1, human_property_id: 1001, client_id: 1 },
+      { id: 2, human_property_id: 2002, client_id: 1 },
+      { id: 3, human_property_id: 3003, client_id: 2 },
+      { id: 4, human_property_id: 4004, client_id: 3 }
      ]
   end
 
@@ -254,31 +225,14 @@ end
 
   def create_billing_profiles
     BillingProfile.create! [
-      {
-        id: 1,
-        use_profile: true,
-        property_id: 1
-      },
-      {
-        id: 2,
-        use_profile: false,
-        property_id: 2
-      },
-      {
-        id: 3,
-        use_profile: false,
-        property_id: 3
-      }
+      { id: 1, use_profile: true,  property_id: 1 },
+      { id: 2, use_profile: false, property_id: 2 },
+      { id: 3, use_profile: false, property_id: 3 }
     ]
   end
 
-
 def reset_pk_sequenece_on_each_table_used
-  ActiveRecord::Base.connection.reset_pk_sequence!(Address.table_name)
-  ActiveRecord::Base.connection.reset_pk_sequence!(Client.table_name)
-  ActiveRecord::Base.connection.reset_pk_sequence!(Entity.table_name)
-  ActiveRecord::Base.connection.reset_pk_sequence!(Property.table_name)
-  ActiveRecord::Base.connection.reset_pk_sequence!(BillingProfile.table_name)
+  Rake::Task['db:reset_pk'].invoke
 end
 
 generate_seeding
