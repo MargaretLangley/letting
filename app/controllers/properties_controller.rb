@@ -1,7 +1,11 @@
 class PropertiesController < ApplicationController
 
   def index
-    @properties = Property.includes(:address).page(params[:page]).load
+    unless params[:search]
+      @properties = Property.includes(:address).page(params[:page]).load
+    else
+      @properties = Property.includes(:address).search_by_all(params[:search]).page(params[:page]).load
+    end
   end
 
   def show

@@ -1,11 +1,17 @@
 Letting::Application.routes.draw do
 
+  resources :search_suggestions
+
   root 'properties#index'
 
   resources :blocks
   resources :addresses
 
-  resources :properties
+  resources :properties do
+    collection do
+      get :search
+    end
+  end
   resources :clients
 
   # The priority is based upon order of creation: first created -> highest priority.

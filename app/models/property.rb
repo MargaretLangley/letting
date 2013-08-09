@@ -37,4 +37,13 @@ class Property < ActiveRecord::Base
     Property.includes(:address).where('addresses.house_name LIKE ?', "#{search}").references(:address)
   end
 
+  def self.search_by_all(search)
+    Property.includes(:address).
+      where('addresses.house_name ILIKE ? OR ' + \
+            'addresses.road ILIKE ? OR '  \
+            'addresses.town ILIKE ?',  \
+            "#{search}%", "#{search}%","#{search}%" \
+            ).references(:address)
+  end
+
 end

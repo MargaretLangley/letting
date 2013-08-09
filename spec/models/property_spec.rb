@@ -119,7 +119,7 @@ describe Property do
 
     before do
       p1 = property_factory human_property_id: 1,
-            address_attributes: { house_name: 'Headingly', road: 'Kirstall Road' }
+            address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' }
     end
 
     context 'search by house name' do
@@ -147,6 +147,45 @@ describe Property do
       end
      end
 
+     context 'like road or flat' do
+
+      it 'returns matching road name' do
+        p2 = property_factory human_property_id: 2,
+              address_attributes: { house_name: 'Lords', road: 'Essex'}
+        expect(Property.all).to eq [p1, p2]
+        expect(Property.search_by_all 'Kirstall Road').to eq [p1]
+      end
+
+      it 'returns matching house names' do
+        p2 = property_factory human_property_id: 3,
+              address_attributes: { house_name: 'Vauxall Lane' }
+        expect(Property.all).to eq [p1, p2]
+        expect(Property.search_by_all 'Headingly').to eq [p1]
+      end
+
+      it 'returns matching road name' do
+        p2 = property_factory human_property_id: 2,
+              address_attributes: { house_name: 'Headingly', road: 'unknown' }
+        expect(Property.all).to eq [p1, p2]
+        expect(Property.search_by_all 'Kirstall').to eq [p1]
+      end
+
+      it 'returns matching towns' do
+        p2 = property_factory human_property_id: 2,
+              address_attributes: { town: 'unknown' }
+        expect(Property.all).to eq [p1, p2]
+        expect(Property.search_by_all 'York').to eq [p1]
+      end
+
+      it 'returns matching all works beginning with' do
+        p2 = property_factory human_property_id: 2,
+              address_attributes: { town: 'Yorks' }
+        expect(Property.all).to eq [p1, p2]
+        expect(Property.search_by_all 'York').to eq [p1,p2]
+      end
+
+
+     end
 
   end
 
