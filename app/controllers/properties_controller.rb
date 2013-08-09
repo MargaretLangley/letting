@@ -1,7 +1,7 @@
 class PropertiesController < ApplicationController
 
   def index
-    @properties = Property.includes(:address).load
+    @properties = Property.includes(:address).page(params[:page]).load
   end
 
   def show

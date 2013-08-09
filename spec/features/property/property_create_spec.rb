@@ -36,7 +36,7 @@ describe Property do
 
   def navigate_to_create_page
     visit '/properties'
-    click_on 'Add New Property'
+    click_on 'New Property'
   end
 
   def validate_page

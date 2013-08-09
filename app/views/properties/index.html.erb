@@ -1,5 +1,6 @@
 
 <h2>Properties</h2>
-<%= link_to 'Add New Property', new_property_path %>
 
 <%= render partial: 'index_table', locals: { properties: @properties, show_actions: true } %>
+
+<%= paginate @properties %>
