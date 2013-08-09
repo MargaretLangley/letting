@@ -3,7 +3,7 @@
 
   <div class='field text require'>
     <%= f.label :type %>
-    <%= f.select :type, { 'Flat' => 'FlatAddress', 'House' => 'HouseAddress'}  %>
+    <%= f.select :type, Address.types, include_blank: true %>
   </div>
 
   <div class='field text require'>

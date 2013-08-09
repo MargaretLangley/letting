@@ -6,6 +6,10 @@ class Address < ActiveRecord::Base
     attributes.except(*ignored_attrs).values.all?( &:blank? )
   end
 
+  def self.types
+    { 'Flat' => 'FlatAddress', 'House' => 'HouseAddress'}
+  end
+
   private
     def ignored_attrs
       ['id', 'addressable_id', 'addressable_type', 'created_at', 'updated_at']

@@ -85,6 +85,7 @@ describe Property do
 
     def fill_in_address
       within_fieldset 'property_address' do
+        select 'Flat', from: 'Type'
         fill_in 'Flat no', with: '58'
         fill_in 'House name', with: 'River Brook'
         fill_in 'Road no', with: '11c'
