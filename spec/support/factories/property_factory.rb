@@ -1,5 +1,12 @@
-
 def property_factory args = {}
+  property = Property.new property_attributes args
+  add_contact property, args
+  add_no_billing_profile property
+  property.save!
+  property
+end
+
+def property_factory_with_billing args = {}
   property = Property.new property_attributes args
   add_contact property, args
   add_billing_profile property
@@ -7,13 +14,6 @@ def property_factory args = {}
   property
 end
 
-def property_no_billing_profile_factory args = {}
-  property = Property.new property_attributes args
-  add_contact property, args
-  add_no_billing_profile property
-  property.save!
-  property
-end
 
 def add_no_billing_profile bill_me
   bill_me.build_billing_profile use_profile: false

@@ -115,34 +115,39 @@ describe Property do
 
   context 'search by house name' do
 
-    it 'returns only those with that house name' do
-      p1 = property_no_billing_profile_factory human_property_id: 3000,
-                   address_attributes: { flat_no: 10, house_name: 'Headingly' }
-      p2 = property_no_billing_profile_factory human_property_id: 3001,
-                   address_attributes: { flat_no: 20, house_name: 'Headingly' }
-      p3 = property_no_billing_profile_factory human_property_id: 3002,
-                   address_attributes: { flat_no: 10, house_name: 'Vauxall Lane' }
-      expect(Property.all).to eq [p1, p2, p3 ]
-      expect(Property.search_by_house_name 'Headingly').to eq [p1, p2]
+    p1 = p2 = p3 = c1 = nil
+
+    before do
+      p1 = property_factory human_property_id: 1,
+            address_attributes: { house_name: 'Headingly', road: 'Kirstall Road' }
     end
 
-    it 'does not return addresses from other types' do
-      p1 = property_no_billing_profile_factory human_property_id: 3000,
-                   address_attributes: { flat_no: 10, house_name: 'Headingly' }
-      c2 = client_factory human_client_id: 4002,
-                   address_attributes: { flat_no: 10, house_name: 'Headingly' }
-      expect(Address.all.to_a).to eq [p1.address, c2.address]
-      expect(Property.search_by_house_name 'Headingly').to eq [p1]
-    end
+    context 'search by house name' do
+      it 'returns only those with that house name' do
+        p2 = property_factory human_property_id: 2,
+              address_attributes: { house_name: 'Headingly' }
+        p3 = property_factory human_property_id: 3,
+              address_attributes: { house_name: 'Vauxall Lane' }
+        expect(Property.all).to eq [p1, p2, p3 ]
+        expect(Property.search_by_house_name 'Headingly').to eq [p1, p2]
+      end
 
-    it 'it does not find part of the housename' do
-      p1 = property_no_billing_profile_factory human_property_id: 3000,
-                   address_attributes: { flat_no: 10, house_name: 'Headingly' }
-      p2 = property_no_billing_profile_factory human_property_id: 3001,
-                   address_attributes: { flat_no: 20, house_name: 'Lords' }
-      expect(Address.all.to_a).to eq [p1.address, p2.address]
-      expect(Property.search_by_house_name 'eadin').to eq []
-    end
+      it 'does not return addresses from other types' do
+        c1 = client_factory human_client_id: 1,
+              address_attributes: { house_name: 'Headingly' }
+        expect(Address.all.to_a).to eq [p1.address, c1.address]
+        expect(Property.search_by_house_name 'Headingly').to eq [p1]
+      end
+
+      it 'it does not find part of the housename' do
+        p4 = property_factory human_property_id: 2,
+              address_attributes: { house_name: 'Lords' }
+        expect(Address.all.to_a).to eq [p1.address, p4.address]
+        expect(Property.search_by_house_name 'eadin').to eq []
+      end
+     end
+
+
   end
 
 end

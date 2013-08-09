@@ -25,11 +25,11 @@ describe Block do
   end
 
   def create_properties
-    p1 = property_no_billing_profile_factory human_property_id: 3001,
+    p1 = property_factory human_property_id: 3001,
                  address_attributes: { flat_no: 1, house_name: 'Hillbank House' }
-    p2 = property_no_billing_profile_factory human_property_id: 3002,
+    p2 = property_factory human_property_id: 3002,
                  address_attributes: { flat_no: 2, house_name: 'Hillbank House' }
-    p3 = property_no_billing_profile_factory human_property_id: 3003,
+    p3 = property_factory human_property_id: 3003,
                  address_attributes: { flat_no: 3, house_name: 'Hillbank House' }
   end
 

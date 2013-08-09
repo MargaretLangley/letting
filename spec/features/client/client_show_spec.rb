@@ -5,7 +5,7 @@ require_relative '../shared/entity'
 describe Client do
   it '#show' do
     client = client_factory id: 1, human_client_id: 3008
-    client.properties << property_no_billing_profile_factory(id: 1, human_property_id: 909)
+    client.properties << property_factory(id: 1, human_property_id: 909)
     visit '/clients/'
     click_on '3008'
     expect(current_path).to eq '/clients/1'

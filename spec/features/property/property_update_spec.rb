@@ -5,7 +5,7 @@ require_relative '../shared/entity'
 describe Property do
 
   it '#updates' do
-    property_factory id: 1, human_property_id: 8000
+    property_factory_with_billing id: 1, human_property_id: 8000
     navigate_to_edit_page
     validate_page
     expect_form_to_be
@@ -17,7 +17,7 @@ describe Property do
   end
 
   it '#update handles validation' do
-    property_factory id: 1, human_property_id: 8000
+    property_factory_with_billing id: 1, human_property_id: 8000
     navigate_to_edit_page
     validate_page
     check_use_billing_profile
