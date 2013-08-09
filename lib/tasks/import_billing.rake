@@ -12,20 +12,16 @@
 require 'csv'
 
 desc "Import properties data from CSV file"
-task  import_properties: :environment do
+task  import_billing: :environment do
   puts "Start Import"
 
-  contents = CSV.open "import_data/properties.csv", headers: true, header_converters: :symbol, converters: lambda {|f| f ? f.strip : nil}
+  contents = CSV.open "import_data/address2.csv", headers: true, header_converters: :symbol, converters: lambda {|f| f ? f.strip : nil}
 
    puts 'open file'
 
-    # contents.first(10).each do |row|
-    #   puts row[:housename]
-    # end
 
 
-
-  contents.drop(33).each_with_index do |row, index|
+  contents.each_ do |row|
     property = Property.where(human_property_id: row[:propertyid]).first_or_initialize
       flatnum = row[:flatno]
       housena = row[:housename]
@@ -36,41 +32,9 @@ task  import_properties: :environment do
       count = row[:county]
       postcd = row[:pc]
 
-      if tow.include? "Kingswinford"
-        dist = "Kingswinford"
-        tow = "Dudley"
-      end
-
-      if tow.include? "KINGSWINFORD"
-        dist = "Kingswinford"
-        tow = "Dudley"
-      end
-
-      if road.include? "Barn Owl"
-        postcd = "DY5 2QW"
-      end
-
-      if road.include? "Cliveden"
-        postcd = "WS9 8HG"
-      end
-
-      if road.include? "Nursery"
-        postcd = "WS9 0HT"
-      end
-
-      if road.include? "Puxton"
-        postcd = "DY11 5HY"
-      end
-
-     if road.include? "Whitley"
-       postcd = "WS10 9PF"
-     end
-
-    if count.include? "Worcs"
-        count = "Worcestershire"
-    end
-
-
+      tow = tow.capitalize if tow.include? "BIRMINGHAM"
+      tow = tow.capitalize if tow.include? "PENKRIDGE"
+      tow = tow.capitalize if tow.include? "SOLIHULL"
 
     property.assign_attributes human_property_id: row[:propertyid], client_id: row[:clientid]
     # NO not new!!!!!
