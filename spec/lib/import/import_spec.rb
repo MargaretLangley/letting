@@ -5,7 +5,7 @@ module DB
 
     context 'location' do
       it 'can be set during initialization' do
-        expect(Import.new('spec/import_data').location).to eq 'spec/import_data'
+        expect(Import.new('spec/import_data', 0).location).to eq 'spec/import_data'
       end
     end
 
@@ -15,7 +15,14 @@ module DB
       end
 
       it 'Opens file a valid file' do
-        output = Import.csv_table('open_test', 'spec/import_data')
+        output = Import.csv_table('open_test', location: 'spec/import_data')
+        expect(output.length).to eq 2
+      end
+    end
+
+    context 'drop rows' do
+      it 'can drop a row' do
+        output = Import.csv_table('open_test', location: 'spec/import_data', drop_rows: 1)
         expect(output.length).to eq 1
       end
     end
