@@ -4,7 +4,7 @@
 
 STDOUT.sync = true
 
-namespace :db do
+module DB
 
   desc "Raise an error unless development environment"
   task :dev_warning do

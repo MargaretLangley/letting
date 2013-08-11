@@ -11,7 +11,7 @@
 
 require 'csv'
 
-namespace :db do
+module DB
 
   desc "Import properties data from CSV file"
   task  import_properties: :environment do

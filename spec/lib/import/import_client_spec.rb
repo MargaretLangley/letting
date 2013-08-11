@@ -2,7 +2,7 @@ require 'csv'
 require_relative '../../../lib/import/import'
 require_relative '../../../lib/import/import_client'
 
-namespace :db do
+module DB
 
   describe 'Import' do
 

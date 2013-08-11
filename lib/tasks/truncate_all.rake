@@ -4,7 +4,7 @@
 
 STDOUT.sync = true
 
-namespace :db do
+module DB
 
   desc "Truncates all the database tables"
   task truncate_all: :environment do

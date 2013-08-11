@@ -1,6 +1,6 @@
 require_relative '../../../lib/import/import'
 
-namespace :db do
+module DB
   describe Import do
 
     context 'location' do

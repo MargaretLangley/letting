@@ -1,6 +1,6 @@
 require 'csv'
 
-namespace :db do
+module DB
 
   class Import
     attr_reader :location

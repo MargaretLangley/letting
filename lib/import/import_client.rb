@@ -1,4 +1,4 @@
-namespace :db do
+module DB
   class ImportClient
 
     def self.import contents
