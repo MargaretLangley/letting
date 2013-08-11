@@ -4,7 +4,7 @@
 
 STDOUT.sync = true
 
-module DB
+namespace :db do
 
   desc "Inserting and deleting data can leave the automatic pk sequence out of step with your data. This fixes this difference."
   task reset_pk: :environment do

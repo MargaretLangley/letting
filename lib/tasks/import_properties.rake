@@ -8,84 +8,72 @@
 #   This way we can update a property even if it has already been added.
 # 3 Note:  contents.drop(33).take(2)  <--- great for debugging
 
-
 require 'csv'
 
-module DB
+namespace :db do
+
+  def kingswinford property
+    property.address.dist = "Kingswinford"
+    property.address.town = "Dudley"
+  end
+
+  def clean_addresses property
+
+    property.address.postcd = "DY5 2QW" if  property.address.road.include? "Barn Owl"
+    property.address.postcd = "WS9 8HG" if  property.address.road.include? "Cliveden"
+    property.address.postcd = "WS9 0HT" if  property.address.road.include? "Nursery"
+    property.address.postcd = "DY11 5HY" if  property.address.road.include? "Puxton"
+    property.address.postcd = "WS10 9PF" if  property.address.road.include? "Whitley"
+
+    kingswinford if property.address.town =  "Kingswinford"
+    kingswinford if property.address.town =  "KINGSWINFORD"
+
+    property.address.county = "Worcestershire" if  property.address.county == "Worcs"
+
+    # pro.atrribute postcode: postcode
+
+  end
+
 
   desc "Import properties data from CSV file"
   task  import_properties: :environment do
     puts "Start Import"
 
     contents = CSV.open "import_data/properties.csv", headers: true, header_converters: :symbol, converters: lambda {|f| f ? f.strip : nil}
-
-     puts 'open file'
-
-      # contents.first(10).each do |row|
-      #   puts row[:housename]
-      # end
-
-
-
+    puts "Open File"
     contents.drop(33).each_with_index do |row, index|
+
+      # puts Property.where(human_property_id: row[:propertyid]).to_sql
       property = Property.where(human_property_id: row[:propertyid]).first_or_initialize
-        flatnum = row[:flatno]
-        housena = row[:housename]
-        roadno = row[:rdno]
-        road = row[:rd]
-        dist = row[:district]
-        tow = row[:town]
-        count = row[:county]
-        postcd = row[:pc]
 
-        if tow.include? "Kingswinford"
-          dist = "Kingswinford"
-          tow = "Dudley"
-        end
-
-        if tow.include? "KINGSWINFORD"
-          dist = "Kingswinford"
-          tow = "Dudley"
-        end
-
-        if road.include? "Barn Owl"
-          postcd = "DY5 2QW"
-        end
-
-        if road.include? "Cliveden"
-          postcd = "WS9 8HG"
-        end
-
-        if road.include? "Nursery"
-          postcd = "WS9 0HT"
-        end
-
-        if road.include? "Puxton"
-          postcd = "DY11 5HY"
-        end
-
-       if road.include? "Whitley"
-         postcd = "WS10 9PF"
-       end
-
-      if count.include? "Worcs"
-          count = "Worcestershire"
-      end
-
-
-
-      property.assign_attributes human_property_id: row[:propertyid], client_id: row[:clientid]
+       property.assign_attributes human_property_id: row[:propertyid], client_id: row[:clientid]
       # NO not new!!!!!
       # property = Property.new human_property_id: row[:propertyid], client_id: row[:clientid]
-      property.entities.new title: row[:title1], initials: row[:init1], name: row[:name1]
-      property.entities.new title: row[:title2], initials: row[:init2], name: row[:name2]
-      property.build_address flat_no: flatnum, house_name: housena, road_no: roadno, road: road, district: dist, town: tow, county: count, postcode: postcd
+        property.entities.new title:    row[:Title1],
+                              initials: row[:Init1],
+                              name:     row[:Name1]
+
+         property.entities.new title:    row[:Title2],
+                               initials: row[:Init2],
+                               name:     row[:Name2]
+
+        property.build_address flat_no: row[:flatno],
+                             house_name: row[:housename],
+                             road_no:    row[:rdno],
+                             road:       row[:rd],
+                             district:   row[:district],
+                             town:       row[:town],
+                             county:     row[:county],
+                             postcode:   row[:pc]
+
       if property.human_property_id > 6000
         property.address.type = 'FlatAddress'
       else
         property.address.type = 'HouseAddress'
       end
       property.build_billing_profile use_profile: false
+
+      clean_addresses (property)
 
       # puts property.inspect
       # puts property.entities.first.inspect
