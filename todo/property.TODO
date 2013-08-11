@@ -4,6 +4,7 @@ Property
  ☐ Import
  ☐ Js to add new entity
  ☐ Model Includes
+     ☐ Model has block_id and probably should be removed
      ✔ Entity (People) @done (13-07-28 23:38)
      ☐ Entity (company)
      ✔ Multiple Entities in testing @done (13-07-31 16:30)
