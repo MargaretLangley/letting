@@ -1,4 +1,5 @@
 require 'csv'
+require 'spec_helper'
 require_relative '../../../lib/import/import'
 require_relative '../../../lib/import/import_client'
 
