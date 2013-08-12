@@ -1,5 +1,8 @@
+require_relative 'import_contact'
+
 module DB
   class ImportProperty
+    include ImportContact
 
     def self.import contents
 
@@ -9,12 +12,6 @@ module DB
         property.prepare_for_form
         property.assign_attributes human_property_id: row[:propertyid], client_id: row[:clientid]
         self.import_contact property, row
-
-        if property.human_property_id > 6000
-          property.address.type = 'FlatAddress'
-        else
-          property.address.type = 'HouseAddress'
-        end
 
         # NOTE NO BILLING ADDRESS IS BEING IMPORTED
         property.build_billing_profile use_profile: false
@@ -29,27 +26,25 @@ module DB
       end
     end
 
-    def self.import_contact contactable, row
-      self.entity contactable.entities[0],
+    def self.import_contact property, row
+      self.entity property.entities[0],
           { title: row[:title1], initials: row[:init1], name: row[:name1] }
-      self.entity contactable.entities[1],
+      self.entity property.entities[1],
           { title: row[:title2], initials: row[:init2], name: row[:name2] }
 
-      contactable.address.attributes = {  flat_no:    row[:flatno],
-                                          house_name: row[:housename],
-                                          road_no:    row[:rdno],
-                                          road:       row[:rd],
-                                          district:   row[:district],
-                                          town:       row[:town],
-                                          county:     row[:county],
-                                          postcode:   row[:pc] }
+      self.address property.address,
+                                   type:       self.address_type(property),
+                                   house_name: row[:housename],
+                                   road_no:    row[:rdno],
+                                   road:       row[:rd],
+                                   district:   row[:district],
+                                   town:       row[:town],
+                                   county:     row[:county],
+                                   postcode:   row[:pc]
     end
 
-
-    def self.entity entity, args = {}
-      entity.attributes = { title:    args[:title],
-                            initials: args[:initials],
-                            name:     args[:name] }
+    def self.address_type property
+      property.human_property_id > 6000 ? 'FlatAddress' : 'HouseAddress'
     end
 
     def self.clean_addresses property

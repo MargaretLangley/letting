@@ -1,5 +1,7 @@
+require_relative 'import_contact'
+
 module DB
-  class ImportBilling
+  class ImportBillingProfile
 
     def self.import contents
 

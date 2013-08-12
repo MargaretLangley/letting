@@ -1,5 +1,8 @@
+require_relative 'import_contact'
+
 module DB
   class ImportClient
+    include ImportContact
 
     def self.import contents
 
@@ -33,27 +36,6 @@ module DB
                                    town:       row[:town],
                                    county:     row[:county],
                                    postcode:   row[:pc]
-    end
-
-
-    def self.address addressable, args = {}
-
-      addressable.attributes = {  type:       args[:type],
-                                  flat_no:    args[:flat_no],
-                                  house_name: args[:house_name],
-                                  road_no:    args[:road_no],
-                                  road:       args[:road],
-                                  district:   args[:district],
-                                  town:       args[:town],
-                                  county:     args[:county],
-                                  postcode:   args[:postcode] }
-    end
-
-
-    def self.entity entity, args = {}
-      entity.attributes = { title:    args[:title],
-                            initials: args[:initials],
-                            name:     args[:name] }
     end
 
 
