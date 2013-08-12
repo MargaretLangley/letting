@@ -8,9 +8,9 @@ module DB
 
       contents.each_with_index do |row, index|
 
-        property = Property.where(human_property_id: row[:propertyid]).first_or_initialize
+        property = Property.where(human_property_id: row[:human_id]).first_or_initialize
         property.prepare_for_form
-        property.assign_attributes human_property_id: row[:propertyid], client_id: row[:clientid]
+        property.assign_attributes human_property_id: row[:human_id], client_id: row[:clientid]
         self.import_contact property, row
         property.billing_profile.use_profile = false if property.new_record?
 
@@ -18,31 +18,31 @@ module DB
         print '.' if index % 100 == 0 && index != 0
 
         unless property.save
-          puts "human propertyid: #{row[:propertyid]} -  #{property.errors.full_messages}"
+          puts "human propertyid: #{row[:human_id]} -  #{property.errors.full_messages}"
         end
 
       end
     end
 
-    def self.import_contact property, row
-      self.entity property.entities[0],
-          { title: row[:title1], initials: row[:init1], name: row[:name1] }
-      self.entity property.entities[1],
-          { title: row[:title2], initials: row[:init2], name: row[:name2] }
-
-      self.address property.address,
-                                   type:       self.address_type(property),
+    def self.import_contact contactable, row
+      self.entity contactable.entities[0],
+          title: row[:title1], initials: row[:initials1], name: row[:name1]
+      self.entity contactable.entities[1],
+          title: row[:title2], initials: row[:initials2], name: row[:name2]
+      self.address contactable.address,
+                                   type:      self.address_type(row[:human_id]),
+                                   flat_no:    row[:flat_no],
                                    house_name: row[:housename],
-                                   road_no:    row[:rdno],
-                                   road:       row[:rd],
+                                   road_no:    row[:road_no],
+                                   road:       row[:road],
                                    district:   row[:district],
                                    town:       row[:town],
                                    county:     row[:county],
-                                   postcode:   row[:pc]
+                                   postcode:   row[:postcode]
     end
 
-    def self.address_type property
-      property.human_property_id > 6000 ? 'FlatAddress' : 'HouseAddress'
+    def self.address_type human_id
+      human_id.to_i > 6000 ? 'FlatAddress' : 'HouseAddress'
     end
   end
 end
