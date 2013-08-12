@@ -12,6 +12,7 @@ module DB
         change(Property, :count).by 1
     end
 
+
     it "One row, 2 Entities" do
       expect{ ImportProperty.import Import.csv_table('properties', location:'spec/fixtures/import_data/properties') }.to \
         change(Entity, :count).by 2
@@ -29,6 +30,33 @@ module DB
         change(Entity, :count).by 2
       expect{ ImportProperty.import Import.csv_table('properties', location:'spec/fixtures/import_data/properties') }.to \
         change(Entity, :count).by 0
+    end
+
+    context 'use profile' do
+
+      it "new record to false" do
+        ImportProperty.import Import.csv_table('properties', location:'spec/fixtures/import_data/properties')
+        expect(Property.first.billing_profile.use_profile).to be_false
+      end
+
+        # Nice setup!
+        # I'm worried that I might start overwriting use_profile
+        # The profile addresses were kept in different tables on the
+        # original system. This means importing it separately after the
+        # property import and know I won't change use_profile accidently.
+        # Import the record. Save a profile onto it. Import again and see that
+        # Profile still true.
+      it 'does not alter use profile' do
+        ImportProperty.import Import.csv_table('properties', location:'spec/fixtures/import_data/properties')
+        property = Property.first
+        property.prepare_for_form
+        property.billing_profile.use_profile = true
+        property.billing_profile.address.attributes = oval_address_attributes
+        property.billing_profile.entities[0].attributes = oval_person_entity_attributes
+        property.save!
+        ImportProperty.import Import.csv_table('properties', location:'spec/fixtures/import_data/properties')
+        expect(Property.first.billing_profile.use_profile).to be_true
+      end
     end
 
     context 'entities' do
@@ -56,12 +84,6 @@ module DB
           expect{ ImportProperty.import Import.csv_table 'properties_one_entity', location:'spec/fixtures/import_data/properties' }.to \
             change(Entity, :count).by -1
         end
-      end
-    end
-
-    context 'Billing information' do
-      it 'imports billing information' do
-        pending 'NEED TO IMPLEMENT ASAP'
       end
     end
   end
