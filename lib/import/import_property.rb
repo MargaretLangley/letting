@@ -39,7 +39,7 @@ module DB
 
         clean_addresses property
 
-        print '.' if index % 100 == 0
+        print '.' if index % 100 == 0 && index != 0
 
         unless property.save
           puts "human propertyid: #{row[:propertyid]} -  #{property.errors.full_messages}"

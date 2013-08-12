@@ -1,6 +1,6 @@
 require 'csv'
-require_relative '../import/import'
-require_relative '../import/import_property'
+require_relative '../../import/import'
+require_relative '../../import/import_property'
 
 # Without this you won't see stdoutput until finished running
 STDOUT.sync = true
