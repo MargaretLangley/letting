@@ -31,7 +31,7 @@ module DB
 
       context ':headers' do
         it 'overrides headers if required' do
-          output = Import.csv_table('open_test', header: ['one', 'line'], location: 'spec/fixtures/import_data')
+          output = Import.csv_table('open_test', header: %{one line}, location: 'spec/fixtures/import_data')
           output.each do |row|
             expect(row[:one]).to_not be_nil
             expect(row[:line]).to_not be_nil
