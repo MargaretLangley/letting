@@ -5,7 +5,7 @@ require_relative '../../../lib/import/import_property'
 
 module DB
 
-  describe 'Import' do
+  describe 'ImportProperty' do
 
     it "One row" do
       expect{ ImportProperty.import Import.csv_table('properties', location:'spec/fixtures/import_data/properties') }.to \

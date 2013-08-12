@@ -5,7 +5,7 @@ require_relative '../../../lib/import/import_client'
 
 module DB
 
-  describe 'Import' do
+  describe 'ImportClient' do
 
     it "One row" do
       expect{ ImportClient.import Import.csv_table('clients', location: 'spec/fixtures/import_data/clients') }.to \
