@@ -26,7 +26,7 @@ describe BillingProfile do
 
       let(:full_profile) do
         profile = BillingProfile.find billing_profile.id
-        profile.prepare_for_form
+        profile.prepare_for_form Property.new
         profile
       end
 
@@ -63,7 +63,7 @@ describe BillingProfile do
 
     let(:prepare_blank_profile) do
       profile = BillingProfile.new use_profile: false, property_id: 1
-      profile.prepare_for_form
+      profile.prepare_for_form Property.new
       profile
     end
 

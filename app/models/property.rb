@@ -12,7 +12,7 @@ class Property < ActiveRecord::Base
   def prepare_for_form
     prepare_contact
     self.build_billing_profile if self.billing_profile.nil?
-    billing_profile.prepare_for_form
+    billing_profile.prepare_for_form self
   end
 
   def clear_up_after_form
@@ -30,7 +30,7 @@ class Property < ActiveRecord::Base
   end
 
   def bill_to
-    billing_profile.use_profile? ? billing_profile : self
+    billing_profile.bill_to
   end
 
   def self.search_by_house_name(search)

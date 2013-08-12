@@ -3,7 +3,17 @@ class BillingProfile < ActiveRecord::Base
   include Contact
   validates :entities, :presence => true, if: :use_profile?
 
-  def prepare_for_form
+  # if we have
+  def bill_to
+    use_profile? ? self : property
+  end
+
+  def prepare_for_form property
+    # When saved it will set the property. However, before it is
+    # saved. property is nil. I'm setting it here so not nil when
+    # property is a new_record
+    self.property = property
+    use_profile = false if use_profile.nil?
     prepare_contact
   end
 

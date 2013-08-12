@@ -85,16 +85,22 @@ describe Property do
         expect(property.entities.reject(&:marked_for_destruction?)).to have(0).items
         expect(property.billing_profile).to_not be_nil
       end
+
     end
 
     context '#bill_to' do
+      let(:property) do
+        property = Property.new human_property_id: 8000
+        property.prepare_for_form
+        property
+      end
 
       it 'property with no billing profile' do
         expect(property.bill_to).to eq property
       end
 
-      it 'billing profile when s' do
-        property.build_billing_profile use_profile: true
+      it 'billing profile when using it' do
+        property.billing_profile.use_profile = true
         expect(property.bill_to).to eq property.billing_profile
       end
 
