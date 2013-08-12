@@ -5,25 +5,10 @@ module DB
 
       contents.each do |row|
         client = Client.where(human_client_id: row[:clientid]).first_or_initialize
-
         client.prepare_for_form
 
         client.human_client_id = row[:clientid]
-        client.entities[0].attributes = { title:    row[:clienttitle],
-                                          initials: row[:clientinit],
-                                          name:     row[:clientname]   }
-        client.entities[1].attributes = { title:    row[:clienttitle2],
-                                          initials: row[:clientinit2],
-                                          name:     row[:clientname2] }
-        client.address.attributes = { type:       'FlatAddress',
-                                     flat_no:    row[:flatno],
-                                     house_name: row[:housename],
-                                     road_no:    row[:rdno],
-                                     road:       row[:rd],
-                                     district:   row[:district],
-                                     town:       row[:town],
-                                     county:     row[:county],
-                                     postcode:   row[:pc] }
+        import_contact client, row
 
         clean_addresses client
         clean_entities client
@@ -33,6 +18,44 @@ module DB
         end
       end
     end
+
+    def self.import_contact contactable, row
+      self.entity contactable.entities[0],
+          title: row[:clienttitle], initials: row[:clientinit], name: row[:clientname]
+      self.entity contactable.entities[1],
+          title: row[:clienttitle2], initials: row[:clientinit2], name: row[:clientname2]
+      self.address contactable.address,
+                                   type:      'FlatAddress',
+                                   house_name: row[:housename],
+                                   road_no:    row[:rdno],
+                                   road:       row[:rd],
+                                   district:   row[:district],
+                                   town:       row[:town],
+                                   county:     row[:county],
+                                   postcode:   row[:pc]
+    end
+
+
+    def self.address addressable, args = {}
+
+      addressable.attributes = {  type:       args[:type],
+                                  flat_no:    args[:flat_no],
+                                  house_name: args[:house_name],
+                                  road_no:    args[:road_no],
+                                  road:       args[:road],
+                                  district:   args[:district],
+                                  town:       args[:town],
+                                  county:     args[:county],
+                                  postcode:   args[:postcode] }
+    end
+
+
+    def self.entity entity, args = {}
+      entity.attributes = { title:    args[:title],
+                            initials: args[:initials],
+                            name:     args[:name] }
+    end
+
 
 
     def self.clean_addresses client

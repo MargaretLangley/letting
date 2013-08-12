@@ -6,27 +6,9 @@ module DB
       contents.each_with_index do |row, index|
 
         property = Property.where(human_property_id: row[:propertyid]).first_or_initialize
-
         property.prepare_for_form
-
         property.assign_attributes human_property_id: row[:propertyid], client_id: row[:clientid]
-
-        property.entities[0].attributes = { title:    row[:title1],
-                                            initials: row[:init1],
-                                            name:     row[:name1] }
-
-        property.entities[1].attributes = { title:    row[:title2],
-                                            initials: row[:init2],
-                                            name:     row[:name2] }
-
-        property.address.attributes = { flat_no:    row[:flatno],
-                                        house_name: row[:housename],
-                                        road_no:    row[:rdno],
-                                        road:       row[:rd],
-                                        district:   row[:district],
-                                        town:       row[:town],
-                                        county:     row[:county],
-                                        postcode:   row[:pc] }
+        self.import_contact property, row
 
         if property.human_property_id > 6000
           property.address.type = 'FlatAddress'
@@ -45,6 +27,29 @@ module DB
           puts "human propertyid: #{row[:propertyid]} -  #{property.errors.full_messages}"
         end
       end
+    end
+
+    def self.import_contact contactable, row
+      self.entity contactable.entities[0],
+          { title: row[:title1], initials: row[:init1], name: row[:name1] }
+      self.entity contactable.entities[1],
+          { title: row[:title2], initials: row[:init2], name: row[:name2] }
+
+      contactable.address.attributes = {  flat_no:    row[:flatno],
+                                          house_name: row[:housename],
+                                          road_no:    row[:rdno],
+                                          road:       row[:rd],
+                                          district:   row[:district],
+                                          town:       row[:town],
+                                          county:     row[:county],
+                                          postcode:   row[:pc] }
+    end
+
+
+    def self.entity entity, args = {}
+      entity.attributes = { title:    args[:title],
+                            initials: args[:initials],
+                            name:     args[:name] }
     end
 
     def self.clean_addresses property
