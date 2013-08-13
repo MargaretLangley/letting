@@ -3,53 +3,44 @@ require_relative 'import_contact'
 module DB
   class ImportClient
     include ImportContact
+    attr_reader :contents
+
+    def initialize contents
+      @contents = contents
+    end
 
     def self.import contents
+      new(contents).do_it
+    end
+
+    def do_it
 
       contents.each_with_index do |row, index|
 
         client = Client.where(human_id: row[:human_id]).first_or_initialize
         client.prepare_for_form
         client.assign_attributes human_id: row[:human_id]
-        self.import_contact client, row
+        import_contact client, row
 
         # if a long import. Put a dot every 100 but not the first as you'll see dots in spec tests
         print '.' if index % 100 == 0 && index != 0
 
-        clean_addresses client
-        clean_entities client
+        clean_contact client
         unless client.save!
           puts "human_id: #{row[:human_id]} -  #{client.errors.full_messages}"
         end
       end
     end
 
-    def self.import_contact contactable, row
-      self.entity contactable.entities[0],
-          title: row[:title1], initials: row[:initials1], name: row[:name1]
-      self.entity contactable.entities[1],
-          title: row[:title2], initials: row[:initials2], name: row[:name2]
-      self.address contactable.address,
-                                   type:      self.address_type(contactable),
-                                   flat_no:    row[:flat_no],
-                                   house_name: row[:housename],
-                                   road_no:    row[:road_no],
-                                   road:       row[:road],
-                                   district:   row[:district],
-                                   town:       row[:town],
-                                   county:     row[:county],
-                                   postcode:   row[:postcode]
-    end
-
-    def self.address_type contactable
+    def address_type contactable
       'FlatAddress'
     end
 
-    def self.clean_addresses addressable
+    def clean_addresses addressable
       addressable.address.attributes = { town: addressable.address.town.titleize }
     end
 
-    def self.clean_entities entitiable
+    def clean_entities entitiable
       if entitiable.entities[1] && entitiable.entities[1].title.present? && entitiable.entities[1].title.starts_with?("& M")
         entitiable.entities[1].title.sub!("& M","M")
       end
