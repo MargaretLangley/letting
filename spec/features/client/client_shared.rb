@@ -2,7 +2,7 @@ require_relative '../shared/address'
 
 def fill_in_form
 
-  fill_in 'client_human_client_id', with: '278'
+  fill_in 'client_human_id', with: '278'
 
   within_fieldset 'client_address' do
     fill_in_address_nottingham

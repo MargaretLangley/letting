@@ -82,9 +82,9 @@ end
     ]
 
     Client.create! [
-      { id: 1, human_client_id: 1 },
-      { id: 2, human_client_id: 2 },
-      { id: 3, human_client_id: 3 }
+      { id: 1, human_id: 1 },
+      { id: 2, human_id: 2 },
+      { id: 3, human_id: 3 }
     ]
   end
 

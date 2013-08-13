@@ -3,9 +3,9 @@ require 'spec_helper'
 describe Client do
 
   it '#index' do
-    client_factory human_client_id: 101
-    client_factory human_client_id: 102
-    client_factory human_client_id: 103
+    client_factory human_id: 101
+    client_factory human_id: 102
+    client_factory human_id: 103
 
     visit '/clients/'
     expect(current_path).to eq '/clients/'
@@ -23,7 +23,7 @@ describe Client do
   end
 
   def client_factory args = {}
-    client = Client.new human_client_id: args[:human_client_id]
+    client = Client.new human_id: args[:human_id]
     client.build_address address_attributes
     client.entities.build person_entity_attributes
     client.save!

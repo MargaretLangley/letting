@@ -8,15 +8,15 @@ module DB
 
       contents.each do |row|
 
-        client = Client.where(human_client_id: row[:human_id]).first_or_initialize
+        client = Client.where(human_id: row[:human_id]).first_or_initialize
         client.prepare_for_form
-        client.human_client_id = row[:human_id]
+        client.human_id = row[:human_id]
         import_contact client, row
 
         clean_addresses client
         clean_entities client
         unless client.save!
-          puts "human_client_id: #{row[:human_id]} -  #{client.errors.full_messages}"
+          puts "human_id: #{row[:human_id]} -  #{client.errors.full_messages}"
         end
       end
     end

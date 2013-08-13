@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Client do
 
   it '#destroys' do
-    client_factory human_client_id: 9000
+    client_factory human_id: 9000
     visit '/clients'
     expect(page).to have_text '9000'
     expect{ click_on 'Delete'}.to change(Client, :count).by -1

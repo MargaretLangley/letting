@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Client do
 
   let(:client) do
-    client = Client.new human_client_id: 1
+    client = Client.new human_id: 1
     client.entities.new person_entity_attributes
     client
   end
@@ -11,19 +11,19 @@ describe Client do
   it ('is valid') { expect(client).to be_valid }
 
   context 'validations' do
-    it '#human_client_id is present' do
-      client.human_client_id = nil
+    it '#human_id is present' do
+      client.human_id = nil
       expect(client).not_to be_valid
     end
 
     it 'validates it is a number' do
-      client.human_client_id = "Not numbers"
+      client.human_id = "Not numbers"
       expect(client).to_not be_valid
     end
 
-    it '#human_client_id is unique' do
+    it '#human_id is unique' do
       client.save!
-      expect{ Client.create! human_client_id: 1 }.to raise_error ActiveRecord::RecordInvalid
+      expect{ Client.create! human_id: 1 }.to raise_error ActiveRecord::RecordInvalid
     end
 
     it 'has at least one child' do
@@ -41,7 +41,7 @@ describe Client do
     context '#address' do
 
       let(:client) do
-        client = Client.new human_client_id: 1
+        client = Client.new human_id: 1
         client.entities.new person_entity_attributes
         client.build_address address_attributes road_no: 3456
         client
@@ -69,7 +69,7 @@ describe Client do
 
   context '#prepare_for_form' do
     let(:client) do
-      client = Client.new human_client_id: 8000
+      client = Client.new human_id: 8000
       client.prepare_for_form
       client
     end

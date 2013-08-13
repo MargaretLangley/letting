@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20130809214432) do
   end
 
   create_table "clients", force: true do |t|
-    t.integer  "human_client_id"
+    t.integer  "human_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

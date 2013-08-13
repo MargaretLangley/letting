@@ -49,7 +49,7 @@ describe Property do
     end
 
     it 'belongs to a client' do
-      client = client_factory id: 1, human_client_id: 1
+      client = client_factory id: 1, human_id: 1
       property = client.properties.new human_id: 8000
       expect(property.client).to eq client
     end
@@ -139,7 +139,7 @@ describe Property do
       end
 
       it 'does not return addresses from other types' do
-        c1 = client_factory human_client_id: 1,
+        c1 = client_factory human_id: 1,
               address_attributes: { house_name: 'Headingly' }
         expect(Address.all.to_a).to eq [p1.address, c1.address]
         expect(Property.search_by_house_name 'Headingly').to eq [p1]

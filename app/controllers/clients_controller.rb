@@ -48,6 +48,6 @@ class ClientsController < ApplicationController
 
     def clients_params
       params.require(:client).
-        permit :human_client_id, address_attributes: address_params, entities_attributes: entities_params
+        permit :human_id, address_attributes: address_params, entities_attributes: entities_params
     end
 end

@@ -30,7 +30,7 @@
     <% @clients.each do |client| %>
     <tr>
       <td class='alnright'>
-        <%= link_to client.human_client_id, client %>
+        <%= link_to client.human_id, client %>
       </td>
       <td>
         <%= client.entities.first.initials %>

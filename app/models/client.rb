@@ -3,8 +3,8 @@ class Client < ActiveRecord::Base
   include Contact
   before_validation :clear_up_after_form
 
-  validates :human_client_id, numericality: true
-  validates :human_client_id, uniqueness: true
+  validates :human_id, numericality: true
+  validates :human_id, uniqueness: true
   validates :entities, presence: true
 
   def prepare_for_form

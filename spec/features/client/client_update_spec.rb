@@ -5,7 +5,7 @@ require_relative '../shared/entity'
 describe Client do
 
   it '#updates' do
-    client_factory id: 1, human_client_id: 3003
+    client_factory id: 1, human_id: 3003
     navigate_to_edit_page
     validate_page
     fill_in_form
@@ -16,7 +16,7 @@ describe Client do
   end
 
   it '#update handles validation' do
-    client_factory id: 1, human_client_id: 3003
+    client_factory id: 1, human_id: 3003
     navigate_to_edit_page
     invalidate_page
     click_on 'Update Client'
@@ -37,7 +37,7 @@ describe Client do
   end
 
     def expect_client_has_original_attributes
-      expect(find_field('client_human_client_id').value).to have_text '3003'
+      expect(find_field('client_human_id').value).to have_text '3003'
     end
 
     def expect_address_has_original_attributes
