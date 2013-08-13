@@ -15,7 +15,7 @@ module DB
 
     def self.csv_table filename, args = {}
       new(args.fetch(:location, 'import_data'),
-          args.fetch(:drop_rows,0),
+          args.fetch(:drop_rows,1),
           args.fetch(:headers, true)).file_to_table filename
     end
 

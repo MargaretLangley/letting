@@ -11,33 +11,33 @@ module DB
     end
 
     it "One row" do
-      expect{ ImportProperty.import Import.csv_table('properties',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties') }.to \
+      expect{ ImportProperty.import Import.csv_table('properties',  headers: headers, location:'spec/fixtures/import_data/properties') }.to \
         change(Property, :count).by 1
     end
 
     it "One row, 2 Entities" do
-      expect{ ImportProperty.import Import.csv_table('properties',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties') }.to \
+      expect{ ImportProperty.import Import.csv_table('properties',  headers: headers, location:'spec/fixtures/import_data/properties') }.to \
         change(Entity, :count).by 2
     end
 
     it "Not double import" do
-      expect{ ImportProperty.import Import.csv_table('properties',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties') }.to \
+      expect{ ImportProperty.import Import.csv_table('properties',  headers: headers, location:'spec/fixtures/import_data/properties') }.to \
         change(Property, :count).by 1
-      expect{ ImportProperty.import Import.csv_table('properties',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties') }.to \
+      expect{ ImportProperty.import Import.csv_table('properties',  headers: headers, location:'spec/fixtures/import_data/properties') }.to \
         change(Property, :count).by 0
     end
 
     it "Not double import" do
-      expect{ ImportProperty.import Import.csv_table('properties',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties') }.to \
+      expect{ ImportProperty.import Import.csv_table('properties',  headers: headers, location:'spec/fixtures/import_data/properties') }.to \
         change(Entity, :count).by 2
-      expect{ ImportProperty.import Import.csv_table('properties',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties') }.to \
+      expect{ ImportProperty.import Import.csv_table('properties',  headers: headers, location:'spec/fixtures/import_data/properties') }.to \
         change(Entity, :count).by 0
     end
 
     context 'use profile' do
 
       it "new record to false" do
-        ImportProperty.import Import.csv_table('properties',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties')
+        ImportProperty.import Import.csv_table('properties',  headers: headers, location:'spec/fixtures/import_data/properties')
         expect(Property.first.billing_profile.use_profile).to be_false
       end
 
@@ -49,41 +49,41 @@ module DB
         # Import the record. Save a profile onto it. Import again and see that
         # Profile still true.
       it 'does not alter use profile' do
-        ImportProperty.import Import.csv_table('properties',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties')
+        ImportProperty.import Import.csv_table('properties',  headers: headers, location:'spec/fixtures/import_data/properties')
         property = Property.first
         property.prepare_for_form
         property.billing_profile.use_profile = true
         property.billing_profile.address.attributes = oval_address_attributes
         property.billing_profile.entities[0].attributes = oval_person_entity_attributes
         property.save!
-        ImportProperty.import Import.csv_table('properties',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties')
+        ImportProperty.import Import.csv_table('properties',  headers: headers, location:'spec/fixtures/import_data/properties')
         expect(Property.first.billing_profile.use_profile).to be_true
       end
     end
 
     context 'entities' do
       it 'adds one entity when second entity blank' do
-        expect{ ImportProperty.import Import.csv_table 'properties_one_entity',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties' }.to \
+        expect{ ImportProperty.import Import.csv_table 'properties_one_entity',  headers: headers, location:'spec/fixtures/import_data/properties' }.to \
           change(Entity, :count).by 1
       end
 
       it 'ordered by creation' do
-        ImportProperty.import Import.csv_table('properties',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties')
+        ImportProperty.import Import.csv_table('properties',  headers: headers, location:'spec/fixtures/import_data/properties')
         expect(Property.first.entities[0].created_at).to be < Property.first.entities[1].created_at
       end
 
       context 'multiple imports' do
 
         it 'updated changed entities' do
-          ImportProperty.import Import.csv_table 'properties',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties'
-          ImportProperty.import Import.csv_table 'properties_updated',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties'
+          ImportProperty.import Import.csv_table 'properties',  headers: headers, location:'spec/fixtures/import_data/properties'
+          ImportProperty.import Import.csv_table 'properties_updated',  headers: headers, location:'spec/fixtures/import_data/properties'
           expect(Property.first.entities[0].name).to eq 'Changed'
           expect(Property.first.entities[1].name).to eq 'Other'
         end
 
         it 'removes deleted second entities' do
-          ImportProperty.import Import.csv_table 'properties',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties'
-          expect{ ImportProperty.import Import.csv_table 'properties_one_entity',  headers: headers, drop_rows: 1, location:'spec/fixtures/import_data/properties' }.to \
+          ImportProperty.import Import.csv_table 'properties',  headers: headers, location:'spec/fixtures/import_data/properties'
+          expect{ ImportProperty.import Import.csv_table 'properties_one_entity',  headers: headers, location:'spec/fixtures/import_data/properties' }.to \
             change(Entity, :count).by -1
         end
       end
