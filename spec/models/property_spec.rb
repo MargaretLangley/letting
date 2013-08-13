@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Property do
 
   let(:property) do
-    property = Property.new human_property_id: 8000
+    property = Property.new human_id: 8000
     property.entities.new person_entity_attributes
     property.build_billing_profile use_profile: false, property_id: property.id
     property
@@ -12,22 +12,22 @@ describe Property do
   it ('#valid?') { expect(property).to be_valid }
 
   context 'validations' do
-    context '#human_property_id' do
+    context '#human_id' do
 
       it 'is present' do
-        property.human_property_id = nil
+        property.human_id = nil
         expect(property).not_to be_valid
       end
 
       it 'validates it is a number' do
-        property.human_property_id = "Not numbers"
+        property.human_id = "Not numbers"
         expect(property).to_not be_valid
       end
 
       it 'validates it is unique' do
         property.save!
         property.id = nil # dirty way of saving it again
-        expect { property.save! human_property_id: 8000 }.to raise_error ActiveRecord::RecordInvalid
+        expect { property.save! human_id: 8000 }.to raise_error ActiveRecord::RecordInvalid
       end
     end
   end
@@ -50,7 +50,7 @@ describe Property do
 
     it 'belongs to a client' do
       client = client_factory id: 1, human_client_id: 1
-      property = client.properties.new human_property_id: 8000
+      property = client.properties.new human_id: 8000
       expect(property.client).to eq client
     end
 
@@ -60,7 +60,7 @@ describe Property do
 
     context '#prepare_for_form' do
       let(:property) do
-        property = Property.new human_property_id: 8000
+        property = Property.new human_id: 8000
         property.prepare_for_form
         property
       end
@@ -90,7 +90,7 @@ describe Property do
 
     context '#bill_to' do
       let(:property) do
-        property = Property.new human_property_id: 8000
+        property = Property.new human_id: 8000
         property.prepare_for_form
         property
       end
@@ -124,15 +124,15 @@ describe Property do
     p1 = p2 = p3 = c1 = nil
 
     before do
-      p1 = property_factory human_property_id: 1,
+      p1 = property_factory human_id: 1,
             address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' }
     end
 
     context 'search by house name' do
       it 'returns only those with that house name' do
-        p2 = property_factory human_property_id: 2,
+        p2 = property_factory human_id: 2,
               address_attributes: { house_name: 'Headingly' }
-        p3 = property_factory human_property_id: 3,
+        p3 = property_factory human_id: 3,
               address_attributes: { house_name: 'Vauxall Lane' }
         expect(Property.all).to eq [p1, p2, p3 ]
         expect(Property.search_by_house_name 'Headingly').to eq [p1, p2]
@@ -146,7 +146,7 @@ describe Property do
       end
 
       it 'it does not find part of the housename' do
-        p4 = property_factory human_property_id: 2,
+        p4 = property_factory human_id: 2,
               address_attributes: { house_name: 'Lords' }
         expect(Address.all.to_a).to eq [p1.address, p4.address]
         expect(Property.search_by_house_name 'eadin').to eq []
@@ -156,35 +156,35 @@ describe Property do
      context 'like road or flat' do
 
       it 'returns matching road name' do
-        p2 = property_factory human_property_id: 2,
+        p2 = property_factory human_id: 2,
               address_attributes: { house_name: 'Lords', road: 'Essex'}
         expect(Property.all).to eq [p1, p2]
         expect(Property.search_by_all 'Kirstall Road').to eq [p1]
       end
 
       it 'returns matching house names' do
-        p2 = property_factory human_property_id: 3,
+        p2 = property_factory human_id: 3,
               address_attributes: { house_name: 'Vauxall Lane' }
         expect(Property.all).to eq [p1, p2]
         expect(Property.search_by_all 'Headingly').to eq [p1]
       end
 
       it 'returns matching road name' do
-        p2 = property_factory human_property_id: 2,
+        p2 = property_factory human_id: 2,
               address_attributes: { house_name: 'Headingly', road: 'unknown' }
         expect(Property.all).to eq [p1, p2]
         expect(Property.search_by_all 'Kirstall').to eq [p1]
       end
 
       it 'returns matching towns' do
-        p2 = property_factory human_property_id: 2,
+        p2 = property_factory human_id: 2,
               address_attributes: { town: 'unknown' }
         expect(Property.all).to eq [p1, p2]
         expect(Property.search_by_all 'York').to eq [p1]
       end
 
       it 'returns matching all works beginning with' do
-        p2 = property_factory human_property_id: 2,
+        p2 = property_factory human_id: 2,
               address_attributes: { town: 'Yorks' }
         expect(Property.all).to eq [p1, p2]
         expect(Property.search_by_all 'York').to eq [p1,p2]

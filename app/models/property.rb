@@ -4,8 +4,8 @@ class Property < ActiveRecord::Base
   has_one :billing_profile, dependent: :destroy
   accepts_nested_attributes_for :billing_profile, allow_destroy: true
 
-  validates :human_property_id, numericality: true
-  validates :human_property_id, uniqueness: true
+  validates :human_id, numericality: true
+  validates :human_id, uniqueness: true
   validates :entities, :presence => true
   before_validation :clear_up_after_form
 

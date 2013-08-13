@@ -5,7 +5,7 @@ require_relative '../shared/entity'
 describe Property do
 
   it '#show' do
-    property = property_factory_with_billing id: 1, human_property_id: 1000
+    property = property_factory_with_billing id: 1, human_id: 1000
     visit '/properties/'
     click_on '1000'
     expect(current_path).to eq '/properties/1'

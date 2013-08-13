@@ -5,7 +5,7 @@ require_relative '../shared/entity'
 describe Property do
 
   it '#updates' do
-    property_factory_with_billing id: 1, human_property_id: 8000
+    property_factory_with_billing id: 1, human_id: 8000
     navigate_to_edit_page
     validate_page
     expect_form_to_be
@@ -17,7 +17,7 @@ describe Property do
   end
 
   it '#update handles validation' do
-    property_factory_with_billing id: 1, human_property_id: 8000
+    property_factory_with_billing id: 1, human_id: 8000
     navigate_to_edit_page
     validate_page
     check_use_billing_profile
@@ -44,7 +44,7 @@ describe Property do
   end
 
     def expect_property_has_original_attributes
-      expect(find_field('property_human_property_id').value).to have_text '8000'
+      expect(find_field('property_human_id').value).to have_text '8000'
     end
 
     def expect_address_has_original_attributes
@@ -70,7 +70,7 @@ describe Property do
 
 
   def fill_in_form
-    fill_in 'property_human_property_id', with: '8001'
+    fill_in 'property_human_id', with: '8001'
     fill_in_address
     fill_in_entity
     fill_in_bill_profile

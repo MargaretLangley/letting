@@ -8,9 +8,9 @@ module DB
 
       contents.each_with_index do |row, index|
 
-        property = Property.where(human_property_id: row[:human_id]).first_or_initialize
+        property = Property.where(human_id: row[:human_id]).first_or_initialize
         property.prepare_for_form
-        property.assign_attributes human_property_id: row[:human_id], client_id: row[:clientid]
+        property.assign_attributes human_id: row[:human_id], client_id: row[:clientid]
         self.import_contact property, row
         property.billing_profile.use_profile = false if property.new_record?
 

@@ -1,6 +1,6 @@
 def property_attributes overrides = {}
   {
-    human_property_id: 2002
+    human_id: 2002
   }.merge overrides
 end
 

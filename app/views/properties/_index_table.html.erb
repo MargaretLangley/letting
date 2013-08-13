@@ -30,7 +30,7 @@
     <% properties.each do |property| %>
     <tr>
       <td class='alnright'>
-        <%= link_to property.human_property_id, property %>
+        <%= link_to property.human_id, property %>
       </td>
       <td class='alnright'>
         <%= format_empty_string_as_dash property.address.flat_no %>

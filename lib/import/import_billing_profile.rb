@@ -7,8 +7,8 @@ module DB
 
       contents.each do |row|
 
-        #This won't be the 1st time the human_property_id has been used since this is the billing address
-        property = Property.where(human_property_id: row[:propertyid]).first_or_initialize
+        #This won't be the 1st time the human_id has been used since this is the billing address
+        property = Property.where(human_id: row[:propertyid]).first_or_initialize
 
         # NO not new!!!!!
 
@@ -30,7 +30,7 @@ module DB
                                         county:     row[:county],
                                         postcode:   row[:pc] }
 
-        if property.human_property_id > 6000
+        if property.human_id > 6000
           property.address.type = 'FlatAddress'
         else
           property.address.type = 'HouseAddress'

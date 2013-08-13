@@ -4,9 +4,9 @@ require_relative '../shared/address'
 describe Property do
 
   it '#index' do
-    property_factory human_property_id: 111
-    property_factory human_property_id: 222
-    property_factory human_property_id: 333
+    property_factory human_id: 111
+    property_factory human_id: 222
+    property_factory human_id: 333
 
     visit '/properties/'
     # shows more than one row

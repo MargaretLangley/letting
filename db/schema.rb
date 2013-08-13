@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20130809214432) do
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
 
   create_table "properties", force: true do |t|
-    t.integer  "human_property_id"
+    t.integer  "human_id"
     t.integer  "block_id"
     t.integer  "client_id"
     t.datetime "created_at"
