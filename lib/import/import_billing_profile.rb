@@ -5,25 +5,21 @@ module DB
   class ImportBillingProfile < ImportBase
 
     def do_it
-
       contents.each_with_index do |row, index|
-
-        property = Property.where(human_id: row[:human_id]).first_or_initialize
-        billing_profile = property.billing_profile
-        billing_profile.prepare_for_form property
-
-        billing_profile.assign_attributes use_profile: true
-
-        import_contact billing_profile, row
-        clean_contact billing_profile
-
-        still_running index
-
-        unless billing_profile.save
-          puts "human propertyid: #{row[:propertyid]} -  #{billing_profile.errors.full_messages}"
-        end
+        property = model_prepared_for_import row, Property
+        model = property.billing_profile
+        model_assigned_row_attributes model, row
+        output_error row, model unless model.save
+        output_still_running index
       end
     end
+
+    def model_assigned_row_attributes model, row
+      model.assign_attributes use_profile: true
+      import_contact model, row
+      clean_contact model
+    end
+
 
     def address_type contactable
       contactable.property.human_id.to_i > 6000 ? 'FlatAddress' : 'HouseAddress'

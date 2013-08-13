@@ -5,25 +5,19 @@ module DB
   class ImportProperty  < ImportBase
 
     def do_it
-
       contents.each_with_index do |row, index|
-
-        property = Property.where(human_id: row[:human_id]).first_or_initialize
-        property.prepare_for_form
-
-        property.assign_attributes human_id: row[:human_id], client_id: row[:clientid]
-        property.billing_profile.use_profile = false if property.new_record?
-
-        import_contact property, row
-        clean_contact property
-
-        still_running index
-
-        unless property.save
-          puts "human propertyid: #{row[:human_id]} -  #{property.errors.full_messages}"
-        end
-
+        model = model_prepared_for_import row, Property
+        model_assigned_row_attributes model, row
+        output_error row, model unless model.save
+        output_still_running index
       end
+    end
+
+    def model_assigned_row_attributes model, row
+      model.assign_attributes human_id: row[:human_id], client_id: row[:clientid]
+      model.billing_profile.use_profile = false if model.new_record?
+      import_contact model, row
+      clean_contact model
     end
 
     def address_type contactable
