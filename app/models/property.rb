@@ -17,7 +17,6 @@ class Property < ActiveRecord::Base
 
   def clear_up_after_form
     entities_for_destruction :empty?
-    billing_profile.clear_up_after_form unless self.billing_profile.nil?
   end
 
   def separate_billing_address

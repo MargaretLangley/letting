@@ -2,6 +2,7 @@ class BillingProfile < ActiveRecord::Base
   belongs_to :property
   include Contact
   validates :entities, :presence => true, if: :use_profile?
+  before_validation :clear_up_after_form
 
   # if we have
   def bill_to
