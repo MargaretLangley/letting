@@ -10,7 +10,7 @@ module DB
 
       it 'Opens file a valid file' do
         output = Import.csv_table('open_test', location: 'spec/fixtures/import_data')
-        expect(output.length).to eq 2
+        expect(output.length).to eq 1
       end
     end
 
