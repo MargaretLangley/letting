@@ -17,7 +17,7 @@ module DB
         import_contact billing_profile, row
         clean_contact billing_profile
 
-        still_running index
+        output_still_running index
 
         unless billing_profile.save
           puts "human propertyid: #{row[:propertyid]} -  #{billing_profile.errors.full_messages}"

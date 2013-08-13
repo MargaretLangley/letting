@@ -8,7 +8,7 @@ module DB
 
       contents.each_with_index do |row, index|
 
-        property = Property.where(human_id: row[:human_id]).first_or_initialize
+        property = find_or_initialize_model row, Property
         property.prepare_for_form
 
         property.assign_attributes human_id: row[:human_id], client_id: row[:clientid]
@@ -17,11 +17,8 @@ module DB
         import_contact property, row
         clean_contact property
 
-        still_running index
-
-        unless property.save
-          puts "human propertyid: #{row[:human_id]} -  #{property.errors.full_messages}"
-        end
+        output_error row, property unless property.save
+        output_still_running index
 
       end
     end

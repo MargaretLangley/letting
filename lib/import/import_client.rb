@@ -5,28 +5,54 @@ module DB
   class ImportClient < ImportBase
 
     def do_it
+      build_patching_models Client
 
       contents.each_with_index do |row, index|
-
-        client = Client.where(human_id: row[:human_id]).first_or_initialize
-        client.prepare_for_form
-
-        client.assign_attributes human_id: row[:human_id]
-
-        import_contact client, row
-        clean_contact client
-
-        still_running index
-
-        unless client.save!
-          puts "human_id: #{row[:human_id]} -  #{client.errors.full_messages}"
-        end
+        model = prepare_model_for_import row, Client
+        model_assigned_row_attributes model, row
+        patch_imported_model model
+        output_error row, model unless model.save
+        output_still_running index
       end
+    end
+
+    def build_patching_models model_class
+      patch_contents.each do |row|
+        model = model_class.new human_id: row[:human_id]
+        model.prepare_for_form
+        model_assigned_row_attributes model, row
+        patch_models << { 'id' => model.human_id, 'model' => model }
+      end
+    end
+
+    def model_assigned_row_attributes model, row
+      model.assign_attributes human_id: row[:human_id]
+      import_contact model, row
+      clean_contact model
     end
 
     def address_type contactable
       'FlatAddress'
     end
 
+    def patch_imported_model imported_model
+      model_hash = patch_models.detect { |m| m['id'] == imported_model.human_id }
+      if model_hash.present?
+        patch_model = model_hash['model']
+        if entity_names_match? imported_model, patch_model
+          patch_address imported_model, patch_model
+        else
+          puts none_matching_entities_error_message imported_model, patch_model
+        end
+      end
+    end
+
+    def entity_names_match? imported_model, patch_model
+      imported_model.entities[0].name == patch_model.entities[0].name
+    end
+
+    def patch_address imported_model, patch_model
+      imported_model.address = patch_model.address
+    end
   end
 end
