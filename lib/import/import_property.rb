@@ -14,9 +14,11 @@ module DB
         self.import_contact property, row
         property.billing_profile.use_profile = false if property.new_record?
 
-        # It's a long import. Put a dot every 100 but not the first as you'll see dots in spec tests
+        # if a long import. Put a dot every 100 but not the first as you'll see dots in spec tests
         print '.' if index % 100 == 0 && index != 0
 
+        clean_addresses property
+        clean_entities property
         unless property.save
           puts "human propertyid: #{row[:human_id]} -  #{property.errors.full_messages}"
         end
@@ -44,5 +46,17 @@ module DB
     def self.address_type human_id
       human_id.to_i > 6000 ? 'FlatAddress' : 'HouseAddress'
     end
+
+    def self.clean_addresses addressable
+      addressable.address.attributes = { town: addressable.address.town.titleize }
+    end
+
+    def self.clean_entities entitiable
+      if entitiable.entities[1] && entitiable.entities[1].title.present? && entitiable.entities[1].title.starts_with?("& M")
+        entitiable.entities[1].title.sub!("& M","M")
+      end
+    end
+
+
   end
 end
