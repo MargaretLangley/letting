@@ -3,17 +3,15 @@ module DB
   class ImportBase
     include ImportContact
     attr_reader :contents
-    attr_reader :patch_contents
-    attr_reader :patch_models
+    attr_reader :patch
 
-    def initialize contents, patch_contents
+    def initialize contents, patch
       @contents = contents
-      @patch_contents = patch_contents
-      @patch_models = []
+      @patch = patch
     end
 
-    def self.import contents, patch_contents = []
-      new(contents, patch_contents).do_it
+    def self.import contents, patch = nil
+      new(contents, patch).do_it
     end
 
     def model_prepared_for_import row, model_class
@@ -38,11 +36,5 @@ module DB
         puts "human_id: #{row[:human_id]} -  #{model.errors.full_messages}"
       end
 
-      def none_matching_entities_error_message model, patch_model
-        "Cannot match #{model.class} #{patch_model.human_id} names." +
-        "between the loading data and the patch data." +
-        " Until '#{patch_model.entities[0].name}' " +
-        "is the same as '#{model.entities[0].name}' we cannot patch the address data."
-      end
   end
 end
