@@ -8,18 +8,6 @@ module DB
       super BillingProfile, contents, patch
     end
 
-    def do_it
-      contents.each_with_index do |row, index|
-        model = model_prepared_for_import row
-        model_assigned_row_attributes model, row
-        patch.patch_model model if patch
-        unless model.save
-          output_error row, model
-        end
-        output_still_running index
-      end
-    end
-
     # Returns Billing Profile model
     def model_prepared_for_import row
       property = find_or_initialize_model row, Property
