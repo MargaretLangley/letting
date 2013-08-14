@@ -22,7 +22,6 @@ module DB
                              postcode:   row[:postcode] }
     end
 
-
     def assign_entity entity, number, row
       entity.attributes = { title:    row[:"title#{number}"],
                             initials: row[:"initials#{number}"],
@@ -41,9 +40,17 @@ module DB
 
     def clean_entities contactable
       entitiable = contactable.entities
-      if entitiable[1] && entitiable[1].title.present? && entitiable[1].title.starts_with?("& M")
-        entitiable[1].title.sub!("& M","M")
+      if entity_title_starts_with_ampersand? entitiable[1]
+        remove_ampersand_from_entity_title entitable[1]
       end
+    end
+
+    def entity_title_starts_with_ampersand? entity
+      entity && entity.title.present? && entity.title.starts_with?("& M")
+    end
+
+    def remove_ampersand_from_entity_title entity
+      entity.title.sub!("& M","M")
     end
 
   end
