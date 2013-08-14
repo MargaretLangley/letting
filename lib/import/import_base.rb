@@ -2,10 +2,12 @@ require_relative 'import_contact'
 module DB
   class ImportBase
     include ImportContact
+    attr_reader :klass
     attr_reader :contents
     attr_reader :patch
 
-    def initialize contents, patch
+    def initialize klass, contents, patch
+      @klass = klass
       @contents = contents
       @patch = patch
     end
@@ -14,8 +16,8 @@ module DB
       new(contents, patch).do_it
     end
 
-    def model_prepared_for_import row, model_class
-      model = find_or_initialize_model row, model_class
+    def model_prepared_for_import row
+      model = find_or_initialize_model row, klass
       model.prepare_for_form
       model
     end

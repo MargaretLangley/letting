@@ -5,9 +5,13 @@ require_relative 'patch'
 module DB
   class ImportClient < ImportBase
 
+    def initialize  contents, patch
+      super Client, contents, patch
+    end
+
     def do_it
       contents.each_with_index do |row, index|
-        model = model_prepared_for_import row, Client
+        model = model_prepared_for_import row
         model_assigned_row_attributes model, row
         patch.patch_model model if patch
         unless model.save
