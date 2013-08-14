@@ -4,6 +4,8 @@ class BillingProfile < ActiveRecord::Base
   validates :entities, :presence => true, if: :use_profile?
   before_validation :clear_up_after_form
 
+  attr_accessor :human_id
+
   def bill_to
     use_profile? ? self : property
   end

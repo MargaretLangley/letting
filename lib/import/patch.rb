@@ -26,7 +26,7 @@ module DB
     end
 
     def model_prepared_for_import row
-      model = model_class.new human_id: row[:human_id]
+      model = model_class.new human_id: row[:human_id].to_i
       model.prepare_for_form
       model
     end
@@ -40,6 +40,7 @@ module DB
       patch_models << { 'id' => model.human_id, 'model' => model }
     end
 
+    #debug hash array: patch_models[0]['model']
     def patch_model model
       model_hash = patch_models.detect { |m| m['id'] == model.human_id }
       if model_hash.present?

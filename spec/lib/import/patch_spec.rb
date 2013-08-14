@@ -53,7 +53,6 @@ module DB
     end
     context 'BillingProfile' do
       it 'works on BillingProfile' do
-        pending
         property_headers = %w{human_id title1  initials1 name1 title2  initials2 name2 flat_no  housename road_no  road  district  town  county  postcode}
         ImportProperty.import   \
         Import.csv_table('address2', headers: headers, location: 'spec/fixtures/import_data/billing_profiles') , \
