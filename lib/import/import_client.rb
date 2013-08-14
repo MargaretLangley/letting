@@ -10,7 +10,9 @@ module DB
         model = model_prepared_for_import row, Client
         model_assigned_row_attributes model, row
         patch.patch_model model if patch
-        output_error row, model unless model.save
+        unless model.save
+          output_error row, model
+        end
         output_still_running index
       end
     end

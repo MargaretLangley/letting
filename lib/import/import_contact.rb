@@ -3,7 +3,7 @@ module DB
     extend ActiveSupport::Concern
 
     def import_contact contactable, row
-      contactable.entities.each_with_index do|entity,index|
+      contactable.entities.each_with_index do |entity, index|
         assign_entity entity, index + 1, row
       end
       assign_address contactable.address, row
