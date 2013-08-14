@@ -21,8 +21,8 @@ module DB
     end
 
 
-    def address_type contactable
-      contactable.property.human_id.to_i > 6000 ? 'FlatAddress' : 'HouseAddress'
+    def address_type row
+      row[:human_id].to_i > 6000 ? 'FlatAddress' : 'HouseAddress'
     end
 
   end

@@ -42,7 +42,7 @@ module DB
 
     private
 
-      def address_type contactable
+      def address_type row
         'DoNotUse'
       end
 
