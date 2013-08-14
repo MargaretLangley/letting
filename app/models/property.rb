@@ -1,7 +1,7 @@
 class Property < ActiveRecord::Base
   belongs_to :client
   include Contact
-  has_one :billing_profile, dependent: :destroy
+  has_one :billing_profile, dependent: :destroy, inverse_of: :property
   accepts_nested_attributes_for :billing_profile, allow_destroy: true
 
   validates :human_id, numericality: true
@@ -12,7 +12,7 @@ class Property < ActiveRecord::Base
   def prepare_for_form
     prepare_contact
     self.build_billing_profile if self.billing_profile.nil?
-    billing_profile.prepare_for_form self
+    billing_profile.prepare_for_form
   end
 
   def clear_up_after_form

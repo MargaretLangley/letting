@@ -1,19 +1,14 @@
 class BillingProfile < ActiveRecord::Base
-  belongs_to :property
+  belongs_to :property, inverse_of: :billing_profile
   include Contact
   validates :entities, :presence => true, if: :use_profile?
   before_validation :clear_up_after_form
 
-  # if we have
   def bill_to
     use_profile? ? self : property
   end
 
-  def prepare_for_form property
-    # When saved it will set the property. However, before it is
-    # saved. property is nil. I'm setting it here so not nil when
-    # property is a new_record
-    self.property = property
+  def prepare_for_form
     use_profile = false if use_profile.nil?
     prepare_contact
   end
