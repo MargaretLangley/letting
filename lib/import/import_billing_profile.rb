@@ -6,14 +6,21 @@ module DB
 
     def do_it
       contents.each_with_index do |row, index|
-        property = model_prepared_for_import row, Property
-        model = property.billing_profile
+        model = model_prepared_for_import row, BillingProfile
         model_assigned_row_attributes model, row
+        patch.patch_model model if patch
         unless model.save
           output_error row, model
         end
         output_still_running index
       end
+    end
+
+    # Returns Billing Profile model
+    def model_prepared_for_import row, model_class
+      property = find_or_initialize_model row, Property
+      property.prepare_for_form
+      property.billing_profile
     end
 
     def model_assigned_row_attributes model, row
