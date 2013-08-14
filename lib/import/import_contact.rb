@@ -41,7 +41,7 @@ module DB
     def clean_entities contactable
       entitiable = contactable.entities
       if entity_title_starts_with_ampersand? entitiable[1]
-        remove_ampersand_from_entity_title entitable[1]
+        remove_ampersand_from_entity_title entitiable[1]
       end
     end
 
