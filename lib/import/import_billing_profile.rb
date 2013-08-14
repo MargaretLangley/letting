@@ -16,7 +16,7 @@ module DB
     end
 
     def model_assigned_row_attributes model, row
-      model.assign_attributes use_profile: true
+      model.assign_attributes use_profile: true, human_id: row[:human_id].to_i
       import_contact model, row
       clean_contact model
     end

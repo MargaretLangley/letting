@@ -67,7 +67,8 @@ module DB
       end
 
       def patch_address model, patch_model
-        model.address = patch_model.address
+        model.address.attributes = \
+          patch_model.address.copy_approved_attributes
       end
 
       def none_matching_entities_error_message model, patch_model

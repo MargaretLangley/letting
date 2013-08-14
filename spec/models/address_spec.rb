@@ -27,4 +27,12 @@ describe Address do
     it('with noted attribute not empty') { address.town = 'Bath'; expect(address).to_not be_empty }
     it('with ignored attribute empty') { address.id = 8; expect(address).to be_empty}
   end
+
+  it 'Limits attributes copied' do
+    client = client_factory human_id: 5
+    new_address = Address.new
+    new_address.attributes = client.address.copy_approved_attributes
+    expect(new_address.addressable_id).to be_nil
+    expect(new_address.road).not_to be_nil
+  end
 end
