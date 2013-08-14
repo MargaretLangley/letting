@@ -19,19 +19,26 @@ module DB
 
     def build_patching_models
       patch_contents.each do |row|
-        model = model_class.new human_id: row[:human_id]
-        model.prepare_for_form
+        model = model_prepared_for_import row
         model_assigned_row_attributes model, row
-        patch_models << { 'id' => model.human_id, 'model' => model }
+        patch_models_add model
       end
     end
 
+    def model_prepared_for_import row
+      model = model_class.new human_id: row[:human_id]
+      model.prepare_for_form
+      model
+    end
+
     def model_assigned_row_attributes model, row
-      model.assign_attributes human_id: row[:human_id]
       import_contact model, row
       clean_contact model
     end
 
+    def patch_models_add model
+      patch_models << { 'id' => model.human_id, 'model' => model }
+    end
 
     def patch_model model
       model_hash = patch_models.detect { |m| m['id'] == model.human_id }
