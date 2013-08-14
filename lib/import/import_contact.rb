@@ -11,15 +11,15 @@ module DB
 
     def assign_address address, row
 
-      address.attributes = {      type:       address_type(row),
-                                  flat_no:    row[:flat_no],
-                                  house_name: row[:house_name],
-                                  road_no:    row[:road_no],
-                                  road:       row[:road],
-                                  district:   row[:district],
-                                  town:       row[:town],
-                                  county:     row[:county],
-                                  postcode:   row[:postcode] }
+      address.attributes = { type:       address_type(row),
+                             flat_no:    row[:flat_no],
+                             house_name: row[:house_name],
+                             road_no:    row[:road_no],
+                             road:       row[:road],
+                             district:   row[:district],
+                             town:       row[:town],
+                             county:     row[:county],
+                             postcode:   row[:postcode] }
     end
 
 
