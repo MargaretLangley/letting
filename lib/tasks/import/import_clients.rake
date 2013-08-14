@@ -13,7 +13,8 @@ namespace :import do
 
   desc "Import clients data from CSV file"
   task clients: :environment do
-    DB::ImportClient.import DB::Import.csv_table('clients', headers: headers)
+    DB::ImportClient.import DB::Import.csv_table('clients', headers: headers), \
+    DB::Patch.import(Client, DB::Import.csv_table('clients_patch', headers: headers, location: 'import_data/patch'))
   end
 end
 

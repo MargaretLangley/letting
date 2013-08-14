@@ -35,7 +35,8 @@ module DB
 
     def clean_addresses contactable
       addressable = contactable.address
-      addressable.attributes = { town: addressable.town.titleize }
+      addressable.attributes = \
+        { town: addressable.town.titleize } if addressable.town.present?
     end
 
     def clean_entities contactable

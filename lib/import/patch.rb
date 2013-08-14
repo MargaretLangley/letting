@@ -1,15 +1,23 @@
 module DB
   class Patch
     include ImportContact
+    attr_reader :model_class
     attr_reader :patch_contents
     attr_reader :patch_models
 
-    def initialize patch_contents = []
+    def initialize model_class, patch_contents = []
+      @model_class = model_class
       @patch_contents = patch_contents
       @patch_models = []
     end
 
-    def build_patching_models model_class
+    def self.import model_class, patch_contents
+      patch = new(model_class, patch_contents)
+      patch.build_patching_models
+      patch
+    end
+
+    def build_patching_models
       patch_contents.each do |row|
         model = model_class.new human_id: row[:human_id]
         model.prepare_for_form
