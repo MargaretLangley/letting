@@ -8,7 +8,9 @@ module DB
       contents.each_with_index do |row, index|
         model = model_prepared_for_import row, Property
         model_assigned_row_attributes model, row
-        output_error row, model unless model.save
+        unless model.save
+          output_error row, model
+        end
         output_still_running index
       end
     end
