@@ -1,6 +1,5 @@
 
 def fill_in_address_nottingham
-  select 'Flat', from: 'Type'
   fill_in 'Flat no', with: '471'
   fill_in 'House name', with: 'Trent Bridge'
   fill_in 'Road no', with: '63c'

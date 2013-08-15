@@ -15,9 +15,5 @@ module DB
       clean_contact model
     end
 
-    def address_type row
-      'FlatAddress'
-    end
-
   end
 end

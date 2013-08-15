@@ -46,9 +46,6 @@ module DB
       if model_hash.present?
         patch_model = model_hash['model']
         if entity_names_match? model, patch_model
-          # Address types are a pain since they have to be calculated
-          # Not stored in the data
-          patch_model.address.type = model.address.type
           patch_address model, patch_model
         else
           puts none_matching_entities_error_message model, patch_model
@@ -57,10 +54,6 @@ module DB
     end
 
     private
-
-      def address_type row
-        'DoNotUse'
-      end
 
       def entity_names_match? model, patch_model
         model.entities[0].name == patch_model.entities[0].name

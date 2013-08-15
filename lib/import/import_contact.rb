@@ -11,8 +11,7 @@ module DB
 
     def assign_address address, row
 
-      address.attributes = { type:       address_type(row),
-                             flat_no:    row[:flat_no],
+      address.attributes = { flat_no:    row[:flat_no],
                              house_name: row[:house_name],
                              road_no:    row[:road_no],
                              road:       row[:road],

@@ -1,13 +1,11 @@
 class Address < ActiveRecord::Base
   belongs_to :addressable, polymorphic: true
-  validates :county, :town, :road, :type, presence: true
+  validates :county, :road, presence: true
+  validates :road_no, presence: true, unless: :house_name?
+  validates :house_name, presence: true, unless: :road_no?
 
   def empty?
     attributes.except(*ignored_attrs).values.all?( &:blank? )
-  end
-
-  def self.types
-    { 'Flat' => 'FlatAddress', 'House' => 'HouseAddress'}
   end
 
   def copy_approved_attributes

@@ -15,9 +15,5 @@ module DB
       clean_contact model
     end
 
-    def address_type row
-      row[:human_id].to_i > 6000 ? 'FlatAddress' : 'HouseAddress'
-    end
-
   end
 end

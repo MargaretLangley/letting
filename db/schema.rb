@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20130809214432) do
   create_table "addresses", force: true do |t|
     t.integer  "addressable_id",   null: false
     t.string   "addressable_type", null: false
-    t.string   "type"
     t.string   "flat_no"
     t.string   "house_name"
     t.string   "road_no"

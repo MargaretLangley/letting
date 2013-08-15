@@ -81,7 +81,6 @@ describe Property do
 
     def fill_in_billing_profile_address
       within_fieldset 'billing_profile' do
-        select  'Flat', from: 'Type'
         fill_in 'Flat no', with: '555'
         fill_in 'House name', with: 'The County Ground'
         fill_in 'Road no', with: '68f'

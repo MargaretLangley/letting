@@ -43,7 +43,6 @@ end
       {
         addressable_id: 1,
         addressable_type: 'Client',
-        type:     'FlatAddress',
         flat_no:  '96',
         house_name: 'Old Trafford',
         road_no:  '154',
@@ -56,7 +55,6 @@ end
       {
         addressable_id: 2,
         addressable_type: 'Client',
-        type:     'FlatAddress',
         flat_no:  '64',
         house_name: 'Old Trafford',
         road_no:  '311',
@@ -69,7 +67,6 @@ end
       {
         addressable_id: 3,
         addressable_type: 'Client',
-        type:     'FlatAddress',
         flat_no:  '84',
         house_name: 'Old Trafford',
         road_no:  '189',
@@ -137,7 +134,6 @@ end
       {
         addressable_id: 1,
         addressable_type: 'Property',
-        type:     'FlatAddress',
         flat_no: '28',
         house_name: 'Lords',
         road_no: '2',
@@ -149,7 +145,6 @@ end
       {
         addressable_id: 2,
         addressable_type: 'Property',
-        type:     'FlatAddress',
         flat_no: '31',
         house_name: 'Lords',
         road_no: '2',
@@ -161,7 +156,6 @@ end
       {
         addressable_id: 3,
         addressable_type: 'Property',
-        type:     'FlatAddress',
         flat_no: '31',
         house_name: 'Tavern',
         road_no: '2',
@@ -173,7 +167,6 @@ end
       {
         addressable_id: 4,
         addressable_type: 'Property',
-        type:     'HouseAddress',
         road_no: '3',
         road: 'Green Fields',
         town: 'Suburbaton',
@@ -210,7 +203,6 @@ end
       {
         addressable_id: 1,
         addressable_type: 'BillingProfile',
-        type:     'FlatAddress',
         flat_no:  '33',
         house_name: 'The Oval',
         road_no:  '207b',
