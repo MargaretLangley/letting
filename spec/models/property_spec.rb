@@ -119,7 +119,7 @@ describe Property do
     end
   end
 
-  context 'search by house name' do
+  context 'search' do
 
     p1 = p2 = p3 = c1 = nil
 
@@ -128,8 +128,8 @@ describe Property do
             address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' }
     end
 
-    context 'search by house name' do
-      it 'returns only those with that house name' do
+    context '#search_by_house_name' do
+      it 'matches just that house name' do
         p2 = property_factory human_id: 2,
               address_attributes: { house_name: 'Headingly' }
         p3 = property_factory human_id: 3,
@@ -138,7 +138,7 @@ describe Property do
         expect(Property.search_by_house_name 'Headingly').to eq [p1, p2]
       end
 
-      it 'does not return addresses from other types' do
+      it 'returns property addreses only (and not client etc)' do
         c1 = client_factory human_id: 1,
               address_attributes: { house_name: 'Headingly' }
         expect(Address.all.to_a).to eq [p1.address, c1.address]
@@ -153,43 +153,48 @@ describe Property do
       end
      end
 
-     context 'like road or flat' do
+     context '#search_by_all returns' do
 
-      it 'returns matching road name' do
+      it 'exact number (human_id)' do
+        p2 = property_factory human_id: 10
+        expect(Property.all).to eq [p1, p2]
+        expect(Property.search_by_all '1').to eq [p1]
+      end
+
+      it 'exact names' do
         p2 = property_factory human_id: 2,
               address_attributes: { house_name: 'Lords', road: 'Essex'}
         expect(Property.all).to eq [p1, p2]
         expect(Property.search_by_all 'Kirstall Road').to eq [p1]
       end
 
-      it 'returns matching house names' do
-        p2 = property_factory human_id: 3,
-              address_attributes: { house_name: 'Vauxall Lane' }
-        expect(Property.all).to eq [p1, p2]
-        expect(Property.search_by_all 'Headingly').to eq [p1]
-      end
+      context 'wildcard' do
+        it 'house name' do
+          p2 = property_factory human_id: 3,
+                address_attributes: { house_name: 'Vauxall Lane' }
+          expect(Property.all).to eq [p1, p2]
+          expect(Property.search_by_all 'Headi').to eq [p1]
+        end
+        it 'road name' do
+          p2 = property_factory human_id: 2,
+                address_attributes: { house_name: 'Headingly', road: 'unknown' }
+          expect(Property.all).to eq [p1, p2]
+          expect(Property.search_by_all 'Kirstall').to eq [p1]
+        end
+        it 'towns' do
+          p2 = property_factory human_id: 2,
+                address_attributes: { town: 'unknown' }
+          expect(Property.all).to eq [p1, p2]
+          expect(Property.search_by_all 'Yor').to eq [p1]
+        end
 
-      it 'returns matching road name' do
-        p2 = property_factory human_id: 2,
-              address_attributes: { house_name: 'Headingly', road: 'unknown' }
-        expect(Property.all).to eq [p1, p2]
-        expect(Property.search_by_all 'Kirstall').to eq [p1]
+        it 'multiple' do
+          p2 = property_factory human_id: 2,
+                address_attributes: { town: 'Yorks' }
+          expect(Property.all).to eq [p1, p2]
+          expect(Property.search_by_all 'Yor').to eq [p1,p2]
+        end
       end
-
-      it 'returns matching towns' do
-        p2 = property_factory human_id: 2,
-              address_attributes: { town: 'unknown' }
-        expect(Property.all).to eq [p1, p2]
-        expect(Property.search_by_all 'York').to eq [p1]
-      end
-
-      it 'returns matching all works beginning with' do
-        p2 = property_factory human_id: 2,
-              address_attributes: { town: 'Yorks' }
-        expect(Property.all).to eq [p1, p2]
-        expect(Property.search_by_all 'York').to eq [p1,p2]
-      end
-
 
      end
 

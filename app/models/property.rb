@@ -38,10 +38,11 @@ class Property < ActiveRecord::Base
 
   def self.search_by_all(search)
     Property.includes(:address).
-      where('addresses.house_name ILIKE ? OR ' + \
+      where('human_id = ? OR ' + \
+            'addresses.house_name ILIKE ? OR ' + \
             'addresses.road ILIKE ? OR '  \
             'addresses.town ILIKE ?',  \
-            "#{search}%", "#{search}%","#{search}%" \
+            "#{search.to_i}", "#{search}%", "#{search}%", "#{search}%" \
             ).references(:address)
   end
 
