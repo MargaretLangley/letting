@@ -14,7 +14,7 @@
       <%= render partial: 'shared/address', locals: { f: builder, parent: 'property' } %>
     <% end %>
 
- <a href="#" class="button" onClick="makeItemsVisible('property_entity_1')">Add Person</a>
+ <a href="#" class="button" onClick="changeElementDisplay('property_entity_1')">Add Person</a>
 
     <% @property.entities.each do |entity| %>
       <%= f.fields_for :entities, entity do |builder| %>
