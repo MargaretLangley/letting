@@ -8,6 +8,9 @@ describe Block do
     context 'presence' do
       it('name') { block.name = nil; expect(block).to_not be_valid }
     end
+
+    it ('name has maximum length')   { block.name = 'a' * 65; expect(block).to_not be_valid }
+
   end
 
 end

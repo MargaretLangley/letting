@@ -1,6 +1,8 @@
 class Entity < ActiveRecord::Base
   belongs_to :entitieable, polymorphic: true
-  validates :name, presence: true
+  validates :name, length: { maximum:40 }, presence: true
+  validates :title, :initials, length: { maximum:10 }
+  validates :entitieable_type, length: { maximum:15 }
 
   def all?
     true
