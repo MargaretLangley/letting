@@ -27,22 +27,32 @@ describe Address do
       expect(address).to_not be_valid
     end
 
-    it 'has a minimum and maximum length' do
-      address.district = ''
-      expect(address).to be_valid
-    end
+    it ('flat_no can be blank')       { address.flat_no = '';expect(address).to be_valid }
+    it ('flat_no has maximum length') { address.flat_no = 'a' * 11; expect(address).to_not be_valid }
 
+    it ('house_name can be blank')       { address.house_name = ''; expect(address).to be_valid }
+    it ('house_name has maximum length') { address.house_name = 'a' * 65; expect(address).to_not be_valid }
 
-    it 'has a minimum and maximum length' do
-      address.district = 'aa'
-      expect(address).to_not be_valid
-    end
+    it ('road_no can be blank')  { address.road_no = ''; expect(address).to be_valid }
+    it ('road_no has a maximum length') {address.road_no = 'a' * 11; expect(address).to_not be_valid }
 
+    it ('road string has to be present') { address.road = ''; expect(address).to_not be_valid }
+    it ('road has a maximum length') { address.road = 'a' * 65; expect(address).to_not be_valid }
 
-    it 'has a minimum and maximum length' do
-      address.district = 'a' * 65
-      expect(address).to_not be_valid
-    end
+    it ('district can be blank') { address.district = ''; expect(address).to be_valid }
+    it ('district has a minimum length') { address.district = 'aa'; expect(address).to_not be_valid }
+    it ('district has a maximum length') { address.district = 'a' * 65; expect(address).to_not be_valid }
+
+    it ('town can be blank') { address.town = ''; expect(address).to be_valid }
+    it ('town has a minimum length') { address.town = 'aa'; expect(address).to_not be_valid }
+    it ('town has a maximum length') { address.town = 'a' * 65; expect(address).to_not be_valid }
+
+    it ('county cannot be blank')      { address.county = ''; expect(address).to_not be_valid }
+    it ('county has a minimum length') { address.county = 'aa'; expect(address).to_not be_valid }
+    it ('county has a maximum length') { address.county = 'a' * 65; expect(address).to_not be_valid }
+
+    it ('postcode has a valid form') { address.postcode = 'B75 6NR'; expect(address).to be_valid }
+    it ('postcode has an invalid form') { address.postcode = 'B7'; expect(address).to_not be_valid }
 
   end
 

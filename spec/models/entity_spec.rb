@@ -23,6 +23,12 @@ describe Entity do
     it('with ignored attribute empty') { entity.id = 8; expect(entity).to be_empty}
   end
 
+  it ('name cannot be blank') { entity.name = ''; expect(entity).to_not be_valid }
+  it ('name has a maximum length') { entity.name = 'a' * 41; expect(entity).to_not be_valid }
+
+  it ('title has a maximum length') { entity.title = 'a' * 11; expect(entity).to_not be_valid }
+  it ('initials has a maximum length') { entity.initials = 'a' * 11; expect(entity).to_not be_valid }
+  it ('entitieable_type has a maximum length') { entity.entitieable_type = 'a' * 16; expect(entity).to_not be_valid }
 end
 
 
