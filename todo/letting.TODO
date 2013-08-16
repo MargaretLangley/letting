@@ -9,7 +9,7 @@ Resources
   ☐ Client
 
 Action:
-  ☐ Need Paging on Index?
+  ✔ Need Paging on Index? @done (before 06-08-16 22:07)
 
 Testing:
       ☐ Feature tests need refactoring as shared address
@@ -22,8 +22,8 @@ Style:
 
 Shared Partials:
 Address
-  ☐ Address length validations
-  ☐ Postcode validation
+  ✔ Address length validations @done (13-08-16 22:07)
+  ✔ Postcode validation @done (13-08-16 22:07)
   ☐ Length of lines shorter for postcode, flat no, road no
 
 Entity
