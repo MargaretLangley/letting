@@ -3,7 +3,7 @@ class Address < ActiveRecord::Base
   validates :county, :road, presence: true
   validates :road_no, presence: true, unless: :house_name?
   validates :house_name, presence: true, unless: :road_no?
-
+  validates :district, length: { minimum: 4, maximum: 64 }, allow_blank: true
   def empty?
     attributes.except(*ignored_attrs).values.all?( &:blank? )
   end

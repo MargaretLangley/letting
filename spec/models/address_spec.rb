@@ -26,6 +26,24 @@ describe Address do
       address.house_name =nil
       expect(address).to_not be_valid
     end
+
+    it 'has a minimum and maximum length' do
+      address.district = ''
+      expect(address).to be_valid
+    end
+
+
+    it 'has a minimum and maximum length' do
+      address.district = 'aa'
+      expect(address).to_not be_valid
+    end
+
+
+    it 'has a minimum and maximum length' do
+      address.district = 'a' * 65
+      expect(address).to_not be_valid
+    end
+
   end
 
   context 'methods #empty? new address' do
