@@ -28,7 +28,6 @@ describe Entity do
 
   it ('title has a maximum length') { entity.title = 'a' * 11; expect(entity).to_not be_valid }
   it ('initials has a maximum length') { entity.initials = 'a' * 11; expect(entity).to_not be_valid }
-  it ('entitieable_type has a maximum length') { entity.entitieable_type = 'a' * 16; expect(entity).to_not be_valid }
 end
 
 
