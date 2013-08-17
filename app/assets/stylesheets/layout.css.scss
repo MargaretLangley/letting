@@ -7,14 +7,13 @@ body {
 }
 
 header#page-header {
-  background-color: $secondary-background-color;
+
   padding: 0px 25px;
 
   h1 a {
     height: 0px;
     padding-top: 60px;
     display: block;
-    font-family: "Esteban", sans-serif;
     color: #fff;
     text-decoration: none;
     overflow: hidden;
