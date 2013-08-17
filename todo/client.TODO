@@ -1,20 +1,27 @@
 Letting:
 
 Client
+
  ☐ Import
  ✔ Seed @done (13-08-03)
+
  ☐ Model
-     ✔ Entity (people) @done (13-08-04 16:47)
-     ☐ Entity (company)
-     ✔ Multiple Entities @done (13-08-03 19:13)
-     ☐ Address
-       ☐ Handle nil address as Address::NoAddress
-     ☐ Validation
-        ✔ human_readable_client_id   unique @done (13-08-03 19:12)
- ☐ Associations
+   ☐ Address
+     ☐ Handle nil address as Address::NoAddress
+
+ Associations:
    ✔ has_one address @done (Before13-08-04 18:14)
    ✔ has_many entites @done (before 13-08-04 18:14)
    ✔ has_many properties @done (13-08-04 18:13)
+
+ Validation:
+   ✔ client_id (human_id) @done (13-08-17 12:48)
+     ✔ numeric @done (before 13-08-17 12:47)
+     ✔ human_readable_client_id   unique @done (13-08-03 19:12)
+
+ Shared Require:
+   ☐ Address
+   ☐ Entity
 
  ☐ Actions
      ☐ Index
@@ -25,7 +32,6 @@ Client
        ✔ C @done (13-08-04 13:18)
      ☐ Create
        ☐ V
-          ☐ Address Type alignment
        ✔ C @done (By 13-08-04 16:47)
      ☐ Update
        ☐ V

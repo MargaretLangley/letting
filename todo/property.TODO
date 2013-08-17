@@ -1,21 +1,25 @@
 Letting:
 
 Property
+
  ☐ Import
- ☐ Model Includes
-     ☐ Model has block_id and probably should be removed
-     ✔ Entity (People) @done (13-07-28 23:38)
-     ☐ Entity (company)
-     ✔ Multiple Entities in testing @done (13-07-31 16:30)
-     ✔ Address @done (13-07-27)
-     ✔ Billing Address @done (13-08-02 00:10)
-     ☐ tag
-     ☐ Edit a number of records at once 'A Block'
-     ✔ validates numericality @done (13-07-27 15:13)
-     ✔ validates uniqueness @done (13-07-27 15:13)
-     ☐ validates string length
-     ☐ Set default for BillingProperty use_profile but doesn't seem to work.
+ ✔ Seed @done (before 13-08-17 12:51)
+
+ Model:
+   ✔ Model has block_id and probably should be removed @done (13-08-17 12:12)
+   ✔ Billing Address @done (13-08-02 00:10)
+   ☐ tag
+   ☐ Edit a number of records at once 'A Block'
+   ☐ Set default for BillingProperty use_profile but doesn't seem to work.
          http://stackoverflow.com/questions/8146448/get-the-default-values-of-table-columns-in-postgres
+    ☐ Validates
+      PropertyID / human_id
+      ✔ validates numericality @done (13-07-27 15:13)
+      ✔ validates uniqueness @done (13-07-27 15:13)
+    Shared Require:
+      ☐ Address
+      ☐ Entity
+
   ☐ Actions
     ☐ Index
       ☐ V
@@ -26,7 +30,7 @@ Property
      ✔ C @done (13-07-27 15:25)
     ☐ Create
       ☐ V
-        ☐ Add Entity Button
+        ✔ Add Entity Button @done (Before 13-08-17 12:10)
         ☐ Add District Button
       ✔ C @done (13-08-03 11:15)
         ✔ Happy Path @done (13-07-30 18:14)
