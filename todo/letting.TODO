@@ -27,5 +27,5 @@ Address
   ☐ Length of lines shorter for postcode, flat no, road no
 
 Entity
-  ☐ Title, Initials, Name length validations
+  ✔ Title, Initials, Name length validations @done (13-08-17 10:49)
   ☐ Length of lines shorter for Title and Intials

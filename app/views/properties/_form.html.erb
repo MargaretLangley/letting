@@ -24,9 +24,15 @@
 
   </fieldset>
 
-  <%= f.fields_for :billing_profile do |builder| %>
-    <%= render partial: 'billing_profile', locals: { f: builder } %>
-  <% end %>
+  <div style='position: relative;'>
+    <div id='blank_slate' class='blank_slate_overlay' style='position: absolute; top: 200px; left: 10%; width:85%; padding: 60px 22px; background: rgba(109,109,109,0.6);font-size:1.6em; font-weight: bold; text-align: center;'>
+      Billing is to the above property address. If you wish to send the bill to this billing address click the 'Use profile' checkbox.
+    </div>
+    <%= f.fields_for :billing_profile do |builder| %>
+      <%= render partial: 'billing_profile', locals: { f: builder } %>
+    <% end %>
+  </div>
+
 
   <div>
     <p>

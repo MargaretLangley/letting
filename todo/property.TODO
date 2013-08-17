@@ -2,7 +2,6 @@ Letting:
 
 Property
  ☐ Import
- ☐ Js to add new entity
  ☐ Model Includes
      ☐ Model has block_id and probably should be removed
      ✔ Entity (People) @done (13-07-28 23:38)
@@ -39,3 +38,7 @@ Property
         ✔ Happy Path @done (13-07-28 00:27)
         ✔ Fail Save @done (13-08-03 11:04)
     ✔ Delete @done (13-07-30 22:04)
+
+  Behaviour:
+ ✔ Js to add new entity @done (13-08-17 10:35)
+ ☐ any change display jquery -> javascript
