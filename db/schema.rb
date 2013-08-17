@@ -66,13 +66,11 @@ ActiveRecord::Schema.define(version: 20130809214432) do
 
   create_table "properties", force: true do |t|
     t.integer  "human_id"
-    t.integer  "block_id"
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "properties", ["block_id"], name: "index_properties_on_block_id", using: :btree
   add_index "properties", ["client_id"], name: "index_properties_on_client_id", using: :btree
 
   create_table "search_suggestions", force: true do |t|
