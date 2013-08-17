@@ -37,3 +37,10 @@ Shared:
     ✔ Title, Initials, Name length validations @done (13-08-17 10:49)
     Partial:
     ☐ Length of lines shorter for Title and Intials
+
+  Requirements:
+    ☐ entities before addresses (except on the property)
+    ☐ district text box invisible till click add district
+    ☐ Billing profile disabled if use profile is disabled
+    ☐ Use profile label => Use Billing Address
+    ☐ Post code shorter than other text boxes
