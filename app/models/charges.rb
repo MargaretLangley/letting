@@ -2,11 +2,15 @@ module Charges
   extend ActiveSupport::Concern
   included do
     has_many :charges, dependent: :destroy do
+      def prepare
+        (self.size...MAX_CHARGES).each { self.build }
+      end
+
       def clean_up_form
-        charges_for_destruction :empty?
+        destruction_if :empty?
       end
     private
-      def charges_for_destruction matcher
+      def destruction_if matcher
         self.select(&matcher).each {|charge| mark_charge_for_destruction charge }
       end
 
@@ -14,13 +18,6 @@ module Charges
         charge.mark_for_destruction
       end
     end
-    accepts_nested_attributes_for :charges, allow_destroy: true
   end
   MAX_CHARGES = 1
-
-
-private
-  def prepare_charges
-    (self.charges.size...MAX_CHARGES).each { self.charges.build }
-  end
 end

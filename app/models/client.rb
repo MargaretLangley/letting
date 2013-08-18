@@ -12,7 +12,7 @@ class Client < ActiveRecord::Base
   end
 
   def clear_up_after_form
-    entities_for_destruction :empty?
+    entities.clean_up_form
   end
 
 end

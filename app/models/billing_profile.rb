@@ -17,10 +17,10 @@ class BillingProfile < ActiveRecord::Base
 
   def clear_up_after_form
     if use_profile?
-      entities_for_destruction :empty?
+      entities.clean_up_form
     else
       address_for_destruction unless self.address.nil?
-      entities_for_destruction :all?
+      entities.remove_form
     end
   end
 
