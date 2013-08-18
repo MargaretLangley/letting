@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe Address do
 
-  let(:address) { Address.new address_attributes addressable_id: 1}
+  let(:address) do
+    Address.new road_no: '1', road: 'my road', town: 'my town', county: 'my county'
+  end
 
   it ('valid') { expect(address).to be_valid }
 
@@ -18,7 +20,7 @@ describe Address do
       it('#road')    { address.road =nil; expect(address).not_to be_valid }
     end
 
-    it('#road_no')    { address.road_no =nil; expect(address).to be_valid }
+    it('#road_no')    { address.road_no =nil; address.house_name = 'my house'; expect(address).to be_valid }
     it('#house_name') { address.house_name =nil; expect(address).to be_valid }
 
     it('#road_no & #house_name') do
@@ -33,7 +35,12 @@ describe Address do
     it ('house_name can be blank')       { address.house_name = ''; expect(address).to be_valid }
     it ('house_name has maximum length') { address.house_name = 'a' * 65; expect(address).to_not be_valid }
 
-    it ('road_no can be blank')  { address.road_no = ''; expect(address).to be_valid }
+    it ('road_no can be blank if house_name is set')  do
+      address.road_no = ''
+      address.house_name = 'my house'
+      expect(address).to be_valid
+    end
+
     it ('road_no has a maximum length') {address.road_no = 'a' * 11; expect(address).to_not be_valid }
 
     it ('road string has to be present') { address.road = ''; expect(address).to_not be_valid }
