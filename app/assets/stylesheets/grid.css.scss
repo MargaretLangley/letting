@@ -17,7 +17,8 @@ $pad: 40px;
 
 .grid {
   background: white;
-  margin: 0 0 $pad 0;
+  margin: 0 0 $pad 2%;
+  padding: 0 2% 0 0;
 
   &:after {
     /* Or @extend clearfix */
