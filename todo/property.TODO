@@ -12,15 +12,15 @@ Property
    ☐ Edit a number of records at once 'A Block'
    ☐ Set default for BillingProperty use_profile but doesn't seem to work.
          http://stackoverflow.com/questions/8146448/get-the-default-values-of-table-columns-in-postgres
-    ☐ Validates
-      PropertyID / human_id
+    Validates:
+      PropertyID / human_id:
       ✔ validates numericality @done (13-07-27 15:13)
       ✔ validates uniqueness @done (13-07-27 15:13)
     Shared Require:
       ☐ Address
       ☐ Entity
 
-  ☐ Actions
+  Actions:
     ☐ Index
       ☐ V
          ☐ IMPROVE: Navigating from list to show currently by clicking human_id
