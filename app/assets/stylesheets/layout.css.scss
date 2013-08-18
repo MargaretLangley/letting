@@ -50,70 +50,10 @@ footer#page-footer {
   }
 }
 
-div#wrapper {
-  background: #fff;
-  padding: 10px;
-  min-height: 400px;
-  overflow: hidden;
-  div#container {
-    width: 960px;
-    margin: 0 auto;
-    padding: 10px 0;
-    section#content {
-      width: 620px;
-      h1 {
-        margin: 0;
-        padding: 0 0 20px 0;
-      }
-    }
-  }
-}
 
-aside#sidebar {
-  width: 200px;
+nav {
+  border-radius: 5px;
+  border: 1px solid $fieldset-color;
+  padding: 5%;
   float: right;
-
-  h1 {
-    color: $secondary-text-color;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  a,
-  a:link,
-  a:visited {
-    text-decoration: none;
-  }
-
-  nav {
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-
-      li {
-        padding: 4px 0;
-        padding-left: 25px;
-
-        &.all-movies a {
-          display: block;
-          background: image-url("arrow.png") no-repeat 10px 8px;
-          padding-left: 35px;
-        }
-
-        &.create-movie a {
-          display: block;
-          background: image-url("add.png") no-repeat 10px 8px;
-          padding-left: 35px;
-        }
-
-        a:hover {
-          background-color: $accent-color;
-          color: #000;
-        }
-
-      }
-    }
-  }
 }
