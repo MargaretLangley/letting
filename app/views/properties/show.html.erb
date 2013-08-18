@@ -12,18 +12,7 @@
     <%= render 'shared/show_entity', object: entity %>
   <% end %>
 
-  <h3>Billing Address</h3>
+  <%= render 'show_billing_profile', object: @property.billing_profile %>
+  <%= render 'show_charges', object: @property.charges %>
 
-  <% if @property.separate_billing_address? %>
-    <%= render 'shared/show_address', object: @property.bill_to %>
-    <% if @property.bill_to.entities.any? %>
-      <% @property.bill_to.entities.each do |entity| %>
-      <%= render 'shared/show_entity', object: entity %>
-      <% end %>
-    <% else %>
-      No Entities
-    <% end %>
-  <% else %>
-   Billing to home address
-  <% end %>
 </article>

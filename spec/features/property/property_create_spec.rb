@@ -54,6 +54,7 @@ describe Property do
     fill_in_use_billing_profile
     fill_in_billing_profile_address
     fill_in_billing_profile_entities
+    fill_in_charge
   end
 
     def fill_in_property
@@ -100,6 +101,14 @@ describe Property do
       end
     end
 
+    def fill_in_charge
+      within_fieldset 'property_charge_0' do
+        fill_in 'Charge type', with: 'Ground Rent'
+        fill_in 'Due in', with: 'Advance'
+        fill_in 'Amount', with: '50.50'
+      end
+    end
+
   def invalidate_page
     fill_in_property
     fill_in_property_address
@@ -119,6 +128,7 @@ describe Property do
     expect_property_entities
     expect_billing_profile_address
     expect_billing_profile_entities
+    expect_charges
   end
 
     def expect_property
@@ -148,6 +158,12 @@ describe Property do
       expect(page).to have_text 'Mr'
       expect(page).to have_text 'K J'
       expect(page).to have_text 'Barnett'
+    end
+
+    def expect_charges
+      expect(page).to have_text 'Ground Rent'
+      expect(page).to have_text 'Advance'
+      expect(page).to have_text '£50.50'
     end
 
 end

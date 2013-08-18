@@ -1,0 +1,23 @@
+Charge:
+
+  ☐ Import
+  ☐ Model
+    ☐ Charge
+    ☐ BeDue
+  ☐ Validations
+    ☐ Parse day / month to know if valid date
+
+  ☐ Actions
+    ☐ Index
+      ☐ V
+      ☐ C
+    ☐ Create
+      ☐ V
+      ☐ C
+    ☐ Update
+      ☐ V
+      ☐ C
+    ☐ Destroy
+      ☐ V
+      ☐ C
+

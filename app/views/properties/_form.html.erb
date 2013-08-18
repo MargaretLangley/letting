@@ -20,6 +20,7 @@
       <% end %>
     <% end %>
 
+
  <a href="#" id = "changeDisplay" onClick="changeElementDisplay('property_entity_1')">Add Person</a>
 
   </fieldset>
@@ -33,6 +34,11 @@
     <% end %>
   </div>
 
+  <% @property.charges.each.with_index do |charge,index| %>
+    <%= f.fields_for :charges, charge do |builder| %>
+      <%= render partial: 'charge', locals: { f: builder, parent: 'property', index: index } %>
+    <% end %>
+  <% end %>
 
   <div>
     <p>

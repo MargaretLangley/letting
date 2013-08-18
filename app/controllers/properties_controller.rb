@@ -54,7 +54,8 @@ class PropertiesController < ApplicationController
         permit :human_id,
           address_attributes: address_params,
           entities_attributes: entities_params,
-          billing_profile_attributes: billing_profile_params
+          billing_profile_attributes: billing_profile_params,
+          charges_attributes: charges_params
           # Note for collection of entities you need to return :id as well
           # Note saw '_destroy' in the attributes
     end
@@ -66,4 +67,7 @@ class PropertiesController < ApplicationController
       ]
     end
 
+    def charges_params
+      [ :id, :charge_type, :due_in, :amount ]
+    end
 end

@@ -1,0 +1,17 @@
+<fieldset id='<%= parent %>_charge_<%= index %>'>
+  <h3>Charge</h3>
+  <div class='field text require'>
+    <%= f.label :charge_type %>
+    <%= f.text_field :charge_type %>
+  </div>
+
+  <div class='field text require'>
+    <%= f.label :due_in %>
+    <%= f.text_field :due_in %>
+  </div>
+
+  <div class='field text require'>
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+  </div>
+</fieldset>

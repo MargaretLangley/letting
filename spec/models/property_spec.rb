@@ -200,4 +200,23 @@ describe Property do
 
   end
 
+  context 'charges' do
+
+    it 'has no charges' do
+      expect(property.charges).to have_exactly(0).items
+    end
+
+    it 'has charges' do
+      expect(property.charges).to eq []
+    end
+
+    # Tests that relationship exists
+    it 'adds a new charge' do
+      property.charges.build charge_type: 'ground_rent', \
+        due_in: 'advance', amount: '50.50', property_id: property.id
+      expect(property.charges.first.charge_type).to eq 'ground_rent'
+    end
+
+  end
+
 end

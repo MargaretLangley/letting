@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(version: 20130809214432) do
 
   add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type", using: :btree
 
+  create_table "be_dues", force: true do |t|
+    t.integer  "day"
+    t.integer  "month"
+    t.integer  "charge_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "be_dues", ["charge_id"], name: "index_be_dues_on_charge_id", using: :btree
+
   create_table "billing_profiles", force: true do |t|
     t.boolean  "use_profile", default: false, null: false
     t.integer  "property_id",                 null: false
@@ -40,11 +50,24 @@ ActiveRecord::Schema.define(version: 20130809214432) do
     t.datetime "updated_at"
   end
 
+  add_index "billing_profiles", ["property_id"], name: "index_billing_profiles_on_property_id", using: :btree
+
   create_table "blocks", force: true do |t|
     t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "charges", force: true do |t|
+    t.string   "charge_type",                         null: false
+    t.string   "due_in",                              null: false
+    t.decimal  "amount",      precision: 8, scale: 2, null: false
+    t.integer  "property_id",                         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "charges", ["property_id"], name: "index_charges_on_property_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.integer  "human_id"
