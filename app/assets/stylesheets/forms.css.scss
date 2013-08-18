@@ -26,12 +26,19 @@ fieldset {
      width: 30%;
   }
 
-  .field.text input {
-     display: inline-block;
-     margin-left: 2%;
-     padding: 3px;
-     width: 65%;
+  .field.text {
+    input {
+       display: inline-block;
+       margin-left: 2%;
+       padding: 3px;
+       width: 65%;
+     }
+
+     &.short input {
+        width: 30%;
+      }
   }
+
 
   // for horizontal form I want to get a
   // block lined up under the text inputs
