@@ -19,5 +19,13 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+en-GB:
+  number:
+    currency:
+        format:
+            format: "%u%n"
+            unit: "&pound;"
+            # These three are to override number.format and are optional
+            separator: "."
+            delimiter: ","
+            precision: 2
