@@ -23,7 +23,11 @@
 
   <div class='field text require'>
     <%= f.label :district %>
-    <%= f.text_field :district %>
+
+    <a href="#" class = "textAdd" id = "addDistrict" onClick ="displayTextfield('districtBox','addDistrict')">&nbsp; &nbsp; Add District</a>
+
+    <span id = "districtBox"><%= f.text_field :district %></span>
+
   </div>
 
   <div class='field text require'>

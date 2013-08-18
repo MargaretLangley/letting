@@ -11,6 +11,7 @@ function setElementDisplayNone()
     document.getElementById('changeBillingDisplay').innerHTML = "Add Person";
   }
   document.getElementById('changeDisplay').innerHTML = "Add Person";
+  document.getElementById('districtBox').style.display="none";
 }
 
 function changeElementDisplay(elId)
@@ -37,4 +38,27 @@ $(function () {
   }).change(); //ensure visible state matches initially
 });
 
+function toggleDisplay(elId,eltx,txcomment)
+{
+  // Toggle feature needs both text and textfield called as in displayTextfield
+  if (document.getElementById(elId).style.display =="block")
+  {
+    document.getElementById(elId).style.display="none";
+    document.getElementById(eltx).innerHTML = txcomment;
+  }
+  else
+  {
+    document.getElementById(eltx).innerHTML = '';
+    document.getElementById(elId).style.display="block";
+  }
+}
 
+function displayTextfield(elId,eltx)
+{
+  // Note line-height set in textAdd and .field label
+  if (document.getElementById(elId).style.display =="none")
+  {
+    document.getElementById(eltx).innerHTML = '';
+    document.getElementById(elId).style.display="block";
+  }
+}

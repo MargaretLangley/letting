@@ -27,7 +27,7 @@ Shared:
       ✔ Address length validations @done (13-08-16 22:07)
       ✔ Postcode validation @done (13-08-16 22:07)
     Partial:
-      ☐ Length of lines shorter for postcode, flat no, road no
+      ✔ Length of lines shorter for postcode, flat no, road no @done (13-08-17 20:50)
 
   Entity
     Model:
@@ -39,8 +39,8 @@ Shared:
     ☐ Length of lines shorter for Title and Intials
 
   Requirements:
-    ☐ entities before addresses (except on the property)
-    ☐ district text box invisible till click add district
+    ✔ entities before addresses (except on the property) @done (13-08-18 08:54)
+    ✔ district text box invisible till click add district @done (13-08-18 08:53)
     ☐ Billing profile disabled if use profile is disabled
     ☐ Use profile label => Use Billing Address
-    ☐ Post code shorter than other text boxes
+    ✔ Post code shorter than other text boxes @done (13-08-17 20:50)

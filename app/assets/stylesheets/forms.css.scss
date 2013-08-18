@@ -24,7 +24,8 @@ fieldset {
      text-overflow: ellipsis;
      white-space: nowrap;
      width: 30%;
-  }
+     line-height: 27px;
+   }
 
   .field.text {
     input {
@@ -39,6 +40,13 @@ fieldset {
       }
   }
 
+.textAdd
+{
+  color: red;
+  text-decoration: none;
+  line-height: 27px;
+ }
+
 
   // for horizontal form I want to get a
   // block lined up under the text inputs
@@ -49,7 +57,6 @@ fieldset {
     width: 68%;
     white-space: nowrap;
   }
-
 
 
   input,
