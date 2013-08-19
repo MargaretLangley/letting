@@ -20,9 +20,11 @@ describe 'Session' do
   end
 
   def fill_in_login
-    fill_in 'Email', with: 'user@example.com'
-    fill_in 'Password', with: 'password'
-    click_on 'Log In'
+    within_fieldset 'login' do
+      fill_in 'Email', with: 'user@example.com'
+      fill_in 'Password', with: 'password'
+      click_on 'Log In'
+    end
   end
 
   def expect_to
