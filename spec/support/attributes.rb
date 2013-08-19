@@ -1,3 +1,11 @@
+def user_attributes overrides = {}
+  {
+    email: 'example@example.com',
+    password: 'password',
+    password_confirmation: 'password'
+  }.merge overrides
+end
+
 def property_attributes overrides = {}
   {
     human_id: 2002

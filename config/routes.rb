@@ -1,5 +1,7 @@
 Letting::Application.routes.draw do
 
+  resources :users
+
   resources :search_suggestions
 
   root 'properties#index'
