@@ -22,7 +22,8 @@ Charge:
       ☐ C
 Behaviour:
   ✔ Autocomplete Charge infor @done (13-08-19 16:38)
-  ☐ Add Charge
+  ☐ Add Charge button - upto 4?
+  ☐ Delete charge with X button
 
 Autocomplete on charges...
 http://railscasts.com/episodes/102-auto-complete-association-revised
