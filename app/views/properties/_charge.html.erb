@@ -2,12 +2,12 @@
   <h3>Charge</h3>
   <div class='field text require'>
     <%= f.label :charge_type %>
-    <%= f.text_field :charge_type %>
+    <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
   </div>
 
   <div class='field text require'>
     <%= f.label :due_in %>
-    <%= f.text_field :due_in %>
+    <%= f.text_field :due_in, data: { autocomplete_source: Charge.uniq.pluck(:due_in).sort } %>
   </div>
 
   <div class='field text require'>

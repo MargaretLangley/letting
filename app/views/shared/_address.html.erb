@@ -8,7 +8,7 @@
 
   <div class='field text require'>
     <%= f.label :house_name %>
-    <%= f.text_field :house_name %>
+    <%= f.text_field :house_name, data: { autocomplete_source: Address.uniq.pluck(:house_name).reject(&:blank?).sort }  %>
   </div>
 
   <div class='field text require short' >
@@ -18,7 +18,7 @@
 
   <div class='field text require'>
     <%= f.label :road %>
-    <%= f.text_field :road %>
+    <%= f.text_field :road, data: { autocomplete_source: Address.uniq.pluck(:road).reject(&:blank?).sort } %>
   </div>
 
   <div class='field text require'>
@@ -32,12 +32,12 @@
 
   <div class='field text require'>
     <%= f.label :town %>
-    <%= f.text_field :town %>
+    <%= f.text_field :town, data: { autocomplete_source: Address.uniq.pluck(:town).reject(&:blank?).sort } %>
   </div>
 
   <div class='field text require'>
     <%= f.label :county %>
-    <%= f.text_field :county %>
+    <%= f.text_field :county, data: { autocomplete_source: Address.uniq.pluck(:county).reject(&:blank?).sort }  %>
   </div>
 
   <div class='field text require short' >
