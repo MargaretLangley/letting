@@ -1,6 +1,6 @@
 def user_attributes overrides = {}
   {
-    email: 'example@example.com',
+    email: 'user@example.com',
     password: 'password',
     password_confirmation: 'password'
   }.merge overrides

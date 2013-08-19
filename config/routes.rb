@@ -1,6 +1,6 @@
 Letting::Application.routes.draw do
 
-  resources :users
+  resources :sessions
 
   resources :search_suggestions
 
