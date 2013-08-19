@@ -94,6 +94,7 @@ def seed_properties
   create_billing_profile_entities
   create_billing_profile_addresses
   create_billing_profiles
+  create_charges
 end
 
   def create_entities
@@ -220,6 +221,14 @@ end
       { id: 1, use_profile: true,  property_id: 1 },
       { id: 2, use_profile: false, property_id: 2 },
       { id: 3, use_profile: false, property_id: 3 }
+    ]
+  end
+
+  def create_charges
+    Charge.create! [
+      { id: 1, charge_type: 'Ground Rent', due_in: 'Advance', amount: '88.08', property_id: 1},
+      { id: 2, charge_type: 'Service Charge', due_in: 'Advance', amount: '125.08', property_id: 1},
+      { id: 3, charge_type: 'Ground Rent', due_in: 'Advance', amount: '70.00', property_id: 2}
     ]
   end
 

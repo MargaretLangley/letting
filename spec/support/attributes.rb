@@ -47,4 +47,10 @@ def oval_person_entity_attributes overrides = {}
   }.merge overrides
 end
 
-
+def charge_attributes overrides = {}
+  {
+    charge_type: 'Ground Rent',
+    due_in: 'Advance',
+    amount: '88.08'
+  }.merge overrides
+end

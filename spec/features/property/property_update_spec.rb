@@ -41,6 +41,7 @@ describe Property do
     expect_address_has_original_attributes
     expect_entity_has_original_attributes
     expect_bill_profile_has_original_attributes
+    expect_charge_has_original_attributes
   end
 
     def expect_property_has_original_attributes
@@ -67,6 +68,14 @@ describe Property do
       end
     end
 
+    def expect_charge_has_original_attributes
+      within_fieldset 'property_charge_0' do
+        expect(find_field('Charge type').value).to have_text 'Ground Rent'
+        expect(find_field('Due in').value).to have_text 'Advance'
+        expect(find_field('Amount').value).to have_text '88.08'
+      end
+    end
+
 
 
   def fill_in_form
@@ -74,6 +83,7 @@ describe Property do
     fill_in_address
     fill_in_entity
     fill_in_bill_profile
+    fill_in_charge
   end
 
     def fill_in_client_address
@@ -120,6 +130,14 @@ describe Property do
         end
       end
 
+      def fill_in_charge
+        within_fieldset 'property_charge_0' do
+          fill_in 'Charge type', with: 'Service Charge'
+          fill_in 'Due in', with: 'Arrears'
+          fill_in 'Amount', with: '100.08'
+        end
+      end
+
   def navigate_to_property_page
     visit '/properties/1'
   end
@@ -143,6 +161,7 @@ describe Property do
     expect_new_address
     expect_new_entity
     expect_new_bill_profile
+    expect_new_charge
   end
 
     def expect_new_address
@@ -157,6 +176,12 @@ describe Property do
       expect(page).to have_text 'Middlesex Road'
       expect(page).to have_text 'G A R'
       expect(page).to have_text 'Lock'
+    end
+
+    def expect_new_charge
+      expect(page).to have_text 'Service Charge'
+      expect(page).to have_text 'Arrears'
+      expect(page).to have_text '100.08'
     end
 
   def clear_address_road
