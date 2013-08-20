@@ -107,6 +107,12 @@ describe Property do
         fill_in 'Due in', with: 'Advance'
         fill_in 'Amount', with: '50.50'
       end
+      fill_in_due_on
+    end
+
+    def fill_in_due_on
+      # within_fieldset 'property_charge_0_be_due_'
+      # fill_in day
     end
 
   def invalidate_page

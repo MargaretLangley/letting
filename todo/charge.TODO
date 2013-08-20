@@ -3,7 +3,7 @@ Charge:
   ☐ Import
   ☐ Model
     ✔ Charge @done (13-08-19 10:49)
-    ☐ BeDue
+    ☐ DueOn
   ☐ Validations
     ☐ Parse day / month to know if valid date
 

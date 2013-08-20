@@ -1,6 +1,6 @@
 class Charge < ActiveRecord::Base
   belongs_to :property
-  has_many :be_dues, dependent: :destroy
+  has_many :due_on, dependent: :destroy
   validates :amount, :charge_type, :due_in, presence: true
 
   def empty?

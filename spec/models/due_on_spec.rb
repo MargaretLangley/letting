@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe BeDue do
-  let(:be_due) { BeDue.new day: 1, month: 1, charge_id: 1 }
+describe DueOn do
+  let(:be_due) { DueOn.new day: 1, month: 1, charge_id: 1 }
   let(:charge) { Charge.new charge_type: 'ground_rent', due_in: 'advance', amount: 500.50, property_id: 1 }
 
   it('is valid') { expect(be_due).to be_valid }
@@ -27,7 +27,7 @@ describe BeDue do
 
   context 'associations' do
     it 'belongs to a charge' do
-      be_due = charge.be_dues.new day: 1, month: 1, charge_id: 1
+      be_due = charge.due_on.new day: 1, month: 1, charge_id: 1
       charge.save!
       expect(be_due.charge).to eq charge
     end

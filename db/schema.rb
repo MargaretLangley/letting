@@ -33,16 +33,6 @@ ActiveRecord::Schema.define(version: 20130819155927) do
 
   add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type", using: :btree
 
-  create_table "be_dues", force: true do |t|
-    t.integer  "day"
-    t.integer  "month"
-    t.integer  "charge_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "be_dues", ["charge_id"], name: "index_be_dues_on_charge_id", using: :btree
-
   create_table "billing_profiles", force: true do |t|
     t.boolean  "use_profile", default: false, null: false
     t.integer  "property_id",                 null: false
@@ -74,6 +64,16 @@ ActiveRecord::Schema.define(version: 20130819155927) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "due_ons", force: true do |t|
+    t.integer  "day"
+    t.integer  "month"
+    t.integer  "charge_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "due_ons", ["charge_id"], name: "index_due_ons_on_charge_id", using: :btree
 
   create_table "entities", force: true do |t|
     t.integer  "entitieable_id",   null: false

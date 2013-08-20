@@ -1,4 +1,4 @@
-class BeDue < ActiveRecord::Base
+class DueOn < ActiveRecord::Base
   belongs_to :charge
   validates :day, :charge_id, :month, presence: true
   validates :day, numericality: { only_integer: true, greater_than: 0, less_than: 32 }
