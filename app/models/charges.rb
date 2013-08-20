@@ -3,7 +3,10 @@ module Charges
   included do
     has_many :charges, dependent: :destroy do
       def prepare
-        (self.size...MAX_CHARGES).each { self.build }
+        (self.size...MAX_CHARGES).each do
+          charge = self.build
+          charge.prepare
+        end
       end
 
       def clean_up_form

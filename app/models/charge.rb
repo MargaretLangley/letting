@@ -1,11 +1,19 @@
 class Charge < ActiveRecord::Base
+  include DueOns
   belongs_to :property
-  has_many :due_ons, dependent: :destroy
   validates :amount, :charge_type, :due_in, presence: true
   validates :due_ons, presence: true
+  def prepare
+    due_ons.prepare
+  end
+
+  def clean_up_form
+    due_ons.clean_up_form
+  end
 
   def empty?
-    attributes.except(*ignored_attrs).values.all?( &:blank? )
+    attributes.except(*ignored_attrs).values.all?( &:blank? ) \
+    && due_ons.empty?
   end
 
   private
