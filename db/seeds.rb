@@ -5,6 +5,7 @@
 # this starts seeding off with method call at the end of file
 def generate_seeding
   truncate_tables
+  seed_users
   seed_clients
   seed_properties
   reset_pk_sequenece_on_each_table_used
@@ -13,6 +14,17 @@ end
 
   def truncate_tables
     Rake::Task['db:truncate_all'].invoke
+  end
+
+  def seed_users
+    User.create! [
+      {
+        id: 1,
+        email: 'user@example.com',
+        password: 'password',
+        password_confirmation: 'password'
+      }
+    ]
   end
 
   def seed_clients
