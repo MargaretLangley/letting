@@ -36,7 +36,7 @@
 
   <% @property.charges.each.with_index do |charge,index| %>
     <%= f.fields_for :charges, charge do |builder| %>
-      <%= render partial: 'charge', locals: { f: builder, parent: 'property', index: index } %>
+      <%= render partial: 'charge', locals: { f: builder, charge: charge, parent: 'property', index: index } %>
     <% end %>
   <% end %>
 

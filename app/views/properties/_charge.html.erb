@@ -14,4 +14,13 @@
     <%= f.label :amount %>
     <%= f.text_field :amount %>
   </div>
+
+  <% charge.due_ons.each.with_index do |due_on,due_on_index| %>
+    <%= f.fields_for :due_ons, due_on do |builder| %>
+      <%= render partial: 'due_on', locals: { f: builder, due_on: due_on, parent: "property_charge_#{index}", index: due_on_index } %>
+    <% end %>
+  <% end %>
+
+
+
 </fieldset>

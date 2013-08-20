@@ -5,11 +5,11 @@ require_relative '../shared/entity'
 describe Property do
 
   it '#create' do
-    pending 'due ons being implemented'
     navigate_to_create_page
     validate_page
     fill_in_form
     click_on 'Create Property'
+    have_we_saved?
     expect_properties_page
     navigate_to_property_page
     expect_property_page
@@ -112,9 +112,15 @@ describe Property do
     end
 
     def fill_in_due_on
-      # within_fieldset 'property_charge_0_be_due_'
-      # fill_in day
+      within_fieldset 'property_charge_0_due_on_0' do
+        fill_in 'Day', with: 1
+        fill_in 'Month', with: 1
+      end
     end
+
+  def have_we_saved?
+    expect(current_path).to eq '/properties' # Not Saved
+  end
 
   def invalidate_page
     fill_in_property
@@ -171,6 +177,10 @@ describe Property do
       expect(page).to have_text 'Ground Rent'
       expect(page).to have_text 'Advance'
       expect(page).to have_text '£50.50'
+
+      expect(page).to have_text '01/01'
     end
+
+
 
 end

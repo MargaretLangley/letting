@@ -2,4 +2,8 @@
   <%= object.charge_type %>
   <%= object.due_in %>
   <%= number_to_currency object.amount %>
+
+  <% object.due_ons.each do |due_ons| %>
+    <%= render 'show_due_on', object: due_ons %>
+  <% end %>
 </p>

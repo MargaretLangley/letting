@@ -225,10 +225,20 @@ end
   end
 
   def create_charges
+    create_due_ons
     Charge.create! [
       { id: 1, charge_type: 'Ground Rent', due_in: 'Advance', amount: '88.08', property_id: 1},
       { id: 2, charge_type: 'Service Charge', due_in: 'Advance', amount: '125.08', property_id: 1},
       { id: 3, charge_type: 'Ground Rent', due_in: 'Advance', amount: '70.00', property_id: 2}
+    ]
+  end
+
+  def create_due_ons
+    DueOn.create! [
+      {id: 1, day: 1,  month: 1, charge_id: 1},
+      {id: 2, day: 1,  month: 7, charge_id: 1},
+      {id: 3, day: 30, month: 4, charge_id: 2 },
+      {id: 4, day: 30, month: 9, charge_id: 3 }
     ]
   end
 

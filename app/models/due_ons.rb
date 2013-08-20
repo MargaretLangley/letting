@@ -7,7 +7,7 @@ module DueOns
       end
 
       def empty?
-        self.select(&:empty?).any?
+        self.all?(&:empty?)
       end
 
       def clean_up_form

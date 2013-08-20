@@ -5,11 +5,12 @@ module Charges
       def prepare
         (self.size...MAX_CHARGES).each do
           charge = self.build
-          charge.prepare
         end
+        self.each {|charge| charge.prepare }
       end
 
       def clean_up_form
+        self.each {|charge| charge.clean_up_form }
         destruction_if :empty?
       end
     private
@@ -22,5 +23,5 @@ module Charges
       end
     end
   end
-  MAX_CHARGES = 1
+  MAX_CHARGES = 2
 end
