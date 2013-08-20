@@ -10,7 +10,6 @@ describe DueOn do
     context 'presence' do
       it('day') { be_due.day = nil; expect(be_due).not_to be_valid }
       it('month') { be_due.month = nil; expect(be_due).not_to be_valid }
-      it('charge id') { be_due.charge_id = nil; expect(be_due).not_to be_valid }
     end
 
     context 'numerical' do
@@ -27,7 +26,7 @@ describe DueOn do
 
   context 'associations' do
     it 'belongs to a charge' do
-      be_due = charge.due_on.new day: 1, month: 1, charge_id: 1
+      be_due = charge.due_ons.build day: 1, month: 1, charge_id: 1
       charge.save!
       expect(be_due.charge).to eq charge
     end

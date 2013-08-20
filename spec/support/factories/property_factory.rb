@@ -28,5 +28,15 @@ def add_billing_profile bill_me
 end
 
 def add_charge charge_me
-  charge_me.charges.build charge_attributes
+  charge = charge_me.charges.build charge_attributes
+  add_due_on_0 charge
+  add_due_on_1 charge
+end
+
+def add_due_on_0 charge
+  charge.due_ons.build due_on_attributes_0
+end
+
+def add_due_on_1 charge
+  charge.due_ons.build due_on_attributes_1
 end

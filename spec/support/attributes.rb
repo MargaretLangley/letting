@@ -62,3 +62,20 @@ def charge_attributes overrides = {}
     amount: '88.08'
   }.merge overrides
 end
+
+def due_on_attributes_0 overrides = {}
+  {
+    day: 31,
+    month: 3
+  }.merge overrides
+end
+
+def due_on_attributes_1 overrides = {}
+  {
+    day: 30,
+    month: 9
+  }.merge overrides
+end
+
+
+
