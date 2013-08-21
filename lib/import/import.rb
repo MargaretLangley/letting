@@ -4,8 +4,6 @@ module DB
 
   class Import
     attr_reader :location
-    attr_reader :drop_rows
-    attr_reader :headers
 
     def initialize location, drop_rows, headers
       @location = location
@@ -20,13 +18,14 @@ module DB
     end
 
     def file_to_table filename
-      CSV.open( get_file(filename), headers: headers, header_converters: :symbol, converters: lambda {|f| f ? f.strip : nil}).read.drop(drop_rows)
+      CSV.open( get_file(filename), headers: @headers, header_converters: :symbol, \
+        converters: lambda {|f| f ? f.strip : nil}).read.drop(@drop_rows)
     end
 
     private
 
       def get_file filename
-        "#{location}/#{filename}.csv"
+        "#{@location}/#{filename}.csv"
       end
   end
 

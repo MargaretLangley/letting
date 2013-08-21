@@ -1,9 +1,6 @@
 module DB
   class Patch
     include ImportContact
-    attr_reader :model_class
-    attr_reader :patch_contents
-    attr_reader :patch_models
 
     def initialize model_class, patch_contents = []
       @model_class = model_class
@@ -18,7 +15,7 @@ module DB
     end
 
     def build_patching_models
-      patch_contents.each do |row|
+      @patch_contents.each do |row|
         model_prepared_for_import row
         model_assigned_row_attributes row
         patch_models_add
@@ -26,7 +23,7 @@ module DB
     end
 
     def model_prepared_for_import row
-      @model_to_assign = model_class.new human_id: row[:human_id].to_i
+      @model_to_assign = @model_class.new human_id: row[:human_id].to_i
       @model_to_assign.prepare_for_form
     end
 
@@ -36,12 +33,12 @@ module DB
     end
 
     def patch_models_add
-      patch_models << { 'id' => @model_to_assign.human_id, 'model' => @model_to_assign }
+      @patch_models << { 'id' => @model_to_assign.human_id, 'model' => @model_to_assign }
     end
 
     #debug hash array: patch_models[0]['model']
     def patch_model model
-      model_hash = patch_models.detect { |m| m['id'] == model.human_id }
+      model_hash = @patch_models.detect { |m| m['id'] == model.human_id }
       if model_hash.present?
         patch_model = model_hash['model']
         if entity_names_match? model, patch_model

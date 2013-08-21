@@ -2,9 +2,6 @@ require_relative 'import_contact'
 module DB
   class ImportBase
     include ImportContact
-    attr_reader :klass
-    attr_reader :contents
-    attr_reader :patch
 
     def model_to_save
       @model_to_save || @model_to_assign
@@ -15,15 +12,15 @@ module DB
     end
 
     def model_prepared_for_import row
-      @model_to_assign = first_or_initialize_model row, klass
+      @model_to_assign = first_or_initialize_model row, @klass
       @model_to_assign.prepare_for_form
     end
 
     def import_rows_loop
-      contents.each_with_index do |row, index|
+      @contents.each_with_index do |row, index|
         model_prepared_for_import row
         model_assigned_row_attributes row
-        patch.patch_model @model_to_assign if patch
+        @patch.patch_model @model_to_assign if @patch
         unless model_to_save.save
           output_error row, model_to_save
         end
