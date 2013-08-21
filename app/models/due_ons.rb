@@ -23,5 +23,5 @@ module DueOns
       end
     end
   end
-  MAX_DUE_ONS = 2
+  MAX_DUE_ONS = 4
 end

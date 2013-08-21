@@ -7,7 +7,7 @@ describe DueOns do
   it '#prepare' do
     expect(due_ons).to have(0).items
     due_ons.prepare
-    expect(due_ons).to have(2).items
+    expect(due_ons).to have(4).items
   end
 
   context '#empty?' do
