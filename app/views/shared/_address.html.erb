@@ -1,4 +1,6 @@
+
 <fieldset id='<%= parent %>_address'>
+
   <h3>Address</h3>
 
   <div class='field text require short' >
@@ -22,11 +24,9 @@
   </div>
 
   <div class='field text require'>
-    <%= f.label :district %>
-
-    <a href="#" class = "textAdd" id = "addDistrict" onClick ="displayTextfield('districtBox','addDistrict')">&nbsp; &nbsp; Add District</a>
-
-    <span id = "districtBox"><%= f.text_field :district %></span>
+  <%= f.label :District %>
+   <%= f.label :Add_District %>
+   <%= f.text_field :district %>
 
   </div>
 
