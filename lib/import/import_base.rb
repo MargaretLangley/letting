@@ -6,6 +6,10 @@ module DB
     attr_reader :contents
     attr_reader :patch
 
+    def model_to_save
+      @model_to_save || @model_to_assign
+    end
+
     def self.import contents, patch = nil
       new(contents, patch).import_rows_loop
     end
@@ -15,15 +19,13 @@ module DB
       @model_to_assign.prepare_for_form
     end
 
-
-
     def import_rows_loop
       contents.each_with_index do |row, index|
         model_prepared_for_import row
         model_assigned_row_attributes row
         patch.patch_model @model_to_assign if patch
-        unless @model_to_assign.save
-          output_error row, @model_to_assign
+        unless model_to_save.save!
+          output_error row, model_to_save
         end
         output_still_running index
       end
@@ -40,6 +42,10 @@ module DB
 
       def first_or_initialize_model row, model_class
         model_class.where(human_id: row[:human_id]).first_or_initialize
+      end
+
+      def first_model row, model_class
+        model_class.where(human_id: row[:human_id]).first!
       end
 
       def output_still_running index

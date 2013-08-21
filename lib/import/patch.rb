@@ -28,7 +28,6 @@ module DB
     def model_prepared_for_import row
       @model_to_assign = model_class.new human_id: row[:human_id].to_i
       @model_to_assign.prepare_for_form
-      @model_to_assign
     end
 
     def model_assigned_row_attributes row

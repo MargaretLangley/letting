@@ -8,11 +8,10 @@ module DB
       super BillingProfile, contents, patch
     end
 
-    # Returns Billing Profile model
     def model_prepared_for_import row
-      property = first_or_initialize_model row, Property
-      property.prepare_for_form
-      @model_to_assign = property.billing_profile
+      @model_to_save = first_or_initialize_model row, Property
+      @model_to_save.prepare_for_form
+      @model_to_assign = @model_to_save.billing_profile
     end
 
     def model_assigned_row_attributes row
