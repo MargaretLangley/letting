@@ -20,9 +20,11 @@
       <% end %>
     <% end %>
 
+  <%= javascript_tag do %>
+    setBlockDisplay('property_entities_attributes_1_name','property_entity_1');
+  <% end %>
 
- <a href="#" id = "changeDisplay" onClick="changeElementDisplay('property_entity_1')">Add Person</a>
-
+ <a href="#" id = "togglePerson" onClick = "toggleFieldDisplay('property_entity_1','togglePerson')">Add Person</a>
   </fieldset>
 
   <div style='position: relative;'>
@@ -33,6 +35,14 @@
       <%= render partial: 'billing_profile', locals: { f: builder } %>
     <% end %>
   </div>
+
+  <%= javascript_tag do %>
+    setBlockDisplay('property_billing_profile_attributes_entities_attributes_1_name','property_billing_profile_entity_1');
+
+  <% end %>
+
+ <a href="#" id = "toggleBillingPerson" onClick ="toggleFieldDisplay('property_billing_profile_entity_1','toggleBillingPerson')">Add Person</a>
+  </fieldset>
 
   <% @property.charges.each.with_index do |charge,index| %>
     <%= f.fields_for :charges, charge do |builder| %>
