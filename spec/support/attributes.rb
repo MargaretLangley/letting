@@ -1,3 +1,11 @@
+def user_attributes overrides = {}
+  {
+    email: 'user@example.com',
+    password: 'password',
+    password_confirmation: 'password'
+  }.merge overrides
+end
+
 def property_attributes overrides = {}
   {
     human_id: 2002
@@ -46,5 +54,28 @@ def oval_person_entity_attributes overrides = {}
     name: 'Knutt'
   }.merge overrides
 end
+
+def charge_attributes overrides = {}
+  {
+    charge_type: 'Ground Rent',
+    due_in: 'Advance',
+    amount: '88.08'
+  }.merge overrides
+end
+
+def due_on_attributes_0 overrides = {}
+  {
+    day: 31,
+    month: 3
+  }.merge overrides
+end
+
+def due_on_attributes_1 overrides = {}
+  {
+    day: 30,
+    month: 9
+  }.merge overrides
+end
+
 
 

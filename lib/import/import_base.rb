@@ -6,25 +6,26 @@ module DB
     attr_reader :contents
     attr_reader :patch
 
+    def model_to_save
+      @model_to_save || @model_to_assign
+    end
+
     def self.import contents, patch = nil
       new(contents, patch).import_rows_loop
     end
 
     def model_prepared_for_import row
-      model = find_or_initialize_model row, klass
-      model.prepare_for_form
-      model
+      @model_to_assign = first_or_initialize_model row, klass
+      @model_to_assign.prepare_for_form
     end
-
-
 
     def import_rows_loop
       contents.each_with_index do |row, index|
-        model = model_prepared_for_import row
-        model_assigned_row_attributes model, row
-        patch.patch_model model if patch
-        unless model.save
-          output_error row, model
+        model_prepared_for_import row
+        model_assigned_row_attributes row
+        patch.patch_model @model_to_assign if patch
+        unless model_to_save.save
+          output_error row, model_to_save
         end
         output_still_running index
       end
@@ -39,8 +40,17 @@ module DB
       end
 
 
-      def find_or_initialize_model row, model_class
+      def first_or_initialize_model row, model_class
         model_class.where(human_id: row[:human_id]).first_or_initialize
+      end
+
+      def first_model row, model_class
+        model = model_class.where(human_id: row[:human_id]).first
+        if model.nil?
+         puts "human_id: #{row[:human_id]} - Not found"
+         raise ActiveRecord::RecordNotFound
+        end
+        model
       end
 
       def output_still_running index

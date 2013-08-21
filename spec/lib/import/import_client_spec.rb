@@ -18,8 +18,7 @@ module DB
     end
 
     it "Not double import" do
-      expect{ ImportClient.import Import.csv_table('clients', headers: ImportFields.client, location: 'spec/fixtures/import_data/clients') }.to \
-        change(Client, :count).by 1
+      ImportClient.import Import.csv_table('clients', headers: ImportFields.client, location: 'spec/fixtures/import_data/clients')
       expect{ ImportClient.import Import.csv_table('clients', headers: ImportFields.client, location: 'spec/fixtures/import_data/clients') }.to \
         change(Client, :count).by 0
     end
@@ -42,7 +41,7 @@ module DB
         expect(Client.first.entities[0].created_at).to be < Client.first.entities[1].created_at
       end
 
-      context 'muliple imports' do
+      context 'multiple imports' do
 
         it 'updated changed entities' do
           ImportClient.import Import.csv_table 'clients', headers: ImportFields.client, location: 'spec/fixtures/import_data/clients'

@@ -1,3 +1,11 @@
 <header class="header">
-  <h1><%= link_to 'Adams Lettings', root_path, class: 'header' %></h1>
+    <h1><%= link_to 'Adams Lettings', root_path, class: 'header' %></h1>
+    <nav>
+      <% if current_user %>
+       Logged in as <%= current_user.email %>
+       <%= link_to 'Log Out', session_path('current'), method: :delete %>
+      <% else %>
+        <%= link_to 'Log In', new_session_path %>
+      <% end %>
+    </nav>
 </header>

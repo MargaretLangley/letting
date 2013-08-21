@@ -2,8 +2,8 @@ Charge:
 
   ☐ Import
   ☐ Model
-    ☐ Charge
-    ☐ BeDue
+    ✔ Charge @done (13-08-19 10:49)
+    ✔ DueOn @done (13-08-20 18:11)
   ☐ Validations
     ☐ Parse day / month to know if valid date
 
@@ -20,4 +20,10 @@ Charge:
     ☐ Destroy
       ☐ V
       ☐ C
+Behaviour:
+  ✔ Autocomplete Charge infor @done (13-08-19 16:38)
+  ☐ Add Charge button - upto 4?
+  ☐ Delete charge with X button
 
+Autocomplete on charges...
+http://railscasts.com/episodes/102-auto-complete-association-revised

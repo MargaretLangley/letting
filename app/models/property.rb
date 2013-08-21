@@ -9,7 +9,7 @@ class Property < ActiveRecord::Base
 
   validates :human_id, numericality: true
   validates :human_id, uniqueness: true
-  validates :entities, :presence => true
+  validates :entities, presence: true
   before_validation :clear_up_after_form
 
   def prepare_for_form

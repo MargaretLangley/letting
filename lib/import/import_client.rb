@@ -9,10 +9,10 @@ module DB
       super Client, contents, patch
     end
 
-    def model_assigned_row_attributes model, row
-      model.assign_attributes human_id: row[:human_id]
-      import_contact model, row
-      clean_contact model
+    def model_assigned_row_attributes row
+      @model_to_assign.assign_attributes human_id: row[:human_id]
+      import_contact @model_to_assign, row
+      clean_contact @model_to_assign
     end
 
   end

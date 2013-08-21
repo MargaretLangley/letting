@@ -1,7 +1,7 @@
 class BillingProfile < ActiveRecord::Base
   belongs_to :property, inverse_of: :billing_profile
   include Contact
-  validates :entities, :presence => true, if: :use_profile?
+  validates :entities, presence: true, if: :use_profile?
   before_validation :clear_up_after_form
 
   attr_accessor :human_id

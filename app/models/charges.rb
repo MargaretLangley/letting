@@ -3,11 +3,19 @@ module Charges
   included do
     has_many :charges, dependent: :destroy do
       def prepare
-        (self.size...MAX_CHARGES).each { self.build }
+        (self.size...MAX_CHARGES).each do
+          charge = self.build
+        end
+        self.each {|charge| charge.prepare }
       end
 
       def clean_up_form
+        self.each {|charge| charge.clean_up_form }
         destruction_if :empty?
+      end
+
+      def first_or_initialize charge_type
+        self.detect{|charge| charge.charge_type == charge_type } || self.build
       end
     private
       def destruction_if matcher
@@ -19,5 +27,5 @@ module Charges
       end
     end
   end
-  MAX_CHARGES = 1
+  MAX_CHARGES = 4
 end

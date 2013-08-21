@@ -9,6 +9,7 @@ describe Property do
     validate_page
     fill_in_form
     click_on 'Create Property'
+    have_we_saved?
     expect_properties_page
     navigate_to_property_page
     expect_property_page
@@ -107,7 +108,19 @@ describe Property do
         fill_in 'Due in', with: 'Advance'
         fill_in 'Amount', with: '50.50'
       end
+      fill_in_due_on
     end
+
+    def fill_in_due_on
+      within_fieldset 'property_charge_0_due_on_0' do
+        fill_in 'Day', with: 1
+        fill_in 'Month', with: 1
+      end
+    end
+
+  def have_we_saved?
+    expect(current_path).to eq '/properties' # Not Saved
+  end
 
   def invalidate_page
     fill_in_property
@@ -164,6 +177,10 @@ describe Property do
       expect(page).to have_text 'Ground Rent'
       expect(page).to have_text 'Advance'
       expect(page).to have_text '£50.50'
+
+      expect(page).to have_text '01/01'
     end
+
+
 
 end

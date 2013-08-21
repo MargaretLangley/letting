@@ -19,25 +19,24 @@ module DB
 
     def build_patching_models
       patch_contents.each do |row|
-        model = model_prepared_for_import row
-        model_assigned_row_attributes model, row
-        patch_models_add model
+        model_prepared_for_import row
+        model_assigned_row_attributes row
+        patch_models_add
       end
     end
 
     def model_prepared_for_import row
-      model = model_class.new human_id: row[:human_id].to_i
-      model.prepare_for_form
-      model
+      @model_to_assign = model_class.new human_id: row[:human_id].to_i
+      @model_to_assign.prepare_for_form
     end
 
-    def model_assigned_row_attributes model, row
-      import_contact model, row
-      clean_contact model
+    def model_assigned_row_attributes row
+      import_contact @model_to_assign, row
+      clean_contact @model_to_assign
     end
 
-    def patch_models_add model
-      patch_models << { 'id' => model.human_id, 'model' => model }
+    def patch_models_add
+      patch_models << { 'id' => @model_to_assign.human_id, 'model' => @model_to_assign }
     end
 
     #debug hash array: patch_models[0]['model']

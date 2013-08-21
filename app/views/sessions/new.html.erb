@@ -1,0 +1,20 @@
+<fieldset id='login'>
+  <h1>Log In</h1>
+
+  <%= form_tag sessions_path do %>
+    <div class="field text">
+      <%= label_tag :email %>
+      <%= text_field_tag :email, params[:email] %>
+    </div>
+    <div class="field text">
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
+    </div>
+
+    <div class="field submit">
+      <p>
+        <%= submit_tag "Log In", class: 'under-input' %>
+      <p>
+    </div>
+  <% end %>
+</fieldset>
