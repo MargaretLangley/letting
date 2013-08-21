@@ -8,11 +8,11 @@ module DB
       super Property, contents, patch
     end
 
-    def model_assigned_row_attributes model, row
-      model.assign_attributes human_id: row[:human_id], client_id: row[:clientid]
-      model.billing_profile.use_profile = false if model.new_record?
-      import_contact model, row
-      clean_contact model
+    def model_assigned_row_attributes row
+      @model_to_assign.assign_attributes human_id: row[:human_id], client_id: row[:clientid]
+      @model_to_assign.billing_profile.use_profile = false if @model_to_assign.new_record?
+      import_contact @model_to_assign, row
+      clean_contact @model_to_assign
     end
 
   end

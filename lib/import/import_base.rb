@@ -11,20 +11,19 @@ module DB
     end
 
     def model_prepared_for_import row
-      model = first_or_initialize_model row, klass
-      model.prepare_for_form
-      model
+      @model_to_assign = first_or_initialize_model row, klass
+      @model_to_assign.prepare_for_form
     end
 
 
 
     def import_rows_loop
       contents.each_with_index do |row, index|
-        model = model_prepared_for_import row
-        model_assigned_row_attributes model, row
-        patch.patch_model model if patch
-        unless model.save
-          output_error row, model
+        model_prepared_for_import row
+        model_assigned_row_attributes row
+        patch.patch_model @model_to_assign if patch
+        unless @model_to_assign.save
+          output_error row, @model_to_assign
         end
         output_still_running index
       end
