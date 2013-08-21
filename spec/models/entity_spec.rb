@@ -24,7 +24,7 @@ describe Entity do
   end
 
   it ('name cannot be blank') { entity.name = ''; expect(entity).to_not be_valid }
-  it ('name has a maximum length') { entity.name = 'a' * 41; expect(entity).to_not be_valid }
+  it ('name has a maximum length') { entity.name = 'a' * 65; expect(entity).to_not be_valid }
 
   it ('title has a maximum length') { entity.title = 'a' * 11; expect(entity).to_not be_valid }
   it ('initials has a maximum length') { entity.initials = 'a' * 11; expect(entity).to_not be_valid }
