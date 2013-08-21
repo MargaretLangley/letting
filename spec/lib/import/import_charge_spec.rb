@@ -13,8 +13,9 @@ module DB
     end
 
     it "fails if property doesn't exist" do
+      $stdout.should_receive(:puts).with(/human_id: 2002 - Not found/)
       expect{ ImportCharge.import Import.csv_table('acc_info', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges') }.to \
-         raise_error ActiveRecord::RecordNotFound
+      raise_error ActiveRecord::RecordNotFound
     end
 
     it "One row, 2 Entities" do

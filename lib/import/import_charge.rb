@@ -3,7 +3,13 @@ require_relative 'import_base'
 module DB
   class ImportCharge < ImportBase
 
-    ChargeCodeToString = { 'GR' => 'Ground Rent', 'SC' => 'Service Charge' }
+    ChargeCodeToString = { 'GGR'  => 'Garage Ground Rent',
+                           'GIns' => 'Garage Insurance',
+                           'GR'   => 'Ground Rent',
+                           'H'    => 'Service Charge',
+                           'Ins'  => 'Insurance',
+                           'M'    => 'Service Charge',
+                           'Q'    => 'Service Charge'    }
     DueInCodeToString  = { '0'  => 'Advance', '1' => 'Arrears', 'M' => 'MidTerm'}
 
     def initialize contents, patch

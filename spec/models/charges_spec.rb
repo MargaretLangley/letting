@@ -11,7 +11,7 @@ describe Charges do
   it '#prepare' do
     expect(charges).to have(0).items
     charges.prepare
-    expect(charges).to have(2).items
+    expect(charges).to have(4).items
   end
 
   it '#cleans up form' do

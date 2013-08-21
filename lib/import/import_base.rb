@@ -24,7 +24,7 @@ module DB
         model_prepared_for_import row
         model_assigned_row_attributes row
         patch.patch_model @model_to_assign if patch
-        unless model_to_save.save!
+        unless model_to_save.save
           output_error row, model_to_save
         end
         output_still_running index
@@ -45,7 +45,12 @@ module DB
       end
 
       def first_model row, model_class
-        model_class.where(human_id: row[:human_id]).first!
+        model = model_class.where(human_id: row[:human_id]).first
+        if model.nil?
+         puts "human_id: #{row[:human_id]} - Not found"
+         raise ActiveRecord::RecordNotFound
+        end
+        model
       end
 
       def output_still_running index

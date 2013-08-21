@@ -27,5 +27,5 @@ module Charges
       end
     end
   end
-  MAX_CHARGES = 2
+  MAX_CHARGES = 4
 end
