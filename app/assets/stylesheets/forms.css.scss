@@ -25,7 +25,12 @@ fieldset {
      white-space: nowrap;
      width: 20%;
      line-height: 27px;
+     display: block;
    }
+label
+{
+   display: block;
+}
 
   .field.text {
     input {

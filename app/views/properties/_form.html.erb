@@ -22,9 +22,13 @@
 
   <%= javascript_tag do %>
     setBlockDisplay('property_entities_attributes_1_name','property_entity_1');
+    setFieldDisplay('property_address_attributes_district')
+
   <% end %>
 
  <a href="#" id = "togglePerson" onClick = "toggleFieldDisplay('property_entity_1','togglePerson')">Add Person</a>
+ <a href="#" id = "changePropertyDistrict" onClick ="changeFieldDisplay('property_address_attributes_district')">Add District</a>
+
   </fieldset>
 
   <div style='position: relative;'>
@@ -38,10 +42,12 @@
 
   <%= javascript_tag do %>
     setBlockDisplay('property_billing_profile_attributes_entities_attributes_1_name','property_billing_profile_entity_1');
-
+    setFieldDisplay('property_billing_profile_attributes_address_attributes_district')
   <% end %>
 
  <a href="#" id = "toggleBillingPerson" onClick ="toggleFieldDisplay('property_billing_profile_entity_1','toggleBillingPerson')">Add Person</a>
+  <a href="#" id = "changeBillingDistrict" onClick ="changeFieldDisplay('property_billing_profile_attributes_address_attributes_district')">Add District</a>
+
   </fieldset>
 
   <% @property.charges.each.with_index do |charge,index| %>
@@ -49,6 +55,9 @@
       <%= render partial: 'charge', locals: { f: builder, charge: charge, parent: 'property', index: index } %>
     <% end %>
   <% end %>
+  <%= javascript_tag do %>
+    setBlockDisplay('property_billing_profile_attributes_entities_attributes_1_name','property_charge_1');
+   <% end %>
 
   <div>
     <p>

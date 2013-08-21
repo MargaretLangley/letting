@@ -21,9 +21,11 @@
 
   <%= javascript_tag do %>
    setBlockDisplay('client_entities_attributes_1_name','client_entity_1');
+   setFieldDisplay('client_address_attributes_district')
    <% end %>
 
  <a href="#" id = "togglePerson" onClick ="toggleFieldDisplay('client_entity_1','togglePerson')">Add Person</a>
+ <a href="#" id = "changeClientDistrict" onClick ="changeFieldDisplay('client_address_attributes_district')">Add District</a>
 
   </fieldset>
 
