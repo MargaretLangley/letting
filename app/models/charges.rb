@@ -13,6 +13,10 @@ module Charges
         self.each {|charge| charge.clean_up_form }
         destruction_if :empty?
       end
+
+      def first_or_initialize charge_type
+        self.detect{|charge| charge.charge_type == charge_type } || self.build
+      end
     private
       def destruction_if matcher
         self.select(&matcher).each {|charge| mark_charge_for_destruction charge }
