@@ -13,6 +13,12 @@ module DB
       %w{ human_id } + self.entities + self.address
     end
 
+    def self.charge
+      %w{ human_id updated charge_type due_in amount payment_type } +
+      %w{ day_1 month_1 day_2 month_2 day_3 month_3 day_4 month_4 } +
+      %w{ escalation_date escaltion_new_rent }
+    end
+
     private
 
       def self.entities
