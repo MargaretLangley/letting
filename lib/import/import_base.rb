@@ -11,7 +11,7 @@ module DB
     end
 
     def model_prepared_for_import row
-      model = find_or_initialize_model row, klass
+      model = first_or_initialize_model row, klass
       model.prepare_for_form
       model
     end
@@ -39,7 +39,7 @@ module DB
       end
 
 
-      def find_or_initialize_model row, model_class
+      def first_or_initialize_model row, model_class
         model_class.where(human_id: row[:human_id]).first_or_initialize
       end
 

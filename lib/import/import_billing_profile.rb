@@ -10,7 +10,7 @@ module DB
 
     # Returns Billing Profile model
     def model_prepared_for_import row
-      property = find_or_initialize_model row, Property
+      property = first_or_initialize_model row, Property
       property.prepare_for_form
       property.billing_profile
     end
