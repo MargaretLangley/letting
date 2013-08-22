@@ -22,3 +22,5 @@
 /import_data
 
 .coveralls.yml
+
+Guardfile

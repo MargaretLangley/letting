@@ -28,6 +28,26 @@ function changeFieldDisplay(elId)
   document.getElementById(elId).style.visibility="visible";
 }
 
+function addFieldDisplay(fieldset1,fieldset2,fieldset3,buttonId)
+{
+  if (document.getElementById(fieldset1).style.display == 'none')
+  {
+    document.getElementById(fieldset1).style.display="block";
+  }
+  else
+  {
+    if (document.getElementById(fieldset2).style.display == 'none')
+    {
+      document.getElementById(fieldset2).style.display="block";
+    }
+    else
+    {
+      document.getElementById(fieldset3).style.display="block";
+      document.getElementById(buttonId).style.visibility="hidden";
+    }
+  }
+}
+
 function toggleFieldDisplay(fieldset,buttonId,addText,removeText)
 {
   if (document.getElementById(fieldset).style.display == 'none')
