@@ -28,17 +28,17 @@ function changeFieldDisplay(elId)
   document.getElementById(elId).style.visibility="visible";
 }
 
-function toggleFieldDisplay(fieldset,buttonId)
+function toggleFieldDisplay(fieldset,buttonId,addText,removeText)
 {
   if (document.getElementById(fieldset).style.display == 'none')
   {
     document.getElementById(fieldset).style.display="block";
-    document.getElementById(buttonId).innerHTML = "Remove Person";
+    document.getElementById(buttonId).innerHTML = removeText;
    }
    else
    {
    document.getElementById(fieldset).style.display="none";
-   document.getElementById(buttonId).innerHTML = "Add Person";
+   document.getElementById(buttonId).innerHTML = addText;
   }
 }
 

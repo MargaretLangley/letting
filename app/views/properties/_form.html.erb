@@ -26,7 +26,7 @@
 
   <% end %>
 
- <a href="#" id = "togglePerson" onClick = "toggleFieldDisplay('property_entity_1','togglePerson')">Add Person</a>
+ <a href="#" id = "togglePerson" onClick = "toggleFieldDisplay('property_entity_1','togglePerson','Add Person','Remove Person')">Add Person</a>
  <a href="#" id = "changePropertyDistrict" onClick ="changeFieldDisplay('property_address_attributes_district')">Add District</a>
 
   </fieldset>
@@ -45,7 +45,7 @@
     setFieldDisplay('property_billing_profile_attributes_address_attributes_district')
   <% end %>
 
- <a href="#" id = "toggleBillingPerson" onClick ="toggleFieldDisplay('property_billing_profile_entity_1','toggleBillingPerson')">Add Person</a>
+ <a href="#" id = "toggleBillingPerson" onClick ="toggleFieldDisplay('property_billing_profile_entity_1','toggleBillingPerson','Add Person','Remove Person')">Add Person</a>
   <a href="#" id = "changeBillingDistrict" onClick ="changeFieldDisplay('property_billing_profile_attributes_address_attributes_district')">Add District</a>
 
   </fieldset>
@@ -56,9 +56,11 @@
     <% end %>
   <% end %>
   <%= javascript_tag do %>
-    setBlockDisplay('property_billing_profile_attributes_entities_attributes_1_name','property_charge_1');
+    setBlockDisplay('property_charges_attributes_1_charge_type','property_charge_1');
+    setBlockDisplay('property_charges_attributes_2_charge_type','property_charge_2');
+    setBlockDisplay('property_charges_attributes_3_charge_type','property_charge_3');
    <% end %>
-
+<a href="#" id = "toggleCharge" onClick = "toggleFieldDisplay('property_charge_1','toggleCharge','Add Charge','Remove Charge')">Add Charge</a>
   <div>
     <p>
       <%= f.submit %>
