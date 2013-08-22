@@ -3,7 +3,7 @@
 
   <h3>Address</h3>
 
-  <div class='field text require short' >
+  <div class='field text require half' >
     <%= f.label :flat_no %>
     <%= f.text_field :flat_no %>
   </div>
@@ -13,7 +13,7 @@
     <%= f.text_field :house_name, data: { autocomplete_source: Address.uniq.pluck(:house_name).reject(&:blank?).sort }  %>
   </div>
 
-  <div class='field text require short' >
+  <div class='field text require half' >
     <%= f.label :road_no %>
     <%= f.text_field :road_no %>
   </div>
@@ -39,7 +39,7 @@
     <%= f.text_field :county, data: { autocomplete_source: Address.uniq.pluck(:county).reject(&:blank?).sort }  %>
   </div>
 
-  <div class='field text require short' >
+  <div class='field text require half' >
     <%= f.label :postcode %>
     <%= f.text_field :postcode %>
   </div>

@@ -112,8 +112,8 @@ describe Property do
 
     def fill_in_due_on
       within_fieldset 'property_charge_0_due_on_0' do
-        fill_in 'Day', with: 1
-        fill_in 'Month', with: 1
+        fill_in 'property_charges_attributes_0_due_ons_attributes_0_day', with: 1
+        fill_in 'property_charges_attributes_0_due_ons_attributes_0_month', with: 1
       end
     end
 

@@ -3,12 +3,24 @@
 @import "colors";
 
 
+
 fieldset {
-  margin: 0 0 2% 0;
-  padding: 3% 4%;
   background-color: $fieldset-color;
   border: 0;
-  box-shadow: #aaa 0 0 8px;
+  border-bottom: 1px solid $background-filler;
+  margin-bottom: 1.5%;
+
+  &.shell  {
+    margin: 0 0 2% 0;
+    padding: 3% 4%;
+    box-shadow: #aaa 0 0 8px;
+  }
+
+  &.minimal {
+    border: none;
+    padding: 0;
+    margin-bottom: 0;
+  }
 
   h3 {
     margin-top: 0;
@@ -36,8 +48,11 @@ fieldset {
        width: 65%;
      }
 
-     &.short input {
-        width: 30%;
+     &.half input {
+        width: 32.5%;
+      }
+     &.quarter input {
+        width: 16.25%;
       }
   }
 
