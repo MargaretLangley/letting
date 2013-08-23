@@ -68,7 +68,7 @@ group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem 'pry-rails'
-  gem 'pry-plus'
+  gem 'pry-nav'
   gem 'bullet'
   gem 'rack-mini-profiler'
 end
