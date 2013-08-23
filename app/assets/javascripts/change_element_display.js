@@ -28,25 +28,29 @@ function changeFieldDisplay(elId)
   document.getElementById(elId).style.visibility="visible";
 }
 
-function addFieldDisplay(fieldset1,fieldset2,fieldset3,buttonId)
+
+function addFieldDisplay(fieldset0,fieldset1,fieldset2,buttonId)
 {
-  if (document.getElementById(fieldset1).style.display == 'none')
+  var chargefields = new Array(fieldset0,fieldset1,fieldset2);
+  var foundblockspace = false;
+  var count = -1;
+
+  while (foundblockspace === false)
   {
-    document.getElementById(fieldset1).style.display="block";
-  }
-  else
-  {
-    if (document.getElementById(fieldset2).style.display == 'none')
+    count = count+1;
+    if (document.getElementById(chargefields[count]).style.display == 'none')
     {
-      document.getElementById(fieldset2).style.display="block";
+     alert (chargefields[count]+" none");
+    document.getElementById(chargefields[count]).style.display="block";
+    foundblockspace = true;
     }
-    else
+    if (count == 2)
     {
-      document.getElementById(fieldset3).style.display="block";
+      foundblockspace = true;
       document.getElementById(buttonId).style.visibility="hidden";
     }
-  }
-}
+   }
+ }
 
 function toggleFieldDisplay(fieldset,buttonId,addText,removeText)
 {
