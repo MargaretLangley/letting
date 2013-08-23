@@ -36,6 +36,13 @@ describe Property do
     expect(page).to have_text 'The property could not be saved.'
   end
 
+  it 'can add charges', js: true do
+    navigate_to_create_page
+    expect(page).to_not have_text 'Charge 2'
+    click_on 'Add Charge'
+    expect(page).to have_text 'Charge 2'
+  end
+
 
   def navigate_to_create_page
     visit '/properties'
