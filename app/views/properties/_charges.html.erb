@@ -1,0 +1,11 @@
+<div class='selection'>
+  <% charges.each.with_index do |charge,index| %>
+    <%= f.fields_for :charges, charge do |builder| %>
+
+      <fieldset id='property_charge_<%= index %>' class='shell' style='<%= hide_new_record_unless_first charge, index %>' >
+        <%= render partial: 'charge', locals: { f: builder, charge: charge, index: index } %>
+      </fieldset>
+    <% end %>
+  <% end %>
+  <a href="#" class="add">Add Charge</a>
+</div>

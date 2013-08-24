@@ -14,14 +14,8 @@
       <%= render partial: 'shared/address', locals: { f: builder, parent: 'property' } %>
     <% end %>
 
-    <% @property.entities.each do |entity| %>
-      <%= f.fields_for :entities, entity do |builder| %>
-        <%= render partial: 'shared/entity', locals: { f: builder, parent: 'property' } %>
-      <% end %>
-    <% end %>
+    <%= render partial: 'shared/entities', locals: { f: f, entitieable: @property } %>
 
-
- <a href="#" id = "togglePerson" onClick = "toggleFieldDisplay('property_entity_1','togglePerson','Add Person','Remove Person')">Add Person</a>
   </fieldset>
 
   <div style='position: relative;'>
@@ -32,20 +26,10 @@
       <%= render partial: 'billing_profile', locals: { f: builder } %>
     <% end %>
   </div>
-
- <a href="#" id = "toggleBillingPerson" onClick ="toggleFieldDisplay('property_billing_profile_entity_1','toggleBillingPerson','Add Person','Remove Person')">Add Person</a>
   </fieldset>
 
-  <% @property.charges.each.with_index do |charge,index| %>
-    <%= f.fields_for :charges, charge do |builder| %>
-      <%= render partial: 'charge', locals: { f: builder, charge: charge, parent: 'property', index: index } %>
-    <% end %>
-  <% end %>
-  <%= javascript_tag do %>
-    setBlockDisplay('property_entities_attributes_1_name','property_entity_1');
-    setBlockDisplay('property_billing_profile_attributes_entities_attributes_1_name','property_billing_profile_entity_1');
-  <% end %>
- <a href="#" id = "addCharge" onClick = "addFieldDisplay('property_charge_1','property_charge_2','property_charge_3','addCharge')">Add Charge</a>
+  <%= render partial: 'charges', locals: { f: f, charges: @property.charges } %>
+
  <p />
  <a href ="#" id = "removeBut" ><%= image_tag "close.png" %></a>
 

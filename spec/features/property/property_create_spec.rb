@@ -52,7 +52,7 @@ describe Property do
   def validate_page
     expect(current_path).to eq '/properties/new'
     expect(page.all('h3', text: 'Address').count).to eq 2
-    expect(page.all('h3', text: 'Person').count).to eq 4
+    expect(page.all('h3', text: 'Person').count).to eq 2
   end
 
   def fill_in_form
@@ -101,7 +101,7 @@ describe Property do
     end
 
     def fill_in_billing_profile_entities
-      within_fieldset 'property_billing_profile_entity_0' do
+      within_fieldset 'billing_profile_entity_0' do
         fill_in 'Title', with: 'Mr'
         fill_in 'Initials', with: 'K J'
         fill_in 'Name', with: 'Barnett'

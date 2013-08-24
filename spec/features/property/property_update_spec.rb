@@ -124,7 +124,7 @@ describe Property do
       end
 
       def fill_in_bill_profile_entity
-        within_fieldset 'property_billing_profile_entity_0' do
+        within_fieldset 'billing_profile_entity_0' do
           fill_in 'Initials', with: 'G A R'
           fill_in 'Name', with: 'Lock'
         end

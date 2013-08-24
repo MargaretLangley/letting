@@ -47,7 +47,7 @@ describe Client do
     end
 
     def expect_entity_has_original_attributes
-      expect(page.all('h3', text: 'Person').count).to eq 2
+      expect(page.all('h3', text: 'Person').count).to eq 1
       within_fieldset 'client_entity_0' do
         expect_entity_wg_grace_by_field
       end

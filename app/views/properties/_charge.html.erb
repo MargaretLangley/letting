@@ -1,27 +1,24 @@
-<fieldset id='<%= parent %>_charge_<%= index %>' class='shell'>
-  <fieldset id='charge'>
-    <h2>Charge <%= index + 1 %></h2>
-    <div class='field text require'>
-      <%= f.label :charge_type %>
-      <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
-    </div>
+<fieldset id='charge'>
+  <h2>Charge <%= index + 1 %></h2>
+  <div class='field text require'>
+    <%= f.label :charge_type %>
+    <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
+  </div>
 
-    <div class='field text require'>
-      <%= f.label :due_in %>
-      <%= f.text_field :due_in, data: { autocomplete_source: Charge.uniq.pluck(:due_in).sort } %>
-    </div>
+  <div class='field text require'>
+    <%= f.label :due_in %>
+    <%= f.text_field :due_in, data: { autocomplete_source: Charge.uniq.pluck(:due_in).sort } %>
+  </div>
 
-    <div class='field text require'>
-      <%= f.label :amount %>
-      <%= f.text_field :amount %>
-    </div>
-  </fieldset>
-
-  <h3>Due Date</h3>
-  <% charge.due_ons.each.with_index do |due_on,due_on_index| %>
-    <%= f.fields_for :due_ons, due_on do |builder| %>
-      <%= render partial: 'due_on', locals: { f: builder, due_on: due_on, parent: "property_charge_#{index}", index: due_on_index } %>
-    <% end %>
-  <% end %>
-
+  <div class='field text require'>
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+  </div>
 </fieldset>
+
+<h3>Due Date</h3>
+<% charge.due_ons.each.with_index do |due_on,due_on_index| %>
+  <%= f.fields_for :due_ons, due_on do |builder| %>
+    <%= render partial: 'due_on', locals: { f: builder, due_on: due_on, parent: "property_charge_#{index}", index: due_on_index } %>
+  <% end %>
+<% end %>

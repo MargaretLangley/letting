@@ -9,10 +9,6 @@
   <%= render partial: 'shared/address', locals: { f: builder, parent: 'property_billing_profile' } %>
 <% end %>
 
-<% @property.billing_profile.entities.each do |entity| %>
-  <%= f.fields_for :entities, entity do |builder| %>
-    <%= render partial: 'shared/entity', locals: { f: builder, parent: 'property_billing_profile' } %>
-  <% end %>
-<% end %>
+<%= render partial: 'shared/entities', locals: { f: f, entitieable: @property.billing_profile } %>
 
 </fieldset>

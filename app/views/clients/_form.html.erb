@@ -9,21 +9,10 @@
       <%= f.text_field :human_id %>
     </div>
 
-    <% @client.entities.each do |entity| %>
-      <%= f.fields_for :entities, entity do |builder| %>
-        <%= render partial: 'shared/entity', locals: { f: builder, parent: 'client' } %>
-      <% end %>
-    <% end %>
-
+    <%= render partial: 'shared/entities', locals: { f: f, entitieable: @client } %>
     <%= f.fields_for :address do |builder| %>
       <%= render partial: 'shared/address', locals: { f: builder, parent: 'client' } %>
     <% end %>
-
-  <%= javascript_tag do %>
-   setBlockDisplay('client_entities_attributes_1_name','client_entity_1');
-   <% end %>
-
- <a href="#" id = "togglePerson" onClick ="toggleFieldDisplay('client_entity_1','togglePerson','Add Person','Remove Person')">Add Person</a>
 
   </fieldset>
 

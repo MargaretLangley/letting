@@ -29,7 +29,7 @@ describe Client do
 
   def validate_page
     expect(current_path).to eq '/clients/new'
-    expect(page.all('h3', text: 'Person').count).to eq 2
+    expect(page.all('h3', text: 'Person').count).to eq 1
   end
 
   def expect_clients_page
