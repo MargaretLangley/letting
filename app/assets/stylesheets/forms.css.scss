@@ -3,6 +3,12 @@
 @import "colors";
 
 
+a.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: default;
+}
+
 
 fieldset {
   background-color: $fieldset-color;
@@ -116,4 +122,5 @@ input[type="submit"].under-input {
   @include button-base;
   width: 55%;
 }
+
 
