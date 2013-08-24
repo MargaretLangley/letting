@@ -44,11 +44,11 @@
   <%= javascript_tag do %>
     setBlockDisplay('property_entities_attributes_1_name','property_entity_1');
     setBlockDisplay('property_billing_profile_attributes_entities_attributes_1_name','property_billing_profile_entity_1');
-    setBlockDisplay('property_charges_attributes_1_charge_type','property_charge_1');
-    setBlockDisplay('property_charges_attributes_2_charge_type','property_charge_2');
-    setBlockDisplay('property_charges_attributes_3_charge_type','property_charge_3');
-   <% end %>
+  <% end %>
  <a href="#" id = "addCharge" onClick = "addFieldDisplay('property_charge_1','property_charge_2','property_charge_3','addCharge')">Add Charge</a>
+ <p />
+ <a href ="#" id = "removeBut" ><%= image_tag "close.png" %></a>
+
   <div>
     <p>
       <%= f.submit %>

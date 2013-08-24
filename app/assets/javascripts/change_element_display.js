@@ -40,8 +40,7 @@ function addFieldDisplay(fieldset0,fieldset1,fieldset2,buttonId)
     count = count+1;
     if (document.getElementById(chargefields[count]).style.display == 'none')
     {
-     alert (chargefields[count]+" none");
-    document.getElementById(chargefields[count]).style.display="block";
+     document.getElementById(chargefields[count]).style.display="block";
     foundblockspace = true;
     }
     if (count == 2)
@@ -67,8 +66,15 @@ function toggleFieldDisplay(fieldset,buttonId,addText,removeText)
 }
 
 $(function () {
+  $("#property_charge_1").css("display", "none");
+  $("#property_charge_2").css("display", "none");
+  $("#property_charge_3").css("display", "none");
   $('#property_billing_profile_attributes_use_profile').change(function () {
     $('#blank_slate').toggle(!this.checked);
   }).change(); //ensure visible state matches initially
+  $("#removeBut").click(function(event){
+  $("#property_charge_1").css("display", "none");
+  event.preventDefault();
+ });
 });
 
