@@ -38,7 +38,7 @@ function addFieldDisplay(fieldset0,fieldset1,fieldset2,buttonId)
   while (foundblockspace === false)
   {
     count = count+1;
-    alert(count);
+  //  alert(count);
     if (document.getElementById(chargefields[count]).style.display == 'none')
     {
      document.getElementById(chargefields[count]).style.display="block";
@@ -47,7 +47,7 @@ function addFieldDisplay(fieldset0,fieldset1,fieldset2,buttonId)
     if (count == 2)
     {
       foundblockspace = true;
-      alert("true "+count);
+   //   alert("true "+count);
   //    document.getElementById(buttonId).style.visibility="hidden";
     }
    }

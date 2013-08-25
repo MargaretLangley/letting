@@ -3,14 +3,14 @@
   <%= render 'shared/errors', object: @client %>
   <fieldset id='client' class='shell'>
 
-    <div class='field text required'>
+    <div class='field text required half'>
       <h3>Client</h3>
       <%= f.label :Client_ID %>
       <%= f.text_field :human_id %>
     </div>
 
     <%= render partial: 'shared/entities', locals: { f: f, entitieable: @client } %>
-    <a href="#" class="add" id ="property_entity_add">Add Person</a>
+    <a href="#" class="add" id ="client_entity_add">Add Person</a>
     <%= f.fields_for :address do |builder| %>
       <%= render partial: 'shared/address', locals: { f: builder, parent: 'client' } %>
     <% end %>
