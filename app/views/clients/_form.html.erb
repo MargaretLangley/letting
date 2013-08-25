@@ -10,9 +10,11 @@
     </div>
 
     <%= render partial: 'shared/entities', locals: { f: f, entitieable: @client } %>
+    <a href="#" class="add" id ="property_entity_add">Add Person</a>
     <%= f.fields_for :address do |builder| %>
       <%= render partial: 'shared/address', locals: { f: builder, parent: 'client' } %>
     <% end %>
+
 
   </fieldset>
 

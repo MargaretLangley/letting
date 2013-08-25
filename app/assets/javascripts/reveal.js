@@ -11,6 +11,5 @@ $( document ).ready(function() {
       // note disabled class is in forms.css.scss unless brighter idea
     }
   });
-
 });
 

@@ -2,13 +2,11 @@
 
 @import "colors";
 
-
 a.disabled {
   opacity: 0.5;
   pointer-events: none;
   cursor: default;
 }
-
 
 fieldset {
   background-color: $fieldset-color;

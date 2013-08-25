@@ -3,7 +3,7 @@
   <h3>BILLING ADDRESS</h3>
   <fieldset>
     <%= f.check_box :use_profile %>
-    <%= f.label :use_profile %>
+    <%= f.label :use_agent %>
  </fieldset>
 <%= f.fields_for :address do |builder| %>
   <%= render partial: 'shared/address', locals: { f: builder, parent: 'property_billing_profile' } %>
