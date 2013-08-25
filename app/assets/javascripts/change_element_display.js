@@ -72,10 +72,35 @@ $(function () {
   $("#property_charge_2").css("display", "none");
   $("#property_charge_3").css("display", "none");
 
+  $("#client_entity_0 > h3").html("Person/Company");
+
+  $("#company_wanted").click(function(event){
+    //  $("#company_name").css("display", "block");
+    //  $("#client_entity_0").css("display", "none");
+    $("#client_entity_0 > h3").html("Person/Company");
+    $("#client_entities_attributes_0_title").siblings("label").css("display", "none");
+    $("#client_entities_attributes_0_initials").siblings("label").css("display", "none");
+    $("#client_entities_attributes_0_initials").css("display", "none");
+    $("#client_entities_attributes_0_title").css("display", "none");
+
+
+     event.preventDefault();
+  });
+
+
+
+ if ($("#property_billing_profile_attributes_use_profile").is(':checked')) {
+   } else {
+     $("#property_billing_profile_address").css("display", "none");
+     $("#billing_profile_entity_0").css("display", "none");
+  }
+
 $("#client_entity_add").click(function(event){
   $("#client_entity_1").css("display", "block");
   event.preventDefault();
   });
+
+
 
 $("#property_entity_add").click(function(event){
   $("#property_entity_1").css("display", "block");
@@ -95,6 +120,27 @@ $("#billing_entity_add").click(function(event){
   $("#property_charge_1").css("display", "none");
   event.preventDefault();
   });
+
+  $("#property_billing_profile_attributes_use_profile").click(function(event){
+    if ($("#property_billing_profile_attributes_use_profile").is(':checked')) {
+        $("#property_billing_profile_address").css("display", "block");
+       $("#billing_profile_entity_0").css("display", "block");
+     }
+  event.preventDefault();
+  });
+
+  // $("#agentcheck").click(function(event){
+  //   if ($("#property_billing_profile_attributes_use_profile").is(':checked')) {
+  //    alert("checked");
+  //    } else {
+  //       alert(" not checked");
+  //      $("#property_billing_profile_address").css("display", "none");
+  //      $("#billing_profile_entity_0").css("display", "none");
+  //   }
+  // event.preventDefault();
+  // });
+
+
   // Test functions
   $("#test2").css("display", "none");
 

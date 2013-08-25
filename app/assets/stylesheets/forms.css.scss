@@ -2,6 +2,20 @@
 
 @import "colors";
 
+.mainTitle
+{
+  padding-left:40px;
+}
+.blank_slate_overlay
+{
+  font-size:1.2em;
+  text-align: left;
+  border: 1px solid black;
+  position: absolute; top: 12px; left: 30%; width:65%;
+  background: rgba(184,184,184,0.6);
+  padding: 10px 20px;
+ }
+
 a.disabled {
   opacity: 0.5;
   pointer-events: none;
@@ -72,6 +86,7 @@ fieldset {
   }
 
 
+
   input,
   textarea {
     font-size:     16px;
@@ -120,5 +135,4 @@ input[type="submit"].under-input {
   @include button-base;
   width: 55%;
 }
-
 
