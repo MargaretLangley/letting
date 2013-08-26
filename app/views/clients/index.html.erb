@@ -1,4 +1,5 @@
-<h2>Clients</h2>
+<h2 class = "mainTitle">Clients</h2>
+<%= render partial: 'clients/search' %>
 <table>
   <thead>
     <tr>
@@ -54,5 +55,6 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @clients %>
 
 

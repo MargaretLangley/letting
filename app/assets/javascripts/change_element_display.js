@@ -29,30 +29,6 @@ function changeFieldDisplay(elId)
 }
 
 
-function addFieldDisplay(fieldset0,fieldset1,fieldset2,buttonId)
-{
-  var chargefields = new Array(fieldset0,fieldset1,fieldset2);
-  var foundblockspace = false;
-  var count = -1;
-
-  while (foundblockspace === false)
-  {
-    count = count+1;
-  //  alert(count);
-    if (document.getElementById(chargefields[count]).style.display == 'none')
-    {
-     document.getElementById(chargefields[count]).style.display="block";
-    foundblockspace = true;
-    }
-    if (count == 2)
-    {
-      foundblockspace = true;
-   //   alert("true "+count);
-  //    document.getElementById(buttonId).style.visibility="hidden";
-    }
-   }
- }
-
 function toggleFieldDisplay(fieldset,buttonId,addText,removeText)
 {
   if (document.getElementById(fieldset).style.display == 'none')
@@ -73,7 +49,7 @@ $(function () {
   $("#property_charge_3").css("display", "none");
 
   $("#client_entity_0 > h3").html("Person/Company");
-
+  $("#client_entity_0 > closeBut").css("display", "none");
   $("#company_wanted").click(function(event){
     //  $("#company_name").css("display", "block");
     //  $("#client_entity_0").css("display", "none");
@@ -82,12 +58,8 @@ $(function () {
     $("#client_entities_attributes_0_initials").siblings("label").css("display", "none");
     $("#client_entities_attributes_0_initials").css("display", "none");
     $("#client_entities_attributes_0_title").css("display", "none");
-
-
      event.preventDefault();
   });
-
-
 
  if ($("#property_billing_profile_attributes_use_profile").is(':checked')) {
    } else {
@@ -99,8 +71,6 @@ $("#client_entity_add").click(function(event){
   $("#client_entity_1").css("display", "block");
   event.preventDefault();
   });
-
-
 
 $("#property_entity_add").click(function(event){
   $("#property_entity_1").css("display", "block");
@@ -116,10 +86,6 @@ $("#billing_entity_add").click(function(event){
     $('#blank_slate').toggle(!this.checked);
   }).change(); //ensure visible state matches initially
 
-  $("#removeBut").click(function(event){
-  $("#property_charge_1").css("display", "none");
-  event.preventDefault();
-  });
 
   $("#property_billing_profile_attributes_use_profile").click(function(event){
     if ($("#property_billing_profile_attributes_use_profile").is(':checked')) {
@@ -129,34 +95,16 @@ $("#billing_entity_add").click(function(event){
   event.preventDefault();
   });
 
-  // $("#agentcheck").click(function(event){
-  //   if ($("#property_billing_profile_attributes_use_profile").is(':checked')) {
-  //    alert("checked");
-  //    } else {
-  //       alert(" not checked");
-  //      $("#property_billing_profile_address").css("display", "none");
-  //      $("#billing_profile_entity_0").css("display", "none");
-  //   }
-  // event.preventDefault();
-  // });
-
-
-  // Test functions
-  $("#test2").css("display", "none");
-
-  $("#swopBut").click(function(event){
-    if($("#test1").css("display") == "none") {
-      $("#test1").css("display", "block");
-     $("#test2").css("display", "none");
-     } else {
-     $("#test1").css("display", "none");
-     $("#test2").css("display", "block");
-    }
+ $("#addCharge").click(function(event){
+   $("#property_charge_1").css("display", "block");
   event.preventDefault();
   });
-});
 
+  $("#removeBut").click(function(event){
+  $("#property_charge_1").css("display", "none");
+  event.preventDefault();
+  });
 
-
+ });
 
 

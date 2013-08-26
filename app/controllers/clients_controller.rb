@@ -1,7 +1,11 @@
 class ClientsController < ApplicationController
 
   def index
-    @clients = Client.includes(:address).load
+    unless params[:search]
+      @clients = Client.includes(:address).page(params[:page]).load
+    else
+     @clients = Client.includes(:address).search_by_all(params[:search]).page(params[:page]).load
+    end
   end
 
   def show
