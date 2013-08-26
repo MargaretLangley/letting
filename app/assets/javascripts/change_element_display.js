@@ -1,48 +1,3 @@
-
-function setBlockDisplay(elId,fieldset)
-{
-  if (document.getElementById(elId).value.length > 0)
-  {
-    document.getElementById(fieldset).style.display="block";
-  }
-  else
-  {
-    document.getElementById(fieldset).style.display="none";
-  }
-}
-
-function setFieldDisplay(elId)
-{
-  if (document.getElementById(elId).value.length > 0)
-  {
-    document.getElementById(elId).style.visibility="visible";
-  }
-  else
-  {
-    document.getElementById(elId).style.visibility="hidden";
-  }
-}
-
-function changeFieldDisplay(elId)
-{
-  document.getElementById(elId).style.visibility="visible";
-}
-
-
-function toggleFieldDisplay(fieldset,buttonId,addText,removeText)
-{
-  if (document.getElementById(fieldset).style.display == 'none')
-  {
-    document.getElementById(fieldset).style.display="block";
-    document.getElementById(buttonId).innerHTML = removeText;
-   }
-   else
-   {
-   document.getElementById(fieldset).style.display="none";
-   document.getElementById(buttonId).innerHTML = addText;
-  }
-}
-
 $(function () {
   $("#property_charge_1").css("display", "none");
   $("#property_charge_2").css("display", "none");
@@ -86,7 +41,6 @@ $("#billing_entity_add").click(function(event){
     $('#blank_slate').toggle(!this.checked);
   }).change(); //ensure visible state matches initially
 
-
   $("#property_billing_profile_attributes_use_profile").click(function(event){
     if ($("#property_billing_profile_attributes_use_profile").is(':checked')) {
         $("#property_billing_profile_address").css("display", "block");
@@ -96,15 +50,23 @@ $("#billing_entity_add").click(function(event){
   });
 
  $("#addCharge").click(function(event){
+   if($("#property_charge_1").css("display") == "none") {
    $("#property_charge_1").css("display", "block");
+   } else {
+      $("#property_charge_2").css("display", "block");
+     }
   event.preventDefault();
   });
 
   $("#removeBut").click(function(event){
-  $("#property_charge_1").css("display", "none");
-  event.preventDefault();
+   if($("#property_charge_2").css("display") == "block") {
+   $("#property_charge_2").css("display", "none");
+   } else {
+      if($("#property_charge_1").css("display") == "block") {
+      $("#property_charge_1").css("display", "none");
+      }
+     }
+   event.preventDefault();
   });
 
  });
-
-
