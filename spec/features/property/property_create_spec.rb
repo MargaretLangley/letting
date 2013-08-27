@@ -41,6 +41,15 @@ describe Property do
     expect(page).to_not have_text 'Charge 2'
     click_on 'Add Charge'
     expect(page).to have_text 'Charge 2'
+    click_on 'Add Charge'
+    expect(page).to have_text 'Charge 3'
+    # couldn't get the rest of this to work reliabily
+    # Charge 4 should work the .disabled might be
+    # a dynamic insertion of css problem
+    # click_on 'Add Charge'
+    # expect(page).to have_text 'Charge 4'
+    # page.should have_css('.disabled')
+    expect(page).to have_text 'Charge'
   end
 
 

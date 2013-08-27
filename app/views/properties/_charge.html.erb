@@ -14,7 +14,14 @@
     <%= f.label :amount %>
     <%= f.text_field :amount %>
   </div>
+
+  <div class='field text require'>
+    <%= f.check_box :_destroy %>
+    <%= f.label :_destroy, 'Remove Charge' %>
+  </div>
+
 </fieldset>
+
 
 <h3>Due Date</h3>
 <% charge.due_ons.each.with_index do |due_on,due_on_index| %>
