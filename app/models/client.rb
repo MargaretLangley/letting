@@ -15,4 +15,23 @@ class Client < ActiveRecord::Base
     entities.clean_up_form
   end
 
+  def self.search search
+    if search.blank?
+       Client.all
+    else
+      self.search_by_all(search)
+    end
+  end
+
+  private
+    def self.search_by_all(search)
+      Client.includes(:entities, :address).
+      where('human_id = ? OR ' + \
+              'entities.name ILIKE ? OR ' + \
+              'addresses.house_name ILIKE ? OR ' + \
+              'addresses.road ILIKE ? OR '  \
+              'addresses.town ILIKE ?',  \
+              "#{search.to_i}", "#{search}%", "#{search}%", "#{search}%", "#{search}%" \
+              ).references(:address)
+    end
 end

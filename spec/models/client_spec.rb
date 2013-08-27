@@ -63,8 +63,6 @@ describe Client do
     context '#properties' do
       it('has properties') { expect(client).to respond_to(:properties) }
     end
-
-
   end
 
   context '#prepare_for_form' do
@@ -91,5 +89,53 @@ describe Client do
       expect(client.address).to_not be_nil
       expect(client.entities.reject(&:marked_for_destruction?)).to have(0).items
     end
+  end
+
+  context 'search' do
+
+   c3 = c2 = c1 = nil
+
+    before do
+        c1 = client_factory human_id: 111,
+              address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' },
+              entity_attributes: { name: 'Pieman', title: 'Ms', initials: 'YK' }
+    end
+
+    it 'exact number (human_id)' do
+      c2 = client_factory human_id: 131
+      expect(Client.all).to eq [c1, c2]
+      expect(Client.search '111').to eq [c1]
+    end
+
+    it 'towns' do
+       c2 = client_factory human_id: 131,
+            address_attributes: { town: 'unknown' }
+      expect(Client.all).to eq [c1, c2]
+      expect(Client.search 'Yor').to eq [c1]
+    end
+
+
+    it 'entities names' do
+      c2 = client_factory human_id: 102,
+            address_attributes: { house_name: 'Headingly', road: 'unknown' },
+            entities_attributes: { name: 'Gormless', title: 'Mr', initials: 'BJ' }
+      expect(Client.all).to eq [c1, c2]
+      expect(Client.search 'Gormless').to eq [c2]
+    end
+
+    it 'road name' do
+      c2 = client_factory human_id: 102,
+            address_attributes: { house_name: 'Headingly', road: 'unknown' }
+      expect(Client.all).to eq [c1, c2]
+      expect(Client.search 'Kirstall').to eq [c1]
+    end
+
+    it 'multiple' do
+      c2 = client_factory human_id: 102,
+            address_attributes: { town: 'Yorks' }
+      expect(Client.all).to eq [c1, c2]
+      expect(Client.search 'Yor').to eq [c1,c2]
+    end
+
   end
 end
