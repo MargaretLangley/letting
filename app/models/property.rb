@@ -42,21 +42,22 @@ class Property < ActiveRecord::Base
   end
 
   def self.search search
-    # if no search parameter
-      # return scoped
-    # else
-      # self.search_by_all(search)
+    if search.blank?
+       Property.all
+    else
+      self.search_by_all(search)
+    end
   end
 
-  #private
-  def self.search_by_all(search)
-    Property.includes(:address).
-      where('human_id = ? OR ' + \
-            'addresses.house_name ILIKE ? OR ' + \
-            'addresses.road ILIKE ? OR '  \
-            'addresses.town ILIKE ?',  \
-            "#{search.to_i}", "#{search}%", "#{search}%", "#{search}%" \
-            ).references(:address)
-  end
+  private
+    def self.search_by_all(search)
+      Property.includes(:address).
+        where('human_id = ? OR ' + \
+              'addresses.house_name ILIKE ? OR ' + \
+              'addresses.road ILIKE ? OR '  \
+              'addresses.town ILIKE ?',  \
+              "#{search.to_i}", "#{search}%", "#{search}%", "#{search}%" \
+              ).references(:address)
+    end
 
 end

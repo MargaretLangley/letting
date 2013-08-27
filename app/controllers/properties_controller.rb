@@ -1,14 +1,7 @@
 class PropertiesController < ApplicationController
 
   def index
-    if params[:search].blank?
-      @properties = Property.includes(:address).page(params[:page]).load
-    else
-      @properties = Property.includes(:address).search_by_all(params[:search]).page(params[:page]).load
-    end
-
-    # to become simply
-    #@properties = Propery.search(params[:search]).page(params[:page]).load
+    @properties = Property.search(params[:search]).page(params[:page]).load
   end
 
   def show

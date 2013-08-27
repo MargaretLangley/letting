@@ -153,7 +153,7 @@ describe Property do
       end
      end
 
-     context '#search_by_all returns' do
+     context '#search' do
 
       # * Change search_by_all to use search *
       # specs should test the interface of property
@@ -163,14 +163,14 @@ describe Property do
       it 'exact number (human_id)' do
         p2 = property_factory human_id: 10
         expect(Property.all).to eq [p1, p2]
-        expect(Property.search_by_all '1').to eq [p1]
+        expect(Property.search '1').to eq [p1]
       end
 
       it 'exact names' do
         p2 = property_factory human_id: 2,
               address_attributes: { house_name: 'Lords', road: 'Essex'}
         expect(Property.all).to eq [p1, p2]
-        expect(Property.search_by_all 'Kirstall Road').to eq [p1]
+        expect(Property.search 'Kirstall Road').to eq [p1]
       end
 
       context 'wildcard' do
@@ -178,26 +178,26 @@ describe Property do
           p2 = property_factory human_id: 3,
                 address_attributes: { house_name: 'Vauxall Lane' }
           expect(Property.all).to eq [p1, p2]
-          expect(Property.search_by_all 'Headi').to eq [p1]
+          expect(Property.search 'Headi').to eq [p1]
         end
         it 'road name' do
           p2 = property_factory human_id: 2,
                 address_attributes: { house_name: 'Headingly', road: 'unknown' }
           expect(Property.all).to eq [p1, p2]
-          expect(Property.search_by_all 'Kirstall').to eq [p1]
+          expect(Property.search 'Kirstall').to eq [p1]
         end
         it 'towns' do
           p2 = property_factory human_id: 2,
                 address_attributes: { town: 'unknown' }
           expect(Property.all).to eq [p1, p2]
-          expect(Property.search_by_all 'Yor').to eq [p1]
+          expect(Property.search 'Yor').to eq [p1]
         end
 
         it 'multiple' do
           p2 = property_factory human_id: 2,
                 address_attributes: { town: 'Yorks' }
           expect(Property.all).to eq [p1, p2]
-          expect(Property.search_by_all 'Yor').to eq [p1,p2]
+          expect(Property.search 'Yor').to eq [p1,p2]
         end
       end
 
