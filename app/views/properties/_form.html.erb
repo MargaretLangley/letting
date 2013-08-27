@@ -15,7 +15,6 @@
     <% end %>
 
     <%= render partial: 'shared/entities', locals: { f: f, entitieable: @property } %>
-   <a href="#" class="add" id ="property_entity_add">Add Person</a>
   </fieldset>
 
   <div style='position: relative;'>
@@ -25,13 +24,11 @@
     <%= f.fields_for :billing_profile do |builder| %>
       <%= render partial: 'billing_profile', locals: { f: builder } %>
     <% end %>
-     <a href="#" class="add" id ="billing_entity_add">Add Person</a>
   </div>
   </fieldset>
 
   <%= render partial: 'charges', locals: { f: f, charges: @property.charges } %>
 
-  <a href="#" id = "addCharge">Add Charge</a>
  <p />
  <a href ="#" id = "removeBut" ><%= image_tag "close.png" %></a>
 
