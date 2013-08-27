@@ -155,6 +155,11 @@ describe Property do
 
      context '#search_by_all returns' do
 
+      # * Change search_by_all to use search *
+      # specs should test the interface of property
+      # search by all will become private
+      #search_by_all => search
+
       it 'exact number (human_id)' do
         p2 = property_factory human_id: 10
         expect(Property.all).to eq [p1, p2]

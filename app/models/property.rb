@@ -41,6 +41,14 @@ class Property < ActiveRecord::Base
     Property.includes(:address).where('addresses.house_name LIKE ?', "#{search}").references(:address)
   end
 
+  def self.search search
+    # if no search parameter
+      # return scoped
+    # else
+      # self.search_by_all(search)
+  end
+
+  #private
   def self.search_by_all(search)
     Property.includes(:address).
       where('human_id = ? OR ' + \
