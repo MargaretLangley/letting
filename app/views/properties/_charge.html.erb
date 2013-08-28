@@ -16,16 +16,15 @@
   </div>
 
   <div class='field text require'>
-    <%= f.check_box :_destroy %>
-    <%= f.label :_destroy, 'Remove Charge' %>
+    <%= f.hidden_field :_destroy %>
+    <%= link_to 'Remove Charge', '#', class: 'remove_fields' %>
   </div>
 
-</fieldset>
-
-
-<h3>Due Date</h3>
-<% charge.due_ons.each.with_index do |due_on,due_on_index| %>
-  <%= f.fields_for :due_ons, due_on do |builder| %>
-    <%= render partial: 'due_on', locals: { f: builder, due_on: due_on, parent: "property_charge_#{index}", index: due_on_index } %>
+  <h3>Due Date</h3>
+  <% charge.due_ons.each.with_index do |due_on,due_on_index| %>
+    <%= f.fields_for :due_ons, due_on do |builder| %>
+      <%= render partial: 'due_on', locals: { f: builder, due_on: due_on, parent: "property_charge_#{index}", index: due_on_index } %>
+    <% end %>
   <% end %>
-<% end %>
+
+</fieldset>

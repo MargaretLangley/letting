@@ -27,14 +27,13 @@ describe Property do
     expect(page).to have_text 'The property could not be saved.'
   end
 
-  it '#update can delete charge' do
+  it '#update can delete charge', js: true do
     property_factory_with_charge id: 1, human_id: 8000
     navigate_to_edit_page
     expect(page).to have_text 'Charge 1'
-    check 'Remove Charge'
+    click_on 'Remove Charge'
     click_on 'Update Property'
     navigate_to_property_page
-    save_and_open_page
     expect(page).to_not have_text 'Ground Rent'
     expect(page).to have_text 'No charges levied against this property.'
   end

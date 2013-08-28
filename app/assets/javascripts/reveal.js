@@ -13,5 +13,12 @@ $( document ).ready(function() {
       // note disabled class is in forms.css.scss unless brighter idea
     }
   });
+
+  $('.remove_fields').click(function(event) {
+    event.preventDefault();
+    $(this).prev('input[type=hidden]').val('1')
+    $(this).closest('.selection').slideToggle('fast')
+  });
+
 });
 
