@@ -37,14 +37,4 @@ describe Client do
     expect(page).to have_text '333'
   end
 
-
-
-
-  def client_factory args = {}
-    client = Client.new human_id: args[:human_id]
-    client.build_address address_attributes
-    client.entities.build person_entity_attributes
-    client.save!
-    client
-  end
 end

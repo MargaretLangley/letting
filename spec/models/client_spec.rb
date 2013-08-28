@@ -98,7 +98,7 @@ describe Client do
     before do
         c1 = client_factory human_id: 111,
               address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' },
-              entity_attributes: { name: 'Pieman', title: 'Ms', initials: 'YK' }
+              entities_attributes: { '0' =>  { name: 'Knutt', title: 'Rev', initials: 'K V' } }
     end
 
     it 'exact number (human_id)' do
@@ -118,7 +118,7 @@ describe Client do
     it 'entities names' do
       c2 = client_factory human_id: 102,
             address_attributes: { house_name: 'Headingly', road: 'unknown' },
-            entities_attributes: { name: 'Gormless', title: 'Mr', initials: 'BJ' }
+            entities_attributes: { '0' => { name: 'Gormless', title: 'Mr', initials: 'BJ' } }
       expect(Client.all).to eq [c1, c2]
       expect(Client.search 'Gormless').to eq [c2]
     end

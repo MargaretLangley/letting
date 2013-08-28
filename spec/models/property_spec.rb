@@ -125,7 +125,8 @@ describe Property do
 
     before do
       p1 = property_factory human_id: 1,
-            address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' }
+            address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' },
+            entities_attributes: { "0" =>  { name: 'Knutt', title: 'Rev', initials: 'K V' } }
     end
 
     context '#search_by_house_name' do
@@ -155,16 +156,12 @@ describe Property do
 
      context '#search' do
 
-      # * Change search_by_all to use search *
-      # specs should test the interface of property
-      # search by all will become private
-      #search_by_all => search
-
       it 'exact number (human_id)' do
         p2 = property_factory human_id: 10
         expect(Property.all).to eq [p1, p2]
         expect(Property.search '1').to eq [p1]
       end
+
 
       it 'exact names' do
         p2 = property_factory human_id: 2,
