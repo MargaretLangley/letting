@@ -11,8 +11,8 @@
 
     <%= render partial: 'shared/entities', locals: { f: f, entitieable: @client } %>
 
-    <a href="#" class="add" id ="company_wanted">Company</a>
-    <a href="#" class="add bad" id ="client_entity_add">Add Person</a>
+    <a href="#" class="add go" id ="company_wanted">Company</a>
+    <a href="#" class="add go" id ="client_entity_add">Add Person</a>
     <%= f.fields_for :address do |builder| %>
       <%= render partial: 'shared/address', locals: { f: builder, parent: 'client' } %>
     <% end %>
