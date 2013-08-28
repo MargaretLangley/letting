@@ -19,7 +19,7 @@
 
   <div style='position: relative;'>
     <div id='blank_slate' class='blank_slate_overlay'>
-      Billing is to the above property address. If the bill should go to an agent click the 'Use agent' checkbox and fill in the billing address.
+      Billing is to the above property address. If the bill should go to an agent click the 'Use profile' checkbox and fill in the billing address.
     </div>
     <%= f.fields_for :billing_profile do |builder| %>
       <%= render partial: 'billing_profile', locals: { f: builder } %>
@@ -38,3 +38,4 @@
     </p>
   </div>
 <% end %>
+

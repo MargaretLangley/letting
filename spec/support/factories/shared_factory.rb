@@ -7,7 +7,7 @@ def add_entity entity_me, args = {}
   unless args[:entities_attributes]
     entity_me.entities.build person_entity_attributes
   else
-    entity_me.entities.build person_entity_attributes args[:entities_attributes]
+    entity_me.entities.build person_entity_attributes args[:entities_attributes]['0']
   end
 end
 

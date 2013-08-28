@@ -1,12 +1,8 @@
 class ClientsController < ApplicationController
 
   def index
-    unless params[:search]
-      @clients = Client.includes(:address).page(params[:page]).load
-    else
-     @clients = Client.includes(:address).search_by_all(params[:search]).page(params[:page]).load
-    end
-  end
+     @clients = Client.search(params[:search]).page(params[:page]).load
+     end
 
   def show
     @client = Client.find params[:id]
