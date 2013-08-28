@@ -2,6 +2,7 @@
 
 @import "colors";
 
+
 .mainTitle
 {
   padding-left:40px;
@@ -136,3 +137,14 @@ input[type="submit"].under-input {
   width: 55%;
 }
 
+
+a.bad {
+  background-color: red;
+  text-decoration: none;
+  font-size: 4em;
+
+  &:hover {
+    background-color: green;
+    text-decoration: underline;
+  }
+}
