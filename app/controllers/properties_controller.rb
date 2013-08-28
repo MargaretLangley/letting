@@ -64,7 +64,7 @@ class PropertiesController < ApplicationController
     end
 
     def charges_params
-      [ :id, :charge_type, :due_in, :amount ,
+      [ :id, :charge_type, :due_in, :amount, :_destroy,
         due_ons_attributes: due_on_params
       ]
     end
