@@ -1,13 +1,14 @@
 Charge:
 
   ☐ Import
-  ☐ Model
+  Model:
     ✔ Charge @done (13-08-19 10:49)
     ✔ DueOn @done (13-08-20 18:11)
   ☐ Validations
     ☐ Parse day / month to know if valid date
 
   ☐ Actions
+    Currently through property page
     ☐ Index
       ☐ V
       ☐ C
@@ -22,8 +23,9 @@ Charge:
       ☐ C
 Behaviour:
   ✔ Autocomplete Charge infor @done (13-08-19 16:38)
-  ☐ Add Charge button - upto 4?
-  ☐ Delete charge with X button
+  ✔ Add Charge button - upto 4? @done (13-08-28 10:14)
+  ✔ Delete charge with X button @done (13-08-28 10:14)
+    ☐ Delete with jquery (optional)
 
 Autocomplete on charges...
 http://railscasts.com/episodes/102-auto-complete-association-revised

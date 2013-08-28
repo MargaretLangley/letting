@@ -11,7 +11,7 @@ Action:
   ✔ Need Paging on Index? @done (before 06-08-16 22:07)
 
 Testing:
-      ☐ Feature tests need refactoring as shared address
+   ☐ Feature tests need refactoring as shared address
 
 Features:
   ☐ Searching Lists

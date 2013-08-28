@@ -44,5 +44,6 @@ Property
     ✔ Delete @done (13-07-30 22:04)
 
   Behaviour:
- ✔ Js to add new entity @done (13-08-17 10:35)
- ☐ any change display jquery -> javascript
+ ✔ Jquery to add new entity @done (13-08-17 10:35)
+ ✔ jquery to add charge @done (13-08-28 10:19)
+ ☐ Jquery to remove charge (optional)

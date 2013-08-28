@@ -8,7 +8,8 @@ def property_factory args = {}
 end
 
 def property_factory_with_billing args = {}
-  property = Property.new property_attributes args
+  property = Property.new property_attributes id: args[:id]
+  property.human_id = args[:human_id] if args[:human_id].present?
   add_contact property, args
   add_billing_profile property
   add_charge property
@@ -17,7 +18,8 @@ def property_factory_with_billing args = {}
 end
 
 def property_factory_with_charge args = {}
-  property = Property.new property_attributes args
+  property = Property.new property_attributes id: args[:id]
+  property.human_id = args[:human_id] if args[:human_id].present?
   add_contact property, args
   add_no_billing_profile property
   add_charge property
