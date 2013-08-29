@@ -31,7 +31,9 @@ describe Property do
     property_factory_with_charge id: 1, human_id: 8000
     navigate_to_edit_page
     expect(page).to have_text 'Charge 1'
-    click_on 'Remove Charge'
+    within_fieldset 'property_charge_0' do
+      click_on 'X'
+    end
     click_on 'Update Property'
     navigate_to_property_page
     expect(page).to_not have_text 'Ground Rent'
