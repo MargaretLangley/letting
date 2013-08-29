@@ -1,3 +1,8 @@
+  <div class='field text require'>
+    <%= f.hidden_field :_destroy %>
+    <%= link_to 'Remove Charge', '#', class: 'remove_fields' %>
+  </div>
+
 <fieldset id='charge'>
   <h2>Charge <%= index + 1 %></h2>
   <div class='field text require'>
@@ -13,11 +18,6 @@
   <div class='field text require'>
     <%= f.label :amount %>
     <%= f.text_field :amount %>
-  </div>
-
-  <div class='field text require'>
-    <%= f.hidden_field :_destroy %>
-    <%= link_to 'Remove Charge', '#', class: 'remove_fields' %>
   </div>
 
   <h3>Due Date</h3>

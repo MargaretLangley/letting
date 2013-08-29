@@ -8,12 +8,12 @@
 }
 .blank_slate_overlay
 {
-  font-size:1.2em;
+  font-size:1.4em;
   text-align: left;
   border: 1px solid black;
-  position: absolute; top: 12px; left:30%; width:65%;
+  position: absolute; top: 50px; left:30%; width:65%;
   background: rgba(184,184,184,0.6);
-  padding: 10px 20px;
+  padding: 80px 40px;
  }
 
 a.disabled {
@@ -118,6 +118,17 @@ fieldset {
   background-image:-moz-linear-gradient(-90deg, rgb(238, 238, 238), rgb(204, 204, 204));
 }
 
+@mixin small-button-base {
+ background-color: #3d94f6;
+  background-image:linear-gradient(-90deg, #3d94f6, #1e62d0);
+  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from #3d94f6, to #1e62d0);
+  background-image:-moz-linear-gradient(-90deg, #3d94f6, #1e62d0);
+  padding:5px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+}
+
 input[type="submit"] {
   @include button-base;
   width: 40%;
@@ -130,15 +141,17 @@ input[type="submit"].under-input {
 
  a.go {
   @include button-base;
-  background-color: #3d94f6;
-  background-image:linear-gradient(-90deg, #3d94f6, #1e62d0);
-  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from #3d94f6, to #1e62d0);
-  background-image:-moz-linear-gradient(-90deg, #3d94f6, #1e62d0);
-  padding:5px;
-  text-decoration: none;
-  font-size: 18px;
-  color: white;
-  &:hover {
+  @include small-button-base;
+    &:hover {
+    text-decoration: underline;
+  }
+}
+
+ a.remove_fields {
+  @include button-base;
+  @include small-button-base;
+  float:right;
+    &:hover {
     text-decoration: underline;
   }
 }

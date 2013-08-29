@@ -13,22 +13,8 @@ $(function () {
      event.preventDefault();
   });
 
- if ($("#property_billing_profile_attributes_use_profile").is(':checked')) {
-   } else {
-     $("#property_billing_profile_address").css("display", "none");
-     $("#billing_profile_entity_0").css("display", "none");
-  }
-
   $('#property_billing_profile_attributes_use_profile').change(function () {
     $('#blank_slate').toggle(!this.checked);
-  }).change(); //ensure visible state matches initially
-
-  $("#property_billing_profile_attributes_use_profile").click(function(event){
-    if ($("#property_billing_profile_attributes_use_profile").is(':checked')) {
-        $("#property_billing_profile_address").css("display", "block");
-       $("#billing_profile_entity_0").css("display", "block");
-     }
-  event.preventDefault();
-  });
+   }).change(); //ensure visible state matches initially
 
  });
