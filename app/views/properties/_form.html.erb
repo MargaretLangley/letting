@@ -10,11 +10,12 @@
       </div>
     </fieldset>
 
+    <%= render partial: 'shared/entities', locals: { f: f, entitieable: @property } %>
+
     <%= f.fields_for :address do |builder| %>
       <%= render partial: 'shared/address', locals: { f: builder, parent: 'property' } %>
     <% end %>
 
-    <%= render partial: 'shared/entities', locals: { f: f, entitieable: @property } %>
   </fieldset>
 
   <div style='position: relative;'>
