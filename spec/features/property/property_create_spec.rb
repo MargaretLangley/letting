@@ -61,6 +61,7 @@ describe Property do
   def validate_page
     expect(current_path).to eq '/properties/new'
     expect(page.all('h3', text: 'Address').count).to eq 2
+    expect(page.all('h3', text: 'Occupier').count).to eq 1
     expect(page.all('h3', text: 'Person').count).to eq 2
   end
 

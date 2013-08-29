@@ -1,16 +1,13 @@
 <%= form_for @property do |f| %>
   <%= render 'shared/errors', object: @property %>
-  <fieldset id='contact_property' class='shell'>
-
-    <fieldset id='property'>
+    <fieldset id='property' class='shell'>
       <div class='field text required half'>
         <h3>Property</h3>
         <%= f.label :Property_ID %>
         <%= f.text_field :human_id %>
       </div>
-    </fieldset>
 
-    <%= render partial: 'shared/entities', locals: { f: f, entitieable: @property } %>
+    <%= render partial: 'occupier', locals: { f: f, entitieable: @property } %>
 
     <%= f.fields_for :address do |builder| %>
       <%= render partial: 'shared/address', locals: { f: builder, parent: 'property' } %>
