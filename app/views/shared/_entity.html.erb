@@ -1,4 +1,7 @@
-<a href ="#"  class="add go" style= "float:right">X</a>
+  <div class='field text require'>
+    <%= f.hidden_field :_destroy %>
+    <%= link_to 'X', '#', class:'remove_fields', data:{confirm:'Are you sure?'}%>
+  </div>
 <h3>Person </h3>
 <div class='field text require'>
   <%= f.label :title %>
@@ -15,3 +18,4 @@
   <%= f.text_field :name %>
 </div>
 
+<a href="#" class="add go" id ="company_wanted">Company</a>

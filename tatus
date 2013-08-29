@@ -1,0 +1,15 @@
+[1mdiff --git a/app/assets/javascripts/change_element_display.js b/app/assets/javascripts/change_element_display.js[m
+[1mindex 8daeccf..6c5699a 100644[m
+[1m--- a/app/assets/javascripts/change_element_display.js[m
+[1m+++ b/app/assets/javascripts/change_element_display.js[m
+[36m@@ -17,4 +17,10 @@[m [m$(function () {[m
+     $('#blank_slate').toggle(!this.checked);[m
+    }).change(); //ensure visible state matches initially[m
+ [m
+[32m+[m[32m$("#property_entity_add").click(function(event){[m
+[32m+[m[32m  $("#property_entity_1").css("display", "block");[m
+[32m+[m[32m  event.preventDefault();[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m
+  });[m
