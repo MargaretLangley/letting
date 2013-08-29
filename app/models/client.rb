@@ -17,7 +17,7 @@ class Client < ActiveRecord::Base
 
   def self.search search
     if search.blank?
-       Client.all
+       Client.all.includes(:address)
     else
       self.search_by_all(search)
     end
@@ -25,13 +25,13 @@ class Client < ActiveRecord::Base
 
   private
     def self.search_by_all(search)
-      Client.includes(:entities, :address).
+      Client.includes(:address, :entities).
       where('human_id = ? OR ' + \
               'entities.name ILIKE ? OR ' + \
               'addresses.house_name ILIKE ? OR ' + \
               'addresses.road ILIKE ? OR '  \
               'addresses.town ILIKE ?',  \
               "#{search.to_i}", "#{search}%", "#{search}%", "#{search}%", "#{search}%" \
-              ).references(:address)
+              ).references(:address, :entity)
     end
 end
