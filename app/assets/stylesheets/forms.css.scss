@@ -119,14 +119,10 @@ fieldset {
 }
 
 @mixin small-button-base {
- background-color: #3d94f6;
-  background-image:linear-gradient(-90deg, #3d94f6, #1e62d0);
-  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from #3d94f6, to #1e62d0);
-  background-image:-moz-linear-gradient(-90deg, #3d94f6, #1e62d0);
-  padding:5px;
+  padding:10px;
   text-decoration: none;
   font-size: 18px;
-  color: white;
+  color: red;
 }
 
 input[type="submit"] {
