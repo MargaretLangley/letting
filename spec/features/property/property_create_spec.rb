@@ -4,7 +4,7 @@ require_relative '../shared/entity'
 
 describe Property do
 
-  it '#create' do
+  it '#create', js:true  do
     navigate_to_create_page
     validate_page
     fill_in_form

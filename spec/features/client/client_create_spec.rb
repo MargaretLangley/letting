@@ -3,7 +3,7 @@ require_relative 'client_shared'
 
 describe Client do
 
-  it '#creates' do
+  it '#creates', js: true do
     navigate_to_create_page
     validate_page
     fill_in_form
@@ -34,7 +34,7 @@ describe Client do
 
   def expect_clients_page
     expect(current_path).to eq '/clients'
-    expect(page).to have_text 'Client successfully created!'
+    expect(page).to have_text 'CLIENT SUCCESSFULLY CREATED!'
   end
 
 end

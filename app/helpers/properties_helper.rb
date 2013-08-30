@@ -4,7 +4,7 @@ module PropertiesHelper
   end
 
   def hide_new_record_unless_first record, index
-    "display: none;" if record.new_record? && index > 0
+    record.new_record? && index > 0 ? "revealable" : ""
   end
 
 end
