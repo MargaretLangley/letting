@@ -1,16 +1,20 @@
-<fieldset id='billing_profile' class='shell'>
+<div class='billing_selection'>
+  <fieldset id='billing_profile' class='shell'>
 
-  <h3>BILLING ADDRESS</h3>
-  <fieldset>
-    <%= f.check_box :use_profile %>
-    <%= f.label :use_profile %>
- </fieldset>
-<p />
+    <h3>BILLING ADDRESS</h3>
+    <fieldset>
+      <%= f.check_box :use_profile %>
+      <%= f.label :use_profile %>
+   </fieldset>
+  <p />
 
-<%= render partial: 'agent', locals: { f: f, entitieable: @property.billing_profile } %>
+  <%= render partial: 'agent', locals: { f: f, entitieable: @property.billing_profile } %>
 
-<%= f.fields_for :address do |builder| %>
-  <%= render partial: 'shared/address', locals: { f: builder, parent: 'property_billing_profile' } %>
-<% end %>
+   <%= render partial: 'billing_no_agent' %>
 
-</fieldset>
+  <%= f.fields_for :address do |builder| %>
+    <%= render partial: 'shared/address', locals: { f: builder, parent: 'property_billing_profile' } %>
+  <% end %>
+
+  </fieldset>
+</div>
