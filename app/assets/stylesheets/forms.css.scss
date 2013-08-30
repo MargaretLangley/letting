@@ -118,11 +118,21 @@ fieldset {
   background-image:-moz-linear-gradient(-90deg, rgb(238, 238, 238), rgb(204, 204, 204));
 }
 
+
 @mixin small-button-base {
-  padding:10px;
+  padding:2px;
   text-decoration: none;
-  font-size: 18px;
-  color: red;
+  font-size: 8px;
+  color: $primary-link-color;
+  font-size: 1.5em;
+  border-radius:5px 5px 5px 5px;
+  -moz-border-radius:5px 5px 5px 5px;
+  -webkit-border-radius:5px 5px 5px 5px;
+  box-shadow:0px 0px 0px rgb(0, 0, 0);
+  -moz-box-shadow:0px 0px 0px rgb(0, 0, 0);
+  -webkit-box-shadow:0px 0px 0px rgb(0, 0, 0);
+  background-color: $secondary-background-color;
+  background-color: white;
 }
 
 input[type="submit"] {
@@ -136,7 +146,6 @@ input[type="submit"].under-input {
 }
 
  a.go {
-  @include button-base;
   @include small-button-base;
     &:hover {
     text-decoration: underline;
