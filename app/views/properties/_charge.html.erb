@@ -1,9 +1,9 @@
+<fieldset id='charge'>
   <div class='field text require'>
     <%= f.hidden_field :_destroy %>
     <%= link_to 'X', '#', class:'remove_fields', data:{confirm:'Are you sure?'} %>
   </div>
 
-<fieldset id='charge'>
   <h2>Charge <%= index + 1 %></h2>
   <div class='field text require'>
     <%= f.label :charge_type %>

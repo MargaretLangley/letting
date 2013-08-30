@@ -7,9 +7,10 @@
  </fieldset>
 <p />
 
+<%= render partial: 'agent', locals: { f: f, entitieable: @property.billing_profile } %>
+
 <%= f.fields_for :address do |builder| %>
   <%= render partial: 'shared/address', locals: { f: builder, parent: 'property_billing_profile' } %>
 <% end %>
 
-<%= render partial: 'shared/entities', locals: { f: f, entitieable: @property.billing_profile } %>
 </fieldset>
