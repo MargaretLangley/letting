@@ -11,7 +11,7 @@ describe PropertiesHelper do
     it 'hide if new and not first' do
       property = Property.new human_id: 1
       property.prepare_for_form
-      expect(hide_new_record_unless_first(property.charges.first, 1) ).to eq 'display: none;'
+      expect(hide_new_record_unless_first(property.charges.first, 1) ).to eq 'revealable'
     end
 
     it 'displays if valid' do

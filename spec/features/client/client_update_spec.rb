@@ -4,7 +4,7 @@ require_relative '../shared/entity'
 
 describe Client do
 
-  it '#updates' do
+  it '#updates', js: true do
     client_factory id: 1, human_id: 3003
     navigate_to_edit_page
     validate_page
@@ -56,7 +56,7 @@ describe Client do
 
   def expect_clients_page
     expect(current_path).to eq '/clients'
-    expect(page).to have_text 'Client successfully updated!'
+    expect(page).to have_text 'CLIENT SUCCESSFULLY UPDATED!'
     expect_client_data_changed
   end
 
