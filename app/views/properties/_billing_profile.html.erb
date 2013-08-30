@@ -1,20 +1,32 @@
-<div class='billing_selection'>
-  <fieldset id='billing_profile' class='shell'>
+<fieldset id='billing_profile' class='shell'>
+  <div class='selection'>
 
-    <h3>BILLING ADDRESS</h3>
-    <fieldset>
-      <%= f.check_box :use_profile %>
-      <%= f.label :use_profile %>
-   </fieldset>
-  <p />
+<div id='blank_slate' class='blank_slate_overlay'>
+      Billing is to the above property address. If the bill should go to an agent click the 'Use profile' checkbox and fill in the billing address.
+    </div>
 
-  <%= render partial: 'agent', locals: { f: f, entitieable: @property.billing_profile } %>
+    <div class='toggle'>
+      <h3>BILLING ADDRESS</h3>
+      <fieldset>
+        <%= f.check_box :use_profile %>
+        <%= f.label :use_profile %>
+      </fieldset>
+      <p />
+    </div>
 
-   <%= render partial: 'billing_no_agent' %>
+<h3>Agent</h3>
+    <div class='togglable'>
+       <%= render partial: 'billing_no_agent' %>
+    </div>
 
-  <%= f.fields_for :address do |builder| %>
-    <%= render partial: 'shared/address', locals: { f: builder, parent: 'property_billing_profile' } %>
-  <% end %>
+  <div class='togglable revealable'>
 
-  </fieldset>
-</div>
+        <%= render partial: 'shared/entities', locals: { f: f, entitieable: @property.billing_profile } %>
+      </div>
+    <div class='togglable revealable'>
+      <%= f.fields_for :address do |builder| %>
+        <%= render partial: 'shared/address', locals: { f: builder, parent: 'property_billing_profile' } %>
+      <% end %>
+    </div>
+  </div>
+</fieldset>
