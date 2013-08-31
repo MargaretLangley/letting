@@ -11,7 +11,7 @@ describe Client do
     fill_in_form
     click_on 'Update Client'
     expect_clients_page
-    navigate_to_client_page
+    navigate_to_client_page '278'
     expect_client_page
   end
 
@@ -22,6 +22,21 @@ describe Client do
     click_on 'Update Client'
     expect(current_path).to eq '/clients/1'
     expect(page).to have_text 'The client could not be saved.'
+  end
+
+  it '#updates adds second entity', js: true do
+    client_factory id: 1, human_id: 3003
+    navigate_to_edit_page
+    click_on 'Add Person'
+    within_fieldset 'client_entity_1' do
+      fill_in 'Title', with: 'Mr'
+      fill_in 'Initials', with: 'I'
+      fill_in 'Name', with: 'Test'
+    end
+    click_on 'Update Client'
+    save_and_open_page
+    navigate_to_client_page '3003'
+    expect(page).to have_text 'Mr I Test'
   end
 
   def navigate_to_edit_page

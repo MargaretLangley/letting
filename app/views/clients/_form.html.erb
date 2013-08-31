@@ -1,6 +1,7 @@
 <%= form_for @client do |f| %>
 
   <%= render 'shared/errors', object: @client %>
+
   <fieldset id='client' class='shell'>
 
     <div class='field text required half'>
@@ -14,7 +15,6 @@
     <%= f.fields_for :address do |builder| %>
       <%= render partial: 'shared/address', locals: { f: builder, parent: 'client' } %>
     <% end %>
-
 
   </fieldset>
 

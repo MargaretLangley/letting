@@ -1,5 +1,5 @@
 <div class='toggle-selection'>
-  <div class='selection togglable'>
+  <div class='togglable reveal-selection'>
     <% entitieable.entities.select(&:person?).each.with_index do |entity, index| %>
       <%= f.fields_for :entities, entity do |builder| %>
         <fieldset id='<%= entity_field_id entitieable, index %>' class='<%= hide_new_record_unless_first entity, index %>' >
@@ -7,11 +7,11 @@
         </fieldset>
       <% end %>
     <% end %>
-    <%= link_to 'Add Person', '#', class: 'add' %>
+    <%= link_to 'Add Person', '#', class: 'reveal-partial' %>
   </div>
 
 
-  <div class='selection togglable revealable'>
+  <div class='togglable revealable'>
     <% entitieable.entities.reject(&:person?).each.with_index do |entity, index| %>
       <%= f.fields_for :entities, entity do |builder| %>
         <fieldset id='<%= entity_field_id entitieable, Entities::MAX_ENTITIES %>'>

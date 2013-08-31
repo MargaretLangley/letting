@@ -154,7 +154,7 @@ input[type="submit"].under-input {
   }
 }
 
- a.remove_fields {
+ a.remove-fields, a.hide-partial {
   @include button-base;
   @include small-button-base;
   float:right;

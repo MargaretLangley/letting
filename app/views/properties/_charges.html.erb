@@ -1,4 +1,4 @@
-<div class='selection'>
+<div class='reveal-selection'>
   <% charges.each.with_index do |charge,index| %>
     <%= f.fields_for :charges, charge do |builder| %>
       <fieldset id='property_charge_<%= index %>' class='shell selection <%= hide_new_record_unless_first charge, index %>'  >
@@ -6,5 +6,5 @@
       </fieldset>
     <% end %>
   <% end %>
-  <%= link_to 'Add Charge', '#', class: 'add' %>
+  <%= link_to 'Add Charge', '#', class: 'reveal-partial' %>
 </div>

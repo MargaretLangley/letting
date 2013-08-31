@@ -1,21 +1,21 @@
   <div class='field text require'>
     <%= f.hidden_field :_destroy %>
-    <%= link_to 'X', '#', class:'remove_fields', data:{confirm:'Are you sure?'}%>
+    <%= link_to 'X', '#', class:'hide-partial' %>
   </div>
-<h3>Person<span>&nbsp;<%= link_to 'or Company', '#', class: 'toggle' %></span></h3>
+<h3>Person<span>&nbsp;<%= link_to 'or company', '#', class: 'toggle' %></span></h3>
 <div class='field text require'>
   <%= f.label :title %>
-  <%= f.text_field :title %>
+  <%= f.text_field :title, class: 'clearable' %>
 </div>
 
 <div class='field text require'>
   <%= f.label :initials %>
-  <%= f.text_field :initials %>
+  <%= f.text_field :initials, class: 'clearable' %>
 </div>
 
 <div class='field text require'>
   <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name, class: 'clearable' %>
 </div>
 
 <%= f.hidden_field :type %>
