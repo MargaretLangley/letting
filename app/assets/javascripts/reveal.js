@@ -51,16 +51,16 @@ $( document ).ready(function() {
   $('.toggle').click(function(event) {
     event.preventDefault();
     var selection = $(this).closest('.toggle-selection');
-    togglableChildren.slideToggle('fast')
+    togglableChildren(selection).slideToggle('fast')
   });
 
-  function togglableChildren() {
-    return selection.children('.togglable');
+  function togglableChildren(element) {
+    return element.children('.togglable');
   }
 
   $('.checkbox-toggle').click(function(event) {
     var selection = $(this).closest('.selection');
-    togglableChildren.slideToggle('fast');
+    togglableChildren(selection).slideToggle('fast');
   });
 
 

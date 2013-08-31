@@ -34,7 +34,6 @@ describe Client do
       fill_in 'Name', with: 'Test'
     end
     click_on 'Update Client'
-    save_and_open_page
     navigate_to_client_page '3003'
     expect(page).to have_text 'Mr I Test'
   end
