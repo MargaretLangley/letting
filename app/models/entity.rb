@@ -12,6 +12,6 @@ class Entity < ActiveRecord::Base
 
   private
     def ignored_attrs
-      ['id', 'entitieable_id', 'entitieable_type', 'created_at', 'updated_at']
+      ['id', 'entitieable_id', 'entitieable_type', 'created_at', 'type', 'updated_at']
     end
 end

@@ -67,14 +67,14 @@ describe Property do
 
       it 'builds required models' do
         expect(property.address).to_not be_nil
-        expect(property.entities).to have(2).items
+        expect(property.entities).to have(3).items
         expect(property.billing_profile).to_not be_nil
       end
 
       it 'builds no more than the required models' do
         property.prepare_for_form  # * 2
         expect(property.address).to_not be_nil
-        expect(property.entities).to have(2).items
+        expect(property.entities).to have(3).items
         expect(property.billing_profile).to_not be_nil
       end
 

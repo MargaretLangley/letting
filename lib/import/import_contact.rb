@@ -22,9 +22,14 @@ module DB
     end
 
     def assign_entity entity, number, row
-      entity.attributes = { title:    row[:"title#{number}"],
+      entity.attributes = { type:     entity_type(row),
+                            title:    row[:"title#{number}"],
                             initials: row[:"initials#{number}"],
                             name:     row[:"name#{number}"] }
+    end
+
+    def entity_type row
+      row[:'title1'].present? ? 'Person' : 'Company'
     end
 
     def clean_contact contactable

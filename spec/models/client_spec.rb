@@ -74,13 +74,13 @@ describe Client do
 
     it 'builds required models' do
       expect(client.address).to_not be_nil
-      expect(client.entities).to have(2).items
+      expect(client.entities).to have(3).items
     end
 
     it 'builds no more than the required models' do
       client.prepare_for_form  # * 2
       expect(client.address).to_not be_nil
-      expect(client.entities).to have(2).items
+      expect(client.entities).to have(3).items
     end
 
 

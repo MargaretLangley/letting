@@ -73,7 +73,7 @@ describe BillingProfile do
       end
 
       it 'has entities but all blank' do
-        expect(prepare_blank_profile.entities).to have(2).items
+        expect(prepare_blank_profile.entities).to have(3).items
         expect(prepare_blank_profile.entities).to be_all(&:empty?)
       end
 

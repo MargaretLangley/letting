@@ -1,4 +1,6 @@
 require_relative '../shared/address'
+require_relative '../shared/entity'
+
 
 def fill_in_form
 

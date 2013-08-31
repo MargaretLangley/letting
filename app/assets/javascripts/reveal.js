@@ -16,8 +16,8 @@ $( document ).ready(function() {
 
   $('.toggle').click(function(event) {
     event.preventDefault();
-    var selection = $(this).closest('.selection');
-    selection.children('.togglable').slideToggle('fast');
+    var selection = $(this).closest('.toggle-selection');
+    selection.children('.togglable').slideToggle('fast')
   });
 
   $('.checkbox_toggle').click(function(event) {

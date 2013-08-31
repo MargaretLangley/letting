@@ -28,14 +28,13 @@ describe Property do
   end
 
   it '#update can delete charge', js: true do
-    property_factory_with_charge id: 1, human_id: 8000
+    property = property_factory_with_charge id: 1, human_id: 8000
     navigate_to_edit_page
     expect(page).to have_text 'Charge 1'
     within_fieldset 'property_charge_0' do
       click_on 'X'
-      a = page.driver.browser.switch_to.alert
-      a.accept  # can also be a.dismiss
     end
+    puts page.driver.error_messages
     click_on 'Update Property'
     navigate_to_property_page
     expect(page).to_not have_text 'Ground Rent'

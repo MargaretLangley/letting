@@ -41,6 +41,7 @@ end
 
 def person_entity_attributes overrides = {}
   {
+    type: 'Person',
     title: 'Mr',
     initials: 'W G',
     name: 'Grace'
@@ -49,6 +50,7 @@ end
 
 def oval_person_entity_attributes overrides = {}
   {
+    type: 'Person',
     title: 'Rev',
     initials: 'V W',
     name: 'Knutt'

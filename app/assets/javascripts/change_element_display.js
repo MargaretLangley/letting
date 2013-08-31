@@ -8,13 +8,12 @@ $(function () {
     $("#blank_slate").css("display", "none");
     $("#agent_entity").css("display", "block");
     $("#agent_address").css("display", "block");
-}
+  }
 
-$("#property_entity_add").click(function(event){
-  $("#property_entity_1").css("display", "block");
-  event.preventDefault();
+  $("#property_entity_add").click(function(event){
+    $("#property_entity_1").css("display", "block");
+    event.preventDefault();
   });
 
-
- });
+});
 

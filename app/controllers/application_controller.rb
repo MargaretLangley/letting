@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def entities_params
-    [:id, :title, :initials, :name ]
+    [:id, :title, :initials, :name, :type ]
   end
 
   private

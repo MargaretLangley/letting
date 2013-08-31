@@ -51,7 +51,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
  group :development, :test do
    gem 'rspec-rails', '~> 2.14.0'
    gem 'capybara'
-   gem 'selenium-webdriver'
+   gem "capybara-webkit"
    gem 'guard'
    gem 'guard-rspec', '~> 3.0.2'
    gem 'guard-livereload'
