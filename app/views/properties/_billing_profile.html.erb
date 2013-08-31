@@ -1,10 +1,10 @@
 <fieldset id='billing_profile' class='shell'>
   <div class='selection'>
 
-    <div class='checkbox-toggle' style = "position: relative">
+    <div>
       <h3>BILLING ADDRESS</h3>
       <fieldset>
-        <%= f.check_box :use_profile %>
+        <%= f.check_box :use_profile, class: 'checkbox-toggle' %>
         <%= f.label :use_profile %>
       </fieldset>
     </div>
