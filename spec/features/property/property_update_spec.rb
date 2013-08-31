@@ -33,6 +33,8 @@ describe Property do
     expect(page).to have_text 'Charge 1'
     within_fieldset 'property_charge_0' do
       click_on 'X'
+      a = page.driver.browser.switch_to.alert
+      a.accept  # can also be a.dismiss
     end
     click_on 'Update Property'
     navigate_to_property_page

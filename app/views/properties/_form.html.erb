@@ -3,7 +3,7 @@
     <fieldset id='property' class='shell'>
       <div class='field text required half'>
         <h3>Property</h3>
-        <%= f.label :Property_ID %>
+        <%= f.label :human_id, 'Property ID' %>
         <%= f.text_field :human_id %>
       </div>
 
@@ -23,7 +23,6 @@
   </div>
 
   <%= render partial: 'charges', locals: { f: f, charges: @property.charges } %>
- <p />
 
   <div>
     <p>

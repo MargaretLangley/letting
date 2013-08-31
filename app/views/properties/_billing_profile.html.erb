@@ -1,7 +1,7 @@
 <fieldset id='billing_profile' class='shell'>
   <div class='selection'>
 
-<div id='blank_slate' class='blank_slate_overlay'>
+    <div id='blank_slate' class='blank_slate_overlay'>
       Billing is to the above property address. If the bill should go to an agent click the 'Use profile' checkbox and fill in the billing address.
     </div>
 
@@ -14,15 +14,14 @@
       <p />
     </div>
 
-<h3>Agent</h3>
+    <h3>Agent</h3>
     <div class='togglable'>
        <%= render partial: 'billing_no_agent' %>
     </div>
 
-  <div class='togglable revealable'>
-
-        <%= render partial: 'shared/entities', locals: { f: f, entitieable: @property.billing_profile } %>
-      </div>
+    <div class='togglable revealable'>
+      <%= render partial: 'shared/entities', locals: { f: f, entitieable: @property.billing_profile } %>
+    </div>
     <div class='togglable revealable'>
       <%= f.fields_for :address do |builder| %>
         <%= render partial: 'shared/address', locals: { f: builder, parent: 'property_billing_profile' } %>
