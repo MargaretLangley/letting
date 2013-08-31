@@ -3,7 +3,8 @@
     <h3 class = "mainTitle">Property</h3>
   </header>
   <p>
-    Property Id <%= @property.human_id %>
+    <div class='fieldset' style='background: #ddd;border:1px solid #666; border-radius: 12px; padding: 0 20px;margin-top: 10px;margin-bottom: 3px;'>
+    Property Id <%= @property.human_id %> <%= link_to 'Edit', edit_property_path(@property) %> |
   </p>
   <h3>Address</h3>
   <%= render 'shared/show_address', object: @property %>
@@ -14,4 +15,5 @@
 
   <%= render 'show_billing_profile', object: @property.billing_profile %>
   <%= render 'show_charges', object: @property.charges %>
+  </div>
 </article>

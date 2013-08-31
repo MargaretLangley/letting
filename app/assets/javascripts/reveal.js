@@ -17,7 +17,12 @@ $( document ).ready(function() {
   $('.toggle').click(function(event) {
     event.preventDefault();
     var selection = $(this).closest('.selection');
-    selection.children('.togglable').slideToggle('fast')
+    selection.children('.togglable').slideToggle('fast');
+  });
+
+  $('.checkbox_toggle').click(function(event) {
+    var selection = $(this).closest('.selection');
+    selection.children('.togglable').slideToggle('fast');
   });
 
   $('.remove_fields').click(function(event) {

@@ -1,11 +1,11 @@
 <%= form_for @property do |f| %>
   <%= render 'shared/errors', object: @property %>
-    <fieldset id='property' class='shell'>
-      <div class='field text required half'>
-        <h3>Property</h3>
-        <%= f.label :human_id, 'Property ID' %>
-        <%= f.text_field :human_id %>
-      </div>
+ <fieldset id='property' class='shell'>
+    <div class='field text required half'>
+      <h3>Property</h3>
+      <%= f.label :Property_ID %>
+      <%= f.text_field :human_id %>
+    </div>
 
     <%= render partial: 'occupier', locals: { f: f, entitieable: @property } %>
 
@@ -15,18 +15,12 @@
 
   </fieldset>
 
-  <div style='position: relative;'>
-
-    <%= f.fields_for :billing_profile do |builder| %>
-      <%= render partial: 'billing_profile', locals: { f: builder } %>
-    <% end %>
-  </div>
+  <%= f.fields_for :billing_profile do |builder| %>
+    <%= render partial: 'billing_profile', locals: { f: builder } %>
+  <% end %>
 
   <%= render partial: 'charges', locals: { f: f, charges: @property.charges } %>
-
-  <div>
     <p>
       <%= f.submit %>
     </p>
-  </div>
 <% end %>
