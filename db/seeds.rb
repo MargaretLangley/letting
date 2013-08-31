@@ -30,6 +30,7 @@ end
   def seed_clients
     Entity.create! [
       {
+        type: 'Person',
         entitieable_id: 1,
         entitieable_type: 'Client',
         title: 'Mr',
@@ -37,6 +38,7 @@ end
         name: 'Ranjitsinhji'
       },
       {
+        type: 'Person',
         entitieable_id: 2,
         entitieable_type: 'Client',
         title: 'Mr',
@@ -44,6 +46,7 @@ end
         name: 'Simpson'
       },
       {
+        type: 'Person',
         entitieable_id: 3,
         entitieable_type: 'Client',
         title: 'Mr',
@@ -112,6 +115,7 @@ end
   def create_entities
     Entity.create! [
       {
+        type: 'Person',
         entitieable_id: 1,
         entitieable_type: 'Property',
         title: 'Mr',
@@ -119,6 +123,7 @@ end
         name: 'Hendren'
       },
       {
+        type: 'Person',
         entitieable_id: 2,
         entitieable_type: 'Property',
         title: 'Mr',
@@ -126,6 +131,7 @@ end
         name: 'Gatting'
       },
       {
+        type: 'Person',
         entitieable_id: 3,
         entitieable_type: 'Property',
         title: 'Mr',
@@ -133,6 +139,7 @@ end
         name: 'Hearne'
       },
       {
+        type: 'Person',
         entitieable_id: 4,
         entitieable_type: 'Property',
         title: 'Mr',
@@ -202,6 +209,7 @@ end
   def create_billing_profile_entities
     Entity.create! [
       {
+        type: 'Person',
         entitieable_id: 1,
         entitieable_type: 'BillingProfile',
         title: 'Mr',
