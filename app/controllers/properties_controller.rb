@@ -48,6 +48,7 @@ class PropertiesController < ApplicationController
     def property_params
       params.require(:property).
         permit :human_id,
+          :client_id,
           address_attributes: address_params,
           entities_attributes: entities_params,
           billing_profile_attributes: billing_profile_params,

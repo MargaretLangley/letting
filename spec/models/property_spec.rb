@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Property do
 
   let(:property) do
-    property = Property.new human_id: 8000
+    property = Property.new human_id: 8000, client_id: 2
     property.entities.new person_entity_attributes
     property.build_billing_profile use_profile: false, property_id: property.id
     property
@@ -28,6 +28,18 @@ describe Property do
         property.save!
         property.id = nil # dirty way of saving it again
         expect { property.save! human_id: 8000 }.to raise_error ActiveRecord::RecordInvalid
+      end
+    end
+
+    context '#client_id' do
+      it 'required' do
+        property.client_id = nil
+        expect(property).not_to be_valid
+      end
+
+      it '#numeric' do
+        property.client_id = 'Not numbers'
+        expect(property).to_not be_valid
       end
     end
   end

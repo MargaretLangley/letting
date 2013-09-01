@@ -7,6 +7,11 @@
       <%= f.text_field :human_id %>
     </div>
 
+    <div class='field text required half'>
+      <%= f.label :client_id, 'Client id' %>
+      <%= f.text_field :client_id %>
+    </div>
+
     <%= render partial: 'occupier', locals: { f: f, entitieable: @property } %>
 
     <%= f.fields_for :address do |builder| %>

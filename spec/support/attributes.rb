@@ -8,7 +8,8 @@ end
 
 def property_attributes overrides = {}
   {
-    human_id: 2002
+    human_id: 2002,
+    client_id: 8989,
   }.merge overrides
 end
 

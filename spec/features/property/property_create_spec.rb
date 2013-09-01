@@ -70,7 +70,6 @@ describe Property do
     fill_in_property
     fill_in_property_address
     fill_in_property_entities
-    fill_in_use_billing_profile
     fill_in_billing_profile_address
     fill_in_billing_profile_entities
     fill_in_charge
@@ -78,6 +77,7 @@ describe Property do
 
     def fill_in_property
       fill_in 'property_human_id', with: '278'
+      fill_in 'Client id', with: '2'
     end
 
 
@@ -93,13 +93,8 @@ describe Property do
       end
     end
 
-    def fill_in_use_billing_profile
-      within_fieldset 'billing_profile' do
-        check 'Use profile'
-      end
-    end
-
     def fill_in_billing_profile_address
+      check 'Use profile'
       within_fieldset 'billing_profile' do
         fill_in 'Flat no', with: '555'
         fill_in 'House name', with: 'The County Ground'

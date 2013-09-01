@@ -6,7 +6,7 @@ module DB
     end
 
     def self.property
-      %w{human_id updated } + self.entities + self.address
+      %w{human_id updated } + self.entities + self.address + %w{ client_id }
     end
 
     def self.billing_profile

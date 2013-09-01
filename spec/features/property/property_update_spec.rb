@@ -5,7 +5,7 @@ require_relative '../shared/entity'
 describe Property do
 
   it '#updates' do
-    property_factory_with_billing id: 1, human_id: 8000
+    property = property_factory_with_billing id: 1, human_id: 8000
     navigate_to_edit_page
     validate_page
     expect_form_to_be
@@ -25,6 +25,15 @@ describe Property do
     click_on 'Update Property'
     expect(current_path).to eq '/properties/1'
     expect(page).to have_text 'The property could not be saved.'
+  end
+
+  it '#update removes billing address' do
+    property_factory_with_billing id: 1, human_id: 8000
+    navigate_to_edit_page
+    uncheck 'Use profile'
+    click_on 'Update Property'
+    navigate_to_property_page
+    expect(page).to have_text 'Billing to property address'
   end
 
   it '#update can delete charge', js: true do

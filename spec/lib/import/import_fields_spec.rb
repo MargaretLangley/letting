@@ -13,7 +13,7 @@ module DB
 
    it 'property' do
       fields = %w[human_id  updated title1  initials1 name1 title2
-        initials2 name2 flat_no  house_name road_no  road  district  town  county  postcode]
+        initials2 name2 flat_no  house_name road_no  road  district  town  county  postcode client_id]
       expect(ImportFields.property).to eq fields
    end
 
