@@ -4,6 +4,7 @@ require_relative '../../../lib/import/import'
 require_relative '../../../lib/import/import_fields'
 require_relative '../../../lib/import/import_client'
 require_relative '../../../lib/import/import_property'
+require_relative '../../../lib/import/import_billing_profile'
 
 module DB
 
@@ -49,10 +50,11 @@ module DB
     end
     context 'BillingProfile' do
       it 'works on BillingProfile' do
-        ImportProperty.import   \
+        property_factory human_id: 122
+        ImportBillingProfile.import   \
         Import.csv_table('address2', headers: ImportFields.billing_profile, location: 'spec/fixtures/import_data/billing_profiles') , \
         Patch.import(BillingProfile, Import.csv_table('address2_patch', headers: ImportFields.billing_profile, location: 'spec/fixtures/import_data/patch'))
-        expect(Property.first.address.district).to eq 'Example District Changed'
+        expect(Property.first.billing_profile.address.district).to eq 'Example District Changed'
       end
     end
   end
