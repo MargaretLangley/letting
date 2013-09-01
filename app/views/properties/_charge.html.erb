@@ -5,17 +5,17 @@
   </div>
 
   <h2>Charge <%= index + 1 %></h2>
-  <div class='field text require'>
+  <div class='field text'>
     <%= f.label :charge_type %>
     <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
   </div>
 
-  <div class='field text require'>
+  <div class='field text'>
     <%= f.label :due_in %>
     <%= f.text_field :due_in, data: { autocomplete_source: Charge.uniq.pluck(:due_in).sort } %>
   </div>
 
-  <div class='field text require'>
+  <div class='field text'>
     <%= f.label :amount %>
     <%= f.text_field :amount %>
   </div>
