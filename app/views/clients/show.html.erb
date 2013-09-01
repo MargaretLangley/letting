@@ -1,24 +1,21 @@
-<div>
-
-<div class='fieldset' style='background: #ddd;border:1px solid #666; border-radius: 12px; padding: 0 20px;margin-top: 10px;margin-bottom: 3px;'>
-  <h2>Client</h2>
-  <p>
-  <span style='float: left; width:30%;'>ID:</span><span style='display: inline-block;'><%= @client.human_id %></span>
- </P>
- <p>
-<% @client.entities.each do |entity| %>
-  <span style='float: left; width:30%;'>Name</span><span style='display: inline-block;'><%= render 'shared/show_entity', object: entity %></span>
-  <% end %>
-</p>
-  <h3>Address</h3>
-  <%= render 'shared/show_address', object: @client %>
-
-
-  <h3>Properties Owned</h3>
-  <% @client.properties.each do |property| %>
-    <%= property.human_id %>
-    <%= render 'shared/show_address', object: property %>
-  <% end %>
-</div>
-
-</div>
+<article>
+  <div class = 'greybox'>
+    <h2>Client</h2>
+    <p>
+    <span style='float: left; width:30%;'>ID:</span>
+    <span style='display: inline-block;'><%= @client.human_id %></span>
+     </p>
+     <p>
+    <% @client.entities.each do |entity| %>
+      <span style='float: left; width:30%;'>Name</span><span style='display: inline-block;'><%= render 'shared/show_entity', object: entity %></span>
+      <% end %>
+    </p>
+    <h3>Address</h3>
+    <%= render 'shared/show_address', object: @client %>
+    <h3>Properties Owned</h3>
+    <% @client.properties.each do |property| %>
+      <%= property.human_id %>
+      <%= render 'shared/show_1_line_address', object: property %>
+    <% end %>
+  </div>
+</article>

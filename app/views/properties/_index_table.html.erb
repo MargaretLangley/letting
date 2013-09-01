@@ -5,6 +5,9 @@
         ID
       </th>
       <th class='alnright'>
+        Cl
+      </th>
+      <th class='alnright'>
         No
       </th>
       <th>
@@ -32,6 +35,9 @@
       <td class='alnright'>
         <%= link_to property.human_id, property %>
       </td>
+      <td>
+        <%=property.client_id%>
+      </td>
       <td class='alnright'>
         <%= format_empty_string_as_dash property.address.flat_no %>
       </td>
@@ -49,7 +55,7 @@
       </td>
       <% if show_actions %>
       <td>
-        <%= link_to 'Edit', edit_property_path(property) %> |
+         <%= link_to 'Edit', edit_property_path(property) %> |
         <%= link_to 'Delete', property, method: :delete, data: { confirm: 'Are you sure?' } %>
       </td>
       <% end %>

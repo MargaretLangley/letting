@@ -70,3 +70,23 @@ nav {
   border: 1px solid $fieldset-color;
   padding: 5%;
 }
+
+.greybox{
+ background-color: #ddd;
+ border:1px solid #666;
+ border-radius: 12px;
+ padding: 0 20px;
+ margin-top: 10px;
+ margin-bottom: 3px;
+}
+
+.float30left{
+  width:30%;
+  float:left;
+ }
+
+.float30right{
+  width:30%;
+  float:right;
+ }
+

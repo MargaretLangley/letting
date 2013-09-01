@@ -1,8 +1,8 @@
 <%= form_for @property do |f| %>
   <%= render 'shared/errors', object: @property %>
  <fieldset id='property' class='shell'>
-    <div class='field text required half'>
       <h3>Property</h3>
+    <div class='field text required half'>
       <%= f.label :Property_ID %>
       <%= f.text_field :human_id %>
     </div>
