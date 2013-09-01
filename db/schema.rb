@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20130819155927) do
   add_index "due_ons", ["charge_id"], name: "index_due_ons_on_charge_id", using: :btree
 
   create_table "entities", force: true do |t|
-    t.string   "type",             null: false
+    t.string   "entity_type",      null: false
     t.integer  "entitieable_id",   null: false
     t.string   "entitieable_type", null: false
     t.string   "title"

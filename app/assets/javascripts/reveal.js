@@ -48,6 +48,7 @@ $( document ).ready(function() {
     $(this).closest('.selection').slideToggle('fast')
   });
 
+  // current panel switch code
   $('.toggle').click(function(event) {
     event.preventDefault();
     var selection = $(this).closest('.toggle-selection');
@@ -63,6 +64,4 @@ $( document ).ready(function() {
     togglableChildren(selection).slideToggle('fast');
   });
 
-
 });
-

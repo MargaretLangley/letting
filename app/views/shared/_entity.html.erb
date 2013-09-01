@@ -1,21 +1,27 @@
-  <div class='field text require'>
-    <%= f.hidden_field :_destroy %>
-    <%= link_to 'X', '#', class:'hide-partial' %>
+<div class='toggle-selection'>
+
+    <div class='field text require'>
+      <%= f.hidden_field :_destroy %>
+      <%= link_to 'X', '#', class:'hide-partial' %>
+    </div>
+    <div class='togglable'>
+      <h3>Person<span>&nbsp;<%= link_to 'or company', '#', class: 'toggle' %></span></h3>
+    </div>
+
+  <div class='field text togglable'>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'clearable' %>
   </div>
-<h3>Person<span>&nbsp;<%= link_to 'or company', '#', class: 'toggle' %></span></h3>
-<div class='field text'>
-  <%= f.label :title %>
-  <%= f.text_field :title, class: 'clearable' %>
-</div>
 
-<div class='field text'>
-  <%= f.label :initials %>
-  <%= f.text_field :initials, class: 'clearable' %>
-</div>
+  <div class='field text togglable'>
+    <%= f.label :initials %>
+    <%= f.text_field :initials, class: 'clearable' %>
+  </div>
 
-<div class='field text require'>
-  <%= f.label :name %>
-  <%= f.text_field :name, class: 'clearable' %>
-</div>
+  <div class='field text require'>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'clearable' %>
+  </div>
 
-<%= f.hidden_field :type %>
+  <%= f.hidden_field :entity_type %>
+</div>

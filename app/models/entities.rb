@@ -3,8 +3,7 @@ module Entities
   included do
     has_many :entities, -> { order('created_at ASC') }, dependent: :destroy, as: :entitieable do
       def prepare
-         self << Company.new if self.reject(&:person?).empty?
-        (self.size...MAX_ENTITIES).each { self << Person.new }
+        (self.size...MAX_ENTITIES).each { self.build }
       end
 
       def clean_up_form
@@ -24,5 +23,5 @@ module Entities
         end
     end
   end
-  MAX_ENTITIES = 3
+  MAX_ENTITIES = 2
 end

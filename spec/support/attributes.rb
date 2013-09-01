@@ -42,16 +42,26 @@ end
 
 def person_entity_attributes overrides = {}
   {
-    type: 'Person',
+    entity_type: 'Person',
     title: 'Mr',
     initials: 'W G',
     name: 'Grace'
   }.merge overrides
 end
 
+def company_entity_attributes overrides = {}
+  {
+    entity_type: 'Company',
+    title: '',
+    initials: '',
+    name: 'ICC'
+  }.merge overrides
+end
+
+
 def oval_person_entity_attributes overrides = {}
   {
-    type: 'Person',
+    entity_type: 'Person',
     title: 'Rev',
     initials: 'V W',
     name: 'Knutt'

@@ -38,6 +38,14 @@ describe Client do
     expect(page).to have_text 'Mr I Test'
   end
 
+  it '#updates shows company', js:true do
+    client = client_factory id: 1, human_id: 111, entities_attributes: { '0' => company_entity_attributes }
+    navigate_to_edit_page
+    expect(page).to have_text 'Company or person'
+    expect(page).to have_text 'ICC'
+    expect(page).to_not have_text 'Initials'
+  end
+
   def navigate_to_edit_page
     visit '/clients/'
     click_on 'Edit'
