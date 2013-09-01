@@ -5,10 +5,10 @@
 <h3>Person<span>&nbsp;<%= link_to 'or company', '#', class: 'toggle' %></span></h3>
 <div class='field text require'>
   <%= f.label :title %>
-  <%= f.text_field :title, class: 'clearable' %>
+  <%= f.text_field :title, class: 'clearable', required: true, label: '*' %>
 </div>
 
-<div class='field text require'>
+<div class='field text'>
   <%= f.label :initials %>
   <%= f.text_field :initials, class: 'clearable' %>
 </div>
