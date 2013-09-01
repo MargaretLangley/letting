@@ -69,7 +69,7 @@ describe Property do
   end
 
     def expect_property_has_original_attributes
-      expect(find_field('property_human_id').value).to have_text '8000'
+      expect(find_field('Property ID').value).to have_text '8000'
     end
 
     def expect_address_has_original_attributes
@@ -103,7 +103,7 @@ describe Property do
 
 
   def fill_in_form
-    fill_in 'property_human_id', with: '8001'
+    fill_in 'Property ID', with: '8001'
     fill_in_address
     fill_in_entity
     fill_in_bill_profile

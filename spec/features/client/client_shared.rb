@@ -4,7 +4,7 @@ require_relative '../shared/entity'
 
 def fill_in_form
 
-  fill_in 'client_human_id', with: '278'
+  fill_in 'Client ID', with: '278'
 
   within_fieldset 'client_address' do
     fill_in_address_nottingham

@@ -76,8 +76,8 @@ describe Property do
   end
 
     def fill_in_property
-      fill_in 'property_human_id', with: '278'
-      fill_in 'Client id', with: '2'
+      fill_in 'Property ID', with: '278'
+      fill_in 'Client ID', with: '2'
     end
 
 

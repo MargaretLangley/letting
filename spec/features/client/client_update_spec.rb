@@ -51,7 +51,7 @@ describe Client do
   end
 
     def expect_client_has_original_attributes
-      expect(find_field('client_human_id').value).to have_text '3003'
+      expect(find_field('Client ID').value).to have_text '3003'
     end
 
     def expect_address_has_original_attributes

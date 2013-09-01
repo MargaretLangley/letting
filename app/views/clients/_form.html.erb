@@ -6,7 +6,7 @@
     <h3>Client</h3>
     <div class='field text require half'>
       <%= f.label :human_id, 'Client ID' %>
-      <%= f.text_field :human_id %>
+      <%= f.text_field :human_id, autofocus:true %>
     </div>
 
     <%= render partial: 'shared/entities', locals: { f: f, entitieable: @client } %>

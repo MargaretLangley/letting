@@ -3,12 +3,12 @@
  <fieldset id='property' class='shell'>
       <h3>Property</h3>
     <div class='field text require half'>
-      <%= f.label :Property_ID %>
-      <%= f.text_field :human_id %>
+      <%= f.label :human_id,'Property ID' %>
+      <%= f.text_field :human_id, autofocus: true %>
     </div>
 
     <div class='field text require half'>
-      <%= f.label :client_id, 'Client id' %>
+      <%= f.label :client_id, 'Client ID' %>
       <%= f.text_field :client_id %>
     </div>
 
