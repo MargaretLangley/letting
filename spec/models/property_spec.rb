@@ -115,7 +115,6 @@ describe Property do
         property.billing_profile.use_profile = true
         expect(property.bill_to).to eq property.billing_profile
       end
-
     end
 
     context '#separate_billing_address?' do
@@ -131,17 +130,27 @@ describe Property do
     end
   end
 
-  context 'search' do
+context 'search' do
 
     p1 = p2 = p3 = c1 = nil
 
     before do
-      p1 = property_factory human_id: 1,
+      p1 = property_factory id:1, human_id: 1,
             address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' },
             entities_attributes: { "0" =>  { name: 'Knutt', title: 'Rev', initials: 'K V' } }
     end
 
+   it 'uses ordered ASC search' do
+      p3 = property_factory id: 3, human_id: 3,
+          address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' }
+      p2 = property_factory id: 2, human_id: 2,
+      address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' }
+      expect(Property.all).to eq [p1, p3, p2 ]
+      expect(Property.search 'Yor').to eq [p1,p2,p3]
+    end
+
     context '#search_by_house_name' do
+
       it 'matches just that house name' do
         p2 = property_factory human_id: 2,
               address_attributes: { house_name: 'Headingly' }
@@ -151,7 +160,7 @@ describe Property do
         expect(Property.search_by_house_name 'Headingly').to eq [p1, p2]
       end
 
-      it 'returns property addreses only (and not client etc)' do
+      it 'returns property addresses only (and not client etc)' do
         c1 = client_factory human_id: 1,
               address_attributes: { house_name: 'Headingly' }
         expect(Address.all.to_a).to eq [p1.address, c1.address]
@@ -164,16 +173,15 @@ describe Property do
         expect(Address.all.to_a).to eq [p1.address, p4.address]
         expect(Property.search_by_house_name 'eadin').to eq []
       end
-     end
+    end
 
-     context '#search' do
+    context '#search' do
 
       it 'exact number (human_id)' do
         p2 = property_factory human_id: 10
         expect(Property.all).to eq [p1, p2]
         expect(Property.search '1').to eq [p1]
       end
-
 
       it 'exact names' do
         p2 = property_factory human_id: 2,
@@ -189,12 +197,14 @@ describe Property do
           expect(Property.all).to eq [p1, p2]
           expect(Property.search 'Headi').to eq [p1]
         end
+
         it 'road name' do
           p2 = property_factory human_id: 2,
                 address_attributes: { house_name: 'Headingly', road: 'unknown' }
           expect(Property.all).to eq [p1, p2]
           expect(Property.search 'Kirstall').to eq [p1]
         end
+
         it 'towns' do
           p2 = property_factory human_id: 2,
                 address_attributes: { town: 'unknown' }
@@ -209,7 +219,6 @@ describe Property do
           expect(Property.search 'Yor').to eq [p1,p2]
         end
       end
-
      end
 
   end

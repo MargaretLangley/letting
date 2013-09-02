@@ -91,6 +91,7 @@ describe Client do
     end
   end
 
+# Note search automatically uses ordered ASC search
   context 'search' do
 
    c3 = c2 = c1 = nil
@@ -114,13 +115,12 @@ describe Client do
       expect(Client.search 'Yor').to eq [c1]
     end
 
-
     it 'entities names' do
       c2 = client_factory human_id: 102,
             address_attributes: { house_name: 'Headingly', road: 'unknown' },
-            entities_attributes: { '0' => { name: 'Gormless', title: 'Mr', initials: 'BJ' } }
+            entities_attributes: { '0' => { name: 'Hammond', title: 'Mr', initials: 'W' } }
       expect(Client.all).to eq [c1, c2]
-      expect(Client.search 'Gormless').to eq [c2]
+      expect(Client.search 'Hammond').to eq [c2]
     end
 
     it 'road name' do
@@ -130,11 +130,19 @@ describe Client do
       expect(Client.search 'Kirstall').to eq [c1]
     end
 
-    it 'multiple' do
+    it 'multiple uses ordered ASC search' do
       c2 = client_factory human_id: 102,
             address_attributes: { town: 'Yorks' }
       expect(Client.all).to eq [c1, c2]
-      expect(Client.search 'Yor').to eq [c1,c2]
+      expect(Client.search 'Yor').to eq [c2,c1]
+    end
+
+    it 'entities names' do
+      c2 = client_factory human_id: 102,
+            address_attributes: { house_name: 'Headingly', road: 'unknown' },
+            entities_attributes: { '0' => { name: 'Knutt', title: 'Mr', initials: 'KV' } }
+      expect(Client.all).to eq [c1, c2]
+      expect(Client.search 'Knutt').to eq [c2,c1]
     end
 
   end
