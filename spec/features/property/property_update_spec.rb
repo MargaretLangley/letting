@@ -30,7 +30,7 @@ describe Property do
   it '#update removes billing address' do
     property_factory_with_billing id: 1, human_id: 8000
     navigate_to_edit_page
-    uncheck 'Use profile'
+    uncheck 'Use Agent'
     click_on 'Update Property'
     navigate_to_property_page
     expect(page).to have_text 'Billing to property address'
@@ -137,7 +137,7 @@ describe Property do
 
       def check_use_billing_profile
         within_fieldset 'billing_profile' do
-          check 'Use profile'
+          check 'Use Agent'
         end
       end
 
