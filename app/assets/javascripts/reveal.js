@@ -23,6 +23,10 @@ $( document ).ready(function() {
     $(this).closest('fieldset').find('.clearable').prop('disabled', true)
   });
 
+  function findParentofRevealableElements(element) {
+    return element.closest('.reveal-parent');
+  }
+
   function noHiddenChildren(element) {
     return element.children('.revealable:hidden:first').length === 0;
   }
@@ -31,16 +35,12 @@ $( document ).ready(function() {
     return element.children('.revealable:hidden:first');
   }
 
-  function findParentofRevealableElements(element) {
-    return element.closest('.reveal-selection');
+  function anyVisibleChildren(element) {
+    return element.children('.revealable:visible:first').length > 0;
   }
 
   function toggleDisableable(element) {
     element.toggleClass('disabled');
-  }
-
-  function anyVisibleChildren(element) {
-    return element.children('.revealable:visible:first').length > 0;
   }
 
   function findClearable(element) {
