@@ -38,12 +38,12 @@ class Property < ActiveRecord::Base
   end
 
   def self.search_by_house_name(search)
-    Property.includes(:address).where('addresses.house_name LIKE ?', "#{search}").references(:address)
+    Property.includes(:address).where('addresses.house_name LIKE ?',"#{search}").references(:address)
   end
 
   def self.search search
     if search.blank?
-       Property.all.includes(:address)
+       Property.all.includes(:address).order('human_id ASC')
     else
       self.search_by_all(search)
     end
@@ -56,9 +56,9 @@ class Property < ActiveRecord::Base
               'entities.name ILIKE ? OR ' + \
               'addresses.house_name ILIKE ? OR ' + \
               'addresses.road ILIKE ? OR '  \
-              'addresses.town ILIKE ?',  \
+              'addresses.town ILIKE ?',\
               "#{search.to_i}", "#{search}%", "#{search}%", "#{search}%", "#{search}%" \
-              ).references(:address, :entity)
+              ).references(:address, :entity).order('human_id ASC')
     end
 
 end
