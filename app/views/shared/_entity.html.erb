@@ -2,7 +2,7 @@
 
     <div class='field text require'>
       <%= f.hidden_field :_destroy %>
-      <%= link_to 'X', '#', class:"hide-partial #{hide_if_first_record(index)}" %>
+      <%= link_to 'X', '#', class:"hide-link #{hide_if_first_record(index)}" %>
     </div>
     <div class='togglable <%= hide_field_on_start_by_entity_type record %>'>
       <h3>Person<span>&nbsp;<%= link_to 'or company', '#', class: 'toggle', data: { :'model-type-to' => 'Company' } %></span></h3>
