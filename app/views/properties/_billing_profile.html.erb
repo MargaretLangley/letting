@@ -5,18 +5,18 @@
       <h3>BILLING ADDRESS</h3>
       <fieldset>
         <%= f.check_box :use_profile, class: 'checkbox-toggle' %>
-        <%= f.label :use_profile %>
+        <%= f.label :use_profile, 'Use Agent' %>
       </fieldset>
     </div>
 
     <div id='blank_slate' class='togglable blank_slate_overlay'>
-         Billing is to the above property address. If the bill should go to an agent click the 'Use profile' checkbox and fill in the billing address.
-     </div>
+         Billing is to the above property address. If the bill should go to an agent click the 'Use Agent' checkbox and fill in the billing address.
+    </div>
 
-   <div class='togglable'>
     <h3>Agent</h3>
 
-      <%= render partial: 'billing_no_agent' %>
+    <div class='togglable'>
+       <%= render partial: 'billing_no_agent' %>
     </div>
 
     <div class='togglable revealable' id = "agent_entity">

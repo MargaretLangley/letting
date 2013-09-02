@@ -94,7 +94,7 @@ describe Property do
     end
 
     def fill_in_billing_profile_address
-      check 'Use profile'
+      check 'Use Agent'
       within_fieldset 'billing_profile' do
         fill_in 'Flat no', with: '555'
         fill_in 'House name', with: 'The County Ground'
