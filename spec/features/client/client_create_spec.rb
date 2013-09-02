@@ -22,6 +22,26 @@ describe Client do
     expect(page).to have_text 'The client could not be saved.'
   end
 
+
+  it '#creates company', js: true do
+    navigate_to_create_page
+    validate_page
+    fill_in 'Client ID', with: '278'
+    click_on 'or company'
+    within_fieldset 'client_entity_0' do
+      fill_in 'Name', with: 'ICC'
+    end
+
+    within_fieldset 'client_address' do
+      fill_in_address_nottingham
+    end
+
+    click_on 'Create Client'
+    expect_clients_page
+    navigate_to_client_page '278'
+    expect(page).to have_text 'Company Name: ICC'
+  end
+
   it '#adds and removes new persons', js: true do
     navigate_to_create_page
     fill_in_form
@@ -33,8 +53,13 @@ describe Client do
     click_on 'Add Person'
     expect(page.all('h3', text: 'Person or company').count).to eq 2
     within_fieldset 'client_entity_1' do
-      # expect(find_field('Name').value).to be_blank
+      expect(find_field('Name').value).to be_blank
     end
+  end
+
+  it '#shows person by default', js:true do
+    navigate_to_create_page
+    expect(page).to have_text 'Person or company'
   end
 
   it 'swiches between company and person', js:true do

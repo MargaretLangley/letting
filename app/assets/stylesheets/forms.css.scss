@@ -24,11 +24,19 @@ a.disabled {
   cursor: default;
 }
 
+@mixin top {
+  margin-top: 1.5%;
+  border-top: 1px solid $background-filler;
+}
+
+.top {
+  @include top;
+}
+
 fieldset {
   background-color: $fieldset-color;
   border: 0;
-  border-bottom: 1px solid $background-filler;
-  margin-bottom: 1.5%;
+  @include top;
 
   &.shell  {
     margin: 0 0 2% 0;
@@ -162,7 +170,7 @@ input[type="submit"].under-input {
   }
 }
 
- a.remove-fields, a.hide-partial {
+ a.remove-fields, a.hide-link {
   @include button-base;
   @include small-button-base;
   float:right;

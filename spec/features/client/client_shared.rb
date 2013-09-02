@@ -6,12 +6,12 @@ def fill_in_form
 
   fill_in 'Client ID', with: '278'
 
-  within_fieldset 'client_address' do
-    fill_in_address_nottingham
-  end
-
   within_fieldset 'client_entity_0' do
     fill_in_entity_wg_grace
+  end
+
+  within_fieldset 'client_address' do
+    fill_in_address_nottingham
   end
 
 end

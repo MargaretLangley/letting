@@ -4,6 +4,7 @@ module Entities
     has_many :entities, -> { order('created_at ASC') }, dependent: :destroy, as: :entitieable do
       def prepare
         (self.size...MAX_ENTITIES).each { self.build }
+        self.each {|entity| entity.prepare }
       end
 
       def clean_up_form

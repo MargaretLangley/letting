@@ -8,6 +8,8 @@ def add_entity entity_me, args = {}
     entity_me.entities.build person_entity_attributes
   else
     entity_me.entities.build person_entity_attributes args[:entities_attributes]['0']
+    entity_me.entities.build person_entity_attributes args[:entities_attributes]['1'] \
+       if args[:entities_attributes]['1'].present?
   end
 end
 

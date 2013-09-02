@@ -7,7 +7,7 @@
      </p>
      <p>
     <% @client.entities.each do |entity| %>
-      <span style='float: left; width:30%;'>Name</span><span style='display: inline-block;'><%= render 'shared/show_entity', object: entity %></span>
+      <span style='float: left; width:30%;'><%= heading entity %></span><span style='display: inline-block;'><%= render 'shared/show_entity', object: entity %></span>
       <% end %>
     </p>
     <h3>Address</h3>

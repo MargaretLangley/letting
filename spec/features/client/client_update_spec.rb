@@ -38,13 +38,33 @@ describe Client do
     expect(page).to have_text 'Mr I Test'
   end
 
+  it '#updates deletes a second entity', js:true do
+    client = client_factory id: 1, human_id: 3003, \
+      entities_attributes: { '0' => person_entity_attributes, '1' => oval_person_entity_attributes }
+    navigate_to_edit_page
+    click_on 'X'
+    click_on 'Update Client'
+    navigate_to_client_page '3003'
+    expect(page).to_not have_text 'Knutt'
+  end
+
   it '#updates shows company', js:true do
-    client = client_factory id: 1, human_id: 111, entities_attributes: { '0' => company_entity_attributes }
+    client_factory id: 1, human_id: 111, \
+      entities_attributes: { '0' => company_entity_attributes }
     navigate_to_edit_page
     expect(page).to have_text 'Company or person'
-    expect(page).to have_text 'ICC'
+    expect(find_field('Name').value).to have_text 'ICC'
     expect(page).to_not have_text 'Initials'
   end
+
+  it '#updates shows person', js:true do
+    client_factory id: 1, human_id: 111
+    navigate_to_edit_page
+    expect(page).to have_text 'Person or company'
+    expect(find_field('Name').value).to have_text 'Grace'
+    expect(page).to have_text 'Initials'
+  end
+
 
   def navigate_to_edit_page
     visit '/clients/'
