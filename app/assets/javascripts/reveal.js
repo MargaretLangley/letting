@@ -9,20 +9,19 @@ $( document ).ready(function() {
 
   $('.hide-link').click(function(event) {
     event.preventDefault();
-    $(this).closest('.revealable').slideToggle('fast');
-    findClearable($(this).closest('.revealable')).val("");;
+    $(this).closest('fieldset').slideToggle('fast');
+    $(this).closest('fieldset').find('.clearable').val('');
     var selection = findParentofRevealableElements($(this));
     if(anyVisibleChildren(selection)) {
       toggleDisableable($(selection).children('.reveal-link'));
      }
-    $(this).prev('input[type=hidden]').val('1')
-    console.log( $(this).prev('input[type=hidden]').val() );
   });
 
-
-  // $('.destroy-link').click(function(event)) {
-  //   event.preventDefault();
-  // }
+  $('.destroy-link').click(function(event) {
+    event.preventDefault();
+    $(this).prev('input[type=hidden]').val('1')
+    $(this).closest('fieldset').find('.clearable').prop('disabled', true)
+  });
 
   function noHiddenChildren(element) {
     return element.children('.revealable:hidden:first').length === 0;
