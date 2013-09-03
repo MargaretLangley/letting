@@ -135,7 +135,7 @@ context 'search' do
   p1 = p2 = p3 = c1 = nil
 
     before do
-      p1 = property_factory id:1, human_id: 1,
+      p1 = property_factory human_id: 1,
             address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' },
             entities_attributes: { "0" =>  { name: 'Knutt', title: 'Rev', initials: 'K V' } }
     end
