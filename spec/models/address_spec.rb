@@ -20,15 +20,6 @@ describe Address do
       it('#road')    { address.road =nil; expect(address).not_to be_valid }
     end
 
-    it('#road_no')    { address.road_no =nil; address.house_name = 'my house'; expect(address).to be_valid }
-    it('#house_name') { address.house_name =nil; expect(address).to be_valid }
-
-    it('#road_no & #house_name') do
-      address.road_no =nil
-      address.house_name =nil
-      expect(address).to_not be_valid
-    end
-
     it ('flat_no can be blank')       { address.flat_no = '';expect(address).to be_valid }
     it ('flat_no has maximum length') { address.flat_no = 'a' * 11; expect(address).to_not be_valid }
 
