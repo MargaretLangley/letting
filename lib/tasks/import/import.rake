@@ -12,7 +12,7 @@ namespace :db do
     'db:truncate_all',   # Stripped out for now but when in parellell with live system. nope
     'import:clients',
     'import:properties',
-    'import:billing_profile',
+    'import:billing_profiles',
     'import:charges'
   ]
 
