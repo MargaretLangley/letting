@@ -28,7 +28,7 @@ describe Charge do
 
     it 'prepares to display by creating extra due_ons' do
       charge.prepare
-      expect(charge.due_ons).to have(4).items
+      expect(charge.due_ons).to have(12).items
     end
 
     it 'on marks for distruction empty items' do

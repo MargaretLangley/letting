@@ -6,25 +6,31 @@ require_relative '../../../lib/import/import_charge'
 
 module DB
   describe ImportCharge do
-    it "One row" do
+    it 'One row' do
       property_factory
       expect{ ImportCharge.import Import.csv_table('acc_info', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges') }.to \
         change(Charge, :count).by 1
     end
 
-    it "fails if property doesn't exist" do
+    it 'fails if property does not exist' do
       $stdout.should_receive(:puts).with(/human_id: 2002 - Not found/)
       expect{ ImportCharge.import Import.csv_table('acc_info', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges') }.to \
       raise_error ActiveRecord::RecordNotFound
     end
 
-    it "One row, 2 Entities" do
+    it 'One row, 2 DueOns' do
       property_factory
       expect{ ImportCharge.import Import.csv_table('acc_info', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges') }.to \
         change(DueOn, :count).by 2
     end
 
-    it "Not double import" do
+    it 'One monthly row, 12 DueOns' do
+      property_factory
+      expect{ ImportCharge.import Import.csv_table('acc_info_monthly', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges') }.to \
+        change(DueOn, :count).by 12
+    end
+
+    it 'Not double import' do
       property_factory
       ImportCharge.import Import.csv_table('acc_info', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges')
       expect{ ImportCharge.import Import.csv_table('acc_info', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges') }.to \

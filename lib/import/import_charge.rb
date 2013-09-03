@@ -6,6 +6,7 @@ module DB
   class ImportCharge < ImportBase
 
     DueInCodeToString  = { '0'  => 'Advance', '1' => 'Arrears', 'M' => 'MidTerm'}
+    MONTHS_IN_YEAR = 12
 
     def initialize contents, patch
       super Charge, contents, patch
@@ -27,11 +28,31 @@ module DB
     end
 
     def assign_due_ons row
-      max_dates = ChargeValues.from_code(row[:charge_type]).max_dates_per_year
-      @model_to_assign.due_ons.to_a.take(max_dates).\
-          each_with_index do |due_on, index|
-        assign_due_on due_on, day_month_from_row_columns(index + 1, row)
+      day_months = []
+      if monthly_charge? row
+         monthly_charge = day_month_from_row_columns 1, row
+        (1..MONTHS_IN_YEAR).each {|index| day_months <<  DayMonth.from_day_month( monthly_charge.day, index ) }
+      else
+        (1..maximum_dates(row)).each {|index| day_months <<  day_month_from_row_columns( index, row ) }
+        (maximum_dates(row)..MONTHS_IN_YEAR).each {|index| day_months << DayMonth.from_day_month( 0,0 ) }
       end
+
+      @model_to_assign.due_ons.each_with_index do |due_on, index|
+        assign_due_on due_on, day_months[index]
+      end
+    end
+
+    def assign_due_on due_on, day_month
+      due_on.attributes = { day: day_month.day, month: day_month.month } \
+                                  unless ignored_date_combination day_month
+    end
+
+    def maximum_dates row
+      ChargeValues.from_code(row[:charge_type]).max_dates_per_year
+    end
+
+    def monthly_charge? row
+      (day_month_from_row_columns 1, row).month == 0
     end
 
     def day_month_from_row_columns number, row
@@ -40,10 +61,6 @@ module DB
             row[:"month_#{number}"].to_i
     end
 
-    def assign_due_on due_on, day_month
-      due_on.attributes = { day: day_month.day, month: day_month.month } \
-      unless ignored_date_combination day_month
-    end
 
     def ignored_date_combination day_month
       # import data using 0 and -1 to mean null
