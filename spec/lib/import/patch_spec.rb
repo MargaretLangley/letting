@@ -42,6 +42,7 @@ module DB
 
     context 'Property' do
       it 'works on property' do
+        client_factory human_id: 11
         ImportProperty.import   \
         Import.csv_table('properties', headers: ImportFields.property, drop_rows: 34, location: 'spec/fixtures/import_data/properties'), \
         Patch.import(Property, Import.csv_table('properties_patch', headers: ImportFields.property, location: 'spec/fixtures/import_data/patch'))
