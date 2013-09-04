@@ -4,7 +4,7 @@
       <th class='alnright'>
         ID
       </th>
-      <th>
+      <th class='alnright'>
         Cl
       </th>
        <th>
@@ -38,7 +38,7 @@
       <td class='alnright'>
         <%= link_to property.human_id, property %>
       </td>
-      <td>
+      <td class='alnright'>
         <%=property.client_id%>
       </td>
       <td>
@@ -54,7 +54,7 @@
         <%= property.address.road_no %>
       </td>
       <td>
-        <%= property.address.road %>
+        <%= link_to property.address.road, edit_property_path(property) %>
       </td>
       <td>
         <%= property.address.town %>
