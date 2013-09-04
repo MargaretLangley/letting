@@ -1,6 +1,7 @@
 @import "colors";
 
 body {
+  background: $primary-background-color;
   color: $primary-text-color;
   /*background-image: image-url("background.jpg");*/
   font-family: "Helvetica Neue", Helvetica, Arial;
