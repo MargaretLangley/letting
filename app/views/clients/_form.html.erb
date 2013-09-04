@@ -1,26 +1,22 @@
 <%= form_for @client do |f| %>
 
   <%= render 'shared/errors', object: @client %>
-
   <fieldset id='client' class='shell'>
+
     <h3>Client</h3>
+
     <div class='field text require half'>
       <%= f.label :human_id, 'Client ID' %>
       <%= f.text_field :human_id, autofocus:true %>
     </div>
 
     <%= render partial: 'shared/entities', locals: { f: f, entitieable: @client } %>
-
-    <%= f.fields_for :address do |builder| %>
-      <%= render partial: 'shared/address', locals: { f: builder, parent: 'client' } %>
-    <% end %>
+    <%= render partial: 'shared/address', locals: { f: f, parent: 'client' } %>
 
   </fieldset>
 
   <div>
-    <p>
-      <%= f.submit %>
-    </p>
+    <%= f.submit %>
   </div>
 
 <% end %>

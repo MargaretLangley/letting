@@ -1,0 +1,6 @@
+<h3>Due Date</h3>
+<% due_ons.to_a.take(DueOns::MAX_DISPLAYED_DUE_ONS).each.with_index do |due_on,due_on_index| %>
+  <%= f.fields_for :due_ons, due_on do |builder| %>
+    <%= render partial: 'due_on', locals: { f: builder, due_on: due_on, parent: "property_charge_#{f.options[:child_index] }" } %>
+  <% end %>
+<% end %>

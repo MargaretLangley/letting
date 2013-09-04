@@ -4,7 +4,7 @@
     <%= link_to 'X', '#', class:'remove-fields', data:{confirm:'Are you sure?'} %>
   </div>
 
-  <h2>Charge <%= index + 1 %></h2>
+  <h2>Charge <%= f.options[:child_index]  + 1 %></h2>
   <div class='field text'>
     <%= f.label :charge_type %>
     <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
@@ -20,11 +20,15 @@
     <%= f.text_field :amount %>
   </div>
 
-  <h3>Due Date</h3>
-  <% charge.due_ons.to_a.take(DueOns::MAX_DISPLAYED_DUE_ONS).each.with_index do |due_on,due_on_index| %>
-    <%= f.fields_for :due_ons, due_on do |builder| %>
-      <%= render partial: 'due_on', locals: { f: builder, due_on: due_on, parent: "property_charge_#{index}", index: due_on_index } %>
-    <% end %>
-  <% end %>
+
+  <div class="grid">
+  <div class="col-1-2">
+    <%= render partial: 'due_ons', locals: { f: f, due_ons: charge.due_ons } %>
+  </div>
+  <div class="col-1-2">
+    <p>or monthly</p>
+  </div>
+</div>
+
 
 </fieldset>

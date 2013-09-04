@@ -1,11 +1,12 @@
+<%= f.fields_for :billing_profile do |b| %>
 <fieldset id='billing_profile' class='shell'>
   <div class='selection'>
 
     <div>
       <h3>BILLING ADDRESS</h3>
       <fieldset>
-        <%= f.check_box :use_profile, class: 'checkbox-toggle' %>
-        <%= f.label :use_profile, 'Use Agent' %>
+        <%= b.check_box :use_profile, class: 'checkbox-toggle' %>
+        <%= b.label :use_profile, 'Use Agent' %>
       </fieldset>
     </div>
 
@@ -20,12 +21,11 @@
     </div>
 
     <div class='togglable revealable' id = "agent_entity">
-      <%= render partial: 'shared/entities', locals: { f: f, entitieable: @property.billing_profile } %>
+      <%= render partial: 'shared/entities', locals: { f: b, entitieable: @property.billing_profile } %>
     </div>
     <div class='togglable revealable' id = "agent_address">
-      <%= f.fields_for :address do |builder| %>
-        <%= render partial: 'shared/address', locals: { f: builder, parent: 'property_billing_profile' } %>
-      <% end %>
+      <%= render partial: 'shared/address', locals: { f: b, parent: 'property_billing_profile' } %>
     </div>
   </div>
 </fieldset>
+<% end %>

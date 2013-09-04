@@ -1,7 +1,9 @@
 <%= form_for @property do |f| %>
   <%= render 'shared/errors', object: @property %>
- <fieldset id='property' class='shell'>
-      <h3>Property</h3>
+  <fieldset id='property' class='shell'>
+
+    <h3>Property</h3>
+
     <div class='field text require half'>
       <%= f.label :human_id,'Property ID' %>
       <%= f.text_field :human_id, autofocus: true %>
@@ -13,19 +15,13 @@
     </div>
 
     <%= render partial: 'occupier', locals: { f: f, entitieable: @property } %>
-
-    <%= f.fields_for :address do |builder| %>
-      <%= render partial: 'shared/address', locals: { f: builder, parent: 'property' } %>
-    <% end %>
+    <%= render partial: 'shared/address', locals: { f: f, parent: 'property' } %>
 
   </fieldset>
 
-  <%= f.fields_for :billing_profile do |builder| %>
-    <%= render partial: 'billing_profile', locals: { f: builder } %>
-  <% end %>
-
+  <%= render partial: 'billing_profile', locals: { f: f } %>
   <%= render partial: 'charges', locals: { f: f, charges: @property.charges } %>
-    <p>
-      <%= f.submit %>
-    </p>
+  <div>
+    <%= f.submit %>
+  </div>
 <% end %>
