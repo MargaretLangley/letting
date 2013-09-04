@@ -5,7 +5,7 @@ require_relative 'day_month'
 module DB
   class ImportCharge < ImportBase
 
-    DueInCodeToString  = { '0'  => 'Advance', '1' => 'Arrears', 'M' => 'MidTerm'}
+    DueInCodeToString  = { '0'  => 'Arrears', '1' => 'Advance', 'M' => 'MidTerm'}
     MONTHS_IN_YEAR = 12
 
     def initialize contents, patch
