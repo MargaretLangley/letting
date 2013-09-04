@@ -22,6 +22,6 @@
   <%= render partial: 'billing_profile', locals: { f: f } %>
   <%= render partial: 'charges', locals: { f: f, charges: @property.charges } %>
   <div>
-    <%= f.submit %>
+    <%= f.submit %><%= link_to 'Cancel', properties_path %>
   </div>
 <% end %>

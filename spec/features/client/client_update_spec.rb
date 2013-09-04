@@ -65,6 +65,18 @@ describe Client do
     expect(page).to have_text 'Initials'
   end
 
+  it 'you can cancel without changing' do
+    client_factory id: 1, human_id: 3003
+    navigate_to_edit_page
+    within_fieldset 'client_entity_0' do
+      fill_in 'Title', with: 'Mr'
+      fill_in 'Name',  with: 'Whistleblower'
+    end
+    click_on 'Cancel'
+    expect(current_path).to eq '/clients'
+    navigate_to_client_page '3003'
+    expect(page).to have_text 'Mr W G Grace'
+  end
 
   def navigate_to_edit_page
     visit '/clients/'
@@ -95,7 +107,6 @@ describe Client do
       end
     end
 
-
   def expect_clients_page
     expect(current_path).to eq '/clients'
     expect(page).to have_text 'CLIENT SUCCESSFULLY UPDATED!'
@@ -108,4 +119,6 @@ describe Client do
       expect(page).to_not have_text '294'
       expect(page).to have_text '63c'
     end
+
+
 end
