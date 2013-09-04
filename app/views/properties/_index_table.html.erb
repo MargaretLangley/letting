@@ -4,8 +4,11 @@
       <th class='alnright'>
         ID
       </th>
-      <th class='alnright'>
+      <th>
         Cl
+      </th>
+       <th>
+        Name
       </th>
       <th class='alnright'>
         No
@@ -37,6 +40,9 @@
       </td>
       <td>
         <%=property.client_id%>
+      </td>
+      <td>
+        <%= format_empty_string_as_dash property.entities.first.name %>
       </td>
       <td class='alnright'>
         <%= format_empty_string_as_dash property.address.flat_no %>
