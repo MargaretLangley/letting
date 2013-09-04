@@ -23,5 +23,6 @@ module DueOns
       end
     end
   end
+  MAX_DISPLAYED_DUE_ONS = 4
   MAX_DUE_ONS = 12
 end
