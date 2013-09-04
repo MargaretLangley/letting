@@ -183,3 +183,11 @@ input[type="submit"].under-input {
 .revealable {
   display: none;
 }
+
+.simple
+{
+   @include button-base;
+   padding:2px 20px;
+      border: 1px solid $subdued-color;
+   float:right;
+ }
