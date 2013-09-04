@@ -33,7 +33,7 @@
         <%= link_to client.human_id, client %>
       </td>
       <td>
-        <%= client.entities.first.initials %>
+        <%= format_empty_string_as_dash client.entities.first.initials %>
       </td>
       <td>
         <%= client.entities.first.name %>
