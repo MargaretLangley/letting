@@ -30,6 +30,8 @@ Shared:
       ✔ Length of lines shorter for postcode, flat no, road no @done (13-08-17 20:50)
 
   Entity
+    IMPORT:
+    ✔ Initials moved into Name if limited company @done (13-09-04 15:00)
     Model:
     ✔ Entity (People) @done (13-07-28 23:38)
     ✔ Entity (company) @done (13-09-04 12:11)

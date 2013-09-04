@@ -22,14 +22,36 @@ module DB
     end
 
     def assign_entity entity, number, row
-      entity.attributes = { entity_type:  entity_type(row),
-                            title:        row[:"title#{number}"],
-                            initials:     row[:"initials#{number}"],
-                            name:         row[:"name#{number}"] }
+      if person? row, number
+        assign_person entity, number, row
+      else
+        assign_company entity, number, row
+      end
     end
 
-    def entity_type row
-      row[:'title1'].present? ? 'Person' : 'Company'
+    def assign_person entity, number, row
+      entity.attributes = { entity_type:  entity_type(row, number),
+                              title:        row[:"title#{number}"],
+                              initials:     row[:"initials#{number}"],
+                              name:         row[:"name#{number}"] }
+    end
+
+    def assign_company entity, number, row
+      name = "#{row[:"title#{number}"]} #{row[:"initials#{number}"]} " + \
+             "#{row[:"name#{number}"]}"
+      entity.attributes = { entity_type:  entity_type(row, number),
+                            title:        '',
+                            initials:     '',
+                            name:         name.strip }
+    end
+
+    def entity_type row, number
+      person?(row, number) ? 'Person' : 'Company'
+    end
+
+    def person? row, number
+      ( row[:"title#{number}"].present? || row[:"title#{number}"].present? ) \
+        && row[:"title#{number}"].exclude?('Ltd')
     end
 
     def clean_contact contactable

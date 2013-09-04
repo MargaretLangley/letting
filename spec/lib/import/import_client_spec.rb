@@ -57,8 +57,16 @@ module DB
             change(Entity, :count).by -1
         end
       end
+
+      context 'In odd state' do
+        it 'concats a company with intials' do
+          ImportClient.import Import.csv_table 'clients_company_with_initials', headers: ImportFields.client, location: 'spec/fixtures/import_data/clients'
+          expect(Entity.first.name).to eq 'A D Example Ltd'
+        end
+      end
     end
   end
 
 
 end
+
