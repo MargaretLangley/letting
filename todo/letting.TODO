@@ -32,7 +32,7 @@ Shared:
   Entity
     Model:
     ✔ Entity (People) @done (13-07-28 23:38)
-    ☐ Entity (company)
+    ✔ Entity (company) @done (13-09-04 12:11)
     ✔ Multiple Entities in testing @done (13-07-31 16:30)
     ✔ Title, Initials, Name length validations @done (13-08-17 10:49)
     Partial:
@@ -41,6 +41,6 @@ Shared:
   Requirements:
     ✔ entities before addresses (except on the property) @done (13-08-18 08:54)
     ✔ district text box invisible till click add district @done (13-08-18 08:53)
-    ☐ Billing profile disabled if use profile is disabled
-    ☐ Use profile label => Use Billing Address
+    ✔ Billing profile disabled if use profile is disabled @done (13-09-04 12:11)
+    ✔ Use profile label => Use Billing Address @done (13-09-04 12:11)
     ✔ Post code shorter than other text boxes @done (13-08-17 20:50)
