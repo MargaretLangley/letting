@@ -6,10 +6,10 @@ $( document ).ready(function() {
     doToggle($(this));
   });
 
-  function doToggle(element) {
-    var toggleSelection = element.closest('.toggle-selection');
+  function doToggle(toggle) {
+    var toggleSelection = toggle.closest('.toggle-selection');
     togglableChildren(toggleSelection).slideToggle('fast');
-    toggleSelection.children('.model_type').val(element.data('model-type-to'));
+    toggle.trigger('testEventHandler');
   }
 
   $('.checkbox-toggle').click(function(event) {
@@ -24,6 +24,14 @@ $( document ).ready(function() {
   function onWindowLoad() {
     $('.toggleOnStart').toggle();
   }
+
+
+   // this custom event is to separate the entity specific code from
+   // the toggle code.
+   $('.entity-event').on('testEventHandler', function() {
+      var toggleSelection = $(this).closest('.toggle-selection');
+      toggleSelection.children('.model_type').val($(this).data('model-type-to'));
+   });
 
   $(onWindowLoad);
 

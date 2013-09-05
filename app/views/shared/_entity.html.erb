@@ -5,10 +5,10 @@
       <%= link_to 'X', '#', class:"#{hide_or_destroy record} #{hide_if_first_record(index)}" %>
     </div>
     <div class='togglable <%= hide_field_on_start_by_entity_type record %>'>
-      <h3>Person<span>&nbsp;<%= link_to 'or company', '#', class: 'toggle', data: { :'model-type-to' => 'Company' } %></span></h3>
+      <h3>Person<span>&nbsp;<%= link_to 'or company', '#', class: 'toggle entity-event', data: { :'model-type-to' => 'Company' } %></span></h3>
     </div>
     <div class='togglable revealable <%= hide_field_on_start_by_entity_type record %>'>
-      <h3>Company<span>&nbsp;<%= link_to 'or person', '#', class: 'toggle', data: { :'model-type-to' => 'Person' } %></span></h3>
+      <h3>Company<span>&nbsp;<%= link_to 'or person', '#', class: 'toggle entity-event', data: { :'model-type-to' => 'Person' } %></span></h3>
     </div>
     <%= f.hidden_field :entity_type, class: 'model_type' %>
 
