@@ -7,9 +7,9 @@ $( document ).ready(function() {
   });
 
   function doToggle(element) {
-    var selection = element.closest('.toggle-selection');
-    togglableChildren(selection).slideToggle('fast');
-    selection.children('.model_type').val(element.data('model-type-to'));
+    var toggleSelection = element.closest('.toggle-selection');
+    togglableChildren(toggleSelection).slideToggle('fast');
+    toggleSelection.children('.model_type').val(element.data('model-type-to'));
   }
 
   $('.checkbox-toggle').click(function(event) {
