@@ -5,7 +5,7 @@ require_relative '../shared/entity'
 describe Client do
 
   it '#updates', js: true do
-    client_factory id: 1, human_id: 3003
+    client_factory human_id: 3003
     navigate_to_edit_page
     validate_page
     fill_in_form
@@ -25,7 +25,7 @@ describe Client do
   end
 
   it '#updates adds second entity', js: true do
-    client_factory id: 1, human_id: 3003
+    client_factory human_id: 3003
     navigate_to_edit_page
     click_on 'Add Person'
     within_fieldset 'client_entity_1' do
@@ -40,7 +40,7 @@ describe Client do
   end
 
   it '#updates deletes a second entity', js:true do
-    client = client_factory id: 1, human_id: 3003, \
+    client = client_factory human_id: 3003, \
       entities_attributes: { '0' => person_entity_attributes, '1' => oval_person_entity_attributes }
     navigate_to_edit_page
     click_on 'X'
@@ -50,7 +50,7 @@ describe Client do
   end
 
   it '#updates shows company', js:true do
-    client_factory id: 1, human_id: 111, \
+    client_factory human_id: 111, \
       entities_attributes: { '0' => company_entity_attributes }
     navigate_to_edit_page
     expect(page).to have_text 'Company or person'
@@ -59,7 +59,7 @@ describe Client do
   end
 
   it '#updates shows person', js:true do
-    client_factory id: 1, human_id: 111
+    client_factory human_id: 111
     navigate_to_edit_page
     expect(page).to have_text 'Person or company'
     expect(find_field('Name').value).to have_text 'Grace'
@@ -67,7 +67,7 @@ describe Client do
   end
 
   it 'you can cancel without changing' do
-    client_factory id: 1, human_id: 3003
+    client_factory human_id: 3003
     navigate_to_edit_page
     within_fieldset 'client_entity_0' do
       fill_in 'Title', with: 'Mr'
