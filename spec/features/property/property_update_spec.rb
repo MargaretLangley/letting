@@ -43,7 +43,6 @@ describe Property do
     within_fieldset 'property_charge_0' do
       click_on 'X'
     end
-    puts page.driver.error_messages
     click_on 'Update Property'
     navigate_to_property_page
     expect(page).to_not have_text 'Ground Rent'
