@@ -19,16 +19,5 @@
     <%= f.label :amount %>
     <%= f.text_field :amount %>
   </div>
-
-
-  <div class="grid">
-  <div class="col-1-2">
-    <%= render partial: 'due_ons', locals: { f: f, due_ons: charge.due_ons } %>
-  </div>
-  <div class="col-1-2">
-    <p>or monthly</p>
-  </div>
-</div>
-
-
+  <%= render partial: 'due_ons', locals: { f: f, due_ons: charge.due_ons } %>
 </fieldset>
