@@ -9,6 +9,7 @@ describe Property do
     validate_page
     fill_in_form
     click_on 'Create Property'
+    expect(page).to_not have_text"The property could not be saved."
     have_we_saved?
     expect_properties_page
     navigate_to_property_page
