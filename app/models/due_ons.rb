@@ -10,6 +10,10 @@ module DueOns
         self.all?(&:empty?)
       end
 
+      def per_month?
+        self.reject(&:empty?).size == MAX_DUE_ONS
+      end
+
       def clean_up_form
         destruction_if :empty?
       end

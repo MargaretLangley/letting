@@ -3,6 +3,7 @@ require 'spec_helper'
 describe DueOns do
 
   let(:due_ons) { property_factory.charges.build.due_ons }
+  let(:charge) { Charge.new charge_type: 'ground_rent', due_in: 'advance', amount: 500.50, property_id: 1 }
 
   it '#prepare' do
     expect(due_ons).to have(0).items
@@ -37,7 +38,22 @@ describe DueOns do
     end
   end
 
+  context '#per month?' do
+    it 'knows when the charge is not per month' do
+      charge.due_ons.build day: 1, month: 1, charge_id: 1
+      expect(charge.due_ons.per_month?).to be_false
+    end
+    it 'knows when the charge is not per month' do
+      (1..12).each { charge.due_ons.build day: 1, month: 1, charge_id: 1 }
+      expect(charge.due_ons.per_month?).to be_true
+    end
 
+    it 'max displayed dueons does not make it per month' do
+      (1..4).each { charge.due_ons.build day: 1, month: 1, charge_id: 1 }
+      (5..12).each { charge.due_ons.build }
+      expect(charge.due_ons.per_month?).to be_false
+    end
+  end
 
 
 
