@@ -2,6 +2,7 @@ class ClientsController < ApplicationController
 
   def index
      @clients = Client.search(params[:search]).page(params[:page]).load
+     #client_path(the-searchrest.id)
      end
 
   def show
@@ -16,7 +17,7 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new clients_params
     if @client.save
-      redirect_to clients_path, notice: 'Client successfully created!'
+      redirect_to clients_path, notice: "#{@client.human_id} client successfully created!"
     else
       @client.prepare_for_form
       render :new
@@ -31,7 +32,7 @@ class ClientsController < ApplicationController
   def update
     @client = Client.find params[:id]
     if @client.update clients_params
-      redirect_to clients_path, notice: 'Client successfully updated!'
+      redirect_to clients_path, notice: "#{@client.human_id} client successfully updated!"
     else
       render :edit
     end
@@ -41,7 +42,7 @@ class ClientsController < ApplicationController
   def destroy
     @client = Client.find(params[:id])
     @client.destroy
-    redirect_to clients_path, alert: 'Client successfully deleted!'
+    redirect_to clients_path, alert: "#{@client.human_id} client successfully deleted!"
   end
 
   private

@@ -7,8 +7,7 @@ describe Client do
     visit '/clients'
     expect(page).to have_text '9000'
     expect{ click_on 'Delete'}.to change(Client, :count).by -1
-    expect(page).not_to have_text '9000'
-    expect(page).to have_text 'Client successfully deleted!'
+    expect(page).to have_text '9000 client successfully deleted!'
     expect(current_path).to eq '/clients'
   end
 end

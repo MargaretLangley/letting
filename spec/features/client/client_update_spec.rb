@@ -5,7 +5,7 @@ require_relative '../shared/entity'
 describe Client do
 
   it '#updates', js: true do
-    client_factory human_id: 3003
+    client_factory id: 1, human_id: 3003
     navigate_to_edit_page
     validate_page
     fill_in_form
@@ -89,6 +89,7 @@ describe Client do
     expect_client_has_original_attributes
     expect_address_has_original_attributes
     expect_entity_has_original_attributes
+
   end
 
     def expect_client_has_original_attributes
