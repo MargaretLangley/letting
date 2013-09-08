@@ -199,51 +199,38 @@ describe Property do
 
     context '#charge' do
 
-      it '#adds date charge', js: true do
+      it '#adds date charge' do
         property = property_factory id: 1, human_id: 8000
         navigate_to_edit_page
         fill_in_charge
+        fill_in_due_on_on_date
         update_then_expect_properties_page
         navigate_to_property_view_page
         expect(page).to have_text 'Service Charge Arrears £100.08'
       end
 
-        def expect_new_charge
-          expect(page).to have_text 'Service Charge'
-          expect(page).to have_text 'Arrears'
-          expect(page).to have_text '100.08'
-        end
-
-          def fill_in_charge
-            within_fieldset 'property_charge_0' do
-              fill_in 'Charge type', with: 'Service Charge'
-              fill_in 'Due in', with: 'Arrears'
-              fill_in 'Amount', with: '100.08'
-            end
-
-            within_fieldset 'property_charge_0_due_on_0' do
-              fill_in 'property_charges_attributes_0_due_ons_attributes_0_day', with: '5'
-              fill_in 'property_charges_attributes_0_due_ons_attributes_0_month', with: '4'
-            end
-
+        def fill_in_charge
+          within_fieldset 'property_charge_0' do
+            fill_in 'Charge type', with: 'Service Charge'
+            fill_in 'Due in', with: 'Arrears'
+            fill_in 'Amount', with: '100.08'
           end
-
-      it 'can delete', js: true do
-        property = property_factory_with_charge id: 1, human_id: 8000
-        navigate_to_edit_page
-        expect(page).to have_text 'Charge 1'
-        within_fieldset 'property_charge_0' do
-          click_on 'X'
         end
-        update_then_expect_properties_page
-        navigate_to_property_view_page
-        expect(page).to_not have_text 'Ground Rent'
-        expect(page).to have_text 'No charges levied against this property.'
-      end
+
+        def fill_in_due_on_on_date
+          fill_in 'property_charges_attributes_0_due_ons_attributes_0_day', with: '5'
+          fill_in 'property_charges_attributes_0_due_ons_attributes_0_month', with: '4'
+        end
 
 
       it 'adds monthly charge', js: true do
-        pending
+        property = property_factory id: 1, human_id: 8000
+        navigate_to_edit_page
+        fill_in_charge
+        fill_in_due_on_on_date
+        update_then_expect_properties_page
+        navigate_to_property_view_page
+        expect(page).to have_text 'Service Charge Arrears £100.08'
       end
 
       it 'opens a montly charge correctly', js: true do
@@ -253,6 +240,19 @@ describe Property do
       it 'opens monthly and changes to date charge', js: true do
         pending
       end
+    end
+
+    it 'can delete', js: true do
+      property = property_factory_with_charge id: 1, human_id: 8000
+      navigate_to_edit_page
+      expect(page).to have_text 'Charge 1'
+      within_fieldset 'property_charge_0' do
+        click_on 'X'
+      end
+      update_then_expect_properties_page
+      navigate_to_property_view_page
+      expect(page).to_not have_text 'Ground Rent'
+      expect(page).to have_text 'No charges levied against this property.'
     end
   end
 
