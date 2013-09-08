@@ -235,7 +235,6 @@ describe Property do
 
         def fill_in_due_on_every_month
           fill_in 'property_charges_attributes_0_due_ons_attributes_4_day', with: '5'
-          fill_in 'property_charges_attributes_0_due_ons_attributes_4_month', with: '-1'
         end
 
 

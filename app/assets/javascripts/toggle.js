@@ -28,10 +28,19 @@ $( document ).ready(function() {
 
    // this custom event is to separate the entity specific code from
    // the toggle code.
-   $('.entity-event').on('testEventHandler', function() {
-      var toggleSelection = $(this).closest('.toggle-selection');
-      toggleSelection.children('.model_type').val($(this).data('model-type-to'));
-   });
+  $('.entity-event').on('testEventHandler', function() {
+    var toggleSelection = $(this).closest('.toggle-selection');
+    toggleSelection.children('.model_type').val($(this).data('model-type-to'));
+  });
+
+
+  $('.charges').on('testEventHandler', function() {
+    $(this).find(':input').val('');
+  });
+
+  $('.every-month').on('change', function() {
+    $(this).next('input[type=hidden]').val('-1');
+  });
 
   $(onWindowLoad);
 
