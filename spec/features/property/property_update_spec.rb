@@ -233,6 +233,12 @@ describe Property do
         expect(page).to have_text 'Service Charge Arrears £100.08'
       end
 
+        def fill_in_due_on_every_month
+          fill_in 'property_charges_attributes_0_due_ons_attributes_4_day', with: '5'
+          fill_in 'property_charges_attributes_0_due_ons_attributes_4_month', with: '-1'
+        end
+
+
       it 'opens a montly charge correctly', js: true do
         pending
       end

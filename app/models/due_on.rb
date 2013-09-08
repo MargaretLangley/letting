@@ -4,10 +4,15 @@ class DueOn < ActiveRecord::Base
   validates :day, numericality: { only_integer: true, greater_than: 0, less_than: 32 }
   validates :month, numericality: { only_integer: true, greater_than: 0, less_than: 13 }
 
+  PER_MONTH = -1
+
   def empty?
     attributes.except(*ignored_attrs).values.all?( &:blank? ) #\
   end
 
+  def per_month?
+    month == PER_MONTH
+  end
 
   private
     def ignored_attrs

@@ -35,6 +35,19 @@ describe DueOn do
         expect(due_on).to be_empty
       end
     end
+
+    context '#per_month?' do
+      it 'recognises when not every month' do
+        due_on.day = 1
+        due_on.month = 1
+        expect(due_on).to_not be_per_month
+      end
+      it 'recognises every month' do
+        due_on.day = 1
+        due_on.month = -1
+        expect(due_on).to be_per_month
+      end
+    end
   end
 
   context 'associations' do

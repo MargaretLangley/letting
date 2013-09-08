@@ -11,7 +11,7 @@ module DueOns
       end
 
       def per_month?
-        self.reject(&:empty?).size == MAX_DUE_ONS
+        max_due_ons || has_per_month_due_on
       end
 
       def clean_up_form
@@ -24,6 +24,14 @@ module DueOns
 
       def mark_due_on_for_destruction due_on
         due_on.mark_for_destruction
+      end
+
+      def max_due_ons
+        self.reject(&:empty?).size == MAX_DUE_ONS
+      end
+
+      def has_per_month_due_on
+        self.detect(&:per_month?).present?
       end
     end
   end
