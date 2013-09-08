@@ -16,7 +16,7 @@ class PropertiesController < ApplicationController
   def create
     @property = Property.new property_params
     if @property.save
-      redirect_to properties_path, notice: 'Property successfully created!'
+      redirect_to properties_path, notice: "#{@property.human_id} property successfully created!"
     else
       @property.prepare_for_form
       render :new
@@ -31,7 +31,7 @@ class PropertiesController < ApplicationController
   def update
     @property = Property.find params[:id]
     if @property.update property_params
-      redirect_to properties_path, notice: 'Property successfully updated!'
+      redirect_to properties_path, notice: "#{@property.human_id} property successfully updated!"
     else
       render :edit
     end
@@ -40,7 +40,7 @@ class PropertiesController < ApplicationController
   def destroy
     @property = Property.find(params[:id])
     @property.destroy
-    redirect_to properties_path, alert: 'Property successfully deleted!'
+    redirect_to properties_path, alert: "#{@property.human_id} property successfully deleted!"
   end
 
   private
