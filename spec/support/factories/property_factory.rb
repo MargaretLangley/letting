@@ -51,3 +51,16 @@ end
 def add_due_on_1 charge
   charge.due_ons.build due_on_attributes_1
 end
+
+
+
+def property_factory_with_monthly_charge args = {}
+  property = Property.new property_attributes id: args[:id]
+  property.human_id = args[:human_id] if args[:human_id].present?
+  add_contact property, args
+  add_no_billing_profile property
+  charge = property.charges.build charge_attributes
+  charge.due_ons.build due_on_monthly_attributes_0
+  property.save!
+  property
+end

@@ -5,6 +5,7 @@ class DueOn < ActiveRecord::Base
   validates :month, numericality: { only_integer: true, greater_than: -2, less_than: 13 }
 
   PER_MONTH = -1
+  ON_DATE = 0
 
   def empty?
     attributes.except(*ignored_attrs).values.all?( &:blank? ) #\

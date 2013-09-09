@@ -17,6 +17,14 @@ class DueOnsDecorator
     @due_ons.to_a.take(1)
   end
 
+  def hidden_side? side
+    if per_month?
+      side == DueOn::PER_MONTH ? '' : 'hidden'
+    else
+      side == DueOn::ON_DATE ? '' : 'hidden'
+    end
+  end
+
   def method_missing method_name, *args, &block
     @due_ons.send method_name, *args, &block
   end

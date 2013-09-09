@@ -1,6 +1,6 @@
 <h3>Due Date</h3>
 <div class='toggle-selection charges'>
-  <div class='togglable'>
+  <div class='togglable <%= due_ons.hidden_side? DueOn::ON_DATE %>'>
     <h4>on date <a href='#' class='toggle toggle-event'> or every month</a></h4>
     <% due_ons.by_date.each do |due_on| %>
       <%= f.fields_for :due_ons, due_on do |builder| %>
@@ -8,7 +8,7 @@
       <% end %>
     <% end %>
   </div>
-  <div class='togglable hidden'>
+  <div class='togglable <%= due_ons.hidden_side? DueOn::PER_MONTH %>'>
     <h4>every month <a href='#' class='toggle toggle-event'> or on date</a></h4>
     <% due_ons.every_month.each do |due_on| %>
       <%= f.fields_for :due_ons, due_on do |builder| %>

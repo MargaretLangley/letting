@@ -242,7 +242,10 @@ describe Property do
 
 
       it 'opens a montly charge correctly', js: true do
-        pending
+        property = property_factory_with_monthly_charge id: 1, human_id: 8000
+        binding.pry
+        navigate_to_edit_page
+        expect(page).to have_text 'every month or on date'
       end
 
       it 'opens monthly and changes to date charge', js: true do

@@ -91,4 +91,10 @@ def due_on_attributes_1 overrides = {}
 end
 
 
+def due_on_monthly_attributes_0 overrides = {}
+  {
+    day: 1,
+    month: -1
+  }.merge overrides
+end
 
