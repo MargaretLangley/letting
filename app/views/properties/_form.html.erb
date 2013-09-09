@@ -2,7 +2,7 @@
   <%= render 'shared/errors', object: @property %>
   <fieldset id='property' class='shell'>
 
-    <h3>Property</h3>
+    <h3>Property<span class= 'floatright'><%= link_to 'View', property_path(@property) %><span></h3>
 
     <div class='field text require half'>
       <%= f.label :human_id,'Property ID' %>
