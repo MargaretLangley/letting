@@ -1,93 +1,127 @@
 @import "colors";
 
-body {
-  background: $primary-background-color;
-  color: $primary-text-color;
-  /*background-image: image-url("background.jpg");*/
-  font-family: "Helvetica Neue", Helvetica, Arial;
-}
+@media screen {
 
-@mixin header-object {
-  color: white;
-  background-color: $secondary-background-color;
-}
-
-header {
-  width: 100%;
-  height: 70px;
-  @include header-object;
-  nav {
-    padding: 1%;
-    a:link, a:visited {
-      @include header-object;
-    }
+  body {
+    background: $primary-background-color;
+    color: $primary-text-color;
+    /*background-image: image-url("background.jpg");*/
+    font-family: "Helvetica Neue", Helvetica, Arial;
   }
 
-  h1 {
-    width: 50%;
-    float: left;
+  @mixin header-object {
+    color: $print-background-white;
+    background-color: $secondary-background-color;
   }
 
-  a.header {
+  header {
+    width: 100%;
+    height: 70px;
     @include header-object;
-    padding: 0px 10%;
-    text-decoration: none;
-    margin-left: 0;
-  }
+    nav {
+      padding: 1%;
+      a:link, a:visited {
+      @include header-object;
+      }
+    }
 
-  a:hover,
-  a:active {
-    text-decoration: underline;
-  }
-}
+    h1 {
+      width: 50%;
+      float: left;
+    }
 
+    a.header {
+      @include header-object;
+      padding: 0px 10%;
+      text-decoration: none;
+      margin-left: 0;
+    }
 
-footer#page-footer {
-  color: $secondary-text-color;
-  background-color: $primary-background-color;
-  padding: 0.5em 0.5em;
-
-  p {
-    text-align: center;
-  }
-
-  a {
-    color: $primary-link-color;
-    text-decoration: none;
-
-    &:hover {
+    a:hover,
+    a:active {
       text-decoration: underline;
     }
   }
+
+  footer#page-footer {
+    color: $secondary-text-color;
+    background-color: $primary-background-color;
+    padding: 0.5em 0.5em;
+
+    p {
+      text-align: center;
+    }
+
+    a {
+      color: $primary-link-color;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+
+  nav {
+    float: right;
+  }
+
+  .shell {
+    border-radius: 5px;
+    border: 1px solid $fieldset-color;
+    padding: 5%;
+  }
+
+  .greybox{
+   background-color: #ddd;
+   border:1px solid #666;
+   border-radius: 12px;
+   padding: 0 35px;
+   margin-top: 10px;
+   margin-bottom: 3px;
+  }
+
+  @mixin leftfloat{
+    width:30%;
+    float:left;
+  }
+
+  .floatleft{
+    @include leftfloat;
+  }
+
+  .boldfloat{
+    @include leftfloat;
+    font-weight: bold;
+  }
+
+  .floatright{
+    width:30%;
+    float:right;
+  }
 }
 
+@media print {
 
-nav {
-  float: right;
+  body {
+    background: $print-background-white;
+    color: $primary-text-color;
+    /*background-image: image-url("background.jpg");*/
+    font-family: "Helvetica Neue", Helvetica, Arial;
+   }
+
+  .float30left{
+    margin:30px;
+  }
+
+  .boldfloat{
+     margin:30px;
+     font-weight: bold;
+  }
+
+  .greybox{
+  }
+
 }
-
-.shell {
-  border-radius: 5px;
-  border: 1px solid $fieldset-color;
-  padding: 5%;
-}
-
-.greybox{
- background-color: #ddd;
- border:1px solid #666;
- border-radius: 12px;
- padding: 0 20px;
- margin-top: 10px;
- margin-bottom: 3px;
-}
-
-.float30left{
-  width:30%;
-  float:left;
- }
-
-.float30right{
-  width:30%;
-  float:right;
- }
 

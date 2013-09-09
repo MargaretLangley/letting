@@ -1,14 +1,16 @@
 <h3>Billing Address</h3>
 
 <% if object.use_profile? %>
-  <%= render 'shared/show_address', object: object.bill_to %>
   <% if object.entities.any? %>
+  <span class= 'boldfloat'>Agent</span>
     <% object.entities.each do |entity| %>
     <%= render 'shared/show_entity', object: entity %>
-    <% end %>
-  <% else %>
-    No Entities
   <% end %>
+  <p></p>
+<%= render 'shared/show_1_line_address', object: object.bill_to %>
+<% else %>
+  No Entities
+<% end %>
 <% else %>
  Billing to property address
 <% end %>

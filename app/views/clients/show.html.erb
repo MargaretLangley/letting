@@ -1,17 +1,15 @@
 <article>
   <div class = 'greybox'>
-    <h2>Client</h2>
+    <h2>Client ID:
+     <%= @client.human_id %><span class= 'floatright'><%= link_to 'Edit', edit_client_path(@client) %><span>
+    </h2>
     <p>
-    <span style='float: left; width:30%;'>ID:</span>
-    <span style='display: inline-block;'><%= @client.human_id %></span>
-     </p>
-     <p>
     <% @client.entities.each do |entity| %>
-      <span style='float: left; width:30%;'><%= heading entity %></span><span style='display: inline-block;'><%= render 'shared/show_entity', object: entity %></span>
+      <span class = 'boldfloat'><%= heading entity %></span><span style='display: inline-block;'><%= render 'shared/show_entity', object: entity %></span>
       <% end %>
     </p>
     <h3>Address</h3>
-    <%= render 'shared/show_address', object: @client %>
+      <%= render 'shared/show_1_line_address', object: @client %>
     <h3>Properties Owned</h3>
     <% @client.properties.each do |property| %>
       <%= property.human_id %>

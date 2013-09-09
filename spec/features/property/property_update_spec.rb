@@ -111,7 +111,8 @@ describe Property do
       expect_bill_profile_has_original_attributes
       update_then_expect_properties_page
       navigate_to_property_view_page
-      expect(page).to have_text 'Billing Address Flat No: 33'
+      expect(page).to have_text 'Billing Address'
+      expect(page).to have_text '33'
     end
 
       def expect_bill_profile_has_original_attributes
@@ -206,7 +207,8 @@ describe Property do
         fill_in_due_on_on_date
         update_then_expect_properties_page
         navigate_to_property_view_page
-        expect(page).to have_text 'Service Charge Arrears £100.08'
+        expect(page).to have_text 'Service Charge in Arrears'
+        expect(page).to have_text '£100.08'
       end
 
         def fill_in_charge
@@ -230,7 +232,8 @@ describe Property do
         fill_in_due_on_on_date
         update_then_expect_properties_page
         navigate_to_property_view_page
-        expect(page).to have_text 'Service Charge Arrears £100.08'
+        expect(page).to have_text 'Service Charge in Arrears'
+        expect(page).to have_text '£100.08'
       end
 
         def fill_in_due_on_every_month

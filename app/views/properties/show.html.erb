@@ -1,24 +1,27 @@
 <article>
   <div class = 'greybox'>
-    <h2>Property</h2>
-    <p>
-    <span class= 'float30left'> Property Id </span>
-    <%= @property.human_id %>
-     <span style='float: right; width:30%;'><%= link_to 'Edit', edit_property_path(@property) %><span>
-    </p>
-     <span class= 'float30left'> Client Id </span>
+    <h2>Property Id: </span>
+      <%= @property.human_id %>
+      <span class= 'floatright'><%= link_to 'Edit', edit_property_path(@property) %><span>
+    </h2>
+     <p>
+       <span class= 'boldfloat'>Client Id: </span>
     <%= @property.client_id %>
+    </p>
     <p>
-    <h2>Address</h2>
-    <%= render 'shared/show_address', object: @property %>
-
-    <h3>Tenant</h3>
+     <h3> Occupier</h3>
     <% @property.entities.each do |entity| %>
       <%= render 'shared/show_entity', object: entity %>
     <% end %>
-
+    </p>
+    <p>
+    <h2>Address</h2>
+    <%= render 'shared/show_1_line_address', object: @property %>
+    </p>
+    <p>
     <%= render 'show_billing_profile', object: @property.billing_profile %>
     <%= render 'show_charges', object: @property.charges %>
-    <p>
+
+    </p>
   </div>
  </article>
