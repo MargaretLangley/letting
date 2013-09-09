@@ -13,8 +13,8 @@ class DueOnsDecorator
     @due_ons.to_a.take(DueOns::MAX_DISPLAYED_DUE_ONS)
   end
 
-  def every_month
-    @due_ons.to_a.take(1)
+  def per_month
+    @due_ons.per_month
   end
 
   def hidden_side? side

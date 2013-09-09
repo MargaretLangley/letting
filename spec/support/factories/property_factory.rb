@@ -61,6 +61,7 @@ def property_factory_with_monthly_charge args = {}
   add_no_billing_profile property
   charge = property.charges.build charge_attributes
   charge.due_ons.build due_on_monthly_attributes_0
+  property.prepare_for_form
   property.save!
   property
 end

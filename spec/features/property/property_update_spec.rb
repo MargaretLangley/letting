@@ -198,9 +198,9 @@ describe Property do
 
 
 
-    context '#charge' do
+    context 'charge' do
 
-      it '#adds date charge' do
+      it 'adds date charge' do
         property = property_factory id: 1, human_id: 8000
         navigate_to_edit_page
         fill_in_charge
@@ -228,15 +228,16 @@ describe Property do
       it 'adds monthly charge', js: true do
         property = property_factory id: 1, human_id: 8000
         navigate_to_edit_page
+        click_on 'or every month'
         fill_in_charge
-        fill_in_due_on_on_date
+        fill_in_due_on_per_month
         update_then_expect_properties_page
         navigate_to_property_view_page
         expect(page).to have_text 'Service Charge in Arrears'
         expect(page).to have_text '£100.08'
       end
 
-        def fill_in_due_on_every_month
+        def fill_in_due_on_per_month
           fill_in 'property_charges_attributes_0_due_ons_attributes_4_day', with: '5'
         end
 
@@ -248,7 +249,7 @@ describe Property do
       end
 
       it 'opens monthly and changes to date charge', js: true do
-        property_factory_with_monthly_charge id: 1, human_id: 8000
+        property = property_factory_with_monthly_charge id: 1, human_id: 8000
         navigate_to_edit_page
         click_on 'or on date'
         expect(page).to have_text 'on date or every month'

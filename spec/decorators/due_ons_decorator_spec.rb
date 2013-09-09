@@ -18,8 +18,14 @@ describe DueOnsDecorator do
       expect(prepared_due_ons.by_date.size).to eq 4
     end
 
-    it '#every_month' do
-      expect(prepared_due_ons.every_month.size).to eq 1
+    context '#every month' do
+      it 'returns one' do
+        due_ons = Charge.new.due_ons
+        (1..12).each.with_index { |index| due_ons.build day: 3, month: index }
+        due_on_dec = DueOnsDecorator.new due_ons
+        expect(due_on_dec.per_month.day).to eq 3
+        expect(due_on_dec.per_month.month).to eq -1
+      end
     end
   end
 
@@ -42,5 +48,6 @@ describe DueOnsDecorator do
         expect(due_ons_dec.hidden_side? DueOn::PER_MONTH).to eq ''
       end
     end
+
   end
 end

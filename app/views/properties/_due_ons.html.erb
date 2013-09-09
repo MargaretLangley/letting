@@ -10,10 +10,8 @@
   </div>
   <div class='togglable <%= due_ons.hidden_side? DueOn::PER_MONTH %>'>
     <h4>every month <a href='#' class='toggle toggle-event'> or on date</a></h4>
-    <% due_ons.every_month.each do |due_on| %>
-      <%= f.fields_for :due_ons, due_on do |builder| %>
-        <%= render partial: 'due_on_every_month', locals: { f: builder, due_on: due_on, parent: due_ons.id(f.options[:child_index]) } %>
+      <%= f.fields_for :due_ons, due_ons.per_month do |builder| %>
+        <%= render partial: 'due_on_per_month', locals: { f: builder, due_on: due_ons.per_month, parent: due_ons.id(f.options[:child_index]) } %>
       <% end %>
-    <% end %>
   </div>
 </div>
