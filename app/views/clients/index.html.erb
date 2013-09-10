@@ -19,9 +19,6 @@
         Road
       </th>
       <th>
-        Town
-      </th>
-      <th>
         Actions
       </th>
     </tr>
@@ -30,7 +27,7 @@
     <% @clients.each do |client| %>
     <tr>
       <td class='alnright'>
-        <%= link_to client.human_id, client %>
+        <%= link_to client.human_id, edit_client_path(client) %>
       </td>
       <td>
         <%= format_empty_string_as_dash client.entities.first.initials %>
@@ -45,12 +42,10 @@
         <%= client.address.road %>
       </td>
       <td>
-        <%= client.address.town %>
-      </td>
-      <td>
         <%= link_to 'Edit', edit_client_path(client) %> |
+        <%= link_to 'View', client_path(client) %> |
         <%= link_to 'Delete', client, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </t>
+      </td>
     </tr>
     <% end %>
   </tbody>

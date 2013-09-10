@@ -19,7 +19,6 @@ describe Client do
     expect(page).to have_text 'W G'
     expect(page).to have_text 'Grace'
     expect(page).to have_text 'Edgbaston Road'
-    expect(page).to have_text 'Birmingham'
   end
 
   it '#index search' do
@@ -35,6 +34,16 @@ describe Client do
     expect(page).to_not have_text '111'
     expect(page).to have_text '222'
     expect(page).to have_text '333'
+  end
+
+  it '#index View' do
+    client_factory human_id: 111,
+              address_attributes: { road: 'Vauxall Lane' }
+    visit '/clients'
+    click_on 'View'
+    expect(page).to have_text '111'
+    expect(page).to have_text 'Edit'
+    expect(page).to have_text 'Properties Owned'
   end
 
 end
