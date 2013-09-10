@@ -10,9 +10,9 @@ describe Client do
     validate_page
     fill_in_form
     click_on 'Update Client'
-    expect_clients_page
+    expect_client_index
     navigate_to_client_page '278'
-    expect_client_page
+    expect_client_edit
   end
 
   it '#update handles validation' do
@@ -35,8 +35,8 @@ describe Client do
     end
     click_on 'Update Client'
     expect(current_path).to eq '/clients'
-    navigate_to_client_page '3003'
-    expect(page).to have_text 'Mr I Test'
+    click_on 'View'
+    expect(page).to have_text 'Test'
   end
 
   it '#updates deletes a second entity', js:true do
@@ -45,7 +45,9 @@ describe Client do
     navigate_to_edit_page
     click_on 'X'
     click_on 'Update Client'
-    navigate_to_client_page '3003'
+    click_on 'View'
+    expect(page).to have_text 'Properties Owned'
+    expect(page).to have_text 'Grace'
     expect(page).to_not have_text 'Knutt'
   end
 
@@ -75,8 +77,7 @@ describe Client do
     end
     click_on 'Cancel'
     expect(current_path).to eq '/clients'
-    navigate_to_client_page '3003'
-    expect(page).to have_text 'Mr W G Grace'
+    expect(page).to have_text 'Grace'
   end
 
   def navigate_to_edit_page
@@ -109,10 +110,14 @@ describe Client do
       end
     end
 
-  def expect_clients_page
+  def expect_client_index
     expect(current_path).to eq '/clients'
-    expect(page).to have_text 'CLIENT SUCCESSFULLY UPDATED!'
+    expect(page).to have_text /client successfully updated!/i
     expect_client_data_changed
+  end
+
+  def expect_client_edit
+    expect(find_field('Town').value).to have_text 'Nottingham'
   end
 
     def expect_client_data_changed

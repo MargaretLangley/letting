@@ -7,10 +7,9 @@ describe Client do
     client = client_factory id: 1, human_id: 3008
     client.properties << property_factory(id: 1, human_id: 909)
     visit '/clients/'
-    click_on '3008'
-    expect(current_path).to eq '/clients/1'
-    expect_client_address
+    click_on 'View'
     expect_client_entity
+    expect_client_address
     expect_property
   end
 

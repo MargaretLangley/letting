@@ -1,9 +1,9 @@
 class ClientsController < ApplicationController
 
   def index
-     @clients = Client.search(params[:search]).page(params[:page]).load
-     #client_path(the-searchrest.id)
-     end
+     @clients = Client.search(search_param).page(params[:page]).load
+     redirect_to edit_client_path @clients.first if unique_search?
+   end
 
   def show
     @client = Client.find params[:id]
@@ -46,6 +46,14 @@ class ClientsController < ApplicationController
   end
 
   private
+
+    def unique_search?
+      @clients.size == 1 && search_param.present?
+    end
+
+    def search_param
+      params[:search]
+    end
 
     def clients_params
       params.require(:client).

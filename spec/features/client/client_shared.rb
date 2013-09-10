@@ -26,7 +26,7 @@ def navigate_to_client_page human_id
     click_on human_id
 end
 
-def expect_client_page
+def expect_client_view
   expect(page).to have_text '278'
   expect_address_nottingham
   expect_entity_wg_grace

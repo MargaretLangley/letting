@@ -8,9 +8,9 @@ describe Client do
     validate_page
     fill_in_form
     click_on 'Create Client'
-    expect_clients_page
-    navigate_to_client_page '278'
-    expect_client_page
+    expect_client_index
+    click_on 'View'
+    expect_client_view
   end
 
   it '#create handles validation' do
@@ -31,15 +31,11 @@ describe Client do
     within_fieldset 'client_entity_0' do
       fill_in 'Name', with: 'ICC'
     end
-
     within_fieldset 'client_address' do
       fill_in_address_nottingham
     end
-
     click_on 'Create Client'
-    expect_clients_page
-    navigate_to_client_page '278'
-    expect(page).to have_text 'Company Name: ICC'
+    expect(page).to have_text 'ICC'
   end
 
   it '#adds and removes new persons', js: true do
@@ -81,9 +77,9 @@ describe Client do
     expect(page.all('h3', text: 'Person').count).to eq 1
   end
 
-  def expect_clients_page
+  def expect_client_index
     expect(current_path).to eq '/clients'
-    expect(page).to have_text 'CLIENT SUCCESSFULLY CREATED!'
+    expect(page).to have_text /client successfully created!/i
   end
 
 end
