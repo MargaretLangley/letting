@@ -15,6 +15,10 @@ class DueOn < ActiveRecord::Base
     month == PER_MONTH
   end
 
+  def per_month2?
+    month == PER_MONTH
+  end
+
   private
     def ignored_attrs
       ['id','charge_id', 'created_at', 'updated_at']

@@ -8,13 +8,13 @@ describe DueOns do
     it 'fills empty' do
       expect(due_ons).to have(0).items
       due_ons.prepare
-      expect(due_ons).to have(12).items
+      expect(due_ons).to have(4).items
     end
 
     it 'every month then makes per_month' do
       expect(due_ons).to have(0).items
       due_ons.prepare
-      expect(due_ons).to have(12).items
+      expect(due_ons).to have(4).items
     end
   end
 
@@ -79,18 +79,20 @@ describe DueOns do
   end
 
 
-  context 'load, save, load' do
-    it 'new, save on date' do
+  context 'creating, saving and loading' do
+
+    it 'new on date' do
       charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
-      charge.due_ons.prepare
-      charge.due_ons[0].update day: 24, month: 6
-      charge.due_ons[1].update day: 25, month: 12
+      charge.prepare
+      charge.due_ons.build day: 24, month: 6
+      charge.due_ons.build day: 25, month: 12
       charge.clean_up_form
       charge.save!
       reload = Charge.find(charge.id)
       expect(reload.due_ons).to have(2).items
     end
-    it 'on date, save on date' do
+
+    it 'on date to different on date' do
       charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
       charge.due_ons.build day: 24, month: 6, id: 7
       charge.due_ons.build day: 25, month: 12, id: 8
@@ -106,47 +108,79 @@ describe DueOns do
       reload2 = Charge.find(charge.id)
       expect(reload2.due_ons).to have(1).items
     end
-    it 'new, per date' do
+
+    it 'new per date' do
       charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
       charge.due_ons.prepare
-      charge.due_ons[0].update day: 5, month: -1
+      charge.due_ons.build day: 5, month: -1
       charge.clean_up_form
       charge.save!
       reload = Charge.find(charge.id)
       expect(reload.due_ons).to have(12).items
     end
 
-    it 'saved, per date' do
+    it 'per date to different per date' do
+      charge_per_date = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
+      charge_per_date.prepare
+      charge_per_date.due_ons.build day: 24, month: -1
+      charge_per_date.clean_up_form
+      charge_per_date.save!
+      charge_diff_date = Charge.find(charge_per_date.id)
+      charge_diff_date.prepare
+      charge_diff_date.due_ons.build day: 10, month: -1
+      charge_diff_date.clean_up_form
+      charge_diff_date.save!
+      charge_reload = Charge.find(charge_per_date.id)
+      expect(charge_reload.due_ons).to have(12).items
+    end
+
+    it 'per date to same per date' do
       charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
-      charge.due_ons.prepare
-      charge.due_ons[0].update day: 5, month: -1
+      charge.prepare
+      charge.due_ons.build day: 24, month: -1
       charge.clean_up_form
       charge.save!
       reload = Charge.find(charge.id)
-      reload.due_ons.prepare
-      charge.due_ons[0].update day: 6, month: -1
-      charge.clean_up_form
-      charge.save!
+      reload.prepare
+      reload.due_ons.build day: 24, month: -1
+      reload.clean_up_form
+      reload.save!
       reload2 = Charge.find(charge.id)
+      reload2.prepare
       expect(reload2.due_ons).to have(12).items
     end
 
-    it 'on date, save per date' do
+    it 'on date to per date' do
       charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
       charge.due_ons.build day: 24, month: 6
       charge.due_ons.build day: 25, month: 12
-      charge.due_ons.prepare
+      charge.prepare
       charge.clean_up_form
       charge.save!
       reload = Charge.find(charge.id)
-      reload.due_ons.prepare
+      reload.prepare
       reload.due_ons[0].update day: 10, month: -1
       reload.clean_up_form
       reload.save!
       reload2 = Charge.find(charge.id)
       expect(reload2.due_ons).to have(12).items
     end
+
+    it 'per date to on date' do
+      charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
+      charge.prepare
+      charge.due_ons.build day: 24, month: -1
+      charge.clean_up_form
+      charge.save!
+      reload = Charge.find(charge.id)
+      reload.prepare
+      reload.due_ons.build day: 1, month: 5
+      reload.due_ons.build day: 1, month: 11
+      reload.clean_up_form
+      reload.save!
+      reload2 = Charge.find(charge.id)
+      expect(reload2.due_ons).to have(2).items
+    end
+
   end
-
-
 end

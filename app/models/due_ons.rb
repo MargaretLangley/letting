@@ -1,9 +1,21 @@
+#
+# Two types of DueOn
+# OnDate   Day 1-31, Month 1-12
+# PerMonth  Day 1-31, Month -1   (DueOn::PerDate)
+#
+# If a charge happens on a few dates in the year you use a number of OnDates
+# If a charge occurs on each month then you use a PerDate.
+# To create PerMonth DueOns we pass a dueon with a Day 1-31 and Month -1 (DueON::PerDate)
+# As long as this is different from the current due on we delete all the other DueOns in
+# the collection (including the PerMonth DueOn) and replace it with 12 onDate DueOns, one
+# for each month.
+#
 module DueOns
   extend ActiveSupport::Concern
   included do
     has_many :due_ons, -> { order('created_at ASC') }, dependent: :destroy do
       def prepare
-        (self.size...MAX_DUE_ONS).each { self.build }
+        (self.size...MAX_DISPLAYED_DUE_ONS).each { self.build }
       end
 
       def empty?
@@ -15,11 +27,26 @@ module DueOns
       end
 
       def per_month
-        DueOn.new day: first_day, month: first_month
+        if per_month?
+          DueOn.new day: first_day_or_empty, month: DueOn::PER_MONTH
+        else
+          DueOn.new day: '', month: ''
+        end
       end
 
       def clean_up_form
-        assign_per_month if has_per_month_due_on?
+        if has_per_month_due_on?
+          new_day_for_per_month_charge = per_month_due_on.day
+          destruction_if :per_month? if has_per_month_due_on?
+          if new_day_for_per_month_charge != current_day_for_per_month_charge
+            destruction_if :present?
+            assign_per_month new_day_for_per_month_charge
+          end
+        else
+          if self.detect(&:new_record?).present?
+            destruction_if :persisted?
+          end
+        end
         destruction_if :empty?
       end
     private
@@ -43,25 +70,32 @@ module DueOns
         self.detect(&:per_month?)
       end
 
-      def first_day
-        if per_month?
-          self.first.nil? ? nil : self.first.day
-        else
-          ''
-        end
+      def current_day_for_per_month_charge
+        first_none_per_month_due_on.present? ? first_none_per_month_due_on.day : nil
       end
 
-      def first_month
-        if per_month?
-          self.first.nil? ? nil : DueOn::PER_MONTH
-        else
-          ''
-        end
+      def first_none_per_month_due_on
+        self.reject(&:per_month?).first
       end
 
-      def assign_per_month
-        day = per_month_due_on.day
-        self.each.with_index{|due_on,month| due_on.update day: day, month: month + 1 }
+      def first_day_or_empty
+        self.first.present? ? self.first.day : ''
+      end
+
+      def assign_per_month day
+        (1..MAX_DUE_ONS).each {|month| self.build day: day, month: month }
+      end
+    end
+
+    def logger_due_ons
+      logger.debug "M4D: #{self.select(&:marked_for_destruction?).length} / #{self.size}"
+      logger.debug "Saved"
+      self.reject(&:marked_for_destruction?).each do |due_on|
+        logger.debug "day: #{due_on.day} month: #{due_on.month}"
+      end
+      logger.debug "Marked for destruction"
+      self.select(&:marked_for_destruction?).each do |due_on|
+        logger.debug "day: #{due_on.day} month: #{due_on.month}"
       end
     end
   end

@@ -16,6 +16,17 @@ describe Charge do
       it('due in') { charge.due_in = nil; expect(charge).to_not be_valid }
       it('amount') {charge.amount = nil; expect(charge).to_not be_valid}
       it('due_ons') {charge.due_ons.destroy_all; expect(charge).to_not be_valid}
+      context 'due_ons_size' do
+        it 'not valid one over limit' do
+          (1..12).each { charge.due_ons.build day: 1, month: 1 }
+          expect(charge).to_not be_valid
+        end
+        it 'valid if marked for destruction' do
+          (1..12).each { charge.due_ons.build day: 1, month: 1 }
+          charge.due_ons.first.mark_for_destruction
+          expect(charge).to be_valid
+        end
+      end
     end
   end
 
@@ -28,7 +39,7 @@ describe Charge do
 
     it 'prepares to display by creating extra due_ons' do
       charge.prepare
-      expect(charge.due_ons).to have(12).items
+      expect(charge.due_ons).to have(4).items
     end
 
     it 'on marks for distruction empty items' do

@@ -31,13 +31,13 @@ module DB
       day_months = []
       if monthly_charge? row
          monthly_charge = day_month_from_row_columns 1, row
-        (1..MONTHS_IN_YEAR).each {|index| day_months <<  DayMonth.from_day_month( monthly_charge.day, index ) }
+         day_months << DayMonth.from_day_month( monthly_charge.day, DueOn::PER_MONTH )
+        # (1..MONTHS_IN_YEAR).each {|index| day_months <<  DayMonth.from_day_month( monthly_charge.day, index ) }
       else
         (1..maximum_dates(row)).each {|index| day_months <<  day_month_from_row_columns( index, row ) }
-        (maximum_dates(row)..MONTHS_IN_YEAR).each {|index| day_months << DayMonth.from_day_month( 0,0 ) }
       end
 
-      @model_to_assign.due_ons.each_with_index do |due_on, index|
+      @model_to_assign.due_ons.first(day_months.length).each_with_index do |due_on, index|
         assign_due_on due_on, day_months[index]
       end
     end

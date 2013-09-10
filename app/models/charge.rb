@@ -4,8 +4,14 @@ class Charge < ActiveRecord::Base
   belongs_to :property
   validates :amount, :charge_type, :due_in, presence: true
   validates :due_ons, presence: true
+  validate :due_ons_size
+
   def prepare
     due_ons.prepare
+  end
+
+  def due_ons_size
+    errors.add :due_ons, 'Too many due_ons' if due_ons.reject(&:marked_for_destruction?).size > 12
   end
 
   def clean_up_form
