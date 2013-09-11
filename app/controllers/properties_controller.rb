@@ -1,7 +1,8 @@
 class PropertiesController < ApplicationController
 
   def index
-    @properties = Property.search(params[:search]).page(params[:page]).load
+    @properties = Property.search(search_param).page(params[:page]).load
+    redirect_to edit_property_path @properties.first if unique_search?
   end
 
   def show
@@ -45,6 +46,13 @@ class PropertiesController < ApplicationController
 
   private
 
+    def unique_search?
+      @properties.size == 1 && search_param.present?
+    end
+
+    def search_param
+      params[:search]
+    end
 
     def property_params
       params.require(:property).
