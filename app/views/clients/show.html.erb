@@ -1,5 +1,5 @@
 <article>
-  <div class = 'greybox'>
+  <div class = 'showbox'>
     <h2>Client ID:
      <%= @client.human_id %><span class= 'floatright'><%= link_to 'Edit', edit_client_path(@client) %><span>
     </h2>
@@ -16,4 +16,7 @@
       <%= render 'shared/show_1_line_address', object: property %>
     <% end %>
   </div>
+  <p>
+    <button> <%= link_to 'Print This Page', '#', class: 'print-window'%></button>
+  </p>
 </article>

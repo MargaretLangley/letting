@@ -73,7 +73,7 @@
     padding: 5%;
   }
 
-  .greybox{
+  .showbox{
    background-color: #ddd;
    border:1px solid #666;
    border-radius: 12px;
@@ -109,19 +109,38 @@
     color: $primary-text-color;
     /*background-image: image-url("background.jpg");*/
     font-family: "Helvetica Neue", Helvetica, Arial;
+    width: 100%;
+    margin: .5cm;
    }
 
-  .float30left{
-    margin:30px;
+  .col-3-4 {
+  width: 100%;
   }
 
+  .col-1-4 {
+  width: 0%;
+  }
+
+  .shell{
+   display: none;
+   width: 5px;
+  }
+
+  .floatleft{
+
+   }
+
   .boldfloat{
-     margin:30px;
      font-weight: bold;
   }
 
-  .greybox{
+  .showbox{
+     width: 90%;
   }
 
-}
+   button, header, footer, .noshowprint, .floatright{
+   display: none;
+  }
 
+
+}
