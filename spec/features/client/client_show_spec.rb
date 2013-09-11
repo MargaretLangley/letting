@@ -3,6 +3,9 @@ require_relative '../shared/address'
 require_relative '../shared/entity'
 
 describe Client do
+
+  before(:each) { log_in }
+
   it '#show' do
     client = client_factory id: 1, human_id: 3008
     client.properties << property_factory(id: 1, human_id: 909)

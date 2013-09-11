@@ -6,6 +6,8 @@ describe Property do
 
   context '#update' do
 
+    before(:each) { log_in }
+
     it 'basic' do
       property = property_factory id: 1, human_id: 8000
       navigate_to_edit_page

@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Property do
 
+  before(:each) { log_in }
+
   it '#destroys a property' do
     property = property_factory human_id: 9000
     visit '/properties'

@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Client do
 
+  before(:each) { log_in }
+
   it '#destroys' do
     client_factory human_id: 9000
     visit '/clients'

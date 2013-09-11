@@ -4,6 +4,8 @@ require_relative '../shared/entity'
 
 describe Property do
 
+  before(:each) { log_in }
+
   it '#show' do
     property = property_factory_with_billing id: 1, human_id: 1000
     visit '/properties/'

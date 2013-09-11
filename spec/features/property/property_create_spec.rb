@@ -4,6 +4,8 @@ require_relative '../shared/entity'
 
 describe Property do
 
+  before(:each) { log_in }
+
   it '#create', js:true  do
     navigate_to_create_page
     validate_page

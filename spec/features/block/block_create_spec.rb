@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Block do
 
-
+  before(:each) { log_in }
 
   it '#create a block' do
     create_properties
