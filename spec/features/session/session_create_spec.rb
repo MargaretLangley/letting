@@ -17,7 +17,7 @@ describe 'Session' do
   end
 
   def navigates_to_create_page
-    visit '/sessions/new/'
+    visit '/login/'
   end
 
   def fill_in_login
@@ -30,14 +30,14 @@ describe 'Session' do
 
   def expect_to
     expect(current_path).to eq '/'
-    expect(page).to have_text 'Logged in!'
-    expect(page).to have_text 'user@example.com'
+    expect(page).to have_text /Logged in!/i
+    expect(page).to have_text /user@example.com/i
   end
 
   def logs_out
     click_on 'Log Out'
-    expect(page).to have_text 'Logged out!'
-    expect(page).to have_text 'Log In'
+    expect(page).to have_text /Logged out!/i
+    expect(page).to have_text /Log In/i
   end
 
   def expect_failure
