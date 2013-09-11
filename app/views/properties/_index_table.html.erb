@@ -36,7 +36,7 @@
     <% properties.each do |property| %>
     <tr>
       <td class='alnright'>
-        <%= link_to property.human_id, property %>
+        <%= link_to property.human_id, edit_property_path(property) %>
       </td>
       <td class='alnright'>
         <%=property.client_id%>
@@ -62,6 +62,7 @@
       <% if show_actions %>
       <td>
          <%= link_to 'Edit', edit_property_path(property) %> |
+         <%= link_to 'View', property_path(property) %> |
         <%= link_to 'Delete', property, method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
       </td>
       <% end %>

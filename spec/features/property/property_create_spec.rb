@@ -145,7 +145,7 @@ describe Property do
   end
 
   def navigate_to_property_page
-    click_on '278'
+    click_on 'View'
   end
 
   def expect_property_page

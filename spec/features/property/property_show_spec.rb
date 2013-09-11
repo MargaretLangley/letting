@@ -7,7 +7,7 @@ describe Property do
   it '#show' do
     property = property_factory_with_billing id: 1, human_id: 1000
     visit '/properties/'
-    click_on '1000'
+    click_on 'View'
     expect(current_path).to eq '/properties/1'
     expect_property_address
     expect_property_entity
