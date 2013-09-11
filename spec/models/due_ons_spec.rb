@@ -10,12 +10,6 @@ describe DueOns do
       due_ons.prepare
       expect(due_ons).to have(4).items
     end
-
-    it 'every month then makes per_month' do
-      expect(due_ons).to have(0).items
-      due_ons.prepare
-      expect(due_ons).to have(4).items
-    end
   end
 
   context '#empty?' do
@@ -180,6 +174,10 @@ describe DueOns do
       reload.save!
       reload2 = Charge.find(charge.id)
       expect(reload2.due_ons).to have(2).items
+    end
+
+    it 'what happens if per_month day same as on date day' do
+      pending
     end
 
   end

@@ -228,7 +228,7 @@ describe Property do
       it 'adds monthly charge', js: true do
         property = property_factory id: 1, human_id: 8000
         navigate_to_edit_page
-        click_on 'or every month'
+        click_on 'or per month'
         fill_in_charge
         fill_in_due_on_per_month
         update_then_expect_properties_page
@@ -245,14 +245,14 @@ describe Property do
       it 'opens a monthly charge correctly' do
         property_factory_with_monthly_charge human_id: 8000
         navigate_to_edit_page
-        expect(page).to have_text 'every month or on date'
+        expect(page).to have_text 'Per month or on date'
       end
 
       it 'opens monthly and changes to date charge', js: true do
         property = property_factory_with_monthly_charge human_id: 8000
         navigate_to_edit_page
         click_on 'or on date'
-        expect(page).to have_text 'on date or every month'
+        expect(page).to have_text /on date or per month/i
       end
     end
 

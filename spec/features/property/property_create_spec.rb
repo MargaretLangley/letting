@@ -190,7 +190,7 @@ describe Property do
       expect(page).to have_text 'Advance'
       expect(page).to have_text '£50.50'
 
-      expect(page).to have_text '01/01'
+      expect(page).to have_text '1st Jan'
     end
 
 

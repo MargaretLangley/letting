@@ -37,12 +37,12 @@ describe DueOn do
     end
 
     context '#per_month?' do
-      it 'recognises when not every month' do
+      it 'recognises when not per month' do
         due_on.day = 1
         due_on.month = 1
         expect(due_on).to_not be_per_month
       end
-      it 'recognises every month' do
+      it 'recognises per month' do
         due_on.day = 1
         due_on.month = -1
         expect(due_on).to be_per_month
