@@ -3,7 +3,11 @@
   <%= object.due_in %></span>
   <%= number_to_currency object.amount %>
 
-  <% object.due_ons.each do |due_ons| %>
-   <%= render 'show_due_on', object: due_ons %>
-  <% end %>
+  <% if object.due_ons.per_month? %>
+    <%= "- due #{object.due_ons.per_month.day.ordinalize} of the month" %>
+  <% elsif %>
+    <% object.due_ons.each do |due_ons| %>
+     <%= render 'show_due_on', object: due_ons %>
+    <% end %>
+ <% end %>
 </p>

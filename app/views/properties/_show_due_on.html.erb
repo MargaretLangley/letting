@@ -1,2 +1,2 @@
   <br/>
-  <span class= 'floatleft'>Due on dd/mm: </span><%= left_pad_int_with_upto_2_zeros object.day %>/<%= left_pad_int_with_upto_2_zeros object.month %>
+  <span class= 'floatleft'>Due on: </span><%= object.day.ordinalize %> <%= Date::ABBR_MONTHNAMES[ object.month] %>
