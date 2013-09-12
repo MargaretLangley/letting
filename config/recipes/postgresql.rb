@@ -18,14 +18,18 @@ namespace :postgresql do
   end
   after "deploy:setup", "postgresql:create_database"
 
-  desc "Drop the database and role for this application."
-  task :drop, roles: :db, only: { primary: true } do
-    # drop the database and role
+  desc "Drop the database role for this application."
+  task :drop_role, roles: :db, only: { primary: true } do
+    run %Q{#{sudo} -u postgres psql -c "drop role #{postgresql_user};"}
+  end
+
+  desc "Drop the database for this application."
+  task :drop_db, roles: :db, only: { primary: true } do
     # Doesn't seem to need to drop hstore
     # run %Q{#{sudo} -u postgres psql -d #{postgresql_database} -c "drop extension if exists hstore;"}
     run %Q{#{sudo} -u postgres psql -c "drop database #{postgresql_database};"}
-    run %Q{#{sudo} -u postgres psql -c "drop role #{postgresql_user};"}
   end
+
 
   desc "Generate the database.yml configuration file."
   task :setup, roles: :app do

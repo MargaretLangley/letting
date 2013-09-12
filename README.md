@@ -24,5 +24,18 @@ Handles a number of properties with ground rents and other charges.
 2. Enter password for postgres database
 3. cap deploy
 4. cap deploy:migrate
-5. cap rake:invoke task=db:import
-6. Use the admin created from the application.yml's user and password (see above).
+
+###Reset the database
+1. cap postgresql:drop_role
+2. cap postgresql:drop_db
+Then follow Start from Scratch
+
+
+###Imported Data
+1. cap rake:invoke task=db:import
+2. Use the admin created from the application.yml's user and password (see above).
+
+###Seed Data
+1. cap deploy:seed
+
+
