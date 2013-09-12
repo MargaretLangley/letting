@@ -7,4 +7,10 @@ namespace :import_data do
   end
   after "deploy:setup", "import_data:upload"
 
+  desc "Symlink the import file into latest release"
+  task :symlink, roles: :app do
+    run "ln -nfs #{shared_path}/import_data/ #{release_path}/import_data"
+  end
+  after "deploy:finalize_update", "import_data:symlink"
+
 end
