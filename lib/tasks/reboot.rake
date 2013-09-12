@@ -14,7 +14,7 @@ namespace :db do
   desc "Get app databases back to base state: db:drop, db:create, db:migrate, db:test:prepare, db:populate"
   task reboot: [
     'environment',
-    'db:dev_warning',
+    #'db:dev_warning',
     'db:drop',
     'db:create',
     'db:migrate',
