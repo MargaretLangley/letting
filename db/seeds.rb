@@ -22,7 +22,22 @@ end
         id: 1,
         email: 'user@example.com',
         password: 'password',
-        password_confirmation: 'password'
+        password_confirmation: 'password',
+        admin: true
+     },
+     {
+        id: 2,
+        email: 'archie@mclaren.com',
+        password: 'password',
+        password_confirmation: 'password',
+        admin: true
+     },
+     {
+        id: 3,
+        email: 'teddy@wynyard.com',
+        password: 'password',
+        password_confirmation: 'password',
+        admin: false
       }
     ]
   end
