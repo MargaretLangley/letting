@@ -1,0 +1,21 @@
+# PostgreSQL. Versions 8.2 and up are supported.
+#
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: letting_development
+  pool: 5
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: letting_test
+  pool: 5
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: letting_production
+  pool: 5
+  username: letting
+  password: ADD PASSWORD HERE

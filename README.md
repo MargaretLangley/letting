@@ -6,8 +6,9 @@ Program for handling the accounts of a letting agency company in particular to p
 
 Handles a number of properties with ground rents and other charges.
 
+##GETTING STARTED
 
-Setup the Project
+###Setup the Project
 
 1. git clone git@github.com:BCS-io/letting.git
 2. bundle install
@@ -17,3 +18,11 @@ Setup the Project
   or
   rake db:import - to add the data from old system and bring it into this system. You need a copy of the CSV data files to import and have them in import_data off the root of the project.
 
+##PRODUCTION
+###Start From Scratch
+1. cap deploy:setup
+2. Enter password for postgres database
+3. cap deploy
+4. cap deploy:migrate
+5. cap rake:invoke task=db:import
+6. Use the admin created from the application.yml's user and password (see above).
