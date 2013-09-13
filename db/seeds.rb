@@ -21,22 +21,22 @@ end
       {
         id: 1,
         email: 'user@example.com',
-        password: 'G8fLBrY2vFASW0XZK1672g',
-        password_confirmation: 'G8fLBrY2vFASW0XZK1672g',
+        password: 'password',
+        password_confirmation: 'password',
         admin: true
      },
      {
         id: 2,
         email: 'archie@mclaren.com',
-        password: 'G8fLBrY2vFASW0XZK1672g',
-        password_confirmation: 'G8fLBrY2vFASW0XZK1672g',
+        password: 'password',
+        password_confirmation: 'password',
         admin: true
      },
      {
         id: 3,
         email: 'teddy@wynyard.com',
-        password: 'G8fLBrY2vFASW0XZK1672g',
-        password_confirmation: 'G8fLBrY2vFASW0XZK1672g',
+        password: 'password',
+        password_confirmation: 'password',
         admin: false
       }
     ]

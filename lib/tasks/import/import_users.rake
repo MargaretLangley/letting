@@ -1,21 +1,15 @@
 require 'csv'
+require_relative '../../import/import'
+require_relative '../../import/import_fields'
+require_relative '../../import/import_user'
 
-desc "Import Users"
-task  import_block: :environment do
-  puts "Start Import"
+STDOUT.sync = true
 
-  contents = CSV.open "import_data/properties.csv", headers: true, header_converters: :symbol, converters: lambda {|f| f ? f.strip : nil}
+namespace :import do
 
-   puts 'open file'
-       contents.first(33).each do |row|
-       block = Block.where(name: row[:housename]).first_or_initialize
-
-
-      block.assign_attributes name: row[:housename], client_id: row[:clientid]
-      # NO not new!!!!!
-
-      unless block.save
-        puts "Block Name: #{row[:name]} -  #{block.errors.full_messages}"
-    end
+  desc "Import users data from CSV file"
+  task users: :environment do
+    DB::ImportUser.import DB::Import.csv_table('users', \
+      headers: DB::ImportFields.user)
   end
 end

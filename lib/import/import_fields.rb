@@ -19,6 +19,10 @@ module DB
       %w{ escalation_date escaltion_new_rent }
     end
 
+    def self.user
+      %w{ email password admin }
+    end
+
     private
 
       def self.entities

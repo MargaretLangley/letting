@@ -10,6 +10,7 @@ namespace :db do
   task import: [
     'environment',
     'db:truncate_all',   # Stripped out for now but when in parellell with live system. nope
+    'import:users',
     'import:clients',
     'import:properties',
     'import:billing_profiles',

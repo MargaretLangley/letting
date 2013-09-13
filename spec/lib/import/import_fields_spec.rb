@@ -23,6 +23,11 @@ module DB
       expect(ImportFields.billing_profile).to eq fields
    end
 
+   it 'user' do
+    fields = %w[email password]
+    expect(ImportFields.user).to eq fields
+   end
+
   end
 
 end
