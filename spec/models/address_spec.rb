@@ -68,4 +68,42 @@ describe Address do
     expect(new_address.addressable_id).to be_nil
     expect(new_address.road).not_to be_nil
   end
+
+
+  # Note search automatically uses ordered ASC search
+  context 'search' do
+
+   a3 = a2 = a1 = nil
+
+    before do
+      a1 = Address.create! addressable_id: 1, \
+                           addressable_type: 'Client', \
+                           house_name: 'Hillbank', \
+                           road: 'Edgbaston Road', \
+                           town: 'Birmingham', \
+                           county: 'West Midlands'
+
+      a2 = Address.create! addressable_id: 1, \
+                           addressable_type: 'Client', \
+                           house_name: 'Headingly', \
+                           road: 'Headingly', \
+                           town: 'York', \
+                           county: 'Yorkshire'
+
+      expect(Address.all).to eq [a1,a2]
+    end
+
+    it 'house' do
+      expect(Address.search_by_all 'Hill').to eq [a1]
+    end
+
+    it 'road' do
+      expect(Address.search_by_all 'Edg').to eq [a1]
+    end
+
+    it 'towns' do
+      expect(Address.search_by_all 'Yor').to eq [a2]
+    end
+
+  end
 end

@@ -9,6 +9,13 @@ class Address < ActiveRecord::Base
   validates :county, length: { minimum: 4, maximum: 64 }
   validates :postcode, length: { minimum: 6, maximum: 8 }, allow_blank: true
 
+  scope :search_by_all, ->(search) {
+    where( 'addresses.house_name ILIKE ? OR ' + \
+              'addresses.road ILIKE ? OR '  \
+              'addresses.town ILIKE ?',  \
+              "#{search}%", "#{search}%", "#{search}%" \
+    )}
+
   def empty?
     attributes.except(*ignored_attrs).values.all?( &:blank? )
   end
