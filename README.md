@@ -21,13 +21,13 @@ Handles a number of properties with ground rents and other charges.
 ##PRODUCTION
 ###Start From Scratch
 1. cap deploy:setup
-2. Enter password for postgres database
-3. cap deploy
-4. cap deploy:migrate
+1.1. Enter password for postgres database
+2. cap deploy
+3. cap deploy:migrate
 
 ###Reset the database
-1. cap postgresql:drop_role
-2. cap postgresql:drop_db
+1. cap postgresql:drop_db
+2. cap postgresql:drop_role   (role depends on db)
 Then follow Start from Scratch
 
 
