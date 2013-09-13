@@ -26,7 +26,12 @@ class Client < ActiveRecord::Base
   private
     def self.search_by_all(search)
       Client.includes(:address, :entities).
-      where('human_id = ? OR entities.name ILIKE ?', "#{search.to_i}", "#{search}%" ).merge(Address.search_by_all(search))
-      #.merge(Address.search_by_all(search)).references(:address, :entity).order('human_id ASC')
+            where('human_id = ? OR ' + \
+              'entities.name ILIKE ? OR ' + \
+              'addresses.house_name ILIKE ? OR ' + \
+              'addresses.road ILIKE ? OR '  \
+              'addresses.town ILIKE ?',  \
+              "#{search.to_i}", "#{search}%", "#{search}%", "#{search}%", "#{search}%" \
+              ).references(:address, :entity).order('human_id ASC')
     end
 end
