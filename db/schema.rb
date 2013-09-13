@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20130819155927) do
 
   create_table "users", force: true do |t|
     t.string   "email",           null: false
-    t.string   "password_digest"
+    t.string   "password_digest", null: false
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
