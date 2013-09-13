@@ -3,7 +3,7 @@ $( document ).ready(function() {
   $('.reveal-link').click(function(event) {
     event.preventDefault();
     var parent = findParentofRevealableElements($(this));
-    firstHiddenChild(parent).slideToggle('fast')
+    firstHiddenChild(parent).slideToggle('fast');
     if( noHiddenChildren(parent) ) { toggleDisableable($(this)); }
   });
 
