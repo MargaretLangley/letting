@@ -32,7 +32,6 @@ module DB
       if monthly_charge? row
          monthly_charge = day_month_from_row_columns 1, row
          day_months << DayMonth.from_day_month( monthly_charge.day, DueOn::PER_MONTH )
-        # (1..MONTHS_IN_YEAR).each {|index| day_months <<  DayMonth.from_day_month( monthly_charge.day, index ) }
       else
         (1..maximum_dates(row)).each {|index| day_months <<  day_month_from_row_columns( index, row ) }
       end
