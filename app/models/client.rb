@@ -26,12 +26,12 @@ class Client < ActiveRecord::Base
   private
     def self.search_by_all(search)
       Client.includes(:address, :entities).
-            where('human_id = ? OR ' + \
-              'entities.name ILIKE ? OR ' + \
-              'addresses.house_name ILIKE ? OR ' + \
-              'addresses.road ILIKE ? OR '  \
-              'addresses.town ILIKE ?',  \
-              "#{search.to_i}", "#{search}%", "#{search}%", "#{search}%", "#{search}%" \
+            where('human_id = :i OR ' + \
+              'entities.name ilike :s OR ' + \
+              'addresses.house_name ilike :s OR ' + \
+              'addresses.road ilike :s OR '  \
+              'addresses.town ilike :s',  \
+              i: "#{search.to_i}", s: "#{search}%" \
               ).references(:address, :entity).order('human_id ASC')
     end
 end

@@ -52,12 +52,12 @@ class Property < ActiveRecord::Base
   private
     def self.search_by_all(search)
       Property.includes(:address,:entities).
-        where('human_id = ? OR ' + \
-              'entities.name ILIKE ? OR ' + \
-              'addresses.house_name ILIKE ? OR ' + \
-              'addresses.road ILIKE ? OR '  \
-              'addresses.town ILIKE ?',\
-              "#{search.to_i}", "#{search}%", "#{search}%", "#{search}%", "#{search}%" \
+        where('human_id = :i OR ' + \
+              'entities.name ILIKE :s OR ' + \
+              'addresses.house_name ILIKE :s OR ' + \
+              'addresses.road ILIKE :s OR '  \
+              'addresses.town ILIKE :s',\
+              i: "#{search.to_i}", s: "#{search}%" \
               ).references(:address, :entity).order('human_id ASC')
     end
 
