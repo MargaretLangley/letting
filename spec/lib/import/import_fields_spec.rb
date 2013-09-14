@@ -24,7 +24,7 @@ module DB
    end
 
    it 'user' do
-    fields = %w[email password]
+    fields = %w[email password admin]
     expect(ImportFields.user).to eq fields
    end
 
