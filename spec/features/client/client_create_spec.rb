@@ -44,6 +44,7 @@ describe Client do
 
     it 'adds and removes new persons', js: true do
       navigate_to_create_page
+
       fill_in_form
       click_on 'Add Person'
       within_fieldset 'client_entity_1' do

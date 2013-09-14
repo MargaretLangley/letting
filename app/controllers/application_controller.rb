@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   delegate :allow?, to: :current_permission
   helper_method :allow?
 
-
   protected
 
   def address_params
@@ -24,8 +23,6 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
   helper_method :current_user
-
-
 
   def current_permission
     @current_permission ||= Permission.new(current_user)

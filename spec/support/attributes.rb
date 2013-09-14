@@ -1,11 +1,3 @@
-def user_attributes overrides = {}
-  {
-    email: 'user@example.com',
-    password: 'password',
-    password_confirmation: 'password'
-  }.merge overrides
-end
-
 def property_attributes overrides = {}
   {
     human_id: 2002,
@@ -89,7 +81,6 @@ def due_on_attributes_1 overrides = {}
     month: 9
   }.merge overrides
 end
-
 
 def due_on_monthly_attributes_0 overrides = {}
   {

@@ -7,7 +7,7 @@ RSpec::Matchers.define :allow? do |*args|
   end
 end
 
-describe Permission do
+describe Permission, focus: true do
 
   context "as guest" do
 
@@ -23,11 +23,17 @@ describe Permission do
     it('properties#update') { should_not allow?("properties", "update") }
     it('properties#destroy') { should_not allow?("properties", "destroy") }
 
-    it('clients#update') { should_not allow?("clients", "index") }
-    it('clients#update') { should_not allow?("clients", "create") }
-    it('clients#update') { should_not allow?("clients", "edit") }
+    it('clients#index') { should_not allow?("clients", "index") }
+    it('clients#create') { should_not allow?("clients", "create") }
+    it('clients#edit') { should_not allow?("clients", "edit") }
     it('clients#update') { should_not allow?("clients", "update") }
-    it('clients#update') { should_not allow?("clients", "destroy") }
+    it('clients#destroy') { should_not allow?("clients", "destroy") }
+
+    it('users#index') { should_not allow?("users", "index") }
+    it('users#create') { should_not allow?("users", "create") }
+    it('users#edit') { should_not allow?("users", "edit") }
+    it('users#update') { should_not allow?("users", "update") }
+    it('users#destroy') { should_not allow?("users", "destroy") }
 
   end
 
@@ -45,11 +51,32 @@ describe Permission do
     it('properties#update')  { should allow?("properties", "update") }
     it('properties#destroy') { should allow?("properties", "destroy") }
 
-    it('clients#update') { should allow?("clients", "index") }
-    it('clients#update') { should allow?("clients", "create") }
-    it('clients#update') { should allow?("clients", "edit") }
+    it('clients#index') { should allow?("clients", "index") }
+    it('clients#create') { should allow?("clients", "create") }
+    it('clients#edit') { should allow?("clients", "edit") }
     it('clients#update') { should allow?("clients", "update") }
-    it('clients#update') { should allow?("clients", "destroy") }
+    it('clients#destroy') { should allow?("clients", "destroy") }
+
+    it('users#index') { should_not allow?("users", "index") }
+    it('users#create') { should_not allow?("users", "create") }
+    it('users#edit') { should_not allow?("users", "edit") }
+    it('users#update') { should_not allow?("users", "update") }
+    it('users#destroy') { should_not allow?("users", "destroy") }
+
+  end
+
+  context 'admin' do
+    subject { Permission.new(User.create! user_attributes admin: true) }
+
+    it('session#destroy')  { should allow?("sessions", "destroy") }
+    it('clients#destroy') { should allow?("clients", "destroy") }
+    it('properties#destroy') { should allow?("properties", "destroy") }
+
+    it('users#index') { should allow?("users", "index") }
+    it('users#create') { should allow?("users", "create") }
+    it('users#edit') { should allow?("users", "edit") }
+    it('users#update') { should allow?("users", "update") }
+    it('users#destroy') { should allow?("users", "destroy") }
 
   end
 end
