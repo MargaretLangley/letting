@@ -10,10 +10,10 @@ class Address < ActiveRecord::Base
   validates :postcode, length: { minimum: 6, maximum: 8 }, allow_blank: true
 
   scope :search_by_all, ->(search) {
-    where( 'addresses.house_name ILIKE ? OR ' + \
-              'addresses.road ILIKE ? OR '  \
-              'addresses.town ILIKE ?',  \
-              "#{search}%", "#{search}%", "#{search}%" \
+    where( 'addresses.house_name ILIKE :s  OR ' + \
+              'addresses.road ILIKE :s  OR '  \
+              'addresses.town ILIKE :s ',  \
+              s: "#{search}%" \
     )}
 
   def empty?
