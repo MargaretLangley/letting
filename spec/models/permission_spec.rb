@@ -7,7 +7,7 @@ RSpec::Matchers.define :allow? do |*args|
   end
 end
 
-describe Permission, focus: true do
+describe Permission do
 
   context "as guest" do
 
