@@ -37,7 +37,7 @@ module DueOns
       def clean_up_form
         if has_per_month_due_on?
           new_day_for_per_month_charge = per_month_due_on.day
-          destruction_if :per_month? if has_per_month_due_on?
+          destruction_if :per_month?
           if new_day_for_per_month_charge != current_day_for_per_month_charge
             destruction_if :present?
             assign_per_month new_day_for_per_month_charge
