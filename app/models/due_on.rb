@@ -15,8 +15,9 @@ class DueOn < ActiveRecord::Base
     month == PER_MONTH
   end
 
-  def per_month2?
-    month == PER_MONTH
+  def same_day? due_on
+    return false if due_on.nil?
+    self.day == due_on.day
   end
 
   private

@@ -36,11 +36,11 @@ module DueOns
 
       def clean_up_form
         if has_per_month_due_on?
-          new_day_for_per_month_charge = per_month_due_on.day
-          destruction_if :per_month?
-          if new_day_for_per_month_charge != current_day_for_per_month_charge
+          if per_month_due_on.same_day? first_none_per_month_due_on
+            destruction_if :per_month?
+          else
             destruction_if :present?
-            assign_per_month new_day_for_per_month_charge
+            assign_per_month per_month_due_on.day
           end
         else
           if self.detect(&:new_record?).present?
@@ -68,10 +68,6 @@ module DueOns
 
       def per_month_due_on
         self.detect(&:per_month?)
-      end
-
-      def current_day_for_per_month_charge
-        first_none_per_month_due_on.present? ? first_none_per_month_due_on.day : nil
       end
 
       def first_none_per_month_due_on
