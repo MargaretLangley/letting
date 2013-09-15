@@ -43,7 +43,7 @@ class Property < ActiveRecord::Base
 
   def self.search search
     if search.blank?
-       Property.all.includes(:address).order('human_id ASC')
+       Property.all.includes(:address).order(:human_id)
     else
       self.search_by_all(search)
     end
@@ -58,7 +58,7 @@ class Property < ActiveRecord::Base
               'addresses.road ILIKE :s OR '  \
               'addresses.town ILIKE :s',\
               i: "#{search.to_i}", s: "#{search}%" \
-              ).references(:address, :entity).order('human_id ASC')
+              ).references(:address, :entity).order(:human_id)
     end
 
 end

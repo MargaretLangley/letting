@@ -1,7 +1,7 @@
 class SearchSuggestion < ActiveRecord::Base
   def self.terms_for prefix
     suggestions = where('term ilike ?', "#{prefix}_%")
-    suggestions.order('popularity desc').limit(10).pluck(:term)
+    suggestions.order(popularity: :desc).limit(10).pluck(:term)
   end
 
   def self.index_properties

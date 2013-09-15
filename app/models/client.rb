@@ -17,7 +17,7 @@ class Client < ActiveRecord::Base
 
   def self.search search
     if search.blank?
-       Client.all.includes(:address).order('human_id ASC')
+       Client.all.includes(:address).order(:human_id)
     else
       self.search_by_all(search)
     end
@@ -32,6 +32,6 @@ class Client < ActiveRecord::Base
               'addresses.road ilike :s OR '  \
               'addresses.town ilike :s',  \
               i: "#{search.to_i}", s: "#{search}%" \
-              ).references(:address, :entity).order('human_id ASC')
+              ).references(:address, :entity).order(:human_id)
     end
 end

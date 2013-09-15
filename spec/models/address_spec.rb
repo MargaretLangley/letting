@@ -70,7 +70,7 @@ describe Address do
   end
 
 
-  # Note search automatically uses ordered ASC search
+  # Note search automatically uses ordered asc search
   context 'search' do
 
    a3 = a2 = a1 = nil

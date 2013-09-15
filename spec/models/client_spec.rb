@@ -91,7 +91,7 @@ describe Client do
     end
   end
 
-# Note search automatically uses ordered ASC search
+# Note search automatically uses ordered asc search
   context 'search' do
 
    c3 = c2 = c1 = nil

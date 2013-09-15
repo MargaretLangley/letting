@@ -13,7 +13,7 @@
 module DueOns
   extend ActiveSupport::Concern
   included do
-    has_many :due_ons, -> { order('created_at ASC') }, dependent: :destroy do
+    has_many :due_ons, -> { order(:created_at) }, dependent: :destroy do
       def prepare
         (self.size...MAX_DISPLAYED_DUE_ONS).each { self.build }
       end
