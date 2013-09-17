@@ -31,7 +31,6 @@ def oval_address_attributes overrides = {}
   }.merge overrides
 end
 
-
 def person_entity_attributes overrides = {}
   {
     entity_type: 'Person',
@@ -90,6 +89,15 @@ def due_on_monthly_attributes_0 overrides = {}
 end
 
 def user_attributes overrides = {}
+  {
+    email: 'user@example.com',
+    password: 'password',
+    password_confirmation: 'password',
+    admin: true
+  }.merge overrides
+end
+
+def admin_attributes overrides = {}
   {
     email: 'admin@example.com',
     password: 'password',

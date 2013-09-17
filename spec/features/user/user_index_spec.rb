@@ -5,6 +5,7 @@ describe User do
   before(:each) { log_in }
   context '#index' do
     it 'basic users in view page' do
+      user_factory admin_attributes
       user_factory george_attributes
       user_factory bob_attributes
       visit '/users/'
