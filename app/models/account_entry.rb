@@ -8,17 +8,8 @@ class AccountEntry < ActiveRecord::Base
 
   def debt debt
     self.charge_id = debt.charge_id
-    self.paid = 0
     self.on_date = debt.on_date
-    self.due = debt.amount
-    self
-  end
-
-  def payment payment
-    self.charge_id = payment.charge_id
-    self.paid = payment.amount
-    self.on_date = payment.on_date
-    self.due = 0
+    self.amount = debt.amount
     self
   end
 

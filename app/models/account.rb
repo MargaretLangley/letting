@@ -1,20 +1,18 @@
 class Account < ActiveRecord::Base
   belongs_to :property
-  has_many :account_entries, dependent: :destroy
+  has_many :debts, dependent: :destroy
+  has_many :payments, dependent: :destroy
 
-  def debt debt
-    account_entries.build.debt debt
+  def debt debt_args
+    debts.build debt_args
   end
 
-  def payment payment
-    account_entries.build.payment payment
+  def payment payment_args
+    payments.build payment_args
   end
 
   def self.lastest_payments number_of
-    AccountEntry.latest_payments number_of
+    Payment.latest_payments number_of
   end
-
-
-
 
 end

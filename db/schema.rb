@@ -11,22 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130916115546) do
+ActiveRecord::Schema.define(version: 20130916115888) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "account_entries", force: true do |t|
-    t.string   "account_id",                         null: false
-    t.string   "charge_id",                          null: false
-    t.string   "on_date",                            null: false
-    t.decimal  "due",        precision: 8, scale: 2, null: false
-    t.decimal  "paid",       precision: 8, scale: 2, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "account_entries", ["account_id"], name: "index_account_entries_on_account_id", using: :btree
 
   create_table "accounts", force: true do |t|
     t.integer  "property_id"
@@ -85,6 +73,18 @@ ActiveRecord::Schema.define(version: 20130916115546) do
     t.datetime "updated_at"
   end
 
+  create_table "debts", force: true do |t|
+    t.integer  "account_id",                         null: false
+    t.integer  "charge_id",                          null: false
+    t.date     "on_date",                            null: false
+    t.decimal  "amount",     precision: 8, scale: 2, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "debts", ["account_id"], name: "index_debts_on_account_id", using: :btree
+  add_index "debts", ["charge_id"], name: "index_debts_on_charge_id", using: :btree
+
   create_table "due_ons", force: true do |t|
     t.integer  "day"
     t.integer  "month"
@@ -108,6 +108,18 @@ ActiveRecord::Schema.define(version: 20130916115546) do
 
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
 
+  create_table "payments", force: true do |t|
+    t.integer  "account_id",                         null: false
+    t.integer  "debt_id",                            null: false
+    t.date     "on_date",                            null: false
+    t.decimal  "amount",     precision: 8, scale: 2, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payments", ["account_id"], name: "index_payments_on_account_id", using: :btree
+  add_index "payments", ["debt_id"], name: "index_payments_on_debt_id", using: :btree
+
   create_table "properties", force: true do |t|
     t.integer  "human_id"
     t.integer  "client_id"
@@ -126,7 +138,7 @@ ActiveRecord::Schema.define(version: 20130916115546) do
 
   create_table "users", force: true do |t|
     t.string   "email",           null: false
-    t.string   "password_digest"
+    t.string   "password_digest", null: false
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
