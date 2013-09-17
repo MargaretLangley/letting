@@ -4,8 +4,8 @@ class CreateAccountEntries < ActiveRecord::Migration
       t.string :account_id, null: false
       t.string :charge_id, null: false
       t.string :on_date, null: false
-      t.string :due
-      t.string :paid
+      t.decimal :due, precision: 8, scale: 2, null: false
+      t.decimal :paid, precision: 8, scale: 2, null: false
 
       t.timestamps
     end

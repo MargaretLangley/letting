@@ -17,11 +17,11 @@ ActiveRecord::Schema.define(version: 20130916115546) do
   enable_extension "plpgsql"
 
   create_table "account_entries", force: true do |t|
-    t.string   "account_id", null: false
-    t.string   "charge_id",  null: false
-    t.string   "on_date",    null: false
-    t.string   "due"
-    t.string   "paid"
+    t.string   "account_id",                         null: false
+    t.string   "charge_id",                          null: false
+    t.string   "on_date",                            null: false
+    t.decimal  "due",        precision: 8, scale: 2, null: false
+    t.decimal  "paid",       precision: 8, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
