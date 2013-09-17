@@ -25,18 +25,12 @@ end
         admin: true
      },
      {
-        email: 'archie@mclaren.com',
+        email: 'user@example.com',
         password: 'password',
         password_confirmation: 'password',
         admin: true
-     },
-     {
-        email: 'teddy@wynyard.com',
-        password: 'password',
-        password_confirmation: 'password',
-        admin: false
-      }
-    ]
+     }
+   ]
     Rake::Task['import:users'].invoke
   end
 

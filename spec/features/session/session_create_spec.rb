@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'Session' do
-
   it '#creates' do
     user_factory user_attributes
     navigates_to_create_page
