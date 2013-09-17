@@ -14,12 +14,16 @@ describe Account do
     account.payment payment
   end
 
+  it 'returns unpaid debts' do
+    pending
+  end
+
   it 'returns the payments most recent first' do
-    transactions = []
-    3.times { transactions << account.payment(payment_factory) }
+    payments = []
+    3.times { payments << account.payment(payment_factory) }
     account.save!
-    expect(Payment.all.to_a).to eq transactions
-    expect(Account.lastest_payments(2)).to eq transactions.reverse[0..1]
+    expect(Payment.all.to_a).to eq payments
+    expect(Account.lastest_payments(2)).to eq payments.reverse[0..1]
   end
 
   def debt_factory
