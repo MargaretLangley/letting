@@ -57,6 +57,11 @@ describe Permission do
     it('clients#update') { should allow?("clients", "update") }
     it('clients#destroy') { should allow?("clients", "destroy") }
 
+  end
+
+  context 'admin' do
+    subject { Permission.new(User.create! user_attributes admin: false) }
+
     it('users#index') { should_not allow?("users", "index") }
     it('users#create') { should_not allow?("users", "create") }
     it('users#edit') { should_not allow?("users", "edit") }

@@ -1,7 +1,5 @@
 def user_factory args = {}
-  user = User.new id: args[:id], email: args[:email], \
-                  password: args[:password],
-                  password_confirmation: args[:password_confirmation],
-                  admin: args[:admin]
+  #user = User.new user_attributes args
+  user = User.new args
   user.save!
 end

@@ -22,7 +22,7 @@ describe 'Session' do
 
   def fill_in_login
     within_fieldset 'login' do
-      fill_in 'Email', with: 'user@example.com'
+      fill_in 'Email', with: 'admin@example.com'
       fill_in 'Password', with: 'password'
       click_on 'Log In'
     end
@@ -31,7 +31,7 @@ describe 'Session' do
   def expect_to
     expect(current_path).to eq '/'
     expect(page).to have_text /Logged in!/i
-    expect(page).to have_text /user@example.com/i
+    expect(page).to have_text /admin@example.com/i
   end
 
   def logs_out
