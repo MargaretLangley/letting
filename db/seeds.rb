@@ -8,6 +8,7 @@ def generate_seeding
   seed_users
   seed_clients
   seed_properties
+  seed_charges
   reset_pk_sequenece_on_each_table_used
 end
 
@@ -116,7 +117,6 @@ def seed_properties
   create_billing_profile_entities
   create_billing_profile_addresses
   create_billing_profiles
-  create_charges
 end
 
   def create_entities
@@ -251,6 +251,13 @@ end
     ]
   end
 
+
+def seed_charges
+  create_charges
+  create_account
+  create_debts
+end
+
   def create_charges
     create_due_ons
     Charge.create! [
@@ -262,12 +269,34 @@ end
 
   def create_due_ons
     DueOn.create! [
-      {id: 1, day: 1,  month: 1, charge_id: 1},
-      {id: 2, day: 1,  month: 7, charge_id: 1},
-      {id: 3, day: 30, month: 4, charge_id: 2 },
-      {id: 4, day: 30, month: 9, charge_id: 3 }
+      { id: 1, day: 1,  month: 1, charge_id: 1 },
+      { id: 2, day: 1,  month: 7, charge_id: 1 },
+      { id: 3, day: 30, month: 4, charge_id: 2 },
+      { id: 4, day: 30, month: 9, charge_id: 3 }
     ]
   end
+
+  def create_account
+    Account.create! [
+      { id: 1, property_id: 1 },
+      { id: 2, property_id: 2 },
+      { id: 3, property_id: 3 }
+    ]
+  end
+
+  def create_debts
+    Debt.create! [
+      { id: 1, account_id: 1, charge_id: 1, on_date: '2013/01/01', amount: 88.08 },
+      { id: 2, account_id: 1, charge_id: 1, on_date: '2013/07/01', amount: 88.08 }
+    ]
+  end
+
+  def create_payments
+    Payment.create! [
+      { id: 1, account_id: 1, debt_id: 1, on_date: '2013/03/03', amount: 88.08 }
+    ]
+  end
+
 
 def reset_pk_sequenece_on_each_table_used
   Rake::Task['db:reset_pk'].invoke

@@ -5,6 +5,7 @@ class Charge < ActiveRecord::Base
   validates :amount, :charge_type, :due_in, presence: true
   validates :due_ons, presence: true
   validate :due_ons_size
+  has_many :debt
 
   def prepare
     due_ons.prepare
