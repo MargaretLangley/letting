@@ -256,6 +256,7 @@ def seed_charges
   create_charges
   create_account
   create_debts
+  create_payments
 end
 
   def create_charges
