@@ -19,6 +19,7 @@ Letting::Application.routes.draw do
   end
   resources :clients
   resources :charges
+  resources :debts
   resources :payments
   resources :users
 

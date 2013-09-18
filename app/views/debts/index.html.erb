@@ -1,0 +1,9 @@
+<h2>Charge Properties</h2>
+
+<%= render partial: 'properties/search'%>
+<p>or</p>
+<h3>Select Block</h3>
+
+<% @blocks.each do |block| %>
+  <%= link_to block.name, new_debt_path(block) %>
+<% end %>
