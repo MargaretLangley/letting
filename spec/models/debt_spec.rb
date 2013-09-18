@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Debt do
 
-  let(:debt) { Debt.new charge_id: 1, on_date: '2013/01/30', amount: 10.05 }
+  let(:debt) { Debt.new debt_attributes }
   let(:account) { Account.new id: 1, property_id: 1 }
 
   it 'is valid' do
@@ -37,6 +37,42 @@ describe Debt do
         expect(debt).to_not be_valid
       end
     end
+
+    context 'paid' do
+
+      it 'returns 0 if nothing paid' do
+        expect(debt.paid).to eq 0
+      end
+
+      it 'returns the amount paid' do
+        debt.save!
+        payment = Payment.create! payment_attributes debt_id: debt.id
+        expect(debt.paid).to eq 10.05
+      end
+
+      it 'returns the amount paid' do
+        debt.save!
+        Payment.create! payment_attributes amount: 1.05, debt_id: debt.id
+        Payment.create! payment_attributes amount: 1.05, debt_id: debt.id
+        expect(debt.paid).to eq 2.10
+      end
+
+    end
+
+    context '#paid?' do
+
+      it 'is not paid' do
+        expect(debt).to_not be_paid
+      end
+
+      it 'paid in full true' do
+        debt.save!
+        Payment.create! payment_attributes debt_id: debt.id
+        expect(debt).to be_paid
+      end
+
+    end
+
   end
 
 end

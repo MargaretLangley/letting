@@ -123,3 +123,13 @@ def bob_attributes overrides = {}
     admin: false
   }.merge overrides
 end
+
+
+def debt_attributes overrides = {}
+  { account_id: 1, charge_id: 1, on_date: '2013/1/30', amount: 10.05 }.merge overrides
+end
+
+def payment_attributes  overrides = {}
+  { account_id: 1, debt_id: 1, on_date: '2013/1/30', amount: 10.05 }.merge overrides
+end
+

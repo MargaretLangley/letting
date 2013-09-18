@@ -11,6 +11,10 @@ class Account < ActiveRecord::Base
     payments.build payment_args
   end
 
+  def unpaid_debts
+    debts.reject(&:paid?)
+  end
+
   def self.lastest_payments number_of
     Payment.latest_payments number_of
   end
