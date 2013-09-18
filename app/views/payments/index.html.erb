@@ -1,0 +1,11 @@
+
+<h2 class = "mainTitle">Payments</h2>
+
+<%= render partial: 'properties/search'%>
+
+
+BEGIN IN ERB TAGS
+  render partial: 'index_table', locals: { properties: @payments, show_actions: true }
+END
+
+<%= paginate @payments %>
