@@ -11,8 +11,12 @@ Handles a number of properties with ground rents and other charges.
 ###Setup the Project
 
 1. git clone git@github.com:BCS-io/letting.git
-2. bundle install
-3. rake db:reboot - drops the database (if any), creates and runs migrations.
+2. Rename database.example.yml => database.yml
+   2.1. enter database, username and password into production group
+3. Rename application.example.yml => application.yml
+   3.1. enter a SECRET_KEY_BASE or generate one using rake secret
+4. bundle install
+5. rake db:reboot - drops the database (if any), creates and runs migrations.
 4. Either
   rake db:seed - to get a few lines to test with
   or

@@ -30,6 +30,10 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'kaminari'
 
+# Configuration of sensitive information
+gem 'figaro'
+
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -59,12 +63,6 @@ gem 'capistrano-rbenv', group: :development
    gem 'launchy'
 end
 
-group :test do
-  gem 'zeus'
-  gem 'simplecov', require: false
-  gem 'coveralls', require: false
-  gem 'database_cleaner', '~> 1.0.1'
-end
 
 group :development, :test do
   gem "better_errors"
@@ -75,6 +73,16 @@ group :development, :test do
   gem 'rack-mini-profiler'
 end
 
+group :development do
+  gem 'brakeman', require: false
+end
+
+group :test do
+  gem 'zeus'
+  gem 'simplecov', require: false
+  gem 'coveralls', require: false
+  gem 'database_cleaner', '~> 1.0.1'
+end
 
 group :test do
   gem 'rake', '0.9.6'
