@@ -91,7 +91,7 @@ end
 def user_attributes overrides = {}
   {
     email: 'user@example.com',
-    password: 'passwordspec',
+    password: 'password',
     password_confirmation: 'password',
     admin: false
   }.merge overrides
