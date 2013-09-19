@@ -1,9 +1,9 @@
 <h1 class = "mainTitle">New Block</h1>
 
 <% if block_name_has_no_property_matches? %>
-  <%= render 'find_matching_properties' %>
+  <%= render 'find_matching_properties', block: @block %>
 <% else %>
-  <%= render 'create_block' %>
+  <%= render 'create_block', block: @block %>
 <% end %>
 
 <ul>

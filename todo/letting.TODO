@@ -46,3 +46,12 @@ Shared:
     ✔ Billing profile disabled if use profile is disabled @done (13-09-04 12:11)
     ✔ Use profile label => Use Billing Address @done (13-09-04 12:11)
     ✔ Post code shorter than other text boxes @done (13-08-17 20:50)
+
+
+
+TODO:
+  user form has full hand instead error_messages instead of using shared/errors
+<% if user.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+
