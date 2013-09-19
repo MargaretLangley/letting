@@ -2,10 +2,9 @@ require 'spec_helper'
 
 describe User do
 
-  before(:each) { log_in }
+  before(:each) { log_in admin_attributes }
   context '#destroys' do
     it 'basic' do
-      user_factory admin_attributes
       user_factory george_attributes
       user_factory bob_attributes
       visit '/users/'
