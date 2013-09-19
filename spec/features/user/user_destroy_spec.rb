@@ -6,7 +6,6 @@ describe User do
   context '#destroys' do
     it 'basic' do
       user_factory george_attributes
-      user_factory bob_attributes
       visit '/users/'
       expect(current_path).to eq '/users/'
       expect(page).to have_text 'admin@example.com'
