@@ -8,8 +8,8 @@
       <%= f.label :human_id, 'Client ID' %>
       <%= f.text_field :human_id, autofocus:true %>
     </div>
-    <%= render partial: 'shared/entities', locals: { f: f, entitieable: @client } %>
-    <%= render partial: 'shared/address', locals: { f: f, parent: 'client' } %>
+    <%= render 'shared/entities', f: f, entitieable: @client %>
+    <%= render 'shared/address', f: f, parent: 'client' %>
   </fieldset>
   <div>
     <%= f.submit %><span class = 'simple' ><%= link_to 'Cancel', clients_path %></span>

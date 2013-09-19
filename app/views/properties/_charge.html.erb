@@ -19,5 +19,5 @@
     <%= f.label :amount %>
     <%= f.text_field :amount %>
   </div>
-  <%= render partial: 'due_ons', locals: { f: f, due_ons: DueOnsDecorator.new(charge.due_ons) } %>
+  <%= render 'due_ons', f: f, due_ons: DueOnsDecorator.new(charge.due_ons) %>
 </fieldset>

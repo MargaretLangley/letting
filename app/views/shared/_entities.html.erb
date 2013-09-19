@@ -4,7 +4,7 @@
         <fieldset id='<%= entity_field_id entitieable, index %>'
           class='<%= "#{hide_new_record_unless_first entity, index} " + \
                       "#{destroyable entity, index }" %>' >
-          <%= render partial: 'shared/entity', locals: { f: builder, record: entity, index: index } %>
+          <%= render 'shared/entity', f: builder, record: entity, index: index %>
         </fieldset>
       <% end %>
     <% end %>

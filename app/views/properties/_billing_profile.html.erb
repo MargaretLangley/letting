@@ -17,14 +17,14 @@
     <h3>Agent</h3>
 
     <div class='togglable'>
-       <%= render partial: 'billing_no_agent' %>
+       <%= render'billing_no_agent' %>
     </div>
 
     <div class='togglable revealable' id = "agent_entity">
-      <%= render partial: 'shared/entities', locals: { f: b, entitieable: @property.billing_profile } %>
+      <%= render 'shared/entities', f: b, entitieable: @property.billing_profile %>
     </div>
     <div class='togglable revealable' id = "agent_address">
-      <%= render partial: 'shared/address', locals: { f: b, parent: 'property_billing_profile' } %>
+      <%= render 'shared/address', f: b, parent: 'property_billing_profile' %>
     </div>
   </div>
 </fieldset>

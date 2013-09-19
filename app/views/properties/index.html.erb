@@ -1,8 +1,8 @@
 
 <h2 class = "mainTitle">Properties</h2>
 
-<%= render partial: 'properties/search'%>
+<%= render 'properties/search'%>
 
-<%= render partial: 'index_table', locals: { properties: @properties, show_actions: true } %>
+<%= render 'index_table', properties: @properties, show_actions: true %>
 
 <%= paginate @properties %>

@@ -14,13 +14,13 @@
       <%= f.text_field :client_id %>
     </div>
 
-    <%= render partial: 'occupier', locals: { f: f, entitieable: @property } %>
-    <%= render partial: 'shared/address', locals: { f: f, parent: 'property' } %>
+    <%= render 'occupier', f: f, entitieable: @property %>
+    <%= render 'shared/address', f: f, parent: 'property' %>
 
   </fieldset>
 
-  <%= render partial: 'billing_profile', locals: { f: f } %>
-  <%= render partial: 'charges', locals: { f: f, charges: @property.charges } %>
+  <%= render 'billing_profile', f: f %>
+  <%= render 'charges', f: f, charges: @property.charges %>
   <div>
     <%= f.submit %><span class = 'simple' ><%= link_to 'Cancel', properties_path %></span>
   </div>
