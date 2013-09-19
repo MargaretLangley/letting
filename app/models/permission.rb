@@ -5,6 +5,7 @@ class Permission < Struct.new(:user)
       return true if controller == 'blocks'
       return true if controller == 'clients'
       return true if controller == 'properties'
+      return true if controller == 'payments'
       if user.admin?
         return true if controller == 'users'
       end
