@@ -91,9 +91,9 @@ end
 def user_attributes overrides = {}
   {
     email: 'user@example.com',
-    password: 'password',
+    password: 'passwordspec',
     password_confirmation: 'password',
-    admin: true
+    admin: false
   }.merge overrides
 end
 
@@ -114,16 +114,6 @@ def george_attributes overrides = {}
     admin: true
   }.merge overrides
 end
-
-def bob_attributes overrides = {}
-  {
-    email: 'bob@appleyard.com',
-    password: 'password',
-    password_confirmation: 'password',
-    admin: false
-  }.merge overrides
-end
-
 
 def debt_attributes overrides = {}
   { account_id: 1, charge_id: 1, on_date: '2013/1/30', amount: 10.05 }.merge overrides
