@@ -11,6 +11,7 @@ require "capistrano-rbenv"
 # require "whenever/capistrano"
 
 load "config/recipes/base"
+load "config/recipes/app_env"
 load "config/recipes/nginx"
 load "config/recipes/unicorn"
 load "config/recipes/postgresql"
