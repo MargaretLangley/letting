@@ -15,7 +15,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: letting_production
+  database: ADD DATABASE NAME HERE
   pool: 5
-  username: letting
+  username: ADD USERNAME HERE
   password: ADD PASSWORD HERE
