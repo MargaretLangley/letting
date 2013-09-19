@@ -3,14 +3,13 @@ Letting::Application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
-  resources :sessions
+  resources :sessions, only: [:new, :create, :destroy]
 
   resources :search_suggestions
 
   root 'properties#index'
 
-  resources :blocks
-  resources :addresses
+  resources :blocks, only: [:new, :create, :index]
 
   resources :properties do
     collection do
