@@ -44,22 +44,11 @@ class UsersController < ApplicationController
 
   private
 
-  def authorized
-      if current_user && !current_user.admin?
-      redirect_to root_url, alert: "Not authorized"
-    end
-  end
-
-  def unique_search?
-    @users.size == 1 && search_param.present?
-  end
-
   def search_param
     params[:search]
   end
 
   def users_params
      params.require(:user).permit(:email, :password, :password_confirmation, :admin)
-    # permit :id, :email, :password_digest, :admin
   end
 end
