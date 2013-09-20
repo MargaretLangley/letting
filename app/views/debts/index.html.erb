@@ -5,5 +5,5 @@
 <h3>Select Block</h3>
 
 <% @blocks.each do |block| %>
-  <%= link_to block.name, new_debt_path(block) %>
+  <%= link_to block.name, new_debt_path(block,block: block.name ) %>
 <% end %>
