@@ -2,7 +2,7 @@ Letting::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   config.after_initialize do
-    Bullet.enable = true
+    Bullet.enable = false
     Bullet.alert = true
     Bullet.bullet_logger = true
     Bullet.console = true

@@ -1,5 +1,6 @@
 class Property < ActiveRecord::Base
   belongs_to :client
+  has_one :account
   include Contact
   include Charges
   accepts_nested_attributes_for :charges, allow_destroy: true

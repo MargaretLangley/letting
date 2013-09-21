@@ -3,7 +3,7 @@
 CHARGE ME!
 
 <%= form_tag apply_debts_path, method: :put do %>
-  <%= render 'properties/index_table', properties: @properties, show_checkbox: true, show_actions: false  %>
+  <%= render 'index_table', properties: @properties %>
 
   <%= submit_tag 'Charge Properties' %>
 <% end %>
