@@ -7,6 +7,11 @@ class Account < ActiveRecord::Base
     debts.build debt_args
   end
 
+  def debt_generated_within_date_range date_range
+    debt_infos = property.charges.make_debt_between? date_range
+    debt_infos.each {|debt_info| debts.build debt_info }
+  end
+
   def payment payment_args
     payments.build payment_args
   end

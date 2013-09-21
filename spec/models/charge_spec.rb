@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Charge do
   let(:charge) do
-    charge = Charge.new charge_type: 'ground_rent', \
+    charge = Charge.new id: 1, charge_type: 'ground_rent', \
       due_in: 'advance', amount: 500.50, property_id: 1
-    charge.due_ons.new  day: 1, month: 1, charge_id: 1
+    charge.due_ons.new  day: 3, month: 5, charge_id: 1
     charge
   end
 
@@ -18,11 +18,11 @@ describe Charge do
       it('due_ons') {charge.due_ons.destroy_all; expect(charge).to_not be_valid}
       context 'due_ons_size' do
         it 'not valid one over limit' do
-          (1..12).each { charge.due_ons.build day: 1, month: 1 }
+          (1..12).each { charge.due_ons.build day: 3, month: 5 }
           expect(charge).to_not be_valid
         end
         it 'valid if marked for destruction' do
-          (1..12).each { charge.due_ons.build day: 1, month: 1 }
+          (1..12).each { charge.due_ons.build day: 3, month: 5 }
           charge.due_ons.first.mark_for_destruction
           expect(charge).to be_valid
         end
@@ -63,6 +63,26 @@ describe Charge do
         expect(charge).to be_empty
       end
     end
+  end
+
+
+  context 'due between' do
+
+    it 'missing due on' do
+      expect(charge.due_between? Date.new(2013, 4, 1) .. Date.new(2013, 5, 2) ).to be_false
+    end
+
+    it 'is between due on' do
+      expect(charge.due_between? Date.new(2013, 5, 1) .. Date.new(2013, 5, 5)).to be_true
+    end
+
+  end
+
+  it 'makes charge if between'  do
+    debt = DebtInfo.from_charge charge_id: 1, \
+                        on_date: Date.new(2013,5,3), \
+                        amount: BigDecimal.new(500.5,8)
+    expect(charge.make_debt Date.new(2013, 5, 1) .. Date.new(2013, 5, 5) ).to eq debt
   end
 
 end

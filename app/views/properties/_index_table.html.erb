@@ -1,6 +1,10 @@
 <table>
   <thead>
     <tr>
+    <% if show_checkbox %>
+      <th>
+      </th>
+    <% end %>
       <th class='alnright'>
         ID
       </th>
@@ -35,6 +39,11 @@
   <tbody>
     <% properties.each do |property| %>
     <tr>
+      <% if show_checkbox %>
+        <td>
+          <%= check_box_tag 'property_ids[]', property.id %>
+        </td>
+      <% end %>
       <td class='alnright'>
         <%= link_to property.human_id, edit_property_path(property) %>
       </td>

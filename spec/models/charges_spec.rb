@@ -22,22 +22,36 @@ describe Charges do
     expect(charges.reject(&:empty?)).to have(1).items
   end
 
-  context '#first_or_initialize' do
+  context 'with valid charge' do
     charge = nil
     before(:each) do
       charge = charges.build charge_attributes
-      charge.due_ons.build due_on_attributes_0
+      charge.id = 1
+      due_on = charge.due_ons.build due_on_attributes_0
     end
 
-    it 'initializes if not found' do
-      expect(charges.first_or_initialize 'first seen').to \
-        be_empty
+    context '#first_or_initialize' do
+
+      it 'initializes if not found' do
+        expect(charges.first_or_initialize 'first seen').to \
+          be_empty
+      end
+
+      it 'return if found' do
+        expect(charges.first_or_initialize 'Ground Rent').to_not \
+          be_empty
+      end
     end
 
-    it 'return if found' do
-      expect(charges.first_or_initialize 'Ground Rent').to_not \
-        be_empty
+    context 'debts' do
+
+      it 'applies debt between date' do
+        expect(charges.make_debt_between? Date.new(2013,3,30)..Date.new(2013,3,31)).to \
+        eq [ DebtInfo.from_charge(charge_id: 1, \
+                                  on_date: Date.new(2013,3,31), \
+                                  amount: BigDecimal.new(88.08,8)) \
+           ]
+      end
     end
   end
-
 end

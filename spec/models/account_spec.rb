@@ -8,6 +8,10 @@ describe Account do
     expect(account).to be_valid
   end
 
+  it 'makes debts' do
+    pending 'move charges'
+  end
+
   it 'makes payments' do
     expect(account.payment payment_attributes ).to be_valid
   end
@@ -25,8 +29,6 @@ describe Account do
     expect(Debt.all.to_a).to eq [debt1, debt2]
     expect(account.unpaid_debts).to eq [ debt2 ]
   end
-
-
 
   it 'returns the payments most recent first' do
     payments = []

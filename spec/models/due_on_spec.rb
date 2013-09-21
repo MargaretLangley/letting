@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe DueOn do
-  let(:due_on) { DueOn.new day: 1, month: 1, charge_id: 1 }
+  let(:due_on) { DueOn.new day: 3, month: 5, charge_id: 1 }
   let(:charge) { Charge.new charge_type: 'ground_rent', due_in: 'advance', amount: 500.50, property_id: 1 }
 
   it('is valid') { expect(due_on).to be_valid }
@@ -38,12 +38,12 @@ describe DueOn do
 
     context '#per_month?' do
       it 'recognises when not per month' do
-        due_on.day = 1
-        due_on.month = 1
+        due_on.day = 3
+        due_on.month = 5
         expect(due_on).to_not be_per_month
       end
       it 'recognises per month' do
-        due_on.day = 1
+        due_on.day = 3
         due_on.month = -1
         expect(due_on).to be_per_month
       end
@@ -52,9 +52,33 @@ describe DueOn do
 
   context 'associations' do
     it 'belongs to a charge' do
-      due_on = charge.due_ons.build day: 1, month: 1, charge_id: 1
+      due_on = charge.due_ons.build day: 3, month: 5, charge_id: 1
       charge.save!
       expect(due_on.charge).to eq charge
     end
   end
+
+  context 'due between' do
+
+    it 'before due on' do
+      expect(due_on.between? Date.new(2013,4,1) .. Date.new(2013, 5, 2) ).to be_false
+    end
+
+    it 'is between due on' do
+      expect(due_on.between? Time.new(2013,5,1) .. Date.new(2013,5,5)).to be_true
+    end
+
+    it 'after due on' do
+      expect(due_on.between? Date.new(2013, 5, 4) ..  Date.new(2013, 5, 7) ).to be_false
+    end
+
+    it 'allows for next year' do
+      pending 'during dec it adds on 1 to year for jan dates'
+    end
+  end
+
+  it 'makes date' do
+    expect(due_on.make_date).to eq Date.new 2013, 5, 3
+  end
+
 end

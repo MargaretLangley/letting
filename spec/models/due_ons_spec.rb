@@ -180,5 +180,31 @@ describe DueOns do
       pending
     end
 
+    context 'due between' do
+      before do
+        due_ons.build day: 3, month: 5
+      end
+
+      it 'missing due on' do
+        expect(due_ons.between? Date.new(2013, 4, 4) .. Date.new(2013, 5, 2) ).to be_false
+      end
+
+      it 'is between due on' do
+        expect(due_ons.between? Date.new(2013, 4, 4) .. Date.new(2013, 5, 5)).to be_true
+      end
+
+    end
+
+    it 'makes date between' do
+      due_ons.build day: 3, month: 5
+      expect(due_ons.make_date_between Date.new(2013, 4, 4) .. Date.new(2013, 5, 5) ).to eq Date.new 2013, 5, 3
+    end
+
+    it 'nils outside of date range' do
+      due_ons.build day: 1, month: 2
+      expect { due_ons.make_date_between Date.new(2013, 4, 4) .. Date.new(2013, 5, 5) }.to \
+      raise_error NameError
+    end
+
   end
 end

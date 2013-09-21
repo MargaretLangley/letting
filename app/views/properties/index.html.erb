@@ -3,6 +3,6 @@
 
 <%= render 'properties/search'%>
 
-<%= render 'index_table', properties: @properties, show_actions: true %>
+<%= render 'index_table', properties: @properties, show_actions: true, show_checkbox: false %>
 
 <%= paginate @properties %>

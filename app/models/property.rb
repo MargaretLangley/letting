@@ -37,6 +37,10 @@ class Property < ActiveRecord::Base
     billing_profile.bill_to
   end
 
+  def self.properties property_ids
+    Property.where(id: property_ids)
+  end
+
   def self.search_by_house_name(search)
     Property.includes(:address).where('addresses.house_name LIKE ?',"#{search}").references(:address)
   end

@@ -34,6 +34,15 @@ module DueOns
         end
       end
 
+      def between? date_range
+        self.detect{ |due_on| due_on.between? date_range }.present?
+      end
+
+      def make_date_between date_range
+        self.detect{ |due_on| due_on.between? date_range }.make_date
+      end
+
+
       def clean_up_form
         if has_per_month_due_on?
           if per_month_due_on.same_day? first_none_per_month_due_on

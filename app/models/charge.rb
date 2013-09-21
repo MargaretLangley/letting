@@ -24,8 +24,19 @@ class Charge < ActiveRecord::Base
     && due_ons.empty?
   end
 
+  def due_between? date_range
+    due_ons.between? date_range
+  end
+
+  def make_debt date_range
+    DebtInfo.from_charge charge_id: id, \
+                         on_date: due_ons.make_date_between(date_range), \
+                         amount: amount
+  end
+
   private
     def ignored_attrs
       ['id','property_id', 'created_at', 'updated_at']
     end
+
 end

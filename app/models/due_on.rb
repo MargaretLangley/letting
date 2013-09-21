@@ -20,8 +20,20 @@ class DueOn < ActiveRecord::Base
     self.day == due_on.day
   end
 
+  def between? date_range
+    date_range.cover? Date.new covered_year, month, day
+  end
+
+  def make_date
+    Date.new covered_year, month, day
+  end
+
   private
     def ignored_attrs
       ['id','charge_id', 'created_at', 'updated_at']
+    end
+
+    def covered_year
+      2013
     end
 end
