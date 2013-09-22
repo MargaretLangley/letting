@@ -42,7 +42,6 @@ module DueOns
         self.detect{ |due_on| due_on.between? date_range }.make_date
       end
 
-
       def clean_up_form
         destruction_if :empty?
         destruction_if :persisted? if change_due_on?
