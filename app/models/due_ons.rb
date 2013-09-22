@@ -86,19 +86,6 @@ module DueOns
         (1..MAX_DUE_ONS).each {|month| self.build day: day, month: month }
       end
 
-      def logger_due_ons
-        logger.debug "M4D: #{self.select(&:marked_for_destruction?).length} / #{self.size}"
-        logger.debug "Marked for destruction"
-        self.select(&:marked_for_destruction?).each do |due_on|
-          logger.debug "id: #{due_on.id} day: #{due_on.day} month: #{due_on.month}"
-        end
-        logger.debug "\nSaved"
-        self.reject(&:marked_for_destruction?).each do |due_on|
-          logger.debug "id: #{due_on.id} day: #{due_on.day} month: #{due_on.month} new?:#{due_on.new_record?}"
-        end
-        logger.debug "\n\n"
-      end
-
     end
 
   end
