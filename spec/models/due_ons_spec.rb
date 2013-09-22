@@ -113,7 +113,7 @@ describe DueOns do
       expect(reload.due_ons).to have(12).items
     end
 
-    it 'per date to different per date' do
+    it 'per month to different per month' do
       charge_per_date = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
       charge_per_date.prepare
       charge_per_date.due_ons.build day: 24, month: -1
@@ -128,7 +128,7 @@ describe DueOns do
       expect(charge_reload.due_ons).to have(12).items
     end
 
-    it 'per date to same per date' do
+    it 'per month to same per month' do
       charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
       charge.prepare
       charge.due_ons.build day: 24, month: -1
@@ -144,7 +144,7 @@ describe DueOns do
       expect(reload2.due_ons).to have(12).items
     end
 
-    it 'on date to per date' do
+    it 'on date to per month' do
       charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
       charge.due_ons.build day: 24, month: 6
       charge.due_ons.build day: 25, month: 12
@@ -160,7 +160,7 @@ describe DueOns do
       expect(reload2.due_ons).to have(12).items
     end
 
-    it 'per date to on date' do
+    it 'per month to on date' do
       charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
       charge.prepare
       charge.due_ons.build day: 24, month: -1

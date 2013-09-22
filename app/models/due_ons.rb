@@ -45,7 +45,7 @@ module DueOns
 
       def clean_up_form
         if has_per_month_due_on?
-          if per_month_due_on.same_day? first_none_per_month_due_on
+          if per_month_due_on.same_day? first_on_date_due_on
             destruction_if :per_month?
           else
             destruction_if :present?
@@ -79,7 +79,7 @@ module DueOns
         self.detect(&:per_month?)
       end
 
-      def first_none_per_month_due_on
+      def first_on_date_due_on
         self.reject(&:per_month?).first
       end
 
