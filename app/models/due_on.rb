@@ -8,7 +8,7 @@ class DueOn < ActiveRecord::Base
   ON_DATE = 0
 
   def empty?
-    attributes.except(*ignored_attrs).values.all?( &:blank? ) #\
+    attributes.except(*ignored_attrs).values.all?( &:blank? )
   end
 
   def per_month?

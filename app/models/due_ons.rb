@@ -44,21 +44,20 @@ module DueOns
 
 
       def clean_up_form
-        if has_per_month_due_on?
-          if per_month_due_on.same_day? first_on_date_due_on
-            destruction_if :per_month?
-          else
-            destruction_if :present?
-            assign_per_month per_month_due_on.day
-          end
-        else
-          if self.detect(&:new_record?).present?
-            destruction_if :persisted?
-          end
-        end
         destruction_if :empty?
+        destruction_if :persisted? if change_due_on?
+        if has_per_month_due_on?
+          assign_per_month per_month_due_on.day
+          destruction_if :per_month?
+        end
       end
+
     private
+
+      def change_due_on?
+        self.reject(&:marked_for_destruction?).detect(&:new_record?).present?
+      end
+
       def destruction_if matcher
         self.select(&matcher).each {|due_on| mark_due_on_for_destruction due_on }
       end
@@ -79,10 +78,6 @@ module DueOns
         self.detect(&:per_month?)
       end
 
-      def first_on_date_due_on
-        self.reject(&:per_month?).first
-      end
-
       def first_day_or_empty
         self.first.present? ? self.first.day : ''
       end
@@ -90,19 +85,22 @@ module DueOns
       def assign_per_month day
         (1..MAX_DUE_ONS).each {|month| self.build day: day, month: month }
       end
+
+      def logger_due_ons
+        logger.debug "M4D: #{self.select(&:marked_for_destruction?).length} / #{self.size}"
+        logger.debug "Marked for destruction"
+        self.select(&:marked_for_destruction?).each do |due_on|
+          logger.debug "id: #{due_on.id} day: #{due_on.day} month: #{due_on.month}"
+        end
+        logger.debug "\nSaved"
+        self.reject(&:marked_for_destruction?).each do |due_on|
+          logger.debug "id: #{due_on.id} day: #{due_on.day} month: #{due_on.month} new?:#{due_on.new_record?}"
+        end
+        logger.debug "\n\n"
+      end
+
     end
 
-    def logger_due_ons
-      logger.debug "M4D: #{self.select(&:marked_for_destruction?).length} / #{self.size}"
-      logger.debug "Saved"
-      self.reject(&:marked_for_destruction?).each do |due_on|
-        logger.debug "day: #{due_on.day} month: #{due_on.month}"
-      end
-      logger.debug "Marked for destruction"
-      self.select(&:marked_for_destruction?).each do |due_on|
-        logger.debug "day: #{due_on.day} month: #{due_on.month}"
-      end
-    end
   end
   MAX_DISPLAYED_DUE_ONS = 4
   MAX_DUE_ONS = 12
