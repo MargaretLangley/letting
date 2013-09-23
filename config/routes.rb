@@ -1,5 +1,6 @@
 Letting::Application.routes.draw do
 
+
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
@@ -26,6 +27,7 @@ Letting::Application.routes.draw do
   resources :payments
   resources :users
 
+  resources :debt_generators
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
