@@ -15,11 +15,6 @@ class DueOn < ActiveRecord::Base
     month == PER_MONTH
   end
 
-  def same_day? due_on
-    return false if due_on.nil?
-    self.day == due_on.day
-  end
-
   def between? date_range
     date_range.cover? Date.new covered_year, month, day
   end
