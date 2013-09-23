@@ -1,7 +1,17 @@
 class Account < ActiveRecord::Base
-  belongs_to :property
+  belongs_to :property, inverse_of: :account
   has_many :debts, dependent: :destroy
   has_many :payments, dependent: :destroy
+  include Charges
+  accepts_nested_attributes_for :charges, allow_destroy: true
+
+  def prepare_for_form
+    charges.prepare
+  end
+
+  def clean_up_form
+    charges.clean_up_form
+  end
 
   def debt debt_args
     debts.build debt_args

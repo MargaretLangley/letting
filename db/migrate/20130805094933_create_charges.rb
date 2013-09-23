@@ -4,10 +4,10 @@ class CreateCharges < ActiveRecord::Migration
       t.string :charge_type, null: false
       t.string :due_in, null: false
       t.decimal :amount, precision: 8, scale: 2, null:false
-      t.integer :property_id, null: false
+      t.integer :account_id, null: false
       t.timestamps
     end
-    add_index :charges, :property_id
+    add_index :charges, :account_id
 
   end
 end

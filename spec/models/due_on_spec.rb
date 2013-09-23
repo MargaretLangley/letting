@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe DueOn do
   let(:due_on) { DueOn.new day: 3, month: 5, charge_id: 1 }
-  let(:charge) { Charge.new charge_type: 'ground_rent', due_in: 'advance', amount: 500.50, property_id: 1 }
+  let(:charge) { Charge.new charge_type: 'ground_rent', due_in: 'advance', amount: 500.50, account_id: 1 }
 
   it('is valid') { expect(due_on).to be_valid }
 

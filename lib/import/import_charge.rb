@@ -14,7 +14,7 @@ module DB
 
     def model_prepared_for_import row
       @model_to_save = first_model row, Property
-      @model_to_assign = @model_to_save.charges.first_or_initialize \
+      @model_to_assign = @model_to_save.account.charges.first_or_initialize \
                                 ChargeValues.from_code(row[:charge_type]).charge_code
       @model_to_save.prepare_for_form
     end

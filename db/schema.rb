@@ -60,12 +60,12 @@ ActiveRecord::Schema.define(version: 20130923093205) do
     t.string   "charge_type",                         null: false
     t.string   "due_in",                              null: false
     t.decimal  "amount",      precision: 8, scale: 2, null: false
-    t.integer  "property_id",                         null: false
+    t.integer  "account_id",                          null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "charges", ["property_id"], name: "index_charges_on_property_id", using: :btree
+  add_index "charges", ["account_id"], name: "index_charges_on_account_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.integer  "human_id"

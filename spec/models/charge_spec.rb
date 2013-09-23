@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Charge do
   let(:charge) do
     charge = Charge.new id: 1, charge_type: 'ground_rent', \
-      due_in: 'advance', amount: 500.50, property_id: 1
+      due_in: 'advance', amount: 500.50, account_id: 1
     charge.due_ons.new  day: 3, month: 5, charge_id: 1
     charge
   end

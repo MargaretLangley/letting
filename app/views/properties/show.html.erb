@@ -20,7 +20,7 @@
     </p>
     <p>
     <%= render 'show_billing_profile', object: @property.billing_profile %>
-    <%= render 'show_charges', object: @property.charges %>
+    <%= render 'show_charges', object: @property.account.charges %>
 
     </p>
   </div>

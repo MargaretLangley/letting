@@ -38,4 +38,24 @@ describe Account do
     expect(Account.lastest_payments(2)).to eq payments.reverse[0..1]
   end
 
+  context 'charges' do
+
+    it 'has no charges' do
+      expect(account.charges).to have_exactly(0).items
+    end
+
+    it 'has charges' do
+      expect(account.charges).to eq []
+    end
+
+    # Tests that relationship exists
+    it 'adds a new charge' do
+      account.charges.build charge_type: 'ground_rent', \
+        due_in: 'advance', amount: '50.50', account_id: account.id
+      expect(account.charges.first.charge_type).to eq 'ground_rent'
+    end
+
+  end
+
+
 end

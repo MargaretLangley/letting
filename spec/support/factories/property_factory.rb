@@ -1,6 +1,7 @@
 def property_factory args = {}
   property = Property.new property_attributes id: args[:id]
   property.human_id = args[:human_id] if args[:human_id].present?
+  property.prepare_for_form
   add_contact property, args
   add_no_billing_profile property
   property.save!
@@ -10,6 +11,7 @@ end
 def property_factory_with_billing args = {}
   property = Property.new property_attributes id: args[:id]
   property.human_id = args[:human_id] if args[:human_id].present?
+  property.prepare_for_form
   add_contact property, args
   add_billing_profile property
   add_charge property
@@ -20,6 +22,7 @@ end
 def property_factory_with_charge args = {}
   property = Property.new property_attributes id: args[:id]
   property.human_id = args[:human_id] if args[:human_id].present?
+  property.prepare_for_form
   add_contact property, args
   add_no_billing_profile property
   add_charge property
@@ -39,7 +42,7 @@ def add_billing_profile bill_me
 end
 
 def add_charge charge_me
-  charge = charge_me.charges.build charge_attributes
+  charge = charge_me.account.charges.build charge_attributes
   add_due_on_0 charge
   add_due_on_1 charge
 end
@@ -57,9 +60,10 @@ end
 def property_factory_with_monthly_charge args = {}
   property = Property.new property_attributes id: args[:id]
   property.human_id = args[:human_id] if args[:human_id].present?
+  property.prepare_for_form
   add_contact property, args
   add_no_billing_profile property
-  charge = property.charges.build charge_attributes
+  charge = property.account.charges.build charge_attributes
   charge.due_ons.build due_on_monthly_attributes_0
   property.save!
   property

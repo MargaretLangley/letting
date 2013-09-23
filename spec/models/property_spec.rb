@@ -5,7 +5,9 @@ describe Property do
   let(:property) do
     property = Property.new human_id: 8000, client_id: 2
     property.entities.new person_entity_attributes
-    property.build_billing_profile use_profile: false, property_id: property.id
+    property.build_address address_attributes
+    # property.build_billing_profile use_profile: false, property_id: property.id
+    property.prepare_for_form
     property
   end
 
@@ -233,24 +235,4 @@ context 'search' do
       expect(Property.search 'Yor').to eq [p1,p2,p3]
     end
   end
-
-  context 'charges' do
-
-    it 'has no charges' do
-      expect(property.charges).to have_exactly(0).items
-    end
-
-    it 'has charges' do
-      expect(property.charges).to eq []
-    end
-
-    # Tests that relationship exists
-    it 'adds a new charge' do
-      property.charges.build charge_type: 'ground_rent', \
-        due_in: 'advance', amount: '50.50', property_id: property.id
-      expect(property.charges.first.charge_type).to eq 'ground_rent'
-    end
-
-  end
-
 end

@@ -76,7 +76,7 @@ describe DueOns do
   context 'creating, saving and loading' do
 
     it 'new on date' do
-      charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
+      charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', account_id: 1
       charge.prepare
       charge.due_ons.build day: 24, month: 6
       charge.due_ons.build day: 25, month: 12
@@ -87,7 +87,7 @@ describe DueOns do
     end
 
     it 'on date to different on date' do
-      charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
+      charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', account_id: 1
       charge.due_ons.build day: 24, month: 6, id: 7
       charge.due_ons.build day: 25, month: 12, id: 8
       charge.due_ons.prepare
@@ -104,7 +104,7 @@ describe DueOns do
     end
 
     it 'new per date' do
-      charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
+      charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', account_id: 1
       charge.due_ons.prepare
       charge.due_ons.build day: 5, month: -1
       charge.clean_up_form
@@ -114,7 +114,7 @@ describe DueOns do
     end
 
     it 'per month to different per month' do
-      charge_per_date = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
+      charge_per_date = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', account_id: 1
       charge_per_date.prepare
       charge_per_date.due_ons.build day: 24, month: -1
       charge_per_date.clean_up_form
@@ -129,7 +129,7 @@ describe DueOns do
     end
 
     it 'per month to same per month' do
-      charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
+      charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', account_id: 1
       charge.prepare
       charge.due_ons.build day: 24, month: -1
       charge.clean_up_form
@@ -145,7 +145,7 @@ describe DueOns do
     end
 
     it 'on date to per month' do
-      charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
+      charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', account_id: 1
       charge.due_ons.build day: 24, month: 6
       charge.due_ons.build day: 25, month: 12
       charge.prepare
@@ -161,7 +161,7 @@ describe DueOns do
     end
 
     it 'per month to on date' do
-      charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', property_id: 1
+      charge = Charge.new charge_type: 'Rent', due_in: 'Advance', amount: '100.05', account_id: 1
       charge.prepare
       charge.due_ons.build day: 24, month: -1
       charge.clean_up_form
@@ -177,7 +177,7 @@ describe DueOns do
     end
 
     it 'what happens if per_month day same as on date day' do
-      pending
+      'Edge case that I should consider'
     end
 
     context 'due between' do

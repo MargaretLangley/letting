@@ -269,9 +269,9 @@ end
   def create_charges
     create_due_ons
     Charge.create! [
-      { id: 1, charge_type: 'Ground Rent', due_in: 'Advance', amount: '88.08', property_id: 1},
-      { id: 2, charge_type: 'Service Charge', due_in: 'Advance', amount: '125.08', property_id: 1},
-      { id: 3, charge_type: 'Ground Rent', due_in: 'Advance', amount: '70.00', property_id: 2}
+      { id: 1, charge_type: 'Ground Rent', due_in: 'Advance', amount: '88.08', account_id: 1 },
+      { id: 2, charge_type: 'Service Charge', due_in: 'Advance', amount: '125.08', account_id: 2 },
+      { id: 3, charge_type: 'Ground Rent', due_in: 'Advance', amount: '70.00',  account_id: 3 }
     ]
   end
 

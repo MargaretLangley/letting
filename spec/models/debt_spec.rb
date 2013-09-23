@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Debt do
 
   let(:debt) { Debt.new debt_attributes }
-  let(:account) { Account.new id: 1, property_id: 1 }
+  let(:account) { Account.new id: 1, account_id: 1 }
 
   it 'is valid' do
     expect(debt).to be_valid

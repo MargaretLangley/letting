@@ -36,7 +36,7 @@ class Charge < ActiveRecord::Base
 
   private
     def ignored_attrs
-      ['id','property_id', 'created_at', 'updated_at']
+      ['id','account_id', 'created_at', 'updated_at']
     end
 
 end

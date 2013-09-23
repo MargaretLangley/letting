@@ -69,6 +69,7 @@ group :development, :test do
   gem "binding_of_caller"
   gem 'pry-rails'
   gem 'pry-nav'
+  gem 'pry-stack_explorer'
   gem 'bullet'
   gem 'rack-mini-profiler'
 end

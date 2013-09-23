@@ -222,8 +222,8 @@ describe Property do
         end
 
         def fill_in_due_on_on_date
-          fill_in 'property_charges_attributes_0_due_ons_attributes_0_day', with: '5'
-          fill_in 'property_charges_attributes_0_due_ons_attributes_0_month', with: '4'
+          fill_in 'property_account_attributes_charges_attributes_0_due_ons_attributes_0_day', with: '5'
+          fill_in 'property_account_attributes_charges_attributes_0_due_ons_attributes_0_month', with: '4'
         end
 
 
@@ -240,7 +240,7 @@ describe Property do
       end
 
         def fill_in_due_on_per_month
-          fill_in 'property_charges_attributes_0_due_ons_attributes_4_day', with: '5'
+          fill_in 'property_account_attributes_charges_attributes_0_due_ons_attributes_4_day', with: '5'
         end
 
 

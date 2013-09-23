@@ -1,11 +1,9 @@
 class Property < ActiveRecord::Base
   belongs_to :client
-  has_one :account
+  has_one :account, dependent: :destroy, inverse_of: :property
+  accepts_nested_attributes_for :account, allow_destroy: true
   include Contact
-  include Charges
-  accepts_nested_attributes_for :charges, allow_destroy: true
   has_one :billing_profile, dependent: :destroy, inverse_of: :property
-
   accepts_nested_attributes_for :billing_profile, allow_destroy: true
 
   validates :human_id, :client_id, numericality: true
@@ -17,12 +15,13 @@ class Property < ActiveRecord::Base
     prepare_contact
     self.build_billing_profile if self.billing_profile.nil?
     billing_profile.prepare_for_form
-    charges.prepare
+    self.build_account if self.account.nil?
+    account.prepare_for_form
   end
 
   def clear_up_after_form
     entities.clean_up_form
-    charges.clean_up_form
+    self.account.clean_up_form if self.account.present?
   end
 
   def separate_billing_address

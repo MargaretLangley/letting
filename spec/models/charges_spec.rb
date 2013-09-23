@@ -6,7 +6,7 @@ describe Charges do
     include Charges
   end
 
-  let(:charges) { Property.new.charges }
+  let(:charges) { Account.new.charges }
 
   it '#prepare' do
     expect(charges).to have(0).items
