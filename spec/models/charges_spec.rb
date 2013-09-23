@@ -2,10 +2,6 @@ require 'spec_helper'
 
 describe Charges do
 
-  class Property < ActiveRecord::Base
-    include Charges
-  end
-
   let(:charges) { Account.new.charges }
 
   it '#prepare' do
