@@ -8,18 +8,12 @@ namespace :db do
 
   desc "Truncates all the database tables"
   task truncate_all: :environment do
-    ActiveRecord::Base.connection.execute("TRUNCATE TABLE accounts RESTART IDENTITY;")
-    ActiveRecord::Base.connection.execute("TRUNCATE TABLE addresses RESTART IDENTITY;")
-    ActiveRecord::Base.connection.execute("TRUNCATE TABLE blocks RESTART IDENTITY;")
-    ActiveRecord::Base.connection.execute("TRUNCATE TABLE billing_profiles RESTART IDENTITY;")
-    ActiveRecord::Base.connection.execute("TRUNCATE TABLE charges RESTART IDENTITY;")
-    ActiveRecord::Base.connection.execute("TRUNCATE TABLE clients RESTART IDENTITY;")
-    ActiveRecord::Base.connection.execute("TRUNCATE TABLE debts RESTART IDENTITY;")
-    ActiveRecord::Base.connection.execute("TRUNCATE TABLE due_ons RESTART IDENTITY;")
-    ActiveRecord::Base.connection.execute("TRUNCATE TABLE entities RESTART IDENTITY;")
-    ActiveRecord::Base.connection.execute("TRUNCATE TABLE payments RESTART IDENTITY;")
-    ActiveRecord::Base.connection.execute("TRUNCATE TABLE properties RESTART IDENTITY;")
-    ActiveRecord::Base.connection.execute("TRUNCATE TABLE users RESTART IDENTITY;")
+    ActiveRecord::Base.connection
+                      .tables
+                      .reject{|t| t == 'schema_migrations'}
+                      .each do |table|
+      ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{table} RESTART IDENTITY;")
+    end
   end
 
 end
