@@ -55,14 +55,15 @@ class Property < ActiveRecord::Base
 
   private
     def self.search_by_all(search)
-      Property.includes(:address,:entities).
+      properties = order(:human_id)
+      properties = properties.includes(:address,:entities).
         where('human_id = :i OR ' + \
               'entities.name ILIKE :s OR ' + \
               'addresses.house_name ILIKE :s OR ' + \
               'addresses.road ILIKE :s OR '  \
               'addresses.town ILIKE :s',\
               i: "#{search.to_i}", s: "#{search}%" \
-              ).references(:address, :entity).order(:human_id)
+              ).references(:address, :entity)
     end
 
 end
