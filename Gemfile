@@ -84,6 +84,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'coveralls', require: false
   gem 'database_cleaner', '~> 1.0.1'
+  gem 'timecop'
 end
 
 group :test do

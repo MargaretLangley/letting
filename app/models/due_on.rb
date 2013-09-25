@@ -16,7 +16,7 @@ class DueOn < ActiveRecord::Base
   end
 
   def between? date_range
-    date_range.cover? Date.new covered_year, month, day
+    date_range.cover? make_date
   end
 
   def make_date
@@ -24,11 +24,23 @@ class DueOn < ActiveRecord::Base
   end
 
   private
+
     def ignored_attrs
       ['id','charge_id', 'created_at', 'updated_at']
     end
 
     def covered_year
-      2013
+      due_this_year? ? Date.current.year : Date.current.year + 1
+    end
+
+    def due_this_year?
+      case
+      when month > Date.current.month
+        true
+      when month == Date.current.month && day >= Date.current.day
+        true
+      else
+        false
+      end
     end
 end

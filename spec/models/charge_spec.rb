@@ -67,6 +67,8 @@ describe Charge do
 
 
   context 'due between' do
+    before { Timecop.freeze(Time.zone.parse('3/5/2013 12:00')) }
+    after { Timecop.return }
 
     it 'missing due on' do
       expect(charge.due_between? Date.new(2013, 4, 1) .. Date.new(2013, 5, 2) ).to be_false
@@ -78,11 +80,16 @@ describe Charge do
 
   end
 
-  it 'makes charge if between'  do
-    debt = DebtInfo.from_charge charge_id: 1, \
-                        on_date: Date.new(2013,5,3), \
-                        amount: BigDecimal.new(500.5,8)
-    expect(charge.make_debt Date.new(2013, 5, 1) .. Date.new(2013, 5, 5) ).to eq debt
+  context 'makes charge' do
+    before { Timecop.freeze(Time.zone.parse('3/5/2013 12:00')) }
+    after { Timecop.return }
+
+    it 'makes charge if between'  do
+      debt = DebtInfo.from_charge charge_id: 1, \
+                          on_date: Date.new(2013,5,3), \
+                          amount: BigDecimal.new(500.5,8)
+      expect(charge.make_debt Date.new(2013, 5, 1) .. Date.new(2013, 5, 5) ).to eq debt
+    end
   end
 
 end

@@ -51,18 +51,22 @@ describe Account do
       expect(account.charges.first.charge_type).to eq 'ground_rent'
     end
 
-    it 'generates debts for charges' do
-      charge = account.charges.build id: 1, charge_type: 'ground_rent', \
-        due_in: 'advance', amount: '50.50', account_id: account.id
-      charge.due_ons.build charge_id: 1, day: 15, month: 6
+    context 'generates debts' do
+      before { Timecop.freeze(Time.zone.parse('3/5/2013 12:00')) }
+      after { Timecop.return }
 
-      debts = account.generate_debts_for Date.new(2013,6,1)..Date.new(2013,6,30)
-      expect(debts.first).to eq Debt.new account_id: 1, \
-                                         charge_id: charge.id,  \
-                                         on_date: '2013-06-15', \
-                                         amount: BigDecimal.new(50.50,8)
+      it 'for charges' do
+        charge = account.charges.build id: 1, charge_type: 'ground_rent', \
+          due_in: 'advance', amount: '50.50', account_id: account.id
+        charge.due_ons.build charge_id: 1, day: 15, month: 6
+
+        debts = account.generate_debts_for Date.new(2013,6,1)..Date.new(2013,6,30)
+        expect(debts.first).to eq Debt.new account_id: 1, \
+                                           charge_id: charge.id,  \
+                                           on_date: '2013-06-15', \
+                                           amount: BigDecimal.new(50.50,8)
+      end
     end
-
   end
 
 

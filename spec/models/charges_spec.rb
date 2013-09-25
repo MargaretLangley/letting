@@ -40,6 +40,9 @@ describe Charges do
     end
 
     context 'debts' do
+      before { Timecop.freeze(Time.zone.parse('3/2/2013 12:00')) }
+      after { Timecop.return }
+
 
       it 'applies debt between date' do
         expect(charges.charges_between Date.new(2013,3,30)..Date.new(2013,3,31)).to \

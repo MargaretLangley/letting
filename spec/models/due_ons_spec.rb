@@ -181,6 +181,8 @@ describe DueOns do
     end
 
     context 'due between' do
+      before { Timecop.freeze(Time.zone.parse('3/5/2013 12:00')) }
+      after { Timecop.return }
       before do
         due_ons.build day: 3, month: 5
       end
@@ -195,15 +197,21 @@ describe DueOns do
 
     end
 
-    it 'makes date between' do
-      due_ons.build day: 3, month: 5
-      expect(due_ons.make_date_between Date.new(2013, 4, 4) .. Date.new(2013, 5, 5) ).to eq Date.new 2013, 5, 3
-    end
+    context 'make_day' do
+      before { Timecop.freeze(Time.zone.parse('3/5/2013 12:00')) }
+      after { Timecop.return }
 
-    it 'nils outside of date range' do
-      due_ons.build day: 1, month: 2
-      expect { due_ons.make_date_between Date.new(2013, 4, 4) .. Date.new(2013, 5, 5) }.to \
-      raise_error NameError
+      it 'makes date between' do
+        due_ons.build day: 3, month: 5
+        expect(due_ons.make_date_between Date.new(2013, 4, 4) .. Date.new(2013, 5, 5) ).to eq Date.new 2013, 5, 3
+      end
+
+      it 'nils outside of date range' do
+        due_ons.build day: 1, month: 2
+        expect { due_ons.make_date_between Date.new(2013, 4, 4) .. Date.new(2013, 5, 5) }.to \
+        raise_error NameError
+      end
+
     end
 
   end
