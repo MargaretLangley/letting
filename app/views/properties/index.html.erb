@@ -1,7 +1,7 @@
 
 <h2 class = "mainTitle">Properties</h2>
 
-<%= render 'properties/search'%>
+<%= render 'properties/search', path: properties_path %>
 
 <%= render 'index_table', properties: @properties, show_actions: true, show_checkbox: false %>
 

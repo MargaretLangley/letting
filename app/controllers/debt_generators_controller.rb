@@ -5,13 +5,12 @@ class DebtGeneratorsController < ApplicationController
 
   def new
     @debt_generator = DebtGenerator.new
-    if params[:block].present?
-      Property.search_by_house_name(params[:block])
-              .each do |property|
+    properties = []
+    properties = Property.search(params[:search]) if params[:search].present?
+    properties.each do |property|
         @debt_generator.debts << property
                                 .account
-                                .generate_debts_for(Date.new(2013,6,1)..Date.new(2013,9,30))
-      end
+                                .generate_debts_for(Date.new(2014,6,1)..Date.new(2014,9,30))
     end
   end
 
