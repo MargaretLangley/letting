@@ -21,14 +21,14 @@ Property
       ☐ Entity
 
   Actions:
-    ☐ Index
+    Index:
       ☐ V
          ☐ IMPROVE: Navigating from list to show currently by clicking human_id
       ✔ C @done (13-07-27 11:06)
-    ☐ Show
+    Show:
      ☐ V
      ✔ C @done (13-07-27 15:25)
-    ☐ Create
+    Create:
       ☐ V
         ✔ Add Entity Button @done (Before 13-08-17 12:10)
         ☐ Add District Button
@@ -36,7 +36,7 @@ Property
         ✔ Happy Path @done (13-07-30 18:14)
         ✔ Fail Save @done (13-08-03 11:08)
             ✔ Fail duplicate Human Property ID @done (before 13-08-03 11:06)
-    ☐ Edit
+    Update:
       ☐ V
       ✔ C @done (13-07-28 00:27)
         ✔ Happy Path @done (13-07-28 00:27)

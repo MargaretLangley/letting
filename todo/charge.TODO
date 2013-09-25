@@ -4,6 +4,7 @@ Charge:
   Model:
     ✔ Charge @done (13-08-19 10:49)
     ✔ DueOn @done (13-08-20 18:11)
+    ☐ Validate Arrears vs Advance having correct year
   ☐ Validations
     ☐ Parse day / month to know if valid date
 
