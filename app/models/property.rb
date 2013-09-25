@@ -46,24 +46,41 @@ class Property < ActiveRecord::Base
   end
 
   def self.search search
-    if search.blank?
+    case
+    when self.human_ids(search)
+      self.search_by_human_id(search)
+    when search.blank?
        Property.all.includes(:address).order(:human_id)
     else
       self.search_by_all(search)
     end
   end
 
+
   private
+    def self.search_by_human_id(search)
+      human_ids = search.split('-')
+      human_ids[1] = human_ids[0] if human_ids[1].blank?
+      Property.includes(:address,:entities)
+                    .where(human_id: human_ids[0]..human_ids[1])
+                    .references(:address, :entity).order(:human_id)
+    end
+
     def self.search_by_all(search)
-      properties = order(:human_id)
-      properties = properties.includes(:address,:entities).
+      Property.includes(:address,:entities).
         where('human_id = :i OR ' + \
               'entities.name ILIKE :s OR ' + \
               'addresses.house_name ILIKE :s OR ' + \
               'addresses.road ILIKE :s OR '  \
               'addresses.town ILIKE :s',\
               i: "#{search.to_i}", s: "#{search}%" \
-              ).references(:address, :entity)
+              ).references(:address, :entity).order(:human_id)
+    end
+
+    def self.human_ids search
+      # matches a number (\d) followed by any amount of whitespace (\s)
+      # optional hyphen (-) and optional number (\d)
+      (search =~ /^(\d+\s*-?)+\s*\d+$/).present?
     end
 
 end

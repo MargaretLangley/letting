@@ -137,7 +137,7 @@ context 'search' do
   p1 = p2 = p3 = c1 = nil
 
     before do
-      p1 = property_factory human_id: 1,
+      p1 = property_factory human_id: 10,
             address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' },
             entities_attributes: { "0" =>  { name: 'Knutt', title: 'Rev', initials: 'K V' } }
     end
@@ -171,9 +171,16 @@ context 'search' do
     context '#search' do
 
       it 'exact number (human_id)' do
-        p2 = property_factory human_id: 10
+        p2 = property_factory human_id: 11
         expect(Property.all).to eq [p1, p2]
-        expect(Property.search '1').to eq [p1]
+        expect(Property.search '10').to eq [p1]
+      end
+
+      it 'range of human_id' do
+        p2 = property_factory human_id: 11
+        p3 = property_factory human_id: 13
+        expect(Property.all).to eq [p1, p2, p3]
+        expect(Property.search '10 - 12').to eq [p1,p2]
       end
 
       it 'exact names' do
@@ -206,7 +213,7 @@ context 'search' do
         end
 
         it 'multiple' do
-          p2 = property_factory human_id: 2,
+          p2 = property_factory human_id: 20,
                 address_attributes: { town: 'Yorks' }
           expect(Property.all).to eq [p1, p2]
           expect(Property.search 'Yor').to eq [p1,p2]
