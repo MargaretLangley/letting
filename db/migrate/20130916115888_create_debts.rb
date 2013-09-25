@@ -5,7 +5,7 @@ class CreateDebts < ActiveRecord::Migration
       t.integer  :charge_id,  null: false
       t.date     :on_date,    null: false
       t.decimal  :amount, precision: 8, scale: 2, null: false
-
+      t.integer  :debt_generator_id, null: false
       t.timestamps
     end
 

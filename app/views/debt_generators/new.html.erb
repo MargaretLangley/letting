@@ -1,0 +1,32 @@
+<%= form_for @debt_generator do |debt_gen_form| %>
+  <%= render 'shared/errors', object: @debt_generator %>
+  <fieldset id='debt_generator' class='shell'>
+  <h3>Debt Generation</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Id
+        </th>
+        <th>
+          Charge
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+          Amount
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render 'debts', debt_gen_form: debt_gen_form, debts: @debt_generator.debts %>
+    </tbody>
+</table>
+<div>
+  <%= debt_gen_form.submit %><span class = 'simple' ><%= link_to 'Cancel', debt_generators_path %></span>
+</div>
+<% end %>
+
+

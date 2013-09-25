@@ -1,5 +1,6 @@
 class Debt < ActiveRecord::Base
   belongs_to :account
+  belongs_to :debt_generator
   has_many :payments
   belongs_to :charge
 
@@ -8,6 +9,12 @@ class Debt < ActiveRecord::Base
 
   def paid
     payments.pluck(:amount).inject(0, :+)
+  end
+
+  def == another_debt
+    self.charge_id == another_debt.charge_id && \
+    self.on_date == another_debt.on_date && \
+    self.amount == another_debt.amount
   end
 
   def paid?

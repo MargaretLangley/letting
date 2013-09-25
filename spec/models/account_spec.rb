@@ -8,21 +8,17 @@ describe Account do
     expect(account).to be_valid
   end
 
-  it 'makes debts' do
-    pending 'move charges'
-  end
-
   it 'makes payments' do
     expect(account.payment payment_attributes ).to be_valid
   end
 
   it 'makes debts' do
-    expect(account.debt debt_attributes ).to be_valid
+    expect(account.add_debt debt_attributes ).to be_valid
   end
 
   it 'lists unpaid debts' do
-    debt1 = account.debt debt_attributes
-    debt2 = account.debt debt_attributes charge_id: 2
+    debt1 = account.add_debt debt_attributes
+    debt2 = account.add_debt debt_attributes charge_id: 2
     account.save!
     account.payment payment_attributes debt_id: debt1.id
     account.save!
@@ -53,6 +49,18 @@ describe Account do
       account.charges.build charge_type: 'ground_rent', \
         due_in: 'advance', amount: '50.50', account_id: account.id
       expect(account.charges.first.charge_type).to eq 'ground_rent'
+    end
+
+    it 'generates debts for charges' do
+      charge = account.charges.build id: 1, charge_type: 'ground_rent', \
+        due_in: 'advance', amount: '50.50', account_id: account.id
+      charge.due_ons.build charge_id: 1, day: 15, month: 6
+
+      debts = account.generate_debts_for Date.new(2013,6,1)..Date.new(2013,6,30)
+      expect(debts.first).to eq Debt.new account_id: 1, \
+                                         charge_id: charge.id,  \
+                                         on_date: '2013-06-15', \
+                                         amount: BigDecimal.new(50.50,8)
     end
 
   end

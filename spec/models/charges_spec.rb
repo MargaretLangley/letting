@@ -42,7 +42,7 @@ describe Charges do
     context 'debts' do
 
       it 'applies debt between date' do
-        expect(charges.make_debt_between? Date.new(2013,3,30)..Date.new(2013,3,31)).to \
+        expect(charges.charges_between Date.new(2013,3,30)..Date.new(2013,3,31)).to \
         eq [ DebtInfo.from_charge(charge_id: 1, \
                                   on_date: Date.new(2013,3,31), \
                                   amount: BigDecimal.new(88.08,8)) \

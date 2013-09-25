@@ -18,7 +18,7 @@ module Charges
         self.detect{|charge| charge.charge_type == charge_type } || self.build
       end
 
-      def make_debt_between? date_range
+      def charges_between date_range
         self.select{|charge| charge.due_between? date_range }.map{|charge| charge.make_debt date_range }
       end
     private

@@ -10,6 +10,7 @@ def generate_seeding
   seed_properties
   seed_blocks
   seed_charges
+  debts_and_payments
   reset_pk_sequenece_on_each_table_used
 end
 
@@ -262,8 +263,6 @@ end
 def seed_charges
   create_charges
   create_account
-  create_debts
-  create_payments
 end
 
   def create_charges
@@ -279,7 +278,7 @@ end
     DueOn.create! [
       { id: 1, day: 1,  month: 1, charge_id: 1 },
       { id: 2, day: 1,  month: 7, charge_id: 1 },
-      { id: 3, day: 30, month: 4, charge_id: 2 },
+      { id: 3, day: 30, month: 6, charge_id: 2 },
       { id: 4, day: 30, month: 9, charge_id: 3 }
     ]
   end
@@ -292,10 +291,21 @@ end
     ]
   end
 
+def debts_and_payments
+  create_debt_generator
+  create_debts
+  create_payments
+end
+  def create_debt_generator
+    DebtGenerator.create! [
+      id: 1
+    ]
+  end
+
   def create_debts
     Debt.create! [
-      { id: 1, account_id: 1, charge_id: 1, on_date: '2013/01/01', amount: 88.08 },
-      { id: 2, account_id: 1, charge_id: 1, on_date: '2013/07/01', amount: 88.08 }
+      { id: 1, account_id: 1, charge_id: 1, on_date: '2013/01/01', amount: 88.08, debt_generator_id: 1 },
+      { id: 2, account_id: 1, charge_id: 1, on_date: '2013/07/01', amount: 88.08, debt_generator_id: 2 }
     ]
   end
 

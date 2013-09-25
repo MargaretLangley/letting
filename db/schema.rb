@@ -79,10 +79,11 @@ ActiveRecord::Schema.define(version: 20130923093205) do
   end
 
   create_table "debts", force: true do |t|
-    t.integer  "account_id",                         null: false
-    t.integer  "charge_id",                          null: false
-    t.date     "on_date",                            null: false
-    t.decimal  "amount",     precision: 8, scale: 2, null: false
+    t.integer  "account_id",                                null: false
+    t.integer  "charge_id",                                 null: false
+    t.date     "on_date",                                   null: false
+    t.decimal  "amount",            precision: 8, scale: 2, null: false
+    t.integer  "debt_generator_id",                         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

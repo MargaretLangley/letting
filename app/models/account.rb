@@ -13,16 +13,13 @@ class Account < ActiveRecord::Base
     charges.clean_up_form
   end
 
-  def debt debt_args
+  def add_debt debt_args
     debts.build debt_args
   end
 
-  def generated_debts debt_infos
-    debt_infos.each {|debt_info| debts.build debt_info.to_hash }
-  end
-
-  def new_debts
-    debts.select(&:new_record?)
+  def generate_debts_for date_range
+    generate_debts charges.charges_between date_range
+    new_debts
   end
 
   def payment payment_args
@@ -37,4 +34,13 @@ class Account < ActiveRecord::Base
     Payment.latest_payments number_of
   end
 
+  private
+
+    def generate_debts debt_infos
+      debt_infos.each {|debt_info| debts.build debt_info.to_hash }
+    end
+
+    def new_debts
+      debts.select(&:new_record?)
+    end
 end

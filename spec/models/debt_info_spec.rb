@@ -3,9 +3,9 @@ require 'spec_helper'
 describe DebtInfo do
 
   let(:debt_info) do
-      DebtInfo.from_charge charge_id: 1, \
-      on_date: Date.new(2013,5,3), \
-      amount: 100.5
+    DebtInfo.from_charge charge_id: 1, \
+    on_date: Date.new(2013,5,3), \
+    amount: 100.5
   end
 
   it '#charge_id' do
@@ -22,17 +22,17 @@ describe DebtInfo do
   end
 
   it '#amount as decimal' do
-      debt = DebtInfo.from_charge charge_id: 1, \
-      on_date: Date.new(2013,5,3), \
-      amount: BigDecimal.new(100.50,8)
-      expect(debt.amount).to eq 100.5
+    debt = DebtInfo.from_charge charge_id: 1, \
+    on_date: Date.new(2013,5,3), \
+    amount: BigDecimal.new(100.50,8)
+    expect(debt.amount).to eq 100.5
   end
 
   it 'eq' do
-      debt = DebtInfo.from_charge charge_id: 1, \
-      on_date: Date.new(2013,5,3), \
-      amount: 100.5
-     expect(debt_info).to eq debt
+    debt = DebtInfo.from_charge charge_id: 1, \
+    on_date: Date.new(2013,5,3), \
+    amount: 100.5
+    expect(debt_info).to eq debt
   end
 
   it '#to_hash' do
