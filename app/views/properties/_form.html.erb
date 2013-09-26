@@ -1,8 +1,8 @@
-<%= form_for @property do |f| %>
-  <%= render 'shared/errors', object: @property %>
+<%= form_for property do |f| %>
+  <%= render 'shared/errors', object: property %>
   <fieldset id='property' class='shell'>
 
-    <h3>Property<span class= 'floatright'><%= link_to 'View', property_path(@property) %><span></h3>
+    <h3>Property<span class= 'floatright'><%= link_to 'View', property_path(property) %><span></h3>
 
     <div class='field text require half'>
       <%= f.label :human_id,'Property ID' %>
@@ -14,14 +14,14 @@
       <%= f.text_field :client_id %>
     </div>
 
-    <%= render 'occupier', f: f, entitieable: @property %>
+    <%= render 'occupier', f: f, entitieable: property %>
     <%= render 'shared/address', f: f, parent: 'property' %>
 
   </fieldset>
 
-  <%= render 'billing_profile', f: f %>
+  <%= render 'billing_profile', f: f, billing_profile: property.billing_profile %>
   <%= f.fields_for :account do |a| %>
-    <%= render 'charges', f: a, charges: @property.account.charges %>
+    <%= render 'charges', f: a, charges: property.account.charges %>
   <% end %>
   <div>
     <%= f.submit %><span class = 'simple' ><%= link_to 'Cancel', properties_path %></span>
