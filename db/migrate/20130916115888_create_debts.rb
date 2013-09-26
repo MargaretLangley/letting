@@ -11,5 +11,6 @@ class CreateDebts < ActiveRecord::Migration
 
     add_index :debts, :charge_id
     add_index :debts, :account_id
+    add_index :debts, :debt_generator_id
   end
 end

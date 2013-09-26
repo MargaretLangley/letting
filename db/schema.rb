@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20130923093205) do
 
   add_index "debts", ["account_id"], name: "index_debts_on_account_id", using: :btree
   add_index "debts", ["charge_id"], name: "index_debts_on_charge_id", using: :btree
+  add_index "debts", ["debt_generator_id"], name: "index_debts_on_debt_generator_id", using: :btree
 
   create_table "due_ons", force: true do |t|
     t.integer  "day"
