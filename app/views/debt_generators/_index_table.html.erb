@@ -1,0 +1,30 @@
+<table>
+  <thead>
+    <tr>
+      <th>
+        Search String
+      </th>
+      <th>
+        Start Date
+      </th>
+       <th>
+        End Date
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% debt_generators.each do |debt_generator| %>
+    <tr>
+      <td>
+        <%= debt_generator.search_string %>
+      </td>
+      <td>
+        <%= debt_generator.start_date %>
+      </td>
+      <td>
+        <%= debt_generator.end_date %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

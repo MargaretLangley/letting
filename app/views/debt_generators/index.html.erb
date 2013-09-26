@@ -1,9 +1,3 @@
 <h2>Charge Properties</h2>
 
-<%= render 'properties/search', path: new_debt_generator_path %>
-<p>or</p>
-<h3>Select Block</h3>
-
-<% @blocks.each do |block| %>
-  <%= link_to block.name, new_debt_generator_path(block,search: block.name ) %>
-<% end %>
+<%= render 'index_table', debt_generators: @debt_generators %>

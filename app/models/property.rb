@@ -38,10 +38,10 @@ class Property < ActiveRecord::Base
 
   def self.search search
     case
+    when search.blank?
+      Property.all.includes(:address).order(:human_id)
     when self.human_ids(search)
       self.search_by_human_id(search)
-    when search.blank?
-       Property.all.includes(:address).order(:human_id)
     else
       self.search_by_all(search)
     end

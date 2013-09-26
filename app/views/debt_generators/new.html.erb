@@ -1,8 +1,13 @@
+<%= render 'search'  %>
 <%= form_for @debt_generator do |debt_gen_form| %>
   <%= render 'shared/errors', object: @debt_generator %>
+  <%= debt_gen_form.hidden_field :search_string %>
+  <%= debt_gen_form.hidden_field :start_date  %>
+  <%= debt_gen_form.hidden_field :end_date %>
   <fieldset id='debt_generator' class='shell'>
-  <h3>Debt Generation</h3>
-
+  <h2>Debt Generation</h2>
+  <br/>
+  <h3>New Property Charges</h3>
   <table>
     <thead>
       <tr>
@@ -21,7 +26,9 @@
       </tr>
     </thead>
     <tbody>
-      <%= render 'debts', debt_gen_form: debt_gen_form, debts: @debt_generator.debts %>
+
+     <%= render 'debts', debt_gen_form: debt_gen_form, debts: @debt_generator.debts %>
+
     </tbody>
 </table>
 <div>
