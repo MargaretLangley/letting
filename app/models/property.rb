@@ -24,15 +24,6 @@ class Property < ActiveRecord::Base
     self.account.clean_up_form if self.account.present?
   end
 
-  def separate_billing_address
-    billing_profile.use_profile
-  end
-  alias_method :separate_billing_address?, :separate_billing_address
-
-  def separate_billing_address separate
-    billing_profile.use_profile = separate
-  end
-
   def bill_to
     billing_profile.bill_to
   end

@@ -118,18 +118,6 @@ describe Property do
         expect(property.bill_to).to eq property.billing_profile
       end
     end
-
-    context '#separate_billing_address?' do
-      it 'true when using billing profile' do
-        property.separate_billing_address true
-        expect(property.separate_billing_address?).to be_true
-      end
-
-      it 'false when not using billing profile' do
-        property.separate_billing_address false
-        expect(property.separate_billing_address?).to be_false
-      end
-    end
   end
 
 context 'search' do
