@@ -74,6 +74,9 @@ ActiveRecord::Schema.define(version: 20130923093205) do
   end
 
   create_table "debt_generators", force: true do |t|
+    t.string   "search_string", null: false
+    t.date     "start_date",    null: false
+    t.date     "end_date",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

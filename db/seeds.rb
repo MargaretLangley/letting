@@ -268,18 +268,19 @@ end
   def create_charges
     create_due_ons
     Charge.create! [
-      { id: 1, charge_type: 'Ground Rent', due_in: 'Advance', amount: '88.08', account_id: 1 },
-      { id: 2, charge_type: 'Service Charge', due_in: 'Advance', amount: '125.08', account_id: 2 },
-      { id: 3, charge_type: 'Ground Rent', due_in: 'Advance', amount: '70.00',  account_id: 3 }
+      { id: 1, charge_type: 'Ground Rent',    due_in: 'Advance', amount: '88.08',  account_id: 1 },
+      { id: 2, charge_type: 'Service Charge', due_in: 'Advance', amount: '125.08', account_id: 1 },
+      { id: 3, charge_type: 'Ground Rent',    due_in: 'Advance', amount: '70.00',  account_id: 2 },
+      { id: 4, charge_type: 'Service Charge', due_in: 'Advance', amount: '70.00',  account_id: 3 },
     ]
   end
 
   def create_due_ons
     DueOn.create! [
-      { id: 1, day: 1,  month: 1, charge_id: 1 },
-      { id: 2, day: 1,  month: 7, charge_id: 1 },
-      { id: 3, day: 30, month: 6, charge_id: 2 },
-      { id: 4, day: 30, month: 9, charge_id: 3 }
+      { id: 1, day: 1,  month: (Date.current + 1.month).month , charge_id: 1 },
+      { id: 2, day: 1,  month: 7, charge_id: 2 },
+      { id: 3, day: 1,  month: (Date.current + 1.month).month , charge_id: 3 },
+      { id: 4, day: 30, month: 9, charge_id: 4 }
     ]
   end
 
@@ -287,7 +288,8 @@ end
     Account.create! [
       { id: 1, property_id: 1 },
       { id: 2, property_id: 2 },
-      { id: 3, property_id: 3 }
+      { id: 3, property_id: 3 },
+      { id: 4, property_id: 4 },
     ]
   end
 
@@ -298,20 +300,23 @@ def debts_and_payments
 end
   def create_debt_generator
     DebtGenerator.create! [
-      id: 1
+      { id: 1, search_string: 'Lords',
+               start_date: "2013/#{(Date.current - 6.months).month }/01",
+               end_date: "2013/#{(Date.current - 4.months).month }/01"
+      }
     ]
   end
 
   def create_debts
     Debt.create! [
-      { id: 1, account_id: 1, charge_id: 1, on_date: '2013/01/01', amount: 88.08, debt_generator_id: 1 },
-      { id: 2, account_id: 1, charge_id: 1, on_date: '2013/07/01', amount: 88.08, debt_generator_id: 2 }
+      { id: 1, account_id: 1, charge_id: 1, on_date: "2013/#{(Date.current - 5.months).month }/01", amount: 88.08, debt_generator_id: 1 },
+      { id: 2, account_id: 1, charge_id: 1, on_date: "2013/#{(Date.current - 5.months).month }/01", amount: 88.08, debt_generator_id: 2 }
     ]
   end
 
   def create_payments
     Payment.create! [
-      { id: 1, account_id: 1, debt_id: 1, on_date: '2013/03/03', amount: 88.08 }
+      { id: 1, account_id: 1, debt_id: 1, on_date: "2013/#{(Date.current - 3.months).month }/03", amount: 88.08 }
     ]
   end
 

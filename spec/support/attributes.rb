@@ -123,3 +123,6 @@ def payment_attributes  overrides = {}
   { account_id: 1, debt_id: 1, on_date: '2013/1/30', amount: 10.05 }.merge overrides
 end
 
+def debt_generator_attributes overrides = {}
+  { id: 1, search_string: 'Lords', start_date: '2013/3/1', end_date: '2013/4/1' }.merge overrides
+end
