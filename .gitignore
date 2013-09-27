@@ -18,6 +18,10 @@
 #SimpleCov
 /coverage
 
+#Sandi Meter
+/sandi_meter
+
+
 #data importing - not saved on github!
 /import_data
 

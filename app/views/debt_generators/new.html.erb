@@ -1,3 +1,5 @@
+<h2>New Invoice</h2>
+
 <%= render 'search'  %>
 <%= form_for @debt_generator do |debt_gen_form| %>
   <%= render 'shared/errors', object: @debt_generator %>
@@ -5,9 +7,8 @@
   <%= debt_gen_form.hidden_field :start_date  %>
   <%= debt_gen_form.hidden_field :end_date %>
   <fieldset id='debt_generator' class='shell'>
-  <h2>Debt Generation</h2>
   <br/>
-  <h3>New Property Charges</h3>
+  <h3>Property Charges to be invoiced.</h3>
   <table>
     <thead>
       <tr>

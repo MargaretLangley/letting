@@ -1,6 +1,6 @@
 <%= form_tag new_debt_generator_path, method: 'get' do %>
 
-<h2>Which properties to charge?</h2>
+<h3>Which properties to invoice?</h3>
 <div class="field text half">
   <%= text_field_tag :search, params[:search], data: {autocomplete_source: search_properties_path}, autofocus:true  %>
   <%= submit_tag "Search", name: nil, class: 'search' %>
