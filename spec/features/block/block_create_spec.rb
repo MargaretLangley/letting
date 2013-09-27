@@ -43,8 +43,4 @@ describe Block do
     click_on 'Find properties'
   end
 
-
-
-
-
 end

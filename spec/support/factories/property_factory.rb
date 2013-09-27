@@ -1,6 +1,5 @@
 def property_factory args = {}
-  property = Property.new property_attributes id: args[:id]
-  property.human_id = args[:human_id] if args[:human_id].present?
+  property = Property.new property_attributes args
   property.prepare_for_form
   add_contact property, args
   add_no_billing_profile property

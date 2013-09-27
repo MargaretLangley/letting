@@ -216,15 +216,15 @@ context 'search' do
   p1 = p2 = p3 = c1 = nil
 
     before do
-      p1 = property_factory id:1, human_id: 1,
+      p1 = property_factory human_id: 1,
             address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' },
             entities_attributes: { "0" =>  { name: 'Knutt', title: 'Rev', initials: 'K V' } }
     end
 
-   it 'uses ordered ASC search' do
-      p3 = property_factory id: 3, human_id: 3,
+   it 'uses ordered human_id ASC search' do
+      p3 = property_factory human_id: 3,
           address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' }
-      p2 = property_factory id: 2, human_id: 2,
+      p2 = property_factory human_id: 2,
       address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' }
       expect(Property.all).to eq [p1, p3, p2 ]
       expect(Property.search 'Yor').to eq [p1,p2,p3]
