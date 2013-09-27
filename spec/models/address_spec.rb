@@ -62,7 +62,7 @@ describe Address do
   end
 
   it 'Limits attributes copied' do
-    client = client_factory human_id: 5
+    client = client_new
     new_address = Address.new
     new_address.attributes = client.address.copy_approved_attributes
     expect(new_address.addressable_id).to be_nil

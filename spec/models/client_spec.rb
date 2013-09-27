@@ -2,11 +2,7 @@ require 'spec_helper'
 
 describe Client do
 
-  let(:client) do
-    client = Client.new human_id: 1
-    client.entities.new person_entity_attributes
-    client
-  end
+  let(:client) { client_new  }
 
   it ('is valid') { expect(client).to be_valid }
 
@@ -33,36 +29,9 @@ describe Client do
   end
 
   context 'Associations' do
-
-    context '#entities' do
-      it('is entitieable') { expect(client).to respond_to(:entities) }
-    end
-
-    context '#address' do
-
-      let(:client) do
-        client = Client.new human_id: 1
-        client.entities.new person_entity_attributes
-        client.build_address address_attributes road_no: 3456
-        client
-      end
-
-      it('is addressable') { expect(client).to respond_to :address }
-
-      it 'saving nil address does not change address count' do
-        client.address = nil
-        expect { client.save! }.to change(Address, :count).by 0
-      end
-
-      it 'is saved when filled in' do
-        expect { client.save! }.to change(Address, :count).by 1
-      end
-
-    end
-
-    context '#properties' do
-      it('has properties') { expect(client).to respond_to(:properties) }
-    end
+    it('is entitieable') { expect(client).to respond_to(:entities) }
+    it('is addressable') { expect(client).to respond_to :address }
+    it('has properties') { expect(client).to respond_to(:properties) }
   end
 
   context '#prepare_for_form' do
@@ -83,7 +52,6 @@ describe Client do
       expect(client.entities).to have(2).items
     end
 
-
     it '#clear_up_after_form destroys unused models' do
       client.clear_up_after_form
       expect(client.address).to_not be_nil
@@ -91,59 +59,27 @@ describe Client do
     end
   end
 
-# Note search automatically uses ordered asc search
   context 'search' do
 
-   c3 = c2 = c1 = nil
+    c1 = c2 = nil
+    before { c1 = client_create! }
 
-    before do
-        c1 = client_factory human_id: 111,
-              address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' },
-              entities_attributes: { '0' =>  { name: 'Knutt', title: 'Rev', initials: 'K V' } }
-    end
+    it('human id') { expect((Client.search '8008').load ).to eq [c1] }
+    it('roads') { expect((Client.search 'Edg').load ).to eq [c1] }
+    it('towns') { expect((Client.search 'Bir').load ).to eq [c1] }
+    it('names') { expect(Client.search 'Grace').to eq [c1] }
 
-    it 'exact number (human_id)' do
-      c2 = client_factory human_id: 131
+    it 'only returns expected' do
+      c2 = client_create! human_id: 102,
+            address_attributes: { road: 'unknown' }
       expect(Client.all).to eq [c1, c2]
-      expect(Client.search '111').to eq [c1]
-    end
-
-    it 'towns' do
-       c2 = client_factory human_id: 131,
-            address_attributes: { town: 'unknown' }
-      expect(Client.all).to eq [c1, c2]
-      expect(Client.search 'Yor').to eq [c1]
-    end
-
-    it 'entities names' do
-      c2 = client_factory human_id: 102,
-            address_attributes: { house_name: 'Headingly', road: 'unknown' },
-            entities_attributes: { '0' => { name: 'Hammond', title: 'Mr', initials: 'W' } }
-      expect(Client.all).to eq [c1, c2]
-      expect(Client.search 'Hammond').to eq [c2]
-    end
-
-    it 'road name' do
-      c2 = client_factory human_id: 102,
-            address_attributes: { house_name: 'Headingly', road: 'unknown' }
-      expect(Client.all).to eq [c1, c2]
-      expect(Client.search 'Kirstall').to eq [c1]
+      expect(Client.search 'Edgba').to eq [c1]
     end
 
     it 'multiple uses ordered ASC search' do
-      c2 = client_factory human_id: 102,
-            address_attributes: { town: 'Yorks' }
+      c2 = client_create! human_id: 7000
       expect(Client.all).to eq [c1, c2]
-      expect(Client.search 'Yor').to eq [c2,c1]
+      expect(Client.search 'Bir').to eq [c2,c1]
     end
-
-    it 'entities names' do
-      c2 = client_factory human_id: 102,
-            address_attributes: { house_name: 'Headingly', road: 'unknown' },
-            entities_attributes: { '0' => { name: 'Knutt', title: 'Mr', initials: 'KV' } }
-      expect(Client.all).to eq [c1, c2]
-      expect(Client.search 'Knutt').to eq [c2,c1]
-    end
-
   end
 end

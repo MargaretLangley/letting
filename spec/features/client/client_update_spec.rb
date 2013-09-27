@@ -9,7 +9,7 @@ describe Client do
   context '#updates' do
 
     it 'basic', js: true do
-      client_factory id: 1, human_id: 3003
+      client_create! id: 1, human_id: 3003
       navigate_to_edit_page
       validate_page
       fill_in_form
@@ -20,7 +20,7 @@ describe Client do
     end
 
     it 'handles validation' do
-      client_factory id: 1, human_id: 3003
+      client_create! id: 1, human_id: 3003
       navigate_to_edit_page
       invalidate_page
       click_on 'Update Client'
@@ -29,7 +29,7 @@ describe Client do
     end
 
     it 'adds second entity', js: true do
-      client_factory human_id: 3003
+      client_create! human_id: 3003
       navigate_to_edit_page
       click_on 'Add Person'
       within_fieldset 'client_entity_1' do
@@ -44,8 +44,7 @@ describe Client do
     end
 
     it 'deletes a second entity', js:true do
-      client = client_factory human_id: 3003, \
-        entities_attributes: { '0' => person_entity_attributes, '1' => oval_person_entity_attributes }
+      client = client_two_entities_create! human_id: 3003
       navigate_to_edit_page
       click_on 'X'
       click_on 'Update Client'
@@ -56,8 +55,7 @@ describe Client do
     end
 
     it 'shows company', js:true do
-      client_factory human_id: 111, \
-        entities_attributes: { '0' => company_entity_attributes }
+      client = client_company_create! human_id: 111
       navigate_to_edit_page
       expect(page).to have_text 'Company or person'
       expect(find_field('Name').value).to have_text 'ICC'
@@ -65,7 +63,7 @@ describe Client do
     end
 
     it 'shows person', js:true do
-      client_factory human_id: 111
+      client_create! human_id: 111
       navigate_to_edit_page
       expect(page).to have_text 'Person or company'
       expect(find_field('Name').value).to have_text 'Grace'
@@ -73,7 +71,7 @@ describe Client do
     end
 
     it 'cancel does not change client' do
-      client_factory human_id: 3003
+      client_create! human_id: 3003
       navigate_to_edit_page
       within_fieldset 'client_entity_0' do
         fill_in 'Title', with: 'Mr'

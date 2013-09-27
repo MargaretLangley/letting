@@ -7,7 +7,7 @@ require_relative '../../../lib/import/import_charge'
 module DB
   describe ImportCharge do
     it 'One row' do
-      property_factory
+      property_create!
       expect{ ImportCharge.import Import.csv_table('acc_info', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges') }.to \
         change(Charge, :count).by 1
     end
@@ -19,19 +19,19 @@ module DB
     end
 
     it 'One row, 2 DueOns' do
-      property_factory
+      property_create!
       expect{ ImportCharge.import Import.csv_table('acc_info', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges') }.to \
         change(DueOn, :count).by 2
     end
 
     it 'One monthly row, 12 DueOns' do
-      property_factory
+      property_create!
       expect{ ImportCharge.import Import.csv_table('acc_info_monthly', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges') }.to \
         change(DueOn, :count).by 12
     end
 
     it 'Not double import' do
-      property_factory
+      property_create!
       ImportCharge.import Import.csv_table('acc_info', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges')
       expect{ ImportCharge.import Import.csv_table('acc_info', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges') }.to \
         change(Charge, :count).by 0
@@ -39,7 +39,7 @@ module DB
 
     context 'multiple imports' do
       it 'updated changed charge' do
-        property_factory
+        property_create!
         ImportCharge.import Import.csv_table('acc_info', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges')
         ImportCharge.import Import.csv_table('acc_info_updated', headers: ImportFields.charge, location: 'spec/fixtures/import_data/charges')
         charge = Charge.first

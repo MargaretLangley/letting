@@ -15,7 +15,7 @@ describe PropertiesHelper do
     end
 
     it 'displays if valid' do
-      property = property_factory_with_charge
+      property = property_with_charge_new
       expect(hide_new_record_unless_first property.account.charges.first,0).to be_blank
     end
   end

@@ -1,34 +1,52 @@
-def property_factory args = {}
-  property = Property.new property_attributes args
-  property.prepare_for_form
-  add_contact property, args
+def property_new args = {}
+  property = base_property args
   add_no_billing_profile property
-  property.save!
   property
 end
 
-def property_factory_with_billing args = {}
-  property = Property.new property_attributes id: args[:id]
-  property.human_id = args[:human_id] if args[:human_id].present?
-  property.prepare_for_form
-  add_contact property, args
+def property_create! args = {}
+  (property = property_new args).save!
+  property
+end
+
+def property_with_billing_create! args = {}
+  property = base_property args
   add_billing_profile property
   add_charge property
   property.save!
   property
 end
 
-def property_factory_with_charge args = {}
-  property = Property.new property_attributes id: args[:id]
-  property.human_id = args[:human_id] if args[:human_id].present?
-  property.prepare_for_form
-  add_contact property, args
+def property_with_charge_new args = {}
+  property = base_property args
   add_no_billing_profile property
   add_charge property
+  property
+end
+
+def property_with_charge_create! args = {}
+  (property = property_with_charge_new args).save!
+  property
+end
+
+def property_with_monthly_charge_create! args = {}
+  property = base_property args
+  add_no_billing_profile property
+  charge = property.account.charges.build charge_attributes
+  charge.due_ons.build due_on_monthly_attributes_0
   property.save!
   property
 end
 
+
+private
+
+def base_property args = {}
+  property = Property.new property_attributes args
+  property.prepare_for_form
+  add_contact property, args
+  property
+end
 
 def add_no_billing_profile bill_me
   bill_me.build_billing_profile use_profile: false
@@ -52,18 +70,4 @@ end
 
 def add_due_on_1 charge
   charge.due_ons.build due_on_attributes_1
-end
-
-
-
-def property_factory_with_monthly_charge args = {}
-  property = Property.new property_attributes id: args[:id]
-  property.human_id = args[:human_id] if args[:human_id].present?
-  property.prepare_for_form
-  add_contact property, args
-  add_no_billing_profile property
-  charge = property.account.charges.build charge_attributes
-  charge.due_ons.build due_on_monthly_attributes_0
-  property.save!
-  property
 end

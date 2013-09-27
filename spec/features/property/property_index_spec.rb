@@ -8,9 +8,9 @@ describe Property do
   context '#index' do
 
     it 'basic' do
-      property_factory human_id: 111
-      property_factory human_id: 222
-      property_factory human_id: 333
+      property_create! human_id: 111
+      property_create! human_id: 222
+      property_create! human_id: 333
 
       visit '/properties/'
       # shows more than one row
@@ -23,10 +23,10 @@ describe Property do
     end
 
     it 'search' do
-      property_factory human_id: 111,
+      property_create! human_id: 111,
                 address_attributes: { road: 'Vauxall Lane' }
-      property_factory human_id: 222
-      property_factory human_id: 333
+      property_create! human_id: 222
+      property_create! human_id: 333
 
       visit '/properties'
 

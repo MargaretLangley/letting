@@ -9,7 +9,7 @@ describe Property do
     before(:each) { log_in }
 
     it 'basic' do
-      property = property_factory id: 1, human_id: 8000
+      property_create! id: 1, human_id: 8000
       navigate_to_edit_page
       validate_page
       expect_form_to_be
@@ -108,7 +108,7 @@ describe Property do
 
 
     it 'basic with billing address' do
-      property = property_factory_with_billing id: 1, human_id: 8000
+      property_with_billing_create! id: 1, human_id: 8000
       navigate_to_edit_page
       expect_bill_profile_has_original_attributes
       update_then_expect_properties_page
@@ -127,7 +127,7 @@ describe Property do
 
 
     it 'add billing address', js:true do
-      property = property_factory id: 1, human_id: 8000
+      property_create! id: 1, human_id: 8000
       navigate_to_edit_page
       fill_in_bill_profile
       update_then_expect_properties_page
@@ -172,7 +172,7 @@ describe Property do
 
 
     it 'handles validation' do
-      property_factory id: 1, human_id: 8000
+      property_create! id: 1, human_id: 8000
       navigate_to_edit_page
       validate_page
       clear_address_road
@@ -189,7 +189,7 @@ describe Property do
 
 
     it 'removes billing address' do
-      property_factory_with_billing id: 1, human_id: 8000
+      property_with_billing_create! id: 1, human_id: 8000
       navigate_to_edit_page
       uncheck 'Use Agent'
       update_then_expect_properties_page
@@ -203,7 +203,7 @@ describe Property do
     context 'charge' do
 
       it 'adds date charge' do
-        property = property_factory id: 1, human_id: 8000
+        property_create! id: 1, human_id: 8000
         navigate_to_edit_page
         fill_in_charge
         fill_in_due_on_on_date
@@ -228,7 +228,7 @@ describe Property do
 
 
       it 'adds monthly charge', js: true do
-        property = property_factory id: 1, human_id: 8000
+        property_create! id: 1, human_id: 8000
         navigate_to_edit_page
         click_on 'or per month'
         fill_in_charge
@@ -245,13 +245,13 @@ describe Property do
 
 
       it 'opens a monthly charge correctly' do
-        property_factory_with_monthly_charge human_id: 8000
+        property_with_monthly_charge_create! human_id: 8000
         navigate_to_edit_page
         expect(page).to have_text 'Per month or on date'
       end
 
       it 'opens monthly and changes to date charge', js: true do
-        property = property_factory_with_monthly_charge human_id: 8000
+        property = property_with_monthly_charge_create! human_id: 8000
         navigate_to_edit_page
         click_on 'or on date'
         expect(page).to have_text /on date or per month/i
@@ -259,7 +259,7 @@ describe Property do
     end
 
     it 'can delete', js: true do
-      property = property_factory_with_charge id: 1, human_id: 8000
+      property_with_charge_create! id: 1, human_id: 8000
       navigate_to_edit_page
       expect(page).to have_text 'Charge 1'
       within_fieldset 'property_charge_0' do

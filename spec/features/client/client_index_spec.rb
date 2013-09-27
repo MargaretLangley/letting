@@ -7,9 +7,9 @@ describe Client do
   context '#index' do
 
     it 'basic' do
-      client_factory human_id: 101
-      client_factory human_id: 102
-      client_factory human_id: 103
+      client_create! human_id: 101
+      client_create! human_id: 102
+      client_create! human_id: 103
 
       visit '/clients/'
       expect(current_path).to eq '/clients/'
@@ -26,10 +26,10 @@ describe Client do
     end
 
     it 'search' do
-      client_factory human_id: 111,
+      client_create! human_id: 111,
                 address_attributes: { road: 'Vauxall Lane' }
-      client_factory human_id: 222
-      client_factory human_id: 333
+      client_create! human_id: 222
+      client_create! human_id: 333
 
       visit '/clients'
 
@@ -41,7 +41,7 @@ describe Client do
     end
 
     it 'view' do
-      client_factory human_id: 111,
+      client_create! human_id: 111,
                 address_attributes: { road: 'Vauxall Lane' }
       visit '/clients'
       click_on 'View'

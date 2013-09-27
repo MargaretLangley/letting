@@ -42,7 +42,7 @@ module DB
 
     context 'Property' do
       it 'works on property' do
-        client_factory human_id: 11
+        client_create! human_id: 11
         ImportProperty.import   \
         Import.csv_table('properties', headers: ImportFields.property, drop_rows: 34, location: 'spec/fixtures/import_data/properties'), \
         Patch.import(Property, Import.csv_table('properties_patch', headers: ImportFields.property, location: 'spec/fixtures/import_data/patch'))
@@ -51,7 +51,7 @@ module DB
     end
     context 'BillingProfile' do
       it 'works on BillingProfile' do
-        property_factory human_id: 122
+        property_create! human_id: 122
         ImportBillingProfile.import   \
         Import.csv_table('address2', headers: ImportFields.billing_profile, location: 'spec/fixtures/import_data/billing_profiles') , \
         Patch.import(BillingProfile, Import.csv_table('address2_patch', headers: ImportFields.billing_profile, location: 'spec/fixtures/import_data/patch'))

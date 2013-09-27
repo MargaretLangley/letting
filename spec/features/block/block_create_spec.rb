@@ -2,12 +2,14 @@ require 'spec_helper'
 
 describe Block do
 
-  before(:each) { log_in }
-
-  it '#create a block' do
+  before(:each) do
+    log_in
     create_properties
     navigate_to_create_page
     expect(current_path).to eq '/blocks/new'
+  end
+
+  it '#create a block' do
     find_block 'Hillbank House'
     expect(page).to have_text 'Hillbank House'
     expect{click_on 'Save block'}.to change(Block, :count).by 1
@@ -16,8 +18,6 @@ describe Block do
   end
 
   it '#handles unknown block' do
-    create_properties
-    navigate_to_create_page
     find_block 'Unknown House'
     expect(page).to have_button 'Find properties'
     find_block 'Hillbank House'
@@ -25,11 +25,11 @@ describe Block do
   end
 
   def create_properties
-    p1 = property_factory human_id: 3001,
+    p1 = property_create! human_id: 3001,
                  address_attributes: { flat_no: 1, house_name: 'Hillbank House' }
-    p2 = property_factory human_id: 3002,
+    p2 = property_create! human_id: 3002,
                  address_attributes: { flat_no: 2, house_name: 'Hillbank House' }
-    p3 = property_factory human_id: 3003,
+    p3 = property_create! human_id: 3003,
                  address_attributes: { flat_no: 3, house_name: 'Hillbank House' }
   end
 

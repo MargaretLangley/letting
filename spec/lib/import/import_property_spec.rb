@@ -19,7 +19,7 @@ module DB
     context 'Normal state' do
       client = nil
       before :each do
-        client = client_factory human_id: 11
+        client = client_create! human_id: 11
       end
 
       def properties_directory

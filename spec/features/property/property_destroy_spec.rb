@@ -5,7 +5,7 @@ describe Property do
   before(:each) { log_in }
 
   it '#destroys a property' do
-    property = property_factory human_id: 9000
+    property = property_create! human_id: 9000
     visit '/properties'
     expect(page).to have_text '9000'
     expect{ click_on 'Delete'}.to change(Property, :count).by -1

@@ -5,6 +5,13 @@ def property_attributes overrides = {}
   }.merge overrides
 end
 
+def client_attributes overrides = {}
+  {
+    human_id: 8008,
+  }.merge overrides
+end
+
+
 def address_attributes overrides = {}
   {
     flat_no:  '47',
