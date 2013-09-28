@@ -11,14 +11,14 @@ class Debt < ActiveRecord::Base
     payments.pluck(:amount).inject(0, :+)
   end
 
+  def paid?
+    self.paid == amount
+  end
+
   def == another_debt
     self.charge_id == another_debt.charge_id && \
     self.on_date == another_debt.on_date && \
     self.amount == another_debt.amount
-  end
-
-  def paid?
-    self.paid == amount
   end
 
 end
