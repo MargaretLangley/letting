@@ -7,12 +7,12 @@ class Charge < ActiveRecord::Base
   validate :due_ons_size
   has_many :debt
 
-  def prepare
-    due_ons.prepare
-  end
-
   def due_ons_size
     errors.add :due_ons, 'Too many due_ons' if due_ons.reject(&:marked_for_destruction?).size > 12
+  end
+
+  def prepare
+    due_ons.prepare
   end
 
   def clean_up_form

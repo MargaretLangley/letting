@@ -259,7 +259,7 @@ describe Property do
     end
 
     it 'can delete', js: true do
-      property_with_charge_create! id: 1, human_id: 8000
+      property_create! id: 1, human_id: 8000
       navigate_to_edit_page
       expect(page).to have_text 'Charge 1'
       within_fieldset 'property_charge_0' do

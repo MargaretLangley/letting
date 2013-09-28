@@ -12,7 +12,6 @@ end
 def property_with_billing_create! args = {}
   property = base_property args
   add_billing_profile property
-  add_charge property
   property.save!
   property
 end

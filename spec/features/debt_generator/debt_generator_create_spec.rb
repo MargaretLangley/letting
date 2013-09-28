@@ -12,7 +12,6 @@ describe 'debt_generator' do
   end
 
   it 'creates debts' do
-    property_with_charge_new
     visit '/debt_generators/new'
     fill_in 'search', with: ''
   end

@@ -2,10 +2,9 @@ module Charges
   extend ActiveSupport::Concern
   included do
     has_many :charges, dependent: :destroy do
+
       def prepare
-        (self.size...MAX_CHARGES).each do
-          charge = self.build
-        end
+        (self.size...MAX_CHARGES).each { charge = self.build }
         self.each {|charge| charge.prepare }
       end
 
@@ -14,13 +13,10 @@ module Charges
         destruction_if :empty?
       end
 
-      def first_or_initialize charge_type
-        self.detect{|charge| charge.charge_type == charge_type } || self.build
-      end
-
       def charges_between date_range
         self.select{|charge| charge.due_between? date_range }.map{|charge| charge.make_debt date_range }
       end
+
     private
       def destruction_if matcher
         self.select(&matcher).each {|charge| mark_charge_for_destruction charge }
