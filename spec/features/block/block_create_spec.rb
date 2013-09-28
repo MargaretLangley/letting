@@ -25,12 +25,9 @@ describe Block do
   end
 
   def create_properties
-    p1 = property_create! human_id: 3001,
-                 address_attributes: { flat_no: 1, house_name: 'Hillbank House' }
-    p2 = property_create! human_id: 3002,
-                 address_attributes: { flat_no: 2, house_name: 'Hillbank House' }
-    p3 = property_create! human_id: 3003,
-                 address_attributes: { flat_no: 3, house_name: 'Hillbank House' }
+    property_create! human_id: 31, address_attributes: { flat_no: 1 }
+    property_create! human_id: 32, address_attributes: { flat_no: 2 }
+    property_create! human_id: 33, address_attributes: { flat_no: 3 }
   end
 
   def navigate_to_create_page
