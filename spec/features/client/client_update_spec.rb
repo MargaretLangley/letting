@@ -8,9 +8,12 @@ describe Client do
 
   context '#updates' do
 
-    it 'basic', js: true do
+    before(:each) do
       client_create! id: 1, human_id: 3003
       navigate_to_edit_page
+    end
+
+    it 'basic', js: true do
       validate_page
       fill_in_form
       click_on 'Update Client'
@@ -20,17 +23,13 @@ describe Client do
     end
 
     it 'handles validation' do
-      client_create! id: 1, human_id: 3003
-      navigate_to_edit_page
       invalidate_page
       click_on 'Update Client'
       expect(current_path).to eq '/clients/1'
-      expect(page).to have_text 'The client could not be saved.'
+      expect(page).to have_text /The client could not be saved./i
     end
 
     it 'adds second entity', js: true do
-      client_create! human_id: 3003
-      navigate_to_edit_page
       click_on 'Add Person'
       within_fieldset 'client_entity_1' do
         fill_in 'Title', with: 'Mr'
@@ -43,36 +42,13 @@ describe Client do
       expect(page).to have_text 'Test'
     end
 
-    it 'deletes a second entity', js:true do
-      client = client_two_entities_create! human_id: 3003
-      navigate_to_edit_page
-      click_on 'X'
-      click_on 'Update Client'
-      click_on 'View'
-      expect(page).to have_text 'Properties Owned'
-      expect(page).to have_text 'Grace'
-      expect(page).to_not have_text 'Knutt'
-    end
-
-    it 'shows company', js:true do
-      client = client_company_create! human_id: 111
-      navigate_to_edit_page
-      expect(page).to have_text 'Company or person'
-      expect(find_field('Name').value).to have_text 'ICC'
-      expect(page).to_not have_text 'Initials'
-    end
-
     it 'shows person', js:true do
-      client_create! human_id: 111
-      navigate_to_edit_page
       expect(page).to have_text 'Person or company'
       expect(find_field('Name').value).to have_text 'Grace'
       expect(page).to have_text 'Initials'
     end
 
     it 'cancel does not change client' do
-      client_create! human_id: 3003
-      navigate_to_edit_page
       within_fieldset 'client_entity_0' do
         fill_in 'Title', with: 'Mr'
         fill_in 'Name',  with: 'Whistleblower'
@@ -81,6 +57,25 @@ describe Client do
       expect(current_path).to eq '/clients'
       expect(page).to have_text 'Grace'
     end
+  end
+
+  it '#updates shows company', js:true do
+    client_company_create! human_id: 111
+    navigate_to_edit_page
+    expect(page).to have_text 'Company or person'
+    expect(find_field('Name').value).to have_text 'ICC'
+    expect(page).to_not have_text 'Initials'
+  end
+
+  it '#updates deletes a second entity', js:true do
+    client_two_entities_create! human_id: 3003
+    navigate_to_edit_page
+    click_on 'X'
+    click_on 'Update Client'
+    click_on 'View'
+    expect(page).to have_text 'Properties Owned'
+    expect(page).to have_text 'Grace'
+    expect(page).to_not have_text 'Knutt'
   end
 
   def navigate_to_edit_page
@@ -93,7 +88,6 @@ describe Client do
     expect_client_has_original_attributes
     expect_address_has_original_attributes
     expect_entity_has_original_attributes
-
   end
 
     def expect_client_has_original_attributes
@@ -129,6 +123,4 @@ describe Client do
       expect(page).to_not have_text '294'
       expect(page).to have_text '63c'
     end
-
-
 end

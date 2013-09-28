@@ -23,7 +23,7 @@ def invalidate_page
 end
 
 def navigate_to_client_page human_id
-    click_on human_id
+  click_on human_id
 end
 
 def expect_client_view

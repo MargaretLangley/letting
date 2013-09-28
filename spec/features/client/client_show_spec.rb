@@ -4,11 +4,13 @@ require_relative '../shared/entity'
 
 describe Client do
 
-  before(:each) { log_in }
+  before(:each) do
+    log_in
+    client_create! human_id: 3008
+    client.properties << property_new(human_id: 909)
+  end
 
   it '#show' do
-    client = client_create! human_id: 3008
-    client.properties << property_new(human_id: 909)
     visit '/clients/'
     click_on 'View'
     expect_client_entity
