@@ -6,8 +6,7 @@ describe Client do
 
   before(:each) do
     log_in
-    client_create! human_id: 3008
-    client.properties << property_new(human_id: 909)
+    client_create!.properties << property_new
   end
 
   it '#show' do
@@ -19,7 +18,7 @@ describe Client do
   end
 
   def expect_client_address
-    expect(page).to have_text '3008'
+    expect(page).to have_text '8008'
     expect_address_edgbaston
   end
 
@@ -28,7 +27,7 @@ describe Client do
   end
 
   def expect_property
-    expect(page).to have_text '909'
+    expect(page).to have_text '2002'
   end
 
 end
