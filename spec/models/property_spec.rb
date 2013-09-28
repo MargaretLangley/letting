@@ -2,14 +2,7 @@ require 'spec_helper'
 
 describe Property do
 
-  let(:property) do
-    property = Property.new human_id: 8000, client_id: 2
-    property.entities.new person_entity_attributes
-    property.build_address address_attributes
-    # property.build_billing_profile use_profile: false, property_id: property.id
-    property.prepare_for_form
-    property
-  end
+  let(:property) { property_new }
 
   it ('#valid?') { expect(property).to be_valid }
 
@@ -34,7 +27,7 @@ describe Property do
     end
 
     context '#client_id' do
-      it 'required' do
+      it('required') do
         property.client_id = nil
         expect(property).not_to be_valid
       end
@@ -49,7 +42,6 @@ describe Property do
   context 'Associations' do
 
     context '#entities' do
-
       it('is entitieable') { expect(property).to respond_to(:entities) }
 
       it 'has at least one child' do
@@ -92,7 +84,6 @@ describe Property do
         expect(property.billing_profile).to_not be_nil
       end
 
-
       it '#clear_up_after_form destroys unused models' do
         property.clear_up_after_form
         expect(property.address).to_not be_nil
@@ -103,11 +94,7 @@ describe Property do
     end
 
     context '#bill_to' do
-      let(:property) do
-        property = Property.new human_id: 8000
-        property.prepare_for_form
-        property
-      end
+      let(:property) { property_new }
 
       it 'property with no billing profile' do
         expect(property.bill_to).to eq property
@@ -120,102 +107,50 @@ describe Property do
     end
   end
 
-context 'search' do
+  context 'search' do
 
-  p1 = p2 = p3 = c1 = nil
-
-    before do
-      p1 = property_create! human_id: 10,
-            address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' },
-            entities_attributes: { "0" =>  { name: 'Knutt', title: 'Rev', initials: 'K V' } }
-    end
+    p1 = p2 = nil
+    before { p1 = property_create! }
 
     context '#search_by_house_name' do
 
       it 'matches just that house name' do
         p2 = property_create! human_id: 202,
-              address_attributes: { house_name: 'Headingly' }
-        p3 = property_create! human_id: 303,
-              address_attributes: { house_name: 'Vauxall Lane' }
-        expect(Property.all).to eq [p1, p2, p3 ]
-        expect(Property.search_by_house_name 'Headingly').to eq [p1, p2]
+            address_attributes: { house_name: 'Headingly' }
+        expect(Property.all).to eq [p1, p2]
+        expect(Property.search_by_house_name('Hillbank House').load).to eq [p1]
       end
 
-      it 'returns property addresses only (and not client etc)' do
-        c1 = client_create! human_id: 101,
-              address_attributes: { house_name: 'Headingly' }
-        expect(Address.all.to_a).to eq [p1.address, c1.address]
-        expect(Property.search_by_house_name 'Headingly').to eq [p1]
+      it 'no wildcard matching' do
+        expect(Property.search_by_house_name 'illbank').to eq []
       end
 
-      it 'it does not find part of the housename' do
-        p4 = property_create! human_id: 2,
-              address_attributes: { house_name: 'Lords' }
-        expect(Address.all.to_a).to eq [p1.address, p4.address]
-        expect(Property.search_by_house_name 'eadin').to eq []
-      end
     end
 
     context '#search' do
 
-      it 'exact number (human_id)' do
-        p2 = property_create! human_id: 11
-        expect(Property.all).to eq [p1, p2]
-        expect(Property.search '10').to eq [p1]
-      end
-
+      it('human id') { expect((Property.search '2002').load ).to eq [p1] }
       it 'range of human_id' do
-        p2 = property_create! human_id: 11
-        p3 = property_create! human_id: 13
+        p2 = property_create! human_id: 2003
+        p3 = property_create! human_id: 2004
         expect(Property.all).to eq [p1, p2, p3]
-        expect(Property.search '10 - 12').to eq [p1,p2]
+        expect(Property.search '2002 - 2003').to eq [p1,p2]
       end
-
-      it 'exact names' do
-        p2 = property_create! human_id: 2,
-              address_attributes: { house_name: 'Lords', road: 'Essex'}
+      it('house name') { expect((Property.search 'Hill').load ).to eq [p1] }
+      it('roads') { expect((Property.search 'Edg').load ).to eq [p1] }
+      it('towns') { expect((Property.search 'Bir').load ).to eq [p1] }
+      it('names') { expect(Property.search 'Grace').to eq [p1] }
+      it 'multiple' do
+        p2 = property_create! human_id: 3000
         expect(Property.all).to eq [p1, p2]
-        expect(Property.search 'Kirstall Road').to eq [p1]
+        expect(Property.search 'Bir').to eq [p1,p2]
+      end
+      it 'ordered by human_id ASC' do
+        p2 = property_create! human_id: 2000
+        expect(Property.all).to eq [p1, p2 ]
+        expect(Property.search 'Bir').to eq [p2,p1]
       end
 
-      context 'wildcard' do
-        it 'house name' do
-          p2 = property_create! human_id: 3,
-                address_attributes: { house_name: 'Vauxall Lane' }
-          expect(Property.all).to eq [p1, p2]
-          expect(Property.search 'Headi').to eq [p1]
-        end
-
-        it 'road name' do
-          p2 = property_create! human_id: 2,
-                address_attributes: { house_name: 'Headingly', road: 'unknown' }
-          expect(Property.all).to eq [p1, p2]
-          expect(Property.search 'Kirstall').to eq [p1]
-        end
-
-        it 'towns' do
-          p2 = property_create! human_id: 2,
-                address_attributes: { town: 'unknown' }
-          expect(Property.all).to eq [p1, p2]
-          expect(Property.search 'Yor').to eq [p1]
-        end
-
-        it 'multiple' do
-          p2 = property_create! human_id: 20,
-                address_attributes: { town: 'Yorks' }
-          expect(Property.all).to eq [p1, p2]
-          expect(Property.search 'Yor').to eq [p1,p2]
-        end
-      end
-     end
-
-    it 'uses ordered human_id ASC search' do
-      p3 = property_create! human_id: 30,
-          address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' }
-      p2 = property_create! human_id: 20,
-      address_attributes: { house_name: 'Headingly', road: 'Kirstall Road', town: 'York' }
-      expect(Property.all).to eq [p1, p3, p2 ]
-      expect(Property.search 'Yor').to eq [p1,p2,p3]
     end
   end
 end

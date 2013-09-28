@@ -16,7 +16,7 @@ def client_two_entities_create! args = {}
 end
 
 def client_company_create! args = {}
-  client = Client.new id: args[:id], human_id: args[:human_id]
+  client = Client.new client_attributes args
   client.build_address address_attributes args.fetch(:address_attributes, {})
   client.entities.build company_entity_attributes
   client.save!

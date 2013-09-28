@@ -76,8 +76,8 @@ describe Client do
       expect(Client.search 'Edgba').to eq [c1]
     end
 
-    it 'multiple uses ordered ASC search' do
-      c2 = client_create! human_id: 7000
+    it 'ordered by human_id ASC' do
+      c2 = client_create! human_id: 8000
       expect(Client.all).to eq [c1, c2]
       expect(Client.search 'Bir').to eq [c2,c1]
     end

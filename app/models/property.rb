@@ -33,7 +33,7 @@ class Property < ActiveRecord::Base
   end
 
   def self.search_by_house_name(search)
-    Property.includes(:address).where('addresses.house_name LIKE ?',"#{search}").references(:address)
+    Property.includes(:address).where('addresses.house_name ILIKE ?',"#{search}").references(:address)
   end
 
   def self.search search

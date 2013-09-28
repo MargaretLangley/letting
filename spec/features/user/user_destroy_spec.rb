@@ -5,7 +5,7 @@ describe User do
   before(:each) { log_in admin_attributes }
   context '#destroys' do
     it 'basic' do
-      user_factory george_attributes
+      user_create! george_attributes
       visit '/users/'
       expect(current_path).to eq '/users/'
       expect(page).to have_text 'admin@example.com'

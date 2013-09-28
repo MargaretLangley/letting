@@ -44,7 +44,8 @@ private
 def base_property args = {}
   property = Property.new property_attributes args
   property.prepare_for_form
-  add_contact property, args
+  property.build_address address_attributes args.fetch(:address_attributes, {})
+  property.entities.build person_entity_attributes
   property
 end
 

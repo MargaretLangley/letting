@@ -8,7 +8,7 @@ describe Client do
 
   it '#show' do
     client = client_create! human_id: 3008
-    client.properties << property_new(id: 1, human_id: 909)
+    client.properties << property_new(human_id: 909)
     visit '/clients/'
     click_on 'View'
     expect_client_entity

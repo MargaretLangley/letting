@@ -5,7 +5,7 @@ describe User do
 
   context '#view' do
     it 'basic user in view page' do
-      user_factory george_attributes
+      user_create! george_attributes
       visit '/users/'
       expect(current_path).to eq '/users/'
       first(:link,'View').click
