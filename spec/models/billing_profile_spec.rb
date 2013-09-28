@@ -108,36 +108,13 @@ describe BillingProfile do
         it 'address kept' do
           expect(prepare_blank_profile.address.marked_for_destruction?).to be_false
         end
-
       end
-
     end
-  end
-
-  context 'Attributes' do
   end
 
   context 'Associations' do
-
-    context '#entities' do
-      it('is entitieable') { expect(billing_profile).to respond_to(:entities) }
-    end
-
-    context '#address' do
-
-      it('is addressable') { expect(billing_profile).to respond_to :address }
-
-      it 'saving nil address does not change address count' do
-        billing_profile.address = nil
-        expect { billing_profile.save! }.to change(Address, :count).by 0
-      end
-
-      it 'is saved when filled in' do
-        expect { billing_profile.save! }.to change(Address, :count).by 1
-      end
-
-    end
-
+    it('is entitieable') { expect(billing_profile).to respond_to(:entities) }
+    it('is addressable') { expect(billing_profile).to respond_to :address }
   end
 
 end

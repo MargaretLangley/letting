@@ -9,7 +9,7 @@ describe Client do
   context '#updates' do
 
     before(:each) do
-      client_create! id: 1, human_id: 3003
+      client_create! id: 1
       navigate_to_edit_page
     end
 
@@ -68,7 +68,7 @@ describe Client do
   end
 
   it '#updates deletes a second entity', js:true do
-    client_two_entities_create! human_id: 3003
+    client_two_entities_create! human_id: 8008
     navigate_to_edit_page
     click_on 'X'
     click_on 'Update Client'
@@ -91,7 +91,7 @@ describe Client do
   end
 
     def expect_client_has_original_attributes
-      expect(find_field('Client ID').value).to have_text '3003'
+      expect(find_field('Client ID').value).to have_text '8008'
     end
 
     def expect_address_has_original_attributes
@@ -118,7 +118,7 @@ describe Client do
   end
 
     def expect_client_data_changed
-      expect(page).to_not have_text '3003'
+      expect(page).to_not have_text '8008'
       expect(page).to have_text '278'
       expect(page).to_not have_text '294'
       expect(page).to have_text '63c'

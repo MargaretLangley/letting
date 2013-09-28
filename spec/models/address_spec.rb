@@ -9,9 +9,7 @@ describe Address do
   it ('valid') { expect(address).to be_valid }
 
   context 'associations' do
-    it 'is associated with a addressable' do
-      expect(address).to respond_to(:addressable)
-    end
+    it('is addressable') { expect(address).to respond_to :addressable }
   end
 
   context 'validations' do
@@ -34,7 +32,7 @@ describe Address do
 
     it ('road_no has a maximum length') {address.road_no = 'a' * 11; expect(address).to_not be_valid }
 
-    it ('road string has to be present') { address.road = ''; expect(address).to_not be_valid }
+    it ('road has to be present') { address.road = ''; expect(address).to_not be_valid }
     it ('road has a maximum length') { address.road = 'a' * 65; expect(address).to_not be_valid }
 
     it ('district can be blank') { address.district = ''; expect(address).to be_valid }
@@ -73,8 +71,7 @@ describe Address do
   # Note search automatically uses ordered asc search
   context 'search' do
 
-   a3 = a2 = a1 = nil
-
+    a2 = a1 = nil
     before do
       a1 = Address.create! addressable_id: 1, \
                            addressable_type: 'Client', \
@@ -93,17 +90,8 @@ describe Address do
       expect(Address.all).to eq [a1,a2]
     end
 
-    it 'house' do
-      expect(Address.search_by_all 'Hill').to eq [a1]
-    end
-
-    it 'road' do
-      expect(Address.search_by_all 'Edg').to eq [a1]
-    end
-
-    it 'towns' do
-      expect(Address.search_by_all 'Yor').to eq [a2]
-    end
-
+    it('house') { expect(Address.search_by_all 'Hill').to eq [a1] }
+    it('road')  { expect(Address.search_by_all 'Edg').to  eq [a1] }
+    it('towns') { expect(Address.search_by_all 'Yor').to  eq [a2] }
   end
 end

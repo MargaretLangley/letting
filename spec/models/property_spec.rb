@@ -40,26 +40,13 @@ describe Property do
   end
 
   context 'Associations' do
-
-    context '#entities' do
-      it('is entitieable') { expect(property).to respond_to(:entities) }
-
-      it 'has at least one child' do
-        property.entities.destroy_all
-        expect(property).not_to be_valid
-      end
+    it('is entitieable') { expect(property).to respond_to(:entities) }
+    it 'has at least one child' do
+      property.entities.destroy_all
+      expect(property).not_to be_valid
     end
-
-    context '#addresses' do
-      it('is addressable') { expect(property).to respond_to :address }
-    end
-
-    it 'belongs to a client' do
-      client = client_create! id: 1, human_id: 1
-      property = client.properties.new human_id: 8000
-      expect(property.client).to eq client
-    end
-
+    it('is addressable') { expect(property).to respond_to :address }
+    it('has properties') { expect(property).to respond_to(:client) }
   end
 
   context 'Methods' do
