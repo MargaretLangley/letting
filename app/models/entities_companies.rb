@@ -10,7 +10,7 @@ module Entities
         destruction_if :empty?
       end
 
-      def remove_form
+      def destroy_all
         destruction_if :all?
       end
     private

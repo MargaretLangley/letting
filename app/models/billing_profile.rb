@@ -19,13 +19,13 @@ class BillingProfile < ActiveRecord::Base
     if use_profile?
       entities.clean_up_form
     else
-      address_for_destruction unless self.address.nil?
-      entities.remove_form
+      entities.destroy_all
+      destroy_address unless self.address.nil?
     end
   end
 
   private
-    def address_for_destruction
+    def destroy_address
       self.address.mark_for_destruction
     end
 end
