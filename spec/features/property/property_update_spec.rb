@@ -171,7 +171,7 @@ describe Property do
 
 
 
-    it 'handles validation' do
+    it 'has validation' do
       property_create! id: 1, human_id: 8000
       navigate_to_edit_page
       validate_page

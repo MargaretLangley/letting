@@ -22,7 +22,7 @@ describe Client do
       expect_client_edit
     end
 
-    it 'handles validation' do
+    it 'has validation' do
       invalidate_page
       click_on 'Update Client'
       expect(current_path).to eq '/clients/1'

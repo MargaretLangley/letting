@@ -31,7 +31,7 @@ describe Property do
     expect_property_entities
   end
 
-  it '#create handles validation' do
+  it '#create has validation' do
     navigate_to_create_page
     invalidate_page
     click_on 'Create Property'
