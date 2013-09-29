@@ -9,7 +9,12 @@ describe BillingProfile do
     billing_profile
   end
 
-  it ('is valid') { expect(billing_profile).to be_valid }
+  it('is valid') { expect(billing_profile).to be_valid }
+
+  context 'associations' do
+    it('is entitieable') { expect(billing_profile).to respond_to(:entities) }
+    it('is addressable') { expect(billing_profile).to respond_to :address }
+  end
 
   context 'new profile' do
     let(:new_profile) { BillingProfile.new }
@@ -111,10 +116,4 @@ describe BillingProfile do
       end
     end
   end
-
-  context 'Associations' do
-    it('is entitieable') { expect(billing_profile).to respond_to(:entities) }
-    it('is addressable') { expect(billing_profile).to respond_to :address }
-  end
-
 end

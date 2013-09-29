@@ -4,10 +4,7 @@ describe Payment do
 
   let(:payment) { Payment.new debt_id: 1, on_date: '2013/01/30', amount: 10.05 }
   let(:account) { Account.new id: 1, property_id: 1 }
-
-  it 'is valid' do
-    expect(payment).to be_valid
-  end
+  it('is valid') { expect(payment).to be_valid }
 
   context 'validates' do
     context 'presence' do

@@ -3,8 +3,7 @@ require 'spec_helper'
 describe Client do
 
   let(:client) { client_new  }
-
-  it ('is valid') { expect(client).to be_valid }
+  it('is valid') { expect(client).to be_valid }
 
   context 'validations' do
     it '#human_id is present' do
@@ -28,9 +27,9 @@ describe Client do
     end
   end
 
-  context 'Associations' do
-    it('is entitieable') { expect(client).to respond_to(:entities) }
-    it('is addressable') { expect(client).to respond_to :address }
+  context 'associations' do
+    it('has entities')   { expect(client).to respond_to(:entities) }
+    it('has address')    { expect(client).to respond_to :address }
     it('has properties') { expect(client).to respond_to(:properties) }
   end
 

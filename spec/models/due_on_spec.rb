@@ -4,7 +4,6 @@ describe DueOn do
 
   let(:due_on) { DueOn.new day: 3, month: 5, charge_id: 1 }
   let(:charge) { Charge.new charge_type: 'ground_rent', due_in: 'advance', amount: 500.50, account_id: 1 }
-
   it('is valid') { expect(due_on).to be_valid }
 
   context 'validates' do
@@ -22,6 +21,14 @@ describe DueOn do
       it('month integer') { due_on.month = 8.3; expect(due_on).to_not be_valid }
       it('month not negative') { due_on.month = -3; expect(due_on).to_not be_valid}
       it('month not less than 13') { due_on.month = 13; expect(due_on).to_not be_valid}
+    end
+  end
+
+  context 'associations' do
+    it 'belongs to a charge' do
+      due_on = charge.due_ons.build day: 3, month: 5, charge_id: 1
+      charge.save!
+      expect(due_on.charge).to eq charge
     end
   end
 
@@ -48,14 +55,6 @@ describe DueOn do
         due_on.month = -1
         expect(due_on).to be_per_month
       end
-    end
-  end
-
-  context 'associations' do
-    it 'belongs to a charge' do
-      due_on = charge.due_ons.build day: 3, month: 5, charge_id: 1
-      charge.save!
-      expect(due_on.charge).to eq charge
     end
   end
 

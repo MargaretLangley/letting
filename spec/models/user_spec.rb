@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe User do
   let(:user) { User.new user_attributes }
-
   it('is valid') { expect(user).to be_valid }
 
   context 'validations' do
@@ -15,8 +14,8 @@ describe User do
       end
       it('requires @') { user.email = "noat"; expect(user).not_to be_valid}
     end
-    context 'password' do
 
+    context 'password' do
       it('present') do
         # Bug you can't assign a nil password you can initialize it with empty string
         # http://stackoverflow.com/questions/16804820/why-is-password-validate-presence-ignored
@@ -29,7 +28,7 @@ describe User do
         user.password_confirmation = 'orother'
         expect(user).to_not be_valid
       end
-
     end
   end
+
 end

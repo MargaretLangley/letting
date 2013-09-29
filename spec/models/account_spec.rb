@@ -3,7 +3,6 @@ require 'spec_helper'
 describe Account do
 
   let(:account) { account_new  }
-
   it('is valid') { expect(account).to be_valid }
 
   context 'assocations' do

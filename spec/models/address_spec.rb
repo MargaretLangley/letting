@@ -8,10 +8,6 @@ describe Address do
 
   it ('valid') { expect(address).to be_valid }
 
-  context 'associations' do
-    it('is addressable') { expect(address).to respond_to :addressable }
-  end
-
   context 'validations' do
     context 'presence' do
       it('#county')  { address.county =nil; expect(address).not_to be_valid }
@@ -50,6 +46,10 @@ describe Address do
     it ('postcode has a valid form') { address.postcode = 'B75 6NR'; expect(address).to be_valid }
     it ('postcode has an invalid form') { address.postcode = 'B7'; expect(address).to_not be_valid }
 
+  end
+
+  context 'associations' do
+    it('is addressable') { expect(address).to respond_to :addressable }
   end
 
   context 'methods #empty? new address' do

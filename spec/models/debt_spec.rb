@@ -4,10 +4,7 @@ describe Debt do
 
   let(:debt) { Debt.new debt_attributes }
   let(:account) { Account.new id: 1, account_id: 1 }
-
-  it 'is valid' do
-    expect(debt).to be_valid
-  end
+  it('is valid') { expect(debt).to be_valid }
 
   context 'validates' do
     context 'presence' do
