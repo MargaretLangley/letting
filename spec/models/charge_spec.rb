@@ -2,9 +2,8 @@ require 'spec_helper'
 
 describe Charge do
   let(:charge) do
-    charge = Charge.new id: 1, charge_type: 'ground_rent', \
-      due_in: 'advance', amount: 500.50, account_id: 1
-    charge.due_ons.new  day: 3, month: 5, charge_id: 1
+    charge = Charge.new charge_attributes id: 1
+    charge.due_ons.new due_on_attributes_0 charge_id: 1
     charge
   end
 
@@ -18,11 +17,11 @@ describe Charge do
       it('due_ons') {charge.due_ons.destroy_all; expect(charge).to_not be_valid}
       context 'due_ons_size' do
         it 'not valid one over limit' do
-          (1..12).each { charge.due_ons.build day: 3, month: 5 }
+          (1..12).each { charge.due_ons.build day: 25, month: 3 }
           expect(charge).to_not be_valid
         end
         it 'valid if marked for destruction' do
-          (1..12).each { charge.due_ons.build day: 3, month: 5 }
+          (1..12).each { charge.due_ons.build day: 25, month: 3 }
           charge.due_ons.first.mark_for_destruction
           expect(charge).to be_valid
         end
@@ -31,18 +30,18 @@ describe Charge do
   end
 
   context 'Assocations' do
+    it('belongs to property') { expect(charge).to respond_to(:property) }
     it('is DueOns') { expect(charge).to respond_to(:due_ons) }
+  end
 
-    it 'has due ones' do
-      expect(charge.due_ons).to have(1).items
-    end
+  context 'methods' do
 
-    it 'prepares to display by creating extra due_ons' do
+    it '#prepare creates children' do
       charge.prepare
       expect(charge.due_ons).to have(4).items
     end
 
-    it 'on marks for distruction empty items' do
+    it '#clean_up_form destroys children' do
       charge.clean_up_form
       expect(charge.due_ons).to have(1).items
     end
@@ -63,33 +62,30 @@ describe Charge do
         expect(charge).to be_empty
       end
     end
-  end
 
+    context '#due_between?' do
+      before { Timecop.travel(Time.zone.parse('31/1/2013 12:00')) }
+      after { Timecop.return }
 
-  context 'due between' do
-    before { Timecop.freeze(Time.zone.parse('3/5/2013 12:00')) }
-    after { Timecop.return }
+      it 'missing due on' do
+        expect(charge.due_between? Date.new(2013, 2, 1) .. Date.new(2013, 3, 24) ).to be_false
+      end
 
-    it 'missing due on' do
-      expect(charge.due_between? Date.new(2013, 4, 1) .. Date.new(2013, 5, 2) ).to be_false
+      it 'is between due on' do
+        expect(charge.due_between? Date.new(2013, 3, 25) .. Date.new(2013, 3, 25)).to be_true
+      end
     end
 
-    it 'is between due on' do
-      expect(charge.due_between? Date.new(2013, 5, 1) .. Date.new(2013, 5, 5)).to be_true
-    end
+    context '#makes_debt' do
+      before { Timecop.travel(Time.zone.parse('31/1/2013 12:00')) }
+      after  { Timecop.return }
 
-  end
-
-  context 'makes charge' do
-    before { Timecop.freeze(Time.zone.parse('3/5/2013 12:00')) }
-    after { Timecop.return }
-
-    it 'makes charge if between'  do
-      debt = DebtInfo.from_charge charge_id: 1, \
-                          on_date: Date.new(2013,5,3), \
-                          amount: BigDecimal.new(500.5,8)
-      expect(charge.make_debt Date.new(2013, 5, 1) .. Date.new(2013, 5, 5) ).to eq debt
+      it 'if charge between dates'  do
+        debt = DebtInfo.from_charge charge_id: 1, \
+                            on_date: Date.new(2013,3,25), \
+                            amount: BigDecimal.new(88.08,8)
+        expect(charge.make_debt Date.new(2013, 2, 25) .. Date.new(2013, 3, 25) ).to eq debt
+      end
     end
   end
-
 end

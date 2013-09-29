@@ -15,7 +15,7 @@ end
 
 def due_on_attributes_0 overrides = {}
   {
-    day: 31,
+    day: 25,
     month: 3
   }.merge overrides
 end

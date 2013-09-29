@@ -8,14 +8,8 @@ describe Debt do
 
   context 'validates' do
     context 'presence' do
-      it 'charge_id' do
-        debt.charge_id = nil
-        expect(debt).to_not be_valid
-      end
-      it 'on_date' do
-        debt.on_date = nil
-        expect(debt).to_not be_valid
-      end
+      it('charge_id') { debt.charge_id = nil; expect(debt).to_not be_valid }
+      it('on_date') { debt.on_date = nil; expect(debt).to_not be_valid }
     end
 
     context 'amount' do
@@ -34,9 +28,11 @@ describe Debt do
         expect(debt).to_not be_valid
       end
     end
+  end
 
-    context 'paid' do
+  context 'methods' do
 
+    context '#paid' do
       it 'returns 0 if nothing paid' do
         expect(debt.paid).to eq 0
       end
@@ -53,23 +49,18 @@ describe Debt do
         Payment.create! payment_attributes amount: 1.05, debt_id: debt.id
         expect(debt.paid).to eq 2.10
       end
-
     end
 
     context '#paid?' do
-
-      it 'is not paid' do
+      it 'false without payment' do
         expect(debt).to_not be_paid
       end
 
-      it 'paid in full true' do
+      it 'true when paid in full' do
         debt.save!
         Payment.create! payment_attributes debt_id: debt.id
         expect(debt).to be_paid
       end
-
     end
-
   end
-
 end

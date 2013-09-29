@@ -3,7 +3,7 @@ require 'spec_helper'
 describe DueOn do
 
   let(:due_on) { DueOn.new day: 3, month: 5, charge_id: 1 }
-  let(:charge) { Charge.new charge_type: 'ground_rent', due_in: 'advance', amount: 500.50, account_id: 1 }
+  let(:charge) { Charge.new charge_attributes account_id: 1 }
   it('is valid') { expect(due_on).to be_valid }
 
   context 'validates' do
@@ -59,7 +59,7 @@ describe DueOn do
   end
 
   context 'due between' do
-    before { Timecop.freeze(Time.zone.parse('3/5/2013 12:00')) }
+    before { Timecop.travel(Time.zone.parse('3/5/2013 12:00')) }
     after { Timecop.return }
 
     it 'before due on' do
@@ -74,21 +74,21 @@ describe DueOn do
       expect(due_on.between? Date.new(2013, 5, 4) ..  Date.new(2013, 5, 7) ).to be_false
     end
 
-    context 'timefreeze' do
+    context 'timetravel' do
       it 'knows the year' do
-        Timecop.freeze(Time.zone.parse('3/5/2014 12:00'))
+        Timecop.travel(Time.zone.parse('3/5/2014 12:00'))
         expect(due_on.make_date).to eq Date.new(2014,5,3)
         Timecop.return
       end
 
       it 'allows for next year' do
-        Timecop.freeze(Time.zone.parse('4/5/2014 12:00'))
+        Timecop.travel(Time.zone.parse('4/5/2014 12:00'))
         expect(due_on.make_date).to eq Date.new(2015,5,3)
         Timecop.return
       end
 
       it 'allows for next year in december' do
-        Timecop.freeze(Time.zone.parse('1/12/2014 12:00'))
+        Timecop.travel(Time.zone.parse('1/12/2014 12:00'))
         expect(due_on.make_date).to eq Date.new(2015,5,3)
         Timecop.return
       end
@@ -96,7 +96,7 @@ describe DueOn do
     end
 
     it 'makes date' do
-      Timecop.freeze(Time.zone.parse('3/5/2013 12:00'))
+      Timecop.travel(Time.zone.parse('3/5/2013 12:00'))
       expect(due_on.make_date).to eq Date.new 2013, 5, 3
       Timecop.return
     end

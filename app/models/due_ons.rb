@@ -18,6 +18,15 @@ module DueOns
         (self.size...MAX_DISPLAYED_DUE_ONS).each { self.build }
       end
 
+      def clean_up_form
+        destruction_if :empty?
+        destruction_if :persisted? if change_due_on?
+        if has_per_month_due_on?
+          assign_per_month per_month_due_on.day
+          destruction_if :per_month?
+        end
+      end
+
       def empty?
         self.all?(&:empty?)
       end
@@ -42,14 +51,6 @@ module DueOns
         self.detect{ |due_on| due_on.between? date_range }.make_date
       end
 
-      def clean_up_form
-        destruction_if :empty?
-        destruction_if :persisted? if change_due_on?
-        if has_per_month_due_on?
-          assign_per_month per_month_due_on.day
-          destruction_if :per_month?
-        end
-      end
 
     private
 

@@ -21,7 +21,7 @@ describe 'Account Factory' do
 
     it('has charge') { expect(account.charges[0].charge_type).to eq 'Ground Rent' }
     context 'has due_on' do
-      it('day') { expect(account.charges[0].due_ons[0].day).to eq 31 }
+      it('day') { expect(account.charges[0].due_ons[0].day).to eq 25 }
       it('month') { expect(account.charges[0].due_ons[0].month).to eq 3 }
     end
     context 'overrides' do
