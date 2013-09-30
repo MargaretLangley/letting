@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_filter :authorize
   def index
     @users = User.all
      # @users = User.search(search_param).page(params[:page]).load

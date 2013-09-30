@@ -12,7 +12,6 @@ class Permission < Struct.new(:user)
         return true if controller == 'users'
       end
     end
-    # raise_error "UNKNOWN CONTROLLER #{controller} ACTION #{action}"
     false
   end
 end
