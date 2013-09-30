@@ -10,16 +10,16 @@ describe Entity do
   end
 
   context 'validations' do
-    context '#name' do
+    context 'name' do
       it('presence') { entity.name = nil; expect(entity).to_not be_valid }
       it('cannot be blank') { entity.name = ''; expect(entity).to_not be_valid }
-      it('has a maximum length') { entity.name = 'a' * 65; expect(entity).to_not be_valid }
+      it('has a maximum') { entity.name = 'a' * 65; expect(entity).to_not be_valid }
     end
-    context '#entity_type' do
+    context 'entity_type' do
       it('presence') { entity.entity_type = nil; expect(entity).to_not be_valid }
     end
-    it ('#title has a maximum length') { entity.title = 'a' * 11; expect(entity).to_not be_valid }
-    it ('#initials has a maximum length') { entity.initials = 'a' * 11; expect(entity).to_not be_valid }
+    it ('title has a max') { entity.title = 'a' * 11; expect(entity).to_not be_valid }
+    it ('initials has a max') { entity.initials = 'a' * 11; expect(entity).to_not be_valid }
   end
 
   context 'methods' do

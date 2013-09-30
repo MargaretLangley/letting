@@ -7,7 +7,7 @@ describe Property do
   it ('#valid?') { expect(property).to be_valid }
 
   context 'validations' do
-    context '#human_id' do
+    context 'human_id' do
 
       it 'is present' do
         property.human_id = nil
@@ -26,7 +26,7 @@ describe Property do
       end
     end
 
-    context '#client_id' do
+    context 'client_id' do
       it('required') do
         property.client_id = nil
         expect(property).not_to be_valid
