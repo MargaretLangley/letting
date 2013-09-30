@@ -27,7 +27,7 @@ describe Charges do
       expect(charges.charges_between Date.new(2013,3,24)..Date.new(2013,3,25)).to \
       eq [ DebtInfo.from_charge(charge_id: 1, \
                                 on_date: Date.new(2013,3,25), \
-                                amount: BigDecimal.new(88.08,8)) \
+                                amount: 88.08) \
          ]
     end
   end

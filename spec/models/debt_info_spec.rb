@@ -23,7 +23,7 @@ describe DebtInfo do
   it 'amount as decimal' do
     debt = DebtInfo.from_charge charge_id: 1, \
     on_date: Date.new(2013,5,3), \
-    amount: BigDecimal.new(100.50,8)
+    amount: 100.50
     expect(debt.amount).to eq 100.5
   end
 

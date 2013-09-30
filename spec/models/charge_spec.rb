@@ -83,7 +83,7 @@ describe Charge do
       it 'if charge between dates'  do
         debt = DebtInfo.from_charge charge_id: 1, \
                             on_date: Date.new(2013,3,25), \
-                            amount: BigDecimal.new(88.08,8)
+                            amount: 88.08
         expect(charge.make_debt Date.new(2013, 2, 25) .. Date.new(2013, 3, 25) ).to eq debt
       end
     end

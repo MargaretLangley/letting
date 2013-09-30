@@ -9,7 +9,7 @@ def charge_attributes overrides = {}
   {
     charge_type: 'Ground Rent',
     due_in: 'Advance',
-    amount: '88.08'
+    amount: 88.08
   }.merge overrides
 end
 
