@@ -11,8 +11,19 @@ describe 'debt_generator' do
     expect(page).to have_text /No properties found. Searched for: 'Garbage'/i
   end
 
-  it 'creates debts' do
-    visit '/debt_generators/new'
-    fill_in 'search', with: ''
+  context 'creates' do
+    before { Timecop.travel(Time.zone.parse('31/1/2013 12:00')) }
+    after { Timecop.return }
+
+    it 'debts' do
+      property_with_charge_create!
+      visit '/debt_generators/new'
+      fill_in 'search', with: 'Hillbank House'
+      click_on 'Search'
+      expect(page).to have_text '2002'
+      expect(page).to have_text 'Ground rent'
+      click_on 'Make Charges Due'
+      expect(page).to have_text /Debts successfully created!/i
+    end
   end
 end

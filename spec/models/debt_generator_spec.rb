@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe DebtGenerator do
 
-  it 'returns' do
+  it '#latest_debt_generated' do
     DebtGenerator.create debt_generator_attributes
     expect(DebtGenerator.latest_debt_generated(10).length).to eq 1
     expect(DebtGenerator.latest_debt_generated(10).first).to eq \
