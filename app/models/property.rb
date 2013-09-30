@@ -47,6 +47,18 @@ class Property < ActiveRecord::Base
     end
   end
 
+  def self.search_min search
+    case
+    when search.blank?
+      none
+    when self.human_ids(search)
+      self.search_by_human_id(search)
+    else
+      self.search_by_all(search)
+    end
+  end
+
+
 
   private
     def self.search_by_human_id(search)
