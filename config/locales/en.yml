@@ -26,6 +26,12 @@ en:
         name: 'Person or company name'
       property:
         entities: 'Person or company'
+    errors:
+      models:
+        debt_generator:
+          attributes:
+            search_string:
+              taken: 'and date range has already been used.'
   number:
     currency:
         format:

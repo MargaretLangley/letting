@@ -4,6 +4,16 @@ describe DebtGenerator do
 
   let(:debt_gen) { DebtGenerator.new }
 
+  context 'validations' do
+    context 'validate uniqueness' do
+      it 'prevents same debt_generator being created' do
+        DebtGenerator.create! debt_generator_attributes id: nil
+        expect{ DebtGenerator.create! debt_generator_attributes id: nil}.to \
+          raise_error ActiveRecord::RecordInvalid
+      end
+    end
+  end
+
   context 'inialization' do
     context 'empty' do
       before { Timecop.travel(Time.zone.parse('30/9/2013 12:00')) }
