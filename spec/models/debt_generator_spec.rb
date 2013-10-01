@@ -38,15 +38,18 @@ describe DebtGenerator do
   end
 
   context 'methods' do
-    context '#debts?' do
-      it 'none when unassigned' do
+    context '#debtless?' do
+      it 'when empty' do
         debt_gen = DebtGenerator.new
-        expect(debt_gen).not_to be_debts
+        expect(debt_gen).to be_debtless
       end
-      it 'not empty when assigned' do
+      it 'has debts when assigned' do
         debt_gen = DebtGenerator.new
-        debt_gen.debts << Debt.new
-        expect(debt_gen).to be_blank
+        # setting up debt generation will result in complicated test
+        # doing something like debt_gen.debts << Debt.new would use
+        # private interface. Choose to stub present? Also ugly.
+        debt_gen.debts.should_receive(:empty?).and_return(false)
+        expect(debt_gen).to_not be_debtless
       end
     end
     context '#generate' do

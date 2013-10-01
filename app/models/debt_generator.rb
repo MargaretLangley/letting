@@ -15,8 +15,8 @@ class DebtGenerator < ActiveRecord::Base
     self.debts
   end
 
-  def debts?
-    self.debts.present?
+  def debtless?
+    self.debts.empty?
   end
 
   def == another_debt_generator

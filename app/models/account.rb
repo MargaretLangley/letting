@@ -36,7 +36,7 @@ class Account < ActiveRecord::Base
 
   private
 
-    def generate_debts_from_chargeable debt_infoschargeable_infos
+    def generate_debts_from_chargeable chargeable_infos
       chargeable_infos.each {|chargeable| debts.build chargeable.to_hash }
     end
 

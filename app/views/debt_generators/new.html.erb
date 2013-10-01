@@ -7,7 +7,6 @@
   <%= debt_gen_form.hidden_field :start_date  %>
   <%= debt_gen_form.hidden_field :end_date %>
   <fieldset id='debt_generator' class='shell' style='position: relative;'>
-  <br/>
   <h3>Property Charges to be invoiced.</h3>
   <table>
     <thead>
@@ -30,7 +29,7 @@
       <tr>
         <td colspan='4'>
         <div>
-  <%= debt_gen_form.submit 'Make Charges Due' %><span class = 'simple' ><%= link_to 'Cancel', debt_generators_path %></span>
+  <%= debt_gen_form.submit 'Make Charges Due', disabled: @debt_generator.debtless? %><span class = 'simple' ><%= link_to_unless @debt_generator.debtless? ,'Cancel', debt_generators_path %></span>
 </div>
       </tr>
     </td>

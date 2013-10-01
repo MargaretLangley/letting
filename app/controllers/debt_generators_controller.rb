@@ -7,9 +7,8 @@ class DebtGeneratorsController < ApplicationController
     @debt_generator = DebtGenerator.new search_string: params[:search],
                                         start_date: params[:search_start_date],
                                         end_date: params[:search_end_date]
-    if @debt_generator.generate.any?
-
-    else
+    @debt_generator.generate
+    if @debt_generator.debtless?
       flash.now.notice = "No properties found. Searched for: '#{params[:search]}'" \
         if params[:search].present?
     end
