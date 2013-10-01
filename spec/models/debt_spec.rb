@@ -32,6 +32,24 @@ describe Debt do
 
   context 'methods' do
 
+    context '#already_charged' do
+      it 'matches' do
+        one = Debt.new(charge_id: 1, on_date: '2013-10-1')
+        two = Debt.new(charge_id: 1, on_date: '2013-10-1')
+        expect(one.already_charged(two)).to be_true
+      end
+      it 'charge causes false' do
+        one = Debt.new(charge_id: 1, on_date: '2013-10-1')
+        two = Debt.new(charge_id: 2, on_date: '2013-10-1')
+        expect(one.already_charged(two)).to be_false
+      end
+      it 'date causes false' do
+        one = Debt.new(charge_id: 1, on_date: '2013-10-1')
+        two = Debt.new(charge_id: 1, on_date: '2014-10-1')
+        expect(one.already_charged(two)).to be_false
+      end
+    end
+
     context '#paid' do
       it 'returns 0 if nothing paid' do
         expect(debt.paid).to eq 0

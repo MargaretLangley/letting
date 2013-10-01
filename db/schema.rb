@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20130923093205) do
   end
 
   add_index "debts", ["account_id"], name: "index_debts_on_account_id", using: :btree
+  add_index "debts", ["charge_id", "on_date"], name: "index_debts_on_charge_id_and_on_date", unique: true, using: :btree
   add_index "debts", ["charge_id"], name: "index_debts_on_charge_id", using: :btree
   add_index "debts", ["debt_generator_id"], name: "index_debts_on_debt_generator_id", using: :btree
 

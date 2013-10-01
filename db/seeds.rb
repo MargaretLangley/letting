@@ -310,7 +310,7 @@ end
   def create_debts
     Debt.create! [
       { id: 1, account_id: 1, charge_id: 1, on_date: "2013/#{(Date.current - 5.months).month }/01", amount: 88.08, debt_generator_id: 1 },
-      { id: 2, account_id: 1, charge_id: 1, on_date: "2013/#{(Date.current - 5.months).month }/01", amount: 88.08, debt_generator_id: 2 }
+      { id: 2, account_id: 1, charge_id: 3, on_date: "2013/#{(Date.current - 5.months).month }/01", amount: 88.08, debt_generator_id: 1 }
     ]
   end
 
