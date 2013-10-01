@@ -20,7 +20,7 @@ class Debt < ActiveRecord::Base
     self.on_date == another_debt.on_date
   end
 
-  def eq? another_debt
+  def == another_debt
     self.charge_id == another_debt.charge_id && \
     self.on_date == another_debt.on_date && \
     self.amount == another_debt.amount

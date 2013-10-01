@@ -20,7 +20,7 @@ class DebtGenerator < ActiveRecord::Base
     self.debts.empty?
   end
 
-  def eq? another_debt_generator
+  def == another_debt_generator
     self.search_string == another_debt_generator.search_string && \
     self.start_date == another_debt_generator.start_date && \
     self.end_date == another_debt_generator.end_date

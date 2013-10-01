@@ -7,7 +7,7 @@ class ChargeableInfo
         amount:    args[:amount]
   end
 
-  def eq? another_debt_info
+  def == another_debt_info
     self.charge_id == another_debt_info.charge_id && \
     self.on_date == another_debt_info.on_date && \
     self.amount == another_debt_info.amount
