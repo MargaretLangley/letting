@@ -25,7 +25,7 @@ describe Charges do
       charges = account_and_charge_new.charges
       charges[0].id = 1 # avoid saving object to get id
       expect(charges.charges_between Date.new(2013,3,24)..Date.new(2013,3,25)).to \
-      eq [ DebtInfo.from_charge(charge_id: 1, \
+      eq [ ChargeableInfo.from_charge(charge_id: 1, \
                                 on_date: Date.new(2013,3,25), \
                                 amount: 88.08) \
          ]

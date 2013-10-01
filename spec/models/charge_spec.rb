@@ -76,15 +76,15 @@ describe Charge do
       end
     end
 
-    context '#makes_debt' do
+    context '#chargeable_info' do
       before { Timecop.travel(Time.zone.parse('31/1/2013 12:00')) }
       after  { Timecop.return }
 
       it 'if charge between dates'  do
-        debt = DebtInfo.from_charge charge_id: 1, \
+        info = ChargeableInfo.from_charge charge_id: 1, \
                             on_date: Date.new(2013,3,25), \
                             amount: 88.08
-        expect(charge.make_debt Date.new(2013, 2, 25) .. Date.new(2013, 3, 25) ).to eq debt
+        expect(charge.chargeable_info Date.new(2013, 2, 25) .. Date.new(2013, 3, 25) ).to eq info
       end
     end
   end

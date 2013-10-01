@@ -38,6 +38,17 @@ describe DebtGenerator do
   end
 
   context 'methods' do
+    context '#debts?' do
+      it 'none when unassigned' do
+        debt_gen = DebtGenerator.new
+        expect(debt_gen).not_to be_debts
+      end
+      it 'not empty when assigned' do
+        debt_gen = DebtGenerator.new
+        debt_gen.debts << Debt.new
+        expect(debt_gen).to be_blank
+      end
+    end
     context '#generate' do
       before { Timecop.travel(Time.zone.parse('30/2/2013 12:00')) }
       after { Timecop.return }

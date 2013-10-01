@@ -18,7 +18,7 @@ class Account < ActiveRecord::Base
   end
 
   def generate_debts_for date_range
-    generate_debts charges.charges_between date_range
+    generate_debts_from_chargeable charges.charges_between date_range
     new_debts
   end
 
@@ -36,8 +36,8 @@ class Account < ActiveRecord::Base
 
   private
 
-    def generate_debts debt_infos
-      debt_infos.each {|debt_info| debts.build debt_info.to_hash }
+    def generate_debts_from_chargeable debt_infoschargeable_infos
+      chargeable_infos.each {|chargeable| debts.build chargeable.to_hash }
     end
 
     def new_debts

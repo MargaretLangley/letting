@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe DebtInfo do
+describe ChargeableInfo do
 
   let(:debt_info) do
-    DebtInfo.from_charge charge_id: 1, \
+    ChargeableInfo.from_charge charge_id: 1, \
     on_date: Date.new(2013,5,3), \
     amount: 100.5
   end
@@ -21,7 +21,7 @@ describe DebtInfo do
   end
 
   it 'amount as decimal' do
-    debt = DebtInfo.from_charge charge_id: 1, \
+    debt = ChargeableInfo.from_charge charge_id: 1, \
     on_date: Date.new(2013,5,3), \
     amount: 100.50
     expect(debt.amount).to eq 100.5
@@ -30,7 +30,7 @@ describe DebtInfo do
   context 'methods' do
 
     it '#==' do
-      debt = DebtInfo.from_charge charge_id: 1, \
+      debt = ChargeableInfo.from_charge charge_id: 1, \
       on_date: Date.new(2013,5,3), \
       amount: 100.5
       expect(debt_info).to eq debt

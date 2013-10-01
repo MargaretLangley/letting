@@ -15,6 +15,10 @@ class DebtGenerator < ActiveRecord::Base
     self.debts
   end
 
+  def debts?
+    self.debts.present?
+  end
+
   def == another_debt_generator
     self.search_string == another_debt_generator.search_string && \
     self.start_date == another_debt_generator.start_date && \

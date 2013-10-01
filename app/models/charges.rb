@@ -14,7 +14,7 @@ module Charges
       end
 
       def charges_between date_range
-        self.select{|charge| charge.due_between? date_range }.map{|charge| charge.make_debt date_range }
+        self.select{|charge| charge.due_between? date_range }.map{|charge| charge.chargeable_info date_range }
       end
 
     private

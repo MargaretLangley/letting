@@ -1,4 +1,4 @@
-class DebtInfo
+class ChargeableInfo
   attr_reader :charge_id, :on_date, :amount
 
   def self.from_charge args = {}
