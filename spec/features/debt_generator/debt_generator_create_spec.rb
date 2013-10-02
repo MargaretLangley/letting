@@ -8,7 +8,7 @@ describe 'debt_generator' do
     fill_in 'search', with: 'Garbage'
     click_on 'Search'
     expect(current_path).to eq '/debt_generators/new'
-    expect(page).to have_text /No properties found. Searched for: 'Garbage'/i
+    expect(page).to have_text /No properties matching 'Garbage'/i
   end
 
   context 'creates' do

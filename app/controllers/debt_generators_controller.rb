@@ -9,7 +9,7 @@ class DebtGeneratorsController < ApplicationController
                                         end_date: params[:search_end_date]
     @debt_generator.generate
     if @debt_generator.debtless?
-      flash.now.notice = "No properties found. Searched for: '#{params[:search]}'" \
+      flash.now.notice = "No properties matching '#{params[:search]}' between #{params[:search_start_date]} and #{params[:search_end_date]} require charges." \
         if params[:search].present?
     end
   end
