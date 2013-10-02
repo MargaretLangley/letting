@@ -2,15 +2,15 @@ module DB
   class ImportFields
 
     def self.client
-      %w{human_id } + self.entities + self.address
+      %w{human_id } + entities + address
     end
 
     def self.property
-      %w{human_id updated } + self.entities + self.address + %w{ client_id }
+      %w{human_id updated } + entities + address + %w{ client_id }
     end
 
     def self.billing_profile
-      %w{ human_id } + self.entities + self.address
+      %w{ human_id } + entities + address
     end
 
     def self.charge

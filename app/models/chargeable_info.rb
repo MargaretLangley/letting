@@ -8,11 +8,11 @@ class ChargeableInfo
         account_id: args[:account_id]
   end
 
-  def == another_debt_info
-    self.charge_id == another_debt_info.charge_id && \
-    self.on_date == another_debt_info.on_date && \
-    self.amount == another_debt_info.amount && \
-    self.account_id == another_debt_info.account_id
+  def == other
+    charge_id == other.charge_id && \
+    on_date == other.on_date && \
+    amount == other.amount && \
+    account_id == other.account_id
   end
 
   def to_hash

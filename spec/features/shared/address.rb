@@ -19,22 +19,20 @@ def expect_address_nottingham
   expect(page).to have_text 'NG2 6AG'
 end
 
-
 def expect_address_edgbaston
   expect_index_address_edgbaston
-  expect(page).to have_text 'Edgbaston'      #district
-  expect(page).to have_text 'West Midlands'  #county
-  expect(page).to have_text 'B5 7QU'         #postcode
+  expect(page).to have_text 'Edgbaston'      # district
+  expect(page).to have_text 'West Midlands'  # county
+  expect(page).to have_text 'B5 7QU'         # postcode
 end
 
 def expect_index_address_edgbaston
-  expect(page).to have_text '47'             #Flat No
-  expect(page).to have_text 'Hillbank House' #House Name
-  expect(page).to have_text '294'            #House No
-  expect(page).to have_text 'Edgbaston Road' #Road
-  expect(page).to have_text 'Birmingham'     #Town
+  expect(page).to have_text '47'             # Flat No
+  expect(page).to have_text 'Hillbank House' # House Name
+  expect(page).to have_text '294'            # House No
+  expect(page).to have_text 'Edgbaston Road' # Road
+  expect(page).to have_text 'Birmingham'     # Town
 end
-
 
 def expect_address_edgbaston_by_field
   expect(find_field('Flat no').value).to have_text '47'

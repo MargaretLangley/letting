@@ -58,12 +58,12 @@ describe Client do
       end
     end
 
-    it 'shows person by default', js:true do
+    it 'shows person by default', js: true do
       navigate_to_create_page
       expect(page).to have_text 'Person or company'
     end
 
-    it 'swiches between company and person', js:true do
+    it 'swiches between company and person', js: true do
       navigate_to_create_page
       expect(page).to have_text 'Initials'
       click_on 'or company'

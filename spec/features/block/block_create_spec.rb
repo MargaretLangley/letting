@@ -12,7 +12,7 @@ describe Block do
   it '#create a block' do
     find_block 'Hillbank House'
     expect(page).to have_text 'Hillbank House'
-    expect{click_on 'Save block'}.to change(Block, :count).by 1
+    expect{ click_on 'Save block' }.to change(Block, :count).by 1
     expect(current_path).to eq '/blocks'
     expect(page).to have_text 'Block has been added!'
   end
@@ -21,7 +21,7 @@ describe Block do
     find_block 'Unknown House'
     expect(page).to have_button 'Find properties'
     find_block 'Hillbank House'
-    expect{click_on 'Save block'}.to change(Block, :count).by 1
+    expect{ click_on 'Save block' }.to change(Block, :count).by 1
   end
 
   def create_properties

@@ -3,7 +3,7 @@ module AuthMacros
     @_current_user = User.create! user_attributes attributes
     visit '/login/'
     within_fieldset 'login' do
-      fill_in "Email", with: @_current_user.email
+      fill_in 'Email', with: @_current_user.email
       fill_in "Password", with: @_current_user.password
       click_on 'Log In'
     end

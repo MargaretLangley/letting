@@ -1,17 +1,17 @@
 namespace :monit do
 
-  desc "Setup all Monit configuration"
+  desc 'Setup all Monit configuration'
   task :setup do
     unicorn
     syntax
     reload
   end
-  after "deploy:setup", "monit:setup"
+  after 'deploy:setup', 'monit:setup'
 
-  task(:unicorn, roles: :app) { monit_config "unicorn", "/etc/monit/conf.d/#{application}_unicorn" }
+  task(:unicorn, roles: :app) { monit_config 'unicorn', "/etc/monit/conf.d/#{application}_unicorn" }
 
   %w[start stop restart syntax reload].each do |command|
-    desc "Run Monit #{command} script"
+    desc 'Run Monit #{command} script'
     task command do
       run "#{sudo} service monit #{command}"
     end

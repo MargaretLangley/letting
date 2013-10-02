@@ -26,26 +26,26 @@ module DB
         'spec/fixtures/import_data/properties'
       end
 
-      it "One row" do
+      it 'One row' do
         expect{ ImportProperty.import Import.csv_table('properties',  \
           headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
           change(Property, :count).by 1
       end
 
-      it "Client set to table id" do
+      it 'Client set to table id' do
         expect{ ImportProperty.import Import.csv_table('properties',  \
           headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
           change(Property, :count).by 1
         expect(Property.first.client_id).to eq client.id
       end
 
-      it "One row, 2 Entities" do
+      it 'One row, 2 Entities' do
         expect{ ImportProperty.import Import.csv_table('properties', \
           headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
           change(Entity, :count).by 2
       end
 
-      it "Not double import" do
+      it 'Not double import' do
         expect{ ImportProperty.import Import.csv_table('properties',  \
           headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
           change(Property, :count).by 1
@@ -54,7 +54,7 @@ module DB
           change(Property, :count).by 0
       end
 
-      it "Not double import" do
+      it 'Not double import' do
         expect{ ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
           drop_rows: 34, location: properties_directory) }.to \
           change(Entity, :count).by 2
@@ -65,7 +65,7 @@ module DB
 
       context 'use profile' do
 
-        it "new record to false" do
+        it 'new record to false' do
           ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
             drop_rows: 34, location: properties_directory)
           expect(Property.first.billing_profile.use_profile).to be_false

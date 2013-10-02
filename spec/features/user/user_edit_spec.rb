@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe User do
 
-  before(:each) { log_in admin_attributes}
+  before(:each) { log_in admin_attributes }
 
   context '#edit' do
     it 'basic' do
       go_to_edit_page
       within_fieldset 'user' do
-        fill_in "Email", with: 'another@example.com'
+        fill_in 'Email', with: 'another@example.com'
         fill_in 'Password', with: 'password'
         fill_in 'Password confirmation', with: 'password'
       end
@@ -21,7 +21,7 @@ describe User do
     it 'no password confirmation' do
       go_to_edit_page
       within_fieldset 'user' do
-        fill_in "Email", with: 'another@example.com'
+        fill_in 'Email', with: 'another@example.com'
         fill_in 'Password', with: 'password'
         fill_in 'Password confirmation', with: 'pass'
       end

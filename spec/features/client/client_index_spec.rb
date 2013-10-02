@@ -27,7 +27,7 @@ describe Client do
 
     it 'search' do
       client_create! human_id: 111,
-                address_attributes: { road: 'Vauxall Lane' }
+                     address_attributes: { road: 'Vauxall Lane' }
       client_create! human_id: 222
       client_create! human_id: 333
 

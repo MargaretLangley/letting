@@ -22,17 +22,17 @@ describe Account do
 
     it 'for charges between dates' do
       account = account_and_charge_new charge_attributes: { id: 3 }
-      chargeable = account.chargeables_between(Date.new(2013,3,1)..Date.new(2013,3,31)).first
+      chargeable = account.chargeables_between(Date.new(2013, 3, 1)..Date.new(2013, 3, 31)).first
       expect(chargeable.account_id).to eq 1
       expect(chargeable.charge_id).to eq 3
-      expect(chargeable.on_date).to eq Date.new(2013,03,25)
+      expect(chargeable.on_date).to eq Date.new(2013, 3, 25)
       expect(chargeable.amount).to eq 88.08
     end
 
     it 'not if already debts' do
       account = account_and_charge_new charge_attributes: { id: 3 }
       account.add_debt debt_attributes
-      expect(account.chargeables_between(Date.new(2013,3,1)..Date.new(2013,3,31))).to eq []
+      expect(account.chargeables_between(Date.new(2013, 3, 1)..Date.new(2013, 3, 31))).to eq []
     end
   end
 
@@ -51,7 +51,7 @@ describe Account do
     account.payment payment_attributes debt_id: debt1.id
     account.save!
     expect(Debt.all.to_a).to eq [debt1, debt2]
-    expect(account.unpaid_debts).to eq [ debt2 ]
+    expect(account.unpaid_debts).to eq [debt2]
   end
 
   it 'returns the payments most recent first' do

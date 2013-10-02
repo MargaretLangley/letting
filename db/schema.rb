@@ -131,14 +131,14 @@ ActiveRecord::Schema.define(version: 20130923093205) do
   add_index "payments", ["account_id"], name: "index_payments_on_account_id", using: :btree
   add_index "payments", ["debt_id"], name: "index_payments_on_debt_id", using: :btree
 
-  create_table "properties", force: true do |t|
+  create_table 'properties', force: true do |t|
     t.integer  "human_id"
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "properties", ["client_id"], name: "index_properties_on_client_id", using: :btree
+  add_index 'properties', ["client_id"], name: "index_properties_on_client_id", using: :btree
 
   create_table "search_suggestions", force: true do |t|
     t.string   "term"
@@ -148,13 +148,13 @@ ActiveRecord::Schema.define(version: 20130923093205) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",           null: false
+    t.string   'Email',           null: false
     t.string   "password_digest", null: false
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ['Email'], name: "index_users_on_email", unique: true, using: :btree
 
 end

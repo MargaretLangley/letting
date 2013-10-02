@@ -11,23 +11,23 @@ module DB
       property_create! human_id: 122
     end
 
-    it "One row" do
+    it 'One row' do
       expect(BillingProfile.first.use_profile).to be_false
       ImportBillingProfile.import Import.csv_table('address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles')
       expect(BillingProfile.first.use_profile).to be_true
     end
 
-    it "One row, 2 Entities" do
+    it 'One row, 2 Entities' do
       expect{ ImportBillingProfile.import Import.csv_table('address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles') }.to \
         change(Entity, :count).by 2
     end
 
-    it "billing profiles have already been created when property created" do
+    it 'billing profiles have already been created when property created' do
       expect{ ImportBillingProfile.import Import.csv_table('address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles') }.to \
         change(BillingProfile, :count).by 0
     end
 
-    it "Not double import" do
+    it 'Not double import' do
       expect{ ImportBillingProfile.import Import.csv_table('address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles') }.to \
         change(Entity, :count).by 2
       expect{ ImportBillingProfile.import Import.csv_table('address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles') }.to \
