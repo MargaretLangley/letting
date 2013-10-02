@@ -14,6 +14,15 @@ module DueOns
   extend ActiveSupport::Concern
   included do
     has_many :due_ons, -> { order(:created_at) }, dependent: :destroy do
+
+      def between? date_range
+        self.detect{ |due_on| due_on.between? date_range }.present?
+      end
+
+      def make_date_between date_range
+        self.detect{ |due_on| due_on.between? date_range }.make_date
+      end
+
       def prepare
         (self.size...MAX_DISPLAYED_DUE_ONS).each { self.build }
       end
@@ -41,14 +50,6 @@ module DueOns
         else
           DueOn.new day: '', month: ''
         end
-      end
-
-      def between? date_range
-        self.detect{ |due_on| due_on.between? date_range }.present?
-      end
-
-      def make_date_between date_range
-        self.detect{ |due_on| due_on.between? date_range }.make_date
       end
 
 
