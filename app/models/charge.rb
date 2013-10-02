@@ -7,8 +7,15 @@ class Charge < ActiveRecord::Base
   validate :due_ons_size
   has_many :debt
 
-  def due_ons_size
-    errors.add :due_ons, 'Too many due_ons' if due_ons.reject(&:marked_for_destruction?).size > 12
+  def due_between? date_range
+    due_ons.between? date_range
+  end
+
+  def chargeable_info date_range
+    ChargeableInfo.from_charge charge_id: id, \
+                         on_date: due_ons.make_date_between(date_range), \
+                         amount: amount, \
+                         account_id: account_id
   end
 
   def prepare
@@ -24,14 +31,8 @@ class Charge < ActiveRecord::Base
     && due_ons.empty?
   end
 
-  def due_between? date_range
-    due_ons.between? date_range
-  end
-
-  def chargeable_info date_range
-    ChargeableInfo.from_charge charge_id: id, \
-                         on_date: due_ons.make_date_between(date_range), \
-                         amount: amount
+  def due_ons_size
+    errors.add :due_ons, 'Too many due_ons' if due_ons.reject(&:marked_for_destruction?).size > 12
   end
 
   private

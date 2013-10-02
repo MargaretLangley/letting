@@ -58,10 +58,10 @@ describe Debt do
       it 'returns the amount paid' do
         debt.save!
         payment = Payment.create! payment_attributes debt_id: debt.id
-        expect(debt.paid).to eq 10.05
+        expect(debt.paid).to eq 88.08
       end
 
-      it 'returns the amount paid' do
+      it 'multiple payments are added' do
         debt.save!
         Payment.create! payment_attributes amount: 1.05, debt_id: debt.id
         Payment.create! payment_attributes amount: 1.05, debt_id: debt.id

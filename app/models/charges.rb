@@ -3,6 +3,10 @@ module Charges
   included do
     has_many :charges, dependent: :destroy do
 
+      def chargeables_between date_range
+        self.select{|charge| charge.due_between? date_range }.map{|charge| charge.chargeable_info date_range }
+      end
+
       def prepare
         (self.size...MAX_CHARGES).each { charge = self.build }
         self.each {|charge| charge.prepare }
@@ -11,10 +15,6 @@ module Charges
       def clean_up_form
         self.each {|charge| charge.clean_up_form }
         destruction_if :empty?
-      end
-
-      def charges_between date_range
-        self.select{|charge| charge.due_between? date_range }.map{|charge| charge.chargeable_info date_range }
       end
 
     private

@@ -16,23 +16,23 @@ describe Account do
     end
   end
 
-  context 'charges' do
+  context 'chargeables' do
+    before { Timecop.freeze(Time.zone.parse('31/1/2013 12:00')) }
+    after { Timecop.return }
 
-    context 'generates debts' do
-      before { Timecop.freeze(Time.zone.parse('3/5/2013 12:00')) }
-      after { Timecop.return }
+    it 'for charges between dates' do
+      account = account_and_charge_new charge_attributes: { id: 3 }
+      chargeable = account.chargeables_between(Date.new(2013,3,1)..Date.new(2013,3,31)).first
+      expect(chargeable.account_id).to eq 1
+      expect(chargeable.charge_id).to eq 3
+      expect(chargeable.on_date).to eq Date.new(2013,03,25)
+      expect(chargeable.amount).to eq 88.08
+    end
 
-      it 'for charges' do
-        charge = account.charges.build id: 1, charge_type: 'ground_rent', \
-          due_in: 'advance', amount: 50.50, account_id: account.id
-        charge.due_ons.build charge_id: 1, day: 15, month: 6
-
-        debts = account.generate_debts_for Date.new(2013,6,1)..Date.new(2013,6,30)
-        expect(debts.first).to eq Debt.new account_id: 1, \
-                                           charge_id: charge.id,  \
-                                           on_date: '2013-06-15', \
-                                           amount: 50.50
-      end
+    it 'not if already debts' do
+      account = account_and_charge_new charge_attributes: { id: 3 }
+      account.add_debt debt_attributes
+      expect(account.chargeables_between(Date.new(2013,3,1)..Date.new(2013,3,31))).to eq []
     end
   end
 

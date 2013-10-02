@@ -63,16 +63,34 @@ describe DebtGenerator do
       end
     end
     context '#generate' do
-      before { Timecop.travel(Time.zone.parse('30/2/2013 12:00')) }
+      property = nil
+      before do
+       Timecop.travel(Time.zone.parse('30/2/2013 12:00'))
+       property = property_with_charge_create!
+      end
       after { Timecop.return }
 
       it 'generates' do
-        property = property_with_charge_create!
-        debt_gen = DebtGenerator.new search_string: 'Hillbank House'
-        expect(debt_gen.generate).to have(1).items
-        expect(debt_gen.generate.first).to eq \
-        Debt.new on_date: '2013/3/25', amount: 88.08, \
-           charge_id: property.account.charges.first.id
+        gen_debts = DebtGenerator.new(search_string: 'Hillbank House').generate
+        expect(gen_debts).to have(1).items
+        expect(gen_debts.first).to eq \
+          Debt.new on_date: '2013/3/25', amount: 88.08, \
+            charge_id: property.account.charges.first.id
+      end
+      it 'does not duplicate debt' do
+        debt_gen = DebtGenerator.new(search_string: 'Hillbank House')
+        debt_gen.generate
+        debt_gen.generate
+        expect(debt_gen.debts).to have(1).items
+      end
+      it 'does not duplicate debt2' do
+        debt_gen = DebtGenerator.new(search_string: 'Hillbank House')
+        debt_gen.generate
+        debt_gen.save!
+        debt_gen = DebtGenerator.new(search_string: 'Hillbank House', start_date: Date.current+1.day)
+        debt_gen.generate
+        debt_gen.save!
+        expect(debt_gen.debts).to have(0).items
       end
     end
   end

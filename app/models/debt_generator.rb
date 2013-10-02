@@ -1,5 +1,5 @@
 class DebtGenerator < ActiveRecord::Base
-  has_many :debts
+  has_many :debts, -> { uniq }
   accepts_nested_attributes_for :debts
   validates :search_string, uniqueness: { scope: [ :start_date, :end_date ] }
   scope :latest_debt_generated, ->(limit) { order(created_at: :desc).limit(limit) }
@@ -11,9 +11,11 @@ class DebtGenerator < ActiveRecord::Base
 
   def generate
     Property.search_min(self.search_string).each do |property|
-      self.debts << property.account.generate_debts_for(start_date..end_date)
+      chargeable_to_debt property
+                         .account
+                         .chargeables_between(start_date..end_date)
     end
-    self.debts
+    new_debts
   end
 
   def debtless?
@@ -28,6 +30,10 @@ class DebtGenerator < ActiveRecord::Base
 
   private
 
+  def chargeable_to_debt chargeable_infos
+    chargeable_infos.each {|chargeable| self.debts.build chargeable.to_hash }
+  end
+
   def default_start_date
     Date.current
   end
@@ -37,6 +43,10 @@ class DebtGenerator < ActiveRecord::Base
   # Most printouts are done a month before.
   def default_end_date
     Date.current + 8.weeks
+  end
+
+  def new_debts
+    debts.select(&:new_record?)
   end
 
 end

@@ -5,7 +5,8 @@ describe ChargeableInfo do
   let(:chargeable_info) do
     ChargeableInfo.from_charge charge_id: 1, \
     on_date: Date.new(2013,5,3), \
-    amount: 100.5
+    amount: 100.5,
+    account_id: 2
   end
 
   it 'charge_id' do
@@ -32,13 +33,14 @@ describe ChargeableInfo do
     it '#==' do
       chargeable_info = ChargeableInfo.from_charge charge_id: 1, \
       on_date: Date.new(2013,5,3), \
-      amount: 100.5
+      amount: 100.5, \
+      account_id: 1
       expect(chargeable_info).to eq chargeable_info
     end
 
     it '#to_hash' do
       expect(chargeable_info.to_hash).to eq \
-         'charge_id' => 1, 'on_date' => Date.parse("Fri, 03 May 2013"), 'amount' => 100.5
+         'charge_id' => 1, 'on_date' => Date.parse("Fri, 03 May 2013"), 'amount' => 100.5, 'account_id' => 2
     end
   end
 end

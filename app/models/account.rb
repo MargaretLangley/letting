@@ -5,21 +5,13 @@ class Account < ActiveRecord::Base
   include Charges
   accepts_nested_attributes_for :charges, allow_destroy: true
 
-  def prepare_for_form
-    charges.prepare
-  end
-
-  def clean_up_form
-    charges.clean_up_form
+  def chargeables_between date_range
+    charges.chargeables_between(date_range)
+      .reject { |chargeable| already_charged_for? chargeable }
   end
 
   def add_debt debt_args
     debts.build debt_args
-  end
-
-  def generate_debts_for date_range
-    generate_debts_from_chargeable charges.charges_between date_range
-    new_debts
   end
 
   def payment payment_args
@@ -34,10 +26,18 @@ class Account < ActiveRecord::Base
     Payment.latest_payments number_of
   end
 
+  def prepare_for_form
+    charges.prepare
+  end
+
+  def clean_up_form
+    charges.clean_up_form
+  end
+
   private
 
-    def generate_debts_from_chargeable chargeable_infos
-      chargeable_infos.each {|chargeable| debts.build chargeable.to_hash }
+    def already_charged_for? chargeable
+      debts.any? {|debt| debt.already_charged? Debt.new(chargeable.to_hash) }
     end
 
     def new_debts

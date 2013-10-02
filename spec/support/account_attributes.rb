@@ -35,11 +35,11 @@ def due_on_monthly_attributes_0 overrides = {}
 end
 
 def debt_attributes overrides = {}
-  { account_id: 1, debt_generator_id: 1, charge_id: 1, on_date: '2013/1/30', amount: 10.05 }.merge overrides
+  { account_id: 1, debt_generator_id: 1, charge_id: 3, on_date: '2013/3/25', amount: 88.08 }.merge overrides
 end
 
 def payment_attributes  overrides = {}
-  { account_id: 1, debt_id: 1, on_date: '2013/1/30', amount: 10.05 }.merge overrides
+  { account_id: 1, debt_id: 1, on_date: '2013/4/30', amount: 88.08 }.merge overrides
 end
 
 def debt_generator_attributes overrides = {}

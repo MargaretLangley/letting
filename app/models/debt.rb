@@ -15,7 +15,7 @@ class Debt < ActiveRecord::Base
     self.paid == amount
   end
 
-  def already_charged another_debt
+  def already_charged? another_debt
     self.charge_id == another_debt.charge_id && \
     self.on_date == another_debt.on_date
   end
