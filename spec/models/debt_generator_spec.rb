@@ -53,9 +53,7 @@ describe DebtGenerator do
       end
 
       it 'does not duplicate debt' do
-        debt_gen = DebtGenerator.new(search_string: 'Hillbank House')
-        debt_gen.generate
-        debt_gen.save!
+        (DebtGenerator.new(search_string: 'Hillbank House').generate).save!
         debt_gen = DebtGenerator.new(search_string: 'Hillbank House', start_date: Date.current+1.day)
         debt_gen.generate
         expect{ debt_gen.save! }.to raise_error
@@ -84,7 +82,6 @@ describe DebtGenerator do
                             end_date: '2013-04-01'
     end
   end
-
 
   def debt_generator_new
     debt_gen = DebtGenerator.new debt_generator_attributes
