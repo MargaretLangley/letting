@@ -20,7 +20,7 @@ module DueOns
 
       def clean_up_form
         destruction_if :empty?
-        destruction_if :persisted? if new_due_on?
+        destruction_if :persisted? if new_due_on_present?
         if has_per_month_due_on?
           assign_per_month per_month_due_on.day
           destruction_if :per_month?
@@ -54,7 +54,7 @@ module DueOns
 
     private
 
-      def new_due_on?
+      def new_due_on_present?
         self.reject(&:marked_for_destruction?).detect(&:new_record?)
       end
 
