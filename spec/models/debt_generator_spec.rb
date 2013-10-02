@@ -13,9 +13,10 @@ describe DebtGenerator do
       expect(debt_gen).to_not be_valid
     end
     context 'validate uniqueness' do
-      it 'prevents same debt_generator being created' do
+      it 'prevents debt_generator with same attributes from being created' do
         debt_generator_new.save!
-        expect{ debt_generator_new.save! }.to raise_error ActiveRecord::RecordInvalid
+        expect{ debt_generator_new.save! }.to  \
+          raise_error ActiveRecord::RecordInvalid
       end
     end
   end
@@ -24,18 +25,17 @@ describe DebtGenerator do
     it('debts') { expect(debt_gen).to respond_to(:debts)}
   end
 
-  context 'inialization' do
-    context 'new' do
-      let(:debt_gen) { debt_gen = DebtGenerator.new }
-      before { Timecop.travel(Time.zone.parse('30/9/2013 12:00')) }
-      after { Timecop.return }
+  context 'default inialization' do
+    let(:debt_gen) { debt_gen = DebtGenerator.new }
+    before { Timecop.travel(Time.zone.parse('30/9/2013 12:00')) }
+    after { Timecop.return }
 
-      it('has start date') { expect(debt_gen.start_date).to eq Date.new 2013, 9, 30 }
-      it('has end date') { expect(debt_gen.end_date).to eq Date.new 2013, 11, 25 }
-    end
+    it('has start date') { expect(debt_gen.start_date).to eq Date.new 2013, 9, 30 }
+    it('has end date') { expect(debt_gen.end_date).to eq Date.new 2013, 11, 25 }
   end
 
   context 'methods' do
+
     context '#generate' do
       property = nil
       before do
@@ -53,7 +53,8 @@ describe DebtGenerator do
       end
 
       it 'does not duplicate debt' do
-        (DebtGenerator.new(search_string: 'Hillbank House').generate).save!
+        (debt_gen = DebtGenerator.new(search_string: 'Hillbank House')).generate
+        debt_gen.save!
         debt_gen = DebtGenerator.new(search_string: 'Hillbank House', start_date: Date.current+1.day)
         debt_gen.generate
         expect{ debt_gen.save! }.to raise_error
