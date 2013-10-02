@@ -295,10 +295,10 @@ end
 
 def debts_and_payments
   create_debt_generator
-  create_debts
   create_payments
 end
   def create_debt_generator
+    create_debts
     DebtGenerator.create! [
       { id: 1, search_string: 'Lords',
                start_date: "2013/#{(Date.current - 6.months).month }/01",
