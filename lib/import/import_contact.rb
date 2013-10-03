@@ -50,7 +50,7 @@ module DB
     end
 
     def person? row, number
-      ( row[:"title#{number}"].present? || row[:"title#{number}"].present? ) &&
+      ( row[:"title#{number}"].present? || row[:"title#{number}"].present?) &&
         row[:"title#{number}"].exclude?('Ltd')
     end
 
@@ -73,7 +73,7 @@ module DB
     end
 
     def entity_title_starts_with_ampersand? entity
-      entity && entity.title.present? && entity.title.starts_with?("& M")
+      entity && entity.title.present? && entity.title.starts_with?('& M')
     end
 
     def remove_ampersand_from_entity_title entity

@@ -26,7 +26,7 @@ describe DebtGenerator do
   end
 
   context 'default inialization' do
-    let(:debt_gen) { debt_gen = DebtGenerator.new }
+    let(:debt_gen) { DebtGenerator.new }
     before { Timecop.travel(Time.zone.parse('30/9/2013 12:00')) }
     after { Timecop.return }
 

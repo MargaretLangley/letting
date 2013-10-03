@@ -14,7 +14,7 @@ module DB
       when 'H'
         new 'Service Charge', 2
       when 'Ins'
-        new 'Insurance',4
+        new 'Insurance', 4
       when 'M'
         new 'Service Charge', 1
       when 'Q'

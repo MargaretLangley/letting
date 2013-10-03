@@ -42,7 +42,7 @@ describe ChargeableInfo do
     it '#to_hash' do
       expect(chargeable_info.to_hash).to eq \
          'charge_id' => 1,
-         'on_date' => Date.parse("Fri, 03 May 2013"),
+         'on_date' => Date.parse('Fri, 03 May 2013'),
          'amount' => 100.5,
          'account_id' => 2
     end

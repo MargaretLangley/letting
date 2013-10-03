@@ -57,7 +57,7 @@ describe Debt do
 
       it 'returns the amount paid' do
         debt.save!
-        payment = Payment.create! payment_attributes debt_id: debt.id
+        Payment.create! payment_attributes debt_id: debt.id
         expect(debt.paid).to eq 88.08
       end
 

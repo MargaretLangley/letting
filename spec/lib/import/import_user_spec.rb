@@ -24,4 +24,3 @@ module DB
 
   end
 end
-

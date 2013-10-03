@@ -30,8 +30,8 @@ describe 'Property Factory' do
     end
 
     it 'changes nested attributes' do
-      property = property_new human_id: 3001, \
-           address_attributes: { road: 'Headingly Road' }
+      property = property_new human_id: 3001,
+                              address_attributes: { road: 'Headingly Road' }
       expect(property.address.road).to eq 'Headingly Road'
     end
   end
