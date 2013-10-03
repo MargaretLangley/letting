@@ -1,0 +1,33 @@
+<div class = 'showbox'>
+  <p>
+    Debts
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Date Due
+        </th>
+         <th>
+          Charge Type
+        </th>
+        <th class='alnright'>
+          Amount
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+            <%= @property.account.unpaid_debts[0].on_date.strftime("%d-%m-%Y") %>
+        </td>
+        <td>
+            <%= @property.account.unpaid_debts[0].charge.charge_type %>
+        </td>
+        <td class='alnright'>
+          <%= @property.account.unpaid_debts[0].amount %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+ </div>

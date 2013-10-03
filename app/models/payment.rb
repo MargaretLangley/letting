@@ -7,4 +7,8 @@ class Payment < ActiveRecord::Base
 
   scope :latest_payments, ->(limit) { order(created_at: :desc).limit(limit) }
 
+  def self.search(search)
+    @accounts = Accounts.find_by_property_id params[:property]
+  end
+
 end
