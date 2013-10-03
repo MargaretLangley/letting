@@ -11,49 +11,113 @@ describe Address do
   context 'validations' do
 
     context 'flat_no' do
-      it ('can be blank')  { address.flat_no = '';expect(address).to be_valid }
-      it ('has max') { address.flat_no = 'a' * 11; expect(address).to_not be_valid }
+      it 'can be blank' do
+        address.flat_no = ''
+        expect(address).to be_valid
+      end
+
+      it 'has max' do
+        address.flat_no = 'a' * 11
+        expect(address).to_not be_valid
+      end
     end
 
     context 'house_name' do
-      it ('can be blank') { address.house_name = ''; expect(address).to be_valid }
-      it ('has max') { address.house_name = 'a' * 65; expect(address).to_not be_valid }
+      it 'can be blank' do
+        address.house_name = ''
+        expect(address).to be_valid
+      end
+
+      it 'has max' do
+        address.house_name = 'a' * 65
+        expect(address).to_not be_valid
+      end
     end
 
     context 'road no' do
-      it ('can be blank ')  do
+      it 'can be blank '  do
         address.road_no = ''
         expect(address).to be_valid
       end
-      it ('has max') {address.road_no = 'a' * 11; expect(address).to_not be_valid }
+
+      it 'has max' do
+        address.road_no = 'a' * 11
+        expect(address).to_not be_valid
+      end
     end
 
     context 'road' do
-      it ('has to be present') { address.road = ''; expect(address).to_not be_valid }
-      it ('road has a max') { address.road = 'a' * 65; expect(address).to_not be_valid }
+      it 'has to be present' do
+        address.road = ''
+        expect(address).to_not be_valid
+      end
+
+      it 'road has a max' do
+        address.road = 'a' * 65
+        expect(address).to_not be_valid
+      end
     end
 
     context 'district' do
-      it ('can be blank') { address.district = ''; expect(address).to be_valid }
-      it ('has min') { address.district = 'aa'; expect(address).to_not be_valid }
-      it ('has max') { address.district = 'a' * 65; expect(address).to_not be_valid }
+      it 'can be blank' do
+        address.district = ''
+        expect(address).to be_valid
+      end
+
+      it 'has min' do
+        address.district = 'aa'
+        expect(address).to_not be_valid
+      end
+
+      it 'has max' do
+        address.district = 'a' * 65
+        expect(address).to_not be_valid
+      end
     end
 
     context 'town' do
-      it ('can be blank') { address.town = ''; expect(address).to be_valid }
-      it ('has min') { address.town = 'aa'; expect(address).to_not be_valid }
-      it ('has max') { address.town = 'a' * 65; expect(address).to_not be_valid }
+      it 'can be blank' do
+        address.town = ''
+        expect(address).to be_valid
+      end
+
+      it 'has min' do
+        address.town = 'aa'
+        expect(address).to_not be_valid
+      end
+
+      it 'has max' do
+        address.town = 'a' * 65
+        expect(address).to_not be_valid
+      end
     end
 
     context 'county' do
-      it ('must be present')  { address.county =nil; expect(address).not_to be_valid }
-      it ('has min') { address.county = 'aa'; expect(address).to_not be_valid }
-      it ('has max') { address.county = 'a' * 65; expect(address).to_not be_valid }
+      it 'must be present' do
+        address.county =nil
+        expect(address).not_to be_valid
+      end
+
+      it 'has min' do
+        address.county = 'aa'
+        expect(address).to_not be_valid
+      end
+
+      it 'has max' do
+        address.county = 'a' * 65
+        expect(address).to_not be_valid
+      end
     end
 
     context 'postcode' do
-      it ('has min') { address.postcode = 'B7'; expect(address).to_not be_valid }
-      it ('has max') { address.postcode = 'B' *9; expect(address).to_not be_valid }
+      it 'has min' do
+        address.postcode = 'B7'
+        expect(address).to_not be_valid
+      end
+      it 'has max' do
+        address.postcode = 'B' *9
+        expect(address).to_not be_valid
+      end
     end
   end
 
@@ -64,9 +128,19 @@ describe Address do
   context 'methods' do
     context'#empty?' do
       let(:address) { Address.new }
-      it('empty') { expect(address).to be_empty }
-      it('with noted attribute not empty') { address.town = 'Bath'; expect(address).to_not be_empty }
-      it('with ignored attribute empty') { address.id = 8; expect(address).to be_empty}
+      it 'empty' do
+        expect(address).to be_empty
+      end
+
+      it 'with noted attribute not empty' do
+        address.town = 'Bath'
+        expect(address).to_not be_empty
+      end
+
+      it('with ignored attribute empty') do
+        address.id = 8
+        expect(address).to be_empty
+      end
     end
 
     it 'Limits attributes copied' do

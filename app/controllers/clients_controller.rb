@@ -17,8 +17,7 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new clients_params
     if @client.save
-      redirect_to clients_path,
-                  notice: "#{@client.human_id} client successfully created!"
+      redirect_to clients_path, notice: client_created_message
     else
       @client.prepare_for_form
       render :new
@@ -33,8 +32,7 @@ class ClientsController < ApplicationController
   def update
     @client = Client.find params[:id]
     if @client.update clients_params
-      redirect_to clients_path,
-                  notice: "#{@client.human_id} client successfully updated!"
+      redirect_to clients_path, notice: client_updated_message
     else
       render :edit
     end
@@ -43,7 +41,7 @@ class ClientsController < ApplicationController
   def destroy
     @client = Client.find(params[:id])
     @client.destroy
-    redirect_to clients_path, alert: "#{@client.human_id} client successfully deleted!"
+    redirect_to clients_path, alert: client_deleted_message
   end
 
   private
@@ -62,5 +60,17 @@ class ClientsController < ApplicationController
         .permit :human_id,
                 address_attributes: address_params,
                 entities_attributes: entities_params
+    end
+
+    def client_created_message
+      "#{@client.human_id} client successfully created!"
+    end
+
+    def client_updated_message
+      "#{@client.human_id} client successfully updated!"
+    end
+
+    def client_deleted_message
+      "#{@client.human_id} client successfully deleted!"
     end
 end

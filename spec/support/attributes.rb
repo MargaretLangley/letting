@@ -55,7 +55,6 @@ def company_entity_attributes overrides = {}
   }.merge overrides
 end
 
-
 def oval_person_entity_attributes overrides = {}
   {
     entity_type: 'Person',

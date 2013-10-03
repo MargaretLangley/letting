@@ -19,4 +19,3 @@ describe 'Client Factory' do
   end
 
 end
-

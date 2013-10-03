@@ -24,6 +24,7 @@ def base_account args = {}
 end
 
 def add_charge_attributes account, args
-  charge = account.charges.build charge_attributes args.fetch(:charge_attributes, {})
+  charge = account.charges.build charge_attributes \
+    args.fetch(:charge_attributes,{})
   charge.due_ons.build due_on_attributes_0 args.fetch(:due_on_attribute, {})
 end
