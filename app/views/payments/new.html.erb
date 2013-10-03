@@ -1,0 +1,48 @@
+
+<h2 class = "mainTitle">Payments Results</h2>
+<%= render 'search' %>
+
+<% if @payments %>
+
+  <%= form_for @payment do |f| %>
+
+   <div>
+     <% if @property.account.unpaid_debts.size == 1 %>
+       <%= render 'one_debt' %>
+    <% else %>
+       <%= render 'debts' %>
+     <% end %>
+
+    </div>
+    <p>
+    <p/>
+
+   <% @property.account.unpaid_debts.each do |unpaid_debt| %>
+      <%= f.fields_for :payment,  unpaid_debt.payments.build do |b| %>
+
+        <fieldset id='payment' class='shell'>
+          <%= b.hidden_field :account_id %>
+          <%= b.hidden_field :debt_id %>
+
+          <div class='field text require half'>
+            <%= b.label :on_date,'On Date' %>
+            <%= b.date_field :on_date %>
+          </div>
+
+          <div class='field text require half'>
+            <%= b.label :amount, 'Amount' %>
+            <%= b.text_field :amount %>
+          </div>
+
+        </fieldset>
+
+      <% end %>
+    <% end %>
+    <%= f.submit %><span class = 'simple' ><%= link_to 'Cancel', payments_path %></span>
+  <% end %>
+<% else %>
+
+    Need a property to pay
+<% end %>
+
+

@@ -1,0 +1,41 @@
+<div class = 'showbox'>
+  <p>
+  Last Payments Made
+</p>
+  <table class >
+    <thead>
+      <tr>
+        <th>
+          Date
+        </th>
+        <th class='alnright'>
+         ID
+        </th>
+        <th>
+          Type
+        </th>
+        <th class='alnright'>
+          Amount
+        </th>
+      </tr>
+   </thead>
+    <tbody>
+      <% @payments.each do |payment| %>
+      <tr>
+        <td>
+          <%= payment.on_date.strftime("%d-%m-%Y") %>
+        </td>
+        <td class='alnright'>
+          <%=payment.account.property.human_id %>
+        </td>
+        <td>
+          <%=payment.debt.charge.charge_type %>
+        </td>
+        <td class='alnright'>
+          <%=payment.amount %>
+        </td>
+       </tr>
+      <% end %>
+    </tbody>
+  </table>
+ </div>
