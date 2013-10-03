@@ -13,15 +13,15 @@ class Property < ActiveRecord::Base
 
   def prepare_for_form
     prepare_contact
-    self.build_billing_profile if self.billing_profile.nil?
+    build_billing_profile if billing_profile.nil?
     billing_profile.prepare_for_form
-    self.build_account if self.account.nil?
+    build_account if account.nil?
     account.prepare_for_form
   end
 
   def clear_up_after_form
     entities.clean_up_form
-    self.account.clean_up_form if self.account.present?
+    account.clean_up_form if account.present?
   end
 
   def bill_to
@@ -33,17 +33,19 @@ class Property < ActiveRecord::Base
   end
 
   def self.search_by_house_name(search)
-    Property.includes(:address).where('addresses.house_name ILIKE ?',"#{search}").references(:address)
+    Property.includes(:address)
+    .where('addresses.house_name ILIKE ?', "#{search}")
+    .references(:address)
   end
 
   def self.search search
     case
     when search.blank?
       Property.all.includes(:address).order(:human_id)
-    when self.human_ids(search)
-      self.search_by_human_id(search)
+    when human_ids(search)
+      search_by_human_id(search)
     else
-      self.search_by_all(search)
+      search_by_all(search)
     end
   end
 
@@ -51,27 +53,26 @@ class Property < ActiveRecord::Base
     case
     when search.blank?
       none
-    when self.human_ids(search)
-      self.search_by_human_id(search)
+    when human_ids(search)
+      search_by_human_id(search)
     else
-      self.search_by_all(search)
+      search_by_all(search)
     end
   end
 
-
-
   private
+
     def self.search_by_human_id(search)
       human_ids = search.split('-')
       human_ids[1] = human_ids[0] if human_ids[1].blank?
-      Property.includes(:address,:entities)
+      Property.includes(:address, :entities)
                     .where(human_id: human_ids[0]..human_ids[1])
                     .references(:address, :entity).order(:human_id)
     end
 
     def self.search_by_all(search)
-      Property.includes(:address,:entities).
-        where('human_id = :i OR ' + \
+      Property.includes(:address, :entities)
+        .where('human_id = :i OR ' + \
               'entities.name ILIKE :s OR ' + \
               'addresses.house_name ILIKE :s OR ' + \
               'addresses.road ILIKE :s OR '  \

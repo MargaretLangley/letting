@@ -13,13 +13,15 @@ module DB
 
     def self.csv_table filename, args = {}
       new(args.fetch(:location, 'import_data'),
-          args.fetch(:drop_rows,1),
+          args.fetch(:drop_rows, 1),
           args.fetch(:headers, true)).file_to_table filename
     end
 
     def file_to_table filename
-      CSV.open( get_file(filename), headers: @headers, header_converters: :symbol, \
-        converters: lambda {|f| f ? f.strip : nil}).read.drop(@drop_rows)
+      CSV.open(get_file(filename), headers: @headers, \
+        header_converters: :symbol, \
+        converters: ->(f) { f ? f.strip : nil} )
+        .read.drop(@drop_rows)
     end
 
     private

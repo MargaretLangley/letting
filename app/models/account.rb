@@ -37,7 +37,7 @@ class Account < ActiveRecord::Base
   private
 
     def already_charged_for? chargeable
-      debts.any? {|debt| debt.already_charged? Debt.new(chargeable.to_hash) }
+      debts.any? { |debt| debt.already_charged? Debt.new(chargeable.to_hash) }
     end
 
     def new_debts

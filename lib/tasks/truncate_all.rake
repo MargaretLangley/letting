@@ -10,7 +10,7 @@ namespace :db do
   task truncate_all: :environment do
     ActiveRecord::Base.connection
                       .tables
-                      .reject{|t| t == 'schema_migrations'}
+                      .reject{ |t| t == 'schema_migrations'}
                       .each do |table|
       ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{table} RESTART IDENTITY;")
     end

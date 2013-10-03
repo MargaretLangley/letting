@@ -36,7 +36,6 @@ module DB
         @patch = patch
       end
 
-
       def first_or_initialize_model row, model_class
         model_class.where(human_id: row[:human_id]).first_or_initialize
       end
@@ -44,14 +43,15 @@ module DB
       def first_model row, model_class
         model = model_class.where(human_id: row[:human_id]).first
         if model.nil?
-         puts "human_id: #{row[:human_id]} - Not found"
-         raise ActiveRecord::RecordNotFound
+          puts "human_id: #{row[:human_id]} - Not found"
+          raise ActiveRecord::RecordNotFound
         end
         model
       end
 
       def output_still_running index
-        # if a long import. Put a dot every 100 but not the first as you'll see dots in spec tests
+        # if a long import. Put a dot every 100 but not the first
+        # as you'll see dots in spec tests
         print '.' if index % 100 == 0 && index != 0
       end
 

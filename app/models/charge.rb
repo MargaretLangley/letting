@@ -27,7 +27,7 @@ class Charge < ActiveRecord::Base
   end
 
   def empty?
-    attributes.except(*ignored_attrs).values.all?( &:blank? ) \
+    attributes.except(*ignored_attrs).values.all?(&:blank?) \
     && due_ons.empty?
   end
 
@@ -36,8 +36,9 @@ class Charge < ActiveRecord::Base
   end
 
   private
+
     def ignored_attrs
-      ['id','account_id', 'created_at', 'updated_at']
+      %w[ id account_id created_at updated_at ]
     end
 
 end

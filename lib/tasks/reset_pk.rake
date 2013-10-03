@@ -10,7 +10,7 @@ namespace :db do
   task reset_pk: :environment do
     ActiveRecord::Base.connection
                       .tables
-                      .reject{|t| t == 'schema_migrations'}
+                      .reject{ |t| t == 'schema_migrations'}
                       .each do |table|
       ActiveRecord::Base.connection.reset_pk_sequence!(table)
     end

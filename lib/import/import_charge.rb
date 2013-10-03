@@ -33,7 +33,8 @@ module DB
          monthly_charge = day_month_from_row_columns 1, row
          day_months << DayMonth.from_day_month( monthly_charge.day, DueOn::PER_MONTH )
       else
-        (1..maximum_dates(row)).each {|index| day_months <<  day_month_from_row_columns( index, row ) }
+        (1..maximum_dates(row))
+        .each { |index| day_months <<  day_month_from_row_columns( index, row ) }
       end
 
       @model_to_assign.due_ons.first(day_months.length).each_with_index do |due_on, index|

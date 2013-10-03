@@ -36,6 +36,6 @@ class DebtGeneratorsController < ApplicationController
   end
 
   def debt_params
-    [ :account_id, :charge_id, :id, :on_date, :amount ]
+    [:account_id, :charge_id, :id, :on_date, :amount]
   end
 end

@@ -16,6 +16,7 @@
 #    end
 
 # private
+
 # def address_road()
 #   if  @property.address.road_no.length > 0
 #   address_road = @property.address.road_no + " " + @property.address.road

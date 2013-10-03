@@ -5,10 +5,11 @@
 #
 # If a charge happens on a few dates in the year you use a number of OnDates
 # If a charge occurs on each month then you use a PerDate.
-# To create PerMonth DueOns we pass a dueon with a Day 1-31 and Month -1 (DueON::PerDate)
-# As long as this is different from the current due on we delete all the other DueOns in
-# the collection (including the PerMonth DueOn) and replace it with 12 onDate DueOns, one
-# for each month.
+# To create PerMonth DueOns we pass a dueon with
+# a Day 1-31 and Month -1 (DueON::PerDate)
+# As long as this is different from the current due on we delete
+# all the other DueOns in the collection (including the PerMonth DueOn)
+# and replace it with 12 onDate DueOns, one for each month.
 #
 module DueOns
   extend ActiveSupport::Concern
@@ -16,15 +17,15 @@ module DueOns
     has_many :due_ons, -> { order(:created_at) }, dependent: :destroy do
 
       def between? date_range
-        self.detect{ |due_on| due_on.between? date_range }.present?
+        detect { |due_on| due_on.between? date_range }.present?
       end
 
       def make_date_between date_range
-        self.detect{ |due_on| due_on.between? date_range }.make_date
+        detect { |due_on| due_on.between? date_range }.make_date
       end
 
       def prepare
-        (self.size...MAX_DISPLAYED_DUE_ONS).each { self.build }
+        (size...MAX_DISPLAYED_DUE_ONS).each { build }
       end
 
       def clean_up_form
@@ -52,7 +53,6 @@ module DueOns
         end
       end
 
-
     private
 
       def has_new_due_on?
@@ -60,7 +60,8 @@ module DueOns
       end
 
       def destruction_if matcher
-        self.select(&matcher).each {|due_on| mark_due_on_for_destruction due_on }
+        self.select(&matcher)
+        .each { |due_on| mark_due_on_for_destruction due_on }
       end
 
       def mark_due_on_for_destruction due_on
@@ -80,7 +81,7 @@ module DueOns
       end
 
       def assign_per_month day
-        (1..MAX_DUE_ONS).each {|month| self.build day: day, month: month }
+        (1..MAX_DUE_ONS).each { |month| self.build day: day, month: month }
       end
 
     end

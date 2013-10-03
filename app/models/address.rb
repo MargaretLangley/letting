@@ -10,7 +10,7 @@ class Address < ActiveRecord::Base
   validates :postcode, length: { minimum: 6, maximum: 8 }, allow_blank: true
 
   def empty?
-    attributes.except(*ignored_attrs).values.all?( &:blank? )
+    attributes.except(*ignored_attrs).values.all?(&:blank?)
   end
 
   def copy_approved_attributes
@@ -18,7 +18,8 @@ class Address < ActiveRecord::Base
   end
 
   private
+
     def ignored_attrs
-      ['id', 'addressable_id', 'addressable_type', 'created_at', 'updated_at']
+      %w[ id addressable_id addressable_type created_at updated_at ]
     end
 end

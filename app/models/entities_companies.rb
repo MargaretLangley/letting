@@ -3,7 +3,7 @@ module Entities
   included do
     has_many :entities, -> { order(:created_at) }, dependent: :destroy, as: :entitieable do
       def prepare
-        (self.size...MAX_ENTITIES).each { self.build }
+        (size...MAX_ENTITIES).each { build }
       end
 
       def clean_up_form
@@ -13,9 +13,11 @@ module Entities
       def destroy_all
         destruction_if :all?
       end
+
     private
+
       def destruction_if matcher
-        self.select(&matcher).each {|entity| mark_entity_for_destruction entity }
+        select(&matcher).each { |entity| mark_entity_for_destruction entity }
       end
 
         def mark_entity_for_destruction entity

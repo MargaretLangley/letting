@@ -1,0 +1,12 @@
+DefWithoutParentheses:
+ Enabled: false
+
+AllCops:
+  Includes:
+    - Rakefile
+    - config.ru
+  Excludes:
+    - db/migrate/**
+    - db/schema.rb
+    - bin/**
+

@@ -24,7 +24,8 @@ module DB
     end
 
     def model_assigned_row_attributes row
-      @model_to_assign.assign_attributes use_profile: true, human_id: row[:human_id].to_i
+      @model_to_assign.assign_attributes use_profile: true, \
+                                         human_id: row[:human_id].to_i
       import_contact @model_to_assign, row
       clean_contact @model_to_assign
     end

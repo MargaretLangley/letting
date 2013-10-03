@@ -4,7 +4,9 @@ desc "Import properties data from CSV file"
 task  import_block: :environment do
   puts "Start Import"
 
-  contents = CSV.open "import_data/properties.csv", headers: true, header_converters: :symbol, converters: lambda {|f| f ? f.strip : nil}
+  contents = CSV.open "import_data/properties.csv", headers: true,
+                       header_converters: :symbol,
+                       converters: lambda { |f| f ? f.strip : nil }
 
    puts 'open file'
        contents.first(33).each do |row|

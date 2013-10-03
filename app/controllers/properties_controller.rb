@@ -55,9 +55,9 @@ class PropertiesController < ApplicationController
     end
 
     def property_params
-      params.require(:property).
-        permit :human_id,
-          :client_id,
+      params.require(:property)
+        .permit :human_id,
+                :client_id,
           address_attributes: address_params,
           entities_attributes: entities_params,
           billing_profile_attributes: billing_profile_params,
@@ -67,23 +67,23 @@ class PropertiesController < ApplicationController
     end
 
     def billing_profile_params
-      [ :id, :property_id, :use_profile,
-         address_attributes: address_params,
-         entities_attributes: entities_params
+      [:id, :property_id, :use_profile,
+        address_attributes: address_params,
+        entities_attributes: entities_params
       ]
     end
 
     def account_params
-      [ :id, :property_id, charges_attributes: charges_params ]
+      [:id, :property_id, charges_attributes: charges_params]
     end
 
     def charges_params
-      [ :id, :charge_type, :due_in, :amount, :_destroy,
+      [:id, :charge_type, :due_in, :amount, :_destroy,
         due_ons_attributes: due_on_params
       ]
     end
 
     def due_on_params
-      [ :id, :day, :month ]
+      [:id, :day, :month]
     end
 end

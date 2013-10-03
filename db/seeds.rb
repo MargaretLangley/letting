@@ -14,7 +14,6 @@ def generate_seeding
   reset_pk_sequenece_on_each_table_used
 end
 
-
   def truncate_tables
     Rake::Task['db:truncate_all'].invoke
   end
@@ -109,8 +108,6 @@ end
       { id: 3, human_id: 3 }
     ]
   end
-
-
 
 def seed_properties
   create_entities
@@ -214,7 +211,6 @@ end
      ]
   end
 
-
   def create_billing_profile_entities
     Entity.create! [
       {
@@ -259,7 +255,6 @@ def seed_blocks
   ]
 end
 
-
 def seed_charges
   create_charges
   create_account
@@ -268,10 +263,14 @@ end
   def create_charges
     create_due_ons
     Charge.create! [
-      { id: 1, charge_type: 'Ground Rent',    due_in: 'Advance', amount: '88.08',  account_id: 1 },
-      { id: 2, charge_type: 'Service Charge', due_in: 'Advance', amount: '125.08', account_id: 1 },
-      { id: 3, charge_type: 'Ground Rent',    due_in: 'Advance', amount: '70.00',  account_id: 2 },
-      { id: 4, charge_type: 'Service Charge', due_in: 'Advance', amount: '70.00',  account_id: 3 },
+      { id: 1, charge_type: 'Ground Rent',    due_in: 'Advance',
+        amount: '88.08',  account_id: 1 },
+      { id: 2, charge_type: 'Service Charge', due_in: 'Advance',
+        amount: '125.08', account_id: 1 },
+      { id: 3, charge_type: 'Ground Rent',    due_in: 'Advance',
+        amount: '70.00',  account_id: 2 },
+      { id: 4, charge_type: 'Service Charge', due_in: 'Advance',
+        amount: '70.00',  account_id: 3 },
     ]
   end
 
@@ -309,17 +308,22 @@ end
 
   def create_debts
     Debt.create! [
-      { id: 1, account_id: 1, charge_id: 1, on_date: "2013/#{(Date.current - 5.months).month }/01", amount: 88.08, debt_generator_id: 1 },
-      { id: 2, account_id: 1, charge_id: 3, on_date: "2013/#{(Date.current - 5.months).month }/01", amount: 88.08, debt_generator_id: 1 }
+      { id: 1, account_id: 1, charge_id: 1,
+        on_date: "2013/#{(Date.current - 5.months).month }/01",
+        amount: 88.08, debt_generator_id: 1 },
+      { id: 2, account_id: 1, charge_id: 3,
+        on_date: "2013/#{(Date.current - 5.months).month }/01",
+        amount: 88.08, debt_generator_id: 1 }
     ]
   end
 
   def create_payments
     Payment.create! [
-      { id: 1, account_id: 1, debt_id: 1, on_date: "2013/#{(Date.current - 3.months).month }/03", amount: 88.08 }
+      { id: 1, account_id: 1, debt_id: 1,
+        on_date: "2013/#{(Date.current - 3.months).month }/03",
+        amount: 88.08 }
     ]
   end
-
 
 def reset_pk_sequenece_on_each_table_used
   Rake::Task['db:reset_pk'].invoke

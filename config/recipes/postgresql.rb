@@ -1,11 +1,11 @@
-set_default(:postgresql_host, "localhost")
+set_default(:postgresql_host, 'localhost')
 set_default(:postgresql_user) { application }
 
 set_default(:postgresql_database) { "#{application}_production" }
 set_default(:postgresql_pid) { "/var/run/postgresql/9.2-main.pid" }
 
 namespace :postgresql do
-  desc "Create a database for this application."
+  desc 'Create a database for this application.'
   task :create_database, roles: :db, only: {primary: true} do
     answer = Capistrano::CLI.ui.ask("To create Role and Database, type 'yes' anything else and role and database creation is skipped.")
     if answer == 'yes'
@@ -16,35 +16,32 @@ namespace :postgresql do
       run %Q{#{sudo} -u postgres psql -d #{postgresql_database} -c "create extension if not exists hstore;"}
     end
   end
-  after "deploy:setup", "postgresql:create_database"
+  after 'deploy:setup', 'postgresql:create_database'
 
-  desc "Drop the database role for this application."
+  desc 'Drop the database role for this application.'
   task :drop_role, roles: :db, only: { primary: true } do
     run %Q{#{sudo} -u postgres psql -c "drop role #{postgresql_user};"}
   end
 
-  desc "Drop the database for this application."
+  desc 'Drop the database for this application.'
   task :drop_db, roles: :db, only: { primary: true } do
     # Doesn't seem to need to drop hstore
     # run %Q{#{sudo} -u postgres psql -d #{postgresql_database} -c "drop extension if exists hstore;"}
     run %Q{#{sudo} -u postgres psql -c "drop database #{postgresql_database};"}
   end
 
-
-  desc "Generate the database.yml configuration file."
+  desc 'Generate the database.yml configuration file.'
   task :setup, roles: :app do
     run "mkdir -p #{shared_path}/config"
-    transfer :up, "config/database.yml", "#{shared_path}/config/database.yml", :via => :sftp
+    transfer :up, "config/database.yml", "#{shared_path}/config/database.yml", via: :sftp
   end
-  after "deploy:setup", "postgresql:setup"
+  after 'deploy:setup', 'postgresql:setup'
 
-  desc "Symlink the database.yml file into latest release"
+  desc 'Symlink the database.yml file into latest release'
   task :symlink, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
-  after "deploy:finalize_update", "postgresql:symlink"
-
-
+  after 'deploy:finalize_update', 'postgresql:symlink'
 
   task :ask_drop_confirmation do
     set(:confirmed) do
@@ -67,8 +64,7 @@ namespace :postgresql do
       exit
     end
   end
-
-  before "postgresql:drop", "postgresql:ask_drop_confirmation"
+  before 'postgresql:drop', 'postgresql:ask_drop_confirmation'
 
 
   # lib/tasks/kill_postgres_connections.rake
@@ -90,16 +86,12 @@ namespace :postgresql do
   # kill doesn't work
   # after "postgresql:ask_drop_confirmation", "postgresql:kill_connections"
 
-
-
-  desc "copies the local development database to the remote production."
+  desc 'copies the local development database to the remote production.'
   task :pdrestore do
     # start_banner("wiping out and restoring the PRODUCTION Database")
     run_locally "pg_dump -Fc --no-acl --no-owner #{application}_development > pdrestore.dump"
     run_locally "pg_restore --verbose --clean --no-acl --no-owner -h '#{host}' -U #{application} -d #{application}_production -p 5432 pdrestore.dump"
     run_locally 'rm pdrestore.dump'
   end
-
-
 
 end
