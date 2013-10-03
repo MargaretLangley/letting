@@ -12,10 +12,11 @@ class Charge < ActiveRecord::Base
   end
 
   def chargeable_info date_range
-    ChargeableInfo.from_charge charge_id: id,
-                         on_date: due_ons.make_date_between(date_range),
-                         amount: amount,
-                         account_id: account_id
+    ChargeableInfo
+    .from_charge charge_id:  id,
+                 on_date:    due_ons.make_date_between(date_range),
+                 amount:     amount,
+                 account_id: account_id
   end
 
   def prepare

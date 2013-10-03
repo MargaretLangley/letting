@@ -11,32 +11,63 @@ describe Entity do
 
   context 'validations' do
     context 'name' do
-      it('presence') { entity.name = nil; expect(entity).to_not be_valid }
-      it('cannot be blank') { entity.name = ''; expect(entity).to_not be_valid }
-      it('has a maximum') { entity.name = 'a' * 65; expect(entity).to_not be_valid }
+
+      it 'presence' do
+        entity.name = nil
+        expect(entity).to_not be_valid
+      end
+
+      it 'cannot be blank' do
+        entity.name = ''
+        expect(entity).to_not be_valid
+      end
+
+      it 'has a maximum' do
+        entity.name = 'a' * 65
+        expect(entity).to_not be_valid
+      end
     end
     context 'entity_type' do
-      it('presence') { entity.entity_type = nil; expect(entity).to_not be_valid }
+      it 'presence' do
+        entity.entity_type = nil
+        expect(entity).to_not be_valid
+      end
     end
-    it ('title has a max') { entity.title = 'a' * 11; expect(entity).to_not be_valid }
-    it ('initials has a max') { entity.initials = 'a' * 11; expect(entity).to_not be_valid }
+
+    it 'title has a max' do
+      entity.title = 'a' * 11
+      expect(entity).to_not be_valid
+    end
+
+    it 'initials has a max' do
+      entity.initials = 'a' * 11
+      expect(entity).to_not be_valid
+    end
   end
 
   context 'methods' do
     let(:entity) { Entity.new }
+
     context '#prepare new entity' do
       it 'has entity_type' do
         entity.prepare
         expect(entity.entity_type).to eq 'Person'
       end
     end
+
     context '#empty? new entity' do
       it('empty') { expect(entity).to be_empty }
-      it('with noted attribute not empty') { entity.name = 'Bob'; expect(entity).to_not be_empty }
-      it('with ignored attribute empty') { entity.id = 8; expect(entity).to be_empty}
+
+      it 'with noted attribute not empty' do
+        entity.name = 'Bob'
+        expect(entity).to_not be_empty
+      end
+
+      it 'with ignored attribute empty' do
+        entity.id = 8
+        expect(entity).to be_empty
+      end
     end
   end
 
 end
-
-

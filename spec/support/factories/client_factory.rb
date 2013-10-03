@@ -31,5 +31,3 @@ def base_client args = {}
   client.entities.build person_entity_attributes
   client
 end
-
-

@@ -11,7 +11,6 @@ def client_attributes overrides = {}
   }.merge overrides
 end
 
-
 def address_attributes overrides = {}
   {
     flat_no:  '47',
@@ -92,4 +91,3 @@ def george_attributes overrides = {}
     admin: true
   }.merge overrides
 end
-

@@ -1,8 +1,6 @@
 # Commented out because in production it is asking for prawn
 # Does it need to be added to Gemfile?
 
-
-
 # class LetterPdf < Prawn::Document
 #   def initialize(property)
 #     @property = property
@@ -27,5 +25,3 @@
 # end
 
 # end
-
-

@@ -24,7 +24,7 @@ describe Property do
 
     it 'search' do
       property_create! human_id: 111,
-                address_attributes: { road: 'Vauxall Lane' }
+                       address_attributes: { road: 'Vauxall Lane' }
       property_create! human_id: 222
       property_create! human_id: 333
 

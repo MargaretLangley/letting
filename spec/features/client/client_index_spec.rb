@@ -42,7 +42,7 @@ describe Client do
 
     it 'view' do
       client_create! human_id: 111,
-                address_attributes: { road: 'Vauxall Lane' }
+                     address_attributes: { road: 'Vauxall Lane' }
       visit '/clients'
       click_on 'View'
       expect(page).to have_text '111'

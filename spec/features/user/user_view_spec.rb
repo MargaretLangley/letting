@@ -8,7 +8,7 @@ describe User do
       user_create! george_attributes
       visit '/users/'
       expect(current_path).to eq '/users/'
-      first(:link,'View').click
+      first(:link, 'View').click
       expect(page).to have_text 'admin@example.com'
       expect(page).to have_text 'Print'
       expect(page).to have_text 'Admin'

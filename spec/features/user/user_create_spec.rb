@@ -15,7 +15,6 @@ describe User do
       click_on 'Create User'
       expect(page).to have_text /successfully created!/i
       expect(page).to have_text 'newuser@example.com'
-
     end
   end
 
@@ -33,9 +32,9 @@ describe User do
   end
 
   def go_to_create_page
-      click_on 'Add New User'
-      expect(page).to have_text 'Password confirmation'
-      expect(page).to have_text 'Admin'
+    click_on 'Add New User'
+    expect(page).to have_text 'Password confirmation'
+    expect(page).to have_text 'Admin'
   end
 
 end

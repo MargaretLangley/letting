@@ -4,13 +4,13 @@ class DebtGeneratorsController < ApplicationController
   end
 
   def new
-    @debt_generator = DebtGenerator.new search_string: params[:search],
-                                        start_date: params[:search_start_date],
-                                        end_date: params[:search_end_date]
+    @debt_generator =
+      DebtGenerator.new search_string: params[:search],
+                        start_date:    params[:search_start_date],
+                        end_date:      params[:search_end_date]
     @debt_generator.generate
-    if @debt_generator.debtless?
-      flash.now.notice = "No properties matching '#{params[:search]}' between #{params[:search_start_date]} and #{params[:search_end_date]} require charges." \
-        if params[:search].present?
+    if params[:search].present? && @debt_generator.debtless?
+      flash.now.notice =  no_properties_error
     end
   end
 
@@ -23,7 +23,6 @@ class DebtGeneratorsController < ApplicationController
     end
   end
 
-
   private
 
   def property_create_debts_between property, date_range
@@ -32,10 +31,20 @@ class DebtGeneratorsController < ApplicationController
 
   def debt_generator_params
     params.require(:debt_generator)
-      .permit :id, :search_string, :start_date, :end_date, debts_attributes: debt_params
+      .permit :id,
+              :search_string,
+              :start_date,
+              :end_date,
+              debts_attributes: debt_params
   end
 
   def debt_params
     [:account_id, :charge_id, :id, :on_date, :amount]
+  end
+
+  def no_properties_error
+    "No properties matching '#{params[:search]}' " +
+    "between #{params[:search_start_date]} and " +
+    "#{params[:search_end_date]} require charges."
   end
 end

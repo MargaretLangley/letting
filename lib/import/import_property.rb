@@ -28,7 +28,7 @@ module DB
     end
 
     def find_client_human_id_to_id
-      @client_human_id_to_id ||= Client.pluck(:human_id,:id)
+      @client_human_id_to_id ||= Client.pluck(:human_id, :id)
     end
 
   end

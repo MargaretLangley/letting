@@ -47,7 +47,8 @@ describe BillingProfile do
       context 'cleanup does not affect' do
         it 'valid entities are kept' do
           full_profile.clear_up_after_form
-          expect(full_profile.entities.reject(&:marked_for_destruction?)).to have(1).items
+          expect(full_profile.entities.reject(&:marked_for_destruction?)).to \
+            have(1).items
         end
       end
 
@@ -57,7 +58,8 @@ describe BillingProfile do
           full_profile.clear_up_after_form
         end
         it 'marks entities for distruction' do
-          expect(full_profile.entities.reject(&:marked_for_destruction?)).to have(0).items
+          expect(full_profile.entities.reject(&:marked_for_destruction?)).to \
+            have(0).items
         end
 
         it 'delete address' do
@@ -94,7 +96,8 @@ describe BillingProfile do
         end
 
         it 'empty entities are to be destroyed' do
-          expect(prepare_blank_profile.entities.reject(&:marked_for_destruction?)).to have(0).items
+          expect(prepare_blank_profile.entities.reject(&:marked_for_destruction?)).to \
+            have(0).items
         end
       end
 
@@ -107,7 +110,8 @@ describe BillingProfile do
         end
 
         it 'non empty entity kept' do
-          expect(prepare_blank_profile.entities.reject(&:marked_for_destruction?)).to have(1).items
+          expect(prepare_blank_profile.entities.reject(&:marked_for_destruction?)).to \
+            have(1).items
         end
 
         it 'address kept' do

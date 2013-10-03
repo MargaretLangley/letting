@@ -12,13 +12,14 @@ describe Client do
     end
 
     it 'validates it is a number' do
-      client.human_id = "Not numbers"
+      client.human_id = 'Not numbers'
       expect(client).to_not be_valid
     end
 
     it '#human_id is unique' do
       client.save!
-      expect { Client.create! human_id: 1 }.to raise_error ActiveRecord::RecordInvalid
+      expect { Client.create! human_id: 1 }.to \
+               raise_error ActiveRecord::RecordInvalid
     end
 
     it 'has at least one child' do
@@ -54,7 +55,8 @@ describe Client do
     it '#clear_up_after_form destroys unused models' do
       client.clear_up_after_form
       expect(client.address).to_not be_nil
-      expect(client.entities.reject(&:marked_for_destruction?)).to have(0).items
+      expect(client.entities.reject(&:marked_for_destruction?)).to \
+        have(0).items
     end
   end
 
@@ -78,7 +80,7 @@ describe Client do
     it 'ordered by human_id ASC' do
       c2 = client_create! human_id: 8000
       expect(Client.all).to eq [c1, c2]
-      expect(Client.search 'Bir').to eq [c2,c1]
+      expect(Client.search 'Bir').to eq [c2, c1]
     end
   end
 end

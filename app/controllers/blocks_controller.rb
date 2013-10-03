@@ -35,7 +35,6 @@ class BlocksController < ApplicationController
     end
     helper_method :block_name_has_no_property_matches?
 
-
     def params_state
       params[:block][:state]
     end

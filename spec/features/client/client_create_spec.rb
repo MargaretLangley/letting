@@ -26,7 +26,6 @@ describe Client do
       expect(page).to have_text 'The client could not be saved.'
     end
 
-
     it 'company', js: true do
       navigate_to_create_page
       validate_page

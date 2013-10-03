@@ -37,7 +37,6 @@ def property_with_monthly_charge_create! args = {}
   property
 end
 
-
 private
 
 def base_property args = {}

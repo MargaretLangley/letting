@@ -75,7 +75,6 @@ describe Property do
           end
         end
 
-
       def update_then_expect_properties_page
         click_on 'Update Property'
         expect(current_path).to eq '/properties'
@@ -182,7 +181,6 @@ describe Property do
         end
       end
 
-
     it 'removes billing address' do
       property_with_billing_create! id: 1, human_id: 8000
       navigate_to_edit_page
@@ -218,7 +216,6 @@ describe Property do
           fill_in 'property_account_attributes_charges_attributes_0_due_ons_attributes_0_month', with: '4'
         end
 
-
       it 'adds monthly charge', js: true do
         property_create! id: 1, human_id: 8000
         navigate_to_edit_page
@@ -242,7 +239,7 @@ describe Property do
       end
 
       it 'opens monthly and changes to date charge', js: true do
-        property = property_with_monthly_charge_create! human_id: 8000
+        property_with_monthly_charge_create! human_id: 8000
         navigate_to_edit_page
         click_on 'or on date'
         expect(page).to have_text /on date or per month/i

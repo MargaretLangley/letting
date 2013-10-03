@@ -62,11 +62,10 @@ module DB
       end
 
       def none_matching_entities_error_message model, patch_model
-        "Cannot match #{model.class} #{patch_model.human_id} names." +
-        "between the loading data and the patch data. " +
-        "Until '#{patch_model.entities[0].name}' " +
-        "is the same as '#{model.entities[0].name}' " +
-        "we cannot patch the address data."
+        "Cannot match #{model.class} #{patch_model.human_id} names between " +
+        'the loading data and the patch data. Until ' +
+        "'#{patch_model.entities[0].name}' is the same as " +
+        "'#{model.entities[0].name} we cannot patch the address data."
       end
 
   end

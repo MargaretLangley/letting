@@ -31,9 +31,9 @@ module DB
 
     def assign_person entity, number, row
       entity.attributes = { entity_type:  entity_type(row, number),
-                              title:        row[:"title#{number}"],
-                              initials:     row[:"initials#{number}"],
-                              name:         row[:"name#{number}"] }
+                            title:        row[:"title#{number}"],
+                            initials:     row[:"initials#{number}"],
+                            name:         row[:"name#{number}"] }
     end
 
     def assign_company entity, number, row
@@ -50,8 +50,8 @@ module DB
     end
 
     def person? row, number
-      ( row[:"title#{number}"].present? || row[:"title#{number}"].present? ) \
-        && row[:"title#{number}"].exclude?('Ltd')
+      ( row[:"title#{number}"].present? || row[:"title#{number}"].present? ) &&
+        row[:"title#{number}"].exclude?('Ltd')
     end
 
     def clean_contact contactable
@@ -61,7 +61,7 @@ module DB
 
     def clean_addresses contactable
       addressable = contactable.address
-      addressable.attributes = \
+      addressable.attributes =
         { town: addressable.town.titleize } if addressable.town.present?
     end
 
@@ -77,7 +77,7 @@ module DB
     end
 
     def remove_ampersand_from_entity_title entity
-      entity.title.sub!("& M","M")
+      entity.title.sub!('& M', 'M')
     end
 
   end

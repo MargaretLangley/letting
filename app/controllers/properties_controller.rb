@@ -17,8 +17,7 @@ class PropertiesController < ApplicationController
   def create
     @property = Property.new property_params
     if @property.save
-      redirect_to properties_path,
-                  notice: "#{@property.human_id} property successfully created!"
+      redirect_to properties_path, notice: property_created_message
     else
       @property.prepare_for_form
       render :new
@@ -33,8 +32,7 @@ class PropertiesController < ApplicationController
   def update
     @property = Property.find params[:id]
     if @property.update property_params
-      redirect_to properties_path,
-                  notice: "#{@property.human_id} property successfully updated!"
+      redirect_to properties_path, notice: property_updated_message
     else
       render :edit
     end
@@ -43,8 +41,7 @@ class PropertiesController < ApplicationController
   def destroy
     @property = Property.find(params[:id])
     @property.destroy
-    redirect_to properties_path,
-                alert: "#{@property.human_id} property successfully deleted!"
+    redirect_to properties_path, alert: property_deleted_message
   end
 
   private
@@ -80,12 +77,29 @@ class PropertiesController < ApplicationController
     end
 
     def charges_params
-      [:id, :charge_type, :due_in, :amount, :_destroy,
+      [
+        :id,
+        :charge_type,
+        :due_in,
+        :amount,
+        :_destroy,
         due_ons_attributes: due_on_params
       ]
     end
 
     def due_on_params
       [:id, :day, :month]
+    end
+
+    def property_created_message
+      "#{@property.human_id} property successfully created!"
+    end
+
+    def property_updated_message
+      "#{@property.human_id} property successfully updated!"
+    end
+
+    def property_deleted_message
+      "#{@property.human_id} property successfully deleted!"
     end
 end

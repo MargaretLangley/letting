@@ -53,7 +53,7 @@ module DueOns
         end
       end
 
-    private
+      private
 
       def has_new_due_on?
         reject(&:marked_for_destruction?).detect(&:new_record?)

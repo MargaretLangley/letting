@@ -6,7 +6,7 @@ class Address < ActiveRecord::Base
   validates :road_no, length: { maximum: 10 }, allow_blank: true
   validates :road, length: { maximum: 64 }
   validates :district, :town, length: { minimum: 4, maximum: 64 },
-                       allow_blank: true
+                              allow_blank: true
   validates :county, length: { minimum: 4, maximum: 64 }
   validates :postcode, length: { minimum: 6, maximum: 8 }, allow_blank: true
 

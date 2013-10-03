@@ -8,7 +8,7 @@ AllCops:
     - Rakefile
     - config.ru
   Excludes:
-    - db/migrate/**
-    - db/schema.rb
+    - db/**
     - bin/**
+    - config/**
 

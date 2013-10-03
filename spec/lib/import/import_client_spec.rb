@@ -8,19 +8,31 @@ module DB
 
   describe ImportClient do
     it 'One row' do
-      expect { ImportClient.import Import.csv_table('clients', headers: ImportFields.client, location: 'spec/fixtures/import_data/clients') }.to \
-        change(Client, :count).by 1
+      expect { ImportClient.import \
+                 Import.csv_table('clients',
+                                  headers: ImportFields.client,
+                                  location: 'spec/fixtures/import_data/clients')
+             }.to change(Client, :count).by 1
     end
 
     it 'One row, 2 Entities' do
-      expect { ImportClient.import Import.csv_table('clients', headers: ImportFields.client, location: 'spec/fixtures/import_data/clients') }.to \
-        change(Entity, :count).by 2
+      expect { ImportClient.import \
+                 Import.csv_table('clients',
+                                  headers: ImportFields.client,
+                                  location: 'spec/fixtures/import_data/clients')
+             }.to change(Entity, :count).by 2
     end
 
     it 'Not double import' do
-      ImportClient.import Import.csv_table('clients', headers: ImportFields.client, location: 'spec/fixtures/import_data/clients')
-      expect { ImportClient.import Import.csv_table('clients', headers: ImportFields.client, location: 'spec/fixtures/import_data/clients') }.to \
-        change(Client, :count).by 0
+      ImportClient.import \
+                     Import.csv_table('clients',
+                                      headers: ImportFields.client,
+                                      location: 'spec/fixtures/import_data/clients')
+      expect { ImportClient.import \
+                Import.csv_table('clients',
+                                 headers: ImportFields.client,
+                                 location: 'spec/fixtures/import_data/clients')
+             }.to change(Client, :count).by 0
     end
 
     it 'Not double import' do
@@ -66,7 +78,4 @@ module DB
       end
     end
   end
-
-
 end
-

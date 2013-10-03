@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   def index
     @users = User.all
-     # @users = User.search(search_param).page(params[:page]).load
-     # redirect_to edit_user_path @users.first if unique_search?
-   end
+    # @users = User.search(search_param).page(params[:page]).load
+    # redirect_to edit_user_path @users.first if unique_search?
+  end
 
   def show
     @user = User.find params[:id]
@@ -44,6 +44,8 @@ class UsersController < ApplicationController
   private
 
   def users_params
-     params.require(:user).permit(:email, :password, :password_confirmation, :admin)
+    params
+    .require(:user)
+    .permit(:email, :password, :password_confirmation, :admin)
   end
 end
