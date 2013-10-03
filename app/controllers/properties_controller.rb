@@ -6,7 +6,7 @@ class PropertiesController < ApplicationController
   end
 
   def show
-    @property = Property.find params[:id ]
+    @property = Property.find params[:id]
   end
 
   def new
@@ -17,7 +17,8 @@ class PropertiesController < ApplicationController
   def create
     @property = Property.new property_params
     if @property.save
-      redirect_to properties_path, notice: "#{@property.human_id} property successfully created!"
+      redirect_to properties_path,
+                  notice: "#{@property.human_id} property successfully created!"
     else
       @property.prepare_for_form
       render :new
@@ -32,7 +33,8 @@ class PropertiesController < ApplicationController
   def update
     @property = Property.find params[:id]
     if @property.update property_params
-      redirect_to properties_path, notice: "#{@property.human_id} property successfully updated!"
+      redirect_to properties_path,
+                  notice: "#{@property.human_id} property successfully updated!"
     else
       render :edit
     end
@@ -41,7 +43,8 @@ class PropertiesController < ApplicationController
   def destroy
     @property = Property.find(params[:id])
     @property.destroy
-    redirect_to properties_path, alert: "#{@property.human_id} property successfully deleted!"
+    redirect_to properties_path,
+                alert: "#{@property.human_id} property successfully deleted!"
   end
 
   private
@@ -58,19 +61,18 @@ class PropertiesController < ApplicationController
       params.require(:property)
         .permit :human_id,
                 :client_id,
-          address_attributes: address_params,
-          entities_attributes: entities_params,
-          billing_profile_attributes: billing_profile_params,
-          account_attributes: account_params
-          # Note for collection of entities you need to return :id as well
-          # Note saw '_destroy' in the attributes
+                address_attributes:         address_params,
+                entities_attributes:        entities_params,
+                billing_profile_attributes: billing_profile_params,
+                account_attributes:         account_params
     end
 
     def billing_profile_params
-      [:id, :property_id, :use_profile,
-        address_attributes: address_params,
-        entities_attributes: entities_params
-      ]
+      [:id,
+       :property_id,
+       :use_profile,
+       address_attributes: address_params,
+       entities_attributes: entities_params]
     end
 
     def account_params

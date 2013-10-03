@@ -18,7 +18,7 @@ describe Client do
 
     it '#human_id is unique' do
       client.save!
-      expect{ Client.create! human_id: 1 }.to raise_error ActiveRecord::RecordInvalid
+      expect { Client.create! human_id: 1 }.to raise_error ActiveRecord::RecordInvalid
     end
 
     it 'has at least one child' do
@@ -63,9 +63,9 @@ describe Client do
     c1 = c2 = nil
     before { c1 = client_create! }
 
-    it('human id') { expect((Client.search '8008').load ).to eq [c1] }
-    it('roads') { expect((Client.search 'Edg').load ).to eq [c1] }
-    it('towns') { expect((Client.search 'Bir').load ).to eq [c1] }
+    it('human id') { expect((Client.search '8008').load).to eq [c1] }
+    it('roads') { expect((Client.search 'Edg').load).to eq [c1] }
+    it('towns') { expect((Client.search 'Bir').load).to eq [c1] }
     it('names') { expect(Client.search 'Grace').to eq [c1] }
 
     it 'only returns expected' do

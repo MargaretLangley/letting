@@ -8,7 +8,9 @@ namespace :monit do
   end
   after 'deploy:setup', 'monit:setup'
 
-  task(:unicorn, roles: :app) { monit_config 'unicorn', "/etc/monit/conf.d/#{application}_unicorn" }
+  task(:unicorn, roles: :app) do
+    monit_config 'unicorn', "/etc/monit/conf.d/#{application}_unicorn"
+  end
 
   %w[start stop restart syntax reload].each do |command|
     desc 'Run Monit #{command} script'

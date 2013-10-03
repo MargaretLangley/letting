@@ -27,13 +27,13 @@ class PaymentsController < ApplicationController
     end
 
     def charges_params
-      [ :id, :charge_type, :due_in, :amount, :_destroy,
+      [:id, :charge_type, :due_in, :amount, :_destroy,
         due_ons_attributes: due_on_params
       ]
     end
 
     def payment_params
-      [ :account_id, :debt_id, :on_date, :amount]
+      [:account_id, :debt_id, :on_date, :amount]
     end
 
 end

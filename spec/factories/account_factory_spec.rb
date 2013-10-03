@@ -4,7 +4,7 @@ describe 'Account Factory' do
 
   let(:account) { account_new }
 
-  it('no id'){ expect(account.id).to eq 1 }
+  it('no id') { expect(account.id).to eq 1 }
   it('change id') do
     account = account_new id: 2
     expect(account.id).to eq 2

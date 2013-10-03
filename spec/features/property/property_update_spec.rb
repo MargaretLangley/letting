@@ -106,7 +106,6 @@ describe Property do
           expect_entity_dc_compton
         end
 
-
     it 'basic with billing address' do
       property_with_billing_create! id: 1, human_id: 8000
       navigate_to_edit_page
@@ -125,8 +124,7 @@ describe Property do
         end
       end
 
-
-    it 'add billing address', js:true do
+    it 'add billing address', js: true do
       property_create! id: 1, human_id: 8000
       navigate_to_edit_page
       fill_in_bill_profile
@@ -168,9 +166,6 @@ describe Property do
         expect(page).to have_text 'Lock'
       end
 
-
-
-
     it 'has validation' do
       property_create! id: 1, human_id: 8000
       navigate_to_edit_page
@@ -196,9 +191,6 @@ describe Property do
       navigate_to_property_view_page
       expect(page).to have_text /Billing to property address/i
     end
-
-
-
 
     context 'charge' do
 
@@ -242,7 +234,6 @@ describe Property do
         def fill_in_due_on_per_month
           fill_in 'property_account_attributes_charges_attributes_0_due_ons_attributes_4_day', with: '5'
         end
-
 
       it 'opens a monthly charge correctly' do
         property_with_monthly_charge_create! human_id: 8000

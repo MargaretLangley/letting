@@ -11,7 +11,6 @@ class BillingProfile < ActiveRecord::Base
   end
 
   def prepare_for_form
-    use_profile = false if use_profile.nil?
     prepare_contact
   end
 

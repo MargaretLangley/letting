@@ -25,13 +25,13 @@ end
         password: 'password',
         password_confirmation: 'password',
         admin: true
-     },
-     {
+      },
+      {
         email: 'user@example.com',
         password: 'password',
         password_confirmation: 'password',
         admin: false
-     }
+      }
    ]
     Rake::Task['import:users'].invoke
   end
@@ -296,13 +296,14 @@ def debts_and_payments
   create_debt_generator
   create_payments
 end
+
   def create_debt_generator
     create_debts
     DebtGenerator.create! [
-      { id: 1, search_string: 'Lords',
-               start_date: "2013/#{(Date.current - 6.months).month }/01",
-               end_date: "2013/#{(Date.current - 4.months).month }/01"
-      }
+      { id: 1,
+        search_string: 'Lords',
+        start_date: "2013/#{(Date.current - 6.months).month }/01",
+        end_date: "2013/#{(Date.current - 4.months).month }/01" }
     ]
   end
 

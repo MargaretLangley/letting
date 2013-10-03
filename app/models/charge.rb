@@ -12,9 +12,9 @@ class Charge < ActiveRecord::Base
   end
 
   def chargeable_info date_range
-    ChargeableInfo.from_charge charge_id: id, \
-                         on_date: due_ons.make_date_between(date_range), \
-                         amount: amount, \
+    ChargeableInfo.from_charge charge_id: id,
+                         on_date: due_ons.make_date_between(date_range),
+                         amount: amount,
                          account_id: account_id
   end
 
@@ -27,18 +27,22 @@ class Charge < ActiveRecord::Base
   end
 
   def empty?
-    attributes.except(*ignored_attrs).values.all?(&:blank?) \
-    && due_ons.empty?
+    attributes.except(*ignored_attrs).values.all?(&:blank?) &&
+      due_ons.empty?
   end
 
   def due_ons_size
-    errors.add :due_ons, 'Too many due_ons' if due_ons.reject(&:marked_for_destruction?).size > 12
+    errors.add :due_ons, 'Too many due_ons' if persitable_due_ons.size > 12
   end
 
   private
 
     def ignored_attrs
-      %w[ id account_id created_at updated_at ]
+      %w[id account_id created_at updated_at]
+    end
+
+    def persitable_due_ons
+      due_ons.reject(&:marked_for_destruction?)
     end
 
 end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe User do
 
-  before(:each) { log_in admin_attributes}
+  before(:each) { log_in admin_attributes }
 
   context '#view' do
     it 'basic user in view page' do
@@ -12,6 +12,6 @@ describe User do
       expect(page).to have_text 'admin@example.com'
       expect(page).to have_text 'Print'
       expect(page).to have_text 'Admin'
-     end
+    end
   end
 end

@@ -18,8 +18,8 @@ module DB
     end
 
     def file_to_table filename
-      CSV.open(get_file(filename), headers: @headers, \
-        header_converters: :symbol, \
+      CSV.open(get_file(filename), headers: @headers,
+        header_converters: :symbol,
         converters: ->(f) { f ? f.strip : nil} )
         .read.drop(@drop_rows)
     end

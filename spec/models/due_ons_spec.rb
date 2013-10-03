@@ -82,7 +82,7 @@ describe DueOns do
       end
 
       it 'missing due on' do
-        expect(due_ons.between? Date.new(2013, 4, 4) .. Date.new(2013, 5, 2) ).to be_false
+        expect(due_ons.between? Date.new(2013, 4, 4) .. Date.new(2013, 5, 2)).to be_false
       end
 
       it 'is between due on' do
@@ -96,7 +96,7 @@ describe DueOns do
 
       it 'when in date' do
         due_ons.build day: 3, month: 5
-        expect(due_ons.make_date_between Date.new(2013, 4, 4) .. Date.new(2013, 5, 5) ).to eq Date.new 2013, 5, 3
+        expect(due_ons.make_date_between Date.new(2013, 4, 4) .. Date.new(2013, 5, 5)).to eq Date.new 2013, 5, 3
       end
 
       it 'nils outside of date range' do

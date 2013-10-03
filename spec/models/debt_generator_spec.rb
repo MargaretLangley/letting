@@ -15,7 +15,7 @@ describe DebtGenerator do
     context 'validate uniqueness' do
       it 'prevents debt_generator with same attributes from being created' do
         debt_generator_new.save!
-        expect{ debt_generator_new.save! }.to  \
+        expect { debt_generator_new.save! }.to  \
           raise_error ActiveRecord::RecordInvalid
       end
     end
@@ -57,7 +57,7 @@ describe DebtGenerator do
         debt_gen.save!
         debt_gen = DebtGenerator.new(search_string: 'Hillbank House', start_date: Date.current+1.day)
         debt_gen.generate
-        expect{ debt_gen.save! }.to raise_error
+        expect { debt_gen.save! }.to raise_error
       end
     end
 
@@ -77,9 +77,9 @@ describe DebtGenerator do
       debt_generator_new.save!
       expect(DebtGenerator.latest_debt_generated(10).length).to eq 1
       expect(DebtGenerator.latest_debt_generated(10).first).to eq \
-          DebtGenerator.new id: 1, \
-                            search_string: 'Lords', \
-                            start_date: '2013-03-01', \
+          DebtGenerator.new id: 1,
+                            search_string: 'Lords',
+                            start_date: '2013-03-01',
                             end_date: '2013-04-01'
     end
   end

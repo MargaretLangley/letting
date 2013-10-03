@@ -10,7 +10,7 @@ module DB
 
     context 'error state' do
       it 'throws an error if client foreign key not found' do
-        expect{ ImportProperty.import Import.csv_table('properties',  \
+        expect { ImportProperty.import Import.csv_table('properties',  \
         headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
         raise_error NameError
       end
@@ -27,38 +27,38 @@ module DB
       end
 
       it 'One row' do
-        expect{ ImportProperty.import Import.csv_table('properties',  \
+        expect { ImportProperty.import Import.csv_table('properties',  \
           headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
           change(Property, :count).by 1
       end
 
       it 'Client set to table id' do
-        expect{ ImportProperty.import Import.csv_table('properties',  \
+        expect { ImportProperty.import Import.csv_table('properties',  \
           headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
           change(Property, :count).by 1
         expect(Property.first.client_id).to eq client.id
       end
 
       it 'One row, 2 Entities' do
-        expect{ ImportProperty.import Import.csv_table('properties', \
+        expect { ImportProperty.import Import.csv_table('properties', \
           headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
           change(Entity, :count).by 2
       end
 
       it 'Not double import' do
-        expect{ ImportProperty.import Import.csv_table('properties',  \
+        expect { ImportProperty.import Import.csv_table('properties',  \
           headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
           change(Property, :count).by 1
-        expect{ ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
+        expect { ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
           drop_rows: 34, location: properties_directory) }.to \
           change(Property, :count).by 0
       end
 
       it 'Not double import' do
-        expect{ ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
+        expect { ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
           drop_rows: 34, location: properties_directory) }.to \
           change(Entity, :count).by 2
-        expect{ ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
+        expect { ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
           drop_rows: 34, location: properties_directory) }.to \
           change(Entity, :count).by 0
       end
@@ -95,7 +95,7 @@ module DB
 
       context 'entities' do
         it 'adds one entity when second entity blank' do
-          expect{ ImportProperty.import Import.csv_table 'properties_one_entity',  \
+          expect { ImportProperty.import Import.csv_table 'properties_one_entity',  \
             drop_rows: 34, headers: ImportFields.property, location: properties_directory }.to \
             change(Entity, :count).by 1
         end
@@ -120,7 +120,7 @@ module DB
           it 'removes deleted second entities' do
             ImportProperty.import Import.csv_table 'properties', headers: ImportFields.property, \
               drop_rows: 34, location: properties_directory
-            expect{ ImportProperty.import Import.csv_table 'properties_one_entity',  \
+            expect { ImportProperty.import Import.csv_table 'properties_one_entity',  \
                 drop_rows: 34, headers: ImportFields.property, location: properties_directory }.to \
                 change(Entity, :count).by -1
           end

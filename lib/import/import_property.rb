@@ -12,11 +12,11 @@ module DB
       client_id_2_id.fetch human_id.to_i
     end
 
-
     def model_assigned_row_attributes row
-      @model_to_assign.assign_attributes human_id: row[:human_id], \
+      @model_to_assign.assign_attributes human_id: row[:human_id],
         client_id: client_foreign_key_from_human_id(row[:client_id])
-      @model_to_assign.billing_profile.use_profile = false if @model_to_assign.new_record?
+      @model_to_assign.billing_profile.use_profile = false \
+        if @model_to_assign.new_record?
       import_contact @model_to_assign, row
       clean_contact @model_to_assign
     end

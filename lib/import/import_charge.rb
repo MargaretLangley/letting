@@ -22,7 +22,7 @@ module DB
     def model_assigned_row_attributes row
       @model_to_assign.assign_attributes \
                          charge_type: ChargeValues.from_code(row[:charge_type]).charge_code, \
-                         due_in:      DueInCodeToString[ row[:due_in] ], \
+                         due_in:      DueInCodeToString[row[:due_in]], \
                          amount:      row[:amount].to_d
       assign_due_ons row
     end
@@ -30,11 +30,11 @@ module DB
     def assign_due_ons row
       day_months = []
       if monthly_charge? row
-         monthly_charge = day_month_from_row_columns 1, row
-         day_months << DayMonth.from_day_month( monthly_charge.day, DueOn::PER_MONTH )
+        monthly_charge = day_month_from_row_columns 1, row
+        day_months << DayMonth.from_day_month(monthly_charge.day, DueOn::PER_MONTH)
       else
         (1..maximum_dates(row))
-        .each { |index| day_months <<  day_month_from_row_columns( index, row ) }
+        .each { |index| day_months <<  day_month_from_row_columns(index, row) }
       end
 
       @model_to_assign.due_ons.first(day_months.length).each_with_index do |due_on, index|

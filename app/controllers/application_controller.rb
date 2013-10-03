@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def address_params
-    [:county, :district, :flat_no, :house_name, :road, :road_no, :town, :type, :postcode]
+    [:county, :district, :flat_no, :house_name,
+     :road,   :road_no,  :town,    :type,       :postcode]
   end
 
   def entities_params
@@ -30,7 +31,8 @@ class ApplicationController < ActionController::Base
 
   def authorize
     if !current_permission.allow? params[:controller], params[:action]
-      redirect_to login_path, notice: 'Not logged in. Please login to use the application.'
+      redirect_to login_path,
+                  notice: 'Not logged in. Please login to use the application.'
     end
   end
 

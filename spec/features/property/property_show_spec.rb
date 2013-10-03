@@ -46,6 +46,4 @@ describe Property do
       expect(page).to have_text 'Greater London'
       expect(page).to have_text 'SE11 5SS'
     end
-
-
 end

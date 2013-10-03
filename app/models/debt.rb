@@ -6,7 +6,7 @@ class Debt < ActiveRecord::Base
 
   validates :charge_id, :on_date, presence: true
   validates :amount, format: { with: /\A\d+??(?:\.\d{0,2})?\z/ }, \
-            numericality: { greater_than_or_equal_to: 0}
+            numericality: { greater_than_or_equal_to: 0 }
 
   def paid
     payments.pluck(:amount).inject(0, :+)
@@ -17,13 +17,13 @@ class Debt < ActiveRecord::Base
   end
 
   def already_charged? other
-    charge_id == other.charge_id && \
+    charge_id == other.charge_id &&
     on_date == other.on_date
   end
 
   def == other
-    charge_id == other.charge_id && \
-    on_date == other.on_date && \
+    charge_id == other.charge_id &&
+    on_date == other.on_date &&
     amount == other.amount
   end
 

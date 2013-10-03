@@ -6,7 +6,7 @@ set_default(:postgresql_pid) { "/var/run/postgresql/9.2-main.pid" }
 
 namespace :postgresql do
   desc 'Create a database for this application.'
-  task :create_database, roles: :db, only: {primary: true} do
+  task :create_database, roles: :db, only: { primary: true } do
     answer = Capistrano::CLI.ui.ask("To create Role and Database, type 'yes' anything else and role and database creation is skipped.")
     if answer == 'yes'
       set_default(:postgresql_password)  { Capistrano::CLI.ui.ask("#{application} PostgreSQL Password: ") }

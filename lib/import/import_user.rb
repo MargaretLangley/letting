@@ -8,9 +8,9 @@ module DB
     end
 
     def model_assigned_row_attributes row
-      @model_to_assign.assign_attributes email:    row[:email], \
-                                         password: row[:password], \
-                                         password_confirmation: row[:password], \
+      @model_to_assign.assign_attributes email:    row[:email],
+                                         password: row[:password],
+                                         password_confirmation: row[:password],
                                          admin:    row[:admin]
     end
 

@@ -15,12 +15,12 @@ describe DueOn do
     context 'numerical' do
       it('day numeric') { due_on.day = 'ab'; expect(due_on).to_not be_valid }
       it('day integer') { due_on.day = 8.3; expect(due_on).to_not be_valid }
-      it('day not negative') { due_on.day = -3; expect(due_on).to_not be_valid}
-      it('day not less than 32') { due_on.day = 32; expect(due_on).to_not be_valid}
+      it('day not negative') { due_on.day = -3; expect(due_on).to_not be_valid }
+      it('day not less than 32') { due_on.day = 32; expect(due_on).to_not be_valid }
       it('month numeric') { due_on.month = 'ab'; expect(due_on).to_not be_valid }
       it('month integer') { due_on.month = 8.3; expect(due_on).to_not be_valid }
-      it('month not negative') { due_on.month = -3; expect(due_on).to_not be_valid}
-      it('month not less than 13') { due_on.month = 13; expect(due_on).to_not be_valid}
+      it('month not negative') { due_on.month = -3; expect(due_on).to_not be_valid }
+      it('month not less than 13') { due_on.month = 13; expect(due_on).to_not be_valid }
     end
   end
 
@@ -63,11 +63,11 @@ describe DueOn do
     after { Timecop.return }
 
     it 'before due on' do
-      expect(due_on.between? Date.new(2013,4,1) .. Date.new(2013, 5, 2) ).to be_false
+      expect(due_on.between? Date.new(2013, 4, 1) .. Date.new(2013, 5, 2) ).to be_false
     end
 
     it 'is between due on' do
-      expect(due_on.between? Time.new(2013,5,1) .. Date.new(2013,5,5)).to be_true
+      expect(due_on.between? Time.new(2013, 5, 1) .. Date.new(2013, 5, 5)).to be_true
     end
 
     it 'after due on' do
@@ -77,19 +77,19 @@ describe DueOn do
     context 'timetravel' do
       it 'knows the year' do
         Timecop.travel(Time.zone.parse('3/5/2014 12:00'))
-        expect(due_on.make_date).to eq Date.new(2014,5,3)
+        expect(due_on.make_date).to eq Date.new(2014, 5, 3)
         Timecop.return
       end
 
       it 'allows for next year' do
         Timecop.travel(Time.zone.parse('4/5/2014 12:00'))
-        expect(due_on.make_date).to eq Date.new(2015,5,3)
+        expect(due_on.make_date).to eq Date.new(2015, 5, 3)
         Timecop.return
       end
 
       it 'allows for next year in december' do
         Timecop.travel(Time.zone.parse('1/12/2014 12:00'))
-        expect(due_on.make_date).to eq Date.new(2015,5,3)
+        expect(due_on.make_date).to eq Date.new(2015, 5, 3)
         Timecop.return
       end
 

@@ -2,16 +2,17 @@ class DebtGenerator < ActiveRecord::Base
   has_many :debts, -> { uniq }
   accepts_nested_attributes_for :debts
   validates :debts, presence: true
-  validates :search_string, uniqueness: { scope: [ :start_date, :end_date ] }
-  scope :latest_debt_generated, ->(limit) { order(created_at: :desc).limit(limit) }
+  validates :search_string, uniqueness: { scope: [:start_date, :end_date] }
+  scope :latest_debt_generated, \
+        ->(limit) { order(created_at: :desc).limit(limit) }
 
   after_initialize do |debt_generator|
-    self.start_date = default_start_date if self.start_date.blank?
-    self.end_date = default_end_date if self.end_date.blank?
+    self.start_date = default_start_date if start_date.blank?
+    self.end_date = default_end_date if end_date.blank?
   end
 
   def generate
-    Property.search_min(self.search_string).each do |property|
+    Property.search_min(search_string).each do |property|
       chargeable_to_debt property
                          .account
                          .chargeables_between(start_date..end_date)
@@ -20,19 +21,19 @@ class DebtGenerator < ActiveRecord::Base
   end
 
   def debtless?
-    self.debts.empty?
+    debts.empty?
   end
 
-  def == another_debt_generator
-    self.search_string == another_debt_generator.search_string && \
-    self.start_date == another_debt_generator.start_date && \
-    self.end_date == another_debt_generator.end_date
+  def == other
+    search_string == other.search_string &&
+    start_date == other.start_date &&
+    end_date == other.end_date
   end
 
   private
 
   def chargeable_to_debt chargeable_infos
-    chargeable_infos.each {|chargeable| self.debts.build chargeable.to_hash }
+    chargeable_infos.each { |chargeable| debts.build chargeable.to_hash }
   end
 
   def default_start_date

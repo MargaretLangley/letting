@@ -4,8 +4,8 @@ module Charges
     has_many :charges, dependent: :destroy do
 
       def chargeables_between date_range
-        select{ |charge| charge.due_between? date_range }
-        .map{ |charge| charge.chargeable_info date_range }
+        select { |charge| charge.due_between? date_range }
+        .map { |charge| charge.chargeable_info date_range }
       end
 
       def prepare
@@ -18,7 +18,7 @@ module Charges
         destruction_if :empty?
       end
 
-    private
+      private
 
       def destruction_if matcher
         select(&matcher)

@@ -18,26 +18,26 @@ module DB
     end
 
     it 'One row, 2 Entities' do
-      expect{ ImportBillingProfile.import Import.csv_table('address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles') }.to \
+      expect { ImportBillingProfile.import Import.csv_table('address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles') }.to \
         change(Entity, :count).by 2
     end
 
     it 'billing profiles have already been created when property created' do
-      expect{ ImportBillingProfile.import Import.csv_table('address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles') }.to \
+      expect { ImportBillingProfile.import Import.csv_table('address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles') }.to \
         change(BillingProfile, :count).by 0
     end
 
     it 'Not double import' do
-      expect{ ImportBillingProfile.import Import.csv_table('address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles') }.to \
+      expect { ImportBillingProfile.import Import.csv_table('address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles') }.to \
         change(Entity, :count).by 2
-      expect{ ImportBillingProfile.import Import.csv_table('address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles') }.to \
+      expect { ImportBillingProfile.import Import.csv_table('address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles') }.to \
         change(Entity, :count).by 0
     end
 
 
     context 'entities' do
       it 'adds one entity when second entity blank' do
-        expect{ ImportBillingProfile.import Import.csv_table 'address2_one_entity', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles' }.to \
+        expect { ImportBillingProfile.import Import.csv_table 'address2_one_entity', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles' }.to \
           change(Entity, :count).by 1
       end
 
@@ -57,7 +57,7 @@ module DB
 
         it 'removes deleted second entities' do
           ImportBillingProfile.import Import.csv_table 'address2', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles'
-          expect{ ImportBillingProfile.import Import.csv_table 'address2_one_entity', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles' }.to \
+          expect { ImportBillingProfile.import Import.csv_table 'address2_one_entity', headers: ImportFields.billing_profile, location:'spec/fixtures/import_data/billing_profiles' }.to \
             change(Entity, :count).by -1
         end
       end

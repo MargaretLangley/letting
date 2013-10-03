@@ -11,7 +11,7 @@ describe User do
       expect(page).to have_text 'admin@example.com'
       expect(page).to have_text 'View'
       expect(page).to have_text 'Edit'
-      expect{ first(:link,'Delete').click }.to change(User, :count).by -1
+      expect { first(:link, 'Delete').click }.to change(User, :count).by -1
       expect(current_path).to eq '/users'
     end
   end

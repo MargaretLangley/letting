@@ -6,7 +6,7 @@ describe Property do
 
   before(:each) { log_in }
 
-  it '#create', js:true  do
+  it '#create', js: true  do
     navigate_to_create_page
     validate_page
     fill_in_form
@@ -55,7 +55,6 @@ describe Property do
     expect(page).to have_text 'Charge'
   end
 
-
   def navigate_to_create_page
     visit '/properties'
     click_on 'New Property'
@@ -82,7 +81,6 @@ describe Property do
       fill_in 'Property ID', with: '278'
       fill_in 'Client ID', with: '2'
     end
-
 
     def fill_in_property_address
       within_fieldset 'property_address' do
@@ -194,7 +192,4 @@ describe Property do
 
       expect(page).to have_text '1st Jan'
     end
-
-
-
 end

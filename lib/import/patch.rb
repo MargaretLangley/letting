@@ -33,10 +33,11 @@ module DB
     end
 
     def patch_models_add
-      @patch_models << { 'id' => @model_to_assign.human_id, 'model' => @model_to_assign }
+      @patch_models << { 'id'    => @model_to_assign.human_id,
+                         'model' => @model_to_assign }
     end
 
-    #debug hash array: patch_models[0]['model']
+    # debug hash array: patch_models[0]['model']
     def patch_model model
       model_hash = @patch_models.detect { |m| m['id'] == model.human_id }
       if model_hash.present?
@@ -56,15 +57,16 @@ module DB
       end
 
       def patch_address model, patch_model
-        model.address.attributes = \
+        model.address.attributes =
           patch_model.address.copy_approved_attributes
       end
 
       def none_matching_entities_error_message model, patch_model
         "Cannot match #{model.class} #{patch_model.human_id} names." +
-        "between the loading data and the patch data." +
-        " Until '#{patch_model.entities[0].name}' " +
-        "is the same as '#{model.entities[0].name}' we cannot patch the address data."
+        "between the loading data and the patch data. " +
+        "Until '#{patch_model.entities[0].name}' " +
+        "is the same as '#{model.entities[0].name}' " +
+        "we cannot patch the address data."
       end
 
   end

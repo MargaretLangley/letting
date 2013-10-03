@@ -42,7 +42,7 @@ describe Client do
       expect(page).to have_text 'Test'
     end
 
-    it 'shows person', js:true do
+    it 'shows person', js: true do
       expect(page).to have_text 'Person or company'
       expect(find_field('Name').value).to have_text 'Grace'
       expect(page).to have_text 'Initials'
@@ -59,7 +59,7 @@ describe Client do
     end
   end
 
-  it '#updates shows company', js:true do
+  it '#updates shows company', js: true do
     client_company_create! human_id: 111
     navigate_to_edit_page
     expect(page).to have_text 'Company or person'
@@ -67,7 +67,7 @@ describe Client do
     expect(page).to_not have_text 'Initials'
   end
 
-  it '#updates deletes a second entity', js:true do
+  it '#updates deletes a second entity', js: true do
     client_two_entities_create! human_id: 8008
     navigate_to_edit_page
     click_on 'X'

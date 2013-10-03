@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
 
-  before(:each) { log_in admin_attributes}
+  before(:each) { log_in admin_attributes }
   context '#index' do
     it 'basic users in view page' do
       user_create! george_attributes

@@ -56,11 +56,11 @@ module DueOns
     private
 
       def has_new_due_on?
-        self.reject(&:marked_for_destruction?).detect(&:new_record?)
+        reject(&:marked_for_destruction?).detect(&:new_record?)
       end
 
       def destruction_if matcher
-        self.select(&matcher)
+        select(&matcher)
         .each { |due_on| mark_due_on_for_destruction due_on }
       end
 
@@ -69,19 +69,19 @@ module DueOns
       end
 
       def max_due_ons
-        self.reject(&:empty?).size == MAX_DUE_ONS
+        reject(&:empty?).size == MAX_DUE_ONS
       end
 
       def per_month_due_on
-        self.detect(&:per_month?)
+        detect(&:per_month?)
       end
 
       def first_day_or_empty
-        self.first.present? ? self.first.day : ''
+        first.present? ? first.day : ''
       end
 
       def assign_per_month day
-        (1..MAX_DUE_ONS).each { |month| self.build day: day, month: month }
+        (1..MAX_DUE_ONS).each { |month| build day: day, month: month }
       end
 
     end

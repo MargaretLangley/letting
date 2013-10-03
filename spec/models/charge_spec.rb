@@ -13,8 +13,8 @@ describe Charge do
     context 'presence' do
       it('charge type') { charge.charge_type = nil; expect(charge).to_not be_valid }
       it('due in') { charge.due_in = nil; expect(charge).to_not be_valid }
-      it('amount') {charge.amount = nil; expect(charge).to_not be_valid}
-      it('due_ons') {charge.due_ons.destroy_all; expect(charge).to_not be_valid}
+      it('amount') {charge.amount = nil; expect(charge).to_not be_valid }
+      it('due_ons') {charge.due_ons.destroy_all; expect(charge).to_not be_valid }
       context 'due_ons_size' do
         it 'not valid one over limit' do
           (1..12).each { charge.due_ons.build day: 25, month: 3 }
@@ -82,7 +82,7 @@ describe Charge do
 
       it 'if charge between dates'  do
         info = ChargeableInfo.from_charge charge_id: 1, \
-                            on_date: Date.new(2013,3,25), \
+                            on_date: Date.new(2013, 3, 25), \
                             amount: 88.08
         expect(charge.chargeable_info Date.new(2013, 2, 25) .. Date.new(2013, 3, 25) ).to eq info
       end

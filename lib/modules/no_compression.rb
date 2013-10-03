@@ -1,5 +1,5 @@
 class NoCompression
-  def compress(string)
+  def compress string
     # do nothing
     string
   end

@@ -31,10 +31,10 @@ describe User do
   end
 
   def go_to_edit_page
-      visit '/users/'
-      expect(current_path).to eq '/users/'
-      click_on 'Edit'
-      expect(page).to have_text 'Password confirmation'
-      expect(page).to have_text 'Admin'
-    end
+    visit '/users/'
+    expect(current_path).to eq '/users/'
+    click_on 'Edit'
+    expect(page).to have_text 'Password confirmation'
+    expect(page).to have_text 'Admin'
+  end
 end

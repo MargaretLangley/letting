@@ -23,6 +23,6 @@ class Entity < ActiveRecord::Base
   private
 
     def ignored_attrs
-      %w[ id entitieable_id entitieable_type created_at entity_type updated_at ]
+      %w[id entitieable_id entitieable_type created_at entity_type updated_at]
     end
 end
