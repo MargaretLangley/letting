@@ -7,7 +7,7 @@ describe Property do
   before(:each) { log_in }
 
   it '#show' do
-    property = property_with_billing_create! id: 1, human_id: 1000
+    property_with_billing_create! id: 1, human_id: 1000
     visit '/properties/'
     click_on 'View'
     expect(current_path).to eq '/properties/1'

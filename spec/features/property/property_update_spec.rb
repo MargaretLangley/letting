@@ -158,7 +158,6 @@ describe Property do
           end
         end
 
-
       def expect_new_bill_profile
         expect(page).to have_text 'Middlesex Road'
         expect(page).to have_text 'G A R'

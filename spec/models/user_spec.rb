@@ -6,18 +6,26 @@ describe User do
 
   context 'validations' do
     context '#email' do
+
       it('present') { user.email = nil; expect(user).not_to be_valid }
+
       it('unique') do
         user.save!
         user2 = User.new user_attributes
-        expect { user2.save! email: 'example@example.com' }.to raise_error ActiveRecord::RecordInvalid
+        expect { user2.save! email: 'example@example.com' }.to \
+         raise_error ActiveRecord::RecordInvalid
       end
-      it('requires @') { user.email = "noat"; expect(user).not_to be_valid}
+
+      it 'requires @' do
+        user.email = 'noat'
+        expect(user).not_to be_valid
+      end
     end
 
     context 'password' do
       it('present') do
-        # Bug you can't assign a nil password you can initialize it with empty string
+        # Bug you can't assign a nil password you can initialize it with
+        # empty string
         # http://stackoverflow.com/questions/16804820/why-is-password-validate-presence-ignored
         user = User.new  password: ''
         expect(user).not_to be_valid
