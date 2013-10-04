@@ -10,9 +10,7 @@ module DB
 
     context 'error state' do
       it 'throws an error if client foreign key not found' do
-        expect { ImportProperty.import Import.csv_table('properties',  \
-        headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
-        raise_error NameError
+        expect { property_csv }.to raise_error NameError
       end
     end
 
@@ -22,52 +20,40 @@ module DB
         client = client_create! human_id: 11
       end
 
-      def properties_directory
-        'spec/fixtures/import_data/properties'
-      end
-
       it 'One row' do
-        expect { ImportProperty.import Import.csv_table('properties',  \
-          headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
+        expect { ImportProperty.import property_csv }.to \
           change(Property, :count).by 1
       end
 
       it 'Client set to table id' do
-        expect { ImportProperty.import Import.csv_table('properties',  \
-          headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
+        expect { ImportProperty.import property_csv }.to \
           change(Property, :count).by 1
         expect(Property.first.client_id).to eq client.id
       end
 
       it 'One row, 2 Entities' do
-        expect { ImportProperty.import Import.csv_table('properties', \
-          headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
+        expect { ImportProperty.import property_csv }.to \
           change(Entity, :count).by 2
       end
 
       it 'Not double import' do
-        expect { ImportProperty.import Import.csv_table('properties',  \
-          headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
+        expect { ImportProperty.import property_csv }.to \
           change(Property, :count).by 1
-        expect { ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
-          drop_rows: 34, location: properties_directory) }.to_not \
+        expect { ImportProperty.import property_csv }.to_not \
           change(Property, :count)
       end
 
       it 'Not double import' do
-        expect { ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
-          drop_rows: 34, location: properties_directory) }.to \
+        expect { ImportProperty.import property_csv }.to \
           change(Entity, :count).by 2
-        expect { ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
-          drop_rows: 34, location: properties_directory) }.to_not \
+        expect { ImportProperty.import property_csv }.to_not \
           change(Entity, :count)
       end
 
       context 'use profile' do
 
         it 'new record to false' do
-          ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
-            drop_rows: 34, location: properties_directory)
+          ImportProperty.import property_csv
           expect(Property.first.billing_profile.use_profile).to be_false
         end
 
@@ -76,55 +62,74 @@ module DB
           # The profile addresses were kept in different tables on the
           # original system. This means importing it separately after the
           # property import and know I won't change use_profile accidently.
-          # Import the record. Save a profile onto it. Import again and see that
-          # Profile still true.
+          # Import the record. Save a profile onto it. Import again and
+          # see that Profile still true.
         it 'does not alter use profile' do
-          ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
-            drop_rows: 34, location: properties_directory)
+          ImportProperty.import property_csv
           property = Property.first
           property.prepare_for_form
           property.billing_profile.use_profile = true
           property.billing_profile.address.attributes = oval_address_attributes
-          property.billing_profile.entities[0].attributes = oval_person_entity_attributes
+          property.billing_profile.entities[0].attributes =
+            oval_person_entity_attributes
           property.save!
-          ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
-            drop_rows: 34, location: properties_directory)
+          ImportProperty.import property_csv
           expect(Property.first.billing_profile.use_profile).to be_true
         end
       end
 
       context 'entities' do
         it 'adds one entity when second entity blank' do
-          expect { ImportProperty.import Import.csv_table 'properties_one_entity',  \
-            drop_rows: 34, headers: ImportFields.property, location: properties_directory }.to \
+          expect { ImportProperty.import property_1_entity_csv }.to \
             change(Entity, :count).by 1
         end
 
         it 'ordered by creation' do
-          ImportProperty.import Import.csv_table('properties',  headers: ImportFields.property, \
-            drop_rows: 34, location: properties_directory)
-          expect(Property.first.entities[0].created_at).to be < Property.first.entities[1].created_at
+          ImportProperty.import property_csv
+          expect(Property.first.entities[0].created_at).to be < \
+            Property.first.entities[1].created_at
         end
 
         context 'multiple imports' do
 
           it 'updated changed entities' do
-            ImportProperty.import Import.csv_table 'properties',  \
-              drop_rows: 34, headers: ImportFields.property, location: properties_directory
-            ImportProperty.import Import.csv_table 'properties_updated',  \
-              drop_rows: 34, headers: ImportFields.property, location: properties_directory
+            ImportProperty.import property_csv
+            ImportProperty.import property_updated_csv
             expect(Property.first.entities[0].name).to eq 'Changed'
             expect(Property.first.entities[1].name).to eq 'Other'
           end
 
           it 'removes deleted second entities' do
-            ImportProperty.import Import.csv_table 'properties', headers: ImportFields.property, \
-              drop_rows: 34, location: properties_directory
-            expect { ImportProperty.import Import.csv_table 'properties_one_entity',  \
-                drop_rows: 34, headers: ImportFields.property, location: properties_directory }.to \
-                change(Entity, :count).by -1
+            ImportProperty.import property_csv
+            expect { ImportProperty.import property_1_entity_csv }.to \
+                change(Entity, :count).by(-1)
           end
         end
+      end
+
+      def property_csv
+        Import.csv_table('properties',
+                         headers: ImportFields.property,
+                         drop_rows: 34,
+                         location: properties_directory)
+      end
+
+      def property_updated_csv
+        Import.csv_table 'properties_updated',
+                         drop_rows: 34,
+                         headers: ImportFields.property,
+                         location: properties_directory
+      end
+
+      def property_1_entity_csv
+        Import.csv_table 'properties_one_entity',
+                         drop_rows: 34,
+                         headers: ImportFields.property,
+                         location: properties_directory
+      end
+
+      def properties_directory
+        'spec/fixtures/import_data/properties'
       end
     end
   end
