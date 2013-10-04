@@ -92,7 +92,7 @@ describe Address do
     context 'county' do
       it 'must be present' do
         address.county = nil
-        expect(address).not_to be_valid
+        expect(address).to_not be_valid
       end
 
       it 'has min' do
@@ -145,7 +145,7 @@ describe Address do
       new_address = Address.new
       new_address.attributes = client.address.copy_approved_attributes
       expect(new_address.addressable_id).to be_nil
-      expect(new_address.road).not_to be_nil
+      expect(new_address.road).to_not be_nil
     end
   end
 end

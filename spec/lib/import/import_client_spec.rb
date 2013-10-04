@@ -49,7 +49,7 @@ module DB
         it 'removes deleted second entities' do
           ImportClient.import client_csv
           expect { ImportClient.import client_one_entity_csv }.to \
-            change(Entity, :count).by -1
+            change(Entity, :count).by(-1)
         end
       end
 

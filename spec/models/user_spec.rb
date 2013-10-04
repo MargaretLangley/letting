@@ -9,7 +9,7 @@ describe User do
 
       it 'present' do
         user.email = nil
-        expect(user).not_to be_valid
+        expect(user).to_not be_valid
       end
 
       it('unique') do
@@ -21,7 +21,7 @@ describe User do
 
       it 'requires @' do
         user.email = 'noat'
-        expect(user).not_to be_valid
+        expect(user).to_not be_valid
       end
     end
 
@@ -31,7 +31,7 @@ describe User do
         # empty string
         # stackoverflow.com why-is-password-validate-presence-ignored
         user = User.new  password: ''
-        expect(user).not_to be_valid
+        expect(user).to_not be_valid
       end
 
       it 'must equal confirmation' do

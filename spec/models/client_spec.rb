@@ -8,7 +8,7 @@ describe Client do
   context 'validations' do
     it '#human_id is present' do
       client.human_id = nil
-      expect(client).not_to be_valid
+      expect(client).to_not be_valid
     end
 
     it 'validates it is a number' do
@@ -24,7 +24,7 @@ describe Client do
 
     it 'has at least one child' do
       client.entities.destroy_all
-      expect(client).not_to be_valid
+      expect(client).to_not be_valid
     end
   end
 

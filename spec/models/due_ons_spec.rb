@@ -55,7 +55,7 @@ describe DueOns do
         it 'max displayed dueons does not make it per month' do
           (1..4).each { due_ons.build day: 1, month: 1 }
           (5..12).each { due_ons.build }
-          expect(due_ons).not_to be_per_month
+          expect(due_ons).to_not be_per_month
         end
       end
       context 'by per_month due_on' do

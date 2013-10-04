@@ -50,8 +50,8 @@ module DB
           headers: ImportFields.property, drop_rows: 34, location: properties_directory) }.to \
           change(Property, :count).by 1
         expect { ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
-          drop_rows: 34, location: properties_directory) }.to \
-          change(Property, :count).by 0
+          drop_rows: 34, location: properties_directory) }.to_not \
+          change(Property, :count)
       end
 
       it 'Not double import' do
@@ -59,8 +59,8 @@ module DB
           drop_rows: 34, location: properties_directory) }.to \
           change(Entity, :count).by 2
         expect { ImportProperty.import Import.csv_table('properties', headers: ImportFields.property, \
-          drop_rows: 34, location: properties_directory) }.to \
-          change(Entity, :count).by 0
+          drop_rows: 34, location: properties_directory) }.to_not \
+          change(Entity, :count)
       end
 
       context 'use profile' do

@@ -9,12 +9,12 @@ describe DueOn do
     context 'presence' do
       it 'day' do
         due_on.day = nil
-        expect(due_on).not_to be_valid
+        expect(due_on).to_not be_valid
       end
 
       it 'month' do
         due_on.month = nil
-        expect(due_on).not_to be_valid
+        expect(due_on).to_not be_valid
       end
     end
 

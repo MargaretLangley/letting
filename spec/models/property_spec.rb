@@ -11,7 +11,7 @@ describe Property do
 
       it 'is present' do
         property.human_id = nil
-        expect(property).not_to be_valid
+        expect(property).to_not be_valid
       end
 
       it 'is a number' do
@@ -30,7 +30,7 @@ describe Property do
     context 'client_id' do
       it('required') do
         property.client_id = nil
-        expect(property).not_to be_valid
+        expect(property).to_not be_valid
       end
 
       it '#numeric' do
@@ -44,7 +44,7 @@ describe Property do
     it('has entities') { expect(property).to respond_to(:entities) }
     it 'has at least one child' do
       property.entities.destroy_all
-      expect(property).not_to be_valid
+      expect(property).to_not be_valid
     end
     it('has address') { expect(property).to respond_to :address }
     it('belongs to client') { expect(property).to respond_to(:client) }
