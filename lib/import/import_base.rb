@@ -21,9 +21,7 @@ module DB
         model_prepared_for_import row
         model_assigned_row_attributes row
         @patch.patch_model @model_to_assign if @patch
-        unless model_to_save.save
-          output_error row, model_to_save
-        end
+        model_to_save.save || output_error(row, model_to_save)
         output_still_running index
       end
     end
