@@ -151,6 +151,14 @@ end
         title: 'Mr',
         initials: 'J D B',
         name: 'Robertson'
+      },
+      {
+        entity_type: 'Person',
+        entitieable_id: 5,
+        entitieable_type: 'Property',
+        title: 'Mr',
+        initials: 'T',
+        name: 'Ambose'
       }
     ]
   end
@@ -198,6 +206,15 @@ end
         town: 'Suburbaton',
         county: 'Greater London',
         postcode: 'SG3 3SC'
+      },
+      {
+        addressable_id: 5,
+        addressable_type: 'Property',
+        road_no: '11',
+        road: 'Wicket Street',
+        town: 'Egbaston',
+        county: 'Birmingham',
+        postcode: 'B56 7CR'
       }
     ]
   end
@@ -207,7 +224,8 @@ end
       { id: 1, human_id: 1001, client_id: 1 },
       { id: 2, human_id: 2002, client_id: 1 },
       { id: 3, human_id: 3003, client_id: 2 },
-      { id: 4, human_id: 4004, client_id: 3 }
+      { id: 4, human_id: 4004, client_id: 3 },
+      { id: 5, human_id: 5005, client_id: 3 }
      ]
   end
 
@@ -271,6 +289,14 @@ end
         amount: '70.00',  account_id: 2 },
       { id: 4, charge_type: 'Service Charge', due_in: 'Advance',
         amount: '70.00',  account_id: 3 },
+      { id: 5, charge_type: 'Ground Rent',    due_in: 'Advance',
+        amount: '10.00',  account_id: 4 },
+      { id: 6, charge_type: 'Service Charge', due_in: 'Arrears',
+        amount: '50.00',  account_id: 4 },
+      { id: 7, charge_type: 'Ground Rent',    due_in: 'Advance',
+        amount: '12.00',  account_id: 5},
+      { id: 8, charge_type: 'Service Charge', due_in: 'Arrears',
+        amount: '60.00',  account_id: 5 }
     ]
   end
 
@@ -279,7 +305,13 @@ end
       { id: 1, day: 1,  month: (Date.current + 1.month).month , charge_id: 1 },
       { id: 2, day: 1,  month: 7, charge_id: 2 },
       { id: 3, day: 1,  month: (Date.current + 1.month).month , charge_id: 3 },
-      { id: 4, day: 30, month: 9, charge_id: 4 }
+      { id: 4, day: 30, month: 9, charge_id: 4 },
+      { id: 5, day: 23, month: 3, charge_id: 5 },
+      { id: 6, day: 1, month: 4, charge_id: 6 },
+      { id: 7, day: 23, month: 3, charge_id: 7 },
+      { id: 8, day: 27, month: 9, charge_id: 7 },
+      { id: 9, day: 23, month: 3, charge_id: 8 },
+      { id: 10, day: 27, month: 9, charge_id: 8 }
     ]
   end
 
@@ -289,6 +321,7 @@ end
       { id: 2, property_id: 2 },
       { id: 3, property_id: 3 },
       { id: 4, property_id: 4 },
+      { id: 5, property_id: 5 }
     ]
   end
 
