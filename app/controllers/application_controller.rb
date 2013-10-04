@@ -10,12 +10,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def address_params
-    [:county, :district, :flat_no, :house_name,
-     :road,   :road_no,  :town,    :type,       :postcode]
+    %i(county district flat_no house_name road road_no town type postcode)
   end
 
   def entities_params
-    [:entity_type, :_destroy, :id, :title, :initials, :name]
+    %i(entity_type _destroy id title initials name)
   end
 
   private
