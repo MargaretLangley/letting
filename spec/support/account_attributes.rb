@@ -8,6 +8,7 @@ end
 def charge_attributes overrides = {}
   {
     charge_type: 'Ground Rent',
+    account_id: 2,
     due_in: 'Advance',
     amount: 88.08
   }.merge overrides
@@ -32,6 +33,15 @@ def due_on_monthly_attributes_0 overrides = {}
     day: 1,
     month: -1
   }.merge overrides
+end
+
+def chargeable_attributes overrides = {}
+  {
+    charge_id: 1,
+    account_id: 2,
+    on_date: Date.new(2013, 3, 25),
+    amount: 88.08
+  }
 end
 
 def debt_attributes overrides = {}

@@ -22,7 +22,7 @@ describe Account do
 
     it 'for charges between dates' do
       account = account_and_charge_new charge_attributes: { id: 3 }
-      chargeable = account.chargeables_between(Date.new(2013, 3, 1)..Date.new(2013, 3, 31)).first
+      chargeable = account.chargeables_between(dates_in_march).first
       expect(chargeable.account_id).to eq 1
       expect(chargeable.charge_id).to eq 3
       expect(chargeable.on_date).to eq Date.new(2013, 3, 25)
@@ -32,7 +32,11 @@ describe Account do
     it 'not if already debts' do
       account = account_and_charge_new charge_attributes: { id: 3 }
       account.add_debt debt_attributes
-      expect(account.chargeables_between(Date.new(2013, 3, 1)..Date.new(2013, 3, 31))).to eq []
+      expect(account.chargeables_between(dates_in_march)).to eq []
+    end
+
+    def dates_in_march
+      Date.new(2013, 3, 1)..Date.new(2013, 3, 31)
     end
   end
 

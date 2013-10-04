@@ -80,28 +80,32 @@ describe Charge do
       end
     end
 
-    context '#due_between?' do
+    context 'charging' do
       before { Timecop.travel(Time.zone.parse('31/1/2013 12:00')) }
       after { Timecop.return }
 
-      it 'missing due on' do
-        expect(charge.due_between? Date.new(2013, 2, 1) .. Date.new(2013, 3, 24) ).to be_false
+      context '#due_between?' do
+        it 'true' do
+          expect(charge.due_between? date_when_charged).to be_true
+        end
+
+        it 'false' do
+          expect(charge.due_between? dates_not_charged_on).to be_false
+        end
       end
 
-      it 'is between due on' do
-        expect(charge.due_between? Date.new(2013, 3, 25) .. Date.new(2013, 3, 25)).to be_true
+      context '#chargeable_info' do
+        it 'if charge between dates'  do
+          expect(charge.chargeable_info date_when_charged).to eq \
+            ChargeableInfo.from_charge chargeable_attributes
+        end
       end
-    end
+      def date_when_charged
+        Date.new(2013, 3, 25) .. Date.new(2013, 3, 25)
+      end
 
-    context '#chargeable_info' do
-      before { Timecop.travel(Time.zone.parse('31/1/2013 12:00')) }
-      after  { Timecop.return }
-
-      it 'if charge between dates'  do
-        info = ChargeableInfo.from_charge charge_id: 1, \
-                            on_date: Date.new(2013, 3, 25), \
-                            amount: 88.08
-        expect(charge.chargeable_info Date.new(2013, 2, 25) .. Date.new(2013, 3, 25) ).to eq info
+      def dates_not_charged_on
+        Date.new(2013, 2, 1) .. Date.new(2013, 3, 24)
       end
     end
   end
