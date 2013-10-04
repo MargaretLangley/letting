@@ -17,17 +17,19 @@
       </tr>
     </thead>
     <tbody>
+      <% @property.account.unpaid_debts.each do |debt| %>
       <tr>
         <td>
-            <%= @property.account.unpaid_debts[0].on_date.strftime("%d-%m-%Y") %>
+            <%= debt.on_date.strftime("%d-%m-%Y") %>
         </td>
         <td>
-            <%= @property.account.unpaid_debts[0].charge.charge_type %>
+            <%= debt.charge.charge_type %>
         </td>
         <td class='alnright'>
-          <%= @property.account.unpaid_debts[0].amount %>
+          <%= debt.amount %>
         </td>
       </tr>
+       <% end %>
     </tbody>
   </table>
  </div>

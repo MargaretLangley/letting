@@ -5,12 +5,14 @@ class PaymentsController < ApplicationController
   end
 
   def new
-    @property = Property.search(params[:search]).first \
-      if params[:search].present?
-    # @payment = @property.account.unpaid_debts.payments.build
-    @charge =  @property.account.unpaid_debts[0].charge.charge_type
-    @payment = Payment.new
-    @payments = Payment.latest_payments(10)
+    @property = Property.search(params[:search]).first
+    if params[:search].present?
+      # @payment = @property.account.unpaid_debts.payments.build
+      @payment = Payment.new
+      @payments = Payment.latest_payments(10)
+    else
+      redirect_to payments_path
+    end
   end
 
   def create

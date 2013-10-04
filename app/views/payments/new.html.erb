@@ -7,11 +7,8 @@
   <%= form_for @payment do |f| %>
 
    <div>
-     <% if @property.account.unpaid_debts.size == 1 %>
-       <%= render 'one_debt' %>
-    <% else %>
+
        <%= render 'debts' %>
-     <% end %>
 
     </div>
     <p>
