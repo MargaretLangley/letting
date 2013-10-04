@@ -1,17 +1,24 @@
 class Permission < Struct.new(:user)
   def allow?(controller, action)
-    return true if controller == 'sessions'
+    return true if guest_controllers.include? controller
     if user
-      return true if controller == 'blocks'
-      return true if controller == 'clients'
-      return true if controller == 'debts'
-      return true if controller == 'debt_generators'
-      return true if controller == 'properties'
-      return true if controller == 'payments'
+      return true if user_controllers.include? controller
       if user.admin?
-        return true if controller == 'users'
+        return true if admin_controllers.include? controller
       end
     end
     false
+  end
+
+  def guest_controllers
+    %w{sessions}
+  end
+
+  def user_controllers
+    %w{blocks clients debts debt_generators properties payments}
+  end
+
+  def admin_controllers
+    %w{users}
   end
 end
