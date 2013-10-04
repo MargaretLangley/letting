@@ -5,20 +5,13 @@ module DB
 
     def self.from_code(code)
       case code
-      when 'GGR'
-        new 'Garage Ground Rent', 4
-      when 'GIns'
-        new 'Garage Insurance', 4
-      when 'GR'
-        new 'Ground Rent', 4
-      when 'H'
-        new 'Service Charge', 2
-      when 'Ins'
-        new 'Insurance', 4
-      when 'M'
-        new 'Service Charge', 1
-      when 'Q'
-        new 'Service Charge', 4
+      when 'GGR'  then new 'Garage Ground Rent', 4
+      when 'GIns' then new 'Garage Insurance', 4
+      when 'GR'   then new 'Ground Rent', 4
+      when 'H'    then new 'Service Charge', 2
+      when 'Ins'  then new 'Insurance', 4
+      when 'M'    then new 'Service Charge', 1
+      when 'Q'    then new 'Service Charge', 4
       end
     end
 
