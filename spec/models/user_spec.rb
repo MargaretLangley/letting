@@ -7,7 +7,10 @@ describe User do
   context 'validations' do
     context '#email' do
 
-      it('present') { user.email = nil; expect(user).not_to be_valid }
+      it 'present' do
+        user.email = nil
+        expect(user).not_to be_valid
+      end
 
       it('unique') do
         user.save!
@@ -26,7 +29,7 @@ describe User do
       it('present') do
         # Bug you can't assign a nil password you can initialize it with
         # empty string
-        # http://stackoverflow.com/questions/16804820/why-is-password-validate-presence-ignored
+        # stackoverflow.com why-is-password-validate-presence-ignored
         user = User.new  password: ''
         expect(user).not_to be_valid
       end
