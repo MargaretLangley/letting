@@ -39,7 +39,7 @@ module DB
 
     # debug hash array: patch_models[0]['model']
     def patch_model model
-      model_hash = @patch_models.detect { |m| m['id'] == model.human_id }
+      model_hash = @patch_models.find { |m| m['id'] == model.human_id }
       if model_hash.present?
         patch_model = model_hash['model']
         if entity_names_match? model, patch_model
