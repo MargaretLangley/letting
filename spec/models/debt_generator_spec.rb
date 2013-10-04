@@ -59,7 +59,8 @@ describe DebtGenerator do
       end
 
       it 'does not duplicate debt' do
-        (debt_gen = DebtGenerator.new(search_string: 'Hillbank House')).generate
+        debt_gen = DebtGenerator.new(search_string: 'Hillbank House')
+        debt_gen.generate
         debt_gen.save!
         debt_gen = DebtGenerator.new(search_string: 'Hillbank House',
                                      start_date: Date.current + 1.day)

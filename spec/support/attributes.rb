@@ -11,6 +11,14 @@ def client_attributes overrides = {}
   }.merge overrides
 end
 
+def min_address_attributes overrides = {}
+  {
+    road:     'Edgbaston Road',
+    town:     'Birmingham',
+    county:   'West Midlands',
+  }.merge overrides
+end
+
 def address_attributes overrides = {}
   {
     flat_no:  '47',

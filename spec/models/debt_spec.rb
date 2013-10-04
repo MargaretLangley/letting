@@ -8,8 +8,16 @@ describe Debt do
 
   context 'validates' do
     context 'presence' do
-      it('charge_id') { debt.charge_id = nil; expect(debt).to_not be_valid }
-      it('on_date') { debt.on_date = nil; expect(debt).to_not be_valid }
+
+      it 'charge_id' do
+        debt.charge_id = nil
+        expect(debt).to_not be_valid
+      end
+
+      it 'on_date' do
+        debt.on_date = nil
+        expect(debt).to_not be_valid
+      end
     end
 
     context 'amount' do

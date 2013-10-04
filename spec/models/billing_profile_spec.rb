@@ -18,8 +18,8 @@ describe BillingProfile do
 
   context 'new profile' do
     let(:new_profile) { BillingProfile.new }
-    it ('has nil address') { expect(new_profile.address).to be_nil }
-    it ('has no entities') { expect(new_profile.entities.size).to eq 0 }
+    it('has nil address') { expect(new_profile.address).to be_nil }
+    it('has no entities') { expect(new_profile.entities.size).to eq 0 }
   end
 
   context 'prepared for form' do
@@ -47,8 +47,8 @@ describe BillingProfile do
       context 'cleanup does not affect' do
         it 'valid entities are kept' do
           full_profile.clear_up_after_form
-          expect(full_profile.entities.reject(&:marked_for_destruction?)).to \
-            have(1).items
+          entities = saveable_entities full_profile.entities
+          expect(entities).to have(1).items
         end
       end
 
@@ -58,8 +58,8 @@ describe BillingProfile do
           full_profile.clear_up_after_form
         end
         it 'marks entities for distruction' do
-          expect(full_profile.entities.reject(&:marked_for_destruction?)).to \
-            have(0).items
+          entities = saveable_entities full_profile.entities
+          expect(entities).to have(0).items
         end
 
         it 'delete address' do
@@ -96,8 +96,8 @@ describe BillingProfile do
         end
 
         it 'empty entities are to be destroyed' do
-          expect(prepare_blank_profile.entities.reject(&:marked_for_destruction?)).to \
-            have(0).items
+          entities = saveable_entities prepare_blank_profile.entities
+          expect(entities).to have(0).items
         end
       end
 
@@ -110,14 +110,18 @@ describe BillingProfile do
         end
 
         it 'non empty entity kept' do
-          expect(prepare_blank_profile.entities.reject(&:marked_for_destruction?)).to \
-            have(1).items
+          entities = saveable_entities prepare_blank_profile.entities
+          expect(entities).to have(1).items
         end
 
         it 'address kept' do
-          expect(prepare_blank_profile.address.marked_for_destruction?).to be_false
+          expect(prepare_blank_profile.address.marked_for_destruction?).to \
+            be_false
         end
       end
+    end
+    def saveable_entities entities
+      entities.reject(&:marked_for_destruction?)
     end
   end
 end

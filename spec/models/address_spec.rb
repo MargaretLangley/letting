@@ -2,11 +2,8 @@ require 'spec_helper'
 
 describe Address do
 
-  let(:address) do
-    Address.new road_no: '1', road: 'my road', town: 'my town', county: 'my county'
-  end
-
-  it ('valid') { expect(address).to be_valid }
+  let(:address) { Address.new min_address_attributes }
+  it('valid')   { expect(address).to be_valid }
 
   context 'validations' do
 
@@ -94,7 +91,7 @@ describe Address do
 
     context 'county' do
       it 'must be present' do
-        address.county =nil
+        address.county = nil
         expect(address).not_to be_valid
       end
 
@@ -115,7 +112,7 @@ describe Address do
         expect(address).to_not be_valid
       end
       it 'has max' do
-        address.postcode = 'B' *9
+        address.postcode = 'B' * 9
         expect(address).to_not be_valid
       end
     end

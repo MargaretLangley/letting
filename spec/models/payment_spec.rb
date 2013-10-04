@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe Payment do
 
-  let(:payment) { Payment.new debt_id: 1, on_date: '2013/01/30', amount: 10.05 }
-  let(:account) { Account.new id: 1, property_id: 1 }
+  let(:payment) { Payment.new payment_attributes }
   it('is valid') { expect(payment).to be_valid }
 
   context 'validates' do
