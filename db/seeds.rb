@@ -210,6 +210,7 @@ end
       {
         addressable_id: 5,
         addressable_type: 'Property',
+        house_name: 'Wicket',
         road_no: '11',
         road: 'Wicket Street',
         town: 'Egbaston',
@@ -336,6 +337,10 @@ end
       { id: 1,
         search_string: 'Lords',
         start_date: "2013/#{(Date.current - 6.months).month }/01",
+        end_date: "2013/#{(Date.current - 4.months).month }/01" },
+        { id: 2,
+        search_string: 'Wicket',
+        start_date: "2013/#{(Date.current - 6.months).month }/01",
         end_date: "2013/#{(Date.current - 4.months).month }/01" }
     ]
   end
@@ -347,7 +352,13 @@ end
         amount: 88.08, debt_generator_id: 1 },
       { id: 2, account_id: 1, charge_id: 3,
         on_date: "2013/#{(Date.current - 5.months).month }/01",
-        amount: 88.08, debt_generator_id: 1 }
+        amount: 88.08, debt_generator_id: 1 },
+      { id: 3, account_id: 5, charge_id: 7,
+        on_date: "2013/#{(Date.current - 5.months).month }/01",
+        amount: 12, debt_generator_id: 2 },
+      { id: 4, account_id: 5, charge_id: 8,
+        on_date: "2013/#{(Date.current - 5.months).month }/01",
+        amount: 60, debt_generator_id: 2 }
     ]
   end
 
