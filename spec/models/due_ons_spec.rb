@@ -75,7 +75,7 @@ describe DueOns do
     end
 
     context '#between?' do
-      before { Timecop.freeze(Time.zone.parse('3/5/2013 12:00')) }
+      before { Timecop.travel(Date.new(2013, 5, 3)) }
       after { Timecop.return }
       before do
         due_ons.build day: 3, month: 5
@@ -91,7 +91,7 @@ describe DueOns do
     end
 
     context '#make_date_between' do
-      before { Timecop.freeze(Time.zone.parse('3/5/2013 12:00')) }
+      before { Timecop.travel(Date.new(2013, 5, 3)) }
       after { Timecop.return }
 
       it 'when in date' do

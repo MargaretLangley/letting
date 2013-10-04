@@ -17,7 +17,7 @@ describe Account do
   end
 
   context 'chargeables' do
-    before { Timecop.freeze(Time.zone.parse('31/1/2013 12:00')) }
+    before { Timecop.travel(Date.new(2013, 1, 31)) }
     after { Timecop.return }
 
     it 'for charges between dates' do
