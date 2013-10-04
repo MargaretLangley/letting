@@ -16,16 +16,16 @@ module Entities
         destruction_if :all?
       end
 
-      private
+  private
 
       def destruction_if matcher
         select(&matcher)
         .each { |entity| mark_entity_for_destruction entity }
       end
 
-        def mark_entity_for_destruction entity
-          entity.mark_for_destruction
-        end
+      def mark_entity_for_destruction entity
+        entity.mark_for_destruction
+      end
     end
   end
   MAX_ENTITIES = 2

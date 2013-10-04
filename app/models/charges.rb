@@ -18,7 +18,7 @@ module Charges
         destruction_if :empty?
       end
 
-      private
+  private
 
       def destruction_if matcher
         select(&matcher)

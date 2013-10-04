@@ -11,10 +11,27 @@ describe Charge do
 
   context 'validations' do
     context 'presence' do
-      it('charge type') { charge.charge_type = nil; expect(charge).to_not be_valid }
-      it('due in') { charge.due_in = nil; expect(charge).to_not be_valid }
-      it('amount') {charge.amount = nil; expect(charge).to_not be_valid }
-      it('due_ons') {charge.due_ons.destroy_all; expect(charge).to_not be_valid }
+
+      it 'charge type' do
+        charge.charge_type = nil
+        expect(charge).to_not be_valid
+      end
+
+      it 'due in' do
+        charge.due_in = nil
+        expect(charge).to_not be_valid
+      end
+
+      it 'amount' do
+        charge.amount = nil
+        expect(charge).to_not be_valid
+      end
+
+      it 'due_ons' do
+        charge.due_ons.destroy_all
+        expect(charge).to_not be_valid
+      end
+
       context 'due_ons_size' do
         it 'not valid one over limit' do
           (1..12).each { charge.due_ons.build day: 25, month: 3 }
