@@ -13,7 +13,8 @@ module DB
 
     it 'Not double import' do
       ImportUser.import users_csv_table
-      expect { ImportUser.import users_csv_table }.to_not change(Charge, :count)
+      expect { ImportUser.import users_csv_table }.to_not \
+        change(Charge, :count)
     end
 
     def users_csv_table

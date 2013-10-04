@@ -24,7 +24,7 @@ describe DueOnsDecorator do
         (1..12).each.with_index { |index| due_ons.build day: 3, month: index }
         due_on_dec = DueOnsDecorator.new due_ons
         expect(due_on_dec.per_month.day).to eq 3
-        expect(due_on_dec.per_month.month).to eq -1
+        expect(due_on_dec.per_month.month).to eq(-1)
       end
     end
   end

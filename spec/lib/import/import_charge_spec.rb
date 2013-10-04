@@ -66,4 +66,3 @@ module DB
 
   end
 end
-
