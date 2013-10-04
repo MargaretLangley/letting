@@ -12,7 +12,7 @@ describe 'debt_generator' do
   end
 
   context 'creates' do
-    before { Timecop.travel(Time.zone.parse('31/1/2013 12:00')) }
+    before { Timecop.travel(Date.new(2013, 1, 31)) }
     after { Timecop.return }
 
     it 'debts' do

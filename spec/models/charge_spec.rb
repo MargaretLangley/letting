@@ -81,8 +81,8 @@ describe Charge do
     end
 
     context 'charging' do
-      before { Timecop.travel(Time.zone.parse('31/1/2013 12:00')) }
-      after { Timecop.return }
+      before { Timecop.travel(Date.new(2013, 1, 31)) }
+      after  { Timecop.return }
 
       context '#due_between?' do
         it 'true' do

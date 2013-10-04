@@ -16,7 +16,7 @@ describe DueOns do
 
     context '#cleans_up_form' do
       it 'leaves valid or partially filled due_ons' do
-        due_on = due_ons.build due_on_attributes_0
+        due_ons.build due_on_attributes_0
         due_ons.build
         due_ons.clean_up_form
         expect(due_ons.reject(&:empty?)).to have(1).items
@@ -70,7 +70,7 @@ describe DueOns do
       it 'knows when the charge is not per month' do
         (1..12).each { due_ons.build day: 4, month: 1 }
         expect(due_ons.per_month.day).to eq 4
-        expect(due_ons.per_month.month).to eq -1
+        expect(due_ons.per_month.month).to eq(-1)
       end
     end
 
@@ -216,9 +216,11 @@ describe DueOns do
     end
 
   end
+
   def date_range_covering_due_on
     Date.new(2013, 4, 4) .. Date.new(2013, 5, 5)
   end
+
   def date_range_missing_due_on
     Date.new(2013, 4, 4) .. Date.new(2013, 5, 2)
   end

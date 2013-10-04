@@ -4,7 +4,7 @@ describe Property do
 
   let(:property) { property_new }
 
-  it ('#valid?') { expect(property).to be_valid }
+  it('#valid?') { expect(property).to be_valid }
 
   context 'validations' do
     context 'human_id' do
@@ -15,7 +15,7 @@ describe Property do
       end
 
       it 'is a number' do
-        property.human_id = "Not numbers"
+        property.human_id = 'Not numbers'
         expect(property).to_not be_valid
       end
 
@@ -105,7 +105,7 @@ describe Property do
 
       it 'matches just that house name' do
         p2 = property_create! human_id: 202,
-            address_attributes: { house_name: 'Headingly' }
+                              address_attributes: { house_name: 'Headingly' }
         expect(Property.all).to eq [p1, p2]
         expect(Property.search_by_house_name('Hillbank House').load).to \
           eq [p1]

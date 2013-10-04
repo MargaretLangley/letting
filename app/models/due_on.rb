@@ -8,10 +8,6 @@ class DueOn < ActiveRecord::Base
   PER_MONTH = -1
   ON_DATE = 0
 
-  def empty?
-    attributes.except(*ignored_attrs).values.all?(&:blank?)
-  end
-
   def per_month?
     month == PER_MONTH
   end
@@ -22,6 +18,10 @@ class DueOn < ActiveRecord::Base
 
   def make_date
     Date.new covered_year, month, day
+  end
+
+  def empty?
+    attributes.except(*ignored_attrs).values.all?(&:blank?)
   end
 
   private

@@ -27,7 +27,7 @@ describe DebtGenerator do
 
   context 'default inialization' do
     let(:debt_gen) { DebtGenerator.new }
-    before { Timecop.travel(Time.zone.parse('30/9/2013 12:00')) }
+    before { Timecop.travel(Date.new(2013, 9, 30)) }
     after { Timecop.return }
 
     it 'has start date' do
@@ -44,7 +44,7 @@ describe DebtGenerator do
     context '#generate' do
       property = nil
       before do
-        Timecop.travel(Time.zone.parse('30/2/2013 12:00'))
+        Timecop.travel(Date.new(2013, 1, 31))
         property = property_with_charge_create!
       end
       after { Timecop.return }

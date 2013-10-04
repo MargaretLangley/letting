@@ -72,7 +72,7 @@ describe Client do
 
     it 'only returns expected' do
       c2 = client_create! human_id: 102,
-            address_attributes: { road: 'unknown' }
+                          address_attributes: { road: 'unknown' }
       expect(Client.all).to eq [c1, c2]
       expect(Client.search 'Edgba').to eq [c1]
     end
