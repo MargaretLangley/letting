@@ -9,7 +9,7 @@ namespace :import do
 
   desc "Import users data from CSV file"
   task users: :environment do
-    DB::ImportUser.import DB::Import.csv_table('users', \
-      headers: DB::ImportFields.user)
+    DB::ImportUser.import DB::Import.csv_table('users',
+                                               headers: DB::ImportFields.user)
   end
 end

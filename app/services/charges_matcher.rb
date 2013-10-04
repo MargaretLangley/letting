@@ -7,8 +7,8 @@ class ChargesMatcher
   end
 
   def first_or_initialize charge_type
-    @charges.find { |charge| charge.charge_type == charge_type } \
-      || @charges.build
+    @charges.find { |charge| charge.charge_type == charge_type } ||
+      @charges.build
   end
 
 end

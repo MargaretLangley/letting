@@ -3,7 +3,7 @@ class DebtGenerator < ActiveRecord::Base
   accepts_nested_attributes_for :debts
   validates :debts, presence: true
   validates :search_string, uniqueness: { scope: [:start_date, :end_date] }
-  scope :latest_debt_generated, \
+  scope :latest_debt_generated,
         ->(limit) { order(created_at: :desc).limit(limit) }
 
   after_initialize do |debt_generator|
