@@ -1,3 +1,15 @@
+####
+#
+# The Account is a summation of charges, debts, payments on a property.
+#
+# The property is the
+# a property should become due a charge.
+#
+# The account has one property. A property has a number of charges.
+# The charges generate debts and payments are made to cover these debts.
+#
+####
+#
 class Account < ActiveRecord::Base
   belongs_to :property, inverse_of: :account
   has_many :debts, dependent: :destroy

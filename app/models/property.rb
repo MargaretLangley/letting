@@ -1,3 +1,15 @@
+####
+#
+# A property, under management by the letting company.
+#
+# Properties have an account. They have tenants (see contact module),
+# Agents responsible for account charges ( the billing_profile). Money
+# collected goes to the properties client.
+#
+# The code is part of the representation of a property.
+#
+####
+#
 class Property < ActiveRecord::Base
   belongs_to :client
   has_one :account, dependent: :destroy, inverse_of: :property
