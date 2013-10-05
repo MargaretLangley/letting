@@ -1,3 +1,12 @@
+####
+#
+# A client is paid by the letting agency for collected payments
+#
+# Clients have a number of properties. Clients have an address
+# and contact information (address and entity).
+#
+####
+#
 class Client < ActiveRecord::Base
   has_many :properties, dependent: :destroy
   include Contact
@@ -25,15 +34,15 @@ class Client < ActiveRecord::Base
 
   private
 
-    def self.search_by_all(search)
-      Client.includes(:address, :entities)
-        .where('human_id = :i OR ' +
-               'entities.name ilike :s OR ' +
-               'addresses.house_name ilike :s OR ' +
-               'addresses.road ilike :s OR ' +
-               'addresses.town ilike :s',
-               i: "#{search.to_i}",
-               s: "#{search}%")
-        .references(:address, :entity).order(:human_id)
-    end
+  def self.search_by_all(search)
+    Client.includes(:address, :entities)
+      .where('human_id = :i OR ' +
+             'entities.name ilike :s OR ' +
+             'addresses.house_name ilike :s OR ' +
+             'addresses.road ilike :s OR ' +
+             'addresses.town ilike :s',
+             i: "#{search.to_i}",
+             s: "#{search}%")
+      .references(:address, :entity).order(:human_id)
+  end
 end
