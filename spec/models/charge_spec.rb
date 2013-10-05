@@ -47,7 +47,7 @@ describe Charge do
   end
 
   context 'Assocations' do
-    it('belongs to property') { expect(charge).to respond_to(:property) }
+    it('belongs to an account') { expect(charge).to respond_to(:account) }
     it('is DueOns') { expect(charge).to respond_to(:due_ons) }
   end
 
