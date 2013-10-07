@@ -1,3 +1,23 @@
+####
+#
+# Debt
+#
+# Why does this class exist?
+#
+# It represents an item of debt held under a property's account.
+#
+# How does it fit in to the larger system?
+#
+# Properties have charges which become due. The act of become due is to
+# generate debts for a charge on a particular date - it then sits against
+# the property's account. Payments made by tenants offset these debts.
+#
+# When a charge is being generated the generation system checks against when
+# the debt became due to see if the property has already been charged against
+# for this time period.
+#
+####
+#
 class Debt < ActiveRecord::Base
   belongs_to :account
   belongs_to :debt_generator

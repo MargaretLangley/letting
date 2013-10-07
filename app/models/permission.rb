@@ -1,3 +1,23 @@
+####
+#
+# Permission
+#
+# Authorization of a user accessing the application.
+#
+# How does it fit in to the larger system
+#
+# All controllers and some views check to see if the current user has
+# permissions to continue with the request.
+#
+# guest users - not logged in
+# users       - standard users - access to everything except admin controllers
+#                                this is the users controller
+# admin users - admin          - access to users controller - allowed to create
+#                                and edit users but otherwise the same as a
+#                                user
+#
+####
+#
 class Permission < Struct.new(:user)
   def allow?(controller, action)
     return true if guest_controllers.include?(controller)
