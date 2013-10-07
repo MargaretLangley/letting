@@ -1,8 +1,32 @@
+####
+#
+# DebtGenerator
+#
+# Why does the class exist?
+#
+# To search a group of properties for charges that are due and generate
+# the debts.
+#
+# How does it fit into the larger system?
+#
+# Coverts due charges into debts. The debts are then used for invoicing
+# owning debts and later payments.
+#
+####
+#
 class DebtGenerator < ActiveRecord::Base
   has_many :debts, -> { uniq }
+  attr_accessor :properties
   accepts_nested_attributes_for :debts
+  validates :search_string, uniqueness: { scope: [:start_date, :end_date] },
+                            presence: true
+  validates :properties, presence: true
   validates :debts, presence: true
-  validates :search_string, uniqueness: { scope: [:start_date, :end_date] }
+
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+  validates_with DateEqualOrAfter
+
   scope :latest_debt_generated,
         ->(limit) { order(created_at: :desc).limit(limit) }
 
@@ -12,7 +36,7 @@ class DebtGenerator < ActiveRecord::Base
   end
 
   def generate
-    Property.search_min(search_string).each do |property|
+    properties.each do |property|
       chargeable_to_debt property
                          .account
                          .chargeables_between(start_date..end_date)
@@ -28,6 +52,10 @@ class DebtGenerator < ActiveRecord::Base
     search_string == other.search_string &&
     start_date == other.start_date &&
     end_date == other.end_date
+  end
+
+  def properties
+    @properties ||= Property.search_min(search_string)
   end
 
   private

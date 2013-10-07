@@ -17,7 +17,6 @@ class PaymentsController < ApplicationController
 
   def create
     @payment = Payment.new payments_params
-    binding.pry
     if payment.save
       redirect_to new_payment_path,
                   notice: "#{@payment.account_id} successfully created"

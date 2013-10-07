@@ -1,32 +1,20 @@
-<% if debts.length > 0 %>
-  <% debts.each do |debt| %>
-    <%= debt_gen_form.fields_for :debts, debt do |debt_form| %>
-    <tr>
-      <td>
-        <%= debt_form.label debt.account.property.human_id %>
-        <%= debt_form.hidden_field :account_id %>
-      </td>
-      <td>
-        <%= debt_form.label debt.charge.charge_type %>
-        <%= debt_form.hidden_field :charge_id %>
-      </td>
-      <td>
-        <%= debt_form.text_field :on_date %>
-      </td>
-      <td>
-        <%= debt_form.text_field :amount %>
-      </td>
-    </tr>
-    <% end %>
-  <% end %>
-
-<% else %>
+<% debts.each do |debt| %>
+  <%= debt_gen_form.fields_for :debts, debt do |debt_form| %>
   <tr>
-    <td colspan='4'>
-    <div id='blank_slate' class='blank_slate_overlay'>
-        Search for the properties to charge in the above search box.
-        Common searches are roads, flats and property id ranges. With property ranges use a hyphen e.g. 100-200
-    </div>
-  </td>
+    <td>
+      <%= debt_form.label debt.account.property.human_id %>
+      <%= debt_form.hidden_field :account_id %>
+    </td>
+    <td>
+      <%= debt_form.label debt.charge.charge_type %>
+      <%= debt_form.hidden_field :charge_id %>
+    </td>
+    <td>
+      <%= debt_form.text_field :on_date %>
+    </td>
+    <td>
+      <%= debt_form.text_field :amount %>
+    </td>
   </tr>
+  <% end %>
 <% end %>

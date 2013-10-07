@@ -5,18 +5,50 @@ describe DebtGenerator do
   let(:debt_gen) { debt_generator_new }
 
   context 'validations' do
+
     it 'basic is valid' do
       expect(debt_gen).to be_valid
     end
+
     it 'invalid with no debts' do
       debt_gen.debts = []
       expect(debt_gen).to_not be_valid
     end
+
     context 'validate uniqueness' do
       it 'prevents debt_generator with same attributes from being created' do
         debt_generator_new.save!
         expect { debt_generator_new.save! }.to  \
           raise_error ActiveRecord::RecordInvalid
+      end
+    end
+
+    context 'Properties' do
+      it 'invalid without properties' do
+        debt_gen.properties = []
+        expect(debt_gen).to_not be_valid
+      end
+
+      it 'requires properties to be valid' do
+        debt_gen.should_receive(:properties).and_return([Object.new])
+        expect(debt_gen).to be_valid
+      end
+    end
+    context 'dates' do
+
+      it 'start date required' do
+        debt_gen.start_date = nil
+        expect(debt_gen).to_not be_valid
+      end
+
+      it 'end date required' do
+        debt_gen.end_date = nil
+        expect(debt_gen).to_not be_valid
+      end
+
+      it 'start date > end date' do
+        debt_gen.end_date = Date.new 2013, 2, 1
+        expect(debt_gen).to_not be_valid
       end
     end
   end
@@ -73,10 +105,7 @@ describe DebtGenerator do
       it('when empty') { expect(DebtGenerator.new).to be_debtless }
       it 'indebted when debts assigned' do
         debt_gen = DebtGenerator.new
-        # setting up debt generation will result in complicated test
-        # doing something like debt_gen.debts << Debt.new would use
-        # private interface. Choose to stub present? Also ugly.
-        debt_gen.debts.should_receive(:empty?).and_return(false)
+        debt_gen.should_receive(:debts).and_return([Object.new])
         expect(debt_gen).to_not be_debtless
       end
     end
@@ -93,7 +122,8 @@ describe DebtGenerator do
   end
 
   def debt_generator_new
-    debt_gen = DebtGenerator.new debt_generator_attributes
+    debt_gen = DebtGenerator.new debt_generator_attributes \
+                                 properties: [Object.new]
     debt_gen.debts.build debt_attributes
     debt_gen
   end

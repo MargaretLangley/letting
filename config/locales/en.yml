@@ -30,8 +30,13 @@ en:
       models:
         debt_generator:
           attributes:
+            debts:
+              blank: 'must be found on at least one property in order to charge and invoice.'
             search_string:
               taken: 'and date range has already been used.'
+              blank: 'must be present to find properties. Flat names, roads and property ranges (100-800) can all be used.'
+            properties:
+              blank: 'are not being found. The search string should match any property locations or ID ranges(100-800) for example.'
   number:
     currency:
         format:

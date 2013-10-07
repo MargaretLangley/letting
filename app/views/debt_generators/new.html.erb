@@ -1,12 +1,20 @@
 <h2>New Invoice</h2>
 
-<%= render 'search', debt_generator: @debt_generator  %>
 <%= form_for @debt_generator do |debt_gen_form| %>
   <%= render 'shared/errors', object: @debt_generator %>
-  <%= debt_gen_form.hidden_field :search_string %>
+  <fieldset id='debt_generator' class='shell' style='position: relative;'>
+  <h3>Which properties to invoice?</h3>
+  <div class="grid">
+    <div class="col-3-2">
+    <%= debt_gen_form.text_field :search_string %>
+    </div>
+    <div class="col-1-2">
+    <%= debt_gen_form.submit 'Search' %>
+    </div>
+  </div>
+
   <%= debt_gen_form.hidden_field :start_date  %>
   <%= debt_gen_form.hidden_field :end_date %>
-  <fieldset id='debt_generator' class='shell' style='position: relative;'>
   <h3>Property Charges to be invoiced.</h3>
   <table>
     <thead>
@@ -29,14 +37,25 @@
       <tr>
         <td colspan='4'>
         <div>
-  <%= debt_gen_form.submit 'Make Charges Due', disabled: @debt_generator.debtless? %><span class = 'simple' ><%= link_to_unless @debt_generator.debtless? ,'Cancel', debt_generators_path %></span>
+  <%= debt_gen_form.submit 'Make Charges Due', name: 'create' , disabled: @debt_generator.debtless? %><span class = 'simple' ><%= link_to_unless @debt_generator.debtless? ,'Cancel', debt_generators_path %></span>
 </div>
       </tr>
     </td>
     </tfoot>
     <tbody>
 
+     <% unless @debt_generator.debtless? %>
      <%= render 'debts', debt_gen_form: debt_gen_form, debts: @debt_generator.debts %>
+    <% else %>
+      <tr>
+        <td colspan='4'>
+        <div id='blank_slate' class='blank_slate_overlay'>
+            <p>Search for the properties to charge in the above search box.</p>
+            Common searches are roads, flats and property id ranges. With property ranges use a hyphen e.g. 100-200
+        </div>
+      </td>
+      </tr>
+    <% end %>
 
 
 
