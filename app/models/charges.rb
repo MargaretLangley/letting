@@ -1,3 +1,26 @@
+####
+#
+# Charges
+#
+# Why does this class exist?
+#
+# Charges is an assocation that adds additional methods to
+# it collection.
+#
+# How does this fit into the larger system
+#
+# Charges is an assocation found in an acount. An account has many charges.
+#
+# Account can query charges if it has a charge that become due within a date
+# range. If it does it responds with a Chargeable_info that represents that
+# charge to the account object.
+#
+# A charge can be queried to see if it becomes due within a date range.
+#
+# Charges also have prepare and clean_up_form which prepare for display on a
+# form and handle the clean up after display, respectively.
+####
+#
 module Charges
   extend ActiveSupport::Concern
   included do
