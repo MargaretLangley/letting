@@ -108,21 +108,21 @@ module DB
       end
 
       def property_csv
-        Import.csv_table('properties',
+        Import.file_to_arrays('properties',
                          headers: ImportFields.property,
                          drop_rows: 34,
                          location: properties_directory)
       end
 
       def property_updated_csv
-        Import.csv_table 'properties_updated',
+        Import.file_to_arrays 'properties_updated',
                          drop_rows: 34,
                          headers: ImportFields.property,
                          location: properties_directory
       end
 
       def property_1_entity_csv
-        Import.csv_table 'properties_one_entity',
+        Import.file_to_arrays 'properties_one_entity',
                          drop_rows: 34,
                          headers: ImportFields.property,
                          location: properties_directory

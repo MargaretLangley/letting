@@ -10,7 +10,7 @@ namespace :import do
   desc "Import clients data from CSV file"
   task charges: :environment do
     DB::ImportCharge.import \
-      DB::Import.csv_table('acc_info', headers: DB::ImportFields.charge)
+      DB::Import.file_to_arrays('acc_info', headers: DB::ImportFields.charge)
   end
 end
 

@@ -47,19 +47,19 @@ module DB
     end
 
     def charge_csv
-      Import.csv_table('acc_info',
+      Import.file_to_arrays('acc_info',
                        headers: ImportFields.charge,
                        location: 'spec/fixtures/import_data/charges')
     end
 
     def charge_updated_csv
-      Import.csv_table('acc_info_updated',
+      Import.file_to_arrays('acc_info_updated',
                        headers: ImportFields.charge,
                        location: 'spec/fixtures/import_data/charges')
     end
 
     def charge_monthly_csv
-      Import.csv_table('acc_info_monthly',
+      Import.file_to_arrays('acc_info_monthly',
                        headers: ImportFields.charge,
                        location: 'spec/fixtures/import_data/charges')
     end

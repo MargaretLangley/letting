@@ -8,17 +8,17 @@ require_relative '../../../lib/import/import_user'
 module DB
   describe ImportUser do
     it 'One row' do
-      expect { ImportUser.import users_csv_table }.to change(User, :count).by 1
+      expect { ImportUser.import users_file_to_arrays }.to change(User, :count).by 1
     end
 
     it 'Not double import' do
-      ImportUser.import users_csv_table
-      expect { ImportUser.import users_csv_table }.to_not \
+      ImportUser.import users_file_to_arrays
+      expect { ImportUser.import users_file_to_arrays }.to_not \
         change(Charge, :count)
     end
 
-    def users_csv_table
-      Import.csv_table('users',
+    def users_file_to_arrays
+      Import.file_to_arrays('users',
                        headers: ImportFields.user,
                        location: 'spec/fixtures/import_data/users')
     end

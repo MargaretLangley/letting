@@ -57,50 +57,50 @@ module DB
     end
 
     def clients_csv
-      Import.csv_table('clients',
+      Import.file_to_arrays('clients',
                        headers: ImportFields.client,
                        location: clients_directory)
     end
 
     def clients_no_row_match_csv
-      Import.csv_table('clients_no_row_matches',
+      Import.file_to_arrays('clients_no_row_matches',
                        headers: ImportFields.client,
                        location: 'spec/fixtures/import_data/patch')
     end
 
     def clients_row_match_csv
-      Import.csv_table('clients_row_match',
+      Import.file_to_arrays('clients_row_match',
                        headers: ImportFields.client,
                        location: 'spec/fixtures/import_data/patch')
     end
 
     def clients_row_match_name_changed
-      Import.csv_table('clients_row_match_name_changed',
+      Import.file_to_arrays('clients_row_match_name_changed',
                        headers: ImportFields.client,
                        location: 'spec/fixtures/import_data/patch')
     end
 
     def property_csv
-      Import.csv_table('properties',
+      Import.file_to_arrays('properties',
                        headers: ImportFields.property,
                        drop_rows: 34,
                        location: 'spec/fixtures/import_data/properties')
     end
 
     def property_patch_csv
-      Import.csv_table('properties_patch',
+      Import.file_to_arrays('properties_patch',
                        headers: ImportFields.property,
                        location: 'spec/fixtures/import_data/patch')
     end
 
     def billing_csv
-      Import.csv_table('address2',
+      Import.file_to_arrays('address2',
                        headers: ImportFields.billing_profile,
                        location: 'spec/fixtures/import_data/billing_profiles')
     end
 
     def billing_patch_csv
-      Import.csv_table('address2_patch',
+      Import.file_to_arrays('address2_patch',
                        headers: ImportFields.billing_profile,
                        location: 'spec/fixtures/import_data/patch')
     end

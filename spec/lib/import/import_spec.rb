@@ -3,13 +3,13 @@ require_relative '../../../lib/import/import'
 module DB
   describe Import do
 
-    context 'csv_table' do
+    context 'file_to_arrays' do
       it 'errors if file unknown' do
-        expect { Import.csv_table 'client' }.to raise_error Errno::ENOENT
+        expect { Import.file_to_arrays 'client' }.to raise_error Errno::ENOENT
       end
 
       it 'opens valid file' do
-        output = Import.csv_table('open_test',
+        output = Import.file_to_arrays('open_test',
                                   location: 'spec/fixtures/import_data')
         expect(output.length).to eq 1
       end
@@ -22,14 +22,14 @@ module DB
       end
 
       it 'can drop rows' do
-        output = Import.csv_table('open_test',
+        output = Import.file_to_arrays('open_test',
                                   location: 'spec/fixtures/import_data',
                                   drop_rows: 1)
         expect(output.length).to eq 1
       end
 
       it 'headers can be overriden' do
-        output = Import.csv_table('open_test',
+        output = Import.file_to_arrays('open_test',
                                   header: %{one line},
                                   location: 'spec/fixtures/import_data')
         output.each do |row|
