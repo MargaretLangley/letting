@@ -10,21 +10,23 @@
       </fieldset>
     </div>
 
-    <div id='blank_slate' class='togglable blank_slate_overlay'>
-         Billing is to the above property address. If the bill should go to an agent click the 'Use Agent' checkbox and fill in the billing address.
-    </div>
+    <div class='blank_slate_parent'>
+      <div id='blank_slate' class='togglable blank_slate_overlay'>
+           Billing is to the above property address. If the bill should go to an agent click the 'Use Agent' checkbox and fill in the billing address.
+      </div>
 
-    <h3>Agent</h3>
+      <h3>Agent</h3>
 
-    <div class='togglable'>
-       <%= render'billing_no_agent' %>
-    </div>
+      <div class='togglable'>
+         <%= render'billing_no_agent' %>
+      </div>
 
-    <div class='togglable revealable' id = "agent_entity">
-      <%= render 'shared/entities', f: b, entitieable: billing_profile %>
-    </div>
-    <div class='togglable revealable' id = "agent_address">
-      <%= render 'shared/address', f: b, parent: 'property_billing_profile' %>
+      <div class='togglable revealable' id = "agent_entity">
+        <%= render 'shared/entities', f: b, entitieable: billing_profile %>
+      </div>
+      <div class='togglable revealable' id = "agent_address">
+        <%= render 'shared/address', f: b, parent: 'property_billing_profile' %>
+      </div>
     </div>
   </div>
 </fieldset>

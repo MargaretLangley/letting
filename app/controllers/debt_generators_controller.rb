@@ -53,32 +53,21 @@ class DebtGeneratorsController < ApplicationController
     DebtGenerator.new debt_generator_params
   end
 
-  def property_create_debts_between property, date_range
-    property.account.generate_debts_for date_range
-  end
-
   def debt_generator_params
     params.require(:debt_generator)
       .permit debt_generator, debts_attributes: debt_params
   end
 
   def debt_generator_search_params
-    params.require(:debt_generator)
-      .permit debt_generator
+    params.require(:debt_generator).permit debt_generator
   end
 
   def debt_generator
-    [:id, :search_string, :start_date, :end_date]
+    %i(id search_string start_date end_date)
   end
 
   def debt_params
-    [:account_id, :charge_id, :id, :on_date, :amount]
-  end
-
-  def no_properties_error
-    "No properties matching '#{params[:search]}' " +
-    "between #{params[:search_start_date]} and " +
-    "#{params[:search_end_date]} require charges."
+    %i(account_id charge_id id on_date amount)
   end
 
   def success_message

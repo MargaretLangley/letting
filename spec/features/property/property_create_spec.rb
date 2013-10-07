@@ -109,9 +109,7 @@ describe Property do
 
     def fill_in_billing_profile_entities
       within_fieldset 'billing_profile_entity_0' do
-        fill_in 'Title', with: 'Mr'
-        fill_in 'Initials', with: 'K J'
-        fill_in 'Name', with: 'Barnett'
+        fill_in 'Name', with: 'K J Barnett'
       end
     end
 
@@ -184,9 +182,7 @@ describe Property do
     end
 
     def expect_billing_profile_entities
-      expect(page).to have_text 'Mr'
-      expect(page).to have_text 'K J'
-      expect(page).to have_text 'Barnett'
+      expect(page).to have_text 'K J Barnett'
     end
 
     def expect_charges

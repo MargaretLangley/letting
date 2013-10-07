@@ -6,13 +6,18 @@
 {
   padding-left:40px;
 }
-#blank_slate
+.blank_slate_parent
+{
+  position: relative;
+}
+
+.blank_slate_overlay
 {
   position: absolute;
   font-size:1.4em;
   text-align: left;
   border: 1px solid black;
-  top: 50%;
+  top: 30%;
   left: 40%;
   margin-top: -8%;
   margin-left: -30%;

@@ -3,19 +3,14 @@
 <%= form_for @debt_generator do |debt_gen_form| %>
   <%= render 'shared/errors', object: @debt_generator %>
   <fieldset id='debt_generator' class='shell' style='position: relative;'>
-  <h3>Which properties to invoice?</h3>
-  <div class="grid">
-    <div class="col-3-2">
-    <%= debt_gen_form.text_field :search_string %>
-    </div>
-    <div class="col-1-2">
-    <%= debt_gen_form.submit 'Search' %>
-    </div>
-  </div>
-
-  <%= debt_gen_form.hidden_field :start_date  %>
-  <%= debt_gen_form.hidden_field :end_date %>
+<p>
+  <%= render 'search_chargeable_properties', debt_gen_form: debt_gen_form %>
+</p>
+<div class='blank_slate_parent'>
   <h3>Property Charges to be invoiced.</h3>
+
+  <%= @debt_generator.display_search_string %>
+
   <table>
     <thead>
       <tr>
@@ -49,19 +44,26 @@
     <% else %>
       <tr>
         <td colspan='4'>
-        <div id='blank_slate' class='blank_slate_overlay'>
+          &nbsp;
+        </td>
+      </tr>
+        <div class='blank_slate_overlay'>
             <p>Search for the properties to charge in the above search box.</p>
             Common searches are roads, flats and property id ranges. With property ranges use a hyphen e.g. 100-200
         </div>
-      </td>
+      <tr>
+        <td colspan='4'>
+          &nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td colspan='4'>
+          &nbsp;
+        </td>
       </tr>
     <% end %>
-
-
-
     </tbody>
 </table>
+</div>
 
 <% end %>
-
-

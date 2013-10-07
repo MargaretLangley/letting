@@ -9,7 +9,7 @@ $( document ).ready(function() {
   function doToggle(toggle) {
     var toggleSelection = toggle.closest('.toggle-selection');
     togglableChildren(toggleSelection).slideToggle('fast');
-    toggle.trigger('testEventHandler');
+    toggle.trigger('toggleEventHandler');
   }
 
   $('.checkbox-toggle').click(function(event) {
@@ -18,7 +18,7 @@ $( document ).ready(function() {
   });
 
   function togglableChildren(element) {
-    return element.children('.togglable');
+    return element.find('.togglable');
   }
 
   function onWindowLoad() {
@@ -28,13 +28,13 @@ $( document ).ready(function() {
 
    // this custom event is to separate the entity specific code from
    // the toggle code.
-  $('.entity-event').on('testEventHandler', function() {
+  $('.entity-event').on('toggleEventHandler', function() {
     var toggleSelection = $(this).closest('.toggle-selection');
-    toggleSelection.children('.model_type').val($(this).data('model-type-to'));
+    toggleSelection.find('.model_type').val($(this).data('model-type-to'));
   });
 
 
-  $('.charges').on('testEventHandler', function() {
+  $('.charges').on('toggleEventHandler', function() {
     $(this).find(':input').val('');
   });
 
