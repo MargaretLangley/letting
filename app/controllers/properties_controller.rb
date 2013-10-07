@@ -1,3 +1,19 @@
+####
+#
+# PropertiesController
+#
+# Why does this class exist?
+#
+# Restful actions on the Properties controller
+#
+# How does this fit into the larger system?
+#
+# Property are at the heart of the application - which accounts, tenants,
+# billing profiles / addresses are hung off and this is the managing
+# controller.
+#
+####
+#
 class PropertiesController < ApplicationController
 
   def index
@@ -47,7 +63,7 @@ class PropertiesController < ApplicationController
   private
 
     def unique_search?
-      @properties.size == 1 && search_param.present?
+      search_param.present? && @properties.size == 1
     end
 
     def search_param
@@ -65,30 +81,21 @@ class PropertiesController < ApplicationController
     end
 
     def billing_profile_params
-      [:id,
-       :property_id,
-       :use_profile,
-       address_attributes: address_params,
-       entities_attributes: entities_params]
+      %i(id property_id use_profile) + [address_attributes: address_params] +
+      [entities_attributes: entities_params]
     end
 
     def account_params
-      [:id, :property_id, charges_attributes: charges_params]
+      %i(id property_id) + [charges_attributes: charges_params]
     end
 
     def charges_params
-      [
-        :id,
-        :charge_type,
-        :due_in,
-        :amount,
-        :_destroy,
-        due_ons_attributes: due_on_params
-      ]
+      %i(id charge_type due_in amount _destroy) +
+      [due_ons_attributes: due_on_params]
     end
 
     def due_on_params
-      [:id, :day, :month]
+      %i(id day month)
     end
 
     def property_created_message
