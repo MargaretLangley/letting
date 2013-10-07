@@ -4,7 +4,7 @@
 #
 # Why does this class exist?
 #
-# Restful actions on the Properties controller
+# Restful actions on the Properties resoruce
 #
 # How does this fit into the larger system?
 #

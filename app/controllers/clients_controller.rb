@@ -1,3 +1,15 @@
+####
+#
+# ClientsController
+#
+# Why does this class exist?
+#
+# Restful actions on the Clients resource
+#
+# Client resource covers name, address and properties that the clients
+# own and get payments from.
+####
+#
 class ClientsController < ApplicationController
 
   def index
@@ -47,7 +59,7 @@ class ClientsController < ApplicationController
   private
 
     def unique_search?
-      @clients.size == 1 && search_param.present?
+      search_param.present? && @clients.size == 1
     end
 
     def search_param
