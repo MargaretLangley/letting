@@ -1,3 +1,19 @@
+####
+#
+# Entities
+#
+# Why does this class exist?
+#
+# Adds methods to an association of entities; entities hold
+# either a person or company name.
+#
+# How does this fit into the larger system?
+#
+# Part of the Contact module which is used in a number of classes
+# - property, client and billing profile. It holds a collection
+# of entity objects.
+####
+#
 module Entities
   extend ActiveSupport::Concern
   included do

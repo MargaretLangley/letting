@@ -1,8 +1,20 @@
+####
+#
+# UsersController
+#
+# Why does this class exist?
+#
+# Restful action of the Users resource
+#
+# How does this fit into the larger system?
+#
+# Only admins are permitted to access the users controller and manage them.
+#
+####
+#
 class UsersController < ApplicationController
   def index
     @users = User.all
-    # @users = User.search(search_param).page(params[:page]).load
-    # redirect_to edit_user_path @users.first if unique_search?
   end
 
   def show
