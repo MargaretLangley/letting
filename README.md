@@ -12,9 +12,9 @@ Handles a number of properties with ground rents and other charges.
 
 1. git clone git@github.com:BCS-io/letting.git
 2. Rename database.example.yml => database.yml
-   ..1. enter database, username and password into production group
+  1. enter database, username and password into production group
 3. Rename application.example.yml => application.yml
-   ..1. enter a SECRET_KEY_BASE or generate one using rake secret
+  1. enter a SECRET_KEY_BASE or generate one using rake secret
 4. bundle install
 5. rake db:reboot - drops the database (if any), creates and runs migrations.
 4. Either
@@ -29,7 +29,7 @@ Handles a number of properties with ground rents and other charges.
 
 ###Start From Scratch
 1. cap deploy:setup
-    1. Enter password for postgres database
+  1. Enter password for postgres database
 2. cap deploy
 3. cap deploy:migrate
 
