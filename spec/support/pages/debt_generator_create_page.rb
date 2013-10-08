@@ -20,7 +20,7 @@ class DebtGeneratorCreatePage
   end
 
   def make_charges
-    click_on 'Make Charges Due'
+    click_on 'Invoice Charges'
   end
 
   def have_no_properties?

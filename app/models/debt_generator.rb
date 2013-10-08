@@ -17,15 +17,11 @@
 class DebtGenerator < ActiveRecord::Base
   has_many :debts, -> { uniq }
   attr_accessor :properties
-  accepts_nested_attributes_for :debts
   validates :search_string, uniqueness: { scope: [:start_date, :end_date] },
                             presence: true
-  validates :properties, presence: true
-  validates :debts, presence: true
-
-  validates :start_date, presence: true
-  validates :end_date, presence: true
+  validates :debts, :end_date, :start_date, :properties, presence: true
   validates_with DateEqualOrAfter
+  accepts_nested_attributes_for :debts
 
   scope :latest_debt_generated,
         ->(limit) { order(created_at: :desc).limit(limit) }
