@@ -6,64 +6,7 @@
 <p>
   <%= render 'search_chargeable_properties', debt_gen_form: debt_gen_form %>
 </p>
-<div class='blank_slate_parent'>
-  <h3>Property Charges to be invoiced.</h3>
 
-  <%= @debt_generator.display_search_string %>
-
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Id
-        </th>
-        <th>
-          Charge
-        </th>
-        <th>
-          Date
-        </th>
-        <th>
-          Amount
-        </th>
-      </tr>
-    </thead>
-    <tfoot>
-      <tr>
-        <td colspan='4'>
-        <div>
-  <%= debt_gen_form.submit 'Make Charges Due', name: 'create' , disabled: @debt_generator.debtless? %><span class = 'simple' ><%= link_to_unless @debt_generator.debtless? ,'Cancel', debt_generators_path %></span>
-</div>
-      </tr>
-    </td>
-    </tfoot>
-    <tbody>
-
-     <% unless @debt_generator.debtless? %>
-     <%= render 'debts', debt_gen_form: debt_gen_form, debts: @debt_generator.debts %>
-    <% else %>
-      <tr>
-        <td colspan='4'>
-          &nbsp;
-        </td>
-      </tr>
-        <div class='blank_slate_overlay'>
-            <p>Search for the properties to charge in the above search box.</p>
-            Common searches are roads, flats and property id ranges. With property ranges use a hyphen e.g. 100-200
-        </div>
-      <tr>
-        <td colspan='4'>
-          &nbsp;
-        </td>
-      </tr>
-      <tr>
-        <td colspan='4'>
-          &nbsp;
-        </td>
-      </tr>
-    <% end %>
-    </tbody>
-</table>
-</div>
+ <%= render 'chargeable_properties', debt_gen_form: debt_gen_form %>
 
 <% end %>

@@ -106,6 +106,10 @@ fieldset {
     white-space: nowrap;
   }
 
+  .alternative-choice {
+    white-space: nowrap;
+  }
+
   input,
   textarea {
     font-size:     16px;
@@ -164,11 +168,12 @@ fieldset {
 input[type="submit"] {
   @include button-base;
   width: 40%;
-}
-
-input[type="submit"].under-input {
-  @include button-base;
-  width: 55%;
+  &.medium {
+    width: 60%;
+  }
+  &.under-input {
+    width: 55%;
+  }
 }
 
  a.go {

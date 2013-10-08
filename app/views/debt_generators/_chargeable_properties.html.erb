@@ -1,0 +1,35 @@
+<div class='blank_slate_parent top'>
+  <h2>Property Charges to be invoiced</h2>
+
+  <div class="grid vertical-spacer">
+    <div class="col-1-8">
+        Search:<br>
+        Range:
+    </div>
+    <div class="col-3-8">
+        <span class='important-text'><%= "#{@debt_generator.search_string}" %></span><br>
+        <span class='important-text'><%= "#{search_range}" %></span>
+    </div>
+    <div class="col-1-2">
+      <%= debt_gen_form.submit 'Invoice Charges', name: 'create' , disabled: @debt_generator.debtless?, class: 'medium' %>&nbsp;&nbsp;
+      <%= link_to_unless @debt_generator.debtless? ,' or Cancel', debt_generators_path, class: 'alternative-choice' %>
+    </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Charge</th>
+        <th>Date</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+     <% unless @debt_generator.debtless? %>
+     <%= render 'debts', debt_gen_form: debt_gen_form, debts: @debt_generator.debts %>
+    <% else %>
+      <%= render 'no_chargeable_properties' %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
