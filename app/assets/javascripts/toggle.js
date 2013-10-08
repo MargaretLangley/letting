@@ -24,20 +24,11 @@ $( document ).ready(function() {
     $('.toggleOnStart').toggle();
   }
 
-   // this custom event is to separate the entity specific code from
-   // the toggle code.
+   // enity specific code - separated from the generic toggle code
+   // by event handler.
   $('.entity-event').on('toggleEventHandler', function() {
     var toggleSelection = $(this).closest('.toggle-selection');
     toggleSelection.find('.model_type').val($(this).data('model-type-to'));
-  });
-
-
-  $('.charges').on('toggleEventHandler', function() {
-    $(this).find(':input').val('');
-  });
-
-  $('.every-month').on('change', function() {
-    $(this).next('input[type=hidden]').val('-1');
   });
 
   $(onWindowLoad);
