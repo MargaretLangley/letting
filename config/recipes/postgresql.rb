@@ -66,26 +66,6 @@ namespace :postgresql do
   end
   before 'postgresql:drop', 'postgresql:ask_drop_confirmation'
 
-
-  # lib/tasks/kill_postgres_connections.rake
-  # This doesn't work. Work around. Stop postgresql service and
-  # comment out line beginning after "postgresql:ask_drop_confirmation"
-  task :kill_connections do
-    db_name = "#{postgresql_database}"
-    sh = <<-EOF
-    ps xa \
-      | grep postgres: \
-      | grep #{db_name} \
-      | grep -v grep \
-      | awk '{print $1}' \
-      | sudo xargs kill
-    EOF
-    # puts `#{sh}`
-    run "#{sudo} #{sh}"
-  end
-  # kill doesn't work
-  # after "postgresql:ask_drop_confirmation", "postgresql:kill_connections"
-
   desc 'copies the local development database to the remote production.'
   task :pdrestore do
     # start_banner("wiping out and restoring the PRODUCTION Database")
