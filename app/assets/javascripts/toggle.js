@@ -6,25 +6,23 @@ $( document ).ready(function() {
     doToggle($(this));
   });
 
+  $('.checkbox-toggle').click(function(event) {
+    doToggle($(this));
+  });
+
   function doToggle(toggle) {
     var toggleSelection = toggle.closest('.toggle-selection');
-    togglableChildren(toggleSelection).slideToggle('fast');
+    findTogglable(toggleSelection).slideToggle('fast');
     toggle.trigger('toggleEventHandler');
   }
 
-  $('.checkbox-toggle').click(function(event) {
-    var selection = $(this).closest('.selection');
-    togglableChildren(selection).slideToggle('fast');
-  });
-
-  function togglableChildren(element) {
+  function findTogglable(element) {
     return element.find('.togglable');
   }
 
   function onWindowLoad() {
     $('.toggleOnStart').toggle();
   }
-
 
    // this custom event is to separate the entity specific code from
    // the toggle code.
