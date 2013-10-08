@@ -1,3 +1,26 @@
+####
+#
+# Entity
+#
+# Why does this class exist?
+#
+# represents a person or company in the application.
+#
+# How does this fit into the larger system
+#
+# Entity are used in Properties, clients, and billing profile / agents.
+# The name and addresses were paired together in the contactable module
+# in all the above cases.
+#
+#
+# The polymorphic relationship, entitieable, allowing a model to associate
+# with more than one other model type (client, Property and BillingProfile).
+#
+# The module was introduced for code reuse (having a has_a contact would
+# have been worth investigating).
+#
+####
+#
 class Entity < ActiveRecord::Base
   belongs_to :entitieable, polymorphic: true
   validates :entity_type, presence: true
