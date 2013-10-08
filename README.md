@@ -23,9 +23,13 @@ Handles a number of properties with ground rents and other charges.
   rake db:import - to add the data from old system and bring it into this system. You need a copy of the CSV data files to import and have them in import_data off the root of the project.
 
 ##PRODUCTION
+
+###My Reference Only
+1. Webmachine alias: ssh arran
+
 ###Start From Scratch
 1. cap deploy:setup
-1.1. Enter password for postgres database
+1. 1. Enter password for postgres database
 2. cap deploy
 3. cap deploy:migrate
 
@@ -41,5 +45,4 @@ Then follow Start from Scratch
 
 ###Seed Data
 1. cap deploy:seed
-
 
