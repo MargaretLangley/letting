@@ -6,3 +6,8 @@
 # STRIPE_PUBLIC_KEY: pk_BRgD57O8fHja9HxduJUszhef6jCyS
 
 SECRET_KEY_BASE: 'INSERT HERE OR "rake secret" to generate'
+
+# Database.yml settings
+database: insert database name
+username: insert username name
+password: insert database password

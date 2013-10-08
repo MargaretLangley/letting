@@ -29,8 +29,6 @@
 
 Guardfile
 
-config/database.yml
-
 public/assets
 # Ignore application configuration
 /config/application.yml
