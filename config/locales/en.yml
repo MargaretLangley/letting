@@ -36,7 +36,10 @@ en:
               taken: 'and date range has already been used.'
               blank: 'must be present to find properties. Flat names, roads and property ranges (100-800) can all be used.'
             properties:
-              blank: 'are not being found. The search string should match any property locations or ID ranges(100-800) for example.'
+              blank: 'are not being found. The search string should match any property locations or ID ranges (100-800) for example.'
+    models:
+      debt_generator: Invoicing
+
   number:
     currency:
         format:
