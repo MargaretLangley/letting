@@ -65,20 +65,24 @@ module DB
 
     def billing_csv
       Import.file_to_arrays('address2',
-                       headers: ImportFields.billing_profile,
-                       location: 'spec/fixtures/import_data/billing_profiles')
+                            headers: ImportFields.billing_profile,
+                            location: billing_profile_dir)
     end
 
     def billing_updated_csv
       Import.file_to_arrays 'address2_updated',
-                       headers: ImportFields.billing_profile,
-                       location: 'spec/fixtures/import_data/billing_profiles'
+                            headers: ImportFields.billing_profile,
+                            location: billing_profile_dir
     end
 
     def billing_with_1_entity_csv
       Import.file_to_arrays 'address2_one_entity',
-                       headers: ImportFields.billing_profile,
-                       location: 'spec/fixtures/import_data/billing_profiles'
+                            headers: ImportFields.billing_profile,
+                            location: billing_profile_dir
+    end
+
+    def billing_profile_dir
+      'spec/fixtures/import_data/billing_profiles'
     end
   end
 end

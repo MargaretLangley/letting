@@ -8,7 +8,8 @@ require_relative '../../../lib/import/import_user'
 module DB
   describe ImportUser do
     it 'One row' do
-      expect { ImportUser.import users_file_to_arrays }.to change(User, :count).by 1
+      expect { ImportUser.import users_file_to_arrays }.to \
+        change(User, :count).by 1
     end
 
     it 'Not double import' do
@@ -19,8 +20,8 @@ module DB
 
     def users_file_to_arrays
       Import.file_to_arrays('users',
-                       headers: ImportFields.user,
-                       location: 'spec/fixtures/import_data/users')
+                            headers: ImportFields.user,
+                            location: 'spec/fixtures/import_data/users')
     end
 
   end

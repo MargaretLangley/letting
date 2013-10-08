@@ -63,26 +63,26 @@ module DB
 
     def client_csv
       Import.file_to_arrays('clients',
-                       headers: ImportFields.client,
-                       location: 'spec/fixtures/import_data/clients')
+                            headers: ImportFields.client,
+                            location: 'spec/fixtures/import_data/clients')
     end
 
     def client_updated_csv
       Import.file_to_arrays 'clients_updated',
-                       headers: ImportFields.client,
-                       location: 'spec/fixtures/import_data/clients'
+                            headers: ImportFields.client,
+                            location: 'spec/fixtures/import_data/clients'
     end
 
     def client_one_entity_csv
       Import.file_to_arrays 'clients_one_entity',
-                       headers: ImportFields.client,
-                       location: 'spec/fixtures/import_data/clients'
+                            headers: ImportFields.client,
+                            location: 'spec/fixtures/import_data/clients'
     end
 
     def client_company_with_intials_csv
       Import.file_to_arrays 'clients_company_with_initials',
-                       headers: ImportFields.client,
-                       location: 'spec/fixtures/import_data/clients'
+                            headers: ImportFields.client,
+                            location: 'spec/fixtures/import_data/clients'
     end
   end
 end

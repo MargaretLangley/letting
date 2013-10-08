@@ -10,7 +10,7 @@ module DB
 
       it 'opens valid file' do
         output = Import.file_to_arrays('open_test',
-                                  location: 'spec/fixtures/import_data')
+                                       location: 'spec/fixtures/import_data')
         expect(output.length).to eq 1
       end
     end
@@ -23,15 +23,15 @@ module DB
 
       it 'can drop rows' do
         output = Import.file_to_arrays('open_test',
-                                  location: 'spec/fixtures/import_data',
-                                  drop_rows: 1)
+                                       location: 'spec/fixtures/import_data',
+                                       drop_rows: 1)
         expect(output.length).to eq 1
       end
 
       it 'headers can be overriden' do
         output = Import.file_to_arrays('open_test',
-                                  header: %{one line},
-                                  location: 'spec/fixtures/import_data')
+                                       header: %{one line},
+                                       location: 'spec/fixtures/import_data')
         output.each do |row|
           expect(row[:one]).to_not be_nil
           expect(row[:line]).to_not be_nil

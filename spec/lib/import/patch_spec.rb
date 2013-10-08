@@ -58,51 +58,55 @@ module DB
 
     def clients_csv
       Import.file_to_arrays('clients',
-                       headers: ImportFields.client,
-                       location: clients_directory)
+                            headers: ImportFields.client,
+                            location: clients_directory)
     end
 
     def clients_no_row_match_csv
       Import.file_to_arrays('clients_no_row_matches',
-                       headers: ImportFields.client,
-                       location: 'spec/fixtures/import_data/patch')
+                            headers: ImportFields.client,
+                            location: 'spec/fixtures/import_data/patch')
     end
 
     def clients_row_match_csv
       Import.file_to_arrays('clients_row_match',
-                       headers: ImportFields.client,
-                       location: 'spec/fixtures/import_data/patch')
+                            headers: ImportFields.client,
+                            location: 'spec/fixtures/import_data/patch')
     end
 
     def clients_row_match_name_changed
       Import.file_to_arrays('clients_row_match_name_changed',
-                       headers: ImportFields.client,
-                       location: 'spec/fixtures/import_data/patch')
+                            headers: ImportFields.client,
+                            location: 'spec/fixtures/import_data/patch')
     end
 
     def property_csv
       Import.file_to_arrays('properties',
-                       headers: ImportFields.property,
-                       drop_rows: 34,
-                       location: 'spec/fixtures/import_data/properties')
+                            headers: ImportFields.property,
+                            drop_rows: 34,
+                            location: 'spec/fixtures/import_data/properties')
     end
 
     def property_patch_csv
       Import.file_to_arrays('properties_patch',
-                       headers: ImportFields.property,
-                       location: 'spec/fixtures/import_data/patch')
+                            headers: ImportFields.property,
+                            location: 'spec/fixtures/import_data/patch')
     end
 
     def billing_csv
       Import.file_to_arrays('address2',
-                       headers: ImportFields.billing_profile,
-                       location: 'spec/fixtures/import_data/billing_profiles')
+                            headers: ImportFields.billing_profile,
+                            location: billing_profile_dir)
+    end
+
+    def billing_profile_dir
+      'spec/fixtures/import_data/billing_profiles'
     end
 
     def billing_patch_csv
       Import.file_to_arrays('address2_patch',
-                       headers: ImportFields.billing_profile,
-                       location: 'spec/fixtures/import_data/patch')
+                            headers: ImportFields.billing_profile,
+                            location: 'spec/fixtures/import_data/patch')
     end
 
   end
