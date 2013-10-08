@@ -29,7 +29,7 @@ Handles a number of properties with ground rents and other charges.
 
 ###Start From Scratch
 1. cap deploy:setup
-..1. Enter password for postgres database
+    1. Enter password for postgres database
 2. cap deploy
 3. cap deploy:migrate
 
