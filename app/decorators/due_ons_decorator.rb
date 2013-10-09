@@ -1,3 +1,18 @@
+####
+#
+# DueOnsDecorator
+#
+# Provides a interface to the due_ons to keep view logic away from business
+# logic.
+#
+# Used only for due_ons - currently only in managing charges in the property
+# resource.
+#
+# Any methods that it cannot respond to get passed to the due_ons through
+# method_missing.
+#
+####
+#
 class DueOnsDecorator
   attr_reader :dueons
 
