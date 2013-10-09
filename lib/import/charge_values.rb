@@ -1,4 +1,13 @@
 module DB
+  ####
+  #
+  # ChargeValues
+  #
+  # Wraps up the pairings of charge and periods into
+  # a single object
+  #
+  ####
+  #
   class ChargeValues
     attr_reader :charge_code
     attr_reader :max_dates_per_year
@@ -18,10 +27,6 @@ module DB
     def initialize charge_code, max_dates_per_year
       @charge_code = charge_code
       @max_dates_per_year = max_dates_per_year
-    end
-
-    def all_date_pairs_imported? dates_imported
-      @max_dates_per_year <= dates_imported
     end
 
   end

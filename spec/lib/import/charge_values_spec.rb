@@ -13,17 +13,6 @@ module DB
         charge_value = ChargeValues.from_code 'GGR'
         expect(charge_value.max_dates_per_year).to eq 4
       end
-
-      context 'has maximum row to import' do
-        it 'keeps importing below max' do
-          charge_value = ChargeValues.from_code 'GGR'
-          expect(charge_value.all_date_pairs_imported? 3).to be_false
-        end
-        it 'stops importing at the max' do
-          charge_value = ChargeValues.from_code 'GGR'
-          expect(charge_value.all_date_pairs_imported? 4).to be_true
-        end
-      end
     end
   end
 end
