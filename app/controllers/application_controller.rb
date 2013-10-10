@@ -1,3 +1,17 @@
+####
+#
+# ApplicationController
+#
+# Base Class for all the applications controller. chiefly it supplies current
+# user and authorization.
+#
+# Appliction supplies current_user - so a controller and views have a common
+# way to access the current user and the authorization system.
+#
+# The class also provides, eclecitcly, params used by a few of the classes.
+#
+#####
+#
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
