@@ -1,5 +1,5 @@
 require 'csv'
-require_relative '../../import/import'
+require_relative '../../import/file_import'
 require_relative '../../import/import_fields'
 require_relative '../../import/import_user'
 
@@ -9,7 +9,7 @@ namespace :import do
 
   desc "Import users data from CSV file"
   task users: :environment do
-    DB::ImportUser.import DB::Import.file_to_arrays('users',
+    DB::ImportUser.import DB::FileImport.to_a('users',
                                                headers: DB::ImportFields.user)
   end
 end

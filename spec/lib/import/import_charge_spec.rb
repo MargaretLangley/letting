@@ -1,6 +1,6 @@
 require 'csv'
 require 'spec_helper'
-require_relative '../../../lib/import/import'
+require_relative '../../../lib/import/file_import'
 require_relative '../../../lib/import/import_fields'
 require_relative '../../../lib/import/import_charge'
 
@@ -47,21 +47,21 @@ module DB
     end
 
     def charge_csv
-      Import.file_to_arrays('acc_info',
-                            headers: ImportFields.charge,
-                            location: 'spec/fixtures/import_data/charges')
+      FileImport.to_a('acc_info',
+                      headers: ImportFields.charge,
+                      location: 'spec/fixtures/import_data/charges')
     end
 
     def charge_updated_csv
-      Import.file_to_arrays('acc_info_updated',
-                            headers: ImportFields.charge,
-                            location: 'spec/fixtures/import_data/charges')
+      FileImport.to_a('acc_info_updated',
+                      headers: ImportFields.charge,
+                      location: 'spec/fixtures/import_data/charges')
     end
 
     def charge_monthly_csv
-      Import.file_to_arrays('acc_info_monthly',
-                            headers: ImportFields.charge,
-                            location: 'spec/fixtures/import_data/charges')
+      FileImport.to_a('acc_info_monthly',
+                      headers: ImportFields.charge,
+                      location: 'spec/fixtures/import_data/charges')
     end
 
   end

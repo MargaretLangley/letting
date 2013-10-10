@@ -1,5 +1,5 @@
 require 'csv'
-require_relative '../../import/import'
+require_relative '../../import/file_import'
 require_relative '../../import/import_fields'
 require_relative '../../import/import_property'
 
@@ -11,9 +11,9 @@ namespace :import do
   desc "Import properties data from CSV file"
   task  properties: :environment do
     DB::ImportProperty.import \
-    DB::Import.file_to_arrays('properties',
+    DB::FileImport.to_a('properties',
       headers: DB::ImportFields.property, drop_rows: 34),
-        DB::Patch.import(Property, DB::Import.file_to_arrays('properties_patch',
+        DB::Patch.import(Property, DB::FileImport.to_a('properties_patch',
           headers: DB::ImportFields.property, location: 'import_data/patch'))
    end
 end
