@@ -38,9 +38,10 @@ module DB
         end
       end
 
-      def file_location
-        'spec/fixtures/import_data'
-      end
+    end
+
+    def file_location
+      'spec/fixtures/import_data'
     end
   end
 end
