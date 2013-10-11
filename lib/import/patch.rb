@@ -23,7 +23,8 @@ module DB
     end
 
     def model_prepared_for_import row
-      @model_to_assign = @model_class.new human_id: row[:human_id].to_i
+      @model_to_assign = @model_class.new
+      @model_to_assign.human_id = row[:human_id].to_i
       @model_to_assign.prepare_for_form
     end
 

@@ -1,10 +1,19 @@
+####
+#
+# BillingProfile
+#
+# Provides a contact, agent, address spearate from the property
+#
+# BillingProfile provides the property with a separate contact address
+# if it is required.
+#
+####
+#
 class BillingProfile < ActiveRecord::Base
   belongs_to :property, inverse_of: :billing_profile
   include Contact
   validates :entities, presence: true, if: :use_profile?
   before_validation :clear_up_after_form
-
-  attr_accessor :human_id
 
   def bill_to
     use_profile? ? self : property
@@ -16,16 +25,24 @@ class BillingProfile < ActiveRecord::Base
 
   def clear_up_after_form
     if use_profile?
-      entities.clean_up_form
+      clean_form
     else
-      entities.destroy_all
-      destroy_address unless address.nil?
+      erase_form
     end
   end
 
   private
 
-    def destroy_address
-      address.mark_for_destruction
-    end
+  def clean_form
+    entities.clean_up_form
+  end
+
+  def erase_form
+    entities.destroy_all
+    destroy_address unless address.nil?
+  end
+
+  def destroy_address
+    address.mark_for_destruction
+  end
 end

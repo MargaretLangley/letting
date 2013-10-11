@@ -12,7 +12,7 @@ namespace :import do
   task  billing_profiles: :environment do
     DB::ImportBillingProfile.import \
       DB::FileImport.to_a('address2', headers: DB::ImportFields.billing_profile),
-        DB::Patch.import(BillingProfile,
+        DB::Patch.import(BillingProfileWithId,
                          DB::FileImport.to_a('address2_patch', \
             headers: DB::ImportFields.billing_profile, location: 'import_data/patch'))
    end
