@@ -18,7 +18,7 @@ module Entities
   extend ActiveSupport::Concern
   included do
     has_many :entities, -> { order(:created_at) },
-             dependent: :destroy, as: :entitieable do
+                        dependent: :destroy, as: :entitieable do
       def prepare
         (size...MAX_ENTITIES).each { build }
         each { |entity| entity.prepare }
@@ -35,8 +35,7 @@ module Entities
   private
 
       def destruction_if matcher
-        select(&matcher)
-        .each { |entity| mark_entity_for_destruction entity }
+        select(&matcher).each { |entity| mark_entity_for_destruction entity }
       end
 
       def mark_entity_for_destruction entity
