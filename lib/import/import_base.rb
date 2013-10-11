@@ -48,9 +48,11 @@ module DB
       end
 
       def output_still_running index
-        # if a long import. Put a dot every 100 but not the first
-        # as you'll see dots in spec tests
-        print '.' if index % 100 == 0 && index != 0
+        print '.' if on_100th_iteration
+      end
+
+      def on_100th_iteration index
+        index % 100 == 0 && index != 0
       end
 
       def output_error row, model
