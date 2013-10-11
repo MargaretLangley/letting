@@ -28,25 +28,32 @@ class DebtGeneratorsController < ApplicationController
   end
 
   def create
-    if params[:commit] == 'Search'
-      @debt_generator = search_for_debts
-      render :new
+    if search_debts?
+      search_debts
     else
-      if generate_debts.save
-        redirect_to debt_generators_path, notice: success_message
-      else
-        render :new
-      end
+      create_debts
     end
   end
 
   private
 
-  def search_for_debts
+  def search_debts?
+    params[:commit] == 'Search'
+  end
+
+  def search_debts
     @debt_generator = DebtGenerator.new debt_generator_search_params
     @debt_generator.generate
     @debt_generator.valid?
-    @debt_generator
+    render :new
+  end
+
+  def create_debts
+    if generate_debts.save
+      redirect_to debt_generators_path, notice: success_message
+    else
+      render :new
+    end
   end
 
   def generate_debts
