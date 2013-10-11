@@ -46,17 +46,18 @@ class DueOn < ActiveRecord::Base
     end
 
     def year_next_charge_is_due
-      due_this_year? ? Date.current.year : Date.current.year + 1
+      today_or_later_in_year ? Date.current.year : Date.current.year + 1
     end
 
-    def due_this_year?
-      case
-      when month > Date.current.month
-        true
-      when month == Date.current.month && day >= Date.current.day
-        true
-      else
-        false
-      end
+    def today_or_later_in_year
+      month_later_in_year || today_or_later_in_this_month
+    end
+
+    def month_later_in_year
+      month > Date.current.month
+    end
+
+    def today_or_later_in_this_month
+      month == Date.current.month && day >= Date.current.day
     end
 end
