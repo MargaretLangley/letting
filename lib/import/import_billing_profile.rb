@@ -2,6 +2,17 @@ require_relative 'import_base'
 require_relative 'import_contact'
 
 module DB
+  ####
+  #
+  # ImportBillingProfile
+  #
+  # Imports billing profiles (shipping addreses for properties)
+  #
+  # Uses ImportBase and is called during the import process and at no
+  # other time.
+  #
+  ####
+  #
   class ImportBillingProfile < ImportBase
 
     def initialize contents, patch
@@ -11,7 +22,8 @@ module DB
     def model_prepared_for_import row
       @model_to_save = parent_model row, Property
       @model_to_save.prepare_for_form
-      @model_to_assign = BillingProfileWithId.new @model_to_save.billing_profile
+      @model_to_assign = BillingProfileWithId.new \
+                           @model_to_save.billing_profile
     end
 
     def model_assignment row
