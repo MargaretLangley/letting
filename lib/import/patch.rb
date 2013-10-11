@@ -1,4 +1,20 @@
 module DB
+  ####
+  #
+  # Patch
+  #
+  # Overrides data in models that needs updating but we are unable to upudate
+  # source.
+  #
+  # Currently, this updates client and billing_profile data
+  # Note that calls import_contact which would need to be looked at if
+  # the class didn't use contact.
+  #
+  # Called during the import process only. It updates only those read in
+  # during build_patching models.
+  #
+  ####
+  #
   class Patch
     include ImportContact
 
@@ -17,7 +33,6 @@ module DB
     def build_patching_models
       @patch_contents.each do |row|
         model_prepared_for_import row
-        model_assignment row
         patch_models_add
       end
     end
@@ -26,9 +41,6 @@ module DB
       @model_to_assign = @model_class.new
       @model_to_assign.human_id = row[:human_id].to_i
       @model_to_assign.prepare_for_form
-    end
-
-    def model_assignment row
       import_contact @model_to_assign, row
       clean_contact @model_to_assign
     end

@@ -3,6 +3,14 @@ require_relative 'import_contact'
 require_relative 'patch'
 
 module DB
+  ####
+  #
+  # ImportClient
+  #
+  # Load and assigns, and saves client models into the database.
+  #
+  ####
+  #
   class ImportClient < ImportBase
 
     def initialize  contents, patch
