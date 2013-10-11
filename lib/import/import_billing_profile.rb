@@ -4,7 +4,7 @@ require_relative 'import_contact'
 module DB
   class ImportBillingProfile < ImportBase
 
-    def initialize  contents, patch
+    def initialize contents, patch
       super BillingProfile, contents, patch
     end
 
