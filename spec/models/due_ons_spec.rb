@@ -66,14 +66,6 @@ describe DueOns do
       end
     end
 
-    context '#per_month' do
-      it 'knows when the charge is not per month' do
-        (1..12).each { due_ons.build day: 4, month: 1 }
-        expect(due_ons.per_month.day).to eq 4
-        expect(due_ons.per_month.month).to eq(-1)
-      end
-    end
-
     context '#between?' do
       before { Timecop.travel(Date.new(2013, 5, 3)) }
       after { Timecop.return }

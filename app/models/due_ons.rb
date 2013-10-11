@@ -31,10 +31,7 @@ module DueOns
       def clean_up_form
         destruction_if :empty?
         destruction_if :persisted? if has_new_due_on?
-        if per_month_due_on
-          assign_per_month per_month_due_on.day
-          destruction_if :per_month?
-        end
+        switch_to_a_due_on_for_each_month if per_month_due_on
       end
 
       def empty?
@@ -43,14 +40,6 @@ module DueOns
 
       def per_month?
         max_due_ons || per_month_due_on
-      end
-
-      def per_month
-        if per_month?
-          DueOn.new day: first_day_or_empty, month: DueOn::PER_MONTH
-        else
-          DueOn.new day: '', month: ''
-        end
       end
 
   private
@@ -76,11 +65,12 @@ module DueOns
         find(&:per_month?)
       end
 
-      def first_day_or_empty
-        first.present? ? first.day : ''
+      def switch_to_a_due_on_for_each_month
+        build_due_on_for_each_month_of_year per_month_due_on.day
+        destruction_if :per_month?
       end
 
-      def assign_per_month day
+      def build_due_on_for_each_month_of_year day
         (1..MAX_DUE_ONS).each { |month| build day: day, month: month }
       end
 

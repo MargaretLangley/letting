@@ -2,12 +2,12 @@
   <span class = 'floatleft'><%= object.charge_type %> in
   <%= object.due_in %></span>
   <%= number_to_currency object.amount %>
-
-  <% if object.due_ons.per_month? %>
-    <%= "- due #{object.due_ons.per_month.day.ordinalize} of the month" %>
+  <% dec_due_ons = DueOnsDecorator.new(object.due_ons)
+  if dec_due_ons.per_month? %>
+    <%= "- due #{dec_due_ons.per_month.day.ordinalize} of the month" %>
   <% elsif %>
-    <% object.due_ons.each do |due_ons| %>
-     <%= render 'show_due_on', object: due_ons %>
+    <% dec_due_ons.each do |due_on| %>
+     <%= render 'show_due_on', object: due_on %>
     <% end %>
  <% end %>
 </p>

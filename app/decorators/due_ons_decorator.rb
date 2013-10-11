@@ -29,7 +29,15 @@ class DueOnsDecorator
   end
 
   def per_month
-    @due_ons.per_month
+    if @due_ons.per_month?
+      DueOn.new day: first_day_or_empty, month: DueOn::PER_MONTH
+    else
+      DueOn.new day: '', month: ''
+    end
+  end
+
+  def first_day_or_empty
+    @due_ons.first.present? ? @due_ons.first.day : ''
   end
 
   def hidden_side? side
