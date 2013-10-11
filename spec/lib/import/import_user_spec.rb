@@ -20,7 +20,7 @@ module DB
 
     def users_file_to_arrays
       FileImport.to_a('users',
-                      headers: ImportFields.user,
+                      headers: FileHeaders.user,
                       location: 'spec/fixtures/import_data/users')
     end
 

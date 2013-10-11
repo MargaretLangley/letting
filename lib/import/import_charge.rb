@@ -35,7 +35,7 @@ module DB
     def assign_due_ons row
       day_months = charged_days_in_year(row)
       @model_to_assign.due_ons
-      .first(day_months.size).each_with_index do |due_on, index|
+        .first(day_months.size).each_with_index do |due_on, index|
         assign_due_on due_on, day_months[index]
       end
     end

@@ -65,19 +65,19 @@ module DB
 
     def billing_csv
       FileImport.to_a('address2',
-                      headers: ImportFields.billing_profile,
+                      headers: FileHeaders.billing_profile,
                       location: billing_profile_dir)
     end
 
     def billing_updated_csv
       FileImport.to_a 'address2_updated',
-                      headers: ImportFields.billing_profile,
+                      headers: FileHeaders.billing_profile,
                       location: billing_profile_dir
     end
 
     def billing_with_1_entity_csv
       FileImport.to_a 'address2_one_entity',
-                      headers: ImportFields.billing_profile,
+                      headers: FileHeaders.billing_profile,
                       location: billing_profile_dir
     end
 

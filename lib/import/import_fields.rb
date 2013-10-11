@@ -1,5 +1,5 @@
 module DB
-  class ImportFields
+  class FileHeaders
 
     def self.client
       %w{human_id } + entities + address

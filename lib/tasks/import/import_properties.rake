@@ -12,8 +12,8 @@ namespace :import do
   task  properties: :environment do
     DB::ImportProperty.import \
     DB::FileImport.to_a('properties',
-      headers: DB::ImportFields.property, drop_rows: 34),
+      headers: DB::FileHeaders.property, drop_rows: 34),
         DB::Patch.import(Property, DB::FileImport.to_a('properties_patch',
-          headers: DB::ImportFields.property, location: 'import_data/patch'))
+          headers: DB::FileHeaders.property, location: 'import_data/patch'))
    end
 end

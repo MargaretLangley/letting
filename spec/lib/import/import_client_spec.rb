@@ -63,25 +63,25 @@ module DB
 
     def client_csv
       FileImport.to_a('clients',
-                      headers: ImportFields.client,
+                      headers: FileHeaders.client,
                       location: 'spec/fixtures/import_data/clients')
     end
 
     def client_updated_csv
       FileImport.to_a 'clients_updated',
-                      headers: ImportFields.client,
+                      headers: FileHeaders.client,
                       location: 'spec/fixtures/import_data/clients'
     end
 
     def client_one_entity_csv
       FileImport.to_a 'clients_one_entity',
-                      headers: ImportFields.client,
+                      headers: FileHeaders.client,
                       location: 'spec/fixtures/import_data/clients'
     end
 
     def client_company_with_intials_csv
       FileImport.to_a 'clients_company_with_initials',
-                      headers: ImportFields.client,
+                      headers: FileHeaders.client,
                       location: 'spec/fixtures/import_data/clients'
     end
   end

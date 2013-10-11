@@ -58,44 +58,44 @@ module DB
 
     def clients_csv
       FileImport.to_a('clients',
-                      headers: ImportFields.client,
+                      headers: FileHeaders.client,
                       location: clients_directory)
     end
 
     def clients_no_row_match_csv
       FileImport.to_a('clients_no_row_matches',
-                      headers: ImportFields.client,
+                      headers: FileHeaders.client,
                       location: 'spec/fixtures/import_data/patch')
     end
 
     def clients_row_match_csv
       FileImport.to_a('clients_row_match',
-                      headers: ImportFields.client,
+                      headers: FileHeaders.client,
                       location: 'spec/fixtures/import_data/patch')
     end
 
     def clients_row_match_name_changed
       FileImport.to_a('clients_row_match_name_changed',
-                      headers: ImportFields.client,
+                      headers: FileHeaders.client,
                       location: 'spec/fixtures/import_data/patch')
     end
 
     def property_csv
       FileImport.to_a('properties',
-                      headers: ImportFields.property,
+                      headers: FileHeaders.property,
                       drop_rows: 34,
                       location: 'spec/fixtures/import_data/properties')
     end
 
     def property_patch_csv
       FileImport.to_a('properties_patch',
-                      headers: ImportFields.property,
+                      headers: FileHeaders.property,
                       location: 'spec/fixtures/import_data/patch')
     end
 
     def billing_csv
       FileImport.to_a('address2',
-                      headers: ImportFields.billing_profile,
+                      headers: FileHeaders.billing_profile,
                       location: billing_profile_dir)
     end
 
@@ -105,7 +105,7 @@ module DB
 
     def billing_patch_csv
       FileImport.to_a('address2_patch',
-                      headers: ImportFields.billing_profile,
+                      headers: FileHeaders.billing_profile,
                       location: 'spec/fixtures/import_data/patch')
     end
 

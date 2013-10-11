@@ -109,7 +109,7 @@ module DB
 
       def property_csv
         FileImport.to_a('properties',
-                        headers: ImportFields.property,
+                        headers: FileHeaders.property,
                         drop_rows: 34,
                         location: properties_directory)
       end
@@ -117,14 +117,14 @@ module DB
       def property_updated_csv
         FileImport.to_a 'properties_updated',
                         drop_rows: 34,
-                        headers: ImportFields.property,
+                        headers: FileHeaders.property,
                         location: properties_directory
       end
 
       def property_1_entity_csv
         FileImport.to_a 'properties_one_entity',
                         drop_rows: 34,
-                        headers: ImportFields.property,
+                        headers: FileHeaders.property,
                         location: properties_directory
       end
 

@@ -48,19 +48,19 @@ module DB
 
     def charge_csv
       FileImport.to_a('acc_info',
-                      headers: ImportFields.charge,
+                      headers: FileHeaders.charge,
                       location: 'spec/fixtures/import_data/charges')
     end
 
     def charge_updated_csv
       FileImport.to_a('acc_info_updated',
-                      headers: ImportFields.charge,
+                      headers: FileHeaders.charge,
                       location: 'spec/fixtures/import_data/charges')
     end
 
     def charge_monthly_csv
       FileImport.to_a('acc_info_monthly',
-                      headers: ImportFields.charge,
+                      headers: FileHeaders.charge,
                       location: 'spec/fixtures/import_data/charges')
     end
 
