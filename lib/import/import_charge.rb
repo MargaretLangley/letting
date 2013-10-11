@@ -23,7 +23,7 @@ module DB
       @model_to_save.prepare_for_form
     end
 
-    def model_assigned_row_attributes row
+    def model_assignment row
       @model_to_assign
         .assign_attributes \
            charge_type: ChargeValues.from_code(row[:charge_type]).charge_code,

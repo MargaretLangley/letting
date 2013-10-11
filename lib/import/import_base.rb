@@ -19,7 +19,7 @@ module DB
     def import_rows_loop
       @contents.each_with_index do |row, index|
         model_prepared_for_import row
-        model_assigned_row_attributes row
+        model_assignment row
         @patch.patch_model @model_to_assign if @patch
         model_to_save.save || output_error(row, model_to_save)
         output_still_running index

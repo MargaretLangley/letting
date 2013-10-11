@@ -17,7 +17,7 @@ module DB
     def build_patching_models
       @patch_contents.each do |row|
         model_prepared_for_import row
-        model_assigned_row_attributes row
+        model_assignment row
         patch_models_add
       end
     end
@@ -28,7 +28,7 @@ module DB
       @model_to_assign.prepare_for_form
     end
 
-    def model_assigned_row_attributes row
+    def model_assignment row
       import_contact @model_to_assign, row
       clean_contact @model_to_assign
     end

@@ -15,7 +15,7 @@ module DB
       @model_to_assign = BillingProfileWithId.new @model_to_save.billing_profile
     end
 
-    def model_assigned_row_attributes row
+    def model_assignment row
       @model_to_assign.assign_attributes use_profile: true
       @model_to_assign.human_id = row[:human_id].to_i
       import_contact @model_to_assign, row

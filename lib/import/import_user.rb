@@ -24,7 +24,7 @@ module DB
       super User, contents, patch
     end
 
-    def model_assigned_row_attributes row
+    def model_assignment row
       @model_to_assign.assign_attributes email:    row[:email],
                                          password: row[:password],
                                          password_confirmation: row[:password],
