@@ -37,9 +37,7 @@ class DebtGenerator < ActiveRecord::Base
 
   def generate
     properties.each do |property|
-      chargeable_to_debt property
-                         .account
-                         .chargeables_between(start_date..end_date)
+      chargeable_to_debt property_to_chargeable property
     end
     new_debts
   end
@@ -62,6 +60,10 @@ class DebtGenerator < ActiveRecord::Base
 
   def chargeable_to_debt chargeable_infos
     chargeable_infos.each { |chargeable| debts.build chargeable.to_hash }
+  end
+
+  def property_to_chargeable property
+    property.account.chargeables_between(start_date..end_date)
   end
 
   def default_start_date
