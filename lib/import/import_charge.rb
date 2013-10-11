@@ -15,7 +15,7 @@ module DB
     end
 
     def model_prepared_for_import row
-      @model_to_save = first_model row, Property
+      @model_to_save = parent_model row, Property
       @model_to_assign =
         ChargesMatcher
           .new(@model_to_save.account.charges).first_or_initialize \
