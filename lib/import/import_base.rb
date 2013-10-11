@@ -48,7 +48,7 @@ module DB
       end
 
       def output_still_running index
-        print '.' if on_100th_iteration
+        print '.' if on_100th_iteration index
       end
 
       def on_100th_iteration index
