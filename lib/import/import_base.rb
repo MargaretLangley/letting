@@ -22,7 +22,7 @@ module DB
         model_assignment row
         @patch.patch_model @model_to_assign if @patch
         model_to_save.save || output_error(row, model_to_save)
-        output_still_running index
+        show_output_running index
       end
     end
 
@@ -47,7 +47,7 @@ module DB
         model
       end
 
-      def output_still_running index
+      def show_output_running index
         print '.' if on_100th_iteration index
       end
 
