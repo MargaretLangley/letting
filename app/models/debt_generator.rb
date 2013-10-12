@@ -31,10 +31,6 @@ class DebtGenerator < ActiveRecord::Base
     self.end_date = default_end_date if end_date.blank?
   end
 
-  def display_search_string
-    "Searched for: #{search_string} Date Range: #{start_date} - #{end_date}"
-  end
-
   def generate
     properties.each do |property|
       chargeable_to_debt property_to_chargeable property

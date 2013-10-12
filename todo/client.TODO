@@ -5,7 +5,7 @@ Client
  ✔ Import @done (13-09-04 12:08)
  ✔ Seed @done (13-08-03)
 
- ☐ Model
+ Model:
    Address:
      ✔ Handle nil address as Address::NoAddress @done (13-09-04 12:08)
        Not doing as

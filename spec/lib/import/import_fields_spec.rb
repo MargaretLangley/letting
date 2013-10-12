@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../../../lib/import/import_fields'
+require_relative '../../../lib/import/file_headers'
 
 module DB
 

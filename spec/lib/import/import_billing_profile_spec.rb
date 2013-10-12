@@ -1,7 +1,7 @@
 require 'csv'
 require 'spec_helper'
 require_relative '../../../lib/import/file_import'
-require_relative '../../../lib/import/import_fields'
+require_relative '../../../lib/import/file_headers'
 require_relative '../../../lib/import/import_billing_profile'
 
 module DB
