@@ -46,8 +46,10 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'unicorn'
 
 # Use Capistrano for deployment
-gem 'capistrano', group: :development
-gem 'capistrano-rbenv', group: :development
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rbenv'
+end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
