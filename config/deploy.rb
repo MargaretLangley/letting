@@ -5,7 +5,9 @@
 #  :application
 #  unicorn in gemfile
 require 'bundler/capistrano'
-require 'capistrano-rbenv'
+
+set :ruby_version,  "2.0"
+set :bundle_cmd,    "chruby-exec #{ruby_version} -- bundle"
 
 # set :whenever_command, "bundle exec whenever"
 # require 'whenever/capistrano'
@@ -43,7 +45,6 @@ set :repository_owner, 'BCS-io' # change
 set :repository, "git@github.com:#{repository_owner}/#{application}.git"
 set :branch, 'master'
 set :keep_releases, 3
-set :rbenv_ruby_version, '2.0.0-p195'
 
 set :maintenance_template_path,
     File.expand_path('../recipes/templates/maintenance.html.erb', __FILE__)
