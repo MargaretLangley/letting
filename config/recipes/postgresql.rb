@@ -2,7 +2,7 @@ set_default(:postgresql_host, 'localhost')
 set_default(:postgresql_user) { application }
 
 set_default(:postgresql_database) { "#{application}_production" }
-set_default(:postgresql_pid) { "/var/run/postgresql/9.2-main.pid" }
+set_default(:postgresql_pid) { "/var/run/postgresql/9.3-main.pid" }
 
 namespace :postgresql do
   desc 'Create a database for this application.'
