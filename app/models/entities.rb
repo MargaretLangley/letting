@@ -17,8 +17,8 @@
 module Entities
   extend ActiveSupport::Concern
   included do
-    has_many :entities, -> { order(:created_at) },
-                        dependent: :destroy, as: :entitieable do
+    has_many :entities, -> { order(:created_at) }, dependent: :destroy,
+                                                   as: :entitieable do
       def prepare
         (size...MAX_ENTITIES).each { build }
         each { |entity| entity.prepare }

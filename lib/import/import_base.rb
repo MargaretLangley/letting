@@ -68,9 +68,7 @@ module DB
 
     def parent_model row, model_class
       model = model_class.where(human_id: row[:human_id]).first
-      if model.nil?
-        raise_parent_record_not_found model_class, row
-      end
+      raise_parent_record_not_found model_class, row if model.nil?
       model
     end
 
