@@ -30,7 +30,7 @@ module DB
 
       it 'headers can be overriden' do
         output = FileImport.to_a('open_test',
-                                 header: %{one line},
+                                 header: %w{one line},
                                  location: file_location)
         output.each do |row|
           expect(row[:one]).to_not be_nil

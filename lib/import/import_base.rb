@@ -68,14 +68,14 @@ module DB
 
     def parent_model row, model_class
       model = model_class.where(human_id: row[:human_id]).first
-      raise_parent_record_not_found model_class, row if model.nil?
+      fail_parent_record_not_found model_class, row if model.nil?
       model
     end
 
     private
 
-    def raise_parent_record_not_found model_class, row
-      raise ActiveRecord::RecordNotFound, no_parent_message(model_class, row)
+    def fail_parent_record_not_found model_class, row
+      fail ActiveRecord::RecordNotFound, no_parent_message(model_class, row)
     end
 
     def no_parent_message model_class, row

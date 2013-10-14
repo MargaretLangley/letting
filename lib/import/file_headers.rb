@@ -19,11 +19,11 @@ module DB
   class FileHeaders
 
     def self.client
-      %w{human_id } + entities + address
+      %w{ human_id } + entities + address
     end
 
     def self.property
-      %w{human_id updated } + entities + address + %w{ client_id }
+      %w{ human_id updated } + entities + address + %w{ client_id }
     end
 
     def self.billing_profile
@@ -43,11 +43,11 @@ module DB
     private
 
       def self.entities
-        %w{title1  initials1 name1 title2 initials2 name2}
+        %w{ title1  initials1 name1 title2 initials2 name2 }
       end
 
       def self.address
-        %w{flat_no  house_name road_no  road  district  town  county  postcode}
+        %w{ flat_no house_name road_no road district town county postcode }
       end
   end
 end
