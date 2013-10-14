@@ -1,40 +1,26 @@
 require 'spec_helper'
 
 describe User do
-
+  let(:user_create_page) { UserCreatePage.new }
   before(:each) { log_in admin_attributes }
 
-  context '#edit' do
-    it 'basic' do
-      go_to_create_page
-      within_fieldset 'user' do
-        fill_in 'Email', with: 'newuser@example.com'
-        fill_in 'Password', with: 'password'
-        fill_in 'Password confirmation', with: 'password'
-      end
-      click_on 'Create User'
+  context '#create' do
+    it 'create basic password' do
+      user_create_page.visit_new_page
+      user_create_page.login('newuser@example.com', 'password')
+      user_create_page.click_create_user
       expect(page).to have_text /successfully created!/i
       expect(page).to have_text 'newuser@example.com'
     end
   end
 
-  context '#edit' do
+  context '#create' do
     it 'no password confirmation' do
-      go_to_create_page
-      within_fieldset 'user' do
-        fill_in 'Email', with: 'newuser@example.com'
-        fill_in 'Password', with: 'password'
-        fill_in 'Password confirmation', with: 'pass'
-      end
-      click_on 'Create User'
+      user_create_page.visit_new_page
+      user_create_page.login('newuser@example.com', 'password', 'pass')
+      user_create_page.click_create_user
       expect(page).to have_text /Form is invalid/i
     end
-  end
-
-  def go_to_create_page
-    click_on 'Add New User'
-    expect(page).to have_text 'Password confirmation'
-    expect(page).to have_text 'Admin'
   end
 
 end
