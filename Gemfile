@@ -47,7 +47,8 @@ gem 'unicorn'
 
 # Use Capistrano for deployment
 group :development do
-  gem 'capistrano'
+  gem 'capistrano', '2.15.4'
+  gem 'capistrano-rbenv'
 end
 
 # Use debugger

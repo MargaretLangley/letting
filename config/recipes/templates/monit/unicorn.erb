@@ -2,8 +2,8 @@
 # Unicorn.rb script has to generate worker thread pids for this to work.
 
 check process <%= application %>_unicorn with pidfile <%= unicorn_pid %>
-  start program = "/etc/init.d/unicorn_<%= application %> start"
-  stop program = "/etc/init.d/unicorn_<%= application %> stop"
+  start program = "/etc/init.d/<%= application %>_unicorn start"
+  stop program = "/etc/init.d/<%= application %>_unicorn stop"
 
 <% unicorn_workers.times do |n| %>
   <% pid = unicorn_pid.sub(".pid", ".#{n}.pid") %>
