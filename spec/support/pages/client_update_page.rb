@@ -1,7 +1,7 @@
 class ClientUpdatePage
   include Capybara::DSL
 
-  cldef click_update_client
+  def click_update_client
     click_on 'Update Client'
   end
 

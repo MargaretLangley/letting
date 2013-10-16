@@ -3,7 +3,7 @@ Letting::Application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
   resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:create, :destroy]
 
   root 'properties#index'
   resources :properties do
@@ -16,7 +16,7 @@ Letting::Application.routes.draw do
   resources :clients
 
   resources :charges
-  resources :debt_generators
+  resources :debt_generators, only: [:new, :create, :index]
   resources :payments
 
 end
