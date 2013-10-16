@@ -10,7 +10,7 @@
 # How does it fit into the larger system?
 #
 # Coverts due charges into debts. The debts are then used for invoicing
-# owning debts and later payments.
+# owing debts and later credits through payments.
 #
 ####
 #

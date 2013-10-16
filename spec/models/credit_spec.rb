@@ -1,0 +1,37 @@
+require 'spec_helper'
+
+describe Credit do
+
+  let(:credit) { Credit.new credit_attributes }
+  it('is valid') { expect(credit).to be_valid }
+
+  context 'validates' do
+    context 'presence' do
+      it 'debt_id' do
+        credit.debt_id = nil
+        expect(credit).to_not be_valid
+      end
+      it 'on_date' do
+        credit.on_date = nil
+        expect(credit).to_not be_valid
+      end
+    end
+
+    context 'amount' do
+      it 'One penny is valid' do
+        credit.amount = 0.01
+        expect(credit).to be_valid
+      end
+
+      it 'two digits only' do
+        credit.amount = 0.00001
+        expect(credit).to_not be_valid
+      end
+
+      it 'positive numbers' do
+        credit.amount = -1.00
+        expect(credit).to_not be_valid
+      end
+    end
+  end
+end

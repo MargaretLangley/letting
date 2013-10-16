@@ -73,6 +73,18 @@ ActiveRecord::Schema.define(version: 20130923093205) do
     t.datetime "updated_at"
   end
 
+  create_table "credits", force: true do |t|
+    t.integer  "account_id",                         null: false
+    t.integer  "debt_id",                            null: false
+    t.date     "on_date",                            null: false
+    t.decimal  "amount",     precision: 8, scale: 2, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "credits", ["account_id"], name: "index_credits_on_account_id", using: :btree
+  add_index "credits", ["debt_id"], name: "index_credits_on_debt_id", using: :btree
+
   create_table "debt_generators", force: true do |t|
     t.string   "search_string", null: false
     t.date     "start_date",    null: false
@@ -119,18 +131,6 @@ ActiveRecord::Schema.define(version: 20130923093205) do
 
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
 
-  create_table "payments", force: true do |t|
-    t.integer  "account_id",                         null: false
-    t.integer  "debt_id",                            null: false
-    t.date     "on_date",                            null: false
-    t.decimal  "amount",     precision: 8, scale: 2, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "payments", ["account_id"], name: "index_payments_on_account_id", using: :btree
-  add_index "payments", ["debt_id"], name: "index_payments_on_debt_id", using: :btree
-
   create_table "properties", force: true do |t|
     t.integer  "human_id"
     t.integer  "client_id"
@@ -158,4 +158,3 @@ ActiveRecord::Schema.define(version: 20130923093205) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
-q

@@ -10,7 +10,7 @@
 #
 # Properties have charges which become due. The act of become due is to
 # generate debts for a charge on a particular date - it then sits against
-# the property's account. Payments made by tenants offset these debts.
+# the property's account. Credits made by tenants offset these debts.
 #
 # When a charge is being generated the generation system checks against when
 # the debt became due to see if the property has already been charged against
@@ -21,7 +21,7 @@
 class Debt < ActiveRecord::Base
   belongs_to :account
   belongs_to :debt_generator
-  has_many :payments
+  has_many :credits
   belongs_to :charge
 
   validates :charge_id, :on_date, presence: true
@@ -29,7 +29,7 @@ class Debt < ActiveRecord::Base
                      numericality: { greater_than_or_equal_to: 0 }
 
   def paid
-    payments.pluck(:amount).inject(0, :+)
+    credits.pluck(:amount).inject(0, :+)
   end
 
   def paid?

@@ -65,26 +65,26 @@ describe Debt do
 
       it 'returns the amount paid' do
         debt.save!
-        Payment.create! payment_attributes debt_id: debt.id
+        Credit.create! credit_attributes debt_id: debt.id
         expect(debt.paid).to eq 88.08
       end
 
-      it 'multiple payments are added' do
+      it 'multiple credits are added' do
         debt.save!
-        Payment.create! payment_attributes amount: 1.05, debt_id: debt.id
-        Payment.create! payment_attributes amount: 1.05, debt_id: debt.id
+        Credit.create! credit_attributes amount: 1.05, debt_id: debt.id
+        Credit.create! credit_attributes amount: 1.05, debt_id: debt.id
         expect(debt.paid).to eq 2.10
       end
     end
 
     context '#paid?' do
-      it 'false without payment' do
+      it 'false without credit' do
         expect(debt).to_not be_paid
       end
 
       it 'true when paid in full' do
         debt.save!
-        Payment.create! payment_attributes debt_id: debt.id
+        Credit.create! credit_attributes debt_id: debt.id
         expect(debt).to be_paid
       end
     end

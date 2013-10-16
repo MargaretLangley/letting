@@ -1,19 +1,19 @@
 ####
 #
-# The Account is a summation of charges, debts, payments on a property.
+# The Account is a summation of charges, debts, and credits on a property.
 #
 # The property is the
 # a property should become due a charge.
 #
 # The account has one property. A property has a number of charges.
-# The charges generate debts and payments are made to cover these debts.
+# The charges generate debts and credits are made to cover these debts.
 #
 ####
 #
 class Account < ActiveRecord::Base
   belongs_to :property, inverse_of: :account
   has_many :debts, dependent: :destroy
-  has_many :payments, dependent: :destroy
+  has_many :credits, dependent: :destroy
   include Charges
   accepts_nested_attributes_for :charges, allow_destroy: true
 
@@ -26,16 +26,12 @@ class Account < ActiveRecord::Base
     debts.build debt_args
   end
 
-  def payment payment_args
-    payments.build payment_args
+  def add_credit credit_args
+    credits.build credit_args
   end
 
   def unpaid_debts
     debts.reject(&:paid?)
-  end
-
-  def self.lastest_payments number_of
-    Payment.latest_payments number_of
   end
 
   def prepare_for_form

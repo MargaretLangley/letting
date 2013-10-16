@@ -54,6 +54,15 @@ def debt_attributes overrides = {}
   }.merge overrides
 end
 
+def credit_attributes  overrides = {}
+  {
+    account_id: 1,
+    debt_id: 1,
+    on_date: '2013/4/30',
+    amount: 88.08,
+  }.merge overrides
+end
+
 def payment_attributes  overrides = {}
   {
     account_id: 1,

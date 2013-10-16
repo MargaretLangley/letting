@@ -10,7 +10,7 @@ def generate_seeding
   seed_properties
   seed_blocks
   seed_charges
-  debts_and_payments
+  debts_and_credits
   reset_pk_sequenece_on_each_table_used
 end
 
@@ -326,9 +326,9 @@ end
     ]
   end
 
-def debts_and_payments
+def debts_and_credits
   create_debt_generator
-  create_payments
+  create_credits
 end
 
   def create_debt_generator
@@ -384,8 +384,8 @@ end
     ]
   end
 
-  def create_payments
-    Payment.create! [
+  def create_credits
+    Credit.create! [
       { id: 1,
         account_id: 1,
         debt_id: 1,
