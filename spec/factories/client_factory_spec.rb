@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'Client Factory' do
 
   let(:client) { client_new }
+  it('is valid') { expect(client).to be_valid }
 
   it('no id') { expect(client.id).to eq nil }
   it('has default human_id') { expect(client.human_id).to eq 8008 }

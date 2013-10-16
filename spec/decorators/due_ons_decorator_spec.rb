@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe DueOnsDecorator do
-  let(:due_ons_dec) do
-    DueOnsDecorator.new Charge.new.due_ons
-  end
+  let(:due_ons_dec) { DueOnsDecorator.new Charge.new.due_ons }
 
   context 'Charge prepare' do
 

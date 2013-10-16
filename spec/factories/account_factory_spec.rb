@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'Account Factory' do
 
   let(:account) { account_new }
+  it('is valid') { expect(account).to be_valid }
 
   it('no id') { expect(account.id).to eq 1 }
   it('change id') do

@@ -3,8 +3,7 @@ require 'spec_helper'
 describe Property do
 
   let(:property) { property_new }
-
-  it('#valid?') { expect(property).to be_valid }
+  it('is valid') { expect(property).to be_valid }
 
   context 'validations' do
     context 'human_id' do

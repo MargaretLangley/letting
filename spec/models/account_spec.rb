@@ -41,7 +41,7 @@ describe Account do
   end
 
   it 'makes credit' do
-    expect(account.add_credit payment_attributes).to be_valid
+    expect(account.add_credit credit_attributes).to be_valid
   end
 
   it 'makes debts' do
