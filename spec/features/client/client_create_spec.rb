@@ -61,7 +61,7 @@ describe Client do
       expect(page).to have_text 'Person or company'
     end
 
-    it 'swiches between company and person', js: true do
+    it 'switches between company and person', js: true do
       client_create_page.visit_new_page
       expect(page).to have_text 'Initials'
       client_create_page.click('or company')
