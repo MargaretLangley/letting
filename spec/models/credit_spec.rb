@@ -7,12 +7,20 @@ describe Credit do
 
   context 'validates' do
     context 'presence' do
+      it 'payment' do
+        credit.payment_id = nil
+        expect(credit).to_not be_valid
+      end
       it 'debt_id' do
         credit.debt_id = nil
         expect(credit).to_not be_valid
       end
       it 'on_date' do
         credit.on_date = nil
+        expect(credit).to_not be_valid
+      end
+      it 'amount' do
+        credit.amount = nil
         expect(credit).to_not be_valid
       end
     end
@@ -33,5 +41,11 @@ describe Credit do
         expect(credit).to_not be_valid
       end
     end
+  end
+
+  context 'associations' do
+    it('has payment') { expect(credit).to respond_to :payment }
+    it('has account') { expect(credit).to respond_to :account }
+    it('has debt') { expect(credit).to respond_to :debt }
   end
 end

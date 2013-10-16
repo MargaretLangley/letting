@@ -17,7 +17,8 @@ class Charge < ActiveRecord::Base
   include DueOns
   accepts_nested_attributes_for :due_ons, allow_destroy: true
   belongs_to :account
-  validates :amount, :charge_type, :due_in, presence: true
+  validates :charge_type, :due_in, presence: true
+  validates :amount, amount: true
   validates :due_ons, presence: true
   validate :due_ons_size
   has_many :debt

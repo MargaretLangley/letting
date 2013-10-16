@@ -1,6 +1,7 @@
 class CreateCredits < ActiveRecord::Migration
   def change
     create_table :credits do |t|
+      t.integer  :payment_id, null: false
       t.integer  :account_id, null: false
       t.integer  :debt_id,    null: false
       t.date     :on_date,    null: false
@@ -11,5 +12,6 @@ class CreateCredits < ActiveRecord::Migration
 
     add_index :credits, :debt_id
     add_index :credits, :account_id
+    add_index :credits, :payment_id
   end
 end

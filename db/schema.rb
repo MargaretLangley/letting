@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130923093205) do
+ActiveRecord::Schema.define(version: 20131016112247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20130923093205) do
   end
 
   create_table "credits", force: true do |t|
+    t.integer  "payment_id",                         null: false
     t.integer  "account_id",                         null: false
     t.integer  "debt_id",                            null: false
     t.date     "on_date",                            null: false
@@ -84,6 +85,7 @@ ActiveRecord::Schema.define(version: 20130923093205) do
 
   add_index "credits", ["account_id"], name: "index_credits_on_account_id", using: :btree
   add_index "credits", ["debt_id"], name: "index_credits_on_debt_id", using: :btree
+  add_index "credits", ["payment_id"], name: "index_credits_on_payment_id", using: :btree
 
   create_table "debt_generators", force: true do |t|
     t.string   "search_string", null: false
@@ -130,6 +132,16 @@ ActiveRecord::Schema.define(version: 20130923093205) do
   end
 
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
+
+  create_table "payments", force: true do |t|
+    t.integer  "account_id",                         null: false
+    t.date     "on_date",                            null: false
+    t.decimal  "amount",     precision: 8, scale: 2, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payments", ["account_id"], name: "index_payments_on_account_id", using: :btree
 
   create_table "properties", force: true do |t|
     t.integer  "human_id"

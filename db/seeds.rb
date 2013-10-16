@@ -385,8 +385,10 @@ end
   end
 
   def create_credits
+    #MISSING PAYMENT
     Credit.create! [
       { id: 1,
+        payment_id: 1,
         account_id: 1,
         debt_id: 1,
         on_date: "2013/#{(Date.current - 3.months).month }/03",

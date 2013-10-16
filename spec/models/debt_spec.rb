@@ -18,24 +18,13 @@ describe Debt do
         debt.on_date = nil
         expect(debt).to_not be_valid
       end
-    end
 
-    context 'amount' do
-      it 'One penny is valid' do
-        debt.amount = 0.01
-        expect(debt).to be_valid
-      end
-
-      it 'two digits only' do
-        debt.amount = 0.00001
-        expect(debt).to_not be_valid
-      end
-
-      it 'positive numbers' do
-        debt.amount = -1.00
+      it 'amount' do
+        debt.amount = nil
         expect(debt).to_not be_valid
       end
     end
+
   end
 
   context 'methods' do
