@@ -43,4 +43,16 @@ describe 'Account Factory' do
       end
     end
   end
+
+  context 'debts' do
+
+    it 'new factory account has no debts' do
+      account = account_new
+      expect(account.unpaid_debts).to have(0).items
+    end
+    let(:account) { account_and_debt }
+    it 'debted factory has unpaid debts' do
+      expect(account.unpaid_debts).to have(1).items
+    end
+  end
 end
