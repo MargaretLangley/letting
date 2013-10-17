@@ -25,7 +25,7 @@ describe 'Amount' do
       expect(validatable).to_not be_valid
     end
     it 'none numeric' do
-      validatable.amount = "bat"
+      validatable.amount = 'bat'
       expect(validatable).to_not be_valid
     end
     it 'nil' do

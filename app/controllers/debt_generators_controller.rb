@@ -19,8 +19,9 @@
 #####
 #
 class DebtGeneratorsController < ApplicationController
+  MAX_DISPLAYED_DEBTS = 10
   def index
-    @debt_generators = DebtGenerator.latest_debt_generated(10)
+    @debt_generators = DebtGenerator.latest_debt_generated(MAX_DISPLAYED_DEBTS)
   end
 
   def new
