@@ -14,15 +14,24 @@
 ####
 #
 class Address < ActiveRecord::Base
+  MIN_STRING = 4
+  MAX_STRING = 64
+  MAX_NUMBER = 10
+  MIN_POSTCODE = 6
+  MAX_POSTCODE = 8
   belongs_to :addressable, polymorphic: true
   validates :county, :road, presence: true
-  validates :flat_no, :road_no, length: { maximum: 10 }, allow_blank: true
-  validates :house_name, length: { maximum: 64 }, allow_blank: true
-  validates :road,       length: { maximum: 64 }
-  validates :district, :town, length: { minimum: 4, maximum: 64 },
+  validates :flat_no, :road_no, length: { maximum: MAX_NUMBER },
+                                allow_blank: true
+  validates :house_name, length: { maximum: MAX_STRING }, allow_blank: true
+  validates :road,       length: { maximum: MAX_STRING }
+  validates :district, :town, length: { minimum: MIN_STRING,
+                                        maximum: MAX_STRING },
                               allow_blank: true
-  validates :county,     length: { minimum: 4, maximum: 64 }
-  validates :postcode,   length: { minimum: 6, maximum: 8 }, allow_blank: true
+  validates :county,   length: { minimum: MIN_STRING, maximum: MAX_STRING }
+  validates :postcode, length: { minimum: MIN_POSTCODE,
+                                 maximum: MAX_POSTCODE },
+                       allow_blank: true
 
   def empty?
     attributes.except(*ignored_attrs).values.all?(&:blank?)
@@ -37,4 +46,5 @@ class Address < ActiveRecord::Base
     def ignored_attrs
       %w[id addressable_id addressable_type created_at updated_at]
     end
+
 end
