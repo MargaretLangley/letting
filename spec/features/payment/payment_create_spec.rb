@@ -16,7 +16,7 @@ describe Payment do
   before(:each) { log_in }
 
   it 'payment for debt' do
-    pending
+    pending 'Next Feature Test'
     account_and_debt.save!
     payment_page.visit_new_page
 
