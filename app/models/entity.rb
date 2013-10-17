@@ -43,6 +43,10 @@ class Entity < ActiveRecord::Base
     entity_type == 'Company'
   end
 
+  def full_name
+    "#{title} #{initials} #{name}".strip
+  end
+
   private
 
     def ignored_attrs

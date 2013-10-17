@@ -46,27 +46,33 @@ describe Entity do
   end
 
   context 'methods' do
-    let(:entity) { Entity.new }
+    context 'new entity' do
+      let(:entity) { Entity.new }
 
-    context '#prepare new entity' do
-      it 'has entity_type' do
-        entity.prepare
-        expect(entity.entity_type).to eq 'Person'
+      context '#prepare' do
+        it 'has entity_type' do
+          entity.prepare
+          expect(entity.entity_type).to eq 'Person'
+        end
+      end
+
+      context '#empty?' do
+        it('is empty') { expect(entity).to be_empty }
+
+        it 'with noted attribute not empty' do
+          entity.name = 'Bob'
+          expect(entity).to_not be_empty
+        end
+
+        it 'with ignored attribute empty' do
+          entity.id = 8
+          expect(entity).to be_empty
+        end
       end
     end
 
-    context '#empty? new entity' do
-      it('empty') { expect(entity).to be_empty }
-
-      it 'with noted attribute not empty' do
-        entity.name = 'Bob'
-        expect(entity).to_not be_empty
-      end
-
-      it 'with ignored attribute empty' do
-        entity.id = 8
-        expect(entity).to be_empty
-      end
+    it 'creates #full_name' do
+      expect(entity.full_name).to eq 'Mr W G Grace'
     end
   end
 
