@@ -1,45 +1,10 @@
 
 <h2 class="mainTitle">New Payment</h2>
-<%= render 'search' %>
 
-<% if @payments %>
-
-  <%= form_for @payment do |f| %>
-
-   <div>
-
-       <%= render 'debts' %>
-
-    </div>
-    <p>
-    <p/>
-
-   <% @property.account.unpaid_debts.each do |unpaid_debt| %>
-      <%= f.fields_for :payment,  unpaid_debt.payments.build do |b| %>
-
-        <fieldset id='payment' class='shell'>
-          <%= b.hidden_field :account_id %>
-          <%= b.hidden_field :debt_id %>
-
-          <div class='field text require half'>
-            <%= b.label :on_date,'On Date' %>
-            <%= b.date_field :on_date %>
-          </div>
-
-          <div class='field text require half'>
-            <%= b.label :amount, 'Amount' %>
-            <%= b.text_field :amount %>
-          </div>
-
-        </fieldset>
-
-      <% end %>
-    <% end %>
-    <%= f.submit %><span class = 'simple' ><%= link_to 'Cancel', payments_path %></span>
-  <% end %>
-<% else %>
-
-    Need a property to pay
+<%= form_for @payment do |payment_form| %>
+<%= render 'shared/errors', object: @payment %>
+<fieldset class='shell'>
+  <%= render 'search_payable_properties', payment_form: payment_form %>
+  <%= render 'create_payment', payment_form: payment_form %>
+</fieldset>
 <% end %>
-
-

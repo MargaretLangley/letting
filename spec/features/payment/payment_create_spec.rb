@@ -1,12 +1,25 @@
 require 'spec_helper'
 
+class PaymentCreatePage
+  include Capybara::DSL
+
+  def visit_new_page
+    visit '/payments/new'
+    self
+  end
+
+end
+
 describe Payment do
 
+  let(:payment_page) { PaymentCreatePage.new }
   before(:each) { log_in }
 
-  context '#payment' do
-    it 'verify property id valid' do
-    end
+  it 'payment for debt' do
+    pending
+    account_and_debt.save!
+    payment_page.visit_new_page
+
   end
 
   context '#payment' do

@@ -1,29 +1,42 @@
-# class PaymentsController < ApplicationController
+class PaymentsController < ApplicationController
 
 #   def index
 #     @payments = Payment.latest_payments(10)
 #   end
 
-#   def new
-#     @property = Property.search(params[:search]).first
-#     if params[:search].present?
-#       # @payment = @property.account.unpaid_debts.payments.build
-#       @payment = Payment.new
-#       @payments = Payment.latest_payments(10)
-#     else
-#       redirect_to payments_path
-#     end
-#   end
+  def new
+    @payment = Payment.new
+  end
 
-#   def create
-#     @payment = Payment.new payments_params
-#     if payment.save
-#       redirect_to new_payment_path,
-#                   notice: "#{@payment.account_id} successfully created"
-#     else
-#       redirect_to new_payment_path
-#     end
-#   end
+  def create
+    if search_payments?
+      show_payment
+    else
+      create_payment
+    end
+  end
+
+  def search_payments?
+    params[:commit] == 'Search'
+  end
+
+  def show_payment
+    @payment = Payment.from_human_id
+    render :new
+  end
+
+  def create_payment
+    if payment.save
+      redirect_to new_payment_path,
+                  notice: "#{@payment.account_id} successfully created"
+    else
+      redirect_to new_payment_path
+    end
+  end
+
+  # def new_payment
+  #   Payment.new ..........
+  # end
 
 #   def search_param
 #     params[:search]
@@ -44,4 +57,4 @@
 #     [:account_id, :debt_id, :on_date, :amount]
 #   end
 
-# end
+end

@@ -1,0 +1,14 @@
+<div>
+  <h2>Property</h2>
+
+  <% if @payment.present? %>
+    <div class='grid'>
+      <%= render 'address', property: PropertyDecorator.new(@payment.account.property) %>
+    </div>
+
+    <h2>unpaid debts</h2>
+  <% else %>
+    No Property Selected
+  <% end %>
+
+</div>

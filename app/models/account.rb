@@ -42,6 +42,10 @@ class Account < ActiveRecord::Base
     charges.clean_up_form
   end
 
+  def self.from_human_id
+    1
+  end
+
   private
 
     def already_charged_for? chargeable
