@@ -19,6 +19,11 @@ module Entities
   included do
     has_many :entities, -> { order(:created_at) }, dependent: :destroy,
                                                    as: :entitieable do
+
+      def full_name
+        reject(&:empty?).map(&:full_name).join(' & ')
+      end
+
       def prepare
         (size...MAX_ENTITIES).each { build }
         each { |entity| entity.prepare }

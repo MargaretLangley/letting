@@ -44,7 +44,7 @@ class Entity < ActiveRecord::Base
   end
 
   def full_name
-    "#{title} #{initials} #{name}".strip
+    [title, initials, name].reject(&:blank?).join(' ')
   end
 
   private
