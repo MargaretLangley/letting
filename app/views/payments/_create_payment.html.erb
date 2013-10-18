@@ -1,16 +1,14 @@
-<div>
+<div class='top'>
   <h2>Property</h2>
 
   <% if @payment.present? %>
-    <div class='grid'>
+    <% if @payment.present? %>
       <%= render 'address', property: PropertyDecorator.new(@payment.account.property) %>
-    </div>
-
-    <h2>Unpaid Debts</h2>
-    <% @payment.account.unpaid_debts.each do |debt| %>
-      <%= debt.inspect %><br>
     <% end %>
-
+</div>
+<div class='top'>
+  <h2>Unpaid Debts</h2>
+    <%= render 'credits', payment_form: payment_form  %>
   <% else %>
     No Property Selected
   <% end %>

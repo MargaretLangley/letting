@@ -62,7 +62,7 @@ describe Account do
 
     it '#by_human id' do
       property_create!
-      expect(Account.by_human_id(2002).property.id).to eq 1
+      expect(Account.by_human_id(2002)).to be_present
     end
   end
 

@@ -31,11 +31,19 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def payment
+    Payment.new payment_params
+  end
+
   def success
     "Payment successfully created"
   end
 
   def search_params
+    params.require(:payment).permit :human_id
+  end
+
+  def payment_params
     params.require(:payment).permit :human_id
   end
 

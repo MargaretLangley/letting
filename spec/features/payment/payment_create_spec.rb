@@ -22,6 +22,10 @@ class PaymentCreatePage
     has_content? /No Property Selected/i
   end
 
+  def debt_free?
+    has_content? /Debt Free/i
+  end
+
 end
 
 describe Payment do
@@ -29,17 +33,32 @@ describe Payment do
   let(:payment_page) { PaymentCreatePage.new }
   before(:each) { log_in }
 
-  it 'handles unknown property' do
-    payment_page.visit_new_page
-    payment_page.human_id('800').search
-    expect(payment_page).to be_empty_search
-  end
 
   it 'payment for debt' do
-    property_with_unpaid_debt.save!
+    pending 'needs to be looked at'
+    (property = property_with_unpaid_debt).save!
     payment_page.visit_new_page
     payment_page.human_id('2002').search
+    save_and_open_page
     expect(payment_page).to_not be_empty_search
+    expect(payment_page).to_not be_debt_free
+    expect(property.account.payments[0].credits).to have(1).items
+  end
+
+  context 'error' do
+
+    it 'unknown property' do
+      payment_page.visit_new_page
+      payment_page.human_id('800').search
+      expect(payment_page).to be_empty_search
+    end
+
+    it 'no unpaid debts' do
+      property_create!
+      payment_page.visit_new_page
+      payment_page.human_id('2002').search
+      expect(payment_page).to be_debt_free
+    end
   end
 
   context '#payment' do

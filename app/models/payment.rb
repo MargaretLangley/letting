@@ -12,12 +12,17 @@
 class Payment < ActiveRecord::Base
   belongs_to :account
   has_many :credits
+  accepts_nested_attributes_for :credits, allow_destroy: true
   attr_accessor :human_id
 
   validates :account_id, presence: true
 
   def present?
     account_id.present?
+  end
+
+  def debtless?
+    credits.empty?
   end
 
   def prepare_for_form

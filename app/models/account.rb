@@ -14,6 +14,7 @@ class Account < ActiveRecord::Base
   belongs_to :property, inverse_of: :account
   has_many :debts, dependent: :destroy
   has_many :credits, dependent: :destroy
+  has_many :payments
   include Charges
   accepts_nested_attributes_for :charges, allow_destroy: true
 

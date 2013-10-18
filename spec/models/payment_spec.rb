@@ -21,12 +21,13 @@ describe Payment do
   end
 
   context 'methods' do
-    let(:account) { account_and_debt }
-    it 'prepares payment' do
-      payment = Payment.new
-      payment.prepare_for_form account
+
+    it '#prepare_for_form prepares credit' do
+      property_with_unpaid_debt.save!
+      payment = Payment.new human_id: 2002
+      payment.account =  Account.by_human_id 2002
+      payment.prepare_for_form
       expect(payment.credits).to have(1).items
-      expect(payment.credits[0].debt.amount).to eq 88.08
     end
   end
 
