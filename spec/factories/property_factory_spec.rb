@@ -35,4 +35,11 @@ describe 'Property Factory' do
       expect(property.address.road).to eq 'Headingly Road'
     end
   end
+
+  context 'with paid debt' do
+    it 'has debt' do
+      property = property_with_unpaid_debt
+      expect(property.account.unpaid_debts).to have(1).items
+    end
+  end
 end
