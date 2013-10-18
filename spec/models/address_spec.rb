@@ -145,7 +145,7 @@ describe Address do
       new_address = Address.new
       new_address.attributes = client.address.copy_approved_attributes
       expect(new_address.addressable_id).to be_nil
-      expect(new_address.road).to_not be_nil
+      expect(new_address.road).to be_present
     end
   end
 end
