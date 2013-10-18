@@ -49,3 +49,6 @@ en:
             separator: "."
             delimiter: ","
             precision: 2
+  date:
+    formats:
+      default: "%d/%m/%Y"
