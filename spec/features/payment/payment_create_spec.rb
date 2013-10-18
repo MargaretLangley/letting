@@ -8,6 +8,20 @@ class PaymentCreatePage
     self
   end
 
+  def human_id property
+    fill_in 'payment_human_id', with: property
+    self
+  end
+
+  def search
+    click_on 'Search'
+    self
+  end
+
+  def empty_search?
+    has_content? /No Property Selected/i
+  end
+
 end
 
 describe Payment do
@@ -15,11 +29,17 @@ describe Payment do
   let(:payment_page) { PaymentCreatePage.new }
   before(:each) { log_in }
 
-  it 'payment for debt' do
-    pending 'Next Feature Test'
-    account_and_debt.save!
+  it 'handles unknown property' do
     payment_page.visit_new_page
+    payment_page.human_id('800').search
+    expect(payment_page).to be_empty_search
+  end
 
+  it 'payment for debt' do
+    property_with_unpaid_debt.save!
+    payment_page.visit_new_page
+    payment_page.human_id('2002').search
+    expect(payment_page).to_not be_empty_search
   end
 
   context '#payment' do

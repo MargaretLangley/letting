@@ -6,7 +6,11 @@
       <%= render 'address', property: PropertyDecorator.new(@payment.account.property) %>
     </div>
 
-    <h2>unpaid debts</h2>
+    <h2>Unpaid Debts</h2>
+    <% @payment.account.unpaid_debts.each do |debt| %>
+      <%= debt.inspect %><br>
+    <% end %>
+
   <% else %>
     No Property Selected
   <% end %>

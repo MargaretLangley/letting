@@ -20,8 +20,10 @@ class Payment < ActiveRecord::Base
     account_id.present?
   end
 
-  def self.from_human_id
-    # id = Account.from_human_id human_id
-    Payment.new account_id: 1
+  def prepare_for_form
+    account && account.unpaid_debts.each do |debt|
+      credits.build debt: debt
+    end
   end
+
 end
