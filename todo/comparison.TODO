@@ -2,43 +2,43 @@
 
   LOGIN
 
-  Name                                          Email
-  Password                                      Password
+  Name                                                  Email
+  Password                                              Password
 
-  WELCOME PAGE                                  No welcome page goes into property list
+  WELCOME PAGE                                          No welcome page goes into property list
   Welcome User's name
   Version Date of Update
   Today's date
   Recent payments
 
-  CLIENTS                                     CLIENTS
-  List of Clients & their addresses           Index page Client List
-  Print out of Client list                    NO Print out
-  Create New Client                           Create New Client
+  CLIENTS                                               CLIENTS
+  List of Clients & their addresses                     Index page Client List
+  Print out of Client list                              NO Print out
+  Create New Client                                     Create New Client
   Note client address needed
   to go on invoice
-  Update Client                               Update Client
+  Update Client                                         Update Client
   Drop Down List of Clients for Search
-  Delete Client                                Delete Client from Index Page
-  Client GR House accounts between given dates  Client with List of Properties Account
+  Delete Client                                         Delete Client from Index Page
+  Client GR House accounts between given dates          Client with List of Properties Account
   Print out of Client Accounts
 
-  PROPERTIES                                  PROPERTIES
-  List of Properties                          Index Page Property List
+  PROPERTIES                                            PROPERTIES
+  List of Properties                                    Index Page Property List
   Search for property
-  Update Property                             Edit
+  Update Property                                       Edit
   Address Occupier, Agent Name & Address
 
   Property must be conected to a client
   Drop Down List of Clients to choose from
   Print out of Property List
-  Create New Property                         Create New Property
-  Delete Property                             Delete from Index Page
+  Create New Property                                   Create New Property
+  Delete Property                                       Delete from Index Page
   Print out of Property details
   Print out of Property account
 
   ACCOUNTS FOR PROPERTIES
-  Must have details of GR, Rent, Service Charge   Held in Property details
+  Must have details of GR, Rent, Service Charge         Held in Property details
   or other charges
   Must have details of when charges due
   Must be able to Bill property
@@ -87,11 +87,12 @@
 
   Details of payments made
   Needs property address
-  Batch Payments            Make only batch
-  Single Payment            payments
+  Batch Payments                                        Make only batch
+  Single Payment                                        payments
 
   BLOCKS UPDATE
-  This is used to update charges in a group of flats
+  This is used to update charges
+  in a group of flats
   or roads
   List of Blocks
   Dropdown list of blocks
@@ -101,7 +102,8 @@
   Obtains members of block by searching address
   New block - update block list
   Needs a house name or road name already on
-  data base. Note not all blocks have same service charge
+  data base.
+  Note not all blocks have same service charge
   for each flat
 
   LETTERS
@@ -110,7 +112,8 @@
   Quarterly Service Charge
   Monthly Service Charge
   Update letter Details
-  Wording of letters can change for legal requirements  Text data needed to be held
+  Wording of letters can change
+  for legal requirements                                Text data needed to be held
 
   All letters require:
   Adams' address
@@ -130,7 +133,7 @@
   uses GR data and specific legal form
 
   PRINTOUTS AVAILBLE
-  Agent                                        Probably unnecessary
+  Agent                                                 Probably unnecessary
   Arrears
   Client List
   Monthly Service Charge List
