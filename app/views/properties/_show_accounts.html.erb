@@ -24,8 +24,29 @@
        Balance
       </th>
     </tr>
-  </theadvi
-
+  </thead>
+<tbody>
+     <% debts.each do |debt| %>
+    <tr>
+      <td>
+          <%= debt.charge_id %>
+      </td>
+      <td class='alnright'>
+         <%= debt.on_date %>
+      </td>
+      <td>
+      </td>
+      <td class='alnright'>
+           <%= debt.amount %>
+       </td>
+      <td class='alnright'>
+      </td>
+      <td class='alnright'>
+         <%= debt.amount %>
+     </td>
+    </tr>
+      <% end %>
+  </tbody>
 </table>
 </div>
 
