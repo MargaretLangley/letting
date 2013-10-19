@@ -26,13 +26,14 @@
     </tr>
   </thead>
 <tbody>
+     <% total = 0 %>
      <% debts.each do |debt| %>
     <tr>
       <td>
           <%= debt.charge_id %>
       </td>
       <td class='alnright'>
-         <%= debt.on_date %>
+       <%= display_uk_date(debt.on_date) %>
       </td>
       <td>
       </td>
@@ -42,7 +43,7 @@
       <td class='alnright'>
       </td>
       <td class='alnright'>
-         <%= debt.amount %>
+         <%= total = total + debt.amount %>
      </td>
     </tr>
       <% end %>
