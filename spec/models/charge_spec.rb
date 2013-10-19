@@ -65,12 +65,12 @@ describe Charge do
 
     context '#empty?' do
       it 'valid is not empty' do
-        expect(charge).to_not be_empty
+        expect(charge).to be_present
       end
 
       it 'charge is not empty if due_ons not empty' do
         charge.attributes = { charge_type: '', due_in: '', amount: '' }
-        expect(charge).to_not be_empty
+        expect(charge).to be_present
       end
 
       it 'if charge and due_ons attributes empty' do

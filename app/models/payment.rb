@@ -12,6 +12,7 @@
 class Payment < ActiveRecord::Base
   belongs_to :account
   has_many :credits
+  accepts_nested_attributes_for :credits, allow_destroy: true
   attr_accessor :human_id
 
   validates :account_id, presence: true
@@ -20,8 +21,14 @@ class Payment < ActiveRecord::Base
     account_id.present?
   end
 
-  def self.from_human_id
-    # id = Account.from_human_id human_id
-    Payment.new account_id: 1
+  def debtless?
+    credits.empty?
   end
+
+  def prepare_for_form
+    account && account.unpaid_debts.each do |debt|
+      credits.build debt: debt
+    end
+  end
+
 end

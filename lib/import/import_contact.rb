@@ -48,7 +48,7 @@ module DB
     end
 
     def assign_company entity, number, row
-      name = "#{row[:"title#{number}"]} #{row[:"initials#{number}"]} " + \
+      name = "#{row[:"title#{number}"]} #{row[:"initials#{number}"]} " +
              "#{row[:"name#{number}"]}"
       entity.attributes = { entity_type:  entity_type(row, number),
                             title:        '',

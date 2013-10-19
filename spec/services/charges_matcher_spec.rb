@@ -14,7 +14,7 @@ describe ChargesMatcher do
     it 'matching charge if known' do
       expect(ChargesMatcher.new(charges)
                            .first_or_initialize 'Ground Rent')
-                           .to_not be_empty
+                           .to be_present
     end
   end
 end

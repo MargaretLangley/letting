@@ -61,7 +61,7 @@ describe Entity do
 
         it 'with noted attribute not empty' do
           entity.name = 'Bob'
-          expect(entity).to_not be_empty
+          expect(entity).to be_present
         end
 
         it 'with ignored attribute empty' do

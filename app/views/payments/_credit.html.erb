@@ -1,0 +1,14 @@
+<tr>
+  <td>
+    <%= credit_form.label credit.debt.charge.charge_type %>
+  </td>
+  <td>
+    <%= credit_form.label l credit.debt.on_date %>
+  </td>
+  <td>
+    <%= number_to_currency credit.debt.amount %>
+  </td>
+  <td>
+    <%= credit_form.text_field :amount %>
+  </td>
+</tr>

@@ -37,6 +37,12 @@ def property_with_monthly_charge_create! args = {}
   property
 end
 
+def property_with_unpaid_debt args = {}
+  property = base_property args
+  add_debt_attribute property.account, args
+  property
+end
+
 private
 
 def base_property args = {}
@@ -70,3 +76,8 @@ end
 def add_due_on_1 charge
   charge.due_ons.build due_on_attributes_1
 end
+
+def add_debt_attribute account, args
+  account.add_debt debt_attributes args.fetch(:debt_attributes, {})
+end
+

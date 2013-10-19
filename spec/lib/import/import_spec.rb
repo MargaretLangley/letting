@@ -33,8 +33,8 @@ module DB
                                  header: %w{one line},
                                  location: file_location)
         output.each do |row|
-          expect(row[:one]).to_not be_nil
-          expect(row[:line]).to_not be_nil
+          expect(row[:one]).to be_present
+          expect(row[:line]).to be_present
         end
       end
 

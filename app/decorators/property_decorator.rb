@@ -18,6 +18,17 @@ class PropertyDecorator
     address_lines
   end
 
+  def reduced_address_lines
+    address_lines = []
+    address_lines << property.entities.full_name
+    address_lines << flat_line if address.flat_no.present?
+    address_lines << address.house_name if address.house_name.present?
+    address_lines << road_line
+    address_lines << address.town if address.town.present?
+    address_lines
+  end
+
+
   private
 
     def flat_line

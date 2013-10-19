@@ -20,4 +20,15 @@ describe Payment do
     it('credits') { expect(payment).to respond_to(:credits) }
   end
 
+  context 'methods' do
+
+    it '#prepare_for_form prepares credit' do
+      property_with_unpaid_debt.save!
+      payment = Payment.new human_id: 2002
+      payment.account =  Account.by_human_id 2002
+      payment.prepare_for_form
+      expect(payment.credits).to have(1).items
+    end
+  end
+
 end

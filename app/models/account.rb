@@ -14,6 +14,7 @@ class Account < ActiveRecord::Base
   belongs_to :property, inverse_of: :account
   has_many :debts, dependent: :destroy
   has_many :credits, dependent: :destroy
+  has_many :payments
   include Charges
   accepts_nested_attributes_for :charges, allow_destroy: true
 
@@ -42,8 +43,8 @@ class Account < ActiveRecord::Base
     charges.clean_up_form
   end
 
-  def self.from_human_id
-    1
+  def self.by_human_id human_id
+    Account.joins(:property).find_by(properties: { human_id: human_id } )
   end
 
   private
