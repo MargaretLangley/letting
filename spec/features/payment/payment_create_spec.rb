@@ -27,13 +27,20 @@ class PaymentCreatePage
     self
   end
 
-
   def empty_search?
     has_content? /No Property Selected/i
   end
 
   def debt_free?
     has_content? /Debt Free/i
+  end
+
+  def errored?
+    has_content? /The payment could not be saved./i
+  end
+
+  def successful?
+    has_content? /Payment successfully created/i
   end
 
 end
@@ -45,7 +52,6 @@ describe Payment do
 
 
   it 'payment for debt' do
-    pending 'to be continued'
     (property = property_with_charge_and_unpaid_debt).save!
     payment_page.visit_new_page
     payment_page.human_id('2002').search
@@ -53,7 +59,7 @@ describe Payment do
     expect(payment_page).to_not be_debt_free
     payment_page.payment 88.08
     payment_page.create_payment
-    expect(property.account.payments[0].credits).to have(1).items
+    expect(payment_page).to be_successful
   end
 
   context 'error' do
@@ -69,6 +75,15 @@ describe Payment do
       payment_page.visit_new_page
       payment_page.human_id('2002').search
       expect(payment_page).to be_debt_free
+    end
+
+    it 'handles errors' do
+      (property = property_with_charge_and_unpaid_debt).save!
+      payment_page.visit_new_page
+      payment_page.human_id('2002').search
+      payment_page.payment -10
+      payment_page.create_payment
+      expect(payment_page).to be_errored
     end
   end
 

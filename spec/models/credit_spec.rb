@@ -7,10 +7,6 @@ describe Credit do
 
   context 'validates' do
     context 'presence' do
-      it 'payment' do
-        credit.payment_id = nil
-        expect(credit).to_not be_valid
-      end
       it 'debt_id' do
         credit.debt_id = nil
         expect(credit).to_not be_valid
@@ -51,15 +47,13 @@ describe Credit do
 
   context 'default inialization' do
     let(:credit) do
-      credit = Credit.new
-      credit.debt = Debt.new amount: 0
-      credit
+      debt = Debt.create! debt_attributes
+      debt.credits.build
     end
     before { Timecop.travel(Date.new(2013, 9, 30)) }
     after { Timecop.return }
 
     it 'has on_date' do
-      pending 'test setup problem'
       expect(credit.on_date).to eq Date.new 2013, 9, 30
     end
 

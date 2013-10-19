@@ -3,7 +3,7 @@ class Credit < ActiveRecord::Base
   belongs_to :account
   belongs_to :debt
 
-  validates :debt_id, :on_date, :payment_id, presence: true
+  validates :debt_id, :on_date, presence: true
   validates :amount, amount: true
 
   after_initialize do |debt_generator|
