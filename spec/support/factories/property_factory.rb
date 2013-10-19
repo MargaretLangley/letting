@@ -37,6 +37,18 @@ def property_with_monthly_charge_create! args = {}
   property
 end
 
+
+# when your running full specs I haven't found reliable way of guaranteeing
+# a primary key will be set to a value. This is a hack to save the object
+# get the key value and put it into the debt - not nice
+def property_with_charge_and_unpaid_debt args = {}
+  (property = property_with_charge_new).save!
+  property.account.add_debt debt_attributes \
+    charge_id: property.account.charges.reject(&:empty?).first.id
+  property
+end
+
+
 def property_with_unpaid_debt args = {}
   property = base_property args
   add_debt_attribute property.account, args

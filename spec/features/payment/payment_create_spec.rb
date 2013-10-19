@@ -13,10 +13,20 @@ class PaymentCreatePage
     self
   end
 
+  def payment amount
+    fill_in 'payment_credits_attributes_0_amount', with: amount
+  end
+
   def search
     click_on 'Search'
     self
   end
+
+  def create_payment
+    click_on 'payment'
+    self
+  end
+
 
   def empty_search?
     has_content? /No Property Selected/i
@@ -35,13 +45,14 @@ describe Payment do
 
 
   it 'payment for debt' do
-    pending 'needs to be looked at'
-    (property = property_with_unpaid_debt).save!
+    pending 'to be continued'
+    (property = property_with_charge_and_unpaid_debt).save!
     payment_page.visit_new_page
     payment_page.human_id('2002').search
-    save_and_open_page
     expect(payment_page).to_not be_empty_search
     expect(payment_page).to_not be_debt_free
+    payment_page.payment 88.08
+    payment_page.create_payment
     expect(property.account.payments[0].credits).to have(1).items
   end
 

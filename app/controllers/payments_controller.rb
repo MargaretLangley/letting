@@ -25,14 +25,14 @@ class PaymentsController < ApplicationController
 
   def create_payment
     if payment.save
-      redirect_to new_payment_path, notice: success
+      redirect_to payments_path, notice: success
     else
       render :new
     end
   end
 
   def payment
-    Payment.new payment_params
+    @payment = Payment.new payment_params
   end
 
   def success
@@ -44,7 +44,11 @@ class PaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit :human_id
+    params.require(:payment).permit :account_id, :on_date, :amount, :human_id, credits_attributes: credit_attributes
+  end
+
+  def credit_attributes
+    %i(id account_id debt_id on_date amount)
   end
 
 end

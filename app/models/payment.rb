@@ -11,11 +11,20 @@
 #
 class Payment < ActiveRecord::Base
   belongs_to :account
-  has_many :credits
+  has_many :credits do
+    def default_amount
+      map { |credit| credit.default_amount }.sum
+    end
+  end
   accepts_nested_attributes_for :credits, allow_destroy: true
   attr_accessor :human_id
 
   validates :account_id, presence: true
+
+  after_initialize do |debt_generator|
+    self.on_date = default_on_date if on_date.blank?
+  end
+
 
   def present?
     account_id.present?
@@ -27,8 +36,19 @@ class Payment < ActiveRecord::Base
 
   def prepare_for_form
     account && account.unpaid_debts.each do |debt|
-      credits.build debt: debt
+      credits.build debt: debt, account_id: account_id
     end
+    self.amount = default_amount if amount.blank?
+  end
+
+  private
+
+  def default_on_date
+    Date.current
+  end
+
+  def default_amount
+    credits.default_amount
   end
 
 end

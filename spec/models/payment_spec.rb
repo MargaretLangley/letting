@@ -20,6 +20,22 @@ describe Payment do
     it('credits') { expect(payment).to respond_to(:credits) }
   end
 
+  context 'default inialization' do
+    let(:payment) { Payment.new }
+    before { Timecop.travel(Date.new(2013, 9, 30)) }
+    after { Timecop.return }
+
+    it 'has on_date' do
+      expect(payment.on_date).to eq Date.new 2013, 9, 30
+    end
+
+    it 'has amount' do
+      expect(payment.on_date).to eq Date.new 2013, 9, 30
+    end
+
+
+  end
+
   context 'methods' do
 
     it '#prepare_for_form prepares credit' do
@@ -29,6 +45,14 @@ describe Payment do
       payment.prepare_for_form
       expect(payment.credits).to have(1).items
     end
+
+    it 'prepare_for_form calcualtes default amount' do
+      payment.credits.build amount: 44.08
+      payment.credits.build amount: 44.00
+      payment.prepare_for_form
+      expect(payment.amount).to eq 88.08
+    end
+
   end
 
 end

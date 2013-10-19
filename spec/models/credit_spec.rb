@@ -48,4 +48,21 @@ describe Credit do
     it('has account') { expect(credit).to respond_to :account }
     it('has debt') { expect(credit).to respond_to :debt }
   end
+
+  context 'default inialization' do
+    let(:credit) do
+      credit = Credit.new
+      credit.debt = Debt.new amount: 0
+      credit
+    end
+    before { Timecop.travel(Date.new(2013, 9, 30)) }
+    after { Timecop.return }
+
+    it 'has on_date' do
+      pending 'test setup problem'
+      expect(credit.on_date).to eq Date.new 2013, 9, 30
+    end
+
+  end
+
 end
