@@ -33,7 +33,7 @@ class PaymentsController < ApplicationController
   end
 
   def success
-    "Payment successfully created"
+    'Payment successfully created'
   end
 
   def search_params
@@ -41,7 +41,13 @@ class PaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit :id, :account_id, :on_date, :amount, :human_id, credits_attributes: credit_attributes
+    params.require(:payment)
+     .permit :id,
+             :account_id,
+             :on_date,
+             :amount,
+             :human_id,
+             credits_attributes: credit_attributes
   end
 
   def credit_attributes

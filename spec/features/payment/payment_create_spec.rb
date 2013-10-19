@@ -50,9 +50,8 @@ describe Payment do
   let(:payment_page) { PaymentCreatePage.new }
   before(:each) { log_in }
 
-
   it 'payment for debt' do
-    (property = property_with_charge_and_unpaid_debt).save!
+    property_with_charge_and_unpaid_debt.save!
     payment_page.visit_new_page
     payment_page.human_id('2002').search
     expect(payment_page).to_not be_empty_search
@@ -78,10 +77,10 @@ describe Payment do
     end
 
     it 'handles errors' do
-      (property = property_with_charge_and_unpaid_debt).save!
+      property_with_charge_and_unpaid_debt.save!
       payment_page.visit_new_page
       payment_page.human_id('2002').search
-      payment_page.payment -10
+      payment_page.payment(-10)
       payment_page.create_payment
       expect(payment_page).to be_errored
     end

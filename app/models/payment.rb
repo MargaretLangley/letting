@@ -17,7 +17,7 @@ class Payment < ActiveRecord::Base
     end
 
     def prepare debt, account_id
-      self.build debt: debt, account_id: account_id
+      build debt: debt, account_id: account_id
     end
   end
   accepts_nested_attributes_for :credits, allow_destroy: true
@@ -28,7 +28,6 @@ class Payment < ActiveRecord::Base
   after_initialize do |debt_generator|
     self.on_date = default_on_date if on_date.blank?
   end
-
 
   def present?
     account_id.present?

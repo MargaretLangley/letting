@@ -25,5 +25,4 @@ class Credit < ActiveRecord::Base
     Date.current
   end
 
-
 end

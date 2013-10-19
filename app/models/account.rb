@@ -44,7 +44,7 @@ class Account < ActiveRecord::Base
   end
 
   def self.by_human_id human_id
-    Account.joins(:property).find_by(properties: { human_id: human_id } )
+    Account.joins(:property).find_by(properties: { human_id: human_id })
   end
 
   private

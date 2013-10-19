@@ -33,7 +33,6 @@ describe Payment do
       expect(payment.on_date).to eq Date.new 2013, 9, 30
     end
 
-
   end
 
   context 'methods' do

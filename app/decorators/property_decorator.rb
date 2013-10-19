@@ -28,7 +28,6 @@ class PropertyDecorator
     address_lines
   end
 
-
   private
 
     def flat_line
