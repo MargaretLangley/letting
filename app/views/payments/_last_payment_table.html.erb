@@ -23,7 +23,7 @@
       <% @payments.each do |payment| %>
       <tr>
         <td>
-          <%= payment.on_date.strftime("%d-%m-%Y") %>
+          <%= l payment.on_date %>
         </td>
         <td class='alnright'>
           <%=payment.account.property.human_id %>

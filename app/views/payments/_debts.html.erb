@@ -20,7 +20,7 @@
       <% @property.account.unpaid_debts.each do |debt| %>
       <tr>
         <td>
-            <%= debt.on_date.strftime("%d-%m-%Y") %>
+            <%= l debt.on_date %>
         </td>
         <td>
             <%= debt.charge.charge_type %>

@@ -19,7 +19,7 @@
     <tbody>
       <tr>
         <td>
-            <%= @property.account.unpaid_debts[0].on_date.strftime("%d-%m-%Y") %>
+            <%= l @property.account.unpaid_debts[0].on_date %>
         </td>
         <td>
             <%= @property.account.unpaid_debts[0].charge.charge_type %>
