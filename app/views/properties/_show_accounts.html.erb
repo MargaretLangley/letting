@@ -1,54 +1,49 @@
-<article>
-  <div class = 'showbox'>
-    <h2>Property Id: </span>
-      <%= @property.human_id %>
-<table>
-  <thead>
-    <tr>
-      <th>
-        Type
-      </th>
-      <th>
-        Date
-      </th>
-      <th>
-        Description
-      </th>
-      <th class='alnright'>
-       Due
-      </th>
-      <th class='alnright'>
-        Payment
-      </th>
-      <th class='alnright'>
-       Balance
-      </th>
-    </tr>
-  </thead>
-<tbody>
-     <% total = 0 %>
-     <% debts.each do |debt| %>
-    <tr>
-      <td>
-          <%= debt.charge_id %>
-      </td>
-      <td>
-       <%= l debt.on_date %>
-      </td>
-      <td>
-      </td>
-      <td class='alnright'>
-           <%= debt.amount %>
-       </td>
-      <td class='alnright'>
-      </td>
-      <td class='alnright'>
-         <%= total = total + debt.amount %>
-     </td>
-    </tr>
+<div class = 'showbox'>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Type
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+          Description
+        </th>
+        <th class='alnright'>
+          Due
+        </th>
+        <th class='alnright'>
+          Payment
+        </th>
+        <th class='alnright'>
+          Balance
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% total = 0 %>
+      <% debts.each do |debt| %>
+        <tr>
+          <td>
+            <%= debt.charge_id %>
+          </td>
+          <td>
+           <%= l debt.on_date %>
+          </td>
+          <td>
+          </td>
+          <td class='alnright'>
+            <%= debt.amount %>
+          </td>
+          <td class='alnright'>
+          </td>
+          <td class='alnright'>
+            <%= total = total + debt.amount %>
+          </td>
+        </tr>
       <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 </div>
-
- </article>
