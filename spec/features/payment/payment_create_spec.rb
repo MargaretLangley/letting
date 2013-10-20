@@ -28,7 +28,7 @@ class PaymentCreatePage
   end
 
   def empty_search?
-    has_content? /No Property Selected/i
+    has_content? /To book a payment against a property you need/i
   end
 
   def debit_free?
