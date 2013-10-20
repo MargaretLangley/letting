@@ -32,7 +32,7 @@ class PaymentCreatePage
   end
 
   def debit_free?
-    has_content? /Debit Free/i
+    has_content? /Property has no outstanding debts/i
   end
 
   def errored?
@@ -63,13 +63,13 @@ describe Payment do
 
   context 'error' do
 
-    it 'unknown property' do
+    it 'searched property unknown' do
       payment_page.visit_new_page
       payment_page.human_id('800').search
       expect(payment_page).to be_empty_search
     end
 
-    it 'no unpaid debits' do
+    it 'property has no unpaid debits' do
       property_create!
       payment_page.visit_new_page
       payment_page.human_id('2002').search

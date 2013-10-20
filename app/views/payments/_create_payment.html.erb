@@ -3,8 +3,14 @@
 <div class='blank_slate_parent'>
 <% if @payment.present? %>
   <%= render 'address', property: PropertyDecorator.new(@payment.account.property) %>
-  <%= render 'payment_received', payment_form: payment_form  %>
-  <%= render 'credits', payment_form: payment_form  %>
+  <% if @payment.required? %>
+    <%= render 'payment_received', payment_form: payment_form  %>
+    <%= render 'credits', payment_form: payment_form  %>
+  <% else %>
+  <div class='blank_slate_overlay'>
+     Property has no outstanding debts to apply a payment against.
+  </div>
+  <% end %>
 <% else %>
  <div class='blank_slate_overlay'>
    To book a payment against a property you need to find a property that has a bill to pay. To find a property, enter the property identifier into the search box. An example of a property identifier is 109.
