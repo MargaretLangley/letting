@@ -38,7 +38,7 @@ describe Payment do
   context 'methods' do
 
     it '#prepare_for_form prepares credit' do
-      property_with_unpaid_debt.save!
+      property_with_unpaid_debit.save!
       payment = Payment.new human_id: 2002
       payment.account =  Account.by_human_id 2002
       payment.prepare_for_form

@@ -5,7 +5,7 @@
 # When a payment is recieved from a tenant it is represented by the payment
 # object on the database.
 #
-# Payments are a collection of credits which offset against debts.
+# Payments are a collection of credits which offset against debits.
 #
 ####
 #
@@ -16,8 +16,8 @@ class Payment < ActiveRecord::Base
       map { |credit| credit.default_amount }.sum
     end
 
-    def prepare debt, account_id
-      build debt: debt, account_id: account_id
+    def prepare debit, account_id
+      build debit: debit, account_id: account_id
     end
   end
   accepts_nested_attributes_for :credits, allow_destroy: true
@@ -25,7 +25,7 @@ class Payment < ActiveRecord::Base
 
   validates :account_id, presence: true
 
-  after_initialize do |debt_generator|
+  after_initialize do |debit_generator|
     self.on_date = default_on_date if on_date.blank?
   end
 
@@ -33,13 +33,13 @@ class Payment < ActiveRecord::Base
     account_id.present?
   end
 
-  def debtless?
+  def debitless?
     credits.empty?
   end
 
   def prepare_for_form
-    account && account.unpaid_debts.each do |debt|
-      credits.prepare debt, account_id
+    account && account.unpaid_debits.each do |debit|
+      credits.prepare debit, account_id
     end
     self.amount = default_amount if amount.blank?
   end

@@ -13,16 +13,16 @@
     </tr>
   </thead>
   <tbody>
-    <% debt_generators.each do |debt_generator| %>
+    <% debit_generators.each do |debit_generator| %>
     <tr>
       <td>
-        <%= debt_generator.search_string %>
+        <%= debit_generator.search_string %>
       </td>
       <td>
-        <%= l debt_generator.start_date %>
+        <%= l debit_generator.start_date %>
       </td>
       <td>
-        <%= l debt_generator.end_date %>
+        <%= l debit_generator.end_date %>
       </td>
     </tr>
     <% end %>

@@ -1,12 +1,12 @@
 class Credit < ActiveRecord::Base
   belongs_to :payment
   belongs_to :account
-  belongs_to :debt
+  belongs_to :debit
 
-  validates :debt_id, :on_date, presence: true
+  validates :debit_id, :on_date, presence: true
   validates :amount, amount: true
 
-  after_initialize do |debt_generator|
+  after_initialize do |debit_generator|
     self.on_date = default_on_date if on_date.blank?
     self.amount = default_amount if amount.blank?
   end
@@ -16,7 +16,7 @@ class Credit < ActiveRecord::Base
   end
 
   def default_amount
-    debt.amount
+    debit.amount
   end
 
   private

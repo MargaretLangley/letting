@@ -33,7 +33,7 @@ class Permission < Struct.new(:user)
   end
 
   def user_controllers
-    %w{blocks clients debts debt_generators properties payments}
+    %w{blocks clients debits debit_generators properties payments}
   end
 
   def admin_controllers

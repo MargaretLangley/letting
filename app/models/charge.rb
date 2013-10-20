@@ -8,8 +8,8 @@
 # The code is part of the charge system in the accounts. Charges are
 # associated with a properties account. When an operator decides they want to
 # bill a group of properties. Charges are generated according to this
-# information using the debt generator. The information is passed, as a
-# chargeable, to becomes a debt in the properties account.
+# information using the debit generator. The information is passed, as a
+# chargeable, to becomes a debit in the properties account.
 #
 ####
 #
@@ -21,7 +21,7 @@ class Charge < ActiveRecord::Base
   validates :amount, amount: true
   validates :due_ons, presence: true
   validate :due_ons_size
-  has_many :debt
+  has_many :debit
 
   def due_between? date_range
     due_ons.between? date_range

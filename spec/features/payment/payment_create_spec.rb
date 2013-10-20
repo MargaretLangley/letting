@@ -31,8 +31,8 @@ class PaymentCreatePage
     has_content? /No Property Selected/i
   end
 
-  def debt_free?
-    has_content? /Debt Free/i
+  def debit_free?
+    has_content? /Debit Free/i
   end
 
   def errored?
@@ -50,12 +50,12 @@ describe Payment do
   let(:payment_page) { PaymentCreatePage.new }
   before(:each) { log_in }
 
-  it 'payment for debt' do
-    property_with_charge_and_unpaid_debt.save!
+  it 'payment for debit' do
+    property_with_charge_and_unpaid_debit.save!
     payment_page.visit_new_page
     payment_page.human_id('2002').search
     expect(payment_page).to_not be_empty_search
-    expect(payment_page).to_not be_debt_free
+    expect(payment_page).to_not be_debit_free
     payment_page.payment 88.08
     payment_page.create_payment
     expect(payment_page).to be_successful
@@ -69,15 +69,15 @@ describe Payment do
       expect(payment_page).to be_empty_search
     end
 
-    it 'no unpaid debts' do
+    it 'no unpaid debits' do
       property_create!
       payment_page.visit_new_page
       payment_page.human_id('2002').search
-      expect(payment_page).to be_debt_free
+      expect(payment_page).to be_debit_free
     end
 
     it 'handles errors' do
-      property_with_charge_and_unpaid_debt.save!
+      property_with_charge_and_unpaid_debit.save!
       payment_page.visit_new_page
       payment_page.human_id('2002').search
       payment_page.payment(-10)

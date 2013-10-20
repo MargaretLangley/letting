@@ -28,9 +28,9 @@ en:
         entities: 'Person or company'
     errors:
       models:
-        debt_generator:
+        debit_generator:
           attributes:
-            debts:
+            debits:
               blank: 'must be found on at least one property in order to charge and invoice.'
             search_string:
               taken: 'and date range has already been used.'
@@ -38,7 +38,7 @@ en:
             properties:
               blank: 'are not being found. The search string should match any property locations or ID ranges (100-800) for example.'
     models:
-      debt_generator: Invoicing
+      debit_generator: Invoicing
 
   number:
     currency:

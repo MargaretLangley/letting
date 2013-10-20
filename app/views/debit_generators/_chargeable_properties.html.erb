@@ -7,12 +7,12 @@
         Range:
     </div>
     <div class="col-3-8">
-        <span class='important-text'><%= "#{debt_generator.search_string}" %></span><br>
+        <span class='important-text'><%= "#{debit_generator.search_string}" %></span><br>
         <span class='important-text'><%= "#{search_range}" %></span>
     </div>
     <div class="col-1-2">
-      <%= debt_gen_form.submit 'Invoice Charges', name: 'create' , disabled: debt_generator.debtless?, class: 'medium' %>&nbsp;&nbsp;
-      <%= link_to_unless debt_generator.debtless? ,' or Cancel', debt_generators_path, class: 'alternative-choice' %>
+      <%= debit_gen_form.submit 'Invoice Charges', name: 'create' , disabled: debit_generator.debitless?, class: 'medium' %>&nbsp;&nbsp;
+      <%= link_to_unless debit_generator.debitless? ,' or Cancel', debit_generators_path, class: 'alternative-choice' %>
     </div>
   </div>
   <table>
@@ -25,8 +25,8 @@
       </tr>
     </thead>
     <tbody>
-     <% unless debt_generator.debtless? %>
-     <%= render 'debts', debt_gen_form: debt_gen_form, debts: debt_generator.debts %>
+     <% unless debit_generator.debitless? %>
+     <%= render 'debits', debit_gen_form: debit_gen_form, debits: debit_generator.debits %>
     <% else %>
       <%= render 'no_chargeable_properties' %>
     <% end %>

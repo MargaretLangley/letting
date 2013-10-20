@@ -44,10 +44,10 @@ def chargeable_attributes overrides = {}
   }.merge overrides
 end
 
-def debt_attributes overrides = {}
+def debit_attributes overrides = {}
   {
     account_id: 1,
-    debt_generator_id: 1,
+    debit_generator_id: 1,
     charge_id: 3,
     on_date: '25/3/2013',
     amount: 88.08,
@@ -58,7 +58,7 @@ def credit_attributes  overrides = {}
   {
     payment_id: 1,
     account_id: 1,
-    debt_id: 1,
+    debit_id: 1,
     on_date: '30/4/2013',
     amount: 88.08,
   }.merge overrides
@@ -72,7 +72,7 @@ def payment_attributes  overrides = {}
   }.merge overrides
 end
 
-def debt_generator_attributes overrides = {}
+def debit_generator_attributes overrides = {}
   {
     id: 1,
     search_string: 'Lords',

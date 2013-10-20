@@ -14,9 +14,9 @@ def account_and_charge_new args = {}
   account
 end
 
-def account_and_debt args = {}
+def account_and_debit args = {}
   account = base_account args
-  add_debt_attribute account, args
+  add_debit_attribute account, args
   account
 end
 
@@ -35,6 +35,6 @@ def add_charge_attributes account, args
   charge.due_ons.build due_on_attributes_0 args.fetch(:due_on_attribute, {})
 end
 
-def add_debt_attribute account, args
-  account.add_debt debt_attributes args.fetch(:debt_attributes, {})
+def add_debit_attribute account, args
+  account.add_debit debit_attributes args.fetch(:debit_attributes, {})
 end

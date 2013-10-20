@@ -8,7 +8,7 @@ describe Account do
   context 'assocations' do
     context 'has many' do
       it('charges')  { expect(account).to respond_to(:charges) }
-      it('debts')    { expect(account).to respond_to(:debts) }
+      it('debits')    { expect(account).to respond_to(:debits) }
       it('credits')  { expect(account).to respond_to(:credits) }
     end
     context 'belongs to' do
@@ -33,7 +33,7 @@ describe Account do
 
       it 'does not double charge' do
         account = account_and_charge_new charge_attributes: { id: 3 }
-        account.add_debt debt_attributes
+        account.add_debit debit_attributes
         expect(account.chargeables_between(dates_in_march)).to eq []
       end
 
@@ -42,22 +42,22 @@ describe Account do
       end
     end
 
-    it '#add_debt' do
-      expect(account.add_debt debt_attributes).to be_valid
+    it '#add_debit' do
+      expect(account.add_debit debit_attributes).to be_valid
     end
 
     it '# add_credit' do
       expect(account.add_credit credit_attributes).to be_valid
     end
 
-    it 'lists #unpaid_debts' do
-      debt1 = account.add_debt debt_attributes
-      debt2 = account.add_debt debt_attributes charge_id: 2
+    it 'lists #unpaid_debits' do
+      debit1 = account.add_debit debit_attributes
+      debit2 = account.add_debit debit_attributes charge_id: 2
       account.save!
-      account.add_credit credit_attributes debt_id: debt1.id
+      account.add_credit credit_attributes debit_id: debit1.id
       account.save!
-      expect(Debt.all.to_a).to eq [debt1, debt2]
-      expect(account.unpaid_debts).to eq [debt2]
+      expect(Debit.all.to_a).to eq [debit1, debit2]
+      expect(account.unpaid_debits).to eq [debit2]
     end
 
     it '#by_human id' do

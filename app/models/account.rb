@@ -1,18 +1,18 @@
 ####
 #
-# The Account is a summation of charges, debts, and credits on a property.
+# The Account is a summation of charges, debits, and credits on a property.
 #
 # The property is the
 # a property should become due a charge.
 #
 # The account has one property. A property has a number of charges.
-# The charges generate debts and credits are made to cover these debts.
+# The charges generate debits and credits are made to cover these debits.
 #
 ####
 #
 class Account < ActiveRecord::Base
   belongs_to :property, inverse_of: :account
-  has_many :debts, dependent: :destroy
+  has_many :debits, dependent: :destroy
   has_many :credits, dependent: :destroy
   has_many :payments
   include Charges
@@ -23,16 +23,16 @@ class Account < ActiveRecord::Base
       .reject { |chargeable| already_charged_for? chargeable }
   end
 
-  def add_debt debt_args
-    debts.build debt_args
+  def add_debit debit_args
+    debits.build debit_args
   end
 
   def add_credit credit_args
     credits.build credit_args
   end
 
-  def unpaid_debts
-    debts.reject(&:paid?)
+  def unpaid_debits
+    debits.reject(&:paid?)
   end
 
   def prepare_for_form
@@ -50,10 +50,10 @@ class Account < ActiveRecord::Base
   private
 
     def already_charged_for? chargeable
-      debts.any? { |debt| debt.already_charged? Debt.new(chargeable.to_hash) }
+      debits.any? { |debit| debit.already_charged? Debit.new(chargeable.to_hash) }
     end
 
-    def new_debts
-      debts.select(&:new_record?)
+    def new_debits
+      debits.select(&:new_record?)
     end
 end

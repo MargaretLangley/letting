@@ -7,8 +7,8 @@
   <%= render 'search_payable_properties', payment_form: payment_form %>
   <%= render 'create_payment', payment_form: payment_form %>
    <div class="col-1-2">
-      <%= payment_form.submit 'payment', name: 'create' , disabled: @payment.debtless?, class: 'medium' %>&nbsp;&nbsp;
-      <%= link_to_unless @payment.debtless? ,' or Cancel', payments_path, class: 'alternative-choice' %>
+      <%= payment_form.submit 'payment', name: 'create' , disabled: @payment.debitless?, class: 'medium' %>&nbsp;&nbsp;
+      <%= link_to_unless @payment.debitless? ,' or Cancel', payments_path, class: 'alternative-choice' %>
     </div>
 </fieldset>
 <% end %>

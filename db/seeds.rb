@@ -10,7 +10,7 @@ def generate_seeding
   seed_properties
   seed_blocks
   seed_charges
-  debts_and_credits
+  debits_and_credits
   reset_pk_sequenece_on_each_table_used
 end
 
@@ -326,14 +326,14 @@ end
     ]
   end
 
-def debts_and_credits
-  create_debt_generator
+def debits_and_credits
+  create_debit_generator
   create_credits
 end
 
-  def create_debt_generator
-    create_debts
-    DebtGenerator.create! [
+  def create_debit_generator
+    create_debits
+    DebitGenerator.create! [
       {
         id: 1,
         search_string: 'Lords',
@@ -349,21 +349,21 @@ end
     ]
   end
 
-  def create_debts
-    Debt.create! [
+  def create_debits
+    Debit.create! [
       {
         id: 1, account_id: 1,
         charge_id: 1,
         on_date: "2013/#{(Date.current - 5.months).month }/01",
         amount: 88.08,
-        debt_generator_id: 1,
+        debit_generator_id: 1,
       },
       {
         id: 2, account_id: 1,
         charge_id: 3,
         on_date: "2013/#{(Date.current - 5.months).month }/01",
         amount: 88.08,
-        debt_generator_id: 1 ,
+        debit_generator_id: 1 ,
       },
       {
         id: 3,
@@ -371,7 +371,7 @@ end
         charge_id: 7,
         on_date: "2013/#{(Date.current - 5.months).month }/01",
         amount: 12,
-        debt_generator_id: 2,
+        debit_generator_id: 2,
       },
       {
         id: 4,
@@ -379,7 +379,7 @@ end
         charge_id: 8,
         on_date: "2013/#{(Date.current - 5.months).month }/01",
         amount: 60,
-        debt_generator_id: 2,
+        debit_generator_id: 2,
       }
     ]
   end
@@ -390,7 +390,7 @@ end
       { id: 1,
         payment_id: 1,
         account_id: 1,
-        debt_id: 1,
+        debit_id: 1,
         on_date: "2013/#{(Date.current - 3.months).month }/03",
         amount: 88.08,
       }

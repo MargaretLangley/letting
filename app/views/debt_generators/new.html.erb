@@ -1,9 +1,0 @@
-<h2 class="mainTitle">New Invoice</h2>
-
-<%= form_for @debt_generator do |debt_gen_form| %>
-  <%= render 'shared/errors', object: @debt_generator %>
-  <fieldset id='debt_generator' class='shell' style='position: relative;'>
-    <%= render 'search_chargeable_properties', debt_gen_form: debt_gen_form %>
-    <%= render 'chargeable_properties', debt_gen_form: debt_gen_form, debt_generator: @debt_generator %>
-  </fieldset>
-<% end %>

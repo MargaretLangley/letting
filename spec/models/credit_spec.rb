@@ -7,8 +7,8 @@ describe Credit do
 
   context 'validates' do
     context 'presence' do
-      it 'debt_id' do
-        credit.debt_id = nil
+      it 'debit_id' do
+        credit.debit_id = nil
         expect(credit).to_not be_valid
       end
       it 'on_date' do
@@ -42,13 +42,13 @@ describe Credit do
   context 'associations' do
     it('has payment') { expect(credit).to respond_to :payment }
     it('has account') { expect(credit).to respond_to :account }
-    it('has debt') { expect(credit).to respond_to :debt }
+    it('has debit') { expect(credit).to respond_to :debit }
   end
 
   context 'default inialization' do
     let(:credit) do
-      debt = Debt.create! debt_attributes
-      debt.credits.build
+      debit = Debit.create! debit_attributes
+      debit.credits.build
     end
     before { Timecop.travel(Date.new(2013, 9, 30)) }
     after { Timecop.return }

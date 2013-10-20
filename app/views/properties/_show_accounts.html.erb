@@ -24,23 +24,23 @@
     </thead>
     <tbody>
       <% total = 0 %>
-      <% debts.each do |debt| %>
+      <% debits.each do |debit| %>
         <tr>
           <td>
-            <%= debt.charge_id %>
+            <%= debit.charge_id %>
           </td>
           <td>
-           <%= l debt.on_date %>
+           <%= l debit.on_date %>
           </td>
           <td>
           </td>
           <td class='alnright'>
-            <%= debt.amount %>
+            <%= debit.amount %>
           </td>
           <td class='alnright'>
           </td>
           <td class='alnright'>
-            <%= total = total + debt.amount %>
+            <%= total = total + debit.amount %>
           </td>
         </tr>
       <% end %>

@@ -1,6 +1,6 @@
 <div class = 'showbox'>
   <p>
-    One Debt
+    One Debit
   </p>
   <table>
     <thead>
@@ -19,13 +19,13 @@
     <tbody>
       <tr>
         <td>
-            <%= l @property.account.unpaid_debts[0].on_date %>
+            <%= l @property.account.unpaid_debits[0].on_date %>
         </td>
         <td>
-            <%= @property.account.unpaid_debts[0].charge.charge_type %>
+            <%= @property.account.unpaid_debits[0].charge.charge_type %>
         </td>
         <td class='alnright'>
-          <%= @property.account.unpaid_debts[0].amount %>
+          <%= @property.account.unpaid_debits[0].amount %>
         </td>
       </tr>
     </tbody>

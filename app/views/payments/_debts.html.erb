@@ -1,6 +1,6 @@
 <div class = 'showbox'>
   <p>
-    Debts
+    Debits
   </p>
   <table>
     <thead>
@@ -17,16 +17,16 @@
       </tr>
     </thead>
     <tbody>
-      <% @property.account.unpaid_debts.each do |debt| %>
+      <% @property.account.unpaid_debits.each do |debit| %>
       <tr>
         <td>
-            <%= l debt.on_date %>
+            <%= l debit.on_date %>
         </td>
         <td>
-            <%= debt.charge.charge_type %>
+            <%= debit.charge.charge_type %>
         </td>
         <td class='alnright'>
-          <%= debt.amount %>
+          <%= debit.amount %>
         </td>
       </tr>
        <% end %>

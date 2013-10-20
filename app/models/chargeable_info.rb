@@ -2,9 +2,9 @@
 #
 # ChargeableInfo
 #
-#  Holds information to turn a charge into a debt
+#  Holds information to turn a charge into a debit
 #
-#  The debt generator needs to generate debts from charges.
+#  The debit generator needs to generate debits from charges.
 #  It calls on account for due charges and in turn charge
 #  generates a ChargeableInfo describing a charge that is due
 #  in the queried date range.

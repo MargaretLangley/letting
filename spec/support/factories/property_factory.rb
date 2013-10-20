@@ -39,17 +39,17 @@ end
 
 # when your running full specs I haven't found reliable way of guaranteeing
 # a primary key will be set to a value. This is a hack to save the object
-# get the key value and put it into the debt - not nice
-def property_with_charge_and_unpaid_debt args = {}
+# get the key value and put it into the debit - not nice
+def property_with_charge_and_unpaid_debit args = {}
   (property = property_with_charge_new).save!
-  property.account.add_debt debt_attributes \
+  property.account.add_debit debit_attributes \
     charge_id: property.account.charges.reject(&:empty?).first.id
   property
 end
 
-def property_with_unpaid_debt args = {}
+def property_with_unpaid_debit args = {}
   property = base_property args
-  add_debt_attribute property.account, args
+  add_debit_attribute property.account, args
   property
 end
 
@@ -87,6 +87,6 @@ def add_due_on_1 charge
   charge.due_ons.build due_on_attributes_1
 end
 
-def add_debt_attribute account, args
-  account.add_debt debt_attributes args.fetch(:debt_attributes, {})
+def add_debit_attribute account, args
+  account.add_debit debit_attributes args.fetch(:debit_attributes, {})
 end

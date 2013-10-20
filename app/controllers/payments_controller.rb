@@ -51,7 +51,7 @@ class PaymentsController < ApplicationController
   end
 
   def credit_attributes
-    %i(id account_id debt_id on_date amount)
+    %i(id account_id debit_id on_date amount)
   end
 
 end

@@ -1,13 +1,13 @@
-class DebtGeneratorCreatePage
+class DebitGeneratorCreatePage
   include Capybara::DSL
 
   def visit_page
-    visit '/debt_generators/new'
+    visit '/debit_generators/new'
     self
   end
 
   def search_term term
-    fill_in 'debt_generator_search_string', with: term
+    fill_in 'debit_generator_search_string', with: term
     self
   end
 
@@ -32,7 +32,7 @@ class DebtGeneratorCreatePage
   end
 
   def created?
-    has_content? /Debts successfully created!/i
+    has_content? /Debits successfully created!/i
   end
 
 end
