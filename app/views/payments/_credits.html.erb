@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <% if @payment.credits.any? %>
+    <% if @payment.required? %>
       <% @payment.credits.each do |credit| %>
         <%= payment_form.fields_for :credits, credit do |credit_form| %>
           <%= render 'credit', credit_form: credit_form, credit: credit %>

@@ -33,8 +33,8 @@ class Payment < ActiveRecord::Base
     account_id.present?
   end
 
-  def debitless?
-    credits.empty?
+  def required?
+    credits.any?
   end
 
   def prepare_for_form

@@ -1,17 +1,10 @@
 <div class='top'>
   <h2>Property</h2>
-
   <% if @payment.present? %>
-    <% if @payment.present? %>
-      <%= render 'address', property: PropertyDecorator.new(@payment.account.property) %>
-    <% end %>
+    <%= render 'address', property: PropertyDecorator.new(@payment.account.property) %>
 </div>
-<div class='top'>
-  <h2>Payment Recieved</h2>
-  <%= payment_form.hidden_field :account_id %>
-  <%= payment_form.date_field :on_date %>
-  <%= payment_form.text_field :amount %>
-</div>
+  <div class='top'></div>
+  <%= render 'payment_received', payment_form: payment_form  %>
 <div class='top'>
   <h2>Unpaid Debits</h2>
     <%= render 'credits', payment_form: payment_form  %>
