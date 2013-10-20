@@ -386,15 +386,15 @@ end
 
   def create_credits
     #MISSING PAYMENT
-    Credit.create! [
-      { id: 1,
-        payment_id: 1,
-        account_id: 1,
-        debit_id: 1,
-        on_date: "2013/#{(Date.current - 3.months).month }/03",
-        amount: 88.08,
-      }
-    ]
+    # Credit.create! [
+    #   { id: 1,
+    #     payment_id: 1,
+    #     account_id: 1,
+    #     debit_id: 1,
+    #     on_date: "2013/#{(Date.current - 3.months).month }/03",
+    #     amount: 88.08,
+    #   }
+    # ]
   end
 
 def reset_pk_sequenece_on_each_table_used
