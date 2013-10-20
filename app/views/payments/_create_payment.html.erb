@@ -1,15 +1,13 @@
-<div class='top'>
-  <h2>Property</h2>
-  <% if @payment.present? %>
-    <%= render 'address', property: PropertyDecorator.new(@payment.account.property) %>
-</div>
-  <div class='top'></div>
+<div class='top'></div>
+<h2>Property</h2>
+<% if @payment.present? %>
+  <%= render 'address', property: PropertyDecorator.new(@payment.account.property) %>
   <%= render 'payment_received', payment_form: payment_form  %>
-<div class='top'>
-  <h2>Unpaid Debits</h2>
-    <%= render 'credits', payment_form: payment_form  %>
-  <% else %>
-    No Property Selected
-  <% end %>
-
+  <%= render 'credits', payment_form: payment_form  %>
+<% else %>
+  No Property Selected
+<% end %>
+<div>
+  <%= payment_form.submit 'payment', name: 'create' , disabled: !@payment.required?, class: 'medium' %>&nbsp;&nbsp;
+  <%= link_to_if @payment.required? ,' or Cancel', payments_path, class: 'alternative-choice' %>
 </div>

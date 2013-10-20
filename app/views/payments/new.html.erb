@@ -1,14 +1,9 @@
-
 <h2 class="mainTitle">New Payment</h2>
 
 <%= form_for @payment do |payment_form| %>
-<%= render 'shared/errors', object: @payment %>
-<fieldset class='shell'>
-  <%= render 'search_payable_properties', payment_form: payment_form %>
-  <%= render 'create_payment', payment_form: payment_form %>
-   <div class="col-1-2">
-      <%= payment_form.submit 'payment', name: 'create' , disabled: !@payment.required?, class: 'medium' %>&nbsp;&nbsp;
-      <%= link_to_if @payment.required? ,' or Cancel', payments_path, class: 'alternative-choice' %>
-    </div>
-</fieldset>
+  <%= render 'shared/errors', object: @payment %>
+  <fieldset class='shell'>
+    <%= render 'search_payable_properties', payment_form: payment_form %>
+    <%= render 'create_payment', payment_form: payment_form %>
+  </fieldset>
 <% end %>
