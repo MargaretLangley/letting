@@ -1,4 +1,5 @@
 <div class = 'showbox'>
+  <h3>Accounts</h3>
   <table>
     <thead>
       <tr>
@@ -27,7 +28,7 @@
       <% debits.each do |debit| %>
         <tr>
           <td>
-            <%= debit.charge_id %>
+            <%= debit.charge.charge_type %>
           </td>
           <td>
            <%= l debit.on_date %>
@@ -44,6 +45,29 @@
           </td>
         </tr>
       <% end %>
+      <% payments.each do |payment| %>
+        <tr>
+          <td>
+            <%= payment.account_id %>
+          </td>
+          <td>
+           <%= l payment.on_date %>
+          </td>
+          <td>
+          </td>
+          <td class='alnright'>
+            <%= payment.amount %>
+          </td>
+          <td class='alnright'>
+          </td>
+          <td class='alnright'>
+            <%= total = total + payment.amount %>
+          </td>
+        </tr>
+      <% end %>
+
+
+
     </tbody>
   </table>
 </div>
