@@ -52,8 +52,9 @@ class ClientsController < ApplicationController
 
   def destroy
     @client = Client.find(params[:id])
+    alert_message = client_deleted_message
     @client.destroy
-    redirect_to clients_path, alert: client_deleted_message
+    redirect_to clients_path, alert: alert_message
   end
 
   private
@@ -75,14 +76,18 @@ class ClientsController < ApplicationController
     end
 
     def client_created_message
-      "#{@client.human_id} client successfully created!"
+      "Client '#{@client.entities.full_name} (id #{@client
+        .human_id})' successfully created!"
     end
 
     def client_updated_message
-      "#{@client.human_id} client successfully updated!"
+      "Client '#{@client.entities.full_name} (id #{@client
+        .human_id})' successfully updated!"
     end
 
     def client_deleted_message
-      "#{@client.human_id} client successfully deleted!"
+      "Client '#{@client.entities.full_name} (id #{@client
+        .human_id})' successfully deleted!"
     end
+
 end

@@ -104,7 +104,7 @@ describe Client do
 
   def expect_client_index
     expect(current_path).to eq '/clients'
-    expect(page).to have_text /client successfully updated!/i
+    expect(page).to have_text 'successfully updated!'
     expect_client_data_changed
   end
 

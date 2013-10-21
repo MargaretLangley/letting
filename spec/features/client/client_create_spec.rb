@@ -78,7 +78,7 @@ describe Client do
 
   def expect_client_index
     expect(current_path).to eq '/clients'
-    expect(page).to have_text /client successfully created!/i
+    expect(page).to have_text 'successfully created!'
   end
 
 end
