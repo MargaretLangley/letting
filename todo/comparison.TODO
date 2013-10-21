@@ -15,32 +15,32 @@
   List of Clients & their addresses                     Index page Client List
   Print out of Client list                              NO Print out
   Create New Client                                     Create New Client
-  Note client address needed
+  Note client address needed                            Available
   to go on invoice
-  Update Client                                         Update Client
+  Update Client                                         Update Client available
   Drop Down List of Clients for Search
   Delete Client                                         Delete Client from Index Page
   Client GR House accounts between given dates          Client with List of Properties Account
-  Print out of Client Accounts
+  Print out of Client Accounts                          WAITING FOR ACCOUNTS
 
   PROPERTIES                                            PROPERTIES
   List of Properties                                    Index Page Property List
-  Search for property
+  Search for Property                                   Available
   Update Property                                       Edit
-  Address Occupier, Agent Name & Address
+  Address Occupier, Agent Name & Address                Available
 
-  Property must be conected to a client
+  Property must be conected to a client                 Yes
   Drop Down List of Clients to choose from
   Print out of Property List
-  Create New Property                                   Create New Property
-  Delete Property                                       Delete from Index Page
-  Print out of Property details
-  Print out of Property account
+  Create New Property                                   Create New Property -YES
+  Delete Property                                       Delete from Index Page- YES
+  Print out of Property Details                         Available in view printing
+  Print out of Property Account                         Available in view ONGOING
 
   ACCOUNTS FOR PROPERTIES
-  Must have details of GR, Rent, Service Charge         Held in Property details
+  Must have details of GR, Rent, Service Charge         Held in Property details -YES
   or other charges
-  Must have details of when charges due
+  Must have details of when charges due                 Available
   Must be able to Bill property
   Must be able to hold record of bill due/made
   Delete old data and set to beginning of yr,
@@ -49,12 +49,12 @@
   each property, checks arrears and prints out if
   at minimum or above arrears
 
-  GRID ACCOUNT DETAILS:
-  Search prop no
+  GRID ACCOUNT DETAILS:                                 Available in property listing
+  Search prop no                                        ONGOING
   Give one line address
   2nd line Agent & Billing Address
   Type of Charge, Date Due or paid,
-  description, Due, Payment, Balance
+  Description, Due, Payment, balance                    Description not held
   Split charges by type: All, GR,
   Service Charges, Insurance give balance
   We should probably only give last 3 years
@@ -118,12 +118,12 @@
   All letters require:
   Adams' address
   Invoice Date
-  Occupier Name and Property address
-  Agent Name and Billing address if necessary
-  Client name and address
+  Occupier Name and Property address                    Available
+  Agent Name and Billing address if necessary           Available
+  Client name and address                               Available
   Arrears
   Due Date Description ie GR 25/25/2013 to 23/6/2014
-  Service Charge
+  Service charge                                        Available
   Total
   Sissorcut line
   Form to return with property ref and address
@@ -133,9 +133,9 @@
   uses GR data and specific legal form
 
   PRINTOUTS AVAILBLE
-  Agent                                                 Probably unnecessary
+  Agent                                                 Agent Probably unnecessary
   Arrears
   Client List
   Monthly Service Charge List
-  Property List
+  Property list                                         Available
 
