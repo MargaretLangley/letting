@@ -40,13 +40,21 @@ en:
     models:
       debit_generator: Invoicing
 
-  property_charge_string:  "Search for the properties to charge in the above search box.\nCommon searches are roads, flats and property id ranges. With property ranges use a hyphen e.g. 100-200"
-  property_payment_string: 'To book a payment against a property you need to find a property that has a bill to pay. To find a property, enter the property identifier into the search box. An example of a property identifier is 109.'
-  property_no_debt_string: 'Property has no outstanding debts to apply a payment against.'
-  billing_string:           "Billing is to the above property address. If the bill should go to an agent click the 'Use Agent' checkbox and fill in the billing address."
-
+  number:
+    currency:
+        format:
+            format: "%u%n"
+            unit: "&pound;"
+            # These three are to override number.format and are optional
+            separator: "."
+            delimiter: ","
+            precision: 2
   date:
     formats:
       default: "%d/%m/%Y"
 
-
+  info:
+    property_charge_slate:  "Search for the properties to charge in the above search box.\nCommon searches are roads, flats and property id ranges. With property ranges use a hyphen e.g. 100-200"
+    property_payment_slate: 'To book a payment against a property you need to find a property that has a bill to pay. To find a property, enter the property identifier into the search box. An example of a property identifier is 109.'
+    property_no_debt_slate: 'Property has no outstanding debts to apply a payment against.'
+    billing_slate:          "Billing is to the above property address. If the bill should go to an agent click the 'Use Agent' checkbox and fill in the billing address."
