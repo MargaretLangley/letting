@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
 
   def new
-    @payment = Payment.new
+    prepare_for_new_action human_id: params[:human_id]
   end
 
   def create
@@ -17,9 +17,7 @@ class PaymentsController < ApplicationController
   end
 
   def show_payment
-    @payment = Payment.new search_params
-    @payment.account = Account.by_human_id @payment.human_id
-    @payment.prepare_for_form
+    prepare_for_new_action search_params
     render :new
   end
 
@@ -30,6 +28,14 @@ class PaymentsController < ApplicationController
     else
       render :new
     end
+  end
+
+  private
+
+  def prepare_for_new_action args = {}
+    @payment = Payment.new args
+    @payment.account = Account.by_human_id @payment.human_id
+    @payment.prepare_for_form
   end
 
   def success

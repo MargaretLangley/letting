@@ -13,7 +13,8 @@
   <% end %>
 <% else %>
  <div class='blank_slate_overlay'>
-<%= t('info.property_payment_slate') %>
+   <%= t('info.property_payment_slate') %>
+   <%= link_to '109', new_payment_path(human_id: 109) %>
   </div>
 <% end %>
 </div>

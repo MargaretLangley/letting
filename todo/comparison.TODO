@@ -1,63 +1,68 @@
-  ORIGINAL PROGRAM          NEW PROGRAM
+  ORIGINAL PROGRAM                                    NEW PROGRAM
 
-  LOGIN
+  ✔ LOGIN @done (13-10-21 11:07)
 
-  Name                                                  Email
-  Password                                              Password
+  Name                                                             Email
+  Password                                                       Password
 
-  WELCOME PAGE                                          No welcome page goes into property list
-  Welcome User's name
-  Version Date of Update
-  Today's date
-  Recent payments
+  ☐ WELCOME PAGE
+  Welcome User's name                                  No welcome page goes into property list
+  Version Number                                            REQUIRED
+  Today's date                                                  NOT IMPLEMENTED
+  Recent payments                                          REQUIRED
 
-  CLIENTS                                               CLIENTS
-  List of Clients & their addresses                     Index page Client List
-  Print out of Client list                              NO Print out
-  Create New Client                                     Create New Client
-  Note client address needed                            Available
-  to go on invoice
-  Update Client                                         Update Client available
-  Drop Down List of Clients for Search
-  Delete Client                                         Delete Client from Index Page
-  Client GR House accounts between given dates          Client with List of Properties Account
-  Print out of Client Accounts                          WAITING FOR ACCOUNTS
+  ☐ CLIENTS
+  List Clients                                                    done       (clients/index)
+  Print out of Client list                                   Not required
+  Create New Client                                        done       (clients/new)
+  Update Client                                               done       (clients/edit)
+  Drop Down List of Clients for Search          Not required as stands (demo)
+  Delete Client                                                done        (clients/index)
+  Client accounts list for GR and GGR           REQUIRED
+  between 'given' dates
+  MORE INFO                                                   MORE INFORMATION REQUIRED
+  DATES ARE NOT ARBITARY
+  When do they run the accounts?
+  Does that depend on  the client?
+  Print out of Client Accounts                        REQUIRED
 
-  PROPERTIES                                            PROPERTIES
-  List of Properties                                    Index Page Property List
-  Search for Property                                   Available
-  Update Property                                       Edit
-  Address Occupier, Agent Name & Address                Available
+  ☐ PROPERTIES
+  List of Properties                                          done (properties/index)
+  Search for Property                                      done (properties/index)
+  Update Property                                           done (properties/edit)
+  Addresses
+    Occupier                                                     done
+    Agent Name                                               done
 
-  Property must be conected to a client                 Yes
-  Drop Down List of Clients to choose from
-  Print out of Property List
-  Create New Property                                   Create New Property -YES
-  Delete Property                                       Delete from Index Page- YES
-  Print out of Property Details                         Available in view printing
-  Print out of Property Account                         Available in view ONGOING
+  Property requires a client                            done
+  Drop Down List of Clients                             Not Required (Demo)
+  Print out of Property List                              Not Required
+  Create New Property                                    done (properties/new)
+  Delete Property                                            done (properties/index)
+  Print Property Details                                   done (properties/id/view )
+  Print Property Account                                 ONGOING (properties/id/view )
 
-  ACCOUNTS FOR PROPERTIES
-  Must have details of GR, Rent, Service Charge         Held in Property details -YES
-  or other charges
-  Must have details of when charges due                 Available
-  Must be able to Bill property
-  Must be able to hold record of bill due/made
-  Delete old data and set to beginning of yr,
-  resetting initial balance
-  Arrears list: give minimum arrears goes to
-  each property, checks arrears and prints out if
-  at minimum or above arrears
+  ☐ Property Accounts
+  Display Account Items                                 ONGOING
+  Require date when charge is due               done  (properties/id/view)
+  Delete old data                                             Not required
+  Arrears list
+  Occupents with arreas over £??s                 NOT IMPLEMENTED
 
-  GRID ACCOUNT DETAILS:                                 Available in property listing
-  Search prop no                                        ONGOING
-  Give one line address
-  2nd line Agent & Billing Address
-  Type of Charge, Date Due or paid,
-  Description, Due, Payment, balance                    Description not held
-  Split charges by type: All, GR,
-  Service Charges, Insurance give balance
-  We should probably only give last 3 years
+
+  GRID ACCOUNT DETAILS:
+   (statement of credit / debit not payment)  REQUIRED
+  Search prop no                                               REQUIRED
+  Give one line address, 2nd line Agent  &     Currently Property / Account is 1 page
+  Billing Address                                               If separate pages the account page
+                                                                          will need address identification
+                                                                          (We could reduce address since only for
+                                                                           office reference)
+  Type of Charge, Date Due or paid,                ONGOING
+  Description, Due, Payment, balance             REVIEW - Description not held
+  Split charges by type: All, GR,                       REQUIRED
+  Service Charges, Insurance give balance      REQUIRED
+  We should probably only give last 3 years    REQUIRED
 
   INVOICES
   LETTERS:
@@ -78,31 +83,30 @@
   2nd letter: PRINTS OUT those properties were
   no payment made with or without standing order
 
-  PAYMENTS
-  Fill in Payment date
-  Search on Property No
-  Return sets up the Service Charge
-  for those properties with service charge
-  Ground Rent Due
+  ☐ PAYMENTS
+  Search on Property No                                          done
+  Fill in Payment date                                              done
+  Default to pay in full outstanding charges          done
 
-  Details of payments made
-  Needs property address
-  Batch Payments                                        Make only batch
-  Single Payment                                        payments
+  New Payment
+  Details of payments made                                   done
+  Displays property address                                   done
+  Create allows another new payment               REQUIRED (currently goes to Pyament
+  immediately                                                          Index )
+
 
   BLOCKS UPDATE
-  This is used to update charges
-  in a group of flats
-  or roads
-  List of Blocks
-  Dropdown list of blocks
-  Service charge changes:
-  Half Yearly/Quarterly/Monthly
-  Insurance
-  Obtains members of block by searching address
-  New block - update block list
-  Needs a house name or road name already on
-  data base.
+  List Blocks                                                              REVIEW
+  Update charges in a group (flats/roads)              REQUIRED
+  Service charge typically changed for
+  new year.
+  One off Service charge at EOY                              REQUIRED
+  Dropdown list of blocks                                          REVIEW
+  Obtains members of block by                                REVIEW
+  searching address
+  New block  - on create goes back to block list      REVIEW
+  Block Requires the address to                                 REVIEW
+  already be present
   Note not all blocks have same service charge
   for each flat
 
