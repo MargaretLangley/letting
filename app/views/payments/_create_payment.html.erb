@@ -8,7 +8,7 @@
     <%= render 'credits', payment_form: payment_form  %>
   <% else %>
   <div class='blank_slate_overlay'>
-     Property has no outstanding debts to apply a payment against.
+    <%= t('property_no_debt_string') %>
   </div>
   <% end %>
 <% else %>
