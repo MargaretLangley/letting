@@ -40,6 +40,11 @@ class Property < ActiveRecord::Base
     billing_profile.bill_to
   end
 
+  def start_address
+    [address.flat_no, address.house_name, address.road_no, address
+    .road].reject(&:blank?).join('  ')
+  end
+
   def self.properties property_ids
     Property.where(id: property_ids)
   end
