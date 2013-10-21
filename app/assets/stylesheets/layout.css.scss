@@ -41,7 +41,14 @@
     a:active {
       text-decoration: underline;
     }
+
   }
+
+  .errorhead{
+      height: 90px;
+      padding-top:3px;
+      padding-left:10px;
+   }
 
   footer#page-footer {
     color: $secondary-text-color;
