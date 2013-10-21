@@ -8,12 +8,12 @@
     <%= render 'credits', payment_form: payment_form  %>
   <% else %>
   <div class='blank_slate_overlay'>
-    <%= t('info.property_no_debt_slate') %>
+    <%= t('instruction.payments.property_no_debt') %>
   </div>
   <% end %>
 <% else %>
  <div class='blank_slate_overlay'>
-   <%= t('info.property_payment_slate') %>
+   <%= t('instruction.payments.property_payment') %>
    <%= link_to '109', new_payment_path(human_id: 109) %>
   </div>
 <% end %>
