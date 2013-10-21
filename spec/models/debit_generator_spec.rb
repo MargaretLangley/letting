@@ -82,12 +82,13 @@ describe DebitGenerator do
       after { Timecop.return }
 
       it 'generates debits' do
-        new_debits = DebitGenerator.new(search_string: 'Hillbank House').generate
+        new_debits = DebitGenerator
+         .new(search_string: 'Hillbank House').generate
         expect(new_debits).to have(1).items
         expect(new_debits.first).to eq \
           Debit.new on_date: '2013/3/25',
-                   amount: 88.08,
-                   charge_id: property.account.charges.first.id
+                    amount: 88.08,
+                    charge_id: property.account.charges.first.id
       end
 
       it 'does not duplicate debit' do
@@ -95,7 +96,7 @@ describe DebitGenerator do
         debit_gen.generate
         debit_gen.save!
         debit_gen = DebitGenerator.new(search_string: 'Hillbank House',
-                                     start_date: Date.current + 1.day)
+                                       start_date: Date.current + 1.day)
         debit_gen.generate
         expect { debit_gen.save! }.to raise_error
       end
@@ -115,9 +116,9 @@ describe DebitGenerator do
       expect(DebitGenerator.latest_debit_generated(10).length).to eq 1
       expect(DebitGenerator.latest_debit_generated(10).first).to eq \
           DebitGenerator.new id: 1,
-                            search_string: 'Lords',
-                            start_date: '2013-03-01',
-                            end_date: '2013-04-01'
+                             search_string: 'Lords',
+                             start_date: '2013-03-01',
+                             end_date: '2013-04-01'
     end
   end
 

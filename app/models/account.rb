@@ -50,7 +50,9 @@ class Account < ActiveRecord::Base
   private
 
     def already_charged_for? chargeable
-      debits.any? { |debit| debit.already_charged? Debit.new(chargeable.to_hash) }
+      debits.any? do |debit|
+        debit.already_charged? Debit.new(chargeable.to_hash)
+      end
     end
 
     def new_debits

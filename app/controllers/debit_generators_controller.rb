@@ -21,7 +21,8 @@
 class DebitGeneratorsController < ApplicationController
   MAX_DISPLAYED_DEBITS = 10
   def index
-    @debit_generators = DebitGenerator.latest_debit_generated(MAX_DISPLAYED_DEBITS)
+    @debit_generators = DebitGenerator
+     .latest_debit_generated(MAX_DISPLAYED_DEBITS)
   end
 
   def new
