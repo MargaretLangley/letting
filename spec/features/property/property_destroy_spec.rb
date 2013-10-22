@@ -9,7 +9,8 @@ describe Property do
     visit '/properties'
     expect(page).to have_text '9000'
     expect { click_on 'Delete' }.to change(Property, :count).by(-1)
-    expect(page).to have_text '9000 property successfully deleted!'
+    expect(page).to have_text '9000'
+    expect(page).to have_text 'successfully deleted!'
     expect(current_path).to eq '/properties'
   end
 end

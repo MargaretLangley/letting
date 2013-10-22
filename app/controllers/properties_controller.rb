@@ -56,8 +56,9 @@ class PropertiesController < ApplicationController
 
   def destroy
     @property = Property.find(params[:id])
+    alert_message = property_deleted_message
     @property.destroy
-    redirect_to properties_path, alert: property_deleted_message
+    redirect_to properties_path, alert: alert_message
   end
 
   private
@@ -98,15 +99,19 @@ class PropertiesController < ApplicationController
       %i(id day month)
     end
 
+    def identy
+      "Property 'ID #{@property.human_id}, #{@property.start_address}'"
+    end
+
     def property_created_message
-      "#{@property.human_id} property successfully created!"
+      "#{identy} successfully created!"
     end
 
     def property_updated_message
-      "#{@property.human_id} property successfully updated!"
+      "#{identy} successfully updated!"
     end
 
     def property_deleted_message
-      "#{@property.human_id} property successfully deleted!"
+      "#{identy} successfully deleted!"
     end
 end

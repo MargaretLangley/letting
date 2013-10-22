@@ -78,7 +78,7 @@ describe Property do
       def update_then_expect_properties_page
         click_on 'Update Property'
         expect(current_path).to eq '/properties'
-        expect(page).to have_text /property successfully updated!/i
+        expect(page).to have_text 'successfully updated!'
       end
 
       def expect_property_data_changed
