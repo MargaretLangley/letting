@@ -27,6 +27,10 @@ class PaymentCreatePage
     self
   end
 
+  def on_page?
+    current_path == '/payments/new'
+  end
+
   def empty_search?
     has_content? /To book a payment against a property you need/i
   end
@@ -50,7 +54,7 @@ describe Payment do
   let(:payment_page) { PaymentCreatePage.new }
   before(:each) { log_in }
 
-  it 'payment for debit' do
+  it 'payment for debit - no double payments' do
     property_with_charge_and_unpaid_debit.save!
     payment_page.visit_new_page
     payment_page.human_id('2002').search
@@ -59,6 +63,11 @@ describe Payment do
     payment_page.payment 88.08
     payment_page.create_payment
     expect(payment_page).to be_successful
+    expect(payment_page).to be_on_page
+
+    # double payment
+    payment_page.human_id('2002').search
+    expect(payment_page).to be_debit_free
   end
 
   context 'error' do
@@ -77,32 +86,13 @@ describe Payment do
     end
 
     it 'handles errors' do
+      pending
       property_with_charge_and_unpaid_debit.save!
       payment_page.visit_new_page
       payment_page.human_id('2002').search
       payment_page.payment(-10)
       payment_page.create_payment
       expect(payment_page).to be_errored
-    end
-  end
-
-  context '#payment' do
-    it 'property id invalid' do
-    end
-  end
-
-  context '#payment' do
-    it 'property id invalid' do
-    end
-  end
-
-  context '#payment' do
-    it 'Ground Rent Payment' do
-    end
-  end
-
-  context '#payment' do
-    it 'Monthly Payment' do
     end
   end
 
