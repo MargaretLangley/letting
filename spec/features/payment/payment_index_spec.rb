@@ -1,0 +1,50 @@
+require 'spec_helper'
+
+class PaymentIndexPage
+  include Capybara::DSL
+
+  def visit_page
+    visit '/payments'
+    self
+  end
+
+  def search search_string = ""
+    fill_in 'search', with: search_string
+    click_on 'Search'
+    self
+  end
+
+  def having_payment?
+    has_content? /Mr W G Grace/i
+  end
+end
+
+
+describe 'Payment index' do
+
+  let(:payment_index) { PaymentIndexPage.new }
+  before(:each) { log_in }
+
+  it 'all' do
+    property = property_create!
+    Payment.create! payment_attributes account_id: property.account.id
+    payment_index.visit_page
+    expect(payment_index).to be_having_payment
+  end
+
+  it 'search' do
+    property = property_create!
+    Payment.create! payment_attributes account_id: property.account.id
+    payment_index.visit_page
+    payment_index.search '2002'
+    expect(payment_index).to be_having_payment
+  end
+
+  it 'failed search' do
+    property = property_create!
+    Payment.create! payment_attributes account_id: property.account.id
+    payment_index.visit_page
+    payment_index.search '2003'
+    expect(payment_index).to_not be_having_payment
+  end
+end

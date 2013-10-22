@@ -1,5 +1,9 @@
 class PaymentsController < ApplicationController
 
+  def index
+    @payments = Payment.search(search_param).page(params[:page]).load
+  end
+
   def new
     prepare_for_new_action human_id: params[:human_id]
   end
@@ -31,6 +35,10 @@ class PaymentsController < ApplicationController
   end
 
   private
+
+  def search_param
+    params[:search]
+  end
 
   def prepare_for_new_action args = {}
     @payment = Payment.new args

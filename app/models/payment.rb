@@ -44,6 +44,15 @@ class Payment < ActiveRecord::Base
     self.amount = default_amount if amount.blank?
   end
 
+  def self.search search
+    case
+    when search.blank?
+      Payment.all.includes(account: [:property])
+    else
+      Payment.includes(account: [:property]).where(properties: { human_id: search })
+    end
+  end
+
   private
 
   def default_on_date

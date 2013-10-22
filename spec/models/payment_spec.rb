@@ -54,4 +54,19 @@ describe Payment do
 
   end
 
+  context '#search' do
+
+    it('human id') do
+      property = property_create!
+      payment = Payment.create! payment_attributes account_id: property.account.id
+      expect(Payment.search('2002')).to eq [payment]
+    end
+
+    it('wrong human id') do
+      property = property_create!
+      payment = Payment.create! payment_attributes account_id: property.account.id
+      expect((Payment.search('2003'))).to eq []
+    end
+  end
+
 end

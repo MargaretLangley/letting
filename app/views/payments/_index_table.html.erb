@@ -1,7 +1,42 @@
-<div class = 'showbox'>
-  <p>
-    Charges
-  </p>
-
-
- </div>
+<table>
+  <thead>
+    <tr>
+      <th class='alnright'>
+        Property ID
+      </th>
+       <th>
+        Name
+      </th>
+      <th>
+        Date
+      </th>
+      <th>
+        Amount
+      </th>
+      <th>
+        Actions
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% payments.each do |payment| %>
+    <tr>
+      <td class='alnright'>
+        <%= payment.account.property.human_id %>
+      </td>
+      <td>
+        <%= payment.account.property.entities.full_name %>
+      </td>
+      <td>
+        <%= payment.on_date %>
+      </td>
+      <td>
+        <%= payment.amount %>
+      </td>
+      <td>
+        <%= link_to 'Delete', payment, method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,3 +1,7 @@
 
 <h2 class="mainTitle">Payments Index</h2>
+Find Payment
 <%= render 'search' %>
+<%= render 'index_table', payments: @payments %>
+
+<%= paginate @payments %>
