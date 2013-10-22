@@ -57,11 +57,11 @@ describe 'Payment index' do
     expect(payment_index).to_not be_having_payment
   end
 
-    it '#destroys a property' do
-      property = property_create!
-      Payment.create! payment_attributes account_id: property.account.id
-      payment_index.visit_page
-      expect { payment_index.delete }.to change(Payment, :count).by(-1)
-      expect(payment_index).to be_deleted
-    end
+  it '#destroys a property' do
+    property = property_create!
+    Payment.create! payment_attributes account_id: property.account.id
+    payment_index.visit_page
+    expect { payment_index.delete }.to change(Payment, :count).by(-1)
+    expect(payment_index).to be_deleted
+  end
 end
