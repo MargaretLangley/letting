@@ -99,18 +99,19 @@ class PropertiesController < ApplicationController
       %i(id day month)
     end
 
+    def identy
+      "Property 'ID #{@property.human_id}, #{@property.start_address}'"
+    end
+
     def property_created_message
-      "Property 'id #{@property.human_id}, #{@property
-      .start_address}' successfully created!"
+      "#{identy} successfully created!"
     end
 
     def property_updated_message
-      "Property 'id #{@property.human_id}, #{@property
-      .start_address}' successfully updated!"
+      "#{identy} successfully updated!"
     end
 
     def property_deleted_message
-      "Property 'id #{@property.human_id}, #{@property
-      .start_address}' successfully deleted!"
+      "#{identy} successfully deleted!"
     end
 end
