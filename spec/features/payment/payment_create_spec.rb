@@ -23,7 +23,7 @@ class PaymentCreatePage
   end
 
   def create_payment
-    click_on 'payment'
+    click_on 'pay in full'
     self
   end
 

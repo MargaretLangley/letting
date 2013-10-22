@@ -37,6 +37,33 @@ a.disabled {
   border-top: 1px solid $background-filler;
 }
 
+
+@mixin cell {
+  color: $primary-text-color;
+  padding: 0.6em 0.6em;
+}
+
+.grid-header
+{
+  @include cell;
+}
+
+.top-body
+{
+  @include top;
+  @include cell;
+  height: 5em;
+  line-height: 5em;
+  margin-top: 0em;
+}
+
+.pick-out
+{
+  background-color: lighten($secondary-background-color, 47%);
+}
+
+
+
 .top {
   @include top;
 }
@@ -168,6 +195,9 @@ fieldset {
 input[type="submit"] {
   @include button-base;
   width: 40%;
+  &.x-large {
+    width: 100%;
+  }
   &.medium {
     width: 60%;
   }
