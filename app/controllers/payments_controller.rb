@@ -34,6 +34,13 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def destroy
+    @payment = Payment.find(params[:id])
+    alert_message = payment_deleted_message
+    @payment.destroy
+    redirect_to payments_path, alert: alert_message
+  end
+
   private
 
   def search_param
@@ -66,6 +73,10 @@ class PaymentsController < ApplicationController
 
   def credit_attributes
     %i(id account_id debit_id on_date amount)
+  end
+
+  def payment_deleted_message
+    "payment successfully deleted!"
   end
 
 end
