@@ -100,7 +100,8 @@ class PropertiesController < ApplicationController
     end
 
     def identy
-      "Property 'ID #{@property.human_id}, #{@property.start_address}'"
+      property = PropertyDecorator.new @property
+      "Property 'ID #{property.human_id}, #{property.start_address}'"
     end
 
     def property_created_message
