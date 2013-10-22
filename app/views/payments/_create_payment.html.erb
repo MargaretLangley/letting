@@ -18,7 +18,3 @@
   </div>
 <% end %>
 </div>
-<div>
-  <%= payment_form.submit 'payment', name: 'create' , disabled: !@payment.required?, class: 'medium' %>&nbsp;&nbsp;
-  <%= link_to_if @payment.required? ,' or Cancel', payments_path, class: 'alternative-choice' %>
-</div>

@@ -1,17 +1,15 @@
-<tr>
-  <td>
-    <%= credit_form.label credit.debit.charge.charge_type %>
-  </td>
-  <td>
-    <%= credit_form.label l credit.debit.on_date %>
-  </td>
-  <td>
-    <%= number_to_currency credit.debit.amount %>
-  </td>
-  <td>
-    <%= credit_form.hidden_field :account_id %>
-    <%= credit_form.hidden_field :debit_id %>
-    <%= credit_form.hidden_field :on_date %>
-    <%= credit_form.text_field :amount %>
-  </td>
-</tr>
+<div class="col-1-4 top-body">
+  <%= credit_form.label credit.debit.charge.charge_type %>
+</div>
+<div class="col-1-4 top-body">
+  <%= credit_form.label l credit.debit.on_date %>
+</div>
+<div class="col-1-8 top-body">
+  <%= number_to_currency credit.debit.amount %>
+</div>
+<div class="col-3-8 top-body pick-out">
+  <%= credit_form.hidden_field :account_id %>
+  <%= credit_form.hidden_field :debit_id %>
+  <%= credit_form.hidden_field :on_date %>
+  <%= credit_form.text_field :amount %>
+</div>
