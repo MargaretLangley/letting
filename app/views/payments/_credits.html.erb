@@ -25,7 +25,7 @@
       Total
     </div>
     <div class="col-3-8 body pick-out">
-      <%= text_field_tag :total, @payment.credits.default_amount, class: 'total number' %>
+      <%= text_field_tag :total, @payment.credits.default_amount, readonly: true, class: 'total number' %>
     </div>
   <% else %>
     Debit Free
