@@ -27,12 +27,13 @@ class Debit < ActiveRecord::Base
   validates :charge_id, :on_date, presence: true
   validates :amount, amount: true
 
-  def paid
-    credits.pluck(:amount).inject(0, :+)
-  end
 
   def paid?
     paid == amount
+  end
+
+  def outstanding
+    amount - paid
   end
 
   def already_charged? other
@@ -46,4 +47,9 @@ class Debit < ActiveRecord::Base
     amount == other.amount
   end
 
+  private
+
+  def paid
+    credits.pluck(:amount).inject(0, :+)
+  end
 end
