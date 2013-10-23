@@ -5,7 +5,7 @@
   <%= credit_form.label l credit.debit.on_date %>
 </div>
 <div class="col-1-8 top-body number amount">
-  <%= number_to_currency credit.debit.amount %>
+  <%= number_to_currency credit.debit.outstanding %>
 </div>
 <div class="col-3-8 top-body pick-out">
   <%= credit_form.hidden_field :account_id %>
