@@ -1,5 +1,5 @@
 
-<div class="grid container totalizer debug">
+<div class="grid container totalizer">
   <div class="col-5-8">
     <h3>Unpaid Debits</h3>
   </div>
@@ -27,11 +27,11 @@
     <div class="col-1-2">
       &nbsp;
     </div>
-    <div class="col-1-8 body">
+    <div class="col-1-8 cell">
       <h3>Total</h3>
     </div>
-    <div class="col-3-8 body pick-out debug">
-      <%= payment_form.text_field :amount, readonly: true, class: 'total number' %>
+    <div class="col-3-8 cell pick-out">
+      <%= payment_form.text_field :amount, readonly: true, class: 'total number nested-element' %>
     </div>
   <% else %>
     Debit Free

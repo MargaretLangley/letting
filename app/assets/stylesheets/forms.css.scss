@@ -37,61 +37,7 @@ a.disabled {
   border-top: 1px solid $background-filler;
 }
 
-@mixin cell {
-  padding: 0.6em 0.6em;
-}
 
-@mixin body-cell {
-  @include cell;
-  color: $primary-text-color;
-}
-
-/*http://stackoverflow.com/questions/4785871/css-vertical-align*/
-@mixin vertical-align-hack {
-  height: 5em;
-  line-height: 5em;
-}
-
-.grid-header
-{
-  color: $secondary-text-color;
-  @include cell;
-}
-
-.top-body
-{
-  @include body-cell;
-  @include vertical-align-hack;
-  input {
-    width: 100%;
-  }
-}
-
-.body
-{
-  @include body-cell;
-  @include vertical-align-hack;
-  input {
-    width: 100%;
-  }
-}
-
-
-.pick-out
-{
-  background-color: lighten($secondary-background-color, 47%);
-}
-
-
-input[readonly='readonly']
-{
-  color:  $primary-text-color;
-  background-color: Gainsboro;
-}
-
-.number {
-  text-align: right;
-}
 
 
 .top {
@@ -171,9 +117,9 @@ fieldset {
 
   input,
   textarea {
-    font-size:     16px;
-    padding:       10px;
-    border-radius: 6px;
+    font-size:     1em;
+    padding:       4% 1% 4% 1%;
+    border-radius: 4px;
     box-shadow:    0px;
     border: 1px solid $subdued-color;
   }
@@ -228,7 +174,7 @@ input[type="submit"] {
   @include button-base;
   width: 40%;
   &.x-large {
-    width: 95%;
+    width: 80%;
   }
   &.medium {
     width: 60%;
@@ -271,3 +217,54 @@ input[type="submit"] {
  {
    width: 20%;
  }
+
+
+/*Turn Grid into Table*/
+
+
+@mixin body-cell {
+  color: $primary-text-color;
+}
+
+/*http://stackoverflow.com/questions/4785871/css-vertical-align*/
+@mixin vertical-align-hack {
+  height: 5em;
+  line-height: 5em;
+}
+
+.grid {
+
+  .grid-header
+  {
+    color: $secondary-text-color;
+    border-bottom: 1px solid $background-filler;
+  }
+
+  .cell
+  {
+    @include body-cell;
+    @include vertical-align-hack;
+  }
+
+  .nested-element
+  {
+    margin-left: 1em;
+  }
+
+  .pick-out
+  {
+    background-color: lighten($secondary-background-color, 47%);
+  }
+
+  input[readonly='readonly']
+  {
+    color:  $primary-text-color;
+    background-color: Gainsboro;
+  }
+}
+
+
+.number {
+  text-align: right;
+}
+
