@@ -1,6 +1,6 @@
 <div class='top'></div>
 <h2>Payment Received</h2>
-<div class="grid container debug">
+<div class="grid container">
   <div class="col-1-4 grid-header">
     Type
   </div>
@@ -11,13 +11,13 @@
     Payment Amount
   </div>
 
-  <div class="col-1-4 top-body">
+  <div class="col-1-4 cell">
     <%= payment_form.label 'Cheque' %>
   </div>
-  <div class="col-3-8 top-body">
+  <div class="col-3-8 cell">
     <%= payment_form.date_field :on_date %>
   </div>
-  <div class="col-3-8 top-body pick-out">
+  <div class="col-3-8 cell pick-out">
     <%= payment_form.hidden_field :account_id %>
     <%= payment_form.submit 'pay total', name: 'create' , disabled: !@payment.required?, class: 'x-large' %>
   </div>

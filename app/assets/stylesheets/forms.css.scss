@@ -237,13 +237,7 @@ input[type="submit"] {
   .grid-header
   {
     color: $secondary-text-color;
-  }
-
-  .top-cell
-  {
-    border-top: 1px solid $background-filler;
-    @include body-cell;
-    @include vertical-align-hack;
+    border-bottom: 1px solid $background-filler;
   }
 
   .cell
