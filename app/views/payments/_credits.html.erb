@@ -1,5 +1,11 @@
-<h3>Unpaid Debits</h3>
-<div class="grid container totalizer">
+
+<div class="grid container totalizer debug">
+  <div class="col-5-8">
+    <h3>Unpaid Debits</h3>
+  </div>
+  <div class="col-3-8 pick-out">
+    <h3>Credits</h3>
+  </div>
   <div class="col-1-4 grid-header">
     Charge
   </div>
@@ -9,7 +15,7 @@
   <div class="col-1-8 grid-header number">
     Owed
   </div>
-  <div class="col-3-8 grid-header pick-out">
+  <div class="col-3-8 grid-header number pick-out">
     Payed
   </div>
   <% if @payment.required? %>
@@ -22,10 +28,10 @@
       &nbsp;
     </div>
     <div class="col-1-8 body">
-      Total
+      <h3>Total</h3>
     </div>
-    <div class="col-3-8 body pick-out">
-      <%= text_field_tag :total, @payment.credits.default_amount, readonly: true, class: 'total number' %>
+    <div class="col-3-8 body pick-out debug">
+      <%= payment_form.text_field :amount, readonly: true, class: 'total number' %>
     </div>
   <% else %>
     Debit Free

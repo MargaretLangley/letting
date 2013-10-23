@@ -47,22 +47,22 @@ describe Debit do
       end
     end
 
-    context '#paid' do
-      it 'returns 0 if nothing paid' do
-        expect(debit.paid).to eq 0
+    context '#outstanding' do
+      it 'returns amount if nothing paid' do
+        expect(debit.outstanding).to eq 88.08
       end
 
-      it 'returns the amount paid' do
+      it 'returns 0 when paid' do
         debit.save!
         Credit.create! credit_attributes debit_id: debit.id
-        expect(debit.paid).to eq 88.08
+        expect(debit.outstanding).to eq 0
       end
 
       it 'multiple credits are added' do
         debit.save!
         Credit.create! credit_attributes amount: 1.05, debit_id: debit.id
         Credit.create! credit_attributes amount: 1.05, debit_id: debit.id
-        expect(debit.paid).to eq 2.10
+        expect(debit.outstanding).to eq 85.98
       end
     end
 

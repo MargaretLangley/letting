@@ -16,7 +16,7 @@ class Credit < ActiveRecord::Base
   end
 
   def default_amount
-    debit.amount
+    debit.outstanding
   end
 
   private

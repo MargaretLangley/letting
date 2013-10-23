@@ -2,7 +2,7 @@
     <% entitieable.entities.each.with_index do |entity, index| %>
       <%= f.fields_for :entities, entity do |builder| %>
         <fieldset id='<%= entity_field_id entitieable, index %>'
-          class='<%= "#{hide_new_record_unless_first entity, index} " +
+          class='minimal <%= "#{hide_new_record_unless_first entity, index} " +
                       "#{destroyable entity, index }" %>' >
           <%= render 'shared/entity', f: builder, record: entity, index: index %>
         </fieldset>

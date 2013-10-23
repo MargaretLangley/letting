@@ -16,7 +16,7 @@
 $pad: 2%;
 
 .grid {
-  margin: 0 0 $pad 2%;
+  margin: 0 0 0 2%;
   padding: 0 2% 0 0;
 
   &.vertical-spacer {
@@ -59,6 +59,9 @@ $pad: 2%;
 }
 .col-3-8 {
   width: 37.5%;
+}
+.col-5-8 {
+  width: 62.5%;
 }
 .col-7-8 {
   width: 87.5%;
