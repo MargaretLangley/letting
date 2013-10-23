@@ -245,7 +245,8 @@ end
     BillingProfile.create! [
       { id: 1, use_profile: true,  property_id: 1 },
       { id: 2, use_profile: false, property_id: 2 },
-      { id: 3, use_profile: false, property_id: 3 }
+      { id: 3, use_profile: false, property_id: 3 },
+      { id: 4, use_profile: false, property_id: 4 }
     ]
   end
 

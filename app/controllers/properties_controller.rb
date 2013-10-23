@@ -22,6 +22,8 @@ class PropertiesController < ApplicationController
   end
 
   def show
+    @properties = Property.search(search_param).page(params[:page]).load
+    redirect_to property_path @properties.first if unique_search?
     @property = Property.find params[:id]
   end
 
@@ -41,6 +43,8 @@ class PropertiesController < ApplicationController
   end
 
   def edit
+    @properties = Property.search(search_param).page(params[:page]).load
+    redirect_to edit_property_path @properties.first if unique_search?
     @property = Property.find params[:id]
     @property.prepare_for_form
   end
