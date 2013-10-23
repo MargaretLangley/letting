@@ -28,7 +28,7 @@ class PaymentsController < ApplicationController
   def create_payment
     @payment = Payment.new payment_params
     if @payment.save
-      redirect_to payments_path, notice: success
+      redirect_to new_payment_path, notice: success
     else
       render :new
     end

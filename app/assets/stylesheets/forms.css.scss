@@ -57,11 +57,30 @@ a.disabled {
   margin-top: 0em;
 }
 
+.body
+{
+  @include cell;
+  height: 5em;
+  line-height: 5em;
+  margin-top: 0em;
+}
+
+
 .pick-out
 {
   background-color: lighten($secondary-background-color, 47%);
 }
 
+
+input[readonly='readonly']
+{
+  color:  $primary-text-color;
+  background-color: Gainsboro;
+}
+
+.number {
+  text-align: right;
+}
 
 
 .top {
