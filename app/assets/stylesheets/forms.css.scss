@@ -37,32 +37,38 @@ a.disabled {
   border-top: 1px solid $background-filler;
 }
 
-
 @mixin cell {
-  color: $primary-text-color;
   padding: 0.6em 0.6em;
+}
+
+@mixin body-cell {
+  @include cell;
+  color: $primary-text-color;
+}
+
+/*http://stackoverflow.com/questions/4785871/css-vertical-align*/
+@mixin vertical-align-hack {
+  height: 5em;
+  line-height: 5em;
 }
 
 .grid-header
 {
+  color: $secondary-text-color;
   @include cell;
 }
 
 .top-body
 {
-  @include top;
-  @include cell;
-  height: 5em;
-  line-height: 5em;
-  margin-top: 0em;
+  border-top: 1px solid $background-filler;
+  @include body-cell;
+  @include vertical-align-hack;
 }
 
 .body
 {
-  @include cell;
-  height: 5em;
-  line-height: 5em;
-  margin-top: 0em;
+  @include body-cell;
+  @include vertical-align-hack;
 }
 
 
