@@ -295,6 +295,7 @@ end
 def debits_and_credits
   create_debit_generator
   create_credits
+  create_payment
 end
 
   def create_debit_generator
@@ -334,18 +335,26 @@ end
     ]
   end
 
-
   def create_credits
-    #MISSING PAYMENT
-    # Credit.create! [
-    #   { id: 1,
-    #     payment_id: 1,
-    #     account_id: 1,
-    #     debit_id: 1,
-    #     on_date: create_date(15),
-    #     amount: 88.08,
-    #   }
-    # ]
+    Credit.create! [
+      { id: 1,
+        payment_id: 1,
+        account_id: 1,
+        debit_id: 1,
+        on_date: create_date(15),
+        amount: 88.08,
+      }
+    ]
+  end
+
+  def create_payment
+    Payment.create! [
+      { id: 1,
+        account_id: 1,
+        on_date: create_date(15),
+        amount: 88.08,
+      }
+    ]
   end
 
   def create_date months_ago
