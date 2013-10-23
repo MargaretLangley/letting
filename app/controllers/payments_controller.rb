@@ -76,7 +76,7 @@ class PaymentsController < ApplicationController
   end
 
   def payment_deleted_message
-    "payment successfully deleted!"
+    'payment successfully deleted!'
   end
 
 end

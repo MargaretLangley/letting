@@ -49,7 +49,8 @@ class Payment < ActiveRecord::Base
     when search.blank?
       Payment.all.includes(account: [:property])
     else
-      Payment.includes(account: [:property]).where(properties: { human_id: search })
+      Payment.includes(account: [:property])
+        .where(properties: { human_id: search })
     end
   end
 
