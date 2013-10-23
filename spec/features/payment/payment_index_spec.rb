@@ -8,7 +8,7 @@ class PaymentIndexPage
     self
   end
 
-  def search search_string = ""
+  def search search_string = ''
     fill_in 'search', with: search_string
     click_on 'Search'
     self
@@ -28,7 +28,6 @@ class PaymentIndexPage
   end
 end
 
-
 describe 'Payment index' do
 
   let(:payment_index) { PaymentIndexPage.new }
@@ -36,7 +35,8 @@ describe 'Payment index' do
 
   it 'all' do
     property = property_create!
-    Payment.create! payment_attributes account_id: property.account.id
+    Payment.create! payment_attributes account_id: property
+           .account.id
     payment_index.visit_page
     expect(payment_index).to be_having_payment
   end
