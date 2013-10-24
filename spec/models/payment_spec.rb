@@ -10,6 +10,10 @@ describe Payment do
       payment.account_id = nil
       expect(payment).to_not be_valid
     end
+    it 'requires date' do
+      payment.on_date = nil
+      expect(payment).to_not be_valid
+    end
     it 'requires amount' do
       payment.account = nil
       expect(payment).to_not be_valid

@@ -23,7 +23,7 @@ class Payment < ActiveRecord::Base
   accepts_nested_attributes_for :credits, allow_destroy: true
   attr_accessor :human_id
 
-  validates :account_id, presence: true
+  validates :account_id, :on_date, presence: true
 
   after_initialize do |debit_generator|
     self.on_date = default_on_date if on_date.blank?
