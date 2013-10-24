@@ -328,7 +328,7 @@ end
       },
       {
         id: 2, account_id: 1,
-        charge_id: 3,
+        charge_id: 1,
         on_date: create_date(5),
         amount: 88.08,
         debit_generator_id: 2 ,
