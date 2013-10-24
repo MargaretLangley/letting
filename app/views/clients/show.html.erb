@@ -1,7 +1,9 @@
 <article>
   <div class = 'showbox'>
     <h2>Client ID:
-     <%= @client.human_id %><span class= 'floatright'><%= link_to 'Edit', edit_client_path(@client) %><span>
+     <%= @client.human_id %>
+     <span class= 'floatright'><%= link_to 'Edit', edit_client_path(@client) %><span>
+     <span class= 'floatright'><%= link_to 'List', clients_path %><span>
     </h2>
     <p>
     <% @client.entities.each do |entity| %>
