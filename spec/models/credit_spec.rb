@@ -36,6 +36,12 @@ describe Credit do
         credit.amount = -1.00
         expect(credit).to_not be_valid
       end
+
+      it 'not greater than owed' do
+        credit = credit_new
+        credit.amount = 88.09
+        expect(credit).to_not be_valid
+      end
     end
   end
 
@@ -56,7 +62,13 @@ describe Credit do
     it 'has on_date' do
       expect(credit.on_date).to eq Date.new 2013, 9, 30
     end
+  end
 
+  context 'methods' do
+    let(:credit) { credit_new }
+    it 'default_amount' do
+      expect(credit.default_amount).to eq 88.08
+    end
   end
 
 end
