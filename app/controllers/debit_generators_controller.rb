@@ -51,15 +51,12 @@ class DebitGeneratorsController < ApplicationController
   end
 
   def create_debits
-    if generate_debits.save
+    @debit_generator = DebitGenerator.new debit_generator_params
+    if @debit_generator.save
       redirect_to debit_generators_path, notice: success_message
     else
       render :new
     end
-  end
-
-  def generate_debits
-    DebitGenerator.new debit_generator_params
   end
 
   def debit_generator_params
