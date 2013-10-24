@@ -14,7 +14,7 @@ class ClientsController < ApplicationController
 
   def index
     @clients = Client.search(search_param).page(params[:page]).load
-    redirect_to edit_client_path @clients.first if unique_search?
+    redirect_to find_route(@clients.first) if unique_search?
   end
 
   def show
@@ -58,6 +58,17 @@ class ClientsController < ApplicationController
   end
 
   private
+
+    def find_route model
+      case params[:search_action]
+      when 'show', 'index'
+        client_path model
+      when 'edit'
+        edit_client_path model
+      else
+        clients_path
+      end
+    end
 
     def unique_search?
       search_param.present? && @clients.size == 1
