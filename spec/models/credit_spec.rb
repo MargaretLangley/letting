@@ -18,6 +18,16 @@ describe Credit do
     end
 
     context 'amount' do
+      it 'is a number' do
+        credit.amount = 'nnn'
+        expect(credit).to_not be_valid
+      end
+
+      it 'not greater than owed' do
+        credit.amount = 88.09
+        expect(credit).to_not be_valid
+      end
+
       it 'One penny is valid' do
         credit.amount = 0.01
         expect(credit).to be_valid
@@ -30,12 +40,6 @@ describe Credit do
 
       it 'positive numbers' do
         credit.amount = -1.00
-        expect(credit).to_not be_valid
-      end
-
-      it 'not greater than owed' do
-        credit = credit_new
-        credit.amount = 88.09
         expect(credit).to_not be_valid
       end
     end

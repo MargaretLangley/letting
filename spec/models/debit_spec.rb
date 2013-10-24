@@ -24,7 +24,16 @@ describe Debit do
         expect(debit).to_not be_valid
       end
     end
-
+    context 'amount' do
+      it 'is numeric' do
+        debit.amount = 'nnn'
+        expect(debit).to_not be_valid
+      end
+      it 'has a maximum' do
+        debit.amount = 100000
+        expect(debit).to_not be_valid
+      end
+    end
   end
 
   context 'methods' do
