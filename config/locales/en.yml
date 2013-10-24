@@ -26,6 +26,9 @@ en:
         name: 'Person or company name'
       property:
         entities: 'Person or company'
+        human_id: 'Property ID'
+      client:
+        human_id: 'Client ID'
     errors:
       models:
         debit_generator:
