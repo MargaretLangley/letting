@@ -44,6 +44,16 @@ describe Charge do
         end
       end
     end
+    context 'amount' do
+      it 'is a number' do
+        charge.amount = 'nnn'
+        expect(charge).to_not be_valid
+      end
+      it 'has a maximum' do
+        charge.amount = 100000
+        expect(charge).to_not be_valid
+      end
+    end
   end
 
   context 'Assocations' do

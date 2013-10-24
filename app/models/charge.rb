@@ -19,6 +19,7 @@ class Charge < ActiveRecord::Base
   belongs_to :account
   validates :charge_type, :due_in, presence: true
   validates :amount, amount: true
+  validates :amount, numericality: { less_than: 100000 }
   validates :due_ons, presence: true
   validate :due_ons_size
   has_many :debit
