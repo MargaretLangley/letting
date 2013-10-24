@@ -46,6 +46,7 @@ end
 
 def debit_attributes overrides = {}
   {
+    id: 1,
     account_id: 1,
     debit_generator_id: 1,
     charge_id: 3,
