@@ -8,7 +8,7 @@
 #
 # How does this fit into the larger system?
 #
-# Property are at the heart of the application - which accounts, tenants,
+# Properties are at the heart of the application - which accounts, tenants,
 # billing profiles / addresses are hung off and this is the managing
 # controller.
 #
@@ -18,12 +18,10 @@ class PropertiesController < ApplicationController
 
   def index
     @properties = Property.search(search_param).page(params[:page]).load
-    redirect_to edit_property_path @properties.first if unique_search?
+    redirect_to find_route(@properties.first) if unique_search?
   end
 
   def show
-    @properties = Property.search(search_param).page(params[:page]).load
-    redirect_to property_path @properties.first if unique_search?
     @property = Property.find params[:id]
   end
 
@@ -43,8 +41,6 @@ class PropertiesController < ApplicationController
   end
 
   def edit
-    @properties = Property.search(search_param).page(params[:page]).load
-    redirect_to edit_property_path @properties.first if unique_search?
     @property = Property.find params[:id]
     @property.prepare_for_form
   end
@@ -66,6 +62,17 @@ class PropertiesController < ApplicationController
   end
 
   private
+
+    def find_route model
+      case params[:search_action]
+      when 'show', 'index'
+        property_path model
+      when 'edit'
+        edit_property_path model
+      else
+        properties_path
+      end
+    end
 
     def unique_search?
       search_param.present? && @properties.size == 1
