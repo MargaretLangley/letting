@@ -1,9 +1,2 @@
 <h2 class="mainTitle">New Payment</h2>
-
-<%= form_for @payment do |payment_form| %>
-  <%= render 'shared/errors', object: @payment %>
-  <fieldset class='shell'>
-    <%= render 'search_payable_properties', payment_form: payment_form %>
-    <%= render 'create_payment', payment_form: payment_form %>
-  </fieldset>
-<% end %>
+<%= render 'form', payment: @payment %>

@@ -2,15 +2,11 @@ require 'spec_helper'
 
 describe Credit do
 
-  let(:credit) { Credit.new credit_attributes }
+  let(:credit) { credit_new }
   it('is valid') { expect(credit).to be_valid }
 
   context 'validates' do
     context 'presence' do
-      it 'debit_id' do
-        credit.debit_id = nil
-        expect(credit).to_not be_valid
-      end
       it 'on_date' do
         credit.on_date = nil
         expect(credit).to_not be_valid
@@ -66,8 +62,18 @@ describe Credit do
 
   context 'methods' do
     let(:credit) { credit_new }
-    it 'default_amount' do
-      expect(credit.default_amount).to eq 88.08
+    it 'outstanding' do
+      expect(credit.outstanding).to eq 88.08
+    end
+
+    context 'maximum_payment calculates' do
+      it 'new record correctly' do
+        expect(credit.maximum_payment).to eq 88.08
+      end
+      it 'saved record correctly' do
+        credit.should_receive(:new_record?).and_return(false)
+        expect(credit.maximum_payment).to eq 176.16
+      end
     end
   end
 

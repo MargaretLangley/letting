@@ -1,11 +1,11 @@
 <div class='top'></div>
 <h2>Property</h2>
 <div class='blank_slate_parent'>
-<% if @payment.present? %>
-  <%= render 'address', property: PropertyDecorator.new(@payment.account.property) %>
-  <% if @payment.required? %>
-    <%= render 'payment_received', payment_form: payment_form  %>
-    <%= render 'credits', payment_form: payment_form  %>
+<% if payment.present? %>
+  <%= render 'address', property: PropertyDecorator.new(payment.account.property) %>
+  <% if payment.required? %>
+    <%= render 'payment_received', payment: PaymentDecorator.new(payment), payment_form: payment_form  %>
+    <%= render 'credits', payment: payment, payment_form: payment_form  %>
   <% else %>
   <div class='blank_slate_overlay'>
     <%= t('instruction.payments.property_no_debt') %>

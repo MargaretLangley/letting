@@ -12,8 +12,8 @@
 class Payment < ActiveRecord::Base
   belongs_to :account
   has_many :credits, dependent: :destroy do
-    def default_amount
-      map { |credit| credit.default_amount }.sum
+    def outstanding
+      map { |credit| credit.outstanding }.sum
     end
 
     def prepare debit, account_id
@@ -41,7 +41,7 @@ class Payment < ActiveRecord::Base
     account && account.unpaid_debits.each do |debit|
       credits.prepare debit, account_id
     end
-    self.amount = default_amount if amount.blank?
+    self.amount = outstanding if amount.blank?
   end
 
   def self.search search
@@ -60,8 +60,8 @@ class Payment < ActiveRecord::Base
     Date.current
   end
 
-  def default_amount
-    credits.default_amount
+  def outstanding
+    credits.outstanding
   end
 
 end

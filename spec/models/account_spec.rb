@@ -47,17 +47,26 @@ describe Account do
     end
 
     it '# add_credit' do
-      expect(account.add_credit credit_attributes).to be_valid
+      account.add_credit credit_new
+      expect(account).to be_valid
     end
 
-    it 'lists #unpaid_debits' do
-      debit1 = account.add_debit debit_attributes
-      debit2 = account.add_debit debit_attributes charge_id: 2
-      account.save!
-      account.add_credit credit_attributes debit_id: debit1.id
-      account.save!
-      expect(Debit.all.to_a).to eq [debit1, debit2]
-      expect(account.unpaid_debits).to eq [debit2]
+    context '#upaid_debits' do
+
+      it 'includes unpaid' do
+        debit1 = account.add_debit debit_attributes
+        account.save!
+        expect(account.debits).to have(1).item
+        expect(account.unpaid_debits).to eq [debit1]
+      end
+
+      it 'ignored paid' do
+        # credit has associated debit
+        account.add_credit credit_new
+        account.save!
+        expect(account.debits).to have(1).item
+        expect(account.unpaid_debits).to eq []
+      end
     end
 
     it '#by_human id' do

@@ -1,8 +1,11 @@
 <div class="col-1-4 cell">
   <%= credit_form.label credit.debit.charge.charge_type %>
 </div>
-<div class="col-1-4 cell">
+<div class="col-1-8 cell">
   <%= credit_form.label l credit.debit.on_date %>
+</div>
+<div class="col-1-8 cell number amount">
+  <%= number_to_currency credit.debit.amount %>
 </div>
 <div class="col-1-8 cell number amount">
   <%= number_to_currency credit.debit.outstanding %>

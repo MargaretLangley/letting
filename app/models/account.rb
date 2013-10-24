@@ -27,8 +27,8 @@ class Account < ActiveRecord::Base
     debits.build debit_args
   end
 
-  def add_credit credit_args
-    credits.build credit_args
+  def add_credit credit
+    credits << credit
   end
 
   def unpaid_debits

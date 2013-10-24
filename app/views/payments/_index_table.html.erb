@@ -34,6 +34,7 @@
         <%= number_to_currency payment.amount %>
       </td>
       <td>
+        <%= link_to 'Edit', edit_payment_path(payment) %> |
         <%= link_to 'Delete', payment, method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
       </td>
     </tr>

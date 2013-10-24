@@ -1,0 +1,7 @@
+<%= form_for payment do |payment_form| %>
+  <%= render 'shared/errors', object: payment %>
+  <fieldset class='shell'>
+    <%= render 'search_payable_properties', payment_form: payment_form %>
+    <%= render 'create_payment', payment: payment, payment_form: payment_form %>
+  </fieldset>
+<% end %>

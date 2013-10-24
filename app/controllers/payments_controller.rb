@@ -1,3 +1,21 @@
+#####
+#
+# PaymentsController
+#
+# Restful actions on the Payments resource
+#
+# Payments resource covers crediting the debits that the tennats are
+# charged by the debt generator / invoicing system.
+#
+# Payments are operator generated resources. When a payment is recieved
+# (by standing order or cheque) - it is entered into the system through
+# this resource.
+#
+# Payments are associated with credits which offset the debt_generator's
+# debits.
+#
+####
+#
 class PaymentsController < ApplicationController
 
   def index
@@ -13,6 +31,19 @@ class PaymentsController < ApplicationController
       show_payment
     else
       create_payment
+    end
+  end
+
+  def edit
+    @payment = Payment.find params[:id]
+  end
+
+  def update
+    @payment = Payment.find params[:id]
+    if @payment.update payment_params
+      redirect_to new_payment_path, notice: success
+    else
+      render :edit
     end
   end
 
