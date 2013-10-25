@@ -51,4 +51,5 @@ describe 'Property Factory' do
       expect(property.account.unpaid_debits).to have(1).items
     end
   end
+
 end

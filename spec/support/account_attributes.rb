@@ -49,7 +49,7 @@ def debit_attributes overrides = {}
     id: 1,
     account_id: 1,
     debit_generator_id: 1,
-    charge_id: 3,
+    charge_id: 1,
     on_date: '25/3/2013',
     amount: 88.08,
   }.merge overrides

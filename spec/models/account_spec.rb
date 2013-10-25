@@ -32,7 +32,7 @@ describe Account do
       end
 
       it 'does not double charge' do
-        account = account_and_charge_new charge_attributes: { id: 3 }
+        account = account_and_charge_new charge_attributes: { id: 1 }
         account.add_debit debit_attributes
         expect(account.chargeables_between(dates_in_march)).to eq []
       end
@@ -46,11 +46,6 @@ describe Account do
       expect(account.add_debit debit_attributes).to be_valid
     end
 
-    it '# add_credit' do
-      account.add_credit credit_new
-      expect(account).to be_valid
-    end
-
     context '#upaid_debits' do
 
       it 'includes unpaid' do
@@ -62,7 +57,7 @@ describe Account do
 
       it 'ignored paid' do
         # credit has associated debit
-        account.add_credit credit_new
+        account.credits << credit_new
         account.save!
         expect(account.debits).to have(1).item
         expect(account.unpaid_debits).to eq []

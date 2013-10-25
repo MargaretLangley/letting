@@ -14,7 +14,7 @@ class Account < ActiveRecord::Base
   belongs_to :property, inverse_of: :account
   has_many :debits, dependent: :destroy
   has_many :credits, dependent: :destroy
-  has_many :payments
+  has_many :payments, dependent: :destroy
   include Charges
   accepts_nested_attributes_for :charges, allow_destroy: true
 
@@ -27,8 +27,8 @@ class Account < ActiveRecord::Base
     debits.build debit_args
   end
 
-  def add_credit credit
-    credits << credit
+  def add_credit credit_args
+    credits.build credit_args
   end
 
   def unpaid_debits

@@ -22,7 +22,7 @@ class Charge < ActiveRecord::Base
   validates :amount, numericality: { less_than: 100_000 }
   validates :due_ons, presence: true
   validate :due_ons_size
-  has_many :debit
+  has_many :debits, inverse_of: :charge
 
   def due_between? date_range
     due_ons.between? date_range
