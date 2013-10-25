@@ -3,6 +3,23 @@ require_relative 'charge_values'
 require_relative 'day_month'
 
 module DB
+  ####
+  #
+  # ImportCharge
+  #
+  # Load, assigns and saves Charge model objects into the database
+  #
+  # ImportCharge is called as part of the import.rake task. It reads in
+  # a charge.csv file and creates the charge objects and saves them to
+  # charges and due_ons tables.
+  #
+  # ImportCharge has model_prepared_for_import and model_assignment called
+  # by ImportBase as part of its import_loop. The private code handles
+  # converting the charge.csv into charges (the actual amount) and due_ons
+  # (the date when the charge is due).
+  #
+  ####
+  #
   class ImportCharge < ImportBase
 
     MONTHS_IN_YEAR = 12
@@ -32,6 +49,8 @@ module DB
       assign_due_ons row
     end
 
+    private
+
     def assign_due_ons row
       day_months = charged_days_in_year(row)
       @model_to_assign.due_ons
@@ -43,19 +62,6 @@ module DB
     def assign_due_on due_on, day_month
       due_on.attributes = { day: day_month.day, month: day_month.month } \
                                   unless ignored_date_combination day_month
-    end
-
-    def maximum_dates row
-      ChargeValues.from_code(row[:charge_type]).max_dates_per_year
-    end
-
-    def monthly_charge? row
-      (day_month_from_row_columns 1, row).month == 0
-    end
-
-    def day_month_from_row_columns number, row
-      DayMonth.from_day_month row[:"day_#{number}"].to_i,
-                              row[:"month_#{number}"].to_i
     end
 
     def ignored_date_combination day_month
@@ -71,6 +77,20 @@ module DB
       end
     end
 
+    def monthly_charge? row
+      (day_month_from_row_columns 1, row).month == 0
+    end
+
+    def charged_days_in_year_from_monthly_charge row
+      monthly_charge = day_month_from_row_columns 1, row
+      [*DayMonth.from_day_month(monthly_charge.day, DueOn::PER_MONTH)]
+    end
+
+    def day_month_from_row_columns number, row
+      DayMonth.from_day_month row[:"day_#{number}"].to_i,
+                              row[:"month_#{number}"].to_i
+    end
+
     def charged_days_in_year_from_on_date_charge row
       day_months = []
       (1..maximum_dates(row))
@@ -78,9 +98,8 @@ module DB
       day_months
     end
 
-    def charged_days_in_year_from_monthly_charge row
-      monthly_charge = day_month_from_row_columns 1, row
-      [*DayMonth.from_day_month(monthly_charge.day, DueOn::PER_MONTH)]
+    def maximum_dates row
+      ChargeValues.from_code(row[:charge_type]).max_dates_per_year
     end
   end
 end
