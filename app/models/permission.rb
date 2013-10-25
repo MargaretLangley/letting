@@ -37,6 +37,7 @@ class Permission < Struct.new(:user)
        clients
        debits
        debit_generators
+       invoices
        properties
        payments
        search_suggestions }
