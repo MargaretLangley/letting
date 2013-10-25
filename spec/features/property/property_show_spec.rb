@@ -62,3 +62,29 @@ describe Property do
     expect(page).to have_text 'SE11 5SS'
   end
 end
+
+describe Property do
+
+  before(:each) do
+    log_in
+    property_create! human_id: 111
+    property_create! human_id: 222
+    visit '/properties/'
+    first(:link, 'View').click
+  end
+
+  it 'searches for valid property' do
+    fill_in 'search', with: '222'
+    click_on 'Search'
+    expect(page).to have_text 'Edgbaston Road'
+  end
+
+  it 'searches for same property' do
+    fill_in 'search', with: '222'
+    click_on 'Search'
+    fill_in 'search', with: '222'
+    click_on 'Search'
+    expect(page).to have_text 'Edgbaston Road'
+  end
+
+end
