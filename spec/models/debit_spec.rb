@@ -30,7 +30,7 @@ describe Debit do
         expect(debit).to_not be_valid
       end
       it 'has a maximum' do
-        debit.amount = 100000
+        debit.amount = 100_000
         expect(debit).to_not be_valid
       end
     end

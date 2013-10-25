@@ -26,7 +26,7 @@ class Debit < ActiveRecord::Base
 
   validates :charge_id, :on_date, presence: true
   validates :amount, amount: true
-  validates :amount, numericality: { less_than: 100000 }
+  validates :amount, numericality: { less_than: 100_000 }
 
   def paid?
     paid == amount

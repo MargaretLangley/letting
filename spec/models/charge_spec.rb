@@ -50,7 +50,7 @@ describe Charge do
         expect(charge).to_not be_valid
       end
       it 'has a maximum' do
-        charge.amount = 100000
+        charge.amount = 100_000
         expect(charge).to_not be_valid
       end
     end

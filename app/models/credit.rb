@@ -19,7 +19,7 @@ class Credit < ActiveRecord::Base
 
   validates :on_date, presence: true
   validates :amount, amount: true
-  validates :amount, numericality: { less_than_or_equal_to: ->(credit) { credit.maximum_payment } }
+  validates :amount, numericality: { less_than_or_equal_to: ->(credit) { credit.pay_off } }
 
   after_initialize do |debit_generator|
     self.on_date = default_on_date if on_date.blank?
@@ -34,7 +34,7 @@ class Credit < ActiveRecord::Base
     debit.outstanding
   end
 
-  def maximum_payment
+  def pay_off
     new_record? ? outstanding : outstanding + amount
   end
 

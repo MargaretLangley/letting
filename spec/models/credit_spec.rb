@@ -70,13 +70,13 @@ describe Credit do
       expect(credit.outstanding).to eq 88.08
     end
 
-    context 'maximum_payment calculates' do
+    context 'pay_off calculates' do
       it 'new record correctly' do
-        expect(credit.maximum_payment).to eq 88.08
+        expect(credit.pay_off).to eq 88.08
       end
       it 'saved record correctly' do
         credit.should_receive(:new_record?).and_return(false)
-        expect(credit.maximum_payment).to eq 176.16
+        expect(credit.pay_off).to eq 176.16
       end
     end
   end
