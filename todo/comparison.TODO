@@ -7,9 +7,9 @@
 
   ☐ WELCOME PAGE
   Welcome User's name                                  No welcome page goes into property list
-  Version Number                                            REQUIRED
+  Version Number                                            IMPLEMENTED
   Today's date                                                  NOT IMPLEMENTED
-  Recent payments                                          REQUIRED
+  Recent payments                                          REQUIRED  (RW)
 
   ☐ CLIENTS
   List Clients                                                    done       (clients/index)
