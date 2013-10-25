@@ -61,6 +61,7 @@ describe Client do
       expect(page).to_not have_text 'Title'
       expect(page).to_not have_text 'Delete'
     end
+
   end
 
   context '#updates' do
@@ -130,6 +131,31 @@ describe Client do
     expect(page).to have_text '278'
     expect(page).to_not have_text '294'
     expect(page).to have_text '63c'
+  end
+end
+
+describe Client do
+
+  before(:each) do
+    log_in
+    client_create! human_id: 111
+    client_create! human_id: 222
+    visit '/clients/'
+    first(:link, 'Edit').click
+  end
+
+  it 'searches for valid client' do
+    fill_in 'search', with: '222'
+    click_on 'Search'
+    expect(find_field('Road').value).to have_text 'Edgbaston Road'
+  end
+
+  it 'searches for same client' do
+    fill_in 'search', with: '222'
+    click_on 'Search'
+    fill_in 'search', with: '222'
+    click_on 'Search'
+    expect(find_field('Road').value).to have_text 'Edgbaston Road'
   end
 
 end

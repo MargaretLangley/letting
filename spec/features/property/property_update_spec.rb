@@ -291,3 +291,30 @@ describe Property do
   end
 
 end
+
+describe Property do
+
+  before(:each) do
+    log_in
+    property_create! human_id: 111
+    property_create! human_id: 222
+    visit '/properties/'
+    first(:link, 'Edit').click
+    expect(find_field('Property ID').value).to have_text '111'
+  end
+
+  it 'searches for valid property' do
+    fill_in 'search', with: '222'
+    click_on 'Search'
+    expect(find_field('Property ID').value).to have_text '222'
+  end
+
+  it 'searches for same property' do
+    fill_in 'search', with: '222'
+    click_on 'Search'
+    fill_in 'search', with: '222'
+    click_on 'Search'
+    expect(find_field('Property ID').value).to have_text '222'
+  end
+
+end

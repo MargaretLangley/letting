@@ -44,3 +44,29 @@ describe Client do
   end
 
 end
+
+describe Client do
+
+  before(:each) do
+    log_in
+    client_create! human_id: 111
+    client_create! human_id: 222
+    visit '/clients/'
+    first(:link, 'View').click
+  end
+
+  it 'searches for valid client' do
+    fill_in 'search', with: '222'
+    click_on 'Search'
+    expect(page).to have_text 'Edgbaston Road'
+  end
+
+  it 'searches for same client' do
+    fill_in 'search', with: '222'
+    click_on 'Search'
+    fill_in 'search', with: '222'
+    click_on 'Search'
+    expect(page).to have_text 'Edgbaston Road'
+  end
+
+end
