@@ -7,14 +7,27 @@ describe Client do
   before(:each) do
     log_in
     client_create!.properties << property_new
+    visit '/clients/'
+    click_on 'View'
   end
 
   it '#show' do
-    visit '/clients/'
-    click_on 'View'
     expect_client_entity
     expect_client_address
     expect_property
+  end
+
+  it 'navigates to index page' do
+    click_on 'List'
+    expect(page).to have_text 'Actions'
+    expect(page).to have_text 'Delete'
+  end
+
+  it 'navigates to edit page' do
+    click_on 'Edit'
+    expect(page).to have_text 'Title'
+    expect(page).to have_text 'Postcode'
+    expect(page).to_not have_text 'Delete'
   end
 
   def expect_client_address
