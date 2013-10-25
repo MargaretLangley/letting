@@ -48,6 +48,19 @@ describe Client do
       expect(current_path).to eq '/clients'
       expect(page).to have_text 'Grace'
     end
+
+    it 'navigates to index page' do
+      click_on 'List'
+      expect(page).to have_text 'Actions'
+      expect(page).to have_text 'Delete'
+    end
+
+    it 'navigates to view page' do
+      click_on 'View'
+      expect(page).to have_text 'Address'
+      expect(page).to_not have_text 'Title'
+      expect(page).to_not have_text 'Delete'
+    end
   end
 
   context '#updates' do
@@ -112,11 +125,11 @@ describe Client do
     expect(find_field('Town').value).to have_text 'Nottingham'
   end
 
-    def expect_client_data_changed
-      expect(page).to_not have_text '8008'
-      expect(page).to have_text '278'
-      expect(page).to_not have_text '294'
-      expect(page).to have_text '63c'
-    end
+  def expect_client_data_changed
+    expect(page).to_not have_text '8008'
+    expect(page).to have_text '278'
+    expect(page).to_not have_text '294'
+    expect(page).to have_text '63c'
+  end
 
 end
