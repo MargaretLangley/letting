@@ -45,7 +45,7 @@ describe 'Payment index' do
     property = property_create!
     Payment.create! payment_attributes account_id: property.account.id
     payment_index.visit_page
-    payment_index.search '2002'
+    payment_index.search Date.current.to_s
     expect(payment_index).to be_having_payment
   end
 

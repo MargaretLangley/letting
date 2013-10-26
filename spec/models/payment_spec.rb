@@ -60,18 +60,31 @@ describe Payment do
 
   context '#search' do
 
-    it('human id') do
+    it('no string returns empty') do
+      property = property_create!
+      Payment.create! payment_attributes account_id: property.account.id
+      expect((Payment.search(''))).to eq []
+    end
+
+    it('corrupt date empty ') do
+      property = property_create!
+      Payment.create! payment_attributes account_id: property.account.id
+      expect((Payment.search('2012-x'))).to eq []
+    end
+
+    it('on created date') do
       property = property_create!
       payment = Payment.create! payment_attributes account_id: property
         .account.id
-      expect(Payment.search('2002')).to eq [payment]
+      expect(Payment.search(Date.current.to_s)).to eq [payment]
     end
 
-    it('wrong human id') do
+    it('not created date') do
       property = property_create!
       Payment.create! payment_attributes account_id: property.account.id
-      expect((Payment.search('2003'))).to eq []
+      expect((Payment.search('2000-1-1'))).to eq []
     end
+
   end
 
 end

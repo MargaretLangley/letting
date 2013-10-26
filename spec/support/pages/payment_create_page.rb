@@ -42,7 +42,7 @@ class PaymentCreatePage
   end
 
   def successful?
-    has_content? /Payment successfully created/i
+    has_content? /successfully created/i
   end
 
 end

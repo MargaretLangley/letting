@@ -44,17 +44,28 @@ class Payment < ActiveRecord::Base
     self.amount = outstanding if amount.blank?
   end
 
-  def self.search search
-    case
-    when search.blank?
-      Payment.all.includes(account: [:property])
-    else
+  def self.search date_string
+    if date_string.present? && parse_date?(date_string)
       Payment.includes(account: [:property])
-        .where(properties: { human_id: search })
+             .where(created_at: date_to_datetime_range(Date.parse date_string))
+    else
+      none
     end
   end
 
   private
+
+  def self.date_to_datetime_range date
+    date.to_datetime.beginning_of_day..date.to_datetime.end_of_day
+  end
+
+  def self.parse_date? date_string
+    begin
+      Date.parse date_string
+    rescue
+      false
+    end
+  end
 
   def default_on_date
     Date.current

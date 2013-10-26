@@ -18,6 +18,15 @@
       </th>
     </tr>
   </thead>
+     <tfoot>
+    <tr>
+      <td>&nbsp</td>
+      <td>&nbsp</td>
+      <td>Total</td>
+      <td  class='alnright'><%= number_to_currency payments.sum('amount') %></td>
+      <td>&nbsp</td>
+    </tr>
+  </tfoot>
   <tbody>
     <% payments.each do |payment| %>
     <tr>

@@ -19,7 +19,7 @@
 class PaymentsController < ApplicationController
 
   def index
-    @payments = Payment.search(search_param).page(params[:page]).load
+    @payments = Payment.search(index_search_param).page(params[:page]).load
   end
 
   def new
@@ -41,7 +41,7 @@ class PaymentsController < ApplicationController
   def update
     @payment = Payment.find params[:id]
     if @payment.update payment_params
-      redirect_to new_payment_path, notice: success
+      redirect_to new_payment_path, notice: updated_message
     else
       render :edit
     end
@@ -59,7 +59,7 @@ class PaymentsController < ApplicationController
   def create_payment
     @payment = Payment.new payment_params
     if @payment.save
-      redirect_to new_payment_path, notice: success
+      redirect_to new_payment_path, notice: created_message
     else
       render :new
     end
@@ -67,15 +67,15 @@ class PaymentsController < ApplicationController
 
   def destroy
     @payment = Payment.find(params[:id])
-    alert_message = payment_deleted_message
+    cached_message = deleted_message
     @payment.destroy
-    redirect_to payments_path, alert: alert_message
+    redirect_to payments_path, alert: cached_message
   end
 
   private
 
-  def search_param
-    params[:search]
+  def index_search_param
+    params[:search] ||= Date.current.to_s
   end
 
   def prepare_for_new_action args = {}
@@ -84,8 +84,23 @@ class PaymentsController < ApplicationController
     @payment.prepare_for_form
   end
 
-  def success
-    'Payment successfully created'
+  def created_message
+    "Payment #{identy} successfully created"
+  end
+
+  def updated_message
+    "#{identy} successfully updated!"
+  end
+
+
+  def deleted_message
+    'payment successfully deleted!'
+  end
+
+  def identy
+    "Ref: '#{@payment.account.property.human_id}' " +
+    "Name: '#{@payment.account.property.entities.full_name}' " +
+    "Amount: '£#{@payment.amount}'"
   end
 
   def search_params
@@ -106,8 +121,5 @@ class PaymentsController < ApplicationController
     %i(id account_id debit_id on_date amount)
   end
 
-  def payment_deleted_message
-    'payment successfully deleted!'
-  end
 
 end

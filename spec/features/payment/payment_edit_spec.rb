@@ -40,7 +40,7 @@ class PaymentEditPage
   end
 
   def successful?
-    has_content? /Payment successfully created/i
+    has_content? /successfully updated!/i
   end
 
 end
