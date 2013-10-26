@@ -8,7 +8,7 @@ describe Property do
     log_in
     property_with_billing_create! id: 1, human_id: 1000
     visit '/properties/'
-    click_on 'View'
+    click_on 'View Accounts'
   end
 
   it '#show' do
@@ -70,7 +70,7 @@ describe Property do
     property_create! human_id: 111
     property_create! human_id: 222
     visit '/properties/'
-    first(:link, 'View').click
+    first(:link, 'View Accounts').click
   end
 
   it 'searches for valid property' do
