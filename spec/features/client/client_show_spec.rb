@@ -63,9 +63,9 @@ describe Client do
 
   it 'searches for same client' do
     fill_in 'search', with: '222'
-    click_on 'Search'
+    click_on 'View Search'
     fill_in 'search', with: '222'
-    click_on 'Search'
+    click_on 'View Search'
     expect(page).to have_text 'Edgbaston Road'
   end
 

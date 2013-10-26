@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe Payment do
 
   let(:payment_page) { PaymentCreatePage.new }

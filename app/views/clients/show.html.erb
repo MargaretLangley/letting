@@ -1,5 +1,5 @@
 <article>
-  <%= render 'clients/search' , path: clients_path(@client), search_action: 'show' %>
+  <%= render 'clients/search' , path: clients_path(@client), search_action: 'show', search_label: 'View Search'%>
   <div class = 'showbox'>
     <h2>Client ID:
      <%= @client.human_id %>
