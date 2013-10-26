@@ -24,7 +24,7 @@ class Credit < ActiveRecord::Base
   after_initialize do |debit_generator|
     self.on_date = default_on_date if on_date.blank?
     self.amount = outstanding if amount.blank?
-    @original_amount = self.amount
+    @original_amount = amount
   end
 
   def self.search(search)

@@ -28,10 +28,10 @@ describe Property do
       expect(page).to have_text 'Delete'
     end
 
-    it 'navigates to view page' do
+    it 'navigates to accounts view page' do
       property_create! id: 1, human_id: 8000
       navigate_to_edit_page
-      click_on 'View'
+      click_on 'Accounts'
       expect(page).to have_text 'Address'
       expect(page).to_not have_text 'Title'
       expect(page).to_not have_text 'Delete'
@@ -305,15 +305,15 @@ describe Property do
 
   it 'searches for valid property' do
     fill_in 'search', with: '222'
-    click_on 'Search'
+    click_on 'Edit Search'
     expect(find_field('Property ID').value).to have_text '222'
   end
 
   it 'searches for same property' do
     fill_in 'search', with: '222'
-    click_on 'Search'
+    click_on 'Edit Search'
     fill_in 'search', with: '222'
-    click_on 'Search'
+    click_on 'Edit Search'
     expect(find_field('Property ID').value).to have_text '222'
   end
 

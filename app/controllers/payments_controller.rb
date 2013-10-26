@@ -92,7 +92,6 @@ class PaymentsController < ApplicationController
     "#{identy} successfully updated!"
   end
 
-
   def deleted_message
     'payment successfully deleted!'
   end
@@ -120,6 +119,5 @@ class PaymentsController < ApplicationController
   def credit_attributes
     %i(id account_id debit_id on_date amount)
   end
-
-
+s
 end

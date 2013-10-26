@@ -60,11 +60,9 @@ class Payment < ActiveRecord::Base
   end
 
   def self.parse_date? date_string
-    begin
-      Date.parse date_string
+    Date.parse date_string
     rescue
       false
-    end
   end
 
   def default_on_date

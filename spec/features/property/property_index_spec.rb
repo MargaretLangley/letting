@@ -31,7 +31,7 @@ describe Property do
       visit '/properties'
 
       fill_in 'search', with: 'Edgbaston Road'
-      click_on 'Search'
+      click_on 'Search List'
       expect(page).to_not have_text '111'
       expect(page).to have_text '222'
       expect(page).to have_text '333'

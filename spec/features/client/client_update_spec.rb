@@ -158,4 +158,11 @@ describe Client do
     expect(find_field('Road').value).to have_text 'Edgbaston Road'
   end
 
+  it 'search not found' do
+    fill_in 'search', with: '5'
+    click_on 'Edit Search'
+    expect(page).to_not have_text '5'
+    expect(page).to have_text 'No Clients Found'
+  end
+
 end

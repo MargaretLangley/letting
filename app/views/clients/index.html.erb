@@ -1,6 +1,7 @@
 <h2 class="mainTitle">Clients</h2>
 <%= render 'clients/search', path: clients_path, search_action: 'index', search_label: 'Search List' %>
 <table>
+    <% if @clients.present? %>
   <thead>
     <tr>
       <th class='alnright'>
@@ -23,30 +24,39 @@
       </th>
     </tr>
   </thead>
+    <% end %>
   <tbody>
-    <% @clients.each do |client| %>
-    <tr>
-      <td class='alnright'>
-        <%= link_to client.human_id, edit_client_path(client) %>
-      </td>
-      <td>
-        <%= format_empty_string_as_dash client.entities.first.initials %>
-      </td>
-      <td>
-        <%= client.entities.first.name %>
-      </td>
-      <td class='alnright'>
-        <%= client.address.road_no %>
-      </td>
-      <td>
-        <%= client.address.road %>
-      </td>
-      <td>
-        <%= link_to 'Edit', edit_client_path(client) %> |
-        <%= link_to 'View', client_path(client) %> |
-        <%= link_to 'Delete', client, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </td>
-    </tr>
+    <% if @clients.present? %>
+      <% @clients.each do |client| %>
+      <tr>
+        <td class = 'alnright'>
+          <%= link_to client.human_id, edit_client_path(client) %>
+        </td>
+        <td>
+          <%= format_empty_string_as_dash client.entities.first.initials %>
+        </td>
+        <td>
+          <%= client.entities.first.name %>
+        </td>
+        <td class =' alnright'>
+          <%= client.address.road_no %>
+        </td>
+        <td>
+          <%= client.address.road %>
+        </td>
+        <td>
+          <%= link_to 'Edit', edit_client_path(client) %> |
+          <%= link_to 'View', client_path(client) %> |
+          <%= link_to 'Delete', client, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td class =  'atcenter'>
+          No Clients Found. Try Again.
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>

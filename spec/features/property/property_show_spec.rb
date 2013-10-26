@@ -75,15 +75,15 @@ describe Property do
 
   it 'searches for valid property' do
     fill_in 'search', with: '222'
-    click_on 'Search'
+    click_on 'Accounts Search'
     expect(page).to have_text 'Edgbaston Road'
   end
 
   it 'searches for same property' do
     fill_in 'search', with: '222'
-    click_on 'Search'
+    click_on 'Accounts Search'
     fill_in 'search', with: '222'
-    click_on 'Search'
+    click_on 'Accounts Search'
     expect(page).to have_text 'Edgbaston Road'
   end
 
