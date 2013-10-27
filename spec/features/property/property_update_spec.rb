@@ -317,4 +317,12 @@ describe Property do
     expect(find_field('Property ID').value).to have_text '222'
   end
 
+  it 'search not found' do
+    fill_in 'search', with: '5'
+    click_on 'Edit Search'
+    fill_in 'search', with: '222'
+    expect(page).to_not have_text '5'
+    expect(page).to have_text 'No Properties Found'
+  end
+
 end

@@ -65,7 +65,7 @@ class PropertiesController < ApplicationController
 
     def find_route model
       case params[:search_action]
-      when 'show', 'index'
+      when 'show'
         property_path model
       when 'edit'
         edit_property_path model
