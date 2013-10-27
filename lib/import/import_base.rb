@@ -46,7 +46,7 @@ module DB
     end
 
     def first_or_initialize_model row, model_class
-      model_class.where(human_id: row[:human_id]).first_or_initialize
+      model_class.where(human_ref: row[:human_ref]).first_or_initialize
     end
 
     def model_prepared_for_import row
@@ -67,7 +67,7 @@ module DB
     end
 
     def parent_model row, model_class
-      model = model_class.where(human_id: row[:human_id]).first
+      model = model_class.where(human_ref: row[:human_ref]).first
       fail_parent_record_not_found model_class, row if model.nil?
       model
     end
@@ -79,7 +79,7 @@ module DB
     end
 
     def no_parent_message model_class, row
-      "#{model_class} human_id: #{row[:human_id]} - Not found"
+      "#{model_class} human_ref: #{row[:human_ref]} - Not found"
     end
 
     def show_error row
@@ -95,7 +95,7 @@ module DB
     end
 
     def output_error row, model
-      puts "human_id: #{row[:human_id]} -  #{model.errors.full_messages}"
+      puts "human_ref: #{row[:human_ref]} -  #{model.errors.full_messages}"
     end
   end
 end

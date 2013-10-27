@@ -12,43 +12,44 @@ describe 'Property Factory' do
     expect(property.id).to eq 2
   end
 
-  it 'creates with human_id' do
+  it 'creates with human_ref' do
     property = property_new
-    expect(property.human_id).to eq 2002
+    expect(property.human_ref).to eq 2002
   end
 
-  it 'human_id changeable' do
-    property = property_new human_id: 3001
-    expect(property.human_id).to eq 3001
+  it 'human_ref changeable' do
+    property = property_new human_ref: 3001
+    expect(property.human_ref).to eq 3001
   end
 
   context 'nested attributes' do
 
     it 'has nested attributes' do
-      property = property_new human_id: 3001
+      property = property_new human_ref: 3001
       expect(property.address.road).to eq 'Edgbaston Road'
     end
 
     it 'changes nested attributes' do
-      property = property_new human_id: 3001,
+      property = property_new human_ref: 3001,
                               address_attributes: { road: 'Headingly Road' }
       expect(property.address.road).to eq 'Headingly Road'
     end
   end
 
-  context 'with charge paid debit' do
+  context 'with charge and unpaid debit' do
     it 'has both' do
       property = property_with_charge_and_unpaid_debit
+      property.account.prepare_for_form
       expect(property.account.charges.reject(&:empty?)).to have(1).items
-      expect(property.account.unpaid_debits).to have(1).items
-      expect(property.account.unpaid_debits[0].charge_id).to be_present
+      expect(property.account.credits_for_unpaid_debits).to have(1).items
     end
   end
 
-  context 'with paid debit' do
+  context 'with unpaid debit' do
     it 'has debit' do
       property = property_with_unpaid_debit
-      expect(property.account.unpaid_debits).to have(1).items
+      property.account.prepare_for_form
+      expect(property.account.credits_for_unpaid_debits).to have(1).items
     end
   end
 

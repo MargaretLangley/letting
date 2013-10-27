@@ -18,8 +18,8 @@ class Property < ActiveRecord::Base
   has_one :billing_profile, dependent: :destroy, inverse_of: :property
   accepts_nested_attributes_for :billing_profile, allow_destroy: true
 
-  validates :human_id, :client_id, numericality: true
-  validates :human_id, uniqueness: true
+  validates :human_ref, :client_id, numericality: true
+  validates :human_ref, uniqueness: true
   validates :entities, presence: true
   before_validation :clear_up_after_form
 
@@ -58,9 +58,9 @@ class Property < ActiveRecord::Base
   def self.search search
     case
     when search.blank?
-      Property.all.includes(:address).order(:human_id)
-    when human_ids(search)
-      search_by_human_id(search)
+      Property.all.includes(:address).order(:human_ref)
+    when human_refs(search)
+      search_by_human_ref(search)
     else
       search_by_all(search)
     end
@@ -70,8 +70,8 @@ class Property < ActiveRecord::Base
     case
     when search.blank?
       none
-    when human_ids(search)
-      search_by_human_id(search)
+    when human_refs(search)
+      search_by_human_ref(search)
     else
       search_by_all(search)
     end
@@ -79,27 +79,27 @@ class Property < ActiveRecord::Base
 
   private
 
-    def self.search_by_human_id(search)
-      human_ids = search.split('-')
-      human_ids[1] = human_ids[0] if human_ids[1].blank?
+    def self.search_by_human_ref(search)
+      human_refs = search.split('-')
+      human_refs[1] = human_refs[0] if human_refs[1].blank?
       Property.includes(:address, :entities)
-                    .where(human_id: human_ids[0]..human_ids[1])
-                    .references(:address, :entity).order(:human_id)
+                    .where(human_ref: human_refs[0]..human_refs[1])
+                    .references(:address, :entity).order(:human_ref)
     end
 
     def self.search_by_all(search)
       Property.includes(:address, :entities)
-        .where('human_id = :i OR ' +
+        .where('human_ref = :i OR ' +
                'entities.name ILIKE :s OR ' +
                'addresses.house_name ILIKE :s OR ' +
                'addresses.road ILIKE :s OR ' +
                'addresses.town ILIKE :s',
                i: "#{search.to_i}",
                s: "#{search}%" \
-               ).references(:address, :entity).order(:human_id)
+               ).references(:address, :entity).order(:human_ref)
     end
 
-    def self.human_ids search
+    def self.human_refs search
       # matches a number (\d) followed by any amount of whitespace (\s)
       # optional hyphen (-) and optional number (\d)
       (search =~ /^(\d+\s*-?)+\s*\d+$/).present?

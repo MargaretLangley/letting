@@ -6,19 +6,19 @@ describe Client do
   it('is valid') { expect(client).to be_valid }
 
   context 'validations' do
-    it '#human_id is present' do
-      client.human_id = nil
+    it '#human_ref is present' do
+      client.human_ref = nil
       expect(client).to_not be_valid
     end
 
     it 'validates it is a number' do
-      client.human_id = 'Not numbers'
+      client.human_ref = 'Not numbers'
       expect(client).to_not be_valid
     end
 
-    it '#human_id is unique' do
+    it '#human_ref is unique' do
       client.save!
-      expect { Client.create! human_id: 1 }.to \
+      expect { Client.create! human_ref: 1 }.to \
                raise_error ActiveRecord::RecordInvalid
     end
 
@@ -36,7 +36,7 @@ describe Client do
 
   context '#prepare_for_form' do
     let(:client) do
-      client = Client.new human_id: 8000
+      client = Client.new human_ref: 8000
       client.prepare_for_form
       client
     end
@@ -71,14 +71,14 @@ describe Client do
     it('names') { expect(Client.search 'Grace').to eq [c1] }
 
     it 'only returns expected' do
-      c2 = client_create! human_id: 102,
+      c2 = client_create! human_ref: 102,
                           address_attributes: { road: 'unknown' }
       expect(Client.all).to eq [c1, c2]
       expect(Client.search 'Edgba').to eq [c1]
     end
 
-    it 'ordered by human_id ASC' do
-      c2 = client_create! human_id: 8000
+    it 'ordered by human_ref ASC' do
+      c2 = client_create! human_ref: 8000
       expect(Client.all).to eq [c1, c2]
       expect(Client.search 'Bir').to eq [c2, c1]
     end

@@ -16,7 +16,7 @@ Client
    ✔ has_many properties @done (13-08-04 18:13)
 
  Validation:
-   ✔ client_id (human_id) @done (13-08-17 12:48)
+   ✔ client_id (human_ref) @done (13-08-17 12:48)
      ✔ numeric @done (before 13-08-17 12:47)
      ✔ human_readable_client_id   unique @done (13-08-03 19:12)
 

@@ -68,7 +68,7 @@ describe Client do
     let(:click_update_client) { ClientUpdatePage.new }
 
     it '#updates shows company', js: true do
-      client_company_create! human_id: 111
+      client_company_create! human_ref: 111
       navigate_to_edit_page
       expect(page).to have_text 'Company or person'
       expect(find_field('Name').value).to have_text 'ICC'
@@ -76,7 +76,7 @@ describe Client do
     end
 
     it '#updates deletes a second entity', js: true do
-      client_two_entities_create! human_id: 8008
+      client_two_entities_create! human_ref: 8008
       navigate_to_edit_page
       click_update_client.click('X')
       click_update_client.click_update_client
@@ -138,8 +138,8 @@ describe Client do
 
   before(:each) do
     log_in
-    client_create! human_id: 111
-    client_create! human_id: 222
+    client_create! human_ref: 111
+    client_create! human_ref: 222
     visit '/clients/'
     first(:link, 'Edit').click
   end

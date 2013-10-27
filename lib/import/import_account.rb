@@ -17,12 +17,16 @@ module DB
       @row = row
     end
 
+    def human_ref
+      @row[:human_ref]
+    end
+
     def debits?
-      @row[:debit] != 0
+      @row[:debit] != '0'
     end
 
     def credits?
-      @row[:credit] != 0
+      @row[:credit] != '0'
     end
 
     def attributes
@@ -32,14 +36,20 @@ module DB
     private
 
      def debit_attributes
-       { charge_id: -1,
-       on_date: @row[:on_date],
-       amount: @row[:debit],
-       debit_generator_id: -1 }
+       {
+         charge_id: -1,
+         on_date: @row[:on_date],
+         amount: @row[:debit],
+         debit_generator_id: -1,
+       }
      end
 
      def credit_attributes
-       raise_error ActiveRecord::RecordNotFound
+       {
+         payment_id: -1,
+         on_date: @row[:on_date],
+         amount: @row[:credit],
+       }
      end
 
   end
@@ -51,7 +61,9 @@ module DB
     end
 
     def model_prepared_for_import row
-      @model_to_save = parent_model row, Property
+      account_row = AccountRow.new(row)
+      @model_to_save = parent_model row, Property \
+        unless eq_ref? @model_to_save, account_row
       @model_to_assign = model_to_assign row
     end
 
@@ -62,8 +74,17 @@ module DB
     private
 
     def model_to_assign row
-      AccountRow.new(row).debits? ? @model_to_save.account.debits.build :
-                                    @model_to_save.account.credits.build
+      if AccountRow.new(row).debits?
+        @model_to_save.account.debits.build
+      else
+        @model_to_save.account.prepare_for_form
+        @model_to_save.account.credits_for_unpaid_debits.first
+      end
+    end
+
+    def eq_ref? human_ref, other_human_ref
+      human_ref.present? && other_human_ref.present? &&
+        human_ref.human_ref == other_human_ref.human_ref
     end
 
   end

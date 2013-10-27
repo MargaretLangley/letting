@@ -31,23 +31,31 @@ class Account < ActiveRecord::Base
     credits.build credit_args
   end
 
-  def unpaid_debits
-    debits.reject(&:paid?)
+  def credits_for_unpaid_debits
+    credits.select(&:new_record?)
   end
 
   def prepare_for_form
     charges.prepare
+    unpaid_debits.each do |debit|
+      # could test if it already has a new record for that debit
+      credits.build account_id: id, debit: debit
+    end
   end
 
   def clean_up_form
     charges.clean_up_form
   end
 
-  def self.by_human_id human_id
-    Account.joins(:property).find_by(properties: { human_id: human_id })
+  def self.by_human_ref human_ref
+    Account.joins(:property).find_by(properties: { human_ref: human_ref })
   end
 
   private
+
+    def unpaid_debits
+      debits.reject(&:paid?)
+    end
 
     def already_charged_for? chargeable
       debits.any? do |debit|

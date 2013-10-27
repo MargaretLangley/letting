@@ -6,35 +6,6 @@
         <th>
         </th>
       <% end %>
-        <th class='alnright'>
-          ID
-        </th>
-        <th class='alnright'>
-          Cl
-        </th>
-         <th>
-          Name
-        </th>
-        <th class='alnright'>
-          No
-        </th>
-        <th>
-          House
-        </th>
-        <th class='alnright'>
-          No
-        </th>
-        <th>
-          Road
-        </th>
-        <% if show_actions %>
-          <th>
-            Town
-          </th>
-          <th>
-           Actions
-         </th>
-        <% end %>
       </tr>
     </thead>
   <% end %>
@@ -79,6 +50,38 @@
             </td>
          <% end %>
         </tr>
+=======
+      <td class='alnright'>
+        <%= link_to property.human_ref, edit_property_path(property) %>
+      </td>
+      <td class='alnright'>
+        <%=property.client_id%>
+      </td>
+      <td>
+        <%= format_empty_string_as_dash property.entities.first.name %>
+      </td>
+      <td class='alnright'>
+        <%= format_empty_string_as_dash property.address.flat_no %>
+      </td>
+      <td>
+        <%= format_empty_string_as_dash property.address.house_name %>
+      </td>
+      <td class='alnright'>
+        <%= property.address.road_no %>
+      </td>
+      <td>
+        <%= link_to property.address.road, edit_property_path(property) %>
+      </td>
+      <td>
+        <%= property.address.town %>
+      </td>
+      <% if show_actions %>
+      <td>
+         <%= link_to 'Edit', edit_property_path(property) %> |
+         <%= link_to 'View Accounts', property_path(property) %> |
+        <%= link_to 'Delete', property, method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+      </td>
+>>>>>>> f76d82073cdde325677a939cf6a8912eeaeb50b1
       <% end %>
      <% else %>
       <tr>

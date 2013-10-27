@@ -84,7 +84,7 @@ class PropertiesController < ApplicationController
 
     def property_params
       params.require(:property)
-        .permit :human_id,
+        .permit :human_ref,
                 :client_id,
                 address_attributes:         address_params,
                 entities_attributes:        entities_params,
@@ -112,7 +112,7 @@ class PropertiesController < ApplicationController
 
     def identy
       property = PropertyDecorator.new @property
-      "Property 'ID #{property.human_id}, #{property.start_address}'"
+      "Property 'ID #{property.human_ref}, #{property.start_address}'"
     end
 
     def property_created_message

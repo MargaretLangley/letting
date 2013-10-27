@@ -8,14 +8,26 @@ module DB
 
   describe ImportAccount do
     let!(:property) do
-      property_create! human_id: 122
+      property_create! human_ref: 122
     end
 
     context 'debit' do
 
-      it 'One row' do
+      it 'One debit' do
         expect { ImportAccount.import one_debit_csv }.to \
           change(Debit, :count).by 1
+      end
+
+      it 'debit with credit' do
+        expect { ImportAccount.import debit_with_credit_csv }.to \
+          change(Credit, :count).by 1
+      end
+
+      it '2 debits, 1 credit covering 1 debit' do
+        pending
+        expect { ImportAccount.import two_debit_with_credit_csv }.to \
+          change(Credit, :count).by 1
+        expect(Debit.all).to have(2).items
       end
     end
 
@@ -25,8 +37,14 @@ module DB
                       location: import_dir)
     end
 
-    def one_credit_csv
-      FileImport.to_a('one_credit',
+    def debit_with_credit_csv
+      FileImport.to_a('debit_with_credit',
+                      headers: FileHeader.account,
+                      location: import_dir)
+    end
+
+    def two_debit_with_credit_csv
+      FileImport.to_a('two_debit_with_credit',
                       headers: FileHeader.account,
                       location: import_dir)
     end

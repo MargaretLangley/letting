@@ -82,14 +82,14 @@ class ClientsController < ApplicationController
     def clients_params
       params
         .require(:client)
-        .permit :human_id,
+        .permit :human_ref,
                 address_attributes: address_params,
                 entities_attributes: entities_params
     end
 
     def identy
       "Client '#{@client.entities.full_name} (id #{@client
-        .human_id})'"
+        .human_ref})'"
     end
 
     def client_created_message

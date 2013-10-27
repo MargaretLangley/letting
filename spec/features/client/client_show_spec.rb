@@ -49,8 +49,8 @@ describe Client do
 
   before(:each) do
     log_in
-    client_create! human_id: 111
-    client_create! human_id: 222
+    client_create! human_ref: 111
+    client_create! human_ref: 222
     visit '/clients/'
     first(:link, 'View').click
   end

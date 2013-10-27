@@ -5,7 +5,7 @@
 #   def initialize(property)
 #     @property = property
 #     super(top_margin: 70)
-#     text "#{@property.human_id}"
+#     text "#{@property.human_ref}"
 #     text "#{address_road()}"
 #     text "#{@property.address.district}"
 #     text "#{@property.address.town}"

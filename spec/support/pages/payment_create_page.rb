@@ -6,8 +6,8 @@ class PaymentCreatePage
     self
   end
 
-  def human_id property
-    fill_in 'payment_human_id', with: property
+  def human_ref property
+    fill_in 'payment_human_ref', with: property
     self
   end
 

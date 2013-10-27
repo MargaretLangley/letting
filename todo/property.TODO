@@ -13,7 +13,7 @@ Property
    ☐ Set default for BillingProperty use_profile but doesn't seem to work.
          http://stackoverflow.com/questions/8146448/get-the-default-values-of-table-columns-in-postgres
     Validates:
-      PropertyID / human_id:
+      PropertyID / human_ref:
       ✔ validates numericality @done (13-07-27 15:13)
       ✔ validates uniqueness @done (13-07-27 15:13)
     Shared Require:
@@ -23,7 +23,7 @@ Property
   Actions:
     Index:
       ☐ V
-         ☐ IMPROVE: Navigating from list to show currently by clicking human_id
+         ☐ IMPROVE: Navigating from list to show currently by clicking human_ref
       ✔ C @done (13-07-27 11:06)
     Show:
      ☐ V

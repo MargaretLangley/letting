@@ -23,7 +23,7 @@ class PaymentsController < ApplicationController
   end
 
   def new
-    prepare_for_new_action human_id: params[:human_id]
+    prepare_for_new_action human_ref: params[:human_ref]
   end
 
   def create
@@ -80,7 +80,7 @@ class PaymentsController < ApplicationController
 
   def prepare_for_new_action args = {}
     @payment = Payment.new args
-    @payment.account = Account.by_human_id @payment.human_id
+    @payment.account = Account.by_human_ref @payment.human_ref
     @payment.prepare_for_form
   end
 
@@ -97,13 +97,13 @@ class PaymentsController < ApplicationController
   end
 
   def identy
-    "Ref: '#{@payment.account.property.human_id}' " +
+    "Ref: '#{@payment.account.property.human_ref}' " +
     "Name: '#{@payment.account.property.entities.full_name}' " +
     "Amount: '£#{@payment.amount}'"
   end
 
   def search_params
-    params.require(:payment).permit :human_id
+    params.require(:payment).permit :human_ref
   end
 
   def payment_params
@@ -112,7 +112,7 @@ class PaymentsController < ApplicationController
              :account_id,
              :on_date,
              :amount,
-             :human_id,
+             :human_ref,
              credits_attributes: credit_attributes
   end
 

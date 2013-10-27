@@ -4,10 +4,10 @@ describe Client do
 
   before(:each) do
     log_in
-    client_create! human_id: 111,
+    client_create! human_ref: 111,
                    address_attributes: { road: 'Vauxall Lane' }
-    client_create! human_id: 222
-    client_create! human_id: 333
+    client_create! human_ref: 222
+    client_create! human_ref: 333
     visit '/clients/'
   end
 

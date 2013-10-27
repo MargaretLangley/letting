@@ -35,7 +35,7 @@ module DB
 
     context 'Property' do
       it 'works on property' do
-        client_create! human_id: 11
+        client_create! human_ref: 11
         ImportProperty.import property_csv,
                               Patch.import(Property, property_patch_csv)
         expect(Property.first.address.district).to eq 'Example District'
@@ -44,7 +44,7 @@ module DB
 
     context 'BillingProfile' do
       it 'works on BillingProfile' do
-        property_create! human_id: 122
+        property_create! human_ref: 122
         ImportBillingProfile.import \
           billing_csv, Patch.import(BillingProfileWithId, billing_patch_csv)
         expect(Property.first.billing_profile.address.district).to \

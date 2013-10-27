@@ -14,7 +14,7 @@ module DB
     it 'fails if property does not exist' do
       expect { ImportCharge.import charge_csv }.to \
       raise_error ActiveRecord::RecordNotFound,
-                  'Property human_id: 2002 - Not found'
+                  'Property human_ref: 2002 - Not found'
     end
 
     it 'One row, 2 DueOns' do

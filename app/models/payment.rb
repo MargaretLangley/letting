@@ -15,13 +15,9 @@ class Payment < ActiveRecord::Base
     def outstanding
       map { |credit| credit.outstanding }.sum
     end
-
-    def prepare debit, account_id
-      build debit: debit, account_id: account_id
-    end
   end
   accepts_nested_attributes_for :credits, allow_destroy: true
-  attr_accessor :human_id
+  attr_accessor :human_ref
 
   validates :account_id, :on_date, presence: true
 
@@ -38,8 +34,9 @@ class Payment < ActiveRecord::Base
   end
 
   def prepare_for_form
-    account && account.unpaid_debits.each do |debit|
-      credits.prepare debit, account_id
+    if account
+      account.prepare_for_form
+      account.credits_for_unpaid_debits.each { |credit| credits << credit }
     end
     self.amount = outstanding if amount.blank?
   end

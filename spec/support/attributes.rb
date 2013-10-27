@@ -1,13 +1,13 @@
 def property_attributes overrides = {}
   {
-    human_id: 2002,
+    human_ref: 2002,
     client_id: 8989,
   }.merge overrides
 end
 
 def client_attributes overrides = {}
   {
-    human_id: 8008,
+    human_ref: 8008,
   }.merge overrides
 end
 

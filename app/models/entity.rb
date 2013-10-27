@@ -31,8 +31,12 @@ class Entity < ActiveRecord::Base
     self.entity_type = 'Person' if new_record?
   end
 
-  def all?
-    true
+  def clean_up_form
+    destroy_entity if empty?
+  end
+
+  def destroy_form
+    destroy_entity
   end
 
   def empty?
@@ -47,7 +51,12 @@ class Entity < ActiveRecord::Base
     [title, initials, name].reject(&:blank?).join(' ')
   end
 
+
   private
+
+    def destroy_entity
+      self.mark_for_destruction
+    end
 
     def ignored_attrs
       %w[id entitieable_id entitieable_type created_at entity_type updated_at]

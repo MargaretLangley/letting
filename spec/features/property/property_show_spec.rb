@@ -6,7 +6,7 @@ describe Property do
 
   before(:each) do
     log_in
-    property_with_billing_create! id: 1, human_id: 1000
+    property_with_billing_create! id: 1, human_ref: 1000
     visit '/properties/'
     click_on 'View Accounts'
   end
@@ -67,8 +67,8 @@ describe Property do
 
   before(:each) do
     log_in
-    property_create! human_id: 111
-    property_create! human_id: 222
+    property_create! human_ref: 111
+    property_create! human_ref: 222
     visit '/properties/'
     first(:link, 'View Accounts').click
   end

@@ -44,15 +44,17 @@ describe 'Account Factory' do
     end
   end
 
-  context 'debits' do
+  context 'credits for debits' do
 
-    it 'new factory account has no debits' do
+    it 'new factory account has no credit for unpaid debit' do
       account = account_new
-      expect(account.unpaid_debits).to have(0).items
+      account.prepare_for_form
+      expect(account.credits_for_unpaid_debits).to have(0).items
     end
     let(:account) { account_and_debit }
-    it 'debited factory has unpaid debits' do
-      expect(account.unpaid_debits).to have(1).items
+    it 'debited factory has credit for unpaid debits' do
+      account.prepare_for_form
+      expect(account.credits_for_unpaid_debits).to have(1).items
     end
   end
 end

@@ -8,8 +8,8 @@ class PaymentEditPage
     self
   end
 
-  # def human_id property
-  #   fill_in 'payment_human_id', with: property
+  # def human_ref property
+  #   fill_in 'payment_human_ref', with: property
   #   self
   # end
 
@@ -73,7 +73,7 @@ describe Payment do
   def create_payment
     (property = property_with_charge_and_unpaid_debit).save!
     payment_page.visit_new_page
-    payment_page.human_id('2002').search
+    payment_page.human_ref('2002').search
     payment_page.payment 88.08
     payment_page.create_payment
     property.account.payments.first

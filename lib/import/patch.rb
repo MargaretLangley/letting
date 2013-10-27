@@ -39,20 +39,20 @@ module DB
 
     def model_prepared_for_import row
       @model_to_assign = @model_class.new
-      @model_to_assign.human_id = row[:human_id].to_i
+      @model_to_assign.human_ref = row[:human_ref].to_i
       @model_to_assign.prepare_for_form
       import_contact @model_to_assign, row
       clean_contact @model_to_assign
     end
 
     def patch_models_add
-      @patch_models << { 'id'    => @model_to_assign.human_id,
+      @patch_models << { 'id'    => @model_to_assign.human_ref,
                          'model' => @model_to_assign }
     end
 
     # debug hash array: patch_models[0]['model']
     def patch_model model
-      model_hash = @patch_models.find { |m| m['id'] == model.human_id }
+      model_hash = @patch_models.find { |m| m['id'] == model.human_ref }
       if model_hash.present?
         patch_model = model_hash['model']
         if entity_names_match? model, patch_model
@@ -75,7 +75,7 @@ module DB
       end
 
       def none_matching_entities_error_message model, patch_model
-        "Cannot match #{model.class} #{patch_model.human_id} names between " +
+        "Cannot match #{model.class} #{patch_model.human_ref} names between " +
         'the loading data and the patch data. Until ' +
         "'#{patch_model.entities[0].name}' is the same as " +
         "'#{model.entities[0].name} we cannot patch the address data."
