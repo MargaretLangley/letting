@@ -32,15 +32,15 @@ class Account < ActiveRecord::Base
   end
 
   def credits_for_unpaid_debits
-    unpaid_debits.each do |debit|
-      # could test if it already has a new record for that debit
-      credits.build account_id: id, debit: debit
-    end
     credits.select(&:new_record?)
   end
 
   def prepare_for_form
     charges.prepare
+    unpaid_debits.each do |debit|
+      # could test if it already has a new record for that debit
+      credits.build account_id: id, debit: debit
+    end
   end
 
   def clean_up_form
