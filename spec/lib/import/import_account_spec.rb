@@ -11,6 +11,15 @@ module DB
       property_create! human_id: 122
     end
 
+    context 'credit' do
+
+      it 'One row' do
+        pending
+        expect { ImportAccount.import one_credit_csv }.to \
+          change(Credit, :count).by 1
+      end
+    end
+
     context 'debit' do
 
       it 'One row' do

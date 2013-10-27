@@ -17,12 +17,16 @@ module DB
       @row = row
     end
 
+    def human_id
+      @row[:human_id]
+    end
+
     def debits?
-      @row[:debit] != 0
+      @row[:debit] != '0'
     end
 
     def credits?
-      @row[:credit] != 0
+      @row[:credit] != '0'
     end
 
     def attributes
@@ -51,7 +55,9 @@ module DB
     end
 
     def model_prepared_for_import row
-      @model_to_save = parent_model row, Property
+      account_row = AccountRow.new(row)
+      @model_to_save = parent_model row, Property \
+        unless eq_ref? @model_to_save, account_row
       @model_to_assign = model_to_assign row
     end
 
@@ -64,6 +70,11 @@ module DB
     def model_to_assign row
       AccountRow.new(row).debits? ? @model_to_save.account.debits.build :
                                     @model_to_save.account.credits.build
+    end
+
+    def eq_ref? last_human_ref, current_human_ref
+      @model_to_save.present? && account_row.present? &&
+        @model_to_save.human_id == account_row.human_id
     end
 
   end
