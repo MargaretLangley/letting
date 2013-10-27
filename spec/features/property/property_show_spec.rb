@@ -87,4 +87,10 @@ describe Property do
     expect(page).to have_text 'Edgbaston Road'
   end
 
+  it 'search not found' do
+    fill_in 'search', with: '599'
+    click_on 'Accounts Search'
+    expect(page).to_not have_text '599'
+  end
+
 end
