@@ -47,8 +47,8 @@ class Account < ActiveRecord::Base
     charges.clean_up_form
   end
 
-  def self.by_human_id human_id
-    Account.joins(:property).find_by(properties: { human_id: human_id })
+  def self.by_human_ref human_ref
+    Account.joins(:property).find_by(properties: { human_ref: human_ref })
   end
 
   private

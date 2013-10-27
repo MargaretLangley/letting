@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20131016112247) do
   add_index "charges", ["account_id"], name: "index_charges_on_account_id", using: :btree
 
   create_table "clients", force: true do |t|
-    t.integer  "human_id"
+    t.integer  "human_ref"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 20131016112247) do
   add_index "payments", ["account_id"], name: "index_payments_on_account_id", using: :btree
 
   create_table "properties", force: true do |t|
-    t.integer  "human_id"
+    t.integer  "human_ref"
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"

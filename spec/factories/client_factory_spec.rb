@@ -6,10 +6,10 @@ describe 'Client Factory' do
   it('is valid') { expect(client).to be_valid }
 
   it('no id') { expect(client.id).to eq nil }
-  it('has default human_id') { expect(client.human_id).to eq 8008 }
-  it('overridable human_id') do
-    client = client_new human_id: 3003
-    expect(client.human_id).to eq 3003
+  it('has default human_ref') { expect(client.human_ref).to eq 8008 }
+  it('overridable human_ref') do
+    client = client_new human_ref: 3003
+    expect(client.human_ref).to eq 3003
   end
 
   it('has entity') { expect(client.entities[0].name).to eq 'Grace' }

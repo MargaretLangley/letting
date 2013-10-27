@@ -17,7 +17,7 @@ class Payment < ActiveRecord::Base
     end
   end
   accepts_nested_attributes_for :credits, allow_destroy: true
-  attr_accessor :human_id
+  attr_accessor :human_ref
 
   validates :account_id, :on_date, presence: true
 

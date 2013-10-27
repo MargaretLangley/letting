@@ -25,9 +25,9 @@ describe Block do
   end
 
   def create_properties
-    property_create! human_id: 31, address_attributes: { flat_no: 1 }
-    property_create! human_id: 32, address_attributes: { flat_no: 2 }
-    property_create! human_id: 33, address_attributes: { flat_no: 3 }
+    property_create! human_ref: 31, address_attributes: { flat_no: 1 }
+    property_create! human_ref: 32, address_attributes: { flat_no: 2 }
+    property_create! human_ref: 33, address_attributes: { flat_no: 3 }
   end
 
   def navigate_to_create_page

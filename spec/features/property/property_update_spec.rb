@@ -9,7 +9,7 @@ describe Property do
     before(:each) { log_in }
 
     it 'basic' do
-      property_create! id: 1, human_id: 8000
+      property_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       validate_page
       expect_form_to_be
@@ -21,7 +21,7 @@ describe Property do
     end
 
     it 'navigates to index page' do
-      property_create! id: 1, human_id: 8000
+      property_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       click_on 'List'
       expect(page).to have_text 'Actions'
@@ -29,7 +29,7 @@ describe Property do
     end
 
     it 'navigates to accounts view page' do
-      property_create! id: 1, human_id: 8000
+      property_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       click_on 'Accounts'
       expect(page).to have_text 'Address'
@@ -123,7 +123,7 @@ describe Property do
     end
 
     it 'basic with billing address' do
-      property_with_billing_create! id: 1, human_id: 8000
+      property_with_billing_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       expect_bill_profile_has_original_attributes
       update_then_expect_properties_page
@@ -141,7 +141,7 @@ describe Property do
     end
 
     it 'add billing address', js: true do
-      property_create! id: 1, human_id: 8000
+      property_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       fill_in_bill_profile
       update_then_expect_properties_page
@@ -182,7 +182,7 @@ describe Property do
     end
 
     it 'has validation' do
-      property_create! id: 1, human_id: 8000
+      property_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       validate_page
       clear_address_road
@@ -198,7 +198,7 @@ describe Property do
     end
 
     it 'removes billing address' do
-      property_with_billing_create! id: 1, human_id: 8000
+      property_with_billing_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       uncheck 'Use Agent'
       update_then_expect_properties_page
@@ -209,7 +209,7 @@ describe Property do
     context 'charge' do
 
       it 'adds date charge' do
-        property_create! id: 1, human_id: 8000
+        property_create! id: 1, human_ref: 8000
         navigate_to_edit_page
         fill_in_charge
         fill_in_due_on_on_date
@@ -237,7 +237,7 @@ describe Property do
       end
 
       it 'adds monthly charge', js: true do
-        property_create! id: 1, human_id: 8000
+        property_create! id: 1, human_ref: 8000
         navigate_to_edit_page
         click_on 'or per month'
         fill_in_charge
@@ -255,13 +255,13 @@ describe Property do
       end
 
       it 'opens a monthly charge correctly' do
-        property_with_monthly_charge_create! human_id: 8000
+        property_with_monthly_charge_create! human_ref: 8000
         navigate_to_edit_page
         expect(page).to have_text 'Per month or on date'
       end
 
       it 'opens monthly and changes to date charge', js: true do
-        property_with_monthly_charge_create! human_id: 8000
+        property_with_monthly_charge_create! human_ref: 8000
         navigate_to_edit_page
         click_on 'or on date'
         expect(page).to have_text /on date or per month/i
@@ -269,7 +269,7 @@ describe Property do
     end
 
     it 'can delete', js: true do
-      property_create! id: 1, human_id: 8000
+      property_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       expect(page).to have_text 'Charge 1'
       within_fieldset 'property_charge_0' do
@@ -296,8 +296,8 @@ describe Property do
 
   before(:each) do
     log_in
-    property_create! human_id: 111
-    property_create! human_id: 222
+    property_create! human_ref: 111
+    property_create! human_ref: 222
     visit '/properties/'
     first(:link, 'Edit').click
     expect(find_field('Property ID').value).to have_text '111'

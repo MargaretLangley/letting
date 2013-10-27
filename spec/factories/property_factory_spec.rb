@@ -12,25 +12,25 @@ describe 'Property Factory' do
     expect(property.id).to eq 2
   end
 
-  it 'creates with human_id' do
+  it 'creates with human_ref' do
     property = property_new
-    expect(property.human_id).to eq 2002
+    expect(property.human_ref).to eq 2002
   end
 
-  it 'human_id changeable' do
-    property = property_new human_id: 3001
-    expect(property.human_id).to eq 3001
+  it 'human_ref changeable' do
+    property = property_new human_ref: 3001
+    expect(property.human_ref).to eq 3001
   end
 
   context 'nested attributes' do
 
     it 'has nested attributes' do
-      property = property_new human_id: 3001
+      property = property_new human_ref: 3001
       expect(property.address.road).to eq 'Edgbaston Road'
     end
 
     it 'changes nested attributes' do
-      property = property_new human_id: 3001,
+      property = property_new human_ref: 3001,
                               address_attributes: { road: 'Headingly Road' }
       expect(property.address.road).to eq 'Headingly Road'
     end

@@ -6,8 +6,8 @@
     <span class= 'floatright'><%= link_to 'List', clients_path %><span>
     </h3>
     <div class='field text require half'>
-      <%= f.label :human_id, 'Client ID' %>
-      <%= f.text_field :human_id, autofocus:true %>
+      <%= f.label :human_ref, 'Client ID' %>
+      <%= f.text_field :human_ref, autofocus:true %>
     </div>
     <%= render 'shared/entities', f: f, entitieable: client %>
     <%= render 'shared/address', f: f, parent: 'client' %>

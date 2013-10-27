@@ -43,8 +43,8 @@ describe Payment do
 
     it '#prepare_for_form prepares credit' do
       property_with_unpaid_debit.save!
-      payment = Payment.new human_id: 2002
-      payment.account =  Account.by_human_id 2002
+      payment = Payment.new human_ref: 2002
+      payment.account =  Account.by_human_ref 2002
       payment.prepare_for_form
       expect(payment.credits).to have(1).items
     end

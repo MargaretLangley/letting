@@ -17,8 +17,8 @@ module DB
       @row = row
     end
 
-    def human_id
-      @row[:human_id]
+    def human_ref
+      @row[:human_ref]
     end
 
     def debits?
@@ -74,7 +74,7 @@ module DB
 
     def eq_ref? last_human_ref, current_human_ref
       @model_to_save.present? && account_row.present? &&
-        @model_to_save.human_id == account_row.human_id
+        @model_to_save.human_ref == account_row.human_ref
     end
 
   end

@@ -2,7 +2,7 @@
   <%= debit_gen_form.fields_for :debits, debit do |debit_form| %>
   <tr>
     <td>
-      <%= debit_form.label debit.account.property.human_id %>
+      <%= debit_form.label debit.account.property.human_ref %>
       <%= debit_form.hidden_field :account_id %>
     </td>
     <td>

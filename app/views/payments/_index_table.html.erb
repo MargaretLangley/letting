@@ -31,7 +31,7 @@
     <% payments.each do |payment| %>
     <tr>
       <td class='alnright'>
-        <%= payment.account.property.human_id %>
+        <%= payment.account.property.human_ref %>
       </td>
       <td>
         <%= payment.account.property.entities.full_name %>

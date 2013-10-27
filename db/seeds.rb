@@ -103,9 +103,9 @@ end
     ]
 
     Client.create! [
-      { id: 1, human_id: 1 },
-      { id: 2, human_id: 2 },
-      { id: 3, human_id: 3 }
+      { id: 1, human_ref: 1 },
+      { id: 2, human_ref: 2 },
+      { id: 3, human_ref: 3 }
     ]
   end
 
@@ -204,10 +204,10 @@ end
 
   def create_properties
     Property.create! [
-      { id: 1, human_id: 1001, client_id: 1 },
-      { id: 2, human_id: 2002, client_id: 1 },
-      { id: 3, human_id: 3003, client_id: 2 },
-      { id: 4, human_id: 4004, client_id: 3 },
+      { id: 1, human_ref: 1001, client_id: 1 },
+      { id: 2, human_ref: 2002, client_id: 1 },
+      { id: 3, human_ref: 3003, client_id: 2 },
+      { id: 4, human_ref: 4004, client_id: 3 },
      ]
   end
 

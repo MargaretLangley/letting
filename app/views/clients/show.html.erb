@@ -2,7 +2,7 @@
   <%= render 'clients/search' , path: clients_path(@client), search_action: 'show', search_label: 'View Search'%>
   <div class = 'showbox'>
     <h2>Client ID:
-     <%= @client.human_id %>
+     <%= @client.human_ref %>
      <span class= 'floatright'><%= link_to 'Edit', edit_client_path(@client) %><span>
      <span class= 'floatright'><%= link_to 'List', clients_path %><span>
     </h2>
@@ -15,7 +15,7 @@
       <%= render 'shared/show_1_line_address', object: @client %>
     <h3>Properties Owned</h3>
     <% @client.properties.each do |property| %>
-      <%= property.human_id %>
+      <%= property.human_ref %>
       <%= render 'shared/show_1_line_address', object: property %>
     <% end %>
   </div>

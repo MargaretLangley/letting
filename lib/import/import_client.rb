@@ -18,7 +18,7 @@ module DB
     end
 
     def model_assignment row
-      @model_to_assign.assign_attributes human_id: row[:human_id]
+      @model_to_assign.assign_attributes human_ref: row[:human_ref]
       import_contact @model_to_assign, row
       clean_contact @model_to_assign
     end

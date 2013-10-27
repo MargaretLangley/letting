@@ -8,7 +8,7 @@ module DB
 
   describe ImportBillingProfile do
     let!(:property) do
-      property_create! human_id: 122
+      property_create! human_ref: 122
     end
 
     it 'One row' do

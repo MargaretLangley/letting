@@ -8,7 +8,7 @@ module DB
     it 'client' do
       fields =
         %w[
-          human_id
+          human_ref
           title1  initials1 name1
           title2 initials2 name2
           flat_no house_name road_no road district town county postcode
@@ -19,7 +19,7 @@ module DB
     it 'property' do
       fields =
         %w[
-          human_id  updated
+          human_ref  updated
           title1 initials1 name1
           title2 initials2 name2
           flat_no house_name road_no road district town county postcode
@@ -31,7 +31,7 @@ module DB
     it 'billing_profile' do
       fields =
         %w[
-          human_id
+          human_ref
           title1 initials1 name1
           title2 initials2 name2
           flat_no house_name road_no road district town county postcode

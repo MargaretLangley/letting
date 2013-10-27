@@ -19,23 +19,23 @@ module DB
   class FileHeader
 
     def self.account
-      %w{ human_id, charge_type on_date description debit credit balance }
+      %w{ human_ref, charge_type on_date description debit credit balance }
     end
 
     def self.client
-      %w{ human_id } + entities + address
+      %w{ human_ref } + entities + address
     end
 
     def self.property
-      %w{ human_id updated } + entities + address + %w{ client_id }
+      %w{ human_ref updated } + entities + address + %w{ client_id }
     end
 
     def self.billing_profile
-      %w{ human_id } + entities + address
+      %w{ human_ref } + entities + address
     end
 
     def self.charge
-      %w{ human_id updated charge_type due_in amount payment_type } +
+      %w{ human_ref updated charge_type due_in amount payment_type } +
       %w{ day_1 month_1 day_2 month_2 day_3 month_3 day_4 month_4 } +
       %w{ escalation_date escaltion_new_rent }
     end
