@@ -56,12 +56,12 @@
           <td>
           </td>
           <td class='alnright'>
+          </td>
+          <td class='alnright'>
             <%= payment.amount %>
           </td>
           <td class='alnright'>
-          </td>
-          <td class='alnright'>
-            <%= total = total + payment.amount %>
+            <%= total = total- payment.amount %>
           </td>
         </tr>
       <% end %>
