@@ -46,13 +46,12 @@ describe Account do
       expect(account.add_debit debit_attributes).to be_valid
     end
 
-    context '#upaid_debits' do
-
+    context '#pay_off_unpaid_debits' do
       it 'includes unpaid' do
+        expect(account.credits_for_unpaid_debits).to have(0).item
         debit1 = account.add_debit debit_attributes
         account.save!
-        expect(account.debits).to have(1).item
-        expect(account.unpaid_debits).to eq [debit1]
+        expect(account.credits_for_unpaid_debits).to have(1).item
       end
 
       it 'ignored paid' do
@@ -60,7 +59,7 @@ describe Account do
         account.credits << credit_new
         account.save!
         expect(account.debits).to have(1).item
-        expect(account.unpaid_debits).to eq []
+        expect(account.credits_for_unpaid_debits).to have(0).item
       end
     end
 

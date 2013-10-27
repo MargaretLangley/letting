@@ -36,19 +36,18 @@ describe 'Property Factory' do
     end
   end
 
-  context 'with charge paid debit' do
+  context 'with charge and unpaid debit' do
     it 'has both' do
       property = property_with_charge_and_unpaid_debit
       expect(property.account.charges.reject(&:empty?)).to have(1).items
-      expect(property.account.unpaid_debits).to have(1).items
-      expect(property.account.unpaid_debits[0].charge_id).to be_present
+      expect(property.account.credits_for_unpaid_debits).to have(1).items
     end
   end
 
-  context 'with paid debit' do
+  context 'with unpaid debit' do
     it 'has debit' do
       property = property_with_unpaid_debit
-      expect(property.account.unpaid_debits).to have(1).items
+      expect(property.account.credits_for_unpaid_debits).to have(1).items
     end
   end
 
