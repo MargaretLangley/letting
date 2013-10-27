@@ -41,6 +41,7 @@ class Charge < ActiveRecord::Base
   end
 
   def clean_up_form
+    self.mark_for_destruction if empty?
     due_ons.clean_up_form
   end
 

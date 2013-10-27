@@ -30,21 +30,11 @@ module Entities
       end
 
       def clean_up_form
-        destruction_if :empty?
+        self.each { |entity| entity.clean_up_form }
       end
 
       def destroy_all
-        destruction_if :all?
-      end
-
-  private
-
-      def destruction_if matcher
-        select(&matcher).each { |entity| mark_entity_for_destruction entity }
-      end
-
-      def mark_entity_for_destruction entity
-        entity.mark_for_destruction
+        self.each { |entity| entity.destroy_form }
       end
     end
   end
