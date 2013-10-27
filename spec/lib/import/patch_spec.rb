@@ -1,7 +1,7 @@
 require 'csv'
 require 'spec_helper'
 require_relative '../../../lib/import/file_import'
-require_relative '../../../lib/import/file_headers'
+require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_client'
 require_relative '../../../lib/import/import_property'
 require_relative '../../../lib/import/import_billing_profile'
@@ -58,44 +58,44 @@ module DB
 
     def clients_csv
       FileImport.to_a('clients',
-                      headers: FileHeaders.client,
+                      headers: FileHeader.client,
                       location: clients_directory)
     end
 
     def clients_no_row_match_csv
       FileImport.to_a('clients_no_row_matches',
-                      headers: FileHeaders.client,
+                      headers: FileHeader.client,
                       location: 'spec/fixtures/import_data/patch')
     end
 
     def clients_row_match_csv
       FileImport.to_a('clients_row_match',
-                      headers: FileHeaders.client,
+                      headers: FileHeader.client,
                       location: 'spec/fixtures/import_data/patch')
     end
 
     def clients_row_match_name_changed
       FileImport.to_a('clients_row_match_name_changed',
-                      headers: FileHeaders.client,
+                      headers: FileHeader.client,
                       location: 'spec/fixtures/import_data/patch')
     end
 
     def property_csv
       FileImport.to_a('properties',
-                      headers: FileHeaders.property,
+                      headers: FileHeader.property,
                       drop_rows: 34,
                       location: 'spec/fixtures/import_data/properties')
     end
 
     def property_patch_csv
       FileImport.to_a('properties_patch',
-                      headers: FileHeaders.property,
+                      headers: FileHeader.property,
                       location: 'spec/fixtures/import_data/patch')
     end
 
     def billing_csv
       FileImport.to_a('address2',
-                      headers: FileHeaders.billing_profile,
+                      headers: FileHeader.billing_profile,
                       location: billing_profile_dir)
     end
 
@@ -105,7 +105,7 @@ module DB
 
     def billing_patch_csv
       FileImport.to_a('address2_patch',
-                      headers: FileHeaders.billing_profile,
+                      headers: FileHeader.billing_profile,
                       location: 'spec/fixtures/import_data/patch')
     end
 

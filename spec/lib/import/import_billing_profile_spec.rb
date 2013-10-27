@@ -1,7 +1,7 @@
 require 'csv'
 require 'spec_helper'
 require_relative '../../../lib/import/file_import'
-require_relative '../../../lib/import/file_headers'
+require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_billing_profile'
 
 module DB
@@ -65,19 +65,19 @@ module DB
 
     def billing_csv
       FileImport.to_a('address2',
-                      headers: FileHeaders.billing_profile,
+                      headers: FileHeader.billing_profile,
                       location: billing_profile_dir)
     end
 
     def billing_updated_csv
       FileImport.to_a 'address2_updated',
-                      headers: FileHeaders.billing_profile,
+                      headers: FileHeader.billing_profile,
                       location: billing_profile_dir
     end
 
     def billing_with_1_entity_csv
       FileImport.to_a 'address2_one_entity',
-                      headers: FileHeaders.billing_profile,
+                      headers: FileHeader.billing_profile,
                       location: billing_profile_dir
     end
 

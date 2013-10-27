@@ -1,7 +1,7 @@
 require 'csv'
 require 'spec_helper'
 require_relative '../../../lib/import/file_import'
-require_relative '../../../lib/import/file_headers'
+require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_property'
 
 module DB
@@ -109,7 +109,7 @@ module DB
 
       def property_csv
         FileImport.to_a('properties',
-                        headers: FileHeaders.property,
+                        headers: FileHeader.property,
                         drop_rows: 34,
                         location: properties_directory)
       end
@@ -117,14 +117,14 @@ module DB
       def property_updated_csv
         FileImport.to_a 'properties_updated',
                         drop_rows: 34,
-                        headers: FileHeaders.property,
+                        headers: FileHeader.property,
                         location: properties_directory
       end
 
       def property_1_entity_csv
         FileImport.to_a 'properties_one_entity',
                         drop_rows: 34,
-                        headers: FileHeaders.property,
+                        headers: FileHeader.property,
                         location: properties_directory
       end
 

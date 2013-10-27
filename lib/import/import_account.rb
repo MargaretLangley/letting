@@ -57,7 +57,6 @@ module DB
 
     def model_assignment row
       @model_to_assign.attributes = AccountRow.new(row).attributes
-      binding.pry
     end
 
     private

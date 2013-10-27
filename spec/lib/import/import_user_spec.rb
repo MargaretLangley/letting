@@ -1,7 +1,7 @@
 require 'csv'
 require 'spec_helper'
 require_relative '../../../lib/import/file_import'
-require_relative '../../../lib/import/file_headers'
+require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_charge'
 require_relative '../../../lib/import/import_user'
 
@@ -20,7 +20,7 @@ module DB
 
     def users_file_to_arrays
       FileImport.to_a('users',
-                      headers: FileHeaders.user,
+                      headers: FileHeader.user,
                       location: 'spec/fixtures/import_data/users')
     end
 

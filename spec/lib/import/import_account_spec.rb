@@ -1,7 +1,7 @@
 require 'csv'
 require 'spec_helper'
 require_relative '../../../lib/import/file_import'
-require_relative '../../../lib/import/file_headers'
+require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_account'
 
 module DB
@@ -13,7 +13,7 @@ module DB
 
     context 'debit' do
 
-      it 'One row', focus: true do
+      it 'One row' do
         expect { ImportAccount.import one_debit_csv }.to \
           change(Debit, :count).by 1
       end
@@ -21,13 +21,13 @@ module DB
 
     def one_debit_csv
       FileImport.to_a('one_debit',
-                      headers: FileHeaders.account,
+                      headers: FileHeader.account,
                       location: import_dir)
     end
 
     def one_credit_csv
       FileImport.to_a('one_credit',
-                      headers: FileHeaders.account,
+                      headers: FileHeader.account,
                       location: import_dir)
     end
 

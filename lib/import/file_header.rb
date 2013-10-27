@@ -1,7 +1,7 @@
 module DB
   ####
   #
-  # FileHeaders
+  # FileHeader
   #
   # The headings for each column of the appropriate data file mapped to
   # the model's attributes.
@@ -16,7 +16,7 @@ module DB
   #
   ####
   #
-  class FileHeaders
+  class FileHeader
 
     def self.account
       %w{ human_id, charge_type on_date description debit credit balance }

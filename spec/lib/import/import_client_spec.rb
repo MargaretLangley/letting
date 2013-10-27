@@ -1,7 +1,7 @@
 require 'csv'
 require 'spec_helper'
 require_relative '../../../lib/import/file_import'
-require_relative '../../../lib/import/file_headers'
+require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_client'
 
 module DB
@@ -63,25 +63,25 @@ module DB
 
     def client_csv
       FileImport.to_a('clients',
-                      headers: FileHeaders.client,
+                      headers: FileHeader.client,
                       location: 'spec/fixtures/import_data/clients')
     end
 
     def client_updated_csv
       FileImport.to_a 'clients_updated',
-                      headers: FileHeaders.client,
+                      headers: FileHeader.client,
                       location: 'spec/fixtures/import_data/clients'
     end
 
     def client_one_entity_csv
       FileImport.to_a 'clients_one_entity',
-                      headers: FileHeaders.client,
+                      headers: FileHeader.client,
                       location: 'spec/fixtures/import_data/clients'
     end
 
     def client_company_with_intials_csv
       FileImport.to_a 'clients_company_with_initials',
-                      headers: FileHeaders.client,
+                      headers: FileHeader.client,
                       location: 'spec/fixtures/import_data/clients'
     end
   end
