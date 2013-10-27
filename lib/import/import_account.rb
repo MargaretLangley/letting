@@ -36,14 +36,20 @@ module DB
     private
 
      def debit_attributes
-       { charge_id: -1,
-       on_date: @row[:on_date],
-       amount: @row[:debit],
-       debit_generator_id: -1 }
+       {
+         charge_id: -1,
+         on_date: @row[:on_date],
+         amount: @row[:debit],
+         debit_generator_id: -1,
+       }
      end
 
      def credit_attributes
-       raise_error ActiveRecord::RecordNotFound
+       {
+         payment_id: -1,
+         on_date: @row[:on_date],
+         amount: @row[:credit],
+       }
      end
 
   end
@@ -68,13 +74,17 @@ module DB
     private
 
     def model_to_assign row
-      AccountRow.new(row).debits? ? @model_to_save.account.debits.build :
-                                    @model_to_save.account.credits.build
+      if AccountRow.new(row).debits?
+        @model_to_save.account.debits.build
+      else
+        @model_to_save.account.prepare_for_form
+        @model_to_save.account.credits_for_unpaid_debits.first
+      end
     end
 
-    def eq_ref? last_human_ref, current_human_ref
-      @model_to_save.present? && account_row.present? &&
-        @model_to_save.human_ref == account_row.human_ref
+    def eq_ref? human_ref, other_human_ref
+      human_ref.present? && other_human_ref.present? &&
+        human_ref.human_ref == other_human_ref.human_ref
     end
 
   end
