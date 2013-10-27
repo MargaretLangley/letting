@@ -119,5 +119,5 @@ class PaymentsController < ApplicationController
   def credit_attributes
     %i(id account_id debit_id on_date amount)
   end
-s
+
 end
