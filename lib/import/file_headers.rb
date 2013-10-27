@@ -18,6 +18,10 @@ module DB
   #
   class FileHeaders
 
+    def self.account
+      %w{ human_id, charge_type on_date description debit credit balance }
+    end
+
     def self.client
       %w{ human_id } + entities + address
     end

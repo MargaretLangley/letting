@@ -32,7 +32,7 @@ module DB
         model_prepared_for_import row
         model_assignment row
         model_patched if @patch
-        model_saved || show_error
+        model_saved || show_error(row)
         show_running index
       end
     end
@@ -82,7 +82,7 @@ module DB
       "#{model_class} human_id: #{row[:human_id]} - Not found"
     end
 
-    def show_error
+    def show_error row
       output_error(row, model_to_save)
     end
 
