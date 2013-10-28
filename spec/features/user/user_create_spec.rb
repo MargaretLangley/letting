@@ -19,7 +19,7 @@ describe User do
       user_create_page.visit_new_page
       user_create_page.login('newuser@example.com', 'password', 'pass')
       user_create_page.click_create_user
-      expect(page).to have_text /Form is invalid/i
+      expect(page).to have_text /invalid/i
     end
   end
 
