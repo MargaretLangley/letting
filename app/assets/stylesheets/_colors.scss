@@ -1,16 +1,17 @@
 $print-background-white: #FFFFFF;       // white
 $primary-background-color: #F8F8F8;    // off white
 $secondary-background-color: #237CBE;  // Light blue
-$primary-text-color: #444;             // Dark grey
+$primary-text-color: #444;             // Very Dark grey
 $secondary-text-color: #777;           // Light grey
 $primary-link-color: #2E6AA0;          // Dark Blue
 $secondary-link-color: darken($primary-link-color, 60%);   // dark blue
-$background-filler: #DDD;
-$errors-head-background-color: #2E9AFE;
-$errors-background-color: #FFC;
-$errors-text-color: #DC3D3D;
+$background-filler: #DDD;              // Grey
+$errors-head-background-color: #C5C5C5; // Grey
+$errors-background-color: #FFC;         // Yellow
+$errors-text-color: #DC3D3D;            // Red
+$errors-edge-color: #FFCC33;            // Orange-brown
 $subdued-color: darken($primary-background-color, 20%);
-$flash-notice-color: #DBFFDD;
-$flash-alert-color:  #FFE1DE;
-$accent-color: #FAFBFF;           //white
+$flash-notice-color: #DBFFDD;          // Pale Green
+$flash-alert-color:  #FFE1DE;          // Pink
+$accent-color: #FAFBFF;                // White
 $fieldset-color: lighten($secondary-background-color, 50%); // Egg shell Blue
