@@ -1,7 +1,6 @@
 
 @import "colors";
 
-
 // show selector: article#property
 // index selector ul#properties
 // forms handled in _form
@@ -31,7 +30,9 @@ section#errors {
   margin: 1em 0;
   padding: 1em;
   background: $errors-background-color;
-
+  border:2px solid $errors-edge-color;
+  border-radius: 12px;
+  box-shadow: #aaa 0 0 8px;
   h2 {
     color: $errors-text-color;
     font-size: 1.25em;

@@ -18,7 +18,7 @@ describe User do
       go_to_edit_page
       user_edit_page.login('another@example.com', 'password', 'pass')
       user_edit_page.click_update_user
-      expect(page).to have_text /Form is invalid/i
+      expect(page).to have_text /invalid/i
     end
   end
 

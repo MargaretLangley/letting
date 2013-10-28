@@ -45,13 +45,15 @@
     a:active {
       text-decoration: underline;
     }
-
   }
 
   .errorhead{
       height: 90px;
       padding-top:3px;
       padding-left:10px;
+      border:1px solid #666;
+      border-radius: 12px;
+      background-color: $errors-head-background-color;
    }
 
   footer#page-footer {
@@ -73,13 +75,12 @@
     }
   }
 
-
   nav {
     float: right;
   }
 
   .shell {
-    border-radius: 5px;
+    border-radius: 12px;
     border: 1px solid $fieldset-color;
     padding: 5%;
   }
@@ -138,7 +139,6 @@
   }
 
   .floatleft{
-
    }
 
   .boldfloat{
@@ -149,7 +149,7 @@
      width: 90%;
   }
 
-   button, header, footer, .noshowprint, .floatright{
+   button, header, footer, .noshowprint, .search, .floatright{
    display: none;
   }
 
