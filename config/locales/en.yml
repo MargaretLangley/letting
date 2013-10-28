@@ -22,17 +22,21 @@
 en:
   activerecord:
     attributes:
-      entities:
-        name: 'Person or company name'
       property:
         human_ref: 'Property ID'
-        client_id: 'Client ID'
+        client_id: Client ID
+        blank: cannot be blank
+        entities: 'Person or Company Name'
+
       client:
-        human_ref: 'Client ID'
+        human_ref: Client ID
+        entities: 'Person or Company Name'
+
       address:
         road: Road
         town: Town
         county: County
+
     errors:
       models:
         debit_generator:
