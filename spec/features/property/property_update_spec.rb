@@ -141,12 +141,16 @@ describe Property do
     end
 
     it 'add billing address', js: true do
-      property_create! id: 1, human_ref: 8000
+      property = property_create! human_ref: 8000
       navigate_to_edit_page
       fill_in_bill_profile
       update_then_expect_properties_page
-      navigate_to_property_view_page
+      navigate_view_by_property property
       expect_new_bill_profile
+    end
+
+    def navigate_view_by_property property
+      visit "/properties/#{property.id}"
     end
 
     def fill_in_bill_profile
