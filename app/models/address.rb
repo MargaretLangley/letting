@@ -41,6 +41,10 @@ class Address < ActiveRecord::Base
     attributes.except(*ignored_attrs)
   end
 
+  def clean_up_form
+    self.mark_for_destruction
+  end
+
   private
 
     def ignored_attrs

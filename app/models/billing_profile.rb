@@ -39,10 +39,7 @@ class BillingProfile < ActiveRecord::Base
 
   def erase_form
     entities.destroy_all
-    destroy_address unless address.nil?
+    address.clean_up_form unless address.nil?
   end
 
-  def destroy_address
-    address.mark_for_destruction
-  end
 end
