@@ -66,17 +66,30 @@ describe Credit do
 
   context 'methods' do
     let(:credit) { credit_new }
-    it 'outstanding' do
+    it '#outstanding calculated' do
       expect(credit.outstanding).to eq 88.08
     end
 
-    context 'pay_off calculates' do
+    context '#pay_off calculates' do
       it 'new record correctly' do
         expect(credit.pay_off).to eq 88.08
       end
       it 'saved record correctly' do
         credit.should_receive(:new_record?).and_return(false)
         expect(credit.pay_off).to eq 176.16
+      end
+    end
+
+    context '#clean_up_form' do
+      it '0 amount to be destroyed' do
+        credit.amount = 0.0
+        credit.clean_up_form
+        expect(credit).to be_marked_for_destruction
+      end
+      it 'none 0 amount to be persisted' do
+        credit.amount = 80.0
+        credit.clean_up_form
+        expect(credit).to_not be_marked_for_destruction
       end
     end
   end

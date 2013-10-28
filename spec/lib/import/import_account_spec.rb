@@ -24,7 +24,6 @@ module DB
       end
 
       it '2 debits, 1 credit covering 1 debit' do
-        pending
         expect { ImportAccount.import two_debit_with_credit_csv }.to \
           change(Credit, :count).by 1
         expect(Debit.all).to have(2).items

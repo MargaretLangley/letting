@@ -13,7 +13,12 @@
 class Account < ActiveRecord::Base
   belongs_to :property, inverse_of: :account
   has_many :debits, dependent: :destroy
-  has_many :credits, dependent: :destroy
+  has_many :credits, dependent: :destroy do
+    def clean_up_form
+      each { |credit| credit.clean_up_form }
+    end
+  end
+  accepts_nested_attributes_for :credits, allow_destroy: true
   has_many :payments, dependent: :destroy
   include Charges
   accepts_nested_attributes_for :charges, allow_destroy: true
@@ -45,6 +50,7 @@ class Account < ActiveRecord::Base
 
   def clean_up_form
     charges.clean_up_form
+    credits.clean_up_form
   end
 
   def self.by_human_ref human_ref
