@@ -51,7 +51,6 @@ class Entity < ActiveRecord::Base
     [title, initials, name].reject(&:blank?).join(' ')
   end
 
-
   private
 
     def destroy_entity
