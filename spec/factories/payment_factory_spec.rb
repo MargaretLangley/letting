@@ -33,7 +33,7 @@ describe 'payment' do
     end
 
     it 'can be saved' do
-      expect{payment.save! }.to_not raise_error
+      expect { payment.save! }.to_not raise_error
     end
   end
 end
