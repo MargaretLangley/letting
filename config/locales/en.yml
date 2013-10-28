@@ -37,6 +37,9 @@ en:
         town: Town
         county: County
 
+      user:
+        password_digest: Password Conformation
+
     errors:
       models:
         debit_generator:

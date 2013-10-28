@@ -1,17 +1,9 @@
 <%= form_for user do |f| %>
+  <%= render 'shared/errors', object: user %>
+
   <fieldset id='user' class='shell'>
     <h3>User
     </h3>
-    <% if user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-       <ul>
-        <% user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-   <div>
-    <% end %>
    <div class='field text' >
     <%= f.label :email %>
     <%= f.text_field :email %>

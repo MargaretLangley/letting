@@ -24,6 +24,7 @@
   width: 80%;
   background: rgba(184,184,184,0.85);
   padding: 1em 1em;
+  border-radius: 12px;
  }
 
 a.disabled {
@@ -36,9 +37,6 @@ a.disabled {
   margin-top: 1.5%;
   border-top: 1px solid $background-filler;
 }
-
-
-
 
 .top {
   @include top;
@@ -77,7 +75,6 @@ fieldset {
         content: ' *';
       }
   }
-
 
   .field label {
      float: left;
@@ -153,7 +150,6 @@ fieldset {
   background-image:-moz-linear-gradient(-90deg, rgb(238, 238, 238), rgb(204, 204, 204));
 }
 
-
 @mixin small-button-base {
   padding:2px;
   text-decoration: none;
@@ -209,7 +205,7 @@ input[type="submit"] {
 {
    @include button-base;
    padding:2px 20px;
-      border: 1px solid $subdued-color;
+   border: 1px solid $subdued-color;
    float:right;
  }
 
@@ -218,9 +214,7 @@ input[type="submit"] {
    width: 20%;
  }
 
-
 /*Turn Grid into Table*/
-
 
 @mixin body-cell {
   color: $primary-text-color;
@@ -262,7 +256,6 @@ input[type="submit"] {
     background-color: Gainsboro;
   }
 }
-
 
 .number {
   text-align: right;
