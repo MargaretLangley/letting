@@ -28,6 +28,13 @@ module DB
           change(Credit, :count).by 1
         expect(Debit.all).to have(2).items
       end
+
+      it '1 credit covering multiple debit' do
+        expect { ImportAccount.import credit_cover_multiple_debit_csv }.to \
+          change(Credit, :count).by 2
+        expect(Debit.all).to have(2).items
+      end
+
     end
 
     def one_debit_csv
@@ -44,6 +51,12 @@ module DB
 
     def two_debit_with_credit_csv
       FileImport.to_a('two_debit_with_credit',
+                      headers: FileHeader.account,
+                      location: import_dir)
+    end
+
+    def credit_cover_multiple_debit_csv
+      FileImport.to_a('credit_cover_multiple_debit',
                       headers: FileHeader.account,
                       location: import_dir)
     end

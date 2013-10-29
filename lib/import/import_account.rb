@@ -31,7 +31,7 @@ module DB
       else
         @model_to_assign.each do |model|
           model.attributes = AccountRow.new(row).attributes
-          model.amount = @amount.max_withdrawal AccountRow.new(row).amount
+          model.amount = @amount.max_withdrawal model.outstanding
           @amount.withdraw model.amount
         end
       end
