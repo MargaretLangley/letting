@@ -17,6 +17,7 @@ module DB
   #
   class Patch
     include ImportContact
+     attr_accessor :row
 
     def initialize model_class, patch_contents = []
       @model_class = model_class
@@ -32,12 +33,13 @@ module DB
 
     def build_patching_models
       @patch_contents.each do |row|
-        model_prepared_for_import row
+        self.row = row
+        model_prepared_for_import
         patch_models_add
       end
     end
 
-    def model_prepared_for_import row
+    def model_prepared_for_import
       @model_to_assign = @model_class.new
       @model_to_assign.human_ref = row[:human_ref].to_i
       @model_to_assign.prepare_for_form

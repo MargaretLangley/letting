@@ -18,23 +18,23 @@ module DB
       super Property, contents, patch
     end
 
-    def model_prepared_for_import row
-      account_row = AccountRow.new(row)
-      unless eq_ref? @model_to_save, account_row
-        change_model_to_save account_row
-      end
-      @model_to_assign = model_to_assign row
+    def row= row
+      @row = AccountRow.new(row)
     end
 
-    def model_assignment row
-      acc_row = AccountRow.new(row)
-      if acc_row.debits?
-        @model_to_assign.attributes = acc_row.attributes
+    def model_prepared_for_import
+      change_model_to_save unless eq_ref? @model_to_save, row
+      @model_to_assign = model_to_assign
+    end
+
+    def model_assignment
+      if row.debits?
+        @model_to_assign.attributes = row.attributes
         charges = ChargesMatcher.new @model_to_save.account.charges
-        @model_to_assign.charge_id = charges.find!(acc_row.charge_type).id
+        @model_to_assign.charge_id = charges.find!(row.charge_type).id
       else
         @model_to_assign.each do |model|
-          model.attributes = acc_row.attributes
+          model.attributes = row.attributes
           model.amount = @amount.max_withdrawal model.outstanding
           @amount.withdraw model.amount
         end
@@ -43,16 +43,16 @@ module DB
 
     private
 
-    def change_model_to_save row
-      @model_to_save = parent_model row, Property
+    def change_model_to_save
+      @model_to_save = parent_model Property
       @amount = CreditableAmount.new(0)
     end
 
-    def model_to_assign row
-      if AccountRow.new(row).debits?
+    def model_to_assign
+      if row.debits?
         @model_to_save.account.debits.build
       else
-        @amount.deposit AccountRow.new(row).amount
+        @amount.deposit row.amount
         @model_to_save.account.prepare_for_form
         @model_to_save.account.credits_for_unpaid_debits
       end
@@ -62,6 +62,5 @@ module DB
       human_ref.present? && other_human_ref.present? &&
         human_ref.human_ref == other_human_ref.human_ref
     end
-
   end
 end

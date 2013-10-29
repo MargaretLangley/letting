@@ -5,7 +5,9 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_charge'
 
 module DB
-  describe ImportCharge do
+
+  describe ImportCharge, :import do
+
     it 'One row' do
       property_create!
       expect { ImportCharge.import charge_csv }.to change(Charge, :count).by 1

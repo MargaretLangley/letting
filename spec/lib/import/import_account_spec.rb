@@ -6,7 +6,7 @@ require_relative '../../../lib/import/import_account'
 
 module DB
 
-  describe ImportAccount do
+  describe ImportAccount, :import do
     let!(:property) do
       property_with_charge_create! human_ref: 122
     end

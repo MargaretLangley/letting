@@ -6,7 +6,7 @@ require_relative '../../../lib/import/import_billing_profile'
 
 module DB
 
-  describe ImportBillingProfile do
+  describe ImportBillingProfile, :import do
     let!(:property) do
       property_create! human_ref: 122
     end

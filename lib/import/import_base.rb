@@ -30,15 +30,20 @@ module DB
 
     def import_loop
       @contents.each_with_index do |row, index|
-        model_prepared_for_import row
-        model_assignment row
+        self.row = row
+        model_prepared_for_import
+        model_assignment
         model_patched if @patch
-        model_saved || show_error(row)
+        model_saved || show_error
         show_running index
       end
     end
 
     protected
+
+    def row=(row)
+      @row = row
+    end
 
     def initialize klass, contents, patch
       @klass = klass
@@ -46,12 +51,12 @@ module DB
       @patch = patch
     end
 
-    def first_or_initialize_model row, model_class
+    def first_or_initialize_model model_class
       model_class.where(human_ref: row[:human_ref]).first_or_initialize
     end
 
-    def model_prepared_for_import row
-      @model_to_assign = first_or_initialize_model row, @klass
+    def model_prepared_for_import
+      @model_to_assign = first_or_initialize_model @klass
       @model_to_assign.prepare_for_form
     end
 
@@ -67,24 +72,24 @@ module DB
       @model_to_save || @model_to_assign
     end
 
-    def parent_model row, model_class
+    def parent_model model_class
       model = model_class.where(human_ref: row[:human_ref]).first
-      fail_parent_record_not_found model_class, row if model.nil?
+      fail_parent_record_not_found model_class if model.nil?
       model
     end
 
     private
 
-    def fail_parent_record_not_found model_class, row
-      fail ActiveRecord::RecordNotFound, no_parent_message(model_class, row)
+    def fail_parent_record_not_found model_class
+      fail ActiveRecord::RecordNotFound, no_parent_message(model_class)
     end
 
-    def no_parent_message model_class, row
+    def no_parent_message model_class
       "#{model_class} human_ref: #{row[:human_ref]} - Not found"
     end
 
-    def show_error row
-      output_error(row, model_to_save)
+    def show_error
+      output_error(model_to_save)
     end
 
     def show_running index
@@ -95,7 +100,7 @@ module DB
       index % 100 == 0 && index != 0
     end
 
-    def output_error row, model
+    def output_error model
       puts "human_ref: #{row[:human_ref]} -  #{model.errors.full_messages}"
     end
   end

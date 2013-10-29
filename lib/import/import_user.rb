@@ -24,18 +24,18 @@ module DB
       super User, contents, patch
     end
 
-    def model_assignment row
+    def model_assignment
       @model_to_assign.assign_attributes email:    row[:email],
                                          password: row[:password],
                                          password_confirmation: row[:password],
                                          admin:    row[:admin]
     end
 
-    def model_prepared_for_import row
-      @model_to_assign = first_or_initialize_model row, @klass
+    def model_prepared_for_import
+      @model_to_assign = first_or_initialize_model @klass
     end
 
-    def first_or_initialize_model row, model_class
+    def first_or_initialize_model model_class
       model_class.where(email: row[:email]).first_or_initialize
     end
 

@@ -6,7 +6,7 @@ require_relative '../../../lib/import/import_property'
 
 module DB
 
-  describe ImportProperty do
+  describe ImportProperty, :import do
 
     context 'error state' do
       it 'throws an error if client foreign key not found' do

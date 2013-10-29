@@ -8,7 +8,7 @@ require_relative '../../../lib/import/import_billing_profile'
 
 module DB
 
-  describe 'Patch' do
+  describe 'Patch', :import do
 
     it 'if no merge file nothing merged' do
       ImportClient.import clients_csv

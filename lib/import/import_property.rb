@@ -23,7 +23,7 @@ module DB
       super Property, contents, patch
     end
 
-    def model_assignment row
+    def model_assignment
       @model_to_assign.assign_attributes \
         human_ref:  row[:human_ref],
         client_id: client_foreign_key_from_human_ref(row[:client_id])

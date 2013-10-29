@@ -31,8 +31,8 @@ module DB
       super Charge, contents, patch
     end
 
-    def model_prepared_for_import row
-      @model_to_save = parent_model row, Property
+    def model_prepared_for_import
+      @model_to_save = parent_model Property
       @model_to_assign =
         ChargesMatcher
           .new(@model_to_save.account.charges).first_or_initialize \
@@ -40,7 +40,7 @@ module DB
       @model_to_save.prepare_for_form
     end
 
-    def model_assignment row
+    def model_assignment
       @model_to_assign
         .assign_attributes \
            charge_type: ChargeValues.from_code(row[:charge_type]).charge_code,
