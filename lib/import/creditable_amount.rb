@@ -30,5 +30,10 @@ module DB
     def balance
       @balance
     end
+
+    def assert_balance balance
+      raise DB::BalanceNotMatching, 'Blanace not matching calculated', caller \
+        if @balance != balance
+    end
   end
 end
