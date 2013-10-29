@@ -19,7 +19,7 @@ module DB
   class FileHeader
 
     def self.account
-      %w{ human_ref, charge_type on_date description debit credit balance }
+      %w{ human_ref, charge_code on_date description debit credit balance }
     end
 
     def self.client

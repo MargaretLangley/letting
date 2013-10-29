@@ -22,6 +22,7 @@ module DB
   #
   class ImportBase
     include ImportContact
+    attr_accessor :row
 
     def self.import contents, patch = nil
       new(contents, patch).import_loop

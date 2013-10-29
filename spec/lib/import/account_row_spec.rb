@@ -20,6 +20,12 @@ module DB
       it 'calculates amount' do
         expect(row.amount).to eq 50.5
       end
+
+      context 'ChargeType' do
+        it 'returns chargeType' do
+          expect(row.charge_type).to eq 'Ground Rent'
+        end
+      end
     end
 
     context 'debit row' do

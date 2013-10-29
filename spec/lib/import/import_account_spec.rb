@@ -8,7 +8,7 @@ module DB
 
   describe ImportAccount do
     let!(:property) do
-      property_create! human_ref: 122
+      property_with_charge_create! human_ref: 122
     end
 
     context 'debit' do
@@ -35,6 +35,15 @@ module DB
         expect(Debit.all).to have(2).items
       end
 
+      it '2 properties' do
+        property_with_charge_create! human_ref: 123
+        expect { ImportAccount.import two_accounts }.to \
+          change(Credit, :count).by 2
+        expect(Debit.all).to have(2).items
+        expect(Property.find_by!(human_ref: 122).account.credits).to have(1).items
+        expect(Property.find_by!(human_ref: 123).account.credits).to have(1).items
+      end
+
     end
 
     def one_debit_csv
@@ -57,6 +66,12 @@ module DB
 
     def credit_cover_multiple_debit_csv
       FileImport.to_a('credit_cover_multiple_debit',
+                      headers: FileHeader.account,
+                      location: import_dir)
+    end
+
+    def two_accounts
+      FileImport.to_a('two_accounts',
                       headers: FileHeader.account,
                       location: import_dir)
     end

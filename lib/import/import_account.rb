@@ -20,17 +20,21 @@ module DB
 
     def model_prepared_for_import row
       account_row = AccountRow.new(row)
-      change_model_to_save account_row \
-        unless eq_ref? @model_to_save, account_row
+      unless eq_ref? @model_to_save, account_row
+        change_model_to_save account_row
+      end
       @model_to_assign = model_to_assign row
     end
 
     def model_assignment row
-      if AccountRow.new(row).debits?
-        @model_to_assign.attributes = AccountRow.new(row).attributes
+      acc_row = AccountRow.new(row)
+      if acc_row.debits?
+        @model_to_assign.attributes = acc_row.attributes
+        charges = ChargesMatcher.new @model_to_save.account.charges
+        @model_to_assign.charge_id = charges.find!(acc_row.charge_type).id
       else
         @model_to_assign.each do |model|
-          model.attributes = AccountRow.new(row).attributes
+          model.attributes = acc_row.attributes
           model.amount = @amount.max_withdrawal model.outstanding
           @amount.withdraw model.amount
         end
