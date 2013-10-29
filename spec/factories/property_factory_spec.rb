@@ -36,6 +36,12 @@ describe 'Property Factory' do
     end
   end
 
+  context 'with_charge_create!' do
+    it 'creates valid' do
+      expect { property_with_charge_create! }.to_not raise_error
+    end
+  end
+
   context 'with charge and unpaid debit' do
     it 'has both' do
       property = property_with_charge_and_unpaid_debit
