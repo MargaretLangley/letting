@@ -73,12 +73,16 @@ module DB
     end
 
     def parent_model model_class
-      model = model_class.where(human_ref: row[:human_ref]).first
+      model = find_parent model_class
       fail_parent_record_not_found model_class if model.nil?
       model
     end
 
     private
+
+    def find_parent model_class
+      model_class.find_by human_ref: row[:human_ref]
+    end
 
     def fail_parent_record_not_found model_class
       fail ActiveRecord::RecordNotFound, no_parent_message(model_class)
