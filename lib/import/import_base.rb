@@ -41,23 +41,19 @@ module DB
 
     protected
 
-    def row=(row)
-      @row = row
-    end
-
     def initialize klass, contents, patch
       @klass = klass
       @contents = contents
       @patch = patch
     end
 
-    def first_or_initialize_model model_class
-      model_class.where(human_ref: row[:human_ref]).first_or_initialize
-    end
-
     def model_prepared
       @model_to_assign = first_or_initialize_model @klass
       @model_to_assign.prepare_for_form
+    end
+
+    def first_or_initialize_model model_class
+      model_class.where(human_ref: row[:human_ref]).first_or_initialize
     end
 
     def model_patched
