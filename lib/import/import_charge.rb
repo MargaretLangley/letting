@@ -76,19 +76,18 @@ module DB
     end
 
     def charged_days_in_year_from_monthly_charge
-      monthly_charge = day_month_from_row_columns 1
-      [*DayMonth.from_day_month(monthly_charge.day, DueOn::PER_MONTH)]
-    end
-
-    def day_month_from_row_columns number
-      DayMonth.from_day_month row.day(number), row.month(number)
+      [*DayMonth.from_day_month(row.day(1), DueOn::PER_MONTH)]
     end
 
     def charged_days_in_year_from_on_date_charge
       day_months = []
       (1..row.maximum_dates)
-        .each { |index| day_months <<  day_month_from_row_columns(index) }
+        .each { |index| day_months << day_month_from_row_columns(index) }
       day_months
+    end
+
+    def day_month_from_row_columns number
+      DayMonth.from_day_month row.day(number), row.month(number)
     end
 
   end
