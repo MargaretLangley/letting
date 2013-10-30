@@ -22,7 +22,7 @@ module DB
     end
 
     it 'withdraw more than has raises error' do
-      expect { amount.withdraw 10 }.to raise_error DB::CreditNegativeError
+      expect { amount.withdraw 10 }.to raise_error CreditNegativeError
     end
 
     context 'max_withdrawal' do
@@ -34,7 +34,7 @@ module DB
     context '#assert_balance' do
       it 'asserts if different' do
         expect { amount.assert_balance 4 }.to \
-          raise_error DB::BalanceNotMatching
+          raise_error BalanceNotMatching
       end
       it 'nothing if same' do
         expect { amount.assert_balance 0 }.not_to raise_error
