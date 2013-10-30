@@ -13,7 +13,7 @@ module DB
   # a charge.csv file and creates the charge objects and saves them to
   # charges and due_ons tables.
   #
-  # ImportCharge has model_prepared_for_import and model_assignment called
+  # ImportCharge has model_prepared and model_assignment called
   # by ImportBase as part of its import_loop. The private code handles
   # converting the charge.csv into charges (the actual amount) and due_ons
   # (the date when the charge is due).
@@ -31,7 +31,7 @@ module DB
       super Charge, contents, patch
     end
 
-    def model_prepared_for_import
+    def model_prepared
       @model_to_save = parent_model Property
       @model_to_assign =
         ChargesMatcher

@@ -34,12 +34,12 @@ module DB
     def build_patching_models
       @patch_contents.each do |row|
         self.row = row
-        model_prepared_for_import
+        model_prepared
         patch_models_add
       end
     end
 
-    def model_prepared_for_import
+    def model_prepared
       @model_to_assign = @model_class.new
       @model_to_assign.human_ref = row[:human_ref].to_i
       @model_to_assign.prepare_for_form

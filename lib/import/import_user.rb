@@ -31,7 +31,7 @@ module DB
                                          admin:    row[:admin]
     end
 
-    def model_prepared_for_import
+    def model_prepared
       @model_to_assign = first_or_initialize_model @klass
     end
 

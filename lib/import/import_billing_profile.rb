@@ -19,7 +19,7 @@ module DB
       super BillingProfile, contents, patch
     end
 
-    def model_prepared_for_import
+    def model_prepared
       @model_to_save = parent_model Property
       @model_to_save.prepare_for_form
       @model_to_assign = BillingProfileWithId.new \

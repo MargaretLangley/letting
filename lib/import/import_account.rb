@@ -11,6 +11,12 @@ module DB
   ####
   #
 
+  class ImportPayment
+
+  end
+
+
+
 
   class ImportAccount < ImportBase
 
@@ -22,7 +28,7 @@ module DB
       @row = AccountRow.new(row)
     end
 
-    def model_prepared_for_import
+    def model_prepared
       change_model_to_save unless eq_ref? @model_to_save, row
       @model_to_assign = model_to_assign
     end

@@ -16,7 +16,7 @@ module DB
   # 4. Save the model
   #
   # The derived classes supply model_assignment and override the
-  # model_prepared_for_import, but otherwise mostly use the defaults.
+  # model_prepared, but otherwise mostly use the defaults.
   #
   ####
   #
@@ -31,7 +31,7 @@ module DB
     def import_loop
       @contents.each_with_index do |row, index|
         self.row = row
-        model_prepared_for_import
+        model_prepared
         model_assignment
         model_patched if @patch
         model_saved || show_error
@@ -55,7 +55,7 @@ module DB
       model_class.where(human_ref: row[:human_ref]).first_or_initialize
     end
 
-    def model_prepared_for_import
+    def model_prepared
       @model_to_assign = first_or_initialize_model @klass
       @model_to_assign.prepare_for_form
     end
