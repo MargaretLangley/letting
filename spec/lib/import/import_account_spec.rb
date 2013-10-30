@@ -18,9 +18,9 @@ module DB
           change(Debit, :count).by 1
       end
 
-      it 'debit with credit' do
+      it 'debit with payment' do
         expect { ImportAccount.import debit_with_credit_csv }.to \
-          change(Credit, :count).by 1
+          change(Payment, :count).by 1
       end
 
       it '2 debits, 1 credit covering 1 debit' do

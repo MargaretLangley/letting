@@ -36,8 +36,19 @@ module DB
       charge
     end
 
-    def attributes
-      credit_attributes
+    def payment_attributes
+      {
+        account_id: account_id,
+        on_date: date,
+        amount: amount,
+      }
+    end
+
+    def credit_attributes
+      {
+        on_date: date,
+        amount: amount,
+      }
     end
 
     def method_missing method_name, *args, &block
@@ -50,22 +61,6 @@ module DB
 
     private
 
-    def payment_attributes
-      {
-        account_id: -1,  # FIND!
-        on_date: date,
-        amount: amount,
-      }
-    end
-
-
-    def credit_attributes
-      {
-        payment_id: -1,
-        on_date: date,
-        amount: amount,
-      }
-    end
 
     def charge_code_message
       "Charge code #{charge_code} can not be converted into a string"

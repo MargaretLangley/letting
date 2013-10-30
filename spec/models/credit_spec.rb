@@ -80,15 +80,15 @@ describe Credit do
       end
     end
 
-    context '#clean_up_form' do
+    context '#clear_up_after_form' do
       it '0 amount to be destroyed' do
         credit.amount = 0.0
-        credit.clean_up_form
+        credit.clear_up_after_form
         expect(credit).to be_marked_for_destruction
       end
       it 'none 0 amount to be persisted' do
         credit.amount = 80.0
-        credit.clean_up_form
+        credit.clear_up_after_form
         expect(credit).to_not be_marked_for_destruction
       end
     end

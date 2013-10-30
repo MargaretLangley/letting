@@ -46,8 +46,8 @@ module DB
 
         context '#account_id' do
           it 'returns valid' do
-            property_create! human_ref: 89
-            expect(row.account_id).to eq 1
+            property = property_create! human_ref: 89
+            expect(row.account_id).to eq property.account.id
           end
           it 'errors invalid' do
             expect{ row.account_id }.to raise_error PropertyRefUnknown

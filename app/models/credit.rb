@@ -39,7 +39,7 @@ class Credit < ActiveRecord::Base
     new_record? ? outstanding : update_pay_off
   end
 
-  def clean_up_form
+  def clear_up_after_form
     self.mark_for_destruction if amount.nil? || amount == 0
   end
 
