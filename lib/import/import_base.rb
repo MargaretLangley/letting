@@ -31,12 +31,16 @@ module DB
     def import_loop
       @contents.each_with_index do |row, index|
         self.row = row
-        model_prepared
-        model_assignment
-        model_patched if @patch
-        model_saved || show_error
+        import_row
         show_running index
       end
+    end
+
+    def import_row
+      model_prepared
+      model_assignment
+      model_patched if @patch
+      model_saved || show_error
     end
 
     protected
