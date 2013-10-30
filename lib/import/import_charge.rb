@@ -50,7 +50,7 @@ module DB
     private
 
     def assign_due_ons row
-      day_months = charged_days_in_year(row)
+      day_months = charged_days_in_year
       @model_to_assign.due_ons
         .first(day_months.size).each_with_index do |due_on, index|
         assign_due_on due_on, day_months[index]
@@ -67,37 +67,29 @@ module DB
       day_month.day == 0 && (day_month.month == 0 || day_month.month == -1)
     end
 
-    def charged_days_in_year row
-      if monthly_charge? row
-        charged_days_in_year_from_monthly_charge row
+    def charged_days_in_year
+      if row.monthly_charge?
+        charged_days_in_year_from_monthly_charge
       else
-        charged_days_in_year_from_on_date_charge row
+        charged_days_in_year_from_on_date_charge
       end
     end
 
-    def monthly_charge? row
-      (day_month_from_row_columns 1, row).month == 0
-    end
-
-    def charged_days_in_year_from_monthly_charge row
-      monthly_charge = day_month_from_row_columns 1, row
+    def charged_days_in_year_from_monthly_charge
+      monthly_charge = day_month_from_row_columns 1
       [*DayMonth.from_day_month(monthly_charge.day, DueOn::PER_MONTH)]
     end
 
-    def day_month_from_row_columns number, row
-      DayMonth.from_day_month row[:"day_#{number}"].to_i,
-                              row[:"month_#{number}"].to_i
+    def day_month_from_row_columns number
+      DayMonth.from_day_month row.day(number), row.month(number)
     end
 
-    def charged_days_in_year_from_on_date_charge row
+    def charged_days_in_year_from_on_date_charge
       day_months = []
-      (1..maximum_dates(row))
-        .each { |index| day_months <<  day_month_from_row_columns(index, row) }
+      (1..row.maximum_dates)
+        .each { |index| day_months <<  day_month_from_row_columns(index) }
       day_months
     end
 
-    def maximum_dates row
-      ChargeValues.from_code(row[:charge_type]).max_dates_per_year
-    end
   end
 end

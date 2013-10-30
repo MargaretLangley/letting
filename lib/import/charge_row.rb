@@ -13,6 +13,10 @@ module DB
       @row = row
     end
 
+    def monthly_charge?
+      month(1) == 0
+    end
+
     def amount
       @row[:amount].to_f
     end
@@ -23,10 +27,25 @@ module DB
       charge
     end
 
+    def maximum_dates
+      max_dates = ChargeCode.to_times_per_year charge_code
+      raise ChargeCodeUnknown, max_dates_message, caller unless max_dates
+      max_dates
+    end
+
     def due_in
       DUE_IN_CODE_TO_STRING.fetch(due_in_code)
       rescue KeyError
         raise DueInCodeUnknown, due_in_code_message, caller
+    end
+
+
+    def day number
+      @row[:"day_#{number}"].to_i
+    end
+
+    def month number
+      @row[:"month_#{number}"].to_i
     end
 
     def attributes
@@ -57,6 +76,10 @@ module DB
 
     def charge_code_message
       "Charge code #{charge_code} can not be converted into a string"
+    end
+
+    def max_dates_message
+      "Charge code #{charge_code} can not be converted into maximum dates per year."
     end
 
     def due_in_code_message
