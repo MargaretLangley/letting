@@ -5,4 +5,5 @@ module DB
   class ChargeUnknown < Error; end
   class ChargeCodeUnknown < Error; end
   class PropertyRefUnknown < Error; end
+  class DueInCodeUnknown < Error; end
 end

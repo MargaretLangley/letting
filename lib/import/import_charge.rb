@@ -1,6 +1,7 @@
 require_relative 'import_base'
 require_relative 'charge_values'
 require_relative 'day_month'
+require_relative 'charge_row'
 
 module DB
   ####
@@ -23,12 +24,13 @@ module DB
   class ImportCharge < ImportBase
 
     MONTHS_IN_YEAR = 12
-    DUE_IN_CODE_TO_STRING  = { '0'  => 'Arrears',
-                               '1' => 'Advance',
-                               'M' => 'MidTerm' }
 
     def initialize contents, patch
       super Charge, contents, patch
+    end
+
+    def row= row
+      @row = ChargeRow.new(row)
     end
 
     def model_prepared
@@ -36,16 +38,12 @@ module DB
       @model_to_assign =
         ChargesMatcher
           .new(@model_to_save.account.charges).first_or_initialize \
-            ChargeValues.from_code(row[:charge_type]).charge_code
+          row.charge_type
       @model_to_save.prepare_for_form
     end
 
     def model_assignment
-      @model_to_assign
-        .assign_attributes \
-           charge_type: ChargeValues.from_code(row[:charge_type]).charge_code,
-           due_in:      DUE_IN_CODE_TO_STRING[row[:due_in]],
-           amount:      row[:amount].to_d
+      @model_to_assign.assign_attributes row.attributes
       assign_due_ons row
     end
 
