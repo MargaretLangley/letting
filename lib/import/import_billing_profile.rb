@@ -20,7 +20,7 @@ module DB
     end
 
     def model_prepared
-      @model_to_save = parent_model Property
+      @model_to_save = find_model!(Property).first
       @model_to_save.prepare_for_form
       @model_to_assign = BillingProfileWithId.new \
                            @model_to_save.billing_profile

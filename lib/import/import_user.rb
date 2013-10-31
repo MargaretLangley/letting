@@ -25,7 +25,11 @@ module DB
     end
 
     def model_prepared
-      @model_to_assign = first_or_initialize_model @klass
+      @model_to_assign = find_model(@klass).first_or_initialize
+    end
+
+    def find_model model_class
+      model_class.where email: row[:email]
     end
 
     def model_assignment
@@ -33,10 +37,6 @@ module DB
                                          password: row[:password],
                                          password_confirmation: row[:password],
                                          admin:    row[:admin]
-    end
-
-    def find_model model_class
-      model_class.where email: row[:email]
     end
   end
 end

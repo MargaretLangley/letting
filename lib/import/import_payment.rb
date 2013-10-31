@@ -31,11 +31,5 @@ module DB
                         on_date: row[:on_date]
     end
 
-    private
-
-    def model_to_assign
-      @amount.deposit row.amount
-    end
-
   end
 end

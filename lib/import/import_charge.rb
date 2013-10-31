@@ -34,7 +34,7 @@ module DB
     end
 
     def model_prepared
-      @model_to_save = parent_model Property
+      @model_to_save = find_model!(Property).first
       @model_to_assign =
         ChargesMatcher
           .new(@model_to_save.account.charges).first_or_initialize \

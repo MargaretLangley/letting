@@ -52,16 +52,24 @@ module DB
     end
 
     def model_prepared
-      @model_to_assign = first_or_initialize_model @klass
+      @model_to_assign = find_model(@klass).first_or_initialize
       @model_to_assign.prepare_for_form
     end
 
-    def first_or_initialize_model model_class
-      find_model(model_class).first_or_initialize
+    def find_model model_class
+      model_class.where human_ref: row[:human_ref]
     end
 
     def model_patched
       @patch.patch_model @model_to_assign
+    end
+
+    private
+
+    def find_model! model_class
+      model = find_model(model_class)
+      fail_parent_record_not_found model_class if model.none?
+      model
     end
 
     def model_saved
@@ -71,18 +79,6 @@ module DB
     def model_to_save
       @model_to_save || @model_to_assign
     end
-
-    def parent_model model_class
-      model = find_model(model_class).first
-      fail_parent_record_not_found model_class if model.nil?
-      model
-    end
-
-    def find_model model_class
-      model_class.where human_ref: row[:human_ref]
-    end
-
-    private
 
     def fail_parent_record_not_found model_class
       fail ActiveRecord::RecordNotFound, no_parent_message(model_class)
