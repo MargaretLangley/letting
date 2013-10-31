@@ -20,19 +20,27 @@ module DB
       super Property, contents, patch
     end
 
-    def import_loop
-      @contents.each_with_index do |row, index|
-        if debit? row
-          ImportDebit.import @contents.slice(index..index)
-        else
-          ImportPayment.import @contents.slice(index..index)
-        end
-        show_running index
+    def import_row
+      case
+      when debit?
+        ImportDebit.import [row]
+      when credit?
+        ImportPayment.import [row]
+      else
+        # TODO handle bal codes
       end
     end
 
-    def debit? row
+    def credit?
+      row[:credit].to_f != 0
+    end
+
+    def debit?
       row[:debit].to_f != 0
+    end
+
+    def charge_code
+      row[:charge_code]
     end
   end
 end
