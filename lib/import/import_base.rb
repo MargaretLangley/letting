@@ -57,7 +57,7 @@ module DB
     end
 
     def first_or_initialize_model model_class
-      find_parent(model_class).first_or_initialize
+      find_model(model_class).first_or_initialize
     end
 
     def model_patched
@@ -73,12 +73,12 @@ module DB
     end
 
     def parent_model model_class
-      model = find_parent(model_class).first
+      model = find_model(model_class).first
       fail_parent_record_not_found model_class if model.nil?
       model
     end
 
-    def find_parent model_class
+    def find_model model_class
       model_class.where human_ref: row[:human_ref]
     end
 
