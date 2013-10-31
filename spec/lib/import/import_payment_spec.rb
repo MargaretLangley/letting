@@ -10,6 +10,7 @@ module DB
       property_create! human_ref: 89
       expect { ImportPayment.import parse credit_row }.to \
         change(Payment, :count).by 1
+      expect(Credit.all).to have(0).items
     end
 
     it 'imports with debit' do
@@ -18,13 +19,21 @@ module DB
         change(Credit, :count).by 1
     end
 
+    it 'double import' do
+      pending 'currently not handling double import'
+      (property_with_unpaid_debit human_ref: 89).save!
+      ImportPayment.import parse credit_row
+      expect { ImportPayment.import parse credit_row }.to \
+        change(Credit, :count).by 0
+    end
+
     context 'One credit' do
       def one_credit_csv
         %q[122, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 37.5,    0]
       end
 
       it 'One credit' do
-        pending
+        pending 'Better error message if it can not find matching debit'
         expect { ImportAccount.import parse one_credit_csv }.to \
           change(Credit, :count).by 1
       end
