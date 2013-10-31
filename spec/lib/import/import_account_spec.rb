@@ -11,29 +11,6 @@ module DB
       property_with_charge_create! human_ref: 122
     end
 
-    context 'one debit' do
-      def one_debit_csv
-        %q[122, GR, 2011-12-25 12:00:00, Ground Rent..., 37.5,    0, 37.5]
-      end
-
-      it 'parsed' do
-        expect { ImportAccount.import parse one_debit_csv }.to \
-          change(Debit, :count).by 1
-      end
-    end
-
-    context 'two debits' do
-      def two_debit_csv
-        %q[122, GR, 2011-12-25 12:00:00, Ground Rent..., 37.5,    0, 37.5
-           122, GR, 2012-12-25 12:00:00, Ground Rent..., 37.5,    0, 37.5]
-      end
-
-      it 'parsed' do
-        expect { ImportAccount.import parse two_debit_csv }.to \
-          change(Debit, :count).by 2
-      end
-    end
-
     context 'debit with payment' do
       def debit_with_payment
         %q[122, GR, 2011-12-25 00:00:00, Ground Rent..., 47.5,    0, 47.5
@@ -68,7 +45,7 @@ module DB
            122, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 81.0,    0]
       end
 
-      it '1 credit covering multiple debit' do
+      it 'parses' do
         expect { ImportAccount.import parse payment_covering_2_debits }.to \
           change(Credit, :count).by 2
         expect(Debit.all).to have(2).items
@@ -84,7 +61,7 @@ module DB
            123, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 30.5, 30.5]
       end
 
-      it '2 properties' do
+      it 'parses' do
         property_with_charge_create! human_ref: 123
         expect { ImportAccount.import parse two_properties }.to \
           change(Credit, :count).by 2
@@ -94,16 +71,17 @@ module DB
       end
     end
 
-    context 'One credit' do
-      def one_credit_csv
-        %q[122, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 37.5,    0]
+    context 'ignores empty balance' do
+      def balance_empty
+        %q[109, Bal, 2011-08-01 00:00:00, ,                  0,    0,    0]
+      end
+      it 'parses' do
+        ImportAccount.import parse balance_empty
+        expect(Credit.all).to have(0).items
+        expect(Debit.all).to have(0).items
+        expect(Payment.all).to have(0).items
       end
 
-      it 'One credit' do
-        pending
-        expect { ImportAccount.import parse one_credit_csv }.to \
-          change(Credit, :count).by 1
-      end
     end
 
     def parse row_string

@@ -1,4 +1,5 @@
-
+require_relative 'import_base'
+require_relative 'account_row'
 
 module DB
   class ImportDebit < ImportBase
@@ -12,7 +13,7 @@ module DB
     end
 
     def model_prepared
-      change_model_to_save #unless eq_ref? @model_to_save, row
+      change_model_to_save
       @model_to_assign = model_to_assign
     end
 
