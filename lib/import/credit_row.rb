@@ -16,7 +16,7 @@ module DB
       @row[:charge_code]
     end
 
-    def date
+    def on_date
       @row[:on_date]
     end
 
@@ -39,14 +39,14 @@ module DB
     def payment_attributes
       {
         account_id: account_id,
-        on_date: date,
+        on_date: on_date,
         amount: amount,
       }
     end
 
     def credit_attributes
       {
-        on_date: date,
+        on_date: on_date,
         amount: amount,
       }
     end

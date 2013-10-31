@@ -19,8 +19,8 @@ module DB
           expect(row.charge_code).to eq 'GR'
         end
 
-        it 'date' do
-          expect(row.date).to eq '2012-03-25 12:00:00'
+        it 'on_date' do
+          expect(row.on_date).to eq '2012-03-25 12:00:00'
         end
 
         it 'amount' do
