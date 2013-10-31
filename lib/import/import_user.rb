@@ -24,6 +24,10 @@ module DB
       super User, contents, patch
     end
 
+    def model_prepared
+      @model_to_assign = first_or_initialize_model @klass
+    end
+
     def model_assignment
       @model_to_assign.assign_attributes email:    row[:email],
                                          password: row[:password],
@@ -31,13 +35,8 @@ module DB
                                          admin:    row[:admin]
     end
 
-    def model_prepared
-      @model_to_assign = first_or_initialize_model @klass
+    def find_model model_class
+      model_class.where email: row[:email]
     end
-
-    def first_or_initialize_model model_class
-      model_class.where(email: row[:email]).first_or_initialize
-    end
-
   end
 end
