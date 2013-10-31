@@ -4,7 +4,7 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_payment'
 
 module DB
-  describe ImportPayment do
+  describe ImportPayment, :import do
 
     it 'imports basic' do
       property_create! human_ref: 89
@@ -19,12 +19,11 @@ module DB
         change(Credit, :count).by 1
     end
 
-    it 'double import' do
-      pending 'currently not handling double import'
+    it 'double import raises error' do
       (property_with_unpaid_debit human_ref: 89).save!
       ImportPayment.import parse credit_row
       expect { ImportPayment.import parse credit_row }.to \
-        change(Credit, :count).by 0
+        raise_error NotIdempotent
     end
 
     context 'One credit' do

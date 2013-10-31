@@ -14,6 +14,12 @@ module DB
       @row = CreditRow.new(row)
     end
 
+    def model_prepared
+      super
+      raise DB::NotIdempotent, import_not_idempotent_msg, caller \
+        unless @model_to_assign.new_record?
+    end
+
     def model_assignment
       @amount.deposit row.amount
       @model_to_assign.attributes = row.payment_attributes
@@ -27,9 +33,13 @@ module DB
     end
 
     def find_model model_class
-      model_class.where account_id: row[:account_id],
-                        on_date: row[:on_date]
+      model_class.where account_id: row.account_id, on_date: row.on_date
     end
+
+    def import_not_idempotent_msg
+      "Import Process for #{self.class} is not idempodent. You need to delete Payment and credits before running this task again."
+    end
+
 
   end
 end

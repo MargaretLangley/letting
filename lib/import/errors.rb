@@ -6,4 +6,5 @@ module DB
   class ChargeCodeUnknown < Error; end
   class PropertyRefUnknown < Error; end
   class DueInCodeUnknown < Error; end
+  class NotIdempotent < Error; end
 end
