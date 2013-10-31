@@ -26,7 +26,7 @@ module DB
       end
     end
 
-    def find_parent model_class
+    def find_model model_class
       model_class.where account_id: row[:account_id],
                         on_date: row[:on_date]
     end
