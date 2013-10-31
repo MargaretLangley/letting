@@ -13,7 +13,7 @@ class BillingProfile < ActiveRecord::Base
   belongs_to :property, inverse_of: :billing_profile
   include Contact
   validates :entities, presence: true, if: :use_profile?
-  before_validation :clear_up_after_form
+  before_validation :clear_up_form
 
   def bill_to
     use_profile? ? self : property
@@ -23,7 +23,7 @@ class BillingProfile < ActiveRecord::Base
     prepare_contact
   end
 
-  def clear_up_after_form
+  def clear_up_form
     if use_profile?
       clean_form
     else
@@ -34,12 +34,12 @@ class BillingProfile < ActiveRecord::Base
   private
 
   def clean_form
-    entities.clean_up_form
+    entities.clear_up_form
   end
 
   def erase_form
     entities.destroy_all
-    address.clean_up_form unless address.nil?
+    address.clear_up_form unless address.nil?
   end
 
 end

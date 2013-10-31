@@ -21,7 +21,7 @@ class Property < ActiveRecord::Base
   validates :human_ref, :client_id, numericality: true
   validates :human_ref, uniqueness: true
   validates :entities, presence: true
-  before_validation :clear_up_after_form
+  before_validation :clear_up_form
 
   def prepare_for_form
     prepare_contact
@@ -31,9 +31,9 @@ class Property < ActiveRecord::Base
     account.prepare_for_form
   end
 
-  def clear_up_after_form
-    entities.clean_up_form
-    account.clean_up_form if account.present?
+  def clear_up_form
+    entities.clear_up_form
+    account.clear_up_form if account.present?
   end
 
   def bill_to

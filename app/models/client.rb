@@ -10,7 +10,7 @@
 class Client < ActiveRecord::Base
   has_many :properties, dependent: :destroy
   include Contact
-  before_validation :clear_up_after_form
+  before_validation :clear_up_form
 
   validates :human_ref, numericality: true
   validates :human_ref, uniqueness: true
@@ -20,8 +20,8 @@ class Client < ActiveRecord::Base
     prepare_contact
   end
 
-  def clear_up_after_form
-    entities.clean_up_form
+  def clear_up_form
+    entities.clear_up_form
   end
 
   def self.search search

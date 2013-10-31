@@ -17,7 +17,7 @@
 #
 # A charge can be queried to see if it becomes due within a date range.
 #
-# Charges also have prepare and clean_up_form which prepare for display on a
+# Charges also have prepare and clear_up_form which prepare for display on a
 # form and handle the clean up after display, respectively.
 ####
 #
@@ -36,8 +36,8 @@ module Charges
         each { |charge| charge.prepare }
       end
 
-      def clean_up_form
-        each { |charge| charge.clean_up_form }
+      def clear_up_form
+        each { |charge| charge.clear_up_form }
       end
     end
   end

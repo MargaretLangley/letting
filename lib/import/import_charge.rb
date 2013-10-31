@@ -44,12 +44,12 @@ module DB
 
     def model_assignment
       @model_to_assign.assign_attributes row.attributes
-      assign_due_ons row
+      assign_due_ons
     end
 
     private
 
-    def assign_due_ons row
+    def assign_due_ons
       day_months = charged_days_in_year
       @model_to_assign.due_ons
         .first(day_months.size).each_with_index do |due_on, index|

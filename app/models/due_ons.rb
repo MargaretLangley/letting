@@ -28,7 +28,7 @@ module DueOns
         (size...MAX_DISPLAYED_DUE_ONS).each { build }
       end
 
-      def clean_up_form
+      def clear_up_form
         destruction_if :empty?
         destruction_if :persisted? if has_new_due_on?
         switch_to_a_due_on_for_each_month if per_month_due_on

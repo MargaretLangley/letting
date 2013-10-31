@@ -46,7 +46,7 @@ describe BillingProfile do
 
       context 'cleanup does not affect' do
         it 'valid entities are kept' do
-          full_profile.clear_up_after_form
+          full_profile.clear_up_form
           entities = saveable_entities full_profile.entities
           expect(entities).to have(1).items
         end
@@ -55,7 +55,7 @@ describe BillingProfile do
       context 'stop using profile' do
         before do
           full_profile.use_profile = false
-          full_profile.clear_up_after_form
+          full_profile.clear_up_form
         end
         it 'marks entities for distruction' do
           entities = saveable_entities full_profile.entities
@@ -87,7 +87,7 @@ describe BillingProfile do
       context 'and remains blank after cleanup' do
         before do
           prepare_blank_profile.use_profile = false
-          prepare_blank_profile.clear_up_after_form
+          prepare_blank_profile.clear_up_form
         end
 
         it 'is valid to have no entities if not using information' do
@@ -106,7 +106,7 @@ describe BillingProfile do
           prepare_blank_profile.use_profile = true
           prepare_blank_profile.entities.new person_entity_attributes
           prepare_blank_profile.build_address address_attributes
-          prepare_blank_profile.clear_up_after_form
+          prepare_blank_profile.clear_up_form
         end
 
         it 'non empty entity kept' do

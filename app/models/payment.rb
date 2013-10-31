@@ -16,13 +16,13 @@ class Payment < ActiveRecord::Base
       map { |credit| credit.outstanding }.sum
     end
 
-    def clear_up_after_form
-      each { |charge| charge.clear_up_after_form }
+    def clear_up_form
+      each { |charge| charge.clear_up_form }
     end
 
   end
   accepts_nested_attributes_for :credits, allow_destroy: true
-  before_validation :clear_up_after_form
+  before_validation :clear_up_form
 
   attr_accessor :human_ref
 
@@ -48,8 +48,8 @@ class Payment < ActiveRecord::Base
     self.amount = outstanding if amount.blank?
   end
 
-  def clear_up_after_form
-    credits.clear_up_after_form
+  def clear_up_form
+    credits.clear_up_form
   end
 
   def self.search date_string

@@ -40,9 +40,9 @@ class Charge < ActiveRecord::Base
     due_ons.prepare
   end
 
-  def clean_up_form
+  def clear_up_form
     self.mark_for_destruction if empty?
-    due_ons.clean_up_form
+    due_ons.clear_up_form
   end
 
   def empty?

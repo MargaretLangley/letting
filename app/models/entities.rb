@@ -29,8 +29,8 @@ module Entities
         each { |entity| entity.prepare }
       end
 
-      def clean_up_form
-        self.each { |entity| entity.clean_up_form }
+      def clear_up_form
+        self.each { |entity| entity.clear_up_form }
       end
 
       def destroy_all

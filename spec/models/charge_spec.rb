@@ -68,8 +68,8 @@ describe Charge do
       expect(charge.due_ons).to have(4).items
     end
 
-    it '#clean_up_form destroys children' do
-      charge.clean_up_form
+    it '#clear_up_form destroys children' do
+      charge.clear_up_form
       expect(charge.due_ons).to have(1).items
     end
 

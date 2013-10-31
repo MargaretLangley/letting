@@ -71,8 +71,8 @@ describe Property do
         expect(property.billing_profile).to_not be_nil
       end
 
-      it '#clear_up_after_form destroys unused models' do
-        property.clear_up_after_form
+      it '#clear_up_form destroys unused models' do
+        property.clear_up_form
         expect(property.address).to_not be_nil
         expect(property.entities.reject(&:marked_for_destruction?)).to \
           have(0).items

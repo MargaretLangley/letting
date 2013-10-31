@@ -52,8 +52,8 @@ describe Client do
       expect(client.entities).to have(2).items
     end
 
-    it '#clear_up_after_form destroys unused models' do
-      client.clear_up_after_form
+    it '#clear_up_form destroys unused models' do
+      client.clear_up_form
       expect(client.address).to_not be_nil
       expect(client.entities.reject(&:marked_for_destruction?)).to \
         have(0).items

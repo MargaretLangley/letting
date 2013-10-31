@@ -33,7 +33,7 @@ describe Charges do
     it '#cleans up form' do
       charges.build charge_attributes
       charges.prepare
-      charges.clean_up_form
+      charges.clear_up_form
       expect(charges.reject(&:empty?)).to have(1).items
     end
   end

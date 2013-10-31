@@ -31,7 +31,7 @@ class Entity < ActiveRecord::Base
     self.entity_type = 'Person' if new_record?
   end
 
-  def clean_up_form
+  def clear_up_form
     destroy_entity if empty?
   end
 

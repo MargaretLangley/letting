@@ -18,14 +18,14 @@ describe DueOns do
       it 'leaves valid or partially filled due_ons' do
         due_ons.build due_on_attributes_0
         due_ons.build
-        due_ons.clean_up_form
+        due_ons.clear_up_form
         expect(due_ons.reject(&:empty?)).to have(1).items
       end
 
       it 'cleans up entirely if empty' do
         due_ons.build
         due_ons.build
-        due_ons.clean_up_form
+        due_ons.clear_up_form
         expect(due_ons.reject(&:empty?)).to have(0).items
       end
     end
@@ -106,7 +106,7 @@ describe DueOns do
         charge.prepare
         charge.due_ons.build day: 24, month: 6
         charge.due_ons.build day: 25, month: 12
-        charge.clean_up_form
+        charge.clear_up_form
         charge.save!
         reload = Charge.find(charge.id)
         expect(reload.due_ons).to have(2).items
@@ -117,13 +117,13 @@ describe DueOns do
         charge.due_ons.build day: 24, month: 6, id: 7
         charge.due_ons.build day: 25, month: 12, id: 8
         charge.due_ons.prepare
-        charge.clean_up_form
+        charge.clear_up_form
         charge.save!
         reload = Charge.find(charge.id)
         reload.due_ons.prepare
         reload.due_ons[0].update day: 5, month: 1
         reload.due_ons[0].update day: '', month: ''
-        reload.clean_up_form
+        reload.clear_up_form
         reload.save!
         reload2 = Charge.find(charge.id)
         expect(reload2.due_ons).to have(1).items
@@ -133,7 +133,7 @@ describe DueOns do
         charge = Charge.new charge_attributes account_id: 1
         charge.due_ons.prepare
         charge.due_ons.build day: 5, month: -1
-        charge.clean_up_form
+        charge.clear_up_form
         charge.save!
         reload = Charge.find(charge.id)
         expect(reload.due_ons).to have(12).items
@@ -143,12 +143,12 @@ describe DueOns do
         charge_per_date = Charge.new charge_attributes account_id: 1
         charge_per_date.prepare
         charge_per_date.due_ons.build day: 24, month: -1
-        charge_per_date.clean_up_form
+        charge_per_date.clear_up_form
         charge_per_date.save!
         charge_diff_date = Charge.find(charge_per_date.id)
         charge_diff_date.prepare
         charge_diff_date.due_ons.build day: 10, month: -1
-        charge_diff_date.clean_up_form
+        charge_diff_date.clear_up_form
         charge_diff_date.save!
         charge_reload = Charge.find(charge_per_date.id)
         expect(charge_reload.due_ons).to have(12).items
@@ -158,12 +158,12 @@ describe DueOns do
         charge = Charge.new charge_attributes account_id: 1
         charge.prepare
         charge.due_ons.build day: 24, month: -1
-        charge.clean_up_form
+        charge.clear_up_form
         charge.save!
         reload = Charge.find(charge.id)
         reload.prepare
         reload.due_ons.build day: 24, month: -1
-        reload.clean_up_form
+        reload.clear_up_form
         reload.save!
         reload2 = Charge.find(charge.id)
         reload2.prepare
@@ -175,12 +175,12 @@ describe DueOns do
         charge.due_ons.build day: 24, month: 6
         charge.due_ons.build day: 25, month: 12
         charge.prepare
-        charge.clean_up_form
+        charge.clear_up_form
         charge.save!
         reload = Charge.find(charge.id)
         reload.prepare
         reload.due_ons.build day: 10, month: -1
-        reload.clean_up_form
+        reload.clear_up_form
         reload.save!
         reload2 = Charge.find(charge.id)
         expect(reload2.due_ons).to have(12).items
@@ -190,13 +190,13 @@ describe DueOns do
         charge = Charge.new charge_attributes account_id: 1
         charge.prepare
         charge.due_ons.build day: 24, month: -1
-        charge.clean_up_form
+        charge.clear_up_form
         charge.save!
         reload = Charge.find(charge.id)
         reload.prepare
         reload.due_ons.build day: 1, month: 5
         reload.due_ons.build day: 1, month: 11
-        reload.clean_up_form
+        reload.clear_up_form
         reload.save!
         reload2 = Charge.find(charge.id)
         expect(reload2.due_ons).to have(2).items
