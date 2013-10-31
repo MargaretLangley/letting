@@ -73,7 +73,7 @@ module DB
 
     context 'ignores empty balance' do
       def balance_empty
-        %q[109, Bal, 2011-08-01 00:00:00, ,                  0,    0,    0]
+        %q[122, Bal, 2011-08-01 00:00:00, ,                  0,    0,    0]
       end
       it 'parses' do
         ImportAccount.import parse balance_empty
@@ -82,6 +82,34 @@ module DB
         expect(Payment.all).to have(0).items
       end
 
+    end
+
+    context 'handles non zero balance' do
+      def balance_non_zero
+        %q[122, Bal, 2011-08-01 00:00:00, ,                  20,    0,    20]
+      end
+      it 'parses' do
+        pending
+        ImportAccount.import parse balance_non_zero
+        expect(Debit.all).to have(0).items
+      end
+
+    end
+
+
+    context 'advance payments' do
+      def advance_payment
+        %q[122, GR, 2012-12-01 10:22:00, Payment Gro...,    0,   20,  -20
+           122, GR, 2012-12-25 00:00:00, Ground Rent...,   20,    0,    0]
+      end
+
+      it 'parses' do
+        pending
+        ImportAccount.import parse advance_payment
+        expect(Credit.all).to have(1).items
+        expect(Debit.all).to have(1).items
+        expect(Payment.all).to have(1).items
+      end
     end
 
     def parse row_string
