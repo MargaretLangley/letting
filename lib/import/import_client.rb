@@ -17,6 +17,10 @@ module DB
       super Client, contents, patch
     end
 
+    def find_model model_class
+      model_class.where human_ref: row[:human_ref]
+    end
+
     def model_assignment
       @model_to_assign.assign_attributes human_ref: row[:human_ref]
       import_contact @model_to_assign, row

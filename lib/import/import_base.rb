@@ -56,10 +56,6 @@ module DB
       @model_to_assign.prepare_for_form
     end
 
-    def find_model model_class
-      model_class.where human_ref: row[:human_ref]
-    end
-
     def model_patched
       @patch.patch_model @model_to_assign
     end

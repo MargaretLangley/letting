@@ -26,6 +26,10 @@ module DB
                            @model_to_save.billing_profile
     end
 
+    def find_model model_class
+      model_class.where human_ref: row[:human_ref]
+    end
+
     def model_assignment
       @model_to_assign.assign_attributes use_profile: true
       @model_to_assign.human_ref = row[:human_ref].to_i

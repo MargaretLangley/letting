@@ -17,6 +17,10 @@ module DB
       @model_to_assign = @model_to_save.account.debits.build
     end
 
+    def find_model model_class
+      model_class.where human_ref: row[:human_ref]
+    end
+
     def model_assignment
       @model_to_assign.attributes = row.attributes
       charges = ChargesMatcher.new @model_to_save.account.charges

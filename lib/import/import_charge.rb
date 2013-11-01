@@ -42,6 +42,10 @@ module DB
       @model_to_save.prepare_for_form
     end
 
+    def find_model model_class
+      model_class.where human_ref: row[:human_ref]
+    end
+
     def model_assignment
       @model_to_assign.assign_attributes row.attributes
       assign_due_ons
