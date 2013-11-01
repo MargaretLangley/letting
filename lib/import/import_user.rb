@@ -20,8 +20,8 @@ module DB
   #
   class ImportUser < ImportBase
 
-    def initialize  contents, patch
-      super User, contents, patch
+    def initialize  contents, range, patch
+      super User, contents, range, patch
     end
 
     def model_prepared

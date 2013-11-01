@@ -25,8 +25,8 @@ module DB
 
     MONTHS_IN_YEAR = 12
 
-    def initialize contents, patch
-      super Charge, contents, patch
+    def initialize contents, range, patch
+      super Charge, contents, range, patch
     end
 
     def row= row

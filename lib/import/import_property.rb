@@ -1,5 +1,6 @@
 require_relative 'import_base'
 require_relative 'import_contact'
+require_relative 'property_row'
 
 module DB
   ####
@@ -19,8 +20,8 @@ module DB
   #
   class ImportProperty  < ImportBase
 
-    def initialize  contents, patch
-      super Property, contents, patch
+    def initialize  contents, range, patch
+      super Property, contents, range, patch
     end
 
     def row= row
@@ -29,6 +30,13 @@ module DB
 
     def find_model model_class
       model_class.where human_ref: row.human_ref
+    end
+
+    # true filters
+    # false allows
+    #
+    def filtered_condition
+      @range.exclude? row.human_ref
     end
 
     def model_assignment

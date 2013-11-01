@@ -1,6 +1,5 @@
 require_relative 'import_base'
 require_relative 'import_contact'
-require_relative 'patch'
 
 module DB
   ####
@@ -13,8 +12,8 @@ module DB
   #
   class ImportClient < ImportBase
 
-    def initialize  contents, patch
-      super Client, contents, patch
+    def initialize  contents, range, patch
+      super Client, contents, range, patch
     end
 
     def find_model model_class

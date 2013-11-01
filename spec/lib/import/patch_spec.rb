@@ -2,6 +2,7 @@ require 'csv'
 require 'spec_helper'
 require_relative '../../../lib/import/file_import'
 require_relative '../../../lib/import/file_header'
+require_relative '../../../lib/import/patch'
 require_relative '../../../lib/import/import_client'
 require_relative '../../../lib/import/import_property'
 require_relative '../../../lib/import/import_billing_profile'
@@ -17,27 +18,27 @@ module DB
 
     it 'if import row_id != patch row id - nothing changes' do
       ImportClient.import clients_csv,
-                          Patch.import(Client, clients_no_row_match_csv)
+                          patch: Patch.import(Client, clients_no_row_match_csv)
       expect(Client.first.address.district).to be_blank
     end
 
     it 'if import row id == patch row id - change attributes' do
       ImportClient.import clients_csv,
-                          Patch.import(Client, clients_row_match_csv)
+                          patch: Patch.import(Client, clients_row_match_csv)
       expect(Client.first.address.district).to eq 'Example District'
     end
 
     it 'if entities do not match puts error message' do
       $stdout.should_receive(:puts).with(/Cannot match/)
       ImportClient.import clients_csv,
-                          Patch.import(Client, clients_row_match_name_changed)
+                          patch: Patch.import(Client, clients_row_match_name_changed)
     end
 
     context 'Property' do
       it 'works on property' do
         client_create! human_ref: 11
         ImportProperty.import property_csv,
-                              Patch.import(Property, property_patch_csv)
+                              patch: Patch.import(Property, property_patch_csv)
         expect(Property.first.address.district).to eq 'Example District'
       end
     end
@@ -46,7 +47,7 @@ module DB
       it 'works on BillingProfile' do
         property_create! human_ref: 122
         ImportBillingProfile.import \
-          billing_csv, Patch.import(BillingProfileWithId, billing_patch_csv)
+          billing_csv, patch: Patch.import(BillingProfileWithId, billing_patch_csv)
         expect(Property.first.billing_profile.address.district).to \
           eq 'Example District Changed'
       end

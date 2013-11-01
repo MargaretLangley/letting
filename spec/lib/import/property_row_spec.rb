@@ -11,7 +11,7 @@ module DB
     context 'readers' do
 
       it 'human_ref' do
-        expect(row.human_ref).to eq '122'
+        expect(row.human_ref).to eq 122
       end
 
     end

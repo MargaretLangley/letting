@@ -15,8 +15,8 @@ module DB
   #
   class ImportBillingProfile < ImportBase
 
-    def initialize contents, patch
-      super BillingProfile, contents, patch
+    def initialize  contents, range, patch
+      super BillingProfile, contents, range, patch
     end
 
     def model_prepared

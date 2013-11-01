@@ -9,9 +9,10 @@ STDOUT.sync = true
 namespace :import do
 
   desc "Import properties data from CSV file"
-  task  properties: :environment do
+  task properties: :environment do
     DB::ImportProperty.import properties_file,
-                              DB::Patch.import(Property, patch_file)
+                              range: 100..130,
+                              patch: DB::Patch.import(Property, patch_properties)
    end
 
    def properties_file
@@ -20,7 +21,7 @@ namespace :import do
                          drop_rows: 34
    end
 
-   def patch_file
+   def patch_properties
      DB::FileImport.to_a 'properties_patch',
                          headers: DB::FileHeader.property,
                          location: 'import_data/patch'

@@ -16,8 +16,8 @@ module DB
 
   class ImportAccount < ImportBase
 
-    def initialize contents, patch
-      super Property, contents, patch
+    def initialize  contents, range, patch
+      super Property, contents, range, patch
     end
 
     def import_row

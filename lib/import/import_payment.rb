@@ -5,8 +5,8 @@ require_relative 'creditable_amount'
 module DB
   class ImportPayment < ImportBase
 
-    def initialize contents, patch
-      super Payment, contents, patch
+    def initialize contents, range, patch
+      super Payment, contents, range, patch
       @amount = CreditableAmount.new(0)
     end
 

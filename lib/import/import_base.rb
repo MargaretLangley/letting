@@ -24,14 +24,14 @@ module DB
     include ImportContact
     attr_accessor :row
 
-    def self.import contents, patch = nil
-      new(contents, patch).import_loop
+    def self.import contents, args = {}
+      new(contents, args[:range], args[:patch]).import_loop
     end
 
     def import_loop
       @contents.each_with_index do |row, index|
         self.row = row
-        import_row
+        import_row unless filtered
         show_running index
       end
     end
@@ -43,11 +43,24 @@ module DB
       model_saved || show_error
     end
 
+     def filtered
+      if @range.nil?
+        false
+      else
+        filtered_condition
+      end
+    end
+
+    def filtered_condition
+      false
+    end
+
     protected
 
-    def initialize klass, contents, patch
+    def initialize klass, contents, range, patch
       @klass = klass
       @contents = contents
+      @range = range
       @patch = patch
     end
 

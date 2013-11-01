@@ -4,8 +4,8 @@ require_relative 'account_row'
 module DB
   class ImportDebit < ImportBase
 
-    def initialize contents, patch
-      super Property, contents, patch
+    def initialize contents, range, patch
+      super Property, contents, range, patch
     end
 
     def row= row
