@@ -20,40 +20,39 @@ module DB
         client = client_create! human_ref: 11
       end
 
+      def row
+        %q[122, 2013-02-26 12:35:00, Mr, A N, Example, Mrs, A N, Other,] +
+        %q[1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, ] +
+        %q[11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0]
+      end
+
       it 'One row' do
-        expect { ImportProperty.import property_csv }.to \
-          change(Property, :count).by 1
+        expect { import_property row }.to change(Property, :count).by 1
       end
 
       it 'Client set to table id' do
-        expect { ImportProperty.import property_csv }.to \
-          change(Property, :count).by 1
+        import_property row
         expect(Property.first.client_id).to eq client.id
       end
 
       it 'One row, 2 Entities' do
-        expect { ImportProperty.import property_csv }.to \
-          change(Entity, :count).by 2
+        expect { import_property row }.to change(Entity, :count).by 2
       end
 
       it 'Not double import' do
-        expect { ImportProperty.import property_csv }.to \
-          change(Property, :count).by 1
-        expect { ImportProperty.import property_csv }.to_not \
-          change(Property, :count)
+        import_property row
+        expect { import_property row }.to_not change(Property, :count)
       end
 
-      it 'Not double import' do
-        expect { ImportProperty.import property_csv }.to \
-          change(Entity, :count).by 2
-        expect { ImportProperty.import property_csv }.to_not \
-          change(Entity, :count)
+      it 'Not double import Entity' do
+        import_property row
+        expect { import_property row }.to_not change(Entity, :count)
       end
 
       context 'use profile' do
 
         it 'new record to false' do
-          ImportProperty.import property_csv
+          import_property row
           expect(Property.first.billing_profile.use_profile).to be_false
         end
 
@@ -65,7 +64,7 @@ module DB
           # Import the record. Save a profile onto it. Import again and
           # see that Profile still true.
         it 'does not alter use profile' do
-          ImportProperty.import property_csv
+          import_property row
           property = Property.first
           property.prepare_for_form
           property.billing_profile.use_profile = true
@@ -73,63 +72,62 @@ module DB
           property.billing_profile.entities[0].attributes =
             oval_person_entity_attributes
           property.save!
-          ImportProperty.import property_csv
+          import_property row
           expect(Property.first.billing_profile.use_profile).to be_true
         end
       end
 
       context 'entities' do
+
+        def entity_row
+          %q[122, 2013-02-26 12:35:00, Mr, A N, Example, , , ,] +
+          %q[1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, ] +
+          %q[11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0]
+        end
+
         it 'adds one entity when second entity blank' do
-          expect { ImportProperty.import property_1_entity_csv }.to \
-            change(Entity, :count).by 1
+          expect { import_property entity_row }.to change(Entity, :count).by 1
         end
 
         it 'ordered by creation' do
-          ImportProperty.import property_csv
+          import_property row
           expect(Property.first.entities[0].created_at).to be < \
             Property.first.entities[1].created_at
         end
 
         context 'multiple imports' do
 
+          def updated_row
+            %q[122, 2013-02-26 12:35:00, Mrs, H V, Changed, Mrs, A N, Other,] +
+            %q[1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, ] +
+            %q[11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0]
+          end
+
           it 'updated changed entities' do
-            ImportProperty.import property_csv
-            ImportProperty.import property_updated_csv
+            import_property row
+            import_property updated_row
             expect(Property.first.entities[0].name).to eq 'Changed'
             expect(Property.first.entities[1].name).to eq 'Other'
           end
 
           it 'removes deleted second entities' do
-            ImportProperty.import property_csv
-            expect { ImportProperty.import property_1_entity_csv }.to \
-                change(Entity, :count).by(-1)
+            import_property row
+            expect { import_property entity_row }.to \
+              change(Entity, :count).by(-1)
           end
         end
       end
 
-      def property_csv
-        FileImport.to_a('properties',
-                        headers: FileHeader.property,
-                        drop_rows: 34,
-                        location: properties_directory)
+      def import_property row
+        ImportProperty.import parse row
       end
 
-      def property_updated_csv
-        FileImport.to_a 'properties_updated',
-                        drop_rows: 34,
-                        headers: FileHeader.property,
-                        location: properties_directory
-      end
-
-      def property_1_entity_csv
-        FileImport.to_a 'properties_one_entity',
-                        drop_rows: 34,
-                        headers: FileHeader.property,
-                        location: properties_directory
-      end
-
-      def properties_directory
-        'spec/fixtures/import_data/properties'
+      def parse row_string
+        CSV.parse( row_string,
+                   { headers: FileHeader.property,
+                     header_converters: :symbol,
+                     converters: lambda { |f| f ? f.strip : nil } }
+                 )
       end
     end
   end
