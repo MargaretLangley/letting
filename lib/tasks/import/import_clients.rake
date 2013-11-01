@@ -9,10 +9,20 @@ namespace :import do
 
   desc "Import clients data from CSV file"
   task clients: :environment do
-    DB::ImportClient.import DB::FileImport.to_a('clients',
-      headers: DB::FileHeader.client),
-        DB::Patch.import(Client, DB::FileImport.to_a('clients_patch',
-          headers: DB::FileHeader.client, location: 'import_data/patch'))
+    DB::ImportClient.import clients_file,
+                            DB::Patch.import(Client, patch_file)
+  end
+
+
+  def clients_file
+    DB::FileImport.to_a 'clients',
+                        headers: DB::FileHeader.client
+  end
+
+  def patch_file
+    DB::FileImport.to_a 'clients_patch',
+                        headers: DB::FileHeader.client,
+                        location: 'import_data/patch'
   end
 end
 

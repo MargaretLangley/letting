@@ -10,10 +10,19 @@ namespace :import do
 
   desc "Import billing profile addresses data from CSV file"
   task  billing_profiles: :environment do
-    DB::ImportBillingProfile.import \
-      DB::FileImport.to_a('address2', headers: DB::FileHeader.billing_profile),
-        DB::Patch.import(BillingProfileWithId,
-                         DB::FileImport.to_a('address2_patch', \
-            headers: DB::FileHeader.billing_profile, location: 'import_data/patch'))
+    DB::ImportBillingProfile.import billing_file,
+                                    DB::Patch.import BillingProfileWithId,
+                                                     patch_file
    end
+
+   def billing_file
+     DB::FileImport.to_a 'address2', headers: DB::FileHeader.billing_profile
+   end
+
+   def patch_file
+     DB::FileImport.to_a 'address2_patch',
+                         headers: DB::FileHeader.billing_profile,
+                         location: 'import_data/patch'
+   end
+
 end

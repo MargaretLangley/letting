@@ -10,10 +10,19 @@ namespace :import do
 
   desc "Import properties data from CSV file"
   task  properties: :environment do
-    DB::ImportProperty.import \
-    DB::FileImport.to_a('properties',
-      headers: DB::FileHeader.property, drop_rows: 34),
-        DB::Patch.import(Property, DB::FileImport.to_a('properties_patch',
-          headers: DB::FileHeader.property, location: 'import_data/patch'))
+    DB::ImportProperty.import properties_file,
+                              DB::Patch.import(Property, patch_file)
+   end
+
+   def properties_file
+     DB::FileImport.to_a 'properties',
+                         headers: DB::FileHeader.property,
+                         drop_rows: 34
+   end
+
+   def patch_file
+     DB::FileImport.to_a 'properties_patch',
+                         headers: DB::FileHeader.property,
+                         location: 'import_data/patch'
    end
 end

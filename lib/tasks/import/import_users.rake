@@ -9,7 +9,11 @@ namespace :import do
 
   desc "Import users data from CSV file"
   task users: :environment do
-    DB::ImportUser.import DB::FileImport.to_a('users',
-                                               headers: DB::FileHeader.user)
+    DB::ImportUser.import users_file
+  end
+
+  def users_file
+    DB::FileImport.to_a 'users',
+                        headers: DB::FileHeader.user
   end
 end
