@@ -6,52 +6,50 @@ require_relative '../../../lib/import/credit_row'
 module DB
   describe CreditRow do
 
-    context 'credit row' do
-      let(:row) { CreditRow.new parse_line credit_row }
+    let(:row) { CreditRow.new parse_line credit_row }
 
-      context 'readers' do
+    context 'readers' do
 
-        it 'human_ref' do
-          expect(row.human_ref).to eq '89'
+      it 'human_ref' do
+        expect(row.human_ref).to eq '89'
+      end
+
+      it 'charge_code' do
+        expect(row.charge_code).to eq 'GR'
+      end
+
+      it 'on_date' do
+        expect(row.on_date).to eq '2012-03-25 12:00:00'
+      end
+
+      it 'amount' do
+        expect(row.amount).to eq 50.5
+      end
+
+    end
+
+    context 'methods' do
+
+      context '#ChargeType' do
+
+        it 'returns valid' do
+          expect(row.charge_type).to eq 'Ground Rent'
         end
 
-        it 'charge_code' do
-          expect(row.charge_code).to eq 'GR'
-        end
-
-        it 'on_date' do
-          expect(row.on_date).to eq '2012-03-25 12:00:00'
-        end
-
-        it 'amount' do
-          expect(row.amount).to eq 50.5
+        it 'errors invalid' do
+          bad_code = CreditRow.new parse_line credit_row_no_type
+          expect { bad_code.charge_type }.to raise_error ChargeCodeUnknown
         end
 
       end
 
-      context 'methods' do
-
-        context '#ChargeType' do
-
-          it 'returns valid' do
-            expect(row.charge_type).to eq 'Ground Rent'
-          end
-
-          it 'errors invalid' do
-            bad_code = CreditRow.new parse_line credit_row_no_type
-            expect { bad_code.charge_type }.to raise_error ChargeCodeUnknown
-          end
-
+      context '#account_id' do
+        it 'returns valid' do
+          property = property_create! human_ref: 89
+          expect(row.account_id).to eq property.account.id
         end
-
-        context '#account_id' do
-          it 'returns valid' do
-            property = property_create! human_ref: 89
-            expect(row.account_id).to eq property.account.id
-          end
-          it 'errors invalid' do
-            expect{ row.account_id }.to raise_error PropertyRefUnknown
-          end
+        it 'errors invalid' do
+          expect{ row.account_id }.to raise_error PropertyRefUnknown
         end
       end
     end
@@ -71,6 +69,5 @@ module DB
     def credit_row_no_type
       %q[89, XX, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0]
     end
-
   end
 end

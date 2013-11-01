@@ -17,7 +17,7 @@ module DB
   #
   class Patch
     include ImportContact
-     attr_accessor :row
+    attr_accessor :row
 
     def initialize model_class, patch_contents = []
       @model_class = model_class
