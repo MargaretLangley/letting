@@ -27,7 +27,7 @@ module DB
     end
 
     def self.property
-      %w{ human_ref updated } + entities + address + %w{ client_id }
+      %w{ human_ref updated } + entities + address + %w{ client_ref }
     end
 
     def self.billing_profile
