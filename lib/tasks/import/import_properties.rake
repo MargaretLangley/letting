@@ -9,9 +9,10 @@ STDOUT.sync = true
 namespace :import do
 
   desc "Import properties data from CSV file"
-  task properties: :environment do
+  task :properties, [:range] => :environment do |task, args|
+    range = Range.new(*args.range.split("..").map(&:to_i))
     DB::ImportProperty.import properties_file,
-                              range: 100..130,
+                              range: range,
                               patch: DB::Patch.import(Property, patch_properties)
    end
 

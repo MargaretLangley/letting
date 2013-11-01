@@ -30,6 +30,13 @@ module DB
       model_class.where human_ref: row[:human_ref]
     end
 
+    # true filters
+    # false allows
+    #
+    def filtered_condition
+      @range.exclude? row[:human_ref].to_i
+    end
+
     def model_assignment
       @model_to_assign.assign_attributes use_profile: true
       @model_to_assign.human_ref = row[:human_ref].to_i

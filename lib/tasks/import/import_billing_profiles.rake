@@ -9,8 +9,10 @@ STDOUT.sync = true
 namespace :import do
 
   desc "Import billing profile addresses data from CSV file"
-  task  billing_profiles: :environment do
+  task :billing_profiles, [:range] => :environment do |task, args|
+    range = Range.new(*args.range.split("..").map(&:to_i))
     DB::ImportBillingProfile.import billing_file,
+                                    range: range,
                                     patch: DB::Patch.import(BillingProfileWithId,
                                                      patch_file)
    end

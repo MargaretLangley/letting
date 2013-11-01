@@ -8,8 +8,9 @@ STDOUT.sync = true
 namespace :import do
 
   desc "Import clients data from CSV file"
-  task charges: :environment do
-    DB::ImportCharge.import charges_file
+  task :charges, [:range] => :environment do |task, args|
+    range = Range.new(*args.range.split("..").map(&:to_i))
+    DB::ImportCharge.import charges_file, range: range
   end
 
   def charges_file
