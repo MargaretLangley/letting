@@ -31,6 +31,11 @@ module DB
       end
     end
 
+    def filtered_condition
+      @range.exclude? human_ref
+    end
+
+
     def credit?
       row[:credit].to_f != 0
     end
@@ -41,6 +46,10 @@ module DB
 
     def charge_code
       row[:charge_code]
+    end
+
+    def human_ref
+      row[:human_ref].to_i
     end
   end
 end

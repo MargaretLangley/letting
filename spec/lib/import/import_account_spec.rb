@@ -52,6 +52,23 @@ module DB
       end
     end
 
+    context 'filter' do
+
+      def single_row
+        %q[122, GR, 2011-12-25 00:00:00, Ground Rent..., 47.5,    0, 47.5]
+      end
+
+      it 'allows within range' do
+        expect { import_account single_row, range: 122..122 }.to \
+          change(Debit, :count).by 1
+      end
+
+      it 'filters if out of range' do
+        expect { import_account single_row, range: 100..121 }.to \
+          change(Debit, :count).by 0
+      end
+    end
+
     context 'two properties' do
 
       def two_properties
@@ -63,8 +80,7 @@ module DB
 
       it 'parses' do
         property_with_charge_create! human_ref: 123
-        expect { ImportAccount.import parse two_properties }.to \
-          change(Credit, :count).by 2
+        expect { import_account two_properties }.to change(Credit, :count).by 2
         expect(Debit.all).to have(2).items
         expect(Property.find_by!(human_ref: 122).account.credits).to have(1).items
         expect(Property.find_by!(human_ref: 123).account.credits).to have(1).items
@@ -76,7 +92,7 @@ module DB
         %q[122, Bal, 2011-08-01 00:00:00, ,                  0,    0,    0]
       end
       it 'parses' do
-        ImportAccount.import parse balance_empty
+        import_account balance_empty
         expect(Credit.all).to have(0).items
         expect(Debit.all).to have(0).items
         expect(Payment.all).to have(0).items
@@ -110,6 +126,10 @@ module DB
         expect(Debit.all).to have(1).items
         expect(Payment.all).to have(1).items
       end
+    end
+
+    def import_account row, args = {}
+      ImportAccount.import parse(row), args
     end
 
     def parse row_string
