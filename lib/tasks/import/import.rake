@@ -16,5 +16,6 @@ namespace :db do
     Rake::Task['import:properties'].invoke(args.range)
     Rake::Task['import:billing_profiles'].invoke(args.range)
     Rake::Task['import:charges'].invoke(args.range)
+    Rake::Task['import:accounts'].invoke(args.range)
   end
 end
