@@ -35,3 +35,6 @@ public/assets
 
 # Personal TODO
 todo/work.TODO
+
+# brakeman
+brakeman.html
