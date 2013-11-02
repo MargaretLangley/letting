@@ -19,21 +19,7 @@ end
   end
 
   def seed_users
-    User.create! [
-      {
-        email: 'admin@example.com',
-        password: 'password',
-        password_confirmation: 'password',
-        admin: true
-      },
-      {
-        email: 'user@example.com',
-        password: 'password',
-        password_confirmation: 'password',
-        admin: false
-      }
-   ]
-    Rake::Task['import:users'].invoke
+    Rake::Task['import:users'].invoke('test')
   end
 
   def seed_clients
