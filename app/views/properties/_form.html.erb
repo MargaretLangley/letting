@@ -11,8 +11,11 @@
     </div>
 
     <div class='field text require half'>
-      <%= f.label :client_id, 'Client ID' %>
-      <%= f.text_field :client_id %>
+      <%= f.label :client_ref, 'Client Ref' %>
+
+      <%= text_field_tag nil, property.client_ref, :id => 'property_client_ref',
+        data: { autocomplete_source: Client.order(:human_ref).map { |t| { :label => t.human_ref, :value => t.id } } } %>
+      <%= f.text_field :client_id, id: 'client_id' %>
     </div>
 
     <%= render 'occupier', f: f, entitieable: property %>

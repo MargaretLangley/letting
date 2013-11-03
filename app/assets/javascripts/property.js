@@ -35,5 +35,46 @@ $(function () {
     $(this).closest('.selection').slideToggle('fast');
   });
 
+  // 1 JQuery - Select + Source Working
+  // 2 JQuery - change working but not source
+  // 3 Coffeescript - Select + Source
+
+  // 1 select changes the label and data
+  // Got it by converting 3 into JQuery
+  // return $('#property_client_ref').autocomplete({
+  //   source: $('#property_client_ref').data('autocomplete-source'),
+  //   select: function(event, ui) {
+  //     event.preventDefault();
+  //     $(this).val(ui.item.label);
+  //     return $('#client_id').val(ui.item.value);
+  //   }
+  // });
+
+  // 2
+  // http://stackoverflow.com/questions/6431459/jquery-autocomplete-trigger-change-event
+  var client_ref = $("#property_client_ref").autocomplete({
+      change: function() {
+          alert('changed');
+      }
+   });
+   client_ref.autocomplete('option','change').call(client_ref);
+
+  // 3
+  // http://stackoverflow.com/questions/13443012/rails-how-do-i-autocomplete-search-for-name-but-save-id
+  // Equivalence in coffee script of the above method
+  // jQuery ->
+  // $('#property_client_ref').autocomplete
+  //   source: $('#property_client_ref').data('autocomplete-source')
+  //   select: (event, ui) ->
+
+  //     # necessary to prevent autocomplete from filling in
+  //     # with the value instead of the label
+  //     event.preventDefault()
+
+  //     $(this).val ui.item.label
+  //     $('#client_id').val ui.item.value
+
+
+
 });
 
