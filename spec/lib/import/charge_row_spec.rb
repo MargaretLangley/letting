@@ -72,12 +72,11 @@ module DB
           end
         end
 
-
       end
     end
 
     def parse_line row_string
-      CSV.parse_line( row_string,
+      CSV.parse_line(row_string,
                       { headers: FileHeader.charge,
                         header_converters: :symbol,
                         converters: lambda { |f| f ? f.strip : nil } }
@@ -107,7 +106,6 @@ module DB
       %q[ 24, 3, 25, 6, 25, 9, 31, 12, ] +
       %q[ 1901-01-01, 0 ]
     end
-
 
   end
 end

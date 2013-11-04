@@ -47,7 +47,8 @@ module DB
       it 'works on BillingProfile' do
         property_create! human_ref: 122
         ImportBillingProfile.import \
-          billing_csv, patch: Patch.import(BillingProfileWithId, billing_patch_csv)
+          billing_csv, patch: Patch
+          .import(BillingProfileWithId, billing_patch_csv)
         expect(Property.first.billing_profile.address.district).to \
           eq 'Example District Changed'
       end

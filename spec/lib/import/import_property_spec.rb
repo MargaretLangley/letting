@@ -44,11 +44,13 @@ module DB
 
     context 'filter' do
       it 'allows within range' do
-        expect { import_property row, range: 122..122 }.to change(Property, :count).by 1
+        expect { import_property row, range: 122..122 }
+        .to change(Property, :count).by 1
       end
 
       it 'filters if out of range' do
-        expect { import_property row, range: 120..121 }.to change(Property, :count).by 0
+        expect { import_property row, range: 120..121 }
+        .to change(Property, :count).by 0
       end
     end
 
@@ -126,7 +128,7 @@ module DB
     end
 
     def parse row_string
-      CSV.parse( row_string,
+      CSV.parse(row_string,
                  { headers: FileHeader.property,
                    header_converters: :symbol,
                    converters: lambda { |f| f ? f.strip : nil } }

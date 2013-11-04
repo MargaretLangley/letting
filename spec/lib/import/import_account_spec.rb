@@ -82,8 +82,10 @@ module DB
         property_with_charge_create! human_ref: 123
         expect { import_account two_properties }.to change(Credit, :count).by 2
         expect(Debit.all).to have(2).items
-        expect(Property.find_by!(human_ref: 122).account.credits).to have(1).items
-        expect(Property.find_by!(human_ref: 123).account.credits).to have(1).items
+        expect(Property.find_by!(human_ref: 122).account.credits)
+        .to have(1).items
+        expect(Property.find_by!(human_ref: 123).account.credits)
+        .to have(1).items
       end
     end
 
@@ -112,7 +114,6 @@ module DB
 
     end
 
-
     context 'advance payments' do
       def advance_payment
         %q[122, GR, 2012-12-01 10:22:00, Payment Gro...,    0,   20,  -20
@@ -133,7 +134,7 @@ module DB
     end
 
     def parse row_string
-      CSV.parse( row_string,
+      CSV.parse(row_string,
                  { headers: FileHeader.account,
                    header_converters: :symbol,
                    converters: lambda { |f| f ? f.strip : nil } }

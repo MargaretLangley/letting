@@ -44,8 +44,6 @@ describe Client do
       expect(page).to have_text '111'
     end
 
-
-
     it 'search not found' do
       fill_in 'search', with: 'Highcroft Road'
       click_on 'Search List'

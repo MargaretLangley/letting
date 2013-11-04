@@ -13,7 +13,6 @@ module DB
   ####
   #
 
-
   class ImportAccount < ImportBase
 
     def initialize  contents, range, patch
@@ -27,14 +26,13 @@ module DB
       when credit?
         ImportPayment.import [row]
       else
-        # TODO handle bal codes
+        # TODO: handle bal codes
       end
     end
 
     def filtered_condition
       @range.exclude? human_ref
     end
-
 
     def credit?
       row[:credit].to_f != 0

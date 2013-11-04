@@ -40,6 +40,5 @@ module DB
       "Import Process for #{self.class} is not idempodent. You need to delete Payment and credits before running this task again."
     end
 
-
   end
 end
