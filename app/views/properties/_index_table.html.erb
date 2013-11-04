@@ -38,7 +38,8 @@
     </thead>
   <tbody>
     <% if @properties.present? %>
-      <% properties.each do |property| %>
+      <% properties.each do |prop|
+        property = PropertyDecorator.new prop %>
         <tr>
         <% if show_checkbox %>
           <td>
@@ -46,10 +47,10 @@
           </td>
         <% end %>
         <td class='alnright'>
-          <%= link_to property.human_ref, edit_property_path(property) %>
+          <%= link_to property.human_ref, edit_property_path(property.id) %>
         </td>
         <td class='alnright'>
-          <%=property.client_id %>
+          <%=property.client_ref %>
         </td>
         <td>
           <%= format_empty_string_as_dash property.entities.first.name %>
@@ -71,8 +72,8 @@
         </td>
         <% if show_actions %>
         <td>
-           <%= link_to 'Edit', edit_property_path(property) %> |
-           <%= link_to 'View Accounts', property_path(property) %> |
+          <%= link_to 'Edit', edit_property_path(property.id) %> |
+          <%= link_to 'View Accounts', property_path(property.id) %> |
           <%= link_to 'Delete', property, method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
         </td>
         <% end %>
