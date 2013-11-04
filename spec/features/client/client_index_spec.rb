@@ -21,19 +21,30 @@ describe Client do
       expect(page).to have_text '222'
       expect(page).to have_text '333'
 
-      # displays multiple columns
+      # displays multiple columns/
       expect(page).to have_text 'W G'
       expect(page).to have_text 'Grace'
       expect(page).to have_text 'Edgbaston Road'
     end
 
-    it 'search' do
+    it 'search road' do
       fill_in 'search', with: 'Edgbaston Road'
       click_on 'Search List'
       expect(page).to_not have_text '111'
       expect(page).to have_text '222'
       expect(page).to have_text '333'
     end
+
+    it 'search number' do
+      pending 'Search by number not working'
+      fill_in 'search', with: '111'
+      click_on 'Search List'
+      expect(page).to_not have_text '333'
+      expect(page).to_not have_text '222'
+      expect(page).to have_text '111'
+    end
+
+
 
     it 'search not found' do
       fill_in 'search', with: 'Highcroft Road'
