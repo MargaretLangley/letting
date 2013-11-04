@@ -73,13 +73,13 @@ describe Client do
     it 'only returns expected' do
       c2 = client_create! human_ref: 102,
                           address_attributes: { road: 'unknown' }
-      expect(Client.all).to eq [c1, c2]
+      expect(Client.all).to match_array [c1, c2]
       expect(Client.search 'Edgba').to eq [c1]
     end
 
     it 'ordered by human_ref ASC' do
       c2 = client_create! human_ref: 8000
-      expect(Client.all).to eq [c1, c2]
+      expect(Client.all).to match_array [c1, c2]
       expect(Client.search 'Bir').to eq [c2, c1]
     end
   end

@@ -105,7 +105,7 @@ describe Property do
       it 'matches just that house name' do
         p2 = property_create! human_ref: 202,
                               address_attributes: { house_name: 'Headingly' }
-        expect(Property.all).to eq [p1, p2]
+        expect(Property.all).to match_array [p1, p2]
         expect(Property.search_by_house_name('Hillbank House').load).to \
           eq [p1]
       end
@@ -122,7 +122,7 @@ describe Property do
       it 'range of human_ref' do
         p2 = property_create! human_ref: 2003
         p3 = property_create! human_ref: 2004
-        expect(Property.all).to eq [p1, p2, p3]
+        expect(Property.all).to match_array [p1, p2, p3]
         expect(Property.search '2002 - 2003').to eq [p1, p2]
       end
       it('house name') { expect((Property.search 'Hill').load).to eq [p1] }
@@ -131,12 +131,12 @@ describe Property do
       it('names') { expect(Property.search 'Grace').to eq [p1] }
       it 'multiple' do
         p2 = property_create! human_ref: 3000
-        expect(Property.all).to eq [p1, p2]
+        expect(Property.all).to match_array [p1, p2]
         expect(Property.search 'Bir').to eq [p1, p2]
       end
       it 'ordered by human_ref ASC' do
         p2 = property_create! human_ref: 2000
-        expect(Property.all).to eq [p1, p2]
+        expect(Property.all).to match_array [p1, p2]
         expect(Property.search 'Bir').to eq [p2, p1]
       end
 
