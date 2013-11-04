@@ -71,8 +71,9 @@ module DB
 
     context 'errors' do
       it 'fails if property does not exist' do
-        expect { import_charge row }.to raise_error ActiveRecord::RecordNotFound,
-                                      'Property human_ref: 2002 - Not found'
+        expect { import_charge row }
+        .to raise_error ActiveRecord::RecordNotFound,
+        'Property human_ref: 2002 - Not found'
       end
     end
 
@@ -81,7 +82,7 @@ module DB
     end
 
     def parse row_string
-      CSV.parse( row_string,
+      CSV.parse(row_string,
                  { headers: FileHeader.charge,
                    header_converters: :symbol,
                    converters: lambda { |f| f ? f.strip : nil } }

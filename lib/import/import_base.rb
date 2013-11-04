@@ -43,11 +43,11 @@ module DB
       model_saved || show_error
     end
 
-     def filtered
+    def filtered
       if @range.nil?
-        false
+         false
       else
-        filtered_condition
+         filtered_condition
       end
     end
 

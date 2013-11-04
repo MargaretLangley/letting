@@ -39,7 +39,6 @@ module DB
         raise DueInCodeUnknown, due_in_code_message, caller
     end
 
-
     def day number
       @row[:"day_#{number}"].to_i
     end
