@@ -10,14 +10,12 @@
       <%= f.text_field :human_ref, autofocus: true %>
     </div>
 
-    <div class='field text require half'>
-       <%= f.label :client_id, 'Client ID' %>
-       <%= f.text_field :client_id %>
+    <div class='field text require'>
+       <%= f.label :client_ref, 'Client Ref' %>
 
-      <%= f.label :client_ref, 'Client Ref' %>
-
-      <%= text_field_tag nil, property.client_ref, :id => 'property_client_ref',
-        data: { autocomplete_source: Client.order(:human_ref).map { |t| { :label => t.human_ref, :value => t.id } } } %>
+      <%= text_field_tag nil, "#{property.client.try(:human_ref)} #{property.client.try(:entities).try(:full_name)}", :id => 'property_client_ref',
+        data: { autocomplete_source: Client.order(:human_ref).map { |t| { :label => "#{t.human_ref} #{t.entities.full_name}", :value => t.id } } } %>
+      <%= f.hidden_field :client_id, id: 'client_id' %>
     </div>
 
     <%= render 'occupier', f: f, entitieable: property %>

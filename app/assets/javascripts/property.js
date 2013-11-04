@@ -41,14 +41,14 @@ $(function () {
 
   // 1 select changes the label and data
   // Got it by converting 3 into JQuery
-  // return $('#property_client_ref').autocomplete({
-  //   source: $('#property_client_ref').data('autocomplete-source'),
-  //   select: function(event, ui) {
-  //     event.preventDefault();
-  //     $(this).val(ui.item.label);
-  //     return $('#client_id').val(ui.item.value);
-  //   }
-  // });
+  return $('#property_client_ref').autocomplete({
+    source: $('#property_client_ref').data('autocomplete-source'),
+    select: function(event, ui) {
+      event.preventDefault();
+      $(this).val(ui.item.label);
+      return $('#client_id').val(ui.item.value);
+    }
+  });
 
   // 2
   // http://stackoverflow.com/questions/6431459/jquery-autocomplete-trigger-change-event

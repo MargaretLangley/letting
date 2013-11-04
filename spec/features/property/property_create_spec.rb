@@ -7,6 +7,7 @@ describe Property do
   before(:each) { log_in }
 
   it '#create', js: true  do
+    client_create!
     navigate_to_create_page
     validate_page
     fill_in_form
@@ -18,7 +19,8 @@ describe Property do
     expect_property_page
   end
 
-  it '#creates a property without billing profile' do
+  it '#creates a property without billing profile', js: true do
+    client_create!
     navigate_to_create_page
     fill_in_property
     fill_in_property_address
@@ -31,7 +33,8 @@ describe Property do
     expect_property_entities
   end
 
-  it '#create has validation' do
+  it '#create has validation', js: true do
+    client_create!
     navigate_to_create_page
     invalidate_page
     click_on 'Create Property'
@@ -79,7 +82,18 @@ describe Property do
 
     def fill_in_property
       fill_in 'Property ID', with: '278'
-      fill_in 'Client ID', with: '2'
+      fill_autocomplete('property_client_ref', with: '8008')
+    end
+
+    def fill_autocomplete(field, options = {})
+      fill_in field, with: options[:with]
+
+      page.execute_script %Q{ $('##{field}').trigger('focus') }
+      page.execute_script %Q{ $('##{field}').trigger('keydown') }
+      selector = %Q{ul.ui-autocomplete li.ui-menu-item a:contains("#{options[:select]}")}
+
+      page.should have_selector('ul.ui-autocomplete li.ui-menu-item a')
+      page.execute_script %Q{ $('#{selector}').trigger('mouseenter').click() }
     end
 
     def fill_in_property_address
