@@ -24,13 +24,20 @@ class ChargesMatcher
 
   def find! charge_type
     charge = find charge_type
-    raise DB::ChargeUnknown, 'Charge not found in account', caller \
-      if charge.nil?
+    raise DB::ChargeUnknown, error_msg(charge_type), caller if charge.nil?
     charge
   end
 
   def find charge_type
     @charges.find { |charge| charge.charge_type == charge_type }
+  end
+
+  def error_msg charge_type
+    "Charge '#{charge_type}' not found in property '#{property_ref || 'unknown' }'"
+  end
+
+  def property_ref
+    @charges.first.try(:account).try(:property).try(:human_ref)
   end
 
 end

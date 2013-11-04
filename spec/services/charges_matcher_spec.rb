@@ -31,15 +31,23 @@ module DB
     end
 
     context '#find!' do
-      it 'exception if unknown' do
-        expect { ChargesMatcher.new(charges).find! 'unknown' }.to \
-          raise_error ChargeUnknown
-      end
-
       it 'present if known' do
         expect(ChargesMatcher.new(charges).find! 'Ground Rent').to \
           be_present
       end
+
+      it 'exception if unknown' do
+        property = property_with_charge_create!
+        charges = property.account.charges
+        expect { ChargesMatcher.new(charges).find! 'unknown' }.to \
+          raise_error ChargeUnknown, "Charge 'unknown' not found in property '2002'"
+      end
+
+      it 'property, account or human_ref nil' do
+        expect { ChargesMatcher.new(charges).find! 'unknown' }.to \
+          raise_error ChargeUnknown, "Charge 'unknown' not found in property 'unknown'"
+      end
+
     end
   end
 end
