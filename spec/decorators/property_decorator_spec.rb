@@ -2,7 +2,20 @@ require 'spec_helper'
 
 describe PropertyDecorator do
 
-  let(:property) { PropertyDecorator.new property_new }
+  let(:property) do
+   PropertyDecorator.new property_new
+  end
+
+  context 'client_ref' do
+    it 'returns nil if unknown' do
+      expect(property.client_ref).to eq nil
+    end
+
+    it 'returns ref when known' do
+      property.client = client_new
+      expect(property.client_ref).to eq 8008
+    end
+  end
 
   it 'writes flat property' do
     expect(property.address_lines[0]).to eq 'Mr W G Grace'
@@ -26,3 +39,4 @@ describe PropertyDecorator do
   end
 
 end
+

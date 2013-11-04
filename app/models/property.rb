@@ -40,14 +40,6 @@ class Property < ActiveRecord::Base
     billing_profile.bill_to
   end
 
-  # def client_ref
-  #   client.try(:human_ref)
-  # end
-
-  # def client_ref=(human_ref)
-  #   self.client = Client.find_by(human_ref: human_ref) if human_ref.present
-  # end
-
   def start_address
     [address.flat_no, address.house_name, address.road_no, address
     .road].reject(&:blank?).join('  ')

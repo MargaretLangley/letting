@@ -16,6 +16,10 @@ class PropertyDecorator
     @property = property
   end
 
+  def client_ref
+    client.try(:human_ref)
+  end
+
   def address_lines
     address_lines = []
     address_lines << property.entities.full_name

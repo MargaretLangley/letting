@@ -22,7 +22,7 @@ class PropertiesController < ApplicationController
   end
 
   def show
-    @property = Property.find params[:id]
+    @property = PropertyDecorator.new Property.find params[:id]
   end
 
   def new
