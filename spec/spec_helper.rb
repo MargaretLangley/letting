@@ -70,4 +70,5 @@ RSpec.configure do |config|
   end
 
   config.include AuthMacros
+  config.include CapybaraHelper
 end

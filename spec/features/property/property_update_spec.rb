@@ -8,8 +8,10 @@ describe Property do
 
     before(:each) { log_in }
 
-    it 'basic' do
-      property_create! id: 1, human_ref: 8000
+    it 'basic', js: true do
+      client = client_create!
+      property = property_create! id: 1, human_ref: 8000, client_id: client.id
+      client_create! human_ref: 8010
       navigate_to_edit_page
       validate_page
       expect_form_to_be
@@ -54,6 +56,7 @@ describe Property do
 
     def expect_property_has_original_attributes
       expect(find_field('Property ID').value).to have_text '8000'
+      expect(find_field('Client Ref').value).to have_text '8008'
     end
 
     def expect_address_has_original_attributes
@@ -70,6 +73,7 @@ describe Property do
 
     def fill_in_form
       fill_in 'Property ID', with: '8001'
+      fill_autocomplete('property_client_ref', with: '8010')
       fill_in_address
       fill_in_entity
     end
