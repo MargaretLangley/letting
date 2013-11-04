@@ -52,12 +52,12 @@ $(function () {
 
   // 2
   // http://stackoverflow.com/questions/6431459/jquery-autocomplete-trigger-change-event
-  var client_ref = $("#property_client_ref").autocomplete({
-      change: function() {
-          alert('changed');
-      }
-   });
-   client_ref.autocomplete('option','change').call(client_ref);
+  // var client_ref = $("#property_client_ref").autocomplete({
+  //     change: function() {
+  //         alert('changed');
+  //     }
+  //  });
+  //  client_ref.autocomplete('option','change').call(client_ref);
 
   // 3
   // http://stackoverflow.com/questions/13443012/rails-how-do-i-autocomplete-search-for-name-but-save-id

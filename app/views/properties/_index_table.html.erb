@@ -49,7 +49,7 @@
           <%= link_to property.human_ref, edit_property_path(property) %>
         </td>
         <td class='alnright'>
-          <%=property.client.human_ref%>
+          <%=property.client_id %>
         </td>
         <td>
           <%= format_empty_string_as_dash property.entities.first.name %>
