@@ -1,4 +1,5 @@
 require_relative 'charge_code'
+require_relative 'errors'
 
 module DB
 
@@ -9,6 +10,10 @@ module DB
 
     def human_ref
       @row[:human_ref]
+    end
+
+    def charge_code
+      @row[:charge_code]
     end
 
     def debits?
@@ -24,7 +29,9 @@ module DB
     end
 
     def charge_type
-      ChargeCode.to_string @row[:charge_code]
+      charge = ChargeCode.to_string charge_code
+      raise DB::ChargeCodeUnknown, charge_code_message, caller unless charge
+      charge
     end
 
     def attributes
@@ -40,6 +47,10 @@ module DB
     end
 
     private
+
+    def charge_code_message
+      "Property #{human_ref}: Charge code #{charge_code} can not be converted into a string"
+    end
 
     def debit_attributes
       {

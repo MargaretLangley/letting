@@ -13,6 +13,10 @@ module DB
       @row = row
     end
 
+    def human_ref
+      @row[:human_ref]
+    end
+
     def monthly_charge?
       month(1) == 0
     end
@@ -74,15 +78,15 @@ module DB
     end
 
     def charge_code_message
-      "Charge code #{charge_code} can not be converted into a string"
+      "Property #{human_ref}: Charge code #{charge_code} can not be converted into a string"
     end
 
     def max_dates_message
-      "Charge code #{charge_code} can not be converted into maximum dates per year."
+      "Property #{human_ref}: Charge code #{charge_code} can not be converted into maximum dates per year."
     end
 
     def due_in_code_message
-      "Due in code #{due_in_code} is unknown."
+      "Property #{human_ref}: Due in code #{due_in_code} is unknown."
     end
 
   end

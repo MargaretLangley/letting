@@ -26,6 +26,17 @@ module DB
           expect(row.charge_type).to eq 'Ground Rent'
         end
       end
+
+      context '#charge_type' do
+        it 'returns valid' do
+          expect(row.charge_type).to eq 'Ground Rent'
+        end
+
+        it 'errors invalid' do
+          bad_code = AccountRow.new parse_line credit_row_no_type
+          expect { bad_code.charge_type }.to raise_error ChargeCodeUnknown
+        end
+      end
     end
 
     context 'debit row' do
@@ -55,6 +66,11 @@ module DB
     def debit_row
       %q[89, GR, 2012-03-25 12:00:00, Ground Rent, 50.5, 0, 0]
     end
+
+    def credit_row_no_type
+      %q[89, Bal, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0]
+    end
+
 
   end
 end

@@ -63,7 +63,7 @@ module DB
 
 
     def charge_code_message
-      "Charge code #{charge_code} can not be converted into a string"
+      "Property #{human_ref}: Charge code #{charge_code} can not be converted into a string"
     end
 
     def property_unknown_message
