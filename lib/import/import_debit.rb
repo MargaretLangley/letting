@@ -1,5 +1,5 @@
 require_relative 'import_base'
-require_relative 'account_row'
+require_relative 'debit_row'
 
 module DB
   class ImportDebit < ImportBase
@@ -9,7 +9,7 @@ module DB
     end
 
     def row= row
-      @row = AccountRow.new(row)
+      @row = DebitRow.new(row)
     end
 
     def model_prepared
@@ -18,7 +18,7 @@ module DB
     end
 
     def find_model model_class
-      model_class.where human_ref: row[:human_ref]
+      model_class.where human_ref: row.human_ref
     end
 
     def model_assignment
