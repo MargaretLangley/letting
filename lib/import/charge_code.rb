@@ -12,6 +12,7 @@ module DB
   class ChargeCode
     def self.to_string(code)
       case code
+      when 'Bal'  then 'Arrears'
       when 'GGR'  then 'Garage Ground Rent'
       when 'GIns' then 'Garage Insurance'
       when 'GR'   then 'Ground Rent'

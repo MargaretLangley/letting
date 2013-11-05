@@ -20,6 +20,9 @@ class DueOn < ActiveRecord::Base
                                     less_than: 32 }
   validates :month, numericality: { only_integer: true, greater_than: -2,
                                     less_than: 13 }
+
+  validates :year, numericality: { only_integer: true, greater_than: 1990,
+                                    less_than: 2030 }, allow_nil: true
   PER_MONTH = -1
   ON_DATE = 0
 
@@ -46,23 +49,31 @@ class DueOn < ActiveRecord::Base
 
   private
 
+    def one_off_charge?
+      year.present?
+    end
+
     def ignored_attrs
       %w[id charge_id created_at updated_at]
     end
 
     def year_next_charge_is_due
-      today_or_later_in_year ? Date.current.year : Date.current.year + 1
+      case
+      when one_off_charge? then year
+      when today_or_later_in_year? then Date.current.year
+      else Date.current.year + 1
+      end
     end
 
-    def today_or_later_in_year
-      month_later_in_year || today_or_later_in_this_month
+    def today_or_later_in_year?
+      month_later_in_year? || today_or_later_in_this_month?
     end
 
-    def month_later_in_year
+    def month_later_in_year?
       month > Date.current.month
     end
 
-    def today_or_later_in_this_month
+    def today_or_later_in_this_month?
       month == Date.current.month && day >= Date.current.day
     end
 end

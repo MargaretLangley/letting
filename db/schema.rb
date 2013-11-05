@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20131016112247) do
   create_table "due_ons", force: true do |t|
     t.integer  "day"
     t.integer  "month"
+    t.integer  "year"
     t.integer  "charge_id"
     t.datetime "created_at"
     t.datetime "updated_at"

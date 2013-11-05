@@ -22,9 +22,17 @@ module DB
       charge
     end
 
+    def charge_id
+      property = Property.find_by(human_ref: human_ref)
+      raise DB::PropertyRefUnknown, property_unknown_message, caller unless property
+      charge = Charge.find_by account_id: property.account.id, charge_type: charge_type
+      raise DB::ChargeUnknown, charge_unknown_message, caller unless charge
+      charge.id
+    end
+
     def attributes
       {
-        charge_id: -1,
+        charge_id: charge_id,
         on_date: on_date,
         amount: amount,
         debit_generator_id: -1,
@@ -57,5 +65,12 @@ module DB
       "Property #{human_ref}: Charge code #{charge_code} can not be converted into a string"
     end
 
+    def property_unknown_message
+      "Property ref: #{human_ref} is unknown."
+    end
+
+    def charge_unknown_message
+      "Charge '#{charge_type}' not found in property '#{human_ref || 'unknown' }'"
+    end
   end
 end

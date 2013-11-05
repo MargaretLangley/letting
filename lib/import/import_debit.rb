@@ -23,8 +23,8 @@ module DB
 
     def model_assignment
       @model_to_assign.attributes = row.attributes
-      charges = ChargesMatcher.new @model_to_save.account.charges
-      @model_to_assign.charge_id = charges.find!(row.charge_type).id
+      # charges = ChargesMatcher.new @model_to_save.account.charges
+      # @model_to_assign.charge_id = charges.find!(row.charge_type).id
     end
 
   end

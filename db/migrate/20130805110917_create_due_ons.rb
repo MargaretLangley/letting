@@ -3,6 +3,7 @@ class CreateDueOns < ActiveRecord::Migration
     create_table :due_ons do |t|
       t.integer :day
       t.integer :month
+      t.integer :year
       t.integer :charge_id
 
       t.timestamps

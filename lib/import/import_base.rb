@@ -102,7 +102,6 @@ module DB
     end
 
     def show_running index
-      print "\n#{self.class}: " if index == 0
       print '.' if on_100th_iteration index
     end
 

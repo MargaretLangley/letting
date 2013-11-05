@@ -9,33 +9,37 @@ module DB
     end
 
     def human_ref
-      @row[:human_ref]
+      @row[:human_ref].to_i
     end
 
     def charge_code
       @row[:charge_code]
     end
 
-    def debits?
+    def balance?
+      charge_code == 'Bal'
+    end
+
+    def credit?
+      credit  != 0
+    end
+
+    def debit?
       debit != 0
     end
 
-    def credits?
-      credit != 0
+    def on_date
+      Date.parse @row[:on_date]
     end
 
     def amount
-      debits? ? debit : credit
+      debit? ? debit : credit
     end
 
-    def charge_type
-      charge = ChargeCode.to_string charge_code
-      raise DB::ChargeCodeUnknown, charge_code_message, caller unless charge
-      charge
-    end
-
-    def attributes
-      debits? ? debit_attributes : credit_attributes
+    def account_id
+      Property.find_by!(human_ref: human_ref).account.id
+      rescue ActiveRecord::RecordNotFound
+        raise DB::PropertyRefUnknown, property_unknown_message, caller
     end
 
     def method_missing method_name, *args, &block
@@ -48,33 +52,16 @@ module DB
 
     private
 
-    def charge_code_message
-      "Property #{human_ref}: Charge code #{charge_code} can not be converted into a string"
-    end
-
-    def debit_attributes
-      {
-        charge_id: -1,
-        on_date: @row[:on_date],
-        amount: amount,
-        debit_generator_id: -1,
-      }
-    end
-
-    def credit_attributes
-      {
-        payment_id: -1,
-        on_date: @row[:on_date],
-        amount: amount,
-      }
-    end
-
     def credit
       @row[:credit].to_f
     end
 
     def debit
       @row[:debit].to_f
+    end
+
+    def property_unknown_message
+      "Property ref: #{human_ref} is unknown."
     end
 
   end
