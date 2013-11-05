@@ -29,9 +29,9 @@ module DueOns
       end
 
       def clear_up_form
-        destruction_if :empty?
-        destruction_if :persisted? if has_new_due_on?
+        clear_up_all_children
         switch_to_a_due_on_for_each_month if per_month_due_on
+        destruction_if :per_month? if per_month_due_on
       end
 
       def empty?
@@ -42,10 +42,15 @@ module DueOns
         max_due_ons || per_month_due_on
       end
 
+      def has_new_due_on?
+        reject(&:empty?).find(&:new_record?)
+      end
+
   private
 
-      def has_new_due_on?
-        reject(&:marked_for_destruction?).find(&:new_record?)
+
+      def clear_up_all_children
+        each { |due_on| due_on.clear_up_form self }
       end
 
       def destruction_if matcher
@@ -67,7 +72,6 @@ module DueOns
 
       def switch_to_a_due_on_for_each_month
         build_due_on_for_each_month_of_year per_month_due_on.day
-        destruction_if :per_month?
       end
 
       def build_due_on_for_each_month_of_year day

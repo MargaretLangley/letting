@@ -35,6 +35,11 @@ class DueOn < ActiveRecord::Base
     Date.new year_next_charge_is_due, month, day
   end
 
+  def clear_up_form due_ons
+    self.mark_for_destruction if empty?
+    self.mark_for_destruction if due_ons.has_new_due_on? && self.persisted?
+  end
+
   def empty?
     attributes.except(*ignored_attrs).values.all?(&:blank?)
   end

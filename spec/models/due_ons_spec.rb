@@ -122,7 +122,7 @@ describe DueOns do
         reload = Charge.find(charge.id)
         reload.due_ons.prepare
         reload.due_ons[0].update day: 5, month: 1
-        reload.due_ons[0].update day: '', month: ''
+        reload.due_ons[1].update day: '', month: ''
         reload.clear_up_form
         reload.save!
         reload2 = Charge.find(charge.id)
