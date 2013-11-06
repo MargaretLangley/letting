@@ -52,6 +52,12 @@ module DB
           expect{ row.account_id }.to raise_error PropertyRefUnknown
         end
       end
+
+      context 'identiy' do
+        it 'calculated for row' do
+          expect(row.identity).to eq 'Property: 89, Charge code: GR, Date: 2012-03-25 12:00:00'
+        end
+      end
     end
 
     def parse_line row_string

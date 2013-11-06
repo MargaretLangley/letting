@@ -37,7 +37,7 @@ module DB
     end
 
     def import_not_idempotent_msg
-      "Import Process for #{self.class} is not idempodent. You need to delete Payment and credits before running this task again."
+      "#{row.identity}: Import Process for #{self.class} is not idempodent. You need to delete Payment and credits before running this task again."
     end
 
   end

@@ -59,11 +59,15 @@ module DB
       @row.respond_to?(method_name, include_private) || super
     end
 
+    def identity
+      "Property: #{human_ref}, Charge code: #{charge_code}, Date: #{on_date}"
+    end
+
     private
 
 
     def charge_code_message
-      "Property #{human_ref}: Charge code #{charge_code} can not be converted into a string"
+      "#{identity} - #{charge_code} can not be converted into a string"
     end
 
     def property_unknown_message
