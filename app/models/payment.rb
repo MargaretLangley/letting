@@ -28,7 +28,7 @@ class Payment < ActiveRecord::Base
 
   validates :account_id, :on_date, presence: true
 
-  after_initialize do |debit_generator|
+  after_initialize do
     self.on_date = default_on_date if on_date.blank?
   end
 

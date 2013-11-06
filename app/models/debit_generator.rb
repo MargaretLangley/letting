@@ -26,7 +26,7 @@ class DebitGenerator < ActiveRecord::Base
   scope :latest_debit_generated,
         ->(limit) { order(created_at: :desc).limit(limit) }
 
-  after_initialize do |debit_generator|
+  after_initialize do
     self.start_date = default_start_date if start_date.blank?
     self.end_date = default_end_date if end_date.blank?
   end

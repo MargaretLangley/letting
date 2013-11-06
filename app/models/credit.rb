@@ -7,7 +7,7 @@
 #
 #
 # A payment is applied to one property account. When being applied
-# it finds unpaid debts and generates a matching credit.
+# it finds unpaid debits and generates a matching credit.
 # The credits get set during the payments controller #create action.
 #
 ####
@@ -21,7 +21,7 @@ class Credit < ActiveRecord::Base
   validates :amount, amount: true
   validates :amount, numericality: { less_than_or_equal_to: ->(credit) { credit.pay_off } }
 
-  after_initialize do |debit_generator|
+  after_initialize do
     self.on_date = default_on_date if on_date.blank?
     self.amount = outstanding if amount.blank?
     @original_amount = amount
