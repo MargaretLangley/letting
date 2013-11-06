@@ -40,7 +40,7 @@ class Credit < ActiveRecord::Base
   end
 
   def clear_up_form
-    self.mark_for_destruction if amount.nil? || amount == 0
+    self.mark_for_destruction if amount.nil? || amount.round(2) == 0
   end
 
   private

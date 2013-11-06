@@ -23,7 +23,7 @@ module DB
     def withdraw  amount
       @balance -= amount
       raise DB::CreditNegativeError, 'total credits is negative', caller \
-        if @balance < 0
+        if @balance.round(2) < 0
       self
     end
 

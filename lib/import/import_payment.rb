@@ -28,6 +28,10 @@ module DB
       @amount.deposit row.amount
       @model_to_assign.attributes = row.payment_attributes
       @model_to_assign.account.prepare_for_form
+      model_assignment_credits
+    end
+
+    def model_assignment_credits
       @model_to_assign.account.credits_for_unpaid_debits.each do |credit|
         credit.attributes = row.credit_attributes
         credit.amount = @amount.max_withdrawal credit.outstanding
