@@ -28,6 +28,11 @@ module DB
       @row = PropertyRow.new(row)
     end
 
+    def model_prepared
+      super
+      @model_to_assign.prepare_for_form
+    end
+
     def find_model model_class
       model_class.where human_ref: row.human_ref
     end

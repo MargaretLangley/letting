@@ -66,7 +66,6 @@ module DB
 
     def model_prepared
       @model_to_assign = find_model(@klass).first_or_initialize
-      @model_to_assign.prepare_for_form
     end
 
     def model_patched

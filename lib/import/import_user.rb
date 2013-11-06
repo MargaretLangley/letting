@@ -24,10 +24,6 @@ module DB
       super User, contents, range, patch
     end
 
-    def model_prepared
-      @model_to_assign = find_model(@klass).first_or_initialize
-    end
-
     def find_model model_class
       model_class.where email: row[:email]
     end
