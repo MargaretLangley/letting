@@ -26,6 +26,20 @@ module DB
         raise_error NotIdempotent
     end
 
+    context 'two payments same day' do
+      def payment_later_in_day
+        %q[89, GR, 2012-03-25 14:01:00, Payment Ground Rent, 0, 20, 0]
+       end
+
+      it 'import two credits on one debit' do
+        (property_with_unpaid_debit human_ref: 89).save!
+        ImportPayment.import parse credit_row
+        ImportPayment.import parse payment_later_in_day
+        expect(Payment.all).to have(2).items
+        expect(Credit.all).to have(2).items
+      end
+    end
+
     context 'One credit' do
       def one_credit_csv
         %q[122, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 37.5,    0]
