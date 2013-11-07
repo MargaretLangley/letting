@@ -46,7 +46,7 @@ describe 'Property Factory' do
     it 'has both' do
       property = property_with_charge_and_unpaid_debit
       property.account.prepare_for_form
-      expect(property.account.charges.reject(&:empty?)).to have(1).items
+      expect(property.account.charges.edited).to have(1).items
       expect(property.account.credits_for_unpaid_debits).to have(1).items
     end
   end

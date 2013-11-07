@@ -45,9 +45,8 @@ class Charge < ActiveRecord::Base
     due_ons.clear_up_form
   end
 
-  def empty?
-    attributes.except(*ignored_attrs).values.all?(&:blank?) &&
-      due_ons.empty?
+  def edited?
+    !empty?
   end
 
   def due_ons_size
@@ -55,6 +54,11 @@ class Charge < ActiveRecord::Base
   end
 
   private
+
+    def empty?
+      attributes.except(*ignored_attrs).values.all?(&:blank?) &&
+        due_ons.empty?
+    end
 
     def ignored_attrs
       %w[id account_id created_at updated_at]

@@ -34,7 +34,7 @@ describe Charges do
       charges.build charge_attributes
       charges.prepare
       charges.clear_up_form
-      expect(charges.reject(&:empty?)).to have(1).items
+      expect(charges.edited).to have(1).items
     end
   end
 end
