@@ -20,5 +20,6 @@ namespace :db do
     Rake::Task['import:billing_profiles'].invoke(human_ref_range)
     Rake::Task['import:charges'].invoke(human_ref_range)
     Rake::Task['import:accounts'].invoke(human_ref_range)
+    Rake::Task['import:update_charges'].invoke
   end
 end

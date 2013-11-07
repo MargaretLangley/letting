@@ -10,11 +10,12 @@ namespace :import do
   desc "Import clients data from CSV file"
   task :charges, [:range] => :environment do |task, args|
     range = Range.new(*args.range.split("..").map(&:to_i))
-    DB::ImportCharge.import charges_file, range: range
+    DB::ImportCharge.import charges_file('acc_info'), range: range
+    DB::ImportCharge.import charges_file('acc_info_deleted'), range: range
   end
 
-  def charges_file
-    DB::FileImport.to_a 'acc_info', headers: DB::FileHeader.charge
+  def charges_file file_name
+    DB::FileImport.to_a file_name, headers: DB::FileHeader.charge
   end
 end
 
