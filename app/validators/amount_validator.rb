@@ -17,6 +17,6 @@ class AmountValidator < ActiveModel::EachValidator
   end
 
   def error_message
-    'must be a decimal number greater than or equal to 0.'
+    "must be a decimal number greater than or equal to 0. Currently: #{value}"
   end
 end
