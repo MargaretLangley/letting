@@ -27,10 +27,6 @@ class Credit < ActiveRecord::Base
     @original_amount = amount
   end
 
-  before_validation do
-    self.amount = amount.round(2)
-  end
-
   def self.search(search)
     @accounts = Accounts.find_by_property_id params[:property]
   end
