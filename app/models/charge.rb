@@ -49,23 +49,22 @@ class Charge < ActiveRecord::Base
     !empty?
   end
 
+  private
+
+  def empty?
+    attributes.except(*ignored_attrs).values.all?(&:blank?) &&
+      due_ons.empty?
+  end
+
+  def ignored_attrs
+    %w[id account_id created_at updated_at]
+  end
+
+  def persitable_due_ons
+    due_ons.reject(&:marked_for_destruction?)
+  end
+
   def due_ons_size
     errors.add :due_ons, 'Too many due_ons' if persitable_due_ons.size > 12
   end
-
-  private
-
-    def empty?
-      attributes.except(*ignored_attrs).values.all?(&:blank?) &&
-        due_ons.empty?
-    end
-
-    def ignored_attrs
-      %w[id account_id created_at updated_at]
-    end
-
-    def persitable_due_ons
-      due_ons.reject(&:marked_for_destruction?)
-    end
-
 end

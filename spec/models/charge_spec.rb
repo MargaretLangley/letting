@@ -73,20 +73,16 @@ describe Charge do
       expect(charge.due_ons).to have(1).items
     end
 
-    context '#empty?' do
-      it 'valid is not empty' do
-        expect(charge).to be_present
+    context '#edited?' do
+
+      it 'true when user has set a value on charge or children' do
+        expect(charge).to be_edited
       end
 
-      it 'charge is not empty if due_ons not empty' do
-        charge.attributes = { charge_type: '', due_in: '', amount: '' }
-        expect(charge).to be_present
-      end
-
-      it 'if charge and due_ons attributes empty' do
+      it 'false when the user has not set a value on charge or children' do
         charge.attributes = { charge_type: '', due_in: '', amount: '' }
         charge.due_ons[0].attributes = { day: nil, month: nil }
-        expect(charge).to be_empty
+        expect(charge).to_not be_edited
       end
     end
 
