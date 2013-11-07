@@ -12,11 +12,11 @@
 class AmountValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     unless value && value.to_s =~ /\A\d+??(?:\.\d{0,2})?\z/ && value >= 0
-      record.errors[attribute] << error_message
+      record.errors[attribute] << error_message(value)
     end
   end
 
-  def error_message
+  def error_message value
     "must be a decimal number greater than or equal to 0. Currently: #{value}"
   end
 end
