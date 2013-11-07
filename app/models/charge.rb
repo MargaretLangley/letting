@@ -24,8 +24,17 @@ class Charge < ActiveRecord::Base
   validate :due_ons_size
   has_many :debits, inverse_of: :charge
 
+  after_initialize do
+    self.start_date = Date.parse MIN_DATE if start_date.blank?
+    self.end_date = Date.parse MAX_DATE if end_date.blank?
+  end
+
   def due_between? date_range
-    due_ons.between? date_range
+    charge_range_dates_cover?(date_range) && due_ons.between?(date_range)
+  end
+
+  def active?
+    charge_range.cover?(Date.current)
   end
 
   def chargeable_info date_range
@@ -51,13 +60,23 @@ class Charge < ActiveRecord::Base
 
   private
 
+  def charge_range_dates_cover? date_range
+    charge_range.cover?(date_range.min) && charge_range.cover?(date_range.max)
+  end
+
+  def charge_range
+    start_date .. end_date
+  end
+
   def empty?
     attributes.except(*ignored_attrs).values.all?(&:blank?) &&
-      due_ons.empty?
+    start_date == Date.parse(MIN_DATE) &&
+    end_date == Date.parse(MAX_DATE) &&
+    due_ons.empty?
   end
 
   def ignored_attrs
-    %w[id account_id created_at updated_at]
+    %w[id account_id start_date end_date created_at updated_at]
   end
 
   def persitable_due_ons

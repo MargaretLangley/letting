@@ -63,6 +63,44 @@ describe Charge do
 
   context 'methods' do
 
+    context 'charging' do
+      before { Timecop.travel(Date.new(2013, 1, 31)) }
+      after  { Timecop.return }
+
+      context '#due_between?' do
+        context 'in charge_range' do
+          it 'true' do
+            expect(charge.due_between? date_when_charged).to be_true
+          end
+
+          it 'false' do
+            expect(charge.due_between? dates_not_charged_on).to be_false
+          end
+        end
+        context 'out of charge_range' do
+          it 'is is false' do
+            charge.end_date = '2002-1-1'
+            expect(charge.due_between? date_when_charged).to be_false
+          end
+        end
+      end
+
+      context '#chargeable_info' do
+        it 'if charge between dates'  do
+          expect(charge.chargeable_info date_when_charged).to eq \
+            ChargeableInfo.from_charge chargeable_attributes
+        end
+      end
+
+      def date_when_charged
+        Date.new(2013, 3, 25) .. Date.new(2013, 3, 25)
+      end
+
+      def dates_not_charged_on
+        Date.new(2013, 2, 1) .. Date.new(2013, 3, 24)
+      end
+    end
+
     it '#prepare creates children' do
       charge.prepare
       expect(charge.due_ons).to have(4).items
@@ -80,38 +118,24 @@ describe Charge do
       end
 
       it 'false when the user has not set a value on charge or children' do
-        charge.attributes = { charge_type: '', due_in: '', amount: '' }
+        charge.attributes = { charge_type: '', due_in: '', amount: '',
+                              start_date: MIN_DATE }
         charge.due_ons[0].attributes = { day: nil, month: nil }
         expect(charge).to_not be_edited
       end
+
     end
 
-    context 'charging' do
-      before { Timecop.travel(Date.new(2013, 1, 31)) }
-      after  { Timecop.return }
-
-      context '#due_between?' do
-        it 'true' do
-          expect(charge.due_between? date_when_charged).to be_true
-        end
-
-        it 'false' do
-          expect(charge.due_between? dates_not_charged_on).to be_false
-        end
+    context '#active?' do
+      it 'in date range active' do
+        Timecop.travel(Date.new(2013, 3, 25))
+        expect(charge).to be_active
+        Timecop.return
       end
-
-      context '#chargeable_info' do
-        it 'if charge between dates'  do
-          expect(charge.chargeable_info date_when_charged).to eq \
-            ChargeableInfo.from_charge chargeable_attributes
-        end
-      end
-      def date_when_charged
-        Date.new(2013, 3, 25) .. Date.new(2013, 3, 25)
-      end
-
-      def dates_not_charged_on
-        Date.new(2013, 2, 1) .. Date.new(2013, 3, 24)
+      it 'out of date range inactive' do
+        Timecop.travel(Date.new(2011, 3, 24))
+        expect(charge).to_not be_active
+        Timecop.return
       end
     end
   end

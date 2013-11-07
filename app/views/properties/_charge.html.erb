@@ -18,6 +18,8 @@
   <div class='field text'>
     <%= f.label :amount %>
     <%= f.text_field :amount %>
+    <%= f.hidden_field :start_date %>
+    <%= f.hidden_field :end_date %>
   </div>
   <%= render 'due_ons', f: f, due_ons: DueOnsDecorator.new(charge.due_ons) %>
 </fieldset>

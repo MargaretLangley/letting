@@ -56,6 +56,8 @@ module DB
         charge_type: charge_type,
         due_in: due_in,
         amount: amount,
+        start_date: start_date,
+        end_date: end_date,
       }
     end
 
@@ -75,6 +77,14 @@ module DB
 
     def due_in_code
       @row[:due_in]
+    end
+
+    def start_date
+      Date.parse MIN_DATE  # initializers/app_constants
+    end
+
+    def end_date
+      Date.parse MAX_DATE # initializers/app_constants
     end
 
     def charge_code_message

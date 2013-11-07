@@ -4,6 +4,8 @@ class CreateCharges < ActiveRecord::Migration
       t.string :charge_type, null: false
       t.string :due_in, null: false
       t.decimal :amount, precision: 8, scale: 2, null:false
+      t.date :start_date, null: false
+      t.date :end_date, null: false
       t.integer :account_id, null: false
       t.timestamps
     end

@@ -11,6 +11,8 @@ def charge_attributes overrides = {}
     account_id: 2,
     due_in: 'Advance',
     amount: 88.08,
+    start_date: '2011-03-25',
+    end_date: MAX_DATE,  # app_constants
   }.merge overrides
 end
 

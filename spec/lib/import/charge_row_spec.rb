@@ -72,6 +72,14 @@ module DB
           end
         end
 
+        it 'returns expected attributes' do
+          expect(row.attributes[:charge_type]).to eq 'Ground Rent'
+          expect(row.attributes[:due_in]).to eq 'Arrears'
+          expect(row.attributes[:amount]).to eq 50.5
+          expect(row.attributes[:start_date].to_s).to eq '2000-01-01'
+          expect(row.attributes[:end_date].to_s).to eq '2100-01-01'
+        end
+
       end
     end
 
