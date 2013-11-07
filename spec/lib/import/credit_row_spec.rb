@@ -53,7 +53,7 @@ module DB
         end
       end
 
-      context 'identiy' do
+      context 'identity' do
         it 'calculated for row' do
           expect(row.identity).to eq 'Property: 89, Charge code: GR, Date: 2012-03-25 12:00:00'
         end
