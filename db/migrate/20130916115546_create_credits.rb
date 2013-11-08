@@ -1,12 +1,11 @@
 class CreateCredits < ActiveRecord::Migration
   def change
     create_table :credits do |t|
-      t.integer  :payment_id, null: false
       t.integer  :account_id, null: false
-      t.integer  :debit_id,    null: false
+      t.integer  :payment_id, null: false
       t.date     :on_date,    null: false
+      t.integer  :debit_id,    null: false
       t.decimal  :amount, precision: 8, scale: 2, null: false
-
       t.timestamps
     end
 
