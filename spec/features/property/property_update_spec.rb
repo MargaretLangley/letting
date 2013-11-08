@@ -31,7 +31,7 @@ describe Property do
     end
 
     it 'navigates to accounts view page' do
-      property_create! id: 1, human_ref: 8000
+      pending property_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       click_on 'Accounts'
       expect(page).to have_text 'Address'
