@@ -19,7 +19,6 @@ class Payment < ActiveRecord::Base
     def clear_up_form
       each { |charge| charge.clear_up_form }
     end
-
   end
   accepts_nested_attributes_for :credits, allow_destroy: true
   before_validation :clear_up_form
@@ -32,10 +31,20 @@ class Payment < ActiveRecord::Base
     self.on_date = default_on_date if on_date.blank?
   end
 
+  ####
+  # If an account exists or not
+  #
+  ###
+  #
   def present?
     account_id.present?
   end
 
+  ####
+  # If there an outstanding debit? (in which case credits are generated)
+  #
+  ####
+  #
   def required?
     credits.any?
   end
