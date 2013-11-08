@@ -65,7 +65,6 @@ describe Credit do
   end
 
   context 'methods' do
-    let(:credit) { credit_new }
     it '#outstanding calculated' do
       expect(credit.outstanding).to eq 88.08
     end

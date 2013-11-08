@@ -56,6 +56,7 @@ describe Account do
 
       it 'ignored paid' do
         # credit has associated debit
+        account.debits << debit_new
         account.credits << credit_new
         account.save!
         expect(account.debits).to have(1).item

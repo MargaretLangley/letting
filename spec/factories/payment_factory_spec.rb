@@ -22,10 +22,6 @@ describe 'payment' do
     it 'present' do
       expect(payment.credits.first.amount).to eq 88.08
     end
-    it 'has debit' do
-      debit = payment.credits.first.debit
-      expect(debit.amount).to eq 88.08
-    end
 
     it 'add later date' do
       payment.credits << credit_new(on_date: '2014-03-25')
