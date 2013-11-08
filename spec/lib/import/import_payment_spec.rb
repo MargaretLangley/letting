@@ -42,12 +42,13 @@ module DB
 
     context 'One credit' do
       def one_credit_csv
-        %q[122, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 37.5,    0]
+        %q[89, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 37.5,    0]
       end
 
       it 'One credit' do
-        pending 'Better error message if it can not find matching debit'
-        expect { ImportAccount.import parse one_credit_csv }.to \
+        pending 'need to have payment without debit'
+        property_create! human_ref: 89
+        expect { ImportPayment.import parse one_credit_csv }.to \
           change(Credit, :count).by 1
       end
     end
