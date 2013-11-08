@@ -15,6 +15,7 @@ Letting::Application.routes.draw do
   resources :search_suggestions
   resources :clients
 
+  resources :accounts
   resources :charges
   resources :debit_generators, only: [:new, :create, :index]
   resources :payments
