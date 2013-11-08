@@ -22,7 +22,7 @@ class Charge < ActiveRecord::Base
   validates :amount, numericality: { less_than: 100_000 }
   validates :due_ons, presence: true
   validate :due_ons_size
-  has_many :debits, inverse_of: :charge
+  has_many :debits
 
   after_initialize do
     self.start_date = Date.parse MIN_DATE if start_date.blank?

@@ -21,8 +21,8 @@
 class Debit < ActiveRecord::Base
   belongs_to :account
   belongs_to :debit_generator
-  has_many :credits, inverse_of: :debit
-  belongs_to :charge, inverse_of: :debits
+  has_many :credits
+  belongs_to :charge
 
   validates :charge_id, :on_date, presence: true
   validates :amount, amount: true

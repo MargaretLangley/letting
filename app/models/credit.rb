@@ -15,7 +15,7 @@
 class Credit < ActiveRecord::Base
   belongs_to :payment
   belongs_to :account
-  belongs_to :debit, inverse_of: :credits
+  belongs_to :debit
 
   validates :on_date, presence: true
   validates :amount, amount: true
