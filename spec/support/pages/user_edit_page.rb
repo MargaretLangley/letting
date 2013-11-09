@@ -21,5 +21,4 @@ class UserEditPage
       fill_in 'Password confirmation', with: confirmation
     end
   end
-
 end

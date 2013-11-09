@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe PropertyDecorator do
 
-  let(:property) do
-   PropertyDecorator.new property_new
-  end
+  let(:property) { PropertyDecorator.new property_new }
 
   context 'client_ref' do
     it 'returns nil if unknown' do
@@ -37,6 +35,4 @@ describe PropertyDecorator do
   it 'writes house from road' do
     expect(house.address_lines[1]).to eq '294 Edgbaston Road'
   end
-
 end
-

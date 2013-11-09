@@ -1,5 +1,4 @@
 module AuthMacros
-
   def log_in attributes = {}
     current_user = User.create! user_attributes attributes
     visit '/login/'

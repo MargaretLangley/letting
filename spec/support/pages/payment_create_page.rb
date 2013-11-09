@@ -44,5 +44,4 @@ class PaymentCreatePage
   def successful?
     has_content? /successfully created/i
   end
-
 end

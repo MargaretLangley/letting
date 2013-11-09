@@ -5,9 +5,7 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_property'
 
 module DB
-
   describe ImportProperty, :import do
-
     client = nil
     before :each do
       client = client_create! human_ref: 11
@@ -129,11 +127,10 @@ module DB
 
     def parse row_string
       CSV.parse(row_string,
-                 { headers: FileHeader.property,
-                   header_converters: :symbol,
-                   converters: lambda { |f| f ? f.strip : nil } }
+                headers: FileHeader.property,
+                header_converters: :symbol,
+                converters: lambda { |f| f ? f.strip : nil }
                )
     end
-
   end
 end

@@ -5,9 +5,7 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_charge'
 
 module DB
-
   describe ImportCharge, :import do
-
     def row
       %q[2002, 2006-12-30 17:17:00, GR, 0, 40.5,  S,] +
       %q[24, 6, 25, 12,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 ]
@@ -73,7 +71,7 @@ module DB
       it 'fails if property does not exist' do
         expect { import_charge row }
         .to raise_error ActiveRecord::RecordNotFound,
-        'Property human_ref: 2002 - Not found'
+                        'Property human_ref: 2002 - Not found'
       end
     end
 
@@ -83,9 +81,9 @@ module DB
 
     def parse row_string
       CSV.parse(row_string,
-                 { headers: FileHeader.charge,
-                   header_converters: :symbol,
-                   converters: lambda { |f| f ? f.strip : nil } }
+                headers: FileHeader.charge,
+                header_converters: :symbol,
+                converters: lambda { |f| f ? f.strip : nil }
                )
     end
   end

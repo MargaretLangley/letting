@@ -34,5 +34,4 @@ class DebitGeneratorCreatePage
   def created?
     has_content? /Debits successfully created!/i
   end
-
 end

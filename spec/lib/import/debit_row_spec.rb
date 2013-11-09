@@ -36,7 +36,7 @@ module DB
           expect(row.charge_id).to eq property.account.charges.first.id
         end
         it 'errors if property unknown' do
-          expect{ row.charge_id }.to raise_error PropertyRefUnknown
+          expect { row.charge_id }.to raise_error PropertyRefUnknown
         end
         it 'errors if charge unknown' do
           property_create!
@@ -50,17 +50,16 @@ module DB
           expect(row.attributes[:charge_id]).to eq charge_id
           expect(row.attributes[:on_date]).to eq '2012-03-25 12:00:00'
           expect(row.attributes[:amount]).to eq 50.5
-          expect(row.attributes[:debit_generator_id]).to eq -1
+          expect(row.attributes[:debit_generator_id]).to eq(-1)
         end
       end
     end
 
-
     def parse_line row_string
       CSV.parse_line(row_string,
-                      { headers: FileHeader.account,
-                        header_converters: :symbol,
-                        converters: lambda { |f| f ? f.strip : nil } }
+                     headers: FileHeader.account,
+                     header_converters: :symbol,
+                     converters: lambda { |f| f ? f.strip : nil }
                     )
     end
 

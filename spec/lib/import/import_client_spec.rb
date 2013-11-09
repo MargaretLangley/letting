@@ -5,7 +5,6 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_client'
 
 module DB
-
   describe ImportClient, :import do
     it 'One row' do
       expect { ImportClient.import client_csv }.to change(Client, :count).by 1

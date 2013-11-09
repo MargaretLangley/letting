@@ -5,7 +5,6 @@ require_relative '../../../lib/import/credit_row'
 
 module DB
   describe CreditRow do
-
     let(:row) { CreditRow.new parse_line credit_row }
 
     context 'readers' do
@@ -49,22 +48,23 @@ module DB
           expect(row.account_id).to eq property.account.id
         end
         it 'errors invalid' do
-          expect{ row.account_id }.to raise_error PropertyRefUnknown
+          expect { row.account_id }.to raise_error PropertyRefUnknown
         end
       end
 
       context 'identity' do
         it 'calculated for row' do
-          expect(row.identity).to eq 'Property: 89, Charge code: GR, Date: 2012-03-25 12:00:00'
+          expect(row.identity).to eq 'Property: 89, Charge code: GR, ' +
+                                     'Date: 2012-03-25 12:00:00'
         end
       end
     end
 
     def parse_line row_string
       CSV.parse_line(row_string,
-                      { headers: FileHeader.account,
-                        header_converters: :symbol,
-                        converters: lambda { |f| f ? f.strip : nil } }
+                     headers: FileHeader.account,
+                     header_converters: :symbol,
+                     converters: lambda { |f| f ? f.strip : nil }
                     )
     end
 

@@ -11,7 +11,6 @@ module DB
     context 'credit row' do
 
       context 'attributes' do
-
         it 'has human_ref' do
           expect(credit_row.human_ref).to eq 2002
         end
@@ -19,7 +18,6 @@ module DB
         it 'has charge_code' do
           expect(credit_row.charge_code).to eq 'GR'
         end
-
       end
 
       context 'methods' do
@@ -75,7 +73,7 @@ module DB
           end
 
           it 'errors if property unknown' do
-            expect{ credit_row.account_id }.to raise_error PropertyRefUnknown
+            expect { credit_row.account_id }.to raise_error PropertyRefUnknown
           end
         end
 
@@ -89,15 +87,13 @@ module DB
           end
         end
       end
-
     end
-
 
     def parse_line row_string
       CSV.parse_line(row_string,
-                      { headers: FileHeader.account,
-                        header_converters: :symbol,
-                        converters: lambda { |f| f ? f.strip : nil } }
+                     headers: FileHeader.account,
+                     header_converters: :symbol,
+                     converters: lambda { |f| f ? f.strip : nil }
                     )
     end
 
@@ -113,10 +109,8 @@ module DB
       %q[89, Bal, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0]
     end
 
-     def bad_date_string
+    def bad_date_string
       %q[2002, GR, d-0x-dd, Ground Rent, 0, 50.5, 0]
     end
-
-
   end
 end

@@ -5,7 +5,6 @@ require_relative '../../../lib/import/charge_row'
 
 module DB
   describe ChargeRow do
-
     context 'credit row' do
       let(:row) { ChargeRow.new parse_line charge_row }
 
@@ -85,10 +84,10 @@ module DB
 
     def parse_line row_string
       CSV.parse_line(row_string,
-                      { headers: FileHeader.charge,
-                        header_converters: :symbol,
-                        converters: lambda { |f| f ? f.strip : nil } }
-                    )
+                     headers: FileHeader.charge,
+                     header_converters: :symbol,
+                     converters: lambda { |f| f ? f.strip : nil }
+                     )
     end
 
     def charge_row
@@ -114,6 +113,5 @@ module DB
       %q[ 24, 3, 25, 6, 25, 9, 31, 12, ] +
       %q[ 1901-01-01, 0 ]
     end
-
   end
 end

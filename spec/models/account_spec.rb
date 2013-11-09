@@ -49,7 +49,7 @@ describe Account do
     context '#prepare_for_form' do
       it 'creates credits with amount defaulting from debit' do
         expect(account.credits_for_unpaid_debits).to have(0).item
-        debit1 = account.add_debit debit_attributes
+        account.add_debit debit_attributes
         account.prepare_for_form
         expect(account.credits.first.amount).to eq debit_attributes[:amount]
       end

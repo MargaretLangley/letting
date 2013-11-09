@@ -28,5 +28,4 @@ class ClientUpdatePage
     end
     click_on 'Cancel'
   end
-
 end

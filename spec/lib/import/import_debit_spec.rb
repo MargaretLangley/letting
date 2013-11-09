@@ -5,7 +5,6 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_debit'
 
 module DB
-
   describe ImportDebit, :import do
     let!(:property) do
       property_with_charge_create! human_ref: 122
@@ -36,9 +35,9 @@ module DB
 
     def parse row_string
       CSV.parse(row_string,
-                 { headers: FileHeader.account,
-                   header_converters: :symbol,
-                   converters: lambda { |f| f ? f.strip : nil } }
+                headers: FileHeader.account,
+                header_converters: :symbol,
+                converters: lambda { |f| f ? f.strip : nil }
                )
     end
   end

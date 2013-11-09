@@ -24,7 +24,7 @@ describe AccountCreditDecorator do
     end
 
     it 'balance' do
-      expect(credit_dec.balance).to eq -88.08
+      expect(credit_dec.balance).to eq(-88.08)
     end
   end
 end

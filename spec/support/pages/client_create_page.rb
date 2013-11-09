@@ -27,5 +27,4 @@ class ClientCreatePage
       fill_in_address_nottingham
     end
   end
-
 end

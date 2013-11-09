@@ -8,7 +8,6 @@ class AmountValidatable
   def initialize amount
     @amount = amount
   end
-
 end
 
 describe 'Amount' do

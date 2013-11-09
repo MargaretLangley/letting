@@ -60,7 +60,6 @@ describe Payment do
   end
 
   context 'error' do
-
     it 'handles errors' do
       payment = create_payment
       payment_edit_page.visit_edit_page(payment.id)

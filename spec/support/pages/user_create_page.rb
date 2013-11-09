@@ -1,6 +1,5 @@
 class UserCreatePage
   include Capybara::DSL
-
   def visit_new_page
     visit '/users/new'
     self
@@ -17,5 +16,4 @@ class UserCreatePage
       fill_in 'Password confirmation', with: confirmation
     end
   end
-
 end

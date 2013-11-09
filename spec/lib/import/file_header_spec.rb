@@ -2,7 +2,6 @@ require 'spec_helper'
 require_relative '../../../lib/import/file_header'
 
 module DB
-
   describe FileHeader do
 
     it 'client' do
@@ -43,6 +42,5 @@ module DB
       fields = %w[email password admin]
       expect(FileHeader.user).to eq fields
     end
-
   end
 end

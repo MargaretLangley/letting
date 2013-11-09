@@ -29,7 +29,7 @@ module DB
     context 'two payments same day' do
       def payment_later_in_day
         %q[89, GR, 2012-03-25 14:01:00, Payment Ground Rent, 0, 20, 0]
-       end
+      end
 
       it 'import two credits on one debit' do
         (property_with_unpaid_debit human_ref: 89).save!
@@ -55,9 +55,9 @@ module DB
 
     def parse row_string
       CSV.parse(row_string,
-                 { headers: FileHeader.account,
-                   header_converters: :symbol,
-                   converters: lambda { |f| f ? f.strip : nil } }
+                headers: FileHeader.account,
+                header_converters: :symbol,
+                converters: lambda { |f| f ? f.strip : nil }
                )
     end
 

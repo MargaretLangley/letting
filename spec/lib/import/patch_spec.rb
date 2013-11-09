@@ -8,9 +8,7 @@ require_relative '../../../lib/import/import_property'
 require_relative '../../../lib/import/import_billing_profile'
 
 module DB
-
   describe 'Patch', :import do
-
     it 'if no merge file nothing merged' do
       ImportClient.import clients_csv
       expect(Client.first.address.district).to be_blank
@@ -110,6 +108,5 @@ module DB
                       headers: FileHeader.billing_profile,
                       location: 'spec/fixtures/import_data/patch')
     end
-
   end
 end

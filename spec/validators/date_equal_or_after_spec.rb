@@ -9,7 +9,6 @@ class Validatable
     @start_date = start_date
     @end_date = end_date
   end
-
 end
 
 describe 'DateEqualOrAfter' do

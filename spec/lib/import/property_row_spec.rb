@@ -25,16 +25,16 @@ module DB
         end
 
         it 'errors when missing' do
-          expect {row.client_id }.to raise_error ClientRefUnknown
+          expect { row.client_id }.to raise_error ClientRefUnknown
         end
       end
     end
 
     def parse_line row_string
       CSV.parse_line(row_string,
-                      { headers: FileHeader.property,
-                        header_converters: :symbol,
-                        converters: lambda { |f| f ? f.strip : nil } }
+                     headers: FileHeader.property,
+                     header_converters: :symbol,
+                     converters: lambda { |f| f ? f.strip : nil }
                     )
     end
 

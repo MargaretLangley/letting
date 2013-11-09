@@ -10,7 +10,7 @@ describe Property do
 
     it 'basic', js: true do
       client = client_create!
-      property = property_create! id: 1, human_ref: 8000, client_id: client.id
+      property_create! id: 1, human_ref: 8000, client_id: client.id
       client_create! human_ref: 8010
       navigate_to_edit_page
       validate_page
