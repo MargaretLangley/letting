@@ -89,7 +89,7 @@ module DB
       CSV.parse(row_string,
                 headers: FileHeader.billing_profile,
                 header_converters: :symbol,
-                converters: lambda { |f| f ? f.strip : nil }
+                converters: -> (f) { f ? f.strip : nil }
                )
     end
   end

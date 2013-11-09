@@ -46,7 +46,8 @@ module DB
 
       it 'property, account or human_ref nil' do
         expect { ChargesMatcher.new(charges).find! 'unknown' }.to \
-          raise_error ChargeUnknown, "Charge 'unknown' not found in property 'unknown'"
+          raise_error ChargeUnknown,
+                      "Charge 'unknown' not found in property 'unknown'"
       end
     end
   end

@@ -41,7 +41,7 @@ class AccountDecorator
                                           .map { |d| AccountDebitDecorator.new d })
     items_to_balance.push(*@account.credits.select { |d| d.on_date < date }
                                            .map { |c| AccountCreditDecorator.new c })
-    items_to_balance.reduce(0) { |accumulator, acc_item| accumulator + acc_item.balance }
+    items_to_balance.reduce(0) { |a, e| a + e.balance }
   end
 
   def method_missing method_name, *args, &block

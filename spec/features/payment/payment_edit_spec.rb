@@ -42,7 +42,6 @@ class PaymentEditPage
   def successful?
     has_content? /successfully updated!/i
   end
-
 end
 
 describe Payment do
