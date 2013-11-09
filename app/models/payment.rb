@@ -64,7 +64,8 @@ class Payment < ActiveRecord::Base
   def self.search date_string
     if date_string.present? && parse_date?(date_string)
       Payment.includes(account: [:property])
-             .where(created_at: date_to_datetime_range(Payment.parse_date date_string))
+             .where(created_at: \
+              date_to_datetime_range(Payment.parse_date date_string))
     else
       none
     end
@@ -86,7 +87,6 @@ class Payment < ActiveRecord::Base
       false
   end
 
-
   def default_on_date
     Date.current
   end
@@ -94,5 +94,4 @@ class Payment < ActiveRecord::Base
   def outstanding
     credits.outstanding
   end
-
 end

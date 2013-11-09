@@ -13,7 +13,6 @@
 ####
 #
 class AccountsController < ApplicationController
-
   def index
     @properties = Property.search(search_param).page(params[:page]).load
   end
@@ -21,7 +20,6 @@ class AccountsController < ApplicationController
   def show
     @property = PropertyDecorator.new Property.find params[:id]
   end
-
 
   private
 
@@ -43,5 +41,4 @@ class AccountsController < ApplicationController
       %i(id property_id use_profile) + [address_attributes: address_params] +
       [entities_attributes: entities_params]
     end
-
 end

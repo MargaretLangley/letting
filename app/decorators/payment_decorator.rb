@@ -10,7 +10,6 @@
 ####
 #
 class PaymentDecorator
-
   def initialize payment
     @payment = payment
   end

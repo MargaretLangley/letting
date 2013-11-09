@@ -104,5 +104,4 @@ class Property < ActiveRecord::Base
       # optional hyphen (-) and optional number (\d)
       (search =~ /^(\d+\s*-?)+\s*\d+$/).present?
     end
-
 end

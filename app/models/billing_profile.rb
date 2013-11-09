@@ -41,5 +41,4 @@ class BillingProfile < ActiveRecord::Base
     entities.destroy_all
     address.clear_up_form unless address.nil?
   end
-
 end

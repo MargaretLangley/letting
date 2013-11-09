@@ -13,7 +13,6 @@ require_relative '../../lib/import/errors'
 ####
 #
 class ChargesMatcher
-
   def initialize charges
     @charges = charges
   end
@@ -24,7 +23,7 @@ class ChargesMatcher
 
   def find! charge_type
     charge = find charge_type
-    raise DB::ChargeUnknown, error_msg(charge_type), caller if charge.nil?
+    fail DB::ChargeUnknown, error_msg(charge_type), caller if charge.nil?
     charge
   end
 
@@ -33,11 +32,11 @@ class ChargesMatcher
   end
 
   def error_msg charge_type
-    "Charge '#{charge_type}' not found in property '#{property_ref || 'unknown' }'"
+    "Charge '#{charge_type}' not found in property " +
+    "'#{property_ref || 'unknown' }'"
   end
 
   def property_ref
     @charges.first.try(:account).try(:property).try(:human_ref)
   end
-
 end

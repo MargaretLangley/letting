@@ -11,7 +11,6 @@
 ####
 #
 class ClientsController < ApplicationController
-
   def index
     @clients = Client.search(search_param).page(params[:page]).load
     redirect_to find_route(@clients.first) if unique_search?
@@ -68,7 +67,6 @@ class ClientsController < ApplicationController
       else
         clients_path
       end
-
     end
 
     def unique_search?
@@ -103,5 +101,4 @@ class ClientsController < ApplicationController
     def client_deleted_message
       "#{identy} successfully deleted!"
     end
-
 end

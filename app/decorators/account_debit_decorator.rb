@@ -1,5 +1,3 @@
-
-
 class AccountDebitDecorator
   include ActionView::Helpers::NumberHelper
 
@@ -16,7 +14,7 @@ class AccountDebitDecorator
   end
 
   def due
-    number_with_precision(@debit.amount,precision: 2)
+    number_with_precision(@debit.amount, precision: 2)
   end
 
   def payment

@@ -54,7 +54,7 @@ class Entity < ActiveRecord::Base
   private
 
     def destroy_entity
-      self.mark_for_destruction
+      mark_for_destruction
     end
 
     def ignored_attrs

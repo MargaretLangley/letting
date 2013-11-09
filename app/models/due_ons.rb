@@ -48,7 +48,6 @@ module DueOns
 
   private
 
-
       def clear_up_all_children
         each { |due_on| due_on.clear_up_form self }
       end

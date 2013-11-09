@@ -19,7 +19,8 @@ class Credit < ActiveRecord::Base
 
   validates :on_date, presence: true
   validates :amount, amount: true
-  validates :amount, numericality: { less_than_or_equal_to: ->(credit) { credit.pay_off } }
+  validates :amount, numericality:
+                     { less_than_or_equal_to: ->(credit) { credit.pay_off } }
 
   after_initialize do
     self.on_date = default_on_date if on_date.blank?
@@ -40,7 +41,7 @@ class Credit < ActiveRecord::Base
   end
 
   def clear_up_form
-    self.mark_for_destruction if amount.nil? || amount.round(2) == 0
+    mark_for_destruction if amount.nil? || amount.round(2) == 0
   end
 
   private
@@ -52,5 +53,4 @@ class Credit < ActiveRecord::Base
   def default_on_date
     Date.current
   end
-
 end

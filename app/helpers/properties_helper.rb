@@ -1,5 +1,4 @@
 module PropertiesHelper
-
   def heading entity
     entity.company? ? 'Company Name: ' : 'Name:'
   end
@@ -23,5 +22,4 @@ module PropertiesHelper
   def hide_field_on_start_by_entity_type record
     record.company? ? 'toggleOnStart' : ''
   end
-
 end

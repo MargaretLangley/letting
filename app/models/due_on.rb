@@ -16,13 +16,17 @@
 class DueOn < ActiveRecord::Base
   belongs_to :charge
   validates :day, :month, presence: true
-  validates :day,   numericality: { only_integer: true, greater_than: 0,
+  validates :day,   numericality: { only_integer: true,
+                                    greater_than: 0,
                                     less_than: 32 }
-  validates :month, numericality: { only_integer: true, greater_than: -2,
+  validates :month, numericality: { only_integer: true,
+                                    greater_than: -2,
                                     less_than: 13 }
 
-  validates :year, numericality: { only_integer: true, greater_than: 1990,
-                                    less_than: 2030 }, allow_nil: true
+  validates :year, numericality: { only_integer: true,
+                                   greater_than: 1990,
+                                   less_than: 2030 },
+                   allow_nil: true
   PER_MONTH = -1
   ON_DATE = 0
 
@@ -39,8 +43,8 @@ class DueOn < ActiveRecord::Base
   end
 
   def clear_up_form due_ons
-    self.mark_for_destruction if empty?
-    self.mark_for_destruction if due_ons.has_new_due_on? && self.persisted?
+    mark_for_destruction if empty?
+    mark_for_destruction if due_ons.has_new_due_on? && self.persisted?
   end
 
   def empty?

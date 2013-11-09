@@ -14,7 +14,6 @@
 ####
 #
 class BillingProfileWithId
-
   attr_accessor :human_ref
 
   def initialize billing_profile = BillingProfile.new
@@ -28,5 +27,4 @@ class BillingProfileWithId
   def respond_to_missing? method_name, include_private = false
     @billing_profile.respond_to?(method_name, include_private) || super
   end
-
 end

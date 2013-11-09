@@ -51,5 +51,4 @@ class ApplicationController < ActionController::Base
   def not_logged_in_message
     'Not logged in. Please login to use the application.'
   end
-
 end

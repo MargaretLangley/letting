@@ -30,11 +30,11 @@ module Entities
       end
 
       def clear_up_form
-        self.each { |entity| entity.clear_up_form }
+        each { |entity| entity.clear_up_form }
       end
 
       def destroy_all
-        self.each { |entity| entity.destroy_form }
+        each { |entity| entity.destroy_form }
       end
     end
   end

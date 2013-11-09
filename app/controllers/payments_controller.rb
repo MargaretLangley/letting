@@ -17,7 +17,6 @@
 ####
 #
 class PaymentsController < ApplicationController
-
   def index
     @payments = Payment.search(index_search_param).page(params[:page]).load
   end
@@ -119,5 +118,4 @@ class PaymentsController < ApplicationController
   def credit_attributes
     %i(id account_id debit_id on_date amount)
   end
-
 end

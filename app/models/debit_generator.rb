@@ -76,5 +76,4 @@ class DebitGenerator < ActiveRecord::Base
   def new_debits
     debits.select(&:new_record?)
   end
-
 end

@@ -15,7 +15,6 @@
 ####
 #
 class PropertiesController < ApplicationController
-
   def index
     @properties = Property.search(search_param).page(params[:page]).load
     redirect_to find_route(@properties.first) if unique_search?

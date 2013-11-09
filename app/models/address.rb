@@ -42,7 +42,7 @@ class Address < ActiveRecord::Base
   end
 
   def clear_up_form
-    self.mark_for_destruction
+    mark_for_destruction
   end
 
   private
@@ -50,5 +50,4 @@ class Address < ActiveRecord::Base
     def ignored_attrs
       %w[id addressable_id addressable_type created_at updated_at]
     end
-
 end

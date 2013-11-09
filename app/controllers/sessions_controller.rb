@@ -15,7 +15,6 @@
 #####
 #
 class SessionsController < ApplicationController
-
   def create
     user = user_from_email
     if user && user.authenticate(params[:password])

@@ -1,7 +1,7 @@
-
-
 class AccountBalanceDecorator
   include ActionView::Helpers::NumberHelper
+
+  attr_reader :balance
 
   def initialize balance, date
     @balance = balance
@@ -22,9 +22,5 @@ class AccountBalanceDecorator
 
   def payment
     ''
-  end
-
-  def balance
-    @balance
   end
 end
