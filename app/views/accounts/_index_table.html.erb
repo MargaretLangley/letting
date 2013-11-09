@@ -47,7 +47,7 @@
           </td>
         <% end %>
         <td class='alnright'>
-          <%= link_to property.human_ref, property_path(property.id) %>
+          <%= link_to property.human_ref, account_path(property.id) %>
         </td>
         <td class='alnright'>
           <%=property.client_ref %>
@@ -72,7 +72,7 @@
         </td>
        <% if show_actions %>
         <td>
-          <%= link_to 'View Accounts', property_path(property.id) %>
+          <%= link_to 'View Accounts', account_path(property.id) %>
         </td>
         <% end %>
       <% end %>

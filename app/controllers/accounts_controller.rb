@@ -18,6 +18,11 @@ class AccountsController < ApplicationController
     @properties = Property.search(search_param).page(params[:page]).load
   end
 
+  def show
+    @property = PropertyDecorator.new Property.find params[:id]
+  end
+
+
   private
 
     def search_param
