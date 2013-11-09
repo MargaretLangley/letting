@@ -48,7 +48,6 @@ end
 
 def debit_attributes overrides = {}
   {
-    id: 1,
     account_id: 1,
     debit_generator_id: 1,
     charge_id: 1,
@@ -77,7 +76,6 @@ end
 
 def debit_generator_attributes overrides = {}
   {
-    id: 1,
     search_string: 'Lords',
     start_date: '1/3/2013',
     end_date: '1/4/2013',
