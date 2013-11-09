@@ -2,13 +2,10 @@ require_relative 'charge_code'
 require_relative 'errors'
 
 module DB
-
   class ChargeRow
-
     DUE_IN_CODE_TO_STRING  = { '0'  => 'Arrears',
                                '1' => 'Advance',
                                'M' => 'MidTerm' }
-
     def initialize row
       @row = row
     end
@@ -27,13 +24,13 @@ module DB
 
     def charge_type
       charge = ChargeCode.to_string charge_code
-      raise ChargeCodeUnknown, charge_code_message, caller unless charge
+      fail ChargeCodeUnknown, charge_code_message, caller unless charge
       charge
     end
 
     def maximum_dates
       max_dates = ChargeCode.to_times_per_year charge_code
-      raise ChargeCodeUnknown, max_dates_message, caller unless max_dates
+      fail ChargeCodeUnknown, max_dates_message, caller unless max_dates
       max_dates
     end
 
@@ -88,16 +85,17 @@ module DB
     end
 
     def charge_code_message
-      "Property #{human_ref}: Charge code #{charge_code} can not be converted into a string"
+      "Property #{human_ref}: " +
+      "Charge code #{charge_code} can not be converted into a string"
     end
 
     def max_dates_message
-      "Property #{human_ref}: Charge code #{charge_code} can not be converted into maximum dates per year."
+      "Property #{human_ref}: Charge code #{charge_code} " +
+      'can not be converted into maximum dates per year.'
     end
 
     def due_in_code_message
       "Property #{human_ref}: Due in code #{due_in_code} is unknown."
     end
-
   end
 end

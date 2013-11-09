@@ -2,7 +2,6 @@
 require_relative 'import_base'
 
 module DB
-
   ####
   #
   # Imports users into the application.
@@ -19,7 +18,6 @@ module DB
   ####
   #
   class ImportUser < ImportBase
-
     def initialize  contents, range, patch
       super User, contents, range, patch
     end

@@ -14,7 +14,6 @@ module DB
   ####
   #
   class ImportBillingProfile < ImportBase
-
     def initialize  contents, range, patch
       super BillingProfile, contents, range, patch
     end
@@ -43,6 +42,5 @@ module DB
       import_contact @model_to_assign, row
       clean_contact @model_to_assign
     end
-
   end
 end

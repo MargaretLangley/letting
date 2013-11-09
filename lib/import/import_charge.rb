@@ -22,7 +22,6 @@ module DB
   ####
   #
   class ImportCharge < ImportBase
-
     MONTHS_IN_YEAR = 12
 
     def initialize contents, range, patch
@@ -100,6 +99,5 @@ module DB
     def day_month_from_row_columns number
       DayMonth.from_day_month row.day(number), row.month(number)
     end
-
   end
 end

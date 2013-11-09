@@ -14,7 +14,6 @@ module DB
   #
 
   class ImportAccount < ImportBase
-
     def initialize  contents, range, patch
       super Property, contents, range, patch
     end
@@ -32,7 +31,7 @@ module DB
       when row.credit?
         ImportPayment.import [row]
       else
-        raise AccountRowTypeUnknown, account_type_unknown_msg
+        fail AccountRowTypeUnknown, account_type_unknown_msg
       end
     end
 
@@ -58,6 +57,5 @@ module DB
     def account_type_unknown_msg
       "Unknown Row Property:#{row.human_ref}, charge_code: #{row.charge_code}"
     end
-
   end
 end

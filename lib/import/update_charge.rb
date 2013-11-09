@@ -1,5 +1,4 @@
 module DB
-
   class UpdateCharge
     def self.do
       new.update

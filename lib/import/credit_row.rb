@@ -2,7 +2,6 @@ require_relative 'charge_code'
 require_relative 'errors'
 
 module DB
-
   class CreditRow
     def initialize row
       @row = row
@@ -32,7 +31,7 @@ module DB
 
     def charge_type
       charge = ChargeCode.to_string charge_code
-      raise DB::ChargeCodeUnknown, charge_code_message, caller unless charge
+      fail DB::ChargeCodeUnknown, charge_code_message, caller unless charge
       charge
     end
 
@@ -65,7 +64,6 @@ module DB
 
     private
 
-
     def charge_code_message
       "#{identity} - #{charge_code} can not be converted into a string"
     end
@@ -73,6 +71,5 @@ module DB
     def property_unknown_message
       "Property ref: #{human_ref} is unknown."
     end
-
   end
 end

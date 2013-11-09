@@ -2,7 +2,6 @@ require_relative 'charge_code'
 require_relative 'errors'
 
 module DB
-
   class DebitRow
     def initialize row
       @row = row
@@ -18,15 +17,17 @@ module DB
 
     def charge_type
       charge = ChargeCode.to_string charge_code
-      raise DB::ChargeCodeUnknown, charge_code_message, caller unless charge
+      fail DB::ChargeCodeUnknown, charge_code_message, caller unless charge
       charge
     end
 
     def charge_id
       property = Property.find_by(human_ref: human_ref)
-      raise DB::PropertyRefUnknown, property_unknown_message, caller unless property
-      charge = Charge.find_by account_id: property.account.id, charge_type: charge_type
-      raise DB::ChargeUnknown, charge_unknown_message, caller unless charge
+      fail DB::PropertyRefUnknown, property_unknown_message, caller \
+        unless property
+      charge = Charge.find_by account_id: property.account.id,
+                              charge_type: charge_type
+      fail DB::ChargeUnknown, charge_unknown_message, caller unless charge
       charge.id
     end
 
@@ -62,7 +63,8 @@ module DB
     end
 
     def charge_code_message
-      "Property #{human_ref}: Charge code #{charge_code} can not be converted into a string"
+      "Property #{human_ref}: " +
+      "Charge code #{charge_code} can not be converted into a string"
     end
 
     def property_unknown_message
@@ -70,7 +72,8 @@ module DB
     end
 
     def charge_unknown_message
-      "Charge '#{charge_type}' not found in property '#{human_ref || 'unknown' }'"
+      "Charge '#{charge_type}' not found in property " +
+      "'#{human_ref || 'unknown' }'"
     end
   end
 end

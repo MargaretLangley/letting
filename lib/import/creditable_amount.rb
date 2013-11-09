@@ -2,6 +2,8 @@ require_relative 'errors'
 
 module DB
   class CreditableAmount
+    attr_reader :balance
+
     def initialize amount
       @balance = amount
     end
@@ -22,17 +24,13 @@ module DB
     #
     def withdraw  amount
       @balance -= amount
-      raise DB::CreditNegativeError, 'total credits is negative', caller \
+      fail DB::CreditNegativeError, 'total credits is negative', caller \
         if @balance.round(2) < 0
       self
     end
 
-    def balance
-      @balance
-    end
-
     def assert_balance balance
-      raise DB::BalanceNotMatching, 'Blanace not matching calculated', caller \
+      fail DB::BalanceNotMatching, 'Blanace not matching calculated', caller \
         if @balance != balance
     end
   end

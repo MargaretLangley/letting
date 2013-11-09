@@ -21,7 +21,6 @@ module DB
     end
 
     def assign_address address, row
-
       address.attributes = { flat_no:    row[:flat_no],
                              house_name: row[:house_name],
                              road_no:    row[:road_no],
@@ -90,6 +89,5 @@ module DB
     def remove_ampersand_from_entity_title entity
       entity.title.sub!('& M', 'M')
     end
-
   end
 end

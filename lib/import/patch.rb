@@ -82,6 +82,5 @@ module DB
         "'#{patch_model.entities[0].name}' is the same as " +
         "'#{model.entities[0].name} we cannot patch the address data."
       end
-
   end
 end

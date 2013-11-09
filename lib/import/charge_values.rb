@@ -23,5 +23,4 @@ module DB
       @max_dates_per_year = max_dates_per_year
     end
   end
-
 end

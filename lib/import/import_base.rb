@@ -45,9 +45,9 @@ module DB
 
     def filtered
       if @range.nil?
-         false
+        false
       else
-         filtered_condition
+        filtered_condition
       end
     end
 

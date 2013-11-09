@@ -1,7 +1,6 @@
 require 'csv'
 
 module DB
-
   ####
   #
   # FileImport
@@ -56,5 +55,4 @@ module DB
         "#{@location}/#{filename}.csv"
       end
   end
-
 end

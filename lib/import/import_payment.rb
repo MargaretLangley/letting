@@ -4,7 +4,6 @@ require_relative 'creditable_amount'
 
 module DB
   class ImportPayment < ImportBase
-
     def initialize contents, range, patch
       super Payment, contents, range, patch
       @amount = CreditableAmount.new(0)
@@ -17,7 +16,7 @@ module DB
     def model_prepared
       super
       @model_to_assign.prepare_for_form
-      raise DB::NotIdempotent, import_not_idempotent_msg, caller \
+      fail DB::NotIdempotent, import_not_idempotent_msg, caller \
         unless @model_to_assign.new_record?
     end
 
@@ -42,9 +41,7 @@ module DB
 
     def import_not_idempotent_msg
       "#{row.identity}: Import Process for #{self.class} is not idempodent." +
-      " You need to delete Payment and credits before running this task again."
+      ' You need to delete Payment and credits before running this task again.'
     end
-
-
   end
 end

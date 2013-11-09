@@ -1,9 +1,7 @@
 require_relative 'errors'
 
 module DB
-
   class PropertyRow
-
     def initialize row
       @row = row
     end
@@ -39,7 +37,5 @@ module DB
     def client_ref_unknown_msg
       "Client ref: #{client_ref} is unknown."
     end
-
   end
-
 end

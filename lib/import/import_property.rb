@@ -19,7 +19,6 @@ module DB
   ####
   #
   class ImportProperty  < ImportBase
-
     def initialize  contents, range, patch
       super Property, contents, range, patch
     end
@@ -55,6 +54,5 @@ module DB
     def model_is_new
       @model_to_assign.new_record?
     end
-
   end
 end

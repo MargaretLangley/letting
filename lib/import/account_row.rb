@@ -2,7 +2,6 @@ require_relative 'charge_code'
 require_relative 'errors'
 
 module DB
-
   class AccountRow
     def initialize row
       @row = row
@@ -63,6 +62,5 @@ module DB
     def property_unknown_message
       "Property ref: #{human_ref} is unknown."
     end
-
   end
 end
