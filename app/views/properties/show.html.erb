@@ -1,5 +1,5 @@
 <article>
-   <%= render 'properties/search', path: properties_path, search_action: 'show', search_label: 'Accounts Search' %>
+   <%= render 'properties/search', path: properties_path, search_action: 'show', search_label: 'View Search' %>
   <div class = 'showbox'>
     <h2>Property Id: </span>
       <%= @property.human_ref %>
@@ -25,9 +25,6 @@
       <%= render 'show_charges', object: @property.account.charges %>
     </p>
   </div>
-  <p>
-   <%= render 'show_accounts', debits: @property.account.debits, payments: @property.account.payments %>
-  </p>
   <p>
     <button> <%= link_to 'Print This Page', '#', class: 'print-window'%></button>
   </p>

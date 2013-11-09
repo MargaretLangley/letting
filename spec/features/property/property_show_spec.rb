@@ -8,7 +8,7 @@ describe Property do
     log_in
     property_with_billing_create! id: 1, human_ref: 1000
     visit '/properties/'
-    click_on 'View Accounts'
+    click_on 'View'
   end
 
   it '#show' do
@@ -70,26 +70,26 @@ describe Property do
     property_create! human_ref: 111
     property_create! human_ref: 222
     visit '/properties/'
-    first(:link, 'View Accounts').click
+    first(:link, 'View').click
   end
 
   it 'searches for valid property' do
     fill_in 'search', with: '222'
-    click_on 'Accounts Search'
+    click_on 'View Search'
     expect(page).to have_text 'Edgbaston Road'
   end
 
   it 'searches for same property' do
     fill_in 'search', with: '222'
-    click_on 'Accounts Search'
+    click_on 'View Search'
     fill_in 'search', with: '222'
-    click_on 'Accounts Search'
+    click_on 'View Search'
     expect(page).to have_text 'Edgbaston Road'
   end
 
   it 'search not found' do
     fill_in 'search', with: '599'
-    click_on 'Accounts Search'
+    click_on 'View Search'
     expect(page).to_not have_text '599'
   end
 
