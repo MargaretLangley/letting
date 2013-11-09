@@ -1,13 +1,13 @@
 <div class = 'showbox'>
-  <h3>Accounts</h3>
+  <h3>Account Details</h3>
   <table>
     <thead>
       <tr>
         <th>
-          Type
+          Date
         </th>
         <th>
-          Date
+          Type
         </th>
         <th>
           Description
@@ -25,48 +25,27 @@
     </thead>
     <tbody>
       <% total = 0 %>
-      <% debits.each do |debit| %>
+      <% account.items.each do |item| %>
         <tr>
           <td>
-            <%= debit.type %>
+           <%= item.date %>
           </td>
           <td>
-           <%= l debit.on_date %>
+            <%= item.charge_type %>
           </td>
           <td>
           </td>
           <td class='alnright'>
-            <%= debit.amount %>
+            <%= item.due %>
           </td>
           <td class='alnright'>
+            <%= item.payment %>
           </td>
           <td class='alnright'>
-            <%= total = total + debit.amount %>
+            <%= number_with_precision(total = total + item.balance,precision: 2) %>
           </td>
         </tr>
       <% end %>
-      <% payments.each do |payment| %>
-        <tr>
-          <td>
-            <%= payment.account_id %>
-          </td>
-          <td>
-           <%= l payment.on_date %>
-          </td>
-          <td>
-          </td>
-          <td class='alnright'>
-          </td>
-          <td class='alnright'>
-            <%= payment.amount %>
-          </td>
-          <td class='alnright'>
-            <%= total = total- payment.amount %>
-          </td>
-        </tr>
-      <% end %>
-
-
 
     </tbody>
   </table>

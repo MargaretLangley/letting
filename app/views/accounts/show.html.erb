@@ -24,7 +24,7 @@
     </p>
   </div>
   <p>
-   <%= render 'show_accounts', debits: @property.account.debits, payments: @property.account.payments %>
+   <%= render 'show_accounts', account: AccountDecorator.new(@property.account) %>
   </p>
   <p>
     <button> <%= link_to 'Print This Page', '#', class: 'print-window'%></button>
