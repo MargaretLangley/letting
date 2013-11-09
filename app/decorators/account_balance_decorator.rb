@@ -1,0 +1,30 @@
+
+
+class AccountBalanceDecorator
+  include ActionView::Helpers::NumberHelper
+
+  def initialize balance, date
+    @balance = balance
+    @date = date
+  end
+
+  def charge_type
+    'Balance carried forward'
+  end
+
+  def date
+    I18n.l @date
+  end
+
+  def due
+    ''
+  end
+
+  def payment
+    ''
+  end
+
+  def balance
+    @balance
+  end
+end
