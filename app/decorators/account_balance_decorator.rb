@@ -13,7 +13,7 @@ class AccountBalanceDecorator
   end
 
   def date
-    I18n.l @date
+    I18n.l @date, format: :short
   end
 
   def due

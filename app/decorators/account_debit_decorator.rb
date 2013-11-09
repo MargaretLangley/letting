@@ -12,7 +12,7 @@ class AccountDebitDecorator
   end
 
   def date
-    I18n.l @debit.on_date
+    I18n.l @debit.on_date, format: :short
   end
 
   def due

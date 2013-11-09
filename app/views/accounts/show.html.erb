@@ -23,18 +23,16 @@
       <%= render 'show_charges', object: @property.account.charges %>
     </p>
   </div>
-  <p>
-    <div class='toggle-selection'>
-      <div class='togglable'>
-        <%= link_to 'Full Accounts', '#', class: 'toggle toggle-event' %>
-         <%= render 'show_accounts', items: AccountDecorator.new(@property.account).abbrev_items %>
-      </div>
-      <div class='togglable hidden'>
-        <%= link_to 'Partial Accounts', '#', class: 'toggle toggle-event' %>
-        <%= render 'show_accounts', items: AccountDecorator.new(@property.account).items %>
-      </div>
+  <div class='toggle-selection'>
+    <div class='togglable'>
+      <%= link_to 'Full Accounts', '#', class: 'toggle toggle-event' %>
+       <%= render 'show_accounts', items: AccountDecorator.new(@property.account).abbrev_items %>
     </div>
-  </p>
+    <div class='togglable hidden'>
+      <%= link_to 'Partial Accounts', '#', class: 'toggle toggle-event' %>
+      <%= render 'show_accounts', items: AccountDecorator.new(@property.account).items %>
+    </div>
+  </div>
   <p>
     <button> <%= link_to 'Print This Page', '#', class: 'print-window'%></button>
   </p>

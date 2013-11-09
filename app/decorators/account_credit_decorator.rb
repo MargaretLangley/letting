@@ -12,7 +12,7 @@ class AccountCreditDecorator
   end
 
   def date
-    I18n.l @credit.on_date
+    I18n.l @credit.on_date, format: :short
   end
 
   def due

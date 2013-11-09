@@ -64,7 +64,9 @@ en:
             precision: 2
   date:
     formats:
+      #strftime
       default: "%d/%m/%Y"
+      short: "%d %b %y"
 
   instruction:
     debit_generators:
