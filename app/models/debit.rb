@@ -47,7 +47,15 @@ class Debit < ActiveRecord::Base
     amount == other.amount
   end
 
+  def type
+    charge_obj.charge_type
+  end
+
   private
+
+  def charge_obj
+    charge
+  end
 
   def paid
     credits.pluck(:amount).inject(0, :+)

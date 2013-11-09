@@ -34,11 +34,12 @@ describe Debit do
         expect(debit).to_not be_valid
       end
     end
+
   end
 
   context 'methods' do
 
-    context '#already_charged' do
+    context '#already_charged?' do
       it 'matches' do
         one = Debit.new(charge_id: 1, on_date: '2013-10-1')
         two = Debit.new(charge_id: 1, on_date: '2013-10-1')
@@ -84,6 +85,17 @@ describe Debit do
         debit.save!
         Credit.create! credit_attributes debit_id: debit.id
         expect(debit).to be_paid
+      end
+    end
+
+    context '#type' do
+      it 'returned when charge present' do
+        debit.charge = Charge.new charge_attributes
+        expect(debit.type).to eq 'Ground Rent'
+      end
+
+      it 'errors when charge missing' do
+        expect { debit.type }.to raise_error
       end
     end
   end
