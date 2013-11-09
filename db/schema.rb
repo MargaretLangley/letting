@@ -76,10 +76,10 @@ ActiveRecord::Schema.define(version: 20131016112247) do
   end
 
   create_table "credits", force: true do |t|
-    t.integer  "payment_id",                         null: false
     t.integer  "account_id",                         null: false
-    t.integer  "debit_id",                           null: false
+    t.integer  "payment_id",                         null: false
     t.date     "on_date",                            null: false
+    t.integer  "debit_id",                           null: false
     t.decimal  "amount",     precision: 8, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
