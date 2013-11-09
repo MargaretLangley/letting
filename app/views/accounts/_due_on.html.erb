@@ -1,0 +1,5 @@
+<fieldset id='<%= parent %>_due_on_<%= f.options[:child_index]  %>' class='minimal'>
+  <div class='field text require half'>
+    <%= f.text_field :day, placeholder: 'dd' %>/<%= f.text_field :month, placeholder: 'mm' %>
+  </div>
+</fieldset>
