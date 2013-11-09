@@ -14,8 +14,8 @@ describe AccountDecorator do
   context 'items' do
 
     it 'sorted on date' do
-      expect(account.items.first.date).to eq '25/03/2012'
-      expect(account.items.last.date).to eq '30/04/2013'
+      expect(account.items.first.on_date).to eq Date.new 2012, 3, 25
+      expect(account.items.last.on_date).to eq Date.new 2013, 4, 30
     end
 
   end
@@ -33,7 +33,7 @@ describe AccountDecorator do
 
     it 'abbrev_items' do
       expect(account.abbrev_items.first.balance).to eq 88.08
-      expect(account.abbrev_items.last.date).to eq '30/04/2013'
+      expect(account.abbrev_items.last.on_date).to eq Date.new 2013, 4, 30
     end
   end
 

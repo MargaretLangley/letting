@@ -12,7 +12,7 @@ describe AccountCreditDecorator do
     end
 
     it 'date' do
-      expect(credit_dec.date).to eq '30/04/2013'
+      expect(credit_dec.on_date).to eq Date.new 2013, 4, 30
     end
 
     it 'due' do

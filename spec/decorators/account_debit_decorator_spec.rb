@@ -11,7 +11,7 @@ describe AccountDebitDecorator do
     end
 
     it 'date' do
-      expect(debit_dec.date).to eq '25/03/2013'
+      expect(debit_dec.on_date).to eq Date.new 2013, 3, 25
     end
 
     it 'due' do
