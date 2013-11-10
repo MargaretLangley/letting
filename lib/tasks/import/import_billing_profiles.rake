@@ -10,9 +10,8 @@ namespace :import do
 
   desc "Import billing profile addresses data from CSV file"
   task :billing_profiles, [:range] => :environment do |task, args|
-    range = Range.new(*args.range.split("..").map(&:to_i))
     DB::ImportBillingProfile.import billing_file,
-                                    range: range,
+                                    range: Rangify.from_str(args.range).to_i,
                                     patch: DB::Patch.import(BillingProfileWithId,
                                                      patch_file)
    end

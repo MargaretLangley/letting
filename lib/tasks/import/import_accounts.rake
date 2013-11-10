@@ -9,8 +9,8 @@ namespace :import do
 
   desc "Import accounting information from CSV file"
   task :accounts, [:range] => :environment do |task, args|
-    range = Range.new(*args.range.split("..").map(&:to_i))
-    DB::ImportAccount.import accounts_file, range: range
+    DB::ImportAccount.import accounts_file,
+                             range: Rangify.from_str(args.range).to_i
   end
 
   def accounts_file

@@ -9,7 +9,7 @@ namespace :import do
 
   desc "Import clients data from CSV file"
   task :charges, [:range] => :environment do |task, args|
-    range = Range.new(*args.range.split("..").map(&:to_i))
+    range = Rangify.from_str(args.range).to_i
     DB::ImportCharge.import charges_file('acc_info'), range: range
     DB::ImportCharge.import charges_file('acc_info_deleted'), range: range
   end

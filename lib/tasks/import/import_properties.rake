@@ -10,9 +10,8 @@ namespace :import do
 
   desc "Import properties data from CSV file"
   task :properties, [:range] => :environment do |task, args|
-    range = Range.new(*args.range.split("..").map(&:to_i))
     DB::ImportProperty.import properties_file,
-                              range: range,
+                              range: Rangify.from_str(args.range).to_i,
                               patch: DB::Patch.import(Property, patch_properties)
    end
 
