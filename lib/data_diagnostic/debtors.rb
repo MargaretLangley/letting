@@ -20,7 +20,12 @@ class Debtors
   end
 
   def balance_status
-     if debit_amount != credit_amount
+     if debit_amount != credit_amount #&&
+        # account.charges.size > 1 &&
+        # account.debits.select(:charge_id).uniq.size > 1 &&
+        # account.credits.size > 0
+        # If I put these commented out statements in
+        # you
        @count += 1
        puts no_balance_msg
      end
