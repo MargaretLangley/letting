@@ -10,21 +10,28 @@
 ####
 #
 class PaymentDecorator
+  attr_reader :source
+
   def initialize payment
-    @payment = payment
+    @source = payment
+  end
+
+  def prepare_for_form
+    @source.prepare_for_form
+    @source.amount = outstanding if amount.blank?
   end
 
   def submit_message
-    @payment.new_record? ?  'pay total'  : 'update'
+    @source.new_record? ?  'pay total'  : 'update'
   end
 
   private
 
   def method_missing method_name, *args, &block
-    @payment.send method_name, *args, &block
+    @source.send method_name, *args, &block
   end
 
   def respond_to_missing? method_name, include_private = false
-    @payment.respond_to?(method_name, include_private) || super
+    @source.respond_to?(method_name, include_private) || super
   end
 end

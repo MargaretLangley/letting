@@ -36,7 +36,7 @@ class Payment < ActiveRecord::Base
   #
   ###
   #
-  def present?
+  def exists?
     account_id.present?
   end
 
@@ -54,7 +54,6 @@ class Payment < ActiveRecord::Base
       account.prepare_for_form
       account.credits_for_unpaid_debits.each { |credit| credits << credit }
     end
-    self.amount = outstanding if amount.blank?
   end
 
   def clear_up_form

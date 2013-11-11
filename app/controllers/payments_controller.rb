@@ -25,6 +25,12 @@ class PaymentsController < ApplicationController
     prepare_for_new_action human_ref: params[:human_ref]
   end
 
+  def prepare_for_new_action args = {}
+    @payment = PaymentDecorator.new Payment.new args
+    @payment.account = Account.by_human_ref @payment.human_ref
+    @payment.prepare_for_form
+  end
+
   def create
     if search_payments?
       show_payment
@@ -33,12 +39,26 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def show_payment
+    prepare_for_new_action search_params
+    render :new
+  end
+
+  def create_payment
+    @payment = PaymentDecorator.new Payment.new payment_params
+    if @payment.save
+      redirect_to new_payment_path, notice: created_message
+    else
+      render :new
+    end
+  end
+
   def edit
-    @payment = Payment.find params[:id]
+    @payment = PaymentDecorator.new Payment.find params[:id]
   end
 
   def update
-    @payment = Payment.find params[:id]
+    @payment = PaymentDecorator.new Payment.find params[:id]
     if @payment.update payment_params
       redirect_to new_payment_path, notice: updated_message
     else
@@ -48,20 +68,6 @@ class PaymentsController < ApplicationController
 
   def search_payments?
     params[:commit] == 'Search'
-  end
-
-  def show_payment
-    prepare_for_new_action search_params
-    render :new
-  end
-
-  def create_payment
-    @payment = Payment.new payment_params
-    if @payment.save
-      redirect_to new_payment_path, notice: created_message
-    else
-      render :new
-    end
   end
 
   def destroy
@@ -75,12 +81,6 @@ class PaymentsController < ApplicationController
 
   def index_search_param
     params[:search] ||= Date.current.to_s
-  end
-
-  def prepare_for_new_action args = {}
-    @payment = Payment.new args
-    @payment.account = Account.by_human_ref @payment.human_ref
-    @payment.prepare_for_form
   end
 
   def created_message
