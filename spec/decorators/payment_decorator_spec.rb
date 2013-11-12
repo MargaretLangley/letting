@@ -31,7 +31,7 @@ describe PaymentDecorator do
 
   context '#clear_up_form' do
     it 'removes empty credits' do
-      Credit.any_instance.stub(:outstanding).and_return(0)
+      Credit.any_instance.stub(:debit_outstanding).and_return(0)
       payment.source.credits.build
       payment.clear_up_form
       expect(payment.credits.first).to be_marked_for_destruction

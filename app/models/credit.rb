@@ -20,7 +20,7 @@ class Credit < ActiveRecord::Base
   validates :on_date, presence: true
   validates :amount, amount: true
   validates :amount, numericality:
-                     { less_than_or_equal_to: ->(credit) { credit.pay_off } }
+                     { less_than_or_equal_to: ->(credit) { credit.pay_off_debit } }
 
   after_initialize do
     self.on_date = default_on_date if on_date.blank?
@@ -31,18 +31,21 @@ class Credit < ActiveRecord::Base
     @accounts = Accounts.find_by_property_id params[:property]
   end
 
-  def outstanding
-    debit.outstanding
-  end
-
-  def pay_off
-    new_record? ? outstanding : update_pay_off
+  #
+  # The amount outstanding on the debit associated with this credit
+  #
+  def pay_off_debit
+    new_record? ? debit_outstanding : update_pay_off
   end
 
   private
 
   def update_pay_off
-    outstanding + @original_amount
+    debit_outstanding + @original_amount
+  end
+
+  def debit_outstanding
+    debit.outstanding
   end
 
   def default_on_date

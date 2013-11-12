@@ -13,7 +13,7 @@ class Payment < ActiveRecord::Base
   belongs_to :account
   has_many :credits, dependent: :destroy do
     def outstanding
-      map { |credit| credit.outstanding }.sum
+      map { |credit| credit.pay_off_debit }.sum
     end
   end
   accepts_nested_attributes_for :credits, allow_destroy: true

@@ -65,17 +65,14 @@ describe Credit do
   end
 
   context 'methods' do
-    it '#outstanding calculated' do
-      expect(credit.outstanding).to eq 88.08
-    end
 
-    context '#pay_off calculates' do
+    context '#pay_off_debit calculates' do
       it 'new record correctly' do
-        expect(credit.pay_off).to eq 88.08
+        expect(credit.pay_off_debit).to eq 88.08
       end
       it 'saved record correctly' do
         credit.should_receive(:new_record?).and_return(false)
-        expect(credit.pay_off).to eq 176.16
+        expect(credit.pay_off_debit).to eq 176.16
       end
     end
   end
