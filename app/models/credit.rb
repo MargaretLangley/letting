@@ -27,10 +27,6 @@ class Credit < ActiveRecord::Base
     @original_amount = amount
   end
 
-  def self.search(search)
-    @accounts = Accounts.find_by_property_id params[:property]
-  end
-
   #
   # The amount outstanding on the debit associated with this credit
   #
