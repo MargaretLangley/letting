@@ -31,7 +31,7 @@ module DB
     end
 
     def model_assignment_credits
-      @model_to_assign.account.credits_for_unpaid_debits.each do |credit|
+      @model_to_assign.account_dec.credits_for_unpaid_debits.each do |credit|
         credit.attributes = row.credit_attributes
         credit.amount = (@amount.max_withdrawal credit.outstanding).round(2)
         @amount.withdraw credit.amount

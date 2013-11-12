@@ -18,8 +18,8 @@ class PaymentDecorator
   before_validation :clear_up_form
   attr_reader :source
 
-  def account
-    @account ||= AccountPaymentDecorator.new @source.account
+  def account_dec
+    @account_dec ||= AccountPaymentDecorator.new @source.account
   end
 
   def initialize payment
@@ -27,9 +27,9 @@ class PaymentDecorator
   end
 
   def prepare_for_form
-    if account.source
-      account.prepare_for_form
-      account.credits_for_unpaid_debits.each do |credit|
+    if account_dec.source
+      account_dec.prepare_for_form
+      account_dec.credits_for_unpaid_debits.each do |credit|
         generate_credit credit
       end
     end
