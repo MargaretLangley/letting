@@ -1,4 +1,4 @@
-require 'method_missing'
+require_relative '../../lib/modules/method_missing'
 
 class AccountDebitDecorator
   include MethodMissing

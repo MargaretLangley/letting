@@ -1,17 +1,19 @@
 require_relative 'charge_code'
 require_relative 'errors'
 
+require_relative '../modules/method_missing'
 module DB
   class ChargeRow
+    include MethodMissing
     DUE_IN_CODE_TO_STRING  = { '0'  => 'Arrears',
                                '1' => 'Advance',
                                'M' => 'MidTerm' }
     def initialize row
-      @row = row
+      @source = row
     end
 
     def human_ref
-      @row[:human_ref]
+      @source[:human_ref]
     end
 
     def monthly_charge?
@@ -19,7 +21,7 @@ module DB
     end
 
     def amount
-      @row[:amount].to_f
+      @source[:amount].to_f
     end
 
     def charge_type
@@ -41,11 +43,11 @@ module DB
     end
 
     def day number
-      @row[:"day_#{number}"].to_i
+      @source[:"day_#{number}"].to_i
     end
 
     def month number
-      @row[:"month_#{number}"].to_i
+      @source[:"month_#{number}"].to_i
     end
 
     def attributes
@@ -58,22 +60,14 @@ module DB
       }
     end
 
-    def method_missing method_name, *args, &block
-      @row.send method_name, *args, &block
-    end
-
-    def respond_to_missing? method_name, include_private = false
-      @row.respond_to?(method_name, include_private) || super
-    end
-
     private
 
     def charge_code
-      @row[:charge_type]
+      @source[:charge_type]
     end
 
     def due_in_code
-      @row[:due_in]
+      @source[:due_in]
     end
 
     def start_date

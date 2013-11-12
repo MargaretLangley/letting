@@ -1,26 +1,29 @@
+require_relative '../modules/method_missing'
 require_relative 'charge_code'
 require_relative 'errors'
 
 module DB
   class CreditRow
+    include MethodMissing
+
     def initialize row
-      @row = row
+      @source = row
     end
 
     def human_ref
-      @row[:human_ref]
+      @source[:human_ref]
     end
 
     def charge_code
-      @row[:charge_code]
+      @source[:charge_code]
     end
 
     def on_date
-      @row[:on_date]
+      @source[:on_date]
     end
 
     def amount
-      @row[:credit].to_f
+      @source[:credit].to_f
     end
 
     def account_id
@@ -48,14 +51,6 @@ module DB
         on_date: on_date,
         amount: amount,
       }
-    end
-
-    def method_missing method_name, *args, &block
-      @row.send method_name, *args, &block
-    end
-
-    def respond_to_missing? method_name, include_private = false
-      @row.respond_to?(method_name, include_private) || super
     end
 
     def identity

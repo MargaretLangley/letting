@@ -1,3 +1,4 @@
+require_relative '../../lib/modules/method_missing'
 ####
 #
 # DueOnsDecorator
@@ -14,10 +15,11 @@
 ####
 #
 class DueOnsDecorator
-  attr_reader :dueons
+  include MethodMissing
+  attr_reader :source
 
   def initialize due_ons
-    @due_ons = due_ons
+    @source = due_ons
   end
 
   def id index
@@ -25,11 +27,11 @@ class DueOnsDecorator
   end
 
   def by_date
-    @due_ons.to_a.take(DueOns::MAX_DISPLAYED_DUE_ONS)
+    @source.to_a.take(DueOns::MAX_DISPLAYED_DUE_ONS)
   end
 
   def per_month
-    if @due_ons.per_month?
+    if @source.per_month?
       DueOn.new day: first_day_or_empty, month: DueOn::PER_MONTH
     else
       DueOn.new day: '', month: ''
@@ -37,7 +39,7 @@ class DueOnsDecorator
   end
 
   def first_day_or_empty
-    @due_ons.first.present? ? @due_ons.first.day : ''
+    @source.first.present? ? @source.first.day : ''
   end
 
   def hidden_side? side
@@ -46,13 +48,5 @@ class DueOnsDecorator
     else
       side == DueOn::ON_DATE ? '' : 'hidden'
     end
-  end
-
-  def method_missing method_name, *args, &block
-    @due_ons.send method_name, *args, &block
-  end
-
-  def respond_to_missing? method_name, include_private = false
-    @due_ons.respond_to?(method_name, include_private) || super
   end
 end

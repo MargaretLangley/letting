@@ -1,3 +1,4 @@
+require_relative '../../lib/modules/method_missing'
 ####
 #
 # BillingProfileWith
@@ -14,17 +15,10 @@
 ####
 #
 class BillingProfileWithId
+  include MethodMissing
   attr_accessor :human_ref
 
   def initialize billing_profile = BillingProfile.new
-    @billing_profile = billing_profile
-  end
-
-  def method_missing method_name, *args, &block
-    @billing_profile.send method_name, *args, &block
-  end
-
-  def respond_to_missing? method_name, include_private = false
-    @billing_profile.respond_to?(method_name, include_private) || super
+    @source = billing_profile
   end
 end

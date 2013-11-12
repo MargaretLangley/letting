@@ -1,3 +1,4 @@
+require_relative '../../lib/modules/method_missing'
 ####
 #
 # PropertyDecorator
@@ -10,10 +11,11 @@
 ####
 #
 class PropertyDecorator
-  attr_reader :property
+  include MethodMissing
+  attr_reader :source
 
   def initialize property
-    @property = property
+    @source = property
   end
 
   def client_ref
@@ -22,7 +24,7 @@ class PropertyDecorator
 
   def address_lines
     address_lines = []
-    address_lines << property.entities.full_name
+    address_lines << source.entities.full_name
     address_lines << flat_line if address.flat_no.present?
     address_lines << address.house_name if address.house_name.present?
     address_lines << road_line
@@ -35,7 +37,7 @@ class PropertyDecorator
 
   def reduced_address_lines
     address_lines = []
-    address_lines << property.entities.full_name
+    address_lines << source.entities.full_name
     address_lines << flat_line if address.flat_no.present?
     address_lines << address.house_name if address.house_name.present?
     address_lines << road_line
@@ -56,13 +58,5 @@ class PropertyDecorator
 
     def road_line
       "#{address.road_no} #{address.road}".strip
-    end
-
-    def method_missing method_name, *args, &block
-      @property.send method_name, *args, &block
-    end
-
-    def respond_to_missing? method_name, include_private = false
-      @property.respond_to?(method_name, include_private) || super
     end
 end
