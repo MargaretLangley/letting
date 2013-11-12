@@ -1,16 +1,19 @@
+require 'method_missing'
+
 class AccountCreditDecorator
+  include MethodMissing
   include ActionView::Helpers::NumberHelper
 
   def initialize credit
-    @credit = credit
+    @source = credit
   end
 
   def charge_type
-    @credit.debit.type
+    @source.debit.type
   end
 
   def date
-    I18n.l @credit.on_date, format: :short
+    I18n.l @source.on_date, format: :short
   end
 
   def due
@@ -18,20 +21,10 @@ class AccountCreditDecorator
   end
 
   def payment
-    number_with_precision(@credit.amount, precision: 2)
+    number_with_precision(@source.amount, precision: 2)
   end
 
   def balance
-    -@credit.amount
-  end
-
-  private
-
-  def method_missing method_name, *args, &block
-    @credit.send method_name, *args, &block
-  end
-
-  def respond_to_missing? method_name, include_private = false
-    @credit.respond_to?(method_name, include_private) || super
+    -@source.amount
   end
 end

@@ -1,20 +1,23 @@
+require 'method_missing'
+
 class AccountDebitDecorator
+  include MethodMissing
   include ActionView::Helpers::NumberHelper
 
   def initialize debit
-    @debit = debit
+    @source = debit
   end
 
   def charge_type
-    @debit.type
+    @source.type
   end
 
   def date
-    I18n.l @debit.on_date, format: :short
+    I18n.l @source.on_date, format: :short
   end
 
   def due
-    number_with_precision(@debit.amount, precision: 2)
+    number_with_precision(@source.amount, precision: 2)
   end
 
   def payment
@@ -22,16 +25,6 @@ class AccountDebitDecorator
   end
 
   def balance
-    @debit.amount
-  end
-
-  private
-
-  def method_missing method_name, *args, &block
-    @debit.send method_name, *args, &block
-  end
-
-  def respond_to_missing? method_name, include_private = false
-    @debit.respond_to?(method_name, include_private) || super
+    @source.amount
   end
 end
