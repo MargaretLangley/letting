@@ -13,11 +13,7 @@
 class Account < ActiveRecord::Base
   belongs_to :property, inverse_of: :account
   has_many :debits, dependent: :destroy
-  has_many :credits, dependent: :destroy do
-    def clear_up_form
-      each { |credit| credit.clear_up_form }
-    end
-  end
+  has_many :credits, dependent: :destroy
   accepts_nested_attributes_for :credits, allow_destroy: true
   has_many :payments, dependent: :destroy
   include Charges
@@ -36,21 +32,19 @@ class Account < ActiveRecord::Base
     credits.build credit_args
   end
 
-  def credits_for_unpaid_debits
-    credits.select(&:new_record?)
+  def generate_credits account_decorator
+    unpaid_debits.each do |debit|
+      # could test if it already has a new record for that debit
+      account_decorator.generate_credit Credit.new account_id: id, debit: debit
+    end
   end
 
   def prepare_for_form
     charges.prepare
-    unpaid_debits.each do |debit|
-      # could test if it already has a new record for that debit
-      credits.build account_id: id, debit: debit
-    end
   end
 
   def clear_up_form
     charges.clear_up_form
-    credits.clear_up_form
   end
 
   def self.by_human_ref human_ref
@@ -58,10 +52,6 @@ class Account < ActiveRecord::Base
   end
 
   private
-
-    def unpaid_debits
-      debits.reject(&:paid?)
-    end
 
     def already_charged_for? chargeable
       debits.any? do |debit|
@@ -71,5 +61,10 @@ class Account < ActiveRecord::Base
 
     def new_debits
       debits.select(&:new_record?)
+    end
+
+
+    def unpaid_debits
+      debits.reject(&:paid?)
     end
 end

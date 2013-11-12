@@ -24,7 +24,6 @@ class Credit < ActiveRecord::Base
 
   after_initialize do
     self.on_date = default_on_date if on_date.blank?
-    self.amount = outstanding if amount.blank?
     @original_amount = amount
   end
 
@@ -38,10 +37,6 @@ class Credit < ActiveRecord::Base
 
   def pay_off
     new_record? ? outstanding : update_pay_off
-  end
-
-  def clear_up_form
-    mark_for_destruction if amount.nil? || amount.round(2) == 0
   end
 
   private

@@ -14,7 +14,7 @@ module DB
     end
 
     def model_prepared
-      super
+      @model_to_assign = PaymentDecorator.new find_model(@klass).first_or_initialize
       @model_to_assign.prepare_for_form
       fail DB::NotIdempotent, import_not_idempotent_msg, caller \
         unless @model_to_assign.new_record?
@@ -35,7 +35,7 @@ module DB
         credit.attributes = row.credit_attributes
         credit.amount = (@amount.max_withdrawal credit.outstanding).round(2)
         @amount.withdraw credit.amount
-        @model_to_assign.credits << credit
+        @model_to_assign.generate_credit credit
       end
     end
 

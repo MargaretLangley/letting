@@ -46,42 +46,6 @@ describe Account do
       expect(account.add_debit debit_attributes).to be_valid
     end
 
-    context '#prepare_for_form' do
-      it 'creates credits with amount defaulting from debit' do
-        expect(account.credits_for_unpaid_debits).to have(0).item
-        account.add_debit debit_attributes
-        account.prepare_for_form
-        expect(account.credits.first.amount).to eq debit_attributes[:amount]
-      end
-
-      it 'ignored paid' do
-        # credit has associated debit
-        account.debits << debit_new
-        account.credits << credit_new
-        account.save!
-        expect(account.debits).to have(1).item
-        expect(account.credits_for_unpaid_debits).to have(0).item
-      end
-    end
-
-    context '#clear_up_form' do
-      it 'keeps credits with postive amount' do
-        account.add_debit debit_attributes
-        account.prepare_for_form
-        account.credits.first.amount = 1
-        account.clear_up_form
-        expect(account.credits.first).to_not be_marked_for_destruction
-      end
-
-      it 'removes credits with 0 amount' do
-        account.add_debit debit_attributes
-        account.prepare_for_form
-        account.credits.first.amount = 0
-        account.clear_up_form
-        expect(account.credits.first).to be_marked_for_destruction
-      end
-    end
-
     it '#by_human id' do
       property_create!
       expect(Account.by_human_ref(2002)).to be_present

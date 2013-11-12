@@ -18,5 +18,23 @@ describe PaymentDecorator do
       payment.prepare_for_form
       expect(payment.amount).to eq 50.05
     end
+
+    it '#prepare_for_form creates credit' do
+      property_with_unpaid_debit.save!
+      payment =  PaymentDecorator.new payment_new human_ref: 2002
+      payment.account =  Account.by_human_ref 2002
+      payment.prepare_for_form
+      expect(payment.credits).to have(1).items
+    end
+
+  end
+
+  context '#clear_up_form' do
+    it 'removes empty credits' do
+      Credit.any_instance.stub(:outstanding).and_return(0)
+      payment.source.credits.build
+      payment.clear_up_form
+      expect(payment.credits.first).to be_marked_for_destruction
+    end
   end
 end

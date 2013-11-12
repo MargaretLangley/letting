@@ -15,17 +15,11 @@ class Payment < ActiveRecord::Base
     def outstanding
       map { |credit| credit.outstanding }.sum
     end
-
-    def clear_up_form
-      each { |charge| charge.clear_up_form }
-    end
   end
   accepts_nested_attributes_for :credits, allow_destroy: true
-  before_validation :clear_up_form
+  validates :account_id, :on_date, presence: true
 
   attr_accessor :human_ref
-
-  validates :account_id, :on_date, presence: true
 
   after_initialize do
     self.on_date = default_on_date if on_date.blank?
@@ -49,16 +43,8 @@ class Payment < ActiveRecord::Base
     credits.any?
   end
 
-  def prepare_for_form
-    if account
-      account.prepare_for_form
-      account.credits_for_unpaid_debits.each { |credit| credits << credit }
-    end
-  end
-
-  def clear_up_form
-    credits.clear_up_form
-  end
+  # def prepare_for_form
+  # end
 
   def self.search date_string
     if date_string.present? && parse_date?(date_string)
