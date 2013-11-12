@@ -19,6 +19,8 @@ class Payment < ActiveRecord::Base
   accepts_nested_attributes_for :credits, allow_destroy: true
   validates :account_id, :on_date, presence: true
 
+  # Here until I can work out how to get it into the decorator
+  #
   attr_accessor :human_ref
 
   after_initialize do
@@ -27,7 +29,6 @@ class Payment < ActiveRecord::Base
 
   ####
   # If an account exists or not
-  #
   ###
   #
   def exists?
@@ -36,15 +37,11 @@ class Payment < ActiveRecord::Base
 
   ####
   # If there an outstanding debit? (in which case credits are generated)
-  #
   ####
   #
   def required?
     credits.any?
   end
-
-  # def prepare_for_form
-  # end
 
   def self.search date_string
     if date_string.present? && parse_date?(date_string)
