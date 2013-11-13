@@ -28,7 +28,9 @@
 #popup {
   @include overlay-sign;
   display: none;
-  left: 40%
+  top: 0%;
+  left: 27%;
+  width: 50%;
 }
 
 .blank_slate_overlay
