@@ -34,6 +34,10 @@ class Credit < ActiveRecord::Base
     new_record? ? debit_outstanding : update_pay_off
   end
 
+  def clear_up
+    self.mark_for_destruction if amount.nil? || amount.round(2) == 0
+  end
+
   private
 
   def update_pay_off

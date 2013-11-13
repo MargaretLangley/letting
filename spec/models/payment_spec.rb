@@ -36,17 +36,45 @@ describe Payment do
 
   context 'methods' do
 
-    context '#exists?' do
+    context '#prepareable?' do
       it 'true if account known' do
-        payment = Payment.new
         payment.account = Account.new id: 100
-        expect(payment).to be_exists
+        expect(payment).to be_prepareable
       end
 
       it 'false if no account' do
-        payment = Payment.new
         payment.account = nil
-        expect(payment).to_not be_exists
+        expect(payment).to_not be_prepareable
+      end
+    end
+
+    context '#prepare' do
+      before :each do
+        payment.account = account_new
+      end
+      it 'handles no credits' do
+        payment.account.stub(:prepare).and_return [ ]
+        payment.prepare
+        expect(payment.credits).to have(0).items
+      end
+      it 'adds returned credits' do
+        payment.account.stub(:prepare_credits_for_unpaid_debits).and_return [ credit_new ]
+        payment.prepare
+        expect(payment.credits).to have(1).items
+      end
+    end
+
+    context '#clear_up' do
+      it 'removes credits with no amounts' do
+        credit = payment.credits.build amount: 0
+        payment.clear_up
+        expect(credit).to be_marked_for_destruction
+      end
+
+      it 'saves credits with none-zero amount' do
+        credit = payment.credits.build amount: 10
+        payment.clear_up
+        expect(credit).to_not be_marked_for_destruction
       end
     end
 

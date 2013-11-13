@@ -33,7 +33,7 @@ describe Account do
 
       it 'does not double charge' do
         account = account_and_charge_new charge_attributes: { id: 1 }
-        account.add_debit debit_attributes
+        account.debits.build debit_attributes
         expect(account.chargeables_between(dates_in_march)).to eq []
       end
 
@@ -42,8 +42,21 @@ describe Account do
       end
     end
 
-    it '#add_debit' do
-      expect(account.add_debit debit_attributes).to be_valid
+    context '#prepare_credits_for_unpaid_debits' do
+      it 'does nothing when no debits' do
+        expect(account.prepare_credits_for_unpaid_debits).to have(0).items
+      end
+
+      it 'generates for upaid debits' do
+        account.debits.push debit_new
+        expect(account.prepare_credits_for_unpaid_debits).to have(1).items
+      end
+
+      it 'does not generate for paid debits' do
+        Debit.any_instance.stub(:paid?).and_return true
+        account.debits.push debit_new
+        expect(account.prepare_credits_for_unpaid_debits).to have(0).items
+      end
     end
 
     it '#by_human id' do

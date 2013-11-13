@@ -24,19 +24,14 @@ class Account < ActiveRecord::Base
       .reject { |chargeable| already_charged_for? chargeable }
   end
 
-  def add_debit debit_args
-    debits.build debit_args
-  end
-
-  def add_credit credit_args
-    credits.build credit_args
-  end
-
-  def generate_credits account_decorator
+  # call once per request
+  #
+  def prepare_credits_for_unpaid_debits
+    credits = []
     unpaid_debits.each do |debit|
-      # could test if it already has a new record for that debit
-      account_decorator.generate_credit Credit.new account_id: id, debit: debit
+      credits.push Credit.new account_id: id, debit: debit
     end
+    credits
   end
 
   def prepare_for_form
@@ -58,11 +53,6 @@ class Account < ActiveRecord::Base
         debit.already_charged? Debit.new(chargeable.to_hash)
       end
     end
-
-    def new_debits
-      debits.select(&:new_record?)
-    end
-
 
     def unpaid_debits
       debits.reject(&:paid?)

@@ -27,7 +27,7 @@ class PaymentsController < ApplicationController
 
   def prepare_for_new_action args = {}
     @payment = PaymentDecorator.new Payment.new args
-    @payment.account = Account.by_human_ref @payment.human_ref
+    @payment.account = Account.by_human_ref args[:human_ref]
     @payment.prepare_for_form
   end
 

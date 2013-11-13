@@ -14,8 +14,8 @@ module DB
     end
 
     def model_prepared
-      @model_to_assign = PaymentDecorator.new find_model(@klass).first_or_initialize
-      @model_to_assign.prepare_for_form
+      @model_to_assign = find_model(@klass).first_or_initialize
+      @model_to_assign.prepare
       fail DB::NotIdempotent, import_not_idempotent_msg, caller \
         unless @model_to_assign.new_record?
     end
@@ -31,11 +31,10 @@ module DB
     end
 
     def model_assignment_credits
-      @model_to_assign.account_dec.credits_for_unpaid_debits.each do |credit|
+      @model_to_assign.credits.each do |credit|
         credit.attributes = row.credit_attributes
         credit.amount = (@amount.max_withdrawal credit.pay_off_debit).round(2)
         @amount.withdraw credit.amount
-        @model_to_assign.generate_credit credit
       end
     end
 

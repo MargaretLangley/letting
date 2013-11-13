@@ -11,8 +11,4 @@ class CreditDecorator
   def prepare_for_form
     self.amount = pay_off_debit if amount.blank?
   end
-
-  def clear_up_form
-    self.mark_for_destruction if amount.nil? || amount.round(2) == 0
-  end
 end

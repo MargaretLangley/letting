@@ -18,30 +18,19 @@ class PaymentDecorator
   before_validation :clear_up_form
   attr_reader :source
 
-  def account_dec
-    @account_dec ||= AccountPaymentDecorator.new @source.account
-  end
-
   def initialize payment
     @source = payment
   end
 
   def prepare_for_form
-    if account_dec.source
-      account_dec.prepare_for_form
-      account_dec.credits_for_unpaid_debits.each do |credit|
-        generate_credit credit
-      end
+    if @source.prepareable?
+      @source.prepare
+      @source.amount = outstanding if amount.blank?
     end
-    @source.amount = outstanding if amount.blank?
   end
 
   def clear_up_form
-    credits.each { |credit| credit.clear_up_form }
-  end
-
-  def submit_message
-    @source.new_record? ?  'pay total'  : 'update'
+    @source.clear_up
   end
 
   def credits
@@ -50,9 +39,8 @@ class PaymentDecorator
     @credits
   end
 
-  def generate_credit credit
-    @source.credits << credit.source
-    @credits = []
+  def submit_message
+    @source.new_record? ?  'pay total'  : 'update'
   end
 
   private

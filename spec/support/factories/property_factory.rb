@@ -42,7 +42,7 @@ end
 # get the key value and put it into the debit - not nice
 def property_with_charge_and_unpaid_debit args = {}
   (property = property_with_charge_new).save!
-  property.account.add_debit debit_attributes \
+  property.account.debits.build debit_attributes \
     charge_id: property.account.charges.edited.first.id
   property
 end
@@ -88,5 +88,5 @@ def add_due_on_1 charge
 end
 
 def add_debit_attribute account, args
-  account.add_debit debit_attributes args.fetch(:debit_attributes, {})
+  account.debits.build debit_attributes args.fetch(:debit_attributes, {})
 end

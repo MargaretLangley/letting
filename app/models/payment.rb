@@ -15,24 +15,38 @@ class Payment < ActiveRecord::Base
     def outstanding
       map { |credit| credit.pay_off_debit }.sum
     end
+    def clear_up
+      each { |credit| credit.clear_up }
+    end
   end
   accepts_nested_attributes_for :credits, allow_destroy: true
   validates :account_id, :on_date, presence: true
 
-  # Here until I can work out how to get it into the decorator
+  # PaymentDecorator passes the source (payment) to the form
+  # which means keeping human_ref - not central to payment
+  # in this object.
   #
   attr_accessor :human_ref
+
 
   after_initialize do
     self.on_date = default_on_date if on_date.blank?
   end
 
   ####
-  # If an account exists or not
+  # If an account exists
   ###
   #
-  def exists?
-    account_id.present?
+  def prepareable?
+    account.present?
+  end
+
+  def prepare
+    credits.push account.prepare_credits_for_unpaid_debits
+  end
+
+  def clear_up
+    credits.clear_up
   end
 
   ####

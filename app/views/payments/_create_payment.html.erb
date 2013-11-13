@@ -1,7 +1,7 @@
 <div class='top'></div>
 <h2>Property</h2>
 <div class='blank_slate_parent'>
-<% if payment.exists? %>
+<% if payment.prepareable? %>
   <%= render 'address', property: PropertyDecorator.new(payment.account.property) %>
   <% if payment.required? %>
     <%= render 'payment_received', payment: payment, payment_form: payment_form  %>
