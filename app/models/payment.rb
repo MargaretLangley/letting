@@ -53,7 +53,7 @@ class Payment < ActiveRecord::Base
   # If there an outstanding debit? (in which case credits are generated)
   ####
   #
-  def required?
+  def in_debt?
     credits.any?
   end
 

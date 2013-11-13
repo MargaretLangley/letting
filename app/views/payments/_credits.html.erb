@@ -21,7 +21,7 @@
   <div class="col-3-8 grid-header number pick-out">
     Paid
   </div>
-  <% if @payment.required? %>
+  <% if @payment.in_debt? %>
     <% @payment.credits.each do |credit| %>
       <%= payment_form.fields_for :credits, credit.source do |credit_form| %>
         <%= render 'credit', credit_form: credit_form, credit: credit %>
