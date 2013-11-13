@@ -2,7 +2,13 @@
 <h2>Property</h2>
 <div class='blank_slate_parent'>
 <% if payment.prepareable? %>
-  <%= render 'address', property: PropertyDecorator.new(payment.account.property) %>
+  <div class="grid">
+    <div class="col-5-12">
+      <%= render 'address', property: PropertyDecorator.new(payment.account.property) %>
+    </div>
+    <div class="col-7-12">
+    </div>
+  </div>
   <% if payment.in_debt? %>
     <%= render 'payment_received', payment: payment, payment_form: payment_form  %>
     <%= render 'credits', payment: payment, payment_form: payment_form  %>

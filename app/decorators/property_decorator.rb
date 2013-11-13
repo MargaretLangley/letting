@@ -37,12 +37,11 @@ class PropertyDecorator
 
   def reduced_address_lines
     address_lines = []
-    address_lines << source.entities.full_name
-    address_lines << flat_line if address.flat_no.present?
-    address_lines << address.house_name if address.house_name.present?
-    address_lines << road_line
-    address_lines << address.town if address.town.present?
-    address_lines
+    first_line = source.entities.full_name
+    second_line = "#{flat_line}" if address.flat_no.present?
+    second_line += ", #{address.house_name}" if address.house_name.present?
+    second_line += ", #{road_line}" if second_line.blank?
+    address_lines.push *[ first_line, second_line]
   end
 
   def start_address

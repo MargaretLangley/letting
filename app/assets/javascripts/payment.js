@@ -2,6 +2,12 @@ $(function () {
    $('input.amount').keyup(function(){
       calculateTotal(this);
   });
+
+ $('#address').hover(function() {
+      $('#popup').show();
+  }, function() {
+      $('#popup').hide();
+  });
 });
 
 function calculateTotal( src ) {

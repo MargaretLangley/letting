@@ -11,20 +11,31 @@
   position: relative;
 }
 
-.blank_slate_overlay
-{
+
+@mixin overlay-sign {
   position: absolute;
   font-size:1.4em;
   text-align: left;
   border: 1px solid black;
-  top: 30%;
-  left: 40%;
   margin-top: -8%;
   margin-left: -30%;
   width: 80%;
   background: rgba(184,184,184,0.85);
   padding: 1em 1em;
   border-radius: 12px;
+}
+
+#popup {
+  @include overlay-sign;
+  display: none;
+  left: 40%
+}
+
+.blank_slate_overlay
+{
+  @include overlay-sign;
+  top: 30%;
+  left: 40%;
  }
 
 a.disabled {

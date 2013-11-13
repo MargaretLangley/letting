@@ -1,3 +1,11 @@
-<% property.reduced_address_lines.each do |line| %>
-  <%= line %><br>
-<% end %>
+<div id='address'>
+  <% property.reduced_address_lines[0..-2].each do |line| %>
+    <%= line %><br>
+  <% end %>
+  <%= property.reduced_address_lines.last %> &hellip;<br>
+</div>
+<div id='popup'>
+  <% property.address_lines.each do |line| %>
+    <%= line %><br>
+  <% end %>
+</div>
