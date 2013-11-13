@@ -48,10 +48,15 @@ class Entity < ActiveRecord::Base
   end
 
   def full_name
-    [title, initials, name].reject(&:blank?).join(' ')
+    [title, initializer(initials), name].reject(&:blank?).join(' ')
   end
 
   private
+
+    def initializer str_to_do
+      initialized = str_to_do.split.join('. ')
+      initialized + '.' if str_to_do.present?
+    end
 
     def destroy_entity
       mark_for_destruction

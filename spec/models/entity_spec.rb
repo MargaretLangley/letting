@@ -72,10 +72,10 @@ describe Entity do
     end
 
     context '#full_name' do
-      it 'created' do
-        expect(entity.full_name).to eq 'Mr W G Grace'
+      it 'with initials' do
+        expect(entity.full_name).to eq 'Mr W. G. Grace'
       end
-      it 'created' do
+      it 'without initials' do
         entity.initials = ''
         expect(entity.full_name).to eq 'Mr Grace'
       end
