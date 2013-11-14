@@ -48,7 +48,7 @@ class Entity < ActiveRecord::Base
   end
 
   def full_name
-    [title, initializer(initials), name].reject(&:blank?).join(' ')
+    [title, initializer(initials || ''), name].reject(&:blank?).join(' ')
   end
 
   private

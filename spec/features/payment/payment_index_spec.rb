@@ -20,7 +20,7 @@ class PaymentIndexPage
   end
 
   def having_payment?
-    has_content? /Mr W G Grace/i
+    has_content? /Mr W. G. Grace/i
   end
 
   def deleted?

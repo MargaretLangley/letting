@@ -16,7 +16,7 @@ describe PropertyDecorator do
   end
 
   it 'writes flat property' do
-    expect(property.address_lines[0]).to eq 'Mr W G Grace'
+    expect(property.address_lines[0]).to eq 'Mr W. G. Grace'
     expect(property.address_lines[1]).to eq 'Flat 47'
     expect(property.address_lines[2]).to eq 'Hillbank House'
     expect(property.address_lines[3]).to eq '294 Edgbaston Road'

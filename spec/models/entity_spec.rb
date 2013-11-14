@@ -76,7 +76,7 @@ describe Entity do
         expect(entity.full_name).to eq 'Mr W. G. Grace'
       end
       it 'without initials' do
-        entity.initials = ''
+        entity.initials = nil
         expect(entity.full_name).to eq 'Mr Grace'
       end
     end
