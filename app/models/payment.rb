@@ -20,7 +20,7 @@ class Payment < ActiveRecord::Base
     end
   end
   accepts_nested_attributes_for :credits, allow_destroy: true
-  validates :account_id, :on_date, presence: true
+  validates :account_id, :amount, :on_date, presence: true
 
   # PaymentDecorator passes the source (payment) to the form
   # which means keeping human_ref - not central to payment

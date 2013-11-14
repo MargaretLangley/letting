@@ -15,7 +15,7 @@ describe Payment do
       expect(payment).to_not be_valid
     end
     it 'requires amount' do
-      payment.account = nil
+      payment.amount = nil
       expect(payment).to_not be_valid
     end
   end
