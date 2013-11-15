@@ -33,7 +33,7 @@ class DebitGenerator < ActiveRecord::Base
 
   def generate
     properties.each do |property|
-      chargeable_to_debit property_to_chargeable property
+      debits.push property.account.prepare_debits start_date..end_date
     end
     new_debits
   end
@@ -53,14 +53,6 @@ class DebitGenerator < ActiveRecord::Base
   end
 
   private
-
-  def chargeable_to_debit chargeable_infos
-    chargeable_infos.each { |chargeable| debits.build chargeable.to_hash }
-  end
-
-  def property_to_chargeable property
-    property.account.chargeables_between(start_date..end_date)
-  end
 
   def default_start_date
     Date.current

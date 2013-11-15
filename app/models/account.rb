@@ -19,9 +19,13 @@ class Account < ActiveRecord::Base
   include Charges
   accepts_nested_attributes_for :charges, allow_destroy: true
 
-  def chargeables_between date_range
-    charges.chargeables_between(date_range)
-      .reject { |chargeable| already_charged_for? chargeable }
+
+  def prepare_debits date_range
+    debits = []
+    chargeables_between(date_range).each  do |chargeable|
+      debits.push Debit.new chargeable.to_hash
+    end
+    debits
   end
 
   # call once per request
@@ -49,6 +53,11 @@ class Account < ActiveRecord::Base
   end
 
   private
+
+    def chargeables_between date_range
+      charges.chargeables_between(date_range)
+        .reject { |chargeable| already_charged_for? chargeable }
+    end
 
     def already_charged_for? chargeable
       debits.any? do |debit|

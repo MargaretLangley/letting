@@ -18,23 +18,25 @@ describe Account do
 
   context 'methods' do
 
-    context '#chargeables_between' do
+    context '#prepare_debits' do
       before { Timecop.travel(Date.new(2013, 1, 31)) }
       after { Timecop.return }
 
-      it 'generated when charges' do
+      it 'generates debits when charges due' do
         account = account_and_charge_new charge_attributes: { id: 3 }
-        chargeable = account.chargeables_between(dates_in_march).first
-        expect(chargeable.account_id).to eq 1
-        expect(chargeable.charge_id).to eq 3
-        expect(chargeable.on_date).to eq Date.new(2013, 3, 25)
-        expect(chargeable.amount).to eq 88.08
+        debits = account.prepare_debits(dates_in_march)
+        expect(debits).to have(1).items
+        debit = debits.first
+        expect(debit.account_id).to eq 1
+        expect(debit.charge_id).to eq 3
+        expect(debit.on_date).to eq Date.new 2013, 3, 25
+        expect(debit.amount).to eq 88.08
       end
 
       it 'does not double charge' do
         account = account_and_charge_new charge_attributes: { id: 1 }
         account.debits.build debit_attributes
-        expect(account.chargeables_between(dates_in_march)).to eq []
+        expect(account.prepare_debits(dates_in_march)).to eq []
       end
 
       def dates_in_march
