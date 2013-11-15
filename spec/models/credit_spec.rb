@@ -7,6 +7,10 @@ describe Credit do
 
   context 'validates' do
     context 'presence' do
+      it 'charge_id' do
+        credit.charge_id = nil
+        expect(credit).to_not be_valid
+      end
       it 'on_date' do
         credit.on_date = nil
         expect(credit).to_not be_valid
@@ -48,7 +52,7 @@ describe Credit do
   context 'associations' do
     it('has payment') { expect(credit).to respond_to :payment }
     it('has account') { expect(credit).to respond_to :account }
-    it('has debit') { expect(credit).to respond_to :debit }
+    it('has credit') { expect(credit).to respond_to :debit }
   end
 
   context 'default inialization' do
@@ -73,6 +77,16 @@ describe Credit do
       it 'saved record correctly' do
         credit.should_receive(:new_record?).and_return(false)
         expect(credit.pay_off_debit).to eq 176.16
+      end
+    end
+    context '#type' do
+      it 'returned when charge present' do
+        credit.charge = Charge.new charge_attributes
+        expect(credit.type).to eq 'Ground Rent'
+      end
+
+      it 'errors when charge missing' do
+        expect { credit.type }.to raise_error
       end
     end
   end

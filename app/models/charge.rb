@@ -22,6 +22,7 @@ class Charge < ActiveRecord::Base
   validates :amount, numericality: { less_than: 100_000 }
   validates :due_ons, presence: true
   validate :due_ons_size
+  has_many :credits
   has_many :debits
 
   after_initialize do

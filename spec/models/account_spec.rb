@@ -47,9 +47,12 @@ describe Account do
         expect(account.prepare_credits_for_unpaid_debits).to have(0).items
       end
 
-      it 'generates for upaid debits' do
+      it 'generates credits for upaid debits' do
         account.debits.push debit_new
-        expect(account.prepare_credits_for_unpaid_debits).to have(1).items
+        credits = account.prepare_credits_for_unpaid_debits
+        expect(credits).to have(1).items
+        credits.first.amount = 0
+        expect(credits.first).to be_valid
       end
 
       it 'does not generate for paid debits' do

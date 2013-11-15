@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20131016112247) do
 
   create_table "credits", force: true do |t|
     t.integer  "account_id",                         null: false
+    t.integer  "charge_id",                          null: false
     t.integer  "payment_id",                         null: false
     t.date     "on_date",                            null: false
     t.integer  "debit_id",                           null: false
@@ -86,6 +87,7 @@ ActiveRecord::Schema.define(version: 20131016112247) do
   end
 
   add_index "credits", ["account_id"], name: "index_credits_on_account_id", using: :btree
+  add_index "credits", ["charge_id"], name: "index_credits_on_charge_id", using: :btree
   add_index "credits", ["debit_id"], name: "index_credits_on_debit_id", using: :btree
   add_index "credits", ["payment_id"], name: "index_credits_on_payment_id", using: :btree
 

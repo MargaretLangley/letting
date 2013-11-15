@@ -15,9 +15,10 @@
 class Credit < ActiveRecord::Base
   belongs_to :payment
   belongs_to :account
+  belongs_to :charge
   belongs_to :debit
 
-  validates :on_date, presence: true
+  validates :charge_id, :on_date, presence: true
   validates :amount, amount: true
   validates :amount, numericality:
                      { less_than_or_equal_to: ->(credit) { credit.pay_off_debit } }
@@ -38,6 +39,10 @@ class Credit < ActiveRecord::Base
     self.mark_for_destruction if amount.nil? || amount.round(2) == 0
   end
 
+  def type
+    charge_obj.charge_type
+  end
+
   private
 
   def update_pay_off
@@ -46,6 +51,10 @@ class Credit < ActiveRecord::Base
 
   def debit_outstanding
     debit.outstanding
+  end
+
+  def charge_obj
+    charge
   end
 
   def default_on_date

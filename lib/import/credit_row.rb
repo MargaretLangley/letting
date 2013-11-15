@@ -46,13 +46,6 @@ module DB
       }
     end
 
-    def credit_attributes
-      {
-        on_date: on_date,
-        amount: amount,
-      }
-    end
-
     def identity
       "Property: #{human_ref}, Charge code: #{charge_code}, Date: #{on_date}"
     end

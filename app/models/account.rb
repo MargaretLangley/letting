@@ -29,7 +29,9 @@ class Account < ActiveRecord::Base
   def prepare_credits_for_unpaid_debits
     credits = []
     unpaid_debits.each do |debit|
-      credits.push Credit.new account_id: id, debit: debit
+      credits.push Credit.new account_id: id,
+                              debit: debit,
+                              charge_id: debit.charge_id
     end
     credits
   end
