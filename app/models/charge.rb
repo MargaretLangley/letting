@@ -34,10 +34,6 @@ class Charge < ActiveRecord::Base
     charge_range_dates_cover?(date_range) && due_ons.between?(date_range)
   end
 
-  def active?
-    charge_range.cover?(Date.current)
-  end
-
   def chargeable_info date_range
     ChargeableInfo
     .from_charge charge_id:  id,
@@ -60,6 +56,10 @@ class Charge < ActiveRecord::Base
   end
 
   private
+
+  def active?
+    charge_range.cover?(Date.current)
+  end
 
   def charge_range_dates_cover? date_range
     charge_range.cover?(date_range.min) && charge_range.cover?(date_range.max)
