@@ -32,8 +32,12 @@ module DB
 
     def model_assignment_credits
       @model_to_assign.credits.each do |credit|
-        credit.amount = (@amount.max_withdrawal credit.pay_off_debit).round(2)
-        @amount.withdraw credit.amount
+        unless credit.advance?
+          credit.amount = (@amount.max_withdrawal credit.pay_off_debit).round(2)
+          @amount.withdraw credit.amount
+        else
+          credit.amount = 0
+        end
       end
     end
 

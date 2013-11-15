@@ -44,23 +44,40 @@ describe Account do
       end
     end
 
-    context '#prepare_credits_for_unpaid_debits' do
+    context '#prepare_credits' do
+      before { Timecop.travel(Date.new(2013, 1, 31)) }
+      after { Timecop.return }
+
       it 'no debit - does nothing' do
-        expect(account.prepare_credits_for_unpaid_debits).to have(0).items
+        expect(account.prepare_credits).to have(0).items
       end
 
-      it 'unpaid debits generates matching credits' do
-        account.debits.push debit_new
-        credits = account.prepare_credits_for_unpaid_debits
-        expect(credits).to have(1).items
-        credits.first.amount = 0
-        expect(credits.first).to be_valid
+      context 'unpaid_debits' do
+
+        it 'unpaid debits generates matching credits' do
+          account.debits.push debit_new
+          credits = account.prepare_credits
+          expect(credits).to have(1).items
+          credits.first.amount = 0
+          expect(credits.first).to be_valid
+        end
+
+        it 'paid debits nothing generated' do
+          Debit.any_instance.stub(:paid?).and_return true
+          account.debits.push debit_new
+          expect(account.prepare_credits).to have(0).items
+        end
       end
 
-      it 'paid debits nothing generated' do
-        Debit.any_instance.stub(:paid?).and_return true
-        account.debits.push debit_new
-        expect(account.prepare_credits_for_unpaid_debits).to have(0).items
+      context 'advanced credits' do
+        it 'one advanced charge per charge type only' do
+          account = account_and_charge_new charge_attributes: { id: 3 }
+          credits = account.prepare_credits
+          expect(credits).to have(1).items
+          credit = credits.first
+          expect(credit.on_date).to eq Date.current
+          expect(credit.debit).to be_nil
+        end
       end
     end
 

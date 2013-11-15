@@ -26,11 +26,11 @@ class ChargeableInfo
     account_id == other.account_id
   end
 
-  def to_hash
+  def to_hash overrides = {}
     hash = {}
     instance_variables
       .each { |var| hash[var.to_s.delete('@')] = instance_variable_get(var) }
-    hash
+    hash.merge overrides
   end
 
   private

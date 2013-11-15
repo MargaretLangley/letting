@@ -28,16 +28,12 @@ class Account < ActiveRecord::Base
     debits
   end
 
-  # call once per request
-  #
-  def prepare_credits_for_unpaid_debits
+  def prepare_credits
     credits = []
-    unpaid_debits.each do |debit|
-      credits.push Credit.new account_id: id,
-                              debit: debit,
-                              charge_id: debit.charge_id
-    end
-    credits
+    credits.push prepare_credits_for_unpaid_debits
+    credits.push prepare_advanced_credits
+    # compact removes nil elements from the array
+    credits.compact.reduce([], :|)
   end
 
   def prepare_for_form
@@ -53,6 +49,28 @@ class Account < ActiveRecord::Base
   end
 
   private
+
+    # call once per request
+    #
+    def prepare_credits_for_unpaid_debits
+      credits = []
+      unpaid_debits.each do |debit|
+        credits.push Credit.new account_id: id,
+                                debit: debit,
+                                charge_id: debit.charge_id,
+                                advance: false
+      end
+      credits
+    end
+
+    def prepare_advanced_credits(date_range = Date.current..Date.current + 1.years)
+      credits = []
+      charges.chargeables_between(date_range).each do |chargeable|
+        credits.push Credit.new chargeable.to_hash on_date: Date.current,
+                                                   advance: true
+      end
+      credits
+    end
 
     def chargeables_between date_range
       charges.chargeables_between(date_range)

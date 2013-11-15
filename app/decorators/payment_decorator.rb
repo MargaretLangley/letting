@@ -15,7 +15,6 @@ class PaymentDecorator
   extend ActiveModel::Callbacks
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
-  before_validation :clear_up_form
   attr_reader :source
 
   def initialize payment
@@ -27,10 +26,6 @@ class PaymentDecorator
       @source.prepare
       @source.amount = outstanding if amount.blank?
     end
-  end
-
-  def clear_up_form
-    @source.clear_up
   end
 
   def credits

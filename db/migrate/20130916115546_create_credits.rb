@@ -5,7 +5,8 @@ class CreateCredits < ActiveRecord::Migration
       t.integer  :charge_id,  null: false
       t.integer  :payment_id, null: false
       t.date     :on_date,    null: false
-      t.integer  :debit_id,   null: false
+      t.integer  :debit_id,   null: true
+      t.boolean  :advance,    null: false, default: false
       t.decimal  :amount, precision: 8, scale: 2, null: false
       t.timestamps
     end

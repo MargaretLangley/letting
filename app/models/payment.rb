@@ -19,6 +19,7 @@ class Payment < ActiveRecord::Base
       each { |credit| credit.clear_up }
     end
   end
+  before_validation :clear_up
   accepts_nested_attributes_for :credits, allow_destroy: true
   validates :account_id, :amount, :on_date, presence: true
 
@@ -42,7 +43,7 @@ class Payment < ActiveRecord::Base
   end
 
   def prepare
-    credits.push account.prepare_credits_for_unpaid_debits
+    credits.push account.prepare_credits
   end
 
   def clear_up
