@@ -21,19 +21,20 @@ describe Payment do
     expect(payment_page).to be_debit_free
   end
 
+  it 'property makes advanced payments' do
+    property_create!
+    payment_page.visit_new_page
+    payment_page.human_ref('2002').search
+    expect(payment_page).to be_debit_free
+  end
+
+
   context 'error' do
 
     it 'searched property unknown' do
       payment_page.visit_new_page
       payment_page.human_ref('800').search
       expect(payment_page).to be_empty_search
-    end
-
-    it 'property has no unpaid debits' do
-      property_create!
-      payment_page.visit_new_page
-      payment_page.human_ref('2002').search
-      expect(payment_page).to be_debit_free
     end
 
     it 'handles errors' do

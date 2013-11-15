@@ -43,11 +43,11 @@ describe Account do
     end
 
     context '#prepare_credits_for_unpaid_debits' do
-      it 'does nothing when no debits' do
+      it 'no debit - does nothing' do
         expect(account.prepare_credits_for_unpaid_debits).to have(0).items
       end
 
-      it 'generates credits for upaid debits' do
+      it 'unpaid debits generates matching credits' do
         account.debits.push debit_new
         credits = account.prepare_credits_for_unpaid_debits
         expect(credits).to have(1).items
@@ -55,7 +55,7 @@ describe Account do
         expect(credits.first).to be_valid
       end
 
-      it 'does not generate for paid debits' do
+      it 'paid debits nothing generated' do
         Debit.any_instance.stub(:paid?).and_return true
         account.debits.push debit_new
         expect(account.prepare_credits_for_unpaid_debits).to have(0).items
