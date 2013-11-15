@@ -1,55 +1,116 @@
 <html>
-<head>
-  <meta charset='utf-8'>
-  <title>Invoice</title>
-</head>
-<body>
-  <h1 style='text-align:center;'>F & L Adams</h1>
-  <h2 style='text-align:center;'>Residential Lettings & Property Management</h2>
-  <div class="grid">
-    <div class="col-1-3">
-      VAT Reg No 277 9904 95
+  <head>
+    <meta charset='utf-8'>
+    <title>Invoice</title>
+  </head>
+  <body>
+    <% dotted_line = "----------------" %>
+    <div class ="h1print">F & L Adams</div>
+    <div class ="h2print">
+      <br>Residential Lettings & Property Management</div>
+    <div class="grid">
+      <div class="col-1-3">
+        VAT Reg No 277 9904 95
+      </div>
+      <div class="col-1-3">
+       &nbsp;
+      </div>
+      <div class="col-1-3">
+        2 Attwood Street<br>
+        Halesowen<br>
+        West Midlands<br>
+        B63 3UE<br>
+        Tel: 01215030992<br>
+      </div>
+      <div class ="inv_bold">
+        <div class="col-1-3">
+          <%= '< BILLING ADDRESS >' %><br>
+          Invoice
+        </div>
+        <div class="col-1-3">
+            <%= '< PROPERTY REF >' %><br>
+            Property Ref: 6893
+        </div>
+        <div class="col-1-3">
+          <%= '< INVOICE DATE >' %><br>
+          Date: 18/1/2011
+        </div>
+      </div>
+      <div class="inv_add">
+        Mr J W Scotton<br>
+        Hungary Hill Farm<br>
+        Codsall Wood<br>
+        Wolverhampton<br>
+        WV8 1RA<br>
+      </div>
+
+    <p class ="inv_bold">
+      Property Address: <%= 'THE PROPERTY ADDRESS' %>
+    <p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Due Date
+          </th>
+          <th>
+            Description
+          </th>
+          <th class='alnright'>
+            Amount Due
+          </th>
+          <th class='alnright'>
+           Balance Owing
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>
+          </th>
+          <th>
+          </th>
+          <th class='alnright'>
+          </th>
+          <th class='alnright'>
+          </th>
+        </tr>
+       </tbody>
+     </table>
+     Total now Owing
+    <p>
+    </p>
+    <div class ="inv_advice">
+      We F & L ADAMS ON BEHALF OF YOUR LANDLORD
+      <br>
+      F & L Adams (Pedmore) Ltd 2, Attwood Street, Halesowen, West Midlands, B63 3UE
+      <br>
+      Hereby give you notice pursuant to Section 48 of the Landlords and Tenant Act 1987 that the address in England and Wales at which notices (including notices in proceedings) may be served on your Landlord by you is: 2 Attwood Street  Halesowen  West Midlands  B63 3UE  until you are notified to the contrary.
+      <p>
+      </p>
+      <span class ="inv_advice_bold">Remittance Advice</span>
+      <br>
+      If paying by cheque, please detach and forward only the tear-off counterfoil of this account.
+      <br>
+      CHEQUES ACT 1957: Receipts are not issued for cheque payments unless specifically requested in which case the account should be sent INTACT, endorsed RECEIPT REQUIRED together with a
+      <br>
+      <span class ="inv_advice_bold">STAMPED ADDRESSED ENVELOPE.  PLEASE MAKE CHEQUES PAYABLE TO F&L ADAMS.</span>
+      <br>
+      Postal Orders sent through the post shall be at the sender's risk until actually received.
+      <br>
     </div>
-    <div class="col-1-3">
-     &nbsp;
-    </div>
-    <div class="col-1-3">
-      2 Attwood Street<br>
-      Halesowen<br>
-      West Midlands<br>
-      B63 3UE<br>
-      Tel: 01215030992<br>
-    </div>
-    <div class="col-1-3">
-      <%= '< BILLING ADDRESS >' %><br>
-      Invoice<br>
-      Mr J W Scotton<br>
-      Hungary Hill Farm<br>
-      Codsall Wood<br>
-      Wolverhampton<br>
-      WV8 1RA<br>
-    </div>
-    <div class="col-1-3">
-        <%= '< PROPERTY REF >' %><br>
-        Property Ref: 6893
-    </div>
-    <div class="col-1-3">
-      <%= '< INVOICE DATE >' %><br>
-      Date: 18/1/2011
-    </div>
-  </div>
-  <br>
-  Property Address: <%= 'THE PROPERTY ADDRESS' %>
-  <br>
-  <%= 'THE CHARGES FOR INVOICE' %><br>
-  <br>
-  We F & L ADAMS ON BEHALF OF YOUR LANDLORD
-  F & L Adams (Pedmore) Ltd 2, Attwood Street, Halesowen, West Midlands, B63 3UE
-  Hereby give you notice pursuant to Section 48 of the Landlords and Tenant Act 1987 that the address in England and Wales at which notices (including notices in proceedings) may be served on your Landlord by you is: 2 Attwood Street  Halesowen  West Midlands  B63 3UE  until you are notified to the contrary.
-  <br>
-  <h4>Remittance Advice</h4>
-  If paying by cheque, please detach and forward only the tear-off counterfoil of this account.
-  CHEQUES ACT 1957: Receipts are not issued for cheque payments unless specifically requested in which case the account should be sent INTACT, endorsed RECEIPT REQUIRED together with a STAMPED ADDRESSED ENVELOPE.  PLEASE MAKE CHEQUES PAYABLE TO F&L ADAMS.
-  Postal Orders sent through the post shall be at the sender's risk until actually received.
-</body>
+    <span class = "sissors">&#9985;<%= "#{dotted_line}#{dotted_line}#{dotted_line}#{dotted_line}" %></span>
+    <p class ="inv_bold">
+      Property Address: <%= 'THE PROPERTY ADDRESS' %>
+      <br>
+      Ref:
+      DueDate:
+    <p>
+      From:
+    </p>
+    <button> <%= link_to 'Print This Page', '#', class: 'print-window'%></button>
+    <p>
+    </p>
+  </body>
 </html>
