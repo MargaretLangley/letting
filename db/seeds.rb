@@ -326,6 +326,7 @@ end
     Credit.create! [
       { id: 1,
         payment_id: 1,
+        charge_id: 1,
         account_id: 1,
         debit_id: 1,
         on_date: create_date(15),
