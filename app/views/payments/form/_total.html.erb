@@ -1,0 +1,9 @@
+<div class="col-1-2">
+  &nbsp;
+</div>
+<div class="col-1-8 cell">
+  <h3>Total</h3>
+</div>
+<div class="col-3-8 cell pick-out">
+  <%= payment_form.text_field :amount, value: number_with_precision(payment_form.object.amount, precision: 2), readonly: true, class: 'total number nested-element' %>
+</div>
