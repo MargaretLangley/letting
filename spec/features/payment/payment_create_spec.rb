@@ -24,7 +24,7 @@ describe Payment do
 
     payment_page.human_ref('2002').search
     a_property_is_found
-    property_has_no_unpzaid_debits
+    property_has_no_unpaid_debits
   end
 
 

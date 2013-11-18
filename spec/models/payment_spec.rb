@@ -36,15 +36,15 @@ describe Payment do
 
   context 'methods' do
 
-    context '#prepareable?' do
+    context '#account_exists?' do
       it 'true if account known' do
         payment.account = Account.new id: 100
-        expect(payment).to be_prepareable
+        expect(payment).to be_account_exists
       end
 
       it 'false if no account' do
         payment.account = nil
-        expect(payment).to_not be_prepareable
+        expect(payment).to_not be_account_exists
       end
     end
 

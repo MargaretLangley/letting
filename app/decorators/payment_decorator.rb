@@ -22,16 +22,18 @@ class PaymentDecorator
   end
 
   def prepare_for_form
-    if @source.prepareable?
+    if @source.account_exists?
       @source.prepare
       @source.amount = outstanding if amount.blank?
     end
   end
 
-  def credits
-    @credits = [] if @credits.nil?
-    generate_credits if @credits.empty?
-    @credits
+  def credits_with_debits
+    credits.reject &:advance?
+  end
+
+  def property_decorator
+    PropertyDecorator.new @source.account.property
   end
 
   def submit_message
@@ -39,6 +41,12 @@ class PaymentDecorator
   end
 
   private
+
+  def credits
+    @credits = [] if @credits.nil?
+    generate_credits if @credits.empty?
+    @credits
+  end
 
   def generate_credits
     @credits.push(*@source.credits.map { |d| CreditDecorator.new d })

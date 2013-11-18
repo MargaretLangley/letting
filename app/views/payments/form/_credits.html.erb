@@ -21,11 +21,9 @@
   <div class="col-3-8 grid-header number pick-out">
     Paid
   </div>
-  <% @payment.credits.each do |credit| %>
+  <% @payment.credits_with_debits.each do |credit| %>
     <%= payment_form.fields_for :credits, credit.source do |credit_form| %>
-      <% unless credit.advance %>
-        <%= render 'payments/form/credit', credit_form: credit_form, credit: credit %>
-      <% end %>
+      <%= render 'payments/form/credit', credit_form: credit_form, credit: credit %>
     <% end %>
   <% end %>
   <div class="col-1-2">

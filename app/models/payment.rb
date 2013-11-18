@@ -38,7 +38,7 @@ class Payment < ActiveRecord::Base
   # If an account exists
   ###
   #
-  def prepareable?
+  def account_exists?
     account.present?
   end
 
