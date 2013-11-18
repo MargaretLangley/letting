@@ -1,0 +1,40 @@
+
+<div class="grid container totalizer">
+  <div class="col-5-8">
+    <h3>Unpaid Debits</h3>
+  </div>
+  <div class="col-3-8 pick-out">
+    <h3>Credits</h3>
+  </div>
+  <div class="col-1-4 grid-header">
+    Charge
+  </div>
+  <div class="col-1-8 grid-header">
+    Due On
+  </div>
+  <div class="col-1-8 grid-header number">
+    Amount
+  </div>
+  <div class="col-1-8 grid-header number">
+    Owing
+  </div>
+  <div class="col-3-8 grid-header number pick-out">
+    Paid
+  </div>
+  <% @payment.credits.each do |credit| %>
+    <%= payment_form.fields_for :credits, credit.source do |credit_form| %>
+      <% unless credit.advance %>
+        <%= render 'payments/form/credit', credit_form: credit_form, credit: credit %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <div class="col-1-2">
+    &nbsp;
+  </div>
+  <div class="col-1-8 cell">
+    <h3>Total</h3>
+  </div>
+  <div class="col-3-8 cell pick-out">
+    <%= payment_form.text_field :amount, value: number_with_precision(payment_form.object.amount, precision: 2), readonly: true, class: 'total number nested-element' %>
+  </div>
+</div>

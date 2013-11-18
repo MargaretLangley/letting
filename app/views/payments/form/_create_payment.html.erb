@@ -4,13 +4,13 @@
 <% if payment.prepareable? %>
   <div class="grid">
     <div class="col-5-12">
-      <%= render 'address', property: PropertyDecorator.new(payment.account.property) %>
+      <%= render 'payments/form/address', property: PropertyDecorator.new(payment.account.property) %>
     </div>
     <div class="col-7-12">
     </div>
   </div>
-  <%= render 'payment_received', payment: payment, payment_form: payment_form  %>
-  <%= render 'credits', payment: payment, payment_form: payment_form  %>
+  <%= render 'payments/form/payment_received', payment: payment, payment_form: payment_form  %>
+  <%= render 'payments/form/credits', payment: payment, payment_form: payment_form  %>
 <% else %>
  <div class='blank_slate_overlay' data-role='unknown-property'>
    <%= t('instruction.payments.property_payment') %>

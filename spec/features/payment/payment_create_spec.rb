@@ -17,12 +17,14 @@ describe Payment do
     payment_is_created
   end
 
-  it 'property makes advanced payments' do
+  it 'advanced payment, no debit' do
     pending
     property_create!
     payment_page.visit_new_page
 
     payment_page.human_ref('2002').search
+    a_property_is_found
+    property_has_no_unpzaid_debits
   end
 
 
@@ -58,6 +60,10 @@ describe Payment do
 
   def payment_is_created
     expect(payment_page).to be_successful
+  end
+
+  def property_has_no_unpaid_debits
+
   end
 
 end

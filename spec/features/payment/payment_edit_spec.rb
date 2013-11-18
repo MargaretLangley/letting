@@ -73,7 +73,7 @@ describe Payment do
     payment_page.visit_new_page
     payment_page.human_ref('2002').search
     payment_page.payment 88.08
-    payment_page.create_payment
+    payment_page.click_create_payment
     property.account.payments.first
   end
 
