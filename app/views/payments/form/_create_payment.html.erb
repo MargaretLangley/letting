@@ -12,7 +12,10 @@
     <%= render 'payments/form/payment_received', payment: payment, payment_form: payment_form  %>
     <div class="grid container totalizer">
       <% if @payment.credits_with_debits.present? %>
-        <%= render 'payments/form/credits', payment: payment, payment_form: payment_form  %>
+        <%= render 'payments/form/credits_with_debit', payment: payment, payment_form: payment_form  %>
+      <% end %>
+      <% if @payment.credits_in_advance.present? %>
+        <%= render 'payments/form/credits_in_advance', payment: payment, payment_form: payment_form  %>
       <% end %>
       <%= render 'payments/form/total', payment: payment, payment_form: payment_form %>
     </div>

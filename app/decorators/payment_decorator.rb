@@ -32,6 +32,10 @@ class PaymentDecorator
     credits.reject &:advance?
   end
 
+  def credits_in_advance
+    credits.select &:advance?
+  end
+
   def property_decorator
     PropertyDecorator.new @source.account.property
   end

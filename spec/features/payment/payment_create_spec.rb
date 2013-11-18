@@ -14,12 +14,10 @@ describe Payment do
     property_has_unpaid_debits
     payment_page.payment 88.08
     payment_page.click_create_payment
-
     payment_is_created
   end
 
   it 'advanced payment, no debit' do
-    pending
     property_create!
     payment_page.visit_new_page
 
