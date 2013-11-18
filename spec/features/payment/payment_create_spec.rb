@@ -10,18 +10,18 @@ describe Payment do
     payment_page.visit_new_page
 
     payment_page.human_ref('2002').search
-    expect(payment_page).to_not be_empty_search
+    a_property_is_found
     payment_page.payment 88.08
-    payment_page.create_payment
+    payment_page.click_create_payment
 
-    expect(payment_page).to be_successful
-    expect(payment_page).to be_on_page
+    payment_is_created
   end
 
   it 'property makes advanced payments' do
     pending
     property_create!
     payment_page.visit_new_page
+
     payment_page.human_ref('2002').search
   end
 
@@ -30,18 +30,34 @@ describe Payment do
 
     it 'searched property unknown' do
       payment_page.visit_new_page
+
       payment_page.human_ref('800').search
-      expect(payment_page).to be_empty_search
+
+      no_property_found
     end
 
     it 'handles errors' do
       property_with_charge_and_unpaid_debit.save!
       payment_page.visit_new_page
+
       payment_page.human_ref('2002').search
       payment_page.payment(100_000_000)
-      payment_page.create_payment
+      payment_page.click_create_payment
+
       expect(payment_page).to be_errored
     end
+  end
+
+  def a_property_is_found
+    expect(payment_page).to_not be_empty_search
+  end
+
+  def no_property_found
+    expect(payment_page).to be_empty_search
+  end
+
+  def payment_is_created
+    expect(payment_page).to be_successful
   end
 
 end
