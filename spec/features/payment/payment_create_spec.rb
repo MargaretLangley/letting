@@ -5,17 +5,17 @@ describe Payment do
   let(:payment_page) { PaymentCreatePage.new }
   before(:each) { log_in }
 
-  it 'payment for debit - no double payments' do
+  it 'payment for debit' do
     property_with_charge_and_unpaid_debit.save!
     payment_page.visit_new_page
+
     payment_page.human_ref('2002').search
     expect(payment_page).to_not be_empty_search
-    expect(payment_page).to_not be_debit_free
     payment_page.payment 88.08
     payment_page.create_payment
+
     expect(payment_page).to be_successful
     expect(payment_page).to be_on_page
-
   end
 
   it 'property makes advanced payments' do

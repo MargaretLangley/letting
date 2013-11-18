@@ -30,15 +30,11 @@ class PaymentCreatePage
   end
 
   def empty_search?
-    has_content? /To book a payment against a property you need/i
-  end
-
-  def debit_free?
-    has_content? /Property has no outstanding debts/i
+    has_css? '[data-role="unknown-property"]'
   end
 
   def errored?
-    has_content? /The payment could not be saved./i
+    has_css? '[data-role="errors"]'
   end
 
   def successful?
