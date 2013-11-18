@@ -37,6 +37,10 @@ class PaymentCreatePage
     has_css? '[data-role="errors"]'
   end
 
+  def has_credits_with_debits?
+    has_css? '[data-role="credits-with-debits"]'
+  end
+
   def successful?
     has_content? /successfully created/i
   end
