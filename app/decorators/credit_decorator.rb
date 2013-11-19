@@ -4,8 +4,8 @@ class CreditDecorator
   include MethodMissing
   attr_reader :source
 
-  def initialize payment
-    @source = payment
+  def initialize credit
+    @source = credit
   end
 
   def prepare_for_form

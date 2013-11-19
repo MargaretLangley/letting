@@ -67,7 +67,8 @@ class Account < ActiveRecord::Base
       credits = []
       charges.chargeables_between(date_range).each do |chargeable|
         credits.push Credit.new chargeable.to_hash on_date: Date.current,
-                                                   advance: true
+                                                   advance: true,
+                                                   amount: 0
       end
       credits
     end

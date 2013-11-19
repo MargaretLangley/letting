@@ -17,13 +17,15 @@ describe Payment do
     payment_is_created
   end
 
-  it 'advanced payment, no debit' do
+  it 'no debit, show advanced payment' do
+    pending
     property_create!
     payment_page.visit_new_page
 
     payment_page.human_ref('2002').search
     a_property_is_found
     property_has_no_unpaid_debits
+    property_has_credits_in_advance
   end
 
 
@@ -38,13 +40,13 @@ describe Payment do
     end
 
     it 'handles errors' do
+      pending
       property_with_charge_and_unpaid_debit.save!
       payment_page.visit_new_page
 
       payment_page.human_ref('2002').search
       payment_page.payment(100_000_000)
       payment_page.click_create_payment
-
       expect(payment_page).to be_errored
     end
   end
@@ -60,6 +62,11 @@ describe Payment do
   def payment_is_created
     expect(payment_page).to be_successful
   end
+
+  def property_has_credits_in_advance
+    expect(payment_page).to be_has_credits_in_advance
+  end
+
 
   def property_has_unpaid_debits
     expect(payment_page).to be_has_credits_with_debits

@@ -58,6 +58,7 @@ describe Account do
           account.debits.push debit_new
           credits = account.prepare_credits
           expect(credits).to have(1).items
+          expect(credits.first.amount).to be_nil
           credits.first.amount = 0
           expect(credits.first).to be_valid
         end
@@ -72,11 +73,24 @@ describe Account do
       context 'advanced credits' do
         it 'one advanced charge per charge type only' do
           account = account_and_charge_new charge_attributes: { id: 3 }
+
           credits = account.prepare_credits
+
           expect(credits).to have(1).items
-          credit = credits.first
-          expect(credit.on_date).to eq Date.current
-          expect(credit.debit).to be_nil
+        end
+
+        it 'sets date to current' do
+          expect(advanced_credit.on_date).to eq Date.current
+        end
+
+        it 'sets amount to zero' do
+          expect(advanced_credit.amount).to eq 0.0
+        end
+
+        def advanced_credit
+          account = account_and_charge_new charge_attributes: { id: 3 }
+          credits = account.prepare_credits
+          credits.first
         end
       end
     end
