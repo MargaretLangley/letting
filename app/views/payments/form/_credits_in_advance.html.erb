@@ -1,5 +1,5 @@
 <div class='toggle-selection'>
-  <div class='togglable'>
+  <div class='togglable <%= payment.show_advanced? ? '' : 'hidden' %>'>
     <div class="col-5-8">
       <%= link_to 'to enter advanced payments', '#', class: 'toggle toggle-event' %>
     </div>
@@ -7,7 +7,7 @@
       &nbsp;
     </div>
   </div>
-  <div class='togglable hidden'>
+  <div class='togglable <%= payment.show_advanced? ?  'hidden' : '' %>'>
     <div data-role='credits-in-advance'>
 
       <div class="col-5-8">

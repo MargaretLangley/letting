@@ -44,6 +44,10 @@ class PaymentDecorator
     @source.new_record? ?  'pay total'  : 'update'
   end
 
+  def show_advanced?
+    credits_with_debits.present?
+  end
+
   private
 
   def credits

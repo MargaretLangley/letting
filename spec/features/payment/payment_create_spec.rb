@@ -5,15 +5,17 @@ describe Payment do
   let(:payment_page) { PaymentCreatePage.new }
   before(:each) { log_in }
 
-  it 'payment for debit' do
+  it 'payment for debit', js: true do
     property_with_charge_and_unpaid_debit.save!
     payment_page.visit_new_page
 
     payment_page.human_ref('2002').search
     a_property_is_found
     property_has_unpaid_debits
+    property_has_no_credits_in_advance
     payment_page.payment 88.08
     payment_page.click_create_payment
+
     payment_is_created
   end
 
@@ -27,6 +29,7 @@ describe Payment do
     property_has_credits_in_advance
     payment_page.payment 88.08
     payment_page.click_create_payment
+
     payment_is_created
   end
 
@@ -67,6 +70,11 @@ describe Payment do
   def property_has_credits_in_advance
     expect(payment_page).to be_has_credits_in_advance
   end
+
+  def property_has_no_credits_in_advance
+    expect(payment_page).to_not be_has_credits_in_advance
+  end
+
 
   def property_has_unpaid_debits
     expect(payment_page).to be_has_credits_with_debits
