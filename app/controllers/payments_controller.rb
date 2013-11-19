@@ -46,7 +46,7 @@ class PaymentsController < ApplicationController
 
   def create_payment
     @payment = PaymentDecorator.new Payment.new payment_params
-    if @payment.save
+    if @payment.source.save
       redirect_to new_payment_path, notice: created_message
     else
       render :new

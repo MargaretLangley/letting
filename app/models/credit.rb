@@ -21,7 +21,11 @@ class Credit < ActiveRecord::Base
   validates :charge_id, :on_date, presence: true
   validates :amount, amount: true
   validates :amount, numericality:
-                     { less_than_or_equal_to: ->(credit) { credit.pay_off_debit } }
+                     { less_than_or_equal_to: ->(credit) { credit.pay_off_debit } },
+                     unless: :advance?
+  validates :amount, numericality:
+                     { less_than_or_equal_to: 100_000 },
+                     if: :advance?
 
   after_initialize do
     self.on_date = default_on_date if on_date.blank?

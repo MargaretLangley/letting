@@ -46,6 +46,33 @@ describe Credit do
         credit.amount = -1.00
         expect(credit).to_not be_valid
       end
+
+      context 'credit associated with debit' do
+        it 'valid below or equal to pay_off' do
+          credit.stub(:pay_off_debit).and_return 100
+          credit.amount = 100
+          expect(credit).to be_valid
+        end
+
+        it 'invalid above pay_off' do
+          credit.stub(:pay_off_debit).and_return 100
+          credit.amount = 101
+          expect(credit).to_not be_valid
+        end
+      end
+
+      context 'advance credit' do
+        it 'allowed large amount' do
+          credit.advance = true
+          credit.amount = 100_000
+          expect(credit).to be_valid
+        end
+        it 'but still limited' do
+          credit.advance = true
+          credit.amount = 100_001
+          expect(credit).to_not be_valid
+        end
+      end
     end
   end
 

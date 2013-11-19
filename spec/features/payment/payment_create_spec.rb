@@ -18,14 +18,16 @@ describe Payment do
   end
 
   it 'no debit, show advanced payment' do
-    pending
-    property_create!
+    property_with_charge_create!
     payment_page.visit_new_page
 
     payment_page.human_ref('2002').search
     a_property_is_found
     property_has_no_unpaid_debits
     property_has_credits_in_advance
+    payment_page.payment 88.08
+    payment_page.click_create_payment
+    payment_is_created
   end
 
 
@@ -65,7 +67,6 @@ describe Payment do
   def property_has_credits_in_advance
     expect(payment_page).to be_has_credits_in_advance
   end
-
 
   def property_has_unpaid_debits
     expect(payment_page).to be_has_credits_with_debits
