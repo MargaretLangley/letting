@@ -15,5 +15,5 @@
   <%= credit_form.hidden_field :charge_id %>
   <%= credit_form.hidden_field :debit_id %>
   <%= credit_form.hidden_field :on_date %>
-  <%= credit_form.text_field :amount , value: number_with_precision(credit_form.object.amount,precision: 2), class: 'number amount nested-element' %>
+  <%= credit_form.text_field :amount , value: credit.amount, class: 'number amount nested-element' %>
 </div>

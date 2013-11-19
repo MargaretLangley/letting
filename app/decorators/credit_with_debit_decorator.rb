@@ -1,6 +1,7 @@
 require_relative '../../lib/modules/method_missing'
 
 class CreditWithDebitDecorator
+  include ActionView::Helpers::NumberHelper
   include MethodMissing
   attr_reader :source
 
@@ -10,6 +11,10 @@ class CreditWithDebitDecorator
 
   def prepare_for_form
     self.amount = pay_off_debit if amount.blank?
+  end
+
+  def amount
+    number_with_precision(@source.amount,precision: 2)
   end
 
   def debit_decorator
