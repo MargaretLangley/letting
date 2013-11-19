@@ -9,7 +9,6 @@ describe CreditInAdvanceDecorator do
   end
 
   it 'has the expected amount' do
-    pending
     (charge = charge_new amount: 88.08).save!
     CreditInAdvanceDecorator.any_instance.stub(:charge).and_return charge
 
@@ -20,10 +19,9 @@ describe CreditInAdvanceDecorator do
     before { Timecop.travel(Date.new(2013, 5, 31)) }
     after  { Timecop.return }
     it 'due_on' do
-      pending
       (charge = charge_new).save!
       CreditInAdvanceDecorator.any_instance.stub(:charge).and_return charge
-      expect(credit_dec.expected_date).to eq Date.new 2013, 3, 25
+      expect(credit_dec.expected_date).to eq Date.new 2013, 9, 30
     end
   end
 end

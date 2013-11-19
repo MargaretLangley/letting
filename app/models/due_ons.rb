@@ -21,7 +21,9 @@ module DueOns
       end
 
       def make_date_between date_range
-        find { |due_on| due_on.between? date_range }.make_date
+        find_due_on_within_range(due_ons_ordered_by_next_occurrence,
+                                 date_range)
+        .make_date
       end
 
       def prepare
@@ -77,6 +79,13 @@ module DueOns
         (1..MAX_DUE_ONS).each { |month| build day: day, month: month }
       end
 
+      def find_due_on_within_range due_ons, date_range
+        due_ons.find { |due_on| due_on.between? date_range }
+      end
+
+      def due_ons_ordered_by_next_occurrence
+        sort { |a,b| a.make_date <=> b.make_date }
+      end
     end
 
   end

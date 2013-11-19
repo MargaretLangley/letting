@@ -99,11 +99,10 @@ describe DueOns do
       end
 
       it 'when in date' do
-        pending
         due_ons.build day: 1, month: 5
         due_ons.build day: 3, month: 6
         expect(due_ons.make_date_between date_range_one_year).to \
-          eq Date.new 2013, 5, 3
+          eq Date.new 2013, 6, 3
       end
 
       def date_range_one_year
