@@ -40,7 +40,6 @@ describe Payment do
     end
 
     it 'handles errors' do
-      pending
       property_with_charge_and_unpaid_debit.save!
       payment_page.visit_new_page
 

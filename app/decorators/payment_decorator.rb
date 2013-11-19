@@ -53,7 +53,7 @@ class PaymentDecorator
   end
 
   def generate_credits
-    @credits.push(*@source.credits.reject(&:advance?).map { |d| CreditDecorator.new d })
+    @credits.push(*@source.credits.reject(&:advance?).map { |d| CreditWithDebitDecorator.new d })
     @credits.push(*@source.credits.select(&:advance?).map { |d| CreditInAdvanceDecorator.new d })
     @credits.each { |d| d.prepare_for_form }
     @credits

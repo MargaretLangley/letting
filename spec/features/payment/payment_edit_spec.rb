@@ -47,7 +47,7 @@ describe Payment do
   before(:each) { log_in }
 
   it 'payment for debit - no double payments' do
-    pending 'While await advance credit to work'
+    pending 'While await advance credit to work (currently creates credit for debit and for advance credit)'
     payment = create_payment_to_edit
     payment_edit_page.visit_edit_page(payment.id)
     payment_edit_page.payment 44.00

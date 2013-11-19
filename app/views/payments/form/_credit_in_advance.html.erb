@@ -12,6 +12,7 @@
 </div>
 <div class="col-3-8 cell pick-out">
   <%= credit_form.hidden_field :account_id %>
+  <%= credit_form.hidden_field :advance %>
   <%= credit_form.hidden_field :charge_id %>
   <%= credit_form.hidden_field :debit_id %>
   <%= credit_form.text_field :amount , value: credit.amount, class: 'number amount nested-element' %>

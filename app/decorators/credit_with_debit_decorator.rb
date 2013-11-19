@@ -17,10 +17,6 @@ class CreditWithDebitDecorator
     number_with_precision(@source.amount,precision: 2)
   end
 
-  def debit_decorator
-    DebitDecorator.new debit
-  end
-
   private
 
   def pay_off_debit
