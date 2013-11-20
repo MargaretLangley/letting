@@ -29,11 +29,11 @@ class PaymentDecorator
   end
 
   def credits_with_debits
-    credits.reject &:advance?
+    credits.reject &:advanced?
   end
 
   def credits_in_advance
-    credits.select &:advance?
+    credits.select &:advanced?
   end
 
   def property_decorator
@@ -57,8 +57,8 @@ class PaymentDecorator
   end
 
   def generate_credits
-    @credits.push(*@source.credits.reject(&:advance?).map { |d| CreditWithDebitDecorator.new d })
-    @credits.push(*@source.credits.select(&:advance?).map { |d| CreditInAdvanceDecorator.new d })
+    @credits.push(*@source.credits.reject(&:advanced?).map { |d| CreditWithDebitDecorator.new d })
+    @credits.push(*@source.credits.select(&:advanced?).map { |d| CreditInAdvanceDecorator.new d })
     @credits.each { |d| d.prepare_for_form }
     @credits
   end

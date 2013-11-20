@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20131016112247) do
     t.integer  "payment_id",                                         null: false
     t.date     "on_date",                                            null: false
     t.integer  "debit_id"
-    t.boolean  "advance",                            default: false, null: false
+    t.boolean  "advanced",                           default: false, null: false
     t.decimal  "amount",     precision: 8, scale: 2,                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"

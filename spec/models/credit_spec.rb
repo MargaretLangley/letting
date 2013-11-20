@@ -63,12 +63,12 @@ describe Credit do
 
       context 'advance credit' do
         it 'allowed large amount' do
-          credit.advance = true
+          credit.advanced = true
           credit.amount = 100_000
           expect(credit).to be_valid
         end
         it 'but still limited' do
-          credit.advance = true
+          credit.advanced = true
           credit.amount = 100_001
           expect(credit).to_not be_valid
         end

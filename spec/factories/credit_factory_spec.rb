@@ -7,7 +7,7 @@ describe 'Credit Factory' do
 
   it 'creates advanced credit' do
     credit = credit_in_advance_new
-    expect(credit).to be_advance
+    expect(credit).to be_advanced
     expect(credit.debit_id).to be_nil
   end
 

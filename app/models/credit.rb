@@ -22,10 +22,10 @@ class Credit < ActiveRecord::Base
   validates :amount, amount: true
   validates :amount, numericality:
                      { less_than_or_equal_to: ->(credit) { credit.pay_off_debit } },
-                     unless: :advance?
+                     unless: :advanced?
   validates :amount, numericality:
                      { less_than_or_equal_to: 100_000 },
-                     if: :advance?
+                     if: :advanced?
 
   after_initialize do
     self.on_date = default_on_date if on_date.blank?
