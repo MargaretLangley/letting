@@ -27,8 +27,8 @@ module Charges
     has_many :charges, dependent: :destroy do
 
       def chargeables_between date_range
-        select { |charge| charge.due_between? date_range }
-        .map { |charge| charge.chargeable_info date_range }
+        charges_within?(date_range)
+          .map { |charge| charge_to_chargeable_info charge, date_range }
       end
 
       def prepare
@@ -42,6 +42,16 @@ module Charges
 
       def clear_up_form
         each { |charge| charge.clear_up_form }
+      end
+
+      private
+
+      def charges_within? date_range
+        select { |charge| charge.due_between? date_range }
+      end
+
+      def charge_to_chargeable_info charge, date_range
+        charge.chargeable_info date_range
       end
     end
   end

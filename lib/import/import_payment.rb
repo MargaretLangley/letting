@@ -31,12 +31,22 @@ module DB
     end
 
     def model_assignment_credits
-      credit = @model_to_assign.credits.find { |credit| credit.type == row.charge_type }
-      if credit
+      raise DB::ChargeTypeUnknown, charge_type_unknown, caller \
+        unless find_credits_with_charge_type @model_to_assign.credits, row.charge_type
+
+      select_credits_with_charge_type(@model_to_assign.credits, row.charge_type).each do |credit|
         credit.amount = (@amount.max_withdrawal credit.pay_off_debit).round(2)
-      else
-        raise DB::ChargeTypeUnknown, charge_type_unknown, caller
       end
+    end
+
+    private
+
+    def find_credits_with_charge_type credits, charge_type
+      credits.find { |credit| credit.type == charge_type }
+    end
+
+    def select_credits_with_charge_type credits, charge_type
+      credits.select { |credit| credit.type == charge_type }
     end
 
     def charge_type_unknown
