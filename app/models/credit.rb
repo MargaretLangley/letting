@@ -29,14 +29,14 @@ class Credit < ActiveRecord::Base
 
   after_initialize do
     self.on_date = default_on_date if on_date.blank?
-    @saved_amount = amount
+    @amount_already_paid = amount
   end
 
   #
   # The amount outstanding on the debit associated with this credit
   #
   def pay_off_debit
-    new_record? ? debit_outstanding : update_pay_off
+    new_record? ? debit_outstanding : debit_outstanding + @amount_already_paid
   end
 
   def clear_up
@@ -48,10 +48,6 @@ class Credit < ActiveRecord::Base
   end
 
   private
-
-  def update_pay_off
-    debit_outstanding + @saved_amount
-  end
 
   def debit_outstanding
     debit.try(:outstanding) || 0
