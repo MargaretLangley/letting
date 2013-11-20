@@ -31,14 +31,16 @@ module DB
     end
 
     def model_assignment_credits
-      @model_to_assign.credits.each do |credit|
-        unless credit.advance?
-          credit.amount = (@amount.max_withdrawal credit.pay_off_debit).round(2)
-          @amount.withdraw credit.amount
-        else
-          credit.amount = 0
-        end
+      credit = @model_to_assign.credits.find { |credit| credit.type == row.charge_type }
+      if credit
+        credit.amount = (@amount.max_withdrawal credit.pay_off_debit).round(2)
+      else
+        raise DB::ChargeTypeUnknown, charge_type_unknown, caller
       end
+    end
+
+    def charge_type_unknown
+      "#{row.identity}: Cannot find charge type #{row.charge_type} in property"
     end
 
     def import_not_idempotent_msg

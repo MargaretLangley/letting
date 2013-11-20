@@ -5,6 +5,7 @@ module DB
   class BalanceNotMatching < Error; end
   class ChargeUnknown < Error; end
   class ChargeCodeUnknown < Error; end
+  class ChargeTypeUnknown < Error; end
   class ClientRefUnknown < Error; end
   class PropertyRefUnknown < Error; end
   class DueInCodeUnknown < Error; end

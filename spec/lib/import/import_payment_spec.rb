@@ -6,24 +6,29 @@ require_relative '../../../lib/import/import_payment'
 module DB
   describe ImportPayment, :import do
 
-    it 'imports basic' do
-      property_create! human_ref: 89
-      expect { ImportPayment.import parse credit_row }.to \
-        change(Payment, :count).by 1
-      expect(Credit.all).to have(0).items
+    it 'basic' do
+      Credit.any_instance.stub(:type).and_return 'Ground Rent'
+      (property_with_unpaid_debit human_ref: 89).save!
+
+      expect { ImportPayment.import parse credit_row }
+        .to change(Credit, :count).by 1
     end
 
-    it 'imports with debit' do
+    it 'without charge_type raises error' do
+      Credit.any_instance.stub(:type).and_return 'Service Charge'
       (property_with_unpaid_debit human_ref: 89).save!
-      expect { ImportPayment.import parse credit_row }.to \
-        change(Credit, :count).by 1
+
+      expect { ImportPayment.import parse credit_row }
+        .to raise_error DB::ChargeTypeUnknown
     end
 
     it 'double import raises error' do
+      Credit.any_instance.stub(:type).and_return 'Ground Rent'
       (property_with_unpaid_debit human_ref: 89).save!
+
       ImportPayment.import parse credit_row
-      expect { ImportPayment.import parse credit_row }.to \
-        raise_error NotIdempotent
+      expect { ImportPayment.import parse credit_row }
+        .to raise_error NotIdempotent
     end
 
     context 'two payments same day' do
@@ -32,6 +37,7 @@ module DB
       end
 
       it 'import two credits on one debit' do
+        Credit.any_instance.stub(:type).and_return 'Ground Rent'
         (property_with_unpaid_debit human_ref: 89).save!
         ImportPayment.import parse credit_row
         ImportPayment.import parse payment_later_in_day
@@ -48,8 +54,8 @@ module DB
       it 'One credit' do
         pending 'need to have payment without debit'
         property_create! human_ref: 89
-        expect { ImportPayment.import parse one_credit_csv }.to \
-          change(Credit, :count).by 1
+        expect { ImportPayment.import parse one_credit_csv }
+          .to change(Credit, :count).by 1
       end
     end
 
