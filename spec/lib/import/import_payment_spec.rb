@@ -53,8 +53,8 @@ module DB
       expect { ImportPayment.import parse credit_row }.to match
     end
 
-    def payment_with_stubbed_credit credit
-      Payment.any_instance.stub(:prepare_accounts_credits).and_return [ credit ]
+    def payment_with_stubbed_credit *credit
+      Payment.any_instance.stub(:prepare_accounts_credits).and_return credit
     end
 
     def credit_with_stubbed_charge_type credit, charge_type
