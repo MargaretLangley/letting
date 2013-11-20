@@ -6,44 +6,60 @@ require_relative '../../../lib/import/import_payment'
 module DB
   describe ImportPayment, :import do
 
-    it 'basic' do
-      Credit.any_instance.stub(:type).and_return 'Ground Rent'
-      (property_with_unpaid_debit human_ref: 89).save!
+    it 'with debit' do
+      credit = credit_with_stubbed_charge_type credit_new,
+                                               'Ground Rent'
+      payment_with_stubbed_credit credit
+      property_create! human_ref: 89
 
-      expect { ImportPayment.import parse credit_row }
-        .to change(Credit, :count).by 1
+      expect_import_to change(Credit, :count).by 1
     end
 
-    context 'One credit' do
-      def one_credit_csv
-        %q[89, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 37.5,    0]
-      end
+    it 'in advance' do
+      credit = credit_with_stubbed_charge_type credit_in_advance_new,
+                                               'Ground Rent'
+      payment_with_stubbed_credit credit
+      property_create! human_ref: 89
 
-      it 'One credit' do
-        pending 'need to have payment without debit'
-        property_create! human_ref: 89
-        expect { ImportPayment.import parse one_credit_csv }
-          .to change(Credit, :count).by 1
-      end
+      expect_import_to change(Credit, :count).by 1
     end
 
     context 'errors' do
       it 'without charge_type raises error' do
-        Credit.any_instance.stub(:type).and_return 'Service Charge'
-        (property_with_unpaid_debit human_ref: 89).save!
+        credit = credit_with_stubbed_charge_type credit_in_advance_new,
+                                                 'service_charge'
+        payment_with_stubbed_credit credit
+        property_create! human_ref: 89
 
-        expect { ImportPayment.import parse credit_row }
-          .to raise_error DB::ChargeTypeUnknown
+        expect_import_to raise_error DB::ChargeTypeUnknown
       end
 
       it 'double import raises error' do
-        Credit.any_instance.stub(:type).and_return 'Ground Rent'
-        (property_with_unpaid_debit human_ref: 89).save!
+        credit = credit_with_stubbed_charge_type credit_in_advance_new,
+                                                 'Ground Rent'
+        payment_with_stubbed_credit credit
+        property_create! human_ref: 89
 
         ImportPayment.import parse credit_row
-        expect { ImportPayment.import parse credit_row }
-          .to raise_error NotIdempotent
+        expect_import_to raise_error NotIdempotent
       end
+    end
+
+    def credit_row
+      %q[89, GR, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0]
+    end
+
+    def expect_import_to match
+      expect { ImportPayment.import parse credit_row }.to match
+    end
+
+    def payment_with_stubbed_credit credit
+      Payment.any_instance.stub(:prepare_accounts_credits).and_return [ credit ]
+    end
+
+    def credit_with_stubbed_charge_type credit, charge_type
+        credit.stub(:type).and_return charge_type
+        credit
     end
 
     def parse row_string
@@ -52,10 +68,6 @@ module DB
                 header_converters: :symbol,
                 converters: -> (f) { f ? f.strip : nil }
                )
-    end
-
-    def credit_row
-      %q[89, GR, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0]
     end
   end
 end
