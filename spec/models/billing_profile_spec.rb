@@ -115,8 +115,8 @@ describe BillingProfile do
         end
 
         it 'address kept' do
-          expect(prepare_blank_profile.address.marked_for_destruction?).to \
-            be_false
+          expect(prepare_blank_profile.address.marked_for_destruction?)
+            .to be_false
         end
       end
     end

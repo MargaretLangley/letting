@@ -88,21 +88,21 @@ describe DueOns do
 
       it 'when in date' do
         due_ons.build day: 3, month: 5
-        expect(due_ons.make_date_between date_range_covering_due_on).to \
-          eq Date.new 2013, 5, 3
+        expect(due_ons.make_date_between date_range_covering_due_on)
+          .to eq Date.new 2013, 5, 3
       end
 
       it 'nils outside of date range' do
         due_ons.build day: 1, month: 2
-        expect { due_ons.make_date_between date_range_missing_due_on }.to \
-        raise_error NameError
+        expect { due_ons.make_date_between date_range_missing_due_on }
+          .to raise_error NameError
       end
 
       it 'when in date' do
         due_ons.build day: 1, month: 5
         due_ons.build day: 3, month: 6
-        expect(due_ons.make_date_between date_range_one_year).to \
-          eq Date.new 2013, 6, 3
+        expect(due_ons.make_date_between date_range_one_year)
+          .to eq Date.new 2013, 6, 3
       end
 
       def date_range_one_year

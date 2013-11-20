@@ -34,13 +34,13 @@ module DB
 
       context 'filter' do
         it 'allows within range' do
-          expect { import_charge row, range: 2002..2002 }.to \
-            change(Charge, :count).by 1
+          expect { import_charge row, range: 2002..2002 }
+            .to change(Charge, :count).by 1
         end
 
         it 'filters if out of range' do
-          expect { import_charge row, range: 2000..2001 }.to \
-            change(Charge, :count).by 0
+          expect { import_charge row, range: 2000..2001 }
+            .to change(Charge, :count).by 0
         end
       end
 

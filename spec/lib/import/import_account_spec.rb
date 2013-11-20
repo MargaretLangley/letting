@@ -17,8 +17,8 @@ module DB
       end
 
       it 'parsed' do
-        expect { ImportAccount.import parse debit_with_payment }.to \
-          change(Payment, :count).by 1
+        expect { ImportAccount.import parse debit_with_payment }
+          .to change(Payment, :count).by 1
       end
     end
 
@@ -32,7 +32,7 @@ module DB
       it 'parsed' do
         #expect {
           ImportAccount.import parse two_debits_1_payment
-          #  }.to \
+          #  }.to
           #change(Credit, :count).by 1
         # expect(Debit.all).to have(2).items
       end
@@ -47,8 +47,8 @@ module DB
       end
 
       it 'parses' do
-        expect { ImportAccount.import parse payment_covering_2_debits }.to \
-          change(Credit, :count).by 2
+        expect { ImportAccount.import parse payment_covering_2_debits }
+          .to change(Credit, :count).by 2
         expect(Debit.all).to have(2).items
       end
     end
@@ -60,13 +60,13 @@ module DB
       end
 
       it 'allows within range' do
-        expect { import_account single_row, range: 122..122 }.to \
-          change(Debit, :count).by 1
+        expect { import_account single_row, range: 122..122 }
+          .to change(Debit, :count).by 1
       end
 
       it 'filters if out of range' do
-        expect { import_account single_row, range: 100..121 }.to \
-          change(Debit, :count).by 0
+        expect { import_account single_row, range: 100..121 }
+          .to change(Debit, :count).by 0
       end
     end
 
@@ -95,8 +95,8 @@ module DB
         %q[122, XX, 2011-08-01 00:00:00, ,                  0,    0,    0]
       end
       it 'error if row type unknown' do
-        expect { import_account unknown_row }.to \
-          raise_error AccountRowTypeUnknown, \
+        expect { import_account unknown_row }
+          .to raise_error AccountRowTypeUnknown, \
                       'Unknown Row Property:122, charge_code: XX'
       end
     end
@@ -120,8 +120,8 @@ module DB
         %q[122, Bal, 2011-08-01 00:00:00, ,    20,    0,    20]
       end
       it 'parses' do
-        expect { ImportAccount.import parse balance_non_zero }.to \
-         change(Charge, :count).by 1
+        expect { ImportAccount.import parse balance_non_zero }
+          .to change(Charge, :count).by 1
         expect(Debit.all).to have(1).items
       end
 

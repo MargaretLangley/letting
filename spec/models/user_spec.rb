@@ -15,8 +15,8 @@ describe User do
       it('unique') do
         user.save!
         user2 = User.new user_attributes
-        expect { user2.save! email: 'example@example.com' }.to \
-         raise_error ActiveRecord::RecordInvalid
+        expect { user2.save! email: 'example@example.com' }
+          .to raise_error ActiveRecord::RecordInvalid
       end
 
       it 'requires @' do

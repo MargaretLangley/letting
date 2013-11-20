@@ -16,8 +16,8 @@ module DB
       end
 
       it 'parsed' do
-        expect { ImportDebit.import parse one_debit_csv }.to \
-          change(Debit, :count).by 1
+        expect { ImportDebit.import parse one_debit_csv }
+          .to change(Debit, :count).by 1
       end
     end
 
@@ -28,8 +28,8 @@ module DB
       end
 
       it 'parsed' do
-        expect { ImportDebit.import parse two_debit_csv }.to \
-          change(Debit, :count).by 2
+        expect { ImportDebit.import parse two_debit_csv }
+          .to change(Debit, :count).by 2
       end
     end
 

@@ -75,8 +75,8 @@ module DB
 
         it 'removes deleted second entities' do
           import_billing row
-          expect { import_billing row_1_entity }.to \
-            change(Entity, :count).by(-1)
+          expect { import_billing row_1_entity }
+            .to change(Entity, :count).by(-1)
         end
       end
     end

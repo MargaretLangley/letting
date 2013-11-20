@@ -8,8 +8,8 @@ require_relative '../../../lib/import/import_user'
 module DB
   describe ImportUser, :import do
     it 'One row' do
-      expect { ImportUser.import users_file_to_arrays }.to \
-        change(User, :count).by 1
+      expect { ImportUser.import users_file_to_arrays }
+        .to change(User, :count).by 1
     end
 
     it 'Not double import' do

@@ -33,8 +33,8 @@ module DB
 
     context '#assert_balance' do
       it 'asserts if different' do
-        expect { amount.assert_balance 4 }.to \
-          raise_error BalanceNotMatching
+        expect { amount.assert_balance 4 }
+          .to raise_error BalanceNotMatching
       end
       it 'nothing if same' do
         expect { amount.assert_balance 0 }.not_to raise_error

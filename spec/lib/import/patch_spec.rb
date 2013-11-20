@@ -47,8 +47,8 @@ module DB
         ImportBillingProfile.import \
           billing_csv, patch: Patch
           .import(BillingProfileWithId, billing_patch_csv)
-        expect(Property.first.billing_profile.address.district).to \
-          eq 'Example District Changed'
+        expect(Property.first.billing_profile.address.district)
+          .to eq 'Example District Changed'
       end
     end
 

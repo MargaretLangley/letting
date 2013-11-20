@@ -13,11 +13,11 @@ describe Charges do
       it '#chargeables_between' do
         charges = account_and_charge_new.charges
         charges[0].id = 1 # avoid saving object to get id
-        expect(charges.chargeables_between chargeable_date).to \
-        eq [ChargeableInfo.from_charge(charge_id: 1,
-                                       on_date: Date.new(2013, 3, 25),
-                                       amount: 88.08,
-                                       account_id: 1)]
+        expect(charges.chargeables_between chargeable_date)
+          .to eq [ChargeableInfo.from_charge(charge_id: 1,
+                                             on_date: Date.new(2013, 3, 25),
+                                             amount: 88.08,
+                                             account_id: 1)]
       end
       def chargeable_date
         Date.new(2013, 3, 24)..Date.new(2013, 3, 25)

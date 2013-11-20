@@ -18,8 +18,8 @@ describe Client do
 
     it '#human_ref is unique' do
       client.save!
-      expect { Client.create! human_ref: 1 }.to \
-               raise_error ActiveRecord::RecordInvalid
+      expect { Client.create! human_ref: 1 }
+        .to raise_error ActiveRecord::RecordInvalid
     end
 
     it 'has at least one child' do
@@ -55,8 +55,8 @@ describe Client do
     it '#clear_up_form destroys unused models' do
       client.clear_up_form
       expect(client.address).to_not be_nil
-      expect(client.entities.reject(&:marked_for_destruction?)).to \
-        have(0).items
+      expect(client.entities.reject(&:marked_for_destruction?))
+        .to have(0).items
     end
   end
 

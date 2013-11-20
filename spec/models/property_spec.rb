@@ -21,8 +21,8 @@ describe Property do
       it 'is unique' do
         property.save!
         property.id = nil # dirty way of saving it again
-        expect { property.save! human_ref: 8000 }.to \
-          raise_error ActiveRecord::RecordInvalid
+        expect { property.save! human_ref: 8000 }
+          .to raise_error ActiveRecord::RecordInvalid
       end
     end
 
@@ -74,8 +74,8 @@ describe Property do
       it '#clear_up_form destroys unused models' do
         property.clear_up_form
         expect(property.address).to_not be_nil
-        expect(property.entities.reject(&:marked_for_destruction?)).to \
-          have(0).items
+        expect(property.entities.reject(&:marked_for_destruction?))
+          .to have(0).items
         expect(property.billing_profile).to_not be_nil
       end
 
@@ -106,8 +106,8 @@ describe Property do
         p2 = property_create! human_ref: 202,
                               address_attributes: { house_name: 'Headingly' }
         expect(Property.all).to match_array [p1, p2]
-        expect(Property.search_by_house_name('Hillbank House').load).to \
-          eq [p1]
+        expect(Property.search_by_house_name('Hillbank House').load)
+          .to eq [p1]
       end
 
       it 'no wildcard matching' do

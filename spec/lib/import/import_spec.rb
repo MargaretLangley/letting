@@ -17,8 +17,8 @@ module DB
 
     context 'arguments' do
       it 'can set file location' do
-        expect(FileImport.new(file_location, 0, true).location).to \
-          eq 'spec/fixtures/import_data'
+        expect(FileImport.new(file_location, 0, true).location)
+          .to eq 'spec/fixtures/import_data'
       end
 
       it 'can drop rows' do

@@ -115,8 +115,8 @@ module DB
 
         it 'removes deleted second entities' do
           import_property row
-          expect { import_property entity_row }.to \
-            change(Entity, :count).by(-1)
+          expect { import_property entity_row }
+            .to change(Entity, :count).by(-1)
         end
       end
     end
