@@ -42,11 +42,11 @@ module DB
     private
 
     def find_credits_with_charge_type credits, charge_type
-      credits.find { |credit| credit.type == charge_type }
+      credits.find { |credit| credit.charge_type == charge_type }
     end
 
     def select_credits_with_charge_type credits, charge_type
-      credits.select { |credit| credit.type == charge_type }
+      credits.select { |credit| credit.charge_type == charge_type }
     end
 
     def charge_type_unknown

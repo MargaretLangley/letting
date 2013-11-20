@@ -9,7 +9,7 @@ class AccountCreditDecorator
   end
 
   def charge_type
-    @source.debit.type
+    @source.debit.charge_type
   end
 
   def date

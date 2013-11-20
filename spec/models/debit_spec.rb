@@ -91,11 +91,11 @@ describe Debit do
     context '#type' do
       it 'returned when charge present' do
         debit.charge = Charge.new charge_attributes
-        expect(debit.type).to eq 'Ground Rent'
+        expect(debit.charge_type).to eq 'Ground Rent'
       end
 
       it 'errors when charge missing' do
-        expect { debit.type }.to raise_error
+        expect { debit.charge_type }.to raise_error
       end
     end
   end

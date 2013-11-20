@@ -47,7 +47,7 @@ class Debit < ActiveRecord::Base
     amount == other.amount
   end
 
-  def type
+  def charge_type
     charge_obj.charge_type
   end
 

@@ -109,11 +109,11 @@ describe Credit do
     context '#type' do
       it 'returned when charge present' do
         credit.charge = Charge.new charge_attributes
-        expect(credit.type).to eq 'Ground Rent'
+        expect(credit.charge_type).to eq 'Ground Rent'
       end
 
       it 'errors when charge missing' do
-        expect { credit.type }.to raise_error
+        expect { credit.charge_type }.to raise_error
       end
     end
   end

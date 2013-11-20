@@ -71,7 +71,7 @@ module DB
     end
 
     def credit_with_stubbed_charge_type credit, charge_type
-        credit.stub(:type).and_return charge_type
+        credit.stub(:charge_type).and_return charge_type
         credit
     end
 

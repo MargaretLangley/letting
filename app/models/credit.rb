@@ -43,7 +43,7 @@ class Credit < ActiveRecord::Base
     self.mark_for_destruction if amount.nil? || amount.round(2) == 0
   end
 
-  def type
+  def charge_type
     charge_obj.charge_type
   end
 
