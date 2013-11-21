@@ -67,7 +67,7 @@ module DB
     end
 
     def payment_with_stubbed_credit *credit
-      Payment.any_instance.stub(:prepare_accounts_credits).and_return credit
+      Payment.any_instance.stub(:account_prepare_credits).and_return credit
     end
 
     def credit_with_stubbed_charge_type credit, charge_type

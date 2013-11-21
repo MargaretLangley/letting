@@ -43,7 +43,7 @@ class Payment < ActiveRecord::Base
   end
 
   def prepare
-    credits.push prepare_accounts_credits
+    credits.push account_prepare_credits
   end
 
   def clear_up
@@ -70,7 +70,7 @@ class Payment < ActiveRecord::Base
 
   private
 
-  def prepare_accounts_credits
+  def account_prepare_credits
     account.prepare_credits
   end
 

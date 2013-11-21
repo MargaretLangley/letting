@@ -12,7 +12,15 @@
 #
 class Account < ActiveRecord::Base
   belongs_to :property, inverse_of: :account
-  has_many :debits, dependent: :destroy
+  has_many :debits, dependent: :destroy do
+    def already_debited? debit
+      # any? returns true if one of the collection does not return
+      # false or nil
+      self.any? do |debit|
+        debit.already_charged? debit
+      end
+    end
+  end
   has_many :credits, dependent: :destroy
   accepts_nested_attributes_for :credits, allow_destroy: true
   has_many :payments, dependent: :destroy
@@ -22,7 +30,7 @@ class Account < ActiveRecord::Base
 
   def prepare_debits date_range
     debits = []
-    chargeables_between(date_range).each  do |chargeable|
+    allowed_chargeables(date_range).each  do |chargeable|
       debits.push Debit.new chargeable.to_hash
     end
     debits
@@ -65,7 +73,7 @@ class Account < ActiveRecord::Base
 
     def prepare_advanced_credits(date_range = Date.current..Date.current + 1.years)
       credits = []
-      charges.chargeables_between(date_range).each do |chargeable|
+      chargeables_between(date_range).each do |chargeable|
         credits.push Credit.new chargeable.to_hash on_date: Date.current,
                                                    advanced: true,
                                                    amount: 0
@@ -73,15 +81,17 @@ class Account < ActiveRecord::Base
       credits
     end
 
-    def chargeables_between date_range
-      charges.chargeables_between(date_range)
+    def allowed_chargeables date_range
+      chargeables_between(date_range)
         .reject { |chargeable| already_charged_for? chargeable }
     end
 
+    def chargeables_between date_range
+      charges.chargeables_between(date_range)
+    end
+
     def already_charged_for? chargeable
-      debits.any? do |debit|
-        debit.already_charged? Debit.new(chargeable.to_hash)
-      end
+      debits.already_debited? Debit.new(chargeable.to_hash)
     end
 
     def unpaid_debits
