@@ -18,8 +18,8 @@ describe DebitGenerator do
     context 'validate uniqueness' do
       it 'prevents debit_generator with same attributes from being created' do
         debit_generator_new.save!
-        expect { debit_generator_new.save! }.to  \
-          raise_error ActiveRecord::RecordInvalid
+        expect { debit_generator_new.save! }
+          .to raise_error ActiveRecord::RecordInvalid
       end
     end
 
@@ -85,10 +85,10 @@ describe DebitGenerator do
         new_debits = DebitGenerator
          .new(search_string: 'Hillbank House').generate
         expect(new_debits).to have(1).items
-        expect(new_debits.first).to eq \
-          Debit.new on_date: '2013/3/25',
-                    amount: 88.08,
-                    charge_id: property.account.charges.first.id
+        expect(new_debits.first)
+          .to eq Debit.new on_date: '2013/3/25',
+                           amount: 88.08,
+                           charge_id: property.account.charges.first.id
       end
 
       it 'does not duplicate debit' do
@@ -114,11 +114,11 @@ describe DebitGenerator do
     it '#latest_debit_generated' do
       debit_generator_new.save!
       expect(DebitGenerator.latest_debit_generated(10).length).to eq 1
-      expect(DebitGenerator.latest_debit_generated(10).first).to eq \
-          DebitGenerator.new id: 1,
-                             search_string: 'Lords',
-                             start_date: '2013-03-01',
-                             end_date: '2013-04-01'
+      expect(DebitGenerator.latest_debit_generated(10).first)
+        .to eq DebitGenerator.new id: 1,
+                                  search_string: 'Lords',
+                                  start_date: '2013-03-01',
+                                  end_date: '2013-04-01'
     end
   end
 

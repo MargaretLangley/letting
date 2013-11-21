@@ -94,8 +94,8 @@ module DB
 
       it 'ordered by creation' do
         import_property row
-        expect(Property.first.entities[0].created_at).to be < \
-          Property.first.entities[1].created_at
+        expect(Property.first.entities[0].created_at)
+          .to be < Property.first.entities[1].created_at
       end
 
       context 'multiple imports' do

@@ -14,8 +14,8 @@ module DB
 
     it 'Not double import' do
       ImportUser.import users_file_to_arrays
-      expect { ImportUser.import users_file_to_arrays }.to_not \
-        change(Charge, :count)
+      expect { ImportUser.import users_file_to_arrays }
+        .to_not change(Charge, :count)
     end
 
     def users_file_to_arrays

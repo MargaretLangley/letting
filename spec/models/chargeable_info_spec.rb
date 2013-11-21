@@ -25,16 +25,16 @@ describe ChargeableInfo do
   context 'methods' do
 
     it '#==' do
-      expect(chargeable_info).to eq \
-        ChargeableInfo.from_charge chargeable_attributes
+      expect(chargeable_info)
+        .to eq ChargeableInfo.from_charge chargeable_attributes
     end
 
     it '#to_hash' do
-      expect(chargeable_info.to_hash).to eq \
-         'charge_id' => 1,
-         'on_date' => Date.new(2013, 3, 25),
-         'amount' => 88.08,
-         'account_id' => 2
+      expect(chargeable_info.to_hash)
+        .to eq 'charge_id' => 1,
+               'on_date' => Date.new(2013, 3, 25),
+               'amount' => 88.08,
+               'account_id' => 2
     end
   end
 end

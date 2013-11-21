@@ -95,8 +95,8 @@ class Property < ActiveRecord::Base
                'addresses.road ILIKE :s OR ' +
                'addresses.town ILIKE :s',
                i: "#{search.to_i}",
-               s: "#{search}%" \
-               ).references(:address, :entity).order(:human_ref)
+               s: "#{search}%" )
+        .references(:address, :entity).order(:human_ref)
     end
 
     def self.human_refs search

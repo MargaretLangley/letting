@@ -87,8 +87,8 @@ describe Charge do
 
       context '#chargeable_info' do
         it 'if charge between dates'  do
-          expect(charge.chargeable_info date_when_charged).to eq \
-            ChargeableInfo.from_charge chargeable_attributes
+          expect(charge.chargeable_info date_when_charged)
+            .to eq ChargeableInfo.from_charge chargeable_attributes
         end
       end
 
