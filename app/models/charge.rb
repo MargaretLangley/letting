@@ -24,13 +24,12 @@ class Charge < ActiveRecord::Base
   validate :due_ons_size
   has_many :credits
   has_many :debits do
-     def already_debited? debit
-        # any? returns true if one of the collection does not return
-        # false or nil
-        self.any? do |debit|
-          debit.already_charged? debit
-        end
+    def already_debited? debit
+      # any? returns true if a collection element does not return false or nil
+      self.any? do |debit|
+      debit.already_charged? debit
       end
+    end
   end
 
   after_initialize do
