@@ -6,20 +6,22 @@ describe ChargeableInfo do
     ChargeableInfo.from_charge chargeable_attributes
   end
 
-  it 'charge_id' do
-    expect(chargeable_info.charge_id).to eq 1
-  end
+  context 'attributes' do
+    it 'charge_id' do
+      expect(chargeable_info.charge_id).to eq 1
+    end
 
-  it 'account_id' do
-    expect(chargeable_info.account_id).to eq 2
-  end
+    it 'account_id' do
+      expect(chargeable_info.account_id).to eq 2
+    end
 
-  it 'date' do
-    expect(chargeable_info.on_date).to eq Date.new(2013, 3, 25)
-  end
+    it 'date' do
+      expect(chargeable_info.on_date).to eq Date.new(2013, 3, 25)
+    end
 
-  it 'amount' do
-    expect(chargeable_info.amount).to eq 88.08
+    it 'amount' do
+      expect(chargeable_info.amount).to eq 88.08
+    end
   end
 
   context 'methods' do
