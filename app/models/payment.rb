@@ -29,7 +29,6 @@ class Payment < ActiveRecord::Base
   #
   attr_accessor :human_ref
 
-
   after_initialize do
     self.on_date = default_on_date if on_date.blank?
   end
