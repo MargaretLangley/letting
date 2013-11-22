@@ -26,6 +26,11 @@ describe ChargeableInfo do
 
   context 'methods' do
 
+    it 'self.from_charge generates chargeable_info' do
+      expect((ChargeableInfo.from_charge chargeable_attributes).class)
+        .to be ChargeableInfo
+    end
+
     it '#==' do
       expect(chargeable_info)
         .to eq ChargeableInfo.from_charge chargeable_attributes
