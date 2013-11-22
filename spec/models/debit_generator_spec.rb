@@ -82,10 +82,10 @@ describe DebitGenerator do
       after { Timecop.return }
 
       it 'generates debits' do
-        new_debits = DebitGenerator
-         .new(search_string: 'Hillbank House').generate
-        expect(new_debits).to have(1).items
-        expect(new_debits.first)
+        (generator = DebitGenerator.new(search_string: 'Hillbank House')).generate
+        generated_debits = generator.debits.select(&:new_record?)
+        expect(generated_debits).to have(1).items
+        expect(generated_debits.first)
           .to eq Debit.new on_date: '2013/3/25',
                            amount: 88.08,
                            charge_id: property.account.charges.first.id

@@ -33,9 +33,8 @@ class DebitGenerator < ActiveRecord::Base
 
   def generate
     properties.each do |property|
-      debits.push *(property.account.prepare_debits start_date..end_date)
+      debits.push *(property.prepare_debits start_date..end_date)
     end
-    new_debits
   end
 
   def debitless?
@@ -48,11 +47,11 @@ class DebitGenerator < ActiveRecord::Base
     end_date == other.end_date
   end
 
-  def properties
-    @properties ||= Property.search_min(search_string)
-  end
-
   private
+
+  def properties
+    @properties ||= Property.search_min(search_string).map {|property| property.account}
+  end
 
   def default_start_date
     Date.current
