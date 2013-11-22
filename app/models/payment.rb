@@ -42,7 +42,7 @@ class Payment < ActiveRecord::Base
   end
 
   def prepare
-    credits.push account_prepare_credits
+    credits.push *account_prepare_credits
   end
 
   def clear_up
