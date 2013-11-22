@@ -59,34 +59,34 @@ class Account < ActiveRecord::Base
 
   private
 
-    # call once per request
-    #
-    def prepare_credits_for_unpaid_debits
-      unpaid_debits.map { |debit| build_credit_from_debit(debit) }
-    end
+  # call once per request
+  #
+  def prepare_credits_for_unpaid_debits
+    unpaid_debits.map { |debit| build_credit_from_debit(debit) }
+  end
 
-    def unpaid_debits
-      debits.reject(&:paid?)
-    end
+  def unpaid_debits
+    debits.reject(&:paid?)
+  end
 
-    def build_credit_from_debit debit
-      Credit.new account_id: id,
-                 debit: debit,
-                 charge_id: debit.charge_id,
-                 advanced: false
-    end
+  def build_credit_from_debit debit
+    Credit.new account_id: id,
+               debit: debit,
+               charge_id: debit.charge_id,
+               advanced: false
+  end
 
-    def prepare_advanced_credits(date_range = Date.current..Date.current + 1.years)
-      charges.select{ |charge| charge.first_chargeable?(date_range) }
-             .map do |charge|
-               build_advanced_credit_from_chargeable \
-               charge.first_chargeable(date_range)
-             end
-    end
+  def prepare_advanced_credits(date_range = Date.current..Date.current + 1.years)
+    charges.select{ |charge| charge.first_chargeable?(date_range) }
+           .map do |charge|
+             build_advanced_credit_from_chargeable \
+             charge.first_chargeable(date_range)
+           end
+  end
 
-    def build_advanced_credit_from_chargeable chargeable
-      Credit.new chargeable.to_hash on_date: Date.current,
-                                    advanced: true,
-                                    amount: 0
-    end
+  def build_advanced_credit_from_chargeable chargeable
+    Credit.new chargeable.to_hash on_date: Date.current,
+                                  advanced: true,
+                                  amount: 0
+  end
 end
