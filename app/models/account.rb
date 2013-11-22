@@ -12,36 +12,37 @@
 #
 class Account < ActiveRecord::Base
   belongs_to :property, inverse_of: :account
-  has_many :debits, dependent: :destroy do
-    def already_debited? debit
-      # any? returns true if one of the collection does not return
-      # false or nil
-      self.any? do |debit|
-        debit.already_charged? debit
-      end
-    end
-  end
+  has_many :debits, dependent: :destroy
   has_many :credits, dependent: :destroy
   accepts_nested_attributes_for :credits, allow_destroy: true
   has_many :payments, dependent: :destroy
-  include Charges
+  has_many :charges, dependent: :destroy do
+    def prepare
+      (size...MAX_CHARGES).each { build }
+      each { |charge| charge.prepare }
+    end
+
+    def edited
+      select(&:edited?)
+    end
+
+    def clear_up_form
+      each { |charge| charge.clear_up_form }
+    end
+  end
+  MAX_CHARGES = 4
   accepts_nested_attributes_for :charges, allow_destroy: true
 
-
   def prepare_debits date_range
-    debits = []
-    allowed_chargeables(date_range).each  do |chargeable|
-      debits.push Debit.new chargeable.to_hash
+    charges.select{ |charge| charge.first_free_chargeable? date_range }
+      .map do |charge|
+        Debit.new(charge.first_free_chargeable(date_range).to_hash)
     end
-    debits
   end
 
   def prepare_credits
-    credits = []
-    credits.push prepare_credits_for_unpaid_debits
-    credits.push prepare_advanced_credits
-    # compact removes nil elements from the array
-    credits.compact.reduce([], :|)
+    [ prepare_credits_for_unpaid_debits + prepare_advanced_credits ]
+      .compact.reduce([], :|)
   end
 
   def prepare_for_form
@@ -61,40 +62,31 @@ class Account < ActiveRecord::Base
     # call once per request
     #
     def prepare_credits_for_unpaid_debits
-      credits = []
-      unpaid_debits.each do |debit|
-        credits.push Credit.new account_id: id,
-                                debit: debit,
-                                charge_id: debit.charge_id,
-                                advanced: false
-      end
-      credits
-    end
-
-    def prepare_advanced_credits(date_range = Date.current..Date.current + 1.years)
-      credits = []
-      chargeables_between(date_range).each do |chargeable|
-        credits.push Credit.new chargeable.to_hash on_date: Date.current,
-                                                   advanced: true,
-                                                   amount: 0
-      end
-      credits
-    end
-
-    def allowed_chargeables date_range
-      chargeables_between(date_range)
-        .reject { |chargeable| already_charged_for? chargeable }
-    end
-
-    def chargeables_between date_range
-      charges.chargeables_between(date_range)
-    end
-
-    def already_charged_for? chargeable
-      debits.already_debited? Debit.new(chargeable.to_hash)
+      unpaid_debits.map { |debit| build_credit_from_debit(debit) }
     end
 
     def unpaid_debits
       debits.reject(&:paid?)
+    end
+
+    def build_credit_from_debit debit
+      Credit.new account_id: id,
+                 debit: debit,
+                 charge_id: debit.charge_id,
+                 advanced: false
+    end
+
+    def prepare_advanced_credits(date_range = Date.current..Date.current + 1.years)
+      charges.select{ |charge| charge.first_chargeable?(date_range) }
+             .map do |charge|
+               build_advanced_credit_from_chargeable \
+               charge.first_chargeable(date_range)
+             end
+    end
+
+    def build_advanced_credit_from_chargeable chargeable
+      Credit.new chargeable.to_hash on_date: Date.current,
+                                    advanced: true,
+                                    amount: 0
     end
 end

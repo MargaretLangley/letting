@@ -67,28 +67,64 @@ describe Charge do
       before { Timecop.travel(Date.new(2013, 1, 31)) }
       after  { Timecop.return }
 
-      context '#due_between?' do
+      context '#first_free_chargeable?' do
         context 'in charge_range' do
           it 'true' do
-            expect(charge.due_between? date_when_charged).to be_true
+            expect(charge.first_free_chargeable? date_when_charged).to be_true
           end
 
           it 'false' do
-            expect(charge.due_between? dates_not_charged_on).to be_false
+            expect(charge.first_free_chargeable? dates_not_charged_on).to be_false
+          end
+
+          it 'false when already debited' do
+            charge.debits.build charge_id: charge.id,
+                                on_date: Date.new(2013, 3, 25),
+                                amount: charge.amount
+            expect(charge.first_free_chargeable? date_when_charged).to be_false
           end
         end
         context 'out of charge_range' do
-          it 'is is false' do
+          it 'false' do
             charge.end_date = '2002-1-1'
-            expect(charge.due_between? date_when_charged).to be_false
+            expect(charge.first_free_chargeable? date_when_charged).to be_false
           end
         end
       end
 
-      context '#chargeable_info' do
+      context '#first_free_chargeable' do
         it 'if charge between dates'  do
-          expect(charge.chargeable_info date_when_charged)
+          expect(charge.first_free_chargeable(date_when_charged))
             .to eq ChargeableInfo.from_charge chargeable_attributes
+        end
+
+        it 'return nil if not' do
+          expect(charge.first_free_chargeable(dates_not_charged_on))
+            .to be_nil
+        end
+      end
+
+      context '#first_chargeable?' do
+        context 'in charge_range' do
+          it 'true in charge_range' do
+            expect(charge.first_free_chargeable? date_when_charged).to be_true
+          end
+
+          it 'false out charge_range' do
+            expect(charge.first_free_chargeable? dates_not_charged_on).to be_false
+          end
+        end
+      end
+
+      context '#first_chargeable' do
+        it 'if charge between dates'  do
+          expect(charge.first_chargeable(date_when_charged))
+            .to eq ChargeableInfo.from_charge chargeable_attributes
+        end
+
+        it 'return nil if not' do
+          expect(charge.first_chargeable(dates_not_charged_on))
+            .to be_nil
         end
       end
 

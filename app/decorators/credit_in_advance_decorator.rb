@@ -32,7 +32,7 @@ class CreditInAdvanceDecorator
   private
 
   def charge_info
-    @charge_info ||= charge.chargeable_info Date.current..Date.current + 1.years
+    @charge_info ||= charge.first_chargeable Date.current..Date.current + 1.years
   end
 
   def charge

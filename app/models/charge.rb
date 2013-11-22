@@ -23,23 +23,36 @@ class Charge < ActiveRecord::Base
   validates :due_ons, presence: true
   validate :due_ons_size
   has_many :credits
-  has_many :debits
+  has_many :debits do
+     def already_debited? debit
+        # any? returns true if one of the collection does not return
+        # false or nil
+        self.any? do |debit|
+          debit.already_charged? debit
+        end
+      end
+  end
 
   after_initialize do
     self.start_date = Date.parse MIN_DATE if start_date.blank?
     self.end_date = Date.parse MAX_DATE if end_date.blank?
   end
 
-  def due_between? date_range
-    charge_range_dates_cover?(date_range) && due_ons.between?(date_range)
+  def first_free_chargeable? date_range
+    first_chargeable?(date_range) &&
+      !already_charged_for?(chargeable_info(date_range))
   end
 
-  def chargeable_info date_range
-    ChargeableInfo
-    .from_charge charge_id:  id,
-                 on_date:    due_ons.make_date_between(date_range),
-                 amount:     amount,
-                 account_id: account_id
+  def first_free_chargeable date_range
+    first_free_chargeable?(date_range) ? chargeable_info(date_range) : nil
+  end
+
+  def first_chargeable? date_range
+    due_between?(date_range)
+  end
+
+  def first_chargeable date_range
+    first_chargeable?(date_range) ? chargeable_info(date_range) : nil
   end
 
   def prepare
@@ -61,9 +74,26 @@ class Charge < ActiveRecord::Base
     charge_range.cover?(Date.current)
   end
 
+  def already_charged_for? chargeable
+    debits.already_debited? Debit.new(chargeable.to_hash)
+  end
+
   def charge_range_dates_cover? date_range
     charge_range.cover?(date_range.min) && charge_range.cover?(date_range.max)
   end
+
+  def due_between? date_range
+    charge_range_dates_cover?(date_range) && due_ons.between?(date_range)
+  end
+
+  def chargeable_info date_range
+    ChargeableInfo
+      .from_charge charge_id:  id,
+                   on_date:    due_ons.make_date_between(date_range),
+                   amount:     amount,
+                   account_id: account_id
+  end
+
 
   def charge_range
     start_date .. end_date

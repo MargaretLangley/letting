@@ -24,23 +24,22 @@ describe Account do
 
       it 'generates debits when charges due' do
         account = account_and_charge_new charge_attributes: { id: 3 }
-        debits = account.prepare_debits(dates_in_march)
+        debits = account.prepare_debits(date_when_charged)
         expect(debits).to have(1).items
-        debit = debits.first
-        expect(debit.account_id).to eq 1
-        expect(debit.charge_id).to eq 3
-        expect(debit.on_date).to eq Date.new 2013, 3, 25
-        expect(debit.amount).to eq 88.08
       end
 
-      it 'does not double charge' do
-        account = account_and_charge_new charge_attributes: { id: 1 }
-        account.debits.build debit_attributes
-        expect(account.prepare_debits(dates_in_march)).to eq []
+      it 'generates debits when charges due' do
+        account = account_and_charge_new charge_attributes: { id: 3 }
+        debits = account.prepare_debits(date_not_charged)
+        expect(debits).to have(0).items
       end
 
-      def dates_in_march
-        Date.new(2013, 3, 1)..Date.new(2013, 3, 31)
+      def date_when_charged
+        Date.new(2013, 3, 25)..Date.new(2013, 3, 25)
+      end
+
+      def date_not_charged
+        Date.new(2013, 3, 26)..Date.new(2013, 3, 26)
       end
     end
 
@@ -95,10 +94,24 @@ describe Account do
       end
     end
 
+    it '#prepare' do
+      expect(account.charges).to have(0).items
+      account.prepare_for_form
+      expect(account.charges).to have(4).items
+    end
+
+    it '#cleans up form' do
+      account.charges.build charge_attributes
+      account.prepare_for_form
+      account.clear_up_form
+      expect(account.charges.edited).to have(1).items
+    end
+
     it '#by_human id' do
       property_create!
       expect(Account.by_human_ref(2002)).to be_present
     end
+
   end
 
 end
