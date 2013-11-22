@@ -43,7 +43,7 @@ end
 def property_with_charge_and_unpaid_debit args = {}
   (property = property_with_charge_new).save!
   property.account.debits.build debit_attributes \
-    charge_id: property.account.charges.edited.first.id
+    charge_id: property.account.charges.first.id
   property
 end
 

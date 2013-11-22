@@ -146,20 +146,5 @@ describe Charge do
       charge.clear_up_form
       expect(charge.due_ons).to have(1).items
     end
-
-    context '#edited?' do
-
-      it 'true when user has set a value on charge or children' do
-        expect(charge).to be_edited
-      end
-
-      it 'false when the user has not set a value on charge or children' do
-        charge.attributes = { charge_type: '', due_in: '', amount: '',
-                              start_date: MIN_DATE }
-        charge.due_ons[0].attributes = { day: nil, month: nil }
-        expect(charge).to_not be_edited
-      end
-
-    end
   end
 end

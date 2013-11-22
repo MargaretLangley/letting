@@ -60,15 +60,15 @@ class Charge < ActiveRecord::Base
   end
 
   def clear_up_form
-    mark_for_destruction if empty?
+    mark_for_destruction unless edited?
     due_ons.clear_up_form
   end
+
+  private
 
   def edited?
     !empty?
   end
-
-  private
 
   def due_between? date_range
     charge_range_dates_cover?(date_range) && due_ons.between?(date_range)

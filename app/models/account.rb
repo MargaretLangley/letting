@@ -22,10 +22,6 @@ class Account < ActiveRecord::Base
       each { |charge| charge.prepare }
     end
 
-    def edited
-      select(&:edited?)
-    end
-
     def clear_up_form
       each { |charge| charge.clear_up_form }
     end

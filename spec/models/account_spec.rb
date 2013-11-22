@@ -104,7 +104,7 @@ describe Account do
       account.charges.build charge_attributes
       account.prepare_for_form
       account.clear_up_form
-      expect(account.charges.edited).to have(1).items
+      expect(account.charges.reject(&:marked_for_destruction?)).to have(1).items
     end
 
     it '#by_human id' do
