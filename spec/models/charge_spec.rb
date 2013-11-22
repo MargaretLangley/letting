@@ -161,18 +161,5 @@ describe Charge do
       end
 
     end
-
-    context '#active?' do
-      it 'in date range active' do
-        Timecop.travel(Date.new(2013, 3, 25))
-        expect(charge).to be_active
-        Timecop.return
-      end
-      it 'out of date range inactive' do
-        Timecop.travel(Date.new(2011, 3, 24))
-        expect(charge).to_not be_active
-        Timecop.return
-      end
-    end
   end
 end

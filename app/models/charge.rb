@@ -38,6 +38,14 @@ class Charge < ActiveRecord::Base
     self.end_date = Date.parse MAX_DATE if end_date.blank?
   end
 
+  def first_chargeable? date_range
+    due_between?(date_range)
+  end
+
+  def first_chargeable date_range
+    first_chargeable?(date_range) ? chargeable_info(date_range) : nil
+  end
+
   def first_free_chargeable? date_range
     first_chargeable?(date_range) &&
       !already_charged_for?(chargeable_info(date_range))
@@ -45,14 +53,6 @@ class Charge < ActiveRecord::Base
 
   def first_free_chargeable date_range
     first_free_chargeable?(date_range) ? chargeable_info(date_range) : nil
-  end
-
-  def first_chargeable? date_range
-    due_between?(date_range)
-  end
-
-  def first_chargeable date_range
-    first_chargeable?(date_range) ? chargeable_info(date_range) : nil
   end
 
   def prepare
@@ -70,8 +70,8 @@ class Charge < ActiveRecord::Base
 
   private
 
-  def active?
-    charge_range.cover?(Date.current)
+  def due_between? date_range
+    charge_range_dates_cover?(date_range) && due_ons.between?(date_range)
   end
 
   def already_charged_for? chargeable
@@ -82,10 +82,6 @@ class Charge < ActiveRecord::Base
     charge_range.cover?(date_range.min) && charge_range.cover?(date_range.max)
   end
 
-  def due_between? date_range
-    charge_range_dates_cover?(date_range) && due_ons.between?(date_range)
-  end
-
   def chargeable_info date_range
     ChargeableInfo
       .from_charge charge_id:  id,
@@ -93,7 +89,6 @@ class Charge < ActiveRecord::Base
                    amount:     amount,
                    account_id: account_id
   end
-
 
   def charge_range
     start_date .. end_date
@@ -110,11 +105,11 @@ class Charge < ActiveRecord::Base
     %w[id account_id start_date end_date created_at updated_at]
   end
 
-  def persitable_due_ons
-    due_ons.reject(&:marked_for_destruction?)
-  end
-
   def due_ons_size
     errors.add :due_ons, 'Too many due_ons' if persitable_due_ons.size > 12
+  end
+
+  def persitable_due_ons
+    due_ons.reject(&:marked_for_destruction?)
   end
 end
