@@ -33,7 +33,7 @@ class DebitGenerator < ActiveRecord::Base
 
   def generate
     properties.each do |property|
-      debits.push *(property.prepare_debits start_date..end_date)
+      debits.push *(property.account.prepare_debits start_date..end_date)
     end
   end
 
@@ -49,8 +49,10 @@ class DebitGenerator < ActiveRecord::Base
 
   private
 
+  # Gives error message as properties as well - useful for the user
+  # However, creating unecessary dependency on property
   def properties
-    @properties ||= Property.search_min(search_string).map {|property| property.account}
+    @properties ||= Property.search_min(search_string)
   end
 
   def default_start_date
