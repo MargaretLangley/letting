@@ -11,7 +11,7 @@ describe Payment do
 
     payment_page.human_ref('2002').search
     a_property_is_found
-    property_has_unpaid_debits
+    property_has_receivables
     property_has_no_credits_in_advance
     payment_page.payment 88.08
     payment_page.click_create_payment
@@ -25,7 +25,7 @@ describe Payment do
 
     payment_page.human_ref('2002').search
     a_property_is_found
-    property_has_no_unpaid_debits
+    property_has_no_receivables
     property_has_credits_in_advance
     payment_page.payment 88.08
     payment_page.click_create_payment
@@ -76,12 +76,12 @@ describe Payment do
   end
 
 
-  def property_has_unpaid_debits
-    expect(payment_page).to be_has_credits_with_debits
+  def property_has_receivables
+    expect(payment_page).to be_has_receivables
   end
 
-  def property_has_no_unpaid_debits
-    expect(payment_page).to_not be_has_credits_with_debits
+  def property_has_no_receivables
+    expect(payment_page).to_not be_has_receivables
   end
 
 end

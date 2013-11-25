@@ -37,8 +37,8 @@ class PaymentCreatePage
     has_css? '[data-role="errors"]'
   end
 
-  def has_credits_with_debits?
-    has_css? '[data-role="credits-with-debits"]'
+  def has_receivables?
+    has_css? '[data-role="receivables"]'
   end
 
   def has_credits_in_advance?
