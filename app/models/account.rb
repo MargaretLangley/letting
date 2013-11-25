@@ -86,6 +86,10 @@ class Account < ActiveRecord::Base
     debits.reject(&:paid?)
   end
 
+  # def payables
+  #   credits.reject(&:paid?)
+  # end
+
   def build_credit_from_debit debit
     Credit.new account_id: id,
                debit: debit,
