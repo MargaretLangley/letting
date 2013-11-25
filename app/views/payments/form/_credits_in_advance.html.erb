@@ -1,48 +1,37 @@
-<div class='toggle-selection'>
-  <div class='togglable <%= payment.show_advanced? ? '' : 'hidden' %>'>
-    <div class="col-5-8">
-      <%= link_to 'to enter advanced payments', '#', class: 'toggle toggle-event' %>
-    </div>
-    <div class="col-3-8 pick-out">
-      &nbsp;
-    </div>
-  </div>
-  <div class='togglable <%= payment.show_advanced? ?  'hidden' : '' %>'>
-    <div data-role='credits-in-advance'>
+<div data-role='credits-in-advance'>
 
-      <div class="col-5-8">
-        <%= link_to 'to hide advanced payments', '#', class: 'toggle toggle-event' %>
-      </div>
-      <div class="col-3-8 pick-out">
-        &nbsp;
-      </div>
-
-      <div class="col-5-8">
-        <h3>Advanced/expected charge</h3>
-      </div>
-      <div class="col-3-8 pick-out">
-        <h3>Credits</h3>
-      </div>
-      <div class="col-1-4 grid-header">
-        Charge
-      </div>
-      <div class="col-1-8 grid-header">
-        Due On
-      </div>
-      <div class="col-1-8 grid-header number">
-        Amount
-      </div>
-      <div class="col-1-8 grid-header number">
-        Owing
-      </div>
-      <div class="col-3-8 grid-header number pick-out">
-        Paid
-      </div>
-      <% @payment.credits_in_advance.each do |credit| %>
-        <%= payment_form.fields_for :credits, credit.source do |credit_form| %>
-          <%= render 'payments/form/credit_in_advance', credit_form: credit_form, credit: credit %>
-        <% end %>
-      <% end %>
-    </div>
+  <div class="col-5-8">
+    <%= link_to 'to hide advanced payments', '#', class: 'toggle toggle-event' %>
   </div>
+  <div class="col-3-8 pick-out">
+    &nbsp;
+  </div>
+
+  <div class="col-5-8">
+    <h3>Advanced/expected charge</h3>
+  </div>
+  <div class="col-3-8 pick-out">
+    <h3>Credits</h3>
+  </div>
+  <div class="col-1-4 grid-header">
+    Charge
+  </div>
+  <div class="col-1-8 grid-header">
+    Due On
+  </div>
+  <div class="col-1-8 grid-header number">
+    Amount
+  </div>
+  <div class="col-1-8 grid-header number">
+    Owing
+  </div>
+  <div class="col-3-8 grid-header number pick-out">
+    Paid
+  </div>
+  <% @payment.credits_in_advance.each do |credit| %>
+    <%= payment_form.fields_for :credits, credit.source do |credit_form| %>
+      <%= render 'payments/form/credit_in_advance', credit_form: credit_form, credit: credit %>
+    <% end %>
+  <% end %>
 </div>
+
