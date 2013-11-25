@@ -8,6 +8,12 @@
 # The account has one property. A property has a number of charges.
 # The charges generate debits and credits are made to cover these debits.
 #
+# Definition
+#
+# Accounts
+# Receivable - money owed by customer for a service that has been delivered
+#              but not paid for.
+#
 # Advanced Payments
 #
 # If I want to apply money in advance to a charge_type then need to break
@@ -52,7 +58,7 @@ class Account < ActiveRecord::Base
   end
 
   def prepare_credits
-    [ prepare_credits_for_unpaid_debits + prepare_advanced_credits ]
+    [ prepare_credits_to_receivables + prepare_advanced_credits ]
       .compact.reduce([], :|)
   end
 
@@ -72,11 +78,11 @@ class Account < ActiveRecord::Base
 
   # call once per request
   #
-  def prepare_credits_for_unpaid_debits
-    unpaid_debits.map { |debit| build_credit_from_debit(debit) }
+  def prepare_credits_to_receivables
+    receivables.map { |debit| build_credit_from_debit(debit) }
   end
 
-  def unpaid_debits
+  def receivables
     debits.reject(&:paid?)
   end
 
