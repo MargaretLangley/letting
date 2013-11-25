@@ -8,6 +8,21 @@
 # The account has one property. A property has a number of charges.
 # The charges generate debits and credits are made to cover these debits.
 #
+# Advanced Payments
+#
+# If I want to apply money in advance to a charge_type then need to break
+# payment into sub-payment.
+#
+# Subpayment must be passed to payment as when need saving of subpayment at
+# same time as payment (transactional).
+#
+# credit differs from advanced credit:
+#
+# We don't know how many credits will be generated from an advanced credit.
+# If we choose to make the advance behaviour into credit. Credit would have to
+# mutate in value remaining to pay off debts and duplicate it self in some way
+# as you would need multiple credits if it covered multiple payments.
+#
 ####
 #
 class Account < ActiveRecord::Base
