@@ -1,0 +1,13 @@
+<div class='toggle-selection'>
+  <div class='togglable <%= payment.show_advanced? ? '' : 'hidden' %>'>
+    <div class="col-5-8">
+      <%= link_to 'to enter advanced payments', '#', class: 'toggle toggle-event' %>
+    </div>
+    <div class="col-3-8 pick-out">
+      &nbsp;
+    </div>
+  </div>
+  <div class='togglable <%= payment.show_advanced? ?  'hidden' : '' %>'>
+    <%= render 'payments/form/credits_in_advance', payment: payment, payment_form: payment_form  %>
+  </div>
+</div>

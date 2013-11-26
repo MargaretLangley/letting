@@ -9,6 +9,13 @@ class CreditInAdvanceDecorator
     @source = credit
   end
 
+  def prepare_for_form
+  end
+
+  def amount
+    number_with_precision(source.amount,precision: 2)
+  end
+
   def expected_amount
     number_to_currency charge_info.amount
   end
@@ -19,14 +26,6 @@ class CreditInAdvanceDecorator
 
   def owing_amount
     number_to_currency 0
-  end
-
-  def amount
-    number_with_precision(source.amount,precision: 2)
-  end
-
-  def prepare_for_form
-    # self.amount = pay_off_debit if amount.blank?
   end
 
   private

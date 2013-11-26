@@ -58,7 +58,7 @@ describe Payment do
         expect(payment.credits).to have(0).items
       end
       it 'adds returned credits' do
-        payment.account.stub(:prepare_credits_for_unpaid_debits).and_return [ credit_new ]
+        payment.account.stub(:prepare_credits_to_receivables).and_return [ credit_new ]
         payment.prepare
         expect(payment.credits).to have(1).items
       end

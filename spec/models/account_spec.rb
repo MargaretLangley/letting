@@ -7,9 +7,10 @@ describe Account do
 
   context 'assocations' do
     context 'has many' do
-      it('charges')  { expect(account).to respond_to(:charges) }
       it('debits')    { expect(account).to respond_to(:debits) }
       it('credits')  { expect(account).to respond_to(:credits) }
+      it('payments')  { expect(account).to respond_to(:payments) }
+      it('charges')  { expect(account).to respond_to(:charges) }
     end
     context 'belongs to' do
       it('property') { expect(account).to respond_to(:property) }
@@ -17,18 +18,17 @@ describe Account do
   end
 
   context 'methods' do
+    before { Timecop.travel(Date.new(2013, 1, 31)) }
+    after { Timecop.return }
 
     context '#prepare_debits' do
-      before { Timecop.travel(Date.new(2013, 1, 31)) }
-      after { Timecop.return }
-
       it 'generates debits when charges due' do
         account = account_and_charge_new charge_attributes: { id: 3 }
         debits = account.prepare_debits(date_when_charged)
-        expect(debits).to have(1).items
+        expect(debits).to have(1).item
       end
 
-      it 'generates debits when charges due' do
+      it 'no debits when no charges due' do
         account = account_and_charge_new charge_attributes: { id: 3 }
         debits = account.prepare_debits(date_not_charged)
         expect(debits).to have(0).items
@@ -44,25 +44,18 @@ describe Account do
     end
 
     context '#prepare_credits' do
-      before { Timecop.travel(Date.new(2013, 1, 31)) }
-      after { Timecop.return }
-
       it 'no debit - does nothing' do
         expect(account.prepare_credits).to have(0).items
       end
 
-      context 'unpaid_debits' do
-
-        it 'unpaid debits generates matching credits' do
+      context 'receivables' do
+        it 'generate matching credits' do
           account.debits.push debit_new
-          credits = account.prepare_credits
-          expect(credits).to have(1).items
+          expect(credits = account.prepare_credits).to have(1).item
           expect(credits.first.amount).to be_nil
-          credits.first.amount = 0
-          expect(credits.first).to be_valid
         end
 
-        it 'paid debits nothing generated' do
+        it 'no recievables, no credits' do
           Debit.any_instance.stub(:paid?).and_return true
           account.debits.push debit_new
           expect(account.prepare_credits).to have(0).items
@@ -72,10 +65,8 @@ describe Account do
       context 'advanced credits' do
         it 'one advanced charge per charge type only' do
           account = account_and_charge_new charge_attributes: { id: 3 }
-
           credits = account.prepare_credits
-
-          expect(credits).to have(1).items
+          expect(credits).to have(1).item
         end
 
         it 'sets date to current' do
@@ -94,7 +85,7 @@ describe Account do
       end
     end
 
-    it '#prepare' do
+    it '#prepare_for_form' do
       expect(account.charges).to have(0).items
       account.prepare_for_form
       expect(account.charges).to have(4).items
@@ -104,14 +95,12 @@ describe Account do
       account.charges.build charge_attributes
       account.prepare_for_form
       account.clear_up_form
-      expect(account.charges.reject(&:marked_for_destruction?)).to have(1).items
+      expect(account.charges.reject(&:marked_for_destruction?)).to have(1).item
     end
 
     it '#by_human id' do
       property_create!
       expect(Account.by_human_ref(2002)).to be_present
     end
-
   end
-
 end
