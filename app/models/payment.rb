@@ -45,6 +45,10 @@ class Payment < ActiveRecord::Base
     credits.push *account_prepare_credits
   end
 
+  def clear_debt
+    self.amount = outstanding
+  end
+
   def clear_up
     credits.clear_up
   end

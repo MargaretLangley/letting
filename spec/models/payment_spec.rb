@@ -60,6 +60,15 @@ describe Payment do
       end
     end
 
+    context '#clear_debt' do
+      it 'set payment amount equal to debts' do
+        payment = Payment.new payment_attributes amount: 10
+        payment.stub(:outstanding).and_return 20
+        payment.clear_debt
+        expect(payment.amount).to eq 20
+      end
+    end
+
     context '#clear_up' do
       it 'removes credits with no amounts' do
         credit = payment.credits.build amount: 0

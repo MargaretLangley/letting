@@ -24,7 +24,7 @@ class PaymentDecorator
   def prepare_for_form
     if @source.account_exists?
       @source.prepare
-      @source.amount = outstanding if amount.blank?
+      @source.clear_debt if amount.blank?
     end
   end
 
