@@ -118,10 +118,6 @@ describe Address do
     end
   end
 
-  context 'associations' do
-    it('is addressable') { expect(address).to respond_to :addressable }
-  end
-
   context 'methods' do
     context'#empty?' do
       let(:address) { Address.new }

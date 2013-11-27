@@ -5,18 +5,6 @@ describe Account do
   let(:account) { account_new  }
   it('is valid') { expect(account).to be_valid }
 
-  context 'assocations' do
-    context 'has many' do
-      it('debits')    { expect(account).to respond_to(:debits) }
-      it('credits')  { expect(account).to respond_to(:credits) }
-      it('payments')  { expect(account).to respond_to(:payments) }
-      it('charges')  { expect(account).to respond_to(:charges) }
-    end
-    context 'belongs to' do
-      it('property') { expect(account).to respond_to(:property) }
-    end
-  end
-
   context 'methods' do
     before { Timecop.travel(Date.new(2013, 1, 31)) }
     after { Timecop.return }

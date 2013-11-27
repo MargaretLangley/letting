@@ -20,10 +20,6 @@ describe Payment do
     end
   end
 
-  context 'associations' do
-    it('credits') { expect(payment).to respond_to(:credits) }
-  end
-
   context 'default inialization' do
     let(:payment) { Payment.new }
     before { Timecop.travel(Date.new(2013, 9, 30)) }

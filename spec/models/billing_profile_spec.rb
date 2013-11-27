@@ -11,11 +11,6 @@ describe BillingProfile do
 
   it('is valid') { expect(billing_profile).to be_valid }
 
-  context 'associations' do
-    it('is entitieable') { expect(billing_profile).to respond_to(:entities) }
-    it('is addressable') { expect(billing_profile).to respond_to :address }
-  end
-
   context 'new profile' do
     let(:new_profile) { BillingProfile.new }
     it('has nil address') { expect(new_profile.address).to be_nil }

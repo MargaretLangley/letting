@@ -56,11 +56,6 @@ describe Charge do
     end
   end
 
-  context 'Assocations' do
-    it('belongs to an account') { expect(charge).to respond_to(:account) }
-    it('is DueOns') { expect(charge).to respond_to(:due_ons) }
-  end
-
   context 'methods' do
 
     context 'charging' do

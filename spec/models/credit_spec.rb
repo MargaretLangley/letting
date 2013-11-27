@@ -76,12 +76,6 @@ describe Credit do
     end
   end
 
-  context 'associations' do
-    it('has payment') { expect(credit).to respond_to :payment }
-    it('has account') { expect(credit).to respond_to :account }
-    it('has credit') { expect(credit).to respond_to :debit }
-  end
-
   context 'default inialization' do
     let(:credit) do
       debit = Debit.create! debit_attributes

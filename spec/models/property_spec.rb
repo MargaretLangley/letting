@@ -39,16 +39,6 @@ describe Property do
     end
   end
 
-  context 'associations' do
-    it('has entities') { expect(property).to respond_to(:entities) }
-    it 'has at least one child' do
-      property.entities.destroy_all
-      expect(property).to_not be_valid
-    end
-    it('has address') { expect(property).to respond_to :address }
-    it('belongs to client') { expect(property).to respond_to(:client) }
-  end
-
   context 'Methods' do
 
     context '#prepare_for_form' do

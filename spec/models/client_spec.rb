@@ -28,12 +28,6 @@ describe Client do
     end
   end
 
-  context 'associations' do
-    it('has entities')   { expect(client).to respond_to(:entities) }
-    it('has address')    { expect(client).to respond_to :address }
-    it('has properties') { expect(client).to respond_to(:properties) }
-  end
-
   context '#prepare_for_form' do
     let(:client) do
       client = Client.new human_ref: 8000

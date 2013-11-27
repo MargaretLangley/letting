@@ -5,10 +5,6 @@ describe Entity do
   let(:entity) { Entity.new person_entity_attributes entitieable_id: 1 }
   it('is valid') { expect(entity).to be_valid }
 
-  context 'associations' do
-    it('is entitieable') { expect(entity).to respond_to(:entitieable) }
-  end
-
   context 'validations' do
     context 'name' do
 

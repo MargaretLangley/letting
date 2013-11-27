@@ -53,10 +53,6 @@ describe DebitGenerator do
     end
   end
 
-  context 'assocations' do
-    it('debits') { expect(debit_gen).to respond_to(:debits) }
-  end
-
   context 'default inialization' do
     let(:debit_gen) { DebitGenerator.new }
     before { Timecop.travel(Date.new(2013, 9, 30)) }

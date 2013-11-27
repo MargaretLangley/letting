@@ -85,10 +85,6 @@ describe DueOn do
     end
   end
 
-  context 'associations' do
-    it('has charge') { expect(due_on).to respond_to :charge }
-  end
-
   context 'methods' do
 
     context '#per_month?' do
