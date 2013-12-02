@@ -26,12 +26,12 @@ describe PaymentDecorator do
         expect(payment.amount).to eq 50.05
       end
 
-      it 'generates #credits_with_debits' do
+      it 'generates #credits_decorated' do
         payment = generate_payment_for_account_with_debit
 
         payment.prepare_for_form
 
-        expect(payment.credits_with_debits).to have(1).items
+        expect(payment.credits_decorated).to have(1).items
       end
 
       def generate_payment_for_account_with_debit

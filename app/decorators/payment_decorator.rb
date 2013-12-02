@@ -28,8 +28,8 @@ class PaymentDecorator
     end
   end
 
-  def credits_with_debits
-    credits.reject &:advanced?
+  def credits_decorated
+    credits
   end
 
   def property_decorator
@@ -38,10 +38,6 @@ class PaymentDecorator
 
   def submit_message
     @source.new_record? ?  'pay total'  : 'update'
-  end
-
-  def show_advanced?
-    credits_with_debits.present?
   end
 
   private
