@@ -15,10 +15,10 @@ Letting::Application.routes.draw do
   resources :search_suggestions
   resources :clients
 
-  resources :accounts
+  resources :accounts, only: [:show, :index]
   resources :charges
   resources :debit_generators, only: [:new, :create, :index]
-  resources :payments
-  resources :invoices
+  resources :payments, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :invoices, only: [:create]
 
 end
