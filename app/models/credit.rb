@@ -50,7 +50,7 @@ class Credit < ActiveRecord::Base
   private
 
   def debit_outstanding
-    debit.try(:outstanding) || 0
+    debit && debit.outstanding || 0
   end
 
   def charge_obj
