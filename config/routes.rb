@@ -18,7 +18,7 @@ Letting::Application.routes.draw do
   resources :accounts, only: [:show, :index]
   resources :charges
   resources :debit_generators, only: [:new, :create, :index]
-  resources :payments, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  resources :invoices, only: [:create]
+  resources :payments, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :invoices, only: [:new]
 
 end

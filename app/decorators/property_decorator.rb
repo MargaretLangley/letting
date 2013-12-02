@@ -25,21 +25,21 @@ class PropertyDecorator
   def address_lines
     address_lines = []
     address_lines << source.entities.full_name
-    address_lines << flat_line if address.flat_no.present?
-    address_lines << address.house_name if address.house_name.present?
+    address_lines << flat_line if address.flat_no?
+    address_lines << address.house_name if address.house_name?
     address_lines << road_line
-    address_lines << address.district if address.district.present?
-    address_lines << address.town if address.town.present?
-    address_lines << address.county if address.county.present?
-    address_lines << address.postcode if address.postcode.present?
+    address_lines << address.district if address.district?
+    address_lines << address.town if address.town?
+    address_lines << address.county if address.county?
+    address_lines << address.postcode if address.postcode?
     address_lines
   end
 
   def reduced_address_lines
     address_lines = []
     first_line = source.entities.full_name
-    second_line = "#{flat_line}" if address.flat_no.present?
-    second_line += ", #{address.house_name}" if address.house_name.present?
+    second_line = "#{flat_line}" if address.flat_no?
+    second_line += ", #{address.house_name}" if address.house_name?
     second_line += ", #{road_line}" if second_line.blank?
     address_lines.push *[ first_line, second_line]
   end
