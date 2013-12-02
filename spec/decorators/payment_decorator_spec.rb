@@ -34,14 +34,6 @@ describe PaymentDecorator do
         expect(payment.credits_with_debits).to have(1).items
       end
 
-      it 'generates #credit_in_advance' do
-        payment = generate_payment_for_account_with_charge
-
-        payment.prepare_for_form
-
-        expect(payment.credits_in_advance).to have(1).items
-      end
-
       def generate_payment_for_account_with_debit
         (account = account_and_debit).save!
         PaymentDecorator.new payment_new account_id: account.id

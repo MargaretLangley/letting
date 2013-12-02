@@ -14,7 +14,6 @@
       <% if @payment.credits_with_debits.present? %>
         <%= render 'payments/form/credits_with_debit', payment: payment, payment_form: payment_form  %>
       <% end %>
-      <%= render 'payments/form/toggle_credits_in_advance', payment: payment, payment_form: payment_form  %>
       <%= render 'payments/form/total', payment: payment, payment_form: payment_form %>
     </div>
   <% else %>

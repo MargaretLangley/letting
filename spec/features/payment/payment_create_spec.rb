@@ -12,27 +12,11 @@ describe Payment do
     payment_page.human_ref('2002').search
     a_property_is_found
     property_has_receivables
-    property_has_no_credits_in_advance
     payment_page.payment 88.08
     payment_page.click_create_payment
 
     payment_is_created
   end
-
-  it 'no debit, show advanced payment' do
-    property_with_charge_create!
-    payment_page.visit_new_page
-
-    payment_page.human_ref('2002').search
-    a_property_is_found
-    property_has_no_receivables
-    property_has_credits_in_advance
-    payment_page.payment 88.08
-    payment_page.click_create_payment
-
-    payment_is_created
-  end
-
 
   context 'error' do
 
@@ -66,15 +50,6 @@ describe Payment do
   def payment_is_created
     expect(payment_page).to be_successful
   end
-
-  def property_has_credits_in_advance
-    expect(payment_page).to be_has_credits_in_advance
-  end
-
-  def property_has_no_credits_in_advance
-    expect(payment_page).to_not be_has_credits_in_advance
-  end
-
 
   def property_has_receivables
     expect(payment_page).to be_has_receivables

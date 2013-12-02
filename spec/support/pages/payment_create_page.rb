@@ -41,10 +41,6 @@ class PaymentCreatePage
     has_css? '[data-role="receivables"]'
   end
 
-  def has_credits_in_advance?
-    has_css? '[data-role="credits-in-advance"]'
-  end
-
   def successful?
     has_content? /successfully created/i
   end
