@@ -49,28 +49,6 @@ describe Account do
           expect(account.prepare_credits).to have(0).items
         end
       end
-
-      context 'advanced credits' do
-        it 'one advanced charge per charge type only' do
-          account = account_and_charge_new charge_attributes: { id: 3 }
-          credits = account.prepare_credits
-          expect(credits).to have(1).item
-        end
-
-        it 'sets date to current' do
-          expect(advanced_credit.on_date).to eq Date.current
-        end
-
-        it 'sets amount to zero' do
-          expect(advanced_credit.amount).to eq 0.0
-        end
-
-        def advanced_credit
-          account = account_and_charge_new charge_attributes: { id: 3 }
-          credits = account.prepare_credits
-          credits.first
-        end
-      end
     end
 
     it '#prepare_for_form' do

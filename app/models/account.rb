@@ -14,21 +14,6 @@
 # Receivable - money owed by customer for a service that has been delivered
 #              but not paid for.
 #
-# Advanced Payments
-#
-# If I want to apply money in advance to a charge_type then need to break
-# payment into sub-payment.
-#
-# Subpayment must be passed to payment as when need saving of subpayment at
-# same time as payment (transactional).
-#
-# credit differs from advanced credit:
-#
-# We don't know how many credits will be generated from an advanced credit.
-# If we choose to make the advance behaviour into credit. Credit would have to
-# mutate in value remaining to pay off debts and duplicate it self in some way
-# as you would need multiple credits if it covered multiple payments.
-#
 ####
 #
 class Account < ActiveRecord::Base
@@ -58,8 +43,7 @@ class Account < ActiveRecord::Base
   end
 
   def prepare_credits
-    [ prepare_credits_to_receivables + prepare_advanced_credits ]
-      .compact.reduce([], :|)
+    [ prepare_credits_to_receivables ].compact.reduce([], :|)
   end
 
   def prepare_for_form
@@ -93,21 +77,6 @@ class Account < ActiveRecord::Base
   def build_credit_from_debit debit
     Credit.new account_id: id,
                debit: debit,
-               charge_id: debit.charge_id,
-               advanced: false
-  end
-
-  def prepare_advanced_credits(date_range = Date.current..Date.current + 1.years)
-    charges.select{ |charge| charge.first_chargeable?(date_range) }
-           .map do |charge|
-             build_advanced_credit_from_chargeable \
-             charge.first_chargeable(date_range)
-           end
-  end
-
-  def build_advanced_credit_from_chargeable chargeable
-    Credit.new chargeable.to_hash on_date: Date.current,
-                                  advanced: true,
-                                  amount: 0
+               charge_id: debit.charge_id
   end
 end

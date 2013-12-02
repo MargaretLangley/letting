@@ -17,12 +17,6 @@ module DB
 
     it 'in advance' do
       pending
-      credit = credit_with_stubbed_charge_type credit_in_advance_new,
-                                               'Ground Rent'
-      payment_with_stubbed_credit credit
-      property_create! human_ref: 89
-
-      expect_import_to change(Credit, :count).by 1
     end
 
     it 'multiple debits paid' do
@@ -39,7 +33,7 @@ module DB
 
     context 'errors' do
       it 'without charge_type raises error' do
-        credit = credit_with_stubbed_charge_type credit_in_advance_new,
+        credit = credit_with_stubbed_charge_type credit_new,
                                                  'service_charge'
         payment_with_stubbed_credit credit
         property_create! human_ref: 89
@@ -48,7 +42,7 @@ module DB
       end
 
       it 'double import raises error' do
-        credit = credit_with_stubbed_charge_type credit_in_advance_new,
+        credit = credit_with_stubbed_charge_type credit_new,
                                                  'Ground Rent'
         payment_with_stubbed_credit credit
         property_create! human_ref: 89
