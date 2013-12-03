@@ -27,11 +27,6 @@ describe Credit do
         expect(credit).to_not be_valid
       end
 
-      it 'not greater than owed' do
-        credit.amount = 88.09
-        expect(credit).to_not be_valid
-      end
-
       it 'One penny is valid' do
         credit.amount = 0.01
         expect(credit).to be_valid
@@ -52,12 +47,6 @@ describe Credit do
           credit.stub(:pay_off_debit).and_return 100
           credit.amount = 100
           expect(credit).to be_valid
-        end
-
-        it 'invalid above pay_off' do
-          credit.stub(:pay_off_debit).and_return 100
-          credit.amount = 101
-          expect(credit).to_not be_valid
         end
       end
     end
