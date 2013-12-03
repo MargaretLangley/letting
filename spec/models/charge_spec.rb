@@ -111,18 +111,6 @@ describe Charge do
         end
       end
 
-      context '#first_chargeable' do
-        it 'if charge between dates'  do
-          expect(charge.first_chargeable(date_when_charged))
-            .to eq ChargeableInfo.from_charge chargeable_attributes
-        end
-
-        it 'return nil if not' do
-          expect(charge.first_chargeable(dates_not_charged_on))
-            .to be_nil
-        end
-      end
-
       def date_when_charged
         Date.new(2013, 3, 25) .. Date.new(2013, 3, 25)
       end
