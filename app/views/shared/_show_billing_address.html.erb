@@ -1,0 +1,26 @@
+<% if  object.address.flat_no.present? %>
+  <%= object.address.flat_no %>
+<% end %>
+<% if  object.address.house_name.present? %>
+  <%= object.address.house_name %>
+  <br>
+<% end %>
+<%= object.address.road_no %>
+<%= object.address.road %>
+<br>
+<% if  object.address.district.present? %>
+  <%= object.address.district %>
+  <br>
+<% end %>
+<% if  object.address.town.present? %>
+  <%= object.address.town %>
+  <br>
+<% end %>
+<% if  object.address.county.present? %>
+  <%= object.address.county %>
+  <br>
+<% end %>
+<% if  object.address.postcode.present? %>
+  <%= object.address.postcode %>
+  <br>
+<% end %>

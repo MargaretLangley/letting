@@ -1,0 +1,41 @@
+<h2 class="mainTitle">Invoice</h2>
+<table>
+  <thead>
+    <tr>
+      <th class='alnright'>
+        ID
+      </th>
+      <th class='alnright'>
+        No
+      </th>
+      <th>
+        Road
+      </th>
+      <th>
+        Actions
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @properties.present? %>
+      <% @properties.each do |property| %>
+        <tr>
+          <td class = 'alnright'>
+           <%= property.human_ref %>
+          </td>
+          <td class='alnright'>
+            <%= property.address.road_no %>
+          </td>
+          <td>
+            <%= property.address.road %>
+          </td>
+          <td>
+            <%= link_to 'Invoice', invoice_path(property) %>
+          </td>
+        </tr>
+      <% end %>
+     <% end %>
+  </tbody>
+</table>
+
+
