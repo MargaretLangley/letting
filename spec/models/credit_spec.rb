@@ -67,13 +67,15 @@ describe Credit do
 
   context 'methods' do
 
-    context '#pay_off_debit calculates' do
-      it 'new record correctly' do
-        expect(credit.pay_off_debit).to eq 88.08
+    context '#pay_off_debit' do
+      it 'new record has nothing to pay' do
+        credit = Credit.new credit_attributes amount: nil
+        expect(credit.pay_off_debit).to eq 0.00
       end
-      it 'saved record correctly' do
-        credit.should_receive(:new_record?).and_return(false)
-        expect(credit.pay_off_debit).to eq 176.16
+      it 'credit has to pay off debit' do
+        credit = Credit.new credit_attributes amount: nil
+        credit.debit = Debit.new debit_attributes amount: 10.50
+        expect(credit.pay_off_debit).to eq 10.50
       end
     end
     context '#type' do
