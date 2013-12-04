@@ -41,14 +41,6 @@ describe Credit do
         credit.amount = -1.00
         expect(credit).to_not be_valid
       end
-
-      context 'credit associated with debit' do
-        it 'valid below or equal to pay_off' do
-          credit.stub(:pay_off_debit).and_return 100
-          credit.amount = 100
-          expect(credit).to be_valid
-        end
-      end
     end
   end
 
@@ -67,17 +59,6 @@ describe Credit do
 
   context 'methods' do
 
-    context '#pay_off_debit' do
-      it 'new record has nothing to pay' do
-        credit = Credit.new credit_attributes amount: nil
-        expect(credit.pay_off_debit).to eq 0.00
-      end
-      it 'credit has to pay off debit' do
-        credit = Credit.new credit_attributes amount: nil
-        credit.debit = Debit.new debit_attributes amount: 10.50
-        expect(credit.pay_off_debit).to eq 10.50
-      end
-    end
     context '#type' do
       it 'returned when charge present' do
         credit.charge = Charge.new charge_attributes

@@ -28,13 +28,6 @@ class Credit < ActiveRecord::Base
     @spent = amount
   end
 
-  #
-  # The amount outstanding on the debit associated with this credit
-  #
-  def pay_off_debit
-    debit_outstanding + spent
-  end
-
   def clear_up
     self.mark_for_destruction if amount.nil? || amount.round(2) == 0
   end
@@ -47,10 +40,6 @@ class Credit < ActiveRecord::Base
 
   def spent
     @spent || 0
-  end
-
-  def debit_outstanding
-    debit && debit.outstanding || 0
   end
 
   def charge_obj

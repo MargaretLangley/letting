@@ -12,9 +12,6 @@
 class Payment < ActiveRecord::Base
   belongs_to :account
   has_many :credits, dependent: :destroy do
-    def outstanding
-      map { |credit| credit.pay_off_debit }.sum
-    end
     def clear_up
       each { |credit| credit.clear_up }
     end

@@ -17,6 +17,7 @@ module DB
       end
 
       it 'parsed' do
+        pending
         expect { ImportAccount.import parse debit_with_payment }
           .to change(Payment, :count).by 1
       end
@@ -30,6 +31,7 @@ module DB
       end
 
       it 'parsed' do
+        pending
         #expect {
           ImportAccount.import parse two_debits_1_payment
           #  }.to
@@ -47,6 +49,7 @@ module DB
       end
 
       it 'parses' do
+        pending
         expect { ImportAccount.import parse payment_covering_2_debits }
           .to change(Credit, :count).by 2
         expect(Debit.all).to have(2).items
@@ -80,6 +83,7 @@ module DB
       end
 
       it 'parses' do
+        pending
         property_with_charge_create! human_ref: 123
         expect { import_account two_properties }.to change(Credit, :count).by 2
         expect(Debit.all).to have(2).items

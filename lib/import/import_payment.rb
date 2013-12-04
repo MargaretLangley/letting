@@ -34,9 +34,11 @@ module DB
       raise DB::ChargeTypeUnknown, charge_type_unknown, caller \
         unless find_credits_with_charge_type @model_to_assign.credits, row.charge_type
 
-      select_credits_with_charge_type(@model_to_assign.credits, row.charge_type).each do |credit|
-        credit.amount = (@amount.max_withdrawal credit.pay_off_debit).round(2)
-      end
+      # Need to be redone on charge_type basis
+      fail 'code needs to replace with charge_type specific code'
+      # select_credits_with_charge_type(@model_to_assign.credits, row.charge_type).each do |credit|
+      #   credit.amount = (@amount.max_withdrawal credit.pay_off_debit).round(2)
+      # end
     end
 
     private

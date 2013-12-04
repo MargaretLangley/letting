@@ -7,6 +7,7 @@ module DB
   describe ImportPayment, :import do
 
     it 'with debit' do
+      pending
       credit = credit_with_stubbed_charge_type credit_new,
                                                'Ground Rent'
       payment_with_stubbed_credit credit
@@ -42,6 +43,7 @@ module DB
       end
 
       it 'double import raises error' do
+        pending
         credit = credit_with_stubbed_charge_type credit_new,
                                                  'Ground Rent'
         payment_with_stubbed_credit credit

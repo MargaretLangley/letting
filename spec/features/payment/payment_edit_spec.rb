@@ -47,6 +47,7 @@ describe Payment do
   before(:each) { log_in }
 
   it 'payment for debit - no double payments' do
+    pending
     payment = create_payment_to_edit
     payment_edit_page.visit_edit_page(payment.id)
     payment_edit_page.payment 44.00
@@ -56,6 +57,7 @@ describe Payment do
 
   context 'error' do
     it 'handles errors' do
+      pending
       payment = create_payment_to_edit
       payment_edit_page.visit_edit_page(payment.id)
       payment_edit_page.payment(100_000_000)
