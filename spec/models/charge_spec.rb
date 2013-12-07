@@ -99,7 +99,7 @@ describe Charge do
         end
       end
 
-      context '#first_chargeable?' do
+      context '#first_free_chargeable?' do
         context 'in charge_range' do
           it 'true in charge_range' do
             expect(charge.first_free_chargeable? date_when_charged).to be_true
@@ -108,18 +108,6 @@ describe Charge do
           it 'false out charge_range' do
             expect(charge.first_free_chargeable? dates_not_charged_on).to be_false
           end
-        end
-      end
-
-      context '#first_chargeable' do
-        it 'if charge between dates'  do
-          expect(charge.first_chargeable(date_when_charged))
-            .to eq ChargeableInfo.from_charge chargeable_attributes
-        end
-
-        it 'return nil if not' do
-          expect(charge.first_chargeable(dates_not_charged_on))
-            .to be_nil
         end
       end
 
