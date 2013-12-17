@@ -87,14 +87,14 @@ describe Charge do
         end
       end
 
-      context '#first_free_chargeable' do
+      context '#next_chargeable' do
         it 'if charge between dates'  do
-          expect(charge.first_free_chargeable(date_when_charged))
+          expect(charge.next_chargeable(date_when_charged))
             .to eq ChargeableInfo.from_charge chargeable_attributes
         end
 
         it 'return nil if not' do
-          expect(charge.first_free_chargeable(dates_not_charged_on))
+          expect(charge.next_chargeable(dates_not_charged_on))
             .to be_nil
         end
       end

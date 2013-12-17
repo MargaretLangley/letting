@@ -42,7 +42,7 @@ class Charge < ActiveRecord::Base
       !debited?(chargeable_info(date_range))
   end
 
-  def first_free_chargeable date_range
+  def next_chargeable date_range
     first_free_chargeable?(date_range) ? chargeable_info(date_range) : nil
   end
 

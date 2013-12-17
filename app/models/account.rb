@@ -38,7 +38,7 @@ class Account < ActiveRecord::Base
   def prepare_debits date_range
     charges.select{ |charge| charge.first_free_chargeable? date_range }
       .map do |charge|
-        Debit.new(charge.first_free_chargeable(date_range).to_hash)
+        Debit.new(charge.next_chargeable(date_range).to_hash)
     end
   end
 
