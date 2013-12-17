@@ -37,13 +37,9 @@ class Charge < ActiveRecord::Base
     self.end_date = Date.parse MAX_DATE if end_date.blank?
   end
 
-  def first_chargeable date_range
-    first_chargeable?(date_range) ? chargeable_info(date_range) : nil
-  end
-
   def first_free_chargeable? date_range
     first_chargeable?(date_range) &&
-      !already_charged_for?(chargeable_info(date_range))
+      !debited?(chargeable_info(date_range))
   end
 
   def first_free_chargeable date_range
@@ -73,7 +69,7 @@ class Charge < ActiveRecord::Base
     charge_range_dates_cover?(date_range) && due_ons.between?(date_range)
   end
 
-  def already_charged_for? chargeable
+  def debited? chargeable
     debits.already_debited? Debit.new(chargeable.to_hash)
   end
 
