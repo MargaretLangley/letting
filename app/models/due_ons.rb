@@ -21,9 +21,7 @@ module DueOns
       end
 
       def make_date_between date_range
-        find_due_on_within_range(due_ons_ordered_by_next_occurrence,
-                                 date_range)
-        .make_date
+        within_range?(ordered_by_occurrence, date_range).make_date
       end
 
       def prepare
@@ -31,8 +29,8 @@ module DueOns
       end
 
       def clear_up_form
-        clear_up_all_children
-        switch_to_a_due_on_for_each_month if per_month_due_on
+        clear_up_all
+        to_per_month if per_month_due_on
         destruction_if :per_month? if per_month_due_on
       end
 
@@ -50,16 +48,15 @@ module DueOns
 
   private
 
-      def clear_up_all_children
+      def clear_up_all
         each { |due_on| due_on.clear_up_form self }
       end
 
       def destruction_if matcher
-        select(&matcher)
-        .each { |due_on| mark_due_on_for_destruction due_on }
+        select(&matcher).each { |due_on| mark_for_destruction due_on }
       end
 
-      def mark_due_on_for_destruction due_on
+      def mark_for_destruction due_on
         due_on.mark_for_destruction
       end
 
@@ -71,23 +68,29 @@ module DueOns
         find(&:per_month?)
       end
 
-      def switch_to_a_due_on_for_each_month
-        build_due_on_for_each_month_of_year per_month_due_on.day
+      def to_per_month
+        (1..MAX_DUE_ONS)
+        .each { |month| build day: per_month_due_on.day, month: month }
       end
 
-      def build_due_on_for_each_month_of_year day
-        (1..MAX_DUE_ONS).each { |month| build day: day, month: month }
-      end
-
-      def find_due_on_within_range due_ons, date_range
+      def within_range? due_ons, date_range
         due_ons.find { |due_on| due_on.between? date_range }
       end
 
-      def due_ons_ordered_by_next_occurrence
+      def ordered_by_occurrence
         sort { |a,b| a.make_date <=> b.make_date }
       end
     end
 
+    validate :due_ons_size
+
+    def due_ons_size
+      errors.add :due_ons, 'Too many due_ons' if persitable_due_ons.size > 12
+    end
+
+    def persitable_due_ons
+      due_ons.reject(&:marked_for_destruction?)
+    end
   end
   MAX_DISPLAYED_DUE_ONS = 4
   MAX_DUE_ONS = 12

@@ -21,7 +21,6 @@ class Charge < ActiveRecord::Base
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
   validates :due_ons, presence: true
-  validate :due_ons_size
   has_many :credits
   has_many :debits do
     def already_debited? debit
@@ -98,13 +97,5 @@ class Charge < ActiveRecord::Base
 
   def ignored_attrs
     %w[id account_id start_date end_date created_at updated_at]
-  end
-
-  def due_ons_size
-    errors.add :due_ons, 'Too many due_ons' if persitable_due_ons.size > 12
-  end
-
-  def persitable_due_ons
-    due_ons.reject(&:marked_for_destruction?)
   end
 end

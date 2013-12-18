@@ -46,6 +46,14 @@ class Account < ActiveRecord::Base
     [ prepare_credits_to_receivables ].compact.reduce([], :|)
   end
 
+  def prepare_payment data_range
+    # current debits have the upcoming debits added
+    prepare_debits date_range
+    # I am paying in advance sometimes... so I want upcoming debits
+    # get the matching credits
+    prepare_credits_to_receivables
+  end
+
   def prepare_for_form
     charges.prepare
   end
@@ -63,7 +71,8 @@ class Account < ActiveRecord::Base
   # call once per request
   #
   def prepare_credits_to_receivables
-    receivables.map { |debit| build_credit_from_debit(debit) }
+    # get debits and build matching credits
+    receivables.map { |debit| build_credit_from debit }
   end
 
   def receivables
@@ -74,7 +83,7 @@ class Account < ActiveRecord::Base
   #   credits.reject(&:paid?)
   # end
 
-  def build_credit_from_debit debit
+  def build_credit_from debit
     Credit.new account_id: id,
                debit: debit,
                charge_id: debit.charge_id

@@ -31,18 +31,6 @@ describe Charge do
         charge.due_ons.destroy_all
         expect(charge).to_not be_valid
       end
-
-      context 'due_ons_size' do
-        it 'not valid one over limit' do
-          (1..12).each { charge.due_ons.build day: 25, month: 3 }
-          expect(charge).to_not be_valid
-        end
-        it 'valid if marked for destruction' do
-          (1..12).each { charge.due_ons.build day: 25, month: 3 }
-          charge.due_ons.first.mark_for_destruction
-          expect(charge).to be_valid
-        end
-      end
     end
     context 'amount' do
       it 'is a number' do

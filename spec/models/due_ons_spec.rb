@@ -2,7 +2,22 @@ require 'spec_helper'
 
 describe DueOns do
 
-  let(:due_ons) { Charge.new.due_ons }
+  let(:charge) { Charge.new charge_attributes id: 1}
+  let(:due_ons) { charge.due_ons }
+
+  context 'validates' do
+    context 'due_ons_size' do
+      it 'not valid one over limit' do
+        (1..13).each { charge.due_ons.build day: 25, month: 3 }
+        expect(charge).to_not be_valid
+      end
+      it 'valid if marked for destruction' do
+        (1..12).each { charge.due_ons.build day: 25, month: 3 }
+        charge.due_ons.first.mark_for_destruction
+        expect(charge).to be_valid
+      end
+    end
+  end
 
   context 'methods' do
 
