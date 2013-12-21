@@ -17,10 +17,10 @@ module DueOns
     has_many :due_ons, -> { order(:created_at) }, dependent: :destroy do
 
       def between? date_range
-        find { |due_on| due_on.between? date_range }.present?
+        find { |due_on| due_on.between? date_range }
       end
 
-      def make_date_between date_range
+      def date_between date_range
         within_range?(ordered_by_occurrence, date_range).make_date
       end
 
@@ -42,7 +42,7 @@ module DueOns
         max_due_ons || per_month_due_on
       end
 
-      def has_new_due_on?
+      def has_new?
         reject(&:empty?).find(&:new_record?)
       end
 
@@ -53,11 +53,7 @@ module DueOns
       end
 
       def destruction_if matcher
-        select(&matcher).each { |due_on| mark_for_destruction due_on }
-      end
-
-      def mark_for_destruction due_on
-        due_on.mark_for_destruction
+        select(&matcher).each { |due_on| due_on.mark_for_destruction }
       end
 
       def max_due_ons

@@ -24,7 +24,6 @@ class Charge < ActiveRecord::Base
   has_many :credits
   has_many :debits do
     def already_debited? debit
-      # any? returns true if a collection element does not return false or nil
       self.any? do |debit|
       debit.already_charged? debit
       end
@@ -37,8 +36,7 @@ class Charge < ActiveRecord::Base
   end
 
   def chargeable_between? date_range
-    first_chargeable?(date_range) &&
-      !debited?(chargeable_info(date_range))
+    due_between?(date_range) && !debited?(chargeable_info(date_range))
   end
 
   def next_chargeable date_range
@@ -60,10 +58,6 @@ class Charge < ActiveRecord::Base
     !empty?
   end
 
-  def first_chargeable? date_range
-    due_between?(date_range)
-  end
-
   def due_between? date_range
     charge_range_dates_cover?(date_range) && due_ons.between?(date_range)
   end
@@ -73,19 +67,16 @@ class Charge < ActiveRecord::Base
   end
 
   def charge_range_dates_cover? date_range
-    charge_range.cover?(date_range.min) && charge_range.cover?(date_range.max)
+    (start_date..end_date).cover?(date_range.min) &&
+    (start_date..end_date).cover?(date_range.max)
   end
 
   def chargeable_info date_range
     ChargeableInfo
       .from_charge charge_id:  id,
-                   on_date:    due_ons.make_date_between(date_range),
+                   on_date:    due_ons.date_between(date_range),
                    amount:     amount,
                    account_id: account_id
-  end
-
-  def charge_range
-    start_date .. end_date
   end
 
   def empty?
