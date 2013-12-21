@@ -30,8 +30,8 @@ module DueOns
 
       def clear_up_form
         clear_up_all
-        to_per_month if per_month_due_on
-        destruction_if :per_month? if per_month_due_on
+        to_per_month if monthly_due_on
+        destruction_if :monthly? if monthly_due_on
       end
 
       def empty?
@@ -39,7 +39,7 @@ module DueOns
       end
 
       def per_month?
-        max_due_ons || per_month_due_on
+        max_due_ons || monthly_due_on
       end
 
       def has_new?
@@ -60,13 +60,13 @@ module DueOns
         reject(&:empty?).size == MAX_DUE_ONS
       end
 
-      def per_month_due_on
-        find(&:per_month?)
+      def monthly_due_on
+        find(&:monthly?)
       end
 
       def to_per_month
         (1..MAX_DUE_ONS)
-        .each { |month| build day: per_month_due_on.day, month: month }
+        .each { |month| build day: monthly_due_on.day, month: month }
       end
 
       def ordered_by_occurrence
