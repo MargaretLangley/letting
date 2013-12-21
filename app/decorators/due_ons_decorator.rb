@@ -31,7 +31,7 @@ class DueOnsDecorator
   end
 
   def per_month
-    if @source.per_month?
+    if monthly?
       DueOn.new day: first_day_or_empty, month: DueOn::PER_MONTH
     else
       DueOn.new day: '', month: ''
@@ -43,7 +43,7 @@ class DueOnsDecorator
   end
 
   def hidden_side? side
-    if per_month?
+    if monthly?
       side == DueOn::PER_MONTH ? '' : 'hidden'
     else
       side == DueOn::ON_DATE ? '' : 'hidden'

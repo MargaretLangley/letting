@@ -56,27 +56,27 @@ describe DueOns do
       end
     end
 
-    context '#per month?' do
+    context '#monthly?' do
       context 'by number' do
         it 'knows when the charge is not per month' do
           due_ons.build day: 1, month: 1, charge_id: 1
-          expect(due_ons).to_not be_per_month
+          expect(due_ons).to_not be_monthly
         end
         it 'knows when the charge is not per month' do
           (1..12).each { due_ons.build day: 1, month: 1 }
-          expect(due_ons).to be_per_month
+          expect(due_ons).to be_monthly
         end
 
         it 'max displayed dueons does not make it per month' do
           (1..4).each { due_ons.build day: 1, month: 1 }
           (5..12).each { due_ons.build }
-          expect(due_ons).to_not be_per_month
+          expect(due_ons).to_not be_monthly
         end
       end
       context 'by per_month due_on' do
         it 'is not per month without it' do
           due_ons.build day: 1, month: -1
-          expect(due_ons).to be_per_month
+          expect(due_ons).to be_monthly
         end
       end
     end

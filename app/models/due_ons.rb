@@ -38,7 +38,7 @@ module DueOns
         self.all?(&:empty?)
       end
 
-      def per_month?
+      def monthly?
         max_due_ons || monthly_due_on
       end
 
