@@ -30,7 +30,7 @@ module DueOns
 
       def clear_up_form
         clear_up_all
-        to_per_month if monthly_due_on
+        to_monthly if monthly_due_on
         destruction_if :monthly? if monthly_due_on
       end
 
@@ -64,7 +64,7 @@ module DueOns
         find(&:monthly?)
       end
 
-      def to_per_month
+      def to_monthly
         (1..MAX_DUE_ONS)
         .each { |month| build day: monthly_due_on.day, month: month }
       end
