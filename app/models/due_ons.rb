@@ -17,11 +17,11 @@ module DueOns
     has_many :due_ons, -> { order(:created_at) }, dependent: :destroy do
 
       def between? date_range
-        find { |due_on| due_on.between? date_range }
+        ordered_by_occurrence.find { |due_on| due_on.between? date_range }
       end
 
       def date_between date_range
-        within_range?(ordered_by_occurrence, date_range).make_date
+        ordered_by_occurrence.find { |due_on| due_on.between? date_range }.make_date
       end
 
       def prepare
@@ -46,7 +46,7 @@ module DueOns
         reject(&:empty?).find(&:new_record?)
       end
 
-  private
+      private
 
       def clear_up_all
         each { |due_on| due_on.clear_up_form self }
@@ -67,10 +67,6 @@ module DueOns
       def to_per_month
         (1..MAX_DUE_ONS)
         .each { |month| build day: per_month_due_on.day, month: month }
-      end
-
-      def within_range? due_ons, date_range
-        due_ons.find { |due_on| due_on.between? date_range }
       end
 
       def ordered_by_occurrence
