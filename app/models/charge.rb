@@ -59,14 +59,14 @@ class Charge < ActiveRecord::Base
   end
 
   def due_between? date_range
-    charge_range_dates_cover?(date_range) && due_ons.between?(date_range)
+    charge_range_covers?(date_range) && due_ons.between?(date_range)
   end
 
   def debited? chargeable
     debits.already_debited? Debit.new(chargeable.to_hash)
   end
 
-  def charge_range_dates_cover? date_range
+  def charge_range_covers? date_range
     (start_date..end_date).cover?(date_range.min) &&
     (start_date..end_date).cover?(date_range.max)
   end

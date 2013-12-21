@@ -39,7 +39,7 @@ class DueOn < ActiveRecord::Base
   end
 
   def make_date
-    Date.new year_next_charge_is_due, month, day
+    Date.new charge_year, month, day
   end
 
   def clear_up_form due_ons
@@ -61,7 +61,7 @@ class DueOn < ActiveRecord::Base
       %w[id charge_id created_at updated_at]
     end
 
-    def year_next_charge_is_due
+    def charge_year
       case
       when one_off_charge? then year
       when today_or_later_in_year? then Date.current.year
