@@ -28,12 +28,12 @@ describe DueOns do
       end
       after { Timecop.return }
 
-      it 'missing due on' do
-        expect(due_ons.between? date_range_missing_due_on).to be_false
+      it 'true range covers due_ons' do
+        expect(due_ons.between? date_range_covering_due_on).to be_true
       end
 
-      it 'is between due on' do
-        expect(due_ons.between? date_range_covering_due_on).to be_true
+      it 'false range misses due_ons' do
+        expect(due_ons.between? date_range_missing_due_on).to be_false
       end
     end
 
@@ -67,7 +67,8 @@ describe DueOns do
         due_ons.build due_on_attributes_0
         due_ons.build
         due_ons.clear_up_form
-        expect(due_ons.reject(&:empty?)).to have(1).items
+        expect(due_ons.reject { |due_on| due_on.marked_for_destruction? } )
+                      .to have(1).item
       end
     end
 
