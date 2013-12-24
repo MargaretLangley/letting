@@ -53,31 +53,21 @@ class DueOn < ActiveRecord::Base
 
   private
 
-    def one_off_charge?
-      year.present?
-    end
+  def ignored_attrs
+    %w[id charge_id created_at updated_at]
+  end
 
-    def ignored_attrs
-      %w[id charge_id created_at updated_at]
-    end
+  def charge_year
+    return year if one_off_charge?
 
-    def charge_year
-      case
-      when one_off_charge? then year
-      when today_or_later_in_year? then Date.current.year
-      else Date.current.year + 1
-      end
-    end
+    date_gone? ? Date.current.year + 1 : Date.current.year
+  end
 
-    def today_or_later_in_year?
-      month_later_in_year? || today_or_later_in_this_month?
-    end
+  def one_off_charge?
+    year.present?
+  end
 
-    def month_later_in_year?
-      month > Date.current.month
-    end
-
-    def today_or_later_in_this_month?
-      month == Date.current.month && day >= Date.current.day
-    end
+  def date_gone?
+    Date.current > Date.new(Date.current.year, month, day)
+  end
 end
