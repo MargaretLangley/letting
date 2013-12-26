@@ -1,0 +1,37 @@
+
+<div class="page">
+   	<div class = print_only>
+    	<%= render 'print_invoice_heading' %>
+
+	    <div class="col-1-3">
+	      Invoice
+	    </div>
+	    <div class="col-1-3">
+	        Property Ref: <%= object.human_ref %>
+	    </div>
+
+	 	<p class ="inv_bold">
+	       Property Address: <%= render 'shared/show_1_line_address', object: object %>
+		</p>
+     	<div class="inv_add">
+        	<%= render 'print_billing_profile', object: object %>
+      	</div>
+
+    	<%= render 'print_accounts', items: AccountDecorator.new(object.account).abbrev_items %>
+
+		<%= render 'print_section48', object: object.client %>
+ 		<p class ="inv_bold">
+	       	Property Address: <%= render 'shared/show_1_line_address', object: object %>
+		</p>
+		 	<%= render 'print_short_accounts', items: AccountDecorator.new(object.account).abbrev_items %>
+    </div>
+</div>
+
+<div class="page">
+		<div class = print_only>
+		 	<p class ="inv_bold">
+		       Property Address: <%= render 'shared/show_1_line_address', object: object %>
+			</p>
+	</div>
+</div>
+

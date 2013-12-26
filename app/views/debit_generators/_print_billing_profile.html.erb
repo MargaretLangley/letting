@@ -1,0 +1,7 @@
+  <% if object.entities.any? %>
+     <% object.entities.each do |entity| %>
+     <%= render 'shared/show_entity', object: entity %>
+  <% end %>
+  <br>
+  <%= render 'shared/show_billing_address', object: object.bill_to %>
+   <% end %>

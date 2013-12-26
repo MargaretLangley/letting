@@ -21,7 +21,7 @@ describe 'debit_generator' do
       expect(page).to have_text '2002'
       expect(page).to have_text 'Ground rent'
       debit_gen_page.make_charges
-      expect(debit_gen_page).to be_created
+      expect(current_path).to eq '/debit_generators'
     end
   end
 end
