@@ -90,5 +90,5 @@ group :test do
 end
 
 group :test do
-  gem 'rake', '0.9.6'
+  gem 'rake', '10.1.0'
 end

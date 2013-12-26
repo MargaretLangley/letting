@@ -138,6 +138,30 @@ end
         initials: 'J D B',
         name: 'Robertson'
       },
+      {
+        entity_type: 'Person',
+        entitieable_id: 5,
+        entitieable_type: 'Property',
+        title: 'Ms',
+        initials: 'G',
+        name: 'Jenkyll'
+      },
+      {
+        entity_type: 'Person',
+        entitieable_id: 6,
+        entitieable_type: 'Property',
+        title: 'Miss',
+        initials: 'AH',
+        name: 'Dodd'
+      }, 
+      {
+        entity_type: 'Person',
+        entitieable_id: 7,
+        entitieable_type: 'Property',
+        title: 'Ms',
+        initials: 'E',
+        name: 'Shaw'
+      },
     ]
   end
 
@@ -179,10 +203,37 @@ end
       {
         addressable_id: 4,
         addressable_type: 'Property',
-        road_no: '3',
+        road_no: '4',
         road: 'Green Fields',
         town: 'Suburbaton',
         county: 'Greater London',
+        postcode: 'SG3 3SC'
+      },
+      {
+        addressable_id: 5,
+        addressable_type: 'Property',
+        road_no: '5',
+        road: 'Lower Hill Street',
+        town: 'Aldridge',
+        county: 'West Midlands',
+        postcode: 'B42 9HG'
+      },
+      {
+        addressable_id: 6,
+        addressable_type: 'Property',
+        road_no: '6',
+        road: 'Upton Road',
+        town: 'Walsall',
+        county: 'West Midlands',
+        postcode: 'B42 9HG'
+      },
+      {
+        addressable_id: 7,
+        addressable_type: 'Property',
+        road_no: '3',
+        road: 'Green Lane',
+        town: 'Erdington',
+        county: 'Birmingham',
         postcode: 'SG3 3SC'
       },
     ]
@@ -194,6 +245,9 @@ end
       { id: 2, human_ref: 2002, client_id: 1 },
       { id: 3, human_ref: 3003, client_id: 2 },
       { id: 4, human_ref: 4004, client_id: 3 },
+      { id: 5, human_ref: 1005, client_id: 2 },
+      { id: 6, human_ref: 1006, client_id: 2 },
+      { id: 7, human_ref: 1007, client_id: 2},
      ]
   end
 
@@ -232,7 +286,10 @@ end
       { id: 1, use_profile: true,  property_id: 1 },
       { id: 2, use_profile: false, property_id: 2 },
       { id: 3, use_profile: false, property_id: 3 },
-      { id: 4, use_profile: false, property_id: 4 }
+      { id: 4, use_profile: false, property_id: 4 },
+      { id: 5, use_profile: false, property_id: 5 },
+      { id: 6, use_profile: false, property_id: 6 },
+      { id: 7, use_profile: false, property_id: 7 },
     ]
   end
 
@@ -257,7 +314,14 @@ end
       { id: 3, charge_type: 'Ground Rent',    due_in: 'Advance',
         amount: '70.00',  account_id: 2 },
       { id: 4, charge_type: 'Service Charge', due_in: 'Advance',
-        amount: '70.00',  account_id: 3 },
+        amount: '170.00',  account_id: 3 },
+      { id: 5, charge_type: 'Service Charge', due_in: 'Arrears',
+        amount: '130.08', account_id: 5 },
+      { id: 6, charge_type: 'Ground Rent',    due_in: 'Arrears',
+        amount: '59.00',  account_id: 6 },
+      { id: 7, charge_type: 'Service Charge', due_in: 'Arrears',
+        amount: '90.00',  account_id: 7 },
+
     ]
   end
 
@@ -267,6 +331,11 @@ end
       { id: 2,  day: 1,  month: 7, charge_id: 2 },
       { id: 3,  day: 1,  month: (Date.current + 1.month).month , charge_id: 3 },
       { id: 4,  day: 30, month: 9, charge_id: 4 },
+      { id: 5,  day: 25, month: 12, charge_id: 5 },
+      { id: 6,  day: 25, month: 12, charge_id: 6 },
+      { id: 7,  day: 11, month: 1, charge_id: 7 },
+   
+
     ]
   end
 
@@ -276,6 +345,11 @@ end
       { id: 2, property_id: 2 },
       { id: 3, property_id: 3 },
       { id: 4, property_id: 4 },
+      { id: 5, property_id: 5 },
+      { id: 6, property_id: 6 },
+      { id: 7, property_id: 7 },
+
+
     ]
   end
 
@@ -323,17 +397,17 @@ end
   end
 
   def create_credits
-    Credit.create! [
-      { id: 1,
-        payment_id: 1,
-        charge_id: 1,
-        account_id: 1,
-        debit_id: 1,
-        on_date: create_date(15),
-        amount: 88.08,
-      }
-    ]
-  end
+      Credit.create! [
+        { id: 1,
+          payment_id: 1,
+          charge_id: 1,
+          account_id: 1,
+          debit_id: 1,
+          on_date: create_date(15),
+          amount: 88.08,
+        }
+      ]
+    end
 
   def create_payment
     Payment.create! [
