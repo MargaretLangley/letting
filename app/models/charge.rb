@@ -23,9 +23,9 @@ class Charge < ActiveRecord::Base
   validates :due_ons, presence: true
   has_many :credits
   has_many :debits do
-    def already_debited? debit
-      self.any? do |debit|
-      debit.already_charged? debit
+    def without_debit? on_date
+      self.all? do |debit|
+      debit.on_date != on_date
       end
     end
   end
@@ -35,12 +35,11 @@ class Charge < ActiveRecord::Base
     self.end_date = Date.parse MAX_DATE if end_date.blank?
   end
 
-  def chargeable_between? date_range
-    due_between?(date_range) && !debited?(chargeable_info(date_range))
-  end
-
   def next_chargeable date_range
-    chargeable_between?(date_range) ? chargeable_info(date_range) : nil
+    next_chargeable_date = allowed_due_dates(date_range).detect do |my_date|
+      debits.without_debit? my_date
+    end
+    next_chargeable_date ? chargeable_info(next_chargeable_date) : nil
   end
 
   def prepare
@@ -58,23 +57,14 @@ class Charge < ActiveRecord::Base
     !empty?
   end
 
-  def due_between? date_range
-    charge_range_covers?(date_range) && due_ons.between?(date_range)
+  def allowed_due_dates date_range
+    due_ons.due_dates(date_range).to_a & (start_date..end_date).to_a
   end
 
-  def debited? chargeable
-    debits.already_debited? Debit.new(chargeable.to_hash)
-  end
-
-  def charge_range_covers? date_range
-    (start_date..end_date).cover?(date_range.min) &&
-    (start_date..end_date).cover?(date_range.max)
-  end
-
-  def chargeable_info date_range
+  def chargeable_info date
     ChargeableInfo
       .from_charge charge_id:  id,
-                   on_date:    due_ons.date_between(date_range),
+                   on_date:    date,
                    amount:     amount,
                    account_id: account_id
   end

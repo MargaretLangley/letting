@@ -50,52 +50,17 @@ describe Charge do
       before { Timecop.travel(Date.new(2013, 1, 31)) }
       after  { Timecop.return }
 
-      context '#chargeable_between?' do
-        context 'in charge_range' do
-          it 'true' do
-            expect(charge.chargeable_between? date_when_charged).to be_true
-          end
-
-          it 'false' do
-            expect(charge.chargeable_between? dates_not_charged_on).to be_false
-          end
-
-          it 'false when already debited' do
-            charge.debits.build charge_id: charge.id,
-                                on_date: Date.new(2013, 3, 25),
-                                amount: charge.amount
-            expect(charge.chargeable_between? date_when_charged).to be_false
-          end
-        end
-        context 'out of charge_range' do
-          it 'false' do
-            charge.end_date = '2002-1-1'
-            expect(charge.chargeable_between? date_when_charged).to be_false
-          end
-        end
-      end
-
       context '#next_chargeable' do
         it 'if charge between dates'  do
-          expect(charge.next_chargeable(date_when_charged))
-            .to eq ChargeableInfo.from_charge chargeable_attributes
+          charge.due_ons.new due_on_attributes_1 charge_id: 1
+          charge.debits.build debit_attributes on_date: '2013-3-25'
+          expect(charge.next_chargeable(Date.new(2013, 3, 25) .. Date.new(2014, 3, 25)))
+            .to eq ChargeableInfo.from_charge chargeable_attributes on_date: Date.new(2013,9,30)
         end
 
         it 'return nil if not' do
           expect(charge.next_chargeable(dates_not_charged_on))
             .to be_nil
-        end
-      end
-
-      context '#chargeable_between?' do
-        context 'in charge_range' do
-          it 'true in charge_range' do
-            expect(charge.chargeable_between? date_when_charged).to be_true
-          end
-
-          it 'false out charge_range' do
-            expect(charge.chargeable_between? dates_not_charged_on).to be_false
-          end
         end
       end
 

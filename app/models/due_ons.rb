@@ -24,6 +24,11 @@ module DueOns
         ordered_by_occurrence.find { |due_on| due_on.between? date_range }.make_date
       end
 
+      def due_dates date_range
+        ordered_by_occurrence.select { |due_on| due_on.between? date_range }
+                              .map { |due_on| due_on.make_date }
+      end
+
       def prepare
         (size...MAX_DISPLAYED_DUE_ONS).each { build }
       end
