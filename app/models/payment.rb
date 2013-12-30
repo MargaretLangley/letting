@@ -39,7 +39,7 @@ class Payment < ActiveRecord::Base
   end
 
   def prepare
-    credits.push *account_prepare_credits
+    credits.push *account.prepare_credits
   end
 
   def clear_debt
@@ -69,10 +69,6 @@ class Payment < ActiveRecord::Base
   end
 
   private
-
-  def account_prepare_credits
-    account.prepare_credits
-  end
 
   def self.date_to_datetime_range date
     date.to_datetime.beginning_of_day..date.to_datetime.end_of_day
