@@ -25,11 +25,11 @@ class Account < ActiveRecord::Base
   has_many :charges, dependent: :destroy do
     def prepare
       (size...MAX_CHARGES).each { build }
-      each { |charge| charge.prepare }
+      each &:prepare
     end
 
     def clear_up_form
-      each { |charge| charge.clear_up_form }
+      each &:clear_up_form
     end
   end
   MAX_CHARGES = 4
@@ -37,9 +37,7 @@ class Account < ActiveRecord::Base
 
   def prepare_debits date_range
     charges.select{ |charge| charge.next_chargeable(date_range) }
-      .map do |charge|
-        Debit.new(charge.next_chargeable(date_range).to_hash)
-    end
+      .map { |charge| Debit.new(charge.next_chargeable(date_range).to_hash) }
   end
 
   def prepare_credits

@@ -50,7 +50,7 @@ class PaymentDecorator
 
   def generate_credits
     @credits.push(*@source.credits.map { |d| CreditDecorator.new d })
-    @credits.each { |d| d.prepare_for_form }
+    @credits.each &:prepare_for_form
     @credits
   end
 end

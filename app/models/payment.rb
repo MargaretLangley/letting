@@ -13,7 +13,7 @@ class Payment < ActiveRecord::Base
   belongs_to :account
   has_many :credits, dependent: :destroy do
     def clear_up
-      each { |credit| credit.clear_up }
+      each &:clear_up
     end
   end
   before_validation :clear_up
