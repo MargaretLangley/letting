@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe AccountDecorator do
+  before { Timecop.travel(Date.new(2013, 1, 31)) }
+  after { Timecop.return }
 
   let(:account) do
     account = account_and_charge_new
