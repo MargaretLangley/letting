@@ -23,9 +23,9 @@ class Charge < ActiveRecord::Base
   validates :due_ons, presence: true
   has_many :credits
   has_many :debits do
-    def without_debit? on_date
-      self.all? do |debit|
-      debit.on_date != on_date
+    def created_on? on_date
+      self.any? do |debit|
+      debit.on_date == on_date
       end
     end
   end
@@ -36,10 +36,9 @@ class Charge < ActiveRecord::Base
   end
 
   def next_chargeable date_range
-    next_chargeable_date = allowed_due_dates(date_range).detect do |my_date|
-      debits.without_debit? my_date
-    end
-    next_chargeable_date ? chargeable_info(next_chargeable_date) : nil
+    allowed_due_dates(date_range).map do |my_date|
+      chargeable_info(my_date) if !debits.created_on? my_date
+    end.compact
   end
 
   def prepare

@@ -47,30 +47,39 @@ describe Charge do
   context 'methods' do
 
     context 'charging' do
-      before { Timecop.travel(Date.new(2013, 1, 31)) }
+      before do
+        Timecop.travel(Date.new(2013, 1, 31))
+        charge.due_ons.new due_on_attributes_1 charge_id: 1
+      end
       after  { Timecop.return }
 
       context '#next_chargeable' do
         it 'if charge between dates'  do
-          charge.due_ons.new due_on_attributes_1 charge_id: 1
+          expect(charge.next_chargeable(Date.new(2013, 3, 25)..Date.new(2016, 3, 25)))
+            .to eq [chargeable(Date.new(2013,3,25)),
+                    chargeable(Date.new(2013,9,30))]
+        end
+
+        it 'ignores charges which have debits'  do
           charge.debits.build debit_attributes on_date: '2013-3-25'
-          expect(charge.next_chargeable(Date.new(2013, 3, 25) .. Date.new(2014, 3, 25)))
-            .to eq ChargeableInfo.from_charge chargeable_attributes on_date: Date.new(2013,9,30)
+          expect(charge.next_chargeable(Date.new(2013, 3, 25)..Date.new(2016, 3, 25)))
+            .to eq [chargeable(Date.new(2013,9,30))]
         end
 
         it 'return nil if not' do
           expect(charge.next_chargeable(dates_not_charged_on))
-            .to be_nil
+            .to eq []
         end
       end
 
-      def date_when_charged
-        Date.new(2013, 3, 25) .. Date.new(2013, 3, 25)
+      def chargeable date
+        ChargeableInfo.from_charge(chargeable_attributes on_date: date)
       end
 
       def dates_not_charged_on
-        Date.new(2013, 2, 1) .. Date.new(2013, 3, 24)
+        Date.new(2013, 2, 1)..Date.new(2013, 3, 24)
       end
+
     end
 
     it '#prepare creates children' do

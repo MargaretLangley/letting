@@ -36,8 +36,9 @@ class Account < ActiveRecord::Base
   accepts_nested_attributes_for :charges, allow_destroy: true
 
   def prepare_debits date_range
-    charges.select{ |charge| charge.next_chargeable(date_range) }
-      .map { |charge| Debit.new(charge.next_chargeable(date_range).to_hash) }
+    charges.map do |charge|
+      charge.next_chargeable(date_range).map { |chargeable| Debit.new(chargeable.to_hash) }
+    end.flatten
   end
 
   def prepare_credits
