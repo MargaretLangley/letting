@@ -21,39 +21,6 @@ describe DueOns do
 
   context 'methods' do
 
-    context '#between?' do
-      before do
-        Timecop.travel Date.new 2013, 5, 3
-        due_ons.build day: 3, month: 5
-      end
-      after { Timecop.return }
-
-      it 'true range covers due_ons' do
-        expect(due_ons.between? date_range_covering_due_on).to be_true
-      end
-
-      it 'false range misses due_ons' do
-        expect(due_ons.between? date_range_missing_due_on).to be_false
-      end
-    end
-
-    context '#date_between' do
-      before { Timecop.travel Date.new 2013, 5, 3 }
-      after { Timecop.return }
-
-      it 'returns date when range in due date' do
-        due_ons.build day: 3, month: 5
-        expect(due_ons.date_between date_range_covering_due_on)
-          .to eq Date.new 2013, 5, 3
-      end
-
-      it 'returns nils when range outside due date' do
-        due_ons.build day: 1, month: 2
-        expect { due_ons.date_between date_range_missing_due_on }
-          .to raise_error NameError
-      end
-    end
-
     context '#due_dates' do
       before { Timecop.travel Date.new 2013, 4, 1 }
       after { Timecop.return }

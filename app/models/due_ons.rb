@@ -16,14 +16,6 @@ module DueOns
   included do
     has_many :due_ons, -> { order(:created_at) }, dependent: :destroy do
 
-      def between? date_range
-        ordered_by_occurrence.find { |due_on| due_on.between? date_range }
-      end
-
-      def date_between date_range
-        ordered_by_occurrence.find { |due_on| due_on.between? date_range }.make_date
-      end
-
       def due_dates date_range
         ordered_by_occurrence.select { |due_on| due_on.between? date_range }
                               .map { |due_on| due_on.make_date }
