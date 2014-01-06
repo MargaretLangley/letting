@@ -1,0 +1,208 @@
+@import "colors";
+
+/*Used in Invoice for both screen and print
+where print requirements hidden from screen and 
+screen requirements hidden from print*/
+
+@media all{
+
+  .h2print{
+    text-align:center;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .inv_advice{
+    font-size: 12px;
+    font-weight: normal;
+  }
+
+  .inv_advice_bold{
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
+
+@media screen{
+
+  .print_only{
+    display: none;
+  }
+
+  .inv_add{
+    display: none;
+  }
+
+  .inv_bold{
+    display: none;
+  }
+
+  .sissors{
+     display: none;
+  }
+
+  @mixin header-object {
+    color: $print-background-white;
+    background-color: $secondary-background-color;
+  }
+
+  .h1print{
+     display: none;
+  }
+
+  .small_line_height{
+    lineheight: 10%;
+  }
+}
+
+@media print{
+ 
+  body{
+    background: $print-background-white;
+    color: $primary-text-color;
+    font-family: "Helvetica Neue", Helvetica, Arial;
+    width: 595px;
+    margin-top: 0cm;
+    margin-left: 0.0cm;
+    margin-right: 0.20cm;
+   }
+
+  div.page
+  {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+
+.margwide{
+    margin-left: 0.80cm;
+  }
+
+/* This calls new page for printer */
+
+  h2{ 
+    break-before: always;
+  }
+
+  .h1print{
+    text-align:center;
+    font-size: 20px;
+    font-weight: bold;
+    lineheight: 70%;
+  }
+
+  .inv_add{
+    margin-left: 1.2cm;
+    font-size: 12px;
+  }
+
+  .inv_bold{
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .col-1-3{
+  font-weight :bold;
+  width: 33.333333333333%;
+  float:left;
+  }
+
+  .col-thin{
+   width: 20%;
+  }
+
+  .col-wide{
+   width:40%;
+  }
+
+  .shell{
+     display: none;
+     width: 5px;
+   }
+
+  .floatleft{
+   }
+
+  .boldfloat{
+     font-weight: bold;
+  }
+
+  .showbox{
+     width: 90%;
+  }
+
+  .red_notice{
+  display: none;
+  }
+
+   button, header, footer, .screen_only, .search, .floatright{
+   display: none;
+  }
+
+/* Charges print table*/
+
+  table{
+    width: 600px;
+    border-collapse: collapse;
+    text-align: left;
+    padding: 0;
+    margin: 50;
+    lineheight: 90%;
+   }
+
+  table th{
+    padding: 0;
+    margin: 0;
+    margin-right: 20px;
+  }
+
+    table td{
+    padding: 0;
+    margin-right: 20px;
+    font-size: 14px;
+  }
+
+  table .toright
+  {
+    text-align: right;
+  }
+
+  .sissors{
+    font-size: 30px;
+  }
+
+/* invoice page 2*/
+
+  .p2head{
+    font-size: 12px;
+    font-weight: bold;
+    text-align:center;
+  }
+
+  .actref{
+    font-size: 14px;
+    text-align:center;
+  }
+
+  .longlease{
+    font-size: 16px;
+    font-weight: bold;
+    text-align:center;
+  }
+
+  .note{
+    font-size: 10px;
+    margin-left: 80px
+  }
+  
+  .insert{
+    font-size: 8px;
+    margin-left: 5px
+  }
+
+  .widemargin{
+    font-size: 12px;
+    margin-left: 80px
+  }
+
+
+}

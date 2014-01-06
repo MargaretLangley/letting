@@ -1,0 +1,30 @@
+<% dotted_line = "-------------" %>
+<% namestr = render file: 'invoice_texts/name.txt' %> 
+<div class ="inv_advice">
+  We <%= namestr.upcase %> ON BEHALF OF YOUR LANDLORD
+  <br>
+  <%= object.entities.full_name %>
+
+  <%= render 'shared/show_1_line_address', object: object %>
+
+  <%= render file: 'invoice_texts/invoice_texts_p1/section48.txt' %>
+  <%= render file: 'invoice_texts/add1.txt' %>
+  <%= render file: 'invoice_texts/add2.txt' %>
+  <%= render file: 'invoice_texts/add3.txt' %>
+  <%= render file: 'invoice_texts/postcode.txt' %>
+  <p>
+    <span class ="inv_advice_bold">
+      <%= render file: 'invoice_texts/invoice_texts_p1/rem1.txt' %>
+    </span>
+    <br>
+    <%= render file: 'invoice_texts/invoice_texts_p1/rem2.txt' %>
+    <br>
+    <%= render file: 'invoice_texts/invoice_texts_p1/rem3.txt' %>
+    <br>
+    <span class ="inv_advice_bold">
+      <%= render file: 'invoice_texts/invoice_texts_p1/rem4.txt' %></span>
+    <br>
+    <%= render file: 'invoice_texts/invoice_texts_p1/rem5.txt' %>
+ </p>
+</div>
+  <span class = "sissors">&#9985;<%= "#{dotted_line}#{dotted_line}#{dotted_line}#{dotted_line}" %></span>
