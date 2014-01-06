@@ -38,9 +38,7 @@ class PropertyDecorator
   def reduced_address_lines
     address_lines = []
     first_line = source.entities.full_name
-    second_line = "#{flat_line}" if address.flat_no?
-    second_line += ", #{address.house_name}" if address.house_name?
-    second_line += ", #{road_line}" if second_line.blank?
+    second_line = [flat_line, address.house_name, road_line].compact.join" "
     address_lines.push *[ first_line, second_line]
   end
 
@@ -52,7 +50,7 @@ class PropertyDecorator
   private
 
     def flat_line
-      "Flat #{address.flat_no}".strip
+      "Flat #{address.flat_no}".strip if address.flat_no?
     end
 
     def road_line
