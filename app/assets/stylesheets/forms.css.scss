@@ -11,7 +11,6 @@
   position: relative;
 }
 
-
 @mixin overlay-sign {
   position: absolute;
   font-size:1.4em;
@@ -208,7 +207,6 @@ input[type="submit"] {
     text-decoration: underline;
   }
 }
-
 
 .revealable, .hidden {
   display: none;

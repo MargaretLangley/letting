@@ -16,5 +16,6 @@
  *= require lettings
  *= require properties
  *= require forms
+ *= require invoices
  *= require jquery.ui.all
  */

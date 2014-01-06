@@ -4,74 +4,28 @@
   border: 1px solid black;
 }
 
-/*Used in Invoice for both screen and print*/
+@media screen{
 
-
-.h2print{
-  text-align:center;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-
-.inv_advice{
-  font-size: 12px;
-  font-weight: normal;
-}
-
-.inv_advice_bold{
-  font-size: 12px;
-  font-weight: bold;
-}
-
-@media print{
-
-  div.page
-  {
-    page-break-after: always;
-    page-break-inside: avoid;
-  }
-}
-
-@media screen {
-
-  body {
+  body{
     background: $primary-background-color;
     color: $primary-text-color;
-    /*background-image: image-url("background.jpg");*/
     font-family: "Helvetica Neue", Helvetica, Arial;
   }
-
-  .print_only{
-    display: none;
-  }
-
-  .inv_add{
-    display: none;
-  }
-
-  .inv_bold{
-    display: none;
-  }
-
-  .sissors{
-     display: none;
-  }
+ 
+.setleftmargin{
+      margin-left:30px;
+ }
 
   @mixin header-object {
     color: $print-background-white;
     background-color: $secondary-background-color;
   }
 
-  .h1print{
-     display: none;
-  }
-
-  .small_line_height{
+   .small_line_height{
     lineheight: 10%;
   }
 
-  header {
+  header{
     width: 100%;
     height: 70px;
     @include header-object;
@@ -82,12 +36,12 @@
       }
     }
 
-    h1 {
+    h1{
       width: 50%;
       float: left;
     }
 
-    a.header {
+    a.header{
       @include header-object;
       padding: 0px 10%;
       text-decoration: none;
@@ -114,11 +68,11 @@
     background-color: $primary-background-color;
     padding: 0.5em 0.5em;
 
-    p {
+    p{
       text-align: center;
     }
 
-    a {
+    a{
       color: $primary-link-color;
       text-decoration: none;
 
@@ -128,14 +82,15 @@
     }
   }
 
-  nav {
+  nav{
     float: right;
   }
 
-  .shell {
+  .shell{
     border-radius: 12px;
     border: 1px solid $fieldset-color;
     padding: 5%;
+    margin: 50px;
   }
 
   .showbox{
@@ -144,6 +99,7 @@
    border-radius: 12px;
    padding: 0 35px;
    margin-top: 10px;
+   margin-left: 30px;
    margin-bottom: 3px;
   }
 
@@ -162,107 +118,18 @@
   }
 
   .floatright{
-    width:30%;
+    width:20%;
     float:right;
   }
-}
 
-@media print{
-
- 
-  body {
-    background: $print-background-white;
-    color: $primary-text-color;
-    /*background-image: image-url("background.jpg");*/
-    font-family: "Helvetica Neue", Helvetica, Arial;
-    width: 100%;
-    margin-top: 0cm;
-    margin-left: 0.80cm;
-    margin-right: 0.20cm;
-   }
-
-  h2 { 
-    break-before: always;
-  }
-
-  .h1print{
-    text-align:center;
-    font-size: 20px;
-    font-weight: bold;
-    lineheight: 70%;
-  }
-
-  .inv_add{
-    margin-left: 1.2cm;
-    font-size: 12px;
-  }
-
-  .inv_bold{
-    font-size: 14px;
+  .justbold{
     font-weight: bold;
   }
 
-  .col-1-3 {
-  font-weight :bold;
+  .blankright{
+     margin-right: 20px;
   }
 
-  .col-3-4 {
-   width: 100%;
-  }
-
-  .col-1-4 {
-   width: 0%;
-  }
-
-  .shell{
-     display: none;
-     width: 5px;
-   }
-
-  .floatleft{
-   }
-
-  .boldfloat{
-     font-weight: bold;
-  }
-
-  .showbox{
-     width: 90%;
-  }
-
-  .red_notice{
-  display: none;
-  }
-
-   button, header, footer, .screen_only, .search, .floatright{
-   display: none;
-  }
-
-  table{
-    font-size: .8em;
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    padding: 0;
-    margin: 0;
-    lineheight: 90%;
- }
-
-  table th
-  {
-    padding: 0;
-    margin: 0;
-  }
-
-    table td
-  {
-    padding: 0;
-    margin: 0;
-    font-size: 14px;
-  }
-
-.sissors{
-  font-size: 30px;
-  }
 
 }
+
