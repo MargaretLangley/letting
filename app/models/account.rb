@@ -45,12 +45,12 @@ class Account < ActiveRecord::Base
     [ prepare_credits_to_receivables ].compact.reduce([], :|)
   end
 
-  def prepare_payment data_range
-    # current debits have the upcoming debits added
-    prepare_debits date_range
-    # I am paying in advance sometimes... so I want upcoming debits
-    # get the matching credits
-    prepare_credits_to_receivables
+  def prepare_payment date_range
+    debits = receivables + prepare_debits(date_range)
+    # advanced credits have not been applied to the newly created debits (prepare_debits)
+    # a credit could be larger than the debit
+    credits = debits.map { |debit| build_credit_from debit }.compact
+    OpenStruct.new(debits: debits, credits: credits)
   end
 
   def prepare_for_form
