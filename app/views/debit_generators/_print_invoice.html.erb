@@ -4,19 +4,22 @@
     <title>Invoice</title>
   </head>
   <body>
-   <div class = 'print_only'>
-     <div class = 'inv_bold'>
-    <%= render 'invoice_page1/print_invoice_heading' %>
-  </div>
-  Property Ref: <%= property_object.human_ref %>
-  <%= render 'invoice_page1/print_section48', object: property_object.client %>
-   <%= render 'invoice_page1/print_from', object: property_object %>
- <%= render 'invoice_page1/print_short_accounts', items: AccountDecorator.new(property_object.account).abbrev_items %>
-
-
-
-
-<%= render 'invoice_page2/print_invoice_page2', object: property_object %>
-</div>
+      <div class = 'print_only'>
+        <div class = 'margwide'>
+          <%= render 'invoice_page1/print_invoice_heading' %>
+          <%= render partial: 'invoice_page1/print_ref_date', locals: {property_object: property_object, date_object: date_object} %>
+          <%= render 'invoice_page1/print_billing_profile', object: property_object %>
+          <%= render 'invoice_page1/print_property_address', object: property_object %>
+          <%= render 'invoice_page1/print_accounts', items: AccountDecorator.new(property_object.account).abbrev_items %>
+          <%= render 'invoice_page1/print_section48', object: property_object.client %>
+          <%= render 'invoice_page1/print_property_address', object: property_object %>
+          <%= render partial: 'invoice_page1/print_ref_date_short', locals: {property_object: property_object, date_object: date_object} %>
+          <%= render 'invoice_page1/print_from', object: property_object %>
+          <%= render 'invoice_page1/print_short_accounts', items: AccountDecorator.new(property_object.account).abbrev_items %>
+        </div>
+         <div class = 'page' >
+        <%= render 'invoice_page2/print_invoice_page2', object: property_object %>
+      </div>'
+    </div>
   </body>
 </html>

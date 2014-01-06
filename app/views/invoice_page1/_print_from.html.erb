@@ -1,7 +1,9 @@
-  From: 
-  <% if object.entities.any? %>
+ <div class = 'medfont'>
+   From: 
+   <% if object.entities.any? %>
      <% object.entities.each do |entity| %>
-     <%= render 'shared/show_entity', object: entity %>
-  <% end %>
-  <%= render 'shared/show_1_line_address', object: object.bill_to %>
+	   <%= render 'shared/show_entity', object: entity %>
+	 <% end %>
+     <%= render 'shared/show_1_line_address', object: object.bill_to %>
    <% end %>
+</div>
