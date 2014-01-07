@@ -46,8 +46,10 @@ class Account < ActiveRecord::Base
   end
 
   def prepare_payment date_range
+    # a list of all the possible debits
     debits = receivables + prepare_debits(date_range)
-    # advanced credits have not been applied to the newly created debits (prepare_debits)
+    # advanced credits have not been applied to the newly created debits
+    # (prepare_debits)
     # a credit could be larger than the debit
     credits = debits.map { |debit| build_credit_from debit }.compact
     OpenStruct.new(debits: debits, credits: credits)

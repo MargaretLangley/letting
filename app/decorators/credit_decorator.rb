@@ -9,6 +9,9 @@ class CreditDecorator
     @source = credit
   end
 
+  def prepare_for_form
+  end
+
   def amount
     number_with_precision(@source.amount,precision: 2)
   end

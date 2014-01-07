@@ -75,20 +75,6 @@ describe Account do
       end
     end
 
-
-    it '#prepare_for_form' do
-      expect(account.charges).to have(0).items
-      account.prepare_for_form
-      expect(account.charges).to have(4).items
-    end
-
-    it '#cleans up form' do
-      account.charges.build charge_attributes
-      account.prepare_for_form
-      account.clear_up_form
-      expect(account.charges.reject(&:marked_for_destruction?)).to have(1).item
-    end
-
     it '#by_human id' do
       property_create!
       expect(Account.by_human_ref(2002)).to be_present
