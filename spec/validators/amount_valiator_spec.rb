@@ -34,7 +34,7 @@ describe 'Amount' do
   end
 
   it 'sets error' do
-    validatable.amount = 88.333
+    validatable.amount = -0.01
     expect(validatable).to have(1).error_on(:amount)
   end
 
