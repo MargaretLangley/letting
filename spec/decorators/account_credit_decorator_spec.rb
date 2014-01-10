@@ -6,8 +6,7 @@ describe AccountCreditDecorator do
 
   context 'attributes has' do
     it 'charge_type' do
-      credit_dec.debit = Debit.new debit_attributes
-      credit_dec.debit.stub(:charge_type).and_return 'Ground Rent'
+      credit_dec.charge = Charge.new charge_attributes
       expect(credit_dec.charge_type).to eq 'Ground Rent'
     end
 

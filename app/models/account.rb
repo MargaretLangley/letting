@@ -42,17 +42,7 @@ class Account < ActiveRecord::Base
   end
 
   def prepare_credits
-    [ prepare_credits_to_receivables ].compact.reduce([], :|)
-  end
-
-  def prepare_payment date_range
-    # a list of all the possible debits
-    debits = receivables + prepare_debits(date_range)
-    # advanced credits have not been applied to the newly created debits
-    # (prepare_debits)
-    # a credit could be larger than the debit
-    credits = debits.map { |debit| build_credit_from debit }.compact
-    OpenStruct.new(debits: debits, credits: credits)
+    charges.map { |charge| create_credit charge }
   end
 
   def prepare_for_form
@@ -69,24 +59,7 @@ class Account < ActiveRecord::Base
 
   private
 
-  # call once per request
-  #
-  def prepare_credits_to_receivables
-    # get debits and build matching credits
-    receivables.map { |debit| build_credit_from debit }
-  end
-
-  def receivables
-    debits.reject(&:paid?)
-  end
-
-  # def payables
-  #   credits.reject(&:paid?)
-  # end
-
-  def build_credit_from debit
-    Credit.new account_id: id,
-               debit: debit,
-               charge_id: debit.charge_id
+  def create_credit charge
+    credits.build charge: charge, on_date: Date.current, amount: charge.amount
   end
 end

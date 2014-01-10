@@ -49,12 +49,11 @@ describe Payment do
         payment.account = account_new
       end
       it 'handles no credits' do
-        payment.account.stub(:prepare).and_return [ ]
         payment.prepare
         expect(payment.credits).to have(0).items
       end
       it 'adds returned credits' do
-        payment.account.stub(:prepare_credits_to_receivables).and_return [ credit_new ]
+        payment.account.stub(:charges).and_return [ charge_new ]
         payment.prepare
         expect(payment.credits).to have(1).items
       end

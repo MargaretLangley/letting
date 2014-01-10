@@ -32,46 +32,13 @@ describe Account do
     end
 
     context '#prepare_credits' do
-      it 'no debit - does nothing' do
+      it 'empty charges, empty credits ' do
         expect(account.prepare_credits).to have(0).items
       end
 
-      context 'receivables' do
-        it 'generate matching credits' do
-          account.debits.push debit_new
-          expect(credits = account.prepare_credits).to have(1).item
-          expect(credits.first.amount).to be_nil
-        end
-
-        it 'no recievables, no credits' do
-          Debit.any_instance.stub(:paid?).and_return true
-          account.debits.push debit_new
-          expect(account.prepare_credits).to have(0).items
-        end
-      end
-    end
-
-    context '#prepare_payment' do
-      it 'no debit - does nothing' do
-        march_quarters = Date.new(2013, 3, 25)..Date.new(2016, 3, 25)
-        expect(account.prepare_payment(march_quarters).debits).to have(0).items
-      end
-
-      context 'receivables' do
-        it 'from outstanding debits' do
-          account.debits.push debit_new
-          march_quarters = Date.new(2013, 3, 25)..Date.new(2016, 3, 25)
-          expect(debits = account.prepare_payment(march_quarters).debits).to have(1).item
-          expect(debits.first).to eq debit_new
-        end
-
-        it 'paid debts so no debits' do
-          Debit.any_instance.stub(:paid?).and_return true
-          account.debits.push debit_new
-          march_quarters = Date.new(2013, 3, 25)..Date.new(2016, 3, 25)
-          expect(debits = account.prepare_payment(march_quarters).debits).to have(0).item
-          expect(debits).to eq []
-        end
+      it 'one charge, one credit' do
+        account.charges.build charge_attributes
+        expect(account.prepare_credits).to have(1).item
       end
     end
 
