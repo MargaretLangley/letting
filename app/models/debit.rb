@@ -21,24 +21,25 @@
 class Debit < ActiveRecord::Base
   belongs_to :account
   belongs_to :debit_generator
-  has_many :credits
+  has_many :credits, through: :settlements
+  has_many :settlements
   belongs_to :charge
 
   validates :charge_id, :on_date, presence: true
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
+  before_save :reconcile
 
-  def paid?
-    paid == amount
+  def charge_type
+    charge.charge_type
   end
 
   def outstanding
     amount - paid
   end
 
-  def already_charged? other
-    charge_id == other.charge_id &&
-    on_date == other.on_date
+  def paid?
+    paid.round(2) == amount.round(2)
   end
 
   def == other
@@ -47,17 +48,17 @@ class Debit < ActiveRecord::Base
     amount == other.amount
   end
 
-  def charge_type
-    charge_obj.charge_type
-  end
-
   private
 
-  def charge_obj
-    charge
+  def self.available charge_id
+    where(charge_id: charge_id).order(:on_date).reject(&:paid?)
   end
 
   def paid
-    credits.pluck(:amount).inject(0, :+)
+    settlements.pluck(:amount).inject(0, :+)
+  end
+
+  def reconcile
+    Settlement.resolve_debit self, Credit.available(charge_id)
   end
 end

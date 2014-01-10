@@ -16,37 +16,46 @@ class Credit < ActiveRecord::Base
   belongs_to :payment
   belongs_to :account
   belongs_to :charge
-  belongs_to :debit
+  has_many :debits, through: :settlements
+  has_many :settlements
 
   validates :charge_id, :on_date, presence: true
   validates :amount, amount: true
   validates :amount, numericality:
                      { less_than_or_equal_to: 100_000 }
+  before_save :reconcile
 
   after_initialize do
-    self.on_date = default_on_date if on_date.blank?
-    @spent = amount
+    self.on_date = Date.current if on_date.blank?
+  end
+
+  def charge_type
+    charge.charge_type
   end
 
   def clear_up
     self.mark_for_destruction if amount.nil? || amount.round(2) == 0
   end
 
-  def charge_type
-    charge_obj.charge_type
+  def spendable
+    amount - spent
+  end
+
+  def spent?
+    amount.round(2) == spent.round(2)
   end
 
   private
 
+  def reconcile
+    Settlement.resolve_credit self, Debit.available(charge_id)
+  end
+
   def spent
-    @spent || 0
+    settlements.pluck(:amount).inject(0, :+)
   end
 
-  def charge_obj
-    charge
-  end
-
-  def default_on_date
-    Date.current
+  def self.available charge_id
+    where(charge_id: charge_id).order(:on_date).reject(&:spent?)
   end
 end
