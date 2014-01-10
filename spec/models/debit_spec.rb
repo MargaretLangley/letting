@@ -71,7 +71,7 @@ describe Debit do
       end
 
       it 'multiple credits are added' do
-        Credit.create! credit_attributes amount: 44.04, debit_id: debit.id
+        Credit.create! credit_attributes amount: 44.04
         debit.save!
         expect(debit.outstanding).to eq 44.04
       end

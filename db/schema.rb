@@ -80,7 +80,6 @@ ActiveRecord::Schema.define(version: 20140107121253) do
     t.integer  "charge_id",                          null: false
     t.integer  "payment_id",                         null: false
     t.date     "on_date",                            null: false
-    t.integer  "debit_id"
     t.decimal  "amount",     precision: 8, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -88,7 +87,6 @@ ActiveRecord::Schema.define(version: 20140107121253) do
 
   add_index "credits", ["account_id"], name: "index_credits_on_account_id", using: :btree
   add_index "credits", ["charge_id"], name: "index_credits_on_charge_id", using: :btree
-  add_index "credits", ["debit_id"], name: "index_credits_on_debit_id", using: :btree
   add_index "credits", ["payment_id"], name: "index_credits_on_payment_id", using: :btree
 
   create_table "debit_generators", force: true do |t|
