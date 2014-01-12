@@ -83,8 +83,4 @@ class Payment < ActiveRecord::Base
   def default_on_date
     Date.current
   end
-
-  def outstanding
-    credits.outstanding
-  end
 end

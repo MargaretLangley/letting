@@ -132,6 +132,7 @@ fieldset {
     border-radius: 4px;
     box-shadow:    0px;
     border: 1px solid $subdued-color;
+    width: 90%;
   }
 
   div.field_with_errors {
@@ -273,4 +274,3 @@ input[type="submit"] {
 .number {
   text-align: right;
 }
-

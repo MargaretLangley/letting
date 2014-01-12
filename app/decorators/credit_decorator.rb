@@ -16,6 +16,10 @@ class CreditDecorator
     number_with_precision(@source.amount,precision: 2)
   end
 
+  def owing
+    Debit.available(charge_id).to_a.sum &:outstanding
+  end
+
   private
 
   def debit
