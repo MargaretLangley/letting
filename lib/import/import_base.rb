@@ -40,7 +40,7 @@ module DB
       model_prepared
       model_assignment
       model_patched if @patch
-      model_saved || show_error
+      model_to_save.save || show_error
     end
 
     def filtered
@@ -78,10 +78,6 @@ module DB
       model = find_model(model_class)
       fail_parent_record_not_found model_class if model.none?
       model
-    end
-
-    def model_saved
-      model_to_save.save
     end
 
     def model_to_save
