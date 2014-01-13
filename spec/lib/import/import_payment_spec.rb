@@ -6,69 +6,28 @@ require_relative '../../../lib/import/import_payment'
 module DB
   describe ImportPayment, :import do
 
-    it 'with debit' do
-      pending
-      credit = credit_with_stubbed_charge_type credit_new,
-                                               'Ground Rent'
-      payment_with_stubbed_credit credit
-      property_create! human_ref: 89
+    it 'single credit' do
+      property = property_create! human_ref: 89
+      charge_new(account_id: property.account.id).save!
 
-      expect_import_to change(Credit, :count).by 1
-    end
-
-    it 'in advance' do
-      pending
-    end
-
-    it 'multiple debits paid' do
-      pending
-      credit1 = credit_with_stubbed_charge_type credit_new,
-                                                'Ground Rent'
-      credit2 = credit_with_stubbed_charge_type credit_new,
-                                                'Ground Rent'
-      payment_with_stubbed_credit credit1, credit2
-      property_create! human_ref: 89
-
-      expect_import_to change(Credit, :count).by 1
+      expect { ImportPayment.import parse credit_row }.to \
+        change(Credit, :count).by 1
     end
 
     context 'errors' do
-      it 'without charge_type raises error' do
-        credit = credit_with_stubbed_charge_type credit_new,
-                                                 'service_charge'
-        payment_with_stubbed_credit credit
-        property_create! human_ref: 89
-
-        expect_import_to raise_error DB::ChargeTypeUnknown
-      end
-
       it 'double import raises error' do
-        pending
-        credit = credit_with_stubbed_charge_type credit_new,
-                                                 'Ground Rent'
-        payment_with_stubbed_credit credit
-        property_create! human_ref: 89
+        pending 'will not work until model_prepared can find_model'
+        property = property_create! human_ref: 89
+        charge_new(account_id: property.account.id).save!
 
         ImportPayment.import parse credit_row
-        expect_import_to raise_error NotIdempotent
+        expect { ImportPayment.import parse credit_row }.to \
+          raise_error NotIdempotent
       end
     end
 
     def credit_row
       %q[89, GR, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0]
-    end
-
-    def expect_import_to match
-      expect { ImportPayment.import parse credit_row }.to match
-    end
-
-    def payment_with_stubbed_credit *credit
-      Payment.any_instance.stub(:account_prepare_credits).and_return credit
-    end
-
-    def credit_with_stubbed_charge_type credit, charge_type
-        credit.stub(:charge_type).and_return charge_type
-        credit
     end
 
     def parse row_string

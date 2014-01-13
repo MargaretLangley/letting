@@ -32,6 +32,12 @@ module DB
         raise DB::PropertyRefUnknown, property_unknown_message, caller
     end
 
+    def charge_id
+      Charge.find_by!(account_id: account_id, charge_type: charge_type).id
+      rescue ActiveRecord::RecordNotFound
+        raise DB::ChargeUnknown, charge_unknown(account_id, charge_type), caller
+    end
+
     def charge_type
       charge = ChargeCode.to_string charge_code
       fail DB::ChargeCodeUnknown, charge_code_message, caller unless charge
@@ -58,6 +64,10 @@ module DB
 
     def property_unknown_message
       "Property ref: #{human_ref} is unknown."
+    end
+
+    def charge_unknown account_id, charge_type
+      "Charge with account: #{account_id} charge_type: #{charge_type} "
     end
   end
 end
