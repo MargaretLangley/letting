@@ -308,19 +308,19 @@ end
     create_due_ons
     Charge.create! [
       { id: 1, charge_type: 'Ground Rent',    due_in: 'Advance',
-        amount: '88.08',  account_id: 1 },
+        amount: '88.08',  account_id: 1, so_dd: 'false' },
       { id: 2, charge_type: 'Service Charge', due_in: 'Advance',
-        amount: '125.08', account_id: 1 },
+        amount: '125.08', account_id: 1, so_dd: 'false' },
       { id: 3, charge_type: 'Ground Rent',    due_in: 'Advance',
-        amount: '70.00',  account_id: 2 },
+        amount: '70.00',  account_id: 2, so_dd: 'true' },
       { id: 4, charge_type: 'Service Charge', due_in: 'Advance',
-        amount: '170.00',  account_id: 3 },
+        amount: '170.00',  account_id: 3, so_dd: 'false' },
       { id: 5, charge_type: 'Service Charge', due_in: 'Arrears',
-        amount: '130.08', account_id: 5 },
+        amount: '130.08', account_id: 5, so_dd: 'true' },
       { id: 6, charge_type: 'Ground Rent',    due_in: 'Arrears',
-        amount: '59.00',  account_id: 6 },
+        amount: '59.00',  account_id: 6, so_dd: 'false' },
       { id: 7, charge_type: 'Service Charge', due_in: 'Arrears',
-        amount: '90.00',  account_id: 7 },
+        amount: '90.00',  account_id: 7, so_dd: 'true' },
 
     ]
   end
@@ -331,10 +331,11 @@ end
       { id: 2,  day: 1,  month: 7, charge_id: 2 },
       { id: 3,  day: 1,  month: (Date.current + 1.month).month , charge_id: 3 },
       { id: 4,  day: 30, month: 9, charge_id: 4 },
-      { id: 5,  day: 25, month: 12, charge_id: 5 },
-      { id: 6,  day: 25, month: 12, charge_id: 6 },
+      { id: 5,  day: 2, month: 3, charge_id: 5 },
+      { id: 6,  day: 2, month: 3, charge_id: 6 },
       { id: 7,  day: 11, month: 1, charge_id: 7 },
-   
+      { id: 8,  day: 24, month: 9, charge_id: 6 },
+      { id: 9,  day: 21, month: 9, charge_id: 5 },
 
     ]
   end

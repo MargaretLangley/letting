@@ -21,5 +21,11 @@
     <%= f.hidden_field :start_date %>
     <%= f.hidden_field :end_date %>
   </div>
+
+   <div class='field text'>
+      <%= f.label :so_dd, 'Stand Order/DD' %>
+      <%= f.check_box :so_dd, class: 'checkbox-toggle' %>
+   </div>
+   
   <%= render 'due_ons', f: f, due_ons: DueOnsDecorator.new(charge.due_ons) %>
 </fieldset>

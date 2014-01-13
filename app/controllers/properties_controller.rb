@@ -17,7 +17,7 @@
 class PropertiesController < ApplicationController
   def index
     @properties = Property.search(search_param).page(params[:page]).load
-    redirect_to find_route(@properties.first) if unique_search?
+     redirect_to property_path(@properties.first) if unique_search?
   end
 
   def show
@@ -26,6 +26,7 @@ class PropertiesController < ApplicationController
 
   def new
     @property = Property.new
+    @clients = Client.all
     @property.prepare_for_form
   end
 
@@ -77,7 +78,7 @@ class PropertiesController < ApplicationController
       search_param.present? && @properties.size == 1
     end
 
-    def search_param
+     def search_param
       params[:search]
     end
 
@@ -101,7 +102,7 @@ class PropertiesController < ApplicationController
     end
 
     def charges_params
-      %i(id charge_type due_in amount _destroy) +
+      %i(id charge_type due_in amount so_dd _destroy) +
       [due_ons_attributes: due_on_params]
     end
 
