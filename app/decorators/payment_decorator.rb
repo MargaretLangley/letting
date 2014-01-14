@@ -28,7 +28,7 @@ class PaymentDecorator
   end
 
   def credits_decorated
-    @credits_decorated ||= generate_credits
+    @source.credits.map { |d| CreditDecorator.new d }.sort_by &:charge_type
   end
 
   def property_decorator
@@ -37,11 +37,5 @@ class PaymentDecorator
 
   def submit_message
     @source.new_record? ?  'pay total'  : 'update'
-  end
-
-  private
-
-  def generate_credits
-    @source.credits.map { |d| CreditDecorator.new d }.sort_by &:charge_type
   end
 end
