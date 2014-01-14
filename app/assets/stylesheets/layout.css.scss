@@ -12,9 +12,9 @@
     font-family: "Helvetica Neue", Helvetica, Arial;
   }
  
-.setleftmargin{
-      margin-left:30px;
- }
+  .setleftmargin{
+     margin-left:30px;
+  }
 
   @mixin header-object {
     color: $print-background-white;
@@ -130,6 +130,4 @@
      margin-right: 20px;
   }
 
-
 }
-

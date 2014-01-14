@@ -1,7 +1,7 @@
+<div class = 'setleftmargin'>
+	<h2 class = "mainTitle">Properties</h2>
 
-<h2 class = "mainTitle">Properties</h2>
-
-<%= render 'properties/search', path: properties_path, search_action: 'index', search_label: 'Search List' %>
-<%= render 'index_table', properties: @properties, show_actions: true, show_checkbox: false %>
-
-<%= paginate @properties %>
+	<%= render 'properties/search', path: properties_path, search_action: 'index', search_label: 'Search List' %>
+	<%= render 'index_table', properties: @properties, show_actions: true, show_checkbox: false %>
+	<%= paginate @properties %>
+</div>
