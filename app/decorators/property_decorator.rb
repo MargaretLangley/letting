@@ -42,15 +42,6 @@ class PropertyDecorator
     [ first_line, second_line]
   end
 
-  def start_address
-    [ address.flat_no,
-      address.house_name,
-      address.road_no,
-      address.road ]
-    .reject(&:blank?)
-    .join('  ')
-  end
-
   private
 
   def flat_line

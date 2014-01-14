@@ -97,18 +97,10 @@ describe Payment do
         expect((Payment.search('2000-1-1'))).to eq []
       end
 
-      context 'returns nothing' do
-        it('on empty string') do
-          property = property_create!
-          Payment.create! payment_attributes account_id: property.account.id
-          expect((Payment.search(''))).to eq []
-        end
-
-        it('on corrupt date') do
-          property = property_create!
-          Payment.create! payment_attributes account_id: property.account.id
-          expect((Payment.search('2012-x'))).to eq []
-        end
+      it('returns nothing if invalid date') do
+        property = property_create!
+        Payment.create! payment_attributes account_id: property.account.id
+        expect((Payment.search('2012-x'))).to eq []
       end
     end
   end
