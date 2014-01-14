@@ -18,7 +18,7 @@
     Owing
   </div>
   <div class="col-3-8 grid-header number pick-out">
-    Paid
+    Payment
   </div>
   <% @payment.credits_decorated.each do |credit| %>
     <%= payment_form.fields_for :credits, credit.source do |credit_form| %>
