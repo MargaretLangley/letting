@@ -35,28 +35,33 @@ class PropertyDecorator
     address_lines
   end
 
-  def reduced_address_lines
-    address_lines = []
-    first_line = source.entities.full_name
-    second_line = []
-    second_line << "#{flat_line}" if address.flat_no?
-    second_line << "#{address.house_name}" if address.house_name?
-    second_line << "#{road_line}" if second_line.blank?
-    address_lines.push *[ first_line, second_line.join(', ')]
+  def abbreviated_address
+    first_line  = source.entities.full_name
+    second_line = [ flat_line, house_name ].compact.join(', ')
+    second_line = road_line if second_line.blank?
+    [ first_line, second_line]
   end
 
   def start_address
-    [address.flat_no, address.house_name, address.road_no, address
-    .road].reject(&:blank?).join('  ')
+    [ address.flat_no,
+      address.house_name,
+      address.road_no,
+      address.road ]
+    .reject(&:blank?)
+    .join('  ')
   end
 
   private
 
-    def flat_line
-      "Flat #{address.flat_no}".strip
-    end
+  def flat_line
+    address.flat_no? ? "Flat #{address.flat_no}" : nil
+  end
 
-    def road_line
-      "#{address.road_no} #{address.road}".strip
-    end
+  def house_name
+    address.house_name? ? address.house_name : nil
+  end
+
+  def road_line
+    "#{address.road_no} #{address.road}".strip
+  end
 end

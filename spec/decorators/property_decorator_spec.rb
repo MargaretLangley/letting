@@ -4,6 +4,12 @@ describe PropertyDecorator do
 
   let(:property) { PropertyDecorator.new property_new }
 
+  let(:house) do
+    property.address.flat_no = ''
+    property.address.house_name = ''
+    property
+  end
+
   context 'client_ref' do
     it 'returns nil if unknown' do
       expect(property.client_ref).to eq nil
@@ -26,13 +32,18 @@ describe PropertyDecorator do
     expect(property.address_lines[7]).to eq 'B5 7QU'
   end
 
-  let(:house) do
-    property.address.flat_no = ''
-    property.address.house_name = ''
-    property
-  end
-
   it 'writes house from road' do
     expect(house.address_lines[1]).to eq '294 Edgbaston Road'
+  end
+
+  context 'reduced_address_lines' do
+    it 'generates flat address' do
+      expect(property.reduced_address_lines[0]).to eq 'Mr W. G. Grace'
+      expect(property.reduced_address_lines[1]).to eq 'Flat 47, Hillbank House'
+    end
+    it 'generates house address' do
+      expect(house.reduced_address_lines[0]).to eq 'Mr W. G. Grace'
+      expect(house.reduced_address_lines[1]).to eq '294 Edgbaston Road'
+    end
   end
 end
