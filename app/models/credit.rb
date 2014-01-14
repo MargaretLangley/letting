@@ -38,11 +38,11 @@ class Credit < ActiveRecord::Base
   end
 
   def spendable
-    amount - spent
+    amount - settled
   end
 
   def spent?
-    amount.round(2) == spent.round(2)
+    amount.round(2) == settled.round(2)
   end
 
   private
@@ -51,7 +51,7 @@ class Credit < ActiveRecord::Base
     Settlement.resolve_credit self, Debit.available(charge_id)
   end
 
-  def spent
+  def settled
     settlements.pluck(:amount).inject(0, :+)
   end
 

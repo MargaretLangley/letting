@@ -35,11 +35,11 @@ class Debit < ActiveRecord::Base
   end
 
   def outstanding
-    amount - paid
+    amount - settled
   end
 
   def paid?
-    paid.round(2) == amount.round(2)
+    amount.round(2) == settled.round(2)
   end
 
   def == other
@@ -54,7 +54,7 @@ class Debit < ActiveRecord::Base
     where(charge_id: charge_id).order(:on_date).reject(&:paid?)
   end
 
-  def paid
+  def settled
     settlements.pluck(:amount).inject(0, :+)
   end
 
