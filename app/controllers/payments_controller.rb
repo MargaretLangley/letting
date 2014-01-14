@@ -18,7 +18,9 @@
 #
 class PaymentsController < ApplicationController
   def index
-    @payments = Payment.search(index_search_param).page(params[:page]).load
+    @payments = Payment.search(params[:search])
+                       .page(params[:page])
+                       .load
   end
 
   def new
@@ -78,10 +80,6 @@ class PaymentsController < ApplicationController
   end
 
   private
-
-  def index_search_param
-    params[:search] ||= Date.current.to_s
-  end
 
   def created_message
     "Payment #{identy} successfully created"
