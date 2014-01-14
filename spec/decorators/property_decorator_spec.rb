@@ -36,14 +36,14 @@ describe PropertyDecorator do
     expect(house.address_lines[1]).to eq '294 Edgbaston Road'
   end
 
-  context 'reduced_address_lines' do
+  context 'abbreviated_address' do
     it 'generates flat address' do
-      expect(property.reduced_address_lines[0]).to eq 'Mr W. G. Grace'
-      expect(property.reduced_address_lines[1]).to eq 'Flat 47, Hillbank House'
+      expect(property.abbreviated_address[0]).to eq 'Mr W. G. Grace'
+      expect(property.abbreviated_address[1]).to eq 'Flat 47, Hillbank House'
     end
     it 'generates house address' do
-      expect(house.reduced_address_lines[0]).to eq 'Mr W. G. Grace'
-      expect(house.reduced_address_lines[1]).to eq '294 Edgbaston Road'
+      expect(house.abbreviated_address[0]).to eq 'Mr W. G. Grace'
+      expect(house.abbreviated_address[1]).to eq '294 Edgbaston Road'
     end
   end
 end
