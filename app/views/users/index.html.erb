@@ -1,45 +1,45 @@
-<h2 class="mainTitle">Users</h2>
-<table>
-  <thead>
-    <tr>
-      <th class='alnright'>
-        ID
-      </th>
-      <th>
-        email
-      </th>
-      <th class='alnright'>
-        Admin
-      </th>
-      <th>
-        Actions
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-    <tr>
-      <td class='alnright'>
-        <%= link_to user.id, edit_user_path(user) %>
-      </td>
-      <td>
-        <%= user.email %>
-      </td>
-      <td class='alnright'>
-        <% if user.admin %>
-          Yes
-        <% else %>
-          No
-        <% end %>
-      </td>
-      <td>
-        <%= link_to 'Edit', edit_user_path(user) %> |
-        <%= link_to 'View', user_path(user) %> |
-        <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
+<div class = 'setleftmargin'>
+  <h1 class="mainTitle">Users</h1>
+  <table>
+    <thead>
+      <tr>
+        <th class='alnright'>
+          ID
+        </th>
+        <th>
+          email
+        </th>
+        <th class='alnright'>
+          Admin
+        </th>
+        <th>
+          Actions
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td class='alnright'>
+          <%= link_to user.id, edit_user_path(user) %>
+        </td>
+        <td>
+          <%= user.email %>
+        </td>
+        <td class='alnright'>
+          <% if user.admin %>
+            Yes
+          <% else %>
+            No
+          <% end %>
+        </td>
+        <td>
+          <%= link_to 'Edit', edit_user_path(user) %> |
+          <%= link_to 'View', user_path(user) %> |
+          <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
