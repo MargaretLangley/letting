@@ -1,0 +1,58 @@
+  <% dotted_line = "----------" %>
+  <% total = 0 %>
+  <table>
+     <tbody>
+      <% items.each do |item| %>
+        <% if item.due != 0 %>
+          <% if item.charge_type != 'Balance carried forward' && item.balance != 0 %>
+            <tr>
+              <td>
+               <%= item.date %>
+              </td>
+              <td>
+               <% if item.charge_type == 'Balance carried forward' %>
+               Arrears
+               <% else %>
+                <%= item.charge_type %>
+                <% end %>
+              </td>
+              <td>
+              </td>
+              <td class='toright'>
+                <%= number_with_precision(total = total + item.balance,precision: 2) %>
+              </td>
+           </tr>
+          <% end %>
+        <% end %>
+       <% end %>
+          <tr class= 'small_line_height'>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td class='toright'>
+    <%= "#{dotted_line}" %>
+            </td>
+             <td class='toright'>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            </td>
+            <td>
+         Total now Owing
+            </td>
+            <td>
+            </td>
+            <td class='toright'>
+               <%= number_with_precision(total,precision: 2) %>
+            </td>
+           </tr>
+    </tbody>
+  </table>
+  <p>
+  </p>
+
+

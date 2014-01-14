@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Invoice</title>
+  </head>
+  <body>
+    <div class = 'print_only'>
+      <div class = 'page' >
+        <%= render partial: 'invoice_page1/print_invoice_page1', locals: {property_object: property_object, date_object: date_object} %>
+      </div>
+      <div class = 'page' >
+        <%= render 'invoice_page2/check_GR', items: AccountDecorator.new(property_object.account).abbrev_items, property_object: property_object %>
+      </div>
+    </div>
+  </body>
+</html>
