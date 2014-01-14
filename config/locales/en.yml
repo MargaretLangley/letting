@@ -67,6 +67,9 @@ en:
       #strftime
       default: "%d/%m/%Y"
       short: "%d %b %y"
+  time:
+    formats:
+      human: "%d %b %Y"
 
   instruction:
     debit_generators:

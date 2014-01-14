@@ -37,7 +37,7 @@
         <%= payment.account.property.entities.full_name %>
       </td>
       <td>
-        <%= l payment.on_date %>
+        <%= l payment.on_date, format: :human %>
       </td>
       <td class='alnright'>
         <%= number_to_currency payment.amount %>
