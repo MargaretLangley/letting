@@ -2,9 +2,42 @@ require 'spec_helper'
 
 describe DueOns do
 
-  let(:due_ons) { Charge.new.due_ons }
+  let(:charge) { Charge.new charge_attributes id: 1}
+  let(:due_ons) { charge.due_ons }
+
+  context 'validates' do
+    context 'due_ons_size' do
+      it 'invalid above max' do
+        (1..13).each { charge.due_ons.build day: 25, month: 3 }
+        expect(charge).to_not be_valid
+      end
+      it 'valid if marked for destruction' do
+        (1..13).each { charge.due_ons.build day: 25, month: 3 }
+        charge.due_ons.first.mark_for_destruction
+        expect(charge).to be_valid
+      end
+    end
+  end
 
   context 'methods' do
+
+    context '#due_dates' do
+      before { Timecop.travel Date.new 2013, 4, 1 }
+      after { Timecop.return }
+
+      it 'returns date when range in due date' do
+        due_ons.build day: 4, month: 4
+        due_ons.build day: 3, month: 5
+        expect(due_ons.due_dates date_range_covering_due_on)
+          .to eq [ Date.new(2013, 4, 4), Date.new(2013, 5, 3) ]
+      end
+
+      it 'returns nils when range outside due date' do
+        due_ons.build day: 1, month: 2
+        expect(due_ons.due_dates date_range_missing_due_on )
+          .to be_empty
+      end
+    end
 
     context '#prepare' do
       it 'fills empty' do
@@ -14,19 +47,13 @@ describe DueOns do
       end
     end
 
-    context '#cleans_up_form' do
+    context '#clears_up_form' do
       it 'leaves valid or partially filled due_ons' do
         due_ons.build due_on_attributes_0
         due_ons.build
         due_ons.clear_up_form
-        expect(due_ons.reject(&:empty?)).to have(1).items
-      end
-
-      it 'cleans up entirely if empty' do
-        due_ons.build
-        due_ons.build
-        due_ons.clear_up_form
-        expect(due_ons.reject(&:empty?)).to have(0).items
+        expect(due_ons.reject { |due_on| due_on.marked_for_destruction? } )
+                      .to have(1).item
       end
     end
 
@@ -41,72 +68,36 @@ describe DueOns do
       end
     end
 
-    context '#per month?' do
+    context '#monthly?' do
       context 'by number' do
-        it 'knows when the charge is not per month' do
-          due_ons.build day: 1, month: 1, charge_id: 1
-          expect(due_ons).to_not be_per_month
-        end
-        it 'knows when the charge is not per month' do
+        it '12 persistable due_ons monthly charge' do
           (1..12).each { due_ons.build day: 1, month: 1 }
-          expect(due_ons).to be_per_month
+          expect(due_ons).to be_monthly
         end
 
-        it 'max displayed dueons does not make it per month' do
-          (1..4).each { due_ons.build day: 1, month: 1 }
-          (5..12).each { due_ons.build }
-          expect(due_ons).to_not be_per_month
+        it '< 12 persistable due_ons not monthly' do
+          (1..11).each { due_ons.build day: 1, month: 1 }
+          due_ons.build
+          expect(due_ons).to_not be_monthly
         end
       end
       context 'by per_month due_on' do
         it 'is not per month without it' do
           due_ons.build day: 1, month: -1
-          expect(due_ons).to be_per_month
+          expect(due_ons).to be_monthly
         end
       end
-    end
 
-    context '#between?' do
-      before { Timecop.travel(Date.new(2013, 5, 3)) }
-      after { Timecop.return }
-      before do
-        due_ons.build day: 3, month: 5
-      end
+      context '#has_new?' do
+        it 'true with new persistable record' do
+          due_ons.build due_on_attributes_0
+          expect(due_ons).to be_has_new
+        end
 
-      it 'missing due on' do
-        expect(due_ons.between? date_range_missing_due_on).to be_false
-      end
-
-      it 'is between due on' do
-        expect(due_ons.between? date_range_covering_due_on).to be_true
-      end
-    end
-
-    context '#make_date_between' do
-      before { Timecop.travel(Date.new(2013, 5, 3)) }
-      after { Timecop.return }
-
-      it 'when in date' do
-        due_ons.build day: 3, month: 5
-        expect(due_ons.make_date_between date_range_covering_due_on)
-          .to eq Date.new 2013, 5, 3
-      end
-
-      it 'nils outside of date range' do
-        due_ons.build day: 1, month: 2
-        expect { due_ons.make_date_between date_range_missing_due_on }
-          .to raise_error NameError
-      end
-
-      it 'when in date' do
-        due_ons.build day: 1, month: 5
-        due_ons.build day: 3, month: 6
-        expect(due_ons.make_date_between date_range_one_year)
-          .to eq Date.new 2013, 6, 3
-      end
-
-      def date_range_one_year
-        Date.new(2013, 5, 30)..Date.new(2014, 5, 30)
+        it 'false with new empty record' do
+          due_ons.build
+          expect(due_ons).to_not be_has_new
+        end
       end
     end
 

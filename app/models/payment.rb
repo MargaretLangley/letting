@@ -12,11 +12,8 @@
 class Payment < ActiveRecord::Base
   belongs_to :account
   has_many :credits, dependent: :destroy do
-    def outstanding
-      map { |credit| credit.pay_off_debit }.sum
-    end
     def clear_up
-      each { |credit| credit.clear_up }
+      each &:clear_up
     end
   end
   before_validation :clear_up
@@ -33,16 +30,12 @@ class Payment < ActiveRecord::Base
     self.on_date = default_on_date if on_date.blank?
   end
 
-  ####
-  # If an account exists
-  ###
-  #
   def account_exists?
     account.present?
   end
 
   def prepare
-    credits.push *account_prepare_credits
+    credits.push *account.prepare_credits
   end
 
   def clear_debt
@@ -73,10 +66,6 @@ class Payment < ActiveRecord::Base
 
   private
 
-  def account_prepare_credits
-    account.prepare_credits
-  end
-
   def self.date_to_datetime_range date
     date.to_datetime.beginning_of_day..date.to_datetime.end_of_day
   end
@@ -93,9 +82,5 @@ class Payment < ActiveRecord::Base
 
   def default_on_date
     Date.current
-  end
-
-  def outstanding
-    credits.outstanding
   end
 end

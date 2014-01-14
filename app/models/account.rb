@@ -25,25 +25,24 @@ class Account < ActiveRecord::Base
   has_many :charges, dependent: :destroy do
     def prepare
       (size...MAX_CHARGES).each { build }
-      each { |charge| charge.prepare }
+      each &:prepare
     end
 
     def clear_up_form
-      each { |charge| charge.clear_up_form }
+      each &:clear_up_form
     end
   end
   MAX_CHARGES = 4
   accepts_nested_attributes_for :charges, allow_destroy: true
 
   def prepare_debits date_range
-    charges.select{ |charge| charge.first_free_chargeable? date_range }
-      .map do |charge|
-        Debit.new(charge.first_free_chargeable(date_range).to_hash)
-    end
+    charges.map do |charge|
+      charge.next_chargeable(date_range).map { |chargeable| Debit.new(chargeable.to_hash) }
+    end.flatten
   end
 
   def prepare_credits
-    [ prepare_credits_to_receivables ].compact.reduce([], :|)
+    charges.map { |charge| create_credit charge }
   end
 
   def prepare_for_form
@@ -60,23 +59,7 @@ class Account < ActiveRecord::Base
 
   private
 
-  # call once per request
-  #
-  def prepare_credits_to_receivables
-    receivables.map { |debit| build_credit_from_debit(debit) }
-  end
-
-  def receivables
-    debits.reject(&:paid?)
-  end
-
-  # def payables
-  #   credits.reject(&:paid?)
-  # end
-
-  def build_credit_from_debit debit
-    Credit.new account_id: id,
-               debit: debit,
-               charge_id: debit.charge_id
+  def create_credit charge
+    credits.build charge: charge, on_date: Date.current, amount: charge.amount
   end
 end

@@ -16,14 +16,9 @@ module DueOns
   included do
     has_many :due_ons, -> { order(:created_at) }, dependent: :destroy do
 
-      def between? date_range
-        find { |due_on| due_on.between? date_range }.present?
-      end
-
-      def make_date_between date_range
-        find_due_on_within_range(due_ons_ordered_by_next_occurrence,
-                                 date_range)
-        .make_date
+      def due_dates date_range
+        ordered_by_occurrence.select { |due_on| due_on.between? date_range }
+                              .map { |due_on| due_on.make_date }
       end
 
       def prepare
@@ -31,63 +26,60 @@ module DueOns
       end
 
       def clear_up_form
-        clear_up_all_children
-        switch_to_a_due_on_for_each_month if per_month_due_on
-        destruction_if :per_month? if per_month_due_on
+        clear_up_all
+        to_monthly if monthly_due_on
+        destruction_if :monthly? if monthly_due_on
       end
 
       def empty?
         self.all?(&:empty?)
       end
 
-      def per_month?
-        max_due_ons || per_month_due_on
+      def monthly?
+        max_due_ons || monthly_due_on
       end
 
-      def has_new_due_on?
+      def has_new?
         reject(&:empty?).find(&:new_record?)
       end
 
-  private
+      private
 
-      def clear_up_all_children
+      def clear_up_all
         each { |due_on| due_on.clear_up_form self }
       end
 
       def destruction_if matcher
-        select(&matcher)
-        .each { |due_on| mark_due_on_for_destruction due_on }
-      end
-
-      def mark_due_on_for_destruction due_on
-        due_on.mark_for_destruction
+        select(&matcher).each &:mark_for_destruction
       end
 
       def max_due_ons
         reject(&:empty?).size == MAX_DUE_ONS
       end
 
-      def per_month_due_on
-        find(&:per_month?)
+      def monthly_due_on
+        find(&:monthly?)
       end
 
-      def switch_to_a_due_on_for_each_month
-        build_due_on_for_each_month_of_year per_month_due_on.day
+      def to_monthly
+        (1..MAX_DUE_ONS)
+        .each { |month| build day: monthly_due_on.day, month: month }
       end
 
-      def build_due_on_for_each_month_of_year day
-        (1..MAX_DUE_ONS).each { |month| build day: day, month: month }
-      end
-
-      def find_due_on_within_range due_ons, date_range
-        due_ons.find { |due_on| due_on.between? date_range }
-      end
-
-      def due_ons_ordered_by_next_occurrence
+      def ordered_by_occurrence
         sort { |a,b| a.make_date <=> b.make_date }
       end
     end
 
+    validate :due_ons_size
+
+    def due_ons_size
+      errors.add :due_ons, 'Too many due_ons' if persitable_due_ons.size > 12
+    end
+
+    def persitable_due_ons
+      due_ons.reject(&:marked_for_destruction?)
+    end
   end
   MAX_DISPLAYED_DUE_ONS = 4
   MAX_DUE_ONS = 12

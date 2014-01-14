@@ -24,12 +24,11 @@ class PaymentDecorator
   def prepare_for_form
     if @source.account_exists?
       @source.prepare
-      @source.clear_debt if amount.blank?
     end
   end
 
   def credits_decorated
-    credits
+    @source.credits.map { |d| CreditDecorator.new d }.sort_by &:charge_type
   end
 
   def property_decorator
@@ -38,19 +37,5 @@ class PaymentDecorator
 
   def submit_message
     @source.new_record? ?  'pay total'  : 'update'
-  end
-
-  private
-
-  def credits
-    @credits = [] if @credits.nil?
-    generate_credits if @credits.empty?
-    @credits
-  end
-
-  def generate_credits
-    @credits.push(*@source.credits.map { |d| CreditDecorator.new d })
-    @credits.each { |d| d.prepare_for_form }
-    @credits
   end
 end

@@ -32,36 +32,14 @@ describe Account do
     end
 
     context '#prepare_credits' do
-      it 'no debit - does nothing' do
+      it 'empty charges, empty credits ' do
         expect(account.prepare_credits).to have(0).items
       end
 
-      context 'receivables' do
-        it 'generate matching credits' do
-          account.debits.push debit_new
-          expect(credits = account.prepare_credits).to have(1).item
-          expect(credits.first.amount).to be_nil
-        end
-
-        it 'no recievables, no credits' do
-          Debit.any_instance.stub(:paid?).and_return true
-          account.debits.push debit_new
-          expect(account.prepare_credits).to have(0).items
-        end
+      it 'one charge, one credit' do
+        account.charges.build charge_attributes
+        expect(account.prepare_credits).to have(1).item
       end
-    end
-
-    it '#prepare_for_form' do
-      expect(account.charges).to have(0).items
-      account.prepare_for_form
-      expect(account.charges).to have(4).items
-    end
-
-    it '#cleans up form' do
-      account.charges.build charge_attributes
-      account.prepare_for_form
-      account.clear_up_form
-      expect(account.charges.reject(&:marked_for_destruction?)).to have(1).item
     end
 
     it '#by_human id' do

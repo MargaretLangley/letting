@@ -21,13 +21,11 @@ class Charge < ActiveRecord::Base
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
   validates :due_ons, presence: true
-  validate :due_ons_size
   has_many :credits
   has_many :debits do
-    def already_debited? debit
-      # any? returns true if a collection element does not return false or nil
+    def created_on? on_date
       self.any? do |debit|
-      debit.already_charged? debit
+      debit.on_date == on_date
       end
     end
   end
@@ -37,21 +35,10 @@ class Charge < ActiveRecord::Base
     self.end_date = Date.parse MAX_DATE if end_date.blank?
   end
 
-  def first_chargeable? date_range
-    due_between?(date_range)
-  end
-
-  def first_chargeable date_range
-    first_chargeable?(date_range) ? chargeable_info(date_range) : nil
-  end
-
-  def first_free_chargeable? date_range
-    first_chargeable?(date_range) &&
-      !already_charged_for?(chargeable_info(date_range))
-  end
-
-  def first_free_chargeable date_range
-    first_free_chargeable?(date_range) ? chargeable_info(date_range) : nil
+  def next_chargeable date_range
+    allowed_due_dates(date_range).map do |my_date|
+      chargeable_info(my_date) if !debits.created_on? my_date
+    end.compact
   end
 
   def prepare
@@ -69,28 +56,16 @@ class Charge < ActiveRecord::Base
     !empty?
   end
 
-  def due_between? date_range
-    charge_range_dates_cover?(date_range) && due_ons.between?(date_range)
+  def allowed_due_dates date_range
+    due_ons.due_dates(date_range).to_a & (start_date..end_date).to_a
   end
 
-  def already_charged_for? chargeable
-    debits.already_debited? Debit.new(chargeable.to_hash)
-  end
-
-  def charge_range_dates_cover? date_range
-    charge_range.cover?(date_range.min) && charge_range.cover?(date_range.max)
-  end
-
-  def chargeable_info date_range
+  def chargeable_info date
     ChargeableInfo
       .from_charge charge_id:  id,
-                   on_date:    due_ons.make_date_between(date_range),
+                   on_date:    date,
                    amount:     amount,
                    account_id: account_id
-  end
-
-  def charge_range
-    start_date .. end_date
   end
 
   def empty?
@@ -102,13 +77,5 @@ class Charge < ActiveRecord::Base
 
   def ignored_attrs
     %w[id account_id start_date end_date created_at updated_at]
-  end
-
-  def due_ons_size
-    errors.add :due_ons, 'Too many due_ons' if persitable_due_ons.size > 12
-  end
-
-  def persitable_due_ons
-    due_ons.reject(&:marked_for_destruction?)
   end
 end

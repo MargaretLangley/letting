@@ -37,23 +37,31 @@ describe Debit do
 
   end
 
+  context 'class method' do
+    context '.available' do
+
+      it 'orders debits by date' do
+        last  = create_debit Date.new(2013, 4, 1)
+        first = create_debit Date.new(2012, 4, 1)
+        expect(Debit.available first.charge_id).to eq [first, last]
+      end
+
+      def create_debit on_date
+        Debit.create! debit_attributes on_date: on_date
+      end
+    end
+  end
+
   context 'methods' do
 
-    context '#already_charged?' do
-      it 'matches' do
-        one = Debit.new(charge_id: 1, on_date: '2013-10-1')
-        two = Debit.new(charge_id: 1, on_date: '2013-10-1')
-        expect(one.already_charged?(two)).to be_true
+    context '#charge_type' do
+      it 'returned when charge present' do
+        debit.charge = Charge.new charge_attributes
+        expect(debit.charge_type).to eq 'Ground Rent'
       end
-      it 'charge causes false' do
-        one = Debit.new(charge_id: 1, on_date: '2013-10-1')
-        two = Debit.new(charge_id: 2, on_date: '2013-10-1')
-        expect(one.already_charged?(two)).to be_false
-      end
-      it 'date causes false' do
-        one = Debit.new(charge_id: 1, on_date: '2013-10-1')
-        two = Debit.new(charge_id: 1, on_date: '2014-10-1')
-        expect(one.already_charged?(two)).to be_false
+
+      it 'errors when charge missing' do
+        expect { debit.charge_type }.to raise_error
       end
     end
 
@@ -62,40 +70,25 @@ describe Debit do
         expect(debit.outstanding).to eq 88.08
       end
 
-      it 'returns 0 when paid' do
-        debit.save!
-        Credit.create! credit_attributes debit_id: debit.id
-        expect(debit.outstanding).to eq 0
-      end
-
       it 'multiple credits are added' do
+        Credit.create! credit_attributes amount: 44.04
         debit.save!
-        Credit.create! credit_attributes amount: 1.05, debit_id: debit.id
-        Credit.create! credit_attributes amount: 1.05, debit_id: debit.id
-        expect(debit.outstanding).to eq 85.98
+        expect(debit.outstanding).to eq 44.04
       end
     end
 
     context '#paid?' do
       it 'false without credit' do
+        debit  = Debit.create! debit_attributes amount: 88.08
+        debit.save!
         expect(debit).to_not be_paid
       end
 
       it 'true when paid in full' do
+        debit  = Debit.create! debit_attributes amount: 88.08
+        credit = Credit.create! credit_attributes amount: 88.08
         debit.save!
-        Credit.create! credit_attributes debit_id: debit.id
         expect(debit).to be_paid
-      end
-    end
-
-    context '#type' do
-      it 'returned when charge present' do
-        debit.charge = Charge.new charge_attributes
-        expect(debit.charge_type).to eq 'Ground Rent'
-      end
-
-      it 'errors when charge missing' do
-        expect { debit.charge_type }.to raise_error
       end
     end
   end

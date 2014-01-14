@@ -30,11 +30,10 @@ module DB
       end
 
       it 'parsed' do
-        #expect {
+        expect {
           ImportAccount.import parse two_debits_1_payment
-          #  }.to
-          #change(Credit, :count).by 1
-        # expect(Debit.all).to have(2).items
+          }.to change(Credit, :count).by 1
+        expect(Debit.all).to have(2).items
       end
     end
 
@@ -48,7 +47,7 @@ module DB
 
       it 'parses' do
         expect { ImportAccount.import parse payment_covering_2_debits }
-          .to change(Credit, :count).by 2
+          .to change(Credit, :count).by 1
         expect(Debit.all).to have(2).items
       end
     end
@@ -134,7 +133,6 @@ module DB
       end
 
       it 'parses' do
-        pending
         ImportAccount.import parse advance_payment
         expect(Credit.all).to have(1).items
         expect(Debit.all).to have(1).items

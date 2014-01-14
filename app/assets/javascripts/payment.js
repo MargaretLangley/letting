@@ -1,3 +1,7 @@
+$(document).ready(function() {
+  calculateTotal($(this).find('input.amount'));
+});
+
 $(function () {
    $('input.amount').keyup(function(){
       calculateTotal(this);

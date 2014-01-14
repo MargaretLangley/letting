@@ -14,15 +14,19 @@ module DB
     end
 
     def model_prepared
-      @model_to_assign = find_model(@klass).first_or_initialize
-      @model_to_assign.prepare
+      #@model_to_assign = find_model(@klass).first_or_initialize
+      @model_to_assign = @klass.new account_id: row.account_id,
+                                      on_date: row.on_date
       fail DB::NotIdempotent, import_not_idempotent_msg, caller \
         unless @model_to_assign.new_record?
     end
 
-    def find_model model_class
-      model_class.where account_id: row.account_id, on_date: row.on_date
-    end
+    # def find_model model_class
+    #   model_class.joins(:credits)
+    #              .where account_id: row.account_id,
+    #                     charge_id: row.charge_id,
+    #                     on_date: row.on_date
+    # end
 
     def model_assignment
       @amount.deposit row.amount
@@ -31,22 +35,18 @@ module DB
     end
 
     def model_assignment_credits
-      raise DB::ChargeTypeUnknown, charge_type_unknown, caller \
-        unless find_credits_with_charge_type @model_to_assign.credits, row.charge_type
-
-      select_credits_with_charge_type(@model_to_assign.credits, row.charge_type).each do |credit|
-        credit.amount = (@amount.max_withdrawal credit.pay_off_debit).round(2)
-      end
+      # raise DB::ChargeTypeUnknown, charge_type_unknown, caller \
+      #   unless find_credits_with_charge_type @model_to_assign.credits, row.charge_type
+      @model_to_assign.credits.build account_id: row.account_id,
+                                         charge_id: row.charge_id,
+                                         on_date: row.on_date,
+                                         amount: row.amount
     end
 
     private
 
     def find_credits_with_charge_type credits, charge_type
       credits.find { |credit| credit.charge_type == charge_type }
-    end
-
-    def select_credits_with_charge_type credits, charge_type
-      credits.select { |credit| credit.charge_type == charge_type }
     end
 
     def charge_type_unknown

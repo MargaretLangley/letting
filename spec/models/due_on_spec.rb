@@ -22,8 +22,8 @@ describe DueOn do
         expect(due_on).to_not be_valid
       end
 
-      it 'not negative' do
-        due_on.day = -3
+      it 'greater than 0' do
+        due_on.day = 0
         expect(due_on).to_not be_valid
       end
 
@@ -87,28 +87,28 @@ describe DueOn do
 
   context 'methods' do
 
-    context '#per_month?' do
+    context '#monthly?' do
       it 'recognises when not per month' do
         due_on.day = 25
         due_on.month = 3
-        expect(due_on).to_not be_per_month
+        expect(due_on).to_not be_monthly
       end
       it 'recognises per month' do
         due_on.day = 25
         due_on.month = -1
-        expect(due_on).to be_per_month
+        expect(due_on).to be_monthly
       end
     end
 
     context '#between?' do
-      before { Timecop.travel(Date.new(2013, 1, 31)) }
+      before { Timecop.travel Date.new 2013, 1, 31 }
       after { Timecop.return }
 
-      it 'true' do
+      it 'true range covers due_on' do
         expect(due_on.between? charge_due_on_date).to be_true
       end
 
-      it 'false' do
+      it 'false range misses due_on' do
         expect(due_on.between? no_charge_on_dates).to be_false
       end
 
@@ -121,22 +121,28 @@ describe DueOn do
       end
     end
 
+    context '#clear_up_form' do
+      it 'is pending' do
+        pending
+      end
+    end
+
     context '#makedate' do
       it 'this year before charge on_date' do
-        Timecop.travel(Date.new(2014, 3, 25))
+        Timecop.travel Date.new 2014, 3, 25
         expect(due_on.make_date).to eq Date.new(2014, 3, 25)
         Timecop.return
       end
 
       it 'next year after charge on_date' do
-        Timecop.travel(Date.new(2014, 3, 26))
+        Timecop.travel Date.new 2014, 3, 26
         expect(due_on.make_date).to eq Date.new(2015, 3, 25)
         Timecop.return
       end
 
       context 'year set' do
         it 'uses the set year' do
-          Timecop.travel(Date.new(2014, 3, 25))
+          Timecop.travel Date.new 2014, 3, 25
           due_on.year = 2015
           expect(due_on.make_date).to eq Date.new(2015, 3, 25)
           Timecop.return
@@ -145,10 +151,10 @@ describe DueOn do
     end
 
     context '#empty?' do
-      it 'valid not empty' do
+      it 'with attributes not empty' do
         expect(due_on).to_not be_empty
       end
-      it 'no day or month is empty' do
+      it 'without attributes empty' do
         due_on.day = nil
         due_on.month = nil
         expect(due_on).to be_empty

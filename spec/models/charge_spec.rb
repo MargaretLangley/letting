@@ -31,18 +31,6 @@ describe Charge do
         charge.due_ons.destroy_all
         expect(charge).to_not be_valid
       end
-
-      context 'due_ons_size' do
-        it 'not valid one over limit' do
-          (1..12).each { charge.due_ons.build day: 25, month: 3 }
-          expect(charge).to_not be_valid
-        end
-        it 'valid if marked for destruction' do
-          (1..12).each { charge.due_ons.build day: 25, month: 3 }
-          charge.due_ons.first.mark_for_destruction
-          expect(charge).to be_valid
-        end
-      end
     end
     context 'amount' do
       it 'is a number' do
@@ -59,77 +47,39 @@ describe Charge do
   context 'methods' do
 
     context 'charging' do
-      before { Timecop.travel(Date.new(2013, 1, 31)) }
+      before do
+        Timecop.travel(Date.new(2013, 1, 31))
+        charge.due_ons.new due_on_attributes_1 charge_id: 1
+      end
       after  { Timecop.return }
 
-      context '#first_free_chargeable?' do
-        context 'in charge_range' do
-          it 'true' do
-            expect(charge.first_free_chargeable? date_when_charged).to be_true
-          end
-
-          it 'false' do
-            expect(charge.first_free_chargeable? dates_not_charged_on).to be_false
-          end
-
-          it 'false when already debited' do
-            charge.debits.build charge_id: charge.id,
-                                on_date: Date.new(2013, 3, 25),
-                                amount: charge.amount
-            expect(charge.first_free_chargeable? date_when_charged).to be_false
-          end
-        end
-        context 'out of charge_range' do
-          it 'false' do
-            charge.end_date = '2002-1-1'
-            expect(charge.first_free_chargeable? date_when_charged).to be_false
-          end
-        end
-      end
-
-      context '#first_free_chargeable' do
+      context '#next_chargeable' do
         it 'if charge between dates'  do
-          expect(charge.first_free_chargeable(date_when_charged))
-            .to eq ChargeableInfo.from_charge chargeable_attributes
+          expect(charge.next_chargeable(Date.new(2013, 3, 25)..Date.new(2016, 3, 25)))
+            .to eq [chargeable(Date.new(2013,3,25)),
+                    chargeable(Date.new(2013,9,30))]
+        end
+
+        it 'ignores charges which have debits'  do
+          charge.debits.build debit_attributes on_date: '2013-3-25'
+          expect(charge.next_chargeable(Date.new(2013, 3, 25)..Date.new(2016, 3, 25)))
+            .to eq [chargeable(Date.new(2013,9,30))]
         end
 
         it 'return nil if not' do
-          expect(charge.first_free_chargeable(dates_not_charged_on))
-            .to be_nil
+          expect(charge.next_chargeable(dates_not_charged_on))
+            .to eq []
         end
       end
 
-      context '#first_chargeable?' do
-        context 'in charge_range' do
-          it 'true in charge_range' do
-            expect(charge.first_free_chargeable? date_when_charged).to be_true
-          end
-
-          it 'false out charge_range' do
-            expect(charge.first_free_chargeable? dates_not_charged_on).to be_false
-          end
-        end
-      end
-
-      context '#first_chargeable' do
-        it 'if charge between dates'  do
-          expect(charge.first_chargeable(date_when_charged))
-            .to eq ChargeableInfo.from_charge chargeable_attributes
-        end
-
-        it 'return nil if not' do
-          expect(charge.first_chargeable(dates_not_charged_on))
-            .to be_nil
-        end
-      end
-
-      def date_when_charged
-        Date.new(2013, 3, 25) .. Date.new(2013, 3, 25)
+      def chargeable date
+        ChargeableInfo.from_charge(chargeable_attributes on_date: date)
       end
 
       def dates_not_charged_on
-        Date.new(2013, 2, 1) .. Date.new(2013, 3, 24)
+        Date.new(2013, 2, 1)..Date.new(2013, 3, 24)
       end
+
     end
 
     it '#prepare creates children' do

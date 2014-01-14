@@ -8,29 +8,15 @@ describe CreditDecorator do
     expect(credit_dec.amount).to eq '88.08'
   end
 
-  context '#prepare_for_form' do
-    it 'nil amount set to pay off the debit' do
-      credit_dec.stub(:pay_off_debit).and_return 40
-      credit_dec.amount = nil
+  context 'owing' do
 
-      credit_dec.prepare_for_form
-      amount_set_to_pay_off_debit
+    it 'none' do
+      expect(credit_dec.owing).to eq 0
     end
 
-    it 'none 0 amount unchanged' do
-      credit_dec.stub(:pay_off_debit).and_return 40
-      credit_dec.amount = 80
-
-      credit_dec.prepare_for_form
-      amount_is_unchanged
+    it 'sums debit' do
+      Debit.create! debit_attributes amount: 100.08
+      expect(credit_dec.owing).to eq 100.08
     end
-  end
-
-  def amount_set_to_pay_off_debit
-    expect(credit_dec.amount).to eq '40.00'
-  end
-
-  def amount_is_unchanged
-    expect(credit_dec.amount).to eq '80.00'
   end
 end

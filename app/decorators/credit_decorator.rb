@@ -10,18 +10,17 @@ class CreditDecorator
   end
 
   def prepare_for_form
-    self.amount = pay_off_debit if amount.blank?
   end
 
   def amount
     number_with_precision(@source.amount,precision: 2)
   end
 
-  private
-
-  def pay_off_debit
-    @source.pay_off_debit
+  def owing
+    Debit.available(charge_id).to_a.sum &:outstanding
   end
+
+  private
 
   def debit
     @source.debit
