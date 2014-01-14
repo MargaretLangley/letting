@@ -9,7 +9,6 @@
 
 <div class =  "insert" >
 	<%= render file: 'invoice_texts/invoice_texts_p2/insert1.txt' %>
-</div>
 
 <div class =  "widemargin" >
    To  
@@ -20,9 +19,7 @@
     <% end %>
 </div>
 
-<div class =  "insert" >
 	<%= render file: 'invoice_texts/invoice_texts_p2/insert2.txt' %>
-</div> 
 <div class =  "widemargin" >  
 	This notice is given in respect of
 	<br>
@@ -31,26 +28,20 @@
 </p>
 <p>
 
-<div class =  "insert" >
 	<%= render file: 'invoice_texts/invoice_texts_p2/insert3.txt' %>
-</div>
 <div class =  "widemargin" >
-	It requires you to pay rent
+	It requires you to pay rent of <%= due_object %> on <%= date_object %>
 </div> 
 <br>
-<div class =  "insert" >
 	<%= render file: 'invoice_texts/invoice_texts_p2/insert4.txt' %>
-</div> 
 <div class =  "widemargin" >  
-	The rent is payable in respect of the period 
+	The rent is payable in respect of the period <%= date_object %>
 </div> 
 <br>
 
 <%= render 'invoice_page2/print_payto_agent_address' %>
 
-<div class =  "insert" >
 	<%= render file: 'invoice_texts/invoice_texts_p2/insert7.txt' %>
-</div> 
 
 <div class =  "widemargin" >     
  This notice is given by <%= object.entities.full_name %>

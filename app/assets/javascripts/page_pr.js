@@ -1,5 +1,0 @@
-function printpage()
-	{
-	window.print();
-	}
-

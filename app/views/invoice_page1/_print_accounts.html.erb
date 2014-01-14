@@ -30,7 +30,9 @@
                  Arrears
                <% else %>
                   <%= item.charge_type %>
-                   <%= item.charge_type %>
+                  <%= item.account_id %>
+                  <%= item.account.charges[0].due_in %>
+                  <%= item.account.charges[0].due_ons[0].month %>
                 <% end %>
               </td>
               <td class='toright'>
