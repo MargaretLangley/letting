@@ -9,6 +9,18 @@ describe Account do
     before { Timecop.travel(Date.new(2013, 1, 31)) }
     after { Timecop.return }
 
+    context 'calculated balance' do
+
+      it 'ignores entires after date' do
+        account = account_and_charge_new
+        account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
+        account.debits.push debit_new on_date: '25/3/2012', amount: 10.00
+        account.credits.push credit_new on_date: '25/4/2012', amount: 5.50
+        binding.pry
+        expect(account.balance '24/4/2012').to eq 20.50
+      end
+    end
+
     context '#prepare_debits' do
       it 'generates debits when charges due' do
         account = account_and_charge_new charge_attributes: { id: 3 }

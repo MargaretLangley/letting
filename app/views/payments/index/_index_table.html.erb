@@ -13,6 +13,9 @@
       <th class='alnright'>
         Amount
       </th>
+      <th class='alnright'>
+        Balance
+      </th>
       <th>
         Actions
       </th>
@@ -28,19 +31,24 @@
     </tr>
   </tfoot>
   <tbody>
-    <% payments.each do |payment| %>
+    <% payments.each do |payment|
+      payment_dec = PaymentIndexDecorator.new payment
+      %>
     <tr>
       <td class='alnright'>
-        <%= payment.account.property.human_ref %>
+        <%= payment_dec.property_ref %>
       </td>
       <td>
-        <%= payment.account.property.entities.full_name %>
+        <%= payment_dec.full_name %>
       </td>
       <td>
-        <%= l payment.on_date, format: :human %>
+        <%= payment_dec.on_date %>
       </td>
       <td class='alnright'>
-        <%= number_to_currency payment.amount %>
+        <%= payment_dec.amount %>
+      </td>
+      <td class='alnright'>
+        <%= payment_dec.balance %>
       </td>
       <td>
         <%= link_to 'Edit', edit_payment_path(payment) %> |

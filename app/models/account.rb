@@ -53,6 +53,12 @@ class Account < ActiveRecord::Base
     charges.clear_up_form
   end
 
+  def balance date
+    date ||= Date.current
+    credits.select { |c| c.on_date <= date }.map { |c| c.amount }.inject(0,:+) -
+    debits.select { |d| d.on_date <= date }.map { |d| d.amount }.inject(0,:+)
+  end
+
   def self.by_human_ref human_ref
     Account.joins(:property).find_by(properties: { human_ref: human_ref })
   end
