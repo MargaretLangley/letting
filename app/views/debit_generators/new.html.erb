@@ -1,11 +1,10 @@
-<div class = 'setleftmargin'>
-	<h2 class="mainTitle">New Invoice</h2>
+<h2 class="mainTitle">New Invoice</h2>
 
-	<%= form_for @debit_generator do |debit_gen_form| %>
-	  <%= render 'shared/errors', object: @debit_generator %>
-	  <fieldset id='debit_generator' class='shell' style='position: relative;'>
-	    <%= render 'search_chargeable_properties', debit_gen_form: debit_gen_form %>
-	    <%= render 'chargeable_properties', debit_gen_form: debit_gen_form, debit_generator: @debit_generator %>
-	  </fieldset>
-	<% end %>
-</div>
+<%= form_for @debit_generator do |debit_gen_form| %>
+  <%= render 'shared/errors', object: @debit_generator %>
+  <fieldset id='debit_generator' class='shell' style='position: relative;'>
+    <%= render 'search_chargeable_properties', debit_gen_form: debit_gen_form %>
+    <%= render 'chargeable_properties', debit_gen_form: debit_gen_form, debit_generator: @debit_generator %>
+  </fieldset>
+<% end %>
+git 
