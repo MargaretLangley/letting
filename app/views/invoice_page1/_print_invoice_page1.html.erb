@@ -1,6 +1,6 @@
 
-<div class = 'print_only'>
-  <div class = 'margwide'>
+<div class='print_only'>
+  <div class='margwide'>
     <%= render 'invoice_page1/print_invoice_heading' %>
     <%= render partial: 'invoice_page1/print_ref_date', locals: {property_object: property_object, date_object: date_object} %>
     <%= render 'invoice_page1/print_billing_profile', object: property_object %>
@@ -13,4 +13,3 @@
     <%= render 'invoice_page1/print_short_accounts', items: AccountDecorator.new(property_object.account).abbrev_items %>
   </div>
 </div>
- 
