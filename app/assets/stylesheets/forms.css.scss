@@ -5,7 +5,7 @@
 .mainTitle{
  /*clearly need something*/
 }
-.blank_slate_parent{
+.blank-slate-parent{
   position: relative;
 }
 
@@ -31,7 +31,7 @@
   width: 50%;
 }
 
-.blank_slate_overlay{
+.blank-slate-overlay{
   @include overlay-sign;
   top: 30%;
   left: 40%;

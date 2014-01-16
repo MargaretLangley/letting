@@ -10,21 +10,18 @@
       </fieldset>
     </div>
 
-    <div class='blank_slate_parent'>
-      <div id='blank_slate' class='js-togglable blank_slate_overlay'>
-        <%= t('instruction.properties.billing') %>
-      </div>
-
+    <div class='blank-slate-parent'>
       <h3>Agent</h3>
 
-      <div class='js-togglable'>
-         <%= render'billing_no_agent' %>
+      <div class='js-togglable js-unchecked'>
+        <div class='blank-slate-overlay'>
+          <%= t('instruction.properties.billing') %>
+        </div>
+        <%= render'billing_no_agent' %>
       </div>
 
-      <div class='js-togglable revealable' id = "agent_entity">
+      <div class='js-togglable js-checked revealable'>
         <%= render 'shared/entities', f: b, entitieable: billing_profile %>
-      </div>
-      <div class='js-togglable revealable' id = "agent_address">
         <%= render 'shared/address', f: b, parent: 'property_billing_profile' %>
       </div>
     </div>
