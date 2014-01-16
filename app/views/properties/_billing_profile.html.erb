@@ -1,29 +1,28 @@
 <%= f.fields_for :billing_profile do |b| %>
-<fieldset id='billing_profile' class='shell' style='position: relative;'>
-  <div class='js-toggle-selection'>
+<fieldset id='billing_profile' class='shell js-toggle-selection'>
+  <h3>BILLING ADDRESS</h3>
+  <fieldset class='grid'>
+    <div class='col-1-12'>
+      <%= b.check_box :use_profile, class: 'js-checkbox-toggle' %>
+    </div>
+    <div class='col-1-8'>
+      <%= b.label :use_profile, 'Use Agent' %>
+    </div>
+  </fieldset>
 
-    <div>
-      <h3>BILLING ADDRESS</h3>
-      <fieldset class='minimal'>
-        <%= b.check_box :use_profile, class: 'js-checkbox-toggle' %>
-        <%= b.label :use_profile, 'Use Agent' %>
-      </fieldset>
+  <div class='blank-slate-parent'>
+    <h3>Agent</h3>
+
+    <div class='js-togglable js-unchecked'>
+      <div class='blank-slate-overlay'>
+        <%= t('instruction.properties.billing') %>
+      </div>
+      <%= render'billing_no_agent' %>
     </div>
 
-    <div class='blank-slate-parent'>
-      <h3>Agent</h3>
-
-      <div class='js-togglable js-unchecked'>
-        <div class='blank-slate-overlay'>
-          <%= t('instruction.properties.billing') %>
-        </div>
-        <%= render'billing_no_agent' %>
-      </div>
-
-      <div class='js-togglable js-checked revealable'>
-        <%= render 'shared/entities', f: b, entitieable: billing_profile %>
-        <%= render 'shared/address', f: b, parent: 'property_billing_profile' %>
-      </div>
+    <div class='js-togglable js-checked revealable'>
+      <%= render 'shared/entities', f: b, entitieable: billing_profile %>
+      <%= render 'shared/address', f: b, parent: 'property_billing_profile' %>
     </div>
   </div>
 </fieldset>
