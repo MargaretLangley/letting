@@ -7,7 +7,7 @@
 
 /* FLASHES */
 
-.flash {
+.flash{
   color: $primary-text-color;
   border-radius: 4px;
   padding: 2% 0% 2% 3%;
@@ -15,18 +15,18 @@
   text-align: center;
   box-shadow: #ffc 0 0 4px;
 
-  &.notice {
+  &.notice{
     background-color: $flash-notice-color;
   }
 
-  &.alert {
+  &.alert{
     background-color: $flash-alert-color;
   }
 }
 
 /* ERRORS */
 
-section#errors {
+section#errors{
   margin: 1em 0;
   padding: 1em;
   background: $errors-background-color;
@@ -38,13 +38,13 @@ section#errors {
     font-size: 1.25em;
   }
 
-  h3 {
+  h3{
     font-size: 1em;
     margin: .5em 0;
     font-weight: bold;
   }
 }
 
-.important-text {
+.important-text{
   font-weight: bold;
 }

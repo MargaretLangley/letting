@@ -2,17 +2,15 @@
 
 @import "colors";
 
-.mainTitle
-{
+.mainTitle{
  /*clearly need something*/
 }
-.blank_slate_parent
-{
+.blank_slate_parent{
   position: relative;
 }
 
 
-@mixin overlay-sign {
+@mixin overlay-sign{
   position: absolute;
   font-size:1.4em;
   text-align: left;
@@ -25,7 +23,7 @@
   border-radius: 12px;
 }
 
-#popup {
+#popup{
   @include overlay-sign;
   display: none;
   top: 0%;
@@ -33,56 +31,55 @@
   width: 50%;
 }
 
-.blank_slate_overlay
-{
+.blank_slate_overlay{
   @include overlay-sign;
   top: 30%;
   left: 40%;
  }
 
-a.disabled {
+a.disabled{
   opacity: 0.5;
   pointer-events: none;
   cursor: default;
 }
 
-@mixin top {
+@mixin top{
   margin-top: 1.5%;
   border-top: 1px solid $background-filler;
 }
 
-.top {
+.top{
   @include top;
 }
 
-fieldset {
+fieldset{
   background-color: $fieldset-color;
   border: 0;
   &.top {
     @include top;
   }
 
-  &.shell  {
+  &.shell{
     margin: 0 0 2% 0;
     padding: 3% 4%;
     box-shadow: #aaa 0 0 8px;
   }
 
-  &.minimal {
+  &.minimal{
     border: none;
     padding: 0;
     margin-bottom: 0;
   }
 
-  h3 {
+  h3{
     /*margin-top: 0;*/
   }
 
-  .field {
+  .field{
     margin-bottom: 1.5%;
   }
 
-  .field.require label {
+  .field.require label{
       font-weight: bold;
       &:after {
         content: ' *';
@@ -114,19 +111,19 @@ fieldset {
       }
   }
 
-  .field.submit {
+  .field.submit{
     display: inline-block;
     float: right;
     width: 68%;
     white-space: nowrap;
   }
 
-  .alternative-choice {
+  .alternative-choice{
     white-space: nowrap;
   }
 
   input,
-  textarea {
+  textarea{
     font-size:     1em;
     padding:       4% 1% 4% 1%;
     border-radius: 4px;
@@ -135,19 +132,23 @@ fieldset {
     width: 90%;
   }
 
-  div.field_with_errors {
+  div.field_with_errors{
     label {
       color: $errors-text-color;
     }
-    input, textarea {
+    input, textarea{
       background: $errors-background-color;
     }
   }
 
-  p {
-      input { display: inline-block; }
-      a.button { padding: 10px 15px; }
+  p{
+    input{
+      display: inline-block;
     }
+    a.button{
+      padding: 10px 15px;
+    }
+  }
 }
 
 @mixin button-base {
@@ -194,14 +195,14 @@ input[type="submit"] {
   }
 }
 
- a.go {
+ a.go{
   @include small-button-base;
     &:hover {
     text-decoration: underline;
   }
 }
 
- a.remove-fields, a.hide-link, a.destroy-link {
+ a.remove-fields, a.hide-link, a.destroy-link{
   @include button-base;
   @include small-button-base;
   float:right;
@@ -211,26 +212,24 @@ input[type="submit"] {
 }
 
 
-.revealable, .hidden {
+.revealable, .hidden{
   display: none;
 }
 
-.simple
-{
+.simple{
    @include button-base;
    padding:2px 20px;
    border: 1px solid $subdued-color;
    float:right;
  }
 
- .search
- {
+ .search{
    width: 20%;
  }
 
 /*Turn Grid into Table*/
 
-@mixin body-cell {
+@mixin body-cell{
   color: $primary-text-color;
 }
 
@@ -240,37 +239,32 @@ input[type="submit"] {
   line-height: 5em;
 }
 
-.grid {
+.grid{
 
-  .grid-header
-  {
+  .grid-header{
     color: $secondary-text-color;
     border-bottom: 1px solid $background-filler;
   }
 
-  .cell
-  {
+  .cell{
     @include body-cell;
     @include vertical-align-hack;
   }
 
-  .nested-element
-  {
+  .nested-element{
     margin-left: 1em;
   }
 
-  .pick-out
-  {
+  .pick-out{
     background-color: lighten($secondary-background-color, 47%);
   }
 
-  input[readonly='readonly']
-  {
+  input[readonly='readonly']{
     color:  $primary-text-color;
     background-color: Gainsboro;
   }
 }
 
-.number {
+.number{
   text-align: right;
 }

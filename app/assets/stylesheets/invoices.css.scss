@@ -1,7 +1,7 @@
 @import "colors";
 
 /*Used in Invoice for both screen and print
-where print requirements hidden from screen and 
+where print requirements hidden from screen and
 screen requirements hidden from print*/
 
 @media all{
@@ -38,16 +38,16 @@ screen requirements hidden from print*/
   }
 
   .sissors{
-     display: none;
+    display: none;
   }
 
-  @mixin header-object {
+  @mixin header-object{
     color: $print-background-white;
     background-color: $secondary-background-color;
   }
 
   .h1print{
-     display: none;
+    display: none;
   }
 
   .small_line_height{
@@ -56,7 +56,7 @@ screen requirements hidden from print*/
 }
 
 @media print{
- 
+
   body{
     background: $print-background-white;
     color: $primary-text-color;
@@ -65,21 +65,20 @@ screen requirements hidden from print*/
     margin-top: 0cm;
     margin-left: 0.0cm;
     margin-right: 0.20cm;
-   }
+  }
 
-  div.page
-  {
+  div.page{
     page-break-after: always;
     page-break-inside: avoid;
   }
 
-.margwide{
+  .margwide{
     margin-left: 0.80cm;
   }
 
 /* This calls new page for printer */
 
-  h2{ 
+  h2{
     break-before: always;
   }
 
@@ -101,45 +100,45 @@ screen requirements hidden from print*/
   }
 
   .col-1-3{
-  font-weight :bold;
-  width: 33.333333333333%;
-  float:left;
+    font-weight :bold;
+    width: 33.333333333333%;
+    float:left;
   }
 
   .col-thin{
-   width: 20%;
+    width: 20%;
   }
 
   .col-wide{
-   width:40%;
+    width:40%;
   }
 
   .shell{
-     display: none;
-     width: 5px;
-   }
-
-  .floatleft{
-   }
-
-  .boldfloat{
-     font-weight: bold;
+    display: none;
+    width: 5px;
   }
 
- .blankright{
-     margin-right: 40px;
+  .floatleft{
+  }
+
+  .boldfloat{
+    font-weight: bold;
+  }
+
+  .blankright{
+    margin-right: 40px;
   }
 
   .showbox{
-     width: 90%;
+    width: 90%;
   }
 
   .red_notice{
-  display: none;
+    display: none;
   }
 
-   button, header, footer, .screen_only, .search, .floatright{
-   display: none;
+  button, header, footer, .screen_only, .search, .floatright{
+    display: none;
   }
 
 /* Charges print table*/
@@ -151,7 +150,7 @@ screen requirements hidden from print*/
     padding: 0;
     margin: 50;
     lineheight: 90%;
-   }
+  }
 
   table th{
     padding: 0;
@@ -159,14 +158,13 @@ screen requirements hidden from print*/
     margin-right: 20px;
   }
 
-    table td{
+  table td{
     padding: 0;
     margin-right: 20px;
     font-size: 14px;
   }
 
-  table .toright
-  {
+  table .toright{
     text-align: right;
   }
 
@@ -174,7 +172,7 @@ screen requirements hidden from print*/
     font-size: 30px;
   }
 
- .medfont{
+  .medfont{
     font-size: 12px;
   }
 
@@ -201,7 +199,7 @@ screen requirements hidden from print*/
     font-size: 10px;
     margin-left: 80px
   }
-  
+
   .insert{
     font-size: 8px;
     margin-left: 5px
@@ -211,6 +209,4 @@ screen requirements hidden from print*/
     font-size: 12px;
     margin-left: 80px
   }
-
-
 }

@@ -63,7 +63,7 @@
       background-color: $errors-head-background-color;
    }
 
-  footer#page-footer {
+  footer#page-footer{
     color: $secondary-text-color;
     background-color: $primary-background-color;
     padding: 0.5em 0.5em;
@@ -77,7 +77,7 @@
       color: $primary-link-color;
       text-decoration: none;
 
-      &:hover {
+      &:hover{
         text-decoration: underline;
       }
     }
@@ -95,12 +95,13 @@
   }
 
   .showbox{
-   background-color: #ddd;
-   border:1px solid #666;
-   border-radius: 12px;
-   padding: 0 35px;
-   margin-top: 10px;
-   margin-bottom: 3px;
+    background-color: #ddd;
+    border:1px solid #666;
+    border-radius: 12px;
+    padding: 0 35px;
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-bottom: 3px;
   }
 
   @mixin leftfloat{
@@ -129,5 +130,4 @@
   .blankright{
      margin-right: 20px;
   }
-
 }

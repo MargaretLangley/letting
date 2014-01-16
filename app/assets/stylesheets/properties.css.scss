@@ -3,24 +3,24 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "colors";
 
-ul.ui-autocomplete {
+ul.ui-autocomplete{
   position: absolute;
   list-style: none;
   margin: 0;
   padding: 0;
   border: solid 1px $subdued-color;
   cursor: default;
-  li {
+  li{
     background-color: $primary-background-color;
     border-top: solid 1px #DDD;
     margin: 0;
     padding: 0;
-    a {
+    a{
       color: #000;
       display: block;
       padding: 3px;
     }
-    a.ui-state-hover, a.ui-state-active {
+    a.ui-state-hover, a.ui-state-active{
       background-color: $secondary-background-color;
     }
   }
