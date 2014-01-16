@@ -13,17 +13,19 @@ $(function () {
     event.preventDefault();
   });
 
-  // charges - due-on toggling
-  // clears the input each time a due-on is switched from monthly to on-date
-  $('.charges').on('toggleEventHandler', function() {
+
+  // charges-due-on toggling
+
+  // clears the input when switch from every-month to date
+  $('.js-charges').on('toggleEventHandler', function() {
     $(this).find(':input').val('');
   });
 
-
-  // Minus one means every month
-  $('.every-month').on('change', function() {
+  // input -1 when switch from date to every-month
+  $('.js-every-month').on('change', function() {
     $(this).next('input[type=hidden]').val('-1');
   });
+
 
   // hiding a panel when button clicked
   // this could be used elsewhere in program
