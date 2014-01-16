@@ -1,52 +1,52 @@
 <%= render 'invoice_page2/print_p2_heading' %>
 
-<div class ="longlease">
+<div class='longlease'>
 	<%= render file: 'invoice_texts/invoice_texts_p2/long_lease_notice.txt' %> <%= object.human_ref %>
 </div>
 <p>
 </p>
 
-
-<div class =  "insert" >
+<div class='insert'>
 	<%= render file: 'invoice_texts/invoice_texts_p2/insert1.txt' %>
-
-<div class =  "widemargin" >
-   To  
-    <% if object.entities.any? %>
-        <% object.entities.each do |entity| %>
-	    	<%= render 'shared/show_entity', object: entity %>
-	   <% end %>
-    <% end %>
 </div>
 
-	<%= render file: 'invoice_texts/invoice_texts_p2/insert2.txt' %>
-<div class =  "widemargin" >  
+<div class='widemargin'>
+ To
+  <% if object.entities.any? %>
+      <% object.entities.each do |entity| %>
+    	<%= render 'shared/show_entity', object: entity %>
+   <% end %>
+  <% end %>
+</div>
+
+<%= render file: 'invoice_texts/invoice_texts_p2/insert2.txt' %>
+<div class='widemargin'>
 	This notice is given in respect of
 	<br>
 	<%= render 'shared/show_billing_address', object: object %>
-</div> 
+</div>
 </p>
 <p>
 
-	<%= render file: 'invoice_texts/invoice_texts_p2/insert3.txt' %>
-<div class =  "widemargin" >
+<%= render file: 'invoice_texts/invoice_texts_p2/insert3.txt' %>
+<div class='widemargin'>
 	It requires you to pay rent of <%= due_object %> on <%= date_object %>
-</div> 
+</div>
 <br>
 	<%= render file: 'invoice_texts/invoice_texts_p2/insert4.txt' %>
-<div class =  "widemargin" >  
+<div class='widemargin'>
 	The rent is payable in respect of the period <%= date_object %>
-</div> 
+</div>
 <br>
 
 <%= render 'invoice_page2/print_payto_agent_address' %>
 
-	<%= render file: 'invoice_texts/invoice_texts_p2/insert7.txt' %>
+<%= render file: 'invoice_texts/invoice_texts_p2/insert7.txt' %>
 
-<div class =  "widemargin" >     
+<div class='widemargin'>
  This notice is given by <%= object.entities.full_name %>
  <br>
  	<%= render 'shared/show_1_line_address', object: object.client %>
-</div> 
+</div>
 
 <%= render 'invoice_page2/print_notices_notes' %>
