@@ -23,7 +23,7 @@ screen requirements hidden from print*/
   }
 }
 
-@media screen{
+@media screen {
 
   .print_only{
     display: none;
@@ -65,18 +65,21 @@ screen requirements hidden from print*/
     margin-top: 0cm;
     margin-left: 0.0cm;
     margin-right: 0.20cm;
+   }
+
+  .margwide{
+    margin-left: 0.80cm;
   }
+
+  /* This calls new page for printer */
 
   div.page{
     page-break-after: always;
     page-break-inside: avoid;
   }
 
-  .margwide{
-    margin-left: 0.80cm;
-  }
 
-/* This calls new page for printer */
+  /* This calls new page for printer */
 
   h2{
     break-before: always;
@@ -125,7 +128,7 @@ screen requirements hidden from print*/
     font-weight: bold;
   }
 
-  .blankright{
+ .blankright{
     margin-right: 40px;
   }
 
@@ -134,14 +137,14 @@ screen requirements hidden from print*/
   }
 
   .red_notice{
-    display: none;
+  display: none;
   }
 
   button, header, footer, .screen_only, .search, .floatright{
     display: none;
   }
 
-/* Charges print table*/
+  /* Charges print accounts table in invoice */
 
   table{
     width: 600px;
@@ -168,15 +171,17 @@ screen requirements hidden from print*/
     text-align: right;
   }
 
+  /* used for sissors line above return slip */
+
   .sissors{
     font-size: 30px;
   }
 
-  .medfont{
+ .medfont{
     font-size: 12px;
   }
 
-/* invoice page 2*/
+  /* invoice page 2*/
 
   .p2head{
     font-size: 12px;
@@ -189,11 +194,15 @@ screen requirements hidden from print*/
     text-align:center;
   }
 
+  /* longlease used for heading 'Notice to longleaseholders ....' */
+
   .longlease{
     font-size: 16px;
     font-weight: bold;
     text-align:center;
   }
+
+  /* note used for notes in lefthand margin */
 
   .note{
     font-size: 10px;
@@ -204,6 +213,8 @@ screen requirements hidden from print*/
     font-size: 8px;
     margin-left: 5px
   }
+
+  /* widemargin used to set addresses in correct position for envelope window */
 
   .widemargin{
     font-size: 12px;
