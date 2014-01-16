@@ -4,7 +4,7 @@
 where print requirements hidden from screen and 
 screen requirements hidden from print*/
 
-@media all{
+@media all {
 
   .h2print{
     text-align:center;
@@ -12,32 +12,32 @@ screen requirements hidden from print*/
     font-weight: bold;
   }
 
-  .inv_advice{
+  .inv_advice {
     font-size: 12px;
     font-weight: normal;
   }
 
-  .inv_advice_bold{
+  .inv_advice_bold {
     font-size: 12px;
     font-weight: bold;
   }
 }
 
-@media screen{
+@media screen {
 
-  .print_only{
+  .print_only {
     display: none;
   }
 
-  .inv_add{
+  .inv_add {
     display: none;
   }
 
-  .inv_bold{
+  .inv_bold {
     display: none;
   }
 
-  .sissors{
+  .sissors {
      display: none;
   }
 
@@ -46,18 +46,18 @@ screen requirements hidden from print*/
     background-color: $secondary-background-color;
   }
 
-  .h1print{
+  .h1print {
      display: none;
   }
 
-  .small_line_height{
+  .small_line_height {
     lineheight: 10%;
   }
 }
 
-@media print{
+@media print {
  
-  body{
+  body {
     background: $print-background-white;
     color: $primary-text-color;
     font-family: "Helvetica Neue", Helvetica, Arial;
@@ -67,84 +67,86 @@ screen requirements hidden from print*/
     margin-right: 0.20cm;
    }
 
-  div.page
-  {
-    page-break-after: always;
-    page-break-inside: avoid;
-  }
-
-.margwide{
+.margwide {
     margin-left: 0.80cm;
   }
 
 /* This calls new page for printer */
 
-  h2{ 
+  div.page {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+
+
+/* This calls new page for printer */
+
+  h2 { 
     break-before: always;
   }
 
-  .h1print{
+  .h1print {
     text-align:center;
     font-size: 20px;
     font-weight: bold;
     lineheight: 70%;
   }
 
-  .inv_add{
+  .inv_add {
     margin-left: 1.2cm;
     font-size: 12px;
   }
 
-  .inv_bold{
+  .inv_bold {
     font-size: 14px;
     font-weight: bold;
   }
 
-  .col-1-3{
+  .col-1-3 {
   font-weight :bold;
   width: 33.333333333333%;
   float:left;
   }
 
-  .col-thin{
+  .col-thin {
    width: 20%;
   }
 
-  .col-wide{
+  .col-wide {
    width:40%;
   }
 
-  .shell{
+  .shell {
      display: none;
      width: 5px;
    }
 
-  .floatleft{
+  .floatleft {
    }
 
-  .boldfloat{
+  .boldfloat {
      font-weight: bold;
   }
 
- .blankright{
+ .blankright {
      margin-right: 40px;
   }
 
-  .showbox{
+  .showbox {
      width: 90%;
   }
 
-  .red_notice{
+  .red_notice {
   display: none;
   }
 
-   button, header, footer, .screen_only, .search, .floatright{
+   button, header, footer, .screen_only, .search, .floatright {
    display: none;
   }
 
-/* Charges print table*/
+/* Charges print accounts table in invoice */
 
-  table{
+  table {
     width: 600px;
     border-collapse: collapse;
     text-align: left;
@@ -153,64 +155,70 @@ screen requirements hidden from print*/
     lineheight: 90%;
    }
 
-  table th{
+  table th {
     padding: 0;
     margin: 0;
     margin-right: 20px;
   }
 
-    table td{
+    table td {
     padding: 0;
     margin-right: 20px;
     font-size: 14px;
   }
 
-  table .toright
-  {
+  table .toright {
     text-align: right;
   }
 
-  .sissors{
+/* used for sissors line above return slip */
+
+  .sissors {
     font-size: 30px;
   }
 
- .medfont{
+ .medfont {
     font-size: 12px;
   }
 
 /* invoice page 2*/
 
-  .p2head{
+  .p2head {
     font-size: 12px;
     font-weight: bold;
     text-align:center;
   }
 
-  .actref{
+  .actref {
     font-size: 14px;
     text-align:center;
   }
 
-  .longlease{
+/* longlease used for heading 'Notice to longleaseholders ....' */
+
+  .longlease {
     font-size: 16px;
     font-weight: bold;
     text-align:center;
   }
 
-  .note{
+/* note used for notes in lefthand margin */
+
+  .note {
     font-size: 10px;
     margin-left: 80px
   }
   
-  .insert{
+  .insert {
     font-size: 8px;
     margin-left: 5px
   }
 
-  .widemargin{
+/* widemargin used to set addresses in correct position for envelope window */
+
+  .widemargin {
     font-size: 12px;
     margin-left: 80px
   }
-
 
 }
