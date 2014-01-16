@@ -29,7 +29,7 @@ $(function () {
 
   // hiding a panel when button clicked
   // this could be used elsewhere in program
-  $('.remove-fields').click(function(event) {
+  $('.js-remove-fields').click(function(event) {
     event.preventDefault();
     $(this).prev('input[type=hidden]').val('1');
     $(this).closest('.selection').slideToggle('fast');
