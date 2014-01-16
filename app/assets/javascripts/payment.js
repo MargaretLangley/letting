@@ -1,27 +1,27 @@
 $(document).ready(function() {
-  calculateTotal($(this).find('input.amount'));
+  calculateTotal($(this).find('.js-amount'));
 });
 
 $(function () {
-   $('input.amount').keyup(function(){
+   $('.js-amount').keyup(function(){
       calculateTotal(this);
   });
 
  $('#address').hover(function() {
-      $('#popup').show();
+      $('#js-popup').show();
   }, function() {
-      $('#popup').hide();
+      $('#js-popup').hide();
   });
 });
 
 function calculateTotal( src ) {
     var sum = 0,
-        tbl = $(src).closest('.totalizer');
-    tbl.find('input.amount').each(function( index, elem ) {
+        tbl = $(src).closest('.js-totalizer');
+    tbl.find('.js-amount').each(function( index, elem ) {
         var val = parseFloat($(elem).val());
         if( !isNaN( val ) ) {
             sum += val;
         }
     });
-    tbl.find('input.total').val(sum.toFixed(2));
+    tbl.find('.js-total').val(sum.toFixed(2));
 }
