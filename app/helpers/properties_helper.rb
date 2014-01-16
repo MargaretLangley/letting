@@ -20,6 +20,6 @@ module PropertiesHelper
   end
 
   def hide_field_on_start_by_entity_type record
-    record.company? ? 'toggleOnStart' : ''
+    record.company? ? 'js-toggle-on-start' : ''
   end
 end

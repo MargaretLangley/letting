@@ -7,14 +7,14 @@
   <%= debit_gen_form.submit 'Search', class: 'search' %>
   </div>
   <div class='col-1'>
-    <div class='toggle-selection'>
-    <div class='togglable'>
+    <div class='js-toggle-selection'>
+    <div class='js-togglable'>
       <h4>Search for new charges within the next 8 weeks
-        <a href='#' class='toggle toggle-event'> or choose dates</a>
+        <a href='#' class='js-toggle toggle-event'> or choose dates</a>
     </div>
-    <div class='togglable hidden'>
+    <div class='js-togglable hidden'>
       <h4>Search for new charges within choosen dates
-        <a href='#' class='toggle toggle-event'> or default to the next 8 weeks</a>
+        <a href='#' class='js-toggle toggle-event'> or default to the next 8 weeks</a>
       <div class="col-1-2">
         <%= debit_gen_form.label :start_date %>
         <%= debit_gen_form.date_field :start_date  %>

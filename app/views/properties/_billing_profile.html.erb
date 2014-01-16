@@ -1,30 +1,30 @@
 <%= f.fields_for :billing_profile do |b| %>
 <fieldset id='billing_profile' class='shell' style='position: relative;'>
-  <div class='toggle-selection'>
+  <div class='js-toggle-selection'>
 
     <div>
       <h3>BILLING ADDRESS</h3>
       <fieldset class='minimal'>
-        <%= b.check_box :use_profile, class: 'checkbox-toggle' %>
+        <%= b.check_box :use_profile, class: 'js-checkbox-toggle' %>
         <%= b.label :use_profile, 'Use Agent' %>
       </fieldset>
     </div>
 
     <div class='blank_slate_parent'>
-      <div id='blank_slate' class='togglable blank_slate_overlay'>
+      <div id='blank_slate' class='js-togglable blank_slate_overlay'>
         <%= t('instruction.properties.billing') %>
       </div>
 
       <h3>Agent</h3>
 
-      <div class='togglable'>
+      <div class='js-togglable'>
          <%= render'billing_no_agent' %>
       </div>
 
-      <div class='togglable revealable' id = "agent_entity">
+      <div class='js-togglable revealable' id = "agent_entity">
         <%= render 'shared/entities', f: b, entitieable: billing_profile %>
       </div>
-      <div class='togglable revealable' id = "agent_address">
+      <div class='js-togglable revealable' id = "agent_address">
         <%= render 'shared/address', f: b, parent: 'property_billing_profile' %>
       </div>
     </div>

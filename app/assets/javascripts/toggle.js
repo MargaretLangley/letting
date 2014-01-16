@@ -1,33 +1,33 @@
 $( document ).ready(function() {
 
   // current panel switch code
-  $('.toggle').click(function(event) {
+  $('.js-toggle').click(function(event) {
     event.preventDefault();
     doToggle($(this));
   });
 
-  $('.checkbox-toggle').click(function(event) {
+  $('.js-checkbox-toggle').click(function(event) {
     doToggle($(this));
   });
 
   function doToggle(toggle) {
-    var toggleSelection = toggle.closest('.toggle-selection');
+    var toggleSelection = toggle.closest('.js-toggle-selection');
     findTogglable(toggleSelection).slideToggle('fast');
     toggle.trigger('toggleEventHandler');
   }
 
   function findTogglable(element) {
-    return element.find('.togglable');
+    return element.find('.js-togglable');
   }
 
   function onWindowLoad() {
-    $('.toggleOnStart').toggle();
+    $('.js-toggle-on-start').toggle();
   }
 
-   // enity specific code - separated from the generic toggle code
+   // enity specific code - separated from the generic js-toggle code
    // by event handler.
-  $('.entity-event').on('toggleEventHandler', function() {
-    var toggleSelection = $(this).closest('.toggle-selection');
+  $('.js-entity-event').on('toggleEventHandler', function() {
+    var toggleSelection = $(this).closest('.js-toggle-selection');
     toggleSelection.find('.model_type').val($(this).data('model-type-to'));
   });
 
