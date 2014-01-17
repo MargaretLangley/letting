@@ -11,7 +11,7 @@
     </div>
 
     <div class='field text require'>
-       <%= f.label :client_ref, 'Client Ref' %>
+      <%= f.label :client_ref, 'Client Ref' %>
 
       <%= text_field_tag nil, "#{property.client.try(:human_ref)} #{property.client.try(:entities).try(:full_name)}", :id => 'property_client_ref',
         data: { autocomplete_source: Client.order(:human_ref).map { |t| { :label => "#{t.human_ref} #{t.entities.full_name}", :value => t.id } } } %>
