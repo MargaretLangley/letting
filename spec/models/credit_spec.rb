@@ -80,15 +80,15 @@ describe Credit do
       end
     end
 
-    context '#spendable' do
+    context '#outstanding' do
       it 'returns amount if nothing paid' do
-        expect(credit.spendable).to eq 88.08
+        expect(credit.outstanding).to eq 88.08
       end
 
       it 'multiple credits are added' do
         Debit.create! debit_attributes amount: 44.04
         credit.save!
-        expect(credit.spendable).to eq 44.04
+        expect(credit.outstanding).to eq 44.04
       end
     end
 

@@ -37,7 +37,7 @@ class Credit < ActiveRecord::Base
     self.mark_for_destruction if amount.nil? || amount.round(2) == 0
   end
 
-  def spendable
+  def outstanding
     amount - settled
   end
 
