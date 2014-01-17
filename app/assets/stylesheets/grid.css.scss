@@ -1,9 +1,10 @@
-/*
- Chris Coyier
- http://css-tricks.com/dont-overthink-it-grids/
+/*--------------------------------------------------*\
 
- Don't have compass so have explicit border-box
-*/
+  $GRID
+
+  Chris Coyier
+  http://css-tricks.com/dont-overthink-it-grids/
+\*--------------------------------------------------*/
 
 *, *:before, *:after{
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
