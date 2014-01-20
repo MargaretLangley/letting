@@ -1,7 +1,10 @@
 <article>
   <div class = 'showbox'>
     <h2>User ID:
-      <%= @user.id %><span class= 'floatright'><%= link_to 'Edit', edit_user_path(@user) %><span>
+      <%= @user.id %>
+      <nav class= 'floatright'>
+        <%= link_to 'Edit', edit_user_path(@user) %>
+      </nav>
     </h2>
     <p>
       <span class = 'boldfloat'>email:</span><%= @user.email %>

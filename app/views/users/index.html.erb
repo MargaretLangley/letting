@@ -33,9 +33,11 @@
         <% end %>
       </td>
       <td>
-        <%= link_to 'Edit', edit_user_path(user) %> |
-        <%= link_to 'View', user_path(user) %> |
-        <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <nav>
+          <%= link_to 'Edit', edit_user_path(user) %> |
+          <%= link_to 'View', user_path(user) %> |
+          <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+         </nav
       </td>
     </tr>
     <% end %>
