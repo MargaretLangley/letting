@@ -6,10 +6,6 @@
   http://css-tricks.com/dont-overthink-it-grids/
 \*--------------------------------------------------*/
 
-*, *:before, *:after{
-  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
- }
-
 @media screen{
 
   $pad: 2%;
