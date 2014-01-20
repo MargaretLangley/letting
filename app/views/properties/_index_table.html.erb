@@ -33,7 +33,7 @@
           <th>
             <div class = "screen_only" >
               Actions
-            </div>  
+            </div>
          </th>
         <% end %>
       </tr>
@@ -74,11 +74,11 @@
         </td>
         <% if show_actions %>
         <td>
-          <div class = "screen_only" >
+          <nav class = "screen_only" >
             <%= link_to 'Edit', edit_property_path(property.id) %> |
             <%= link_to 'View', property_path(property.id) %> |
             <%= link_to 'Delete', property, method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
-            </div>  
+           </nav>
         </td>
         <% end %>
       <% end %>

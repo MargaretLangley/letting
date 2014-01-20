@@ -5,13 +5,15 @@
   <div class = 'showbox'>
     <h2>Client ID:
       <%= @client.human_ref %>
-      <span class= 'floatright'><%= link_to 'Edit', edit_client_path(@client) %><span>
-      <span class= 'floatright'><%= link_to 'List', clients_path %><span>
+      <nav class= 'floatright'>
+        <%= link_to 'Edit', edit_client_path(@client) %>
+        <%= link_to 'List', clients_path %>
+      </nav>
     </h2>
 
     <p>
       <% @client.entities.each do |entity| %>
-        <span class= 'justbold'><%= heading entity %></span>  
+        <span class= 'justbold'><%= heading entity %></span>
         <span class= 'blankright'> <%= render 'shared/show_entity', object: entity %></span>
       <% end %>
     </p>
