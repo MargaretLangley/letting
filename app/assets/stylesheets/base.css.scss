@@ -1,0 +1,32 @@
+/*-----------------------------------------------------------*\
+
+   $BASE
+
+   Base rules are the defaults. They are almost exclusively
+   single element selectors. Essentially, a base style says
+   that whatever this element is on the page, it should look
+   like this.
+
+   I include normalize and then add my own base rules here.
+
+   SNOOK is against reset sheets - he prefers crafted resets.
+   However, I don't want to be left managing updates to the
+   reset sheet. By keeping a copy I can diff with any new
+   version.
+
+\*-----------------------------------------------------------*/
+
+@import "colors";
+
+/*------------------------------------------------------------------*\
+
+   $BASE
+
+\*------------------------------------------------------------------*/
+
+
+body{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: $primary-text-color;
+}
+
