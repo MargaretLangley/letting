@@ -1,47 +1,39 @@
 <div class = "screen_only" >
+	<h2>Invoice Batches</h2>
+	<p>
+	 <% invoice_on = Date.today %>
 
-	<div class = "setleftmargin" >
+		<%= invoice_on %>
 
-		<h2>Invoice Batches</h2>
-		<p>
-		 <% invoice_on = Date.today %>
-	
-			<%= invoice_on %> 
+	<p/>
+	<p>
 
-		<p/>
-		<p>
+	 	Note : Before printing ensure options:
+		<br>
+		Header & footer not set
+		<br>
+		Two-sided set
+	<p/>
+	<p>
+		<button><%= link_to 'Print Invoices', '#', class: 'print-window'%></button>
+	</p>
 
-		 	Note : Before printing ensure options:
-			<br>
-			Header & footer not set
-			<br>
-			Two-sided set
-		<p/>
-		<p>
-			<button><%= link_to 'Print Invoices', '#', class: 'print-window'%></button>
-		</p>	
+	<% search_string = DebitGenerator.last.search_string %>
 
-		<% search_string = DebitGenerator.last.search_string %>
-
-		Search String is <%= search_string %>
-	</div>
+	Search String is <%= search_string %>
 </div>
 
 <% DebitGenerator.last.debits.each do |debit| %>
 	<div class = "screen_only" >
-		<div class = "setleftmargin" >
-		   <br>
-		   <%= debit.account.property.human_ref %>
-		   <%= debit.charge_type %>
-		</div>
+		<br>
+	  <%= debit.account.property.human_ref %>
+	  <%= debit.charge_type %>
 	</div>
 	 <%= render partial: 'print_invoice', locals: {property_object: debit.account.property, date_object: invoice_on} %>
 <% end %>
 
 <div class = "screen_only" >
-	<div class = "setleftmargin" >
-		<p>
-		<%= render 'index_table', debit_generators: @debit_generators %>
-		</p>
-	</div>
+	<p>
+	<%= render 'index_table', debit_generators: @debit_generators %>
+	</p>
 </div>

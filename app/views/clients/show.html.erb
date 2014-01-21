@@ -1,33 +1,30 @@
-<article>
-  <div class = 'setleftmargin' >
-    <%= render 'clients/search' , path: clients_path, search_action: 'show', search_label: 'View Search'%>
-  </div>
-  <div class = 'showbox'>
-    <h2>Client ID:
-      <%= @client.human_ref %>
-      <nav class= 'floatright'>
-        <%= link_to 'Edit', edit_client_path(@client) %>
-        <%= link_to 'List', clients_path %>
-      </nav>
-    </h2>
+<%= render 'clients/search' , path: clients_path, search_action: 'show', search_label: 'View Search'%>
+<div class = 'showbox'>
+  <h2>Client ID:
+    <%= @client.human_ref %>
+    <nav class= 'floatright'>
+      <%= link_to 'Edit', edit_client_path(@client) %>
+      <%= link_to 'List', clients_path %>
+    </nav>
+  </h2>
 
-    <p>
-      <% @client.entities.each do |entity| %>
-        <span class= 'justbold'><%= heading entity %></span>
-        <span class= 'blankright'> <%= render 'shared/show_entity', object: entity %></span>
-      <% end %>
-    </p>
-    <p>
-      <h3>Address</h3>
-      <%= render 'shared/show_1_line_address', object: @client %>
-    </p>
-    <h3>Properties Owned</h3>
-    <% @client.properties.each do |property| %>
-      <%= property.human_ref %>
-      <%= render 'shared/show_1_line_address', object: property %>
+  <p>
+    <% @client.entities.each do |entity| %>
+      <span class= 'justbold'><%= heading entity %></span>
+      <span class= 'blankright'> <%= render 'shared/show_entity', object: entity %></span>
     <% end %>
-  </div>
-  <p class = 'setleftmargin'>
-    <button> <%= link_to 'Print This Page', '#', class: 'print-window'%></button>
   </p>
-</article>
+  <p>
+    <h3>Address</h3>
+    <%= render 'shared/show_1_line_address', object: @client %>
+  </p>
+  <h3>Properties Owned</h3>
+  <% @client.properties.each do |property| %>
+    <%= property.human_ref %>
+    <%= render 'shared/show_1_line_address', object: property %>
+  <% end %>
+</div>
+<p>
+  <button> <%= link_to 'Print This Page', '#', class: 'print-window'%></button>
+</p>
+

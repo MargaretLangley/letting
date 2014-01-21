@@ -10,10 +10,6 @@
     background: $primary-background-color;
   }
 
-  .setleftmargin{
-     margin-left:30px;
-  }
-
   @mixin header-object {
     color: $print-background-white;
     background-color: $secondary-background-color;
@@ -98,7 +94,6 @@
     border-radius: 12px;
     padding: 0 35px;
     margin-top: 10px;
-    margin-left: 30px;
     margin-bottom: 3px;
   }
 
