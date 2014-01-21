@@ -1,3 +1,14 @@
+
+/*---------------------------------------------------*\
+
+  $COLORS
+
+  Defined colors
+
+\*----------------------------------------------------*/
+
+
+
 $print-background-white: #FFFFFF;       // white
 $primary-background-color: #F8F8F8;    // off white
 $secondary-background-color: #237CBE;  // Light blue
@@ -15,3 +26,9 @@ $flash-notice-color: #DBFFDD;          // Pale Green
 $flash-alert-color:  #FFE1DE;          // Pink
 $accent-color: #FAFBFF;                // White
 $fieldset-color: lighten($secondary-background-color, 50%); // Egg shell Blue
+
+
+@mixin inverted-color {
+  color: $print-background-white;
+  background-color: $secondary-background-color;
+}

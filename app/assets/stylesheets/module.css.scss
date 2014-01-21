@@ -1,0 +1,24 @@
+
+
+@import "colors";
+
+
+/*----------------------------------------------------*\
+   $LINK
+\*----------------------------------------------------*/
+
+
+.in-text-link{
+  whitespace: nowrap;
+  text-decoration: none;
+  &:active,
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+
+a.inverted-link{
+  @include inverted-color;
+}
+

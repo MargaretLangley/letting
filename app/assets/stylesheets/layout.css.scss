@@ -6,15 +6,6 @@
 
 @media screen{
 
-  body{
-    background: $primary-background-color;
-  }
-
-  @mixin header-object {
-    color: $print-background-white;
-    background-color: $secondary-background-color;
-  }
-
    .small_line_height{
     lineheight: 10%;
   }
@@ -22,30 +13,7 @@
   header{
     width: 100%;
     height: 70px;
-    @include header-object;
-    nav {
-      padding: 1%;
-      a:link, a:visited {
-      @include header-object;
-      }
-    }
-
-    h1{
-      width: 50%;
-      float: left;
-    }
-
-    a.header{
-      @include header-object;
-      padding: 0px 10%;
-      text-decoration: none;
-      margin-left: 0;
-    }
-
-    a:hover,
-    a:active {
-      text-decoration: underline;
-    }
+    @include inverted-color;
   }
 
   .errorhead{
@@ -65,15 +33,6 @@
 
     p{
       text-align: center;
-    }
-
-    a{
-      color: $primary-link-color;
-      text-decoration: none;
-
-      &:hover{
-        text-decoration: underline;
-      }
     }
   }
 
@@ -123,4 +82,5 @@
   .blankright{
      margin-right: 20px;
   }
+
 }

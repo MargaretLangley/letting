@@ -13,6 +13,7 @@
  *= require base
  *= require grid
  *= require layout
+ *= require module
  *= require elements
  *= require lettings
  *= require properties

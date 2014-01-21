@@ -1,11 +1,17 @@
-<header class="header">
-    <h1><%= link_to 'Adams Lettings', root_path, class: 'header' %></h1>
-    <nav>
-      <% if current_user %>
-       Logged in as <%= current_user.email %>
-       <%= link_to 'Log Out', logout_path %>
-      <% else %>
-        <%= link_to 'Log In', login_path %>
-      <% end %>
-    </nav>
+<header>
+  <div class="grid outergrid">
+    <div class="col-3-4">
+      <h1><%= link_to 'Adams Lettings', root_path, class: 'in-text-link inverted-link' %></h1>
+    </div>
+    <div class="col-1-4">
+      <nav>
+        <% if current_user %>
+         <%= current_user.email %>
+         <%= link_to 'Log Out', logout_path, class: 'inverted-link'  %>
+        <% else %>
+          <%= link_to 'Log In', login_path, class: 'inverted-link'   %>
+        <% end %>
+      </nav>
+    </div>
+  </div>
 </header>
