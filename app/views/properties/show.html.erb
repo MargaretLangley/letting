@@ -1,7 +1,7 @@
 <article>
   <%= render 'properties/search', path: properties_path, search_action: 'show', search_label: 'View Search' %>
   <div class = 'showbox'>
-    <h2>Property Id: </span>
+    <h2>Property Id:
       <%= @property.human_ref %>
       <nav class= 'floatright'>
         <%= link_to 'Edit', edit_property_path(@property.id) %>
