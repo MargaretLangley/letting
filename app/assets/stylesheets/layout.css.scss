@@ -10,20 +10,20 @@
     lineheight: 10%;
   }
 
+
+
+  /*------------------------------------------------*\
+
+    $PAGE
+
+  \*------------------------------------------------*/
+
   header{
     width: 100%;
     height: 70px;
     @include inverted-color;
   }
 
-  .errorhead{
-      height: 90px;
-      padding-top:3px;
-      padding-left:10px;
-      border:1px solid #666;
-      border-radius: 12px;
-      background-color: $errors-head-background-color;
-   }
 
   footer#page-footer{
     color: $secondary-text-color;
@@ -36,9 +36,19 @@
     }
   }
 
+
   nav{
     float: right;
   }
+
+
+
+  /*--------------------------------------*\
+
+      $STRUCTURAL ELEMENTS
+
+  \*--------------------------------------*/
+
 
   .shell{
     border-radius: 12px;
