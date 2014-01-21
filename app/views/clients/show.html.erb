@@ -22,7 +22,9 @@
   <% @client.properties.each do |property| %>
     <%= property.human_ref %>
     <%= render 'shared/show_1_line_address', object: property %>
+    <br>
   <% end %>
+  <br>
 </div>
 <p>
   <button> <%= link_to 'Print This Page', '#', class: 'print-window'%></button>
