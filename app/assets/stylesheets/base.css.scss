@@ -78,3 +78,28 @@ h5{
 h6{
   font-size: 0.444em;
 }
+
+
+
+
+/*---------------------------------------------------*\
+
+  $LINKS
+
+\*---------------------------------------------------*/
+
+
+a{
+  text-decoration: underline;
+
+  &:link,
+  &:visited{
+    color: $primary-link-color;
+  }
+
+  &:hover,
+  &:active{
+    color: $secondary-link-color;
+    background: $secondary-background-color;
+  }
+}

@@ -5,22 +5,6 @@ img{
   border-width: 0;
 }
 
-a{
-  text-decoration: underline;
-}
-
-a:link,
-a:visited{
-  color: $primary-link-color;
-}
-
-a:hover,
-a:active{
-  text-decoration: none;
-  color: $secondary-link-color;
-  background: $secondary-background-color;
-}
-
 @media screen{
 
   table{
