@@ -50,22 +50,6 @@
   \*--------------------------------------*/
 
 
-  .shell{
-    border-radius: 12px;
-    border: 1px solid $fieldset-color;
-    padding: 5%;
-    margin: 50px;
-  }
-
-  .showbox{
-    background-color: #ddd;
-    border:1px solid #666;
-    border-radius: 12px;
-    padding: 0 35px;
-    margin-top: 10px;
-    margin-bottom: 3px;
-  }
-
   @mixin leftfloat{
     width:30%;
     float:left;
