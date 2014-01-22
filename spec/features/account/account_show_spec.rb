@@ -21,7 +21,7 @@ describe Property do
     end
 
     it 'navigates to index page' do
-      click_on 'List'
+      click_on 'Properties'
       expect(page).to have_text 'Town'
       expect(page).to have_text 'Road'
       expect(page).to have_text '1'
