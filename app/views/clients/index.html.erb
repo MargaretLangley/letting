@@ -29,7 +29,7 @@
     <% if @clients.present? %>
       <% @clients.each do |client| %>
       <tr>
-        <td class = 'alnright'>
+        <td class='alnright'>
           <%= link_to client.human_ref, edit_client_path(client) %>
         </td>
         <td>
@@ -38,7 +38,7 @@
         <td>
           <%= client.entities.first.name %>
         </td>
-        <td class =' alnright'>
+        <td class ='alnright'>
           <%= client.address.road_no %>
         </td>
         <td>
@@ -54,7 +54,7 @@
        <% end %>
     <% else %>
       <tr>
-        <td colspan ="9", class =  'atcenter'>
+        <td colspan ="9" class='atcenter'>
           No Clients Found. Try Again.
         </td>
       </tr>
