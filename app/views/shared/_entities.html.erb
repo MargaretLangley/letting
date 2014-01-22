@@ -1,4 +1,4 @@
-  <div class='reveal-parent'>
+  <div class='js-reveal-parent'>
     <% entitieable.entities.each.with_index do |entity, index| %>
       <%= f.fields_for :entities, entity do |builder| %>
         <fieldset id='<%= entity_field_id entitieable, index %>'
@@ -8,5 +8,5 @@
         </fieldset>
       <% end %>
     <% end %>
-    <%= link_to 'Add Person', '#', class: 'reveal-link' %>
+    <%= link_to 'Add Person', '#', class: 'js-reveal-link' %>
   </div>

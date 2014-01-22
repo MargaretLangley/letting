@@ -4,7 +4,7 @@ module PropertiesHelper
   end
 
   def hide_or_destroy record
-    record.new_record? ? 'hide-link' : 'destroy-link'
+    record.new_record? ? 'js-hide-link' : 'js-destroy-link'
   end
 
   def hide_new_record_unless_first record, index

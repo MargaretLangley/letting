@@ -154,13 +154,9 @@ input[type="submit"] {
   }
 }
 
-a.remove-fields, a.hide-link, a.destroy-link{
+.small-button{
   @include button-base;
   @include small-button-base;
-  float:right;
-    &:hover {
-    text-decoration: underline;
-  }
 }
 
 .revealable, .hidden{
