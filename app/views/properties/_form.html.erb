@@ -1,11 +1,7 @@
 <%= form_for property do |f| %>
   <%= render 'shared/errors', object: property %>
   <fieldset id='property' class='shell'>
-    <h3>Property Edit
-      <span class='floatright'>
-        <%= link_to 'Accounts', property_path(property) %>
-      </span>
-    </h3>
+    <h3>Property Edit</h3>
     <div class='field text require half'>
       <%= f.label :human_ref,'Property ID' %>
       <%= f.text_field :human_ref, autofocus: true %>
