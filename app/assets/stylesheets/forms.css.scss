@@ -18,12 +18,6 @@ fieldset{
     @include top;
   }
 
-  &.shell{
-    margin: 0 0 2% 0;
-    padding: 3% 4%;
-    box-shadow: #aaa 0 0 8px;
-  }
-
   &.minimal{
     margin-bottom: 0;
     padding: 0;
