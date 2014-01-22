@@ -3,17 +3,16 @@
 <div class='showbox'>
   <h3>Client ID:
     <%= @client.human_ref %>
-    <span class='floatright'>
+    <span class='link_button'>
       <%= link_to 'Edit', edit_client_path(@client) %>
     </span>
   </h3>
 
-  <p>
-    <% @client.entities.each do |entity| %>
-      <strong><%= heading entity %></strong>
-      <span class='blankright'> <%= render 'shared/show_entity', object: entity %></span>
-    <% end %>
-  </p>
+  <% @client.entities.each do |entity| %>
+    <strong><%= heading entity %></strong>
+    <span class='blankright'> <%= render 'shared/show_entity', object: entity %></span>
+  <% end %>
+
   <h3>Address</h3>
   <%= render 'shared/show_1_line_address', object: @client %>
   <h3>Properties Owned</h3>
@@ -22,9 +21,10 @@
     <%= render 'shared/show_1_line_address', object: property %>
     <br>
   <% end %>
+
   <br>
 </div>
-<p>
-  <button> <%= link_to 'Print This Page', '#', class: 'print-window'%></button>
-</p>
 
+<p>
+  <span class='simple_button'><%= link_to 'Print This Page', '#', class: 'print-window'%></span>
+</p>

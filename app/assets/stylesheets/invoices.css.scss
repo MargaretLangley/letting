@@ -1,7 +1,7 @@
 @import "colors";
 
-/*Used in Invoice for both screen and print
-where print requirements hidden from screen and
+/*Used mainly in Invoice for both screen and print
+and where print requirements hidden from screen and
 screen requirements hidden from print*/
 
 @media all{
@@ -45,9 +45,42 @@ screen requirements hidden from print*/
     display: none;
   }
 
+  @mixin small-button-base {
+  padding:2px 20px;
+  -webkit-border-radius:5px 5px 5px 5px;
+  -moz-border-radius:5px 5px 5px 5px;
+  border-radius:5px 5px 5px 5px;
+  background-color: $background-filler;
+  -webkit-box-shadow:0px 0px 0px rgb(0, 0, 0);
+  -moz-box-shadow:0px 0px 0px rgb(0, 0, 0);
+  box-shadow:0px 0px 0px rgb(0, 0, 0);
+  color: $primary-link-color;
+  border: 1px solid $subdued-color;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+  .link_button{
+   @include small-button-base;
+   float:right;
+ }
+
+  .simple_button{
+   @include small-button-base;
+ }
+
 }
 
 @media print{
+
+/* Buttons need to be invisible in printouts */
+
+.link_button, .simple_button{
+    display: none;
+ }
+
+
+/* Printing for invoice */
 
   body{
     background: $print-background-white;
@@ -56,6 +89,7 @@ screen requirements hidden from print*/
     margin-left: 0.0cm;
     margin-right: 0.20cm;
    }
+
 
   .margwide{
     margin-left: 0.80cm;
@@ -124,6 +158,7 @@ screen requirements hidden from print*/
 
   .showbox{
     width: 90%;
+
   }
 
   .red_notice{

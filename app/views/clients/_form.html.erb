@@ -2,7 +2,7 @@
   <%= render 'shared/errors', object: client %>
   <fieldset id='client' class='shell'>
     <h3>Client
-      <span class='floatright'>
+       <span class='link_button'>
         <%= link_to 'View', client_path(client) %>
       </span>
     </h3>
@@ -14,6 +14,6 @@
     <%= render 'shared/address', f: f, parent: 'client' %>
   </fieldset>
   <div>
-    <%= f.submit %><span class='simple' ><%= link_to 'Cancel', clients_path %></span>
+    <%= f.submit %><span class='simple_button'><%= link_to 'Cancel', clients_path %></span>
   </div>
 <% end %>

@@ -1,7 +1,11 @@
 <%= form_for property do |f| %>
   <%= render 'shared/errors', object: property %>
   <fieldset id='property' class='shell'>
-    <h3>Property Edit</h3>
+    <h3>Property Edit
+       <span class='link_button'>
+        <%= link_to 'View', property_path(property) %>
+      </span>
+    </h3>
     <div class='field text require half'>
       <%= f.label :human_ref,'Property ID' %>
       <%= f.text_field :human_ref, autofocus: true %>
@@ -25,6 +29,6 @@
     <%= render 'charges', f: a, charges: property.account.charges %>
   <% end %>
   <div>
-    <%= f.submit %><span class='simple' ><%= link_to 'Cancel', properties_path %></span>
+    <%= f.submit %><span class='simple_button' ><%= link_to 'Cancel', properties_path %></span>
   </div>
 <% end %>
