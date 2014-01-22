@@ -99,15 +99,6 @@ fieldset{
       background: $errors-background-color;
     }
   }
-
-  p{
-    input{
-      display: inline-block;
-    }
-    a.button{
-      padding: 10px 15px;
-    }
-  }
 }
 
 @mixin button-base {
