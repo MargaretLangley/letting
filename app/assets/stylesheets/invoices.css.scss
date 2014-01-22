@@ -41,11 +41,6 @@ screen requirements hidden from print*/
     display: none;
   }
 
-  @mixin header-object{
-    color: $print-background-white;
-    background-color: $secondary-background-color;
-  }
-
   .h1print{
     display: none;
   }
