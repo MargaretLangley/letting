@@ -105,22 +105,6 @@ fieldset{
   font-size: 1.5em;
 }
 
-@mixin small-button-base {
-  padding:2px;
-  -webkit-border-radius:5px 5px 5px 5px;
-  -moz-border-radius:5px 5px 5px 5px;
-  border-radius:5px 5px 5px 5px;
-  background-color: $secondary-background-color;
-  background-color: white;
-  -webkit-box-shadow:0px 0px 0px rgb(0, 0, 0);
-  -moz-box-shadow:0px 0px 0px rgb(0, 0, 0);
-  box-shadow:0px 0px 0px rgb(0, 0, 0);
-  color: $primary-link-color;
-  text-decoration: none;
-  font-size: 8px;
-  font-size: 1.5em;
-}
-
 input[type="submit"] {
   @include button-base;
   width: 40%;
@@ -135,21 +119,9 @@ input[type="submit"] {
   }
 }
 
-.small-button{
-  @include button-base;
-  @include small-button-base;
-}
-
 .revealable, .hidden{
   display: none;
 }
-
-.simple{
-   @include button-base;
-   float:right;
-   padding:2px 20px;
-   border: 1px solid $subdued-color;
- }
 
  .search{
    width: 20%;
