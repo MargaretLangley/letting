@@ -3,7 +3,6 @@
 @import "colors";
 
 
-
 /*----------------------------------------------------*\
 
    $LINK
@@ -12,8 +11,8 @@
 
 
 .in-text-link{
-  whitespace: nowrap;
   text-decoration: none;
+  whitespace: nowrap;
   &:active,
   &:hover{
     text-decoration: underline;
@@ -42,30 +41,70 @@ a.inverted-link{
 
 
 
-
-
 /*-----------------------------------------------*\
 
    $CONTENT
 
 \*-----------------------------------------------*/
 
-  .shell{
-    border-radius: 12px;
-    border: 1px solid $fieldset-color;
-    padding: 5%;
-    margin: 50px;
-  }
+.shell{
+  margin: 50px;
+  padding: 5%;
+  border: 1px solid $fieldset-color;
+  border-radius: 12px;
+}
 
 
-  .showbox{
-    background-color: #ddd;
-    border:1px solid #666;
-    border-radius: 12px;
-    padding: 0 35px;
-    margin-top: 10px;
-    margin-bottom: 3px;
-  }
+.showbox{
+  margin-top: 10px;
+  margin-bottom: 3px;
+  padding: 0 35px;
+  border:1px solid #666;
+  border-radius: 12px;
+  background-color: #ddd;
+}
+
+
+
+
+/*--------------------------------------------------*\
+
+  $OVERLAY
+
+\*--------------------------------------------------*/
+
+
+.overlay-parent{
+  position: relative;
+}
+
+.overlay{
+  position: absolute;
+  margin-top: -8%;
+  margin-left: -30%;
+  padding: 1em 1em;
+  width: 80%;
+
+  border: 1px solid black;
+  border-radius: 12px;
+
+  background: rgba(184,184,184,0.85);
+  font-size:1.4em;
+}
+
+.popup-pos{
+  top: 0%;
+  left: 27%;
+  display: none;
+  width: 50%;
+}
+
+.overlay-pos{
+  top: 30%;
+  left: 40%;
+ }
+
+
 
 
 
@@ -76,11 +115,13 @@ a.inverted-link{
 \*--------------------------------------------------*/
 
 .errorhead{
-  height: 90px;
   padding-top:3px;
   padding-left:10px;
+  height: 90px;
+
   border:1px solid #666;
   border-radius: 12px;
+
   background-color: $errors-head-background-color;
  }
 

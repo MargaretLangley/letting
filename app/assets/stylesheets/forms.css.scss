@@ -5,37 +5,6 @@
 .mainTitle{
  /*clearly need something*/
 }
-.blank-slate-parent{
-  position: relative;
-}
-
-
-@mixin overlay-sign{
-  position: absolute;
-  font-size:1.4em;
-  text-align: left;
-  border: 1px solid black;
-  margin-top: -8%;
-  margin-left: -30%;
-  width: 80%;
-  background: rgba(184,184,184,0.85);
-  padding: 1em 1em;
-  border-radius: 12px;
-}
-
-.popup{
-  @include overlay-sign;
-  display: none;
-  top: 0%;
-  left: 27%;
-  width: 50%;
-}
-
-.blank-slate-overlay{
-  @include overlay-sign;
-  top: 30%;
-  left: 40%;
- }
 
 a.disabled{
   opacity: 0.5;
