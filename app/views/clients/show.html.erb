@@ -10,7 +10,7 @@
 
   <p>
     <% @client.entities.each do |entity| %>
-      <span class= 'justbold'><%= heading entity %></span>
+      <strong><%= heading entity %></strong>
       <span class= 'blankright'> <%= render 'shared/show_entity', object: entity %></span>
     <% end %>
   </p>
