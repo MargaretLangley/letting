@@ -1,43 +1,19 @@
-<nav class='shell'>
-  <p>
-  <%= link_to 'Accounts', accounts_path %>
-  </p>
-  <p>
-  <%= link_to 'Payments', payments_path %>
-  </p>
-  <p>
-  <%= link_to 'New Payment', new_payment_path %>
-  </p>
-  <p>
-  <%= link_to 'Properties', properties_path %>
-  </p>
-  <p>
-  <%= link_to 'Add New Property', new_property_path %>
-  </p>
-  <p>
-  <%= link_to 'Invoice Batches', debit_generators_path %>
-  </p>
-  <p>
-  <%= link_to 'New Invoice Batch', new_debit_generator_path %>
-  </p>
-  <p>
-  <%= link_to 'Blocks', blocks_path %>
-  </p>
-  <p>
-  <%= link_to 'Add New Block', new_block_path %>
-  </p>
-  <p>
-  <%= link_to 'Clients', clients_path %>
-  </p>
-  <p>
-  <%= link_to 'Add New Client', new_client_path %>
-  </p>
-  <% if allow? "users", "" %>
-    <p>
-    <%= link_to 'Users', users_path %>
-    </p>
-    <p>
-    <%=  link_to 'Add New User', new_user_path %>
-    </p>
-  <% end %>
+<nav>
+  <ul class='shell'>
+    <li><%= link_to 'Accounts', accounts_path %></li>
+    <li><%= link_to 'Payments', payments_path %></li>
+    <li><%= link_to 'New Payment', new_payment_path %></li>
+    <li><%= link_to 'Properties', properties_path %></li>
+    <li><%= link_to 'Add New Property', new_property_path %></li>
+    <li><%= link_to 'Invoice Batches', debit_generators_path %></li>
+    <li><%= link_to 'New Invoice Batch', new_debit_generator_path %></li>
+    <li><%= link_to 'Blocks', blocks_path %></li>
+    <li><%= link_to 'Add New Block', new_block_path %></li>
+    <li><%= link_to 'Clients', clients_path %></li>
+    <li><%= link_to 'Add New Client', new_client_path %></li>
+    <% if allow? "users", "" %>
+      <li><%= link_to 'Users', users_path %></li>
+      <li><%=  link_to 'Add New User', new_user_path %></li>
+    <% end %>
+  </ul>
 </nav>

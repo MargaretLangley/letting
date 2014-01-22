@@ -24,8 +24,6 @@ a.inverted-link{
   @include inverted-color;
 }
 
-
-
 /*--------------------------------------------------*\
 
   $TYPOGRAPHY
@@ -40,6 +38,26 @@ a.inverted-link{
 
 
 
+/*-----------------------------------------------*\
+
+   $NAVIGATION
+
+\*------------------------------------------------*/
+
+
+nav{
+  float: right;
+}
+
+
+li a{
+  display: block;
+  padding: 4%;
+  border-bottom: 1px solid $primary-background-color;
+  background-color: $fieldset-color;
+}
+
+
 
 /*-----------------------------------------------*\
 
@@ -48,12 +66,11 @@ a.inverted-link{
 \*-----------------------------------------------*/
 
 .shell{
-  margin: 50px;
   padding: 5%;
-  border: 1px solid $fieldset-color;
   border-radius: 12px;
+  background-color: $fieldset-color;
+  box-shadow: #aaa 0 0 8px;
 }
-
 
 .showbox{
   margin-top: 10px;
