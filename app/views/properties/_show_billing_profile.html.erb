@@ -2,7 +2,7 @@
 
 <% if object.use_profile? %>
   <% if object.entities.any? %>
-  <span class= 'boldfloat'>Agent</span>
+  <span class='boldfloat'>Agent</span>
     <% object.entities.each do |entity| %>
     <%= render 'shared/show_entity', object: entity %>
   <% end %>

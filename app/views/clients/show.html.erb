@@ -1,8 +1,8 @@
 <%= render 'clients/search' , path: clients_path, search_action: 'show', search_label: 'View Search'%>
-<div class = 'showbox'>
+<div class='showbox'>
   <h3>Client ID:
     <%= @client.human_ref %>
-    <span class= 'floatright'>
+    <span class='floatright'>
       <%= link_to 'Edit', edit_client_path(@client) %>
       <%= link_to 'List', clients_path %>
     </span>
@@ -11,7 +11,7 @@
   <p>
     <% @client.entities.each do |entity| %>
       <strong><%= heading entity %></strong>
-      <span class= 'blankright'> <%= render 'shared/show_entity', object: entity %></span>
+      <span class='blankright'> <%= render 'shared/show_entity', object: entity %></span>
     <% end %>
   </p>
   <h3>Address</h3>

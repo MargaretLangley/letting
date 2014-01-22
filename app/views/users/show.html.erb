@@ -1,16 +1,16 @@
 <article>
-  <div class = 'showbox'>
+  <div class='showbox'>
     <h2>User ID:
       <%= @user.id %>
-      <nav class= 'floatright'>
+      <span class='floatright'>
         <%= link_to 'Edit', edit_user_path(@user) %>
-      </nav>
+      </span>
     </h2>
     <p>
-      <span class = 'boldfloat'>email:</span><%= @user.email %>
+      <span class='boldfloat'>email:</span><%= @user.email %>
     </p>
     <p>
-      <span class = 'boldfloat'>Admin:</span>
+      <span class='boldfloat'>Admin:</span>
         <% if @user.admin %>
           Yes
         <% else %>
