@@ -1,4 +1,4 @@
-<h2 class = "mainTitle">Accounts Index</h2>
+<% @title='Accounts' %>
 
 <%= render 'properties/search', path: accounts_path, search_action: 'index', search_label: 'Search List' %>
 <%= render 'index_table', properties: @properties, show_actions: true, show_checkbox: false %>

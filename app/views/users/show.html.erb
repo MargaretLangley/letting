@@ -1,24 +1,24 @@
-<article>
-  <div class='showbox'>
-    <h2>User ID:
-      <%= @user.id %>
-      <span class='floatright'>
-        <%= link_to 'Edit', edit_user_path(@user) %>
-      </span>
-    </h2>
-    <p>
-      <span class='boldfloat'>email:</span><%= @user.email %>
-    </p>
-    <p>
-      <span class='boldfloat'>Admin:</span>
-        <% if @user.admin %>
-          Yes
-        <% else %>
-          No
-        <% end %>
-    </p>
-  </div>
+<% @title='New User' %>
+<div class='showbox'>
+  <h2>User ID:
+    <%= @user.id %>
+    <span class='floatright'>
+      <%= link_to 'Edit', edit_user_path(@user) %>
+    </span>
+  </h2>
   <p>
-    <button><%= link_to 'Print This Page', '#', class: 'print-window'%></button>
+    <span class='boldfloat'>email:</span><%= @user.email %>
   </p>
-</article>
+  <p>
+    <span class='boldfloat'>Admin:</span>
+      <% if @user.admin %>
+        Yes
+      <% else %>
+        No
+      <% end %>
+  </p>
+</div>
+<p>
+  <button><%= link_to 'Print This Page', '#', class: 'print-window'%></button>
+</p>
+
