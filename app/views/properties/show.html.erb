@@ -3,13 +3,13 @@
   <div class = 'showbox'>
     <h2>Property Id:
       <%= @property.human_ref %>
-      <nav class= 'floatright'>
+      <nav class='floatright'>
         <%= link_to 'Edit', edit_property_path(@property.id) %>
         <%= link_to 'List', properties_path %>
       </nav>
     </h2>
     <p>
-     <span class= 'boldfloat'>Client Id: </span>
+     <span class='boldfloat'>Client Id: </span>
      <%= @property.client_ref %>
     </p>
     <p>

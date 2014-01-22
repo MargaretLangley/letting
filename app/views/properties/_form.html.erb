@@ -2,10 +2,10 @@
   <%= render 'shared/errors', object: property %>
   <fieldset id='property' class='shell'>
     <h3>Property Edit
-      <nav class= 'floatright'>
+      <span class='floatright'>
         <%= link_to 'Accounts', property_path(property) %>
         <%= link_to 'List', properties_path %>
-      </nav>
+      </span>
     </h3>
     <div class='field text require half'>
       <%= f.label :human_ref,'Property ID' %>
