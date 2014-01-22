@@ -8,7 +8,7 @@ describe Property do
     log_in
     property_with_billing_create! id: 1, human_ref: 1000
     visit '/accounts/'
-    click_on 'View Accounts'
+    click_on 'View'
   end
 
   context '#show' do
