@@ -1,6 +1,6 @@
 <% dotted_line = "-------------" %>
 <% namestr = render file: 'invoice_texts/name.txt' %>
-<div class='inv_advice'>
+<div class='inv-advice'>
   We <%= namestr.upcase %> ON BEHALF OF YOUR LANDLORD
   <br>
   <%= object.entities.full_name %>
@@ -13,7 +13,7 @@
   <%= render file: 'invoice_texts/add3.txt' %>
   <%= render file: 'invoice_texts/postcode.txt' %>
   <p>
-    <span class='inv_advice_bold'>
+    <span class='inv-advice-bold'>
       <%= render file: 'invoice_texts/invoice_texts_p1/rem1.txt' %>
     </span>
     <br>
@@ -21,7 +21,7 @@
     <br>
     <%= render file: 'invoice_texts/invoice_texts_p1/rem3.txt' %>
     <br>
-    <span class='inv_advice_bold'>
+    <span class='inv-advice-bold'>
       <%= render file: 'invoice_texts/invoice_texts_p1/rem4.txt' %></span>
     <br>
     <%= render file: 'invoice_texts/invoice_texts_p1/rem5.txt' %>

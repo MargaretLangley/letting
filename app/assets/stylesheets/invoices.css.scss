@@ -12,12 +12,12 @@ screen requirements hidden from print*/
     font-weight: bold;
   }
 
-  .inv_advice{
+  .inv-advice{
     font-size: 12px;
     font-weight: normal;
   }
 
-  .inv_advice_bold{
+  .inv-advice-bold{
     font-size: 12px;
     font-weight: bold;
   }
@@ -25,15 +25,15 @@ screen requirements hidden from print*/
 
 @media screen{
 
-  .print_only{
+  .print-only{
     display: none;
   }
 
-  .inv_add{
+  .inv-add{
     display: none;
   }
 
-  .inv_bold{
+  .inv-bold{
     display: none;
   }
 
@@ -60,12 +60,12 @@ screen requirements hidden from print*/
   font-size: 1.2em;
 }
 
-  .link_button{
+  .link-button{
    @include small-button-base;
    float:right;
  }
 
-  .simple_button{
+  .simple-button{
    @include small-button-base;
  }
 
@@ -75,7 +75,7 @@ screen requirements hidden from print*/
 
 /* Buttons need to be invisible in printouts */
 
-.link_button, .simple_button{
+.link-button, .simple-button{
     display: none;
  }
 
@@ -116,12 +116,12 @@ screen requirements hidden from print*/
     lineheight: 70%;
   }
 
-  .inv_add{
+  .inv-add{
     margin-left: 1.2cm;
     font-size: 12px;
   }
 
-  .inv_bold{
+  .inv-bold{
     font-size: 14px;
     font-weight: bold;
   }
@@ -159,10 +159,6 @@ screen requirements hidden from print*/
   .showbox{
     width: 90%;
 
-  }
-
-  .red_notice{
-  display: none;
   }
 
   button, header, footer, .screen_only, .search, .floatright{
