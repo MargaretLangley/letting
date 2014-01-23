@@ -28,13 +28,6 @@ fieldset{
     margin-bottom: 1.5%;
   }
 
-  .field.require label{
-      font-weight: bold;
-      &:after {
-        content: ' *';
-      }
-  }
-
   .field label {
      display: block;
      float: left;

@@ -6,8 +6,8 @@
         <%= link_to 'View', client_path(client) %>
       </span>
     </h3>
-    <div class='field text require half'>
-      <%= f.label :human_ref, 'Client ID' %>
+    <div class='field text half'>
+      <%= f.label :human_ref, 'Client ID', class: 'required' %>
       <%= f.text_field :human_ref, autofocus:true %>
     </div>
     <%= render 'shared/entities', f: f, entitieable: client %>

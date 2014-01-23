@@ -1,7 +1,7 @@
 <%= form_for block do |f| %>
   <%= render 'shared/errors', object: block %>
   <fieldset id='block' class='shell'>
-    <div class='field text require'>
+    <div class='field text'>
       <%= f.label :matching_properties %>
       <%= f.text_field :name, readonly: true %>
     </div>
