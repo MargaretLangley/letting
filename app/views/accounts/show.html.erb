@@ -4,33 +4,32 @@
   <h2>Property Id:
     <%= @property.human_ref %>
   </h2>
-   <span class='boldfloat'>Client Id: </span>
-   <%= @property.client_ref %>
-    <h3> Occupier</h3>
-    <% @property.entities.each do |entity| %>
-      <%= render 'shared/show_entity', object: entity %>
-    <% end %>
-    <h2>Address</h2>
-    <%= render 'shared/show_1_line_address', object: @property %>
-    <%= render 'show_billing_profile', object: @property.billing_profile %>
-    <%= render 'show_charges', object: @property.account.charges %>
+  <span class='boldfloat'>Client Id: </span>
+  <%= @property.client_ref %>
+  <h3> Occupier</h3>
+  <% @property.entities.each do |entity| %>
+    <%= render 'shared/show_entity', object: entity %>
+  <% end %>
+  <h2>Address</h2>
+  <%= render 'shared/show_1_line_address', object: @property %>
+  <%= render 'show_billing_profile', object: @property.billing_profile %>
+  <%= render 'show_charges', object: @property.account.charges %>
+</div>
+
+<div class='js-toggle-selection'>
+  <div class='js-togglable'>
+    <br>
+    <%= link_to 'Full Accounts', '#', class: 'js-toggle toggle-event' %>
+    <br>
+    <%= render 'show_accounts', items: AccountDecorator.new(@property.account).abbrev_items %>
   </div>
-  <div class='js-toggle-selection'>
-    <div class='js-togglable'>
-      <br>
-      <span class='simple_button'>
-        <%= link_to 'Full Accounts', '#', class: 'js-toggle toggle-event' %>
-      </span>
-      <br>
-       <%= render 'show_accounts', items: AccountDecorator.new(@property.account).abbrev_items %>
-    </div>
-  <div class='js-togglable hidden'>
-    <%= link_to 'Partial Accounts', '#', class: 'js-toggle toggle-event' %>
-    <%= render 'show_accounts', items: AccountDecorator.new(@property.account).items %>
+<div class='js-togglable hidden'>
+  <%= link_to 'Partial Accounts', '#', class: 'js-toggle toggle-event' %>
+  <%= render 'show_accounts', items: AccountDecorator.new(@property.account).items %>
   </div>
 </div>
 
 <br>
-  <span class='simple_button'>
-    <%= link_to 'Print This Page', '#', class: 'print-window'%>
-  </span>
+<span class='simple-button'>
+  <%= link_to 'Print This Page', '#', class: 'print-window'%>
+</span>
