@@ -25,6 +25,11 @@ screen requirements hidden from print*/
 
 @media screen{
 
+  .main-heading{
+  margin-top: 0;
+  font-size: 2em;
+  }
+
   .print-only{
     display: none;
   }
@@ -73,11 +78,11 @@ screen requirements hidden from print*/
 
 @media print{
 
-/* Buttons need to be invisible in printouts */
+/* Buttons and main heading need to be invisible in printouts */
 
-.link-button, .simple-button{
-    display: none;
- }
+  .main-heading, .no-print, .link-button, .simple-button{
+   display: none;
+  }
 
 
 /* Printing for invoice */
