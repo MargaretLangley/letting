@@ -5,7 +5,7 @@
 # Provides a contact, agent, address spearate from the property
 #
 # BillingProfile provides the property with a separate contact address
-# if it is required.
+# if it is needed.
 #
 ####
 #
