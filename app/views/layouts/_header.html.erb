@@ -7,9 +7,12 @@
       <nav>
         <% if current_user %>
          <%= current_user.email %>
-         <%= link_to 'Log Out', logout_path, class: 'inverted-link'  %>
+         <%= link_to 'Log Out', logout_path, class: 'inverted-link' %>
         <% else %>
-          <%= link_to 'Log In', login_path, class: 'inverted-link'   %>
+          <%= link_to 'Log In', login_path, class: 'inverted-link'  %>
+        <% end %>
+        <% if allow? "users", "" %>
+          <%= link_to 'Admin', users_path, class: 'inverted-link' %>
         <% end %>
       </nav>
     </div>

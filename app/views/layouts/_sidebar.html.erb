@@ -11,9 +11,6 @@
     <li><%= link_to 'Add New Block', new_block_path %></li>
     <li><%= link_to 'Clients', clients_path %></li>
     <li><%= link_to 'Add New Client', new_client_path %></li>
-    <% if allow? "users", "" %>
-      <li><%= link_to 'Users', users_path %></li>
-      <li><%=  link_to 'Add New User', new_user_path %></li>
-    <% end %>
+
   </ul>
 </nav>

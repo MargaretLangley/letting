@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Letting</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
+  <head>
+    <title>Letting</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
 
-<body>
- <%= render 'layouts/header' %>
- <%= render 'layouts/flashes' %>
+  <body>
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/flashes' %>
 
-<div class="grid outergrid">
-  <div class="col-3-4">
-     <article class="module">
-       <h2><%= @title %></h2>
-        <%= yield %>
-     </article>
-  </div>
-  <div class="col-1-4">
-    <aside class="module">
-      <%= render 'layouts/sidebar' %>
-    </aside>
-  </div>
-</div>
-<%= render 'layouts/footer' %>
+    <div class="grid outergrid">
+      <div class="col-3-4">
+        <article class="module">
+          <span class="main-heading"><%= @title %></span>
+          <%= yield %>
+        </article>
+      </div>
+      <div class="col-1-4">
+        <aside class="module">
+          <% if @title.include? 'User'  %>
+            <%= render 'layouts/sidebar_admin' %>
+          <% else %>
+            <%= render 'layouts/sidebar' %>
+          <% end %>
+        </aside>
+      </div>
+    </div>
+    <%= render 'layouts/footer' %>
 
-</body>
+  </body>
 </html>

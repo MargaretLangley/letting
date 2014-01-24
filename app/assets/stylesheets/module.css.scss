@@ -73,13 +73,22 @@ li a{
   box-shadow: #aaa 0 0 8px;
 }
 
-.showbox{
-  margin-top: 10px;
-  margin-bottom: 3px;
-  padding: 0 35px;
-  border:1px solid #666;
-  border-radius: 12px;
-  background-color: #ddd;
+@media all{
+
+  .showbox{
+    margin-top: 10px;
+    margin-bottom: 3px;
+    padding: 0 35px;
+    border:1px solid #666;
+    border-radius: 12px;
+    background-color: #ddd;
+  }
+}
+
+@media print{
+  .showbox{
+     border:0px;
+  }
 }
 
 
