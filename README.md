@@ -32,14 +32,18 @@ http://letting.bcs.io
 
 ###Start From Scratch
 1. cap deploy:setup
-  1. Enter password for postgres database
+  1. Enter password for postgres database (from application.yml)
 2. cap deploy
 3. cap deploy:migrate
 
 ###Reset the database
-1. cap postgresql:drop_db
-2. cap postgresql:drop_role   (role depends on db)
-Then follow Start from Scratch
+1. Remove any backend connections
+  1. local dev: rake db:terminate RAILS_ENV=test
+  2. Production: *need a cap version*
+2. cap postgresql:drop_db
+3. cap postgresql:drop_role
+  1. role depends on db
+4. Follow instructions 'Start from Scratch'
 
 
 ###Imported Data
