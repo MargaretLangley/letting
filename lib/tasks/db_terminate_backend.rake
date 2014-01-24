@@ -1,4 +1,5 @@
 # http://stackoverflow.com/questions/5108876/kill-a-postgresql-session-connection
+# rake db:terminate RAILS_ENV=test
 namespace :db do
   desc "Fix 'database is being accessed by other users'"
   task :terminate => :environment do
