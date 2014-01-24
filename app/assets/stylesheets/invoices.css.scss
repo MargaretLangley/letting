@@ -53,8 +53,8 @@ screen requirements hidden from print*/
 
   @mixin small-button-base {
   padding:2px 20px;
-  /*@include border-radius(5px);
-  -webkit-border-radius:5px 5px 5px 5px;
+  @include border-radius(5px);
+  /*-webkit-border-radius:5px 5px 5px 5px;
   -moz-border-radius:5px 5px 5px 5px;
   border-radius:5px 5px 5px 5px;*/
   background-color: $background-filler;
