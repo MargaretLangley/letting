@@ -35,8 +35,18 @@ http://letting.bcs.io
   1. Enter password for postgres database (from application.yml)
 2. cap deploy
 3. cap deploy:migrate
+4. Add Data
+
+###Add Data
+Add data through either adding:
+1. Imported Data
+  1. cap rake:invoke task=db:import
+  2. Use the admin created from the application.yml's user and password (see above).
+2. Seed Data
+  1. cap deploy:seed
 
 ###Reset the database
+Sometimes you have to reset the database. If this is the case follow this:
 1. Remove any backend connections
   1. local dev: rake db:terminate RAILS_ENV=test
   2. Production: *need a cap version*
@@ -44,12 +54,4 @@ http://letting.bcs.io
 3. cap postgresql:drop_role
   1. role depends on db
 4. Follow instructions 'Start from Scratch'
-
-
-###Imported Data
-1. cap rake:invoke task=db:import
-2. Use the admin created from the application.yml's user and password (see above).
-
-###Seed Data
-1. cap deploy:seed
 
