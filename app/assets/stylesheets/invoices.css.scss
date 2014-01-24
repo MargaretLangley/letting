@@ -1,4 +1,5 @@
 @import "colors";
+@import "compass/css3";
 
 /*Used mainly in Invoice for both screen and print
 and where print requirements hidden from screen and
@@ -52,9 +53,10 @@ screen requirements hidden from print*/
 
   @mixin small-button-base {
   padding:2px 20px;
+  /*@include border-radius(5px);
   -webkit-border-radius:5px 5px 5px 5px;
   -moz-border-radius:5px 5px 5px 5px;
-  border-radius:5px 5px 5px 5px;
+  border-radius:5px 5px 5px 5px;*/
   background-color: $background-filler;
   -webkit-box-shadow:0px 0px 0px rgb(0, 0, 0);
   -moz-box-shadow:0px 0px 0px rgb(0, 0, 0);
