@@ -1,5 +1,5 @@
 <span class="no-print">
   <% flash.each do |key, value| %>
-    <%= content_tag(:p, value, class: "flash #{key}") %>
+    <%= content_tag(:h3, value, class: "flash #{key}") %>
   <% end %>
 </span>

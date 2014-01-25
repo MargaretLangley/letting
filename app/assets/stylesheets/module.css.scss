@@ -141,22 +141,23 @@ label {
 
 \*--------------------------------------------------*/
 
-
 .flash{
-  margin: 0;
-  padding: 2% 0% 2% 3%;
-  border-radius: 5px;
-  box-shadow: #ffc 0 0 4px;
-  color: $primary-text-color;
-  text-align: center;
+  margin: 0 0 2% 0;
+  padding: 2%;
+  border-radius: 12px;
+  box-shadow: #aaa 0 0 8px;
 
   &.notice{
+    border: 1px solid lighten($flash-notice-color, 20%);
     background-color: $flash-notice-color;
   }
 
   &.alert{
+    border: 1px solid lighten($flash-alert-color, 20%);
     background-color: $flash-alert-color;
   }
+
+  text-align: center;
 }
 
 
