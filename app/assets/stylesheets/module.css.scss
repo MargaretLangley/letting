@@ -151,6 +151,33 @@ label {
 }
 
 
+
+/*--------------------------------------------------*\
+
+  $FLASH
+
+\*--------------------------------------------------*/
+
+
+.flash{
+  color: $primary-text-color;
+  border-radius: 4px;
+  padding: 2% 0% 2% 3%;
+  margin: 0;
+  text-align: center;
+  box-shadow: #ffc 0 0 4px;
+
+  &.notice{
+    background-color: $flash-notice-color;
+  }
+
+  &.alert{
+    background-color: $flash-alert-color;
+  }
+}
+
+
+
 /*--------------------------------------------------*\
 
   $OVERLAY
