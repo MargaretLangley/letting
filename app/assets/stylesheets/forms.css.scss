@@ -65,15 +65,6 @@ fieldset{
     border: 1px solid $subdued-color;
     font-size:     1em;
   }
-
-  div.field_with_errors{
-    label {
-      color: $errors-text-color;
-    }
-    input, textarea{
-      background: $errors-background-color;
-    }
-  }
 }
 
 
