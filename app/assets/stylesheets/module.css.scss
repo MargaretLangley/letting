@@ -1,7 +1,5 @@
-
-
 @import "colors";
-
+@import "compass/css3";
 
 /*----------------------------------------------------*\
 
@@ -96,6 +94,56 @@ label {
 }
 
 
+
+
+/*--------------------------------------------------*\
+
+  $BUTTON
+
+\*--------------------------------------------------*/
+
+@media screen{
+
+  input[type="submit"] {
+    width: 40%;
+    border-radius: 5px;
+    background-color: $background-filler;
+    font-size: 1.5em;
+    &.x-large {
+      width: 80%;
+    }
+    &.medium {
+      width: 60%;
+    }
+    &.under-input {
+      width: 55%;
+    }
+  }
+
+  @mixin small-button-base {
+    margin: 0 0 2% 0;
+    padding: 2%;
+    border: 1px solid lighten($background-filler, 20%);
+    border-radius: 5px;
+    background-color: $background-filler;
+    color: $primary-link-color;
+    box-shadow: #aaa 0 0 4px;
+    text-decoration: none;
+    font-size: 1.2em;
+  }
+
+  .link-button{
+     @include small-button-base;
+     float:right;
+   }
+
+  .simple-button{
+     @include small-button-base;
+   }
+}
+
+
+
 /*--------------------------------------------------*\
 
   $SEARCH-FORMS
@@ -147,6 +195,8 @@ label {
   border-radius: 12px;
   box-shadow: #aaa 0 0 8px;
 
+  text-align: center;
+
   &.notice{
     border: 1px solid lighten($flash-notice-color, 20%);
     background-color: $flash-notice-color;
@@ -156,8 +206,6 @@ label {
     border: 1px solid lighten($flash-alert-color, 20%);
     background-color: $flash-alert-color;
   }
-
-  text-align: center;
 }
 
 

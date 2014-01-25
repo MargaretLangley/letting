@@ -1,5 +1,4 @@
 @import "colors";
-@import "compass/css3";
 
 /*Used mainly in Invoice for both screen and print
 and where print requirements hidden from screen and
@@ -49,26 +48,6 @@ screen requirements hidden from print*/
   .h1print{
     display: none;
   }
-
-  @mixin small-button-base {
-  padding:2px 20px;
-  border-radius: 5px;
-  background-color: $background-filler;
-  color: $primary-link-color;
-  border: 1px solid $subdued-color;
-  text-decoration: none;
-  font-size: 1.2em;
-}
-
-  .link-button{
-   @include small-button-base;
-   float:right;
- }
-
-  .simple-button{
-   @include small-button-base;
- }
-
 }
 
 @media print{
