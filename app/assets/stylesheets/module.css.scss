@@ -66,8 +66,9 @@ li a{
 \*-----------------------------------------------*/
 
 .shell{
-  padding: 2%;
   margin: 0 0 2% 0;
+  padding: 2%;
+  border: 1px solid lighten($fieldset-color, 20%);
   border-radius: 12px;
   background-color: $fieldset-color;
   box-shadow: #aaa 0 0 8px;
@@ -142,12 +143,12 @@ label {
 
 
 .flash{
-  color: $primary-text-color;
-  border-radius: 4px;
-  padding: 2% 0% 2% 3%;
   margin: 0;
-  text-align: center;
+  padding: 2% 0% 2% 3%;
+  border-radius: 4px;
   box-shadow: #ffc 0 0 4px;
+  color: $primary-text-color;
+  text-align: center;
 
   &.notice{
     background-color: $flash-notice-color;
@@ -173,27 +174,18 @@ label {
 
 .overlay{
   position: absolute;
-  margin-top: -8%;
-  margin-left: -30%;
-  padding: 1em 1em;
-  width: 80%;
-
-  border: 1px solid black;
-  border-radius: 12px;
-
-  background: rgba(184,184,184,0.85);
-  font-size:1.4em;
-}
-
-.popup-pos{
-  top: 0%;
-  left: 27%;
-  display: none;
-  width: 50%;
-}
-
-.overlay-pos{
   top: 30%;
   left: 40%;
+  margin-top: -8%;
+  margin-left: -30%;
+  width: 80%;
+  border: 1px solid lighten(rgb(184,184,184), 20%);
+  background-color: rgba(184,184,184,0.85);
+  color: $primary-text-color;
+  font-size:1.4em;
  }
+
+.popup{
+  display: none;
+}
 
