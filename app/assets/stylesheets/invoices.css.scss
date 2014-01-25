@@ -52,7 +52,7 @@ screen requirements hidden from print*/
 
   @mixin small-button-base {
   padding:2px 20px;
-  @include border-radius(5px);
+  border-radius: 5px;
   background-color: $background-filler;
   color: $primary-link-color;
   border: 1px solid $subdued-color;

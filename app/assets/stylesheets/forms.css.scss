@@ -69,7 +69,7 @@ fieldset{
 
 
 @mixin button-base {
-   @include border-radius(5px);
+  border-radius: 5px;
   background-color: rgb(255, 255, 255);
   @include background-image(linear-gradient(top, rgb(238, 238, 238), rgb(204, 204, 204)));
   font-size: 1.5em;
