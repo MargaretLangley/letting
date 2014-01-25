@@ -12,8 +12,8 @@
       <%= "#{search_range}" %>
     </div>
     <div class="col-1-2">
-      <%= debit_gen_form.submit 'Invoice Charges', name: 'create' , disabled: debit_generator.debitless?, class: 'medium' %>&nbsp;&nbsp;
-      <%= link_to_unless debit_generator.debitless? ,' or Cancel', debit_generators_path %>
+      <%= debit_gen_form.submit 'Invoice Charges', name: 'create' , disabled: debit_generator.debitless?, class: 'medium' %> or
+      <%= link_to_unless debit_generator.debitless? ,'Cancel', debit_generators_path, class: 'warn'  %>
     </div>
   </div>
   <table>

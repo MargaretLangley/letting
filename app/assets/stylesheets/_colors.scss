@@ -19,7 +19,7 @@ $secondary-link-color: darken($primary-link-color, 60%);   // dark blue
 $background-filler: #DDD;              // Grey
 $errors-head-background-color: #C5C5C5; // Grey
 $errors-background-color: #FFC;         // Yellow
-$errors-text-color: #DC3D3D;            // Red
+$warn: #DC3D3D;                         // Red
 $errors-edge-color: #FFCC33;            // Orange-brown
 $subdued-color: darken($primary-background-color, 20%);
 $flash-notice-color: #DBFFDD;          // Pale Green

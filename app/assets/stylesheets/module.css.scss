@@ -22,6 +22,19 @@ a.inverted-link{
   @include inverted-color;
 }
 
+
+a.warn{
+  color: $warn;
+
+  &:hover,
+  &:active{
+    color: $print-background-white;
+    background: $warn;
+  }
+}
+
+
+
 /*--------------------------------------------------*\
 
   $TYPOGRAPHY
@@ -167,13 +180,13 @@ label {
   border:2px solid $errors-edge-color;
   background: $errors-background-color;
   h2 {
-    color: $errors-text-color;
+    color: $warn;
   }
 }
 
 .field_with_errors{
   label {
-    color: $errors-text-color;
+    color: $warn;
   }
   input,
   textarea{

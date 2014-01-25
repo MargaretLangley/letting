@@ -14,6 +14,6 @@
     <%= render 'shared/address', f: f, parent: 'client' %>
   </fieldset>
   <div>
-    <%= f.submit %><span class='simple-button'><%= link_to 'Cancel', clients_path %></span>
+    <%= f.submit %> or <%= link_to 'Cancel', clients_path, class: 'warn' %>
   </div>
 <% end %>
