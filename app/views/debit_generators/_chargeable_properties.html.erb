@@ -3,12 +3,13 @@
 
   <div class="grid vertical-spacer">
     <div class="col-1-8">
-        Search:<br>
-        Range:
+      Search:<br>
+      Range:
     </div>
-    <div class="col-3-8">
-        <span class='important-text'><%= "#{debit_generator.search_string}" %></span><br>
-        <span class='important-text'><%= "#{search_range}" %></span>
+    <div class="col-3-8 search-terms">
+      <%= "#{debit_generator.search_string}" %>
+      <br>
+      <%= "#{search_range}" %>
     </div>
     <div class="col-1-2">
       <%= debit_gen_form.submit 'Invoice Charges', name: 'create' , disabled: debit_generator.debitless?, class: 'medium' %>&nbsp;&nbsp;
