@@ -3,7 +3,7 @@ require_relative '../../lib/import/errors'
 #
 # ChargesMatcher
 #
-# Matching only required during the import process
+# Matching only needed during the import process
 #
 # This is a service object for Charges it allows a charge to match
 # an imported charge. Matching import charges should not be the concern

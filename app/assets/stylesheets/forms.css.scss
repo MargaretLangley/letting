@@ -1,6 +1,7 @@
 /* FORMS */
 
 @import "colors";
+@import "compass/css3";
 
 @mixin top{
   margin-top: 1.5%;
@@ -28,20 +29,10 @@ fieldset{
     margin-bottom: 1.5%;
   }
 
-  .field.require label{
-      font-weight: bold;
-      &:after {
-        content: ' *';
-      }
-  }
-
   .field label {
      display: block;
      float: left;
-     overflow: hidden;
      width: 20%;
-     text-overflow: ellipsis;
-     white-space: nowrap;
      line-height: 27px;
    }
 
@@ -53,11 +44,8 @@ fieldset{
      }
 
      &.half input {
-        width: 32.5%;
-      }
-     &.quarter input {
-        width: 16.25%;
-      }
+       width: 32.5%;
+     }
   }
 
   .field.submit{
@@ -67,57 +55,13 @@ fieldset{
     white-space: nowrap;
   }
 
-  .alternative-choice{
-    white-space: nowrap;
-  }
-
   input,
   textarea{
     padding:       4% 1% 4% 1%;
-    width: 90%;
-    border: 1px solid $subdued-color;
-    border-radius: 4px;
-    box-shadow:    0px;
     font-size:     1em;
   }
-
-  div.field_with_errors{
-    label {
-      color: $errors-text-color;
-    }
-    input, textarea{
-      background: $errors-background-color;
-    }
-  }
 }
 
-@mixin button-base {
-  -webkit-border-radius:5px 5px 5px 5px;
-  -moz-border-radius:5px 5px 5px 5px;
-  border-radius:5px 5px 5px 5px;
-  background-color: rgb(255, 255, 255);
-  background-image:linear-gradient(-90deg, rgb(238, 238, 238), rgb(204, 204, 204));
-  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgb(238, 238, 238)), to(rgb(204, 204, 204)));
-  background-image:-moz-linear-gradient(-90deg, rgb(238, 238, 238), rgb(204, 204, 204));
-  -webkit-box-shadow:0px 0px 0px rgb(0, 0, 0);
-  -moz-box-shadow:0px 0px 0px rgb(0, 0, 0);
-  box-shadow:0px 0px 0px rgb(0, 0, 0);
-  font-size: 1.5em;
-}
-
-input[type="submit"] {
-  @include button-base;
-  width: 40%;
-  &.x-large {
-    width: 80%;
-  }
-  &.medium {
-    width: 60%;
-  }
-  &.under-input {
-    width: 55%;
-  }
-}
 
 .revealable, .hidden{
   display: none;
@@ -160,6 +104,10 @@ input[type="submit"] {
     background-color: Gainsboro;
     color:  $primary-text-color;
   }
+}
+
+.vertical-spacer{
+  margin: 0 0 1% 0;
 }
 
 .number{

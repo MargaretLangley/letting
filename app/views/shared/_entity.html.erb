@@ -1,6 +1,6 @@
 <div class='js-toggle-selection'>
 
-    <div class='field text require'>
+    <div class='field text'>
       <%= f.hidden_field :_destroy %>
       <%= link_to 'X', '#', class:"float-right hover-link simple-button #{hide_or_destroy record} #{hide_if_first_record(index)}" %>
     </div>
@@ -22,8 +22,8 @@
     <%= f.text_field :initials, class: 'js-clearable' %>
   </div>
 
-  <div class='field text require'>
-    <%= f.label :name %>
+  <div class='field text'>
+    <%= f.label :name, class: 'required' %>
     <%= f.text_field :name, class: 'js-clearable' %>
   </div>
 

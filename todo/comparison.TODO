@@ -13,10 +13,10 @@
 
   ☐ CLIENTS
   List Clients                                                    done       (clients/index)
-  Print out of Client list                                   Not required
+  Print out of Client list                                   Not needed
   Create New Client                                        done       (clients/new)
   Update Client                                               done       (clients/edit)
-  Drop Down List of Clients for Search          Not required as stands (demo)
+  Drop Down List of Clients for Search          Not needed as stands (demo)
   Delete Client                                                done        (clients/index)
   Client accounts list for GR and GGR           REQUIRED
   between 'given' dates
@@ -45,7 +45,7 @@
   ☐ Property Accounts
   Display Account Items                                 ONGOING
   Require date when charge is due               done  (properties/id/view)
-  Delete old data                                             Not required
+  Delete old data                                             Not needed
   Arrears list
   Occupents with arreas over £??s                 NOT IMPLEMENTED
 

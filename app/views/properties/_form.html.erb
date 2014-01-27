@@ -6,13 +6,13 @@
         <%= link_to 'View', property_path(property) %>
       </span>
     </h3>
-    <div class='field text require half'>
-      <%= f.label :human_ref,'Property ID' %>
+    <div class='field text half'>
+      <%= f.label :human_ref,'Property ID', class: 'required' %>
       <%= f.text_field :human_ref, autofocus: true %>
     </div>
 
-    <div class='field text require'>
-      <%= f.label :client_ref, 'Client Ref' %>
+    <div class='field text'>
+      <%= f.label :client_ref, 'Client Ref', class: 'required' %>
 
       <%= text_field_tag nil, "#{property.client.try(:human_ref)} #{property.client.try(:entities).try(:full_name)}", :id => 'property_client_ref',
         data: { autocomplete_source: Client.order(:human_ref).map { |t| { :label => "#{t.human_ref} #{t.entities.full_name}", :value => t.id } } } %>
@@ -29,6 +29,6 @@
     <%= render 'charges', f: a, charges: property.account.charges %>
   <% end %>
   <div>
-    <%= f.submit %><span class='simple-button' ><%= link_to 'Cancel', properties_path %></span>
+    <%= f.submit %> or <%= link_to 'Cancel', properties_path, class: 'warn' %>
   </div>
 <% end %>

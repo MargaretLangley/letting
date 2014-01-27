@@ -19,8 +19,8 @@
     <%= b.text_field :road_no %>
   </div>
 
-  <div class='field text require'>
-    <%= b.label :road %>
+  <div class='field text'>
+    <%= b.label :road, class: 'required' %>
     <%= b.text_field :road, data: { autocomplete_source: Address.uniq.pluck(:road).reject(&:blank?).sort } %>
   </div>
 
@@ -30,13 +30,13 @@
 
   </div>
 
-  <div class='field text require'>
+  <div class='field text'>
     <%= b.label :town %>
     <%= b.text_field :town, data: { autocomplete_source: Address.uniq.pluck(:town).reject(&:blank?).sort } %>
   </div>
 
-  <div class='field text require'>
-    <%= b.label :county %>
+  <div class='field text'>
+    <%= b.label :county, class: 'required' %>
     <%= b.text_field :county, data: { autocomplete_source: Address.uniq.pluck(:county).reject(&:blank?).sort }  %>
   </div>
 

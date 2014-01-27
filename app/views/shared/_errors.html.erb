@@ -1,17 +1,15 @@
 <% if object.errors.any? %>
-<section id="errors" data-role='errors'>
-  <header class='errorhead' >
-    <p>
-    <h2>  Oops Invalid! The <%= object.class.model_name.human.downcase %> could not be saved.
+  <section class='shell error-panel' data-role='errors'>
+    <h2 class='warn'>
+      Oops Invalid! The <%= object.class.model_name.human.downcase %> could not be saved.
     </h2>
-    <h3>  Please correct the following <%= pluralize(object.errors.count, "error") %>:
+    <h3>
+      Please correct the following <%= pluralize(object.errors.count, "error") %>:
     </h3>
-  </p>
-  </header>
-  <ul>
-    <% object.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-</section>
+    <ol>
+      <% object.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ol>
+  </section>
 <% end %>
