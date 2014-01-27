@@ -1,25 +1,31 @@
 <fieldset>
-  <div class='field text'>
-    <%= f.hidden_field :_destroy %>
-    <%= link_to 'X', '#', class:'float-right hover-link simple-button js-remove-fields', data: {confirm:'Are you sure?'} %>
-  </div>
-
-  <h2>Charge <%= f.options[:child_index]  + 1 %></h2>
-  <div class='field text'>
-    <%= f.label :charge_type %>
-    <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
-  </div>
-
-  <div class='field text'>
-    <%= f.label :due_in %>
-    <%= f.text_field :due_in, data: { autocomplete_source: Charge.uniq.pluck(:due_in).sort } %>
-  </div>
-
-  <div class='field text'>
-    <%= f.label :amount %>
-    <%= f.text_field :amount %>
-    <%= f.hidden_field :start_date %>
-    <%= f.hidden_field :end_date %>
+  <div class='grid'>
+    <div class='col-1-1 vertical-spacer'>
+      <%= f.hidden_field :_destroy %>
+      <%= link_to 'X', '#', class:'float-right hover-link simple-button js-remove-fields', data: {confirm:'Are you sure?'} %>
+      <h2>Charge <%= f.options[:child_index]  + 1 %></h2>
+    </div>
+    <div class='col-1-4 vertical-spacer'>
+      <%= f.label :charge_type %>
+    </div>
+    <div class='col-3-4 vertical-spacer'>
+      <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
+    </div>
+    <div class='col-1-4 vertical-spacer'>
+      <%= f.label :due_in %>
+    </div>
+    <div class='col-3-4 vertical-spacer'>
+      <%= f.text_field :due_in, data: { autocomplete_source: Charge.uniq.pluck(:due_in).sort } %>
+    </div>
+    <div class='col-1-4 vertical-spacer'>
+      <%= f.label :amount %>
+    </div>
+    <div class='col-3-4 vertical-spacer'>
+      <%= f.text_field :amount %>
+      <%= f.hidden_field :start_date %>
+      <%= f.hidden_field :end_date %>
+    </div>
+    <div></div>
   </div>
   <%= render 'due_ons', f: f, due_ons: DueOnsDecorator.new(charge.due_ons) %>
 </fieldset>

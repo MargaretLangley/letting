@@ -1,48 +1,62 @@
 <%= f.fields_for :address do |b| %>
 
-<fieldset id='<%= parent %>_address'>
-
-  <h3>Address</h3>
-
-  <div class='field text half' >
+<div id='<%= parent %>_address'>
+  <div class='col-1-1 vertical-spacer'>
+    <h3>Address</h3>
+  </div>
+  <div class='col-1-4 vertical-spacer'>
     <%= b.label :flat_no %>
+  </div>
+  <div class='col-3-4 vertical-spacer'>
     <%= b.text_field :flat_no %>
   </div>
-
-  <div class='field text'>
+  <div class='col-1-4 vertical-spacer'>
     <%= b.label :house_name %>
+  </div>
+  <div class='col-3-4 vertical-spacer'>
     <%= b.text_field :house_name, data: { autocomplete_source: Address.uniq.pluck(:house_name).reject(&:blank?).sort }  %>
   </div>
-
-  <div class='field text half' >
+  <div class='col-1-4 vertical-spacer'>
     <%= b.label :road_no %>
+  </div>
+  <div class='col-3-4 vertical-spacer'>
     <%= b.text_field :road_no %>
   </div>
-
-  <div class='field text'>
+  <div class='col-1-4 vertical-spacer'>
     <%= b.label :road, class: 'required' %>
+  </div>
+  <div class='col-3-4 vertical-spacer'>
     <%= b.text_field :road, data: { autocomplete_source: Address.uniq.pluck(:road).reject(&:blank?).sort } %>
   </div>
-
-  <div class='field text '>
-  <%= b.label :district %>
-  <%= b.text_field :district %>
-
+  <div class='col-1-4 vertical-spacer'>
+    <%= b.label :district %>
   </div>
-
-  <div class='field text'>
+  <div class='col-3-4 vertical-spacer'>
+    <%= b.text_field :district %>
+  </div>
+  <div class='col-1-4 vertical-spacer'>
     <%= b.label :town %>
+  </div>
+  <div class='col-3-4 vertical-spacer'>
     <%= b.text_field :town, data: { autocomplete_source: Address.uniq.pluck(:town).reject(&:blank?).sort } %>
   </div>
-
-  <div class='field text'>
+  <div class='col-1-4 vertical-spacer'>
     <%= b.label :county, class: 'required' %>
+  </div>
+  <div class='col-3-4 vertical-spacer'>
     <%= b.text_field :county, data: { autocomplete_source: Address.uniq.pluck(:county).reject(&:blank?).sort }  %>
   </div>
-
-  <div class='field text half' >
+  <div class='col-1-4 vertical-spacer'>
     <%= b.label :postcode %>
+  </div>
+  <div class='col-3-4 vertical-spacer'>
     <%= b.text_field :postcode %>
   </div>
-</fieldset>
+  <div class='col-1-4'>
+    &nbsp;
+  </div>
+  <div class='col-3-4'>
+    &nbsp;
+  </div>
+</div>
 <% end %>

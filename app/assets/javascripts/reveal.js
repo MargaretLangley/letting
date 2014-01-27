@@ -9,8 +9,8 @@ $( document ).ready(function() {
 
   $('.js-hide-link').click(function(event) {
     event.preventDefault();
-    $(this).closest('fieldset').slideToggle('fast');
-    $(this).closest('fieldset').find('.js-clearable').val('');
+    $(this).closest('.fieldset').slideToggle('fast');
+    $(this).closest('.fieldset').find('.js-clearable').val('');
     var selection = findParentofRevealableElements($(this));
     if(anyVisibleChildren(selection)) {
       toggleDisableable($(selection).children('.js-reveal-link'));
@@ -20,7 +20,7 @@ $( document ).ready(function() {
   $('.js-destroy-link').click(function(event) {
     event.preventDefault();
     $(this).prev('input[type=hidden]').val('1')
-    $(this).closest('fieldset').find('.js-clearable').prop('disabled', true)
+    $(this).closest('.fieldset').find('.js-clearable').prop('disabled', true)
   });
 
   function findParentofRevealableElements(element) {

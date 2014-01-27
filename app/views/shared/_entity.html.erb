@@ -1,9 +1,8 @@
 <div class='js-toggle-selection'>
 
-    <div class='field text'>
-      <%= f.hidden_field :_destroy %>
-      <%= link_to 'X', '#', class:"float-right hover-link simple-button #{hide_or_destroy record} #{hide_if_first_record(index)}" %>
-    </div>
+  <div class='col-1-1 vertical-spacer'>
+    <%= f.hidden_field :_destroy %>
+    <%= link_to 'X', '#', class:"float-right hover-link simple-button #{hide_or_destroy record} #{hide_if_first_record(index)}" %>
     <div class='js-togglable <%= hide_field_on_start_by_entity_type record %>'>
       <h3>Person<span>&nbsp;<%= link_to 'or company', '#', class: 'js-toggle js-entity-event', data: { :'model-type-to' => 'Company' } %></span></h3>
     </div>
@@ -11,20 +10,26 @@
       <h3>Company<span>&nbsp;<%= link_to 'or person', '#', class: 'js-toggle js-entity-event', data: { :'model-type-to' => 'Person' } %></span></h3>
     </div>
     <%= f.hidden_field :entity_type, class: 'model_type' %>
+  </div>
 
-  <div class='field text js-togglable <%= hide_field_on_start_by_entity_type record %>'>
+  <div class='col-1-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %>'>
     <%= f.label :title %>
+  </div>
+  <div class='col-3-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %>'>
     <%= f.text_field :title, class: 'js-clearable' %>
   </div>
 
-  <div class='field text js-togglable <%= hide_field_on_start_by_entity_type record %>'>
+  <div class='col-1-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %>'>
     <%= f.label :initials %>
+  </div>
+  <div class='col-3-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %>'>
     <%= f.text_field :initials, class: 'js-clearable' %>
   </div>
-
-  <div class='field text'>
+  <div class='col-1-4 vertical-spacer'>
     <%= f.label :name, class: 'required' %>
+  </div>
+  <div class='col-3-4 vertical-spacer'>
     <%= f.text_field :name, class: 'js-clearable' %>
   </div>
-
+  <div></div>
 </div>

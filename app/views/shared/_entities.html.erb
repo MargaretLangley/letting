@@ -1,12 +1,17 @@
   <div class='js-reveal-parent'>
     <% entitieable.entities.each.with_index do |entity, index| %>
       <%= f.fields_for :entities, entity do |builder| %>
-        <fieldset id='<%= entity_field_id entitieable, index %>'
-          class='minimal <%= "#{hide_new_record_unless_first entity, index} " +
+        <div id='<%= entity_field_id entitieable, index %>'
+          class='fieldset <%= "#{hide_new_record_unless_first entity, index} " +
                       "#{destroyable entity, index }" %>' >
           <%= render 'shared/entity', f: builder, record: entity, index: index %>
-        </fieldset>
+        </div>
       <% end %>
     <% end %>
-    <%= link_to 'Add Person', '#', class: 'js-reveal-link' %>
+    <div class='col-1-4 vertical-spacer'>
+      &nbsp;
+    </div>
+    <div class='col-3-4 vertical-spacer'>
+      <%= link_to 'Add Person', '#', class: 'js-reveal-link' %>
+    </div>
   </div>

@@ -31,10 +31,10 @@ describe Client do
       validate_page
       client_create_page.fill_in_form('278')
       client_create_page.click('or company')
-      within_fieldset 'client_entity_0' do
+      within '#client_entity_0' do
         fill_in 'Name', with: 'ICC'
       end
-      within_fieldset 'client_address' do
+      within_fieldset 'client' do
         fill_in_address_nottingham
       end
       client_create_page.click_create_client
@@ -45,13 +45,13 @@ describe Client do
       client_create_page.visit_new_page
       client_create_page.fill_in_form('278')
       client_create_page.click('Add Person')
-      within_fieldset 'client_entity_1' do
+      within '#client_entity_1' do
         fill_in 'Name', with: 'test'
         client_create_page.click('X')
       end
       client_create_page.click('Add Person')
       expect(page.all('h3', text: 'Person or company').count).to eq 2
-      within_fieldset 'client_entity_1' do
+      within '#client_entity_1' do
         expect(find_field('Name').value).to be_blank
       end
     end

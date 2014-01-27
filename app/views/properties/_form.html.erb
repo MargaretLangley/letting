@@ -1,19 +1,28 @@
 <%= form_for property do |f| %>
   <%= render 'shared/errors', object: property %>
+
   <fieldset id='property' class='shell'>
-    <h3>Property Edit
-       <span class='link-button'>
-        <%= link_to 'View', property_path(property) %>
-      </span>
-    </h3>
-    <div class='field text half'>
+    <div class='grid'>
+      <div class='col-1-2 vertical-spacer'>
+        <h3>Property Edit</h3>
+      </div>
+      <div class='col-1-2 vertical-spacer'>
+        <span class='link-button'>
+          <%= link_to 'View', property_path(property) %>
+        </span>
+      </div>
+    </div>
+    <div class='grid'>
+    <div class='col-1-4 vertical-spacer'>
       <%= f.label :human_ref,'Property ID', class: 'required' %>
+    </div>
+    <div class='col-3-4 vertical-spacer'>
       <%= f.text_field :human_ref, autofocus: true %>
     </div>
-
-    <div class='field text'>
+    <div class='col-1-4 vertical-spacer'>
       <%= f.label :client_ref, 'Client Ref', class: 'required' %>
-
+    </div>
+    <div class='col-3-4 vertical-spacer'>
       <%= text_field_tag nil, "#{property.client.try(:human_ref)} #{property.client.try(:entities).try(:full_name)}", :id => 'property_client_ref',
         data: { autocomplete_source: Client.order(:human_ref).map { |t| { :label => "#{t.human_ref} #{t.entities.full_name}", :value => t.id } } } %>
       <%= f.hidden_field :client_id, id: 'client_id' %>

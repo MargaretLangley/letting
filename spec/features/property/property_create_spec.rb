@@ -86,13 +86,13 @@ describe Property do
     end
 
     def fill_in_property_address
-      within_fieldset 'property_address' do
+      within_fieldset 'property' do
         fill_in_address_nottingham
       end
     end
 
     def fill_in_property_entities
-      within_fieldset 'property_entity_0' do
+      within '#property_entity_0' do
         fill_in_entity_wg_grace
       end
     end
@@ -111,7 +111,7 @@ describe Property do
     end
 
     def fill_in_billing_profile_entities
-      within_fieldset 'billing_profile_entity_0' do
+      within '#billing_profile_entity_0' do
         fill_in 'Name', with: 'K J Barnett'
       end
     end
@@ -126,7 +126,7 @@ describe Property do
     end
 
     def fill_in_due_on
-      within_fieldset 'property_charge_0_due_on_0' do
+      within '#property_charge_0_due_on_0' do
         fill_in 'property_account_attributes_charges_' +
                 'attributes_0_due_ons_attributes_0_day',
                 with: 1

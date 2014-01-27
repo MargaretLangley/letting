@@ -104,14 +104,14 @@ describe Client do
   end
 
   def expect_address_has_original_attributes
-    within_fieldset 'client_address' do
+    within_fieldset 'client' do
       expect_address_edgbaston_by_field
     end
   end
 
   def expect_entity_has_original_attributes
     expect(page.all('h3', text: 'Person').count).to eq 1
-    within_fieldset 'client_entity_0' do
+    within '#client_entity_0' do
       expect_entity_wg_grace_by_field
     end
   end

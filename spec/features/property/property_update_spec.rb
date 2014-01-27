@@ -60,13 +60,13 @@ describe Property do
     end
 
     def expect_address_has_original_attributes
-      within_fieldset 'property_address' do
+      within_fieldset 'property' do
         expect_address_edgbaston_by_field
       end
     end
 
     def expect_entity_has_original_attributes
-      within_fieldset 'property_entity_0' do
+      within '#property_entity_0' do
         expect_entity_wg_grace_by_field
       end
     end
@@ -79,19 +79,19 @@ describe Property do
     end
 
     def fill_in_client_address
-      within_fieldset 'client_address' do
+      within_fieldset 'client' do
         fill_in_address_nottingham
       end
     end
 
     def fill_in_address
-      within_fieldset 'property_address' do
+      within_fieldset 'property' do
         fill_in_address_nottingham
       end
     end
 
     def fill_in_entity
-      within_fieldset 'property_entity_0' do
+      within '#property_entity_0' do
         fill_in_entity_dc_compto
       end
     end
@@ -177,7 +177,7 @@ describe Property do
     end
 
     def fill_in_bill_profile_entity
-      within_fieldset 'billing_profile_entity_0' do
+      within '#billing_profile_entity_0' do
         fill_in 'Initials', with: 'G A R'
         fill_in 'Name', with: 'Lock'
       end
@@ -200,7 +200,7 @@ describe Property do
     end
 
     def clear_address_road
-      within_fieldset 'property_address' do
+      within '#property_address' do
         fill_in 'Road', with: ''
       end
     end

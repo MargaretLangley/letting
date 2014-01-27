@@ -14,7 +14,7 @@ class ClientUpdatePage
   end
 
   def fill_in_2nd_ent_form
-    within_fieldset 'client_entity_1' do
+    within '#client_entity_1' do
       fill_in 'Title',    with: 'Mr'
       fill_in 'Initials', with: 'I'
       fill_in 'Name',     with: 'Test'
@@ -22,7 +22,7 @@ class ClientUpdatePage
   end
 
   def fill_in_cancel_form
-    within_fieldset 'client_entity_0' do
+    within '#client_entity_0' do
       fill_in 'Title',    with: 'Mr'
       fill_in 'Name',     with: 'Whistleblower'
     end
