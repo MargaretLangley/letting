@@ -58,8 +58,6 @@ fieldset{
   input,
   textarea{
     padding:       4% 1% 4% 1%;
-    width: 90%;
-    border: 1px solid $subdued-color;
     font-size:     1em;
   }
 }
@@ -106,6 +104,10 @@ fieldset{
     background-color: Gainsboro;
     color:  $primary-text-color;
   }
+}
+
+.vertical-spacer{
+  margin: 0 0 1% 0;
 }
 
 .number{

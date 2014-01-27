@@ -1,20 +1,25 @@
 <% @title='Login' %>
-<fieldset id='login'  class='shell'>
-
+<div  class='shell  dialog-box'>
   <%= form_tag sessions_path do %>
-    <div class="field text">
-      <%= label_tag :email %>
-      <%= text_field_tag :email, params[:email] %>
-    </div>
-    <div class="field text">
-      <%= label_tag :password %>
-      <%= password_field_tag :password %>
-    </div>
-
-    <div class="field submit">
-      <p>
+    <div class='grid '>
+      <div class='col-1-4 vertical-spacer'>
+        <%= label_tag :email %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <%= text_field_tag :email, params[:email], autofocus: true %>
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        <%= label_tag :password %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <%= password_field_tag :password %>
+      </div>
+      <div class='col-1-4'>
+        &nbsp;
+      </div>
+      <div class='col-3-4'>
         <%= submit_tag "Log In", class: 'under-input' %>
-      <p>
+      </div>
     </div>
   <% end %>
-</fieldset>
+</div>
