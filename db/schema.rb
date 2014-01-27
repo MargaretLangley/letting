@@ -50,12 +50,6 @@ ActiveRecord::Schema.define(version: 20140107121253) do
 
   add_index "billing_profiles", ["property_id"], name: "index_billing_profiles_on_property_id", using: :btree
 
-  create_table "blocks", force: true do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "charges", force: true do |t|
     t.string   "charge_type",                         null: false
     t.string   "due_in",                              null: false

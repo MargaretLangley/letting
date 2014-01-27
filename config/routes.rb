@@ -11,7 +11,6 @@ Letting::Application.routes.draw do
       get :search
     end
   end
-  resources :blocks, only: [:new, :create, :index]
   resources :search_suggestions
   resources :clients
 

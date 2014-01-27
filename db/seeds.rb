@@ -8,7 +8,6 @@ def generate_seeding
   seed_users
   seed_clients
   seed_properties
-  seed_blocks
   seed_charges
   debits_and_credits
   reset_pk_sequenece_on_each_table_used
@@ -235,12 +234,6 @@ end
       { id: 4, use_profile: false, property_id: 4 }
     ]
   end
-
-def seed_blocks
-  Block.create! [
-    { id: 1, name: 'Lords' }
-  ]
-end
 
 def seed_charges
   create_charges
