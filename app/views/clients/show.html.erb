@@ -1,30 +1,62 @@
 <% @title='View Client' %>
 <%= render 'clients/search' , path: clients_path, search_action: 'show', search_label: 'View Search'%>
+
 <div class='shell'>
-  <h3>Client ID:
-    <%= @client.human_ref %>
-    <span class='link-button'>
-      <%= link_to 'Edit', edit_client_path(@client) %>
-    </span>
-  </h3>
-
+  <div class='grid'>
+    <div class='col-1-2 vertical-spacer'>
+      <h2>Client View</h2>
+    </div>
+    <div class='col-1-2 vertical-spacer'>
+      <span class='link-button'>
+        <%= link_to 'Edit', edit_client_path(@client) %>
+      </span>
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='col-1-4 vertical-spacer'>
+      <strong>Client ID:</strong>
+    </div>
+    <div class='col-3-4 vertical-spacer'>
+      <%= @client.human_ref %>
+    </div>
+  </div>
   <% @client.entities.each do |entity| %>
-    <strong><%= heading entity %></strong>
-    <span class='blankright'> <%= render 'shared/show_entity', object: entity %></span>
+    <div class='grid'>
+      <div class='col-1-4 vertical-spacer'>
+       <strong><%= heading entity %></strong>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <%= render 'shared/show_entity', object: entity %>
+      </div>
+    </div>
   <% end %>
-
-  <h3>Address</h3>
-  <%= render 'shared/show_1_line_address', object: @client %>
-  <h3>Properties Owned</h3>
+  <div class='grid'>
+    <div class='col-1-4 vertical-spacer'>
+      <strong>Address:</strong>
+    </div>
+    <div class='col-3-4 vertical-spacer'>
+     <%= render 'shared/show_1_line_address', object: @client %>
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='col-1-4 vertical-spacer'>
+      <strong>Properties</strong>
+    </div>
+    <div class='col-3-4 vertical-spacer'>
+     <strong>Addresses</strong>
+    </div>
+  </div>
   <% @client.properties.each do |property| %>
-    <%= property.human_ref %>
-    <%= render 'shared/show_1_line_address', object: property %>
-    <br>
+    <div class='grid'>
+      <div class='col-1-4 vertical-spacer'>
+         <%= property.human_ref %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+       <%= render 'shared/show_1_line_address', object: property %>
+      </div>
+    </div>
   <% end %>
-
-  <br>
 </div>
+<br>
+<span class='simple-button'><%= link_to 'Print This Page', '#', class: 'print-window'%></span>
 
-<p>
-  <span class='simple-button'><%= link_to 'Print This Page', '#', class: 'print-window'%></span>
-</p>
