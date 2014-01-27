@@ -1,7 +1,6 @@
 /* FORMS */
 
 @import "colors";
-@import "compass/css3";
 
 @mixin top{
   margin-top: 1.5%;
@@ -46,19 +45,6 @@ fieldset{
      &.half input {
        width: 32.5%;
      }
-  }
-
-  .field.submit{
-    display: inline-block;
-    float: right;
-    width: 68%;
-    white-space: nowrap;
-  }
-
-  input,
-  textarea{
-    padding:       4% 1% 4% 1%;
-    font-size:     1em;
   }
 }
 
