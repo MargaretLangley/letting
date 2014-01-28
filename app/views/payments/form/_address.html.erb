@@ -1,10 +1,9 @@
 <div id='address'>
-  <% property.abbreviated_address[0..-2].each do |line| %>
-    <%= line %><br>
-  <% end %>
-  <%= property.abbreviated_address.last %> &hellip;<br>
+  <%= property.address_name %><br>
+  <%= property.abbreviated_address %>&hellip;<br>
 </div>
 <div id='js-popup' class='shell  overlay  popup'>
+  <%= property.address_name %><br>
   <% property.address_lines.each do |line| %>
     <%= line %><br>
   <% end %>

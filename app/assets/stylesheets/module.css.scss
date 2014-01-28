@@ -70,6 +70,10 @@ a.warn{
   line-height: 5em;
 }
 
+.grid-row{
+  clear: both;
+}
+
 .cell{
   @include vertical-align-hack;
   color: $primary-text-color;

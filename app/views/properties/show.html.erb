@@ -3,40 +3,53 @@
 <div class='shell'>
   <div class='grid'>
     <div class='col-1-2 vertical-spacer'>
-      <h2>Property Id:<%= @property.human_ref %></h2>
+      <h2>Property</h2>
     </div>
     <div class='col-1-2 vertical-spacer'>
       <%= link_to 'Edit', edit_property_path(@property.id), class: 'link-button' %>
     </div>
-  </div>
-  <div class='grid'>
+    <div class='col-1-4 vertical-spacer grid-row'>
+      Property Id
+    </div>
+    <div class='col-3-4 vertical-spacer'>
+      <%= @property.human_ref %>
+    </div>
     <div class='col-1-4 vertical-spacer'>
       Client Id:
     </div>
     <div class='col-3-4 vertical-spacer'>
       <strong><%= @property.client_ref %></strong>
     </div>
-  </div>
-  <% @property.entities.each do |entity| %>
-    <div class='grid'>
-      <div class='col-1-4 vertical-spacer'>
-        Occupier
-       <%= heading entity %>
-      </div>
-      <div class='col-3-4 vertical-spacer'>
-        <strong><%= render 'shared/show_entity', object: entity %></strong>
-      </div>
+    <div class='col-1-4 vertical-spacer'>
+      Association
     </div>
-  <% end %>
-  <div class='grid'>
+    <div class='col-3-8 vertical-spacer'>
+      Occupier
+    </div>
+    <div class='col-3-8 vertical-spacer'>
+      Agent
+    </div>
+    <div class='col-1-4 vertical-spacer'>
+     <%= heading @property.entities.first %>
+    </div>
+    <div class='col-3-8 vertical-spacer'>
+      <strong><%= @property.entities.full_name %></strong>
+    </div>
+    <div class='col-3-8 vertical-spacer'>
+       <strong><%= @property.billing_profile.entities.full_name %></strong>
+    </div>
     <div class='col-1-4 vertical-spacer'>
       Address:
     </div>
-    <div class='col-3-4 vertical-spacer'>
-     <strong><%= render 'shared/show_1_line_address', object: @property %></strong>
+    <div class='col-3-8 vertical-spacer'>
+      <% @property.address_lines.each do |line| %>
+        <%= line %><br>
+      <% end %>
+    </div>
+    <div class='col-3-8 vertical-spacer'>
+      &nbsp;
     </div>
   </div>
-  <%= render 'show_billing_profile', object: @property.billing_profile %>
   <%= render 'show_charges', object: @property.account.charges %>
 </div>
 <br>

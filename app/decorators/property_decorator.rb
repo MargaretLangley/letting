@@ -22,11 +22,13 @@ class PropertyDecorator
     client && client.human_ref
   end
 
+  def address_name
+    source.entities.full_name
+  end
+
   def address_lines
     address_lines = []
-    address_lines << source.entities.full_name
-    address_lines << flat_line if address.flat_no?
-    address_lines << address.house_name if address.house_name?
+    address_lines << flat_line if flat_house_line.present?
     address_lines << road_line
     address_lines << address.district if address.district?
     address_lines << address.town if address.town?
@@ -36,16 +38,13 @@ class PropertyDecorator
   end
 
   def abbreviated_address
-    first_line  = source.entities.full_name
-    second_line = [ flat_line, house_name ].compact.join(', ')
-    second_line = road_line if second_line.blank?
-    [ first_line, second_line]
+    flat_house_line.blank? ? road_line : flat_line
   end
 
   private
 
   def flat_line
-    address.flat_no? ? "Flat #{address.flat_no}" : nil
+    flat_house_line.present? ? "Flat #{flat_house_line}" : nil
   end
 
   def house_name
@@ -54,5 +53,9 @@ class PropertyDecorator
 
   def road_line
     "#{address.road_no} #{address.road}".strip
+  end
+
+  def flat_house_line
+    "#{address.flat_no} #{address.house_name}".strip
   end
 end
