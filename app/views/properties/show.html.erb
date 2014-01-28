@@ -1,25 +1,53 @@
 <% @title='View Property' %>
 <%= render 'properties/search', path: properties_path, search_action: 'show', search_label: 'View Search' %>
 <div class='shell'>
-  <h2>Property Id:
-    <%= @property.human_ref %>
-     <span class='link-button'>
-      <%= link_to 'Edit', edit_property_path(@property.id) %>
-    </span>
-  </h2>
-  <span class='boldfloat'>Client Id: </span>
-  <%= @property.client_ref %>
 
-  <h3> Occupier</h3>
+
+  <div class='grid'>
+    <div class='col-1-2 vertical-spacer'>
+      <h2>Property Id:<%= @property.human_ref %></h2>
+    </div>
+    <div class='col-1-2 vertical-spacer'>
+      <span class='link-button'>
+       <%= link_to 'Edit', edit_property_path(@property.id) %>
+      </span>
+    </div>
+  </div>
+
+
+  <div class='grid'>
+    <div class='col-1-4 vertical-spacer'>
+      Client Id:
+    </div>
+    <div class='col-3-4 vertical-spacer'>
+      <strong><%=  @property.client_ref %></strong>
+    </div>
+  </div>
+
   <% @property.entities.each do |entity| %>
-    <%= render 'shared/show_entity', object: entity %>
+    <div class='grid'>
+      <div class='col-1-4 vertical-spacer'>
+        Occupier
+       <%= heading entity %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <strong><%= render 'shared/show_entity', object: entity %></strong>
+      </div>
+    </div>
   <% end %>
-  <h2>Address</h2>
-  <%= render 'shared/show_1_line_address', object: @property %>
+
+  <div class='grid'>
+    <div class='col-1-4 vertical-spacer'>
+      Address:
+    </div>
+    <div class='col-3-4 vertical-spacer'>
+     <strong><%= render 'shared/show_1_line_address', object: @property %></strong>
+    </div>
+  </div>
+
   <%= render 'show_billing_profile', object: @property.billing_profile %>
   <%= render 'show_charges', object: @property.account.charges %>
 </div>
-<p>
-  <span class='simple-button'><%= link_to 'Print This Page', '#', class: 'print-window'%></span>
-</p>
+<br>
+<span class='simple-button'><%= link_to 'Print This Page', '#', class: 'print-window'%></span>
 
