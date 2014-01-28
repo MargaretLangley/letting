@@ -132,7 +132,7 @@ describe Property do
       expect_bill_profile_has_original_attributes
       update_then_expect_properties_page
       navigate_to_property_view_page
-      expect(page).to have_text 'Billing Address'
+      expect(page).to have_text 'Rev V. W. Knutt'
       expect(page).to have_text '33'
     end
 
@@ -185,7 +185,7 @@ describe Property do
 
     def expect_new_bill_profile
       expect(page).to have_text 'Middlesex Road'
-      expect(page).to have_text 'G A R'
+      expect(page).to have_text 'G. A. R.'
       expect(page).to have_text 'Lock'
     end
 

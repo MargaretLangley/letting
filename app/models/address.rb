@@ -33,6 +33,23 @@ class Address < ActiveRecord::Base
                                  maximum: MAX_POSTCODE },
                        allow_blank: true
 
+  def address_lines
+    address_lines = []
+    if flat_house_line.present?
+      address_lines << flat_line
+    end
+    address_lines << road_line
+    address_lines << district if district?
+    address_lines << town if town?
+    address_lines << county if county?
+    address_lines << postcode if postcode?
+    address_lines
+  end
+
+  def abbreviated_address
+    flat_house_line.blank? ? road_line : flat_line
+  end
+
   def empty?
     attributes.except(*ignored_attrs).values.all?(&:blank?)
   end
@@ -47,7 +64,19 @@ class Address < ActiveRecord::Base
 
   private
 
-    def ignored_attrs
-      %w[id addressable_id addressable_type created_at updated_at]
-    end
+  def flat_line
+    flat_house_line.present? ? "Flat #{flat_house_line}" : nil
+  end
+
+  def road_line
+    "#{road_no} #{road}".strip
+  end
+
+  def flat_house_line
+    "#{flat_no} #{house_name}".strip
+  end
+
+  def ignored_attrs
+    %w[id addressable_id addressable_type created_at updated_at]
+  end
 end

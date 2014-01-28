@@ -47,7 +47,7 @@ describe Property do
 
   def expect_billing_entity
     expect(page).to have_text 'Rev'
-    expect(page).to have_text 'V W'
+    expect(page).to have_text 'V. W.'
     expect(page).to have_text 'Knutt'
   end
 

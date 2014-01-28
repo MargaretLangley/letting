@@ -6,7 +6,7 @@ end
 
 def expect_entity_wg_grace
   expect(page).to have_text 'Mr'
-  expect(page).to have_text 'W G'
+  expect(page).to have_text 'W. G.'
   expect(page).to have_text 'Grace'
 end
 
@@ -24,6 +24,6 @@ end
 
 def expect_entity_dc_compton
   expect(page).to have_text 'Mr'
-  expect(page).to have_text 'D C S'
+  expect(page).to have_text 'D. C. S.'
   expect(page).to have_text 'Compton'
 end

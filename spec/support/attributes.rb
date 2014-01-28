@@ -32,6 +32,17 @@ def address_attributes overrides = {}
   }.merge overrides
 end
 
+def house_address_attributes overrides = {}
+  {
+    road_no:  '294',
+    road:     'Edgbaston Road',
+    district: 'Edgbaston',
+    town:     'Birmingham',
+    county:   'West Midlands',
+    postcode: 'B5 7QU'
+  }.merge overrides
+end
+
 def oval_address_attributes overrides = {}
   {
     flat_no:  '33',

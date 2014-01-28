@@ -27,23 +27,9 @@ describe PropertyDecorator do
 
   it 'writes flat property' do
     expect(property.address_lines[0]).to eq 'Flat 47 Hillbank House'
-    expect(property.address_lines[1]).to eq '294 Edgbaston Road'
-    expect(property.address_lines[2]).to eq 'Edgbaston'
-    expect(property.address_lines[3]).to eq 'Birmingham'
-    expect(property.address_lines[4]).to eq 'West Midlands'
-    expect(property.address_lines[5]).to eq 'B5 7QU'
   end
 
-  it 'writes house from road' do
-    expect(house.address_lines[0]).to eq '294 Edgbaston Road'
-  end
-
-  context 'abbreviated_address' do
-    it 'generates flat address' do
-      expect(property.abbreviated_address).to eq 'Flat 47 Hillbank House'
-    end
-    it 'generates house address' do
-      expect(house.abbreviated_address).to eq '294 Edgbaston Road'
-    end
+  it 'generates abbrivated address' do
+    expect(property.abbreviated_address).to eq 'Flat 47 Hillbank House'
   end
 end

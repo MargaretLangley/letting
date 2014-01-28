@@ -36,7 +36,11 @@
       <strong><%= @property.entities.full_name %></strong>
     </div>
     <div class='col-3-8 vertical-spacer'>
-       <strong><%= @property.billing_profile.entities.full_name %></strong>
+      <% if @property.billing_profile.use_profile? %>
+        <strong><%= @property.billing_profile.entities.full_name %></strong>
+      <% else %>
+        None
+      <% end %>
     </div>
     <div class='col-1-4 vertical-spacer'>
       Address:
@@ -47,7 +51,13 @@
       <% end %>
     </div>
     <div class='col-3-8 vertical-spacer'>
-      &nbsp;
+      <% if @property.billing_profile.use_profile? %>
+        <% @property.billing_profile.address.address_lines.each do |line| %>
+          <%= line %><br>
+        <% end %>
+      <% else %>
+        Billing to property address
+      <% end %>
     </div>
   </div>
   <%= render 'show_charges', object: @property.account.charges %>

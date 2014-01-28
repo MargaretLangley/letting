@@ -119,6 +119,34 @@ describe Address do
   end
 
   context 'methods' do
+    context '#address_lines' do
+      it 'writes flat property' do
+        address = Address.new address_attributes
+        expect(address.address_lines[0]).to eq 'Flat 47 Hillbank House'
+        expect(address.address_lines[1]).to eq '294 Edgbaston Road'
+        expect(address.address_lines[2]).to eq 'Edgbaston'
+        expect(address.address_lines[3]).to eq 'Birmingham'
+        expect(address.address_lines[4]).to eq 'West Midlands'
+        expect(address.address_lines[5]).to eq 'B5 7QU'
+      end
+
+      it 'writes house from road' do
+        house = Address.new house_address_attributes
+        expect(house.address_lines[0]).to eq '294 Edgbaston Road'
+      end
+    end
+
+    context 'abbreviated_address' do
+      it 'generates flat address' do
+        address = Address.new address_attributes
+        expect(address.abbreviated_address).to eq 'Flat 47 Hillbank House'
+      end
+      it 'generates house address' do
+        house = Address.new house_address_attributes
+        expect(house.abbreviated_address).to eq '294 Edgbaston Road'
+      end
+    end
+
     context'#empty?' do
       let(:address) { Address.new }
       it 'empty' do
