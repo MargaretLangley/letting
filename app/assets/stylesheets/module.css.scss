@@ -73,6 +73,7 @@ a.warn{
 }
 
 .grid-header{
+  padding-top: 1%;  /* for pick-out color not to end next to top of letters */
   border-bottom: 1px solid $background-filler;
   color: $secondary-text-color;
 }
