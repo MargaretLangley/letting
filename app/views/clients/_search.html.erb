@@ -3,7 +3,7 @@
 	  <p>
 	     <%= text_field_tag :search, params[:search], data: {autocomplete_source: search_properties_path }, autofocus:true, class: 'noshowprint'  %>
 	     <%= hidden_field_tag :search_action, search_action %>
-	     <%= submit_tag search_label, name: nil, class: 'search' %>
+	     <%= submit_tag search_label, name: nil %>
 	  	</p>
 	<% end %>
 </div>
