@@ -1,8 +1,6 @@
 <% if object.use_profile? %>
   <% if object.entities.any? %>
-
     <% object.entities.each do |entity| %>
-
       <div class='grid'>
         <div class='col-1-4 vertical-spacer'>
           Agent
@@ -12,8 +10,6 @@
         </div>
       </div>
     <% end %>
-
-
     <div class='grid'>
       <div class='col-1-4 vertical-spacer'>
         Billing Address
@@ -22,7 +18,6 @@
           <strong><%= render 'shared/show_1_line_address', object: object.bill_to %></strong>
       </div>
     </div>
-
   <% end %>
 <% else %>
  Billing to property address

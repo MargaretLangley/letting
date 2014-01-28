@@ -1,8 +1,6 @@
 <% @title='View Property' %>
 <%= render 'properties/search', path: properties_path, search_action: 'show', search_label: 'View Search' %>
 <div class='shell'>
-
-
   <div class='grid'>
     <div class='col-1-2 vertical-spacer'>
       <h2>Property Id:<%= @property.human_ref %></h2>
@@ -13,8 +11,6 @@
       </span>
     </div>
   </div>
-
-
   <div class='grid'>
     <div class='col-1-4 vertical-spacer'>
       Client Id:
@@ -23,7 +19,6 @@
       <strong><%=  @property.client_ref %></strong>
     </div>
   </div>
-
   <% @property.entities.each do |entity| %>
     <div class='grid'>
       <div class='col-1-4 vertical-spacer'>
@@ -35,7 +30,6 @@
       </div>
     </div>
   <% end %>
-
   <div class='grid'>
     <div class='col-1-4 vertical-spacer'>
       Address:
@@ -44,10 +38,8 @@
      <strong><%= render 'shared/show_1_line_address', object: @property %></strong>
     </div>
   </div>
-
   <%= render 'show_billing_profile', object: @property.billing_profile %>
   <%= render 'show_charges', object: @property.account.charges %>
 </div>
 <br>
 <span class='simple-button'><%= link_to 'Print This Page', '#', class: 'print-window'%></span>
-
