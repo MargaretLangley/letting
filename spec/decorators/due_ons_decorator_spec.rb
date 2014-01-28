@@ -33,13 +33,13 @@ describe DueOnsDecorator do
         expect(due_ons_dec.hidden_side? DueOn::ON_DATE).to eq ''
       end
       it 'visible' do
-        expect(due_ons_dec.hidden_side? DueOn::PER_MONTH).to eq 'hidden'
+        expect(due_ons_dec.hidden_side? DueOn::PER_MONTH).to eq 'revealable'
       end
     end
     context 'monthly' do
       it 'hides on date' do
         due_ons_dec.build day: 1, month: DueOn::PER_MONTH
-        expect(due_ons_dec.hidden_side? DueOn::ON_DATE).to eq 'hidden'
+        expect(due_ons_dec.hidden_side? DueOn::ON_DATE).to eq 'revealable'
       end
       it 'visible' do
         due_ons_dec.build day: 1, month: DueOn::PER_MONTH

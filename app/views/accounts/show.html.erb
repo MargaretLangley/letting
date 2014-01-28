@@ -22,7 +22,7 @@
     <br>
     <%= render 'show_accounts', items: AccountDecorator.new(@property.account).abbrev_items %>
   </div>
-<div class='js-togglable hidden'>
+<div class='js-togglable revealable'>
   <%= link_to 'Partial Accounts', '#', class: 'js-toggle toggle-event' %>
   <%= render 'show_accounts', items: AccountDecorator.new(@property.account).items %>
   </div>
