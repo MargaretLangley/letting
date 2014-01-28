@@ -14,36 +14,36 @@
   </div>
   <div class='grid'>
     <div class='col-1-4 vertical-spacer'>
-      <strong>Client ID:</strong>
+      Client ID:
     </div>
     <div class='col-3-4 vertical-spacer'>
-      <%= @client.human_ref %>
+      <strong><%= @client.human_ref %></strong>
     </div>
   </div>
   <% @client.entities.each do |entity| %>
     <div class='grid'>
       <div class='col-1-4 vertical-spacer'>
-       <strong><%= heading entity %></strong>
+       <%= heading entity %>
       </div>
       <div class='col-3-4 vertical-spacer'>
-        <%= render 'shared/show_entity', object: entity %>
+        <strong><%= render 'shared/show_entity', object: entity %></strong>
       </div>
     </div>
   <% end %>
   <div class='grid'>
     <div class='col-1-4 vertical-spacer'>
-      <strong>Address:</strong>
+      Address:
     </div>
     <div class='col-3-4 vertical-spacer'>
-     <%= render 'shared/show_1_line_address', object: @client %>
+     <strong><%= render 'shared/show_1_line_address', object: @client %></strong>
     </div>
   </div>
   <div class='grid'>
     <div class='col-1-4 vertical-spacer'>
-      <strong>Properties</strong>
+      Properties
     </div>
     <div class='col-3-4 vertical-spacer'>
-     <strong>Addresses</strong>
+     Addresses
     </div>
   </div>
   <% @client.properties.each do |property| %>
