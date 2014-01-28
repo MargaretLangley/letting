@@ -2,15 +2,6 @@
 
 @import "colors";
 
-@mixin top{
-  margin-top: 1.5%;
-  border-top: 1px solid $background-filler;
-}
-
-.top{
-  @include top;
-}
-
 .revealable, .hidden{
   display: none;
 }
