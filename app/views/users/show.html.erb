@@ -2,9 +2,7 @@
 <div class='shell'>
   <h2>User ID:
     <%= @user.id %>
-    <span class='link-button'>
-      <%= link_to 'Edit', edit_user_path(@user) %>
-    </span>
+      <%= link_to 'Edit', edit_user_path(@user), class: 'link-button' %>
   </h2>
   <span class='boldfloat'>email:</span><%= @user.email %>
   <span class='boldfloat'>Admin:</span>
