@@ -147,11 +147,21 @@ hr {
 \*---------------------------------------------------*/
 
 
+
 input,
 textarea{
+  padding: 2%;
   border: 1px solid $subdued-color;
   border-radius: 5px;
   width: 90%;
 }
 
+input[type=submit]{
+  padding: 2%;
+}
+
+input[readonly='readonly']{
+  background-color: Gainsboro;
+  color:  $primary-text-color;
+}
 
