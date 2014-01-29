@@ -1,8 +1,0 @@
-<h3>Charges</h3>
-<% if object.any? %>
-  <% object.each do |charge| %>
-    <%= render 'show_charge', object: charge %>
-  <% end %>
-<% else %>
-  No charges levied against this property.
-<% end %>
