@@ -1,6 +1,6 @@
 module PropertiesHelper
   def heading entity
-    entity.company? ? 'Company Name: ' : 'Name:'
+    entity.company? ? 'Company Name ' : 'Name'
   end
 
   def hide_or_destroy record
