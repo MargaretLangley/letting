@@ -7,16 +7,27 @@
 
 <div class='js-toggle-selection'>
   <div class='js-togglable'>
-    <br>
-    <%= link_to 'Full Accounts', '#', class: 'js-toggle toggle-event' %>
+
     <div class='grid shell'>
+      <div class='col-3-4 vertical-spacer'>
+        <h3>Accounts</h3>
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        <%= link_to 'Full Accounts', '#', class: 'js-toggle toggle-event link-button' %>
+      </div>
       <%= render 'properties/show/account_header' %>
       <%= render partial: 'properties/show/account_item', collection: AccountDecorator.new(@property.account).abbrev_items %>
     </div>
   </div>
   <div class='js-togglable revealable'>
-    <%= link_to 'Partial Accounts', '#', class: 'js-toggle toggle-event' %>
+
     <div class='grid shell'>
+      <div class='col-3-4 vertical-spacer'>
+        <h3>Accounts</h3>
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        <%= link_to 'Partial Accounts', '#', class: 'js-toggle toggle-event link-button' %>
+      </div>
       <%= render 'properties/show/account_header' %>
       <%= render partial: 'properties/show/account_item', collection: AccountDecorator.new(@property.account).items %>
     </div>

@@ -211,7 +211,7 @@ describe Property do
       uncheck 'Use Agent'
       update_then_expect_properties_page
       navigate_to_property_view_page
-      expect(page).to have_text /Billing to property address/i
+      expect(page).to have_text /None/i
     end
 
     context 'charge' do

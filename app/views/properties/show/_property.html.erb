@@ -1,47 +1,49 @@
 <div class='col-1-2 vertical-spacer'>
-  <h2>Property</h2>
+  <h3>Property</h3>
 </div>
 <div class='col-1-2 vertical-spacer'>
   <%= link_to 'Edit', edit_property_path(property.id), class: 'link-button' %>
 </div>
-<div class='col-1-4 vertical-spacer grid-row'>
+<div class='col-1-4 vertical-spacer grid-row grid-sub-header'>
   Property Id
 </div>
 
 <div class='col-3-4 vertical-spacer'>
   <%= property.human_ref %>
 </div>
-<div class='col-1-4 vertical-spacer'>
+<div class='col-1-4 vertical-spacer grid-sub-header'>
   Client Id
 </div>
 <div class='col-3-4 vertical-spacer'>
-  <strong><%= property.client_ref %></strong>
+  <%= property.client_ref %>
 </div>
-
-<div class='col-1-4 vertical-spacer'>
+<div class='col-1-1'>
+  &nbsp;
+</div>
+<div class='col-1-4 vertical-spacer grid-header'>
   Association
 </div>
-<div class='col-3-8 vertical-spacer'>
+<div class='col-3-8 vertical-spacer grid-header'>
   Occupier
 </div>
-<div class='col-3-8 vertical-spacer'>
+<div class='col-3-8 vertical-spacer grid-header'>
   Agent
 </div>
 
-<div class='col-1-4 vertical-spacer'>
+<div class='col-1-4 vertical-spacer grid-sub-header'>
  <%= heading property.entities.first %>
 </div>
 <div class='col-3-8 vertical-spacer'>
-  <strong><%= property.entities.full_name %></strong>
+  <%= property.entities.full_name %>
 </div>
 <div class='col-3-8 vertical-spacer'>
   <% if property.billing_profile.use_profile? %>
-    <strong><%= property.billing_profile.entities.full_name %></strong>
+    <%= property.billing_profile.entities.full_name %>
   <% else %>
     None
   <% end %>
 </div>
-<div class='col-1-4 vertical-spacer'>
+<div class='col-1-4 vertical-spacer grid-sub-header'>
   Address
 </div>
 <div class='col-3-8 vertical-spacer'>
@@ -55,6 +57,6 @@
       <%= line %><br>
     <% end %>
   <% else %>
-    Billing to property address
+    None
   <% end %>
 </div>
