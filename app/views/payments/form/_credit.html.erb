@@ -5,16 +5,16 @@
   <div class="col-1-8 cell">
     &nbsp;
   </div>
-  <div class="col-1-8 cell number amount">
+  <div class="col-1-8 cell r-align amount">
     <%= number_to_currency credit.amount %>
   </div>
-  <div class="col-1-8 cell number amount">
+  <div class="col-1-8 cell r-align amount">
     <%= number_to_currency credit.owing %>
   </div>
   <div class="col-3-8 cell pick-out">
     <%= credit_form.hidden_field :account_id %>
     <%= credit_form.hidden_field :charge_id %>
     <%= credit_form.hidden_field :on_date %>
-    <%= credit_form.text_field :amount , value: credit.amount, class: 'number js-amount nested-element' %>
+    <%= credit_form.text_field :amount , value: credit.amount, class: 'js-amount r-align nested-element' %>
   </div>
 </div>

@@ -82,13 +82,13 @@
       <div class='col-1-4 vertical-spacer'>
         Description
       </div>
-      <div class='col-1-8 vertical-spacer'>
+      <div class='col-1-8 vertical-spacer r-align'>
         Due
       </div>
-      <div class='col-1-8 vertical-spacer'>
+      <div class='col-1-8 vertical-spacer r-align'>
         Payment
       </div>
-      <div class='col-1-8 vertical-spacer'>
+      <div class='col-1-8 vertical-spacer r-align'>
         Balance
       </div>
       <%= render partial: 'account_item', collection: AccountDecorator.new(@property.account).abbrev_items %>
@@ -96,8 +96,6 @@
   </div>
   <div class='js-togglable revealable'>
     <%= link_to 'Partial Accounts', '#', class: 'js-toggle toggle-event' %>
-     <!-- render 'show_accounts', items: AccountDecorator.new(@property.account).items  -->
-
      <div class='grid shell'>
       <div class='col-1-8 vertical-spacer'>
         Date
@@ -108,13 +106,13 @@
       <div class='col-1-4 vertical-spacer'>
         Description
       </div>
-      <div class='col-1-8 vertical-spacer'>
+      <div class='col-1-8 vertical-spacer r-align'>
         Due
       </div>
-      <div class='col-1-8 vertical-spacer'>
+      <div class='col-1-8 vertical-spacer r-align'>
         Payment
       </div>
-      <div class='col-1-8 vertical-spacer'>
+      <div class='col-1-8 vertical-spacer r-align'>
         Balance
       </div>
       <%= render partial: 'account_item', collection: AccountDecorator.new(@property.account).items %>
