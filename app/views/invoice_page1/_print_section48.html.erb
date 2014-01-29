@@ -1,6 +1,7 @@
 <% dotted_line = "-------------" %>
 <% namestr = render file: 'invoice_texts/name.txt' %>
-<div class='inv-advice'>
+<div class='inv-advice grid-row'>
+ <br>
   We <%= namestr.upcase %> ON BEHALF OF YOUR LANDLORD
   <br>
   <%= object.entities.full_name %>
