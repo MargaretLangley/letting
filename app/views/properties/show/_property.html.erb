@@ -1,0 +1,60 @@
+<div class='col-1-2 vertical-spacer'>
+  <h2>Property</h2>
+</div>
+<div class='col-1-2 vertical-spacer'>
+  <%= link_to 'Edit', edit_property_path(property.id), class: 'link-button' %>
+</div>
+<div class='col-1-4 vertical-spacer grid-row'>
+  Property Id
+</div>
+
+<div class='col-3-4 vertical-spacer'>
+  <%= property.human_ref %>
+</div>
+<div class='col-1-4 vertical-spacer'>
+  Client Id
+</div>
+<div class='col-3-4 vertical-spacer'>
+  <strong><%= property.client_ref %></strong>
+</div>
+
+<div class='col-1-4 vertical-spacer'>
+  Association
+</div>
+<div class='col-3-8 vertical-spacer'>
+  Occupier
+</div>
+<div class='col-3-8 vertical-spacer'>
+  Agent
+</div>
+
+<div class='col-1-4 vertical-spacer'>
+ <%= heading property.entities.first %>
+</div>
+<div class='col-3-8 vertical-spacer'>
+  <strong><%= property.entities.full_name %></strong>
+</div>
+<div class='col-3-8 vertical-spacer'>
+  <% if property.billing_profile.use_profile? %>
+    <strong><%= property.billing_profile.entities.full_name %></strong>
+  <% else %>
+    None
+  <% end %>
+</div>
+<div class='col-1-4 vertical-spacer'>
+  Address
+</div>
+<div class='col-3-8 vertical-spacer'>
+  <% property.address_lines.each do |line| %>
+    <%= line %><br>
+  <% end %>
+</div>
+<div class='col-3-8 vertical-spacer'>
+  <% if property.billing_profile.use_profile? %>
+    <% property.billing_profile.address.address_lines.each do |line| %>
+      <%= line %><br>
+    <% end %>
+  <% else %>
+    Billing to property address
+  <% end %>
+</div>
