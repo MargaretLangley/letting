@@ -1,0 +1,22 @@
+<div class='col-1-1'>
+  <h3>Charges</h3>
+</div>
+
+<div class='col-1-4 vertical-spacer grid-header'>
+  Charge
+</div>
+<div class='col-1-4 vertical-spacer grid-header'>
+  Payment
+</div>
+<div class='col-1-4 vertical-spacer grid-header'>
+  Amount
+</div>
+<div class='col-1-4 vertical-spacer grid-header'>
+  Due
+</div>
+
+<% if charges.any? %>
+  <%= render partial: '/properties/show/charge', collection: charges %>
+<% else %>
+  No charges levied against this property.
+<% end %>

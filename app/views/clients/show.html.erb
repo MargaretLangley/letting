@@ -28,7 +28,7 @@
     Address:
   </div>
   <div class='col-3-4 vertical-spacer'>
-   <strong><%= render 'shared/show_1_line_address', object: @client %></strong>
+   <strong><%= render 'shared/show_1_line_address', addressee: @client %></strong>
   </div>
 
   <div class='col-1-4 vertical-spacer'>
@@ -43,7 +43,7 @@
        <%= property.human_ref %>
     </div>
     <div class='col-3-4 vertical-spacer'>
-     <%= render 'shared/show_1_line_address', object: property %>
+     <%= render 'shared/show_1_line_address', addressee: property %>
     </div>
   <% end %>
 </div>

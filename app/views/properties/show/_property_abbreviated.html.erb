@@ -1,0 +1,31 @@
+<div class='col-1-4 vertical-spacer grid-row grid-header'>
+  Property Id
+</div>
+<div class='col-1-4 vertical-spacer grid-header'>
+  Client Id
+</div>
+<div class='col-1-4 vertical-spacer grid-header'>
+  Occupier
+</div>
+<div class='col-1-4 vertical-spacer grid-header'>
+  Agent
+</div>
+
+
+<div class='col-1-4 vertical-spacer'>
+  <%= property.human_ref %>
+</div>
+
+<div class='col-1-4 vertical-spacer'>
+  <%= property.client_ref %>
+</div>
+<div class='col-1-4 vertical-spacer'>
+  <%= property.entities.full_name %>
+</div>
+<div class='col-1-4 vertical-spacer'>
+  <% if property.billing_profile.use_profile? %>
+    <%= property.billing_profile.entities.full_name %>
+  <% else %>
+    None
+  <% end %>
+</div>

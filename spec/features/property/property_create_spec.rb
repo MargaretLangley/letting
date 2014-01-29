@@ -167,6 +167,7 @@ describe Property do
     end
 
     def expect_property_address
+      click_on 'Full Property'
       expect_address_nottingham
     end
 

@@ -1,0 +1,56 @@
+<div class='col-1-4 vertical-spacer grid-row grid-sub-header'>
+  Property Id
+</div>
+
+<div class='col-3-4 vertical-spacer'>
+  <%= property.human_ref %>
+</div>
+<div class='col-1-4 vertical-spacer grid-sub-header'>
+  Client Id
+</div>
+<div class='col-3-4 vertical-spacer'>
+  <%= property.client_ref %>
+</div>
+<div class='col-1-1'>
+  &nbsp;
+</div>
+<div class='col-1-4 vertical-spacer grid-header'>
+  Association
+</div>
+<div class='col-3-8 vertical-spacer grid-header'>
+  Occupier
+</div>
+<div class='col-3-8 vertical-spacer grid-header'>
+  Agent
+</div>
+
+<div class='col-1-4 vertical-spacer grid-sub-header'>
+ <%= heading property.entities.first %>
+</div>
+<div class='col-3-8 vertical-spacer'>
+  <%= property.entities.full_name %>
+</div>
+<div class='col-3-8 vertical-spacer'>
+  <% if property.billing_profile.use_profile? %>
+    <%= property.billing_profile.entities.full_name %>
+  <% else %>
+    None
+  <% end %>
+</div>
+<div class='col-1-4 vertical-spacer grid-sub-header'>
+  Address
+</div>
+<div class='col-3-8 vertical-spacer'>
+  <% property.address_lines.each do |line| %>
+    <%= line %><br>
+  <% end %>
+</div>
+<div class='col-3-8 vertical-spacer'>
+  <% if property.billing_profile.use_profile? %>
+    <% property.billing_profile.address.address_lines.each do |line| %>
+      <%= line %><br>
+    <% end %>
+  <% else %>
+    None
+  <% end %>
+</div>

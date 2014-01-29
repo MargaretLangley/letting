@@ -84,6 +84,11 @@ a.warn{
   color: $secondary-text-color;
 }
 
+.grid-sub-header{
+  color: $secondary-text-color;
+}
+
+
 /* Wanted to emphasise the payment column. However it
    looks odd if elements are at the point the colour
    changes. So I've padded it. Only used on payment */
