@@ -1,4 +1,19 @@
-<h3>Charges</h3>
+<div class='col-1-1 vertical-spacer'>
+  <h3>Charges</h3>
+</div>
+
+<div class='col-1-4 vertical-spacer'>
+  Charge
+</div>
+<div class='col-1-4 vertical-spacer'>
+  Payment
+</div>
+<div class='col-1-4 vertical-spacer'>
+  Amount
+</div>
+<div class='col-1-4 vertical-spacer'>
+  Due
+</div>
 <% if object.any? %>
   <% object.each do |charge| %>
     <%= render 'show_charge', object: charge %>

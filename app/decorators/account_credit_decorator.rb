@@ -4,6 +4,8 @@ class AccountCreditDecorator
   include MethodMissing
   include ActionView::Helpers::NumberHelper
 
+  attr_accessor :balance
+
   def initialize credit
     @source = credit
   end
@@ -24,7 +26,7 @@ class AccountCreditDecorator
     number_with_precision(@source.amount, precision: 2)
   end
 
-  def balance
+  def amount
     -@source.amount
   end
 end

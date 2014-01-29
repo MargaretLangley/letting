@@ -63,5 +63,66 @@
   </div>
   <%= render 'show_charges', object: @property.account.charges %>
 </div>
+
+
+<div class='js-toggle-selection'>
+  <div class='js-togglable'>
+    <br>
+    <%= link_to 'Full Accounts', '#', class: 'js-toggle toggle-event' %>
+    <br>
+    <!-- render 'show_accounts', items: AccountDecorator.new(@property.account).abbrev_items -->
+
+    <div class='grid shell'>
+      <div class='col-1-8 vertical-spacer'>
+        Date
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        Type
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        Description
+      </div>
+      <div class='col-1-8 vertical-spacer'>
+        Due
+      </div>
+      <div class='col-1-8 vertical-spacer'>
+        Payment
+      </div>
+      <div class='col-1-8 vertical-spacer'>
+        Balance
+      </div>
+      <%= render partial: 'account_item', collection: AccountDecorator.new(@property.account).abbrev_items %>
+    </div>
+  </div>
+  <div class='js-togglable revealable'>
+    <%= link_to 'Partial Accounts', '#', class: 'js-toggle toggle-event' %>
+     <!-- render 'show_accounts', items: AccountDecorator.new(@property.account).items  -->
+
+     <div class='grid shell'>
+      <div class='col-1-8 vertical-spacer'>
+        Date
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        Type
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        Description
+      </div>
+      <div class='col-1-8 vertical-spacer'>
+        Due
+      </div>
+      <div class='col-1-8 vertical-spacer'>
+        Payment
+      </div>
+      <div class='col-1-8 vertical-spacer'>
+        Balance
+      </div>
+      <%= render partial: 'account_item', collection: AccountDecorator.new(@property.account).items %>
+    </div>
+  </div>
+</div>
+
+
+
 <br>
 <%= link_to 'Print This Page', '#', class: 'print-window  simple-button'%>

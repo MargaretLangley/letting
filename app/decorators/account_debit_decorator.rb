@@ -4,6 +4,8 @@ class AccountDebitDecorator
   include MethodMissing
   include ActionView::Helpers::NumberHelper
 
+  attr_accessor :balance
+
   def initialize debit
     @source = debit
   end
@@ -24,7 +26,7 @@ class AccountDebitDecorator
     ''
   end
 
-  def balance
+  def amount
     @source.amount
   end
 end

@@ -22,8 +22,8 @@ describe AccountDebitDecorator do
       expect(debit_dec.payment).to eq ''
     end
 
-    it 'balance' do
-      expect(debit_dec.balance).to eq 88.08
+    it 'amount' do
+      expect(debit_dec.amount).to eq 88.08
     end
   end
 end

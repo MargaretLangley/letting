@@ -223,7 +223,8 @@ describe Property do
         fill_in_due_on_on_date
         update_then_expect_properties_page
         navigate_to_property_view_page
-        expect(page).to have_text 'Service Charge in Arrears'
+        expect(page).to have_text 'Service Charge'
+        expect(page).to have_text 'Arrears'
         expect(page).to have_text '£100.08'
       end
 
@@ -252,7 +253,8 @@ describe Property do
         fill_in_due_on_per_month
         update_then_expect_properties_page
         navigate_to_property_view_page
-        expect(page).to have_text 'Service Charge in Arrears'
+        expect(page).to have_text 'Service Charge'
+        expect(page).to have_text 'Arrears'
         expect(page).to have_text '£100.08'
       end
 

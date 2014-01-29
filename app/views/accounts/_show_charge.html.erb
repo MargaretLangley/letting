@@ -1,11 +1,23 @@
-<span class='floatleft'><%= object.charge_type %> in
-<%= object.due_in %></span>
-<%= number_to_currency object.amount %>
-<% dec_due_ons = DueOnsDecorator.new(object.due_ons)
-if dec_due_ons.monthly? %>
-  <%= "- due #{dec_due_ons.per_month.day.ordinalize} of the month" %>
-<% elsif %>
-  <% dec_due_ons.each do |due_on| %>
-   <%= render 'show_due_on', object: due_on %>
+<div class='col-1-4 vertical-spacer'>
+  <%= object.charge_type %>
+</div>
+<div class='col-1-4 vertical-spacer'>
+  <%= object.due_in %>
+</div>
+<div class='col-1-4 vertical-spacer'>
+  <%= number_to_currency object.amount %>
+</div>
+<div class='col-1-4 vertical-spacer'>
+  <% dec_due_ons = DueOnsDecorator.new(object.due_ons)
+  if dec_due_ons.monthly? %>
+    <%= "- due #{dec_due_ons.per_month.day.ordinalize} of the month" %>
+  <% elsif %>
+    <% dec_due_ons.each do |due_on| %>
+     <%= render 'show_due_on', object: due_on %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
+
+
+
+

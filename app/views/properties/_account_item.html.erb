@@ -1,0 +1,18 @@
+<div class='col-1-8 vertical-spacer'>
+  <%= account_item.date %>
+</div>
+<div class='col-1-4 vertical-spacer'>
+  <%= account_item.charge_type %>
+</div>
+<div class='col-1-4 vertical-spacer'>
+  &nbsp;
+</div>
+<div class='col-1-8 vertical-spacer'>
+  <%= account_item.due %>
+</div>
+<div class='col-1-8 vertical-spacer'>
+  <%= account_item.payment %>
+</div>
+<div class='col-1-8 vertical-spacer'>
+  <%= number_with_precision(account_item.balance,precision: 2) %>
+</div>
