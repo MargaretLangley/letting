@@ -1,7 +1,41 @@
+<% content_for :heading do %>
+  <div class='col-3-4'>
+    <h2>View Property</h2>
+  </div>
+  <div class='col-1-4'>
+    <%= link_to 'Edit', edit_property_path(@property.id), class: 'link-button' %>
+  </div>
+<% end %>
+
 <% @title='View Property' %>
 <%= render 'properties/search', path: properties_path, search_action: 'show', search_label: 'View Search' %>
+
+<div class='js-toggle-selection'>
+  <div class='js-togglable'>
+    <div class='grid shell'>
+      <div class='col-1-2'>
+        <h3>Property &hellip;</h3>
+      </div>
+      <div class='col-1-2 vertical-spacer'>
+        <%= link_to 'Full Property', '#', class: 'js-toggle toggle-event link-button' %>
+      </div>
+      <%= render 'properties/show/property_abbreviated', property: @property %>
+    </div>
+  </div>
+  <div class='js-togglable  revealable'>
+    <div class='grid shell'>
+      <div class='col-1-2'>
+        <h3>Property</h3>
+      </div>
+      <div class='col-1-2 vertical-spacer'>
+        <%= link_to 'Partial Property', '#', class: 'js-toggle toggle-event link-button' %>
+      </div>
+      <%= render 'properties/show/property', property: @property %>
+    </div>
+  </div>
+</div>
+
 <div class='grid shell'>
-  <%= render 'properties/show/property', property: @property %>
   <%= render 'properties/show/charges', charges: @property.account.charges %>
 </div>
 
@@ -9,8 +43,8 @@
   <div class='js-togglable'>
 
     <div class='grid shell'>
-      <div class='col-3-4 vertical-spacer'>
-        <h3>Accounts</h3>
+      <div class='col-3-4'>
+        <h3>Accounts &hellip;</h3>
       </div>
       <div class='col-1-4 vertical-spacer'>
         <%= link_to 'Full Accounts', '#', class: 'js-toggle toggle-event link-button' %>
@@ -22,7 +56,7 @@
   <div class='js-togglable revealable'>
 
     <div class='grid shell'>
-      <div class='col-3-4 vertical-spacer'>
+      <div class='col-3-4'>
         <h3>Accounts</h3>
       </div>
       <div class='col-1-4 vertical-spacer'>

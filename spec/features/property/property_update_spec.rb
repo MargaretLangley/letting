@@ -19,6 +19,7 @@ describe Property do
       update_then_expect_properties_page
       expect_property_data_changed
       navigate_to_property_view_page
+      click_on 'Full Property'
       expect_property_updates
     end
 
@@ -150,6 +151,7 @@ describe Property do
       fill_in_bill_profile
       update_then_expect_properties_page
       navigate_view_by_property property
+      click_on 'Full Property'
       expect_new_bill_profile
     end
 
@@ -178,14 +180,12 @@ describe Property do
 
     def fill_in_bill_profile_entity
       within '#billing_profile_entity_0' do
-        fill_in 'Initials', with: 'G A R'
         fill_in 'Name', with: 'Lock'
       end
     end
 
     def expect_new_bill_profile
       expect(page).to have_text 'Middlesex Road'
-      expect(page).to have_text 'G. A. R.'
       expect(page).to have_text 'Lock'
     end
 
