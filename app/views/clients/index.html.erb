@@ -1,52 +1,54 @@
 <% @title='Clients' %>
 <%= render 'clients/search', path: clients_path, search_action: 'index', search_label: 'Search List' %>
+  <div class='grid shell'>
 
-<div class='col-1-12 vertical-spacer grid-header r-align'>
-  ID
-</div>
-<div class='col-1-12 vertical-spacer grid-header'>
-  Intials
-</div>
-<div class='col-3-12 vertical-spacer grid-header'>
-  Name
-</div>
-<div class='col-1-12 vertical-spacer grid-header r-align'>
-  No
-</div>
-<div class='col-4-12 vertical-spacer grid-header'>
- Road
-</div>
-<div class='col-2-12 vertical-spacer grid-header r-align'>
-  Actions
-</div>
+   <% if @clients.present? %>
+    <div class='col-1-12 vertical-spacer grid-header r-align'>
+      ID
+    </div>
+    <div class='col-1-12 vertical-spacer grid-header'>
+      Intials
+    </div>
+    <div class='col-3-12 vertical-spacer grid-header'>
+      Name
+    </div>
+    <div class='col-1-12 vertical-spacer grid-header r-align'>
+      No
+    </div>
+    <div class='col-4-12 vertical-spacer grid-header'>
+     Road
+    </div>
+    <div class='col-2-12 vertical-spacer grid-header r-align'>
+      Actions
+    </div>
 
-<% if @clients.present? %>
-  <% @clients.each do |client| %>
+    <% @clients.each do |client| %>
 
-    <div class='col-1-12 vertical-spacer r-align'>
-       <%= link_to client.human_ref, edit_client_path(client) %>
-    </div>
-    <div class='col-1-12 vertical-spacer'>
-        <%= format_empty_string_as_dash client.entities.first.initials %>
-    </div>
-    <div class='col-3-12'>
-       <%= client.entities.first.name %>
-    </div>
-    <div class='col-1-12 r-align'>
-     <%= client.address.road_no %>
-    </div>
-    <div class='col-3-12 vertical-spacer'>
-      <%= client.address.road %>
-    </div>
-    <div class='col-3-12 vertical-spacer r-align no-r-pad'>
-      <%= link_to 'Edit', edit_client_path(client) %> |
-      <%= link_to 'View', client_path(client) %> |
-      <%= link_to 'Delete', client, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </div>
-  <% end %>
-<% else %>
-  <div colspan ="9" class='atcenter'>
+      <div class='col-1-12 vertical-spacer r-align'>
+         <%= link_to client.human_ref, edit_client_path(client) %>
+      </div>
+      <div class='col-1-12 vertical-spacer'>
+          <%= format_empty_string_as_dash client.entities.first.initials %>
+      </div>
+      <div class='col-3-12'>
+         <%= client.entities.first.name %>
+      </div>
+      <div class='col-1-12 r-align'>
+       <%= client.address.road_no %>
+      </div>
+      <div class='col-3-12 vertical-spacer'>
+        <%= client.address.road %>
+      </div>
+      <div class='col-3-12 vertical-spacer r-align no-r-pad'>
+        <%= link_to 'Edit', edit_client_path(client) %> |
+        <%= link_to 'View', client_path(client) %> |
+        <%= link_to 'Delete', client, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+  <% else %>
     No Clients Found. Try Again.
-  </div>
-<% end %>
+  <% end %>
+
+</div>
 <%= paginate @clients %>

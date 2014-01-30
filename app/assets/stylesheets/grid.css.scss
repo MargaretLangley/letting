@@ -72,10 +72,10 @@
   .col-7-8{
     width: 87.5%;
   }
-  .col-1-12{
+  .col-1-12, .col-2-24{
     width: 8.333333333333333%;
   }
-  .col-1-6, .col-2-12{
+  .col-1-6, .col-2-12, col-4-24{
     width: 16.66666666666667%;
   }
   .col-5-12{
@@ -89,6 +89,24 @@
   }
   .col-11-12{
     width: 91.6666%;
+  }
+
+  .col-1-24{
+    width: 4.16666667%;
+  }
+
+/* 23/24 width column, full 100% cannot be used because of padding,
+this column slightly more than 3/24 to take up slack*/
+
+  .col-3-24{
+    width: 13.5%;
+  }
+
+/* col-3-24 not big enough to take actions and next size up too big,
+So this column used to allow actions to fit in */
+
+ .col-action{
+    width: 15%;
   }
 
   /* Opt-in outside padding */
