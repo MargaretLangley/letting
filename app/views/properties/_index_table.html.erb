@@ -1,93 +1,69 @@
-<table>
-    <thead>
-      <tr>
-      <% if show_checkbox %>
-        <th>
-        </th>
-      <% end %>
-      <th class='r-align'>
-          ID
-      </th>
-      <th class='r-align'>
-          Cl
-        </th>
-         <th>
-          Name
-        </th>
-        <th class='r-align'>
-          No
-        </th>
-        <th>
-          House
-        </th>
-        <th class='r-align'>
-          No
-        </th>
-        <th>
-          Road
-        </th>
-        <% if show_actions %>
-          <th>
-            Town
-          </th>
-          <th>
-            <div class='screen_only' >
-              Actions
-            </div>
-         </th>
-        <% end %>
-      </tr>
-    </thead>
-  <tbody>
-    <% if @properties.present? %>
-      <% properties.each do |prop|
+<div class='grid shell'>
+  <% if @properties.present? %>
+    <div class='col-2-24 vertical-spacer grid-header r-align'>
+      ID
+    </div>
+    <div class='col-1-24 vertical-spacer grid-header r-align'>
+       Cl
+    </div>
+    <div class='col-3-24 vertical-spacer grid-header'>
+      Name
+    </div>
+    <div class='col-2-24 vertical-spacer grid-header r-align'>
+      No
+    </div>
+    <div class='col-3-24 vertical-spacer grid-header'>
+     House
+    </div>
+    <div class='col-2-24 vertical-spacer grid-header r-align'>
+      No
+    </div>
+    <div class='col-3-24 vertical-spacer grid-header'>
+     Road
+    </div>
+    <div class='col-3-24 vertical-spacer grid-header'>
+    Town
+    </div>
+    <div class='col-action vertical-spacer grid-header'>
+      Actions
+    </div>
+
+   <% properties.each do |prop|
         property = PropertyDecorator.new prop %>
-        <tr>
-        <% if show_checkbox %>
-          <td>
-            <%= check_box_tag 'property_ids[]', property.id %>
-          </td>
-        <% end %>
-        <td class='r-align'>
-          <%= link_to property.human_ref, edit_property_path(property.id) %>
-        </td>
-        <td class='r-align'>
-          <%=property.client_ref %>
-        </td>
-        <td>
-          <%= format_empty_string_as_dash property.entities.first.name %>
-        </td>
-        <td class='r-align'>
-          <%= format_empty_string_as_dash property.address.flat_no %>
-        </td>
-        <td>
-          <%= format_empty_string_as_dash property.address.house_name %>
-        </td>
-        <td class='r-align'>
-          <%= property.address.road_no %>
-        </td>
-        <td>
-          <%= link_to property.address.road, edit_property_path(property) %>
-        </td>
-        <td>
-          <%= property.address.town %>
-        </td>
+
+      <div class='col-2-24 vertical-spacer r-align grid-row'>
+        <%= link_to property.human_ref, edit_property_path(property.id) %>
+      </div>
+      <div class='col-1-24 vertical-spacer r-align'>
+         <%=property.client_ref %>
+      </div>
+      <div class='col-3-24 vertical-spacer'>
+        <%= format_empty_string_as_dash property.entities.first.name %>
+      </div>
+      <div class='col-2-24 vertical-spacer r-align'>
+       <%= format_empty_string_as_dash property.address.flat_no %>
+      </div>
+      <div class='col-3-24 vertical-spacer'>
+       <%= format_empty_string_as_dash property.address.house_name %>
+      </div>
+      <div class='col-2-24 vertical-spacer r-align'>
+        <%= property.address.road_no %>
+      </div>
+      <div class='col-3-24 vertical-spacer'>
+       <%= link_to property.address.road, edit_property_path(property) %>
+      </div>
+      <div class='col-3-24 vertical-spacer'>
+      <%= property.address.town %>
+      </div>
+      <div class='col-action vertical-spacer'>
         <% if show_actions %>
-        <td>
-          <nav class = "screen_only" >
-            <%= link_to 'Edit', edit_property_path(property.id) %> |
-            <%= link_to 'View', property_path(property.id) %> |
-            <%= link_to 'Delete', property, method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
-           </nav>
-        </td>
+          <%= link_to 'Edit', edit_property_path(property.id) %> |
+        <%= link_to 'View', property_path(property.id) %> |
+        <%= link_to 'Delete', property, method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
         <% end %>
-      <% end %>
-     <% else %>
-      <tr>
-        <td colspan="9" class='atcenter'>
-          No Properties Found. Try Again.
-        </td>
-      </tr>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  <% else %>
+    No Properties Found. Try Again.
+  <% end %>
+</div>

@@ -1,8 +1,9 @@
 <% @title='Clients' %>
 <%= render 'clients/search', path: clients_path, search_action: 'index', search_label: 'Search List' %>
-  <div class='grid shell'>
 
-   <% if @clients.present? %>
+<div class='grid shell'>
+
+  <% if @clients.present? %>
     <div class='col-1-12 vertical-spacer grid-header r-align'>
       ID
     </div>
