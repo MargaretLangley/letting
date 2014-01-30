@@ -40,8 +40,15 @@ http://letting.bcs.io
 ###Add Data
 Add data through either adding:
 1. Imported Data
-  1. cap rake:invoke task=db:import
-  2. Use the admin created from the application.yml's user and password (see above).
+  To import data localy: rake db:import
+  db:import has two options
+  1. range:  rake 'db:import[1..200]'
+  2. test passwords: rake 'db:import[test]'
+    1. import creates an admin from the application.yml's user and password (see above).
+
+  To import data on remote server:
+  cap rake:invoke task=db:import
+
 2. Seed Data
   1. cap deploy:seed
 
