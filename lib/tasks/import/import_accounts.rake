@@ -14,6 +14,8 @@ namespace :import do
   end
 
   def accounts_file
-    DB::FileImport.to_a 'acc_items', headers: DB::FileHeader.account
+    DB::FileImport.to_a 'acc_items',
+                        headers: DB::FileHeader.account,
+                        location: 'import_data/latest'
   end
 end

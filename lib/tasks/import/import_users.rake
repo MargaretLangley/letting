@@ -30,7 +30,8 @@ namespace :import do
 
   def users_file
     DB::FileImport.to_a 'users',
-                        headers: DB::FileHeader.user
+                        headers: DB::FileHeader.user,
+                        location: 'import_data/patch'
   end
 
 end

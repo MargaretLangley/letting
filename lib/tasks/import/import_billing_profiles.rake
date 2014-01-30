@@ -17,7 +17,9 @@ namespace :import do
    end
 
    def billing_file
-     DB::FileImport.to_a 'address2', headers: DB::FileHeader.billing_profile
+     DB::FileImport.to_a 'address2',
+                          headers: DB::FileHeader.billing_profile,
+                          location: 'import_data/latest'
    end
 
    def patch_file
