@@ -2,27 +2,45 @@
   <%= render 'shared/errors', object: user %>
 
   <fieldset id='user' class='shell'>
-     <h3>User</h3>
-     <div class='field text' >
-       <%= f.label :email %>
-       <%= f.text_field :email %>
-    </div>
-    <div class='field text' >
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-    </div>
-    <div class='field text' >
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %>
-    </div>
+
     <div class="grid">
-      <div class='col-1-6'>
+      <div class='col-1-2 vertical-spacer'>
+        <h2>User</h2>
+      </div>
+      <div class='col-1-2 vertical-spacer'>
+        <%= link_to 'View', user_path(user), class: 'link-button' %>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <div class='col-1-4 vertical-spacer'>
+       <%= f.label :email %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <%= f.text_field :email %>
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+       <%= f.label :password %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+       <%= f.password_field :password %>
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+       <%= f.label :password_confirmation %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <%= f.password_field :password_confirmation %>
+      </div>
+      <div class='col-1-4 vertical-spacer'>
         <%= f.label :admin, 'Admin Status' %>
       </div>
-      <div class='col-1-12'>
+      <div class='col-3-4 vertical-spacer'>
         <%= f.check_box :admin %>
       </div>
+
     </div>
+
   </fieldset>
   <div>
     <%= f.submit %> or <%= link_to 'Cancel', users_path, class: 'warn' %>

@@ -10,7 +10,6 @@ describe User do
       expect(current_path).to eq '/users/'
       first(:link, 'View').click
       expect(page).to have_text 'admin@example.com'
-      expect(page).to have_text 'Print'
       expect(page).to have_text 'Admin'
     end
   end
