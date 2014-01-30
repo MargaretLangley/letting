@@ -43,11 +43,14 @@ module DB
 
     def csv_to_arrays filename
       CSV.open(get_file(filename),
+               encoding: 'windows-1251:utf-8',
                headers: @headers,
                header_converters: :symbol,
                converters: ->(f) { f ? f.strip : nil})
          .read.drop(@drop_rows)
     end
+
+
 
     private
 
