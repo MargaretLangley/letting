@@ -1,7 +1,7 @@
 <table>
   <thead>
     <tr>
-      <th class='alnright'>
+      <th class='r-align'>
         Property ID
       </th>
        <th>
@@ -10,10 +10,10 @@
       <th>
         Date
       </th>
-      <th class='alnright'>
+      <th class='r-align'>
         Amount
       </th>
-      <th class='alnright'>
+      <th class='r-align'>
         Balance
       </th>
       <th>
@@ -26,7 +26,7 @@
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>Total</td>
-      <td  class='alnright'><%= number_to_currency payments.sum('amount') %></td>
+      <td  class='r-align'><%= number_to_currency payments.sum('amount') %></td>
       <td>&nbsp;</td>
     </tr>
   </tfoot>
@@ -35,7 +35,7 @@
       payment_dec = PaymentIndexDecorator.new payment
       %>
     <tr>
-      <td class='alnright'>
+      <td class='r-align'>
         <%= payment_dec.property_ref %>
       </td>
       <td>
@@ -44,10 +44,10 @@
       <td>
         <%= payment_dec.on_date %>
       </td>
-      <td class='alnright'>
+      <td class='r-align'>
         <%= payment_dec.amount %>
       </td>
-      <td class='alnright'>
+      <td class='r-align'>
         <%= payment_dec.balance %>
       </td>
       <td>

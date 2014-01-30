@@ -2,13 +2,13 @@
 <table>
   <thead>
     <tr>
-      <th class='alnright'>
+      <th class='r-align'>
         ID
       </th>
       <th>
         email
       </th>
-      <th class='alnright'>
+      <th class='r-align'>
         Admin
       </th>
       <th>
@@ -19,13 +19,13 @@
   <tbody>
     <% @users.each do |user| %>
     <tr>
-      <td class='alnright'>
+      <td class='r-align'>
         <%= link_to user.id, edit_user_path(user) %>
       </td>
       <td>
         <%= user.email %>
       </td>
-      <td class='alnright'>
+      <td class='r-align'>
         <% if user.admin %>
           Yes
         <% else %>

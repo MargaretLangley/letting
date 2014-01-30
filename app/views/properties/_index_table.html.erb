@@ -5,22 +5,22 @@
         <th>
         </th>
       <% end %>
-      <th class='alnright'>
+      <th class='r-align'>
           ID
       </th>
-      <th class='alnright'>
+      <th class='r-align'>
           Cl
         </th>
          <th>
           Name
         </th>
-        <th class='alnright'>
+        <th class='r-align'>
           No
         </th>
         <th>
           House
         </th>
-        <th class='alnright'>
+        <th class='r-align'>
           No
         </th>
         <th>
@@ -48,22 +48,22 @@
             <%= check_box_tag 'property_ids[]', property.id %>
           </td>
         <% end %>
-        <td class='alnright'>
+        <td class='r-align'>
           <%= link_to property.human_ref, edit_property_path(property.id) %>
         </td>
-        <td class='alnright'>
+        <td class='r-align'>
           <%=property.client_ref %>
         </td>
         <td>
           <%= format_empty_string_as_dash property.entities.first.name %>
         </td>
-        <td class='alnright'>
+        <td class='r-align'>
           <%= format_empty_string_as_dash property.address.flat_no %>
         </td>
         <td>
           <%= format_empty_string_as_dash property.address.house_name %>
         </td>
-        <td class='alnright'>
+        <td class='r-align'>
           <%= property.address.road_no %>
         </td>
         <td>
