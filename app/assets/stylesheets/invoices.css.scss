@@ -28,23 +28,13 @@ screen requirements hidden from print*/
   .main-heading{
   }
 
-  .print-only{
-    display: none;
-  }
-
-  .inv-add{
-    display: none;
-  }
-
-  .inv-bold{
-    display: none;
-  }
-
-  .sissors{
-    display: none;
-  }
-
-  .h1print{
+  .h1print,
+  .hgh,
+  .inv-add,
+  .inv-bold,
+  .print-only,
+  .sissors,
+  .vi{
     display: none;
   }
 }
@@ -53,10 +43,12 @@ screen requirements hidden from print*/
 
 /* Buttons and main heading need to be invisible in printouts */
 
-  .main-heading, .no-print, .link-button, .simple-button{
+  .link-button,
+  .main-heading,
+  .no-print,
+  .simple-button{
    display: none;
   }
-
 
 /* Printing for invoice
   SETTING WIDTH Note columns have to be set to suit this width
@@ -69,7 +61,6 @@ screen requirements hidden from print*/
     margin-left: 0.0cm;
     margin-right: 0.20cm;
    }
-
 
   .margwide{
     margin-left: 0.80cm;
@@ -137,18 +128,11 @@ $pad: 2%;
     width: 5px;
   }
 
-  .floatleft{
-  }
-
-  .boldfloat{
-    font-weight: bold;
-  }
-
  .blankright{
     margin-right: 40px;
   }
 
-  button, header, footer, .screen_only, .search, .floatright{
+  button, header, footer, .screen_only, .search{
     display: none;
   }
 
