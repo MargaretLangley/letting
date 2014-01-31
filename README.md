@@ -8,7 +8,8 @@ Handles a number of properties with ground rents and other charges.
 
 This document covers the following sections
 
-###Content
+
+####Content
 
 1. Project Setup
   1. Development
@@ -57,9 +58,9 @@ My Reference: Webserver alias: `ssh arran`
 
 ===
 
-###2 Commands
+###2 COMMANDS
 
-1. rake db:import
+###2.1. rake db:import
   `rake db:import` is a command for importing production data from the old system to the new system.
   The basic command: `rake db:import`
   options
