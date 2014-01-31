@@ -46,7 +46,7 @@ My Reference: Webserver alias: `ssh arran`
 
 ---
 
-###2 Add Data
+##2 Add Data
 Add data through either importing or seeding data
 
 1. Imported Data
@@ -65,8 +65,8 @@ Add data through either importing or seeding data
 
 ---
 
-###3 Troubleshooting
-1. Reset the database
+##3 Troubleshooting
+###1. Reset the database
 Sometimes when you are changing a project the database will not allow you to delete it due to open connections to it. If you cannot close the connections you will have to reset the database. If this is the case follow this
 
 1. Remove any backend connections
