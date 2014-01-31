@@ -60,8 +60,8 @@ Add data through either importing or seeding data
     2. adding test passwords for easy login: `rake 'db:import[test]'`
       1. import creates an admin from the application.yml's user and password (see above).
 
-  2. To import data on remote server
-     `cap rake:invoke task=db:import`
+  2. To import data on remote server -
+     - `cap rake:invoke task=db:import`
 
 2. Seed Data
   1. `cap deploy:seed`
