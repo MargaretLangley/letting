@@ -2,15 +2,11 @@
 [![Build Status](https://travis-ci.org/BCS-io/letting.png)](https://travis-ci.org/BCS-io/letting)
 [![Coverage Status](https://coveralls.io/repos/BCS-io/letting/badge.png)](https://coveralls.io/r/BCS-io/letting)
 
-Program for handling the accounts of a letting agency company in particular to print letters for people with unpaid charges.
-
-Handles a number of properties with ground rents and other charges.
+This is an application for handling the accounts of a letting agency company in particular to print letters for people with unpaid charges. It handles a number of properties with ground rents, services, and other charges.
 
 This document covers the following sections
 
-
 ####Content
-
 1. Project Setup
   1. Development
   2. Production
@@ -19,11 +15,12 @@ This document covers the following sections
   1. Reset the database
 
 
+
 ===
 
-### 1 PROJECT SETUP
+### 1. PROJECT SETUP
 
-###1.1 Development Setup
+###1.1. Development Setup
 
 1. `git clone git@github.com:BCS-io/letting.git`
 2. Rename database.example.yml => database.yml
@@ -40,7 +37,7 @@ This document covers the following sections
 
 ===
 
-###1.2 Production Setup
+###1.2. Production Setup
 
 1. `cap deploy:setup`
   1. Enter password for postgres database (from application.yml)
@@ -58,9 +55,9 @@ My Reference: Webserver alias: `ssh arran`
 
 ===
 
-###2 COMMANDS
+####2. COMMANDS
 
-###2.1. rake db:import
+####2.1. rake db:import
   `rake db:import` is a command for importing production data from the old system to the new system.
   The basic command: `rake db:import`
   options
@@ -73,7 +70,7 @@ My Reference: Webserver alias: `ssh arran`
 
 ===
 
-###3 TROUBLESHOOTING
+###3. TROUBLESHOOTING
 ###3.1. Reset the database
 Sometimes when you are changing a project the database will not allow you to delete it due to open connections to it. If you cannot close the connections you will have to reset the database. If this is the case follow this
 
