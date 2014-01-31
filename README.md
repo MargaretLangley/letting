@@ -16,7 +16,7 @@ This document covers the following sections
   1. Reset the database
 
 
-...
+===
 
 ### 1 PROJECT SETUP
 
@@ -32,7 +32,7 @@ This document covers the following sections
 4. Add Data (See below)
 
 
-...
+===
 
 ###1.2 Production Setup
 
@@ -47,7 +47,7 @@ This document covers the following sections
 My Reference: Webserver alias: `ssh arran`
 
 
-...
+===
 
 ###2 ADD DATA
 Add data through either importing or seeding data
@@ -67,7 +67,7 @@ Add data through either importing or seeding data
   1. `cap deploy:seed`
 
 
-...
+===
 
 ###3 TROUBLESHOOTING
 ###3.1. Reset the database
