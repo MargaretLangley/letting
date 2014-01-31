@@ -39,7 +39,7 @@ This document covers the following sections
 
 ===
 
-###1.2. Production Setup
+####1.2. Production Setup
 
 1. `cap deploy:setup`
   1. Enter password for postgres database (from application.yml)
@@ -72,8 +72,8 @@ My Reference: Webserver alias: `ssh arran`
 
 ===
 
-###3. TROUBLESHOOTING
-###3.1. Reset the database
+####3. TROUBLESHOOTING
+####3.1. Reset the database
 Sometimes when you are changing a project the database will not allow you to delete it due to open connections to it. If you cannot close the connections you will have to reset the database. If this is the case follow this
 
 1. Remove any backend connections
@@ -84,3 +84,4 @@ Sometimes when you are changing a project the database will not allow you to del
   1. role depends on db
 4. Follow instructions for: Project Setup
 
+===
