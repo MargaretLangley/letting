@@ -35,8 +35,12 @@
          <%= client.entities.first.name %>
       </div>
       <div class='col-1-12 r-align'>
-       <%= client.address.road_no %>
-      </div>
+       <% if client.address.road_no? %>
+         <%= client.address.road_no %>
+      <% else %>
+        &nbsp;
+      <% end %>
+    </div>
       <div class='col-3-12 vertical-spacer'>
         <%= client.address.road %>
       </div>
