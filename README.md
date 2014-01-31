@@ -53,15 +53,15 @@ My Reference: Webserver alias: `ssh arran`
 Add data through either importing or seeding data
 
 1. Imported Data
-  To import data locally use
+  1. To import data locally use
     `rake db:import`
-  options
-  1. range of properties to import: `rake 'db:import[1..200]'`
-  2. adding test passwords for easy login: `rake 'db:import[test]'`
-    1. import creates an admin from the application.yml's user and password (see above).
+    options
+    1. range of properties to import: `rake 'db:import[1..200]'`
+    2. adding test passwords for easy login: `rake 'db:import[test]'`
+      1. import creates an admin from the application.yml's user and password (see above).
 
-  To import data on remote server
-  `cap rake:invoke task=db:import`
+  2. To import data on remote server
+     `cap rake:invoke task=db:import`
 
 2. Seed Data
   1. `cap deploy:seed`
