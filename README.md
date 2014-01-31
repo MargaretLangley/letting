@@ -17,9 +17,9 @@ This document covers the following sections
 
 ---
 
-## 1 PROJECT SETUP
+### 1 PROJECT SETUP
 
-###1 DEVELOPMENT SETUP
+###1 Development Setup
 
 1. `git clone git@github.com:BCS-io/letting.git`
 2. Rename database.example.yml => database.yml
@@ -32,7 +32,7 @@ This document covers the following sections
 
 ---
 
-###2 PRODUCTION SETUP
+###2 Production Setup
 
 1. `cap deploy:setup`
   1. Enter password for postgres database (from application.yml)
@@ -46,7 +46,7 @@ My Reference: Webserver alias: `ssh arran`
 
 ---
 
-##2 Add Data
+###2 ADD DATA
 Add data through either importing or seeding data
 
 1. Imported Data
@@ -65,7 +65,7 @@ Add data through either importing or seeding data
 
 ---
 
-##3 Troubleshooting
+###3 TROUBLESHOOTING
 ###1. Reset the database
 Sometimes when you are changing a project the database will not allow you to delete it due to open connections to it. If you cannot close the connections you will have to reset the database. If this is the case follow this
 
