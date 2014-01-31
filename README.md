@@ -64,12 +64,14 @@ My Reference: Webserver alias: `ssh arran`
   `rake db:import` is a command for importing production data from the old system to the new system.
   The basic command: `rake db:import`
   options
-    1. range of properties to import: `rake 'db:import[1..200]'`
-    2. adding test passwords for easy login: `rake 'db:import[test]'`
-      1. import creates an admin from the application.yml's user and password (see above).
-    3. joining commands follows rake format `rake 'db:import[1..200,test]'`
+    To add an option -- is needed after db:import to bypass the rake argument parsing.
+    1. -r Range of properties to import: `rake db:import -- -r 1..200`
+      1. Default is import all properties
+    2. -t Adding test passwords for easy login: `rake db:import -- -t`
+      1. Default is *no* test passwords
+      2. Import creates an admin from the application.yml's user and password (see above).
+    3. -h Help displays help and exits `rake db:import -- -h`
 
-  Note: the additional ' around the commands. This is required if you are using zsh.
 
 ===
 
