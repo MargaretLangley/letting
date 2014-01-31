@@ -38,9 +38,10 @@ http://letting.bcs.io
 4. Add Data
 
 ###Add Data
-Add data through either adding:
+Add data through either importing or seeding data
+
 1. Imported Data
-  To import data localy: rake db:import
+  To import data locally: rake db:import
   db:import has two options
   1. range:  rake 'db:import[1..200]'
   2. test passwords: rake 'db:import[test]'
