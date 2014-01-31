@@ -54,7 +54,20 @@ module DB
     end
 
     def debit
-      @source[:debit].to_f
+      debit = @source[:debit].to_f
+      if negative_credit?
+        puts "Property #{human_ref}: converting negative credit to debit"
+        debit = credit * -1
+      end
+      debit
+    end
+
+    def negative_credit?
+      credit < 0
+    end
+
+    def credit
+      @source[:credit].to_f
     end
 
     def charge_code_message

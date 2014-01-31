@@ -27,7 +27,7 @@ module DB
     end
 
     def debit?
-      debit != 0
+      debit != 0 || credit < 0
     end
 
     def on_date

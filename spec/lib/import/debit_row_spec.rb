@@ -16,6 +16,11 @@ module DB
       it 'calculates amount' do
         expect(row.amount).to eq 50.5
       end
+
+      it 'calculates amount from negative credit' do
+        row = DebitRow.new parse_line debit_negative_credit
+        expect(row.amount).to eq 10.5
+      end
     end
 
     context 'methods' do
@@ -65,6 +70,10 @@ module DB
 
     def debit_row
       %q[2002, GR, 2012-03-25 12:00:00, Ground Rent, 50.5, 0, 0]
+    end
+
+    def debit_negative_credit
+      %q[2002, GR, 2012-03-25 12:00:00, Ground Rent, 0, -10.5, 0]
     end
 
     def debit_row_no_type

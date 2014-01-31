@@ -36,6 +36,11 @@ module DB
             expect(debit_row).to be_debit
           end
 
+          it 'returns true when credit paid negative' do
+            credit_row = AccountRow.new parse_line credit_negative
+            expect(credit_row).to be_debit
+          end
+
           it 'returns false when credit row' do
             expect(credit_row).to_not be_debit
           end
@@ -107,6 +112,10 @@ module DB
 
     def credit_row_no_type
       %q[89, Bal, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0]
+    end
+
+    def credit_negative
+      %q[2002, GR, 2012-03-25 12:00:00, Ground Rent, 0, -10.5, 0]
     end
 
     def bad_date_string
