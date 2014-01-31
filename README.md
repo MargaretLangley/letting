@@ -54,7 +54,7 @@ Add data through either importing or seeding data
   1. cap deploy:seed
 
 ###Reset the database
-Sometimes you have to reset the database. If this is the case follow this:
+Sometimes you have to reset the database. If this is the case follow this
 
 1. Remove any backend connections
   1. local dev: rake db:terminate RAILS_ENV=test
