@@ -2,7 +2,9 @@
 [![Build Status](https://travis-ci.org/BCS-io/letting.png)](https://travis-ci.org/BCS-io/letting)
 [![Coverage Status](https://coveralls.io/repos/BCS-io/letting/badge.png)](https://coveralls.io/r/BCS-io/letting)
 
-This is an application for handling the accounts of a letting agency company in particular to print letters for people with unpaid charges. It handles a number of properties with ground rents, services, and other charges.
+###LETTING
+
+Letting is an application for handling the accounts of a letting agency company in particular to print letters for people with unpaid charges. It handles a number of properties with ground rents, services, and other charges.
 
 This document covers the following sections
 
@@ -18,9 +20,9 @@ This document covers the following sections
 
 ===
 
-### 1. PROJECT SETUP
+####1. PROJECT SETUP
 
-###1.1. Development Setup
+####1.1. Development Setup
 
 1. `git clone git@github.com:BCS-io/letting.git`
 2. Rename database.example.yml => database.yml
