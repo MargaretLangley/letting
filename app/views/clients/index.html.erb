@@ -25,7 +25,7 @@
 
     <% @clients.each do |client| %>
 
-      <div class='col-1-12 vertical-spacer r-align'>
+      <div class='col-1-12 vertical-spacer r-align grid-row'>
          <%= link_to client.human_ref, edit_client_path(client) %>
       </div>
       <div class='col-1-12 vertical-spacer'>
