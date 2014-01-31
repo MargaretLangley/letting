@@ -44,7 +44,7 @@ Add data through either importing or seeding data
   To import data locally use: rake db:import
   rake db:import has two options
   1. range: `rake 'db:import[1..200]'`
-  2. test passwords: rake 'db:import[test]'
+  2. test passwords: `rake 'db:import[test]'`
     1. import creates an admin from the application.yml's user and password (see above).
 
   To import data on remote server:
@@ -55,6 +55,7 @@ Add data through either importing or seeding data
 
 ###Reset the database
 Sometimes you have to reset the database. If this is the case follow this:
+
 1. Remove any backend connections
   1. local dev: rake db:terminate RAILS_ENV=test
   2. Production: *need a cap version*
