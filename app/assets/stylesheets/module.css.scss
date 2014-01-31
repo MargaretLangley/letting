@@ -151,15 +151,23 @@ li a{
 
 \*-----------------------------------------------*/
 
-.shell{
-  margin: 0 0 2% 0;
-  padding: 2%;
-  border: 1px solid lighten($fieldset-color, 20%);
-  border-radius: 12px;
-  background-color: $fieldset-color;
-  box-shadow: #aaa 0 0 8px;
+@media screen{
+
+  .shell{
+    margin: 0 0 2% 0;
+    padding: 2%;
+    border: 1px solid lighten($fieldset-color, 20%);
+    border-radius: 12px;
+    background-color: $fieldset-color;
+    box-shadow: #aaa 0 0 8px;
+  }
 }
 
+@media print{
+
+  .shell{
+  }
+}
 
 .dialog-box{
   margin: 0 auto;
