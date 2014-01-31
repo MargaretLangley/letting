@@ -41,9 +41,9 @@ http://letting.bcs.io
 Add data through either importing or seeding data
 
 1. Imported Data
-  To import data locally: rake db:import
-  db:import has two options
-  1. range:  rake 'db:import[1..200]'
+  To import data locally use: rake db:import
+  rake db:import has two options
+  1. range: `rake 'db:import[1..200]'`
   2. test passwords: rake 'db:import[test]'
     1. import creates an admin from the application.yml's user and password (see above).
 
