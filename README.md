@@ -11,7 +11,7 @@ This document covers the following sections
 1. Project Setup
   1. Development
   2. Production
-2. Add Data
+2. Commands
 3. Troubleshooting
   1. Reset the database
 
@@ -29,7 +29,10 @@ This document covers the following sections
   2. Enter database, username and password
 4. `bundle install`
 5. `rake db:reboot` - drops the database (if any), creates and runs migrations.
-4. Add Data (See below)
+4. Add Data
+  Use either seed data or import production data
+  4.1 Seed data: `rake db:seed`
+  4.2 import data: `rake db:import`
 
 
 ===
@@ -40,7 +43,10 @@ This document covers the following sections
   1. Enter password for postgres database (from application.yml)
 2. `cap deploy`
 3. `cap deploy:migrate`
-4. Add Data (See below)
+4. Add Data
+  Use either seed data or import production data
+  4.1 Seed data `cap deploy:seed`
+  4.2 Production data `cap rake:invoke task=db:import`
 
 [Demo](http://letting.bcs.io)
 
@@ -49,23 +55,18 @@ My Reference: Webserver alias: `ssh arran`
 
 ===
 
-###2 ADD DATA
-Add data through either importing or seeding data
+###2 Commands
 
-1. Imported Data
-  1. To import data locally use
-    `rake db:import`
-    options
+1. rake db:import
+  `rake db:import` is a command for importing production data from the old system to the new system.
+  The basic command: `rake db:import`
+  options
     1. range of properties to import: `rake 'db:import[1..200]'`
     2. adding test passwords for easy login: `rake 'db:import[test]'`
       1. import creates an admin from the application.yml's user and password (see above).
+    3. joining commands follows rake format `rake 'db:import[1..200,test]'`
 
-  2. To import data on remote server -
-     `cap rake:invoke task=db:import`
-
-2. Seed Data
-  1. `cap deploy:seed`
-
+  Note: the additional ' around the commands. This is required if you are using zsh.
 
 ===
 
