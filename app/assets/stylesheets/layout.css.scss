@@ -1,9 +1,5 @@
 @import "colors";
 
-.debug {
-  border: 1px solid black;
-}
-
 @media screen{
 
 
@@ -23,12 +19,7 @@
   footer{
     color: $secondary-text-color;
     background-color: $primary-background-color;
-    padding: 0.5em 0.5em;
     clear: both;
-
-    p{
-      text-align: center;
-    }
 
     .center-text{
       text-align: center;
