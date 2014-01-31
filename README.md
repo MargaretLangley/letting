@@ -13,6 +13,7 @@ This document covers the following sections
   1. Development
   2. Production
 2. Commands
+  1. rake db:import
 3. Troubleshooting
   1. Reset the database
 
