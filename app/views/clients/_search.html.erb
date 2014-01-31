@@ -1,7 +1,7 @@
-<div class = "screen_only" >
+<div class = "no-print" >
 	<%= form_tag clients_path, method: 'get' do %>
 	  <p>
-	     <%= text_field_tag :search, params[:search], data: {autocomplete_source: search_properties_path }, autofocus:true, class: 'noshowprint'  %>
+	     <%= text_field_tag :search, params[:search], data: {autocomplete_source: search_properties_path }, autofocus:true  %>
 	     <%= hidden_field_tag :search_action, search_action %>
 	     <%= submit_tag search_label, name: nil %>
 	  	</p>
