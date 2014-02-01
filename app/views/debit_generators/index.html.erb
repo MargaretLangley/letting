@@ -1,5 +1,5 @@
 <% @title='Debits' %>
-<div class = "screen_only" >
+<div class = "no-print" >
 	<h2>Invoice Batches</h2>
 	<p>
 	 <% invoice_on = Date.today %>
@@ -25,7 +25,7 @@
 </div>
 
 <% DebitGenerator.last.debits.each do |debit| %>
-	<div class = "screen_only" >
+	<div class = "no-print" >
 		<br>
 	  <%= debit.account.property.human_ref %>
 	  <%= debit.charge_type %>
@@ -33,6 +33,6 @@
 	 <%= render partial: 'print_invoice', locals: {property_object: debit.account.property, date_object: invoice_on} %>
 <% end %>
 
-<div class = "screen_only" >
+<div class = "no-print" >
 	<%= render 'index_table', debit_generators: @debit_generators %>
 </div>

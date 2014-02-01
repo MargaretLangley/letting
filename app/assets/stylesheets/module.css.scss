@@ -159,7 +159,7 @@ li a{
 
   .shell{
     margin: 0 0 2% 0;
-    padding: 2%;
+    padding: 1%;
     border: 1px solid lighten($fieldset-color, 20%);
     border-radius: 12px;
     background-color: $fieldset-color;
@@ -170,6 +170,7 @@ li a{
 @media print{
 
   .shell{
+width: 620px;
   }
 }
 
