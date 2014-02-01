@@ -62,7 +62,7 @@ describe AccountDecorator do
       account.save!
       dec = AccountDecorator.new account
 
-      expect(dec.abbrev_items.first.balance).to eq -14.50
+      expect(dec.abbrev_items.first.balance).to eq 14.50
     end
   end
 end

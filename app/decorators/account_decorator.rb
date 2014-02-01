@@ -39,13 +39,13 @@ class AccountDecorator
   private
 
   def balance_on_date date
-    @source.credits
-           .select { |c| c.on_date < date }
-           .map { |c| c.amount }
-           .inject(0,:+)  -
     @source.debits
            .select { |d| d.on_date < date }
            .map { |d| d.amount }
+           .inject(0,:+) -
+    @source.credits
+           .select { |c| c.on_date < date }
+           .map { |c| c.amount }
            .inject(0,:+)
   end
 end
