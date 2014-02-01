@@ -9,7 +9,7 @@ class AccountDecorator
 
   def items
     balance = 0
-    x = [ *@source.debits.map { |d| AccountDebitDecorator.new d },
+    [ *@source.debits.map { |d| AccountDebitDecorator.new d },
       *@source.credits.map { |c| AccountCreditDecorator.new c } ]
     .sort_by(&:on_date)
     .map do |dec|
