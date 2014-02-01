@@ -8,15 +8,10 @@
 
 @media all{
 
-  $pad: 2%;
+  $pad: 1%;
 
   .grid {
     margin: 0;
-
-    &.outergrid{
-      margin: 0 0 0 2%;
-      padding: 0 2% 0 0;
-    }
 
     &.vertical-spacer{
       margin: 4% 0 2% 0;

@@ -41,6 +41,10 @@ body{
 /*------------------------------------------------------------------*\
 
    $TYPOGRAPHY
+   Sizes from type-scale.com - generates typographic scales
+   - Using perfect fourth (multiplication of 1.333)
+   - Starting with an h4 of 1em, h3 or 1.333em and h2 of 1.77em etc.
+   - Demoed in SMACSS on Tuts
 
 \*------------------------------------------------------------------*/
 
@@ -56,17 +60,17 @@ h6{
 
 h1{
   margin-top: 0;
-  font-size: 3.375em;
+  font-size: 2.369em;
 }
 
 h2{
   margin-top: 0;
-  font-size: 2.25em;
+  font-size: 1.77em;
 }
 
 h3{
   margin-top: 0.5em;
-  font-size: 1.5em;
+  font-size: 1.33em;
 }
 
 h4{
@@ -74,11 +78,11 @@ h4{
 }
 
 h5{
-  font-size: 0.667em;
+  font-size: 0.75em;
 }
 
 h6{
-  font-size: 0.444em;
+  font-size: 0.563em;
 }
 
 
