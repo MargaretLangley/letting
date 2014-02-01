@@ -10,17 +10,13 @@
 
   @import "compass/utilities/general/clearfix";
 
-  $pad: 1%;
+  $pad: 1em;
 
   .grid {
     margin: 0;
     @include clearfix;
-
-    &.vertical-spacer{
-      margin: 4% 0 2% 0;
-      padding: 0 0 0 0;
-    }
   }
+
 
   [class*='col-']{
     float: left;
