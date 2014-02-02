@@ -51,10 +51,8 @@
         <%= payment_dec.balance %>
       </td>
       <td>
-        <nav>
-          <%= link_to 'Edit', edit_payment_path(payment) %> |
-          <%= link_to 'Delete', payment, method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
-      </nav>
+        <%= link_to 'Edit', edit_payment_path(payment) %> |
+        <%= link_to 'Delete', payment, method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
       </td>
     </tr>
     <% end %>
