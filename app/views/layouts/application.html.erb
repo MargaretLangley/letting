@@ -21,15 +21,13 @@
           <%= yield %>
         </article>
       </div>
-      <div class="col-1-4">
-        <aside>
-          <% if @title.include? 'User'  %>
-            <%= render 'layouts/sidebar_admin' %>
-          <% else %>
-            <%= render 'layouts/sidebar' %>
-          <% end %>
-        </aside>
-      </div>
+      <aside class="col-1-4">
+        <% if @title.include? 'User'  %>
+          <%= render 'layouts/sidebar_admin' %>
+        <% else %>
+          <%= render 'layouts/sidebar' %>
+        <% end %>
+      </aside>
     </div>
     <%= render 'layouts/footer' %>
 
