@@ -15,7 +15,7 @@
         <% if content_for?(:heading) %>
           <%= yield :heading %>
         <% else %>
-          <h2 class="main-heading"><%= @title %></h2>
+          <h2><%= @title %></h2>
         <% end %>
         <%= yield %>
       </article>
