@@ -5,7 +5,7 @@
     <div class='col-1-2 vertical-spacer'>
       <h2>User ID: <%= @user.id %></h2>
     </div>
-    <div class='col-1-2 vertical-spacer'>
+    <div class='col-1-2 vertical-spacer  no-r-pad'>
       <%= link_to 'Edit', edit_user_path(@user), class: 'link-button' %>
     </div>
   </div>
@@ -22,7 +22,7 @@
     <div class='col-1-6 vertical-spacer r-align'>
      Admin:
     </div>
-    <div class='col-1-3 vertical-spacer'>
+    <div class='col-1-3 vertical-spacer no-r-pad'>
       <% if @user.admin %>
       Yes
       <% else %>

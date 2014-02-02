@@ -16,7 +16,7 @@
       <div class='col-1-2'>
         <h3>Property &hellip;</h3>
       </div>
-      <div class='col-1-2 vertical-spacer'>
+      <div class='col-1-2 vertical-spacer no-r-pad'>
         <%= link_to 'Full Property', '#', class: 'js-toggle toggle-event link-button' %>
       </div>
       <%= render 'properties/show/property_abbreviated', property: @property %>
@@ -27,7 +27,7 @@
       <div class='col-1-2'>
         <h3>Property</h3>
       </div>
-      <div class='col-1-2 vertical-spacer'>
+      <div class='col-1-2 vertical-spacer no-r-pad'>
         <%= link_to 'Partial Property', '#', class: 'js-toggle toggle-event link-button' %>
       </div>
       <%= render 'properties/show/property', property: @property %>
@@ -46,7 +46,7 @@
       <div class='col-3-4'>
         <h3>Accounts &hellip;</h3>
       </div>
-      <div class='col-1-4 vertical-spacer'>
+      <div class='col-1-4 vertical-spacer no-r-pad'>
         <%= link_to 'Full Accounts', '#', class: 'js-toggle toggle-event link-button' %>
       </div>
       <%= render 'properties/show/account_header' %>
@@ -59,7 +59,7 @@
       <div class='col-3-4'>
         <h3>Accounts</h3>
       </div>
-      <div class='col-1-4 vertical-spacer'>
+      <div class='col-1-4 vertical-spacer no-r-pad'>
         <%= link_to 'Partial Accounts', '#', class: 'js-toggle toggle-event link-button' %>
       </div>
       <%= render 'properties/show/account_header' %>

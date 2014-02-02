@@ -15,21 +15,20 @@
   <div class='col-1-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %>'>
     <%= f.label :title %>
   </div>
-  <div class='col-3-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %>'>
+  <div class='col-3-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %> no-r-pad'>
     <%= f.text_field :title, class: 'js-clearable' %>
   </div>
 
   <div class='col-1-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %>'>
     <%= f.label :initials %>
   </div>
-  <div class='col-3-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %>'>
+  <div class='col-3-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %> no-r-pad'>
     <%= f.text_field :initials, class: 'js-clearable' %>
   </div>
   <div class='col-1-4 vertical-spacer'>
     <%= f.label :name, class: 'required' %>
   </div>
-  <div class='col-3-4 vertical-spacer'>
+  <div class='col-3-4 vertical-spacer no-r-pad'>
     <%= f.text_field :name, class: 'js-clearable' %>
   </div>
-  <div></div>
 </div>

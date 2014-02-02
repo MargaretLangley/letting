@@ -15,12 +15,17 @@
     @include inverted-color;
   }
 
+  .page-wrapper{
+    width: 97.5%;
+    margin: 0 auto;
+  }
 
   footer{
     color: $secondary-text-color;
     background-color: $primary-background-color;
     clear: both;
   }
+
 
 
   /*--------------------------------------*\

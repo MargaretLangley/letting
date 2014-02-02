@@ -6,7 +6,7 @@
       <div class='col-1-2 vertical-spacer'>
         <h2>Client</h2>
       </div>
-      <div class='col-1-2 vertical-spacer'>
+      <div class='col-1-2 vertical-spacer no-r-pad'>
         <%= link_to 'View', client_path(client), class: 'link-button' %>
       </div>
     </div>
@@ -14,7 +14,7 @@
       <div class='col-1-4 vertical-spacer'>
         <%= f.label :human_ref, 'Client ID', class: 'required' %>
       </div>
-      <div class='col-3-4 vertical-spacer'>
+      <div class='col-3-4 vertical-spacer no-r-pad'>
         <%= f.text_field :human_ref, autofocus:true %>
       </div>
       <%= render 'shared/entities', f: f, entitieable: client %>
@@ -22,7 +22,7 @@
       <div class='col-1-4'>
         &nbsp;
       </div>
-      <div class='col-3-4'>
+      <div class='col-3-4 no-r-pad'>
         <%= f.submit %> or <%= link_to 'Cancel', clients_path, class: 'warn' %>
       </div>
     </div>
