@@ -65,7 +65,7 @@ My Reference: Webserver alias: `ssh arran`
 
   The basic command: `rake db:import`
 
-  #####options
+#####options
   To add an option -- is needed after db:import to bypass the rake argument parsing.
   1. -r Range of properties to import: `rake db:import -- -r 1..200`
     1. Default is import all properties
