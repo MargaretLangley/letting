@@ -12,7 +12,7 @@
     <%= render 'layouts/flashes' %>
     <div class="grid grid-pad">
       <div class="col-3-4">
-        <article class="module">
+        <article>
           <% if content_for?(:heading) %>
             <%= yield :heading %>
           <% else %>
@@ -22,7 +22,7 @@
         </article>
       </div>
       <div class="col-1-4">
-        <aside class="module">
+        <aside>
           <% if @title.include? 'User'  %>
             <%= render 'layouts/sidebar_admin' %>
           <% else %>
