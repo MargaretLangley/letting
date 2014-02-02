@@ -11,16 +11,14 @@
     <%= render 'layouts/header' %>
     <%= render 'layouts/flashes' %>
     <div class="grid grid-pad">
-      <div class="col-3-4">
-        <article>
-          <% if content_for?(:heading) %>
-            <%= yield :heading %>
-          <% else %>
-            <h2 class="main-heading"><%= @title %></h2>
-          <% end %>
-          <%= yield %>
-        </article>
-      </div>
+      <article class="col-3-4">
+        <% if content_for?(:heading) %>
+          <%= yield :heading %>
+        <% else %>
+          <h2 class="main-heading"><%= @title %></h2>
+        <% end %>
+        <%= yield %>
+      </article>
       <aside class="col-1-4">
         <% if @title.include? 'User'  %>
           <%= render 'layouts/sidebar_admin' %>
