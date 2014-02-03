@@ -60,8 +60,8 @@ module DB
         it 'updated changed entities' do
           import_client row
           import_client updated_row
-          expect(Client.first.entities[0].name).to eq 'Changed'
-          expect(Client.first.entities[1].name).to eq 'Other'
+          expect(Client.first.entities.full_name).to \
+            eq 'Mr E. Changed & Mrs A. N. Other'
         end
 
         it 'removes deleted second entities' do
