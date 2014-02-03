@@ -2,54 +2,54 @@ require 'spec_helper'
 require_relative 'client_shared'
 
 describe Client do
-  let(:client_create_page) { ClientCreatePage.new }
+  let(:client_page) { ClientCreatePage.new }
   before(:each) { log_in }
 
   context '#create' do
 
     it 'basic', js: true do
-      client_create_page.visit_new_page
+      client_page.visit_new_page
       validate_page
-      client_create_page.fill_in_form('278')
-      client_create_page.click_create_client
+      client_page.fill_in_form('278')
+      client_page.create
       expect_client_index
-      client_create_page.click('View')
+      client_page.view
       expect_client_view
     end
 
     it 'handles validation' do
-      client_create_page.visit_new_page
-      client_create_page.fill_in_form('278')
+      client_page.visit_new_page
+      client_page.fill_in_form('278')
       invalidate_page
-      client_create_page.click_create_client
+      client_page.create
       expect(current_path).to eq '/clients'
       expect(page).to have_text 'The client could not be saved.'
     end
 
     it 'company', js: true do
-      client_create_page.visit_new_page
+      client_page.visit_new_page
       validate_page
-      client_create_page.fill_in_form('278')
-      client_create_page.click('or company')
+      client_page.fill_in_form('278')
+      client_page.click('or company')
       within '#client_entity_0' do
         fill_in 'Name', with: 'ICC'
       end
       within_fieldset 'client' do
         fill_in_address_nottingham
       end
-      client_create_page.click_create_client
+      client_page.create
       expect(page).to have_text 'ICC'
     end
 
     it 'adds and removes new persons', js: true do
-      client_create_page.visit_new_page
-      client_create_page.fill_in_form('278')
-      client_create_page.click('Add Person')
+      client_page.visit_new_page
+      client_page.fill_in_form('278')
+      client_page.click('Add Person')
       within '#client_entity_1' do
         fill_in 'Name', with: 'test'
-        client_create_page.click('X')
+        client_page.click('X')
       end
-      client_create_page.click('Add Person')
+      client_page.click('Add Person')
       expect(page.all('h3', text: 'Person or company').count).to eq 2
       within '#client_entity_1' do
         expect(find_field('Name').value).to be_blank
@@ -57,16 +57,16 @@ describe Client do
     end
 
     it 'shows person by default', js: true do
-      client_create_page.visit_new_page
+      client_page.visit_new_page
       expect(page).to have_text 'Person or company'
     end
 
     it 'switches between company and person', js: true do
-      client_create_page.visit_new_page
+      client_page.visit_new_page
       expect(page).to have_text 'Initials'
-      client_create_page.click('or company')
+      client_page.click('or company')
       expect(page).to_not have_text 'Initials'
-      client_create_page.click('or person')
+      client_page.click('or person')
       expect(page).to have_text 'Initials'
     end
   end

@@ -6,8 +6,12 @@ class ClientCreatePage
     self
   end
 
-  def click_create_client
+  def create
     click_on 'Create Client'
+  end
+
+  def view
+    click_on 'View'
   end
 
   def click(choice)
