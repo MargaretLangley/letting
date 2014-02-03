@@ -55,12 +55,12 @@ screen requirements hidden from print*/
   }
 
 /* Printing for invoice
-  SETTING WIDTH Note columns have to be set to suit this width
+  SETTING WIDTH A4 is 210.0mm
  */
 
   body{
     background: $print-background-white;
-    width: 595px;
+    width: 21cm;
     margin-top: 0cm;
     margin-left: 0.20cm;
     margin-right: 0.20cm;
