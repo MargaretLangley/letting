@@ -31,18 +31,18 @@
    <strong><%= render 'shared/show_1_line_address', addressee: @client %></strong>
   </div>
 
-  <div class='col-1-4 vertical-spacer'>
+  <div class='col-1-8 vertical-spacer '>
     Properties Owned
   </div>
-  <div class='col-3-4 vertical-spacer'>
+  <div class='col-7-8 vertical-spacer'>
    Addresses
   </div>
 
   <% @client.properties.each do |property| %>
-    <div class='col-1-4 vertical-spacer'>
+    <div class='col-1-8 vertical-spacer grid-row'>
        <%= property.human_ref %>
     </div>
-    <div class='col-3-4 vertical-spacer'>
+    <div class='col-7-8 vertical-spacer'>
      <%= render 'shared/show_1_line_address', addressee: property %>
     </div>
   <% end %>
