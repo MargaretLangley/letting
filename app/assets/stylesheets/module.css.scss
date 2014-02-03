@@ -83,10 +83,6 @@ a.warn{
   color: $secondary-text-color;
 }
 
-.grid-sub-header{
-  color: $secondary-text-color;
-}
-
 
 /* Wanted to emphasise the payment column. However it
    looks odd if elements are at the point the colour
@@ -119,6 +115,10 @@ a.warn{
 
 .no-warp{
   white-space: nowrap;
+}
+
+.faded{
+  color: $secondary-text-color;
 }
 
 
@@ -158,10 +158,6 @@ li a{
     border-radius: 12px;
     background-color: $fieldset-color;
     box-shadow: #aaa 0 0 8px;
-  }
-
- .faded{
-    color: $secondary-text-color;
   }
 }
 
