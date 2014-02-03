@@ -26,7 +26,7 @@ describe Property do
     it 'navigates to index page' do
       property_create! id: 1, human_ref: 8000
       navigate_to_edit_page
-      click_on 'Properties'
+      click_on 'Accounts'
       expect(page).to have_text 'Actions'
       expect(page).to have_text 'Delete'
     end
