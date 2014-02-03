@@ -1,30 +1,23 @@
-<table>
-  <thead>
-    <tr>
-      <th>
-        Search String
-      </th>
-      <th>
-        Start Date
-      </th>
-       <th>
-        End Date
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <% debit_generators.each do |debit_generator| %>
-    <tr>
-      <td>
-        <%= debit_generator.search_string %>
-      </td>
-      <td>
-        <%= l debit_generator.start_date %>
-      </td>
-      <td>
-        <%= l debit_generator.end_date %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class='grid shell'>
+  <div class='col-1-3 vertical-spacer grid-header'>
+    Search String
+  </div>
+  <div class='col-1-3 vertical-spacer grid-header'>
+    Start Date
+  </div>
+  <div class='col-1-3 vertical-spacer grid-header'>
+    End Date
+  </div>
+
+  <% debit_generators.each do |debit_generator| %>
+    <div class='col-1-3 vertical-spacer grid-row'>
+      <%= debit_generator.search_string %>
+    </div>
+    <div class='col-1-3 vertical-spacer'>
+      <%= l debit_generator.start_date %>
+    </div>
+    <div class='col-1-3 vertical-spacer no-r-pad'>
+      <%= l debit_generator.end_date %>
+    </div>
+  <% end %>
+ </div>
