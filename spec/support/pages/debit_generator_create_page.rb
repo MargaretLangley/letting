@@ -27,10 +27,6 @@ class DebitGeneratorCreatePage
     has_content? /Properties are not being found./i
   end
 
-  def have_empty_search?
-    has_content? /No properties matching 'Garbage'/i
-  end
-
   def created?
     has_content? /Debits successfully created!/i
   end
