@@ -159,6 +159,10 @@ li a{
     background-color: $fieldset-color;
     box-shadow: #aaa 0 0 8px;
   }
+
+ .faded{
+    color: $secondary-text-color;
+  }
 }
 
 @media print{
