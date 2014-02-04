@@ -24,7 +24,7 @@
     <div class='col-3-24 vertical-spacer grid-header'>
     Town
     </div>
-    <div class='col-action vertical-spacer grid-header no-r-pad'>
+    <div class='col-action vertical-spacer grid-header no-print no-r-pad'>
       Actions
     </div>
 
@@ -55,7 +55,7 @@
       <div class='col-3-24 vertical-spacer'>
       <%= property.address.town %>
       </div>
-      <div class='col-action vertical-spacer no-r-pad'>
+      <div class='col-action vertical-spacer no-print no-r-pad'>
         <% if show_actions %>
           <%= link_to 'Edit', edit_property_path(property.id) %> |
         <%= link_to 'View', property_path(property.id) %> |
