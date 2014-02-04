@@ -9,27 +9,48 @@ require_relative '../../../lib/import/import_billing_profile'
 
 module DB
   describe 'Patch', :import do
-    it 'if no merge file nothing merged' do
-      ImportClient.import clients_csv
-      expect(Client.first.address.district).to be_blank
-    end
 
-    it 'if import row_id != patch row id - nothing changes' do
-      ImportClient.import clients_csv,
-                          patch: Patch.import(Client, clients_no_row_match_csv)
-      expect(Client.first.address.district).to be_blank
-    end
+    context 'Client' do
 
-    it 'if import row id == patch row id - change attributes' do
-      ImportClient.import clients_csv,
-                          patch: Patch.import(Client, clients_row_match_csv)
-      expect(Client.first.address.district).to eq 'Example District'
-    end
+      def row
+        %q[11,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ] +
+        %q[Example Street, ,Example Town,  Example County,  E10 7EX]
+      end
 
-    it 'if entities do not match puts error message' do
-      $stdout.should_receive(:puts).with(/Cannot match/)
-      ImportClient.import clients_csv,
-                          patch: Patch.import(Client, clients_row_match_name_changed)
+      def different_id
+        %q[12,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ] +
+        %q[Example Street, Example District ,Example Town,  Example County,  E10 7EX]
+      end
+
+      def same_id
+        %q[11,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ] +
+        %q[Example Street, Example District ,Example Town,  Example County,  E10 7EX]
+      end
+
+      def same_id_name_changed
+        %q[11,  Mr,  A, Name Changed, Mrs, A N, Other, 1, ExampleHouse,  2, ] +
+        %q[Example Street, Example District ,Example Town,  Example County,  E10 7EX]
+      end
+
+
+      it 'only patches when id are the same' do
+        ImportClient.import parse(row),
+                            patch: Patch.import(Client, parse(different_id))
+        expect(Client.first.address.district).to be_blank
+      end
+
+      it 'if import row id == patch row id - change attributes' do
+        ImportClient.import parse(row),
+                            patch: Patch.import(Client, parse(same_id))
+        expect(Client.first.address.district).to eq 'Example District'
+      end
+
+      it 'if id match but entity names are differenit it errors' do
+        $stdout.should_receive(:puts).with(/Cannot match/)
+        ImportClient.import parse(row),
+                            patch: Patch.import(Client, parse(same_id_name_changed))
+
+      end
     end
 
     context 'Property' do
@@ -52,32 +73,12 @@ module DB
       end
     end
 
-    def clients_directory
-      'spec/fixtures/import_data/clients'
-    end
-
-    def clients_csv
-      FileImport.to_a('clients',
-                      headers: FileHeader.client,
-                      location: clients_directory)
-    end
-
-    def clients_no_row_match_csv
-      FileImport.to_a('clients_no_row_matches',
-                      headers: FileHeader.client,
-                      location: 'spec/fixtures/import_data/patch')
-    end
-
-    def clients_row_match_csv
-      FileImport.to_a('clients_row_match',
-                      headers: FileHeader.client,
-                      location: 'spec/fixtures/import_data/patch')
-    end
-
-    def clients_row_match_name_changed
-      FileImport.to_a('clients_row_match_name_changed',
-                      headers: FileHeader.client,
-                      location: 'spec/fixtures/import_data/patch')
+    def parse row_string
+      CSV.parse(row_string,
+                headers: FileHeader.client,
+                header_converters: :symbol,
+                converters: -> (f) { f ? f.strip : nil }
+               )
     end
 
     def property_csv
