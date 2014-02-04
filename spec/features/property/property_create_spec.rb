@@ -19,7 +19,7 @@ describe Property do
     expect_property_page
   end
 
-  it '#creates a property without billing profile', js: true do
+  it '#creates a account without billing profile', js: true do
     client_create!
     navigate_to_create_page
     fill_in_property
@@ -60,7 +60,7 @@ describe Property do
 
   def navigate_to_create_page
     visit '/properties'
-    click_on 'New Property'
+    click_on 'New Account'
   end
 
   def validate_page
