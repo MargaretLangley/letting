@@ -34,30 +34,44 @@ module DB
 
 
       it 'only patches when id are the same' do
-        ImportClient.import parse(row),
-                            patch: Patch.import(Client, parse(different_id))
+        ImportClient.import parse_client(row),
+                            patch: Patch.import(Client, parse_client(different_id))
         expect(Client.first.address.district).to be_blank
       end
 
       it 'if import row id == patch row id - change attributes' do
-        ImportClient.import parse(row),
-                            patch: Patch.import(Client, parse(same_id))
+        ImportClient.import parse_client(row),
+                            patch: Patch.import(Client, parse_client(same_id))
         expect(Client.first.address.district).to eq 'Example District'
       end
 
       it 'if id match but entity names are differenit it errors' do
         $stdout.should_receive(:puts).with(/Cannot match/)
-        ImportClient.import parse(row),
-                            patch: Patch.import(Client, parse(same_id_name_changed))
+        ImportClient.import parse_client(row),
+                            patch: Patch.import(Client, parse_client(same_id_name_changed))
 
       end
     end
 
     context 'Property' do
+
+      def row
+        %q[122, 2013-02-26 12:35:00, Mr, A N, Example, Mrs, A N, Other,] +
+        %q[1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, ] +
+        %q[11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0]
+      end
+
+      def patch_row
+        %q[122, 2013-02-26 12:35:00, Mr, A N, Example, Mrs, A N, Other,] +
+        %q[1, ExampleHouse, 2, Ex Street, Example District ,Ex Town, Ex County, E10 7EX, ] +
+        %q[11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0]
+      end
+
+
       it 'works on property' do
         client_create! human_ref: 11
-        ImportProperty.import property_csv,
-                              patch: Patch.import(Property, property_patch_csv)
+        ImportProperty.import parse_property(row),
+                              patch: Patch.import(Property, parse_property(patch_row))
         expect(Property.first.address.district).to eq 'Example District'
       end
     end
@@ -73,7 +87,7 @@ module DB
       end
     end
 
-    def parse row_string
+    def parse_client row_string
       CSV.parse(row_string,
                 headers: FileHeader.client,
                 header_converters: :symbol,
@@ -81,17 +95,12 @@ module DB
                )
     end
 
-    def property_csv
-      FileImport.to_a('properties',
-                      headers: FileHeader.property,
-                      drop_rows: 34,
-                      location: 'spec/fixtures/import_data/properties')
-    end
-
-    def property_patch_csv
-      FileImport.to_a('properties_patch',
-                      headers: FileHeader.property,
-                      location: 'spec/fixtures/import_data/patch')
+    def parse_property row_string
+      CSV.parse(row_string,
+                headers: FileHeader.property,
+                header_converters: :symbol,
+                converters: -> (f) { f ? f.strip : nil }
+               )
     end
 
     def billing_csv
