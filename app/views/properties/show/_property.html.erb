@@ -41,16 +41,8 @@
   Address
 </div>
 <div class='col-3-8 vertical-spacer'>
-  <% property.address_lines.each do |line| %>
-    <%= line %><br>
-  <% end %>
+  <%= render 'shared/address_lines', lines: property.address_lines %>
 </div>
 <div class='col-3-8 vertical-spacer'>
-  <% if property.billing_profile.use_profile? %>
-    <% property.billing_profile.address.address_lines.each do |line| %>
-      <%= line %><br>
-    <% end %>
-  <% else %>
-    -
-  <% end %>
+  <%= render 'shared/address_lines', lines: property.billing_profile_address_lines %>
 </div>

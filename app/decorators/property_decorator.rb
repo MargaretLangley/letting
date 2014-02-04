@@ -30,6 +30,14 @@ class PropertyDecorator
     source.address.address_lines
   end
 
+  def billing_profile_address_lines
+    if @source.billing_profile.use_profile?
+      @source.billing_profile.address.address_lines
+    else
+     [ '-' ]
+    end
+  end
+
   def abbreviated_address
     source.address.abbreviated_address
   end

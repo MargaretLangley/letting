@@ -28,7 +28,7 @@
     Address:
   </div>
   <div class='col-3-4 vertical-spacer'>
-   <%= render 'shared/show_1_line_address', addressee: @client %>
+    <%= render 'shared/address_lines', lines: @client.address.address_lines %>
   </div>
 
   <div class='col-1-8 vertical-spacer faded'>
