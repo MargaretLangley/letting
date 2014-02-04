@@ -3,30 +3,32 @@
 	<h2>Invoice Batches</h2>
 	<p>
 	 <% invoice_on = Date.today %>
-
 		<%= invoice_on %>
 
-	</p>
-	<p>
+  <div class='grid shell'>
 
-	 	Note : Before printing ensure options:
-		<br>
-		Header & footer not set
-		<br>
-		Two-sided set
-	</p>
-	<p>
-		<button><%= link_to 'Print Invoices', '#', class: 'print-window'%></button>
-	</p>
+    <div class='col-5-8 vertical-spacer'>
+     <h3>
+        <% search_string = DebitGenerator.last.search_string %>
+        Invoice Range is <%= search_string  %>
+        <br>
+        Note : Before printing ensure options:
+        <br>
+        Two-sided option should be set
+        <br>
+        Header & footer should NOT be set
+    </h3>
+    </div>
+    <div class='col-3-8 vertical-spacer'>
+      <br>
+      <%= link_to 'Print Invoices', '#', class: 'print-window simple-button'%>
+    </div>
+  </div>
 
-	<% search_string = DebitGenerator.last.search_string %>
-
-	Search String is <%= search_string %>
 </div>
 
 <% DebitGenerator.last.debits.each do |debit| %>
 	<div class="no-print">
-		<br>
 	  <%= debit.account.property.human_ref %>
 	  <%= debit.charge_type %>
 	</div>
