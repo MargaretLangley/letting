@@ -19,7 +19,7 @@
     <div class='col-4-12 vertical-spacer grid-header'>
      Road
     </div>
-    <div class='col-2-12 vertical-spacer grid-header r-align'>
+    <div class='col-2-12 vertical-spacer grid-header no-print r-align'>
       Actions
     </div>
 
@@ -44,7 +44,7 @@
       <div class='col-3-12 vertical-spacer'>
         <%= client.address.road %>
       </div>
-      <div class='col-3-12 vertical-spacer r-align no-r-pad'>
+      <div class='col-3-12 vertical-spacer r-align no-print no-r-pad'>
         <%= link_to 'Edit', edit_client_path(client) %> |
         <%= link_to 'View', client_path(client) %> |
         <%= link_to 'Delete', client, method: :delete, data: { confirm: 'Are you sure?' } %>
