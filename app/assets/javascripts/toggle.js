@@ -31,6 +31,12 @@ $( document ).ready(function() {
     toggleSelection.find('.model_type').val($(this).data('model-type-to'));
   });
 
+
+  $('.js-clear').on('toggleEventHandler', function() {
+    $(this).find(':input').val('');
+  });
+
+
   $(onWindowLoad);
 
 });

@@ -28,7 +28,6 @@ describe Property do
     click_on 'Edit'
     expect(page).to have_text 'Title'
     expect(page).to have_text 'Postcode'
-    expect(page).to_not have_text 'Delete'
   end
 
   def expect_property_address

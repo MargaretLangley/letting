@@ -22,7 +22,7 @@
 
     <div class='js-togglable js-checked revealable'>
       <%= render 'shared/entities', f: b, entitieable: billing_profile %>
-      <%= render 'shared/address', f: b, parent: 'property_billing_profile' %>
+      <%= render 'shared/address', f: b, parent: 'property_billing_profile', address: AddressDecorator.new(billing_profile.address) %>
     </div>
   </div>
 </fieldset>

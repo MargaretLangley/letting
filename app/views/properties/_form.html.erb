@@ -27,7 +27,7 @@
     </div>
 
     <%= render 'occupier', f: f, entitieable: property %>
-    <%= render 'shared/address', f: f, parent: 'property' %>
+    <%= render 'shared/address', f: f, parent: 'property', address: AddressDecorator.new(property.address) %>
 
   </fieldset>
 

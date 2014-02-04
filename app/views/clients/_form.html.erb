@@ -18,7 +18,7 @@
         <%= f.text_field :human_ref, autofocus:true %>
       </div>
       <%= render 'shared/entities', f: f, entitieable: client %>
-      <%= render 'shared/address', f: f, parent: 'client' %>
+      <%= render 'shared/address', f: f, parent: 'client', address: AddressDecorator.new(client.address) %>
       <div class='col-1-4'>
         &nbsp;
       </div>
