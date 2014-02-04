@@ -62,7 +62,7 @@ describe Address do
       end
 
       it 'has min' do
-        address.district = 'aa'
+        address.district = 'a'
         expect(address).to_not be_valid
       end
 
@@ -79,7 +79,7 @@ describe Address do
       end
 
       it 'has min' do
-        address.town = 'aa'
+        address.town = 'a'
         expect(address).to_not be_valid
       end
 
@@ -96,7 +96,7 @@ describe Address do
       end
 
       it 'has min' do
-        address.county = 'aa'
+        address.county = 'a'
         expect(address).to_not be_valid
       end
 
@@ -113,6 +113,23 @@ describe Address do
       end
       it 'has max' do
         address.postcode = 'B' * 9
+        expect(address).to_not be_valid
+      end
+    end
+
+    context 'nation' do
+      it 'can be blank' do
+        address.nation = ''
+        expect(address).to be_valid
+      end
+
+      it 'has min' do
+        address.nation = 'a'
+        expect(address).to_not be_valid
+      end
+
+      it 'has max' do
+        address.nation = 'a' * 65
         expect(address).to_not be_valid
       end
     end

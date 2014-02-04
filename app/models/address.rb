@@ -14,24 +14,25 @@
 ####
 #
 class Address < ActiveRecord::Base
-  MIN_STRING = 4
+  MIN_STRING = 2
   MAX_STRING = 64
   MAX_NUMBER = 10
   MIN_POSTCODE = 6
   MAX_POSTCODE = 8
   belongs_to :addressable, polymorphic: true
   validates :county, :road, presence: true
-  validates :flat_no, :road_no, length: { maximum: MAX_NUMBER },
-                                allow_blank: true
+  validates :flat_no, :road_no,
+             length: { maximum: MAX_NUMBER },
+            allow_blank: true
   validates :house_name, length: { maximum: MAX_STRING }, allow_blank: true
   validates :road,       length: { maximum: MAX_STRING }
-  validates :district, :town, length: { minimum: MIN_STRING,
-                                        maximum: MAX_STRING },
-                              allow_blank: true
+  validates :district, :nation, :town,
+            length: { minimum: MIN_STRING, maximum: MAX_STRING },
+            allow_blank: true
   validates :county,   length: { minimum: MIN_STRING, maximum: MAX_STRING }
-  validates :postcode, length: { minimum: MIN_POSTCODE,
-                                 maximum: MAX_POSTCODE },
-                       allow_blank: true
+  validates :postcode,
+            length: { minimum: MIN_POSTCODE, maximum: MAX_POSTCODE },
+            allow_blank: true
 
   def address_lines
     address_lines = []
@@ -43,6 +44,7 @@ class Address < ActiveRecord::Base
     address_lines << town if town?
     address_lines << county if county?
     address_lines << postcode if postcode?
+    address_lines << nation if nation?
     address_lines
   end
 

@@ -30,11 +30,12 @@ ActiveRecord::Schema.define(version: 20140107121253) do
     t.string   "flat_no"
     t.string   "house_name"
     t.string   "road_no"
-    t.string   "road"
+    t.string   "road",             null: false
     t.string   "district"
     t.string   "town"
-    t.string   "county"
+    t.string   "county",           null: false
     t.string   "postcode"
+    t.string   "nation"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
