@@ -5,12 +5,12 @@ class CreateAddresses < ActiveRecord::Migration
       t.string :flat_no
       t.string :house_name
       t.string :road_no
-      t.string :road
+      t.string :road, null: false
       t.string :district
       t.string :town
-      t.string :county
+      t.string :county, null: false
       t.string :postcode
-
+      t.string :nation
       t.timestamps
     end
     add_index :addresses, [:addressable_id, :addressable_type]
