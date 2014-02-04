@@ -1,28 +1,31 @@
-require 'csv'
 require 'spec_helper'
 require_relative '../../../lib/import/file_import'
 require_relative '../../../lib/import/file_header'
-require_relative '../../../lib/import/import_charge'
 require_relative '../../../lib/import/import_user'
 
 module DB
   describe ImportUser, :import do
+
+    def row
+      %q[richard.wigley@gmail.com,  password,  TRUE]
+    end
+
     it 'One row' do
-      expect { ImportUser.import users_file_to_arrays }
+      expect { ImportUser.import parse(row) }
         .to change(User, :count).by 1
     end
 
     it 'Not double import' do
-      ImportUser.import users_file_to_arrays
-      expect { ImportUser.import users_file_to_arrays }
-        .to_not change(Charge, :count)
+      ImportUser.import parse(row)
+      expect { ImportUser.import parse(row) }.to_not change(User, :count)
     end
 
-    def users_file_to_arrays
-      FileImport.to_a('users',
-                      headers: FileHeader.user,
-                      location: 'spec/fixtures/import_data/users')
+    def parse row_string
+      CSV.parse(row_string,
+                headers: FileHeader.user,
+                header_converters: :symbol,
+                converters: -> (f) { f ? f.strip : nil }
+               )
     end
-
   end
 end
