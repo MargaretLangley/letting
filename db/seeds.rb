@@ -18,7 +18,7 @@ end
   end
 
   def seed_users
-    Rake::Task['import:users'].invoke('test')
+    Rake::Task['db:import:users'].invoke('test')
   end
 
   def seed_clients
