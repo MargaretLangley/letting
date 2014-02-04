@@ -77,13 +77,24 @@ module DB
     end
 
     context 'BillingProfile' do
+
+      def row
+        %q[122, Mr, B P, Example, Mrs, A N, Other,] +
+        %q[1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, ]
+      end
+
+      def patch_row
+        %q[122, Mr, B P, Example, Mrs, A N, Other,] +
+        %q[1, ExampleHouse, 2, Ex Street, Example District ,Ex Town, Ex County, E10 7EX, ]
+      end
+
+
       it 'works on BillingProfile' do
         property_create! human_ref: 122
-        ImportBillingProfile.import \
-          billing_csv, patch: Patch
-          .import(BillingProfileWithId, billing_patch_csv)
+        ImportBillingProfile.import parse_billing_profile(row),
+          patch: Patch.import(BillingProfileWithId, parse_billing_profile(patch_row))
         expect(Property.first.billing_profile.address.district)
-          .to eq 'Example District Changed'
+          .to eq 'Example District'
       end
     end
 
@@ -103,20 +114,12 @@ module DB
                )
     end
 
-    def billing_csv
-      FileImport.to_a('address2',
-                      headers: FileHeader.billing_profile,
-                      location: billing_profile_dir)
-    end
-
-    def billing_profile_dir
-      'spec/fixtures/import_data/billing_profiles'
-    end
-
-    def billing_patch_csv
-      FileImport.to_a('address2_patch',
-                      headers: FileHeader.billing_profile,
-                      location: 'spec/fixtures/import_data/patch')
+    def parse_billing_profile row_string
+      CSV.parse(row_string,
+                headers: FileHeader.billing_profile,
+                header_converters: :symbol,
+                converters: -> (f) { f ? f.strip : nil }
+               )
     end
   end
 end
