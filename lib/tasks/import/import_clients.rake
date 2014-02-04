@@ -7,25 +7,26 @@ require_relative '../../import/import_client'
 
 STDOUT.sync = true
 
-namespace :import do
+namespace :db do
+  namespace :import do
 
-  desc "Import clients data from CSV file"
-  task clients: :environment do
-    DB::ImportClient.import clients_file,
-                            patch: DB::Patch.import(Client, patch_clients)
-  end
+    desc "Import clients data from CSV file"
+    task clients: :environment do
+      DB::ImportClient.import clients_file,
+                              patch: DB::Patch.import(Client, patch_clients)
+    end
 
-  def clients_file
-    DB::FileImport.to_a 'clients',
-                        headers: DB::FileHeader.client,
-                        location: 'import_data/latest'
-  end
+    def clients_file
+      DB::FileImport.to_a 'clients',
+                          headers: DB::FileHeader.client,
+                          location: 'import_data/latest'
+    end
 
-  def patch_clients
-    DB::FileImport.to_a 'clients_patch',
-                        headers: DB::FileHeader.client,
-                        location: 'import_data/patch'
+    def patch_clients
+      DB::FileImport.to_a 'clients_patch',
+                          headers: DB::FileHeader.client,
+                          location: 'import_data/patch'
+    end
   end
 end
-
 
