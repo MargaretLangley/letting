@@ -11,7 +11,7 @@ describe Property do
     navigate_to_create_page
     validate_page
     fill_in_form
-    click_on 'Create Property'
+    click_on 'Create/Update Account'
     expect(page).to_not have_text 'The property could not be saved.'
     have_we_saved?
     expect_properties_page
@@ -25,7 +25,7 @@ describe Property do
     fill_in_property
     fill_in_property_address
     fill_in_property_entities
-    click_on 'Create Property'
+    click_on 'Create/Update Account'
     expect(current_path).to eq '/properties'
     navigate_to_property_page
     expect_property
@@ -37,7 +37,7 @@ describe Property do
     client_create!
     navigate_to_create_page
     invalidate_page
-    click_on 'Create Property'
+    click_on 'Create/Update Account'
     expect(current_path).to eq '/properties'
     expect(page).to have_text 'The property could not be saved.'
   end
