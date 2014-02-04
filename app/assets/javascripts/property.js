@@ -14,14 +14,9 @@ $(function () {
   });
 
 
-  // charges-due-on toggling
-
-  // clears the input when switch from every-month to date
-  $('.js-charges').on('toggleEventHandler', function() {
-    $(this).find(':input').val('');
-  });
-
-  // input -1 when switch from date to every-month
+  // charges-due-on toggle: on-date => every-month
+  // change month input to -1
+  //
   $('.js-every-month').on('change', function() {
     $(this).next('input[type=hidden]').val('-1');
   });
