@@ -4,6 +4,6 @@
 	     <%= render 'shared/show_entity', object: entity %>
 	  <% end %>
 	  <br>
-	  <%= render 'shared/show_agent_address', object: object.bill_to %>
+	   <%= render 'shared/address_lines', lines: object.bill_to.address.address_lines %>
    <% end %>
 </div>
