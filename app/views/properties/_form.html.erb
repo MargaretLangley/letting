@@ -9,26 +9,25 @@
       <div class='col-1-2 vertical-spacer no-r-pad'>
         <%= link_to 'View', property_path(property), class: 'link-button' %>
       </div>
+      <div class='grid-row col-1-4 vertical-spacer'>
+        <%= f.label :human_ref,'Property ID', class: 'required' %>
+      </div>
+      <div class='col-3-4 vertical-spacer no-r-pad'>
+        <%= f.text_field :human_ref, autofocus: true %>
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        <%= f.label :client_ref, 'Client Ref', class: 'required' %>
+      </div>
+      <div class='col-3-4 vertical-spacer no-r-pad'>
+        <%= text_field_tag nil, "#{property.client.try(:human_ref)} #{property.client.try(:entities).try(:full_name)}", :id => 'property_client_ref',
+          data: { autocomplete_source: Client.order(:human_ref).map { |t| { :label => "#{t.human_ref} #{t.entities.full_name}", :value => t.id } } } %>
+        <%= f.hidden_field :client_id, id: 'client_id' %>
+      </div>
+      <div class='col-4-4 vertical-spacer no-r-pad'>
+        <%= render 'occupier', f: f, entitieable: property %>
+        <%= render 'shared/address', f: f, parent: 'property', address: AddressDecorator.new(property.address) %>
+      </div>
     </div>
-    <div class='grid'>
-    <div class='col-1-4 vertical-spacer'>
-      <%= f.label :human_ref,'Property ID', class: 'required' %>
-    </div>
-    <div class='col-3-4 vertical-spacer no-r-pad'>
-      <%= f.text_field :human_ref, autofocus: true %>
-    </div>
-    <div class='col-1-4 vertical-spacer'>
-      <%= f.label :client_ref, 'Client Ref', class: 'required' %>
-    </div>
-    <div class='col-3-4 vertical-spacer no-r-pad'>
-      <%= text_field_tag nil, "#{property.client.try(:human_ref)} #{property.client.try(:entities).try(:full_name)}", :id => 'property_client_ref',
-        data: { autocomplete_source: Client.order(:human_ref).map { |t| { :label => "#{t.human_ref} #{t.entities.full_name}", :value => t.id } } } %>
-      <%= f.hidden_field :client_id, id: 'client_id' %>
-    </div>
-
-    <%= render 'occupier', f: f, entitieable: property %>
-    <%= render 'shared/address', f: f, parent: 'property', address: AddressDecorator.new(property.address) %>
-
   </fieldset>
 
   <%= render 'billing_profile', f: f, billing_profile: property.billing_profile %>
