@@ -1,4 +1,6 @@
 <% @title='Payments Entered' %>
-Find which payments were entered on a day
-<%= render 'payments/index/search' %>
+<div class='no-print'>
+  Find which payments were entered on a day
+  <%= render 'payments/index/search' %>
+</div>
 <%= render 'payments/index/index_table', payments: @payments %>
