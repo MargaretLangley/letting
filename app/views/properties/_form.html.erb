@@ -24,7 +24,9 @@
         <%= f.hidden_field :client_id, id: 'client_id' %>
       </div>
       <div class='col-4-4 vertical-spacer no-r-pad'>
+        <hr>
         <%= render 'occupier', f: f, entitieable: property %>
+        <hr>
         <%= render 'shared/address', f: f, parent: 'property', address: AddressDecorator.new(property.address) %>
       </div>
     </div>

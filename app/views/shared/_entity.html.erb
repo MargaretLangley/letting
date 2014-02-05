@@ -4,10 +4,12 @@
     <%= f.hidden_field :_destroy %>
     <%= link_to 'X', '#', class:"float-right hover-link simple-button #{hide_or_destroy record} #{hide_if_first_record(index)}" %>
     <div class='js-togglable <%= hide_field_on_start_by_entity_type record %>'>
-      <h3><%= yield :entities_heading %> Person&nbsp;<%= link_to 'or company', '#', class: 'js-toggle js-entity-event', data: { :'model-type-to' => 'Company' } %></h3>
+      <%= yield :entities_heading %>
+      <h3> Person&nbsp;<%= link_to 'or company', '#', class: 'js-toggle js-entity-event', data: { :'model-type-to' => 'Company' } %></h3>
     </div>
     <div class='js-togglable revealable <%= hide_field_on_start_by_entity_type record %>'>
-      <h3><%= yield :entities_heading %> Company&nbsp;<%= link_to 'or person', '#', class: 'js-toggle js-entity-event', data: { :'model-type-to' => 'Person' } %></h3>
+      <%= yield :entities_heading %>
+      <h3>Company&nbsp;<%= link_to 'or person', '#', class: 'js-toggle js-entity-event', data: { :'model-type-to' => 'Person' } %></h3>
     </div>
     <%= f.hidden_field :entity_type, class: 'model_type' %>
   </div>
