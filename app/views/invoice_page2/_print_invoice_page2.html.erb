@@ -23,7 +23,7 @@
 <div class='widemargin'>
 	This notice is given in respect of
 	<br>
-	<%= render 'shared/show_agent_address', object: object %>
+   <%= render 'shared/address_lines', lines: object.bill_to.address.address_lines %>
 </div>
 </p>
 <p>
