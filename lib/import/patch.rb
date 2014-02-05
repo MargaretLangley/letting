@@ -1,3 +1,4 @@
+require_relative 'patch_model'
 require_relative 'import_contact'
 
 module DB

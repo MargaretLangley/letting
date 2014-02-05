@@ -1,7 +1,6 @@
 require 'spec_helper'
 require_relative '../../../lib/import/file_import'
 require_relative '../../../lib/import/file_header'
-require_relative '../../../lib/import/patch_model'
 require_relative '../../../lib/import/patch'
 require_relative '../../../lib/import/import_client'
 require_relative '../../../lib/import/import_property'
