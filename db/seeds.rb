@@ -98,9 +98,9 @@ def seed_properties
   create_entities
   create_addresses
   create_properties
-  create_billing_profile_entities
-  create_billing_profile_addresses
-  create_billing_profiles
+  create_agent_entities
+  create_agent_addresses
+  create_agents
 end
 
   def create_entities
@@ -196,12 +196,12 @@ end
      ]
   end
 
-  def create_billing_profile_entities
+  def create_agent_entities
     Entity.create! [
       {
         entity_type: 'Person',
         entitieable_id: 1,
-        entitieable_type: 'BillingProfile',
+        entitieable_type: 'Agent',
         title: 'Mr',
         initials: 'J C',
         name: 'Laker'
@@ -209,11 +209,11 @@ end
     ]
   end
 
-  def create_billing_profile_addresses
+  def create_agent_addresses
     Address.create! [
       {
         addressable_id: 1,
-        addressable_type: 'BillingProfile',
+        addressable_type: 'Agent',
         flat_no:  '33',
         house_name: 'The Oval',
         road_no:  '207b',
@@ -226,8 +226,8 @@ end
     ]
   end
 
-  def create_billing_profiles
-    BillingProfile.create! [
+  def create_agents
+    Agent.create! [
       { id: 1, use_profile: true,  property_id: 1 },
       { id: 2, use_profile: false, property_id: 2 },
       { id: 3, use_profile: false, property_id: 3 },

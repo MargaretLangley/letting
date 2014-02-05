@@ -32,7 +32,7 @@
     </div>
   </fieldset>
 
-  <%= render 'billing_profile', f: f, billing_profile: property.billing_profile %>
+  <%= render 'agent', f: f, agent: property.agent %>
   <%= f.fields_for :account do |a| %>
     <%= render 'charges', f: a, charges: property.account.charges %>
   <% end %>

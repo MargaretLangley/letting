@@ -29,7 +29,7 @@ module DB
       %w{ human_ref updated } + entities + address + %w{ client_ref }
     end
 
-    def self.billing_profile
+    def self.agent
       %w{ human_ref } + entities + address
     end
 

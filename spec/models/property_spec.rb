@@ -51,14 +51,14 @@ describe Property do
       it 'builds required models' do
         expect(property.address).to_not be_nil
         expect(property.entities).to have(2).items
-        expect(property.billing_profile).to_not be_nil
+        expect(property.agent).to_not be_nil
       end
 
       it 'builds no more than the required models' do
         property.prepare_for_form  # * 2
         expect(property.address).to_not be_nil
         expect(property.entities).to have(2).items
-        expect(property.billing_profile).to_not be_nil
+        expect(property.agent).to_not be_nil
       end
 
       it '#clear_up_form destroys unused models' do
@@ -66,7 +66,7 @@ describe Property do
         expect(property.address).to_not be_nil
         expect(property.entities.reject(&:marked_for_destruction?))
           .to have(0).items
-        expect(property.billing_profile).to_not be_nil
+        expect(property.agent).to_not be_nil
       end
 
     end
@@ -74,13 +74,13 @@ describe Property do
     context '#bill_to' do
       let(:property) { property_new }
 
-      it 'property with no billing profile' do
+      it 'property with no agent' do
         expect(property.bill_to).to eq property
       end
 
-      it 'billing profile when using it' do
-        property.billing_profile.use_profile = true
-        expect(property.bill_to).to eq property.billing_profile
+      it 'agent when using it' do
+        property.agent.use_profile = true
+        expect(property.bill_to).to eq property.agent
       end
     end
   end

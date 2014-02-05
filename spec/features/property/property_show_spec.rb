@@ -6,7 +6,7 @@ describe Property do
 
   before(:each) do
     log_in
-    property_with_billing_create! id: 1, human_ref: 1000
+    property_with_agent_create! id: 1, human_ref: 1000
     visit '/properties/'
     click_on 'View'
   end
@@ -15,7 +15,7 @@ describe Property do
     expect(current_path).to eq '/properties/1'
     expect_property_address
     expect_property_entity
-    expect_billing_info
+    expect_agent_info
   end
 
   it 'navigates to index page' do
@@ -39,18 +39,18 @@ describe Property do
     expect_entity_wg_grace
   end
 
-  def expect_billing_info
-    expect_billing_address
-    expect_billing_entity
+  def expect_agent_info
+    expect_agent_address
+    expect_agent_entity
   end
 
-  def expect_billing_entity
+  def expect_agent_entity
     expect(page).to have_text 'Rev'
     expect(page).to have_text 'V. W.'
     expect(page).to have_text 'Knutt'
   end
 
-  def expect_billing_address
+  def expect_agent_address
     expect(page).to have_text '33'
     expect(page).to have_text 'The Oval'
     expect(page).to have_text '207b'

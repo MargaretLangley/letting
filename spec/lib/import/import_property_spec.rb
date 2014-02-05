@@ -55,7 +55,7 @@ module DB
 
       it 'new record to false' do
         import_property row
-        expect(Property.first.billing_profile.use_profile).to be_false
+        expect(Property.first.agent.use_profile).to be_false
       end
 
         # Nice setup!
@@ -69,13 +69,13 @@ module DB
         import_property row
         property = Property.first
         property.prepare_for_form
-        property.billing_profile.use_profile = true
-        property.billing_profile.address.attributes = oval_address_attributes
-        property.billing_profile.entities[0].attributes =
+        property.agent.use_profile = true
+        property.agent.address.attributes = oval_address_attributes
+        property.agent.entities[0].attributes =
           oval_person_entity_attributes
         property.save!
         import_property row
-        expect(Property.first.billing_profile.use_profile).to be_true
+        expect(Property.first.agent.use_profile).to be_true
       end
     end
 

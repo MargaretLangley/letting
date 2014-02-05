@@ -1,6 +1,6 @@
 def property_new args = {}
   property = base_property args
-  add_no_billing_profile property
+  add_no_agent property
   property
 end
 
@@ -9,16 +9,16 @@ def property_create! args = {}
   property
 end
 
-def property_with_billing_create! args = {}
+def property_with_agent_create! args = {}
   property = base_property args
-  add_billing_profile property
+  add_agent property
   property.save!
   property
 end
 
 def property_with_charge_new args = {}
   property = base_property args
-  add_no_billing_profile property
+  add_no_agent property
   add_charge property
   property
 end
@@ -30,7 +30,7 @@ end
 
 def property_with_monthly_charge_create! args = {}
   property = base_property args
-  add_no_billing_profile property
+  add_no_agent property
   charge = property.account.charges.build charge_attributes
   charge.due_ons.build due_on_monthly_attributes_0
   property.save!
@@ -63,14 +63,14 @@ def base_property args = {}
   property
 end
 
-def add_no_billing_profile bill_me
-  bill_me.build_billing_profile use_profile: false
+def add_no_agent bill_me
+  bill_me.build_agent use_profile: false
 end
 
-def add_billing_profile bill_me
-  bill_me.build_billing_profile use_profile: true
-  bill_me.billing_profile.build_address oval_address_attributes
-  bill_me.billing_profile.entities.build oval_person_entity_attributes
+def add_agent bill_me
+  bill_me.build_agent use_profile: true
+  bill_me.agent.build_address oval_address_attributes
+  bill_me.agent.entities.build oval_person_entity_attributes
 end
 
 def add_charge charge_me

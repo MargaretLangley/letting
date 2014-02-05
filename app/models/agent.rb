@@ -1,16 +1,16 @@
 ####
 #
-# BillingProfile
+# Agent
 #
 # Provides a contact, agent, address spearate from the property
 #
-# BillingProfile provides the property with a separate contact address
+# Agent provides the property with a separate contact address
 # if it is needed.
 #
 ####
 #
-class BillingProfile < ActiveRecord::Base
-  belongs_to :property, inverse_of: :billing_profile
+class Agent < ActiveRecord::Base
+  belongs_to :property, inverse_of: :agent
   include Contact
   validates :entities, presence: true, if: :use_profile?
   before_validation :clear_up_form

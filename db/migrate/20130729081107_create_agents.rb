@@ -1,11 +1,11 @@
-class CreateBillingProfiles < ActiveRecord::Migration
+class CreateAgents < ActiveRecord::Migration
   def change
-    create_table :billing_profiles do |t|
+    create_table :agents do |t|
       t.boolean :use_profile, null: false, default: false
       t.integer :property_id, null: false
       t.timestamps
     end
-    add_index :billing_profiles, :property_id
+    add_index :agents, :property_id
   end
 end
 

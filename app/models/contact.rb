@@ -4,7 +4,7 @@
 #
 # The system follows entities with an address this wraps up the relationship
 #
-# Contact is used by Property, Client and Billing Address.
+# Contact is used by Property, Client and Agent.
 # Contact includes entites and an address.
 ####
 #

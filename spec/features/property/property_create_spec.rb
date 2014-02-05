@@ -19,7 +19,7 @@ describe Property do
     expect_property_page
   end
 
-  it '#creates a account without billing profile', js: true do
+  it '#creates a account without agent', js: true do
     client_create!
     navigate_to_create_page
     fill_in_property
@@ -71,8 +71,8 @@ describe Property do
     fill_in_property
     fill_in_property_address
     fill_in_property_entities
-    fill_in_billing_profile_address
-    fill_in_billing_profile_entities
+    fill_in_agent_address
+    fill_in_agent_entities
     fill_in_charge
   end
 
@@ -93,9 +93,9 @@ describe Property do
       end
     end
 
-    def fill_in_billing_profile_address
+    def fill_in_agent_address
       check 'Use Agent'
-      within_fieldset 'billing_profile' do
+      within_fieldset 'agent' do
         fill_in 'Flat no', with: '555'
         fill_in 'House name', with: 'The County Ground'
         fill_in 'Road no', with: '68f'
@@ -106,8 +106,8 @@ describe Property do
       end
     end
 
-    def fill_in_billing_profile_entities
-      within '#billing_profile_entity_0' do
+    def fill_in_agent_entities
+      within '#agent_entity_0' do
         fill_in 'Name', with: 'K J Barnett'
       end
     end
@@ -153,8 +153,8 @@ describe Property do
     expect_property
     expect_property_address
     expect_property_entities
-    expect_billing_profile_address
-    expect_billing_profile_entities
+    expect_agent_address
+    expect_agent_entities
     expect_charges
   end
 
@@ -171,7 +171,7 @@ describe Property do
       expect_entity_wg_grace
     end
 
-    def expect_billing_profile_address
+    def expect_agent_address
       expect(page).to have_text '555'
       expect(page).to have_text 'The County Ground'
       expect(page).to have_text '68f'
@@ -181,7 +181,7 @@ describe Property do
       expect(page).to have_text 'DE21 6AF'
     end
 
-    def expect_billing_profile_entities
+    def expect_agent_entities
       expect(page).to have_text 'K J Barnett'
     end
 

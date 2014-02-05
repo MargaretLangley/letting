@@ -27,7 +27,7 @@ module DB
       expect(FileHeader.property).to eq fields
     end
 
-    it 'billing_profile' do
+    it 'agent' do
       fields =
         %w[
           human_ref
@@ -35,7 +35,7 @@ module DB
           title2 initials2 name2
           flat_no house_name road_no road district town county postcode
         ]
-      expect(FileHeader.billing_profile).to eq fields
+      expect(FileHeader.agent).to eq fields
     end
 
     it 'user' do

@@ -5,7 +5,7 @@ module DB
   #
   # Shared code for the importing of contact data (entities + address)
   #
-  # Contact data is used on Property, billing_profile and Client data
+  # Contact data is used on Property, agent and Client data
   # This is used during the import of these model's data.
   #
   ####

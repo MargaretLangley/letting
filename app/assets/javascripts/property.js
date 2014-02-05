@@ -1,6 +1,6 @@
 $(function () {
 
-  // Billing profile is hidden by default. This will display an element
+  // Agent is hidden by default. This will display an element
   // if present on the property
 
   if ($(".js-checkbox-toggle").is(':checked')) {

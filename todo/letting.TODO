@@ -44,8 +44,8 @@ Shared:
   Requirements:
     ✔ entities before addresses (except on the property) @done (13-08-18 08:54)
     ✔ district text box invisible till click add district @done (13-08-18 08:53)
-    ✔ Billing profile disabled if use profile is disabled @done (13-09-04 12:11)
-    ✔ Use profile label => Use Billing Address @done (13-09-04 12:11)
+    ✔ Agent disabled if use profile is disabled @done (13-09-04 12:11)
+    ✔ Use profile label => Use Agent Address @done (13-09-04 12:11)
     ✔ Post code shorter than other text boxes @done (13-08-17 20:50)
 
 

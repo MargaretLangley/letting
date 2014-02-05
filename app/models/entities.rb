@@ -10,7 +10,7 @@
 # How does this fit into the larger system?
 #
 # Part of the Contact module which is used in a number of classes
-# - property, client and billing profile. It holds a collection
+# - property, client and agent. It holds a collection
 # of entity objects.
 ####
 #

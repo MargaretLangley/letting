@@ -4,25 +4,25 @@ require_relative 'import_contact'
 module DB
   ####
   #
-  # ImportBillingProfile
+  # ImportAgent
   #
-  # Imports billing profiles (shipping addreses for properties)
+  # Imports agents (shipping addreses for properties)
   #
   # Uses ImportBase and is called during the import process and at no
   # other time.
   #
   ####
   #
-  class ImportBillingProfile < ImportBase
+  class ImportAgent < ImportBase
     def initialize  contents, range, patch
-      super BillingProfile, contents, range, patch
+      super Agent, contents, range, patch
     end
 
     def model_prepared
       @model_to_save = find_model!(Property).first
       @model_to_save.prepare_for_form
-      @model_to_assign = BillingProfileWithId.new \
-                           @model_to_save.billing_profile
+      @model_to_assign = AgentWithId.new \
+                           @model_to_save.agent
     end
 
     def find_model model_class

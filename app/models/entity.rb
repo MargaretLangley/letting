@@ -8,13 +8,13 @@
 #
 # How does this fit into the larger system
 #
-# Entity are used in Properties, clients, and billing profile / agents.
+# Entity are used in Properties, clients, and agent / agents.
 # The name and addresses were paired together in the contactable module
 # in all the above cases.
 #
 #
 # The polymorphic relationship, entitieable, allowing a model to associate
-# with more than one other model type (client, Property and BillingProfile).
+# with more than one other model type (client, Property and Agent).
 #
 # The module was introduced for code reuse (having a has_a contact would
 # have been worth investigating).

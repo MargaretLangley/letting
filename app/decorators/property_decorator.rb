@@ -30,9 +30,9 @@ class PropertyDecorator
     source.address.address_lines
   end
 
-  def billing_profile_address_lines
-    if @source.billing_profile.use_profile?
-      @source.billing_profile.address.address_lines
+  def agent_address_lines
+    if @source.agent.use_profile?
+      @source.agent.address.address_lines
     else
      [ '-' ]
     end

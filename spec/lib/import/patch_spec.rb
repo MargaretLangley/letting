@@ -4,7 +4,7 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/patch'
 require_relative '../../../lib/import/import_client'
 require_relative '../../../lib/import/import_property'
-require_relative '../../../lib/import/import_billing_profile'
+require_relative '../../../lib/import/import_agent'
 
 module DB
   describe 'Patch', :import do
@@ -75,7 +75,7 @@ module DB
       end
     end
 
-    context 'BillingProfile' do
+    context 'Agent' do
 
       def row
         %q[122, Mr, B P, Example, Mrs, A N, Other,] +
@@ -88,11 +88,11 @@ module DB
       end
 
 
-      it 'works on BillingProfile' do
+      it 'works on Agent' do
         property_create! human_ref: 122
-        ImportBillingProfile.import parse_billing_profile(row),
-          patch: Patch.import(BillingProfileWithId, parse_billing_profile(patch_row))
-        expect(Property.first.billing_profile.address.district)
+        ImportAgent.import parse_agent(row),
+          patch: Patch.import(AgentWithId, parse_agent(patch_row))
+        expect(Property.first.agent.address.district)
           .to eq 'Example District'
       end
     end
@@ -113,9 +113,9 @@ module DB
                )
     end
 
-    def parse_billing_profile row_string
+    def parse_agent row_string
       CSV.parse(row_string,
-                headers: FileHeader.billing_profile,
+                headers: FileHeader.agent,
                 header_converters: :symbol,
                 converters: -> (f) { f ? f.strip : nil }
                )
