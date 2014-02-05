@@ -1,18 +1,18 @@
 require 'spec_helper'
 
-describe BillingProfile do
+describe Agent do
 
-  let(:billing_profile) do
-    billing_profile = BillingProfile.new use_profile: true, property_id: 1
-    billing_profile.entities.new person_entity_attributes
-    billing_profile.build_address address_attributes
-    billing_profile
+  let(:agent) do
+    agent = Agent.new use_profile: true, property_id: 1
+    agent.entities.new person_entity_attributes
+    agent.build_address address_attributes
+    agent
   end
 
-  it('is valid') { expect(billing_profile).to be_valid }
+  it('is valid') { expect(agent).to be_valid }
 
   context 'new profile' do
-    let(:new_profile) { BillingProfile.new }
+    let(:new_profile) { Agent.new }
     it('has nil address') { expect(new_profile.address).to be_nil }
     it('has no entities') { expect(new_profile.entities.size).to eq 0 }
   end
@@ -21,11 +21,11 @@ describe BillingProfile do
 
     context 'which is already being used to contact and remains unaffected' do
       before do
-        billing_profile.save!
+        agent.save!
       end
 
       let(:full_profile) do
-        profile = BillingProfile.find billing_profile.id
+        profile = Agent.find agent.id
         profile.prepare_for_form
         profile
       end
@@ -64,7 +64,7 @@ describe BillingProfile do
     end
 
     let(:prepare_blank_profile) do
-      profile = BillingProfile.new use_profile: false, property_id: 1
+      profile = Agent.new use_profile: false, property_id: 1
       profile.prepare_for_form
       profile
     end

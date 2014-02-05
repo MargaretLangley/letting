@@ -9,7 +9,7 @@
 # How does this fit into the larger system?
 #
 # Properties are at the heart of the application - which accounts, tenants,
-# billing profiles / addresses are hung off and this is the managing
+# agents / addresses are hung off and this is the managing
 # controller.
 #
 ####
@@ -87,11 +87,11 @@ class PropertiesController < ApplicationController
                 :client_id,
                 address_attributes:         address_params,
                 entities_attributes:        entities_params,
-                billing_profile_attributes: billing_profile_params,
+                agent_attributes: agent_params,
                 account_attributes:         account_params
     end
 
-    def billing_profile_params
+    def agent_params
       %i(id property_id use_profile) + [address_attributes: address_params] +
       [entities_attributes: entities_params]
     end

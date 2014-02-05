@@ -77,4 +77,4 @@ en:
     payments:
       property_payment: 'To book a payment against a property you need to find a property that is being billed. Then enter the property identifier into the search box. An example of a property identifier is 109.'
     properties:
-      billing:          "Billing is to the above property address. If the bill should go to an agent click the 'Use Agent' checkbox and fill in the agent's details."
+      agent:          "Billing is to the above property address. If the bill should go to an agent click the 'Use Agent' checkbox and fill in the agent's details."

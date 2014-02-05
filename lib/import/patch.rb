@@ -7,7 +7,7 @@ module DB
   # Overrides data in models that needs updating but we are unable to upudate
   # source.
   #
-  # Currently, this updates client and billing_profile data
+  # Currently, this updates client and agent data
   # Note that calls import_contact which would need to be looked at if
   # the class didn't use contact.
   #

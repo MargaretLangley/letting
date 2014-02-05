@@ -31,8 +31,8 @@
   <%= property.entities.full_name %>
 </div>
 <div class='col-3-8 vertical-spacer'>
-  <% if property.billing_profile.use_profile? %>
-    <%= property.billing_profile.entities.full_name %>
+  <% if property.agent.use_profile? %>
+    <%= property.agent.entities.full_name %>
   <% else %>
     None
   <% end %>
@@ -44,5 +44,5 @@
   <%= render 'shared/address_lines', lines: property.address_lines %>
 </div>
 <div class='col-3-8 vertical-spacer'>
-  <%= render 'shared/address_lines', lines: property.billing_profile_address_lines %>
+  <%= render 'shared/address_lines', lines: property.agent_address_lines %>
 </div>

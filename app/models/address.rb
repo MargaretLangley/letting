@@ -8,7 +8,7 @@
 #
 # How does it fit in the larger system?
 #
-# Property, Billing Addresses (Agents) and Clients all require and has_one
+# Property, Agent and Clients all require and has_one
 # address.
 #
 ####

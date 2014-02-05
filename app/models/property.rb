@@ -3,7 +3,7 @@
 # A property, under management by the letting company.
 #
 # Properties have an account. They have tenants (see contact module),
-# Agents responsible for account charges ( the billing_profile). Money
+# Agents responsible for account charges ( the agent). Money
 # collected goes to the properties client.
 #
 # The code is part of the representation of a property.
@@ -15,8 +15,8 @@ class Property < ActiveRecord::Base
   has_one :account, dependent: :destroy, inverse_of: :property
   accepts_nested_attributes_for :account, allow_destroy: true
   include Contact
-  has_one :billing_profile, dependent: :destroy, inverse_of: :property
-  accepts_nested_attributes_for :billing_profile, allow_destroy: true
+  has_one :agent, dependent: :destroy, inverse_of: :property
+  accepts_nested_attributes_for :agent, allow_destroy: true
 
   validates :human_ref, :client_id, numericality: true
   validates :human_ref, uniqueness: true
@@ -25,8 +25,8 @@ class Property < ActiveRecord::Base
 
   def prepare_for_form
     prepare_contact
-    build_billing_profile if billing_profile.nil?
-    billing_profile.prepare_for_form
+    build_agent if agent.nil?
+    agent.prepare_for_form
     build_account if account.nil?
     account.prepare_for_form
   end
@@ -37,7 +37,7 @@ class Property < ActiveRecord::Base
   end
 
   def bill_to
-    billing_profile.bill_to
+    agent.bill_to
   end
 
   def self.properties property_ids

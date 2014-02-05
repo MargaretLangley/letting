@@ -46,7 +46,7 @@ module DB
     def model_assignment
       @model_to_assign.assign_attributes human_ref: row.human_ref,
                                          client_id: row.client_id
-      @model_to_assign.billing_profile.use_profile = false if model_is_new
+      @model_to_assign.agent.use_profile = false if model_is_new
       import_contact @model_to_assign, row
       clean_contact @model_to_assign
     end

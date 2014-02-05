@@ -127,8 +127,8 @@ describe Property do
       expect_entity_dc_compton
     end
 
-    it 'basic with billing address' do
-      property_with_billing_create! id: 1, human_ref: 8000
+    it 'basic with agent address' do
+      property_with_agent_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       expect_bill_profile_has_original_attributes
       update_then_expect_properties_page
@@ -140,12 +140,12 @@ describe Property do
     def expect_bill_profile_has_original_attributes
       expect(find_field('Use Agent')).to be_checked
 
-      within_fieldset 'billing_profile' do
+      within_fieldset 'agent' do
         expect(find_field('Flat no').value).to have_text '33'
       end
     end
 
-    it 'add billing address', js: true do
+    it 'add agent address', js: true do
       property = property_create! human_ref: 8000
       navigate_to_edit_page
       fill_in_bill_profile
@@ -160,26 +160,26 @@ describe Property do
     end
 
     def fill_in_bill_profile
-      check_use_billing_profile
+      check_use_agent
       fill_in_bill_profile_address
       fill_in_bill_profile_entity
     end
 
-    def check_use_billing_profile
-      within_fieldset 'billing_profile' do
+    def check_use_agent
+      within_fieldset 'agent' do
         check 'Use Agent'
       end
     end
 
     def fill_in_bill_profile_address
-      within_fieldset 'billing_profile' do
+      within_fieldset 'agent' do
         fill_in 'Road', with: 'Middlesex Road'
         fill_in 'County', with: 'Greater London'
       end
     end
 
     def fill_in_bill_profile_entity
-      within '#billing_profile_entity_0' do
+      within '#agent_entity_0' do
         fill_in 'Name', with: 'Lock'
       end
     end
@@ -205,8 +205,8 @@ describe Property do
       end
     end
 
-    it 'removes billing address' do
-      property_with_billing_create! id: 1, human_ref: 8000
+    it 'removes agent address' do
+      property_with_agent_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       uncheck 'Use Agent'
       update_then_expect_properties_page

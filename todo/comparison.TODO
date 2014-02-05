@@ -54,7 +54,7 @@
    (statement of credit / debit not payment)  REQUIRED
   Search prop no                                               REQUIRED
   Give one line address, 2nd line Agent  &     Currently Property / Account is 1 page
-  Billing Address                                               If separate pages the account page
+  Agent                                                             If separate pages the account page
                                                                           will need address identification
                                                                           (We could reduce address since only for
                                                                            office reference)
@@ -123,15 +123,15 @@
   Adams' address
   Invoice Date
   Occupier Name and Property address                    Available
-  Agent Name and Billing address if necessary           Available
-  Client name and address                               Available
+  Agent Name and address if necessary                 Available
+  Client name and address                                   Available
   Arrears
   Due Date Description ie GR 25/25/2013 to 23/6/2014
   Service charge                                        Available
   Total
   Sissorcut line
   Form to return with property ref and address
-  From Billing address
+  From Agent address
   Copy of invoice details with total
   2nd page for GR ie long leaseholder
   uses GR data and specific legal form
