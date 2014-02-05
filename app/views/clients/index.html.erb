@@ -44,11 +44,11 @@
       <div class='col-3-12 vertical-spacer'>
         <%= client.address.road %>
       </div>
-      <div class='col-3-12 vertical-spacer r-align no-print no-r-pad'>
+      <nav class='col-3-12 vertical-spacer r-align no-r-pad'>
         <%= link_to 'Edit', edit_client_path(client) %> |
         <%= link_to 'View', client_path(client) %> |
         <%= link_to 'Delete', client, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </div>
+      </nav>
     <% end %>
 
   <% else %>
