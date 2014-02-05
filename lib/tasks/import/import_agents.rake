@@ -25,7 +25,7 @@ namespace :db do
 
      def patch_file
        DB::FileImport.to_a 'address2_patch',
-                           headers: DB::FileHeader.agent,
+                           headers: DB::FileHeader.agent_patch,
                            location: 'import_data/patch'
      end
   end

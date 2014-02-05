@@ -28,7 +28,9 @@ module DB
                              district:   row[:district],
                              town:       row[:town],
                              county:     row[:county],
-                             postcode:   row[:postcode] }
+                             postcode:   row[:postcode],
+                             nation:     row[:nation],
+                           }
     end
 
     def assign_entity entity, number, row
