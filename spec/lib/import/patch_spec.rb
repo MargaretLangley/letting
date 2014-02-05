@@ -87,13 +87,12 @@ module DB
         %q[1, ExampleHouse, 2, Ex Street, Example District ,Ex Town, Ex County, E10 7EX, ]
       end
 
-
       it 'works on Agent' do
         property_create! human_ref: 122
         ImportAgent.import parse_agent(row),
-          patch: Patch.import(AgentWithId, parse_agent(patch_row))
-        expect(Property.first.agent.address.district)
-          .to eq 'Example District'
+                           patch: Patch.import(AgentWithId,
+                                               parse_agent(patch_row))
+        expect(Property.first.agent.address.district).to eq 'Example District'
       end
     end
 
