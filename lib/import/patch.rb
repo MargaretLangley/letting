@@ -1,4 +1,5 @@
 require_relative 'import_contact'
+
 module DB
   ####
   #
@@ -49,39 +50,13 @@ module DB
     end
 
     def patch_models_add
-      @patch_models << { 'id'    => @model_to_assign.human_ref,
-                         'model' => @model_to_assign }
+      @patch_models << PatchModel.new(@model_to_assign)
     end
 
-    # debug hash array: patch_models[0]['model']
     def patch_model model
-      model_hash = @patch_models.find { |m| m['id'] == model.human_ref }
-      if model_hash.present?
-        patch_model = model_hash['model']
-        if entity_names_match? model, patch_model
-          patch_address model, patch_model
-        else
-          puts none_matching_entities_error_message model, patch_model
-        end
-      end
+      patch_model = @patch_models.find { |m| m.human_ref == model.human_ref }
+      return if patch_model.nil? || patch_model.changed?(model)
+      patch_model.patch model
     end
-
-    private
-
-      def entity_names_match? model, patch_model
-        model.entities[0].name == patch_model.entities[0].name
-      end
-
-      def patch_address model, patch_model
-        model.address.attributes =
-          patch_model.address.copy_approved_attributes
-      end
-
-      def none_matching_entities_error_message model, patch_model
-        "Cannot match #{model.class} #{patch_model.human_ref} names between " +
-        'the loading data and the patch data. Until ' +
-        "'#{patch_model.entities[0].name}' is the same as " +
-        "'#{model.entities[0].name} we cannot patch the address data."
-      end
   end
 end

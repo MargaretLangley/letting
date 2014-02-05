@@ -34,7 +34,7 @@ module DB
     end
 
     def self.agent_patch
-      agent + %w{ nation }
+      agent + %w{ nation override}
     end
 
     def self.charge
