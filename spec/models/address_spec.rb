@@ -112,7 +112,7 @@ describe Address do
         expect(address).to_not be_valid
       end
       it 'has max' do
-        address.postcode = 'B' * 9
+        address.postcode = 'B' * 21
         expect(address).to_not be_valid
       end
     end
