@@ -38,6 +38,19 @@ module DB
       expect(FileHeader.agent).to eq fields
     end
 
+    it 'agent patch' do
+      fields =
+        %w[
+          human_ref
+          title1 initials1 name1
+          title2 initials2 name2
+          flat_no house_name road_no road district town county postcode
+          nation
+        ]
+      expect(FileHeader.agent_patch).to eq fields
+    end
+
+
     it 'user' do
       fields = %w[email password admin]
       expect(FileHeader.user).to eq fields

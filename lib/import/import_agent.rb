@@ -21,8 +21,7 @@ module DB
     def model_prepared
       @model_to_save = find_model!(Property).first
       @model_to_save.prepare_for_form
-      @model_to_assign = AgentWithId.new \
-                           @model_to_save.agent
+      @model_to_assign = AgentWithId.new @model_to_save.agent
     end
 
     def find_model model_class

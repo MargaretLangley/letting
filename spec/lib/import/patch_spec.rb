@@ -87,13 +87,26 @@ module DB
         %q[1, ExampleHouse, 2, Ex Street, Example District ,Ex Town, Ex County, E10 7EX, ]
       end
 
+      def patch_nation_row
+        %q[122, Mr, B P, Example, Mrs, A N, Other,] +
+        %q[,The Aparments, , Road  Panel 2, District Buzon 16, Town Dip de Zarzalico,] +
+        %q[County Puerto Lumbreras,, SPAIN]
+      end
 
       it 'works on Agent' do
         property_create! human_ref: 122
         ImportAgent.import parse_agent(row),
-          patch: Patch.import(AgentWithId, parse_agent(patch_row))
-        expect(Property.first.agent.address.district)
-          .to eq 'Example District'
+                           patch: Patch.import(AgentWithId,
+                                               parse_agent(patch_row))
+        expect(Property.first.agent.address.district).to eq 'Example District'
+      end
+
+      it 'patches nation' do
+        property_create! human_ref: 122
+        ImportAgent.import parse_agent(row),
+                           patch: Patch.import(AgentWithId,
+                                               parse_agent(patch_nation_row))
+        expect(Property.first.agent.address.nation).to eq 'SPAIN'
       end
     end
 
@@ -116,6 +129,14 @@ module DB
     def parse_agent row_string
       CSV.parse(row_string,
                 headers: FileHeader.agent,
+                header_converters: :symbol,
+                converters: -> (f) { f ? f.strip : nil }
+               )
+    end
+
+    def parse_agent row_string
+      CSV.parse(row_string,
+                headers: FileHeader.agent_patch,
                 header_converters: :symbol,
                 converters: -> (f) { f ? f.strip : nil }
                )
