@@ -78,12 +78,6 @@ a.warn{
   color: $primary-text-color;
 }
 
-.grid-header{
-  border-bottom: 1px solid $background-filler;
-  color: $secondary-text-color;
-}
-
-
 /* Wanted to emphasise the payment column. However it
    looks odd if elements are at the point the colour
    changes. So I've padded it. Only used on payment */
@@ -98,12 +92,32 @@ a.warn{
   margin: 0 0 1% 0;
 }
 
+/* To change heading color for printing just change
+   $secondary-print-text-color in _colors.scss.
+   faded holds the switch. grid-header uses faded
+   extended. */
+
+.grid-header{
+  @extend .faded;
+  border-bottom: 1px solid $background-filler;
+}
 
 /*--------------------------------------------------*\
 
   $TYPOGRAPHY
 
 \*--------------------------------------------------*/
+
+/* faded holds the switch for printing.
+   To change heading color for printing just change
+   $secondary-print-text-color in _colors.scss.  */
+
+.faded{
+  color: $secondary-text-color;
+  @media print {
+        color: $secondary-print-text-color;
+  }
+}
 
 .r-align{
   text-align: right;
@@ -115,10 +129,6 @@ a.warn{
 
 .no-warp{
   white-space: nowrap;
-}
-
-.faded{
-  color: $secondary-text-color;
 }
 
 
