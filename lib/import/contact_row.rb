@@ -31,7 +31,7 @@ module DB
     private
 
     def town
-      return @row[:town] if @row[:town].empty?
+      return if @row[:town].nil?
       @row[:town].titleize
     end
   end
