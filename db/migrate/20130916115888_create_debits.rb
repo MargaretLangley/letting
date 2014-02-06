@@ -1,11 +1,11 @@
 class CreateDebits < ActiveRecord::Migration
   def change
     create_table :debits do |t|
-      t.integer  :account_id, null: false, index: true
+      t.belongs_to  :account, null: false, index: true
       t.integer  :charge_id,  null: false, index: true
       t.date     :on_date,    null: false
       t.decimal  :amount, precision: 8, scale: 2, null: false
-      t.integer  :debit_generator_id, null: false, index: true
+      t.belongs_to  :debit_generator, null: false, index: true
       t.timestamps
     end
     add_index :debits, [:charge_id, :on_date], unique: true

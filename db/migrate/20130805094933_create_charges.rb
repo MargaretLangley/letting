@@ -6,7 +6,7 @@ class CreateCharges < ActiveRecord::Migration
       t.decimal :amount, precision: 8, scale: 2, null:false
       t.date :start_date, null: false
       t.date :end_date, null: false
-      t.integer :account_id, null: false, index: true
+      t.belongs_to :account, null: false, index: true
       t.timestamps
     end
   end

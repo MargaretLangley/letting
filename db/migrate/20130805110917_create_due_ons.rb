@@ -4,7 +4,7 @@ class CreateDueOns < ActiveRecord::Migration
       t.integer :day, null: false
       t.integer :month, null: false
       t.integer :year
-      t.integer :charge_id, index: true
+      t.belongs_to :charge, index: true
 
       t.timestamps
     end
