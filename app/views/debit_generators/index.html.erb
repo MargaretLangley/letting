@@ -6,39 +6,41 @@
   <%= invoice_on %>
   <p>
   </p>
-  <% if DebitGenerator.last.present? %>
-
-    <div class='grid shell'>
-      <div class='col-5-8 vertical-spacer'>
-       <h3>
-          Invoice Range is <%= DebitGenerator.last.search_string %>
-          <br>
-          Note : Before printing ensure options:
-          <br>
-          Two-sided option should be set
-          <br>
-          Header & footer should NOT be set
-      </h3>
-      </div>
-      <div class='col-3-8 vertical-spacer'>
-        <br>
-        <%= link_to 'Print Invoices', '#', class: 'print-window simple-button'%>
-      </div>
-    </div>
-
-    <% DebitGenerator.last.debits.each do |debit| %>
-      <%= debit.account.property.human_ref %>
-      <%= debit.charge_type %>
-
-      <%= render partial: 'print_invoice', locals: {property_object: debit.account.property, date_object: invoice_on} %>
-    <% end %>
-
-    <br>
-    <%= render 'index_table', debit_generators: @debit_generators %>
-
-  <% else %>
-    <div class='grid shell'>
-     NO Invoice Range available
-    </div>
-  <% end %>
 </div>
+
+<% if DebitGenerator.last.present? %>
+
+  <div class='grid shell'>
+    <div class='col-5-8 vertical-spacer'>
+     <h3>
+        Invoice Range is <%= DebitGenerator.last.search_string %>
+        <br>
+        Note : Before printing ensure options:
+        <br>
+        Two-sided option should be set
+        <br>
+        Header & footer should NOT be set
+    </h3>
+    </div>
+    <div class='col-3-8 vertical-spacer'>
+      <br>
+      <%= link_to 'Print Invoices', '#', class: 'print-window simple-button'%>
+    </div>
+  </div>
+
+  <% DebitGenerator.last.debits.each do |debit| %>
+  <div class="no-print">
+    <%= debit.account.property.human_ref %>
+    <%= debit.charge_type %>
+</div>
+    <%= render partial: 'print_invoice', locals: {property_object: debit.account.property, date_object: invoice_on} %>
+  <% end %>
+
+  <br>
+  <%= render 'index_table', debit_generators: @debit_generators %>
+
+<% else %>
+  <div class='grid shell'>
+   NO Invoice Range available
+  </div>
+<% end %>
