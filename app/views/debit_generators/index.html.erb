@@ -1,16 +1,19 @@
 <% @title='Debits' %>
 <div class="no-print">
-	<h2>Invoice Batches</h2>
-	<p>
-	 <% invoice_on = Date.today %>
-		<%= invoice_on %>
+  <h2>Invoice Batches</h2>
+  <!-- Faked date -->
+  <% invoice_on = Date.today %>
+  <%= invoice_on %>
+  <p>
+  </p>
+</div>
+
+<% if DebitGenerator.last.present? %>
 
   <div class='grid shell'>
-
     <div class='col-5-8 vertical-spacer'>
      <h3>
-        <% search_string = DebitGenerator.last.search_string %>
-        Invoice Range is <%= search_string  %>
+        Invoice Range is <%= DebitGenerator.last.search_string %>
         <br>
         Note : Before printing ensure options:
         <br>
@@ -25,17 +28,19 @@
     </div>
   </div>
 
+  <% DebitGenerator.last.debits.each do |debit| %>
+  <div class="no-print">
+    <%= debit.account.property.human_ref %>
+    <%= debit.charge_type %>
 </div>
+    <%= render partial: 'print_invoice', locals: {property_object: debit.account.property, date_object: invoice_on} %>
+  <% end %>
 
-<% DebitGenerator.last.debits.each do |debit| %>
-	<div class="no-print">
-	  <%= debit.account.property.human_ref %>
-	  <%= debit.charge_type %>
-	</div>
-	 <%= render partial: 'print_invoice', locals: {property_object: debit.account.property, date_object: invoice_on} %>
-<% end %>
-
-<div class="no-print">
   <br>
-	<%= render 'index_table', debit_generators: @debit_generators %>
-</div>
+  <%= render 'index_table', debit_generators: @debit_generators %>
+
+<% else %>
+  <div class='grid shell'>
+   NO Invoice Range available
+  </div>
+<% end %>
