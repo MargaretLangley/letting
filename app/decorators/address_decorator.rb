@@ -8,11 +8,11 @@ class AddressDecorator
   end
 
   def district_visiblity
-    js_hooks + (@address.district.present? ? '' : 'revealable')
+    js_hooks + (@address.district? ? '' : 'revealable')
   end
 
   def add_district_visiblity
-    js_hooks + (@address.district.present? ? 'revealable' : '')
+    js_hooks + (@address.district? ? 'revealable' : '')
   end
 
   private
