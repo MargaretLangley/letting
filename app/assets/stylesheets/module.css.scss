@@ -327,11 +327,12 @@ label {
 
 .overlay{
   position: absolute;
-  top: 30%;
-  left: 40%;
-  margin-top: -8%;
-  margin-left: -30%;
+  left: 0;
+  right: 0;
+  top: 10%;  /* arbitary small amount to move it away from top border */
   width: 80%;
+  margin-left: auto;
+  margin-right: auto;
   border: 1px solid lighten(rgb(184,184,184), 20%);
   background-color: rgba(184,184,184,0.85);
   color: $primary-text-color;
