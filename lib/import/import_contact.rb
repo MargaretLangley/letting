@@ -1,3 +1,5 @@
+require_relative 'contact_row'
+
 module DB
   ####
   #
