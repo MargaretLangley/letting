@@ -48,7 +48,6 @@ module DB
                                          client_id: row.client_id
       @model_to_assign.agent.use_profile = false if model_is_new
       import_contact @model_to_assign, row
-      clean_contact @model_to_assign
     end
 
     def model_is_new

@@ -1,5 +1,4 @@
 require_relative '../modules/method_missing'
-require_relative 'errors'
 require_relative 'entity_row'
 
 module DB
@@ -9,10 +8,31 @@ module DB
     attr_reader :entities
 
     def initialize row
-      @source = row
+      @row = row
       @entities = []
       @entities << EntityRow.new(row[:title1], row[:initials1], row[:name1])
       @entities << EntityRow.new(row[:title2], row[:initials2], row[:name2])
+    end
+
+    def address_attributes
+      {
+        flat_no:    @row[:flat_no],
+        house_name: @row[:house_name],
+        road_no:    @row[:road_no],
+        road:       @row[:road],
+        district:   @row[:district],
+        town:       town,
+        county:     @row[:county],
+        postcode:   @row[:postcode],
+        nation:     @row[:nation],
+      }
+    end
+
+    private
+
+    def town
+      return @row[:town] if @row[:town].empty?
+      @row[:town].titleize
     end
   end
 end

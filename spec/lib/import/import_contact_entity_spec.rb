@@ -21,12 +21,6 @@ module DB
       %q[Example Street, ,Example Town,  Example County,  E10 7EX]
     end
 
-    def initialised_company_row
-      %q[11,  ,  A D, Example Ltd, , , , 1, ExampleHouse,  2, ] +
-      %q[Example Street, ,Example Town,  Example County,  E10 7EX]
-    end
-
-
     it 'One row, 2 Entities' do
       expect { import_client row }.to change(Entity, :count).by 2
     end
@@ -59,13 +53,6 @@ module DB
       it 'removes deleted second entities' do
         import_client row
         expect { import_client one_entity_row }.to change(Entity, :count).by(-1)
-      end
-    end
-
-    context 'In odd state' do
-      it 'concats a company with intials' do
-        import_client initialised_company_row
-        expect(Entity.first.name).to eq 'A D Example Ltd'
       end
     end
 

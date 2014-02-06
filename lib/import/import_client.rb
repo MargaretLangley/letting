@@ -27,7 +27,6 @@ module DB
     def model_assignment
       @model_to_assign.assign_attributes human_ref: row[:human_ref]
       import_contact @model_to_assign, row
-      clean_contact @model_to_assign
     end
   end
 end

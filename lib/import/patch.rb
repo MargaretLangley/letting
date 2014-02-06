@@ -47,7 +47,6 @@ module DB
       @model_to_assign.human_ref = row[:human_ref].to_i
       @model_to_assign.prepare_for_form
       import_contact @model_to_assign, row
-      clean_contact @model_to_assign
     end
 
     def patch_models_add

@@ -39,7 +39,6 @@ module DB
       @model_to_assign.assign_attributes use_profile: true
       @model_to_assign.human_ref = row[:human_ref].to_i
       import_contact @model_to_assign, row
-      clean_contact @model_to_assign
     end
   end
 end
