@@ -6,7 +6,7 @@ class CreateEntities < ActiveRecord::Migration
       t.string  :entitieable_type, null: false
       t.string :title
       t.string :initials
-      t.string :name
+      t.string :name, null: false
 
       t.timestamps
     end

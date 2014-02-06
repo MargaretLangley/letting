@@ -22,8 +22,6 @@ ActiveRecord::Schema.define(version: 20140107121253) do
     t.datetime "updated_at"
   end
 
-  add_index "accounts", ["property_id"], name: "index_accounts_on_property_id", using: :btree
-
   create_table "addresses", force: true do |t|
     t.integer  "addressable_id",   null: false
     t.string   "addressable_type", null: false
@@ -49,8 +47,6 @@ ActiveRecord::Schema.define(version: 20140107121253) do
     t.datetime "updated_at"
   end
 
-  add_index "agents", ["property_id"], name: "index_agents_on_property_id", using: :btree
-
   create_table "charges", force: true do |t|
     t.string   "charge_type",                         null: false
     t.string   "due_in",                              null: false
@@ -62,10 +58,8 @@ ActiveRecord::Schema.define(version: 20140107121253) do
     t.datetime "updated_at"
   end
 
-  add_index "charges", ["account_id"], name: "index_charges_on_account_id", using: :btree
-
   create_table "clients", force: true do |t|
-    t.integer  "human_ref"
+    t.integer  "human_ref",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -79,10 +73,6 @@ ActiveRecord::Schema.define(version: 20140107121253) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "credits", ["account_id"], name: "index_credits_on_account_id", using: :btree
-  add_index "credits", ["charge_id"], name: "index_credits_on_charge_id", using: :btree
-  add_index "credits", ["payment_id"], name: "index_credits_on_payment_id", using: :btree
 
   create_table "debit_generators", force: true do |t|
     t.string   "search_string", null: false
@@ -102,21 +92,16 @@ ActiveRecord::Schema.define(version: 20140107121253) do
     t.datetime "updated_at"
   end
 
-  add_index "debits", ["account_id"], name: "index_debits_on_account_id", using: :btree
   add_index "debits", ["charge_id", "on_date"], name: "index_debits_on_charge_id_and_on_date", unique: true, using: :btree
-  add_index "debits", ["charge_id"], name: "index_debits_on_charge_id", using: :btree
-  add_index "debits", ["debit_generator_id"], name: "index_debits_on_debit_generator_id", using: :btree
 
   create_table "due_ons", force: true do |t|
-    t.integer  "day"
-    t.integer  "month"
+    t.integer  "day",        null: false
+    t.integer  "month",      null: false
     t.integer  "year"
     t.integer  "charge_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "due_ons", ["charge_id"], name: "index_due_ons_on_charge_id", using: :btree
 
   create_table "entities", force: true do |t|
     t.string   "entity_type",      null: false
@@ -124,7 +109,7 @@ ActiveRecord::Schema.define(version: 20140107121253) do
     t.string   "entitieable_type", null: false
     t.string   "title"
     t.string   "initials"
-    t.string   "name"
+    t.string   "name",             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -139,16 +124,12 @@ ActiveRecord::Schema.define(version: 20140107121253) do
     t.datetime "updated_at"
   end
 
-  add_index "payments", ["account_id"], name: "index_payments_on_account_id", using: :btree
-
   create_table "properties", force: true do |t|
-    t.integer  "human_ref"
+    t.integer  "human_ref",  null: false
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "properties", ["client_id"], name: "index_properties_on_client_id", using: :btree
 
   create_table "search_suggestions", force: true do |t|
     t.string   "term"
@@ -171,7 +152,7 @@ ActiveRecord::Schema.define(version: 20140107121253) do
   create_table "users", force: true do |t|
     t.string   "email",           null: false
     t.string   "password_digest", null: false
-    t.boolean  "admin"
+    t.boolean  "admin",           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

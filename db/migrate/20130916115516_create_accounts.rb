@@ -1,10 +1,8 @@
 class CreateAccounts < ActiveRecord::Migration
   def change
     create_table :accounts do |t|
-      t.integer :property_id
+      t.integer :property_id, index: true
       t.timestamps
     end
-
-    add_index :accounts, :property_id
   end
 end
