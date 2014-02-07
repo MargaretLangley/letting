@@ -217,6 +217,46 @@ label {
 
 /*--------------------------------------------------*\
 
+  $SEARCH
+
+\*--------------------------------------------------*/
+
+
+
+.form-wrapper {
+  padding: 3px;
+  background: $secondary-background-color;
+  border-radius: 10px;
+  border: 1px solid lighten($fieldset-color, 20%);
+  box-shadow: #aaa 0 0 8px;
+}
+
+.form-wrapper input {
+  padding: 10px 5px;
+  line-height: 21px;
+  float: left;
+  border: 1px solid darken(#d83c3c, 10%);
+  background: $primary-background-color;
+  border-radius: 5px 0 0 5px;
+}
+
+.form-wrapper button {
+  overflow: visible;
+  line-height: 41px;
+  border: 1px solid darken(#d83c3c, 10%);
+  color: white;
+  background: #DC3D3D;
+  float: right;
+  text-transform: uppercase;
+  border-radius: 0 5px 5px 0;
+}
+
+.form-wrapper button:hover{
+  background: darken(#DC3D3D, 8%);
+}
+
+/*--------------------------------------------------*\
+
   $BUTTON
 
 \*--------------------------------------------------*/
