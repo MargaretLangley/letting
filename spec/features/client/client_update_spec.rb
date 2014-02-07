@@ -145,14 +145,7 @@ describe Client do
   end
 
   it 'searches for valid client' do
-    fill_in 'search', with: '222'
-    click_on 'Search'
-    expect(find_field('Road').value).to have_text 'Edgbaston Road'
-  end
-
-  it 'searches for same client' do
-    fill_in 'search', with: '222'
-    click_on 'Search'
+    pending
     fill_in 'search', with: '222'
     click_on 'Search'
     expect(find_field('Road').value).to have_text 'Edgbaston Road'

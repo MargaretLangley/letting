@@ -314,24 +314,15 @@ describe Property do
   end
 
   it 'searches for valid property' do
-    fill_in 'search', with: '222'
-    click_on 'Search'
-    expect(find_field('Property ID').value).to have_text '222'
-  end
-
-  it 'searches for same property' do
-    fill_in 'search', with: '222'
-    click_on 'Search'
+    pending
     fill_in 'search', with: '222'
     click_on 'Search'
     expect(find_field('Property ID').value).to have_text '222'
   end
 
   it 'search not found' do
-    fill_in 'search', with: '5'
+    fill_in 'search', with: 'Not Matching'
     click_on 'Search'
-    fill_in 'search', with: '222'
-    expect(page).to_not have_text '5'
     expect(page).to have_text 'No Accounts Found'
   end
 

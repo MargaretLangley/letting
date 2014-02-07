@@ -247,7 +247,7 @@ label {
   background: darken(#DC3D3D, 8%);
 }
 
-.delete {
+.delete-x {
   float:left;
   height:43px;
   cursor: pointer;
@@ -256,9 +256,6 @@ label {
   background: $primary-background-color;
   border: 1px solid darken(#d83c3c, 10%);
   border-left:none;
-}
-
-.x {
   color:#A1B9ED;
 }
 

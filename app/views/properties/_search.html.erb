@@ -3,7 +3,7 @@
     <div class='col-2-3 form-wrapper'>
       <%= form_tag path, method: 'get' do %>
           <%= text_field_tag :search , params[:search], placeholder: 'Search here...', data: {autocomplete_source: search_properties_path}, autofocus:true, class: 'col-15-24' %>
-           <div class="col-1-24 delete"><span class='x'>x</span></div>
+           <div class="col-1-24 delete-x"><span>x</span></div>
            <button type="submit" class='col-8-24'>Search</button>
       <% end %>
     </div>
