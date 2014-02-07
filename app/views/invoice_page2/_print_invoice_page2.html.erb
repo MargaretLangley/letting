@@ -1,15 +1,14 @@
 <%= render 'invoice_page2/print_p2_heading' %>
 
 <div class='res-longlease'>
-	<%= render file: 'invoice_texts/invoice_texts_p2/long_lease_notice.txt' %> <%= object.human_ref %>
+	Notice to long leaseholders of rent due Ref No  <%= object.human_ref %>
 </div>
 <p>
 </p>
 
 <div class='insert'>
-	<%= render file: 'invoice_texts/invoice_texts_p2/insert1.txt' %>
+	[insert name(s) of leaseholder(s)] (note 1)
 </div>
-
 <div class='widemargin'>
  To
   <% if object.entities.any? %>
@@ -19,21 +18,26 @@
   <% end %>
 </div>
 
-<%= render file: 'invoice_texts/invoice_texts_p2/insert2.txt' %>
+<div class='insert'>
+  [address of premises to which the long lease releates]
+</div>
 <div class='widemargin'>
 	This notice is given in respect of
 	<br>
    <%= render 'shared/address_lines', lines: object.address.address_lines %>
 </div>
-</p>
-<p>
 
-<%= render file: 'invoice_texts/invoice_texts_p2/insert3.txt' %>
+<div class='insert'>
+  [insert date {note 2)}]
+</div>
 <div class='widemargin'>
 	It requires you to pay rent of <%= due_object %> on <%= date_object %>
 </div>
 <br>
-	<%= render file: 'invoice_texts/invoice_texts_p2/insert4.txt' %>
+
+<div class='insert'>
+  [state period]
+</div>
 <div class='widemargin'>
 	The rent is payable in respect of the period
 </div>
@@ -41,11 +45,13 @@
 
 <%= render 'invoice_page2/print_payto_agent_address' %>
 
-<%= render file: 'invoice_texts/invoice_texts_p2/insert7.txt' %>
+<div class='insert'>
+  [insert name of landlord(s) and if not given above, address]
+</div>
 
 <div class='widemargin'>
  This notice is given by <%= object.client.entities.full_name %>
- <br>
+<br>
  	<%= render 'shared/show_1_line_address', addressee: object.client %>
 </div>
 
