@@ -29,7 +29,7 @@ describe Client do
 
     it 'search road' do
       fill_in 'search', with: 'Edgbaston Road'
-      click_on 'Search List'
+      click_on 'Search'
       expect(page).to_not have_text '111'
       expect(page).to have_text '222'
       expect(page).to have_text '333'
@@ -38,7 +38,7 @@ describe Client do
     it 'search number' do
       pending 'Search by number not working'
       fill_in 'search', with: '111'
-      click_on 'Search List'
+      click_on 'Search'
       expect(page).to_not have_text '333'
       expect(page).to_not have_text '222'
       expect(page).to have_text '111'
@@ -46,7 +46,7 @@ describe Client do
 
     it 'search not found' do
       fill_in 'search', with: 'Highcroft Road'
-      click_on 'Search List'
+      click_on 'Search'
       expect(page).to_not have_text '111'
       expect(page).to have_text 'No Clients Found'
     end
