@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <% DebitGenerator.last.debits.each do |debit| %>
+  <% DebitGenerator.last.debits.sort{ |d1, d2| d1.account.property.human_ref <=> d2.account.property.human_ref}.each do |debit| %>
   <div class="no-print">
     <%= debit.account.property.human_ref %>
     <%= debit.charge_type %>

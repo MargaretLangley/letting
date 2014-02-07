@@ -1,6 +1,6 @@
 <%= render 'invoice_page2/print_p2_heading' %>
 
-<div class='longlease'>
+<div class='res-longlease'>
 	<%= render file: 'invoice_texts/invoice_texts_p2/long_lease_notice.txt' %> <%= object.human_ref %>
 </div>
 <p>
@@ -44,7 +44,7 @@
 <%= render file: 'invoice_texts/invoice_texts_p2/insert7.txt' %>
 
 <div class='widemargin'>
- This notice is given by <%= object.entities.full_name %>
+ This notice is given by <%= object.client.entities.full_name %>
  <br>
  	<%= render 'shared/show_1_line_address', addressee: object.client %>
 </div>
