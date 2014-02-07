@@ -154,6 +154,7 @@ textarea{
   border: 1px solid $subdued-color;
   border-radius: 5px;
   width: 90%;
+  outline: none;
 }
 
 input[type=submit]{
@@ -164,4 +165,7 @@ input[readonly='readonly']{
   background-color: Gainsboro;
   color:  $primary-text-color;
 }
+
+
+
 
