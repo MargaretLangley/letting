@@ -5,6 +5,13 @@ def property_attributes overrides = {}
   }.merge overrides
 end
 
+def agent_attributes overrides = {}
+  {
+    authorized: true,
+    property_id: 1,
+  }.merge overrides
+end
+
 def client_attributes overrides = {}
   {
     human_ref: 8008,
