@@ -28,7 +28,7 @@ describe 'payment' do
       expect(payment.credits.last.on_date).to eq Date.new(2014, 03, 25)
     end
 
-    it 'can be saved' do
+    it 'saves' do
       expect { payment.save! }.to_not raise_error
     end
   end

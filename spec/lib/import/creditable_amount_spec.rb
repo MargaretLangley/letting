@@ -21,12 +21,12 @@ module DB
       expect(amount.balance).to eq 10
     end
 
-    it 'withdraw more than has raises error' do
-      expect { amount.withdraw 10 }.to raise_error CreditNegativeError
-    end
+    context 'being overdrawn' do
+      it 'raises an error' do
+        expect { amount.withdraw 10 }.to raise_error CreditNegativeError
+      end
 
-    context 'max_withdrawal' do
-      it 'can not withdrawal more than it has' do
+      it 'is prevented by #max_withdrawal' do
         expect(amount.max_withdrawal 30).to eq 0
       end
     end

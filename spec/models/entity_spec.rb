@@ -13,7 +13,7 @@ describe Entity do
         expect(entity).to_not be_valid
       end
 
-      it 'cannot be blank' do
+      it 'is required' do
         entity.name = ''
         expect(entity).to_not be_valid
       end
@@ -24,7 +24,7 @@ describe Entity do
       end
     end
     context 'entity_type' do
-      it 'presence' do
+      it 'is required' do
         entity.entity_type = nil
         expect(entity).to_not be_valid
       end

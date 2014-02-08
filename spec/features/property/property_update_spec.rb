@@ -278,7 +278,7 @@ describe Property do
       end
     end
 
-    it 'can delete', js: true do
+    it 'deletes', js: true do
       property_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       expect(page).to have_text 'Charge 1'

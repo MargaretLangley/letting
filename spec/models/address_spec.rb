@@ -8,7 +8,7 @@ describe Address do
   context 'validations' do
 
     context 'flat_no' do
-      it 'can be blank' do
+      it 'allows blanks' do
         address.flat_no = ''
         expect(address).to be_valid
       end
@@ -20,7 +20,7 @@ describe Address do
     end
 
     context 'house_name' do
-      it 'can be blank' do
+      it 'allows blanks' do
         address.house_name = ''
         expect(address).to be_valid
       end
@@ -32,7 +32,7 @@ describe Address do
     end
 
     context 'road no' do
-      it 'can be blank '  do
+      it 'allows blanks'  do
         address.road_no = ''
         expect(address).to be_valid
       end
@@ -56,7 +56,7 @@ describe Address do
     end
 
     context 'district' do
-      it 'can be blank' do
+      it 'allows blanks' do
         address.district = ''
         expect(address).to be_valid
       end
@@ -73,7 +73,7 @@ describe Address do
     end
 
     context 'town' do
-      it 'can be blank' do
+      it 'allows blanks' do
         address.town = ''
         expect(address).to be_valid
       end
@@ -118,7 +118,7 @@ describe Address do
     end
 
     context 'nation' do
-      it 'can be blank' do
+      it 'allows blanks' do
         address.nation = ''
         expect(address).to be_valid
       end
