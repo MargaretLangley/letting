@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Agent do
 
   let(:agent) do
-    agent = Agent.new use_profile: true, property_id: 1
+    agent = Agent.new authorized: true, property_id: 1
     agent.entities.new person_entity_attributes
     agent.build_address address_attributes
     agent
@@ -49,7 +49,7 @@ describe Agent do
 
       context 'stop using profile' do
         before do
-          full_profile.use_profile = false
+          full_profile.authorized = false
           full_profile.clear_up_form
         end
         it 'marks entities for distruction' do
@@ -64,7 +64,7 @@ describe Agent do
     end
 
     let(:prepare_blank_profile) do
-      profile = Agent.new use_profile: false, property_id: 1
+      profile = Agent.new authorized: false, property_id: 1
       profile.prepare_for_form
       profile
     end
@@ -81,12 +81,12 @@ describe Agent do
 
       context 'and remains blank after cleanup' do
         before do
-          prepare_blank_profile.use_profile = false
+          prepare_blank_profile.authorized = false
           prepare_blank_profile.clear_up_form
         end
 
         it 'is valid to have no entities if not using information' do
-          expect(prepare_blank_profile.use_profile).to be_false
+          expect(prepare_blank_profile.authorized).to be_false
           expect(prepare_blank_profile).to be_valid
         end
 
@@ -98,7 +98,7 @@ describe Agent do
 
       context 'and if using the profile will keep contact' do
         before do
-          prepare_blank_profile.use_profile = true
+          prepare_blank_profile.authorized = true
           prepare_blank_profile.entities.new person_entity_attributes
           prepare_blank_profile.build_address address_attributes
           prepare_blank_profile.clear_up_form

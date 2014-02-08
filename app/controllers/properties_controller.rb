@@ -92,7 +92,7 @@ class PropertiesController < ApplicationController
     end
 
     def agent_params
-      %i(id property_id use_profile) + [address_attributes: address_params] +
+      %i(id property_id authorized) + [address_attributes: address_params] +
       [entities_attributes: entities_params]
     end
 

@@ -31,7 +31,7 @@ class PropertyDecorator
   end
 
   def agent_address_lines
-    if @source.agent.use_profile?
+    if @source.agent.authorized?
       @source.agent.address.address_lines
     else
      [ '-' ]

@@ -64,11 +64,11 @@ def base_property args = {}
 end
 
 def add_no_agent bill_me
-  bill_me.build_agent use_profile: false
+  bill_me.build_agent authorized: false
 end
 
 def add_agent bill_me
-  bill_me.build_agent use_profile: true
+  bill_me.build_agent authorized: true
   bill_me.agent.build_address oval_address_attributes
   bill_me.agent.entities.build oval_person_entity_attributes
 end

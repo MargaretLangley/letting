@@ -10,7 +10,7 @@ Property
    ✔ Agent Address @done (13-08-02 00:10)
    ☐ tag
    ☐ Edit a number of records at once 'A Block'
-   ☐ Set default for Agent use_profile but doesn't seem to work.
+   ☐ Set default for Agent authorized but doesn't seem to work.
          http://stackoverflow.com/questions/8146448/get-the-default-values-of-table-columns-in-postgres
     Validates:
       PropertyID / human_ref:

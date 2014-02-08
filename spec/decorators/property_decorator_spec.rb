@@ -35,13 +35,13 @@ describe PropertyDecorator do
 
   context 'Agent' do
     it 'handles empty agent' do
-      expect(property.agent.use_profile?).to eq false
+      expect(property.agent.authorized?).to eq false
       expect(property.agent_address_lines).to eq ['-']
     end
 
     it 'handles agent' do
       property_with_agent = PropertyDecorator.new property_with_agent_create!
-      expect(property_with_agent.agent.use_profile?).to eq true
+      expect(property_with_agent.agent.authorized?).to eq true
       expect(property_with_agent.agent_address_lines).to_not eq ['-']
     end
   end

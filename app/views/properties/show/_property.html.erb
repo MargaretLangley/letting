@@ -31,7 +31,7 @@
   <%= property.entities.full_name %>
 </div>
 <div class='col-3-8 vertical-spacer'>
-  <% if property.agent.use_profile? %>
+  <% if property.agent.authorized? %>
     <%= property.agent.entities.full_name %>
   <% else %>
     None

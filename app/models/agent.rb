@@ -12,11 +12,11 @@
 class Agent < ActiveRecord::Base
   belongs_to :property, inverse_of: :agent
   include Contact
-  validates :entities, presence: true, if: :use_profile?
+  validates :entities, presence: true, if: :authorized?
   before_validation :clear_up_form
 
   def bill_to
-    use_profile? ? self : property
+    authorized? ? self : property
   end
 
   def prepare_for_form
@@ -24,7 +24,7 @@ class Agent < ActiveRecord::Base
   end
 
   def clear_up_form
-    if use_profile?
+    if authorized?
       clean_form
     else
       erase_form

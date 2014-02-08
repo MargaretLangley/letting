@@ -79,7 +79,7 @@ describe Property do
       end
 
       it 'agent when using it' do
-        property.agent.use_profile = true
+        property.agent.authorized = true
         expect(property.bill_to).to eq property.agent
       end
     end

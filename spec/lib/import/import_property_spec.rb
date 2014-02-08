@@ -55,27 +55,27 @@ module DB
 
       it 'new record to false' do
         import_property row
-        expect(Property.first.agent.use_profile).to be_false
+        expect(Property.first.agent.authorized).to be_false
       end
 
         # Nice setup!
-        # I'm worried that I might start overwriting use_profile
+        # I'm worried that I might start overwriting authorized
         # The profile addresses were kept in different tables on the
         # original system. This means importing it separately after the
-        # property import and know I won't change use_profile accidently.
+        # property import and know I won't change authorized accidently.
         # Import the record. Save a profile onto it. Import again and
         # see that Profile still true.
       it 'does not alter use profile' do
         import_property row
         property = Property.first
         property.prepare_for_form
-        property.agent.use_profile = true
+        property.agent.authorized = true
         property.agent.address.attributes = oval_address_attributes
         property.agent.entities[0].attributes =
           oval_person_entity_attributes
         property.save!
         import_property row
-        expect(Property.first.agent.use_profile).to be_true
+        expect(Property.first.agent.authorized).to be_true
       end
     end
 

@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20140107121253) do
   add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type", using: :btree
 
   create_table "agents", force: true do |t|
-    t.boolean  "use_profile", default: false, null: false
+    t.boolean  "authorized",  default: false, null: false
     t.integer  "property_id",                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
