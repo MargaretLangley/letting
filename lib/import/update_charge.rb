@@ -1,3 +1,17 @@
+####
+#
+# UpdateCharge
+#
+# Charges run from a start_date to an end date. The previous system
+# deleted charges that were stopped. This system bands the range
+# that a charge has been active. It has to derive this data from
+# debits that have been made against the charge.
+#
+# UpdateCharge requires Charges and debits to be loaded into the
+# database to work.
+#
+####
+#
 module DB
   class UpdateCharge
     def self.do
@@ -5,11 +19,13 @@ module DB
     end
 
     def update
-      add_charge_range_dates
+      assign_range_dates
       update_recent_stopped_charges
     end
 
-    def add_charge_range_dates
+    private
+
+    def assign_range_dates
       Charge.all.each do |charge|
         @charge = charge
         @charge.start_date = first_debit.on_date if first_debit
@@ -19,11 +35,11 @@ module DB
     end
 
     def first_debit
-      @charge.debits(order: :on_date).last
+      @charge.debits.order('on_date ASC').first
     end
 
     def last_debit
-      @charge.debits(order: :on_date).first
+      @charge.debits.order('on_date ASC').last
     end
 
     def stopped_debiting?

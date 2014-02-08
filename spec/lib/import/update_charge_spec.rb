@@ -6,7 +6,7 @@ module DB
     before { Timecop.travel(Date.new(2013, 11, 01)) }
     after  { Timecop.return }
 
-    it 'leaves alone charges without debits' do
+    it 'ignores a charge without a debit' do
       args = { charge_attributes: { start_date: MIN_DATE ,
                                     end_date: MAX_DATE } }
       (account = account_and_charge_new args).save!
