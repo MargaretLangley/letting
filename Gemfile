@@ -69,26 +69,26 @@ end
 
 
 group :development, :test do
-  gem "better_errors"
+  gem "better_errors", '~> 1.1.0'
   gem "binding_of_caller"
-  gem 'pry-rails'
-  gem 'pry-nav'
-  gem 'pry-stack_explorer'
-  gem 'bullet'
-  gem 'rack-mini-profiler'
+  gem 'pry-rails', '~>0.3.2'
+  gem 'pry-nav', '~>0.2.3'
+  gem 'pry-stack_explorer', '~>0.4.9.0'
+  gem 'bullet', '~>4.7.1'
+  gem 'rack-mini-profiler', '~>0.9.0'
 end
 
 group :development do
-  gem 'brakeman', require: false
-  gem "rails_best_practices"
+  gem 'brakeman', '~>2.4.0', require: false
+  gem "rails_best_practices", '~>1.15.1'
 end
 
 group :test do
   gem 'zeus'
-  gem 'simplecov', require: false
-  gem 'coveralls', require: false
-  gem 'database_cleaner', '~> 1.0.1'
-  gem 'timecop'
+  gem 'simplecov', '~>0.8.2', require: false
+  gem 'coveralls', '~>0.7.0', require: false
+  gem 'database_cleaner', '~> 1.2.0'
+  gem 'timecop', '~>0.7.0'
 end
 
 group :test do
