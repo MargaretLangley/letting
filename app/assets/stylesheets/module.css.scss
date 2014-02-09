@@ -282,11 +282,6 @@ label {
   .simple-button{
     @include base-button;
   }
-
-  .link-button{
-    @include base-button;
-    float:right;
-  }
 }
 
 
