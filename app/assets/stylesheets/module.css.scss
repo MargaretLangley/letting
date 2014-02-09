@@ -248,14 +248,14 @@ label {
 }
 
 .delete-x {
-  float:left;
-  height:43px;
-  border: 1px solid darken(#d83c3c, 10%);
-  border-left:none;
+  float: left;
+  height: 43px;
+  border: 1px solid darken($primary-button, 10%);
+  border-left: none;
   background-color: $primary-background;
-  color:#A1B9ED;
-  font-size:22px;
-  line-height:35px;
+  color: $muted-link;
+  font-size: 22px;
+  line-height: 35px;
   cursor: pointer;
 }
 
