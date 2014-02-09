@@ -65,8 +65,4 @@ class DebitGenerator < ActiveRecord::Base
   def default_end_date
     Date.current + 8.weeks
   end
-
-  def new_debits
-    debits.select(&:new_record?)
-  end
 end
