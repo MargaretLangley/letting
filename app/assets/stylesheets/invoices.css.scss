@@ -7,13 +7,13 @@ screen requirements hidden from print*/
 @media all{
 
   .inv-advice{
-    font-size: 12px;
     font-weight: normal;
+    font-size: 12px;
   }
 
   .inv-advice-bold{
-    font-size: 12px;
     font-weight: bold;
+    font-size: 12px;
   }
 }
 
@@ -55,11 +55,11 @@ screen requirements hidden from print*/
  */
 
   body{
-    background-color: $primary-background-print;
-    width: 22cm;
     margin-top: 0cm;
-    margin-left: 0.20cm;
     margin-right: 0.20cm;
+    margin-left: 0.20cm;
+    width: 22cm;
+    background-color: $primary-background-print;
    }
 
   .margwide{
@@ -69,8 +69,8 @@ screen requirements hidden from print*/
   /* This calls new page for printer */
 
   div.page{
-    page-break-after: always;
     page-break-inside: avoid;
+    page-break-after: always;
   }
 
 
@@ -109,8 +109,8 @@ screen requirements hidden from print*/
   }
 
   .inv-bold{
-    font-size: 14px;
     font-weight: bold;
+    font-size: 14px;
   }
 
  .blankright{
@@ -138,36 +138,36 @@ screen requirements hidden from print*/
 /* Commonhold and Leasehold ..Act */
 
   .actref{
-    font-size: 14pt;
     text-align:center;
+    font-size: 14pt;
   }
 
 /* small margin comments */
 
  .insert{
+    margin-left: .2cm;
     font-size: 10pt;
-    margin-left: .2cm
   }
 
   /* insert used for notes in brackets in lefthand margin , small font */
 
   .insert{
+    margin-left: 5px;
     font-size: 10pt;
-    margin-left: 5px
   }
 
   /* notice used for notices smallish font 'NOTICE FOR LEASEHOLDERS' */
 
  .notice{
+    margin-left: 80px;
     font-size: 10pt;
-    margin-left: 80px
   }
 
   /* widemargin on 2nd inv page */
 
   .widemargin{
-    font-size: 14pt;
     margin-left: 2cm;
+    font-size: 14pt;
   }
 
 
