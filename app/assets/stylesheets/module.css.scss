@@ -267,7 +267,7 @@ label {
 
 @media screen{
 
-  @mixin small-button-base {
+  @mixin base-button {
     margin: 0 0 2% 0;
     padding: 2%;
     border: 1px solid lighten($muted-border, 20%);
@@ -279,14 +279,14 @@ label {
     font-size: 1.2em;
   }
 
-  .link-button{
-     @include small-button-base;
-     float:right;
-   }
-
   .simple-button{
-     @include small-button-base;
-   }
+    @include base-button;
+  }
+
+  .link-button{
+    @include base-button;
+    float:right;
+  }
 }
 
 
