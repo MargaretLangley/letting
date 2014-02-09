@@ -32,8 +32,8 @@
 
 body{
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: $primary-text-color;
-  background-color: $primary-background-color;
+  color: $primary-text;
+  background-color: $primary-background;
 }
 
 
@@ -98,13 +98,13 @@ a{
 
   &:link,
   &:visited{
-    color: $primary-link-color;
+    color: $primary-link;
   }
 
   &:hover,
   &:active{
-    color: $secondary-link-color;
-    background-color: $secondary-background-color;
+    color: $secondary-link;
+    background-color: $secondary-background;
   }
 }
 
@@ -151,7 +151,7 @@ hr {
 
 input,
 textarea{
-  border: 1px solid $subdued-color;
+  border: 1px solid $subdued;
   border-radius: 5px;
   width: 90%;
   outline: none;
@@ -163,7 +163,7 @@ input[type=submit]{
 
 input[readonly='readonly']{
   background-color: Gainsboro;
-  color:  $primary-text-color;
+  color:  $primary-text;
 }
 
 

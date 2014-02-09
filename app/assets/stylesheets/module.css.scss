@@ -41,7 +41,7 @@ a.warn{
 
   &:hover,
   &:active{
-    color: $print-background-white;
+    color: white;
     background-color: $warn;
   }
 }
@@ -66,7 +66,7 @@ a.warn{
 
 .cell{
   @include vertical-align-hack;
-  color: $primary-text-color;
+  color: $primary-text;
 }
 
 /* Wanted to emphasise the payment column. However it
@@ -76,7 +76,7 @@ a.warn{
 .pick-out{
   padding-left: 2.5%;
   padding-right: 2.5%;
-  background-color: darken($fieldset-color, 5%);
+  background-color: darken($fieldset, 5%);
 }
 
 .vertical-spacer{
@@ -84,7 +84,7 @@ a.warn{
 }
 
 /* To change heading color for printing just change
-   $secondary-print-text-color in _colors.scss.
+   $secondary-print-text in _colors.scss.
    faded holds the switch. grid-header uses faded
    extended. */
 
@@ -101,12 +101,12 @@ a.warn{
 
 /* faded holds the switch for printing.
    To change heading color for printing just change
-   $secondary-print-text-color in _colors.scss.  */
+   $secondary-print-text in _colors.scss.  */
 
 .faded{
-  color: $secondary-text-color;
+  color: $secondary-text;
   @media print {
-        color: $secondary-print-text-color;
+        color: $secondary-print-text;
   }
 }
 
@@ -138,8 +138,8 @@ nav{
 li a{
   display: block;
   padding: 4%;
-  border-bottom: 1px solid $primary-background-color;
-  background-color: $fieldset-color;
+  border-bottom: 1px solid $primary-background;
+  background-color: $fieldset;
 }
 
 
@@ -155,9 +155,9 @@ li a{
   .shell{
     margin: 0 0 2% 0;
     padding: 1%;
-    border: 1px solid lighten($fieldset-color, 20%);
+    border: 1px solid lighten($fieldset, 20%);
     border-radius: 12px;
-    background-color: $fieldset-color;
+    background-color: $fieldset;
     box-shadow: #aaa 0 0 8px;
   }
 }
@@ -216,9 +216,9 @@ label {
 
 .form-wrapper {
   padding: 3px;
-  background-color: $secondary-background-color;
+  background-color: $secondary-background;
   border-radius: 10px;
-  border: 1px solid lighten($fieldset-color, 20%);
+  border: 1px solid lighten($fieldset, 20%);
   box-shadow: #aaa 0 0 8px;
 }
 
@@ -227,7 +227,7 @@ label {
   line-height: 21px;
   float: left;
   border: 1px solid darken(#d83c3c, 10%);
-  background-color: $primary-background-color;
+  background-color: $primary-background;
   border-right: 0;
   border-radius: 5px 0 0 5px;
 }
@@ -253,7 +253,7 @@ label {
   cursor: pointer;
   line-height:35px;
   font-size:22px;
-  background-color: $primary-background-color;
+  background-color: $primary-background;
   border: 1px solid darken(#d83c3c, 10%);
   border-left:none;
   color:#A1B9ED;
@@ -273,7 +273,7 @@ label {
     border: 1px solid lighten($background-filler, 20%);
     border-radius: 5px;
     background-color: $background-filler;
-    color: $primary-link-color;
+    color: $primary-link;
     box-shadow: #aaa 0 0 4px;
     text-decoration: none;
     font-size: 1.2em;
@@ -315,8 +315,8 @@ label {
 }
 
 .error-panel{
-  border:2px solid $errors-edge-color;
-  background-color: $errors-background-color;
+  border:2px solid $errors-edge;
+  background-color: $errors-background;
 }
 
 .field_with_errors{
@@ -325,7 +325,7 @@ label {
   }
   input,
   textarea{
-    background-color: $errors-background-color;
+    background-color: $errors-background;
   }
 }
 
@@ -346,13 +346,13 @@ label {
   text-align: center;
 
   &.notice{
-    border: 1px solid lighten($flash-notice-color, 20%);
-    background-color: $flash-notice-color;
+    border: 1px solid lighten($flash-notice, 20%);
+    background-color: $flash-notice;
   }
 
   &.alert{
-    border: 1px solid lighten($flash-alert-color, 20%);
-    background-color: $flash-alert-color;
+    border: 1px solid lighten($flash-alert, 20%);
+    background-color: $flash-alert;
   }
 }
 
@@ -379,7 +379,7 @@ label {
   margin-right: auto;
   border: 1px solid lighten(rgb(184,184,184), 20%);
   background-color: rgba(184,184,184,0.85);
-  color: $primary-text-color;
+  color: $primary-text;
   font-size:1.4em;
  }
 
@@ -402,10 +402,10 @@ ul.ui-autocomplete{
   list-style: none;
   margin: 0;
   padding: 0;
-  border: solid 1px $subdued-color;
+  border: solid 1px $subdued;
   cursor: default;
   li{
-    background-color: $primary-background-color;
+    background-color: $primary-background;
     border-top: solid 1px #DDD;
     margin: 0;
     padding: 0;
@@ -415,7 +415,7 @@ ul.ui-autocomplete{
       padding: 3px;
     }
     a.ui-state-hover, a.ui-state-active{
-      background-color: $secondary-background-color;
+      background-color: $secondary-background;
     }
   }
 }
