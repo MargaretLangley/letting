@@ -22,7 +22,7 @@ class Debit < ActiveRecord::Base
   belongs_to :account
   belongs_to :debit_generator
   has_many :credits, through: :settlements
-  has_many :settlements
+  has_many :settlements, dependent: :destroy
   belongs_to :charge
 
   validates :charge_id, :on_date, presence: true

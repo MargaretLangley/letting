@@ -15,7 +15,7 @@
 ####
 #
 class DebitGenerator < ActiveRecord::Base
-  has_many :debits, -> { uniq }
+  has_many :debits, -> { uniq }, dependent: :destroy
   attr_accessor :properties
   validates :search_string, uniqueness: { scope: [:start_date, :end_date] },
                             presence: true

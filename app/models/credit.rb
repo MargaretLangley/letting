@@ -17,7 +17,7 @@ class Credit < ActiveRecord::Base
   belongs_to :account
   belongs_to :charge
   has_many :debits, through: :settlements
-  has_many :settlements
+  has_many :settlements, dependent: :destroy
 
   validates :charge_id, :on_date, presence: true
   validates :amount, amount: true
