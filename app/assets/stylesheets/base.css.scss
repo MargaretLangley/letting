@@ -138,7 +138,7 @@ hr {
   width: 100%;
   height: 1px;
   border: none;
-  background-color: $background-filler;
+  background-color: $muted-border;
 }
 
 
@@ -153,7 +153,7 @@ input,
 textarea{
   width: 90%;
   outline: none;
-  border: 1px solid $subdued;
+  border: 1px solid $muted-border;
   border-radius: 5px;
 }
 

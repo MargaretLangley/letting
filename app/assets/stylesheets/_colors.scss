@@ -8,25 +8,40 @@
 \*----------------------------------------------------*/
 
 
-$primary-background: #F8F8F8;    // off white
-$primary-background-print: #FFFFFF;    // white
+/* $BASE */
+$primary-background:       #F8F8F8;             // off white
+$primary-background-print: #FFF;                // white
 
-$secondary-background: #237CBE;  // Light blue
-$primary-text: #444;             // Very Dark grey
-$secondary-text: #777;           // Light grey
-$secondary-print-text: #5c5858;  // Light dolphin
-$primary-link: #2E6AA0;          // Dark Blue
-$secondary-link: darken($primary-link, 60%);   // dark blue
-$background-filler: #DDD;              // Grey
-$errors-head-background: #C5C5C5; // Grey
-$errors-background: #FFC;         // Yellow
-$warn: #DC3D3D;                         // Red
-$errors-edge: #FFCC33;            // Orange-brown
-$subdued: darken($primary-background, 20%);
-$flash-notice: #DBFFDD;          // Pale Green
-$flash-alert:  #FFE1DE;          // Pink
-$accent: #FAFBFF;                // White
+$secondary-background:     #237CBE;             // Light blue
+$muted-border:             #DDD;                // Grey
+
 $fieldset: lighten($secondary-background, 50%); // Egg shell Blue
+
+$shadow:                   #AAA;                // Grey
+
+
+/* $TYPOGRAPHY */
+$primary-text:             #444;                // Very Dark grey
+$secondary-text:           #777;                // Light grey
+$secondary-print-text:     #5c5858;             // Light dolphin
+
+
+/* $LINKS */
+$primary-link:             #2E6AA0;              // Dark Blue
+$secondary-link: darken($primary-link, 60%);     // Dark blue
+
+
+/* $BUTTON */
+$primary-button:           #D83C3C;              // Red
+
+/* $ERROR */
+$errors-background:        #FFC;                 // Yellow
+$warn:                     #DC3D3D;              // Red
+
+
+/* $FLASH */
+$flash-notice:             #DBFFDD;              // Pale Green
+$flash-alert:              #FFE1DE;              // Pink
 
 
 @mixin inverted-color {
