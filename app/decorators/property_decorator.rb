@@ -22,7 +22,7 @@ class PropertyDecorator
     client && client.human_ref
   end
 
-  def address_name
+  def occupier
     source.entities.full_name
   end
 
@@ -30,9 +30,17 @@ class PropertyDecorator
     source.address.address_lines
   end
 
+  def agent_name
+    if source.agent.authorized?
+      source.agent.entities.full_name
+    else
+      'None'
+    end
+  end
+
   def agent_address_lines
-    if @source.agent.authorized?
-      @source.agent.address.address_lines
+    if source.agent.authorized?
+      source.agent.address.address_lines
     else
      [ '-' ]
     end

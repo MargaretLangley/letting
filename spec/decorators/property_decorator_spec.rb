@@ -10,19 +10,20 @@ describe PropertyDecorator do
     property
   end
 
-  context 'client_ref' do
-    it 'returns nil if unknown' do
+  describe '#client_ref' do
+    it 'nil when client unknown' do
+      property.client = nil
       expect(property.client_ref).to eq nil
     end
 
-    it 'returns ref when known' do
-      property.client = client_new
+    it 'client_ref when known' do
+      property.client = client_new human_ref: 8008
       expect(property.client_ref).to eq 8008
     end
   end
 
   it 'writes flat name' do
-    expect(property.address_name).to eq 'Mr W. G. Grace'
+    expect(property.occupier).to eq 'Mr W. G. Grace'
   end
 
   it 'writes flat property' do
@@ -33,16 +34,27 @@ describe PropertyDecorator do
     expect(property.abbreviated_address).to eq 'Flat 47 Hillbank House'
   end
 
-  context 'Agent' do
-    it 'handles empty agent' do
-      expect(property.agent.authorized?).to eq false
-      expect(property.agent_address_lines).to eq ['-']
+  describe 'Agent' do
+    context 'authorized for property' do
+      it 'name returned' do
+        agented_property = PropertyDecorator.new property_with_agent_create!
+        expect(agented_property.agent_name).to eq 'Rev V. W. Knutt'
+      end
+
+      it 'address returned' do
+        agented_property = PropertyDecorator.new property_with_agent_create!
+        expect(agented_property.agent_address_lines[0]).to eq 'Flat 33 The Oval'
+      end
     end
 
-    it 'handles agent' do
-      property_with_agent = PropertyDecorator.new property_with_agent_create!
-      expect(property_with_agent.agent.authorized?).to eq true
-      expect(property_with_agent.agent_address_lines).to_not eq ['-']
+    context 'unauthored for property' do
+      it 'name missing' do
+        expect(property.agent_name).to eq 'None'
+      end
+
+      it 'address missing' do
+        expect(property.agent_address_lines).to eq ['-']
+      end
     end
   end
 end
