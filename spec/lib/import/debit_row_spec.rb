@@ -7,8 +7,7 @@ module DB
   describe DebitRow do
     let(:row) { DebitRow.new parse_line debit_row }
 
-    context 'attributes' do
-
+    describe 'attributes' do
       it 'has human_ref' do
         expect(row.human_ref).to eq '2002'
       end
@@ -23,8 +22,8 @@ module DB
       end
     end
 
-    context 'methods' do
-      context '#charge_type' do
+    describe 'methods' do
+      describe '#charge_type' do
         it 'returns valid' do
           expect(row.charge_type).to eq 'Ground Rent'
         end
@@ -35,7 +34,7 @@ module DB
         end
       end
 
-      context '#charge_id' do
+      describe '#charge_id' do
         it 'returns valid charge_id' do
           property = property_with_charge_create!
           expect(row.charge_id).to eq property.account.charges.first.id
@@ -49,7 +48,7 @@ module DB
         end
       end
 
-      context 'attributes' do
+      describe 'attributes' do
         it 'returns expected attributes' do
           charge_id = property_with_charge_create!.account.charges.first.id
           expect(row.attributes[:charge_id]).to eq charge_id

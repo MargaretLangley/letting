@@ -3,6 +3,21 @@ require_relative 'charge_code'
 require_relative 'errors'
 
 module DB
+  ####
+  #
+  # DebitRow
+  #
+  # Wrapps around an imported row of data.
+  #
+  # Called during the Importing of accounts information.
+  # Debits are passed to ImportDebit and during the imported
+  # row is wrapped with this DebitRow. During the importing
+  # the data needs to relate to other imported rows, charges
+  # in this case, and this is hides this behaviour from the
+  # ImportDebit.
+  #
+  ####
+  #
   class DebitRow
     include MethodMissing
 
