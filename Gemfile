@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 # Use postgresql as the database for Active Record
-gem 'pg'
+gem 'pg', '~>0.17.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -30,10 +30,10 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-gem 'kaminari'
+gem 'kaminari', '~> 0.15.1'
 
 # Configuration of sensitive information
-gem 'figaro'
+gem 'figaro', '~> 0.7.0'
 
 
 group :doc do
@@ -59,12 +59,12 @@ end
 
  group :development, :test do
    gem 'rspec-rails', '~> 2.14.0'
-   gem 'capybara'
-   gem "capybara-webkit"
+   gem 'capybara', '~> 2.2.0'
+   gem "capybara-webkit", '~>1.1.0'
    gem 'guard'
    gem 'guard-rspec', '~> 3.0.2'
    gem 'guard-livereload'
-   gem 'launchy'
+   gem 'launchy', '~> 2.4.2'
 end
 
 
