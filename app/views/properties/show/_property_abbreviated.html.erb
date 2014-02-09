@@ -23,9 +23,5 @@
   <%= property.entities.full_name %>
 </div>
 <div class='col-1-4 vertical-spacer'>
-  <% if property.agent.authorized? %>
-    <%= property.agent.entities.full_name %>
-  <% else %>
-    None
-  <% end %>
+  <%= property.agent_name %>
 </div>
