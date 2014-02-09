@@ -314,7 +314,8 @@ label {
   color: $warn;
 }
 
-.error-panel{
+.error-shell{
+  @extend .shell;
   background-color: $errors-background;
 }
 
