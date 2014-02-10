@@ -6,7 +6,7 @@ module DB
     def initialize title, initials, name
       @title = top_punctuation(title).strip
       @initials = initials.strip
-      @name = tail_punctuation(name).strip
+      @name = name ? tail_punctuation(name).strip : ''
     end
 
     def type
@@ -25,6 +25,12 @@ module DB
       person? ? @name : [@initials, @name].join(' ')
     end
 
+    def update_for entity
+      entity.attributes = attributes
+    end
+
+    private
+
     def attributes
       {
         entity_type: type,
@@ -33,8 +39,6 @@ module DB
         name: name,
       }
     end
-
-    private
 
     def person?
       (@title.present? || @initials.present?) && @name.exclude?('Ltd')

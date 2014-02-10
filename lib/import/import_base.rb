@@ -1,4 +1,4 @@
-require_relative 'import_contact'
+require_relative 'contact_row'
 module DB
   ####
   #
@@ -21,7 +21,6 @@ module DB
   ####
   #
   class ImportBase
-    include ImportContact
     attr_accessor :row
 
     def self.import contents, args = {}

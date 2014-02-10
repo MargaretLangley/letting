@@ -14,6 +14,15 @@ module DB
       @entities << EntityRow.new(row[:title2], row[:initials2], row[:name2])
     end
 
+    def update_for contact
+      contact.entities.zip(entities).each do |contact, row|
+        row.update_for contact
+      end
+      contact.address.attributes = address_attributes
+    end
+
+    private
+
     def address_attributes
       {
         flat_no:    @row[:flat_no],
@@ -27,8 +36,6 @@ module DB
         nation:     @row[:nation],
       }
     end
-
-    private
 
     def town
       return if @row[:town].nil?

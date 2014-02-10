@@ -30,10 +30,12 @@ module DB
 
     context 'attributes' do
       it 'structure returned' do
+        client = client_new
         entity = EntityRow.new 'Mr', 'A D', 'Man'
-        expect(entity.attributes[:title]).to eq 'Mr'
-        expect(entity.attributes[:initials]).to eq 'A D'
-        expect(entity.attributes[:name]).to eq 'Man'
+        entity.update_for client.entities.first
+        expect(client.entities.first.title).to eq 'Mr'
+        expect(client.entities.first.initials).to eq 'A D'
+        expect(client.entities.first.name).to eq 'Man'
       end
     end
 

@@ -1,5 +1,5 @@
 require_relative 'patch_model'
-require_relative 'import_contact'
+require_relative 'contact_row'
 
 module DB
   ####
@@ -10,8 +10,6 @@ module DB
   # source.
   #
   # Currently, this updates client and agent data
-  # Note that calls import_contact which would need to be looked at if
-  # the class didn't use contact.
   #
   # Called during the import process only. It updates only those read in
   # during build_patching models.
@@ -19,7 +17,6 @@ module DB
   ####
   #
   class Patch
-    include ImportContact
     attr_accessor :row
 
     def initialize model_class, patch_contents = []
@@ -46,7 +43,7 @@ module DB
       @model_to_assign = @model_class.new
       @model_to_assign.human_ref = row[:human_ref].to_i
       @model_to_assign.prepare_for_form
-      import_contact @model_to_assign, row
+      ContactRow.new(row).update_for @model_to_assign
     end
 
     def patch_models_add

@@ -1,5 +1,5 @@
 require_relative 'import_base'
-require_relative 'import_contact'
+require_relative 'contact_row'
 
 module DB
   ####
@@ -26,7 +26,7 @@ module DB
 
     def model_assignment
       @model_to_assign.assign_attributes human_ref: row[:human_ref]
-      import_contact @model_to_assign, row
+      ContactRow.new(row).update_for @model_to_assign
     end
   end
 end
