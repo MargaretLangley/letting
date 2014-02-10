@@ -297,6 +297,7 @@ label {
 
   a.delete-button{
     @include base-button;
+    text-decoration: none;
   }
 }
 
