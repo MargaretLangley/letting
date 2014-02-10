@@ -15,6 +15,14 @@ class AddressDecorator
     js_hooks + (@address.district? ? 'revealable' : '')
   end
 
+  def nation_visiblity
+    js_hooks + (@address.nation? ? '' : 'revealable')
+  end
+
+  def add_nation_visiblity
+    js_hooks + (@address.nation? ? 'revealable' : '')
+  end
+
   private
 
   def js_hooks

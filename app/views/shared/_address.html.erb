@@ -63,8 +63,16 @@
   <div class='col-1-4 vertical-spacer'>
     <%= b.label :nation %>
   </div>
-  <div class='col-3-4 vertical-spacer  no-r-pad'>
-    <%= b.text_field :nation %>
+  <div class='js-toggle-selection'>
+    <div class='<%= address.add_nation_visiblity %>'>
+      <%= link_to 'Add a nation line to the address', '#', class: 'js-toggle toggle-event' %>
+    </div>
+    <div class='<%= address.nation_visiblity %>'>
+      <div class='col-3-4 vertical-spacer  no-r-pad'>
+        <%= b.text_field :nation, class: 'v_nation' %>
+        <%= link_to 'Delete', '#', class: 'js-toggle toggle-event' %>
+      </div>
+    </div>
   </div>
   <div class='col-1-4'>
     &nbsp;

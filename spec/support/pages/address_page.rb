@@ -12,4 +12,12 @@ class AddressPage
   def district_visible?
     has_css?('.v_district', visible: true)
   end
+
+  def add_nation
+    click_on 'Add a nation line to the address'
+  end
+
+  def nation_visible?
+    has_css?('.v_nation', visible: true)
+  end
 end
