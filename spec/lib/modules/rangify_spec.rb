@@ -13,17 +13,17 @@ describe Rangify do
       end
 
       it 'handles number range' do
-        expect(Rangify.from_str('103..120').to_i).to eq 103..120
+        expect(Rangify.from_str('103-120').to_i).to eq 103..120
       end
     end
 
     context '#to_s' do
       it 'handles single number' do
-        expect(Rangify.from_str('103').to_s).to eq '103..103'
+        expect(Rangify.from_str('103').to_s).to eq '103-103'
       end
 
       it 'handles number range' do
-        expect(Rangify.from_str('103..120').to_s).to eq '103..120'
+        expect(Rangify.from_str('103-120').to_s).to eq '103-120'
       end
     end
   end
