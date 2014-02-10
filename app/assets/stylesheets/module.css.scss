@@ -138,7 +138,7 @@ nav{
 li a{
   display: block;
   padding: 4%;
-  border-bottom: 1px solid $primary-background;
+  border-bottom: 1px solid $neutral;
   background-color: $fieldset;
 }
 
@@ -218,7 +218,7 @@ label {
   padding: 3px;
   border: 1px solid lighten($fieldset, 20%);
   border-radius: 10px;
-  background-color: $secondary-background;
+  background-color: $primary-background;
   box-shadow: $shadow 0 0 8px;
 }
 
@@ -228,7 +228,6 @@ label {
   border: 1px solid darken($primary-button, 10%);
   border-right: 0;
   border-radius: 5px 0 0 5px;
-  background-color: $primary-background;
   line-height: 21px;
 }
 
@@ -252,7 +251,7 @@ label {
   height: 43px;
   border: 1px solid darken($primary-button, 10%);
   border-left: none;
-  background-color: $primary-background;
+  background-color: white;
   color: $muted-link;
   font-size: 22px;
   line-height: 35px;
@@ -272,14 +271,22 @@ label {
     padding: 2%;
     border: 1px solid lighten($muted-border, 20%);
     border-radius: 5px;
-    background-color: $muted-border;
+    background-color: $secondary-button;
     box-shadow: $shadow 0 0 4px;
-    color: $primary-link;
-    text-decoration: none;
+    color: black;
     font-size: 1.2em;
+    &:hover,
+    &:active{
+      background-color: $secondary-background;
+      color: white;
+    }
   }
 
-  .simple-button{
+  a.simple-button{
+    @include base-button;
+  }
+
+  a.delete-button{
     @include base-button;
   }
 }
@@ -403,15 +410,6 @@ ul.ui-autocomplete{
     margin: 0;
     padding: 0;
     border-top: solid 1px $muted-border;
-    background-color: $primary-background;
-    a{
-      display: block;
-      padding: 3px;
-      color: black;
-    }
-    a.ui-state-hover, a.ui-state-active{
-      background-color: $secondary-background;
-    }
   }
 }
 

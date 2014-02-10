@@ -8,14 +8,45 @@
 \*----------------------------------------------------*/
 
 
-/* $BASE */
-$primary-background:       #F8F8F8;             // off white
-$primary-background-print: #FFF;                // white
 
-$secondary-background:     #237CBE;             // Light blue
+/*---------------------------------------------------*\
+
+  $COLORSCHEME
+
+  Color schemes only reside in this colors file.
+  Variables that are used in the application should be
+  expressed in terms of the colour scheme where approriate.
+
+  Colors from:
+  http://colorschemedesigner.com/#3x32orWE7w0w0
+
+\*----------------------------------------------------*/
+
+
+$COLOR-1:                  #237CBE;             // Blue
+$COLOR-2:                  #FFED20;             // Washed Yellow
+$COLOR-3:                  #EA1E62;             // Pink (washed)
+$COLOR-4:                  #0B4B7C;             // Darker Blue
+
+
+/*---------------------------------------------------*\
+
+  $COLORVARIABLES
+
+  Color variables are referenced throughout the application
+
+\*----------------------------------------------------*/
+
+
+/* $BASE */
+$neutral:                  #F8F8F8;             // off white
+$neutral-print:            #FFF;                // white
+
+$primary-background:       $COLOR-1;            // Light blue
+$secondary-background:     $COLOR-4;            // Darker blue
 $muted-border:             #DDD;                // Grey
 
-$fieldset: lighten($secondary-background, 50%); // Egg shell Blue
+$fieldset:   lighten($primary-background, 50%); // Egg shell Blue
 
 $shadow:                   #AAA;                // Grey
 
@@ -33,7 +64,8 @@ $muted-link:               #A1B9ED;              // light grey
 
 
 /* $BUTTON */
-$primary-button:           #D83C3C;              // Red
+$primary-button:           $COLOR-3;              // Red
+$secondary-button:         $COLOR-2;              // Yellow
 
 /* $ERROR */
 $errors-background:        #FFC;                 // Yellow
@@ -46,6 +78,6 @@ $flash-alert:              #FFE1DE;              // Pink
 
 
 @mixin inverted-color {
-  color: $primary-background-print;
-  background-color: $secondary-background;
+  color: $neutral-print;
+  background-color: $primary-background;
 }
