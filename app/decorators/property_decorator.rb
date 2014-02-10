@@ -5,7 +5,7 @@ require_relative '../../lib/modules/method_missing'
 #
 # Adds behavior to the property object
 #
-# Used when the property has need for behviour outside of the core
+# Used when the property has need for behaviour outside of the core
 # of the model. Specifically for display information.
 #
 ####
@@ -49,5 +49,4 @@ class PropertyDecorator
   def abbreviated_address
     source.address.abbreviated_address
   end
-
 end

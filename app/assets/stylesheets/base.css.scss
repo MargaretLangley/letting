@@ -162,7 +162,7 @@ input[type=submit]{
 }
 
 input[readonly='readonly']{
-  background-color: Gainsboro;
+  background-color: $disabled-background;
   color:  $primary-text;
 }
 

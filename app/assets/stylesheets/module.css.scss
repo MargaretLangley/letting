@@ -286,6 +286,15 @@ label {
     @include base-button;
   }
 
+  a.simple-button[disabled]{
+    background-color: $disabled-background;
+    color: white;
+    text-decoration: none;
+    &:hover,
+    &:active{
+    }
+  }
+
   a.delete-button{
     @include base-button;
   }
