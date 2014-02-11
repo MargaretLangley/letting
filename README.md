@@ -49,8 +49,8 @@ This document covers the following sections
 3. `cap deploy:migrate`
 4. Add Data
   Use either seed data or import production data
-  4.1 Seed data `cap deploy:seed`
-  4.2 Production data `cap rake:invoke task=db:import`
+  .1 Seed data `cap deploy:seed`
+  .2 Production data `cap rake:invoke task=db:import`
 
 [Demo](http://letting.bcs.io)
 
