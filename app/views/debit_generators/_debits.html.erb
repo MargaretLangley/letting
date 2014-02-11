@@ -15,8 +15,9 @@
     <div class='col-3-12 vertical-spacer r-align'>
       <%= debit_form.date_field :on_date %>
     </div>
+
     <div class='col-3-12 vertical-spacer r-align no-r-pad'>
-      <%= debit_form.text_field :amount %>
+      <%= debit_form.text_field :amount, value: number_with_precision(debit_form.object.amount, precision: 2), readonly: true %>
     </div>
   </div>
   <% end %>
