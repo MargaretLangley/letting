@@ -4,7 +4,7 @@
   <%= render 'invoice_page1/print_agent', object: property_object %>
   <%= render 'invoice_page1/print_property_address', object: property_object %>
   <%= render 'invoice_page1/print_accounts', items: AccountDecorator.new(property_object.account).abbrev_items %>
-  <%= render 'invoice_page1/print_section48', object: property_object.client %>
+  <%= render 'invoice_page1/print_section48', client: property_object.client %>
   <%= render 'invoice_page1/print_property_address', object: property_object %>
   <%= render partial: 'invoice_page1/print_ref_date_short', locals: {property_object: property_object, date_object: date_object} %>
   <%= render 'invoice_page1/print_from', object: property_object %>

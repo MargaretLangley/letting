@@ -15,7 +15,7 @@ describe 'debit_generator' do
     after  { Timecop.return }
 
 
-  it 'no invoices found' do
+    it 'no invoices found' do
       property_with_charge_create!
       debit_gen_page.visit_page
       debit_gen_page.search_term('102-109').search
@@ -32,14 +32,14 @@ describe 'debit_generator' do
     end
 
     it 'debits' do
-      pending 'Extend test'
-      property_with_charge_create!
+      property = property_with_charge_create!
+      property.client = client_create! human_ref: 8989
+      property.save!
       debit_gen_page.visit_page
       debit_gen_page.search_term('Hillbank House').search
       expect(page).to have_text '2002'
       expect(page).to have_text 'Ground Rent'
       debit_gen_page.make_charges
-
       expect(debit_gen_page).to be_created
     end
 

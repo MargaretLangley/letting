@@ -4,9 +4,9 @@
  <br>
   We <%= namestr.upcase %> ON BEHALF OF YOUR LANDLORD
   <br>
-  <%= object.entities.full_name %>
+  <%= client.entities.full_name %>
 
-  <%= render 'shared/show_1_line_address', addressee: object %>
+  <%= render 'shared/show_1_line_address', addressee: client %>
 
   <%= render file: 'invoice_texts/invoice_texts_p1/section48.txt' %>
   <%= render file: 'invoice_texts/add1.txt' %>
