@@ -27,7 +27,7 @@ describe 'debit_generator' do
       debit_gen_page.visit_page
       debit_gen_page.search_term('Hillbank House').search
       expect(page).to have_text '2002'
-      expect(page).to have_text 'Ground rent'
+      expect(page).to have_text 'Ground Rent'
       debit_gen_page.make_charges
     end
 
@@ -37,7 +37,7 @@ describe 'debit_generator' do
       debit_gen_page.visit_page
       debit_gen_page.search_term('Hillbank House').search
       expect(page).to have_text '2002'
-      expect(page).to have_text 'Ground rent'
+      expect(page).to have_text 'Ground Rent'
       debit_gen_page.make_charges
 
       expect(debit_gen_page).to be_created
