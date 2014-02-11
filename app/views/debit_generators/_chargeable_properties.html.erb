@@ -1,13 +1,15 @@
 <hr/>
 <div class='overlay-parent'>
-  <h2>Property Charges to be invoiced</h2>
-
+  <h2>Invoiced Charges</h2>
+  <div class='faded'>
+    Invoice Date
+  </div>
   <div class="grid vertical-spacer">
-    <div class="col-1-8">
-      Search:<br>
-      Range:
+    <div class="col-1-8 faded">
+      Search<br>
+      Range
     </div>
-    <div class="col-3-8 search-terms">
+    <div class="col-3-8">
       <%= "#{debit_generator.search_string}" %>
       <br>
       <%= "#{search_range}" %>
@@ -17,21 +19,29 @@
       <%= link_to_unless debit_generator.debitless? ,'Cancel', debit_generators_path, class: 'warn'  %>
     </div>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Charge</th>
-        <th>Date</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-     <% unless debit_generator.debitless? %>
-     <%= render 'debits', debit_gen_form: debit_gen_form, debits: debit_generator.debits %>
-    <% else %>
-      <%= render 'no_chargeable_properties' %>
-    <% end %>
-    </tbody>
-  </table>
+
+  <div class='grid'>
+    <div class='col-2-12 vertical-spacer grid-header r-align'>
+      ID
+    </div>
+    <div class='col-1-12 vertical-spacer grid-header'>
+      Type
+    </div>
+    <div class='col-3-12 vertical-spacer grid-header'>
+      Charge
+    </div>
+    <div class='col-3-12 vertical-spacer grid-header r-align'>
+      Date
+    </div>
+    <div class='col-3-12 vertical-spacer grid-header r-align'>
+     Amount
+    </div>
+  </div>
+
+  <% unless debit_generator.debitless? %>
+   <%= render 'debits', debit_gen_form: debit_gen_form, debits: debit_generator.debits %>
+  <% else %>
+    <%= render 'no_chargeable_properties' %>
+  <% end %>
+
 </div>
