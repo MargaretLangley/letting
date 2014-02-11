@@ -8,7 +8,7 @@ gem 'pg', '~>0.17.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
-gem "autoprefixer-rails"
+gem 'autoprefixer-rails'
 gem 'compass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
@@ -53,34 +53,26 @@ group :development do
   gem 'capistrano-rbenv'
 end
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
-
- group :development, :test do
-   gem 'rspec-rails', '~> 2.14.0'
-   gem 'capybara', '~> 2.2.0'
-   gem "capybara-webkit", '~>1.1.0'
-   gem 'guard'
-   gem 'guard-rspec', '~> 3.0.2'
-   gem 'guard-livereload'
-   gem 'launchy', '~> 2.4.2'
-end
-
-
 group :development, :test do
-  gem "better_errors", '~> 1.1.0'
-  gem "binding_of_caller"
+  gem 'better_errors', '~> 1.1.0'
+  gem 'binding_of_caller'
+  gem 'bullet', '~>4.7.1'
+  gem 'capybara', '~> 2.2.0'
+  gem 'capybara-webkit', '~>1.1.0'
+  gem 'guard'
+  gem 'guard-rspec', '~> 3.0.2'
+  gem 'guard-livereload'
+  gem 'launchy', '~> 2.4.2'
   gem 'pry-rails', '~>0.3.2'
   gem 'pry-nav', '~>0.2.3'
   gem 'pry-stack_explorer', '~>0.4.9.0'
-  gem 'bullet', '~>4.7.1'
   gem 'rack-mini-profiler', '~>0.9.0'
+  gem 'rspec-rails', '~> 2.14.0'
 end
 
 group :development do
   gem 'brakeman', '~>2.4.0', require: false
-  gem "rails_best_practices", '~>1.15.1'
+  gem 'rails_best_practices', '~>1.15.1'
 end
 
 group :test do
