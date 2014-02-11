@@ -1,20 +1,39 @@
 <header>
   <div class="grid grid-pad">
-    <div class="col-1-3">
+    <div class="col-1-4">
       <h2><%= link_to 'Adams Lettings', root_path, class: 'hover-link inverted-link' %></h2>
     </div>
-    <div class="col-2-3">
+    <div class="col-1-2">
+      <div class="no-print">
+        <div class="col-1-1">
+          &nbsp;
+        </div>
+        <div class="col-1-1">
+          <div class='form-wrapper'>
+            <%= form_tag root_path, method: 'get' do %>
+              <%= text_field_tag :search , params[:search], placeholder: 'Search here...', data: {autocomplete_source: search_properties_path}, autofocus:true, class: 'max-3-4' %>
+              <button type="submit" class='max-1-4'>Search</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-1-4">
       <nav>
-        <% if current_user %>
-         <%= current_user.email %>
-         <%= link_to 'Log Out', logout_path, class: 'inverted-link' %>
-        <% else %>
-          <%= link_to 'Log In', login_path, class: 'inverted-link'  %>
-        <% end %>
-        <% if allow? "users", "" %>
-          <%= link_to 'Admin', users_path, class: 'inverted-link' %>
-        <% end %>
+        <div class="col-1-1">
+          <% if current_user %>
+           <%= current_user.email %>
+           <%= link_to 'Log Out', logout_path, class: 'inverted-link' %>
+          <% else %>
+            <%= link_to 'Log In', login_path, class: 'inverted-link'  %>
+          <% end %>
+          <% if allow? "users", "" %>
+            <%= link_to 'Admin', users_path, class: 'inverted-link' %>
+          <% end %>
+        </div>
+        <div class="col-1-1">
         <%= link_to 'Print This Page', '#', class: 'print-window inverted-link'%>
+        </div>
       </nav>
     </div>
   </div>
