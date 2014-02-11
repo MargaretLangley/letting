@@ -1,21 +1,23 @@
 <% debits.each do |debit| %>
-
+  <%= debit_gen_form.fields_for :debits, debit do |debit_form| %>
   <div class='grid'>
     <div class='col-2-12 vertical-spacer r-align'>
       <%= debit.account.property.human_ref %>
+      <%= debit_form.hidden_field :account_id %>
     </div>
     <div class='col-1-12 vertical-spacer'>
       -
     </div>
     <div class='col-3-12 vertical-spacer'>
-     <%= debit.charge_type %>
+      <%= debit.charge_type %>
+      <%= debit_form.hidden_field :charge_id %>
     </div>
     <div class='col-3-12 vertical-spacer r-align'>
-       <%= debit.on_date %>
+      <%= debit_form.date_field :on_date %>
     </div>
     <div class='col-3-12 vertical-spacer r-align no-r-pad'>
-     <%= debit.amount %>
+      <%= debit_form.text_field :amount %>
     </div>
   </div>
-
+  <% end %>
 <% end %>
