@@ -5,8 +5,8 @@ describe DueOn do
   let(:due_on) { DueOn.new due_on_attributes_0 charge_id: 1 }
   it('is valid') { expect(due_on).to be_valid }
 
-  context 'Attribute' do
-    context 'day' do
+  describe 'Attribute' do
+    describe 'day' do
       it 'presence' do
         due_on.day = nil
         expect(due_on).to_not be_valid
@@ -60,7 +60,7 @@ describe DueOn do
       end
     end
 
-    context 'year' do
+    describe 'year' do
 
       it 'numeric' do
         due_on.year = 'ab'
@@ -85,9 +85,9 @@ describe DueOn do
     end
   end
 
-  context 'methods' do
+  describe 'methods' do
 
-    context '#monthly?' do
+    describe '#monthly?' do
       it 'recognises when not per month' do
         due_on.day = 25
         due_on.month = 3
@@ -100,7 +100,7 @@ describe DueOn do
       end
     end
 
-    context '#between?' do
+    describe '#between?' do
       before { Timecop.travel Date.new 2013, 1, 31 }
       after { Timecop.return }
 
@@ -121,13 +121,13 @@ describe DueOn do
       end
     end
 
-    context '#clear_up_form' do
-      it 'is pending' do
+    describe '#clear_up_form' do
+      it 'is destroyed when empty' do
         pending
       end
     end
 
-    context '#makedate' do
+    describe '#makedate' do
       it 'this year before charge on_date' do
         Timecop.travel Date.new 2014, 3, 25
         expect(due_on.make_date).to eq Date.new(2014, 3, 25)
@@ -150,7 +150,7 @@ describe DueOn do
       end
     end
 
-    context '#empty?' do
+    describe '#empty?' do
       it 'with attributes not empty' do
         expect(due_on).to_not be_empty
       end
