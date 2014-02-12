@@ -11,7 +11,7 @@ Letting::Application.routes.draw do
       get :search
     end
   end
-  resources :search_suggestions
+  resources :search_suggestions, only: [:index]
   resources :clients
 
   resources :charges
