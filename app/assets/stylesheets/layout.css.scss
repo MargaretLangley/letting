@@ -26,7 +26,6 @@
   }
 
 
-
   /*--------------------------------------*\
 
       $STRUCTURAL ELEMENTS
@@ -37,19 +36,17 @@
     float: right;
   }
 
-  .blankright{
-    margin-right: 20px;
-  }
-
   .center-block{
     margin: 0 auto;
     width: 50%;
   }
 
-  .dialog-box{
+}
+
+
+.dialog-box{
     margin: 0 auto;
     min-width: 25em;
     width: 50%;
   }
 
-}
