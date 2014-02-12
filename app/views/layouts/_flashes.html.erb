@@ -1,3 +1,16 @@
-<% flash.each do |key, value| %>
-  <%= content_tag(:h3, value, class: "flash #{key}") %>
+ <% flash.each do |key, value| %>
+ <div class="grid js-close flash <%= key %>">
+  <div class='row-clear col-8-24'>
+    &nbsp;
+  </div>
+  <div class='col-8-24'>
+      <%= content_tag(:label, value) %>
+  </div>
+  <div class='col-7-24'>
+    &nbsp;
+  </div>
+  <div class='col-1-24 flash-close'>
+    x
+  </div>
+</div>
 <% end %>

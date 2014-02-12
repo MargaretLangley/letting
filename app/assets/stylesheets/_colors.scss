@@ -76,6 +76,7 @@ $warn:                     #DC3D3D;              // Red
 /* $FLASH */
 $flash-notice:             #DBFFDD;              // Pale Green
 $flash-alert:              #FFE1DE;              // Pink
+$flash-opacity:            0.85;
 
 
 @mixin inverted-color {
