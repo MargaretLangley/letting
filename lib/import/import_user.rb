@@ -23,7 +23,7 @@ module DB
     end
 
     def find_model model_class
-      model_class.where nickname: row[:nickname]
+      model_class.where email: row[:email]
     end
 
     def model_assignment

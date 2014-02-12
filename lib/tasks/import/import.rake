@@ -32,7 +32,7 @@ namespace :db do
     OptionParser.new(args) do |opts|
       opts.banner = "Usage: rake db:import -- [options]"
 
-      options[:range] = '1..9000'
+      options[:range] = '1-9000'
       opts.on("-r", "--range {range}","Range of properties to import default is 1..9000.", String) do |range|
         options[:range] = range
       end
