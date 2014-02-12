@@ -38,20 +38,8 @@ class Payment < ActiveRecord::Base
     credits.push *account.prepare_credits
   end
 
-  def clear_debt
-    self.amount = outstanding
-  end
-
   def clear_up
     credits.clear_up
-  end
-
-  ####
-  # If there an outstanding debit? (in which case credits are generated)
-  ####
-  #
-  def in_debt?
-    credits.any?
   end
 
   def self.search date
