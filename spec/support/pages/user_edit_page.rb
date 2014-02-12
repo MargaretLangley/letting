@@ -14,8 +14,9 @@ class UserEditPage
     click_on('Update User')
   end
 
-  def login(email, password, confirmation = password)
+  def fill_form(nickname, email, password, confirmation = password)
     within_fieldset 'user' do
+      fill_in 'Nickname', with: nickname
       fill_in 'Email', with: email
       fill_in 'Password', with: password
       fill_in 'Password confirmation', with: confirmation

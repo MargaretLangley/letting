@@ -44,7 +44,7 @@ module DB
     end
 
     def self.user
-      %w{ email password admin }
+      %w{ nickname email password admin }
     end
 
     private

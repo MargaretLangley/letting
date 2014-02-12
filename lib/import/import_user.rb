@@ -23,11 +23,12 @@ module DB
     end
 
     def find_model model_class
-      model_class.where email: row[:email]
+      model_class.where nickname: row[:nickname]
     end
 
     def model_assignment
-      @model_to_assign.assign_attributes email:    row[:email],
+      @model_to_assign.assign_attributes nickname: row[:nickname],
+                                         email:    row[:email],
                                          password: row[:password],
                                          password_confirmation: row[:password],
                                          admin:    row[:admin]

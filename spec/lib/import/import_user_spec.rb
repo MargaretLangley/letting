@@ -7,7 +7,7 @@ module DB
   describe ImportUser, :import do
 
     def row
-      %q[richard.wigley@gmail.com,  password,  TRUE]
+      %q["Rich", richard.wigley@gmail.com,  password,  TRUE]
     end
 
     it 'One row' do

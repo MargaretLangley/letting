@@ -5,7 +5,10 @@
   <div class='col-1-6 vertical-spacer grid-header r-align'>
     ID
   </div>
-  <div class='col-1-3 vertical-spacer grid-header'>
+  <div class='col-1-6 vertical-spacer grid-header '>
+    Nickname
+  </div>
+  <div class='col-1-6 vertical-spacer grid-header'>
    email
   </div>
   <div class='col-1-6 vertical-spacer grid-header r-align'>
@@ -20,7 +23,10 @@
     <div class='col-1-6 vertical-spacer grid-row r-align'>
       <%= link_to user.id, edit_user_path(user) %>
     </div>
-    <div class='col-1-3 vertical-spacer'>
+    <div class='col-1-6 vertical-spacer'>
+     <%= user.nickname %>
+    </div>
+    <div class='col-1-6 vertical-spacer'>
      <%= user.email %>
     </div>
     <div class='col-1-6 vertical-spacer r-align'>

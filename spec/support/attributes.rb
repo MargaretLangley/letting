@@ -92,6 +92,7 @@ end
 
 def user_attributes overrides = {}
   {
+    nickname: 'user',
     email: 'user@example.com',
     password: 'password',
     password_confirmation: 'password',
@@ -101,6 +102,7 @@ end
 
 def admin_attributes overrides = {}
   {
+    nickname: 'admin',
     email: 'admin@example.com',
     password: 'password',
     password_confirmation: 'password',
@@ -110,6 +112,7 @@ end
 
 def george_attributes overrides = {}
   {
+    nickname: 'george',
     email: 'george@ulyett.com',
     password: 'password',
     password_confirmation: 'password',

@@ -14,12 +14,14 @@ namespace :db do
       if args.test
         User.create! [
           {
+            nickname: 'admin',
             email: 'admin@example.com',
             password: 'password',
             password_confirmation: 'password',
             admin: true
           },
           {
+            nickname: 'user',
             email: 'user@example.com',
             password: 'password',
             password_confirmation: 'password',

@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 20140107121253) do
   add_index "settlements", ["debit_id"], name: "index_settlements_on_debit_id", using: :btree
 
   create_table "users", force: true do |t|
+    t.string   "nickname",        null: false
     t.string   "email",           null: false
     t.string   "password_digest", null: false
     t.boolean  "admin",           null: false
