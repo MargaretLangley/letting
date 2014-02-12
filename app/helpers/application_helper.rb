@@ -15,7 +15,7 @@ module ApplicationHelper
     "#{entitieable.class.to_s.underscore}_entity_#{index}"
   end
 
-   def view_link model
+  def view_link model
     if model.new_record?
       link_to 'View', '#', class: 'simple-button float-right', disabled: true
     else
