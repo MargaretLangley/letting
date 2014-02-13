@@ -55,12 +55,14 @@ describe Client do
   end
 
   it 'searches for valid client' do
+    pending 'search'
     fill_in 'search', with: '222'
     click_on 'Search'
     expect(page).to have_text 'Edgbaston Road'
   end
 
   it 'searches for same client' do
+    pending 'search'
     fill_in 'search', with: '222'
     click_on 'Search'
     fill_in 'search', with: '222'
@@ -69,6 +71,7 @@ describe Client do
   end
 
   it 'search not found' do
+    pending 'search'
     fill_in 'search', with: '5'
     click_on 'Search'
     expect(page).to_not have_text '5'
