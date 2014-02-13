@@ -52,7 +52,7 @@ class DebitGenerator < ActiveRecord::Base
   # Gives error message as properties as well - useful for the user
   # However, creating unecessary dependency on property
   def properties
-    @properties ||= Property.search_min(search_string)
+    @properties ||= Property.sql_search_min(search_string)
   end
 
   def default_start_date

@@ -59,22 +59,22 @@ describe Client do
     c1 = c2 = nil
     before { c1 = client_create! }
 
-    it('human id') { expect((Client.search '8008').load).to eq [c1] }
-    it('roads') { expect((Client.search 'Edg').load).to eq [c1] }
-    it('towns') { expect((Client.search 'Bir').load).to eq [c1] }
-    it('names') { expect(Client.search 'Grace').to eq [c1] }
+    it('human id') { expect((Client.sql_search '8008').load).to eq [c1] }
+    it('roads') { expect((Client.sql_search 'Edg').load).to eq [c1] }
+    it('towns') { expect((Client.sql_search 'Bir').load).to eq [c1] }
+    it('names') { expect(Client.sql_search 'Grace').to eq [c1] }
 
     it 'only returns expected' do
       c2 = client_create! human_ref: 102,
                           address_attributes: { road: 'unknown' }
       expect(Client.all).to match_array [c1, c2]
-      expect(Client.search 'Edgba').to eq [c1]
+      expect(Client.sql_search 'Edgba').to eq [c1]
     end
 
     it 'ordered by human_ref ASC' do
       c2 = client_create! human_ref: 8000
       expect(Client.all).to match_array [c1, c2]
-      expect(Client.search 'Bir').to eq [c2, c1]
+      expect(Client.sql_search 'Bir').to eq [c2, c1]
     end
   end
 end

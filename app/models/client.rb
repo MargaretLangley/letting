@@ -24,7 +24,7 @@ class Client < ActiveRecord::Base
     entities.clear_up_form
   end
 
-  def self.search search
+  def self.sql_search search
     if search.blank?
       Client.all.includes(:address).order(:human_ref)
     else
