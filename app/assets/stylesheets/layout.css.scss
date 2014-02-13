@@ -41,14 +41,14 @@
     width: 50%;
   }
 
-}
-
-
-.dialog-box{
-    margin: 0 auto;
+  dialog-box{
+    @extend center-block;
     min-width: 25em;
-    width: 50%;
+  }
+
 }
+
+
 
 @media all{
 
