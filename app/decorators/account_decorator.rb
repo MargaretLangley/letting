@@ -8,13 +8,13 @@ class AccountDecorator
   end
 
   def items
-    balance = 0
+    running_balance = 0
     [ *@source.debits.map { |d| AccountDebitDecorator.new d },
       *@source.credits.map { |c| AccountCreditDecorator.new c } ]
     .sort_by(&:on_date)
     .map do |dec|
-      balance += dec.amount
-      dec.balance = balance
+      running_balance += dec.amount
+      dec.balance = running_balance
       dec
     end
   end
@@ -22,16 +22,16 @@ class AccountDecorator
   def abbrev_items
     date = Date.current.at_beginning_of_year
 
-    balance = balance_on_date(date)
-    [AccountBalanceDecorator.new(balance, Date.current.at_beginning_of_year) ] +
+    running_balance = balance_on_date(date)
+    [AccountBalanceDecorator.new(running_balance, Date.current.at_beginning_of_year) ] +
     [ *@source.debits.select { |d| d.on_date >= date }
               .map { |d| AccountDebitDecorator.new d } ,
       *@source.credits.select { |d| d.on_date >= date }
               .map { |c| AccountCreditDecorator.new c } ]
     .sort_by(&:on_date)
     .map do |dec|
-      balance += dec.amount
-      dec.balance = balance
+      running_balance += dec.amount
+      dec.balance = running_balance
       dec
     end
   end
