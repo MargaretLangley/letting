@@ -18,7 +18,7 @@
 #
 class PaymentsController < ApplicationController
   def index
-    @payments = Payment.search(params[:search])
+    @payments = Payment.payments_on(params[:search])
                        .page(params[:page])
                        .load
   end
