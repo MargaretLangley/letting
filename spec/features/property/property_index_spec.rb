@@ -23,6 +23,7 @@ describe Property do
     end
 
     it 'search' do
+      pending 'search'
       property_create! human_ref: 111,
                        address_attributes: { road: 'Vauxall Lane' }
       property_create! human_ref: 222

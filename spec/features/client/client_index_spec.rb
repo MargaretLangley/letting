@@ -28,6 +28,7 @@ describe Client do
     end
 
     it 'search road' do
+      pending 'search'
       fill_in 'search', with: 'Edgbaston Road'
       click_on 'Search'
       expect(page).to_not have_text '111'
@@ -45,6 +46,7 @@ describe Client do
     end
 
     it 'search not found' do
+      pending 'search'
       fill_in 'search', with: 'Highcroft Road'
       click_on 'Search'
       expect(page).to_not have_text '111'
