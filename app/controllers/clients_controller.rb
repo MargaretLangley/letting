@@ -12,7 +12,7 @@
 #
 class ClientsController < ApplicationController
   def index
-    @clients = Client.search(search_param).page(params[:page]).load
+    @clients = Client.sql_search(search_param).page(params[:page]).load
     redirect_to find_route(@clients.first) if unique_search?
   end
 

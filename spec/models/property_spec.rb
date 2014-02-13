@@ -96,38 +96,38 @@ describe Property do
         p2 = property_create! human_ref: 202,
                               address_attributes: { house_name: 'Headingly' }
         expect(Property.all).to match_array [p1, p2]
-        expect(Property.search_by_house_name('Hillbank House').load)
+        expect(Property.sql_search_by_house_name('Hillbank House').load)
           .to eq [p1]
       end
 
       it 'no wildcard matching' do
-        expect(Property.search_by_house_name 'illbank').to eq []
+        expect(Property.sql_search_by_house_name 'illbank').to eq []
       end
 
     end
 
     context '#search' do
 
-      it('human id') { expect((Property.search '2002').load).to eq [p1] }
+      it('human id') { expect((Property.sql_search '2002').load).to eq [p1] }
       it 'range of human_ref' do
         p2 = property_create! human_ref: 2003
         p3 = property_create! human_ref: 2004
         expect(Property.all).to match_array [p1, p2, p3]
-        expect(Property.search '2002 - 2003').to eq [p1, p2]
+        expect(Property.sql_search '2002 - 2003').to eq [p1, p2]
       end
-      it('house name') { expect((Property.search 'Hill').load).to eq [p1] }
-      it('roads') { expect((Property.search 'Edg').load).to eq [p1] }
-      it('towns') { expect((Property.search 'Bir').load).to eq [p1] }
-      it('names') { expect(Property.search 'Grace').to eq [p1] }
+      it('house name') { expect((Property.sql_search 'Hill').load).to eq [p1] }
+      it('roads') { expect((Property.sql_search 'Edg').load).to eq [p1] }
+      it('towns') { expect((Property.sql_search 'Bir').load).to eq [p1] }
+      it('names') { expect(Property.sql_search 'Grace').to eq [p1] }
       it 'multiple' do
         p2 = property_create! human_ref: 3000
         expect(Property.all).to match_array [p1, p2]
-        expect(Property.search 'Bir').to eq [p1, p2]
+        expect(Property.sql_search 'Bir').to eq [p1, p2]
       end
       it 'ordered by human_ref ASC' do
         p2 = property_create! human_ref: 2000
         expect(Property.all).to match_array [p1, p2]
-        expect(Property.search 'Bir').to eq [p2, p1]
+        expect(Property.sql_search 'Bir').to eq [p2, p1]
       end
 
     end

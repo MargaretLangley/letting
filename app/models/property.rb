@@ -44,37 +44,37 @@ class Property < ActiveRecord::Base
     Property.where(id: property_ids)
   end
 
-  def self.search_by_house_name(search)
+  def self.sql_search_by_house_name(search)
     Property.includes(:address)
     .where('addresses.house_name ILIKE ?', "#{search}")
     .references(:address)
   end
 
-  def self.search search
+  def self.sql_search search
     case
     when search.blank?
       Property.all.includes(:address).order(:human_ref)
     when human_refs(search)
-      search_by_human_ref(search)
+      sql_search_by_human_ref(search)
     else
-      search_by_all(search)
+      sql_search_by_all(search)
     end
   end
 
-  def self.search_min search
+  def self.sql_search_min search
     case
     when search.blank?
       none
     when human_refs(search)
-      search_by_human_ref(search)
+      sql_search_by_human_ref(search)
     else
-      search_by_all(search)
+      sql_search_by_all(search)
     end
   end
 
   private
 
-    def self.search_by_human_ref(search)
+    def self.sql_search_by_human_ref(search)
       human_refs = search.split('-')
       human_refs[1] = human_refs[0] if human_refs[1].blank?
       Property.includes(:address, :entities)
@@ -82,7 +82,7 @@ class Property < ActiveRecord::Base
                     .references(:address, :entity).order(:human_ref)
     end
 
-    def self.search_by_all(search)
+    def self.sql_search_by_all(search)
       Property.includes(:address, :entities)
         .where('human_ref = :i OR ' +
                'entities.name ILIKE :s OR ' +
