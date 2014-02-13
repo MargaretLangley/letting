@@ -16,7 +16,9 @@ class PaymentCreatePage
   end
 
   def search
-    click_on 'Search'
+    within_fieldset 'payment' do
+      click_on 'Search'
+    end
     self
   end
 
