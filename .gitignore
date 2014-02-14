@@ -30,8 +30,6 @@
 Guardfile
 
 public/assets
-# Ignore application configuration
-/config/application.yml
 
 # Personal TODO
 todo/work.TODO

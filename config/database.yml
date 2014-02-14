@@ -15,8 +15,8 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: <%= ENV['database'] %>
+  database: letting_production
   pool: 5
-  username: <%= ENV['username'] %>
-  password: <%= ENV['password'] %>
+  username: letting
+  password: rvN7O84RuExuyKXv92XExv
 

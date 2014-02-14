@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Letting::Application.config.secret_key_base = ENV['SECRET_KEY_BASE']
+Letting::Application.config.secret_key_base = '84f90664a15053a0b920954285233e2a2050eaa1070c817f6f23af85e71b54ff93346121d219b65923ec6408b46a6650c40449dfa11a214d2810a30412161f16'
