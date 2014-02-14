@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+# Configuration of sensitive information
+#gem 'figaro', '~> 0.7.0'
+gem 'dotenv-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~>4.0.0'
 
@@ -31,10 +35,6 @@ gem 'turbolinks', '~> 2.2.0'
 gem 'jbuilder', '~> 2.0.2'
 
 gem 'kaminari', '~> 0.15.1'
-
-# Configuration of sensitive information
-#gem 'figaro', '~> 0.7.0'
-gem 'dotenv-rails', :groups => [:development, :test]
 
 
 group :doc do
