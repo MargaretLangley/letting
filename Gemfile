@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 # Configuration of sensitive information
-#gem 'figaro', '~> 0.7.0'
 gem 'dotenv-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
