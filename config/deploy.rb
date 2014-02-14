@@ -6,12 +6,12 @@
 #  unicorn in gemfile
 require 'bundler/capistrano'
 require 'capistrano-rbenv'
+require 'dotenv/capistrano'
 
 # set :whenever_command, "bundle exec whenever"
 # require 'whenever/capistrano'
 
 load 'config/recipes/base'
-load 'config/recipes/app_env'
 load 'config/recipes/nginx'
 load 'config/recipes/unicorn'
 load 'config/recipes/postgresql'
