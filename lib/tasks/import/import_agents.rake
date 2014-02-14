@@ -20,7 +20,7 @@ namespace :db do
      def agent_file
        DB::FileImport.to_a 'address2',
                             headers: DB::FileHeader.agent,
-                            location: 'import_data/latest'
+                            location: 'import_data/legacy'
      end
 
      def patch_file

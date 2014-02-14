@@ -19,7 +19,7 @@ namespace :db do
     def clients_file
       DB::FileImport.to_a 'clients',
                           headers: DB::FileHeader.client,
-                          location: 'import_data/latest'
+                          location: 'import_data/legacy'
     end
 
     def patch_clients

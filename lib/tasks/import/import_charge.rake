@@ -18,7 +18,7 @@ namespace :db do
     def charges_file file_name
       DB::FileImport.to_a file_name,
                           headers: DB::FileHeader.charge,
-                          location: 'import_data/latest'
+                          location: 'import_data/legacy'
     end
 
     def patch_charges file_name

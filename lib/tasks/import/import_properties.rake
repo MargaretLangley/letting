@@ -19,7 +19,7 @@ namespace :db do
      def properties_file
        DB::FileImport.to_a 'properties',
                            headers: DB::FileHeader.property,
-                           location: 'import_data/latest',
+                           location: 'import_data/legacy',
                            drop_rows: 34
      end
 

@@ -17,7 +17,7 @@ namespace :db do
     def accounts_file
       DB::FileImport.to_a 'acc_items',
                           headers: DB::FileHeader.account,
-                          location: 'import_data/latest'
+                          location: 'import_data/legacy'
     end
   end
 end
