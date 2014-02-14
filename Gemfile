@@ -33,7 +33,8 @@ gem 'jbuilder', '~> 2.0.2'
 gem 'kaminari', '~> 0.15.1'
 
 # Configuration of sensitive information
-gem 'figaro', '~> 0.7.0'
+#gem 'figaro', '~> 0.7.0'
+gem 'dotenv-rails', :groups => [:development, :test]
 
 
 group :doc do
