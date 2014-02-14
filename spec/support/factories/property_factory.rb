@@ -47,12 +47,6 @@ def property_with_charge_and_unpaid_debit args = {}
   property
 end
 
-def property_with_unpaid_debit args = {}
-  property = base_property args
-  add_debit_attribute property.account, args
-  property
-end
-
 private
 
 def base_property args = {}
@@ -85,8 +79,4 @@ end
 
 def add_due_on_1 charge
   charge.due_ons.build due_on_attributes_1
-end
-
-def add_debit_attribute account, args
-  account.debits.build debit_attributes args.fetch(:debit_attributes, {})
 end

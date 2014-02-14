@@ -53,12 +53,4 @@ describe 'Property Factory' do
       end
     end
   end
-
-  context 'with unpaid debit' do
-    it 'has debit' do
-      property = property_with_unpaid_debit
-      expect(property.account.debits).to have(1).items
-    end
-  end
-
 end
