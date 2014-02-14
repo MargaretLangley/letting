@@ -38,3 +38,7 @@ todo/work.TODO
 
 # brakeman
 brakeman.html
+
+
+#.env
+.env
