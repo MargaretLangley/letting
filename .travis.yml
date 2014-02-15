@@ -13,3 +13,5 @@ rvm:
 
 notifications:
   email: true
+addons:
+  postgresql: 9.3
