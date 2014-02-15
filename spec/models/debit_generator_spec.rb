@@ -22,13 +22,13 @@ describe DebitGenerator do
     end
 
     describe 'Properties' do
-      it 'invalid without properties' do
-        debit_gen.properties = []
+      it 'invalid without accounts' do
+        debit_gen.accounts = []
         expect(debit_gen).to_not be_valid
       end
 
       it 'are required to be valid' do
-        debit_gen.should_receive(:properties).and_return([Object.new])
+        debit_gen.should_receive(:accounts).and_return([Object.new])
         expect(debit_gen).to be_valid
       end
     end
@@ -118,7 +118,7 @@ describe DebitGenerator do
 
   def debit_generator_new
     debit_gen = DebitGenerator.new debit_generator_attributes \
-                                 properties: [Object.new]
+                                 accounts: [Object.new]
     debit_gen.debits.build debit_attributes
     debit_gen
   end

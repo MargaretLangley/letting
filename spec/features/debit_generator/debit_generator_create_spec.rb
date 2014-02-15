@@ -7,7 +7,7 @@ describe 'debit_generator' do
   it 'Errors' do
     debit_gen_page.visit_page.search_term('Garbage').search
     expect(current_path).to eq '/debit_generators'
-    expect(debit_gen_page).to be_have_no_properties
+    expect(debit_gen_page).to be_without_accounts
   end
 
   context 'creates' do

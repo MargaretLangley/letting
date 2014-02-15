@@ -16,10 +16,10 @@
 #
 class DebitGenerator < ActiveRecord::Base
   has_many :debits, -> { uniq }, dependent: :destroy
-  attr_accessor :properties
+  attr_accessor :accounts
   validates :search_string, uniqueness: { scope: [:start_date, :end_date] },
                             presence: true
-  validates :debits, :end_date, :start_date, :properties, presence: true
+  validates :accounts, :debits, :end_date, :start_date, presence: true
   validates_with DateEqualOrAfter
   accepts_nested_attributes_for :debits
 
@@ -32,8 +32,8 @@ class DebitGenerator < ActiveRecord::Base
   end
 
   def generate
-    properties.each do |property|
-      debits.push *(property.account.prepare_debits start_date..end_date)
+    accounts.each do |account|
+      debits.push *(account.prepare_debits start_date..end_date)
     end
   end
 
@@ -49,10 +49,10 @@ class DebitGenerator < ActiveRecord::Base
 
   private
 
-  # Gives error message as properties as well - useful for the user
-  # However, creating unecessary dependency on property
-  def properties
-    @properties ||= Property.search_min(search_string)
+  # REALLY like this to be a search object. Don't see why search
+  # has to be tied to property.
+  def accounts
+    @accounts ||= Property.search_min(search_string).map(&:account)
   end
 
   def default_start_date

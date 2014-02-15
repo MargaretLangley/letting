@@ -23,8 +23,8 @@ class DebitGeneratorCreatePage
     click_on 'Invoice Charges'
   end
 
-  def have_no_properties?
-    has_content? /Properties are not being found./i
+  def without_accounts?
+    has_content? /Accounts are not being found./i
   end
 
   def created?
