@@ -26,7 +26,6 @@ describe 'debit_generator' do
       expect(page).to have_text '2002'
       expect(page).to have_text 'Ground Rent'
       debit_gen_page.make_charges
-      save_and_open_page
       expect(debit_gen_page).to be_created
     end
   end
