@@ -6,7 +6,6 @@
 #  unicorn in gemfile
 require 'bundler/capistrano'
 require 'capistrano-rbenv'
-require 'dotenv/capistrano'
 
 # set :whenever_command, "bundle exec whenever"
 # require 'whenever/capistrano'
