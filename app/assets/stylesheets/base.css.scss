@@ -166,5 +166,8 @@ input[readonly='readonly']{
   color:  $primary-text;
 }
 
-
+input[type='checkbox'] {
+   width: 35px;
+   height: 35px;
+}
 
