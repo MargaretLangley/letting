@@ -1,7 +1,5 @@
-$( document ).ready(function() {
+function readyFn( jQuery ) {
+  setTimeout(function () { $('.js-close').slideToggle('fast'); }, 2000);
+}
 
-  $('.js-close').click(function(event) {
-    $(this).slideToggle('fast');
-  });
-
-});
+$( document ).ready( readyFn );
