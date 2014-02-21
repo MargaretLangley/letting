@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.1.0'
 
 # Configuration of sensitive information
 gem 'dotenv-rails'
@@ -84,5 +85,5 @@ group :test do
 end
 
 group :test do
-  gem 'rake', '0.9.6'
+  gem 'rake', '10.1.0'
 end
