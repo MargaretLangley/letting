@@ -29,36 +29,39 @@ class SheetsController < ApplicationController
   def create
     @sheet = Sheet.new sheets_params
     if @sheet.save
-      redirect_to sheets_path, notice: "#{identy} successfully created!"
+      redirect_to sheets_path, notice: "Invoice information successfully created!"
     else
       render :new
     end
+
   end
 
   def edit
-    @user = Sheet.find params[:id]
+    @sheet = Sheet.find params[:id]
   end
 
   def update
-    @user = Sheet.find params[:id]
-    if @user.update sheets_params
-      redirect_to sheets_path, notice: "#{identy} successfully updated!"
+    @sheet = Sheet.find params[:id]
+    if @sheet.update sheets_params
+      redirect_to sheets_path, notice: "Invoice information successfully updated!"
     else
       render :edit
     end
   end
 
   def destroy
-    @user = Sheet.find(params[:id])
-    alert_message = user_deleted_message
-    @user.destroy
+    @sheet = Sheet.find(params[:id])
+    alert_message = sheet_deleted_message
+    @sheet.destroy
     redirect_to sheets_path, alert: alert_message
   end
 
   private
 
-  def user_deleted_message
-    "#{identy} successfully deleted!"
+   def sheets_params
+    params
+    .require(:sheet)
+    .permit(:adams_name, :street, :district, :county, :postcode)
   end
 
 end
