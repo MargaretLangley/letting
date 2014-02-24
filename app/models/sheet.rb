@@ -1,2 +1,2 @@
-ga class Sheet < ActiveRecord::Base
+class Sheet < ActiveRecord::Base
 end
