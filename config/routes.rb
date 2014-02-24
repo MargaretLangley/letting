@@ -21,5 +21,5 @@ Letting::Application.routes.draw do
   resources :debit_generators, only: [:new, :create, :index]
   resources :payments, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :invoices, only: [:new]
-
+  resources :sheets
 end

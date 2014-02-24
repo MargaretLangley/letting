@@ -41,7 +41,8 @@ class Permission < Struct.new(:user)
        invoices
        properties
        payments
-       search_suggestions }
+       search_suggestions
+       sheets }
   end
 
   def admin_controllers
