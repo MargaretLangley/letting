@@ -10,6 +10,7 @@ def generate_seeding
   seed_properties
   seed_charges
   debits_and_credits
+  create_sheets
   reset_pk_sequenece_on_each_table_used
 end
 
@@ -340,6 +341,30 @@ end
   def create_date months_ago
     on_date = Date.current - months_ago.months
     "#{on_date.year}/#{on_date.month }/01"
+  end
+
+  def create_sheets
+    Sheet.create! [
+      {
+        id: 1,
+        # line: ["Telephone", "VAT", "Resid"],
+        inv_name: "F & L Adams",
+     }
+    ]
+    Address.create! [
+      {
+        addressable_id: 1,
+        addressable_type: 'Sheet',
+        flat_no:  '',
+        house_name: '',
+        road_no:  '2',
+        road:     'Attwood Street',
+        district: '',
+        town:     'Halesowen',
+        county:   'West Midlands',
+        postcode: 'B63 3UE'
+      }
+    ]
   end
 
 def reset_pk_sequenece_on_each_table_used
