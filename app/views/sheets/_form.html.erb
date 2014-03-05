@@ -2,43 +2,20 @@
 
   <fieldset id='sheet' class='shell'>
 
-
     <div class="grid">
 
       <div class='col-1-4 vertical-spacer'>
-       <%= f.label :adams_name %>
+      <%= f.label :inv_name, 'Invoice Name' %>
       </div>
       <div class='col-3-4 vertical-spacer'>
-        <%= f.text_field :adams_name %>
-      </div>
-      <div class='col-1-4 vertical-spacer'>
-       <%= f.label :street %>
-      </div>
-      <div class='col-3-4 vertical-spacer'>
-        <%= f.text_field :street %>
-      </div>
-      <div class='col-1-4 vertical-spacer'>
-       <%= f.label :district %>
-      </div>
-      <div class='col-3-4 vertical-spacer'>
-        <%= f.text_field :district %>
-      </div>
-      <div class='col-1-4 vertical-spacer'>
-       <%= f.label :county %>
-      </div>
-      <div class='col-3-4 vertical-spacer'>
-        <%= f.text_field :county %>
-      </div>
-     <div class='col-1-4 vertical-spacer'>
-       <%= f.label :postcode %>
-      </div>
-      <div class='col-3-4 vertical-spacer'>
-        <%= f.text_field :postcode %>
+      <%= f.text_field :inv_name %>
       </div>
 
+      <%= render 'shared/address', f: f, parent: 'sheet', address: AddressDecorator.new(sheet.address) %>
     </div>
 
   </fieldset>
+
   <div class='no-print'>
     <%= f.submit %> or <%= link_to 'Cancel', sheets_path, class: 'warn' %>
   </div>

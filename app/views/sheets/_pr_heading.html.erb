@@ -1,0 +1,19 @@
+<div class='c-align'>
+  <%= @sheet.inv_name %>
+</div>
+
+<div class='col-1-3'>
+   &nbsp;
+</div>
+<div class='col-1-3'>
+   &nbsp;
+</div>
+<div class='col-1-3'>
+ <%= render 'shared/address_lines', lines: @sheet.address.address_lines %>
+</div>
+
+<div class='c-align'>
+  <%= @sheet.inv_name %>
+  <br>
+  <%= render 'shared/show_1_line_address', addressee: @sheet %>
+</div>

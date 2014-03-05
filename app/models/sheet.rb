@@ -1,12 +1,17 @@
 class Sheet < ActiveRecord::Base
+  # serialize :epithet, Array
+  # serialize :klass, Array
+  # validates :epithet, presence: true
+  # validates :line, presence: true
+  # validates :klass, presence: true
+  include Contact
+  validates :inv_name, presence: true
+  has_one :address, class_name: 'Address',
+                    dependent: :destroy,
+                    as: :addressable
 
-  MAX_STRING = 64
-  MIN_POSTCODE = 6
-  MAX_POSTCODE = 20
+  def prepare_for_form
+    prepare_contact
+  end
 
-  validates :adams_name, :street, :district, :county, :postcode, presence: true
-  validates :adams_name, :street, :district, :county,   length: {  maximum: MAX_STRING }
-  validates :postcode,
-            length: { minimum: MIN_POSTCODE, maximum: MAX_POSTCODE },
-            allow_blank: true
 end
