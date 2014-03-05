@@ -5,7 +5,7 @@ class Sheet < ActiveRecord::Base
   # validates :line, presence: true
   # validates :klass, presence: true
   include Contact
-  validates :inv_name, presence: true
+  validates :invoice_name, presence: true
   has_one :address, class_name: 'Address',
                     dependent: :destroy,
                     as: :addressable
