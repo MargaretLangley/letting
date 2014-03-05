@@ -1,4 +1,4 @@
-qsource 'https://rubygems.org'
+source 'https://rubygems.org'
 ruby '2.1.0'
 
 # Configuration of sensitive information
