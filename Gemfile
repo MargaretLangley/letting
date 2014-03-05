@@ -1,11 +1,11 @@
-source 'https://rubygems.org'
+qsource 'https://rubygems.org'
 ruby '2.1.0'
 
 # Configuration of sensitive information
 gem 'dotenv-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~>4.1.0.rc1'
+gem 'rails', '~>4.0.3'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~>0.17.0'
