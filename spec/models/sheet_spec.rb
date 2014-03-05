@@ -1,7 +1,5 @@
 require 'spec_helper'
 
 describe Sheet do
-  let(:sheet) { property_new }
-  it('is valid') { expect(sheet).to be_valid }
-
+  pending "add some examples to (or delete) #{__FILE__}"
 end

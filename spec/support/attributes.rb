@@ -119,3 +119,9 @@ def george_attributes overrides = {}
     admin: true
   }.merge overrides
 end
+
+def sheet_attributes overrides = {}
+  {
+    invoice_name: 'Estates Ltd'
+  }
+end

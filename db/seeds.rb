@@ -348,7 +348,7 @@ end
       {
         id: 1,
         # line: ["Telephone", "VAT", "Resid"],
-        inv_name: "F & L Adams",
+        invoice_name: "F & L Adams",
      }
     ]
     Address.create! [
