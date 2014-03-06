@@ -64,7 +64,7 @@ class SheetsController < ApplicationController
    def sheets_params
     params
     .require(:sheet)
-    .permit  :invoice_name,
+    .permit  :invoice_name, :phone, :vat,
              address_attributes: address_params
   end
 

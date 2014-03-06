@@ -3,17 +3,22 @@
 </div>
 
 <div class='col-1-3'>
-   &nbsp;
+  VAT Reg No: <%= @sheet.vat %>
 </div>
 <div class='col-1-3'>
-   &nbsp;
+  &nbsp;
 </div>
 <div class='col-1-3'>
- <%= render 'shared/address_lines', lines: @sheet.address.address_lines %>
+  <%= render 'shared/address_lines', lines: @sheet.address.address_lines %>
+  Tel: <%= @sheet.phone %>
 </div>
 
 <div class='c-align'>
   <%= @sheet.invoice_name %>
   <br>
   <%= render 'shared/show_1_line_address', addressee: @sheet %>
+  <br>
+  Tel: <%= @sheet.phone %>
+  <br>
+  VAT Reg No: <%= @sheet.vat %>
 </div>

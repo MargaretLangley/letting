@@ -347,8 +347,9 @@ end
     Sheet.create! [
       {
         id: 1,
-        # line: ["Telephone", "VAT", "Resid"],
         invoice_name: "F & L Adams",
+        phone: "01215030992",
+        vat: "277 9904 95",
      }
     ]
     Address.create! [
