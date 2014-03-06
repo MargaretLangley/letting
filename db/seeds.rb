@@ -297,76 +297,88 @@ end
     ]
   end
 
-  def create_debits
-    Debit.create! [
-      {
-        id: 1, account_id: 1,
-        charge_id: 1,
-        on_date: create_date(17),
-        amount: 88.08,
-        debit_generator_id: 1,
-      },
-      {
-        id: 2, account_id: 1,
-        charge_id: 1,
-        on_date: create_date(5),
-        amount: 88.08,
-        debit_generator_id: 2 ,
-      },
-    ]
-  end
+def create_debits
+  Debit.create! [
+    {
+      id: 1, account_id: 1,
+      charge_id: 1,
+      on_date: create_date(17),
+      amount: 88.08,
+      debit_generator_id: 1,
+    },
+    {
+      id: 2, account_id: 1,
+      charge_id: 1,
+      on_date: create_date(5),
+      amount: 88.08,
+      debit_generator_id: 2 ,
+    },
+  ]
+end
 
-  def create_credits
-    Credit.create! [
-      { id: 1,
-        payment_id: 1,
-        charge_id: 1,
-        account_id: 1,
-        on_date: create_date(15),
-        amount: 88.08,
-      }
-    ]
-  end
+def create_credits
+  Credit.create! [
+    { id: 1,
+      payment_id: 1,
+      charge_id: 1,
+      account_id: 1,
+      on_date: create_date(15),
+      amount: 88.08,
+    }
+  ]
+end
 
-  def create_payment
-    Payment.create! [
-      { id: 1,
-        account_id: 1,
-        on_date: create_date(15),
-        amount: 88.08,
-      }
-    ]
-  end
+def create_payment
+  Payment.create! [
+    { id: 1,
+      account_id: 1,
+      on_date: create_date(15),
+      amount: 88.08,
+    }
+  ]
+end
 
-  def create_date months_ago
-    on_date = Date.current - months_ago.months
-    "#{on_date.year}/#{on_date.month }/01"
-  end
+def create_date months_ago
+  on_date = Date.current - months_ago.months
+  "#{on_date.year}/#{on_date.month }/01"
+end
 
-  def create_sheets
-    Sheet.create! [
-      {
-        id: 1,
-        invoice_name: "F & L Adams",
-        phone: "01215030992",
-        vat: "277 9904 95",
-     }
-    ]
-    Address.create! [
-      {
-        addressable_id: 1,
-        addressable_type: 'Sheet',
-        flat_no:  '',
-        house_name: '',
-        road_no:  '2',
-        road:     'Attwood Street',
-        district: '',
-        town:     'Halesowen',
-        county:   'West Midlands',
-        postcode: 'B63 3UE'
-      }
-    ]
-  end
+def create_sheets
+  Sheet.create! [
+    {
+      id: 1,
+      invoice_name: "F & L Adams",
+      phone: "01215030992",
+      vat: "277 9904 95",
+   }
+  ]
+  Address.create! [
+    {
+      addressable_id: 1,
+      addressable_type: 'Sheet',
+      flat_no:  '',
+      house_name: '',
+      road_no:  '2',
+      road:     'Attwood Street',
+      district: '',
+      town:     'Halesowen',
+      county:   'West Midlands',
+      postcode: 'B63 3UE'
+    }
+  ]
+end
+
+def create_notices
+  Notice.create! [
+    {
+      id: 1,
+      minor: "[Insert name(s)]",
+      major: "To",
+      minor_type: "small",
+      major_type: "centre",
+   }
+  ]
+end
 
 def reset_pk_sequenece_on_each_table_used
   Rake::Task['db:reset_pk'].invoke

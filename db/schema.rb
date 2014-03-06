@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228105312) do
+ActiveRecord::Schema.define(version: 20140306151327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,15 @@ ActiveRecord::Schema.define(version: 20140228105312) do
   end
 
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
+
+  create_table "notices", force: true do |t|
+    t.string   "minor",      null: false
+    t.string   "major",      null: false
+    t.string   "minor_type", null: false
+    t.string   "major_type", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "payments", force: true do |t|
     t.integer  "account_id",                         null: false
