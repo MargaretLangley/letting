@@ -131,10 +131,9 @@ ActiveRecord::Schema.define(version: 20140306151327) do
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
 
   create_table "notices", force: true do |t|
-    t.string   "minor",      null: false
-    t.string   "major",      null: false
-    t.string   "minor_type", null: false
-    t.string   "major_type", null: false
+    t.string   "notice_head", null: false
+    t.string   "notice_body", null: false
+    t.string   "notice_type", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -372,10 +372,9 @@ def create_notices
   Notice.create! [
     {
       id: 1,
-      minor: "[Insert name(s)]",
-      major: "To",
-      minor_type: "small",
-      major_type: "centre",
+      notice_head: "[Insert name(s)]",
+      notice_body: "To",
+      notice_type: "small",
    }
   ]
 end
