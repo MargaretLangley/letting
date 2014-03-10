@@ -1,9 +1,7 @@
 class Sheet < ActiveRecord::Base
-  # serialize :epithet, Array
-  # serialize :klass, Array
-  # validates :epithet, presence: true
+  # serialize :line, Array
   # validates :line, presence: true
-  # validates :klass, presence: true
+  has_many :notices, dependent: :destroy
   include Contact
   validates :invoice_name, presence: true
   validates :phone, presence: true
