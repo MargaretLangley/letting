@@ -16,8 +16,10 @@ describe Sheet do
     end
 
      it 'Check Data' do
+      sheet = sheet_factory
       visit '/sheets/'
-      expect(current_path).to eq '/sheets/'
+      expect(page).to have_text '1'
+      expect(page).to have_text 'Edit'
     end
 
   end

@@ -2,9 +2,11 @@
   <%= render 'shared/errors', object: sheet %>
 
   <fieldset id='sheet' class='shell'>
-
+    <div class=".inv-advice-bold c-align">
+      <%= sheet.description %>
+      <br>
+    </div>
     <div class="grid">
-
       <div class='col-1-4 vertical-spacer'>
         <%= f.label :invoice_name, 'Invoice Name' %>
       </div>
@@ -22,6 +24,31 @@
       </div>
       <div class='col-3-4 vertical-spacer'>
         <%= f.text_field :vat %>
+      </div>
+
+      <div class='col-1-4 vertical-spacer'>
+        <%= f.label :heading1, '1st Heading' %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <%= f.text_field :heading1 %>
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        <%= f.label :heading2, '2nd Heading' %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <%= f.text_field :heading2 %>
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        <%= f.label :advice1, '1st Text Block' %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <%= f.text_area :advice1, size: "30x8" %>
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        <%= f.label :advice2, '2nd Text Block' %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <%= f.text_area :advice2, size: "30x8" %>
       </div>
 
     </div>

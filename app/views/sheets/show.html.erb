@@ -1,4 +1,10 @@
 <% @title='View Sheet' %>
-<%= render '/sheets/pr_heading', sheet: @sheet %>
+Sheet Number <%= @sheet.id %>
+<% if @sheet.id == 1 %>
+
+<%= render '/sheets/page1', sheet: @sheet %>
+
+<% else %>
 <%= render '/sheets/page2', sheet: @sheet %>
 
+<% end %>

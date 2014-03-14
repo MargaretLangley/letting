@@ -179,9 +179,14 @@ ActiveRecord::Schema.define(version: 20140306151327) do
   add_index "settlements", ["debit_id"], name: "index_settlements_on_debit_id", using: :btree
 
   create_table "sheets", force: true do |t|
+    t.string   "description",  null: false
     t.string   "invoice_name", null: false
     t.string   "phone",        null: false
     t.string   "vat",          null: false
+    t.string   "heading1",     null: false
+    t.string   "heading2",     null: false
+    t.text     "advice1",      null: false
+    t.text     "advice2",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

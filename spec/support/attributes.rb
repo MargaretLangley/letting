@@ -122,8 +122,13 @@ end
 
 def sheet_attributes overrides = {}
   {
+    description: 'Page 1',
     invoice_name: 'Estates Ltd',
     phone: '0121345678',
-    vat: '123 1234 12'
+    vat: '123 1234 12',
+    heading1: 'Head1',
+    heading2: 'Head2',
+    advice1: 'Good Speed',
+    advice2: 'Lock you door'
   }
 end

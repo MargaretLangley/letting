@@ -1,14 +1,23 @@
 <div class='c-align'>
   <%= @sheet.invoice_name %>
   <br>
-  <%= render 'shared/show_1_line_address', addressee: @sheet %>
+  <%= render 'shared/show_1_line_address', addressee: Sheet.find(1) %>
   <br>
-  Tel: <%= @sheet.phone %>
+  Tel: <%= Sheet.find(1).phone %>
   <br>
-  VAT Reg No: <%= @sheet.vat %>
+  VAT Reg No: <%= Sheet.find(1).vat %>
   <br>
+   <%= @sheet.heading1 %>
+  <br>
+   <%= @sheet.heading2 %>
 </div>
-
+<br>
 <% Sheet.find(2).notices.order(:id).each do  |note| %>
     <%= render '/sheets/instructions', count:note %>
 <% end %>
+CLIENT'S ADDRESS
+<br>
+<%= @sheet.advice1 %>
+<p>
+<%= @sheet.advice2 %>
+</p>
