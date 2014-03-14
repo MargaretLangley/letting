@@ -1,32 +1,38 @@
 <%= form_for sheet do |f| %>
+  <%= render 'shared/errors', object: sheet %>
 
   <fieldset id='sheet' class='shell'>
 
     <div class="grid">
 
       <div class='col-1-4 vertical-spacer'>
-      <%= f.label :invoice_name, 'Invoice Name' %>
+        <%= f.label :invoice_name, 'Invoice Name' %>
       </div>
       <div class='col-3-4 vertical-spacer'>
-      <%= f.text_field :invoice_name %>
+        <%= f.text_field :invoice_name %>
       </div>
       <div class='col-1-4 vertical-spacer'>
-      <%= f.label :phone, 'Telephone' %>
+        <%= f.label :phone, 'Telephone' %>
       </div>
       <div class='col-3-4 vertical-spacer'>
-      <%= f.text_field :phone %>
+        <%= f.text_field :phone %>
       </div>
       <div class='col-1-4 vertical-spacer'>
-      <%= f.label :vat, 'VAT' %>
+        <%= f.label :vat, 'VAT' %>
       </div>
       <div class='col-3-4 vertical-spacer'>
-      <%= f.text_field :vat %>
+        <%= f.text_field :vat %>
       </div>
 
-      <%= render 'shared/address', f: f, parent: 'sheet', address: AddressDecorator.new(sheet.address) %>
     </div>
 
+    <%= render 'shared/address', f: f, parent: 'sheet', address: AddressDecorator.new(sheet.address) %>
+
   </fieldset>
+
+  <%= f.fields_for :notices, f.object.notices.order(:id) do |builder| %>
+    <%= render 'notice_form', f: builder %>
+  <% end %>
 
   <div class='no-print'>
     <%= f.submit %> or <%= link_to 'Cancel', sheets_path, class: 'warn' %>

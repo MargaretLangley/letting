@@ -14,11 +14,7 @@
 </div>
 
 <div class='c-align'>
-  <%= @sheet.invoice_name %>
+  <%= Sheet.find(1).notices.find(1).clause %>
   <br>
-  <%= render 'shared/show_1_line_address', addressee: @sheet %>
-  <br>
-  Tel: <%= @sheet.phone %>
-  <br>
-  VAT Reg No: <%= @sheet.vat %>
+
 </div>

@@ -2,13 +2,12 @@
 #
 # SheetsController
 #
-# Why does this class exist?
+# Restful actions on the Sheets resource
 #
-# To Update invoice sheet details
-#
-# How does this fit into the larger system?
-#
-# Sheets are used to create invoices.
+# Sheets are used to create invoices,
+# they hold data needed to produce heading,
+# Adam's address, notes and items on onvoice and
+# notice of rent due.
 #
 ####
 #
@@ -24,7 +23,6 @@ class SheetsController < ApplicationController
 
   def new
     @sheet = Sheet.new
-    @sheet.prepare_for_form
   end
 
   def create
@@ -32,7 +30,6 @@ class SheetsController < ApplicationController
     if @sheet.save
       redirect_to sheets_path, notice: "Invoice information successfully created!"
     else
-      @sheet.prepare_for_form
       render :new
     end
 
@@ -40,7 +37,6 @@ class SheetsController < ApplicationController
 
   def edit
     @sheet = Sheet.find params[:id]
-    @sheet.prepare_for_form
   end
 
   def update
@@ -61,12 +57,15 @@ class SheetsController < ApplicationController
 
   private
 
-   def sheets_params
-    params
-    .require(:sheet)
+  def sheets_params
+    params.require(:sheet)
     .permit  :invoice_name, :phone, :vat,
-             address_attributes: address_params
+             address_attributes: address_params,
+             notices_attributes: notices_params
+  end
+
+  def notices_params
+    %i(id instruction clause proxy)
   end
 
 end
-

@@ -10,7 +10,7 @@ def generate_seeding
   seed_properties
   seed_charges
   debits_and_credits
-  create_sheets
+  seed_sheets
   reset_pk_sequenece_on_each_table_used
 end
 
@@ -343,6 +343,12 @@ def create_date months_ago
   "#{on_date.year}/#{on_date.month }/01"
 end
 
+def seed_sheets
+  create_sheets
+  create_sheet_addresses
+  create_notices
+end
+
 def create_sheets
   Sheet.create! [
     {
@@ -350,8 +356,17 @@ def create_sheets
       invoice_name: "F & L Adams",
       phone: "01215030992",
       vat: "277 9904 95",
+   },
+   {
+      id: 2,
+      invoice_name: "F & L Adams",
+      phone: "01215030992",
+      vat: "277 9904 95",
    }
   ]
+end
+
+def create_sheet_addresses
   Address.create! [
     {
       addressable_id: 1,
@@ -364,7 +379,19 @@ def create_sheets
       town:     'Halesowen',
       county:   'West Midlands',
       postcode: 'B63 3UE'
-    }
+    },
+    {
+      addressable_id: 2,
+      addressable_type: 'Sheet',
+      flat_no:  '',
+      house_name: '',
+      road_no:  '2',
+      road:     'Attwood Street',
+      district: '',
+      town:     'Halesowen',
+      county:   'West Midlands',
+      postcode: 'B63 3UE'
+   },
   ]
 end
 
@@ -372,10 +399,84 @@ def create_notices
   Notice.create! [
     {
       id: 1,
-      notice_head: "[Insert name(s)]",
-      notice_body: "To",
-      notice_type: "small",
-   }
+      sheet_id: 1,
+      instruction: "",
+      clause: "Hearby give you notice pursuant to Section 48 of the Landlord and Tenant Act",
+      proxy: "small",
+    },
+    {
+      id: 2,
+      sheet_id: 1,
+      instruction: "Remittance Advice",
+      clause: "bold",
+      proxy: "small",
+    },
+    {
+      id: 3,
+      sheet_id: 1,
+      instruction: "If paying by cheque",
+      clause: "To",
+      proxy: "small",
+    },
+
+
+    {
+      id: 10,
+      sheet_id: 2,
+      instruction: "[Insert name(s)of leaseholder(s)] (note 1)",
+      clause: "To",
+      proxy: "Mr & Mrs Jones",
+    },
+    {
+      id: 11,
+      sheet_id: 2,
+      instruction: "[address of premises to which the long lease relates]",
+      clause: "This notice is given in respect of",
+      proxy: "11 Lichfield Road",
+    },
+    {
+      id: 12,
+      sheet_id: 2,
+      instruction: "[Insert date (note 2)]",
+      clause: "It requires you to pay rent of",
+      proxy: "£20 on 25th March 2016",
+    },
+    {
+      id: 13,
+      sheet_id: 2,
+      instruction: "[state period]",
+      clause: "The rent is payable in respect of the period",
+      proxy: "26th Sept 2015 to 25th March 2016",
+    },
+
+     {
+      id: 14,
+      sheet_id: 2,
+      instruction: "[insert name of landlord(s) or if payment should be made to an agent name of agent]",
+      clause: "Payment should be made to ",
+      proxy: "F & L Adams",
+    },
+
+     {
+      id: 15,
+      sheet_id: 2,
+      instruction: "[insert address]",
+      clause: "at ",
+      proxy: "2 Attwood Street",
+    },
+
+     {
+      id:16,
+      sheet_id: 2,
+      instruction: "[insert name of landlord(s) and if not given above, address]",
+      clause: "This notice is given by",
+      proxy: "CLIENT NAME",
+    },
+
+
+
+
+
   ]
 end
 
@@ -384,3 +485,4 @@ def reset_pk_sequenece_on_each_table_used
 end
 
 generate_seeding
+
