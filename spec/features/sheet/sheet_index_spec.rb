@@ -19,6 +19,7 @@ describe Sheet do
       sheet = sheet_factory
       visit '/sheets/'
       expect(page).to have_text '1'
+      expect(page).to have_text 'Page 1'
       expect(page).to have_text 'Edit'
     end
 

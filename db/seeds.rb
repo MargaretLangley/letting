@@ -360,7 +360,8 @@ def create_sheets
       heading1:  "Residential Lettings & Property Management",
       heading2:  "Invoice",
       advice1:  "Hearby give you notice pursuant to Section 48 of the Landlord and Tenant Act 1987 that the address in England and Wales at which notices (including notices in proceedings) may be served on your Landlord by you is:",
-      advice2:  "Remittance Advice  If paying by cheque, please detach and forward only the tear-off counterfoil of this account.CHEQUES ACT 1957: Receipts are not issued for cheque payments unless specifically requested in which case the account should be sent INTACT, endorsed RECEIPT REQUIRED together with a STAMPED ADDRESSED ENVELOPE.  PLEASE MAKE CHEQUES PAYABLE TO F&L ADAMS.
+      advice2:  "Remittance Advice
+       If paying by cheque, please detach and forward only the tear-off counterfoil of this account.CHEQUES ACT 1957: Receipts are not issued for cheque payments unless specifically requested in which case the account should be sent INTACT, endorsed RECEIPT REQUIRED together with a STAMPED ADDRESSED ENVELOPE.  PLEASE MAKE CHEQUES PAYABLE TO F&L ADAMS.
 Postal Orders sent through the post shall be at the sender's risk until actually received.",
    },
    {
@@ -397,47 +398,12 @@ def create_sheet_addresses
       county:   'West Midlands',
       postcode: 'B63 3UE'
     },
-    {
-      addressable_id: 2,
-      addressable_type: 'Sheet',
-      flat_no:  '',
-      house_name: '',
-      road_no:  '2',
-      road:     'Attwood Street',
-      district: '',
-      town:     'Halesowen',
-      county:   'West Midlands',
-      postcode: 'B63 3UE'
-   },
   ]
 end
 
 def create_notices
   Notice.create! [
-    {
-      id: 1,
-      sheet_id: 1,
-      instruction: "",
-      clause: "Hearby give you notice pursuant to Section 48 of the Landlord and Tenant Act",
-      proxy: "small",
-    },
-    {
-      id: 2,
-      sheet_id: 1,
-      instruction: "Remittance Advice",
-      clause: "bold",
-      proxy: "small",
-    },
-    {
-      id: 3,
-      sheet_id: 1,
-      instruction: "If paying by cheque",
-      clause: "To",
-      proxy: "small",
-    },
-
-
-    {
+     {
       id: 10,
       sheet_id: 2,
       instruction: "[Insert name(s)of leaseholder(s)] (note 1)",
@@ -489,11 +455,6 @@ def create_notices
       clause: "This notice is given by",
       proxy: "CLIENT NAME",
     },
-
-
-
-
-
   ]
 end
 

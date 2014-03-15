@@ -18,5 +18,5 @@ We <%= @sheet.invoice_name %> ON BEHALF OF YOUR LANDLORDS
 CLIENT NAME CLIENT ADDRESS
 <%= @sheet.advice1 %>
 <p>
-<%= @sheet.advice2 %>
+<%= simple_format(@sheet.advice2) %>
 </p>

@@ -4,3 +4,9 @@ def sheet_factory args = {}
   sheet.save!
   sheet
 end
+
+def sheet2_factory args = {}
+  sheet = Sheet.new  sheet_p2_attributes args
+  sheet.save!
+  sheet
+end

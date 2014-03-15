@@ -1,5 +1,5 @@
 <div class='c-align'>
-  <%= @sheet.invoice_name %>
+  <%= Sheet.find(1).invoice_name %>
   <br>
   <%= render 'shared/show_1_line_address', addressee: Sheet.find(1) %>
   <br>
@@ -15,9 +15,11 @@
 <% Sheet.find(2).notices.order(:id).each do  |note| %>
     <%= render '/sheets/instructions', count:note %>
 <% end %>
-CLIENT'S ADDRESS
-<br>
-<%= @sheet.advice1 %>
-<p>
-<%= @sheet.advice2 %>
-</p>
+<div class='widemargin'>
+  CLIENT'S ADDRESS
+  <br>
+  <%= simple_format(@sheet.advice1) %>
+  <p>
+  <%= simple_format(@sheet.advice2) %>
+  </p>
+</div>

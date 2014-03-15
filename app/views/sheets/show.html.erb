@@ -1,4 +1,5 @@
 <% @title='View Sheet' %>
+ <%= link_to 'Edit', edit_sheet_path(@sheet), class: 'simple-button float-right' %>
 Sheet Number <%= @sheet.id %>
 <% if @sheet.id == 1 %>
 

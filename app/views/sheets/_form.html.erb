@@ -2,12 +2,15 @@
   <%= render 'shared/errors', object: sheet %>
 
   <fieldset id='sheet' class='shell'>
-    <div class=".inv-advice-bold c-align">
-      <%= sheet.description %>
-      <br>
-    </div>
-    <div class="grid">
-      <div class='col-1-4 vertical-spacer'>
+     <div class="grid">
+
+      <div class='col-1-2'>
+        <h2><%= sheet.description %></h2>
+      </div>
+      <div class='col-1-2 no-r-pad'>
+        <%= view_link(sheet) %>
+      </div>
+      <div class='grid-row col-1-4 vertical-spacer'>
         <%= f.label :invoice_name, 'Invoice Name' %>
       </div>
       <div class='col-3-4 vertical-spacer'>

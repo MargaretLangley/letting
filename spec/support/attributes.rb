@@ -122,6 +122,7 @@ end
 
 def sheet_attributes overrides = {}
   {
+    id: 1,
     description: 'Page 1',
     invoice_name: 'Estates Ltd',
     phone: '0121345678',
@@ -129,6 +130,20 @@ def sheet_attributes overrides = {}
     heading1: 'Head1',
     heading2: 'Head2',
     advice1: 'Good Speed',
-    advice2: 'Lock you door'
+    advice2: 'Lock you door',
+  }
+end
+
+def sheet_p2_attributes overrides = {}
+   {
+    id: 2,
+    description: 'Page 2',
+    invoice_name: 'No_go',
+    phone: '0121345678',
+    vat: '123 1234 12',
+    heading1: 'Page2 head1',
+    heading2: 'Page2 head2',
+    advice1: 'Bowled Out!',
+    advice2: 'Oomf'
   }
 end
