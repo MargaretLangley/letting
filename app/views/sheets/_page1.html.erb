@@ -1,0 +1,22 @@
+<%= render '/sheets/pr_heading', sheet: @sheet %>
+  <br>
+
+<div class='col-1-3'>
+  <%= @sheet.heading2 %>
+</div>
+<div class='col-1-3'>
+ Property Ref:
+</div>
+<div class='col-1-3'>
+  Date:
+</div>
+
+<br>
+
+We <%= @sheet.invoice_name %> ON BEHALF OF YOUR LANDLORDS
+<br>
+CLIENT NAME CLIENT ADDRESS
+<%= @sheet.advice1 %>
+<p>
+<%= simple_format(@sheet.advice2) %>
+</p>

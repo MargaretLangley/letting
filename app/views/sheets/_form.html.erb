@@ -1,32 +1,68 @@
 <%= form_for sheet do |f| %>
+  <%= render 'shared/errors', object: sheet %>
 
   <fieldset id='sheet' class='shell'>
+     <div class="grid">
 
-    <div class="grid">
-
-      <div class='col-1-4 vertical-spacer'>
-      <%= f.label :invoice_name, 'Invoice Name' %>
+      <div class='col-1-2'>
+        <h2><%= sheet.description %></h2>
+      </div>
+      <div class='col-1-2 no-r-pad'>
+        <%= view_link(sheet) %>
+      </div>
+      <div class='grid-row col-1-4 vertical-spacer'>
+        <%= f.label :invoice_name, 'Invoice Name' %>
       </div>
       <div class='col-3-4 vertical-spacer'>
-      <%= f.text_field :invoice_name %>
+        <%= f.text_field :invoice_name %>
       </div>
       <div class='col-1-4 vertical-spacer'>
-      <%= f.label :phone, 'Telephone' %>
+        <%= f.label :phone, 'Telephone' %>
       </div>
       <div class='col-3-4 vertical-spacer'>
-      <%= f.text_field :phone %>
+        <%= f.text_field :phone %>
       </div>
       <div class='col-1-4 vertical-spacer'>
-      <%= f.label :vat, 'VAT' %>
+        <%= f.label :vat, 'VAT' %>
       </div>
       <div class='col-3-4 vertical-spacer'>
-      <%= f.text_field :vat %>
+        <%= f.text_field :vat %>
       </div>
 
-      <%= render 'shared/address', f: f, parent: 'sheet', address: AddressDecorator.new(sheet.address) %>
+      <div class='col-1-4 vertical-spacer'>
+        <%= f.label :heading1, '1st Heading' %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <%= f.text_field :heading1 %>
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        <%= f.label :heading2, '2nd Heading' %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <%= f.text_field :heading2 %>
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        <%= f.label :advice1, '1st Text Block' %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <%= f.text_area :advice1, size: "30x8" %>
+      </div>
+      <div class='col-1-4 vertical-spacer'>
+        <%= f.label :advice2, '2nd Text Block' %>
+      </div>
+      <div class='col-3-4 vertical-spacer'>
+        <%= f.text_area :advice2, size: "30x8" %>
+      </div>
+
     </div>
 
+    <%= render 'shared/address', f: f, parent: 'sheet', address: AddressDecorator.new(sheet.address) %>
+
   </fieldset>
+
+  <%= f.fields_for :notices, f.object.notices.order(:id) do |builder| %>
+    <%= render 'notice_form', f: builder %>
+  <% end %>
 
   <div class='no-print'>
     <%= f.submit %> or <%= link_to 'Cancel', sheets_path, class: 'warn' %>

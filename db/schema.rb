@@ -131,12 +131,15 @@ ActiveRecord::Schema.define(version: 20140306151327) do
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
 
   create_table "notices", force: true do |t|
-    t.string   "notice_head", null: false
-    t.string   "notice_body", null: false
-    t.string   "notice_type", null: false
+    t.integer  "sheet_id"
+    t.string   "instruction", null: false
+    t.string   "clause",      null: false
+    t.string   "proxy",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "notices", ["sheet_id"], name: "index_notices_on_sheet_id", using: :btree
 
   create_table "payments", force: true do |t|
     t.integer  "account_id",                         null: false
@@ -176,9 +179,14 @@ ActiveRecord::Schema.define(version: 20140306151327) do
   add_index "settlements", ["debit_id"], name: "index_settlements_on_debit_id", using: :btree
 
   create_table "sheets", force: true do |t|
+    t.string   "description",  null: false
     t.string   "invoice_name", null: false
     t.string   "phone",        null: false
     t.string   "vat",          null: false
+    t.string   "heading1",     null: false
+    t.string   "heading2",     null: false
+    t.text     "advice1",      null: false
+    t.text     "advice2",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

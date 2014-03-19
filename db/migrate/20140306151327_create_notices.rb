@@ -1,9 +1,10 @@
 class CreateNotices < ActiveRecord::Migration
   def change
     create_table :notices do |t|
-      t.string :notice_head,  null: false
-      t.string :notice_body,  null: false
-      t.string :notice_type,  null: false
+      t.belongs_to :sheet, index: true
+      t.string :instruction,  null: false
+      t.string :clause,  null: false
+      t.string :proxy,  null: false
       t.timestamps
     end
   end

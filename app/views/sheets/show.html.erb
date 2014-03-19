@@ -1,3 +1,11 @@
 <% @title='View Sheet' %>
-<%= render '/sheets/pr_heading', sheet: @sheet %>
+ <%= link_to 'Edit', edit_sheet_path(@sheet), class: 'simple-button float-right' %>
+Sheet Number <%= @sheet.id %>
+<% if @sheet.id == 1 %>
 
+<%= render '/sheets/page1', sheet: @sheet %>
+
+<% else %>
+<%= render '/sheets/page2', sheet: @sheet %>
+
+<% end %>
