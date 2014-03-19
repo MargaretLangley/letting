@@ -31,10 +31,10 @@ set :use_sudo, false
 
 set :scm, 'git'
 set :repository_owner, 'RichardWigley' # change
-set :repository, "  git@bitbucket.org:#{repository_owner}/#{application}.git"
+set :repository, "git@bitbucket.org:#{repository_owner}/#{application}.git"
 set :branch, 'master'
 set :keep_releases, 3
-set :rbenv_ruby_version, '2.0.0-p247'
+set :rbenv_ruby_version, '2.1.1'
 
 set :maintenance_template_path,
     File.expand_path('../recipes/templates/maintenance.html.erb', __FILE__)
