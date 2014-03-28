@@ -39,3 +39,5 @@ brakeman.html
 
 # Ignore environmental secrets file
 .env
+
+vendor/elasticsearch-1.0.1/

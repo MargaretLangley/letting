@@ -16,8 +16,13 @@
 #
 class PropertiesController < ApplicationController
   def index
-    @properties = Property.sql_search(search_param).page(params[:page]).load
-    redirect_to find_route(@properties.first) if unique_search?
+    @properties = Property.page(params[:page]).load
+  end
+
+  def search
+    # What happens for unique_search?
+    @properties = Property.search(params[:search]).page(params[:page]).records
+    render action: 'index'
   end
 
   def show
