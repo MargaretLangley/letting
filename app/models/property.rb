@@ -11,8 +11,7 @@
 ####
 #
 class Property < ActiveRecord::Base
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  include Searchable
   belongs_to :client
   has_one :account, dependent: :destroy, inverse_of: :property
   accepts_nested_attributes_for :account, allow_destroy: true
