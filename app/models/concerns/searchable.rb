@@ -13,5 +13,18 @@ module Searchable
                    agent: { methods: [:address_lines, :full_name], only: [:adress_lines, :full_name]}
                  })
     end
+
+    def self.search(query)
+      __elasticsearch__.search(
+        {
+          query: {
+            query_string: {
+              query: query,
+              default_operator: 'AND'
+            }
+          }
+        }
+      )
+    end
   end
 end
