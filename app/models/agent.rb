@@ -31,6 +31,15 @@ class Agent < ActiveRecord::Base
     end
   end
 
+  # flattening data structure for json conversion
+  def full_name
+    bill_to.entities.full_name
+  end
+
+  def address_lines
+    bill_to.address.address_lines.join ' '
+  end
+
   private
 
   def clean_form
