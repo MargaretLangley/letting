@@ -10,10 +10,10 @@ gem 'rails', '4.0.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '~>0.17.0'
 
-gem 'sprockets', '2.11.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+gem 'sprockets', '~>2.11.0' # bugfix 3376e59
 gem 'autoprefixer-rails'
 gem 'compass-rails'
 
