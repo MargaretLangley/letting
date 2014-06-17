@@ -24,6 +24,7 @@ module DB
 
     context 'two debits with 1 payment' do
       def two_debits_1_payment
+        # Debit (2011-12-25), Debit (2012-12-25), Payment (2012-01-11)
         %q[122, GR, 2011-12-25 00:00:00, Ground Rent..., 40.5,    0, 40.5
            122, GR, 2012-12-25 00:00:00, Ground Rent..., 40.5,    0, 81.0
            122, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 40.5, 40.5]
