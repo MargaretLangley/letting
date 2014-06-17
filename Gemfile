@@ -5,10 +5,12 @@ ruby '2.1.1'
 gem 'dotenv-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~>4.0.3'
+gem 'rails', '4.0.3'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~>0.17.0'
+
+gem 'sprockets', '2.11.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
