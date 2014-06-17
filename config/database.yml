@@ -1,22 +1,21 @@
 # PostgreSQL. Versions 8.2 and up are supported.
 #
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: letting_development
   pool: 5
+
+development:
+  <<: *default
+  database: letting_development
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: letting_test
-  pool: 5
 
 production:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: letting_production
-  pool: 5
   username: letting
-  password: rvN7O84RuExuyKXv92XExv
+  password: ENTER_PASSWORD
 
