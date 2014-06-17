@@ -67,6 +67,7 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'launchy', '~> 2.4.2'
   gem 'pry-rails', '~>0.3.2'
+  gem 'rb-readline'
   gem 'pry-nav', '~>0.2.3'
   gem 'pry-stack_explorer', '~>0.4.9.0'
   gem 'rack-mini-profiler', '~>0.9.0'
