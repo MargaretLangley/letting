@@ -5,14 +5,14 @@ ruby '2.1.1'
 gem 'dotenv-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.3'
+gem 'rails', '4.0.4'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~>0.17.0'
 
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 4.0.2'
 gem 'sprockets', '~>2.11.0' # bugfix 3376e59
 gem 'autoprefixer-rails'
 gem 'compass-rails'
@@ -45,7 +45,7 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.1.0'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
 gem 'unicorn', '~> 4.8.0'
