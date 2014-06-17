@@ -27,13 +27,19 @@ This document covers the following sections
 ####1.1. Development Setup
 
 1. `git clone git@github.com:BCS-io/letting.git`
-2. Rename database.example.yml => database.yml
-3. Rename application.example.yml => application.yml. Within the file:
-  1. Enter a SECRET_KEY_BASE or generate one using rake secret
-  2. Enter database, username and password
-4. `bundle install`
+2. sudo apt-get install libqt4-dev libqtwebkit-dev -y
+  2.1 Required for Capybara-webkit
+3. `bundle install --verbose`
+  3.1 this can take a while and verbose gives feedback.
+4. `rake db:create`
+5. symlink the data to the import_data directory
+  5.1 from lettings directory
+  5.2 `ln -s ~/Dropbox/Work/letting/import_data .`
+
+Repeat each time you want to delete and restore the database.
+
 5. `rake db:reboot` - drops the database (if any), creates and runs migrations.
-4. Add Data
+6. Add Data
   Use either seed data or import production data
   4.1 Seed data: `rake db:seed`
   4.2 import data: `rake db:import`
