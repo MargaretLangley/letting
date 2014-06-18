@@ -1,0 +1,21 @@
+# Note variables are set first in deploy.rb
+# Variables can then be overwritten in production.rb or staging.rb
+require 'dotenv/tasks'
+
+namespace :deploy do
+  desc 'Files to copy from the local application to the remote application directory'
+  task :upload => :dotenv do
+    on roles(:app) do
+
+      fetch(:upload_files).each do |upload_file|
+        smart_template upload_file
+      end
+
+      # Apply symlink
+      fetch(:symlinks).each do |symlink|
+        sudo "ln -nfs #{shared_path}/config/#{symlink[:source]} #{sub_strings(symlink[:link])}"
+      end
+    end
+  end
+  after "deploy", "deploy:upload"
+end

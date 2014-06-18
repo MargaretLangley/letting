@@ -1,45 +1,39 @@
-#  Change
-#  Avoid app names with - a pain with postgres
-#  capify . and allow asset pipeline
-#  :server_name
-#  :application
-#  unicorn in gemfile
-require 'bundler/capistrano'
-require 'capistrano-rbenv'
+lock '3.1.0'
 
-# set :whenever_command, "bundle exec whenever"
-# require 'whenever/capistrano'
-
-load 'config/recipes/base'
-load 'config/recipes/nginx'
-load 'config/recipes/unicorn'
-load 'config/recipes/postgresql'
-load 'config/recipes/seed'
-load 'config/recipes/check'
-load 'config/recipes/monit'
-load 'config/recipes/upload'
-
-set  :host, '193.183.99.251'
-server "#{host}", :web, :app, :db, primary: true
-set :server_name, 'letting.bcs.io'  # change
-
+#
+# Application variables
+#
+set :application, 'letting'
 set :user, 'deployer'
-set :application, 'letting'  # change
-set :deploy_to, "/home/#{user}/apps/#{application}"
-set :deploy_via, :remote_cache
-set :use_sudo, false
 
-set :scm, 'git'
-set :repository_owner, 'RichardWigley' # change
-set :repository, "git@bitbucket.org:#{repository_owner}/#{application}.git"
-set :branch, 'master'
+set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
+set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:full_app_name)}"
+
+# SCM
+set :scm, :git
+set :repo_url, 'git@bitbucket.org:bcsltd/letting.git'
+
+# rbenv
+set :rbenv_type, :system
+set :rbenv_ruby, '2.1.1'
+set :rbenv_custom_path, '/opt/rbenv/'
+
+set :unicorn_workers, 2
+
+set :tests, ["spec"]
+
+# house keeping
 set :keep_releases, 3
-set :rbenv_ruby_version, '2.1.1'
 
-set :maintenance_template_path,
-    File.expand_path('../recipes/templates/maintenance.html.erb', __FILE__)
+#
+# Files that are not in the SCM but which I want copied up to the server
+# Typically they are sensitive information.
+#
+set :upload_files, %w{ secrets.yml }
 
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
-
-after 'deploy', 'deploy:cleanup' # keep only the last 5 releases
+set(:symlinks, [
+  {
+    source: "secrets.yml",
+    link: "#{fetch(:deploy_to)}/current/config/secrets.yml"
+  }
+])

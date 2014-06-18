@@ -37,6 +37,5 @@ todo/work.TODO
 # brakeman
 brakeman.html
 
-
-#.env
+# Ignore environmental secrets file
 .env
