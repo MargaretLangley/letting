@@ -1,4 +1,6 @@
-# Production
+###################################################
+#                  PRODUCTION                     #
+###################################################
 #
 # Capisrano environment settings
 #
@@ -6,13 +8,13 @@ set :stage, :production
 set :branch, 'master'
 
 # Simple Role Syntax
-role :app, %w{deployer@bcs.io}
-role :web, %w{deployer@bcs.io}
-role :db,  %w{deployer@bcs.io}
+role :app, %w{deployer@10.0.0.36}
+role :web, %w{deployer@10.0.0.36}
+role :db,  %w{deployer@10.0.0.36}
 
 # bcs.io
-server 'bcs.io', user: 'deployer', roles: %w{web app db}, primary: true
+server '10.0.0.36', user: 'deployer', roles: %w{web app db}, primary: true
 
 set :rails_env, :production
 
-set :nginx_server_name, 'letting.bcs.io'
+set :nginx_server_name, 'letting.local.bcs.io'
