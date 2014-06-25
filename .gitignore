@@ -39,3 +39,7 @@ brakeman.html
 
 # Ignore environmental secrets file
 .env
+
+
+# capistrano-db-tasks - dump files
+/db/*.sql.*

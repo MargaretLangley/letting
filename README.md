@@ -32,9 +32,8 @@ This document covers the following sections
 3. `bundle install --verbose`
   3.1 this can take a while and verbose gives feedback.
 4. `rake db:create`
-5. symlink the data to the import_data directory
-  5.1 from lettings directory
-  5.2 `ln -s ~/Dropbox/work/letting/import_data ~/code/letting/`
+5. Clone the *private* repository into the import_data directory
+  5.1 `git clone git@bitbucket.org:bcsltd/letting_import_data.git  ~/code/letting/import_data`
 
 Repeat each time you want to delete and restore the database.
 

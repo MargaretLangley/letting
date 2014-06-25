@@ -38,3 +38,20 @@ set(:symlinks, [
     link: "#{fetch(:deploy_to)}/current/config/secrets.yml"
   }
 ])
+
+
+#
+# db-tasks (and assets)
+# sgruhier/capistrano-db-tasks
+#
+
+# if you want to remove the local dump file after loading
+set :db_local_clean, true
+
+# if you want to remove the dump file from the server after downloading
+set :db_remote_clean, true
+
+# If you want to import assets, you can change default asset dir (default = system)
+# This directory must be in your shared directory on the server
+set :assets_dir, %w(public/assets public/att)
+set :local_assets_dir, %w(public/assets public/att)

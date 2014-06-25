@@ -65,6 +65,7 @@ group :development do
   gem 'capistrano-postgresql', '~> 2.0.0'
   gem 'capistrano-unicorn-nginx', github: 'BCS-io/capistrano-unicorn-nginx'
   gem 'capistrano-rails-collection', '~> 0.0.2'
+  gem 'capistrano-db-tasks', require: false
 end
 
 group :development, :test do
