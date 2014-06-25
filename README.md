@@ -34,7 +34,7 @@ This document covers the following sections
 4. `rake db:create`
 5. symlink the data to the import_data directory
   5.1 from lettings directory
-  5.2 `ln -s ~/Dropbox/Work/letting/import_data .`
+  5.2 `ln -s ~/Dropbox/work/letting/import_data ~/code/letting/`
 
 Repeat each time you want to delete and restore the database.
 
