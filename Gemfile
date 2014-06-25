@@ -54,6 +54,8 @@ gem 'bcrypt', '~> 3.1.7'
 # Use unicorn as the app server
 gem 'unicorn', '~> 4.8.0'
 
+gem 'rack-dev-mark', '~> 0.4.0'
+
 # Use Capistrano for deployment
 group :development do
   gem 'capistrano', '~> 3.1.0'
