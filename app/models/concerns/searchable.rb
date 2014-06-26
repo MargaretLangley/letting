@@ -10,7 +10,7 @@ module Searchable
         include: {
                    address: {},
                    entities: { methods: [:full_name], only: [:full_name] },
-                   agent: { methods: [:address_lines, :full_name], only: [:adress_lines, :full_name]}
+                   agent: { methods: [:address_lines, :full_name], only: [:address_lines, :full_name]}
                  })
     end
 
