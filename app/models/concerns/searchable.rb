@@ -7,9 +7,9 @@ module Searchable
 
     def as_indexed_json(options={})
       self.as_json(
+        methods: :occupier,
         include: {
                    address: {},
-                   entities: { methods: [:full_name], only: [:full_name] },
                    agent: { methods: [:address_lines, :full_name], only: [:address_lines, :full_name]}
                  })
     end

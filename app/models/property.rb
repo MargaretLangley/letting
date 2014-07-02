@@ -24,6 +24,10 @@ class Property < ActiveRecord::Base
   validates :entities, presence: true
   before_validation :clear_up_form
 
+  def occupier
+    entities.full_name
+  end
+
   def prepare_for_form
     prepare_contact
     build_agent if agent.nil?

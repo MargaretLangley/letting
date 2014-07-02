@@ -16,7 +16,7 @@ class PaymentIndexDecorator
   end
 
   def full_name
-    @source.account.property.entities.full_name
+    @source.account.property.occupier
   end
 
   def charge

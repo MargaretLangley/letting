@@ -22,10 +22,6 @@ class PropertyDecorator
     client && client.human_ref
   end
 
-  def occupier
-    source.entities.full_name
-  end
-
   def address_lines
     source.address.address_lines
   end

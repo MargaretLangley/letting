@@ -95,7 +95,7 @@ class PaymentsController < ApplicationController
 
   def identy
     "Ref: '#{@payment.account.property.human_ref}' " +
-    "Name: '#{@payment.account.property.entities.full_name}' " +
+    "Name: '#{@payment.account.property.occupier}' " +
     "Amount: '£#{@payment.amount}'"
   end
 
