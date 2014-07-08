@@ -61,38 +61,3 @@ describe Property do
     expect(page).to have_text 'SE11 5SS'
   end
 end
-
-describe Property do
-
-  before(:each) do
-    log_in
-    property_create! human_ref: 111
-    property_create! human_ref: 222
-    visit '/properties/'
-    first(:link, 'View').click
-  end
-
-  it 'searches for valid property' do
-    pending 'search'
-    fill_in 'search', with: '222'
-    click_on 'Search'
-    expect(page).to have_text 'Edgbaston Road'
-  end
-
-  it 'searches for same property' do
-    pending 'search'
-    fill_in 'search', with: '222'
-    click_on 'Search'
-    fill_in 'search', with: '222'
-    click_on 'Search'
-    expect(page).to have_text 'Edgbaston Road'
-  end
-
-  it 'search not found' do
-    pending 'search'
-    fill_in 'search', with: '599'
-    click_on 'Search'
-    expect(page).to_not have_text '599'
-  end
-
-end

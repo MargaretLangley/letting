@@ -21,22 +21,5 @@ describe Property do
       expect(page).to have_text '333'
       expect_index_address_edgbaston
     end
-
-    it 'search' do
-      pending 'search'
-      property_create! human_ref: 111,
-                       address_attributes: { road: 'Vauxall Lane' }
-      property_create! human_ref: 222
-      property_create! human_ref: 333
-
-      visit '/properties'
-
-      fill_in 'search', with: 'Edgbaston Road'
-      click_on 'Search'
-      expect(page).to_not have_text '111'
-      expect(page).to have_text '222'
-      expect(page).to have_text '333'
-    end
   end
-
 end
