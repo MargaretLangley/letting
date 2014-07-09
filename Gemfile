@@ -1,12 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.1.1'
 
-# Configuration of sensitive information
-# It should be listed in the Gemfile before any other gems that use environment
-# variables, otherwise those gems will get initialized with the wrong values.
-gem 'dotenv-rails', '~> 0.11.0' ,:groups => [:development, :test]
-
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 

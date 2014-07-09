@@ -27,20 +27,6 @@ set :tests, ["spec"]
 set :keep_releases, 3
 
 #
-# Files that are not in the SCM but which I want copied up to the server
-# Typically they are sensitive information.
-#
-set :upload_files, %w{ secrets.yml }
-
-set(:symlinks, [
-  {
-    source: "secrets.yml",
-    link: "#{fetch(:deploy_to)}/current/config/secrets.yml"
-  }
-])
-
-
-#
 # db-tasks (and assets)
 # sgruhier/capistrano-db-tasks
 #

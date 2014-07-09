@@ -50,9 +50,9 @@ Repeat each time you want to delete and restore the database.
 
 ####1.2. Production Setup
 
-1. `cap deploy:setup`
+1. `cap <environment> setup`
   1. Enter password for postgres database (from application.yml)
-2. `cap deploy`
+2. `cap <environment> deploy`
 3. `cap deploy:migrate`
 4. Add Data
   Use either seed data or import production data
@@ -62,6 +62,14 @@ Repeat each time you want to delete and restore the database.
 [Demo](http://letting.bcs.io)
 
 My Reference: Webserver alias: `ssh arran`
+
+
+####1.2. Cleaning Production Setup
+
+1. `sudo rm -rf ~/apps/`
+2. `sudo rm /tmp/unicorn.letting_*.sock`
+
+System can then have application setup again
 
 
 ===
