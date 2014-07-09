@@ -43,39 +43,3 @@ describe Client do
   end
 
 end
-
-describe Client do
-
-  before(:each) do
-    log_in
-    client_create! human_ref: 111
-    client_create! human_ref: 222
-    visit '/clients/'
-    first(:link, 'View').click
-  end
-
-  it 'searches for valid client' do
-    pending 'search'
-    fill_in 'search', with: '222'
-    click_on 'Search'
-    expect(page).to have_text 'Edgbaston Road'
-  end
-
-  it 'searches for same client' do
-    pending 'search'
-    fill_in 'search', with: '222'
-    click_on 'Search'
-    fill_in 'search', with: '222'
-    click_on 'Search'
-    expect(page).to have_text 'Edgbaston Road'
-  end
-
-  it 'search not found' do
-    pending 'search'
-    fill_in 'search', with: '5'
-    click_on 'Search'
-    expect(page).to_not have_text '5'
-    expect(page).to have_text 'No Clients Found'
-  end
-
-end

@@ -36,7 +36,7 @@ module Searchable
     )
 
     mapping _all: { index_analyzer: :nGram_analyzer, search_analyzer: :whitespace_analyzer } do
-      indexes :human_ref, type: :integer, boost: 2.0
+      indexes :human_ref, type: :integer, boost: 2.0, index: :not_analyzed
       indexes :occupier, type: :string
       indexes :address do
         indexes :created_at, index: :not_analyzed
