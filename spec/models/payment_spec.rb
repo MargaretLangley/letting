@@ -73,25 +73,25 @@ describe Payment do
       end
     end
 
-    context '#search' do
+    describe '#payments_on' do
 
-      it('returns payments on searched date') do
+      it('returns payments on queried day') do
         property = property_create!
         payment = Payment.create! payment_attributes account_id: property
           .account.id
-        expect(Payment.search(Date.current.to_s)).to eq [payment]
+        expect(Payment.payments_on(Date.current.to_s)).to eq [payment]
       end
 
-      it('payments on none-searched dates not returned') do
+      it('returns nothing on days without a transaction.') do
         property = property_create!
         Payment.create! payment_attributes account_id: property.account.id
-        expect((Payment.search('2000-1-1'))).to eq []
+        expect((Payment.payments_on('2000-1-1'))).to eq []
       end
 
       it('returns nothing if invalid date') do
         property = property_create!
         Payment.create! payment_attributes account_id: property.account.id
-        expect((Payment.search('2012-x'))).to eq []
+        expect((Payment.payments_on('2012-x'))).to eq []
       end
     end
   end

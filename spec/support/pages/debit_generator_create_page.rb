@@ -12,7 +12,9 @@ class DebitGeneratorCreatePage
   end
 
   def search
-    click_on 'Search'
+    within_fieldset 'debit_generator' do
+      click_on 'Search'
+    end
   end
 
   def choose_dates

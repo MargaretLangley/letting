@@ -133,29 +133,3 @@ describe Client do
     expect(page).to have_text '63c'
   end
 end
-
-describe Client do
-
-  before(:each) do
-    log_in
-    client_create! human_ref: 111
-    client_create! human_ref: 222
-    visit '/clients/'
-    first(:link, 'Edit').click
-  end
-
-  it 'searches for valid client' do
-    pending
-    fill_in 'search', with: '222'
-    click_on 'Search'
-    expect(find_field('Road').value).to have_text 'Edgbaston Road'
-  end
-
-  it 'search not found' do
-    fill_in 'search', with: '5'
-    click_on 'Search'
-    expect(page).to_not have_text '5'
-    expect(page).to have_text 'No Clients Found'
-  end
-
-end

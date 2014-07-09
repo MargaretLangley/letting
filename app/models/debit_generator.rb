@@ -52,7 +52,7 @@ class DebitGenerator < ActiveRecord::Base
   # REALLY like this to be a search object. Don't see why search
   # has to be tied to property.
   def accounts
-    @accounts ||= Property.search_min(search_string).map(&:account)
+    @accounts ||= Property.sql_search_min(search_string).map(&:account)
   end
 
   def default_start_date

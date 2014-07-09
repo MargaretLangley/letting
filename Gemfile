@@ -13,7 +13,6 @@ gem 'rails', '4.1.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~>0.17.0'
 
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 gem 'sprockets', '~>2.11.0' # bugfix 3376e59
@@ -101,4 +100,13 @@ end
 
 group :test do
   gem 'rake', '10.1.0'
+end
+
+gem 'elasticsearch', '~> 1.0.2'
+gem 'elasticsearch-model', '~> 0.1.4'
+gem 'elasticsearch-rails', '~> 0.1.4'
+
+group :test do
+  # Create es test node
+  gem 'elasticsearch-extensions'
 end

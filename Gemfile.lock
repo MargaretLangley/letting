@@ -36,6 +36,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.5)
+    ansi (1.4.3)
     arel (5.0.1.20140414130214)
     autoprefixer-rails (1.1.20140218)
       execjs
@@ -128,12 +129,30 @@ GEM
     dotenv-deployment (0.0.2)
     dotenv-rails (0.11.1)
       dotenv (= 0.11.1)
+    elasticsearch (1.0.2)
+      elasticsearch-api (= 1.0.2)
+      elasticsearch-transport (= 1.0.2)
+    elasticsearch-api (1.0.2)
+      multi_json
+    elasticsearch-extensions (0.0.15)
+      ansi
+      ruby-prof
+    elasticsearch-model (0.1.4)
+      activesupport (> 3)
+      elasticsearch (> 0.4)
+      hashie
+    elasticsearch-rails (0.1.4)
+    elasticsearch-transport (1.0.2)
+      faraday
+      multi_json
     em-websocket (0.5.0)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.5.3)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.0.2)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
     ffi (1.9.3)
     formatador (0.2.4)
@@ -153,6 +172,7 @@ GEM
       rspec (~> 2.13)
     haml (4.0.5)
       tilt
+    hashie (3.0.0)
     highline (1.6.20)
     hike (1.2.3)
     http_parser.rb (0.5.3)
@@ -186,9 +206,9 @@ GEM
     mini_portile (0.5.2)
     minitest (5.3.4)
     multi_json (1.10.1)
+    multipart-post (2.0.0)
     net-scp (1.2.1)
-      net-ssh (>= 2.6.5)
-    net-ssh (2.9.1)
+    net-ssh (2.8.0)
     nio4r (1.0.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -263,6 +283,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    ruby-prof (0.15.1)
     ruby-progressbar (1.4.1)
     ruby2ruby (2.0.7)
       ruby_parser (~> 3.1)
@@ -359,6 +380,10 @@ DEPENDENCIES
   coveralls (~> 0.7.0)
   database_cleaner (~> 1.2.0)
   dotenv-rails (~> 0.11.0)
+  elasticsearch (~> 1.0.2)
+  elasticsearch-extensions
+  elasticsearch-model (~> 0.1.4)
+  elasticsearch-rails (~> 0.1.4)
   guard
   guard-livereload
   guard-rspec (~> 3.0.2)

@@ -42,7 +42,7 @@ class Payment < ActiveRecord::Base
     credits.clear_up
   end
 
-  def self.search date
+  def self.payments_on date
     date ||= Date.current.to_s
     return [] unless SearchDate.new(date).valid_date?
     Payment.includes(account: [:property])

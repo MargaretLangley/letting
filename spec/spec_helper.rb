@@ -10,6 +10,8 @@ require 'rspec/rails'
 require 'capybara/rspec'
 Capybara.javascript_driver = :webkit
 
+require 'elasticsearch/extensions/test/cluster/tasks'
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -71,4 +73,20 @@ RSpec.configure do |config|
 
   config.include AuthMacros
   config.include CapybaraHelper
+
+  #
+  # Create an elasticserach test cluster before a test run.
+  #
+  config.before :all, elasticsearch: true do
+    Elasticsearch::Extensions::Test::Cluster.start(nodes: 1, port: 9200) \
+      unless Elasticsearch::Extensions::Test::Cluster.running?
+  end
+
+  #
+  # Destroy an elasticserach test-cluster at the end of a test run.
+  #
+  config.after :suite do
+    Elasticsearch::Extensions::Test::Cluster.stop(nodes: 1, port: 9200) \
+      if Elasticsearch::Extensions::Test::Cluster.running?
+  end
 end

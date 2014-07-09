@@ -23,6 +23,10 @@ class Property < ActiveRecord::Base
   validates :entities, presence: true
   before_validation :clear_up_form
 
+  def occupier
+    entities.full_name
+  end
+
   def prepare_for_form
     prepare_contact
     build_agent if agent.nil?
@@ -44,59 +48,51 @@ class Property < ActiveRecord::Base
     Property.where(id: property_ids)
   end
 
-  def self.search_by_house_name(search)
-    Property.includes(:address)
-    .where('addresses.house_name ILIKE ?', "#{search}")
-    .references(:address)
+  include Searchable
+  def as_indexed_json(options={})
+    self.as_json(
+      methods: :occupier,
+      include: {
+                 address: {},
+                 agent: { methods: [:address_lines, :full_name], only: [:address_lines, :full_name]}
+               })
   end
 
-  def self.search search
+  def self.sql_search query
     case
-    when search.blank?
+    when query.blank?
       Property.all.includes(:address).order(:human_ref)
-    when human_refs(search)
-      search_by_human_ref(search)
+    when human_refs(query)
+      sql_search_by_human_ref(query)
     else
-      search_by_all(search)
+      search(query).records
     end
   end
 
-  def self.search_min search
+  def self.sql_search_min query
     case
-    when search.blank?
+    when query.blank?
       none
-    when human_refs(search)
-      search_by_human_ref(search)
+    when human_refs(query)
+      sql_search_by_human_ref(query)
     else
-      search_by_all(search)
+      search(query).records
     end
   end
 
   private
 
-    def self.search_by_human_ref(search)
-      human_refs = search.split('-')
+    def self.sql_search_by_human_ref(query)
+      human_refs = query.split('-')
       human_refs[1] = human_refs[0] if human_refs[1].blank?
       Property.includes(:address, :entities)
                     .where(human_ref: human_refs[0]..human_refs[1])
                     .references(:address, :entity).order(:human_ref)
     end
 
-    def self.search_by_all(search)
-      Property.includes(:address, :entities)
-        .where('human_ref = :i OR ' +
-               'entities.name ILIKE :s OR ' +
-               'addresses.house_name ILIKE :s OR ' +
-               'addresses.road ILIKE :s OR ' +
-               'addresses.town ILIKE :s',
-               i: "#{search.to_i}",
-               s: "#{search}%" )
-        .references(:address, :entity).order(:human_ref)
-    end
-
-    def self.human_refs search
+    def self.human_refs query
       # matches a number (\d) followed by any amount of whitespace (\s)
       # optional hyphen (-) and optional number (\d)
-      (search =~ /^(\d+\s*-?)+\s*\d+$/).present?
+      (query =~ /^(\d+\s*-?)+\s*\d+$/).present?
     end
 end

@@ -72,8 +72,12 @@ describe DebitGenerator do
       before do
         Timecop.travel(Date.new(2013, 1, 31))
         property = property_with_charge_create!
+        Property.import force: true, refresh: true
       end
-      after { Timecop.return }
+      after do
+        Property.__elasticsearch__.delete_index!
+        Timecop.return
+      end
 
       it 'creates debits' do
         (generator = DebitGenerator.new(search_string: 'Hillbank House')).generate

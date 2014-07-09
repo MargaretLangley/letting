@@ -42,6 +42,7 @@ describe 'Payment index' do
   end
 
   it 'search' do
+    pending 'search'
     property = property_create!
     Payment.create! payment_attributes account_id: property.account.id
     payment_index.visit_page
@@ -50,6 +51,7 @@ describe 'Payment index' do
   end
 
   it 'failed search' do
+    pending 'search'
     property = property_create!
     Payment.create! payment_attributes account_id: property.account.id
     payment_index.visit_page

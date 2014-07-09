@@ -54,27 +54,23 @@ describe Client do
     end
   end
 
-  context 'search' do
+  describe 'search' do
 
-    c1 = c2 = nil
-    before { c1 = client_create! }
-
-    it('human id') { expect((Client.search '8008').load).to eq [c1] }
-    it('roads') { expect((Client.search 'Edg').load).to eq [c1] }
-    it('towns') { expect((Client.search 'Bir').load).to eq [c1] }
-    it('names') { expect(Client.search 'Grace').to eq [c1] }
-
-    it 'only returns expected' do
-      c2 = client_create! human_ref: 102,
-                          address_attributes: { road: 'unknown' }
-      expect(Client.all).to match_array [c1, c2]
-      expect(Client.search 'Edgba').to eq [c1]
+    before :each do
+      client_create!
+      Client.import force: true, refresh: true
     end
 
-    it 'ordered by human_ref ASC' do
-      c2 = client_create! human_ref: 8000
-      expect(Client.all).to match_array [c1, c2]
-      expect(Client.search 'Bir').to eq [c2, c1]
+    after :each do
+      Client.__elasticsearch__.delete_index!
+    end
+
+    context '#search' do
+      it('human id') { expect(Client.search('8008').results.total).to eq 1 }
+      it('names') { expect(Client.search('Grac').results.total).to eq 1 }
+      it('house') { expect(Client.search('Hil').results.total).to eq 1 }
+      it('roads') { expect(Client.search('Edg').results.total).to eq 1 }
+      it('towns') { expect(Client.search('Bir').results.total).to eq 1 }
     end
   end
 end

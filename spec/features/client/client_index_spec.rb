@@ -27,36 +27,11 @@ describe Client do
       expect(page).to have_text 'Edgbaston Road'
     end
 
-    it 'search road' do
-      fill_in 'search', with: 'Edgbaston Road'
-      click_on 'Search'
-      expect(page).to_not have_text '111'
-      expect(page).to have_text '222'
-      expect(page).to have_text '333'
-    end
-
-    it 'search number' do
-      pending 'Search by number not working'
-      fill_in 'search', with: '111'
-      click_on 'Search'
-      expect(page).to_not have_text '333'
-      expect(page).to_not have_text '222'
-      expect(page).to have_text '111'
-    end
-
-    it 'search not found' do
-      fill_in 'search', with: 'Highcroft Road'
-      click_on 'Search'
-      expect(page).to_not have_text '111'
-      expect(page).to have_text 'No Clients Found'
-    end
-
     it 'view' do
       first(:link, 'View').click
       expect(page).to have_text '111'
       expect(page).to have_text 'Edit'
       expect(page).to have_text 'Properties Owned'
     end
-
   end
 end

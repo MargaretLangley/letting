@@ -18,6 +18,7 @@ describe 'debit_generator' do
       property = property_with_charge_create! \
                    human_ref: 2002,
                    address_attributes: { road: 'Talbot Road' }
+      Property.import force: true, refresh: true
       # Client required because controller starts invoicing immediately
       # Be nice to disconnect this requirement.
       property.client = client_create!
@@ -27,6 +28,7 @@ describe 'debit_generator' do
       expect(page).to have_text 'Ground Rent'
       debit_gen_page.make_charges
       expect(debit_gen_page).to be_created
+      Property.__elasticsearch__.delete_index!
     end
   end
 

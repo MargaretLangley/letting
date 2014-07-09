@@ -301,29 +301,3 @@ describe Property do
   end
 
 end
-
-describe Property do
-
-  before(:each) do
-    log_in
-    property_create! human_ref: 111
-    property_create! human_ref: 222
-    visit '/properties/'
-    first(:link, 'Edit').click
-    expect(find_field('Property ID').value).to have_text '111'
-  end
-
-  it 'searches for valid property' do
-    pending
-    fill_in 'search', with: '222'
-    click_on 'Search'
-    expect(find_field('Property ID').value).to have_text '222'
-  end
-
-  it 'search not found' do
-    fill_in 'search', with: 'Not Matching'
-    click_on 'Search'
-    expect(page).to have_text 'No Accounts Found'
-  end
-
-end
