@@ -48,16 +48,16 @@ Repeat each time you want to delete and restore the database.
 
 ===
 
-####1.2. Production Setup
+####1.2. Server Setup
 
 1. `cap <environment> setup`
   1. Enter password for postgres database (from application.yml)
 2. `cap <environment> deploy`
 3. `cap deploy:migrate`
 4. Add Data
-  Use either seed data or import production data
-  .1 Seed data `cap deploy:seed`
-  .2 Production data `cap rake:invoke task=db:import`
+  On your *local* system Add Data (see 1.1.6 above). Then copy to the server.
+  `cap <environment> db:push`
+
 
 [Demo](http://letting.bcs.io)
 
@@ -68,8 +68,9 @@ My Reference: Webserver alias: `ssh arran`
 
 1. `sudo rm -rf ~/apps/`
 2. `sudo rm /tmp/unicorn.letting_*.sock`
-
-System can then have application setup again
+3. `sudo -u postgres psql`
+4. `postgres=# drop database letting_<environment>;`
+5. System can then have Production setup again
 
 
 ===
