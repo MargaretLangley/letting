@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.1.1'
+ruby '2.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.4'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~>0.17.0'
@@ -47,6 +47,7 @@ gem 'bcrypt', '~> 3.1.7'
 # Use unicorn as the app server
 gem 'unicorn', '~> 4.8.0'
 
+# corner banner on staging environment
 gem 'rack-dev-mark', '~> 0.4.0'
 
 # Use Capistrano for deployment
@@ -104,3 +105,4 @@ group :test do
   # Create es test node
   gem 'elasticsearch-extensions'
 end
+
