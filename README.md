@@ -53,10 +53,25 @@ Repeat each time you want to delete and restore the database.
 1. `cap <environment> setup`
   1. Enter password for postgres database (from application.yml)
 2. `cap <environment> deploy`
-3. `cap deploy:migrate`
+
+3. Configure Elasticsearch memory limit (a memory greedy application)
+   `sudo nano /usr/local/etc/elasticsearch/elasticsearch-env.sh`
+   1. Change ES_HEAP_SIZE=1g, -Xms1g, -Xmx1g
+  `sudo service elasticsearch restart`
+  2. verify as it also says 'ok' when it fails.   `sudo service elasticsearch restart`
+
 4. Add Data
   On your *local* system Add Data (see 1.1.6 above). Then copy to the server.
   `cap <environment> db:push`
+
+5.  Import Data Into Elasticsearch Indexes
+     `ssh <server>`
+     `cd ~/apps/letting_<environment>/current`
+     `bundle exec rails c production`
+    `Property.import force: true, refresh: true`
+    `Client.import force: true, refresh: true`
+
+
 
 
 [Demo](http://letting.bcs.io)
@@ -106,4 +121,11 @@ Sometimes when you are changing a project the database will not allow you to del
   1. role depends on db
 4. Follow instructions for: Project Setup
 
+####3.2 Running rails console in prouction
+`bundle exec rails c production`
+
+
 ===
+
+
+
