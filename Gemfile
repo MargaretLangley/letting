@@ -65,7 +65,7 @@ end
 group :development, :test do
   gem 'better_errors', '~> 1.1.0'
   gem 'binding_of_caller'
-  gem 'bullet', '~>4.7.1'
+  gem 'bullet', '~>4.11.0'
   gem 'capybara', '~> 2.2.0'
   gem 'capybara-webkit', '~>1.1.0'
   gem 'guard'
@@ -81,12 +81,11 @@ group :development, :test do
 end
 
 group :development do
-  gem 'brakeman', '~>2.4.0', require: false
+  gem 'brakeman', '~>2.6.0', require: false
   gem 'rails_best_practices', '~>1.15.1'
 end
 
 group :test do
-  gem 'zeus'
   gem 'simplecov', '~>0.8.2', require: false
   gem 'coveralls', '~>0.7.0', require: false
   gem 'database_cleaner', '~> 1.2.0'
@@ -105,4 +104,3 @@ group :test do
   # Create es test node
   gem 'elasticsearch-extensions'
 end
-
