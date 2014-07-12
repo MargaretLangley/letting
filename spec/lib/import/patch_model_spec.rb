@@ -10,13 +10,13 @@ module DB
         patch_model = PatchModel.new client_new
         patchee = client_new
         patchee.entities.first.name = 'Name Changed'
-        expect(patch_model.changed?(patchee)).to be_true
+        expect(patch_model.changed?(patchee)).to be true
       end
 
       it 'false when names match' do
         patch_model = PatchModel.new client_new
         patchee = client_new
-        expect(patch_model.changed?(patchee)).to be_false
+        expect(patch_model.changed?(patchee)).to be false
       end
 
       it 'expected error message' do

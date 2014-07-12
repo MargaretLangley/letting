@@ -3,7 +3,7 @@ require_relative '../../app/models/permission'
 
 RSpec::Matchers.define :allow? do |*args|
   match do |permission|
-    expect(permission.allow?(*args)).to be_true
+    expect(permission.allow?(*args)).to be true
   end
 end
 

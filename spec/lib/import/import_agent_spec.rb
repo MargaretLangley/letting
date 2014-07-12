@@ -16,9 +16,9 @@ module DB
     end
 
     it 'One row' do
-      expect(Agent.first.authorized).to be_false
+      expect(Agent.first.authorized).to be false
       expect { import_agent row }.to_not change(Agent, :count)
-      expect(Agent.first.authorized).to be_true
+      expect(Agent.first.authorized).to be true
     end
 
     # contact entites test suite in import_contact_entity_spec
@@ -32,12 +32,12 @@ module DB
     context 'filter' do
       it 'allows within range' do
         import_agent row, range: 122..122
-        expect(Agent.first.authorized).to be_true
+        expect(Agent.first.authorized).to be true
       end
 
       it 'filters if out of range' do
         import_agent row, range: 120..121
-        expect(Agent.first.authorized).to be_false
+        expect(Agent.first.authorized).to be false
       end
     end
 

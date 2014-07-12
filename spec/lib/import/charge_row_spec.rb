@@ -19,10 +19,10 @@ module DB
         context '#monthly_charge?' do
           it 'true for monthly' do
             monthly = ChargeRow.new parse_line charge_monthly_row
-            expect(monthly.monthly_charge?).to be_true
+            expect(monthly.monthly_charge?).to be true
           end
           it 'false for on dated' do
-            expect(row.monthly_charge?).to be_false
+            expect(row.monthly_charge?).to be false
           end
         end
 

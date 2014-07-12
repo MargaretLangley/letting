@@ -55,7 +55,7 @@ module DB
 
       it 'new record to false' do
         import_property row
-        expect(Property.first.agent.authorized).to be_false
+        expect(Property.first.agent.authorized).to be false
       end
 
         # Nice setup!
@@ -75,7 +75,7 @@ module DB
           oval_person_entity_attributes
         property.save!
         import_property row
-        expect(Property.first.agent.authorized).to be_true
+        expect(Property.first.agent.authorized).to be true
       end
     end
 

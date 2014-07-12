@@ -105,11 +105,11 @@ describe DueOn do
       after { Timecop.return }
 
       it 'true range covers due_on' do
-        expect(due_on.between? charge_due_on_date).to be_true
+        expect(due_on.between? charge_due_on_date).to be true
       end
 
       it 'false range misses due_on' do
-        expect(due_on.between? no_charge_on_dates).to be_false
+        expect(due_on.between? no_charge_on_dates).to be false
       end
 
       def charge_due_on_date
@@ -123,7 +123,7 @@ describe DueOn do
 
     describe '#clear_up_form' do
       it 'is destroyed when empty' do
-        pending
+        skip
       end
     end
 
