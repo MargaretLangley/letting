@@ -4,6 +4,10 @@ ruby '2.1.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 
+# configuration - needs to be at the top!
+gem 'dotenv-rails', '~> 0.11.1'
+gem 'dotenv-deployment', '~> 0.0.2'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~>0.17.0'
 
@@ -51,8 +55,6 @@ gem 'elasticsearch-extensions', group: :test
 # Use unicorn as the app server
 gem 'unicorn', '~> 4.8.0'
 
-# configuration
-gem 'figaro', '1.0.0.rc1'
 
 # corner banner on staging environment
 gem 'rack-dev-mark', '~> 0.4.0'
