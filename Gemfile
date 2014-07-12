@@ -70,9 +70,12 @@ group :development do
   gem 'mascherano', '~> 1.1.0'
 end
 
-group :development, :test do
+group :development do
   gem 'better_errors', '~> 1.1.0'
-  gem 'binding_of_caller'
+  gem 'binding_of_caller', '~> 0.7.2'
+end
+
+group :development, :test do
   gem 'bullet', '~>4.11.0'
   gem 'capybara', '~> 2.3.0'
   gem 'capybara-webkit', '~>1.2.0'
@@ -84,6 +87,7 @@ group :development, :test do
   gem 'rb-readline'
   gem 'pry-nav', '~>0.2.3'
   gem 'pry-stack_explorer', '~>0.4.9.0'
+  gem 'byebug', '~> 3.1.2'
   gem 'rack-mini-profiler', '~>0.9.0'
   gem 'rspec-rails', '~> 2.14.0'
 end
