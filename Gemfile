@@ -82,7 +82,6 @@ group :development, :test do
   gem 'capybara', '~> 2.3.0'
   gem 'capybara-webkit', '~>1.2.0'
   gem 'guard'
-  gem 'guard-rspec', '~> 3.0.2'
   gem 'guard-livereload'
   gem 'launchy', '~> 2.4.2'
   gem 'pry-rails', '~>0.3.2'
@@ -91,7 +90,8 @@ group :development, :test do
   gem 'pry-stack_explorer', '~>0.4.9.0'
   gem 'byebug', '~> 3.1.2'
   gem 'rack-mini-profiler', '~>0.9.0'
-  gem 'rspec-rails', '~> 2.14.0'
+  #gem 'rspec-rails', '~> 2.14.0'
+  gem 'rspec-rails', '~> 2.99.0'
 end
 
 group :development do
