@@ -42,3 +42,6 @@ brakeman.html
 
 # capistrano-db-tasks - dump files
 /db/*.sql.*
+
+# Ignore application configuration
+/config/application.yml

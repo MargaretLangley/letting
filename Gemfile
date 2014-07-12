@@ -51,6 +51,9 @@ gem 'elasticsearch-extensions', group: :test
 # Use unicorn as the app server
 gem 'unicorn', '~> 4.8.0'
 
+# configuration
+gem 'figaro', '1.0.0.rc1'
+
 # corner banner on staging environment
 gem 'rack-dev-mark', '~> 0.4.0'
 
@@ -64,6 +67,7 @@ group :development do
   gem 'capistrano-unicorn-nginx', github: 'BCS-io/capistrano-unicorn-nginx'
   gem 'capistrano-rails-collection', '~> 0.0.2'
   gem 'capistrano-db-tasks', require: false
+  gem 'mascherano', '~> 1.1.0'
 end
 
 group :development, :test do
