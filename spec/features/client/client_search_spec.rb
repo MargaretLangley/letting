@@ -31,6 +31,7 @@ describe Client do
     end
 
     it 'search not found when absent' do
+      visit '/clients'
       fill_in 'search', with: '2599'
       click_on 'Search'
       expect(page).to have_text 'No Matches found. Search again.'
