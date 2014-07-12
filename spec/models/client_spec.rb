@@ -37,20 +37,20 @@ describe Client do
 
     it 'builds required models' do
       expect(client.address).to_not be_nil
-      expect(client.entities).to have(2).items
+      expect(client.entities.size).to eq(2)
     end
 
     it 'builds no more than the required models' do
       client.prepare_for_form  # * 2
       expect(client.address).to_not be_nil
-      expect(client.entities).to have(2).items
+      expect(client.entities.size).to eq(2)
     end
 
     it '#clear_up_form destroys unused models' do
       client.clear_up_form
       expect(client.address).to_not be_nil
-      expect(client.entities.reject(&:marked_for_destruction?))
-        .to have(0).items
+      expect(client.entities.reject(&:marked_for_destruction?).size)
+        .to eq(0)
     end
   end
 

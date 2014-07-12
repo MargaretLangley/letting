@@ -82,7 +82,7 @@ describe DebitGenerator do
       it 'creates debits' do
         (generator = DebitGenerator.new(search_string: 'Hillbank House')).generate
         generated_debits = generator.debits.select(&:new_record?)
-        expect(generated_debits).to have(1).items
+        expect(generated_debits.size).to eq(1)
         expect(generated_debits.first)
           .to eq Debit.new on_date: '2013/3/25',
                            amount: 88.08,

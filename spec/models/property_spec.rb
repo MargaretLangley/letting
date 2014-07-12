@@ -50,22 +50,22 @@ describe Property do
 
       it 'builds required models' do
         expect(property.address).to_not be_nil
-        expect(property.entities).to have(2).items
+        expect(property.entities.size).to eq(2)
         expect(property.agent).to_not be_nil
       end
 
       it 'builds no more than the required models' do
         property.prepare_for_form  # * 2
         expect(property.address).to_not be_nil
-        expect(property.entities).to have(2).items
+        expect(property.entities.size).to eq(2)
         expect(property.agent).to_not be_nil
       end
 
       it '#clear_up_form destroys unused models' do
         property.clear_up_form
         expect(property.address).to_not be_nil
-        expect(property.entities.reject(&:marked_for_destruction?))
-          .to have(0).items
+        expect(property.entities.reject(&:marked_for_destruction?).size)
+          .to eq(0)
         expect(property.agent).to_not be_nil
       end
 

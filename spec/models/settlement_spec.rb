@@ -9,7 +9,7 @@ describe Settlement do
 
     Settlement.resolve_credit credit, [debit1, debit2]
 
-    expect(credit.settlements).to have(2).items
+    expect(credit.settlements.size).to eq(2)
     expect(credit.settlements.first.amount).to eq 48.08
     expect(credit.settlements.last.amount).to eq 20.00
   end
@@ -21,7 +21,7 @@ describe Settlement do
 
     Settlement.resolve_debit debit, [credit1, credit2]
 
-    expect(debit.settlements).to have(2).items
+    expect(debit.settlements.size).to eq(2)
     expect(debit.settlements.first.amount).to eq 44.04
     expect(debit.settlements.last.amount).to eq 40.04
   end

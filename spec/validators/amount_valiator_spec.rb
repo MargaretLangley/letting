@@ -35,7 +35,8 @@ describe 'Amount' do
 
   it 'sets error' do
     validatable.amount = -0.01
-    expect(validatable).to have(1).error_on(:amount)
+    validatable.valid?
+    expect(validatable.errors[:amount].size).to eq(1)
   end
 
   context 'amount' do

@@ -41,9 +41,9 @@ describe DueOns do
 
     context '#prepare' do
       it 'fills empty' do
-        expect(due_ons).to have(0).items
+        expect(due_ons.size).to eq(0)
         due_ons.prepare
-        expect(due_ons).to have(4).items
+        expect(due_ons.size).to eq(4)
       end
     end
 
@@ -52,8 +52,8 @@ describe DueOns do
         due_ons.build due_on_attributes_0
         due_ons.build
         due_ons.clear_up_form
-        expect(due_ons.reject { |due_on| due_on.marked_for_destruction? } )
-                      .to have(1).item
+        expect(due_ons.reject { |due_on| due_on.marked_for_destruction? }.size )
+                      .to eq(1)
       end
     end
 
@@ -111,7 +111,7 @@ describe DueOns do
         charge.clear_up_form
         charge.save!
         reload = Charge.find(charge.id)
-        expect(reload.due_ons).to have(2).items
+        expect(reload.due_ons.size).to eq(2)
       end
 
       it 'on date to different on date' do
@@ -128,7 +128,7 @@ describe DueOns do
         reload.clear_up_form
         reload.save!
         reload2 = Charge.find(charge.id)
-        expect(reload2.due_ons).to have(1).items
+        expect(reload2.due_ons.size).to eq(1)
       end
 
       it 'new per date' do
@@ -138,7 +138,7 @@ describe DueOns do
         charge.clear_up_form
         charge.save!
         reload = Charge.find(charge.id)
-        expect(reload.due_ons).to have(12).items
+        expect(reload.due_ons.size).to eq(12)
       end
 
       it 'per month to different per month' do
@@ -153,7 +153,7 @@ describe DueOns do
         charge_diff_date.clear_up_form
         charge_diff_date.save!
         charge_reload = Charge.find(charge_per_date.id)
-        expect(charge_reload.due_ons).to have(12).items
+        expect(charge_reload.due_ons.size).to eq(12)
       end
 
       it 'per month to same per month' do
@@ -169,7 +169,7 @@ describe DueOns do
         reload.save!
         reload2 = Charge.find(charge.id)
         reload2.prepare
-        expect(reload2.due_ons).to have(12).items
+        expect(reload2.due_ons.size).to eq(12)
       end
 
       it 'on date to per month' do
@@ -185,7 +185,7 @@ describe DueOns do
         reload.clear_up_form
         reload.save!
         reload2 = Charge.find(charge.id)
-        expect(reload2.due_ons).to have(12).items
+        expect(reload2.due_ons.size).to eq(12)
       end
 
       it 'per month to on date' do
@@ -201,7 +201,7 @@ describe DueOns do
         reload.clear_up_form
         reload.save!
         reload2 = Charge.find(charge.id)
-        expect(reload2.due_ons).to have(2).items
+        expect(reload2.due_ons.size).to eq(2)
       end
 
       it 'what happens if per_month day same as on date day' do

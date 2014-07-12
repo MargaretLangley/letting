@@ -28,6 +28,7 @@ describe 'DateEqualOrAfter' do
 
   it 'sets error' do
     validatable.end_date = Date.new(2012, 12, 31)
-    expect(validatable).to have(1).error_on(:end_date)
+    validatable.valid?
+    expect(validatable.errors[:end_date].size).to eq(1)
   end
 end

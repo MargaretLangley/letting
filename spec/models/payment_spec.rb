@@ -50,12 +50,12 @@ describe Payment do
       end
       it 'handles no credits' do
         payment.prepare
-        expect(payment.credits).to have(0).items
+        expect(payment.credits.size).to eq(0)
       end
       it 'adds returned credits' do
         payment.account.stub(:charges).and_return [ charge_new ]
         payment.prepare
-        expect(payment.credits).to have(1).items
+        expect(payment.credits.size).to eq(1)
       end
     end
 

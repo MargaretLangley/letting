@@ -49,7 +49,7 @@ describe 'Property Factory' do
       it 'generated (property created & debited new)' do
         property = property_with_charge_and_unpaid_debit
         property.account.prepare_for_form
-        expect(property.account.debits).to have(1).items
+        expect(property.account.debits.size).to eq(1)
       end
     end
   end

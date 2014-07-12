@@ -34,7 +34,7 @@ module DB
         expect {
           ImportAccount.import parse two_debits_1_payment
           }.to change(Credit, :count).by 1
-        expect(Debit.all).to have(2).items
+        expect(Debit.all.size).to eq(2)
       end
     end
 
@@ -49,7 +49,7 @@ module DB
       it 'parses' do
         expect { ImportAccount.import parse payment_covering_2_debits }
           .to change(Credit, :count).by 1
-        expect(Debit.all).to have(2).items
+        expect(Debit.all.size).to eq(2)
       end
     end
 
@@ -82,11 +82,11 @@ module DB
       it 'parses' do
         property_with_charge_create! human_ref: 123
         expect { import_account two_properties }.to change(Credit, :count).by 2
-        expect(Debit.all).to have(2).items
-        expect(Property.find_by!(human_ref: 122).account.credits)
-        .to have(1).items
-        expect(Property.find_by!(human_ref: 123).account.credits)
-        .to have(1).items
+        expect(Debit.all.size).to eq(2)
+        expect(Property.find_by!(human_ref: 122).account.credits.size)
+        .to eq(1)
+        expect(Property.find_by!(human_ref: 123).account.credits.size)
+        .to eq(1)
       end
     end
 
@@ -107,10 +107,10 @@ module DB
       end
       it 'parses' do
         import_account balance_empty
-        expect(Charge.all).to have(1).items
-        expect(Credit.all).to have(0).items
-        expect(Debit.all).to have(0).items
-        expect(Payment.all).to have(0).items
+        expect(Charge.all.size).to eq(1)
+        expect(Credit.all.size).to eq(0)
+        expect(Debit.all.size).to eq(0)
+        expect(Payment.all.size).to eq(0)
       end
 
     end
@@ -122,7 +122,7 @@ module DB
       it 'parses' do
         expect { ImportAccount.import parse balance_non_zero }
           .to change(Charge, :count).by 1
-        expect(Debit.all).to have(1).items
+        expect(Debit.all.size).to eq(1)
       end
 
     end
@@ -135,9 +135,9 @@ module DB
 
       it 'parses' do
         ImportAccount.import parse advance_payment
-        expect(Credit.all).to have(1).items
-        expect(Debit.all).to have(1).items
-        expect(Payment.all).to have(1).items
+        expect(Credit.all.size).to eq(1)
+        expect(Debit.all.size).to eq(1)
+        expect(Payment.all.size).to eq(1)
       end
     end
 

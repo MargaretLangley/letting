@@ -14,7 +14,7 @@ describe Agent do
         new_agent.prepare_for_form
       end
       it 'has entities but all blank' do
-        expect(new_agent.entities).to have(2).items
+        expect(new_agent.entities.size).to eq(2)
         expect(new_agent.entities).to be_all(&:empty?)
       end
     end
@@ -24,13 +24,13 @@ describe Agent do
     let(:agent) do
       agent = nameless_agent
       agent.entities.build person_entity_attributes
-      expect(agent.entities).to have(1).item
+      expect(agent.entities.size).to eq(1)
       agent.prepare_for_form
       agent
     end
 
     it 'has dummy entity' do
-      expect(agent.entities).to have(2).items
+      expect(agent.entities.size).to eq(2)
     end
 
     context 'when authorized' do
@@ -38,7 +38,7 @@ describe Agent do
 
       it 'clear_up only removes dummy entity' do
         agent.clear_up_form
-        expect(saveable_entities(agent.entities)).to have(1).items
+        expect(saveable_entities(agent.entities)).to eq(1)
       end
     end
 
@@ -48,7 +48,7 @@ describe Agent do
       describe 'clear_up form' do
         it 'removes all entities' do
           agent.clear_up_form
-          expect(saveable_entities(agent.entities)).to have(0).items
+          expect(saveable_entities(agent.entities)).to eq(0)
         end
 
         it 'remains valid' do
@@ -60,6 +60,6 @@ describe Agent do
   end
 
   def saveable_entities entities
-    entities.reject(&:marked_for_destruction?)
+    entities.reject(&:marked_for_destruction?).size
   end
 end

@@ -84,12 +84,12 @@ describe Charge do
 
     it '#prepare creates children' do
       charge.prepare
-      expect(charge.due_ons).to have(4).items
+      expect(charge.due_ons.size).to eq(4)
     end
 
     it '#clear_up_form destroys children' do
       charge.clear_up_form
-      expect(charge.due_ons).to have(1).items
+      expect(charge.due_ons.size).to eq(1)
     end
   end
 end

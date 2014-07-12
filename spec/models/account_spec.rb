@@ -24,13 +24,13 @@ describe Account do
       it 'generates debits when charges due' do
         account = account_and_charge_new charge_attributes: { id: 3 }
         debits = account.prepare_debits(date_when_charged)
-        expect(debits).to have(1).item
+        expect(debits.size).to eq(1)
       end
 
       it 'no debits when no charges due' do
         account = account_and_charge_new charge_attributes: { id: 3 }
         debits = account.prepare_debits(date_not_charged)
-        expect(debits).to have(0).items
+        expect(debits.size).to eq(0)
       end
 
       def date_when_charged
@@ -44,12 +44,12 @@ describe Account do
 
     context '#prepare_credits' do
       it 'empty charges, empty credits ' do
-        expect(account.prepare_credits).to have(0).items
+        expect(account.prepare_credits.size).to eq(0)
       end
 
       it 'one charge, one credit' do
         account.charges.build charge_attributes
-        expect(account.prepare_credits).to have(1).item
+        expect(account.prepare_credits.size).to eq(1)
       end
     end
 
