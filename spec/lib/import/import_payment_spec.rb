@@ -16,7 +16,7 @@ module DB
 
     context 'errors' do
       it 'double import raises error' do
-        pending 'will not work until model_prepared can find_model'
+        skip 'will not work until model_prepared can find_model'
         property = property_create! human_ref: 89
         charge_new(account_id: property.account.id).save!
 

@@ -16,7 +16,7 @@ describe Address do
     end
 
     it 'Display district if added', js: true do
-      pending 'can not get this working in the test - documentations says( Not all drivers support CSS, so the result may be inaccurate.) '
+      skip 'can not get this working in the test - documentations says( Not all drivers support CSS, so the result may be inaccurate.) '
       client_create! address_attributes: { district: 'Edgebaston' }
       navigate_to_edit_page
       expect(address).to be_district_visible
@@ -33,7 +33,7 @@ describe Address do
     end
 
     it 'Display nation if added', js: true do
-      pending 'can not get this working in the test - documentations says( Not all drivers support CSS, so the result may be inaccurate.) '
+      skip 'can not get this working in the test - documentations says( Not all drivers support CSS, so the result may be inaccurate.) '
       client_create! address_attributes: { nation: 'Spain' }
       navigate_to_edit_page
       expect(address).to be_nation_visible

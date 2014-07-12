@@ -5,7 +5,7 @@ describe User do
   before(:each) { log_in admin_attributes }
   context '#destroys' do
     it 'basic' do
-      pending 'deleting admin user (which log_in as) giving errory - review test'
+      skip 'deleting admin user (which log_in as) giving errory - review test'
       user_create! george_attributes
       visit '/users/'
       expect(current_path).to eq '/users/'
