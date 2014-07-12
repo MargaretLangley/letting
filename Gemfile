@@ -42,7 +42,7 @@ gem "spring-commands-rspec", group: :development
 gem 'bcrypt', '~> 3.1.7'
 
 # Search Gems
-gem 'elasticsearch', '~> 1.0.2'
+gem 'elasticsearch', '~> 1.0.0'
 gem 'elasticsearch-model', '~> 0.1.4'
 gem 'elasticsearch-rails', '~> 0.1.4'
 # Create es test node
