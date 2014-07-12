@@ -9,7 +9,7 @@ before_script:
 
 language: ruby
 rvm:
-  - "2.0.0"
+  - "2.1.2"
 
 notifications:
   email: true
