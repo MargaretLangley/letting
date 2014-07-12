@@ -51,20 +51,21 @@ Repeat each time you want to delete and restore the database.
 ####1.2. Server Setup
 
 1. `cap <environment> setup`
-  1. Enter password for postgres database (from application.yml)
-2. `cap <environment> deploy`
+2. `cap <environment> env:upload`
+  1. .env file uploaded to shared directory
+3. `cap <environment> deploy`
 
-3. Configure Elasticsearch memory limit (a memory greedy application)
+4. Configure Elasticsearch memory limit (a memory greedy application)
    `sudo nano /usr/local/etc/elasticsearch/elasticsearch-env.sh`
    1. Change ES_HEAP_SIZE=1g, -Xms1g, -Xmx1g
   `sudo service elasticsearch restart`
   2. verify as it also says 'ok' when it fails.   `sudo service elasticsearch restart`
 
-4. Add Data
+5. Add Data
   On your *local* system Add Data (see 1.1.6 above). Then copy to the server.
   `cap <environment> db:push`
 
-5.  Import Data Into Elasticsearch Indexes
+6.  Import Data Into Elasticsearch Indexes
      `ssh <server>`
      `cd ~/apps/letting_<environment>/current`
      `bundle exec rails c production`
