@@ -44,6 +44,13 @@ gem "spring-commands-rspec", group: :development
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# Search Gems
+gem 'elasticsearch', '~> 1.0.2'
+gem 'elasticsearch-model', '~> 0.1.4'
+gem 'elasticsearch-rails', '~> 0.1.4'
+# Create es test node
+gem 'elasticsearch-extensions', group: :test
+
 # Use unicorn as the app server
 gem 'unicorn', '~> 4.8.0'
 
@@ -94,13 +101,4 @@ end
 
 group :test do
   gem 'rake', '10.1.0'
-end
-
-gem 'elasticsearch', '~> 1.0.2'
-gem 'elasticsearch-model', '~> 0.1.4'
-gem 'elasticsearch-rails', '~> 0.1.4'
-
-group :test do
-  # Create es test node
-  gem 'elasticsearch-extensions'
 end
