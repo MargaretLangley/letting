@@ -29,7 +29,7 @@ class Client < ActiveRecord::Base
   end
 
   include Searchable
-  def as_indexed_json
+  def as_indexed_json(options={})
     self.as_json(
       methods: :full_name,
       include: {
