@@ -36,7 +36,7 @@ class Charge < ActiveRecord::Base
 
   def next_chargeable date_range
     allowed_due_dates(date_range).map do |my_date|
-      chargeable_info(my_date) if !debits.created_on? my_date
+      chargeable_info(my_date) unless debits.created_on? my_date
     end.compact
   end
 
