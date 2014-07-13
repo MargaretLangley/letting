@@ -2,7 +2,6 @@ require_relative '../modules/method_missing'
 require_relative 'entity_row'
 
 module DB
-
   class ContactRow
     include MethodMissing
     attr_reader :entities

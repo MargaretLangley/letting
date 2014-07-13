@@ -20,7 +20,6 @@ class PaymentIndexDecorator
   end
 
   def charge
-
   end
 
   def on_date

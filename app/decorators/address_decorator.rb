@@ -28,5 +28,4 @@ class AddressDecorator
   def js_hooks
     ' js-togglable js-clear '
   end
-
 end

@@ -12,7 +12,6 @@
 ####
 #
 class SheetsController < ApplicationController
-
   def index
     @sheets = Sheet.all
   end
@@ -32,7 +31,6 @@ class SheetsController < ApplicationController
     else
       render :new
     end
-
   end
 
   def edit
@@ -67,5 +65,4 @@ class SheetsController < ApplicationController
   def notices_params
     %i(id instruction clause proxy)
   end
-
 end

@@ -44,5 +44,4 @@ class Client < ActiveRecord::Base
       search(query).records
     end
   end
-
 end

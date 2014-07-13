@@ -66,5 +66,4 @@ class Debtors
   def no_balance_msg
     "#{@count} Property #{account.property.human_ref} Balance: #{debit_amount - credit_amount}"
   end
-
 end
