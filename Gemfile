@@ -90,7 +90,6 @@ group :development, :test do
   gem 'pry-stack_explorer', '~>0.4.9.0'
   gem 'byebug', '~> 3.1.2'
   gem 'rack-mini-profiler', '~>0.9.0'
-  #gem 'rspec-rails', '~> 2.14.0'
   gem 'rspec-rails', '~> 3.0.0'
 end
 
