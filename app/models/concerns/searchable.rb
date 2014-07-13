@@ -15,19 +15,19 @@ module Searchable
               type: "nGram",
               min_gram: 2,
               max_gram: 15,
-              token_chars: [ :letter, :digit, :punctuation, :symbol ]
+              token_chars: [:letter, :digit, :punctuation, :symbol]
             }
           },
           analyzer: {
             nGram_analyzer: {
               type: "custom",
               tokenizer: "whitespace",
-              filter: [ :lowercase, :asciifolding, :nGram_filter ]
+              filter: [:lowercase, :asciifolding, :nGram_filter]
             },
             whitespace_analyzer: {
               type: "custom",
               tokenizer: "whitespace",
-              filter: [ :lowercase, :asciifolding ]
+              filter: [:lowercase, :asciifolding]
             }
           }
         },

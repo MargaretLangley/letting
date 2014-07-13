@@ -38,7 +38,7 @@ class PropertyDecorator
     if source.agent.authorized?
       source.agent.address.address_lines
     else
-      [ '-' ]
+      ['-']
     end
   end
 

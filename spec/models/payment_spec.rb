@@ -53,7 +53,7 @@ describe Payment, type: :model do
         expect(payment.credits.size).to eq(0)
       end
       it 'adds returned credits' do
-        allow(payment.account).to receive(:charges).and_return [ charge_new ]
+        allow(payment.account).to receive(:charges).and_return [charge_new]
         payment.prepare
         expect(payment.credits.size).to eq(1)
       end

@@ -29,7 +29,7 @@ describe DueOns, type: :model do
         due_ons.build day: 4, month: 4
         due_ons.build day: 3, month: 5
         expect(due_ons.due_dates date_range_covering_due_on)
-          .to eq [ Date.new(2013, 4, 4), Date.new(2013, 5, 3) ]
+          .to eq [Date.new(2013, 4, 4), Date.new(2013, 5, 3)]
       end
 
       it 'returns nils when range outside due date' do
