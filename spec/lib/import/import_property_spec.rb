@@ -58,13 +58,13 @@ module DB
         expect(Property.first.agent.authorized).to be false
       end
 
-        # Nice setup!
-        # I'm worried that I might start overwriting authorized
-        # The profile addresses were kept in different tables on the
-        # original system. This means importing it separately after the
-        # property import and know I won't change authorized accidently.
-        # Import the record. Save a profile onto it. Import again and
-        # see that Profile still true.
+      # Nice setup!
+      # I'm worried that I might start overwriting authorized
+      # The profile addresses were kept in different tables on the
+      # original system. This means importing it separately after the
+      # property import and know I won't change authorized accidently.
+      # Import the record. Save a profile onto it. Import again and
+      # see that Profile still true.
       it 'does not alter use profile' do
         import_property row
         property = Property.first
