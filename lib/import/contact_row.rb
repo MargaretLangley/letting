@@ -15,8 +15,8 @@ module DB
     end
 
     def update_for contact
-      contact.entities.zip(entities).each do |contact, row|
-        row.update_for contact
+      contact.entities.zip(entities).each do |entity, row|
+        row.update_for entity
       end
       contact.address.attributes = address_attributes
     end
