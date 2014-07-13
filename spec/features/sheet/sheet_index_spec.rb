@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Sheet do
+describe Sheet, :type => :feature do
 
   before(:each) do
    log_in

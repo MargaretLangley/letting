@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+describe User, :type => :feature do
 
   before(:each) { log_in admin_attributes }
   context '#index' do

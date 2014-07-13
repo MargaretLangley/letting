@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Charge do
+describe Charge, :type => :model do
   let(:charge) do
     charge = Charge.new charge_attributes id: 1
     charge.due_ons.new due_on_attributes_0 charge_id: 1

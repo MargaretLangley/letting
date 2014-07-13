@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'debit_generator' do
+describe 'debit_generator', :type => :feature do
   let(:debit_gen_page) { DebitGeneratorCreatePage.new }
   before(:each) { log_in }
 

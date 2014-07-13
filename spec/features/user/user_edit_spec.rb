@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+describe User, :type => :feature do
   let(:user_edit_page) { UserEditPage.new }
   before(:each) { log_in admin_attributes }
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Payment do
+describe Payment, :type => :model do
 
   let(:payment) { Payment.new payment_attributes }
   it('is valid') { expect(payment).to be_valid }
@@ -53,7 +53,7 @@ describe Payment do
         expect(payment.credits.size).to eq(0)
       end
       it 'adds returned credits' do
-        payment.account.stub(:charges).and_return [ charge_new ]
+        allow(payment.account).to receive(:charges).and_return [ charge_new ]
         payment.prepare
         expect(payment.credits.size).to eq(1)
       end

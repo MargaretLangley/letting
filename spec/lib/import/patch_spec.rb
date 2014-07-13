@@ -45,7 +45,7 @@ module DB
       end
 
       it 'if id match but entity names are differenit it errors' do
-        $stdout.should_receive(:puts).with(/Cannot match/)
+        expect($stdout).to receive(:puts).with(/Cannot match/)
         ImportClient.import parse_client(row),
                             patch: Patch.import(Client, parse_client(same_id_name_changed))
 

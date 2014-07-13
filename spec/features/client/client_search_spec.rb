@@ -1,7 +1,7 @@
 require 'spec_helper'
 require_relative '../shared/address'
 
-describe Client do
+describe Client, :type => :feature do
 
   before(:each) { log_in }
 

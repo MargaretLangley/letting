@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StringDate do
+describe StringDate, :type => :model do
   context 'method' do
     context 'to_date' do
       it 'for date' do

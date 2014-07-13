@@ -20,7 +20,7 @@ module DB
       end
 
       it 'expected error message' do
-        $stdout.should_receive(:puts).with(/Cannot match/)
+        expect($stdout).to receive(:puts).with(/Cannot match/)
         patch_model = PatchModel.new client_new
         patchee = client_new
         patchee.entities.first.name = 'Name Changed'

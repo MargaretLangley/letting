@@ -7,33 +7,33 @@ RSpec::Matchers.define :allow? do |*args|
   end
 end
 
-describe Permission do
+describe Permission, :type => :model do
 
   context 'as guest' do
 
     subject { Permission.new(nil) }
 
-    it('session#new') { should allow?('sessions', 'new') }
-    it('session#create') { should allow?('sessions', 'create') }
-    it('session#destroy') { should allow?('sessions', 'destroy') }
+    it('session#new') { is_expected.to allow?('sessions', 'new') }
+    it('session#create') { is_expected.to allow?('sessions', 'create') }
+    it('session#destroy') { is_expected.to allow?('sessions', 'destroy') }
 
-    it('properties#index') { should_not allow?('properties', 'index') }
-    it('properties#create') { should_not allow?('properties', 'create') }
-    it('properties#edit') { should_not allow?('properties', 'edit') }
-    it('properties#update') { should_not allow?('properties', 'update') }
-    it('properties#destroy') { should_not allow?('properties', 'destroy') }
+    it('properties#index') { is_expected.not_to allow?('properties', 'index') }
+    it('properties#create') { is_expected.not_to allow?('properties', 'create') }
+    it('properties#edit') { is_expected.not_to allow?('properties', 'edit') }
+    it('properties#update') { is_expected.not_to allow?('properties', 'update') }
+    it('properties#destroy') { is_expected.not_to allow?('properties', 'destroy') }
 
-    it('clients#index') { should_not allow?('clients', 'index') }
-    it('clients#create') { should_not allow?('clients', 'create') }
-    it('clients#edit') { should_not allow?('clients', 'edit') }
-    it('clients#update') { should_not allow?('clients', 'update') }
-    it('clients#destroy') { should_not allow?('clients', 'destroy') }
+    it('clients#index') { is_expected.not_to allow?('clients', 'index') }
+    it('clients#create') { is_expected.not_to allow?('clients', 'create') }
+    it('clients#edit') { is_expected.not_to allow?('clients', 'edit') }
+    it('clients#update') { is_expected.not_to allow?('clients', 'update') }
+    it('clients#destroy') { is_expected.not_to allow?('clients', 'destroy') }
 
-    it('users#index') { should_not allow?('users', 'index') }
-    it('users#create') { should_not allow?('users', 'create') }
-    it('users#edit') { should_not allow?('users', 'edit') }
-    it('users#update') { should_not allow?('users', 'update') }
-    it('users#destroy') { should_not allow?('users', 'destroy') }
+    it('users#index') { is_expected.not_to allow?('users', 'index') }
+    it('users#create') { is_expected.not_to allow?('users', 'create') }
+    it('users#edit') { is_expected.not_to allow?('users', 'edit') }
+    it('users#update') { is_expected.not_to allow?('users', 'update') }
+    it('users#destroy') { is_expected.not_to allow?('users', 'destroy') }
 
   end
 
@@ -41,47 +41,47 @@ describe Permission do
 
     subject { Permission.new(User.create! user_attributes) }
 
-    it('session#new')      { should allow?('sessions', 'new') }
-    it('session#create')   { should allow?('sessions', 'create') }
-    it('session#destroy')  { should allow?('sessions', 'destroy') }
+    it('session#new')      { is_expected.to allow?('sessions', 'new') }
+    it('session#create')   { is_expected.to allow?('sessions', 'create') }
+    it('session#destroy')  { is_expected.to allow?('sessions', 'destroy') }
 
-    it('properties#index')   { should allow?('properties', 'index') }
-    it('properties#create')  { should allow?('properties', 'create') }
-    it('properties#edit')    { should allow?('properties', 'edit') }
-    it('properties#update')  { should allow?('properties', 'update') }
-    it('properties#destroy') { should allow?('properties', 'destroy') }
+    it('properties#index')   { is_expected.to allow?('properties', 'index') }
+    it('properties#create')  { is_expected.to allow?('properties', 'create') }
+    it('properties#edit')    { is_expected.to allow?('properties', 'edit') }
+    it('properties#update')  { is_expected.to allow?('properties', 'update') }
+    it('properties#destroy') { is_expected.to allow?('properties', 'destroy') }
 
-    it('clients#index') { should allow?('clients', 'index') }
-    it('clients#create') { should allow?('clients', 'create') }
-    it('clients#edit') { should allow?('clients', 'edit') }
-    it('clients#update') { should allow?('clients', 'update') }
-    it('clients#destroy') { should allow?('clients', 'destroy') }
+    it('clients#index') { is_expected.to allow?('clients', 'index') }
+    it('clients#create') { is_expected.to allow?('clients', 'create') }
+    it('clients#edit') { is_expected.to allow?('clients', 'edit') }
+    it('clients#update') { is_expected.to allow?('clients', 'update') }
+    it('clients#destroy') { is_expected.to allow?('clients', 'destroy') }
 
   end
 
   context 'admin' do
     subject { Permission.new(User.create! user_attributes admin: false) }
 
-    it('users#index') { should_not allow?('users', 'index') }
-    it('users#create') { should_not allow?('users', 'create') }
-    it('users#edit') { should_not allow?('users', 'edit') }
-    it('users#update') { should_not allow?('users', 'update') }
-    it('users#destroy') { should_not allow?('users', 'destroy') }
+    it('users#index') { is_expected.not_to allow?('users', 'index') }
+    it('users#create') { is_expected.not_to allow?('users', 'create') }
+    it('users#edit') { is_expected.not_to allow?('users', 'edit') }
+    it('users#update') { is_expected.not_to allow?('users', 'update') }
+    it('users#destroy') { is_expected.not_to allow?('users', 'destroy') }
 
   end
 
   context 'admin' do
     subject { Permission.new(User.create! user_attributes admin: true) }
 
-    it('session#destroy')  { should allow?('sessions', 'destroy') }
-    it('clients#destroy') { should allow?('clients', 'destroy') }
-    it('properties#destroy') { should allow?('properties', 'destroy') }
+    it('session#destroy')  { is_expected.to allow?('sessions', 'destroy') }
+    it('clients#destroy') { is_expected.to allow?('clients', 'destroy') }
+    it('properties#destroy') { is_expected.to allow?('properties', 'destroy') }
 
-    it('users#index') { should allow?('users', 'index') }
-    it('users#create') { should allow?('users', 'create') }
-    it('users#edit') { should allow?('users', 'edit') }
-    it('users#update') { should allow?('users', 'update') }
-    it('users#destroy') { should allow?('users', 'destroy') }
+    it('users#index') { is_expected.to allow?('users', 'index') }
+    it('users#create') { is_expected.to allow?('users', 'create') }
+    it('users#edit') { is_expected.to allow?('users', 'edit') }
+    it('users#update') { is_expected.to allow?('users', 'update') }
+    it('users#destroy') { is_expected.to allow?('users', 'destroy') }
 
   end
 end

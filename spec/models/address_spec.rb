@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Address do
+describe Address, :type => :model do
 
   let(:address) { Address.new min_address_attributes }
   it('valid')   { expect(address).to be_valid }

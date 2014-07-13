@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Address do
+describe Address, :type => :feature do
   before(:each) { log_in }
 
   context '#updates' do

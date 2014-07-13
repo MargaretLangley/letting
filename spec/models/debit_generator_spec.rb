@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DebitGenerator do
+describe DebitGenerator, :type => :model do
 
   let(:debit_gen) { debit_generator_new }
 
@@ -28,7 +28,7 @@ describe DebitGenerator do
       end
 
       it 'are required to be valid' do
-        debit_gen.should_receive(:accounts).and_return([Object.new])
+        expect(debit_gen).to receive(:accounts).and_return([Object.new])
         expect(debit_gen).to be_valid
       end
     end
@@ -104,7 +104,7 @@ describe DebitGenerator do
       it('when empty') { expect(DebitGenerator.new).to be_debitless }
       it 'indebited when debits assigned' do
         debit_gen = DebitGenerator.new
-        debit_gen.should_receive(:debits).and_return([Object.new])
+        expect(debit_gen).to receive(:debits).and_return([Object.new])
         expect(debit_gen).to_not be_debitless
       end
     end

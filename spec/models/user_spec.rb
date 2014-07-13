@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+describe User, :type => :model do
   let(:user) { User.new user_attributes }
   it('is valid') { expect(user).to be_valid }
 

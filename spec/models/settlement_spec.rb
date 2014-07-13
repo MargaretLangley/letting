@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Settlement do
+describe Settlement, :type => :model do
 
   it 'resolve_credit' do
     debit1 = Debit.create! debit_attributes amount: 48.08, on_date: '25/3/2013'

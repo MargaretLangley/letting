@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Session' do
+describe 'Session', :type => :feature do
   it '#creates' do
     user_create! user_attributes
     navigates_to_create_page

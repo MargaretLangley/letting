@@ -1,7 +1,7 @@
 require 'spec_helper'
 require_relative 'client_shared'
 
-describe Client do
+describe Client, :type => :feature do
   let(:client_page) { ClientCreatePage.new }
   before(:each) { log_in }
 

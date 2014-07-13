@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Debit do
+describe Debit, :type => :model do
 
   let(:debit) { Debit.new debit_attributes }
   let(:account) { Account.new id: 1, account_id: 1 }

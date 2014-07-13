@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DueOn do
+describe DueOn, :type => :model do
 
   let(:due_on) { DueOn.new due_on_attributes_0 charge_id: 1 }
   it('is valid') { expect(due_on).to be_valid }

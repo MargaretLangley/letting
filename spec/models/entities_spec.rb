@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Entities do
+describe Entities, :type => :model do
 
   let(:entities) { base_property.entities }
 

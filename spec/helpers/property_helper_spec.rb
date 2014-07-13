@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PropertiesHelper do
+describe PropertiesHelper, :type => :helper do
   describe '#hide_new_record_unless_first' do
     it 'display if new and first' do
       property = property_new

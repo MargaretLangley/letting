@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ApplicationHelper do
+describe ApplicationHelper, :type => :helper do
   describe '#view_link' do
     it 'disables new records' do
       expect(view_link(property_new)).to include 'disabled'
