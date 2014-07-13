@@ -27,7 +27,7 @@ class SheetsController < ApplicationController
   def create
     @sheet = Sheet.new sheets_params
     if @sheet.save
-      redirect_to sheets_path, notice: "Invoice information successfully created!"
+      redirect_to sheets_path, notice: 'Invoice information successfully created!'
     else
       render :new
     end
@@ -40,7 +40,7 @@ class SheetsController < ApplicationController
   def update
     @sheet = Sheet.find params[:id]
     if @sheet.update sheets_params
-      redirect_to sheets_path, notice: "Invoice information successfully updated!"
+      redirect_to sheets_path, notice: 'Invoice information successfully updated!'
     else
       render :edit
     end

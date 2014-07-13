@@ -5,14 +5,14 @@ module Searchable
     include Elasticsearch::Model
     include Elasticsearch::Model::Callbacks
     # collection is pluraized version of the model_name
-    index_name [Rails.env, model_name.collection.gsub(/\//, '-')].join("_")
+    index_name [Rails.env, model_name.collection.gsub(/\//, '-')].join('_')
 
     settings(
       index: {
         analysis: {
           filter: {
             nGram_filter: {
-              type: "nGram",
+              type: 'nGram',
               min_gram: 2,
               max_gram: 15,
               token_chars: [:letter, :digit, :punctuation, :symbol]
@@ -20,13 +20,13 @@ module Searchable
           },
           analyzer: {
             nGram_analyzer: {
-              type: "custom",
-              tokenizer: "whitespace",
+              type: 'custom',
+              tokenizer: 'whitespace',
               filter: [:lowercase, :asciifolding, :nGram_filter]
             },
             whitespace_analyzer: {
-              type: "custom",
-              tokenizer: "whitespace",
+              type: 'custom',
+              tokenizer: 'whitespace',
               filter: [:lowercase, :asciifolding]
             }
           }
@@ -53,7 +53,7 @@ module Searchable
           match: {
             _all: {
               query: query,
-              operator: "and"
+              operator: 'and'
             }
           }
         }

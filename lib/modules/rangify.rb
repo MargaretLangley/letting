@@ -15,7 +15,7 @@ class Rangify
   end
 
   def to_i
-    Range.new(*range_as_str.split("-").map(&:to_i))
+    Range.new(*range_as_str.split('-').map(&:to_i))
   end
 
   def to_s
