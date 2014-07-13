@@ -22,8 +22,8 @@ class Address < ActiveRecord::Base
   belongs_to :addressable, polymorphic: true
   validates :county, :road, presence: true
   validates :flat_no, :road_no,
-             length: { maximum: MAX_NUMBER },
-             allow_blank: true
+            length: { maximum: MAX_NUMBER },
+            allow_blank: true
   validates :house_name, length: { maximum: MAX_STRING }, allow_blank: true
   validates :road,       length: { maximum: MAX_STRING }
   validates :district, :nation, :town,

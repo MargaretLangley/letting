@@ -97,7 +97,7 @@ module DB
       it 'error if row type unknown' do
         expect { import_account unknown_row }
           .to raise_error AccountRowTypeUnknown, \
-                      'Unknown Row Property:122, charge_code: XX'
+                          'Unknown Row Property:122, charge_code: XX'
       end
     end
 
