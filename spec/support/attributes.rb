@@ -131,7 +131,7 @@ def sheet_attributes overrides = {}
     heading2: 'Head2',
     advice1: 'Good Speed',
     advice2: 'Lock you door',
-  }
+  }.merge overrides
 end
 
 def sheet_p2_attributes overrides = {}
@@ -145,5 +145,5 @@ def sheet_p2_attributes overrides = {}
     heading2: 'Page2 head2',
     advice1: 'Bowled Out!',
     advice2: 'Oomf'
-  }
+  }.merge overrides
 end

@@ -49,7 +49,7 @@ class Property < ActiveRecord::Base
   end
 
   include Searchable
-  def as_indexed_json(options={})
+  def as_indexed_json(_options={})
     self.as_json(
       methods: :occupier,
       include: {
