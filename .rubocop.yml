@@ -22,11 +22,6 @@ Style/CyclomaticComplexity:
 Style/GuardClause:
   Enabled: false
 
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/IndentationWidth:
-  Enabled: false
-
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/LeadingCommentSpace:

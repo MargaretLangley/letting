@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Sheet, type: :feature do
 
   before(:each) do
-   log_in
+    log_in
   end
 
   context '#index' do

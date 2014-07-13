@@ -24,7 +24,7 @@ class Charge < ActiveRecord::Base
   has_many :debits, dependent: :destroy do
     def created_on? on_date
       self.any? do |debit|
-      debit.on_date == on_date
+        debit.on_date == on_date
       end
     end
   end
