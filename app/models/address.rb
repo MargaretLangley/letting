@@ -36,9 +36,7 @@ class Address < ActiveRecord::Base
 
   def address_lines
     address_lines = []
-    if flat_house_line.present?
-      address_lines << flat_line
-    end
+    address_lines << flat_line if flat_house_line.present?
     address_lines << road_line
     address_lines << district if district?
     address_lines << town if town?

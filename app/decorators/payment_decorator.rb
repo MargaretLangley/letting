@@ -22,9 +22,7 @@ class PaymentDecorator
   end
 
   def prepare_for_form
-    if @source.account_exists?
-      @source.prepare
-    end
+    @source.prepare if @source.account_exists?
   end
 
   def credits_decorated
