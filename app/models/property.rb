@@ -54,7 +54,7 @@ class Property < ActiveRecord::Base
       methods: :occupier,
       include: {
         address: {},
-        agent: { methods: [:address_lines, :full_name], only: [:address_lines, :full_name]}
+        agent: { methods: [:address_lines, :full_name], only: [:address_lines, :full_name] }
       })
   end
 
