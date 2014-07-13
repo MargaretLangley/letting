@@ -91,7 +91,7 @@ group :development, :test do
   gem 'byebug', '~> 3.1.2'
   gem 'rack-mini-profiler', '~>0.9.0'
   #gem 'rspec-rails', '~> 2.14.0'
-  gem 'rspec-rails', '~> 2.99.0'
+  gem 'rspec-rails', '~> 3.0.0'
 end
 
 group :development do
