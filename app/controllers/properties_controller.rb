@@ -77,67 +77,55 @@ class PropertiesController < ApplicationController
 
   private
 
-    def find_route model
-      case params[:search_action]
-      when 'show'
-        property_path model
-      when 'edit'
-        edit_property_path model
-      else
-        properties_path
-      end
+  def find_route model
+    case params[:search_action]
+    when 'show'
+      property_path model
+    when 'edit'
+      edit_property_path model
+    else
+      properties_path
     end
+  end
 
-    def unique_search?
-      search_param.present? && @properties.size == 1
-    end
+  def property_params
+    params.require(:property)
+      .permit :human_ref,
+              :client_id,
+              address_attributes:         address_params,
+              entities_attributes:        entities_params,
+              agent_attributes: agent_params,
+              account_attributes:         account_params
+  end
 
-    def search_param
-      params[:search]
-    end
+  def agent_params
+    %i(id property_id authorized) + [address_attributes: address_params] +
+    [entities_attributes: entities_params]
+  end
 
-    def property_params
-      params.require(:property)
-        .permit :human_ref,
-                :client_id,
-                address_attributes:         address_params,
-                entities_attributes:        entities_params,
-                agent_attributes: agent_params,
-                account_attributes:         account_params
-    end
+  def account_params
+    %i(id property_id) + [charges_attributes: charges_params]
+  end
 
-    def agent_params
-      %i(id property_id authorized) + [address_attributes: address_params] +
-      [entities_attributes: entities_params]
-    end
+  def charges_params
+    %i(id charge_type due_in amount _destroy) +
+    [due_ons_attributes: %i(id day month)]
+  end
 
-    def account_params
-      %i(id property_id) + [charges_attributes: charges_params]
-    end
+  def identy
+    property = PropertyDecorator.new @property
+    "Property 'ID #{property.human_ref}, #{property.abbreviated_address}'"
+  end
 
-    def charges_params
-      %i(id charge_type due_in amount _destroy) +
-      [due_ons_attributes: due_on_params]
-    end
+  def property_created_message
+    "#{identy} successfully created!"
+  end
 
-    def due_on_params
-      %i(id day month)
-    end
+  def property_updated_message
+    "#{identy} successfully updated!"
+  end
 
-    def identy
-      property = PropertyDecorator.new @property
-      "Property 'ID #{property.human_ref}, #{property.abbreviated_address}'"
-    end
-
-    def property_created_message
-      "#{identy} successfully created!"
-    end
-
-    def property_updated_message
-      "#{identy} successfully updated!"
-    end
-
-    def property_deleted_message
-      "#{identy} successfully deleted!"
-    end
+  def property_deleted_message
+    "#{identy} successfully deleted!"
+  end
 end

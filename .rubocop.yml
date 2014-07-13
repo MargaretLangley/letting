@@ -13,11 +13,6 @@ Lint/AmbiguousRegexpLiteral:
 Lint/UselessAccessModifier:
   Enabled: false
 
-# Offense count: 1
-# Configuration parameters: CountComments.
-Style/ClassLength:
-  Max: 104
-
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/CommentIndentation:
