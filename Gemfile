@@ -38,10 +38,6 @@ gem 'kaminari', '~> 0.16.1'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
-gem "spring-commands-rspec", group: :development
-
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
@@ -55,9 +51,19 @@ gem 'elasticsearch-extensions', group: :test
 # Use unicorn as the app server
 gem 'unicorn', '~> 4.8.0'
 
-
 # corner banner on staging environment
 gem 'rack-dev-mark', '~> 0.6.0'
+
+group :development do
+  gem 'better_errors', '~> 1.1.0'
+  gem 'binding_of_caller', '~> 0.7.2'
+  gem 'brakeman', '~>2.6.0', require: false
+  gem 'bullet', '~>4.11.0'
+  gem 'rails_best_practices', '~>1.15.1'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem "spring-commands-rspec"
+end
 
 # Use Capistrano for deployment
 group :development do
@@ -72,13 +78,7 @@ group :development do
   gem 'mascherano', '~> 1.1.0'
 end
 
-group :development do
-  gem 'better_errors', '~> 1.1.0'
-  gem 'binding_of_caller', '~> 0.7.2'
-end
-
 group :development, :test do
-  gem 'bullet', '~>4.11.0'
   gem 'capybara', '~> 2.3.0'
   gem 'capybara-webkit', '~>1.2.0'
   gem 'guard'
@@ -91,11 +91,6 @@ group :development, :test do
   gem 'byebug', '~> 3.1.2'
   gem 'rack-mini-profiler', '~>0.9.0'
   gem 'rspec-rails', '~> 3.0.0'
-end
-
-group :development do
-  gem 'brakeman', '~>2.6.0', require: false
-  gem 'rails_best_practices', '~>1.15.1'
 end
 
 group :test do
