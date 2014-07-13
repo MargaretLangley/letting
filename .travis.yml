@@ -2,7 +2,7 @@ env:
   - DB=postgresql
 script:
   - bundle exec rake db:migrate
-  - bundle exec xvfb-run rake
+  - bundle exec xvfb-run rake spec
 before_script:
   - bundle exec rake db:create RAILS_ENV=test
 
