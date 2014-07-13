@@ -7,7 +7,7 @@ module DB
     after  { Timecop.return }
 
     it 'ignores a charge without a debit' do
-      args = { charge_attributes: { start_date: MIN_DATE ,
+      args = { charge_attributes: { start_date: MIN_DATE,
                                     end_date: MAX_DATE } }
       (account = account_and_charge_new args).save!
       UpdateCharge.do
@@ -16,7 +16,7 @@ module DB
     end
 
     it 'updates only the start of recurring charge' do
-      args = { charge_attributes: { start_date: MIN_DATE ,
+      args = { charge_attributes: { start_date: MIN_DATE,
                                     end_date: MAX_DATE } }
       (account = account_and_charge_new args).save!
       account.debits.build debit_attributes on_date: '2013-3-25',
@@ -26,11 +26,11 @@ module DB
       account.save!
       UpdateCharge.do
       expect(account.charges.first.start_date).to eq Date.new 2012, 3, 25
-      expect(account.charges.first.end_date).to eq Date.new 2100, 1 , 1
+      expect(account.charges.first.end_date).to eq Date.new 2100, 1, 1
     end
 
     it 'updates start and end of charge which has finished' do
-      args = { charge_attributes: { start_date: MIN_DATE ,
+      args = { charge_attributes: { start_date: MIN_DATE,
                                     end_date: MAX_DATE } }
       (account = account_and_charge_new args).save!
       account.debits.build debit_attributes on_date: '2012-3-25',
