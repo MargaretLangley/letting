@@ -13,7 +13,7 @@ class CreditDecorator
   end
 
   def amount
-    number_with_precision(@source.amount,precision: 2)
+    number_with_precision(@source.amount, precision: 2)
   end
 
   def owing

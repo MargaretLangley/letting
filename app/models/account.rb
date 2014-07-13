@@ -56,8 +56,8 @@ class Account < ActiveRecord::Base
 
   def balance date
     date ||= Date.current
-    credits.select { |c| c.on_date <= date }.map { |c| c.amount }.inject(0,:+) -
-    debits.select { |d| d.on_date <= date }.map { |d| d.amount }.inject(0,:+)
+    credits.select { |c| c.on_date <= date }.map { |c| c.amount }.inject(0, :+) -
+    debits.select { |d| d.on_date <= date }.map { |d| d.amount }.inject(0, :+)
   end
 
   def self.by_human_ref human_ref

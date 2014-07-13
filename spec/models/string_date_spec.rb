@@ -4,7 +4,7 @@ describe StringDate, type: :model do
   context 'method' do
     context 'to_date' do
       it 'for date' do
-        expect(StringDate.new('2000-1-1').to_date).to eq Date.new 2000,1,1
+        expect(StringDate.new('2000-1-1').to_date).to eq Date.new 2000, 1, 1
       end
 
       it 'handles emtpy' do

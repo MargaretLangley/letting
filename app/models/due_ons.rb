@@ -67,7 +67,7 @@ module DueOns
       end
 
       def ordered_by_occurrence
-        sort { |a,b| a.make_date <=> b.make_date }
+        sort { |a, b| a.make_date <=> b.make_date }
       end
     end
 

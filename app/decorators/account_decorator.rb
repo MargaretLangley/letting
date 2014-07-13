@@ -42,10 +42,10 @@ class AccountDecorator
     @source.debits
            .select { |d| d.on_date < date }
            .map { |d| d.amount }
-           .inject(0,:+) -
+           .inject(0, :+) -
     @source.credits
            .select { |c| c.on_date < date }
            .map { |c| c.amount }
-           .inject(0,:+)
+           .inject(0, :+)
   end
 end

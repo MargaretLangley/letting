@@ -56,14 +56,14 @@ describe Charge, type: :model do
       context '#next_chargeable' do
         it 'if charge between dates'  do
           expect(charge.next_chargeable(Date.new(2013, 3, 25)..Date.new(2016, 3, 25)))
-            .to eq [chargeable(Date.new(2013,3,25)),
-                    chargeable(Date.new(2013,9,30))]
+            .to eq [chargeable(Date.new(2013, 3, 25)),
+                    chargeable(Date.new(2013, 9, 30))]
         end
 
         it 'ignores charges which have debits'  do
           charge.debits.build debit_attributes on_date: '2013-3-25'
           expect(charge.next_chargeable(Date.new(2013, 3, 25)..Date.new(2016, 3, 25)))
-            .to eq [chargeable(Date.new(2013,9,30))]
+            .to eq [chargeable(Date.new(2013, 9, 30))]
         end
 
         it 'return nil if not' do
