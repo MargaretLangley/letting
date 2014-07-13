@@ -49,13 +49,11 @@ module Searchable
 
     def self.search(query)
       __elasticsearch__.search(
-        {
-          query: {
-            match: {
-              _all: {
-                query: query,
-                operator: "and"
-              }
+        query: {
+          match: {
+            _all: {
+              query: query,
+              operator: "and"
             }
           }
         }

@@ -14,12 +14,6 @@ Lint/UselessAccessModifier:
   Enabled: false
 
 # Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/BracesAroundHashParameters:
-  Enabled: false
-
-# Offense count: 1
 # Configuration parameters: CountComments.
 Style/ClassLength:
   Max: 104
