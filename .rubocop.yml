@@ -32,11 +32,6 @@ Style/LineLength:
 Style/MethodLength:
   Max: 13
 
-# Offense count: 9
-# Cop supports --auto-correct.
-Style/SingleSpaceBeforeFirstArg:
-  Enabled: false
-
 # Offense count: 19
 # Configuration parameters: EnforcedStyleForMultiline, SupportedStyles.
 Style/TrailingComma:

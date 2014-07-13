@@ -3,7 +3,7 @@ require 'spec_helper'
 class AmountValidatable
   include ActiveModel::Validations
   validates :amount, amount: true
-  attr_accessor  :amount
+  attr_accessor :amount
 
   def initialize amount
     @amount = amount

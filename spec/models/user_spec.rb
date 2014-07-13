@@ -30,7 +30,7 @@ describe User, type: :model do
         # Bug you can't assign a nil password you can initialize it with
         # empty string
         # stackoverflow.com why-is-password-validate-presence-ignored
-        user = User.new  password: ''
+        user = User.new password: ''
         expect(user).to_not be_valid
       end
 

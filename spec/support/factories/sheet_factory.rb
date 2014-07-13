@@ -6,7 +6,7 @@ def sheet_factory args = {}
 end
 
 def sheet2_factory args = {}
-  sheet = Sheet.new  sheet_p2_attributes args
+  sheet = Sheet.new sheet_p2_attributes args
   sheet.save!
   sheet
 end

@@ -3,7 +3,7 @@ require 'spec_helper'
 class Validatable
   include ActiveModel::Validations
   validates_with DateEqualOrAfter
-  attr_accessor  :start_date, :end_date
+  attr_accessor :start_date, :end_date
 
   def initialize start_date, end_date
     @start_date = start_date

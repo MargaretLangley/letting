@@ -28,7 +28,7 @@ describe AccountDecorator do
       account.credits.push credit_new on_date: '25/9/2014', amount: 15.00
       expect(account.items[0].balance).to eq 10.00
       expect(account.items[1].balance).to eq 20.00
-      expect(account.items[2].balance).to eq  5.00
+      expect(account.items[2].balance).to eq 5.00
     end
 
     it 'abbrev-items' do
@@ -55,8 +55,8 @@ describe AccountDecorator do
   context 'calculated balance' do
     it 'abbrev_items' do
       account = account_and_charge_new
-      account.debits.push debit_new   on_date: '25/3/2011', amount: 10.00
-      account.debits.push debit_new   on_date: '25/3/2012', amount: 10.00
+      account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
+      account.debits.push debit_new on_date: '25/3/2012', amount: 10.00
       account.credits.push credit_new on_date: '25/4/2012', amount: 5.50
       account.save!
       dec = AccountDecorator.new account
