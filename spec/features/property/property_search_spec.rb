@@ -31,6 +31,7 @@ describe Property, :type => :feature do
     end
 
     it 'search not found when absent' do
+      visit '/properties'
       fill_in 'search', with: '599'
       click_on 'Search'
       expect(page).to have_text 'No Matches found. Search again.'
