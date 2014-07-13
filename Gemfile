@@ -89,6 +89,7 @@ group :development, :test do
   gem 'pry-nav', '~>0.2.3'
   gem 'pry-stack_explorer', '~>0.4.9.0'
   gem 'byebug', '~> 3.1.2'
+  gem 'rubocop', require: false
   gem 'rack-mini-profiler', '~>0.9.0'
   gem 'rspec-rails', '~> 3.0.0'
 end

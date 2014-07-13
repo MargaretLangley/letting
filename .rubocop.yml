@@ -1,14 +1,16 @@
 Documentation:
  Enabled: false
-DefWithoutParentheses:
+MethodDefParentheses:
  Enabled: false
+Style/UnneededPercentQ:
+  Enabled: false
 
 AllCops:
-  Includes:
+  Include:
     - Rakefile
     - config.ru
-  Excludes:
-    - db/**
-    - bin/**
-    - config/**
+  Exclude:
+    - db/**/*
+    - bin/**/*
+    - config/**/*
 
