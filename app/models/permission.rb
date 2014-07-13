@@ -19,7 +19,7 @@
 ####
 #
 class Permission < Struct.new(:user)
-  def allow?(controller, action)
+  def allow?(controller, _action)
     return true if guest_controllers.include?(controller)
     if user
       return true if user_controllers.include?(controller)

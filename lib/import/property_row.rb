@@ -14,7 +14,7 @@ module DB
     end
 
     def client_id
-      client_ref_to_id client_ref
+      client_ref_to_id
     end
 
     private
@@ -23,7 +23,7 @@ module DB
       @source[:client_ref]
     end
 
-    def client_ref_to_id human_ref
+    def client_ref_to_id
       Client.find_by!(human_ref: client_ref).id
       rescue ActiveRecord::RecordNotFound
         raise ClientRefUnknown, client_ref_unknown_msg, caller

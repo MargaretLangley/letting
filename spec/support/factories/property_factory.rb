@@ -40,7 +40,7 @@ end
 # when your running full specs I haven't found reliable way of guaranteeing
 # a primary key will be set to a value. This is a hack to save the object
 # get the key value and put it into the debit - not nice
-def property_with_charge_and_unpaid_debit args = {}
+def property_with_charge_and_unpaid_debit
   (property = property_with_charge_new).save!
   property.account.debits.build debit_attributes \
     charge_id: property.account.charges.first.id
