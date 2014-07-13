@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'debit_generator', :type => :feature do
+describe 'debit_generator', type: :feature do
 
   before(:each) do
     log_in

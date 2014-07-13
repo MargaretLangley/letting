@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ChargeableInfo, :type => :model do
+describe ChargeableInfo, type: :model do
 
   let(:chargeable_info) do
     ChargeableInfo.from_charge chargeable_attributes

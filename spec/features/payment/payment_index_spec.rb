@@ -28,7 +28,7 @@ class PaymentIndexPage
   end
 end
 
-describe 'Payment index', :type => :feature do
+describe 'Payment index', type: :feature do
 
   let(:payment_index) { PaymentIndexPage.new }
   before(:each) { log_in }

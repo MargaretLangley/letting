@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Agent, :type => :model do
+describe Agent, type: :model do
 
   it('is valid') { expect(agent_new).to be_valid }
 

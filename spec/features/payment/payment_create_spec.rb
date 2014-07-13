@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Payment, :type => :feature do
+describe Payment, type: :feature do
 
   let(:payment_page) { PaymentCreatePage.new }
   before(:each) { log_in }

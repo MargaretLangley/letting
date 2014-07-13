@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Property, :type => :feature do
+describe Property, type: :feature do
 
   before(:each) { log_in }
 

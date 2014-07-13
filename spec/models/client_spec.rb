@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Client, :type => :model do
+describe Client, type: :model do
 
   let(:client) { client_new  }
   it('is valid') { expect(client).to be_valid }

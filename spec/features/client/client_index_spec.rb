@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Client, :type => :feature do
+describe Client, type: :feature do
 
   before(:each) do
     log_in

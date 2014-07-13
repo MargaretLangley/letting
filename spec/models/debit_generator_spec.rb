@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DebitGenerator, :type => :model do
+describe DebitGenerator, type: :model do
 
   let(:debit_gen) { debit_generator_new }
 

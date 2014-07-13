@@ -40,7 +40,7 @@ class PaymentEditPage
   end
 end
 
-describe Payment, :type => :feature do
+describe Payment, type: :feature do
 
   let(:payment_page) { PaymentCreatePage.new }
   let(:payment_edit_page) { PaymentEditPage.new }

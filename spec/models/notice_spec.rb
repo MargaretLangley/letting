@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Notice, :type => :model do
+describe Notice, type: :model do
   skip "add some examples to (or delete) #{__FILE__}"
 end

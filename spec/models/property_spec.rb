@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Property, :type => :model do
+describe Property, type: :model do
 
   let(:property) { property_new }
   it('is valid') { expect(property).to be_valid }

@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe SheetsController, :type => :controller do
+describe SheetsController, type: :controller do
 
 end

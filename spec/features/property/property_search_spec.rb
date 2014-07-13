@@ -1,7 +1,7 @@
 require 'spec_helper'
 require_relative '../shared/address'
 
-describe Property, :type => :feature do
+describe Property, type: :feature do
 
   before(:each) { log_in }
 

@@ -2,7 +2,7 @@ require 'spec_helper'
 require_relative 'client_shared'
 require_relative '../shared/entity'
 
-describe Client, :type => :feature do
+describe Client, type: :feature do
   before(:each) { log_in }
 
   context '#updates' do
