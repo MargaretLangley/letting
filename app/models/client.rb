@@ -33,8 +33,8 @@ class Client < ActiveRecord::Base
     self.as_json(
       methods: :full_name,
       include: {
-                 address: {}
-               })
+        address: {}
+      })
   end
 
   def self.sql_search search

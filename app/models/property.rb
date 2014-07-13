@@ -53,9 +53,9 @@ class Property < ActiveRecord::Base
     self.as_json(
       methods: :occupier,
       include: {
-                 address: {},
-                 agent: { methods: [:address_lines, :full_name], only: [:address_lines, :full_name]}
-               })
+        address: {},
+        agent: { methods: [:address_lines, :full_name], only: [:address_lines, :full_name]}
+      })
   end
 
   def self.sql_search query

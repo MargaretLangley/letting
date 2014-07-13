@@ -136,14 +136,14 @@ end
 
 def sheet_p2_attributes overrides = {}
    {
-    id: 2,
-    description: 'Page 2',
-    invoice_name: 'No_go',
-    phone: '0121345678',
-    vat: '123 1234 12',
-    heading1: 'Page2 head1',
-    heading2: 'Page2 head2',
-    advice1: 'Bowled Out!',
-    advice2: 'Oomf'
-  }.merge overrides
+     id: 2,
+     description: 'Page 2',
+     invoice_name: 'No_go',
+     phone: '0121345678',
+     vat: '123 1234 12',
+     heading1: 'Page2 head1',
+     heading2: 'Page2 head2',
+     advice1: 'Bowled Out!',
+     advice2: 'Oomf'
+   }.merge overrides
 end
