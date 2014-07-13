@@ -8,7 +8,6 @@ def nameless_agent args = {}
   agent
 end
 
-
 private
 
 def base_agent args = {}

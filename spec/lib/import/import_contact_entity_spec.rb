@@ -30,7 +30,6 @@ module DB
       expect { import_client row }.to_not change(Entity, :count)
     end
 
-
     it 'adds one entity when second entity blank' do
       expect { import_client one_entity_row }.to change(Entity, :count).by 1
     end

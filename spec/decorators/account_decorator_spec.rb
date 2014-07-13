@@ -31,7 +31,6 @@ describe AccountDecorator do
       expect(account.items[2].balance).to eq  5.00
     end
 
-
     it 'abbrev-items' do
       expect(account.abbrev_items[0].on_date).to eq Date.new 2013, 1, 1
       expect(account.abbrev_items[1].on_date).to eq Date.new 2013, 3, 25

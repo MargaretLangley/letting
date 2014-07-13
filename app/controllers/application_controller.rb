@@ -31,8 +31,6 @@ class ApplicationController < ActionController::Base
     %i(entity_type _destroy id title initials name)
   end
 
-
-
   private
 
   def current_user

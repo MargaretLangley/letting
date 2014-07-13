@@ -55,7 +55,6 @@ module DB
       expect(row.attributes[:debit_generator_id]).to eq(-1)
     end
 
-
     def parse_line row_string
       CSV.parse_line(row_string,
                      headers: FileHeader.account,

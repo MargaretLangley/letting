@@ -50,8 +50,6 @@ module DB
          .read.drop(@drop_rows)
     end
 
-
-
     private
 
       def get_file filename

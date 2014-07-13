@@ -62,9 +62,6 @@ module Searchable
   end
 end
 
-
-
-
 # Console Management
 #
 # Create

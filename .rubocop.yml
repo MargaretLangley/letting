@@ -17,11 +17,6 @@ Lint/UselessAccessModifier:
 Style/CyclomaticComplexity:
   Max: 9
 
-# Offense count: 14
-# Cop supports --auto-correct.
-Style/EmptyLines:
-  Enabled: false
-
 # Offense count: 8
 # Cop supports --auto-correct.
 Style/EmptyLinesAroundBody:

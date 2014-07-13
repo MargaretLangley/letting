@@ -50,7 +50,6 @@ module DB
       expect(FileHeader.agent_patch).to eq fields
     end
 
-
     it 'user' do
       fields = %w[nickname email password admin]
       expect(FileHeader.user).to eq fields

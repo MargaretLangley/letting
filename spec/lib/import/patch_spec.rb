@@ -31,7 +31,6 @@ module DB
         %q(Example Street, Example District ,Example Town,  Example County,  E10 7EX)
       end
 
-
       it 'only patches when id are the same' do
         ImportClient.import parse_client(row),
                             patch: Patch.import(Client, parse_client(different_id))
@@ -65,7 +64,6 @@ module DB
         %q(1, ExampleHouse, 2, Ex Street, Example District ,Ex Town, Ex County, E10 7EX, ) +
         %q(11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0)
       end
-
 
       it 'works on property' do
         client_create! human_ref: 11
