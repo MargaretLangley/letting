@@ -123,10 +123,10 @@ describe Property, type: :feature do
 
   def fill_in_due_on
     within '#property_charge_0_due_on_0' do
-      fill_in 'property_account_attributes_charges_' +
+      fill_in 'property_account_attributes_charges_' \
               'attributes_0_due_ons_attributes_0_day',
               with: 1
-      fill_in 'property_account_attributes_charges_' +
+      fill_in 'property_account_attributes_charges_' \
               'attributes_0_due_ons_attributes_0_month',
               with: 1
     end

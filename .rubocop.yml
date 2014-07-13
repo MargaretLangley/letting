@@ -22,11 +22,6 @@ Style/CyclomaticComplexity:
 Style/GuardClause:
   Enabled: false
 
-# Offense count: 16
-# Cop supports --auto-correct.
-Style/LineEndConcatenation:
-  Enabled: false
-
 # Offense count: 37
 # Configuration parameters: AllowURI.
 Style/LineLength:

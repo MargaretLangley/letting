@@ -79,12 +79,12 @@ module DB
     end
 
     def charge_code_message
-      "Property #{human_ref}: " +
+      "Property #{human_ref}: " \
       "Charge code #{charge_code} can not be converted into a string"
     end
 
     def max_dates_message
-      "Property #{human_ref}: Charge code #{charge_code} " +
+      "Property #{human_ref}: Charge code #{charge_code} " \
       'can not be converted into maximum dates per year.'
     end
 

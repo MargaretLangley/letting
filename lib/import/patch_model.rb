@@ -22,9 +22,9 @@ module DB
     private
 
     def changed_message model
-      "Cannot match #{@model.class} #{human_ref} names between " +
-      'the loading data and the patch data. Until ' +
-      "'#{@model.entities[0].name}' is the same as " +
+      "Cannot match #{@model.class} #{human_ref} names between " \
+      'the loading data and the patch data. Until ' \
+      "'#{@model.entities[0].name}' is the same as " \
       "'#{model.entities[0].name} we cannot patch the address data."
     end
   end
