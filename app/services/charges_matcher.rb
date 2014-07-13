@@ -7,8 +7,8 @@ require_relative '../../lib/import/errors'
 #
 # This is a service object for Charges it allows a charge to match
 # an imported charge. Matching import charges should not be the concern
-# of the Charge object. The import process will happen only a few times
-# and then migration is complete to the system retired.
+# of the Charge object. The import process will happen until the migration
+# to the new system is complete - the import code is then retired.
 #
 ####
 #
@@ -21,22 +21,13 @@ class ChargesMatcher
     find(charge_type) || @charges.build
   end
 
-  def find! charge_type
-    charge = find charge_type
-    fail DB::ChargeUnknown, error_msg(charge_type), caller if charge.nil?
-    charge
+  def size
+    @charges.size
   end
+
+  private
 
   def find charge_type
     @charges.find { |charge| charge.charge_type == charge_type }
-  end
-
-  def error_msg charge_type
-    "Charge '#{charge_type}' not found in property " +
-    "'#{property_ref || 'unknown' }'"
-  end
-
-  def property_ref
-    @charges.first.try(:account).try(:property).try(:human_ref)
   end
 end
