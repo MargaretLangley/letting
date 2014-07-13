@@ -15,8 +15,8 @@ describe Sheet, :type => :feature do
 
   context '#edit' do
     it 'finds data page 2  & goes to view page' do
-      sheet = sheet_factory
-      sheet = sheet2_factory
+      sheet_factory
+      sheet2_factory
       visit '/sheets/'
       click_on('2')
       expect(page).to have_title 'Edit Sheet'

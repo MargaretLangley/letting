@@ -101,7 +101,7 @@ describe Credit, :type => :model do
 
       it 'true when spent' do
         credit = Credit.create! credit_attributes amount: 88.07
-        debit  = Debit.create! debit_attributes amount: 88.07
+        Debit.create! debit_attributes amount: 88.07
         credit.save!
         expect(credit).to be_spent
       end
