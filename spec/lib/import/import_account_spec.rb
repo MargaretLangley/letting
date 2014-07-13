@@ -31,9 +31,9 @@ module DB
       end
 
       it 'parsed' do
-        expect {
+        expect do
           ImportAccount.import parse two_debits_1_payment
-        }.to change(Credit, :count).by 1
+        end.to change(Credit, :count).by 1
         expect(Debit.all.size).to eq(2)
       end
     end

@@ -15,11 +15,6 @@ Lint/UselessAccessModifier:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/Blocks:
-  Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/BracesAroundHashParameters:
   Enabled: false
