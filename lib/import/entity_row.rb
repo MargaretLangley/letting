@@ -25,6 +25,10 @@ module DB
       person? ? @name : [@initials, @name].join(' ')
     end
 
+    def person?
+      (@title.present? || @initials.present?) && @name.exclude?('Ltd')
+    end
+
     def update_for entity
       entity.attributes = attributes
     end
@@ -38,10 +42,6 @@ module DB
         initials: initials,
         name: name,
       }
-    end
-
-    def person?
-      (@title.present? || @initials.present?) && @name.exclude?('Ltd')
     end
 
     def top_punctuation s
