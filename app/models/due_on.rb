@@ -54,7 +54,7 @@ class DueOn < ActiveRecord::Base
   private
 
   def ignored_attrs
-    %w[id charge_id created_at updated_at]
+    %w(id charge_id created_at updated_at)
   end
 
   def charge_year

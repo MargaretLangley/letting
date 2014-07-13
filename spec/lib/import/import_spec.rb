@@ -30,7 +30,7 @@ module DB
 
       it 'overwrites headers' do
         output = FileImport.to_a('open_test',
-                                 header: %w{one line},
+                                 header: %w(one line),
                                  location: file_location)
         output.each do |row|
           expect(row[:one]).to be_present

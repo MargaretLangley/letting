@@ -29,11 +29,11 @@ class Permission < Struct.new(:user)
   end
 
   def guest_controllers
-    %w{sessions}
+    %w(sessions)
   end
 
   def user_controllers
-    %w{accounts
+    %w(accounts
        clients
        debits
        debit_generators
@@ -42,10 +42,10 @@ class Permission < Struct.new(:user)
        properties
        payments
        search_suggestions
-       sheets }
+       sheets)
   end
 
   def admin_controllers
-    %w{users}
+    %w(users)
   end
 end

@@ -77,6 +77,6 @@ class Address < ActiveRecord::Base
   end
 
   def ignored_attrs
-    %w[id addressable_id addressable_type created_at updated_at]
+    %w(id addressable_id addressable_type created_at updated_at)
   end
 end
