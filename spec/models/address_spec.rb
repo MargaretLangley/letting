@@ -5,9 +5,9 @@ describe Address, :type => :model do
   let(:address) { Address.new min_address_attributes }
   it('valid')   { expect(address).to be_valid }
 
-  context 'validations' do
+  describe 'validations' do
 
-    context 'flat_no' do
+    describe 'flat_no' do
       it 'allows blanks' do
         address.flat_no = ''
         expect(address).to be_valid
@@ -19,7 +19,7 @@ describe Address, :type => :model do
       end
     end
 
-    context 'house_name' do
+    describe 'house_name' do
       it 'allows blanks' do
         address.house_name = ''
         expect(address).to be_valid
@@ -31,7 +31,7 @@ describe Address, :type => :model do
       end
     end
 
-    context 'road no' do
+    describe 'road no' do
       it 'allows blanks'  do
         address.road_no = ''
         expect(address).to be_valid
@@ -43,7 +43,7 @@ describe Address, :type => :model do
       end
     end
 
-    context 'road' do
+    describe 'road' do
       it 'has to be present' do
         address.road = ''
         expect(address).to_not be_valid
@@ -55,7 +55,7 @@ describe Address, :type => :model do
       end
     end
 
-    context 'district' do
+    describe 'district' do
       it 'allows blanks' do
         address.district = ''
         expect(address).to be_valid
@@ -72,7 +72,7 @@ describe Address, :type => :model do
       end
     end
 
-    context 'town' do
+    describe 'town' do
       it 'allows blanks' do
         address.town = ''
         expect(address).to be_valid
@@ -89,7 +89,7 @@ describe Address, :type => :model do
       end
     end
 
-    context 'county' do
+    describe 'county' do
       it 'must be present' do
         address.county = nil
         expect(address).to_not be_valid
@@ -106,7 +106,7 @@ describe Address, :type => :model do
       end
     end
 
-    context 'postcode' do
+    describe 'postcode' do
       it 'has min' do
         address.postcode = 'B7'
         expect(address).to_not be_valid
@@ -117,7 +117,7 @@ describe Address, :type => :model do
       end
     end
 
-    context 'nation' do
+    describe 'nation' do
       it 'allows blanks' do
         address.nation = ''
         expect(address).to be_valid
@@ -135,8 +135,8 @@ describe Address, :type => :model do
     end
   end
 
-  context 'methods' do
-    context '#address_lines' do
+  describe 'methods' do
+    describe '#address_lines' do
       it 'writes flat property' do
         address = Address.new address_attributes
         expect(address.address_lines[0]).to eq 'Flat 47 Hillbank House'
@@ -153,7 +153,7 @@ describe Address, :type => :model do
       end
     end
 
-    context 'abbreviated_address' do
+    describe 'abbreviated_address' do
       it 'generates flat address' do
         address = Address.new address_attributes
         expect(address.abbreviated_address).to eq 'Flat 47 Hillbank House'
@@ -164,7 +164,7 @@ describe Address, :type => :model do
       end
     end
 
-    context'#empty?' do
+    context '#empty?' do
       let(:address) { Address.new }
       it 'empty' do
         expect(address).to be_empty
@@ -175,7 +175,7 @@ describe Address, :type => :model do
         expect(address).to_not be_empty
       end
 
-      it('with ignored attribute empty') do
+      it 'with ignored attribute empty' do
         address.id = 8
         expect(address).to be_empty
       end
