@@ -57,7 +57,7 @@ gem 'unicorn', '~> 4.8.0'
 
 
 # corner banner on staging environment
-gem 'rack-dev-mark', '~> 0.4.0'
+gem 'rack-dev-mark', '~> 0.6.0'
 
 # Use Capistrano for deployment
 group :development do
