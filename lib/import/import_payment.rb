@@ -16,7 +16,7 @@ module DB
     def model_prepared
       #@model_to_assign = find_model(@klass).first_or_initialize
       @model_to_assign = @klass.new account_id: row.account_id,
-                                      on_date: row.on_date
+                                    on_date: row.on_date
       fail DB::NotIdempotent, import_not_idempotent_msg, caller \
         unless @model_to_assign.new_record?
     end
@@ -38,9 +38,9 @@ module DB
       # raise DB::ChargeTypeUnknown, charge_type_unknown, caller \
       #   unless find_credits_with_charge_type @model_to_assign.credits, row.charge_type
       @model_to_assign.credits.build account_id: row.account_id,
-                                         charge_id: row.charge_id,
-                                         on_date: row.on_date,
-                                         amount: row.amount
+                                     charge_id: row.charge_id,
+                                     on_date: row.on_date,
+                                     amount: row.amount
     end
 
     private
