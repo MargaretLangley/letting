@@ -34,7 +34,7 @@ describe DueOns, type: :model do
 
       it 'returns nils when range outside due date' do
         due_ons.build day: 1, month: 2
-        expect(due_ons.due_dates date_range_missing_due_on )
+        expect(due_ons.due_dates date_range_missing_due_on)
           .to be_empty
       end
     end
@@ -52,7 +52,7 @@ describe DueOns, type: :model do
         due_ons.build due_on_attributes_0
         due_ons.build
         due_ons.clear_up_form
-        expect(due_ons.reject { |due_on| due_on.marked_for_destruction? }.size )
+        expect(due_ons.reject { |due_on| due_on.marked_for_destruction? }.size)
                       .to eq(1)
       end
     end
