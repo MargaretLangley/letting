@@ -24,7 +24,7 @@ describe Address, :type => :feature do
       expect(address).to_not be_district_visible
     end
 
-     it 'Add nation line', js: true do
+    it 'Add nation line', js: true do
       client_create! address_attributes: { nation: '' }
       navigate_to_edit_page
       expect(address).to_not be_nation_visible

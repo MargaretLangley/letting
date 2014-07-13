@@ -15,7 +15,7 @@ describe Sheet, :type => :feature do
       expect(page).to have_text 'No Pages Found'
     end
 
-     it 'Check Data' do
+    it 'Check Data' do
       sheet = sheet_factory
       visit '/sheets/'
       expect(page).to have_text '1'
