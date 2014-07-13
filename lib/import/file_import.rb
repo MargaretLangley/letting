@@ -52,8 +52,8 @@ module DB
 
     private
 
-      def get_file filename
-        "#{@location}/#{filename}.csv"
-      end
+    def get_file filename
+      "#{@location}/#{filename}.csv"
+    end
   end
 end

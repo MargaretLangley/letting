@@ -82,17 +82,17 @@ class Property < ActiveRecord::Base
 
   private
 
-    def self.sql_search_by_human_ref(query)
-      human_refs = query.split('-')
-      human_refs[1] = human_refs[0] if human_refs[1].blank?
-      Property.includes(:address, :entities)
-                    .where(human_ref: human_refs[0]..human_refs[1])
-                    .references(:address, :entity).order(:human_ref)
-    end
+  def self.sql_search_by_human_ref(query)
+    human_refs = query.split('-')
+    human_refs[1] = human_refs[0] if human_refs[1].blank?
+    Property.includes(:address, :entities)
+                  .where(human_ref: human_refs[0]..human_refs[1])
+                  .references(:address, :entity).order(:human_ref)
+  end
 
-    def self.human_refs query
-      # matches a number (\d) followed by any amount of whitespace (\s)
-      # optional hyphen (-) and optional number (\d)
-      (query =~ /^(\d+\s*-?)+\s*\d+$/).present?
-    end
+  def self.human_refs query
+    # matches a number (\d) followed by any amount of whitespace (\s)
+    # optional hyphen (-) and optional number (\d)
+    (query =~ /^(\d+\s*-?)+\s*\d+$/).present?
+  end
 end

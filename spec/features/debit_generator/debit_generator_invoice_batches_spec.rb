@@ -4,7 +4,7 @@ describe 'debit_generator', type: :feature do
 
   before(:each) do
     log_in
-     visit '/debit_generators/'
+    visit '/debit_generators/'
   end
 
   it 'has no Invoice Range setup' do

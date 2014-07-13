@@ -53,16 +53,16 @@ class Entity < ActiveRecord::Base
 
   private
 
-    def initializer str_to_do
-      initialized = str_to_do.split.join('. ')
-      initialized + '.' if str_to_do.present?
-    end
+  def initializer str_to_do
+    initialized = str_to_do.split.join('. ')
+    initialized + '.' if str_to_do.present?
+  end
 
-    def destroy_entity
-      mark_for_destruction
-    end
+  def destroy_entity
+    mark_for_destruction
+  end
 
-    def ignored_attrs
-      %w[id entitieable_id entitieable_type created_at entity_type updated_at]
-    end
+  def ignored_attrs
+    %w[id entitieable_id entitieable_type created_at entity_type updated_at]
+  end
 end

@@ -73,47 +73,47 @@ class ClientsController < ApplicationController
 
   private
 
-    def find_route model
-      case params[:search_action]
-      when 'show'
-        client_path model
-      when 'edit'
-        edit_client_path model
-      else
-        clients_path
-      end
+  def find_route model
+    case params[:search_action]
+    when 'show'
+      client_path model
+    when 'edit'
+      edit_client_path model
+    else
+      clients_path
     end
+  end
 
-    def unique_search?
-      search_param.present? && @clients.size == 1
-    end
+  def unique_search?
+    search_param.present? && @clients.size == 1
+  end
 
-    def search_param
-      params[:search]
-    end
+  def search_param
+    params[:search]
+  end
 
-    def clients_params
-      params
-        .require(:client)
-        .permit :human_ref,
-                address_attributes: address_params,
-                entities_attributes: entities_params
-    end
+  def clients_params
+    params
+      .require(:client)
+      .permit :human_ref,
+              address_attributes: address_params,
+              entities_attributes: entities_params
+  end
 
-    def identy
-      "Client '#{@client.entities.full_name} (id #{@client
-        .human_ref})'"
-    end
+  def identy
+    "Client '#{@client.entities.full_name} (id #{@client
+      .human_ref})'"
+  end
 
-    def client_created_message
-      "#{identy} successfully created!"
-    end
+  def client_created_message
+    "#{identy} successfully created!"
+  end
 
-    def client_updated_message
-      "#{identy} successfully updated!"
-    end
+  def client_updated_message
+    "#{identy} successfully updated!"
+  end
 
-    def client_deleted_message
-      "#{identy} successfully deleted!"
-    end
+  def client_deleted_message
+    "#{identy} successfully deleted!"
+  end
 end
