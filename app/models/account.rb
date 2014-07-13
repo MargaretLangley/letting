@@ -26,11 +26,11 @@ class Account < ActiveRecord::Base
   has_many :charges, dependent: :destroy do
     def prepare
       (size...MAX_CHARGES).each { build }
-      each &:prepare
+      each(&:prepare)
     end
 
     def clear_up_form
-      each &:clear_up_form
+      each(&:clear_up_form)
     end
   end
   MAX_CHARGES = 4

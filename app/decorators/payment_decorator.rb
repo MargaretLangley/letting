@@ -28,7 +28,7 @@ class PaymentDecorator
   end
 
   def credits_decorated
-    @source.credits.map { |d| CreditDecorator.new d }.sort_by &:charge_type
+    @source.credits.map { |d| CreditDecorator.new d }.sort_by(&:charge_type)
   end
 
   def property_decorator

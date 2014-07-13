@@ -33,7 +33,7 @@ class DebitGenerator < ActiveRecord::Base
 
   def generate
     accounts.each do |account|
-      debits.push *(account.prepare_debits start_date..end_date)
+      debits.push(*account.prepare_debits(start_date..end_date))
     end
   end
 

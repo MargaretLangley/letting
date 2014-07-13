@@ -50,7 +50,7 @@ module DueOns
       end
 
       def destruction_if matcher
-        select(&matcher).each &:mark_for_destruction
+        select(&matcher).each(&:mark_for_destruction)
       end
 
       def max_due_ons

@@ -26,15 +26,15 @@ module Entities
 
       def prepare
         (size...MAX_ENTITIES).each { build }
-        each &:prepare
+        each(&:prepare)
       end
 
       def clear_up_form
-        each &:clear_up_form
+        each(&:clear_up_form)
       end
 
       def destroy_all
-        each &:destroy_form
+        each(&:destroy_form)
       end
     end
   end

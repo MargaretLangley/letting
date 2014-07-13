@@ -17,7 +17,7 @@ class CreditDecorator
   end
 
   def owing
-    Debit.available(charge_id).to_a.sum &:outstanding
+    Debit.available(charge_id).to_a.sum(&:outstanding)
   end
 
   private
