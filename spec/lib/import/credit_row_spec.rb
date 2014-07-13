@@ -54,7 +54,7 @@ module DB
 
       context 'identity' do
         it 'calculated for row' do
-          expect(row.identity).to eq 'Property: 89, Charge code: GR, ' +
+          expect(row.identity).to eq 'Property: 89, Charge code: GR, ' \
                                      'Date: 2012-03-25 12:00:00'
         end
       end
@@ -69,11 +69,11 @@ module DB
     end
 
     def credit_row
-      %q[89, GR, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0]
+      %q(89, GR, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0)
     end
 
     def credit_row_no_type
-      %q[89, XX, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0]
+      %q(89, XX, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0)
     end
   end
 end

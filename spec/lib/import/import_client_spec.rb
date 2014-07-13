@@ -7,13 +7,13 @@ module DB
   describe ImportClient, :import do
 
     def row
-      %q[11,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ] +
-      %q[Example Street, ,Example Town,  Example County,  E10 7EX]
+      %q(11,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ) +
+      %q(Example Street, ,Example Town,  Example County,  E10 7EX)
     end
 
     def updated_row
-      %q[11,  Mr,  E, Changed, Mrs, A N, Other, 1, ExampleHouse,  2, ] +
-      %q[Example Street, Example District,Example Town,  Example County,  E10 7EX]
+      %q(11,  Mr,  E, Changed, Mrs, A N, Other, 1, ExampleHouse,  2, ) +
+      %q(Example Street, Example District,Example Town,  Example County,  E10 7EX)
     end
 
     it 'One row' do

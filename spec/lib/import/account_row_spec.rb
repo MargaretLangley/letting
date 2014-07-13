@@ -59,7 +59,7 @@ module DB
         context '#balance?' do
           let(:blance_row) { AccountRow.new parse_line balance }
           def balance
-            %q[122, Bal, 2011-08-01 00:00:00, ,                  0,    0,    0]
+            %q(122, Bal, 2011-08-01 00:00:00, ,                  0,    0,    0)
           end
 
           it 'returns true when balance row' do
@@ -103,23 +103,23 @@ module DB
     end
 
     def credit_string
-      %q[2002, GR, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0]
+      %q(2002, GR, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0)
     end
 
     def debit_string
-      %q[89, GR, 2012-03-25 12:00:00, Ground Rent, 60.5, 0, 0]
+      %q(89, GR, 2012-03-25 12:00:00, Ground Rent, 60.5, 0, 0)
     end
 
     def credit_row_no_type
-      %q[89, Bal, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0]
+      %q(89, Bal, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0)
     end
 
     def credit_negative
-      %q[2002, GR, 2012-03-25 12:00:00, Ground Rent, 0, -10.5, 0]
+      %q(2002, GR, 2012-03-25 12:00:00, Ground Rent, 0, -10.5, 0)
     end
 
     def bad_date_string
-      %q[2002, GR, d-0x-dd, Ground Rent, 0, 50.5, 0]
+      %q(2002, GR, d-0x-dd, Ground Rent, 0, 50.5, 0)
     end
   end
 end

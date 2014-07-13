@@ -65,15 +65,15 @@ module DB
     end
 
     def debit_row
-      %q[2002, GR, 2012-03-25 12:00:00, Ground Rent, 50.5, 0, 0]
+      %q(2002, GR, 2012-03-25 12:00:00, Ground Rent, 50.5, 0, 0)
     end
 
     def debit_negative_credit
-      %q[2002, GR, 2012-03-25 12:00:00, Ground Rent, 0, -10.5, 0]
+      %q(2002, GR, 2012-03-25 12:00:00, Ground Rent, 0, -10.5, 0)
     end
 
     def debit_row_no_type
-      %q[89, XXX, 2012-03-25 12:00:00, Ground Rent, 50.5, 0, 0]
+      %q(89, XXX, 2012-03-25 12:00:00, Ground Rent, 50.5, 0, 0)
     end
   end
 end

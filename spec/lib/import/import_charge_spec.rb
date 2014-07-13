@@ -7,8 +7,8 @@ require_relative '../../../lib/import/import_charge'
 module DB
   describe ImportCharge, :import do
     def row
-      %q[2002, 2006-12-30 17:17:00, GR, 0, 40.5,  S,] +
-      %q[24, 6, 25, 12,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 ]
+      %q(2002, 2006-12-30 17:17:00, GR, 0, 40.5,  S,) +
+      %q(24, 6, 25, 12,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
     end
 
     context 'success' do
@@ -26,8 +26,8 @@ module DB
 
       it 'One monthly row, 12 DueOns' do
         def monthly_row
-          %q[2002, 2006-12-30 17:17:00, GR, 0, 40.5,  S,] +
-          %q[1, 0, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 ]
+          %q(2002, 2006-12-30 17:17:00, GR, 0, 40.5,  S,) +
+          %q(1, 0, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
         end
         expect { import_charge monthly_row }.to change(DueOn, :count).by 12
       end
@@ -52,8 +52,8 @@ module DB
       context 'multiple imports' do
 
         def updated_row
-          %q[2002, 2006-12-30 17:17:00, GR, 0, 30.5,  S,] +
-          %q[24, 6, 26, 12,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 ]
+          %q(2002, 2006-12-30 17:17:00, GR, 0, 30.5,  S,) +
+          %q(24, 6, 26, 12,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
         end
 
         it 'updated changed charge' do

@@ -27,7 +27,7 @@ module DB
     end
 
     def credit_row
-      %q[89, GR, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0]
+      %q(89, GR, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0)
     end
 
     def parse row_string

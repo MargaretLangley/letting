@@ -12,8 +12,8 @@ module DB
 
     context 'debit with payment' do
       def debit_with_payment
-        %q[122, GR, 2011-12-25 00:00:00, Ground Rent..., 47.5,    0, 47.5
-           122, GR, 2012-01-11 15:32:00, Payment Gr....,    0, 47.5,    0]
+        %q(122, GR, 2011-12-25 00:00:00, Ground Rent..., 47.5,    0, 47.5
+           122, GR, 2012-01-11 15:32:00, Payment Gr....,    0, 47.5,    0)
       end
 
       it 'parsed' do
@@ -25,9 +25,9 @@ module DB
     context 'two debits with 1 payment' do
       def two_debits_1_payment
         # Debit (2011-12-25), Debit (2012-12-25), Payment (2012-01-11)
-        %q[122, GR, 2011-12-25 00:00:00, Ground Rent..., 40.5,    0, 40.5
+        %q(122, GR, 2011-12-25 00:00:00, Ground Rent..., 40.5,    0, 40.5
            122, GR, 2012-12-25 00:00:00, Ground Rent..., 40.5,    0, 81.0
-           122, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 40.5, 40.5]
+           122, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 40.5, 40.5)
       end
 
       it 'parsed' do
@@ -41,9 +41,9 @@ module DB
     context 'payment covering 2 debits' do
 
       def payment_covering_2_debits
-        %q[122, GR, 2011-12-25 00:00:00, Ground Rent..., 40.5,    0, 40.5
+        %q(122, GR, 2011-12-25 00:00:00, Ground Rent..., 40.5,    0, 40.5
            122, GR, 2012-12-25 00:00:00, Ground Rent..., 40.5,    0, 81.0
-           122, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 81.0,    0]
+           122, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 81.0,    0)
       end
 
       it 'parses' do
@@ -56,7 +56,7 @@ module DB
     context 'filter' do
 
       def single_row
-        %q[122, GR, 2011-12-25 00:00:00, Ground Rent..., 47.5,    0, 47.5]
+        %q(122, GR, 2011-12-25 00:00:00, Ground Rent..., 47.5,    0, 47.5)
       end
 
       it 'allows within range' do
@@ -73,10 +73,10 @@ module DB
     context 'two properties' do
 
       def two_properties
-        %q[122, GR, 2011-12-25 00:00:00, Ground Rent..., 40.5,    0, 40.5
+        %q(122, GR, 2011-12-25 00:00:00, Ground Rent..., 40.5,    0, 40.5
            122, GR, 2012-01-11 15:32:00, Payment Grou..,    0, 40.5, 40.5
            123, GR, 2011-12-25 00:00:00, Ground Rent .., 30.5,    0, 30.5
-           123, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 30.5, 30.5]
+           123, GR, 2012-01-11 15:32:00, Payment Gro...,    0, 30.5, 30.5)
       end
 
       it 'parses' do
@@ -92,7 +92,7 @@ module DB
 
     context 'unknown row' do
       def unknown_row
-        %q[122, XX, 2011-08-01 00:00:00, ,                  0,    0,    0]
+        %q(122, XX, 2011-08-01 00:00:00, ,                  0,    0,    0)
       end
       it 'error if row type unknown' do
         expect { import_account unknown_row }
@@ -103,7 +103,7 @@ module DB
 
     context 'ignores empty balance' do
       def balance_empty
-        %q[122, Bal, 2011-08-01 00:00:00, ,                  0,    0,    0]
+        %q(122, Bal, 2011-08-01 00:00:00, ,                  0,    0,    0)
       end
       it 'parses' do
         import_account balance_empty
@@ -117,7 +117,7 @@ module DB
 
     context 'handles non zero balance' do
       def balance_non_zero
-        %q[122, Bal, 2011-08-01 00:00:00, ,    20,    0,    20]
+        %q(122, Bal, 2011-08-01 00:00:00, ,    20,    0,    20)
       end
       it 'parses' do
         expect { ImportAccount.import parse balance_non_zero }
@@ -129,8 +129,8 @@ module DB
 
     context 'advance payments' do
       def advance_payment
-        %q[122, GR, 2012-12-01 10:22:00, Payment Gro...,    0,   20,  -20
-           122, GR, 2012-12-25 00:00:00, Ground Rent...,   20,    0,    0]
+        %q(122, GR, 2012-12-01 10:22:00, Payment Gro...,    0,   20,  -20
+           122, GR, 2012-12-25 00:00:00, Ground Rent...,   20,    0,    0)
       end
 
       it 'parses' do

@@ -12,7 +12,7 @@ module DB
 
     context 'one debit' do
       def one_debit_csv
-        %q[122, GR, 2011-12-25 12:00:00, Ground Rent..., 37.5,    0, 37.5]
+        %q(122, GR, 2011-12-25 12:00:00, Ground Rent..., 37.5,    0, 37.5)
       end
 
       it 'parsed' do
@@ -23,8 +23,8 @@ module DB
 
     context 'two debits' do
       def two_debit_csv
-        %q[122, GR, 2011-12-25 12:00:00, Ground Rent..., 37.5,    0, 37.5
-           122, GR, 2012-12-25 12:00:00, Ground Rent..., 37.5,    0, 37.5]
+        %q(122, GR, 2011-12-25 12:00:00, Ground Rent..., 37.5,    0, 37.5
+           122, GR, 2012-12-25 12:00:00, Ground Rent..., 37.5,    0, 37.5)
       end
 
       it 'parsed' do

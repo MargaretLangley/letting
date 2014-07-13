@@ -11,8 +11,8 @@ module DB
     end
 
     def row
-      %q[122, Mr, B P, Example, Mrs, A N, Other,] +
-      %q[1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, ]
+      %q(122, Mr, B P, Example, Mrs, A N, Other,) +
+      %q(1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, )
     end
 
     it 'One row' do

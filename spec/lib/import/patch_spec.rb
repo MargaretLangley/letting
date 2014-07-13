@@ -12,23 +12,23 @@ module DB
     context 'Client' do
 
       def row
-        %q[11,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ] +
-        %q[Example Street, ,Example Town,  Example County,  E10 7EX]
+        %q(11,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ) +
+        %q(Example Street, ,Example Town,  Example County,  E10 7EX)
       end
 
       def different_id
-        %q[12,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ] +
-        %q[Example Street, Example District ,Example Town,  Example County,  E10 7EX]
+        %q(12,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ) +
+        %q(Example Street, Example District ,Example Town,  Example County,  E10 7EX)
       end
 
       def same_id
-        %q[11,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ] +
-        %q[Example Street, Example District ,Example Town,  Example County,  E10 7EX]
+        %q(11,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ) +
+        %q(Example Street, Example District ,Example Town,  Example County,  E10 7EX)
       end
 
       def same_id_name_changed
-        %q[11,  Mr,  A, Name Changed, Mrs, A N, Other, 1, ExampleHouse,  2, ] +
-        %q[Example Street, Example District ,Example Town,  Example County,  E10 7EX]
+        %q(11,  Mr,  A, Name Changed, Mrs, A N, Other, 1, ExampleHouse,  2, ) +
+        %q(Example Street, Example District ,Example Town,  Example County,  E10 7EX)
       end
 
 
@@ -55,15 +55,15 @@ module DB
     context 'Property' do
 
       def row
-        %q[122, 2013-02-26 12:35:00, Mr, A N, Example, Mrs, A N, Other,] +
-        %q[1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, ] +
-        %q[11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0]
+        %q(122, 2013-02-26 12:35:00, Mr, A N, Example, Mrs, A N, Other,) +
+        %q(1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, ) +
+        %q(11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0)
       end
 
       def patch_row
-        %q[122, 2013-02-26 12:35:00, Mr, A N, Example, Mrs, A N, Other,] +
-        %q[1, ExampleHouse, 2, Ex Street, Example District ,Ex Town, Ex County, E10 7EX, ] +
-        %q[11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0]
+        %q(122, 2013-02-26 12:35:00, Mr, A N, Example, Mrs, A N, Other,) +
+        %q(1, ExampleHouse, 2, Ex Street, Example District ,Ex Town, Ex County, E10 7EX, ) +
+        %q(11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0)
       end
 
 
@@ -78,19 +78,19 @@ module DB
     context 'Agent' do
 
       def row
-        %q[122, Mr, B P, Example, Mrs, A N, Other,] +
-        %q[1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, ]
+        %q(122, Mr, B P, Example, Mrs, A N, Other,) +
+        %q(1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, )
       end
 
       def patch_row
-        %q[122, Mr, B P, Example, Mrs, A N, Other,] +
-        %q[1, ExampleHouse, 2, Ex Street, Example District ,Ex Town, Ex County, E10 7EX, ]
+        %q(122, Mr, B P, Example, Mrs, A N, Other,) +
+        %q(1, ExampleHouse, 2, Ex Street, Example District ,Ex Town, Ex County, E10 7EX, )
       end
 
       def patch_nation_row
-        %q[122, Mr, B P, Example, Mrs, A N, Other,] +
-        %q[,The Aparments, , Road  Panel 2, District Buzon 16, Town Dip de Zarzalico,] +
-        %q[County Puerto Lumbreras,, SPAIN]
+        %q(122, Mr, B P, Example, Mrs, A N, Other,) +
+        %q(,The Aparments, , Road  Panel 2, District Buzon 16, Town Dip de Zarzalico,) +
+        %q(County Puerto Lumbreras,, SPAIN)
       end
 
       it 'works on Agent' do

@@ -12,9 +12,9 @@ module DB
     end
 
     def row
-      %q[122, 2013-02-26 12:35:00, Mr, A N, Example, Mrs, A N, Other,] +
-      %q[1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, ] +
-      %q[11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0]
+      %q(122, 2013-02-26 12:35:00, Mr, A N, Example, Mrs, A N, Other,) +
+      %q(1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, ) +
+      %q(11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0)
     end
 
     it 'One row' do
