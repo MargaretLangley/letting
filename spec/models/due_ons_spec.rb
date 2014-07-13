@@ -88,15 +88,15 @@ describe DueOns, type: :model do
         end
       end
 
-      context '#has_new?' do
+      context '#new?' do
         it 'true with new persistable record' do
           due_ons.build due_on_attributes_0
-          expect(due_ons).to be_has_new
+          expect(due_ons).to be_new
         end
 
         it 'false with new empty record' do
           due_ons.build
-          expect(due_ons).to_not be_has_new
+          expect(due_ons).to_not be_new
         end
       end
     end

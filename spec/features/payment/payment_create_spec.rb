@@ -11,7 +11,7 @@ describe Payment, type: :feature do
 
     payment_page.human_ref('2002').search
     a_property_is_found
-    property_has_receivables
+    property_receivables?
     payment_page.payment 88.08
     payment_page.click_create_payment
 
@@ -51,12 +51,8 @@ describe Payment, type: :feature do
     expect(payment_page).to be_successful
   end
 
-  def property_has_receivables
-    expect(payment_page).to be_has_receivables
-  end
-
-  def property_has_no_receivables
-    expect(payment_page).to_not be_has_receivables
+  def property_receivables?
+    expect(payment_page).to be_receivables
   end
 
 end

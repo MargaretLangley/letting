@@ -39,7 +39,7 @@ module DueOns
         max_due_ons || monthly_due_on
       end
 
-      def has_new?
+      def new?
         reject(&:empty?).find(&:new_record?)
       end
 

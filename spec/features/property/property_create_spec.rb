@@ -132,7 +132,7 @@ describe Property, type: :feature do
     end
   end
 
-  def have_we_saved?
+  def we_saved?
     expect(current_path).to eq '/properties' # Not Saved
   end
 

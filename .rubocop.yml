@@ -32,11 +32,6 @@ Style/LineLength:
 Style/MethodLength:
   Max: 13
 
-# Offense count: 3
-# Configuration parameters: NamePrefixBlacklist.
-Style/PredicateName:
-  Enabled: false
-
 # Offense count: 9
 # Cop supports --auto-correct.
 Style/SingleSpaceBeforeFirstArg:

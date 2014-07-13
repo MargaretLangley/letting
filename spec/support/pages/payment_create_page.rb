@@ -39,7 +39,7 @@ class PaymentCreatePage
     has_css? '[data-role="errors"]'
   end
 
-  def has_receivables?
+  def receivables?
     has_css? '[data-role="receivables"]'
   end
 

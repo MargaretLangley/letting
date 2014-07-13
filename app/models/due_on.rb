@@ -44,7 +44,7 @@ class DueOn < ActiveRecord::Base
 
   def clear_up_form due_ons
     mark_for_destruction if empty?
-    mark_for_destruction if due_ons.has_new? && self.persisted?
+    mark_for_destruction if due_ons.new? && self.persisted?
   end
 
   def empty?
