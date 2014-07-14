@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../../app/models/permission'
+require_relative '../../../app/models/admin/permission'
 
 RSpec::Matchers.define :allow? do |*args|
   match do |permission|
