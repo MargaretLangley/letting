@@ -5,10 +5,10 @@
 #
 class DateEqualOrAfter < ActiveModel::Validator
   def validate(record)
-    return if record.start_date.nil? || record.end_date.nil?
-    unless record.start_date <= record.end_date
-      record.errors[:end_date] << error_message
-    end
+    return if record.start_date.nil? ||
+              record.end_date.nil? ||
+              record.start_date <= record.end_date
+    record.errors[:end_date] << error_message
   end
 
   def error_message
