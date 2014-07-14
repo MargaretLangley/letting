@@ -20,3 +20,4 @@ services:
 
 notifications:
   slack: bcs-io:j4u422myY0CcryFquMCAOi45
+    on_success: change
