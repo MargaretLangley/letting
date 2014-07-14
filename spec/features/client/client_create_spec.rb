@@ -41,6 +41,10 @@ describe Client, type: :feature do
       expect(page).to have_text 'ICC'
     end
 
+    # Occasional Fail
+    # Failure/Error: expect(page.all('h3', text: 'Person or company').count).to eq 2
+    # expected: 2  got: 1
+    # not caused by random
     it 'adds and removes new persons', js: true do
       client_page.visit_new_page
       client_page.fill_in_form('278')
