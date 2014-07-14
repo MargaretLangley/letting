@@ -45,6 +45,13 @@ class Credit < ActiveRecord::Base
     amount.round(2) == settled.round(2)
   end
 
+  # charge_id - the charge you are querying for unspent credits.
+  # returns - the unspent credits for the charge_id
+  #
+  def self.available charge_id
+    where(charge_id: charge_id).order(:on_date).reject(&:spent?)
+  end
+
   private
 
   def reconcile
@@ -53,9 +60,5 @@ class Credit < ActiveRecord::Base
 
   def settled
     settlements.pluck(:amount).inject(0, :+)
-  end
-
-  def self.available charge_id
-    where(charge_id: charge_id).order(:on_date).reject(&:spent?)
   end
 end

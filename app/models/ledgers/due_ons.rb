@@ -1,3 +1,4 @@
+#####
 #
 # DueOns
 #
@@ -20,6 +21,8 @@
 # As long as this is different from the current due on we delete
 # all the other DueOns in the collection (including the PerMonth DueOn)
 # and replace it with 12 onDate DueOns, one for each month.
+#
+####
 #
 module DueOns
   extend ActiveSupport::Concern
