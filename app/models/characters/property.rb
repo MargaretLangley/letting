@@ -69,15 +69,8 @@ class Property < ActiveRecord::Base
     end
   end
 
-  def self.sql_search_min query
-    case
-    when query.blank?
-      none
-    when human_refs(query)
-      sql_search_by_human_ref(query)
-    else
-      search(query).records
-    end
+  def self.accounts_from_human_refs query
+    sql_search_by_human_ref(query).map(&:account)
   end
 
   private

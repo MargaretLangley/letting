@@ -71,7 +71,7 @@ describe DebitGenerator, type: :model do
       property = nil
       before do
         Timecop.travel(Date.new(2013, 1, 31))
-        property = property_with_charge_create!
+        property = property_with_charge_create! human_ref: 2002
         Property.import force: true, refresh: true
       end
       after do
@@ -80,7 +80,7 @@ describe DebitGenerator, type: :model do
       end
 
       it 'creates debits' do
-        (generator = DebitGenerator.new(search_string: 'Hillbank House')).generate
+        (generator = DebitGenerator.new(search_string: '2002')).generate
         generated_debits = generator.debits.select(&:new_record?)
         expect(generated_debits.size).to eq(1)
         expect(generated_debits.first)
@@ -90,13 +90,19 @@ describe DebitGenerator, type: :model do
       end
 
       it 'only makes unique debits' do
-        debit_gen = DebitGenerator.new(search_string: 'Hillbank House')
+        debit_gen = DebitGenerator.new(search_string: '2002')
         debit_gen.generate
         debit_gen.save!
-        debit_gen = DebitGenerator.new(search_string: 'Hillbank House',
+        debit_gen = DebitGenerator.new(search_string: '2002',
                                        start_date: Date.current + 1.day)
         debit_gen.generate
         expect { debit_gen.save! }.to raise_error
+      end
+
+      it 'returns no match when string does not match an account' do
+        (generator = DebitGenerator.new(search_string: '2003')).generate
+        generated_debits = generator.debits.select(&:new_record?)
+        expect(generated_debits.size).to eq(0)
       end
     end
 
