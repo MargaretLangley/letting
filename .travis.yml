@@ -17,3 +17,6 @@ addons:
 
 services:
   - elasticsearch
+
+notifications:
+  slack: bcs-io:j4u422myY0CcryFquMCAOi45
