@@ -1,4 +1,14 @@
 #
+# DueOns
+#
+# Dates on which a charge becomes due, billable.
+#
+# Charges are queried if they are billable within a range of dates.
+# The DueOns allows the associated charge to answer the query.
+# The DueOns hold a collection of DueOn - each one has a date that
+# a charge becomes due - the dueons, plural, when queried search the
+# dueon, singular to find any matching dueon.
+#
 # Two types of DueOn
 # OnDate   Day 1-31, Month 1-12
 # PerMonth  Day 1-31, Month -1   (DueOn::PerDate)

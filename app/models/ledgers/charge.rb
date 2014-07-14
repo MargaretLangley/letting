@@ -6,10 +6,10 @@
 # a property should become due a charge.
 #
 # The code is part of the charge system in the accounts. Charges are
-# associated with a properties account. When an operator decides they want to
+# associated with a propertie's account. When an operator decides they want to
 # bill a group of properties. Charges are generated according to this
 # information using the debit generator. The information is passed, as a
-# chargeable, to becomes a debit in the properties account.
+# chargeable, to becomes a debit in the propertie's account.debits
 #
 ####
 #
@@ -34,6 +34,9 @@ class Charge < ActiveRecord::Base
     self.end_date = Date.parse MAX_DATE if end_date.blank?
   end
 
+  # date_range - the date range that we can generate charges for.
+  # returns - array of objects with enough information to charge the
+  #           associated account
   def next_chargeable date_range
     allowed_due_dates(date_range).map do |my_date|
       chargeable_info(my_date) unless debits.created_on? my_date
@@ -59,6 +62,11 @@ class Charge < ActiveRecord::Base
     due_ons.due_dates(date_range).to_a & (start_date..end_date).to_a
   end
 
+  # Converts a Charge object into a ChargeableInfo object.
+  # date - the date we are are creating the charge on. Should match
+  #        a date a charge becomes due.
+  # returns The information to create a charge for the associated account_id
+  #
   def chargeable_info date
     ChargeableInfo
       .from_charge charge_id:  id,
