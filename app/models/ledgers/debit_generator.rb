@@ -49,10 +49,13 @@ class DebitGenerator < ActiveRecord::Base
 
   private
 
-  # REALLY like this to be a search object. Don't see why search
-  # has to be tied to property.
+  # REALLY like this not to be associated with property.
+  # Hard to avoid as it is a property reference.
+  #
+  # search_string - property, human, ref 1098 or range of the form
+  #                 1098 - 2000
   def accounts
-    @accounts ||= Property.sql_search_min(search_string).map(&:account)
+    @accounts ||= Property.accounts_from_human_refs(search_string)
   end
 
   def default_start_date

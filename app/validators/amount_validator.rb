@@ -11,9 +11,8 @@
 #
 class AmountValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    unless value && value.to_s =~ /\A\d+??(?:\.\d{0,})?\z/ && value >= 0
-      record.errors[attribute] << error_message(value)
-    end
+    return if value && value.to_s =~ /\A\d+??(?:\.\d{0,})?\z/ && value >= 0
+    record.errors[attribute] << error_message(value)
   end
 
   def error_message value

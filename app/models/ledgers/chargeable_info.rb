@@ -9,6 +9,8 @@
 #  generates a ChargeableInfo describing a charge that is due
 #  in the queried date range.
 #
+####
+#
 class ChargeableInfo
   attr_reader :account_id, :charge_id, :on_date, :amount
 

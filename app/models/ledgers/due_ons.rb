@@ -1,3 +1,14 @@
+#####
+#
+# DueOns
+#
+# Dates on which a charge becomes due, billable.
+#
+# Charges are queried if they are billable within a range of dates.
+# The DueOns allows the associated charge to answer the query.
+# The DueOns hold a collection of DueOn - each one has a date that
+# a charge becomes due - the dueons, plural, when queried search the
+# dueon, singular to find any matching dueon.
 #
 # Two types of DueOn
 # OnDate   Day 1-31, Month 1-12
@@ -10,6 +21,8 @@
 # As long as this is different from the current due on we delete
 # all the other DueOns in the collection (including the PerMonth DueOn)
 # and replace it with 12 onDate DueOns, one for each month.
+#
+####
 #
 module DueOns
   extend ActiveSupport::Concern

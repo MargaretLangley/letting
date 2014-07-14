@@ -45,11 +45,6 @@ Lint/UselessAccessModifier:
 Style/CyclomaticComplexity:
   Max: 9
 
-# Offense count: 6
-# Configuration parameters: MinBodyLength.
-Style/GuardClause:
-  Enabled: false
-
 # Offense count: 37
 # Configuration parameters: AllowURI.
 Style/LineLength:

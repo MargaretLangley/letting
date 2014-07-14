@@ -53,15 +53,14 @@ module DB
     def update_recent_stopped_charges
       # It's a hack while only 1 needs to be changed
       property = Property.find_by(human_ref: 6531)
-      if property
-        charges = property.account.charges
-        charge = charges.find_by(charge_type: 'Insurance')
-        if charge.present?
-          @charge = charge
-          @charge.end_date = last_debit.on_date
-          charge.save!
-        end
-      end
+      return unless property
+
+      charge = property.account.charges.find_by(charge_type: 'Insurance')
+      return unless charge.present?
+
+      @charge = charge
+      @charge.end_date = last_debit.on_date
+      charge.save!
     end
   end
 end

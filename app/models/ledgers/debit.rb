@@ -48,11 +48,14 @@ class Debit < ActiveRecord::Base
     amount == other.amount
   end
 
-  private
-
+  # charge_id - the charge's being queried for unpaid debits.
+  # returns unpaid debits for the charge_id
+  #
   def self.available charge_id
     where(charge_id: charge_id).order(:on_date).reject(&:paid?)
   end
+
+  private
 
   def settled
     settlements.pluck(:amount).inject(0, :+)
