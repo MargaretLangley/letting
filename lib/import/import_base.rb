@@ -23,10 +23,18 @@ module DB
   class ImportBase
     attr_accessor :row
 
+    # contents - data to be imported - array of arrays indexed
+    #            by row no and header symbols.
+    # range    - the rows to be imported
+    # patch    - the corrections to the contents
+    #
     def self.import contents, args = {}
       new(contents, args[:range], args[:patch]).import_loop
     end
 
+    # Imports, builds or assigns application objects to any row
+    # that has not been filtered out.
+    #
     def import_loop
       @contents.each_with_index do |row, index|
         self.row = row

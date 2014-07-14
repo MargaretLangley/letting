@@ -2,6 +2,19 @@ require_relative '../modules/method_missing'
 require_relative 'errors'
 
 module DB
+  ####
+  #
+  # PropertyRow
+  #
+  # Used by ImportProperty to encapsulates a csv row.
+  #
+  # CSV rows are presented as arrays indexed by symbols - example 'client_ref'
+  # PropertyRow provides an interface to ImportProperty for these CSV rows.
+  # ImportProperty is then only concerned with building and assigning Property
+  # classes and not how to get this information.
+  #
+  ####
+  #
   class PropertyRow
     include MethodMissing
 

@@ -6,8 +6,18 @@ require_relative '../../import/import_property'
 # Without this you won't see stdoutput until finished running
 STDOUT.sync = true
 
+#
+# import_properties.rake
+#
+# Imports csv document and generates property objects.
+#
+# CSV files are converted into an 2D array indexed by row number
+# and header symbols and passed to ImportProperty.import which
+# builds and update Property objects.
+#
 namespace :db do
   namespace :import do
+
 
     desc "Import properties data from CSV file"
     task :properties, [:range] => :environment do |task, args|
@@ -16,6 +26,10 @@ namespace :db do
                                 patch: DB::Patch.import(Property, patch_properties)
      end
 
+     # Takes csv file and returns an array of arrays.
+     # Elements of the array are indexed by symbols taken
+     # from the row header.
+     #
      def properties_file
        DB::FileImport.to_a 'properties',
                            headers: DB::FileHeader.property,
@@ -23,6 +37,8 @@ namespace :db do
                            drop_rows: 34
      end
 
+     # Takes a csv file which corrects mistakes in the properties CSV.
+     #
      def patch_properties
        DB::FileImport.to_a 'properties_patch',
                            headers: DB::FileHeader.property,
