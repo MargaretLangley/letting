@@ -34,12 +34,14 @@ This document covers the following sections
 4. `rake db:create`
 5. Clone the *private* repository into the import_data directory
   5.1 `git clone git@bitbucket.org:bcsltd/letting_import_data.git  ~/code/letting/import_data`
-
+6. Create .env file - for data not kept in the repository
+  6.1 `cp ~/code/letting/.env.example  .env`
+  6.2 `rake secret`  and copy the generated key into .env
 
 Repeat each time you want to delete and restore the database.
 
-5. `rake db:reboot` - drops the database (if any), creates and runs migrations.
-6. Add Data
+7. `rake db:reboot` - drops the database (if any), creates and runs migrations.
+8. Add Data
   Use either seed data or import production data
   4.1 Seed data: `rake db:seed`
   4.2 import data: `rake db:import -- -t`
