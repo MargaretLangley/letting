@@ -41,10 +41,6 @@ Style/TrailingComma:
 Lint/UselessAccessModifier:
   Enabled: false
 
-# Offense count: 2
-Style/CyclomaticComplexity:
-  Max: 9
-
 # Offense count: 37
 # Configuration parameters: AllowURI.
 Style/LineLength:

@@ -35,15 +35,16 @@ class Address < ActiveRecord::Base
             allow_blank: true
 
   def address_lines
-    address_lines = []
-    address_lines << flat_line if flat_house_line.present?
-    address_lines << road_line
-    address_lines << district if district?
-    address_lines << town if town?
-    address_lines << county if county?
-    address_lines << postcode if postcode?
-    address_lines << nation if nation?
-    address_lines
+    [
+      flat_line,
+      road_line,
+      district,
+      town,
+      county,
+      postcode,
+      nation
+    ]
+     .reject { |line| line.nil? }
   end
 
   def abbreviated_address

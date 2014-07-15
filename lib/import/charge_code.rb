@@ -7,19 +7,19 @@ module DB
   #
   # Used in importing charges and account rows.
   #
+  # to_string has CyclomaticComplexity of 7 with 6 acceptable.
+  # rubocop:disable  Style/CyclomaticComplexity
   ####
   #
   class ChargeCode
     def self.to_string(code)
       case code
-      when 'Bal'  then 'Arrears'
-      when 'GGR'  then 'Garage Ground Rent'
-      when 'GIns' then 'Garage Insurance'
-      when 'GR'   then 'Ground Rent'
-      when 'H'    then 'Service Charge'
-      when 'Ins'  then 'Insurance'
-      when 'M'    then 'Service Charge'
-      when 'Q'    then 'Service Charge'
+      when 'Bal'         then 'Arrears'
+      when 'GGR'         then 'Garage Ground Rent'
+      when 'GIns'        then 'Garage Insurance'
+      when 'GR'          then 'Ground Rent'
+      when 'H', 'M', 'Q' then 'Service Charge'
+      when 'Ins'         then 'Insurance'
       end
     end
 
