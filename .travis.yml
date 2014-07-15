@@ -1,23 +1,23 @@
-env:
-  - DB=postgresql
-script:
-  - bundle exec rake db:migrate
-  - bundle exec xvfb-run rake spec
-before_script:
-  - bundle exec rake db:create RAILS_ENV=test
-
 language: ruby
 rvm:
   - "2.1.2"
+env:
+  - DB=postgresql
 
-notifications:
-  email: true
 addons:
   postgresql: 9.3
 
 services:
   - elasticsearch
 
+script:
+  - bundle exec rake db:migrate
+  - bundle exec xvfb-run rake spec
+before_script:
+  - bundle exec rake db:create RAILS_ENV=test
+
 notifications:
+  email: true
   slack: bcs-io:j4u422myY0CcryFquMCAOi45
+  webhooks:
     on_success: change
