@@ -38,9 +38,7 @@ class Payment < ActiveRecord::Base
     credits.push(*account.prepare_credits)
   end
 
-  def clear_up
-    credits.clear_up
-  end
+  delegate :clear_up, to: :credits
 
   def self.payments_on date
     date ||= Date.current.to_s

@@ -10,12 +10,10 @@
 # Ignored Files
 
 AllCops:
-  Include:
-    - Rakefile
+  RunRailsCops: true
   Exclude:
     - db/**/*
     - bin/**/*
-    - config/**/*
 
 #
 # Ignored Styles

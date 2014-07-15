@@ -40,9 +40,7 @@ class Property < ActiveRecord::Base
     account.clear_up_form if account.present?
   end
 
-  def bill_to
-    agent.bill_to
-  end
+  delegate :bill_to, to: :agent
 
   def self.properties property_ids
     Property.where(id: property_ids)

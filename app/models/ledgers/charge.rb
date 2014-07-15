@@ -43,9 +43,7 @@ class Charge < ActiveRecord::Base
     end.compact
   end
 
-  def prepare
-    due_ons.prepare
-  end
+  delegate :prepare, to: :due_ons
 
   def clear_up_form
     mark_for_destruction unless edited?

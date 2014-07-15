@@ -16,17 +16,13 @@ class Client < ActiveRecord::Base
   validates :human_ref, uniqueness: true
   validates :entities, presence: true
 
-  def full_name
-    entities.full_name
-  end
+  delegate :full_name, to: :entities
 
   def prepare_for_form
     prepare_contact
   end
 
-  def clear_up_form
-    entities.clear_up_form
-  end
+  delegate :clear_up_form, to: :entities
 
   include Searchable
   def as_indexed_json(_options = {})

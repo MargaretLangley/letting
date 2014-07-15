@@ -50,9 +50,7 @@ class Account < ActiveRecord::Base
     charges.prepare
   end
 
-  def clear_up_form
-    charges.clear_up_form
-  end
+  delegate :clear_up_form, to: :charges
 
   def balance date
     date ||= Date.current

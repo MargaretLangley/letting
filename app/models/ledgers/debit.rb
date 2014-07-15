@@ -30,9 +30,7 @@ class Debit < ActiveRecord::Base
   validates :amount, numericality: { less_than: 100_000 }
   before_save :reconcile
 
-  def charge_type
-    charge.charge_type
-  end
+  delegate :charge_type, to: :charge
 
   def outstanding
     amount - settled

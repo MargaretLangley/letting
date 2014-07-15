@@ -29,9 +29,7 @@ class Credit < ActiveRecord::Base
     self.on_date = Date.current if on_date.blank?
   end
 
-  def charge_type
-    charge.charge_type
-  end
+  delegate :charge_type, to: :charge
 
   def clear_up
     mark_for_destruction if amount.nil? || amount.round(2) == 0

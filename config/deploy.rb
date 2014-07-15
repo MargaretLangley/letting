@@ -12,7 +12,7 @@ set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:full_app_name)}"
 # SCM
 set :scm, :git
 set :repo_url, 'git@bitbucket.org:bcsltd/letting.git'
-set :branch, ENV["REVISION"] || ENV["BRANCH_NAME"]
+set :branch, ENV['REVISION'] || ENV['BRANCH_NAME']
 
 # rbenv
 set :rbenv_type, :system
@@ -21,7 +21,7 @@ set :rbenv_custom_path, '/opt/rbenv'
 
 set :unicorn_workers, 2
 
-set :tests, ["spec"]
+set :tests, ['spec']
 
 # house keeping
 set :keep_releases, 3

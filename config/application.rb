@@ -1,17 +1,16 @@
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "sprockets/railtie"
+require 'active_record/railtie'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'sprockets/railtie'
 # require "rails/test_unit/railtie"
 require 'elasticsearch/rails/instrumentation'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-
 
 module Letting
   class Application < Rails::Application
@@ -32,6 +31,6 @@ module Letting
     # config.i18n.default_locale = 'en-GB'
 
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**/}'), "#{config.root}/lib/**/"]
-    config.exceptions_app = self.routes
+    config.exceptions_app = routes
   end
 end
