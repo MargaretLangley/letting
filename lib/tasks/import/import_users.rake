@@ -13,11 +13,12 @@ namespace :db do
       if File.exist?('import_data/patch/users.csv')
         DB::ImportUser.import users_file
       else
-        puts "Warning: users.csv is missing - " \
-             "only test users 'admin' and 'user' can be imported."
+        puts missing_users_csv_message
       end
       load_test_users if args.test
     end
+
+    private
 
     def users_file
       DB::FileImport.to_a 'users',
@@ -42,6 +43,11 @@ namespace :db do
           admin: false
         }
       ]
+    end
+
+    def missing_users_csv_message
+      "Warning: users.csv is missing - " \
+      "only test users 'admin' and 'user' can be imported."
     end
   end
 end
