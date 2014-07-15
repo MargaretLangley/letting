@@ -12,7 +12,7 @@ services:
 
 script:
   - bundle exec rake db:migrate
-  - bundle exec xvfb-run rake spec
+  - bundle exec xvfb-run rspec
 before_script:
   - bundle exec rake db:create RAILS_ENV=test
 
@@ -21,3 +21,4 @@ notifications:
   slack: bcs-io:j4u422myY0CcryFquMCAOi45
   webhooks:
     on_success: change
+    on_failure: always
