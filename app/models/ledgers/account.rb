@@ -2,11 +2,8 @@
 #
 # The Account is a summation of charges, debits, and credits on a property.
 #
-# The property is the
-# a property should become due a charge.
-#
 # The account has one property. A property has a number of charges.
-# The charges generate debits and credits are made to cover these debits.
+# The charges generate debits and payments create credits that cover these debits.
 #
 # Definition
 #
@@ -36,6 +33,10 @@ class Account < ActiveRecord::Base
   MAX_CHARGES = 4
   accepts_nested_attributes_for :charges, allow_destroy: true
 
+  # For each charge it finds the next time it can be charged,if any,
+  # and creates a debit.
+  # date_range - dates which we prepare debits over
+  #
   def prepare_debits date_range
     charges.map do |charge|
       charge.next_chargeable(date_range).map { |chargeable| Debit.new(chargeable.to_hash) }
