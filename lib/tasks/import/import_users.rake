@@ -10,7 +10,7 @@ namespace :db do
 
     desc "Import users data from CSV file"
     task :users, [:test] => :environment do |task, args|
-      DB::ImportUser.import users_file
+      #DB::ImportUser.import users_file
       if args.test
         User.create! [
           {

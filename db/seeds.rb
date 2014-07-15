@@ -284,13 +284,13 @@ def create_debit_generator
   DebitGenerator.create! [
     {
       id: 1,
-      search_string: 'Lords',
+      search_string: '1001 - 2002',
       start_date: create_date(18),
       end_date: create_date(16),
     },
     {
       id: 2,
-      search_string: 'Lords',
+      search_string: '1001 - 2002',
       start_date: create_date(6),
       end_date: create_date(4),
     },
