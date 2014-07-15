@@ -48,3 +48,13 @@ Style/LineLength:
 # Configuration parameters: CountComments.
 Style/MethodLength:
   Max: 13
+
+# Rails
+Rails/Output:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Style/LineLength:
+  Enabled: false
