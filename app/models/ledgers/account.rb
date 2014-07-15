@@ -11,6 +11,10 @@
 # Receivable - money owed by customer for a service that has been delivered
 #              but not paid for.
 #
+#
+# Associations
+# Provides queries for account records - required by Payment and debits.
+#
 ####
 #
 class Account < ActiveRecord::Base
@@ -59,8 +63,23 @@ class Account < ActiveRecord::Base
     debits.select { |d| d.on_date <= date }.map { |d| d.amount }.inject(0, :+)
   end
 
-  def self.by_human_ref human_ref
-    Account.joins(:property).find_by(properties: { human_ref: human_ref })
+  # Finds and returns a matching Account
+  # human_ref - a account reference number, '2002'
+  #
+  def self.find_by_human_ref human_ref
+    Account.between?(human_ref).first
+  end
+
+  # Searchs for matching accounts between a range
+  # query - an account or account range, '2002 - 3000'
+  #
+  def self.between? human_ref_range
+    return [] if human_ref_range.nil?
+    human_refs = human_ref_range.split('-')
+    human_refs << human_refs.first if human_refs.size == 1
+    Account.includes(:property)
+           .where(properties: { human_ref: human_refs[0]..human_refs[1] })
+           .order('properties.human_ref')
   end
 
   private

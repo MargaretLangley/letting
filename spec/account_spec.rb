@@ -9,8 +9,7 @@ describe Account, type: :model do
     before { Timecop.travel(Date.new(2013, 1, 31)) }
     after { Timecop.return }
 
-    context 'calculated balance' do
-
+    describe 'calculated balance' do
       it 'ignores entires after date' do
         account = account_and_charge_new
         account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
@@ -20,7 +19,7 @@ describe Account, type: :model do
       end
     end
 
-    context '#prepare_debits' do
+    describe '#prepare_debits' do
       it 'generates debits when charges due' do
         account = account_and_charge_new charge_attributes: { id: 3 }
         debits = account.prepare_debits(date_when_charged)
@@ -42,7 +41,7 @@ describe Account, type: :model do
       end
     end
 
-    context '#prepare_credits' do
+    describe '#prepare_credits' do
       it 'empty charges, empty credits ' do
         expect(account.prepare_credits.size).to eq(0)
       end
@@ -52,10 +51,25 @@ describe Account, type: :model do
         expect(account.prepare_credits.size).to eq(1)
       end
     end
+  end
 
-    it '#by_human id' do
-      property_create!
-      expect(Account.by_human_ref(2002)).to be_present
+  describe 'search' do
+
+    account = nil
+    before :each do
+      account = (property_create! human_ref: 2002).account
+    end
+
+    describe '.find_by_human_ref' do
+      it('handles nil') { expect(Account.find_by_human_ref(nil)).to be_nil }
+      it('matching ref') { expect(Account.find_by_human_ref('2002')).to eq account }
+    end
+
+    describe '.between' do
+      it('handles nil') { expect(Account.between?(nil).size).to eq 0 }
+      it('matching ref') { expect(Account.between?('2002').size).to eq 1 }
+      it('matching range') { expect(Account.between?('2000-2002').size).to eq 1 }
+      it('unlike ref range') { expect(Account.between?('4000').size).to eq 0 }
     end
   end
 end

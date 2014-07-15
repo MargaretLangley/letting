@@ -41,7 +41,7 @@ describe Property, type: :model do
 
   describe 'Methods' do
 
-    context '#prepare_for_form' do
+    describe '#prepare_for_form' do
       let(:property) do
         property = Property.new human_ref: 8000
         property.prepare_for_form
@@ -71,7 +71,7 @@ describe Property, type: :model do
 
     end
 
-    context '#bill_to' do
+    describe '#bill_to' do
       let(:property) { property_new }
 
       it 'property with no agent' do
@@ -96,7 +96,7 @@ describe Property, type: :model do
       Property.__elasticsearch__.delete_index!
     end
 
-    context '#search' do
+    describe '.search' do
       it('human id') { expect(Property.search('2002').results.total).to eq 1 }
       it('names') { expect(Property.search('Grac').results.total).to eq 1 }
       it('house') { expect(Property.search('Hil').results.total).to eq 1 }

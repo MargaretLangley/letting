@@ -49,13 +49,10 @@ class DebitGenerator < ActiveRecord::Base
 
   private
 
-  # REALLY like this not to be associated with property.
-  # Hard to avoid as it is a property reference.
-  #
   # search_string - property, human, ref 1098 or range of the form
   #                 1098 - 2000
   def accounts
-    @accounts ||= Property.accounts_from_human_refs(search_string)
+    @accounts ||= Account.between?(search_string)
   end
 
   def default_start_date

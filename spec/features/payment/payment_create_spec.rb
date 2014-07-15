@@ -8,7 +8,6 @@ describe Payment, type: :feature do
   it 'payment for debit', js: true do
     property_with_charge_and_unpaid_debit.save!
     payment_page.visit_new_page
-
     payment_page.human_ref('2002').search
     a_property_is_found
     property_receivables?
