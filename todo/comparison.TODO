@@ -1,63 +1,61 @@
-  ORIGINAL PROGRAM                                    NEW PROGRAM
+  ORIGINAL PROGRAM                           NEW PROGRAM
 
   ✔ LOGIN @done (13-10-21 11:07)
 
-  Name                                                             Email
-  Password                                                       Password
+  Name                                       Email
+  Password                                   Password
 
   ☐ WELCOME PAGE
-  Welcome User's name                                  No welcome page goes into property list
-  Version Number                                            IMPLEMENTED
-  Today's date                                                  NOT IMPLEMENTED
-  Recent payments                                          REQUIRED  (RW)
+  Welcome User's name                        Not Needed Login goes to Property
+  Version Number                             DONE
+  Today's date                               NOT IMPLEMENTED
+  Recent payments                            REQUIRED  (RW)
 
   ☐ CLIENTS
-  List Clients                                                    done       (clients/index)
-  Print out of Client list                                   Not needed
-  Create New Client                                        done       (clients/new)
-  Update Client                                               done       (clients/edit)
-  Drop Down List of Clients for Search          Not needed as stands (demo)
-  Delete Client                                                done        (clients/index)
-  Client accounts list for GR and GGR           REQUIRED
-  between 'given' dates
-  MORE INFO                                                   MORE INFORMATION REQUIRED
+  List Clients                               DONE   (clients/index page)
+  Print out of Client list                   Not Needed
+  Create New Client                          DONE   (clients/new page)
+  Update Client                              DONE   (clients/edit page)
+  Drop Down List of Clients for Search       Not needed as stands (demo)
+  Delete Client                              DONE   (clients/index page)
+
+  Client accounts list for GR and GGR        REQUIRED
+  between 'given' DATES                      MORE INFORMATION REQUIRED
+
   DATES ARE NOT ARBITARY
   When do they run the accounts?
   Does that depend on  the client?
-  Print out of Client Accounts                        REQUIRED
+  Print out of Client Accounts               REQUIRED
 
   ☐ PROPERTIES
-  List of Properties                                          done (properties/index)
-  Search for Property                                      done (properties/index)
-  Update Property                                           done (properties/edit)
-  Addresses
-    Occupier                                                     done
-    Agent Name                                               done
+  List of Properties                         DONE   (properties/index page)
+  Create New Property                        DONE   (properties/new)
+  Delete Property                            DONE   (properties/index page)
+  Update Property                            DONE   (properties/edit page)
+  Search for Property by ID                  DONE   (properties/index page)
+  Search for Property by Occupier            DONE   (properties/index page)
+  Search for Property by Agent               DONE   (properties/index page)
+  Search for Property by Address             DONE   (properties/index page)
 
-  Property requires a client                            done
-  Drop Down List of Clients                             Not Required (Demo)
-  Print out of Property List                              Not Required
-  Create New Property                                    done (properties/new)
-  Delete Property                                            done (properties/index)
-  Print Property Details                                   done (properties/id/view )
+  Property requires a client                 DONE
+  Drop Down List of Clients                  Not Required (Demo)
+  Print out of Property List                 Not Required
+  Print Property Details                     DONE  properties/id/view )
   Print Property Account                                 ONGOING (properties/id/view )
 
   ☐ Property Accounts
-  Display Account Items                                 ONGOING
+  Display Account Items                      ONGOING
   Require date when charge is due               done  (properties/id/view)
   Delete old data                                             Not needed
   Arrears list
-  Occupents with arreas over £??s                 NOT IMPLEMENTED
+  Occupants with arreas over £??s                 NOT IMPLEMENTED
 
 
   GRID ACCOUNT DETAILS:
    (statement of credit / debit not payment)  REQUIRED
   Search prop no                                               REQUIRED
   Give one line address, 2nd line Agent  &     Currently Property / Account is 1 page
-  Agent                                                             If separate pages the account page
-                                                                          will need address identification
-                                                                          (We could reduce address since only for
-                                                                           office reference)
+  Agent
   Type of Charge, Date Due or paid,                ONGOING
   Description, Due, Payment, balance             REVIEW - Description not held
   Split charges by type: All, GR,                       REQUIRED
