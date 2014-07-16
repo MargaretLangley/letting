@@ -17,8 +17,13 @@ class PaymentDecorator
   include ActiveModel::Validations::Callbacks
   attr_reader :source
 
-  def initialize payment
+  # Import for finding an account object but otherwise has no
+  # role in the payment - hence decorator.
+  attr_accessor :human_ref
+
+  def initialize payment, args = {}
     @source = payment
+    @human_ref = args[:human_ref]
   end
 
   def prepare_for_form
