@@ -46,7 +46,10 @@ Repeat each time you want to delete and restore the database.
   4.1 Seed data: `rake db:seed`
   4.2 import data: `rake db:import -- -t`
    4.2.1 -t includes test user and passwords.
-
+9. Re-index Elasticsearch
+   `bundle exec rails console`
+   `Property.import force: true, refresh: true`
+   `Client.import force: true, refresh: true`
 
 ===
 
