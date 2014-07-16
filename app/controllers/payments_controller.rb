@@ -28,8 +28,8 @@ class PaymentsController < ApplicationController
   end
 
   def prepare_for_new_action args = {}
-    @payment = PaymentDecorator.new Payment.new args
-    @payment.account = Account.find_by_human_ref args[:human_ref]
+    @payment = PaymentDecorator.new Payment.new  \
+               args.merge account: Account.find_by_human_ref(args[:human_ref])
     @payment.prepare_for_form
   end
 
