@@ -38,10 +38,10 @@
     </div>
   </div>
 
-  <% unless debit_generator.debitless? %>
-   <%= render 'debits', debit_gen_form: debit_gen_form, debits: debit_generator.debits %>
-  <% else %>
+  <% if debit_generator.debitless? %>
     <%= render 'no_chargeable_properties' %>
+  <% else %>
+   <%= render 'debits', debit_gen_form: debit_gen_form, debits: debit_generator.debits %>
   <% end %>
 
 </div>
