@@ -25,6 +25,7 @@ describe Property, type: :feature do
   end
 
   it 'navigates to edit page' do
+    pending 'edit removed for now - pending until new edit added'
     click_on 'Edit'
     expect(page).to have_text 'Title'
     expect(page).to have_text 'Postcode'
