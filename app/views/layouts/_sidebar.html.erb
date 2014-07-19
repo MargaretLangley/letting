@@ -1,13 +1,13 @@
-<nav>
+<nav class='nav-shell'>
   <ul class='shell'>
-    <li><%= link_to 'Accounts', properties_path %></li>
-    <li><%= link_to 'New Account', new_property_path %></li>
-    <li><%= link_to 'Clients', clients_path %></li>
-    <li><%= link_to 'New Client', new_client_path %></li>
-    <li><%= link_to 'Invoice Batches', debit_generators_path %></li>
-    <li><%= link_to 'New Invoice Batch', new_debit_generator_path %></li>
-    <li><%= link_to 'Invoice Text Update', sheets_path %></li>
-    <li><%= link_to 'Payments Entered', payments_path %></li>
-    <li><%= link_to 'New Payment', new_payment_path %></li>
+    <li class="<%= active_nav? 'properties' %>"><%= link_to 'Accounts', properties_path %></li>
+    <li class="active-subnav <%= revealable? 'properties' %>"><%= link_to 'New Account', new_property_path %></li>
+    <li class="<%= active_nav? "clients" %>"><%= link_to 'Clients', clients_path %></li>
+    <li class="active-subnav <%= revealable? 'clients' %>"><%= link_to 'New Client', new_client_path %></li>
+    <li class="<%= active_nav? 'debit_generators' %>"><%= link_to 'Invoice', debit_generators_path %></li>
+    <li class="active-subnav <%= revealable? 'debit_generators' %>"><%= link_to 'New Invoice', new_debit_generator_path %></li>
+    <li class="active-subnav <%= revealable? 'debit_generators' %>"><%= link_to 'Text Update', sheets_path %></li>
+    <li class="<%= active_nav? "payments" %>"><%= link_to 'Payments', payments_path %></li>
+    <li class="active-subnav <%= revealable? 'payments' %>"><%= link_to 'New Payment', new_payment_path %></li>
   </ul>
 </nav>

@@ -123,12 +123,47 @@ nav{
 }
 
 
+.nav-shell{
+  margin-top: 15%;
+  width: 75%;
+}
+
+
 li a{
   display: block;
   padding: 4%;
   border-bottom: 1px solid $neutral;
   background-color: $fieldset;
 }
+
+/* navigation */
+
+
+/* extra class selectivity required override 'li a' with li.<class> a */
+
+@mixin menu-style($background, $border) {
+  border: 1px solid darken($fieldset, $background);
+    border-radius: 5px;
+    background-color: darken($fieldset, $border);
+    &:hover,
+    &:active{
+      background-color: $secondary-background;
+      color: white;
+    }
+}
+
+li.inactive-nav a{
+  @include menu-style(0%, 5%);
+}
+
+li.active-nav a{
+  @include menu-style(15%, 25%);
+}
+
+li.active-subnav a{
+  @include menu-style(5%, 15%);
+}
+
 
 
 
