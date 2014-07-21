@@ -30,7 +30,7 @@ describe 'Session', type: :feature do
   def expect_to
     expect(current_path).to eq '/'
     expect(page).to have_text /Logged in!/i
-    expect(page).to have_text /user@example.com/i
+    expect(page).to have_text /user/i
   end
 
   def logs_out

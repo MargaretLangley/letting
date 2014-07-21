@@ -1,9 +1,9 @@
 <header>
   <div class="grid grid-pad">
-    <div class="col-1-4">
+    <div class="col-2-8">
       <h2><%= link_to 'Adams Lettings', root_path, class: 'hover-link inverted-link' %></h2>
     </div>
-    <div class="col-1-2">
+    <div class="col-4-8">
       <div class="no-print">
         <div class="col-1-1">
           &nbsp;
@@ -18,21 +18,33 @@
         </div>
       </div>
     </div>
-    <div class="col-1-4">
+    <div class="col-2-8">
       <nav>
-        <div class="col-1-1">
+        <div class="col-1-8">
+          &nbsp;
+        </div>
+        <div class="col-4-8">
           <% if current_user %>
-           <%= current_user.email %>
-           <%= link_to 'Log Out', logout_path, class: 'inverted-link' %>
+           <i class="fa fa-user"></i>&nbsp;<%= current_user.nickname %>
           <% else %>
             <%= link_to 'Log In', login_path, class: 'inverted-link'  %>
           <% end %>
-          <% if allow? "users", "" %>
-            <%= link_to 'Admin', users_path, class: 'inverted-link' %>
+        </div>
+        <div class="col-3-8">
+          <% if current_user %>
+           <i class="fa fa-sign-out"></i><%= link_to 'Log Out', logout_path, class: 'inverted-link' %>
+          <% else %>
+            <%= link_to 'Log In', login_path, class: 'inverted-link'  %>
           <% end %>
         </div>
-        <div class="col-1-1">
-        <%= link_to 'Print This Page', '#', class: 'print-window inverted-link'%>
+        <div class="col-1-8">
+          &nbsp;
+        </div>
+        <div class="col-4-8">
+          <i class="fa fa-print"></i>&nbsp;<%= link_to 'Print Page', '#', class: 'print-window inverted-link'%>
+        </div>
+        <div class="col-3-8">
+          &nbsp;
         </div>
       </nav>
     </div>

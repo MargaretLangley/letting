@@ -21,11 +21,7 @@
           <%= yield %>
         </article>
         <aside class="col-1-6">
-          <% if @title.include? 'User'  %>
-            <%= render 'layouts/sidebar_admin' %>
-          <% else %>
-            <%= render 'layouts/sidebar' %>
-          <% end %>
+          <%= render 'layouts/sidebar' %>
         </aside>
       </div>
     </div>
