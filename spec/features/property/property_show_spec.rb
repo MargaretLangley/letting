@@ -21,7 +21,7 @@ describe Property, type: :feature do
   it 'navigates to index page' do
     click_on 'Accounts'
     expect(page).to have_text 'Actions'
-    expect(page).to have_text 'Del'
+    expect(page).to have_link 'Delete', href: property_path(Property.first)
   end
 
   it 'navigates to edit page' do

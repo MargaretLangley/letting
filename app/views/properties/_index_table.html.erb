@@ -59,8 +59,8 @@
     <nav class='col-3-24 vertical-spacer  r-align no-r-pad'>
       <% if show_actions %>
       <%= link_to 'View', property_path(property.id) %> |
-      <%= link_to 'Edit', edit_property_path(property.id) %> |
-      <%= link_to 'Del', property, method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+      <%= link_to (fa_icon 'edit'), edit_property_path(property.id), title: 'Edit' %> |
+      <%= link_to (fa_icon 'trash-o'), property, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete' %>
       <% end %>
     </nav>
   <% end %>

@@ -161,6 +161,8 @@ GEM
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
     ffi (1.9.3)
+    font-awesome-rails (4.1.0.0)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.4)
     fssm (0.2.10)
     guard (2.4.0)
@@ -402,6 +404,7 @@ DEPENDENCIES
   elasticsearch-extensions
   elasticsearch-model (~> 0.1.4)
   elasticsearch-rails (~> 0.1.4)
+  font-awesome-rails
   guard
   guard-livereload
   jbuilder (~> 2.0.2)
