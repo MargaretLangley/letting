@@ -20,7 +20,7 @@ describe Sheet, type: :feature do
       visit '/sheets/'
       expect(page).to have_text '1'
       expect(page).to have_text 'Page 1'
-      expect(page).to have_text 'Edit'
+      expect(page).to have_link 'Edit'
     end
 
   end

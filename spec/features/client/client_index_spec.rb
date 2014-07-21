@@ -30,7 +30,7 @@ describe Client, type: :feature do
     it 'view' do
       first(:link, 'View').click
       expect(page).to have_text '111'
-      expect(page).to have_text 'Edit'
+      expect(page).to have_link 'Edit'
       expect(page).to have_text 'Properties Owned'
     end
   end

@@ -38,7 +38,7 @@ describe Property, type: :feature do
       click_on 'Accounts'
       expect(page).to have_text 'Address'
       expect(page).to_not have_text 'Title'
-      expect(page).to_not have_text 'Delete'
+      expect(page).to_not have_link 'Delete'
     end
 
     def navigate_to_edit_page

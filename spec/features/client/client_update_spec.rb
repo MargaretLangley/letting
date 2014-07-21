@@ -52,14 +52,14 @@ describe Client, type: :feature do
     it 'navigates to index page' do
       click_on 'Clients'
       expect(page).to have_text 'Actions'
-      expect(page).to have_text 'Delete'
+      expect(page).to have_link 'Delete'
     end
 
     it 'navigates to view page' do
       click_on 'View'
       expect(page).to have_text 'Address'
       expect(page).to_not have_text 'Title'
-      expect(page).to_not have_text 'Delete'
+      expect(page).to_not have_link 'Delete'
     end
 
   end
