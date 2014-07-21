@@ -28,7 +28,7 @@ describe Property, type: :feature do
       navigate_to_edit_page
       click_on 'Accounts'
       expect(page).to have_text 'Actions'
-      expect(page).to have_text 'Delete'
+      expect(page).to have_text 'Del'
     end
 
     it 'navigates to accounts view page' do

@@ -143,13 +143,13 @@ li a{
 
 @mixin menu-style($background, $border) {
   border: 1px solid darken($fieldset, $background);
-    border-radius: 5px;
-    background-color: darken($fieldset, $border);
-    &:hover,
-    &:active{
-      background-color: $secondary-background;
-      color: white;
-    }
+  border-radius: 5px;
+  background-color: darken($fieldset, $border);
+  &:hover,
+  &:active{
+    background-color: $secondary-background;
+    color: white;
+  }
 }
 
 li.inactive-nav a{
@@ -191,6 +191,28 @@ li.active-subnav a{
     width: 620px;
   }
 }
+
+
+/*-----------------------------------------------*\
+
+   $table rows
+
+   Grid simulating tables
+
+\*-----------------------------------------------*/
+
+  .table-row{
+    &:hover,
+    &:active{
+      text-decoration: underline;
+      background-color: darken($fieldset, 5%);
+    }
+  }
+
+  .inherit-row{
+    text-decoration: inherit;
+    background-color: inherit;
+  }
 
 
 /*--------------------------------------------------*\
