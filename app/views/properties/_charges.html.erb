@@ -1,12 +1,23 @@
 <div class='js-reveal-parent'>
+  <div class='col-3-12 vertical-spacer grid-header'>
+    Charge
+  </div>
+  <div class='col-1-12 vertical-spacer grid-header'>
+    Payment
+  </div>
+  <div class='col-1-12 vertical-spacer grid-header'>
+    Amount
+  </div>
+  <div class='col-6-12 vertical-spacer grid-header'>
+    Due Date(s)
+  </div>
   <% charges.each.with_index do |charge,index| %>
     <%= f.fields_for :charges, charge do |builder| %>
-      <fieldset id='property_charge_<%= index %>' class='shell selection <%= hide_new_record_unless_first charge, index %>'  >
+      <div id='property_charge_<%= index %>' class='selection <%= hide_new_record_unless_first charge, index %>'  >
         <%= render 'charge', f: builder, charge: charge %>
-      </fieldset>
+      </div>
     <% end %>
   <% end %>
-  <p>
-  <%= link_to 'Add Charge', '#', class: 'js-reveal-link' %>
+  <%= link_to (fa_icon 'plus 2x'), '#', class: 'js-reveal-link', title: 'Add Charge' %>
   </p>
 </div>

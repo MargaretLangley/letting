@@ -44,18 +44,11 @@ describe Property, type: :feature do
 
   it 'adds charges', js: true do
     navigate_to_create_page
-    expect(page).to_not have_text 'Charge 2'
+    expect(page).to have_css('.charge-count', count: 1)
     click_on 'Add Charge'
-    expect(page).to have_text 'Charge 2'
     click_on 'Add Charge'
-    expect(page).to have_text 'Charge 3'
-    # couldn't get the rest of this to work reliabily
-    # Charge 4 should work the .disabled might be
-    # a dynamic insertion of css problem
-    # click_on 'Add Charge'
-    # expect(page).to have_text 'Charge 4'
-    # page.should have_css('.disabled')
-    expect(page).to have_text 'Charge'
+    click_on 'Add Charge'
+    expect(page).to have_css('.charge-count', count: 4)
   end
 
   def navigate_to_create_page
@@ -113,10 +106,11 @@ describe Property, type: :feature do
   end
 
   def fill_in_charge
-    within_fieldset 'property_charge_0' do
-      fill_in 'Charge type', with: 'Ground Rent'
-      fill_in 'Due in', with: 'Advance'
-      fill_in 'Amount', with: '50.50'
+    within '#property_charge_0' do
+      id_stem = 'property_account_attributes_charges_attributes_0'
+      fill_in "#{id_stem}_charge_type", with: 'Ground Rent'
+      fill_in "#{id_stem}_due_in", with: 'Advance'
+      fill_in "#{id_stem}_amount", with: '50.50'
     end
     fill_in_due_on
   end

@@ -53,10 +53,8 @@ describe Charge, type: :model do
         charge
       end
 
-      before(:each) do
-        Timecop.travel(Date.new(2013, 1, 31))
-      end
-      after  { Timecop.return }
+      before(:each) { Timecop.travel(Date.new(2013, 1, 31)) }
+      after(:each)  { Timecop.return }
 
       describe '#next_chargeable' do
         it 'if charge between dates'  do
@@ -72,8 +70,7 @@ describe Charge, type: :model do
         end
 
         it 'return nil if not' do
-          expect(charge.next_chargeable(dates_not_charged_on))
-            .to eq []
+          expect(charge.next_chargeable(dates_not_charged_on)).to eq []
         end
       end
 
@@ -84,7 +81,6 @@ describe Charge, type: :model do
       def dates_not_charged_on
         Date.new(2013, 2, 1)..Date.new(2013, 3, 24)
       end
-
     end
 
     it '#prepare creates children' do
