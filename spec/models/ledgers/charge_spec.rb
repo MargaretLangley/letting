@@ -9,8 +9,8 @@ describe Charge, type: :model do
 
   it('is valid') { expect(charge).to be_valid }
 
-  context 'validations' do
-    context 'presence' do
+  describe 'validations' do
+    describe 'presence' do
 
       it 'charge type' do
         charge.charge_type = nil
@@ -32,7 +32,7 @@ describe Charge, type: :model do
         expect(charge).to_not be_valid
       end
     end
-    context 'amount' do
+    describe 'amount' do
       it 'is a number' do
         charge.amount = 'nnn'
         expect(charge).to_not be_valid
@@ -44,16 +44,16 @@ describe Charge, type: :model do
     end
   end
 
-  context 'methods' do
+  describe 'methods' do
 
-    context 'charging' do
+    describe 'charging' do
       before do
         Timecop.travel(Date.new(2013, 1, 31))
         charge.due_ons.new due_on_attributes_1 charge_id: 1
       end
       after  { Timecop.return }
 
-      context '#next_chargeable' do
+      describe '#next_chargeable' do
         it 'if charge between dates'  do
           expect(charge.next_chargeable(Date.new(2013, 3, 25)..Date.new(2016, 3, 25)))
             .to eq [chargeable(Date.new(2013, 3, 25)),
