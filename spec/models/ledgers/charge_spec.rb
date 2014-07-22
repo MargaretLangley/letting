@@ -45,11 +45,16 @@ describe Charge, type: :model do
   end
 
   describe 'methods' do
-
     describe 'charging' do
-      before do
+      let(:charge) do
+        charge = Charge.new charge_attributes id: 1
+        charge.due_ons.new charge_id: 1, day: 25, month: 3
+        charge.due_ons.new charge_id: 1, day: 29, month: 9
+        charge
+      end
+
+      before(:each) do
         Timecop.travel(Date.new(2013, 1, 31))
-        charge.due_ons.new due_on_attributes_1 charge_id: 1
       end
       after  { Timecop.return }
 
@@ -57,13 +62,13 @@ describe Charge, type: :model do
         it 'if charge between dates'  do
           expect(charge.next_chargeable(Date.new(2013, 3, 25)..Date.new(2016, 3, 25)))
             .to eq [chargeable(Date.new(2013, 3, 25)),
-                    chargeable(Date.new(2013, 9, 30))]
+                    chargeable(Date.new(2013, 9, 29))]
         end
 
         it 'ignores charges which have debits'  do
           charge.debits.build debit_attributes on_date: '2013-3-25'
           expect(charge.next_chargeable(Date.new(2013, 3, 25)..Date.new(2016, 3, 25)))
-            .to eq [chargeable(Date.new(2013, 9, 30))]
+            .to eq [chargeable(Date.new(2013, 9, 29))]
         end
 
         it 'return nil if not' do
