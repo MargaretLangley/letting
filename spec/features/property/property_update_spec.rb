@@ -230,10 +230,11 @@ describe Property, type: :feature do
       end
 
       def fill_in_charge
-        within_fieldset 'property_charge_0' do
-          fill_in 'Charge type', with: 'Service Charge'
-          fill_in 'Due in', with: 'Arrears'
-          fill_in 'Amount', with: '100.08'
+        within '#property_charge_0' do
+          id_stem = 'property_account_attributes_charges_attributes_0'
+          fill_in "#{id_stem}_charge_type", with: 'Service Charge'
+          fill_in "#{id_stem}_due_in", with: 'Arrears'
+          fill_in "#{id_stem}_amount", with: '100.08'
         end
       end
 
@@ -268,22 +269,22 @@ describe Property, type: :feature do
       it 'opens a monthly charge correctly' do
         property_with_monthly_charge_create! human_ref: 8000
         navigate_to_edit_page
-        expect(page).to have_text 'Per month or on date'
+        expect(page).to have_text 'or on date'
       end
 
       it 'opens monthly and changes to date charge', js: true do
         property_with_monthly_charge_create! human_ref: 8000
         navigate_to_edit_page
         click_on 'or on date'
-        expect(page).to have_text /on date or per month/i
+        expect(page).to have_text /or per month/i
       end
     end
 
     it 'deletes', js: true do
       property_create! id: 1, human_ref: 8000
       navigate_to_edit_page
-      expect(page).to have_text 'Charge 1'
-      within_fieldset 'property_charge_0' do
+      expect(page).to have_css('.charge-count', count: 1)
+      within '#property_charge_0' do
         click_on 'X'
       end
       update_then_expect_properties_page

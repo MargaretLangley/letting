@@ -1,17 +1,16 @@
-<h3>Due Date</h3>
 <div class='js-toggle-selection js-clear'>
   <div class='js-togglable <%= due_ons.hidden_side? DueOn::ON_DATE %>'>
-    <h4>On date <a href='#' class='js-toggle toggle-event'> or per month</a></h4>
     <% due_ons.by_date.each do |due_on| %>
       <%= f.fields_for :due_ons, due_on do |builder| %>
         <%= render 'due_on', f: builder, due_on: due_on, parent: due_ons.id(f.options[:child_index])  %>
       <% end %>
     <% end %>
+    <a href='#' class='js-toggle toggle-event'> or per month</a>
   </div>
   <div class='js-togglable <%= due_ons.hidden_side? DueOn::PER_MONTH %>'>
-    <h4>Per month <a href='#' class='js-toggle toggle-event'> or on date</a></h4>
       <%= f.fields_for :due_ons, due_ons.per_month do |builder| %>
         <%= render 'due_on_per_month', f: builder, due_on: due_ons.per_month, parent: due_ons.id(f.options[:child_index])  %>
       <% end %>
+      <a href='#' class='js-toggle toggle-event'> or on date</a>
   </div>
 </div>

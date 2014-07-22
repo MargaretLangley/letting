@@ -168,3 +168,18 @@ input[type='checkbox'] {
    width: 35px;
    height: 35px;
 }
+
+
+ /*placeholder text-align*/
+
+::-webkit-input-placeholder {
+   text-align:center;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align:center;
+}
+
+:-ms-input-placeholder {
+   text-align:center;
+}

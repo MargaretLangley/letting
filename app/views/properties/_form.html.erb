@@ -33,9 +33,11 @@
   </fieldset>
 
   <%= render 'agent', f: f, agent: property.agent %>
-  <%= f.fields_for :account do |a| %>
-    <%= render 'charges', f: a, charges: property.account.charges %>
-  <% end %>
+  <div class='grid shell'>
+    <%= f.fields_for :account do |a| %>
+      <%= render 'charges', f: a, charges: property.account.charges %>
+    <% end %>
+  </div>
   <div class='no-print'>
     <%= f.submit value="Create/Update Account"%> or <%= link_to 'Cancel', properties_path, class: 'warn' %>
   </div>

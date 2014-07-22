@@ -1,3 +1,3 @@
-<div id='<%= parent %>_due_on_<%= f.options[:child_index]  %>'>
-  <%= f.text_field :day, placeholder: 'dd', class: 'js-every-month width-1-4' %><%= f.hidden_field :month  %> of the month
-</div>
+<span id='<%= parent %>_due_on_<%= f.options[:child_index]  %>'>
+  <%= f.text_field :day, placeholder: 'dd', class: 'js-every-month width-1-12' %><%= f.hidden_field :month  %><span class='faded'>/ every month</span>
+</span>
