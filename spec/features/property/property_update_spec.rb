@@ -285,7 +285,7 @@ describe Property, type: :feature do
       navigate_to_edit_page
       expect(page).to have_css('.charge-count', count: 1)
       within '#property_charge_0' do
-        click_on 'X'
+        click_on 'Delete'
       end
       update_then_expect_properties_page
       navigate_to_property_view_page

@@ -15,6 +15,6 @@
   </div>
   <div class='col-1-24 vertical-spacer'>
     <%= f.hidden_field :_destroy %>
-    <%= link_to 'X', '#', class:'delete-button float-right js-remove-fields', data: {confirm:'Are you sure?'} %>
+    <%= link_to (fa_icon 'trash-o'), '#', class:'delete-button float-right js-remove-fields', data: {confirm:'Are you sure?'}, title: 'Delete' %>
   </div>
 </div>
