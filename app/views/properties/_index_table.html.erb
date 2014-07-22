@@ -5,7 +5,7 @@
   <div class='col-1-24 vertical-spacer grid-header r-align'>
      Cl
   </div>
-  <div class='col-4-24 vertical-spacer grid-header'>
+  <div class='col-5-24 vertical-spacer grid-header'>
     Name
   </div>
   <div class='col-2-24 vertical-spacer grid-header r-align'>
@@ -17,13 +17,13 @@
   <div class='col-2-24 vertical-spacer grid-header r-align'>
     No
   </div>
-  <div class='col-5-24 vertical-spacer grid-header'>
+  <div class='col-4-24 vertical-spacer grid-header'>
    Road
   </div>
   <div class='col-3-24 vertical-spacer grid-header'>
   Town
   </div>
-  <div class='col-2-24 vertical-spacer grid-header no-print no-r-pad'>
+  <div class='col-2-24 vertical-spacer grid-header no-print no-r-pad r-align'>
     Actions
   </div>
 
@@ -37,7 +37,7 @@
       <div class='col-1-24 vertical-spacer r-align inherit-row'>
          <%=property.client_ref %>
       </div>
-      <div class='col-4-24 vertical-spacer inherit-row'>
+      <div class='col-5-24 vertical-spacer inherit-row'>
         <%= format_empty_string_as_dash property.occupier %>
       </div>
       <div class='col-2-24 vertical-spacer r-align inherit-row'>
@@ -45,6 +45,7 @@
       </div>
       <div class='col-3-24 vertical-spacer inherit-row'>
        <%= format_empty_string_as_dash property.address.house_name %>
+       <%= link_to '.', property_path(property.id), class: 'view-testing-link' %>
       </div>
       <div class='col-2-24 vertical-spacer r-align inherit-row'>
         <%= property.address.road_no %>
@@ -52,16 +53,15 @@
       <div class='col-4-24 vertical-spacer inherit-row'>
        <%= property.address.road %>
       </div>
-      <div class='col-3-24 vertical-spacer tablerow inherit-row'>
+      <div class='col-3-24 vertical-spacer tablerow inherit-row nowrap'>
       <%= property.address.town %>
       </div>
     </div>
-    <nav class='col-3-24 vertical-spacer  r-align no-r-pad'>
+    <div class='col-2-24 vertical-spacer  r-align no-r-pad'>
       <% if show_actions %>
-      <%= link_to 'View', property_path(property.id) %> |
       <%= link_to (fa_icon 'edit'), edit_property_path(property.id), title: 'Edit' %> |
       <%= link_to (fa_icon 'trash-o'), property, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete' %>
       <% end %>
-    </nav>
+    </div>
   <% end %>
 </div>

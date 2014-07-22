@@ -146,7 +146,7 @@ describe Property, type: :feature do
   end
 
   def navigate_to_property_page
-    click_on 'View'
+    find('.view-testing-link', visible: false).click
   end
 
   def expect_property_page

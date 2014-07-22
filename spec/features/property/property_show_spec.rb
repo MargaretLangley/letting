@@ -8,7 +8,7 @@ describe Property, type: :feature do
     log_in
     property_with_agent_create! id: 1, human_ref: 1000
     visit '/properties/'
-    click_on 'View'
+    find('.view-testing-link', visible: false).click
   end
 
   it '#show' do
