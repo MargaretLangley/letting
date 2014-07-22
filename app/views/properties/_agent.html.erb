@@ -1,6 +1,5 @@
 <%= f.fields_for :agent do |b| %>
-<fieldset id='agent' class='shell js-toggle-selection'>
-  <h2>Agent</h2>
+<div id='agent' class='js-toggle-selection'>
   <div class='grid'>
     <div class='col-1-12'>
       <%= b.check_box :authorized, class: 'js-checkbox-toggle' %>
@@ -24,5 +23,5 @@
       <%= render 'shared/address', f: b, parent: 'property_agent', address: AddressDecorator.new(agent.address) %>
     </div>
   </div>
-</fieldset>
+</div>
 <% end %>

@@ -58,7 +58,7 @@ describe Property, type: :feature do
 
     def expect_property_has_original_attributes
       expect(find_field('Property ID').value).to have_text '8000'
-      expect(find_field('Client Ref').value).to have_text '8008'
+      expect(find_field('Client Id').value).to have_text '8008'
     end
 
     def expect_address_has_original_attributes
@@ -69,8 +69,15 @@ describe Property, type: :feature do
 
     def expect_entity_has_original_attributes
       within '#property_entity_0' do
-        expect_entity_wg_grace_by_field
+        expect_entity_wg_grace_by_field2
       end
+    end
+
+    def expect_entity_wg_grace_by_field2
+      id_stem = 'property_entities_attributes_0'
+      expect(find_field("#{id_stem}_title").value).to have_text 'Mr'
+      expect(find_field("#{id_stem}_initials").value).to have_text 'W G'
+      expect(find_field("#{id_stem}_name").value).to have_text 'Grace'
     end
 
     def fill_in_form
@@ -94,8 +101,16 @@ describe Property, type: :feature do
 
     def fill_in_entity
       within '#property_entity_0' do
-        fill_in_entity_dc_compto
+        fill_in_entity_dc_compto2
       end
+    end
+
+    # Eventually method will be in shared/entity
+    def fill_in_entity_dc_compto2
+      id_stem = 'property_entities_attributes_0'
+      fill_in "#{id_stem}_title", with: 'Mr'
+      fill_in "#{id_stem}_initials", with: 'D C S'
+      fill_in "#{id_stem}_name", with: 'Compton'
     end
 
     def update_then_expect_properties_page
@@ -141,7 +156,7 @@ describe Property, type: :feature do
     def expect_bill_profile_has_original_attributes
       expect(find_field('Use Agent')).to be_checked
 
-      within_fieldset 'agent' do
+      within '#agent' do
         expect(find_field('Flat no').value).to have_text '33'
       end
     end
@@ -167,13 +182,13 @@ describe Property, type: :feature do
     end
 
     def check_use_agent
-      within_fieldset 'agent' do
+      within '#agent' do
         check 'Use Agent'
       end
     end
 
     def fill_in_bill_profile_address
-      within_fieldset 'agent' do
+      within '#agent' do
         fill_in 'Road', with: 'Middlesex Road'
         fill_in 'County', with: 'Greater London'
       end

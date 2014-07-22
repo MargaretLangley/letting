@@ -82,13 +82,21 @@ describe Property, type: :feature do
 
   def fill_in_property_entities
     within '#property_entity_0' do
-      fill_in_entity_wg_grace
+      fill_in_entity_wg_grace2
     end
+  end
+
+  # Eventually method will be in shared/entity
+  def fill_in_entity_wg_grace2
+    id_stem = 'property_entities_attributes_0'
+    fill_in "#{id_stem}_title", with: 'Mr'
+    fill_in "#{id_stem}_initials", with: 'W G'
+    fill_in "#{id_stem}_name", with: 'Grace'
   end
 
   def fill_in_agent_address
     check 'Use Agent'
-    within_fieldset 'agent' do
+    within '#agent' do
       fill_in 'Flat no', with: '555'
       fill_in 'House name', with: 'The County Ground'
       fill_in 'Road no', with: '68f'
