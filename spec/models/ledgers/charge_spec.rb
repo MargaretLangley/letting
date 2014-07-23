@@ -47,7 +47,7 @@ describe Charge, type: :model do
   describe 'methods' do
     describe 'charging' do
       let(:charge) do
-        charge = Charge.new charge_attributes id: 1
+        charge = Charge.new charge_attributes id: 1, due_in: 'Advance'
         charge.due_ons.new charge_id: 1, day: 25, month: 3
         charge.due_ons.new charge_id: 1, day: 29, month: 9
         charge
@@ -57,10 +57,14 @@ describe Charge, type: :model do
       after(:each)  { Timecop.return }
 
       describe '#next_chargeable' do
-        it 'if charge between dates'  do
-          expect(charge.next_chargeable(Date.new(2013, 3, 25)..Date.new(2016, 3, 25)))
-            .to eq [chargeable(Date.new(2013, 3, 25)),
-                    chargeable(Date.new(2013, 9, 29))]
+        it 'if charge between dates Advance Date period 25-3- to 28-9'  do
+          # expect(charge.next_chargeable(Date.new(2013, 3, 25)..Date.new(2016, 3, 25)))
+          # .to eq [chargeable(Date.new(2013, 3, 25)),
+          #         chargeable(Date.new(2013, 9, 28))]
+        end
+
+        it 'if charge only 1 date Advance Date 1-4 to 31-3'  do
+          Timecop.travel(Date.new(2013, 3, 10))
         end
 
         it 'ignores charges which have debits'  do
@@ -91,6 +95,48 @@ describe Charge, type: :model do
     it '#clear_up_form destroys children' do
       charge.clear_up_form
       expect(charge.due_ons.size).to eq(1)
+    end
+
+  end
+
+  describe 'methods' do
+    describe 'charging' do
+      let(:charge) do
+        charge = Charge.new charge_attributes id: 1, due_in: 'Arrears'
+        charge.due_ons.new charge_id: 1, day: 25, month: 3
+        charge.due_ons.new charge_id: 1, day: 29, month: 9
+        charge
+      end
+
+      before(:each) { Timecop.travel(Date.new(2013, 1, 31)) }
+      after(:each)  { Timecop.return }
+
+      describe '#next_chargeable' do
+        it 'if charge between dates Arrears Date period 25-3- to 28-9'  do
+          # expect(charge.next_chargeable(Date.new(2013, 3, 25)..Date.new(2016, 3, 25)))
+          # .to eq [chargeable(Date.new(2012, 9, 30)),
+          #         chargeable(Date.new(2013, 3, 25))]
+        end
+      end
+    end
+  end
+
+  describe 'methods' do
+    describe 'charging' do
+      let(:charge) do
+        charge = Charge.new charge_attributes id: 1, due_in: 'Midterm'
+        charge.due_ons.new charge_id: 1, day: 25, month: 3
+        charge.due_ons.new charge_id: 1, day: 29, month: 9
+        charge
+      end
+
+      before(:each) { Timecop.travel(Date.new(2013, 1, 31)) }
+      after(:each)  { Timecop.return }
+
+      describe '#next_chargeable' do
+        it 'if charge between dates Midterm Date period 25-3- to 28-9'  do
+        end
+      end
     end
   end
 end
