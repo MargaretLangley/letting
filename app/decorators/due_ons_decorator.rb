@@ -44,9 +44,9 @@ class DueOnsDecorator
 
   def hidden_side? side
     if monthly?
-      side == DueOn::PER_MONTH ? '' : 'revealable'
+      side == DueOn::PER_MONTH ? '' : 'js-revealable'
     else
-      side == DueOn::ON_DATE ? '' : 'revealable'
+      side == DueOn::ON_DATE ? '' : 'js-revealable'
     end
   end
 end

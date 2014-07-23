@@ -18,7 +18,7 @@
       <%= render'no_agent' %>
     </div>
 
-    <div class='js-togglable js-checked revealable'>
+    <div class='js-togglable js-checked js-revealable'>
       <%= render 'shared/entities2', f: b, entitieable: agent %>
       <%= render 'shared/address2', f: b, parent: 'property_agent', address: AddressDecorator.new(agent.address) %>
     </div>

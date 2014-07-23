@@ -12,14 +12,14 @@ describe NavigationHelper, type: :helper do
     end
   end
 
-  describe '#revealable?' do
-    it 'returns "visible" when "selection" is on named controller' do
+  describe '#menu_hidden?' do
+    it 'returns "flatten" when "selection" is on named controller' do
       allow(controller).to receive(:controller_name).and_return('accounts')
-      expect(revealable? 'accounts').to include 'visible'
+      expect(menu_folded? 'accounts').to include 'flatten'
     end
-    it 'returns "revealable" when "selection" is on different controller' do
+    it 'returns "folded" when "selection" is on different controller' do
       allow(controller).to receive(:controller_name).and_return('mismatch')
-      expect(revealable? 'accounts').to include 'revealable'
+      expect(menu_folded? 'accounts').to include 'folded'
     end
   end
 end

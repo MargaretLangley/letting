@@ -7,11 +7,11 @@ module NavigationHelper
     end
   end
 
-  def revealable? controller
+  def menu_folded? controller
     if controller_name == controller
-      'visible'
+      'flatten'
     else
-      'revealable'
+      'folded'
     end
   end
 end

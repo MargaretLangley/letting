@@ -33,15 +33,15 @@ $( document ).ready(function() {
   }
 
   function noHiddenChildren(element) {
-    return element.children('.revealable:hidden:first').length === 0;
+    return element.children('.js-revealable:hidden:first').length === 0;
   }
 
   function firstHiddenChild(element) {
-    return element.children('.revealable:hidden:first');
+    return element.children('.js-revealable:hidden:first');
   }
 
   function anyVisibleChildren(element) {
-    return element.children('.revealable:visible:first').length > 0;
+    return element.children('.js-revealable:visible:first').length > 0;
   }
 
   function toggleDisableable(element) {

@@ -13,7 +13,7 @@ describe PropertiesHelper, type: :helper do
       property = property_new
       property.prepare_for_form
       charge = property.account.charges.first
-      expect(hide_new_record_unless_first(charge, 1)).to eq 'revealable'
+      expect(hide_new_record_unless_first(charge, 1)).to eq 'js-revealable'
     end
 
     it 'displays if valid' do

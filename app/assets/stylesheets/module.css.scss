@@ -247,9 +247,16 @@ label {
 
 /* js revealable element */
 
-.revealable{
+.js-revealable{
   display: none;
 }
+
+/* js is not used to reveal element */
+
+.folded, .hidden{
+ display: none;
+}
+
 
 
 

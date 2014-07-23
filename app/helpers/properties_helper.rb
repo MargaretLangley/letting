@@ -8,11 +8,11 @@ module PropertiesHelper
   end
 
   def hide_new_record_unless_first record, index
-    record.new_record? && index > 0 ? 'revealable' : ''
+    record.new_record? && index > 0 ? 'js-revealable' : ''
   end
 
   def hide_if_first_record index
-    'revealable' if index == 0
+    'js-revealable' if index == 0
   end
 
   def destroyable record, index
