@@ -20,30 +20,30 @@
     </div>
     <div class="col-2-8">
       <nav>
-        <div class="col-1-8">
+        <div class="col-2-24">
           &nbsp;
         </div>
-        <div class="col-4-8">
+        <div class="col-11-24">
           <% if current_user %>
            <i class="fa fa-user"></i>&nbsp;<%= current_user.nickname %>
           <% else %>
             <%= link_to 'Log In', login_path, class: 'inverted-link'  %>
           <% end %>
         </div>
-        <div class="col-3-8">
+        <div class="col-11-24">
           <% if current_user %>
            <i class="fa fa-sign-out"></i><%= link_to 'Log Out', logout_path, class: 'inverted-link' %>
           <% else %>
             <%= link_to 'Log In', login_path, class: 'inverted-link'  %>
           <% end %>
         </div>
-        <div class="col-1-8">
+        <div class="col-2-24">
           &nbsp;
         </div>
-        <div class="col-4-8">
+        <div class="col-11-24">
           <i class="fa fa-print"></i>&nbsp;<%= link_to 'Print', '#', class: 'print-window inverted-link'%>
         </div>
-        <div class="col-3-8">
+        <div class="col-11-24">
           &nbsp;
         </div>
       </nav>
