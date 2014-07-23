@@ -3,28 +3,28 @@
 
   <fieldset id='property' class='shell'>
     <div class='grid'>
-      <div class='col-1-2 vertical-spacer'>
+      <div class='col-7-8 vertical-spacer'>
         <h3>Property</h3>
+          <div class='col-1-4 vertical-spacer grid-row  faded'>
+            <%= f.label :human_ref,'Property ID', class: 'required' %>
+          </div>
+          <div class='col-3-4 vertical-spacer no-r-pad'>
+            <%= f.text_field :human_ref, autofocus: true %>
+          </div>
+          <div class='col-1-4 vertical-spacer faded'>
+            <%= f.label :client_ref, 'Client Id', class: 'required' %>
+          </div>
+          <div class='col-3-4 vertical-spacer no-r-pad'>
+            <%= text_field_tag nil, "#{property.client.try(:human_ref)} #{property.client.try(:entities).try(:full_name)}", :id => 'property_client_ref',
+              data: { autocomplete_source: Client.order(:human_ref).map { |t| { :label => "#{t.human_ref} #{t.entities.full_name}", :value => t.id } } } %>
+            <%= f.hidden_field :client_id, id: 'client_id' %>
+          </div>
       </div>
-      <div class='col-1-2 vertical-spacer no-r-pad'>
+      <div class='col-1-8 vertical-spacer no-r-pad'>
         <%= view_link(property) %>
       </div>
 
-      <div class='col-1-4 vertical-spacer grid-row  faded'>
-        <%= f.label :human_ref,'Property ID', class: 'required' %>
-      </div>
-      <div class='col-3-4 vertical-spacer no-r-pad'>
-        <%= f.text_field :human_ref, autofocus: true %>
-      </div>
 
-      <div class='col-1-4 vertical-spacer faded'>
-        <%= f.label :client_ref, 'Client Id', class: 'required' %>
-      </div>
-      <div class='col-3-4 vertical-spacer no-r-pad'>
-        <%= text_field_tag nil, "#{property.client.try(:human_ref)} #{property.client.try(:entities).try(:full_name)}", :id => 'property_client_ref',
-          data: { autocomplete_source: Client.order(:human_ref).map { |t| { :label => "#{t.human_ref} #{t.entities.full_name}", :value => t.id } } } %>
-        <%= f.hidden_field :client_id, id: 'client_id' %>
-      </div>
       <div class='col-1-1 vertical-spacer faded'>
         &nbsp;
       </div>
