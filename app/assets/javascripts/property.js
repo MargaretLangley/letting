@@ -1,18 +1,9 @@
 $(function () {
 
-  // Agent is hidden by default. This will display an element
-  // if present on the property
-
-  if ($(".js-checkbox-toggle").is(':checked')) {
-    $(".js-unchecked").css("display", "none");
-    $(".js-checked").css("display", "block");
-  }
-
   $("#property_entity_add").click(function(event){
     $("#property_entity_1").css("display", "block");
     event.preventDefault();
   });
-
 
   // charges-due-on toggle: on-date => every-month
   // change month input to -1
@@ -20,7 +11,6 @@ $(function () {
   $('.js-every-month').on('change', function() {
     $(this).next('input[type=hidden]').val('-1');
   });
-
 
   // hiding a panel when button clicked
   // this could be used elsewhere in program

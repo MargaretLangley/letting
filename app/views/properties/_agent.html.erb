@@ -11,14 +11,14 @@
 
   <div class='overlay-parent'>
 
-    <div class='js-togglable js-unchecked'>
+    <div class='js-togglable js-check-hidden'>
       <div class='shell overlay'>
         <%= t('instruction.properties.agent') %>
       </div>
       <%= render'no_agent' %>
     </div>
 
-    <div class='js-togglable js-checked js-revealable'>
+    <div class='js-togglable js-check-visible js-revealable'>
       <%= render 'shared/entities2', f: b, entitieable: agent %>
       <%= render 'shared/address2', f: b, parent: 'property_agent', address: AddressDecorator.new(agent.address) %>
     </div>

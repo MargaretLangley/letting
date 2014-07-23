@@ -16,6 +16,15 @@ $( document ).ready(function() {
     toggle.trigger('toggleEventHandler');
   }
 
+  // checkbox state affects visibility of selected
+  // js classes (js-check-hidden, js-check-visible)
+  // event run on page creation and if checkbox toggled.
+  //
+  if ($('.js-checkbox-toggle').is(':checked')) {
+    $('.js-check-hidden').css('display', 'none');
+    $('.js-check-visible').css('display', 'block');
+  }
+
   function onWindowLoad() {
     $('.js-toggle-on-start').toggle();
   }
