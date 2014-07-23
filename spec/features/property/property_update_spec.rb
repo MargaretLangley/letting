@@ -146,16 +146,15 @@ describe Property, type: :feature do
     it 'basic with agent address' do
       property_with_agent_create! id: 1, human_ref: 8000
       navigate_to_edit_page
-      expect_bill_profile_has_original_attributes
+      expect_agent_has_original_attributes
       update_then_expect_properties_page
       navigate_to_property_view_page
       expect(page).to have_text 'Rev V. W. Knutt'
       expect(page).to have_text '33'
     end
 
-    def expect_bill_profile_has_original_attributes
-      expect(find_field('Use Agent')).to be_checked
-
+    def expect_agent_has_original_attributes
+      expect(find_field('Agent')).to be_checked
       within '#agent' do
         expect(find_field('Flat no').value).to have_text '33'
       end
@@ -164,43 +163,44 @@ describe Property, type: :feature do
     it 'add agent address', js: true do
       property = property_create! human_ref: 8000
       navigate_to_edit_page
-      fill_in_bill_profile
+      fill_in_agent
       update_then_expect_properties_page
       navigate_view_by_property property
       click_on 'Full Property'
-      expect_new_bill_profile
+      expect_new_agent
     end
 
     def navigate_view_by_property property
       visit "/properties/#{property.id}"
     end
 
-    def fill_in_bill_profile
+    def fill_in_agent
       check_use_agent
-      fill_in_bill_profile_address
-      fill_in_bill_profile_entity
+      fill_in_agent_address
+      fill_in_agent_entity
     end
 
     def check_use_agent
       within '#agent' do
-        check 'Use Agent'
+        check 'Agent'
       end
     end
 
-    def fill_in_bill_profile_address
+    def fill_in_agent_address
       within '#agent' do
         fill_in 'Road', with: 'Middlesex Road'
         fill_in 'County', with: 'Greater London'
       end
     end
 
-    def fill_in_bill_profile_entity
+    def fill_in_agent_entity
+      id_stem = 'property_agent_attributes_entities_attributes_0'
       within '#agent_entity_0' do
-        fill_in 'Name', with: 'Lock'
+        fill_in "#{id_stem}_name", with: 'Lock'
       end
     end
 
-    def expect_new_bill_profile
+    def expect_new_agent
       expect(page).to have_text 'Middlesex Road'
       expect(page).to have_text 'Lock'
     end
@@ -224,7 +224,7 @@ describe Property, type: :feature do
     it 'removes agent address' do
       property_with_agent_create! id: 1, human_ref: 8000
       navigate_to_edit_page
-      uncheck 'Use Agent'
+      uncheck 'Agent'
       update_then_expect_properties_page
       navigate_to_property_view_page
       expect(page).to have_text /None/i

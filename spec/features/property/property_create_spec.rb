@@ -95,7 +95,7 @@ describe Property, type: :feature do
   end
 
   def fill_in_agent_address
-    check 'Use Agent'
+    check 'Agent'
     within '#agent' do
       fill_in 'Flat no', with: '555'
       fill_in 'House name', with: 'The County Ground'
@@ -108,8 +108,9 @@ describe Property, type: :feature do
   end
 
   def fill_in_agent_entities
+    id_stem = 'property_agent_attributes_entities_attributes_0'
     within '#agent_entity_0' do
-      fill_in 'Name', with: 'K J Barnett'
+      fill_in "#{id_stem}_name", with: 'K J Barnett'
     end
   end
 

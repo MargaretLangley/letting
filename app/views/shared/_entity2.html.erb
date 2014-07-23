@@ -1,6 +1,6 @@
 <div class='js-toggle-selection'>
 
-  <div class='col-5-24 vertical-spacer %> no-r-pad'>
+  <div class='col-5-24 vertical-spacer no-r-pad'>
     <%= f.text_field :entity_type, class: 'js-clearable' %>
   </div>
 
@@ -17,6 +17,5 @@
   <div class='col-2-24 vertical-spacer'>
     <%= f.hidden_field :_destroy %>
     <%= link_to (fa_icon 'trash-o'), '#', class:"delete-button float-right #{hide_or_destroy record} #{hide_if_first_record(index)}", title: 'Delete' %>
-    &nbsp;
   </div>
 </div>

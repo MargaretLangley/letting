@@ -28,19 +28,16 @@
       <div class='col-1-1 vertical-spacer faded'>
         &nbsp;
       </div>
-      <div class='col-12-24 vertical-spacer faded'>
-        Occupier
-      </div>
-      <div class='col-12-24 vertical-spacer faded'>
-        Agent
-      </div>
 
-      <div class='col-4-8 vertical-spacer no-r-pad'>
-        <%= render 'occupier', f: f, entitieable: property %>
-        <%= render 'shared/address', f: f, parent: 'property', address: AddressDecorator.new(property.address) %>
+      <div class='col-11-24 vertical-spacer no-r-pad faded'>
+        <h3>Occupier</h3>
+        <%= render 'shared/entities2', f: f, entitieable: property %>
+        <%= render 'shared/address2', f: f, parent: 'property', address: AddressDecorator.new(property.address) %>
       </div>
-
-      <div class='col-4-8 vertical-spacer no-r-pad'>
+      <div class='col-2-24 vertical-spacer faded'>
+        &nbsp;
+      </div>
+      <div class='col-11-24 vertical-spacer no-r-pad faded'>
         <%= render 'agent', f: f, agent: property.agent %>
       </div>
     </div>

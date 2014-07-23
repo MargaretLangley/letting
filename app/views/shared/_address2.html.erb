@@ -1,0 +1,78 @@
+<%= f.fields_for :address do |b| %>
+
+<div id='<%= parent %>_address'>
+  <div class='col-1-1  no-r-pad faded'>
+    <h4>Address</h4>
+  </div>
+  <div class='col-1-4 vertical-spacer faded'>
+    <%= b.label :flat_no %>
+  </div>
+  <div class='col-3-4 vertical-spacer no-r-pad'>
+    <%= b.text_field :flat_no %>
+  </div>
+  <div class='col-1-4 vertical-spacer faded'>
+    <%= b.label :house_name %>
+  </div>
+  <div class='col-3-4 vertical-spacer  no-r-pad'>
+    <%= b.text_field :house_name, data: { autocomplete_source: Address.uniq.pluck(:house_name).reject(&:blank?).sort }  %>
+  </div>
+  <div class='col-1-4 vertical-spacer faded'>
+    <%= b.label :road_no %>
+  </div>
+  <div class='col-3-4 vertical-spacer  no-r-pad'>
+    <%= b.text_field :road_no %>
+  </div>
+  <div class='col-1-4 vertical-spacer faded'>
+    <%= b.label :road, class: 'required' %>
+  </div>
+  <div class='col-3-4 vertical-spacer  no-r-pad'>
+    <%= b.text_field :road, data: { autocomplete_source: Address.uniq.pluck(:road).reject(&:blank?).sort } %>
+  </div>
+  <div class='col-1-4 vertical-spacer faded'>
+    <%= b.label :district %>
+  </div>
+  <div class='js-toggle-selection'>
+    <div class='<%= address.add_district_visiblity %>'>
+      <%= link_to (fa_icon 'plus'), '#', class: 'js-toggle toggle-event', title: 'Add a district line to the address' %>
+    </div>
+    <div class='<%= address.district_visiblity %>'>
+      <div class='col-3-4 vertical-spacer  no-r-pad'>
+        <%= b.text_field :district, class: 'v_district' %>
+        <%= link_to (fa_icon 'trash-o'), '#', class: 'js-toggle toggle-event', title: 'Delete Line' %>
+      </div>
+    </div>
+  </div>
+  <div class='col-1-4 vertical-spacer grid-row faded'>
+    <%= b.label :town %>
+  </div>
+  <div class='col-3-4 vertical-spacer  no-r-pad'>
+    <%= b.text_field :town, data: { autocomplete_source: Address.uniq.pluck(:town).reject(&:blank?).sort } %>
+  </div>
+  <div class='col-1-4 vertical-spacer faded'>
+    <%= b.label :county, class: 'required' %>
+  </div>
+  <div class='col-3-4 vertical-spacer  no-r-pad'>
+    <%= b.text_field :county, data: { autocomplete_source: Address.uniq.pluck(:county).reject(&:blank?).sort }  %>
+  </div>
+  <div class='col-1-4 vertical-spacer faded'>
+    <%= b.label :postcode %>
+  </div>
+  <div class='col-3-4 vertical-spacer  no-r-pad'>
+    <%= b.text_field :postcode %>
+  </div>
+  <div class='col-1-4 vertical-spacer faded'>
+    <%= b.label :nation %>
+  </div>
+  <div class='js-toggle-selection'>
+    <div class='<%= address.add_nation_visiblity %>'>
+      <%= link_to (fa_icon 'plus'), '#', class: 'js-toggle toggle-event', title: 'Add a nation line to the address' %>
+    </div>
+    <div class='<%= address.nation_visiblity %>'>
+      <div class='col-3-4 vertical-spacer  no-r-pad'>
+        <%= b.text_field :nation, class: 'v_nation' %>
+        <%= link_to (fa_icon 'trash-o'), '#', class: 'js-toggle toggle-event', title: 'Delete Line' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

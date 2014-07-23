@@ -4,8 +4,8 @@
     <div class='col-1-12'>
       <%= b.check_box :authorized, class: 'js-checkbox-toggle' %>
     </div>
-    <div class='col-1-8'>
-      <%= b.label :authorized, 'Use Agent' %>
+    <div class='col-11-12'>
+      <h3><%= b.label :authorized, 'Agent' %></h3>
     </div>
   </div>
 
@@ -19,8 +19,8 @@
     </div>
 
     <div class='js-togglable js-checked revealable'>
-      <%= render 'shared/entities', f: b, entitieable: agent %>
-      <%= render 'shared/address', f: b, parent: 'property_agent', address: AddressDecorator.new(agent.address) %>
+      <%= render 'shared/entities2', f: b, entitieable: agent %>
+      <%= render 'shared/address2', f: b, parent: 'property_agent', address: AddressDecorator.new(agent.address) %>
     </div>
   </div>
 </div>
