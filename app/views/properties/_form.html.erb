@@ -3,7 +3,7 @@
 
   <fieldset id='property' class='shell'>
     <div class='grid'>
-      <div class='col-7-8 vertical-spacer'>
+      <div class='col-7-8 vertical-spacer faded'>
         <h3>Property</h3>
           <div class='col-1-4 vertical-spacer grid-row  faded'>
             <%= f.label :human_ref,'Property ID', class: 'required' %>
@@ -23,11 +23,7 @@
       <div class='col-1-8 vertical-spacer no-r-pad'>
         <%= view_link(property) %>
       </div>
-
-
-      <div class='col-1-1 vertical-spacer faded'>
-        &nbsp;
-      </div>
+      <hr>
 
       <div class='col-11-24 vertical-spacer no-r-pad faded'>
         <h3>Occupier</h3>
@@ -41,6 +37,7 @@
         <%= render 'agent', f: f, agent: property.agent %>
       </div>
     </div>
+    <hr>
     <div class='grid'>
       <%= f.fields_for :account do |a| %>
         <%= render 'charges', f: a, charges: property.account.charges %>
