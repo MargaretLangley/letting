@@ -12,7 +12,7 @@ $( document ).ready(function() {
 
   function doToggle(toggle) {
     var toggleSelection = toggle.closest('.js-toggle-selection');
-    toggleSelection.find('.js-togglable').slideToggle('fast');
+    toggleSelection.children('.js-togglable').slideToggle('fast');
     toggle.trigger('toggleEventHandler');
   }
 
@@ -39,7 +39,6 @@ $( document ).ready(function() {
     var toggleSelection = $(this).closest('.js-toggle-selection');
     toggleSelection.find('.model_type').val($(this).data('model-type-to'));
   });
-
 
   $(onWindowLoad);
 

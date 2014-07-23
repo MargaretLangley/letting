@@ -420,7 +420,7 @@ $search-height: 35px;
   position: relative;
 }
 
-.overlay{
+@mixin base-overlay {
   position: absolute;
   top: 10%;  /* arbitary small amount to move it away from top border */
   right: 0;
@@ -432,7 +432,20 @@ $search-height: 35px;
   background-color: rgba(184,184,184,0.85);
   color: $primary-text;
   font-size:1.4em;
- }
+}
+
+
+
+.overlay{
+  @include base-overlay;
+  top: 10%;  /* arbitary small amount to move it away from top border */
+}
+
+.low-overlay{
+  @include base-overlay;
+  top: 100%;
+}
+
 
 .popup{
   display: none;
