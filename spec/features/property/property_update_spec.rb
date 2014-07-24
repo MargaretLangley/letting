@@ -298,7 +298,7 @@ describe Property, type: :feature do
     it 'deletes', js: true do
       property_create! id: 1, human_ref: 8000
       navigate_to_edit_page
-      expect(page).to have_css('.charge-count', count: 1)
+      expect(page).to have_css('.spec-charge-count', count: 1)
       within '#property_charge_0' do
         click_on 'Delete'
       end

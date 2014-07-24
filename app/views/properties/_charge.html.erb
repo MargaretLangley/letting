@@ -1,6 +1,6 @@
 <div id='property_charge_<%= index %>' class='js-selection <%= hide_new_record_unless_first charge, index %>'  >
   <div class='grid'>
-    <div class='col-6-24 vertical-spacer  no-r-pad charge-count'>
+    <div class='col-6-24 vertical-spacer  no-r-pad spec-charge-count'>
       <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
     </div>
     <div class='col-2-24 vertical-spacer  no-r-pad'>
