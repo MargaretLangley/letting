@@ -3,7 +3,7 @@
 
   <fieldset id='property' class='shell'>
     <div class='grid'>
-      <div class='col-7-8 vertical-spacer faded'>
+      <div class='col-7-8 faded vertical-spacer '>
         <h3>Property</h3>
           <div class='col-1-4 vertical-spacer grid-row  faded'>
             <%= f.label :human_ref,'Property ID', class: 'required' %>
@@ -11,10 +11,10 @@
           <div class='col-3-4 vertical-spacer no-r-pad'>
             <%= f.text_field :human_ref, autofocus: true %>
           </div>
-          <div class='col-1-4 vertical-spacer faded'>
+          <div class='col-1-4  faded'>
             <%= f.label :client_ref, 'Client Id', class: 'required' %>
           </div>
-          <div class='col-3-4 vertical-spacer no-r-pad'>
+          <div class='col-3-4 no-r-pad'>
             <%= text_field_tag nil, "#{property.client.try(:human_ref)} #{property.client.try(:entities).try(:full_name)}", :id => 'property_client_ref',
               data: { autocomplete_source: Client.order(:human_ref).map { |t| { :label => "#{t.human_ref} #{t.entities.full_name}", :value => t.id } } } %>
             <%= f.hidden_field :client_id, id: 'client_id' %>
@@ -25,12 +25,12 @@
       </div>
       <hr>
 
-      <div class='col-12-24 vertical-spacer faded verticalLine'>
+      <div class='col-12-24'>
         <h3>Occupier</h3>
         <%= render 'shared/entities2', f: f, entitieable: property %>
         <%= render 'shared/address2', f: f, parent: 'property', address: AddressDecorator.new(property.address) %>
       </div>
-      <div class='col-12-24 vertical-spacerfaded no-r-pad'>
+      <div class='col-12-24 no-r-pad'>
         <%= render 'agent', f: f, agent: property.agent %>
       </div>
     </div>
