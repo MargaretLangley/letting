@@ -88,6 +88,8 @@ a.view-testing-link{
 .grid-header{
   @extend .faded;
   border-bottom: 1px solid $muted-border;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 /*--------------------------------------------------*\

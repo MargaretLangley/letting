@@ -25,15 +25,12 @@
       </div>
       <hr>
 
-      <div class='col-11-24 vertical-spacer no-r-pad faded'>
+      <div class='col-12-24 vertical-spacer faded verticalLine'>
         <h3>Occupier</h3>
         <%= render 'shared/entities2', f: f, entitieable: property %>
         <%= render 'shared/address2', f: f, parent: 'property', address: AddressDecorator.new(property.address) %>
       </div>
-      <div class='col-2-24 vertical-spacer faded'>
-        &nbsp;
-      </div>
-      <div class='col-11-24 vertical-spacer no-r-pad faded'>
+      <div class='col-12-24 vertical-spacerfaded no-r-pad'>
         <%= render 'agent', f: f, agent: property.agent %>
       </div>
     </div>
