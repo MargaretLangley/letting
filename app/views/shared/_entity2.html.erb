@@ -1,21 +1,25 @@
-<div class='js-toggle-selection'>
+<div id='<%= entity_field_id(entitieable, index) %>'
+        class='js-fieldset <%= "#{hide_new_record_unless_first entity, index} " +
+                    "#{destroyable entity, index }" %>' >
+  <div class='js-toggle-selection'>
 
-  <div class='col-5-24 vertical-spacer no-r-pad'>
-    <%= f.text_field :entity_type, class: 'js-clearable' %>
-  </div>
+    <div class='col-5-24 vertical-spacer no-r-pad'>
+      <%= f.text_field :entity_type, class: 'js-clearable' %>
+    </div>
 
-  <div class='col-4-24 vertical-spacer no-r-pad'>
-    <%= f.text_field :title, class: 'js-clearable' %>
-  </div>
+    <div class='col-4-24 vertical-spacer no-r-pad'>
+      <%= f.text_field :title, class: 'js-clearable' %>
+    </div>
 
-  <div class='col-3-24 vertical-spacer no-r-pad'>
-    <%= f.text_field :initials, class: 'js-clearable' %>
-  </div>
-  <div class='col-10-24 vertical-spacer no-r-pad'>
-    <%= f.text_field :name, class: 'js-clearable' %>
-  </div>
-  <div class='col-2-24 vertical-spacer'>
-    <%= f.hidden_field :_destroy %>
-    <%= link_to (fa_icon 'trash-o'), '#', class:"delete-button float-right #{hide_or_destroy record} #{hide_if_first_record(index)}", title: 'Delete' %>
+    <div class='col-3-24 vertical-spacer no-r-pad'>
+      <%= f.text_field :initials, class: 'js-clearable' %>
+    </div>
+    <div class='col-10-24 vertical-spacer no-r-pad'>
+      <%= f.text_field :name, class: 'js-clearable' %>
+    </div>
+    <div class='col-2-24 vertical-spacer'>
+      <%= f.hidden_field :_destroy %>
+      <%= link_to_if(!first_record?(index), (fa_icon 'trash-o'), '#', class:"delete-button #{hide_or_destroy entity}", title: 'Delete') %>
+    </div>
   </div>
 </div>

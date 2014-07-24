@@ -1,20 +1,22 @@
-<div class='grid'>
-  <div class='col-6-24 vertical-spacer  no-r-pad charge-count'>
-    <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
-  </div>
-  <div class='col-2-24 vertical-spacer  no-r-pad'>
-    <%= f.text_field :due_in, data: { autocomplete_source: Charge.uniq.pluck(:due_in).sort } %>
-  </div>
-  <div class='col-2-24 vertical-spacer  no-r-pad'>
-    <%= f.text_field :amount %>
-    <%= f.hidden_field :start_date %>
-    <%= f.hidden_field :end_date %>
-  </div>
-  <div class='col-13-24 vertical-spacer  no-r-pad'>
-    <%= render 'due_ons', f: f, due_ons: DueOnsDecorator.new(charge.due_ons) %>
-  </div>
-  <div class='col-1-24 vertical-spacer'>
-    <%= f.hidden_field :_destroy %>
-    <%= link_to (fa_icon 'trash-o'), '#', class:'delete-button float-right js-remove-fields', data: {confirm:'Are you sure?'}, title: 'Delete' %>
+<div id='property_charge_<%= index %>' class='js-selection <%= hide_new_record_unless_first charge, index %>'  >
+  <div class='grid'>
+    <div class='col-6-24 vertical-spacer  no-r-pad charge-count'>
+      <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
+    </div>
+    <div class='col-2-24 vertical-spacer  no-r-pad'>
+      <%= f.text_field :due_in, data: { autocomplete_source: Charge.uniq.pluck(:due_in).sort } %>
+    </div>
+    <div class='col-2-24 vertical-spacer  no-r-pad'>
+      <%= f.text_field :amount %>
+      <%= f.hidden_field :start_date %>
+      <%= f.hidden_field :end_date %>
+    </div>
+    <div class='col-13-24 vertical-spacer  no-r-pad'>
+      <%= render 'due_ons', f: f, due_ons: DueOnsDecorator.new(charge.due_ons) %>
+    </div>
+    <div class='col-1-24 vertical-spacer'>
+      <%= f.hidden_field :_destroy %>
+      <%= link_to (fa_icon 'trash-o'), '#', class:'delete-button float-right js-remove-fields', data: {confirm:'Are you sure?'}, title: 'Delete' %>
+    </div>
   </div>
 </div>

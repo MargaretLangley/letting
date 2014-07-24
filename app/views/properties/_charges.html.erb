@@ -19,9 +19,7 @@
   </div>
   <% charges.each.with_index do |charge,index| %>
     <%= f.fields_for :charges, charge do |builder| %>
-      <div id='property_charge_<%= index %>' class='js-selection <%= hide_new_record_unless_first charge, index %>'  >
-        <%= render 'charge', f: builder, charge: charge %>
-      </div>
+        <%= render 'charge', f: builder, charge: charge, index: index %>
     <% end %>
   <% end %>
   <%= link_to (fa_icon 'plus 2x'), '#', class: 'js-reveal-link', title: 'Add Charge' %>

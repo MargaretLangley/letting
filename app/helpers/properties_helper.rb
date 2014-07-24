@@ -3,10 +3,6 @@ module PropertiesHelper
     entity.company? ? 'Company Name ' : 'Name'
   end
 
-  def hide_or_destroy record
-    record.new_record? ? 'js-hide-link' : 'js-destroy-link'
-  end
-
   def hide_new_record_unless_first record, index
     record.new_record? && index > 0 ? 'js-revealable' : ''
   end
