@@ -1,8 +1,9 @@
 <div id='<%= entity_field_id(entitieable, index) %>'
-        class='js-fieldset <%= "#{hide_new_record_unless_first entity, index} " +
-                    "#{destroyable entity, index }" %>' >
-  <div class='js-toggle-selection'>
+        class='grid js-fieldset ' \
+               <%= "#{hide_new_record_unless_first entity, index} " %> \
+               <%= "#{destroyable entity, index }" %>' >
 
+  <div class='js-toggle-selection'>
     <div class='col-5-24 vertical-spacer no-r-pad'>
       <%= f.text_field :entity_type, class: 'js-clearable' %>
     </div>
