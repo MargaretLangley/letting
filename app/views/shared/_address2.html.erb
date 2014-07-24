@@ -31,12 +31,12 @@
   <div class='col-1-4 vertical-spacer faded'>
     <%= b.label :district %>
   </div>
-  <div class='js-toggle-selection'>
-    <div class='<%= address.add_district_visiblity %>'>
-      <%= link_to (fa_icon 'plus'), '#', class: 'js-toggle toggle-event', title: 'Add a district line to the address' %>
-    </div>
-    <div class='<%= address.district_visiblity %>'>
-      <div class='col-3-4 vertical-spacer  no-r-pad'>
+  <div class='col-3-4 vertical-spacer  no-r-pad'>
+    <div class='js-toggle-selection'>
+      <div class='<%= address.add_district_visiblity %>'>
+        <%= link_to (fa_icon 'plus'), '#', class: 'js-toggle toggle-event', title: 'Add a district line to the address' %>
+      </div>
+      <div class='<%= address.district_visiblity %>'>
         <%= b.text_field :district, class: 'v_district' %>
         <%= link_to (fa_icon 'trash-o'), '#', class: 'js-toggle toggle-event', title: 'Delete Line' %>
       </div>
@@ -63,14 +63,14 @@
   <div class='col-1-4 vertical-spacer faded'>
     <%= b.label :nation %>
   </div>
-  <div class='js-toggle-selection'>
-    <div class='<%= address.add_nation_visiblity %>'>
-      <%= link_to (fa_icon 'plus'), '#', class: 'js-toggle toggle-event', title: 'Add a nation line to the address' %>
-    </div>
-    <div class='<%= address.nation_visiblity %>'>
-      <div class='col-3-4 vertical-spacer  no-r-pad'>
-        <%= b.text_field :nation, class: 'v_nation' %>
-        <%= link_to (fa_icon 'trash-o'), '#', class: 'js-toggle toggle-event', title: 'Delete Line' %>
+  <div class='col-3-4 vertical-spacer  no-r-pad'>
+    <div class='js-toggle-selection'>
+      <div class='<%= address.add_nation_visiblity %>'>
+        <%= link_to (fa_icon 'plus'), '#', class: 'js-toggle toggle-event', title: 'Add a nation line to the address' %>
+      </div>
+      <div class='<%= address.nation_visiblity %>'>
+          <%= b.text_field :nation, class: 'v_nation' %>
+          <%= link_to (fa_icon 'trash-o'), '#', class: 'js-toggle toggle-event', title: 'Delete Line' %>
       </div>
     </div>
   </div>
