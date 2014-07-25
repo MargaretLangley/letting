@@ -52,6 +52,3 @@ Style/MethodLength:
 # Rails
 Rails/Output:
   Enabled: false
-
-Style/LineLength:
-  Enabled: false
