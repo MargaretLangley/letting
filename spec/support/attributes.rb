@@ -1,3 +1,7 @@
+# Attributes are for initilizing test objects.
+#
+# rubocop: disable Style/MethodLength
+
 def property_attributes overrides = {}
   {
     human_ref: 2002,

@@ -9,7 +9,16 @@ module DB
   #
   # ImportAccount
   #
+  # Wrapps around an account item - which is read in from the imported
+  # legacy file acc_items (account items). ImportBase is responsible
+  # for the generic calls and ImportAccount uses Charge, ImportDebit and
+  # ImportPayment to wrap up the data.
   #
+  # Charge is called when a new (mostly) debit is seen for the first time.
+  # Debit is called when the account is to be debited by a charge.
+  # Credit is called when the account is to be credited by a charge
+  #
+  # rubocop: disable Style/MethodLength
   ####
   #
 

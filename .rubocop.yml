@@ -39,15 +39,15 @@ Style/TrailingComma:
 Lint/UselessAccessModifier:
   Enabled: false
 
-# Offense count: 37
+# Offense count: 62
 # Configuration parameters: AllowURI.
 Style/LineLength:
   Max: 163
 
-# Offense count: 9
+# AIM for 10 Lines Current 12 ( 2 offences before you can get there)
 # Configuration parameters: CountComments.
 Style/MethodLength:
-  Max: 13
+  Max: 12
 
 # Rails
 Rails/Output:
