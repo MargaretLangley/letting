@@ -16,6 +16,9 @@ module DB
   # in this case, and this is hides this behaviour from the
   # ImportDebit.
   #
+  # Errors do not go to logger
+  # rubocop: disable Rails/Output
+  #
   ####
   #
   class DebitRow

@@ -18,6 +18,9 @@ module DB
   # The derived classes supply model_assignment and override the
   # model_prepared, but otherwise mostly use the defaults.
   #
+  # Errors do not go to logger
+  # rubocop: disable Rails/Output
+  #
   ####
   #
   class ImportBase

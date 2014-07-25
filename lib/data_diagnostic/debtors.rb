@@ -28,6 +28,8 @@ class Debtors
     # If I put these commented out statements in
     # you
     @count += 1
+    # Import is not a rails app and should not go to logger
+    # rubocop: disable Rails/Output
     puts no_balance_msg
   end
 

@@ -19,11 +19,8 @@ AllCops:
 # Ignored Styles
 # These styles will not be modelled in our code.
 #
-
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
-Style/Documentation:
- Enabled: false
 Style/MethodDefParentheses:
   Enabled: false
 Style/UnneededPercentQ:
@@ -35,20 +32,16 @@ Style/TrailingComma:
 # Styles we are trying to put into our code!
 #
 
-# Offense count: 2
-Lint/UselessAccessModifier:
-  Enabled: false
-
 # Offense count: 62
 # Configuration parameters: AllowURI.
 Style/LineLength:
   Max: 163
 
+# Offense count: 72
+Style/Documentation:
+ Enabled: false
+
 # AIM for 10 Lines Current 12 ( 2 offences before you can get there)
 # Configuration parameters: CountComments.
 Style/MethodLength:
   Max: 12
-
-# Rails
-Rails/Output:
-  Enabled: false

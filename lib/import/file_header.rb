@@ -47,8 +47,6 @@ module DB
       %w(nickname email password admin)
     end
 
-    private
-
     def self.entities
       %w(title1  initials1 name1 title2 initials2 name2)
     end
