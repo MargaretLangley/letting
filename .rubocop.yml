@@ -53,8 +53,5 @@ Style/MethodLength:
 Rails/Output:
   Enabled: false
 
-Style/Lambda:
-  Enabled: false
-
 Style/LineLength:
   Enabled: false
