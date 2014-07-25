@@ -50,7 +50,7 @@ module DB
       CSV.parse_line(row_string,
                      headers: FileHeader.agent_patch,
                      header_converters: :symbol,
-                     converters: -> (f) { f ? f.strip : nil }
+                     converters: -> (field) { field ? field.strip : nil }
                     )
     end
   end

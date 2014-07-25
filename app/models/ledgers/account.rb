@@ -57,10 +57,18 @@ class Account < ActiveRecord::Base
 
   delegate :clear_up_form, to: :charges
 
+  # AccountDecorator has a different way of calculating the balance!
+  # It places the credits into decorators (because they know the artithmetic
+  # sign of their amount (credits are negative) - then filters on date
+  # then adds the debits and the negative credits.
+  # There should be unified way of calculating the balance.
+  #
   def balance date
     date ||= Date.current
-    credits.select { |c| c.on_date <= date }.map { |c| c.amount }.inject(0, :+) -
-    debits.select { |d| d.on_date <= date }.map { |d| d.amount }.inject(0, :+)
+    credits.select { |credit| credit.on_date <= date }
+           .map { |credit| credit.amount }.inject(0, :+) -
+    debits.select { |debit| debit.on_date <= date }
+           .map { |debit| debit.amount }.inject(0, :+)
   end
 
   # Finds and returns a matching Account

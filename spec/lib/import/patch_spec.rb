@@ -112,7 +112,7 @@ module DB
       CSV.parse(row_string,
                 headers: FileHeader.client,
                 header_converters: :symbol,
-                converters: -> (f) { f ? f.strip : nil }
+                converters: -> (field) { field ? field.strip : nil }
                )
     end
 
@@ -120,7 +120,7 @@ module DB
       CSV.parse(row_string,
                 headers: FileHeader.property,
                 header_converters: :symbol,
-                converters: -> (f) { f ? f.strip : nil }
+                converters: -> (field) { field ? field.strip : nil }
                )
     end
 
@@ -128,7 +128,7 @@ module DB
       CSV.parse(row_string,
                 headers: FileHeader.agent,
                 header_converters: :symbol,
-                converters: -> (f) { f ? f.strip : nil }
+                converters: -> (field) { field ? field.strip : nil }
                )
     end
 
@@ -136,7 +136,7 @@ module DB
       CSV.parse(row_string,
                 headers: FileHeader.agent_patch,
                 header_converters: :symbol,
-                converters: -> (f) { f ? f.strip : nil }
+                converters: -> (field) { field ? field.strip : nil }
                )
     end
   end
