@@ -8,9 +8,9 @@ module DB
     let(:credit_row) { AccountRow.new parse_line credit_string }
     let(:debit_row) { AccountRow.new parse_line debit_string }
 
-    context 'credit row' do
+    describe 'credit row' do
 
-      context 'attributes' do
+      describe 'attributes' do
         it 'has human_ref' do
           expect(credit_row.human_ref).to eq 2002
         end
@@ -20,8 +20,8 @@ module DB
         end
       end
 
-      context 'methods' do
-        context '#credit?' do
+      describe 'methods' do
+        describe '#credit?' do
           it 'returns true when credit row' do
             expect(credit_row).to be_credit
           end
@@ -31,7 +31,7 @@ module DB
           end
         end
 
-        context '#debit?' do
+        describe '#debit?' do
           it 'returns true when debit row' do
             expect(debit_row).to be_debit
           end
@@ -46,7 +46,7 @@ module DB
           end
         end
 
-        context '#amount' do
+        describe '#amount' do
           it 'returns debit column when debit row' do
             expect(debit_row.amount).to eq 60.5
           end
@@ -56,7 +56,7 @@ module DB
           end
         end
 
-        context '#balance?' do
+        describe '#balance?' do
           let(:blance_row) { AccountRow.new parse_line balance }
           def balance
             %q(122, Bal, 2011-08-01 00:00:00, ,                  0,    0,    0)
@@ -71,7 +71,7 @@ module DB
           end
         end
 
-        context '#account_id' do
+        describe '#account_id' do
           it 'finds account_id' do
             property = property_create!
             expect(credit_row.account_id).to eq property.account.id
@@ -82,7 +82,7 @@ module DB
           end
         end
 
-        context 'on_date' do
+        describe 'on_date' do
           it 'returns date' do
             expect(credit_row.on_date).to eq Date.new 2012, 3, 25
           end

@@ -43,8 +43,7 @@ class Address < ActiveRecord::Base
       county,
       postcode,
       nation
-    ]
-     .reject { |line| line.nil? }
+    ].compact
   end
 
   def abbreviated_address

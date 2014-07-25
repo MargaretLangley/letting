@@ -10,9 +10,11 @@ describe AccountDecorator do
       account.debits.push debit_new on_date: '25/9/2012', amount: 5.00
       account.debits.push debit_new on_date: '25/9/2013', amount: 10.00
       account.credits.push credit_new on_date: '25/9/2014', amount: 12.00
-      expect(account.items[0].running_balance).to eq 5.00
-      expect(account.items[1].running_balance).to eq 15.00
-      expect(account.items[2].running_balance).to eq 3.00
+      expect(account.items.map { |item| item.running_balance }).to \
+        contain_exactly \
+           5.00,
+           15.00,
+           3.00
     end
   end
 
@@ -27,16 +29,18 @@ describe AccountDecorator do
     end
 
     it 'orders items by date' do
-      expect(account.items[0].on_date).to eq Date.new 2013, 3, 25
-      expect(account.items[1].on_date).to eq Date.new 2013, 4, 30
-      expect(account.items[2].on_date).to eq Date.new 2013, 9, 25
+      expect(account.items.map { |item| item.on_date }).to contain_exactly \
+        Date.new(2013, 3, 25),
+        Date.new(2013, 4, 30),
+        Date.new(2013, 9, 25)
     end
 
     it 'orders abbrev-items by date' do
-      expect(account.abbrev_items[0].on_date).to eq Date.new 2013, 1, 1
-      expect(account.abbrev_items[1].on_date).to eq Date.new 2013, 3, 25
-      expect(account.abbrev_items[2].on_date).to eq Date.new 2013, 4, 30
-      expect(account.abbrev_items[3].on_date).to eq Date.new 2013, 9, 25
+      expect(account.abbrev_items.map { |item| item.on_date }).to contain_exactly \
+        Date.new(2013, 1, 1),
+        Date.new(2013, 3, 25),
+        Date.new(2013, 4, 30),
+        Date.new(2013, 9, 25)
     end
   end
 

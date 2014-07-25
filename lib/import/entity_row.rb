@@ -14,11 +14,11 @@ module DB
     end
 
     def title
-      person? ? @title : ''
+      @title || ''
     end
 
     def initials
-      person? ? @initials : ''
+      @initials || ''
     end
 
     def name

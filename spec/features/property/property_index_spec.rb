@@ -19,7 +19,7 @@ describe Property, type: :feature do
 
       # Displays expected columns
       expect(page).to have_text '333'
-      expect_index_address_edgbaston
+      expect_index_address
     end
   end
 end
