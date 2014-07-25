@@ -17,7 +17,7 @@ describe Address, type: :feature do
 
     it 'Display district if added', js: true do
       skip 'can not get this working in the test - documentations says( Not all drivers support CSS, so the result may be inaccurate.) '
-      client_create! address_attributes: { district: 'Edgebaston' }
+      client_create! address_attributes: { district: 'Edgbaston' }
       navigate_to_edit_page
       expect(address).to be_district_visible
       address.delete_district
