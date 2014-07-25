@@ -59,7 +59,7 @@ module DB
       ImportDebit.import [row]
     end
 
-    def filtered_condition
+    def filtered?
       @range.exclude? row.human_ref
     end
 

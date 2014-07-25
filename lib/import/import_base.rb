@@ -32,13 +32,12 @@ module DB
       new(contents, args[:range], args[:patch]).import_loop
     end
 
-    # Imports, builds or assigns application objects to any row
-    # that has not been filtered out.
+    # Imports, builds or assigns application objects
     #
     def import_loop
       @contents.each_with_index do |row, index|
         self.row = row
-        import_row unless filtered
+        import_row if allowed?
         show_running index
       end
     end
@@ -50,15 +49,12 @@ module DB
       model_to_save.save || show_error
     end
 
-    def filtered
-      if @range.nil?
-        false
-      else
-        filtered_condition
-      end
+    def allowed?
+      return true if @range.nil?
+      !filtered?
     end
 
-    def filtered_condition
+    def filtered?
       false
     end
 

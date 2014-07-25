@@ -31,7 +31,7 @@ module DB
     # true filters
     # false allows
     #
-    def filtered_condition
+    def filtered?
       @range.exclude? row[:human_ref].to_i
     end
 

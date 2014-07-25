@@ -15,7 +15,7 @@ class Debtors
   def calculate
     Account.all.each do |account|
       @account = account
-      balance_status unless filtered
+      balance_status if allowed?
     end
   end
 
@@ -31,15 +31,12 @@ class Debtors
     puts no_balance_msg
   end
 
-  def filtered
-    if human_ref_range.nil?
-      false
-    else
-      filtered_condition
-    end
+  def allowed?
+    return true if @range.nil?
+    !filtered?
   end
 
-  def filtered_condition
+  def filtered?
     human_ref_range.exclude? account.property.human_ref
   end
 
