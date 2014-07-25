@@ -1,5 +1,12 @@
 require_relative '../../lib/modules/method_missing'
 
+# AccountDecorator
+#
+# AccountDecorator prepares credits and debits and allows them
+# to be viewed
+#
+#
+#
 class AccountDecorator
   include MethodMissing
 
@@ -7,45 +14,42 @@ class AccountDecorator
     @source = account
   end
 
+  # Transactions covering all time
+  #
   def items
-    running_balance = 0
-    [*@source.debits.map { |debit| AccountDebitDecorator.new debit },
-     *@source.credits.map { |credit| AccountCreditDecorator.new credit }]
-    .sort_by(&:on_date)
-    .map do |transaction|
-      running_balance += transaction.amount
-      transaction.balance = running_balance
-      transaction
-    end
+    running_balance ordered_items
   end
 
+  # Transactions covering recent period (typically this year only)
+  #
   def abbrev_items
-    date = Date.current.at_beginning_of_year
+    abbrev_before_date = Date.current.at_beginning_of_year
+    previous_items, current_items =
+    ordered_items.partition { |item| item.on_date < abbrev_before_date }
 
-    running_balance = balance_on_date(date)
-    [AccountBalanceDecorator.new(running_balance, Date.current.at_beginning_of_year)] +
-    [*@source.debits.select { |debit| debit.on_date >= date }
-              .map { |debit| AccountDebitDecorator.new debit },
-     *@source.credits.select { |debit| debit.on_date >= date }
-             .map { |credit| AccountCreditDecorator.new credit }]
-    .sort_by(&:on_date)
-    .map do |transaction|
-      running_balance += transaction.amount
-      transaction.balance = running_balance
-      transaction
-    end
+    running_balance \
+    [AccountBalanceDecorator.new(total(previous_items), abbrev_before_date)] +
+    current_items
   end
 
   private
 
-  def balance_on_date date
-    @source.debits
-           .select { |debit| debit.on_date < date }
-           .map { |debit| debit.amount }
-           .inject(0, :+) -
-    @source.credits
-           .select { |credit| credit.on_date < date }
-           .map { |credit| credit.amount }
-           .inject(0, :+)
+  def ordered_items
+    [*@source.debits.map { |debit| AccountDebitDecorator.new debit },
+     *@source.credits.map { |credit| AccountCreditDecorator.new credit }]
+    .sort_by(&:on_date)
+  end
+
+  def running_balance items
+    running_balance = 0
+    items.map do |item|
+      running_balance += item.amount
+      item.running_balance = running_balance
+      item
+    end
+  end
+
+  def total items
+    items.map { |item| item.amount }.inject(0, :+)
   end
 end

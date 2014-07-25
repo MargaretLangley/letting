@@ -4,40 +4,40 @@ describe AccountDecorator do
   before { Timecop.travel(Date.new(2013, 1, 31)) }
   after { Timecop.return }
 
-  let(:account) do
-    account = account_and_charge_new
-    account.debits.push debit_new
-    account.debits.push debit_new on_date: '25/9/2013'
-    account.credits.push credit_new
-    account.save!
-    AccountDecorator.new account
+  describe 'running-balance' do
+    it 'keeps a working balance' do
+      account = AccountDecorator.new account_and_charge_new
+      account.debits.push debit_new on_date: '25/9/2012', amount: 5.00
+      account.debits.push debit_new on_date: '25/9/2013', amount: 10.00
+      account.credits.push credit_new on_date: '25/9/2014', amount: 12.00
+      expect(account.items[0].running_balance).to eq 5.00
+      expect(account.items[1].running_balance).to eq 15.00
+      expect(account.items[2].running_balance).to eq 3.00
+    end
   end
 
-  context 'sorted' do
+  describe 'sorted' do
+    let(:account) do
+      account = account_and_charge_new
+      account.debits.push debit_new on_date: '25/3/2013'
+      account.debits.push debit_new on_date: '25/9/2013'
+      account.credits.push credit_new on_date: '30/4/2013'
+      account.save!
+      AccountDecorator.new account
+    end
 
-    it 'items' do
+    it 'orders items by date' do
       expect(account.items[0].on_date).to eq Date.new 2013, 3, 25
       expect(account.items[1].on_date).to eq Date.new 2013, 4, 30
       expect(account.items[2].on_date).to eq Date.new 2013, 9, 25
     end
 
-    it 'items-balance' do
-      account = AccountDecorator.new account_and_charge_new
-      account.debits.push debit_new on_date: '25/9/2012', amount: 10.00
-      account.debits.push debit_new on_date: '25/9/2013', amount: 10.00
-      account.credits.push credit_new on_date: '25/9/2014', amount: 15.00
-      expect(account.items[0].balance).to eq 10.00
-      expect(account.items[1].balance).to eq 20.00
-      expect(account.items[2].balance).to eq 5.00
-    end
-
-    it 'abbrev-items' do
+    it 'orders abbrev-items by date' do
       expect(account.abbrev_items[0].on_date).to eq Date.new 2013, 1, 1
       expect(account.abbrev_items[1].on_date).to eq Date.new 2013, 3, 25
       expect(account.abbrev_items[2].on_date).to eq Date.new 2013, 4, 30
       expect(account.abbrev_items[3].on_date).to eq Date.new 2013, 9, 25
     end
-
   end
 
   context 'zero balance' do
@@ -48,7 +48,7 @@ describe AccountDecorator do
     end
 
     it 'abbrev_items' do
-      expect(account.abbrev_items.first.balance).to eq 0.0
+      expect(account.abbrev_items.first.running_balance).to eq 0.0
     end
   end
 
@@ -61,7 +61,7 @@ describe AccountDecorator do
       account.save!
       dec = AccountDecorator.new account
 
-      expect(dec.abbrev_items.first.balance).to eq 14.50
+      expect(dec.abbrev_items.first.running_balance).to eq 14.50
     end
   end
 end
