@@ -41,6 +41,7 @@ class DebitGenerator < ActiveRecord::Base
     debits.empty?
   end
 
+  # simple value equality - (not sure if that's what I need)
   def == other
     search_string == other.search_string &&
     start_date == other.start_date &&

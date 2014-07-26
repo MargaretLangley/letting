@@ -40,6 +40,8 @@ class Debit < ActiveRecord::Base
     amount.round(2) == settled.round(2)
   end
 
+  # Value equality - not sure if that is what is required
+  #
   def == other
     charge_id == other.charge_id &&
     on_date == other.on_date &&

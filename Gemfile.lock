@@ -436,6 +436,7 @@ DEPENDENCIES
   elasticsearch-extensions
   elasticsearch-model (~> 0.1.4)
   elasticsearch-rails (~> 0.1.4)
+  equalizer
   font-awesome-rails
   guard
   guard-livereload

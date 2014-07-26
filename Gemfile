@@ -11,6 +11,8 @@ gem 'dotenv-deployment', '~> 0.0.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '~>0.17.0'
 
+gem 'equalizer'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 gem 'sprockets', '~>2.11.0' # bugfix 3376e59

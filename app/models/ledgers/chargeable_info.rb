@@ -12,6 +12,7 @@
 ####
 #
 class ChargeableInfo
+  include Equalizer.new(:account_id, :amount, :charge_id, :on_date)
   attr_reader :account_id, :charge_id, :on_date, :amount
 
   def self.from_charge args = {}
@@ -19,13 +20,6 @@ class ChargeableInfo
         on_date:    args[:on_date],
         amount:     args[:amount],
         account_id: args[:account_id]
-  end
-
-  def == other
-    charge_id  == other.charge_id &&
-    on_date    == other.on_date &&
-    amount     == other.amount &&
-    account_id == other.account_id
   end
 
   def to_hash overrides = {}
