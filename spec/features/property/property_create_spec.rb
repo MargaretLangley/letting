@@ -10,7 +10,7 @@ describe Property, type: :feature do
     client_create!
     navigate_to_create_page
     validate_page
-    expect(page).to have_css('.spec-entity-count', count: 2)
+    expect(page).to have_css('.spec-entity-count', count: 1)
     fill_in_form
     click_on 'Create/Update Account'
     expect(page).to_not have_text 'The property could not be saved.'
