@@ -71,21 +71,6 @@ class ClientsController < ApplicationController
 
   private
 
-  def find_route model
-    case params[:search_action]
-    when 'show'
-      client_path model
-    when 'edit'
-      edit_client_path model
-    else
-      clients_path
-    end
-  end
-
-  def unique_search?
-    search_param.present? && @clients.size == 1
-  end
-
   def search_param
     params[:search]
   end

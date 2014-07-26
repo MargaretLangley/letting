@@ -41,7 +41,7 @@ Letting::Application.routes.draw do
       get :search
     end
   end
-  resources :invoices, only: [:new]
+  resources :invoices, only: [:index, :show]
   resources :sheets do
     collection do
       get :search

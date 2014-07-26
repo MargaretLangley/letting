@@ -32,12 +32,4 @@ class Client < ActiveRecord::Base
         address: {}
       })
   end
-
-  def self.sql_search search
-    if search.blank?
-      Client.all.includes(:address).order(:human_ref)
-    else
-      search(query).records
-    end
-  end
 end

@@ -75,17 +75,6 @@ class PropertiesController < ApplicationController
 
   private
 
-  def find_route model
-    case params[:search_action]
-    when 'show'
-      property_path model
-    when 'edit'
-      edit_property_path model
-    else
-      properties_path
-    end
-  end
-
   def property_params
     params.require(:property)
       .permit :human_ref,
