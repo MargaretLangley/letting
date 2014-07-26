@@ -15,7 +15,8 @@ describe CreditDecorator do
     end
 
     it 'sums debit' do
-      Debit.create! debit_attributes amount: 100.08
+      Debit.create! debit_attributes on_date: '2013-03-30', amount: 50.08
+      Debit.create! debit_attributes on_date: '2013-06-30', amount: 50.00
       expect(credit_dec.owing).to eq 100.08
     end
   end
