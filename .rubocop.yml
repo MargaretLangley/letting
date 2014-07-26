@@ -23,9 +23,11 @@ Lint/AmbiguousRegexpLiteral:
   Enabled: false
 Style/MethodDefParentheses:
   Enabled: false
-Style/UnneededPercentQ:
-  Enabled: false
+Style/MethodLength:
+  Max: 10
 Style/TrailingComma:
+  Enabled: false
+Style/UnneededPercentQ:
   Enabled: false
 
 #
@@ -34,8 +36,3 @@ Style/TrailingComma:
 # Offense count: 72
 Style/Documentation:
  Enabled: false
-
-# AIM for 10 Lines Current 12 ( 2 offences before you can get there)
-# Configuration parameters: CountComments.
-Style/MethodLength:
-  Max: 12

@@ -18,9 +18,7 @@ def expect_address_nottingham
     'Nottingham',
     'Notts',
     'NG2 6AG'
-  ].each do |line|
-    expect(page).to have_text line
-  end
+  ].each { |line| expect(page).to have_text line }
 end
 
 def expect_address_edgbaston
