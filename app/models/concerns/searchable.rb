@@ -35,7 +35,8 @@ module Searchable
       }
     )
 
-    mapping _all: { index_analyzer: :nGram_analyzer, search_analyzer: :whitespace_analyzer } do
+    mapping _all: { index_analyzer: :nGram_analyzer,
+                    search_analyzer: :whitespace_analyzer } do
       indexes :human_ref, type: :integer, boost: 2.0, index: :not_analyzed
       indexes :occupier, type: :string
       indexes :address do
@@ -67,7 +68,9 @@ end
 # Create
 # Property.__elasticsearch__.create_index! force: true
 # Create None-standard index
-# Property.__elasticsearch__.client.indices.create  index: Property.index_name,  body: { settings: Property.settings.to_hash, mappings: Property.mappings.to_hash }
+# Property.__elasticsearch__.client.indices.create  index: Property.index_name,
+#   body: { settings: Property.settings.to_hash,
+#            mappings: Property.mappings.to_hash }
 #
 # Read
 # GET /properties/_settings

@@ -3,7 +3,8 @@
 # The Account is a summation of charges, debits, and credits on a property.
 #
 # The account has one property. A property has a number of charges.
-# The charges generate debits and payments create credits that cover these debits.
+# The charges generate debits and payments create credits that cover
+# these debits.
 #
 # Definition
 #
@@ -43,7 +44,9 @@ class Account < ActiveRecord::Base
   #
   def prepare_debits date_range
     charges.map do |charge|
-      charge.next_chargeable(date_range).map { |chargeable| Debit.new(chargeable.to_hash) }
+      charge.next_chargeable(date_range).map do |chargeable|
+        Debit.new(chargeable.to_hash)
+      end
     end.flatten
   end
 

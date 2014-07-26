@@ -8,7 +8,8 @@ module DB
 
     def contact_row
       %q(11,  Mr,  D, Example, Mrs, A N, Other&, 1, ExampleHouse,  2, ) +
-      %q(Example Street, District ,Example Town,  Example County,  E10 7EX, SPAIN)
+      %q(Example Street, District ,Example Town,  Example County,) +
+      %q(E10 7EX, SPAIN)
     end
 
     context 'entity' do
@@ -38,7 +39,8 @@ module DB
 
         lower_case_town_row = \
         %q(11,  Mr,  D, Example, Mrs, A N, Other&, 1, ExampleHouse,  2, ) +
-        %q(Example Street, District ,example town,  Example County,  E10 7EX, SPAIN)
+        %q(Example Street, District ,example town,  Example County,  ) +
+        %q(E10 7EX, SPAIN)
 
         client = client_new address_attributes: { town: 'this town is changed' }
         ContactRow.new(parse_line lower_case_town_row).update_for client

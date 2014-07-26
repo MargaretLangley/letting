@@ -36,7 +36,8 @@ describe AccountDecorator do
     end
 
     it 'orders abbrev-items by date' do
-      expect(account.abbrev_items.map { |item| item.on_date }).to contain_exactly \
+      expect(account.abbrev_items.map { |item| item.on_date }).to \
+        contain_exactly \
         Date.new(2013, 1, 1),
         Date.new(2013, 3, 25),
         Date.new(2013, 4, 30),

@@ -1,5 +1,6 @@
 require 'spec_helper'
 require_relative '../../../app/models/admin/permission'
+# rubocop: disable Style/LineLength
 
 RSpec::Matchers.define :allow? do |*args|
   match do |permission|

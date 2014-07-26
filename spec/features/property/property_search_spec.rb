@@ -31,7 +31,8 @@ describe Property, type: :feature do
     end
 
     # Occasional Fail
-    # Failure/Error: Failure/Error: expect(page).to have_text 'No Matches found. Search again.'
+    # Failure/Error: Failure/Error: expect(page).to \
+    # have_text 'No Matches found. Search again.'
     it 'search not found when absent' do
       visit '/properties'
       fill_in 'search', with: '599'

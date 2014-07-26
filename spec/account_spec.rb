@@ -15,7 +15,8 @@ describe Account, type: :model do
         account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
         account.debits.push debit_new on_date: '25/3/2012', amount: 10.00
         account.credits.push credit_new on_date: '25/4/2012', amount: 5.50
-        expect(account.balance Date.new 2012, 4, 24).to eq BigDecimal.new('-20.00')
+        expect(account.balance Date.new 2012, 4, 24).to \
+          eq BigDecimal.new('-20.00')
       end
     end
 
@@ -62,13 +63,17 @@ describe Account, type: :model do
 
     describe '.find_by_human_ref' do
       it('handles nil') { expect(Account.find_by_human_ref(nil)).to be_nil }
-      it('matching ref') { expect(Account.find_by_human_ref('2002')).to eq account }
+      it('matching ref') do
+        expect(Account.find_by_human_ref('2002')).to eq account
+      end
     end
 
     describe '.between' do
       it('handles nil') { expect(Account.between?(nil).size).to eq 0 }
       it('matching ref') { expect(Account.between?('2002').size).to eq 1 }
-      it('matching range') { expect(Account.between?('2000-2002').size).to eq 1 }
+      it('matching range') do
+        expect(Account.between?('2000-2002').size).to eq 1
+      end
       it('unlike ref range') { expect(Account.between?('4000').size).to eq 0 }
     end
   end

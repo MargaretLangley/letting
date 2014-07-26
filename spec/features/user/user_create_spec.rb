@@ -6,7 +6,8 @@ describe User, type: :feature do
 
   it 'creates a user' do
     user_create_page.visit_page
-    user_create_page.fill_form('newuser', 'newuser@example.com', 'password', 'password')
+    user_create_page
+      .fill_form('newuser', 'newuser@example.com', 'password', 'password')
     user_create_page.click
     expect(page).to have_text /successfully created!/i
     expect(page).to have_text 'newuser@example.com'
@@ -14,7 +15,8 @@ describe User, type: :feature do
 
   it 'does not create a user without password confirmation' do
     user_create_page.visit_page
-    user_create_page.fill_form('newuser' 'newuser@example.com', 'password', 'pass')
+    user_create_page
+      .fill_form('newuser', 'newuser@example.com', 'password', 'pass')
     user_create_page.click
     expect(page).to have_text /invalid/i
     expect(page).to_not have_text 'newuser@example.com'
