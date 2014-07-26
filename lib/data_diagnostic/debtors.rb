@@ -15,7 +15,7 @@ class Debtors
   def calculate
     Account.all.each do |account|
       @account = account
-      balance_status unless filtered
+      balance_status if allowed?
     end
   end
 
@@ -28,18 +28,17 @@ class Debtors
     # If I put these commented out statements in
     # you
     @count += 1
+    # Import is not a rails app and should not go to logger
+    # rubocop: disable Rails/Output
     puts no_balance_msg
   end
 
-  def filtered
-    if human_ref_range.nil?
-      false
-    else
-      filtered_condition
-    end
+  def allowed?
+    return true if @range.nil?
+    !filtered?
   end
 
-  def filtered_condition
+  def filtered?
     human_ref_range.exclude? account.property.human_ref
   end
 
@@ -64,6 +63,7 @@ class Debtors
   end
 
   def no_balance_msg
-    "#{@count} Property #{account.property.human_ref} Balance: #{debit_amount - credit_amount}"
+    "#{@count} Property #{account.property.human_ref} "\
+    "Balance: #{debit_amount - credit_amount}"
   end
 end

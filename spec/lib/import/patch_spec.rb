@@ -18,22 +18,27 @@ module DB
 
       def different_id
         %q(12,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ) +
-        %q(Example Street, Example District ,Example Town,  Example County,  E10 7EX)
+        %q(Example Street, Example District ,Example Town,  Example County,) +
+        %q(E10 7EX)
       end
 
       def same_id
         %q(11,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ) +
-        %q(Example Street, Example District ,Example Town,  Example County,  E10 7EX)
+        %q(Example Street, Example District ,Example Town,  Example County,) +
+        %q(E10 7EX)
       end
 
       def same_id_name_changed
         %q(11,  Mr,  A, Name Changed, Mrs, A N, Other, 1, ExampleHouse,  2, ) +
-        %q(Example Street, Example District ,Example Town,  Example County,  E10 7EX)
+        %q(Example Street, Example District ,Example Town,  Example County,) +
+        %q(E10 7EX)
       end
 
       it 'only patches when id are the same' do
-        ImportClient.import parse_client(row),
-                            patch: Patch.import(Client, parse_client(different_id))
+        ImportClient.import(
+          parse_client(row),
+          patch: Patch.import(Client, parse_client(different_id))
+        )
         expect(Client.first.address.district).to be_blank
       end
 
@@ -45,9 +50,10 @@ module DB
 
       it 'if id match but entity names are differenit it errors' do
         expect($stdout).to receive(:puts).with(/Cannot match/)
-        ImportClient.import parse_client(row),
-                            patch: Patch.import(Client, parse_client(same_id_name_changed))
-
+        ImportClient.import(
+          parse_client(row),
+          patch: Patch.import(Client, parse_client(same_id_name_changed))
+        )
       end
     end
 
@@ -61,14 +67,17 @@ module DB
 
       def patch_row
         %q(122, 2013-02-26 12:35:00, Mr, A N, Example, Mrs, A N, Other,) +
-        %q(1, ExampleHouse, 2, Ex Street, Example District ,Ex Town, Ex County, E10 7EX, ) +
+        %q(1, ExampleHouse, 2, Ex Street, Example District ,Ex Town,) +
+        %q(Ex County, E10 7EX, ) +
         %q(11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0)
       end
 
       it 'works on property' do
         client_create! human_ref: 11
-        ImportProperty.import parse_property(row),
-                              patch: Patch.import(Property, parse_property(patch_row))
+        ImportProperty.import(
+          parse_property(row),
+          patch: Patch.import(Property, parse_property(patch_row))
+        )
         expect(Property.first.address.district).to eq 'Example District'
       end
     end
@@ -82,12 +91,14 @@ module DB
 
       def patch_row
         %q(122, Mr, B P, Example, Mrs, A N, Other,) +
-        %q(1, ExampleHouse, 2, Ex Street, Example District ,Ex Town, Ex County, E10 7EX, )
+        %q(1, ExampleHouse, 2, Ex Street, Example District ,Ex Town,) +
+        %q(Ex County, E10 7EX, )
       end
 
       def patch_nation_row
         %q(122, Mr, B P, Example, Mrs, A N, Other,) +
-        %q(,The Aparments, , Road  Panel 2, District Buzon 16, Town Dip de Zarzalico,) +
+        %q(,The Aparments, , Road  Panel 2, District Buzon 16, ) +
+        %q(Town Dip de Zarzalico,) +
         %q(County Puerto Lumbreras,, SPAIN)
       end
 
@@ -112,7 +123,7 @@ module DB
       CSV.parse(row_string,
                 headers: FileHeader.client,
                 header_converters: :symbol,
-                converters: -> (f) { f ? f.strip : nil }
+                converters: -> (field) { field ? field.strip : nil }
                )
     end
 
@@ -120,7 +131,7 @@ module DB
       CSV.parse(row_string,
                 headers: FileHeader.property,
                 header_converters: :symbol,
-                converters: -> (f) { f ? f.strip : nil }
+                converters: -> (field) { field ? field.strip : nil }
                )
     end
 
@@ -128,7 +139,7 @@ module DB
       CSV.parse(row_string,
                 headers: FileHeader.agent,
                 header_converters: :symbol,
-                converters: -> (f) { f ? f.strip : nil }
+                converters: -> (field) { field ? field.strip : nil }
                )
     end
 
@@ -136,7 +147,7 @@ module DB
       CSV.parse(row_string,
                 headers: FileHeader.agent_patch,
                 header_converters: :symbol,
-                converters: -> (f) { f ? f.strip : nil }
+                converters: -> (field) { field ? field.strip : nil }
                )
     end
   end

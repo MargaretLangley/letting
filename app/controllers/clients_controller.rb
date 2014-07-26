@@ -18,16 +18,14 @@ class ClientsController < ApplicationController
   def search
     # What happens for unique_search?
     @clients = Client.search(params[:search]).page(params[:page]).records
-    if @clients.present?
-      render action: 'index'
+    return render action: 'index' if @clients.present?
+
+    if params[:search].present?
+      flash.now[:alert] = 'No Matches found. Search again.'
+      @clients = Client.page(params[:page]).load
+      render :index
     else
-      if params[:search].present?
-        flash.now[:alert] = 'No Matches found. Search again.'
-        @clients = Client.page(params[:page]).load
-        render :index
-      else
-        redirect_to clients_path
-      end
+      redirect_to clients_path
     end
   end
 

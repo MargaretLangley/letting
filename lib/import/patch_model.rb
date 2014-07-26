@@ -10,6 +10,10 @@ module DB
 
     def changed? patchee_model
       changed = (@model.entities[0].name != patchee_model.entities[0].name)
+      # Import is not a rails app and should not go to logger
+      # Comment not at top because I want violation for not
+      # documenting class
+      # rubocop: disable Rails/Output
       puts changed_message patchee_model if changed
       changed
     end
