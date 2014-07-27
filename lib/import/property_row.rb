@@ -6,20 +6,21 @@ module DB
   #
   # PropertyRow
   #
-  # Used by ImportProperty to encapsulates a csv row.
+  # Encapsulates a properties file row
+  # Gives ImportProperty a level of indirection away from the Ruby CSV class.
   #
   # CSV rows are presented as arrays indexed by symbols - example 'client_ref'
-  # PropertyRow provides an interface to ImportProperty for these CSV rows.
-  # ImportProperty is then only concerned with building and assigning Property
-  # classes and not how to get this information.
+  # PropertyRow wraps up one CSV row and provides an interface to
+  # ImportProperty. ImportProperty is then only concerned with building and
+  # assigning Propertie classes and not how to get this information.
   #
   ####
   #
   class PropertyRow
     include MethodMissing
 
-    def initialize row
-      @source = row
+    def initialize file_row
+      @source = file_row
     end
 
     def human_ref

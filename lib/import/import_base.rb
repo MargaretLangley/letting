@@ -38,8 +38,8 @@ module DB
     # Imports, builds or assigns application objects
     #
     def import_loop
-      @contents.each_with_index do |row, index|
-        self.row = row
+      @contents.each_with_index do |file_row, index|
+        self.row = file_row
         import_row if allowed?
         show_running index
       end

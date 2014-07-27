@@ -23,8 +23,8 @@ module DB
       super Property, contents, range, patch
     end
 
-    def row= row
-      @row = PropertyRow.new(row)
+    def row= file_row
+      @row = PropertyRow.new(file_row)
     end
 
     def model_prepared
