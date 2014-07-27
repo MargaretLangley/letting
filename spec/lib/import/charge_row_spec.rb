@@ -3,6 +3,14 @@ require 'spec_helper'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/charge_row'
 
+####
+#
+# charge_row_spec.rb
+#
+# unit testing for charge_row
+#
+####
+#
 module DB
   describe ChargeRow do
     context 'credit row' do

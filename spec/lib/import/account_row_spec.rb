@@ -3,6 +3,12 @@ require 'spec_helper'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/account_row'
 
+####
+# AccountRow Spec
+#
+# Testing the import of Account rows.
+#
+####
 module DB
   describe AccountRow do
     let(:credit_row) { AccountRow.new parse_line credit_string }
@@ -71,17 +77,6 @@ module DB
           end
         end
 
-        describe '#account_id' do
-          it 'finds account_id' do
-            property = property_create!
-            expect(credit_row.account_id).to eq property.account.id
-          end
-
-          it 'errors if property unknown' do
-            expect { credit_row.account_id }.to raise_error PropertyRefUnknown
-          end
-        end
-
         describe 'on_date' do
           it 'returns date' do
             expect(credit_row.on_date).to eq Date.new 2012, 3, 25
@@ -108,10 +103,6 @@ module DB
 
     def debit_string
       %q(89, GR, 2012-03-25 12:00:00, Ground Rent, 60.5, 0, 0)
-    end
-
-    def credit_row_no_type
-      %q(89, Bal, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0)
     end
 
     def credit_negative

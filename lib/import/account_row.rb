@@ -1,10 +1,29 @@
 require_relative '../modules/method_missing'
 require_relative 'charge_code'
 require_relative 'errors'
+require_relative 'accounting_row'
 
 module DB
+  ####
+  #
+  # AccountRow
+  #
+  # Wrapps around an imported row of data acc_items.
+  #
+  # Called during the Importing of accounts information.
+  # ImportAccount assigns a row to AccountRow
+  #
+  # ** Next bit is aspirational **
+  #
+  # AccountRow knows the type responsible for importing the file row
+  # - balance row, credit row or debit row and instantiates it.
+  # The instantiated row is then responsbile for the remaining import.
+  #
+  ####
+  #
   class AccountRow
     include MethodMissing
+    include AccountingRow
 
     def initialize row
       @source = row
@@ -39,9 +58,7 @@ module DB
     end
 
     def account_id
-      Property.find_by!(human_ref: human_ref).account.id
-      rescue ActiveRecord::RecordNotFound
-        raise DB::PropertyRefUnknown, property_unknown_message, caller
+      account(human_ref: human_ref).id
     end
 
     private
@@ -52,10 +69,6 @@ module DB
 
     def debit
       @source[:debit].to_f
-    end
-
-    def property_unknown_message
-      "Property ref: #{human_ref} is unknown."
     end
   end
 end

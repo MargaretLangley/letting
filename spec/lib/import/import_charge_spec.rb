@@ -4,6 +4,14 @@ require_relative '../../../lib/import/file_import'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_charge'
 
+####
+#
+# import_charge_spec.rb
+#
+# unit testing for charge_row
+#
+####
+#
 module DB
   describe ImportCharge, :import do
     def row

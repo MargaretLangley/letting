@@ -1,12 +1,27 @@
 require_relative 'credit_row'
 require_relative 'import_base'
-require_relative 'creditable_amount'
 
 module DB
+  ####
+  #
+  # ImportPayment
+  #
+  # Creates payments and builds associated credits from row file data.
+  #
+  # ImportPayment consumes account information, acc_items.csv, and
+  # produces database records.
+  #
+  # Account process begins with ImportAccount, which contains both
+  # opening balances, credits and debits, and this filters the row
+  # into their bookkeeping taxonamy and feeds it to the appropriate
+  # objects. ImportPayment is responsible for credits and will
+  # create a payment and a credit from a row of file data.
+  #
+  ####
+  #
   class ImportPayment < ImportBase
     def initialize contents, range, patch
       super Payment, contents, range, patch
-      @amount = CreditableAmount.new(0)
     end
 
     def row= row
@@ -21,7 +36,6 @@ module DB
     end
 
     def model_assignment
-      @amount.deposit row.amount
       @model_to_assign.attributes = row.payment_attributes
       model_assignment_credits
     end
@@ -34,14 +48,6 @@ module DB
     end
 
     private
-
-    def find_credits_with_charge_type credits, charge_type
-      credits.find { |credit| credit.charge_type == charge_type }
-    end
-
-    def charge_type_unknown
-      "#{row.identity}: Cannot find charge type #{row.charge_type} in property"
-    end
 
     def import_not_idempotent_msg
       "#{row.identity}: Import Process for #{self.class} is not idempodent." \

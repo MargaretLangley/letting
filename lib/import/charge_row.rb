@@ -1,8 +1,21 @@
 require_relative 'charge_code'
 require_relative 'errors'
-
 require_relative '../modules/method_missing'
+
 module DB
+  #####
+  #
+  # ChargeRow
+  #
+  # Provides a cleaner interface to the charge field data.
+  #
+  # The charge import process takes rows of acc_info.csv and creates database
+  # rows in the charges table. ImportCharge initializes this object and asks
+  # for charge data from it. This object is providing a smoother interface
+  # for the process - a layer of indirection between CSV and ImportCharge.
+  #
+  #####
+  #
   class ChargeRow
     include MethodMissing
     DUE_IN_CODE_TO_STRING  = { '0'  => 'Arrears',

@@ -23,6 +23,7 @@ module DB
   #
   class DebitRow
     include MethodMissing
+    include AccountingRow
 
     def initialize row
       @source = row
@@ -32,24 +33,26 @@ module DB
       @source[:human_ref]
     end
 
+    def charge_code
+      @source[:charge_code]
+    end
+
+    def on_date
+      @source[:on_date]
+    end
+
     def amount
       debit
     end
 
-    def charge_type
-      charge = ChargeCode.to_string charge_code
-      fail DB::ChargeCodeUnknown, charge_code_message, caller unless charge
-      charge
+    def charge_id
+      charge(account: account(human_ref: human_ref),
+             charge_type: charge_type).id
     end
 
-    def charge_id
-      property = Property.find_by(human_ref: human_ref)
-      fail DB::PropertyRefUnknown, property_unknown_message, caller \
-        unless property
-      charge = Charge.find_by account_id: property.account.id,
-                              charge_type: charge_type
-      fail DB::ChargeUnknown, charge_unknown_message, caller unless charge
-      charge.id
+    def charge_type
+      charge_code_to_s(charge_code: charge_code,
+                       human_ref: human_ref)
     end
 
     def attributes
@@ -62,14 +65,6 @@ module DB
     end
 
     private
-
-    def charge_code
-      @source[:charge_code]
-    end
-
-    def on_date
-      @source[:on_date]
-    end
 
     def debit
       debit = @source[:debit].to_f
@@ -86,20 +81,6 @@ module DB
 
     def credit
       @source[:credit].to_f
-    end
-
-    def charge_code_message
-      "Property #{human_ref}: " \
-      "Charge code #{charge_code} can not be converted into a string"
-    end
-
-    def property_unknown_message
-      "Property ref: #{human_ref} is unknown."
-    end
-
-    def charge_unknown_message
-      "Charge '#{charge_type}' not found in property " \
-      "'#{human_ref || 'unknown' }'"
     end
   end
 end

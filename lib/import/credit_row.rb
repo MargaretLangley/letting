@@ -3,8 +3,27 @@ require_relative 'charge_code'
 require_relative 'errors'
 
 module DB
+  ####
+  #
+  # CreditRow
+  #
+  # Wrapps around an imported row of data acc_items.
+  #
+  # Called during the Importing of accounts information.
+  # Credit rows are selected and passed to ImportCredit by the
+  # ImportAccount object.
+  # During the importing the row is wrapped with this CreditRow. Credit object
+  # needs to relate to other database objects, charges in this case, and some
+  # data fields needs to be converted into different types;
+  # this class is responsible for data conversion of the csv fiels and leaves
+  # ImportCredit to create/assign database objects (Credits) and their related
+  # fields.
+  #
+  ####
+  #
   class CreditRow
     include MethodMissing
+    include AccountingRow
 
     def initialize row
       @source = row
@@ -27,21 +46,17 @@ module DB
     end
 
     def account_id
-      Property.find_by!(human_ref: human_ref).account.id
-      rescue ActiveRecord::RecordNotFound
-        raise DB::PropertyRefUnknown, property_unknown_message, caller
+      account(human_ref: human_ref).id
     end
 
     def charge_id
-      Charge.find_by!(account_id: account_id, charge_type: charge_type).id
-      rescue ActiveRecord::RecordNotFound
-        raise DB::ChargeUnknown, charge_unknown(account_id, charge_type), caller
+      charge(account: account(human_ref: human_ref),
+             charge_type: charge_type).id
     end
 
     def charge_type
-      charge = ChargeCode.to_string charge_code
-      fail DB::ChargeCodeUnknown, charge_code_message, caller unless charge
-      charge
+      charge_code_to_s(charge_code: charge_code,
+                       human_ref: human_ref)
     end
 
     def payment_attributes
@@ -50,24 +65,6 @@ module DB
         on_date: on_date,
         amount: amount,
       }
-    end
-
-    def identity
-      "Property: #{human_ref}, Charge code: #{charge_code}, Date: #{on_date}"
-    end
-
-    private
-
-    def charge_code_message
-      "#{identity} - #{charge_code} can not be converted into a string"
-    end
-
-    def property_unknown_message
-      "Property ref: #{human_ref} is unknown."
-    end
-
-    def charge_unknown account_id, charge_type
-      "Charge with account: #{account_id} charge_type: #{charge_type} "
     end
   end
 end

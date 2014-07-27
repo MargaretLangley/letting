@@ -4,6 +4,14 @@ require_relative '../../../lib/import/file_import'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_debit'
 
+####
+#
+# import_debit_spec.rb
+#
+# unit testing for ImportDebit
+#
+####
+#
 module DB
   describe ImportDebit, :import do
     let!(:property) do

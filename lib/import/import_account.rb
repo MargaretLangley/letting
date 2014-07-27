@@ -1,6 +1,5 @@
 require_relative 'import_base'
 require_relative 'account_row'
-require_relative 'creditable_amount'
 require_relative 'import_debit'
 require_relative 'import_payment'
 
@@ -21,7 +20,6 @@ module DB
   # rubocop: disable Style/MethodLength
   ####
   #
-
   class ImportAccount < ImportBase
     def initialize  contents, range, patch
       super Property, contents, range, patch
@@ -31,6 +29,10 @@ module DB
       @row = AccountRow.new(row)
     end
 
+    # This should be in the account_row class
+    # as we are asking about information and performing
+    # actions - when all the time the information is in account_row
+    #
     def import_row
       case
       when row.balance?
