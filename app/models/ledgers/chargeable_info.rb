@@ -9,29 +9,32 @@
 #  generates a ChargeableInfo describing a charge that is due
 #  in the queried date range.
 #
+#  Hashes use symbols as hash keys - faster and saves memory.
+#  http://stackoverflow.com/questions/8189416/why-use-symbols-as-hash-keys-in-ruby
+#
 ####
 #
 class ChargeableInfo
   include Equalizer.new(:account_id, :amount, :charge_id, :on_date)
   attr_reader :account_id, :charge_id, :on_date, :amount
 
-  def self.from_charge args = {}
+  def self.from_charge **args
     new charge_id:  args[:charge_id],
         on_date:    args[:on_date],
         amount:     args[:amount],
         account_id: args[:account_id]
   end
 
-  def to_hash overrides = {}
-    hash = {}
-    instance_variables
-      .each { |var| hash[var.to_s.delete('@')] = instance_variable_get(var) }
-    hash.merge overrides
+  # instance_values is a rails object that returns instances
+  # as hashes with keys as named strings .
+  #
+  def to_hash **overrides
+    instance_values.symbolize_keys.merge overrides
   end
 
   private
 
-  def initialize args = {}
+  def initialize **args
     @charge_id  = args[:charge_id]
     @on_date    = args[:on_date]
     @amount     = args[:amount]
