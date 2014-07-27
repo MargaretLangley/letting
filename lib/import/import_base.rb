@@ -31,7 +31,7 @@ module DB
     # range    - the rows to be imported
     # patch    - the corrections to the contents
     #
-    def self.import contents, args = {}
+    def self.import contents, **args
       new(contents, args[:range], args[:patch]).import_loop
     end
 

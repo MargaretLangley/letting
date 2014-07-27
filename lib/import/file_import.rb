@@ -35,7 +35,7 @@ module DB
       @headers = headers
     end
 
-    def self.to_a filename, args = {}
+    def self.to_a filename, **args
       new(args.fetch(:location, 'import_data'),
           args.fetch(:drop_rows, 1),
           args.fetch(:headers, true)).csv_to_arrays filename

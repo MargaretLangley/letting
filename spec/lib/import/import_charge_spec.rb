@@ -75,7 +75,7 @@ module DB
       end
     end
 
-    def import_charge row, args = {}
+    def import_charge row, **args
       ImportCharge.import parse(row), args
     end
 

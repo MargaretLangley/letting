@@ -56,7 +56,7 @@ module DB
       end
     end
 
-    def import_client row, args = {}
+    def import_client row, **args
       ImportClient.import parse(row), args
     end
 

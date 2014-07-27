@@ -52,7 +52,7 @@ module DB
       expect(Address.first.postcode).to eq 'E10 7EX'
     end
 
-    def import_client row, args = {}
+    def import_client row, **args
       ImportClient.import parse(row), args
     end
 

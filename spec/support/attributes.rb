@@ -2,27 +2,27 @@
 #
 # rubocop: disable Style/MethodLength
 
-def property_attributes overrides = {}
+def property_attributes **overrides
   {
     human_ref: 2002,
     client_id: 8989,
   }.merge overrides
 end
 
-def agent_attributes overrides = {}
+def agent_attributes **overrides
   {
     authorized: true,
     property_id: 1,
   }.merge overrides
 end
 
-def client_attributes overrides = {}
+def client_attributes **overrides
   {
     human_ref: 8008,
   }.merge overrides
 end
 
-def min_address_attributes overrides = {}
+def min_address_attributes **overrides
   {
     road:     'Edgbaston Road',
     town:     'Birmingham',
@@ -30,7 +30,7 @@ def min_address_attributes overrides = {}
   }.merge overrides
 end
 
-def address_attributes overrides = {}
+def address_attributes **overrides
   {
     flat_no:  '47',
     house_name: 'Hillbank House',
@@ -43,7 +43,7 @@ def address_attributes overrides = {}
   }.merge overrides
 end
 
-def house_address_attributes overrides = {}
+def house_address_attributes **overrides
   {
     road_no:  '294',
     road:     'Edgbaston Road',
@@ -54,7 +54,7 @@ def house_address_attributes overrides = {}
   }.merge overrides
 end
 
-def oval_address_attributes overrides = {}
+def oval_address_attributes **overrides
   {
     flat_no:  '33',
     house_name: 'The Oval',
@@ -67,7 +67,7 @@ def oval_address_attributes overrides = {}
   }.merge overrides
 end
 
-def person_entity_attributes overrides = {}
+def person_entity_attributes **overrides
   {
     entity_type: 'Person',
     title: 'Mr',
@@ -76,7 +76,7 @@ def person_entity_attributes overrides = {}
   }.merge overrides
 end
 
-def company_entity_attributes overrides = {}
+def company_entity_attributes **overrides
   {
     entity_type: 'Company',
     title: '',
@@ -85,7 +85,7 @@ def company_entity_attributes overrides = {}
   }.merge overrides
 end
 
-def oval_person_entity_attributes overrides = {}
+def oval_person_entity_attributes **overrides
   {
     entity_type: 'Person',
     title: 'Rev',
@@ -94,7 +94,7 @@ def oval_person_entity_attributes overrides = {}
   }.merge overrides
 end
 
-def user_attributes overrides = {}
+def user_attributes **overrides
   {
     nickname: 'user',
     email: 'user@example.com',
@@ -104,7 +104,7 @@ def user_attributes overrides = {}
   }.merge overrides
 end
 
-def admin_attributes overrides = {}
+def admin_attributes **overrides
   {
     nickname: 'admin',
     email: 'admin@example.com',
@@ -114,7 +114,7 @@ def admin_attributes overrides = {}
   }.merge overrides
 end
 
-def george_attributes overrides = {}
+def george_attributes **overrides
   {
     nickname: 'george',
     email: 'george@ulyett.com',
@@ -124,7 +124,7 @@ def george_attributes overrides = {}
   }.merge overrides
 end
 
-def sheet_attributes overrides = {}
+def sheet_attributes **overrides
   {
     id: 1,
     description: 'Page 1',
@@ -138,7 +138,7 @@ def sheet_attributes overrides = {}
   }.merge overrides
 end
 
-def sheet_p2_attributes overrides = {}
+def sheet_p2_attributes **overrides
   {
     id: 2,
     description: 'Page 2',

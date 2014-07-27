@@ -33,7 +33,7 @@ module DB
         eq 'Mr E. Changed & Mrs A. N. Other'
     end
 
-    def import_client row, args = {}
+    def import_client row, **args
       ImportClient.import parse(row), args
     end
 

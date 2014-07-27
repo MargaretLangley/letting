@@ -1,34 +1,34 @@
-def property_new args = {}
+def property_new **args
   property = base_property args
   add_no_agent property
   property
 end
 
-def property_create! args = {}
+def property_create! **args
   (property = property_new args).save!
   property
 end
 
-def property_with_agent_create! args = {}
+def property_with_agent_create! **args
   property = base_property args
   add_agent property
   property.save!
   property
 end
 
-def property_with_charge_new args = {}
+def property_with_charge_new **args
   property = base_property args
   add_no_agent property
   add_charge property
   property
 end
 
-def property_with_charge_create! args = {}
+def property_with_charge_create! **args
   (property = property_with_charge_new args).save!
   property
 end
 
-def property_with_monthly_charge_create! args = {}
+def property_with_monthly_charge_create! **args
   property = base_property args
   add_no_agent property
   charge = property.account.charges.build charge_attributes
@@ -49,7 +49,7 @@ end
 
 private
 
-def base_property args = {}
+def base_property **args
   property = Property.new property_attributes args
   property.prepare_for_form
   property.build_address address_attributes args.fetch(:address_attributes, {})

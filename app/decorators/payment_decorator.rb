@@ -21,7 +21,7 @@ class PaymentDecorator
   # role in the payment - hence decorator.
   attr_accessor :human_ref
 
-  def initialize payment, args = {}
+  def initialize payment, **args
     @source = payment
     @human_ref = args[:human_ref]
   end

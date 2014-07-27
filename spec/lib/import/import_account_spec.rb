@@ -141,7 +141,7 @@ module DB
       end
     end
 
-    def import_account row, args = {}
+    def import_account row, **args
       ImportAccount.import parse(row), args
     end
 

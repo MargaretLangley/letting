@@ -79,7 +79,7 @@ module DB
       end
     end
 
-    def import_property row, args = {}
+    def import_property row, **args
       ImportProperty.import parse(row), args
     end
 

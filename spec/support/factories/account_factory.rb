@@ -1,20 +1,20 @@
-def account_new args = {}
+def account_new **args
   base_account args
 end
 
-def account_create! args = {}
+def account_create! **args
   account = base_account args
   account.save!
   account
 end
 
-def account_and_charge_new args = {}
+def account_and_charge_new **args
   account = base_account args
   add_charge_attributes account, args
   account
 end
 
-def account_and_debit args = {}
+def account_and_debit **args
   account = base_account args
   add_debit_attribute account, args
   account
@@ -22,7 +22,7 @@ end
 
 private
 
-def base_account args = {}
+def base_account **args
   account = Account.new account_attributes
   account.id = args[:id] if args[:id]
   account.property_id = args[:property_id] if args[:property_id]

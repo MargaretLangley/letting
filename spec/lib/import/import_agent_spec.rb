@@ -41,7 +41,7 @@ module DB
       end
     end
 
-    def import_agent row, args = {}
+    def import_agent row, **args
       ImportAgent.import parse(row), args
     end
 

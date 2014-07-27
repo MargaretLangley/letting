@@ -1,11 +1,11 @@
-def account_attributes overrides = {}
+def account_attributes **overrides
   {
     id: 1,
     property_id: 1,
   }.merge overrides
 end
 
-def charge_attributes overrides = {}
+def charge_attributes **overrides
   {
     charge_type: 'Ground Rent',
     account_id: 2,
@@ -16,28 +16,28 @@ def charge_attributes overrides = {}
   }.merge overrides
 end
 
-def due_on_attributes_0 overrides = {}
+def due_on_attributes_0 **overrides
   {
     day: 25,
     month: 3,
   }.merge overrides
 end
 
-def due_on_attributes_1 overrides = {}
+def due_on_attributes_1 **overrides
   {
     day: 29,
     month: 9,
   }.merge overrides
 end
 
-def due_on_monthly_attributes_0 overrides = {}
+def due_on_monthly_attributes_0 **overrides
   {
     day: 1,
     month: -1,
   }.merge overrides
 end
 
-def chargeable_attributes overrides = {}
+def chargeable_attributes **overrides
   {
     charge_id: 1,
     account_id: 2,
@@ -46,7 +46,7 @@ def chargeable_attributes overrides = {}
   }.merge overrides
 end
 
-def debit_attributes overrides = {}
+def debit_attributes **overrides
   {
     account_id: 1,
     debit_generator_id: 1,
@@ -56,7 +56,7 @@ def debit_attributes overrides = {}
   }.merge overrides
 end
 
-def credit_attributes  overrides = {}
+def credit_attributes  **overrides
   {
     payment_id: 1,
     account_id: 1,
@@ -66,7 +66,7 @@ def credit_attributes  overrides = {}
   }.merge overrides
 end
 
-def payment_attributes  overrides = {}
+def payment_attributes  **overrides
   {
     account_id: 1,
     on_date: '30/4/2013',
@@ -74,7 +74,7 @@ def payment_attributes  overrides = {}
   }.merge overrides
 end
 
-def debit_generator_attributes overrides = {}
+def debit_generator_attributes **overrides
   {
     search_string: 'Lords',
     start_date: '1/3/2013',
