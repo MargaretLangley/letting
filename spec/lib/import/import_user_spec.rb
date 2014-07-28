@@ -24,7 +24,7 @@ module DB
       CSV.parse(row_string,
                 headers: FileHeader.user,
                 header_converters: :symbol,
-                converters: -> (f) { f ? f.strip : nil }
+                converters: -> (field) { field ? field.strip : nil }
                )
     end
   end

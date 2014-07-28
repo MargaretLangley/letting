@@ -1,7 +1,19 @@
 require_relative '../modules/method_missing'
 require_relative 'entity_row'
 
+# rubocop: disable Style/MethodLength
+
 module DB
+  ####
+  #
+  # ContactRow
+  # Wrapps around an imported row of data
+  #
+  # Called during the importing of any entity - property, agent
+  # and client.
+  #
+  ####
+  #
   class ContactRow
     include MethodMissing
     attr_reader :entities

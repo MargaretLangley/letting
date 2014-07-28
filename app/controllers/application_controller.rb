@@ -24,7 +24,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def address_params
-    %i(county district flat_no house_name nation road road_no town type postcode)
+    %i(county district flat_no house_name nation road road_no town type \
+       postcode)
   end
 
   def entities_params

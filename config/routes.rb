@@ -35,7 +35,8 @@ Letting::Application.routes.draw do
       get :search
     end
   end
-  resources :payments, only: [:index, :new, :create, :edit, :update, :destroy] do
+  resources :payments,
+            only: [:index, :new, :create, :edit, :update, :destroy] do
     collection do
       get :search
     end

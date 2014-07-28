@@ -16,7 +16,8 @@ describe User, type: :feature do
   context '#edit' do
     it 'no password confirmation' do
       go_to_edit_page
-      user_edit_page.fill_form('another', 'another@example.com', 'password', 'pass')
+      user_edit_page
+        .fill_form('another', 'another@example.com', 'password', 'pass')
       user_edit_page.click_update_user
       expect(page).to have_text /invalid/i
     end

@@ -1,3 +1,4 @@
+# rubocop: disable Style/LineLength
 module CapybaraHelper
   def fill_autocomplete(field, options = {})
     fill_in field, with: options[:with]

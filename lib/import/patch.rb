@@ -51,9 +51,17 @@ module DB
     end
 
     def patch_model model
-      patch_model = @patch_models.find { |m| m.human_ref == model.human_ref }
+      patch_model = find_patched_model model
       return if patch_model.nil? || patch_model.changed?(model)
       patch_model.patch model
+    end
+
+    private
+
+    def find_patched_model model
+      @patch_models.find do |patch_model|
+        patch_model.human_ref == model.human_ref
+      end
     end
   end
 end

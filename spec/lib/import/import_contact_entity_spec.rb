@@ -13,7 +13,8 @@ module DB
 
     def updated_row
       %q(11,  Mr,  E, Changed, Mrs, A N, Other, 1, ExampleHouse,  2, ) +
-      %q(Example Street, Example District,Example Town,  Example County,  E10 7EX)
+      %q(Example Street, Example District,Example Town,  Example County,) +
+      %q(E10 7EX)
     end
 
     def one_entity_row
@@ -63,7 +64,7 @@ module DB
       CSV.parse(row_string,
                 headers: FileHeader.client,
                 header_converters: :symbol,
-                converters: -> (f) { f ? f.strip : nil }
+                converters: -> (field) { field ? field.strip : nil }
                )
     end
   end

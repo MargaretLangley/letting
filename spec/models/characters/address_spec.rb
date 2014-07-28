@@ -139,12 +139,13 @@ describe Address, type: :model do
     describe '#address_lines' do
       it 'writes flat property' do
         address = Address.new address_attributes
-        expect(address.address_lines[0]).to eq 'Flat 47 Hillbank House'
-        expect(address.address_lines[1]).to eq '294 Edgbaston Road'
-        expect(address.address_lines[2]).to eq 'Edgbaston'
-        expect(address.address_lines[3]).to eq 'Birmingham'
-        expect(address.address_lines[4]).to eq 'West Midlands'
-        expect(address.address_lines[5]).to eq 'B5 7QU'
+        expect(address.address_lines).to contain_exactly \
+          'Flat 47 Hillbank House',
+          '294 Edgbaston Road',
+          'Edgbaston',
+          'Birmingham',
+          'West Midlands',
+          'B5 7QU'
       end
 
       it 'writes house from road' do

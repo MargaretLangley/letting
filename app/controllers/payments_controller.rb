@@ -48,8 +48,9 @@ class PaymentsController < ApplicationController
   end
 
   def create_payment
-    @payment = PaymentDecorator.new(Payment.new(payment_params.except(:human_ref)),
-                                    payment_params.slice('human_ref'))
+    @payment = PaymentDecorator
+                 .new(Payment.new(payment_params.except(:human_ref)),
+                      payment_params.slice('human_ref'))
     if @payment.source.save
       redirect_to new_payment_path, notice: created_message
     else

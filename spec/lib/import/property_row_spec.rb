@@ -34,7 +34,7 @@ module DB
       CSV.parse_line(row_string,
                      headers: FileHeader.property,
                      header_converters: :symbol,
-                     converters: -> (f) { f ? f.strip : nil }
+                     converters: -> (field) { field ? field.strip : nil }
                     )
     end
 

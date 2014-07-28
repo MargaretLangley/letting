@@ -10,28 +10,38 @@ def fill_in_address_nottingham
 end
 
 def expect_address_nottingham
-  expect(page).to have_text '471'
-  expect(page).to have_text 'Trent Bridge'
-  expect(page).to have_text '63c'
-  expect(page).to have_text 'Radcliffe Road'
-  expect(page).to have_text 'Nottingham'
-  expect(page).to have_text 'Notts'
-  expect(page).to have_text 'NG2 6AG'
+  [
+    '471',
+    'Trent Bridge',
+    '63c',
+    'Radcliffe Road',
+    'Nottingham',
+    'Notts',
+    'NG2 6AG'
+  ].each { |line| expect(page).to have_text line }
 end
 
 def expect_address_edgbaston
-  expect_index_address_edgbaston
-  expect(page).to have_text 'Edgbaston'      # district
-  expect(page).to have_text 'West Midlands'  # county
-  expect(page).to have_text 'B5 7QU'         # postcode
+  expect_index_address
+  [
+    'Edgbaston',      # district
+    'West Midlands',  # county
+    'B5 7QU'          # postcode
+  ].each do |line|
+    expect(page).to have_text line
+  end
 end
 
-def expect_index_address_edgbaston
-  expect(page).to have_text '47'             # Flat No
-  expect(page).to have_text 'Hillbank House' # House Name
-  expect(page).to have_text '294'            # House No
-  expect(page).to have_text 'Edgbaston Road' # Road
-  expect(page).to have_text 'Birmingham'     # Town
+def expect_index_address
+  [
+    '47',             # Flat No
+    'Hillbank House', # House Name
+    '294',            # House No
+    'Edgbaston Road', # Road
+    'Birmingham'      # Town
+  ].each do |line|
+    expect(page).to have_text line
+  end
 end
 
 def expect_address_edgbaston_by_field
