@@ -1,5 +1,6 @@
 require 'spec_helper'
 require_relative '../../../lib/import/charge_values'
+# rubocop: disable Style/Documentation
 
 module DB
   describe ChargeValues do

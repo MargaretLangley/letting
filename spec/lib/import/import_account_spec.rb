@@ -3,15 +3,8 @@ require 'spec_helper'
 require_relative '../../../lib/import/file_import'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_account'
+# rubocop: disable Style/Documentation
 
-####
-#
-# import_account_spec.rb
-#
-# unit testing for ImportAccount
-#
-####
-#
 module DB
   describe ImportAccount, :import do
     let!(:property) do

@@ -5,6 +5,7 @@ require_relative '../../../lib/import/patch'
 require_relative '../../../lib/import/import_client'
 require_relative '../../../lib/import/import_property'
 require_relative '../../../lib/import/import_agent'
+# rubocop: disable Style/Documentation
 
 module DB
   describe 'Patch', :import do

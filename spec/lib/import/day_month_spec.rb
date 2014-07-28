@@ -1,5 +1,6 @@
 require 'spec_helper'
 require_relative '../../../lib/import/day_month'
+# rubocop: disable Style/Documentation
 
 module DB
   describe DayMonth do

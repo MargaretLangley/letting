@@ -2,6 +2,7 @@ require 'csv'
 require 'spec_helper'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/contact_row'
+# rubocop: disable Style/Documentation
 
 module DB
   describe ContactRow do

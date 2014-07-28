@@ -1,4 +1,5 @@
 require 'spec_helper'
+# rubocop: disable Style/Documentation
 
 class Validatable
   include ActiveModel::Validations

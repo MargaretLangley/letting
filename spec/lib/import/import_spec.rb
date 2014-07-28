@@ -1,4 +1,5 @@
 require_relative '../../../lib/import/file_import'
+# rubocop: disable Style/Documentation
 
 module DB
   describe FileImport do

@@ -1,5 +1,6 @@
 require 'spec_helper'
 require_relative '../../../lib/import/patch_model'
+# rubocop: disable Style/Documentation
 
 module DB
   describe 'PatchModel' do

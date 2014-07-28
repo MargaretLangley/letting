@@ -3,6 +3,7 @@ require 'spec_helper'
 require_relative '../../../lib/import/file_import'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_agent'
+# rubocop: disable Style/Documentation
 
 module DB
   describe ImportAgent, :import do

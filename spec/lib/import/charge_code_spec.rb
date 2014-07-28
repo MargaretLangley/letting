@@ -1,5 +1,6 @@
 require 'spec_helper'
 require_relative '../../../lib/import/charge_code'
+# rubocop: disable Style/Documentation
 
 module DB
   describe ChargeCode do
