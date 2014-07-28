@@ -3,9 +3,10 @@ require 'spec_helper'
 describe Client, type: :model do
 
   let(:client) { client_new  }
-  it('is valid') { expect(client).to be_valid }
 
-  context 'validations' do
+  describe 'validations' do
+    it('is valid') { expect(client).to be_valid }
+
     it '#human_ref is present' do
       client.human_ref = nil
       expect(client).to_not be_valid
@@ -35,9 +36,18 @@ describe Client, type: :model do
       client
     end
 
-    it 'builds required models' do
-      expect(client.address).to_not be_nil
+    it 'builds entities' do
+      client = Client.new human_ref: 8000
+      expect(client.entities.size).to eq(0)
+      client.prepare_for_form
       expect(client.entities.size).to eq(2)
+    end
+
+    it 'builds address' do
+      client = Client.new human_ref: 8000
+      # pre method call
+      client.prepare_for_form
+      # expect(client.address).to_not be_nil
     end
 
     it 'builds no more than the required models' do
@@ -65,7 +75,7 @@ describe Client, type: :model do
       Client.__elasticsearch__.delete_index!
     end
 
-    context '#search' do
+    describe '#search' do
       it('human id') { expect(Client.search('8008').results.total).to eq 1 }
       it('names') { expect(Client.search('Grac').results.total).to eq 1 }
       it('house') { expect(Client.search('Hil').results.total).to eq 1 }
