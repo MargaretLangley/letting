@@ -18,8 +18,8 @@ describe Client, type: :model do
     end
 
     it '#human_ref is unique' do
-      client.save!
-      expect { Client.create! human_ref: 1 }
+      client_create! human_ref: 1
+      expect {client_create! human_ref: 1}
         .to raise_error ActiveRecord::RecordInvalid
     end
 
@@ -30,33 +30,30 @@ describe Client, type: :model do
   end
 
   context '#prepare_for_form' do
-    let(:client) do
-      client = Client.new human_ref: 8000
-      client.prepare_for_form
-      client
-    end
-
     it 'builds entities' do
-      client = Client.new human_ref: 8000
+      client = Client.new
       expect(client.entities.size).to eq(0)
       client.prepare_for_form
       expect(client.entities.size).to eq(2)
     end
 
     it 'builds address' do
-      client = Client.new human_ref: 8000
-      # pre method call
+      client = Client.new
+      expect(client.address).to be_nil
       client.prepare_for_form
-      # expect(client.address).to_not be_nil
+      expect(client.address).to_not be_nil
     end
 
-    it 'builds no more than the required models' do
-      client.prepare_for_form  # * 2
-      expect(client.address).to_not be_nil
+    it 'limits the number of prepared entities' do
+      client = Client.new
+      client.prepare_for_form
+      client.prepare_for_form
       expect(client.entities.size).to eq(2)
     end
 
     it '#clear_up_form destroys unused models' do
+      client = Client.new
+      client.prepare_for_form
       client.clear_up_form
       expect(client.address).to_not be_nil
       expect(client.entities.reject(&:marked_for_destruction?).size)
@@ -65,7 +62,6 @@ describe Client, type: :model do
   end
 
   describe 'search' do
-
     before :each do
       client_create!
       Client.import force: true, refresh: true
