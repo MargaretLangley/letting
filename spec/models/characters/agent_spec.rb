@@ -4,22 +4,6 @@ describe Agent, type: :model do
 
   it('is valid') { expect(agent_new).to be_valid }
 
-  context 'new agent' do
-    let(:new_agent) { Agent.new }
-    it('has nil address') { expect(new_agent.address).to be_nil }
-    it('has no entities') { expect(new_agent.entities.size).to eq 0 }
-
-    context 'unauthorized and prepared' do
-      before :each do
-        new_agent.prepare_for_form
-      end
-      it 'has entities but all blank' do
-        expect(new_agent.entities.size).to eq(2)
-        expect(new_agent.entities).to be_all(&:empty?)
-      end
-    end
-  end
-
   context 'prepared' do
     let(:agent) do
       agent = nameless_agent
@@ -27,10 +11,6 @@ describe Agent, type: :model do
       expect(agent.entities.size).to eq(1)
       agent.prepare_for_form
       agent
-    end
-
-    it 'has dummy entity' do
-      expect(agent.entities.size).to eq(2)
     end
 
     context 'when authorized' do
