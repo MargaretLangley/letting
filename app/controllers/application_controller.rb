@@ -35,11 +35,9 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    begin
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    rescue
-      reset_session
-    end
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  rescue
+    reset_session
   end
   helper_method :current_user
 
