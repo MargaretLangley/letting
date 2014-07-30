@@ -2,20 +2,19 @@ require 'spec_helper'
 
 describe User, type: :model do
   let(:user) { User.new user_attributes }
-  it('is valid') { expect(user).to be_valid }
 
-  context 'validations' do
-    context '#email' do
+  describe 'validations' do
+    it('is valid') { expect(user).to be_valid }
 
+    describe '#email' do
       it 'present' do
         user.email = nil
         expect(user).to_not be_valid
       end
 
-      it('unique') do
-        user.save!
-        user2 = User.new user_attributes
-        expect { user2.save! email: 'example@example.com' }
+      it 'is unique' do
+        User.create! user_attributes email: 'user@example.com'
+        expect { User.create! user_attributes email: 'user@example.com' }
           .to raise_error ActiveRecord::RecordInvalid
       end
 
@@ -25,8 +24,8 @@ describe User, type: :model do
       end
     end
 
-    context 'password' do
-      it('present') do
+    describe 'password' do
+      it 'is present' do
         # Bug you can't assign a nil password you can initialize it with
         # empty string
         # stackoverflow.com why-is-password-validate-presence-ignored
@@ -41,5 +40,4 @@ describe User, type: :model do
       end
     end
   end
-
 end
