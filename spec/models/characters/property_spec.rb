@@ -18,10 +18,9 @@ describe Property, type: :model do
         expect(property).to_not be_valid
       end
 
-      it 'is unique' do
-        property.save!
-        property.id = nil # dirty way of saving it again
-        expect { property.save! human_ref: 8000 }
+      it '#human_ref is unique' do
+        property_create! human_ref: 8000
+        expect { property_create! human_ref: 8000 }
           .to raise_error ActiveRecord::RecordInvalid
       end
     end
