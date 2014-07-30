@@ -4,7 +4,7 @@
 #
 # Why does this class exist?
 #
-# represents a person or company in the application.
+# represents a person (indivicual or a company) in the application.
 #
 # How does this fit into the larger system
 #
@@ -23,12 +23,10 @@
 #
 class Entity < ActiveRecord::Base
   belongs_to :entitieable, polymorphic: true
-  validates :entity_type, presence: true
   validates :name, length: { maximum: 64 }, presence: true
   validates :title, :initials, length: { maximum: 10 }
 
   def prepare
-    self.entity_type = 'Person' if new_record?
   end
 
   def clear_up_form
@@ -41,10 +39,6 @@ class Entity < ActiveRecord::Base
 
   def empty?
     attributes.except(*ignored_attrs).values.all?(&:blank?)
-  end
-
-  def company?
-    entity_type == 'Company'
   end
 
   def full_name

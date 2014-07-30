@@ -4,8 +4,7 @@
 #
 # Why does this class exist?
 #
-# Adds methods to an association of entities; entities hold
-# either a person or company name.
+# Adds methods to an association of entities;
 #
 # How does this fit into the larger system?
 #

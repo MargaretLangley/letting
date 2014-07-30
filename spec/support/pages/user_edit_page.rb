@@ -1,3 +1,12 @@
+######
+# UseEditPage
+#
+# Encapsulates the User Page (edit)
+#
+# The layer hides the capybara calls to make the functional rspec tests that
+# use this class simpler.
+#####
+#
 class UserEditPage
   include Capybara::DSL
 

@@ -69,7 +69,14 @@ end
 
 def person_entity_attributes **overrides
   {
-    entity_type: 'Person',
+    title: 'Mr',
+    initials: 'W G',
+    name: 'Grace'
+  }.merge overrides
+end
+
+def person_attributes **overrides
+  {
     title: 'Mr',
     initials: 'W G',
     name: 'Grace'
@@ -78,7 +85,6 @@ end
 
 def company_entity_attributes **overrides
   {
-    entity_type: 'Company',
     title: '',
     initials: '',
     name: 'ICC'
@@ -87,7 +93,6 @@ end
 
 def oval_person_entity_attributes **overrides
   {
-    entity_type: 'Person',
     title: 'Rev',
     initials: 'V W',
     name: 'Knutt'

@@ -1,8 +1,4 @@
 module PropertiesHelper
-  def heading entity
-    entity.company? ? 'Company Name ' : 'Name'
-  end
-
   def hide_new_record_unless_first record, index
     record.new_record? && index > 0 ? 'js-revealable' : ''
   end
@@ -13,9 +9,5 @@ module PropertiesHelper
 
   def destroyable record, index
     record.persisted? && index > 0 ? 'destroyable' : ''
-  end
-
-  def hide_field_on_start_by_entity_type record
-    record.company? ? 'js-toggle-on-start' : ''
   end
 end

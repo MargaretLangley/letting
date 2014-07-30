@@ -9,10 +9,6 @@ module DB
       @name = name ? tail_punctuation(name).strip : ''
     end
 
-    def type
-      person? ? 'Person' : 'Company'
-    end
-
     def title
       @title || ''
     end
@@ -37,7 +33,6 @@ module DB
 
     def attributes
       {
-        entity_type: type,
         title: title,
         initials: initials,
         name: name,

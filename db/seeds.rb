@@ -25,7 +25,6 @@ end
 def seed_clients
   Entity.create! [
     {
-      entity_type: 'Person',
       entitieable_id: 1,
       entitieable_type: 'Client',
       title: 'Mr',
@@ -33,7 +32,6 @@ def seed_clients
       name: 'Ranjitsinhji'
     },
     {
-      entity_type: 'Person',
       entitieable_id: 2,
       entitieable_type: 'Client',
       title: 'Mr',
@@ -41,7 +39,6 @@ def seed_clients
       name: 'Simpson'
     },
     {
-      entity_type: 'Person',
       entitieable_id: 3,
       entitieable_type: 'Client',
       title: 'Mr',
@@ -107,7 +104,6 @@ end
 def create_entities
   Entity.create! [
     {
-      entity_type: 'Person',
       entitieable_id: 1,
       entitieable_type: 'Property',
       title: 'Mr',
@@ -115,7 +111,6 @@ def create_entities
       name: 'Hendren'
     },
     {
-      entity_type: 'Person',
       entitieable_id: 2,
       entitieable_type: 'Property',
       title: 'Mr',
@@ -123,7 +118,6 @@ def create_entities
       name: 'Gatting'
     },
     {
-      entity_type: 'Person',
       entitieable_id: 3,
       entitieable_type: 'Property',
       title: 'Mr',
@@ -131,7 +125,6 @@ def create_entities
       name: 'Hearne'
     },
     {
-      entity_type: 'Person',
       entitieable_id: 4,
       entitieable_type: 'Property',
       title: 'Mr',
@@ -200,7 +193,6 @@ end
 def create_agent_entities
   Entity.create! [
     {
-      entity_type: 'Person',
       entitieable_id: 1,
       entitieable_type: 'Agent',
       title: 'Mr',

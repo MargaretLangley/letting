@@ -1,3 +1,12 @@
+######
+# UserCreatePage
+#
+# Encapsulates the PaymentNewPage - despite the name (new/create)
+#
+# The layer hides the capybara calls to make the functional rspec tests that
+# use this class simpler.
+#####
+#
 class PaymentCreatePage
   include Capybara::DSL
 

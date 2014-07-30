@@ -27,8 +27,8 @@
 
       <div class='col-12-24'>
         <h3>Occupier</h3>
-        <%= render 'shared/entities2', f: f, entitieable: property %>
-        <%= render 'shared/address2', f: f, parent: 'property', address: AddressDecorator.new(property.address) %>
+        <%= render 'shared/entities', f: f, entitieable: property %>
+        <%= render 'shared/address', f: f, parent: 'property', address: AddressDecorator.new(property.address) %>
       </div>
       <div class='col-12-24 no-r-pad'>
         <%= render 'agent', f: f, agent: property.agent %>

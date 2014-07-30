@@ -1,8 +1,17 @@
+######
+# AddressPage
+#
+# Encapsulates the Address Page (new/create/edit/update)
+#
+# The layer hides the capybara calls to make the functional rspec tests that
+# use this class simpler.
+#####
+#
 class AddressPage
   include Capybara::DSL
 
   def add_district
-    click_on 'Add a district line to the address'
+    click_on 'Add district'
   end
 
   def delete_district

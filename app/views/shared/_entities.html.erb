@@ -1,17 +1,22 @@
-  <div class='js-reveal-parent'>
-    <% entitieable.entities.each.with_index do |entity, index| %>
-      <%= f.fields_for :entities, entity do |builder| %>
-        <div id='<%= entity_field_id entitieable, index %>'
-          class='js-fieldset <%= "#{hide_new_record_unless_first entity, index} " +
-                      "#{destroyable entity, index }" %>' >
-          <%= render 'shared/entity', f: builder, record: entity, index: index %>
-        </div>
-      <% end %>
-    <% end %>
-    <div class='col-1-4 vertical-spacer'>
-      &nbsp;
-    </div>
-    <div class='col-3-4 vertical-spacer'>
-      <%= link_to (fa_icon 'plus'), '#', class: 'js-reveal-link', title: 'Add Person' %>
-    </div>
+<div class='js-reveal-parent'>
+  <div class='col-6-24 vertical-spacer grid-header faded no-r-pad'>
+    Title
   </div>
+  <div class='col-5-24 vertical-spacer grid-header faded no-r-pad'>
+    Initials
+  </div>
+  <div class='col-11-24 vertical-spacer grid-header faded no-r-pad'>
+    Name
+  </div>
+  <div class='col-2-24 vertical-spacer grid-header faded no-r-pad'>
+    Do
+  </div>
+  <% entitieable.entities.each.with_index do |entity, index| %>
+    <%= f.fields_for :entities, entity do |builder| %>
+      <%= render 'shared/entity', f: builder, entitieable: entitieable, entity: entity, index: index %>
+    <% end %>
+  <% end %>
+  <div class='col-1-1 vertical-spacer'>
+    <%= link_to (fa_icon 'plus'), '#', class: 'js-reveal-link', title: 'Add Person' %>
+  </div>
+</div>

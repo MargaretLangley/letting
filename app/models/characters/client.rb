@@ -12,7 +12,7 @@ class Client < ActiveRecord::Base
   include Contact
   before_validation :clear_up_form
 
-  validates :human_ref, numericality: true
+  validates :human_ref, numericality: { only_integer: true, greater_than: 0 }
   validates :human_ref, uniqueness: true
   validates :entities, presence: true
 

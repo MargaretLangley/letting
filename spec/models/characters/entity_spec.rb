@@ -23,12 +23,6 @@ describe Entity, type: :model do
         expect(entity).to_not be_valid
       end
     end
-    context 'entity_type' do
-      it 'is required' do
-        entity.entity_type = nil
-        expect(entity).to_not be_valid
-      end
-    end
 
     it 'title has a max' do
       entity.title = 'a' * 11
@@ -44,13 +38,6 @@ describe Entity, type: :model do
   context 'methods' do
     context 'new entity' do
       let(:entity) { Entity.new }
-
-      context '#prepare' do
-        it 'has entity_type' do
-          entity.prepare
-          expect(entity.entity_type).to eq 'Person'
-        end
-      end
 
       context '#empty?' do
         it('is empty') { expect(entity).to be_empty }

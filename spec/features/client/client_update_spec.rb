@@ -1,135 +1,100 @@
 require 'spec_helper'
-require_relative 'client_shared'
-require_relative '../shared/entity'
 
 describe Client, type: :feature do
   before(:each) { log_in }
+  let(:client_page) { ClientPage.new }
 
-  context '#updates' do
-    let(:click_update_client) { ClientUpdatePage.new }
+  def orig_person **overrides
+    { title: 'Mr', initials: 'I R', name: 'Bell' }.merge overrides
+  end
+
+  def add_person **overrides
+    { title: 'Mr', initials: 'A', name: 'Cook' }.merge overrides
+  end
+
+  def amend_person **overrides
+    { title: 'Mrs', initials: 'J', name: 'Smit' }.merge overrides
+  end
+
+  def empty_person **overrides
+    { title: '', initials: '', name: '' }.merge overrides
+  end
+
+  context 'with one entity' do
     before(:each) do
-      client_create! id: 1
-      navigate_to_edit_page
+      entitiless_client_create \
+        human_ref: 301,
+        entities_attributes: { '0' => orig_person },
+        address_attributes: { town: 'London' }
+      client_page.edit
     end
 
-    it 'basic', js: true do
-      validate_page
-      fill_in_form
-      click_update_client.click_update_client
-      expect_client_index
-      navigate_to_client_page '278'
-      expect_client_edit
+    it 'opens valid page', js: true  do
+      expect(client_page.title).to eq 'Letting - Edit Client'
+      expect(page).to have_css('.spec-entity-count', count: 1)
+    end
+
+    # Note ** combines keywords (order + amend_person) - splatted into call
+    it 'ammends', js: true do
+      client_page.fill_in_client_id(278)
+      client_page.fill_in_entity(order: 0, **amend_person(name: 'Smit'))
+      client_page.fill_in_address(address_attributes(town: 'York'))
+      client_page.button('Update')
+      expect(client_page).to be_successful
+      client_page.edit
+      client_page.expect_ref(self, 278)
+      client_page.expect_entity(self, order: 0, **amend_person(name: 'Smit'))
+      client_page.expect_address(self, address_attributes(town: 'York'))
     end
 
     it 'has validation' do
-      invalidate_page
-      click_update_client.click_update_client
-      expect(current_path).to eq '/clients/1'
+      client_page.fill_in_client_id(-1) # invalidate_page
+      client_page.button('Update')
       expect(page).to have_text /The client could not be saved./i
     end
 
-    it 'adds second entity', js: true do
-      click_update_client.click('Add Person')
-      click_update_client.fill_in_2nd_ent_form
-      click_update_client.click_update_client
-      expect(current_path).to eq '/clients'
-      click_update_client.click_view
-      expect(page).to have_text 'Test'
+    it 'adds a second entity', js: true do
+      client_page.click('Add Person')
+      client_page.fill_in_entity(order: 1, **add_person(name: 'Cook'))
+      client_page.button('Update')
+      expect(client_page).to be_successful
+      client_page.edit
+      client_page.expect_entity(self, order: 1, **add_person(name: 'Cook'))
     end
 
-    it 'shows person', js: true do
-      expect(page).to have_text 'Person or company'
-      expect(find_field('Name').value).to have_text 'Grace'
-      expect(page).to have_text 'Initials'
-    end
-
-    it 'cancel does not change client' do
-      click_update_client.fill_in_cancel_form
-      expect(current_path).to eq '/clients'
-      expect(page).to have_text 'Grace'
-    end
-
-    it 'navigates to index page' do
-      click_on 'Clients'
-      expect(page).to have_text 'Actions'
-      expect(page).to have_link 'Delete'
+    it 'cancel stops amend' do
+      client_page.fill_in_entity(order: 0, **amend_person(name: 'Smit'))
+      client_page.click('Cancel')
+      expect(client_page.title).to eq 'Letting - Clients'
+      expect(page).to_not have_text 'Smit'
     end
 
     it 'navigates to view page' do
       click_on 'View'
-      expect(page).to have_text 'Address'
-      expect(page).to_not have_text 'Title'
-      expect(page).to_not have_link 'Delete'
-    end
-
-  end
-
-  context '#updates' do
-    let(:click_update_client) { ClientUpdatePage.new }
-
-    it '#updates shows company', js: true do
-      client_company_create! human_ref: 111
-      navigate_to_edit_page
-      expect(page).to have_text 'Company or person'
-      expect(find_field('Name').value).to have_text 'ICC'
-      expect(page).to_not have_text 'Initials'
-    end
-
-    it '#updates deletes a second entity', js: true do
-      client_two_entities_create! human_ref: 8008
-      navigate_to_edit_page
-      click_update_client.click('X')
-      click_update_client.click_update_client
-      click_update_client.click_view
-      expect(page).to have_text 'Properties Owned'
-      expect(page).to have_text 'Grace'
-      expect(page).to_not have_text 'Knutt'
+      expect(client_page.title).to eq 'Letting - View Client'
     end
   end
 
-  def navigate_to_edit_page
-    visit '/clients/'
-    click_on 'Edit'
-  end
-
-  def validate_page
-    expect(current_path).to eq '/clients/1/edit'
-    expect_client_has_original_attributes
-    expect_address_has_original_attributes
-    expect_entity_has_original_attributes
-  end
-
-  def expect_client_has_original_attributes
-    expect(find_field('Client ID').value).to have_text '8008'
-  end
-
-  def expect_address_has_original_attributes
-    within_fieldset 'client' do
-      expect_address_edgbaston_by_field
+  context 'with two entity' do
+    before(:each) do
+      entitiless_client_create \
+        human_ref: 301,
+        entities_attributes: { '0' => orig_person, '1' => add_person },
+        address_attributes: { town: 'London' }
+      client_page.edit
     end
-  end
 
-  def expect_entity_has_original_attributes
-    expect(page.all('h3', text: 'Person').count).to eq 1
-    within '#client_entity_0' do
-      expect_entity_wg_grace_by_field
+    it 'deletes second entity', js: true do
+      client_page.click('Delete Person')
+      client_page.button('Update')
+      client_page.edit
+      client_page.click('Add Person')
+      client_page.expect_entity(self, order: 1, **empty_person)
     end
-  end
 
-  def expect_client_index
-    expect(current_path).to eq '/clients'
-    expect(page).to have_text 'successfully updated!'
-    expect_client_data_changed
-  end
-
-  def expect_client_edit
-    expect(find_field('Town').value).to have_text 'Nottingham'
-  end
-
-  def expect_client_data_changed
-    expect(page).to_not have_text '8008'
-    expect(page).to have_text '278'
-    expect(page).to_not have_text '294'
-    expect(page).to have_text '63c'
+    it 'does not add a third entity', js: true do
+      client_page.click('Add Person')
+      expect(page).to have_css('.spec-entity-count', count: 2)
+    end
   end
 end

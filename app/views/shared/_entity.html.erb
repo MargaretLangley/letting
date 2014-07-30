@@ -1,36 +1,22 @@
-<div class='js-toggle-selection'>
+<div id='<%= entity_field_id(entitieable, index) %>'
+  class='grid js-fieldset <%= "#{hide_new_record_unless_first entity, index} " +
+                    "#{destroyable entity, index }" %>' >
 
-  <div class='col-1-1 vertical-spacer'>
-    <%= f.hidden_field :_destroy %>
-    <%= link_to 'X', '#', class:"delete-button float-right #{hide_or_destroy record} #{hide_if_first_record(index)}" %>
-    <div class='js-togglable <%= hide_field_on_start_by_entity_type record %>'>
-      <%= yield :entities_heading %>
-      <h3> Person&nbsp;<%= link_to 'or company', '#', class: 'js-toggle js-entity-event', data: { :'model-type-to' => 'Company' } %></h3>
+
+  <div class='js-toggle-selection'>
+    <div class='col-6-24 vertical-spacer no-r-pad spec-entity-count'>
+      <%= f.text_field :title, class: 'js-clearable' %>
     </div>
-    <div class='js-togglable js-revealable <%= hide_field_on_start_by_entity_type record %>'>
-      <%= yield :entities_heading %>
-      <h3>Company&nbsp;<%= link_to 'or person', '#', class: 'js-toggle js-entity-event', data: { :'model-type-to' => 'Person' } %></h3>
+
+    <div class='col-5-24 vertical-spacer no-r-pad'>
+      <%= f.text_field :initials, class: 'js-clearable' %>
     </div>
-    <%= f.hidden_field :entity_type, class: 'model_type' %>
-  </div>
-
-  <div class='col-1-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %>'>
-    <%= f.label :title %>
-  </div>
-  <div class='col-3-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %> no-r-pad'>
-    <%= f.text_field :title, class: 'js-clearable' %>
-  </div>
-
-  <div class='col-1-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %>'>
-    <%= f.label :initials %>
-  </div>
-  <div class='col-3-4 vertical-spacer js-togglable <%= hide_field_on_start_by_entity_type record %> no-r-pad'>
-    <%= f.text_field :initials, class: 'js-clearable' %>
-  </div>
-  <div class='col-1-4 vertical-spacer'>
-    <%= f.label :name, class: 'required' %>
-  </div>
-  <div class='col-3-4 vertical-spacer no-r-pad'>
-    <%= f.text_field :name, class: 'js-clearable' %>
+    <div class='col-11-24 vertical-spacer no-r-pad'>
+      <%= f.text_field :name, class: 'js-clearable' %>
+    </div>
+    <div class='col-2-24 vertical-spacer'>
+      <%= f.hidden_field :_destroy %>
+      <%= link_to_if(!first_record?(index), (fa_icon 'trash-o'), '#', class:"delete-button #{hide_or_destroy entity}", title: 'Delete Person') %>
+    </div>
   </div>
 </div>

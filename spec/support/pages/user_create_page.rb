@@ -1,3 +1,12 @@
+######
+# UserCreatePage
+#
+# Encapsulates the User Page (new)
+#
+# The layer hides the capybara calls to make the functional rspec tests that
+# use this class simpler.
+#####
+#
 class UserCreatePage
   include Capybara::DSL
   def visit_page

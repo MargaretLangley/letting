@@ -32,6 +32,6 @@ Style/UnneededPercentQ:
 
 #
 # Styles we are trying to put into our code!
-# Offense count: 35
+# Offense count: 28
 Style/Documentation:
  Enabled: false

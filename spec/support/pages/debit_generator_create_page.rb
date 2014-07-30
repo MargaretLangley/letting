@@ -1,3 +1,12 @@
+######
+# DebitGeneratorCreatePage
+#
+# Encapsulates the DebitGenerator New page - despite the name (edit/create)
+#
+# The layer hides the capybara calls to make the functional rspec tests that
+# use this class simpler.
+#####
+#
 class DebitGeneratorCreatePage
   include Capybara::DSL
 

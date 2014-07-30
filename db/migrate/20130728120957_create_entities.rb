@@ -1,7 +1,6 @@
 class CreateEntities < ActiveRecord::Migration
   def change
     create_table :entities do |t|
-      t.string :entity_type, null: false
       t.integer :entitieable_id, null: false
       t.string  :entitieable_type, null: false
       t.string :title

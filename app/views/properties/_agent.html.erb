@@ -18,8 +18,8 @@
     </div>
 
     <div class='js-togglable js-check-visible js-revealable'>
-      <%= render 'shared/entities2', f: b, entitieable: agent %>
-      <%= render 'shared/address2', f: b, parent: 'property_agent', address: AddressDecorator.new(agent.address) %>
+      <%= render 'shared/entities', f: b, entitieable: agent %>
+      <%= render 'shared/address', f: b, parent: 'property_agent', address: AddressDecorator.new(agent.address) %>
     </div>
   </div>
 </div>
