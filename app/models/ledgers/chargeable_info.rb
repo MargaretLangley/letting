@@ -18,11 +18,11 @@ class ChargeableInfo
   include Equalizer.new(:account_id, :amount, :charge_id, :on_date)
   attr_reader :account_id, :charge_id, :on_date, :amount
 
-  def self.from_charge **args
-    new charge_id:  args[:charge_id],
-        on_date:    args[:on_date],
-        amount:     args[:amount],
-        account_id: args[:account_id]
+  def self.from_charge(charge_id:, on_date:, amount:, account_id:)
+    new charge_id:  charge_id,
+        on_date:    on_date,
+        amount:     amount,
+        account_id: account_id
   end
 
   # instance_values is a rails object that returns instances
@@ -34,10 +34,10 @@ class ChargeableInfo
 
   private
 
-  def initialize **args
-    @charge_id  = args[:charge_id]
-    @on_date    = args[:on_date]
-    @amount     = args[:amount]
-    @account_id = args[:account_id]
+  def initialize(charge_id:, on_date:, amount:, account_id:)
+    @charge_id  = charge_id
+    @on_date    = on_date
+    @amount     = amount
+    @account_id = account_id
   end
 end
