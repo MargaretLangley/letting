@@ -27,10 +27,10 @@ class PaymentsController < ApplicationController
     prepare_for_new_action human_ref: params[:human_ref]
   end
 
-  def prepare_for_new_action **args
-    account = Account.find_by_human_ref(args[:human_ref])
+  def prepare_for_new_action(human_ref:)
+    account = Account.find_by_human_ref(human_ref)
     @payment = PaymentDecorator.new(Payment.new(account: account),
-                                    args.slice(:human_ref))
+                                    human_ref: human_ref)
     @payment.prepare_for_form
   end
 

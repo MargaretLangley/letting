@@ -3,7 +3,7 @@ require 'spec_helper'
 describe PaymentDecorator do
 
   let(:source) { payment_new }
-  let(:payment) { PaymentDecorator.new source }
+  let(:payment) { PaymentDecorator.new source, human_ref: nil }
 
   describe 'methods' do
 
