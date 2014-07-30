@@ -28,11 +28,11 @@ module DB
 
     # contents - data to be imported - array of arrays indexed
     #            by row no and header symbols.
-    # range    - the rows to be imported
-    # patch    - the corrections to the contents
+    # range    - the rows to be imported, default nil
+    # patch    - the corrections to the contents, default nil
     #
-    def self.import contents, **args
-      new(contents, args[:range], args[:patch]).import_loop
+    def self.import(contents, range: nil, patch: nil)
+      new(contents, range, patch).import_loop
     end
 
     # Imports, builds or assigns application objects
