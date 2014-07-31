@@ -115,6 +115,26 @@ describe DebitGenerator, type: :model do
       end
     end
 
+    describe '#==' do
+      it 'returns equal objects as being the same' do
+        lhs = debit_generator_new
+        rhs = debit_generator_new
+        expect(lhs == rhs).to be true
+      end
+
+      it 'returns unequal objects as being different' do
+        lhs = debit_generator_new(search_string: '101')
+        rhs = debit_generator_new(search_string: '102')
+        expect(lhs == rhs).to be false
+      end
+
+      it 'returns nil objects are different classes' do
+        lhs = debit_generator_new
+        rhs = 'I am a string not a debit'
+        expect(lhs == rhs).to be_nil
+      end
+    end
+
     it '#latest_debit_generated' do
       debit_generator_new.save!
       expect(DebitGenerator.latest_debit_generated(10).length).to eq 1
@@ -126,9 +146,11 @@ describe DebitGenerator, type: :model do
     end
   end
 
-  def debit_generator_new
-    debit_gen = DebitGenerator.new debit_generator_attributes \
-                                 accounts: [Object.new]
+  def debit_generator_new **overrides
+    debit_gen = DebitGenerator.new(debit_generator_attributes
+                                   .merge(accounts: [Object.new])
+                                   .merge(overrides)
+                                   )
     debit_gen.debits.build debit_attributes
     debit_gen
   end

@@ -6,8 +6,8 @@ describe Debit, type: :model do
   let(:account) { Account.new id: 1, account_id: 1 }
   it('is valid') { expect(debit).to be_valid }
 
-  context 'validates' do
-    context 'presence' do
+  describe 'validates' do
+    describe 'presence' do
 
       it 'charge_id' do
         debit.charge_id = nil
@@ -24,7 +24,7 @@ describe Debit, type: :model do
         expect(debit).to_not be_valid
       end
     end
-    context 'amount' do
+    describe 'amount' do
       it 'is numeric' do
         debit.amount = 'nnn'
         expect(debit).to_not be_valid
@@ -37,8 +37,8 @@ describe Debit, type: :model do
 
   end
 
-  context 'class method' do
-    context '.available' do
+  describe 'class method' do
+    describe '.available' do
 
       it 'orders debits by date' do
         last  = create_debit Date.new(2013, 4, 1)
@@ -52,9 +52,9 @@ describe Debit, type: :model do
     end
   end
 
-  context 'methods' do
+  describe 'methods' do
 
-    context '#charge_type' do
+    describe '#charge_type' do
       it 'returned when charge present' do
         debit.charge = Charge.new charge_attributes
         expect(debit.charge_type).to eq 'Ground Rent'
@@ -65,7 +65,7 @@ describe Debit, type: :model do
       end
     end
 
-    context '#outstanding' do
+    describe '#outstanding' do
       it 'returns amount if nothing paid' do
         expect(debit.outstanding).to eq 88.08
       end
@@ -77,7 +77,7 @@ describe Debit, type: :model do
       end
     end
 
-    context '#paid?' do
+    describe '#paid?' do
       it 'false without credit' do
         debit  = Debit.create! debit_attributes amount: 88.08
         debit.save!
@@ -89,6 +89,26 @@ describe Debit, type: :model do
         Credit.create! credit_attributes amount: 88.08
         debit.save!
         expect(debit).to be_paid
+      end
+    end
+
+    describe '#==' do
+      it 'returns equal objects as being the same' do
+        lhs = Debit.new debit_attributes
+        rhs = Debit.new debit_attributes
+        expect(lhs == rhs).to be true
+      end
+
+      it 'returns unequal objects as being different' do
+        lhs = Debit.new debit_attributes charge_id: 101
+        rhs = Debit.new debit_attributes charge_id: 100
+        expect(lhs == rhs).to be false
+      end
+
+      it 'returns nil objects are different classes' do
+        lhs = Debit.new debit_attributes
+        rhs = 'I am a string not a debit'
+        expect(lhs == rhs).to be_nil
       end
     end
   end

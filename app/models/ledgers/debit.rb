@@ -43,6 +43,7 @@ class Debit < ActiveRecord::Base
   # Value equality - not sure if that is what is required
   #
   def == other
+    return nil unless other.is_a?(self.class)
     charge_id == other.charge_id &&
     on_date == other.on_date &&
     amount == other.amount
