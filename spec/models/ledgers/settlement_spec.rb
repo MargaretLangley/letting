@@ -1,28 +1,51 @@
 require 'spec_helper'
 
 describe Settlement, type: :model do
+  describe 'resolve' do
+    describe 'matched settlement' do
+      it 'completes when settlement == offset' do
+        offset = Credit.create! credit_attributes amount: -3.00
+        expect { |b| Settlement.resolve(3.00, [offset], &b) }
+          .to yield_with_args(offset, 3.00)
+      end
 
-  it 'resolve_credit' do
-    debit1 = Debit.create! debit_attributes amount: 48.08, on_date: '25/3/2013'
-    debit2 = Debit.create! debit_attributes amount: 20.00, on_date: '25/3/2014'
-    credit = Credit.new credit_attributes amount: 88.08
+      it 'completes when settlement == summed offsets' do
+        offsets = [Credit.create!(credit_attributes amount: -4.00),
+                   Credit.create!(credit_attributes amount: -2.00)]
+        expect { |b| Settlement.resolve(6.00, offsets, &b) }
+          .to yield_successive_args([offsets[0], 4.00], [offsets[1], 2.00])
+      end
 
-    Settlement.resolve_credit credit, [debit1, debit2]
+      it 'handles debit being the offset' do
+        offset = Debit.create! debit_attributes amount: 3.00
+        expect { |b| Settlement.resolve(3.00, [offset], &b) }
+          .to yield_with_args(offset, 3.00)
 
-    expect(credit.settlements.size).to eq(2)
-    expect(credit.settlements.first.amount).to eq 48.08
-    expect(credit.settlements.last.amount).to eq 20.00
-  end
+      end
 
-  it 'resolve_debit' do
-    credit1 = Credit.create! credit_attributes amount: 44.04
-    credit2 = Credit.create! credit_attributes amount: 40.04
-    debit = Debit.new debit_attributes amount: 88.08
+      it 'handles summed debits being the offset' do
+        offsets = [Debit.create!(debit_attributes on_date: '25/3/2013',
+                                                  amount: 3.00),
+                   Debit.create!(debit_attributes amount: 3.00,
+                                                  on_date: '25/3/2014')
+                  ]
+        expect { |b| Settlement.resolve(6.00, offsets, &b) }
+          .to yield_successive_args([offsets[0], 3.00], [offsets[1], 3.00])
+      end
+    end
 
-    Settlement.resolve_debit debit, [credit1, credit2]
+    describe 'maximum settlement' do
+      it 'returns a settlement no more than settle ' do
+        offset = Credit.create! credit_attributes amount: -5.00
+        expect { |b| Settlement.resolve(4.00, [offset], &b) }
+          .to yield_with_args(offset, 4.00)
+      end
 
-    expect(debit.settlements.size).to eq(2)
-    expect(debit.settlements.first.amount).to eq 44.04
-    expect(debit.settlements.last.amount).to eq 40.04
+      it 'returns a settlement no more than offset(s)' do
+        offset = Credit.create! credit_attributes amount: -3.00
+        expect { |b| Settlement.resolve(4.00, [offset], &b) }
+          .to yield_with_args(offset, 3.00)
+      end
+    end
   end
 end

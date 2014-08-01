@@ -23,10 +23,10 @@ class AccountCreditDecorator
   end
 
   def payment
-    number_with_precision(@source.amount, precision: 2)
+    number_with_precision(-@source.amount, precision: 2)
   end
 
   def amount
-    -@source.amount
+    @source.amount
   end
 end

@@ -41,8 +41,12 @@ module DB
       @source[:on_date]
     end
 
+    # credits decrease an account balance.
+    # credit amounts are negative (-)
+    # credit amounts are imported (from acc_items) without a sign
+    #
     def amount
-      @source[:credit].to_f
+      @source[:credit].to_f * -1
     end
 
     def account_id

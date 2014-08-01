@@ -4,8 +4,9 @@ describe CreditDecorator do
 
   let(:credit_dec) { CreditDecorator.new credit_new }
 
-  it 'has the #amount' do
-    expect(credit_dec.amount).to eq '88.08'
+  it 'has the #amount - keeps sign' do
+    credit_dec = CreditDecorator.new credit_new amount: 20.00
+    expect(credit_dec.amount).to eq '20.00'
   end
 
   context 'owing' do

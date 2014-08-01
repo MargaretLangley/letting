@@ -18,7 +18,6 @@
 ####
 #
 class AmountValidator < ActiveModel::EachValidator
-
   # if the validation fails we add an error to the record for this attribute.
   #
   def validate_each(record, attribute, value)

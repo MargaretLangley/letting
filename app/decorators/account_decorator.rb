@@ -23,16 +23,16 @@ class AccountDecorator
   # Transactions covering recent period (typically this year only)
   #
   def abbrev_items
-    abbrev_before_date = Date.current.at_beginning_of_year
-    previous_items, current_items =
-    ordered_items.partition { |item| item.on_date < abbrev_before_date }
-
-    running_balance \
-    [AccountBalanceDecorator.new(total(previous_items), abbrev_before_date)] +
-    current_items
+    date_of = Date.current.at_beginning_of_year
+    running_balance [balance_bought_forward(date_of)] +
+                    ordered_items.select { |item| item.on_date >= date_of }
   end
 
   private
+
+  def balance_bought_forward date_of
+    AccountBalanceDecorator.new(@source.balance(date_of), date_of)
+  end
 
   def ordered_items
     [*@source.debits.map { |debit| AccountDebitDecorator.new debit },
@@ -47,9 +47,5 @@ class AccountDecorator
       item.running_balance = running_balance
       item
     end
-  end
-
-  def total items
-    items.map { |item| item.amount }.inject(0, :+)
   end
 end

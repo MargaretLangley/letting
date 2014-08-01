@@ -9,7 +9,7 @@ describe AccountDecorator do
       account = AccountDecorator.new account_and_charge_new
       account.debits.push debit_new on_date: '25/9/2012', amount: 5.00
       account.debits.push debit_new on_date: '25/9/2013', amount: 10.00
-      account.credits.push credit_new on_date: '25/9/2014', amount: 12.00
+      account.credits.push credit_new on_date: '25/9/2014', amount: -12.00
       expect(account.items.map { |item| item.running_balance }).to \
         contain_exactly \
            5.00,
@@ -62,7 +62,7 @@ describe AccountDecorator do
       account = account_and_charge_new
       account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
       account.debits.push debit_new on_date: '25/3/2012', amount: 10.00
-      account.credits.push credit_new on_date: '25/4/2012', amount: 5.50
+      account.credits.push credit_new on_date: '25/4/2012', amount: -5.50
       account.save!
       dec = AccountDecorator.new account
 

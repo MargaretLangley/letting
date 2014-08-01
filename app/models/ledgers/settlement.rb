@@ -22,35 +22,18 @@ class Settlement < ActiveRecord::Base
 
   validates :credit_id, :debit_id, :amount, presence: true
 
-  # resolving credits with settlements
-  # The amount of the settlement depends on the value(s) of
-  # outstanding debits.
-  #
-  # sum - credit that has not been offset against.
-  # offsets - unpaid debits (assuming it's for this charge)
-  #
-  def self.resolve_credit sum, offsets
-    settle = sum.outstanding
-    offsets.each do |offset|
-      settle -= pay = [settle, offset.outstanding].min
-      break if pay.round(2) == 0.00
-      sum.settlements.build debit: offset, amount: pay
-    end
-  end
-
-  # resolving debit with settlements
+  # resolving settlement with credits
   # The amount of the settlement depends on the value(s) of
   # unpaid credit.
   #
-  # sum - debit that has not been offset against.
-  # offsets - unspent credits (we assume it's for this charge)
+  # settle - the amount thatat has not been offset against.
+  # offsets - unspent offsets (we assume it's for this charge)
   #
-  def self.resolve_debit sum, offsets
-    settle = sum.outstanding
-    offsets.each do |offset|
-      settle -= pay = [settle, offset.outstanding].min
+  def self.resolve settle, offsets
+    offsets.each do |offsetable|
+      settle -= pay = [settle, offsetable.outstanding].min
       break if pay.round(2) == 0.00
-      sum.settlements.build credit: offset, amount: pay
+      yield offsetable, pay
     end
   end
 end

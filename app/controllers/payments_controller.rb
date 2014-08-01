@@ -51,7 +51,7 @@ class PaymentsController < ApplicationController
     @payment = PaymentDecorator
                  .new(Payment.new(payment_params.except(:human_ref)),
                       human_ref: payment_params[:human_ref])
-    if @payment.source.save
+    if @payment.save
       redirect_to new_payment_path, notice: created_message
     else
       render :new

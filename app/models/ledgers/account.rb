@@ -6,13 +6,15 @@
 # The charges generate debits and payments create credits that cover
 # these debits.
 #
+# Balance
+# Debits increase an accounts balance +.
+# Credits decrease an accounts balance -.
+#
 # Definition
 #
 # Accounts
 # Receivable - money owed by customer for a service that has been delivered
 #              but not paid for.
-#
-#
 # Associations
 # Provides queries for account records - required by Payment and debits.
 #
@@ -60,18 +62,10 @@ class Account < ActiveRecord::Base
 
   delegate :clear_up_form, to: :charges
 
-  # AccountDecorator has a different way of calculating the balance!
-  # It places the credits into decorators (because they know the artithmetic
-  # sign of their amount (credits are negative) - then filters on date
-  # then adds the debits and the negative credits.
-  # There should be unified way of calculating the balance.
-  #
   def balance date
     date ||= Date.current
-    credits.select { |credit| credit.on_date <= date }
-           .map { |credit| credit.amount }.inject(0, :+) -
-    debits.select { |debit| debit.on_date <= date }
-           .map { |debit| debit.amount }.inject(0, :+)
+    (credits + debits).select { |transaction| transaction.on_date <= date }
+                      .map { |transaction| transaction.amount }.inject(0, :+)
   end
 
   # Finds and returns a matching Account
@@ -96,6 +90,6 @@ class Account < ActiveRecord::Base
   private
 
   def create_credit charge
-    credits.build charge: charge, on_date: Date.current, amount: charge.amount
+    credits.build charge: charge, on_date: Date.current, amount: -charge.amount
   end
 end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Credit, type: :model do
 
-  let(:credit) { credit_new }
+  let(:credit) { credit_new amount: -88.08 }
   it('is valid') { expect(credit).to be_valid }
 
   context 'validates' do
@@ -27,14 +27,24 @@ describe Credit, type: :model do
         expect(credit).to_not be_valid
       end
 
-      it 'One penny is valid' do
-        credit.amount = 0.01
+      it 'has a positive limit' do
+        credit.amount = 0
+        expect(credit).to_not be_valid
+      end
+
+      it 'valid beneath positive limit' do
+        credit.amount = -0.01
         expect(credit).to be_valid
       end
 
-      it 'positive numbers' do
-        credit.amount = -1.00
+      it 'has a negative limit' do
+        credit.amount = -100_000
         expect(credit).to_not be_valid
+      end
+
+      it 'valid above negative limit' do
+        credit.amount = -99_000.99
+        expect(credit).to be_valid
       end
     end
   end
@@ -82,26 +92,27 @@ describe Credit, type: :model do
 
     context '#outstanding' do
       it 'returns amount if nothing paid' do
-        expect(credit.outstanding).to eq 88.08
+        expect(credit.outstanding).to eq(88.08)
       end
 
       it 'multiple credits are added' do
-        Debit.create! debit_attributes amount: 44.04
+        credit = credit_new amount: -6.00
+        Debit.create! debit_attributes amount: 4.00
         credit.save!
-        expect(credit.outstanding).to eq 44.04
+        expect(credit.outstanding).to eq(2.00)
       end
     end
 
     context '#spent?' do
       it 'false without credit' do
-        credit = Credit.create! credit_attributes amount: 88.07
+        credit = Credit.create! credit_attributes amount: (-88.07)
         credit.save!
         expect(credit).to_not be_spent
       end
 
       it 'true when spent' do
-        credit = Credit.create! credit_attributes amount: 88.07
-        Debit.create! debit_attributes amount: 88.07
+        credit = Credit.create! credit_attributes amount: (-8.00)
+        Debit.create! debit_attributes amount: 8.00
         credit.save!
         expect(credit).to be_spent
       end

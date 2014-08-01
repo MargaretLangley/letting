@@ -41,6 +41,9 @@ module DB
       @source[:on_date]
     end
 
+    # debits increase an account balance.
+    # debits amounts are positive (+)
+    #
     def amount
       debit
     end

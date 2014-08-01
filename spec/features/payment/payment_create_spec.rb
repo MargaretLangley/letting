@@ -13,7 +13,6 @@ describe Payment, type: :feature do
     property_receivables?
     payment_page.payment 88.08
     payment_page.click_create_payment
-
     payment_is_created
   end
 

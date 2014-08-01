@@ -10,6 +10,7 @@
 # it finds unpaid debits and generates a matching credit.
 # The credits get set during the payments controller #create action.
 #
+# Credits decrease an accounts balance -.
 ####
 #
 class Credit < ActiveRecord::Base
@@ -20,9 +21,8 @@ class Credit < ActiveRecord::Base
   has_many :settlements, dependent: :destroy
 
   validates :charge_id, :on_date, presence: true
-  validates :amount, amount: true
   validates :amount, numericality:
-                     { less_than_or_equal_to: 100_000 }
+                     { greater_than: -100_000, less_than: 0 }
   before_save :reconcile
 
   after_initialize do
@@ -35,12 +35,16 @@ class Credit < ActiveRecord::Base
     mark_for_destruction if amount.nil? || amount.round(2) == 0
   end
 
+  # outstanding is the amount left unpaid
+  # (credit) amount is normally negative
+  # settled starts at 0 and becomes larger until settled - amount == 0
+  # Outstanding will be initally negative trending to 0
   def outstanding
-    amount - settled
+    -amount - settled
   end
 
   def spent?
-    amount.round(2) == settled.round(2)
+    outstanding.round(2) == 0.00
   end
 
   # charge_id - the charge you are querying for unspent credits.
@@ -53,7 +57,9 @@ class Credit < ActiveRecord::Base
   private
 
   def reconcile
-    Settlement.resolve_credit self, Debit.available(charge_id)
+    Settlement.resolve(outstanding, Debit.available(charge_id)) do |offset, pay|
+      settlements.build debit: offset, amount: pay
+    end
   end
 
   def settled

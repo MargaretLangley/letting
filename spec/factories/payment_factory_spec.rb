@@ -20,7 +20,7 @@ describe 'payment' do
     end
 
     it 'present' do
-      expect(payment.credits.first.amount).to eq 88.08
+      expect(payment.credits.first.amount).to eq(-88.08)
     end
 
     it 'add later date' do

@@ -71,7 +71,7 @@ describe Debit, type: :model do
       end
 
       it 'multiple credits are added' do
-        Credit.create! credit_attributes amount: 44.04
+        Credit.create! credit_attributes amount: -44.04
         debit.save!
         expect(debit.outstanding).to eq 44.04
       end
@@ -86,7 +86,7 @@ describe Debit, type: :model do
 
       it 'true when paid in full' do
         debit  = Debit.create! debit_attributes amount: 88.08
-        Credit.create! credit_attributes amount: 88.08
+        Credit.create! credit_attributes amount: -88.08
         debit.save!
         expect(debit).to be_paid
       end

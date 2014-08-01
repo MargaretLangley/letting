@@ -62,7 +62,7 @@ def credit_attributes  **overrides
     account_id: 1,
     charge_id: 1,
     on_date: '30/4/2013',
-    amount: 88.08,
+    amount: -88.08,
   }.merge overrides
 end
 

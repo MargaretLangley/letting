@@ -9,17 +9,6 @@ describe Account, type: :model do
     before { Timecop.travel(Date.new(2013, 1, 31)) }
     after { Timecop.return }
 
-    describe 'calculated balance' do
-      it 'ignores entires after date' do
-        account = account_and_charge_new
-        account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
-        account.debits.push debit_new on_date: '25/3/2012', amount: 10.00
-        account.credits.push credit_new on_date: '25/4/2012', amount: 5.50
-        expect(account.balance Date.new 2012, 4, 24).to \
-          eq BigDecimal.new('-20.00')
-      end
-    end
-
     describe '#prepare_debits' do
       it 'generates debits when charges due' do
         account = account_and_charge_new charge_attributes: { id: 3 }
@@ -51,6 +40,30 @@ describe Account, type: :model do
         account.charges.build charge_attributes
         expect(account.prepare_credits.size).to eq(1)
       end
+
+      it 'generates negative amounted credits' do
+        account.charges.build charge_attributes
+        expect(account.prepare_credits.first.amount).to be < 0
+      end
+    end
+
+  end
+
+  describe '#balance' do
+    it 'calculates balance' do
+      account = account_and_charge_new
+      account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
+      account.credits.push credit_new on_date: '25/4/2012', amount: -11.00
+      expect(account.balance Date.new 2013, 1, 1).to \
+        eq BigDecimal.new('-1.00')
+    end
+
+    it 'ignores entires after date' do
+      account = account_and_charge_new
+      account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
+      account.credits.push credit_new on_date: '25/4/2012', amount: -5.50
+      expect(account.balance Date.new 2012, 4, 24).to \
+        eq BigDecimal.new('10.00')
     end
   end
 

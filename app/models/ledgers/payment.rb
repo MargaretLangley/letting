@@ -17,6 +17,7 @@ class Payment < ActiveRecord::Base
     end
   end
   before_validation :clear_up
+
   accepts_nested_attributes_for :credits, allow_destroy: true
   validates :account_id, :amount, :on_date, presence: true
 

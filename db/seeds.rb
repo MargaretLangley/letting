@@ -315,7 +315,7 @@ def create_credits
       charge_id: 1,
       account_id: 1,
       on_date: create_date(15),
-      amount: 88.08,
+      amount: -88.08,
     }
   ]
 end

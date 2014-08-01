@@ -21,8 +21,8 @@ module DB
         expect(row.on_date).to eq '2012-03-25 12:00:00'
       end
 
-      it 'amount' do
-        expect(row.amount).to eq 50.5
+      it 'has a negative amount' do
+        expect(row.amount).to eq(-50.5)
       end
     end
 

@@ -16,6 +16,8 @@
 # the debit became due to see if the property has already been charged against
 # for this time period.
 #
+# Debits increase an accounts balance +.
+#
 ####
 #
 class Debit < ActiveRecord::Base
@@ -63,6 +65,9 @@ class Debit < ActiveRecord::Base
   end
 
   def reconcile
-    Settlement.resolve_debit self, Credit.available(charge_id)
+    Settlement.resolve(outstanding,
+                       Credit.available(charge_id)) do |offset, pay|
+      settlements.build(credit: offset, amount: pay)
+    end
   end
 end
