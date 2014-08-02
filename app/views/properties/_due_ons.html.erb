@@ -5,12 +5,12 @@
         <%= render 'due_on', f: builder, due_on: due_on, parent: due_ons.id(f.options[:child_index])  %>
       <% end %>
     <% end %>
-    <a href='#' class='js-toggle toggle-event'> or per month</a>
+    <a href='#' class='js-toggle '> or per month</a>
   </div>
   <div class='js-togglable <%= due_ons.hidden_side? DueOn::PER_MONTH %>'>
       <%= f.fields_for :due_ons, due_ons.per_month do |builder| %>
         <%= render 'due_on_per_month', f: builder, due_on: due_ons.per_month, parent: due_ons.id(f.options[:child_index])  %>
       <% end %>
-      <a href='#' class='js-toggle toggle-event'> or on date</a>
+      <a href='#' class='js-toggle '> or on date</a>
   </div>
 </div>
