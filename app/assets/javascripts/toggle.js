@@ -1,5 +1,22 @@
+// Toggle Event
+// 1) User clicks on js-toggle or js-checkbox-toggle
+// 2) doToggle called
+// 3) Up the DOM till we find js-toggle-selection and then
+//    slide it's js-togglable chidren
+// 4) Trigger toggleEventHandler - which moves up the DOM until it is handled
+// 5) Hits the js-clear handler (or not) which clears the html component
+
 $( document ).ready(function() {
-  // current panel switch code
+  // Initialization of check box state
+  // checkbox state affects visibility of selected
+  // js classes (js-check-hidden, js-check-visible)
+  // event run on page creation and if checkbox toggled.
+  //
+  if ($('.js-checkbox-toggle').is(':checked')) {
+    $('.js-check-hidden').css('display', 'none');
+    $('.js-check-visible').css('display', 'block');
+  }
+
   $('.js-toggle').click(function(event) {
     event.preventDefault();
     doToggle($(this));
@@ -10,18 +27,11 @@ $( document ).ready(function() {
   });
 
   function doToggle(toggle) {
-    var toggleSelection = toggle.closest('.js-toggle-selection');
-    toggleSelection.children('.js-togglable').slideToggle('fast');
+    toggle.closest('.js-toggle-selection')
+          .children('.js-togglable')
+          .slideToggle('fast');
+    // bubbles up the DOM until it finds a toggleEventHandler
     toggle.trigger('toggleEventHandler');
-  }
-
-  // checkbox state affects visibility of selected
-  // js classes (js-check-hidden, js-check-visible)
-  // event run on page creation and if checkbox toggled.
-  //
-  if ($('.js-checkbox-toggle').is(':checked')) {
-    $('.js-check-hidden').css('display', 'none');
-    $('.js-check-visible').css('display', 'block');
   }
 
   // When toggle event fired it clears field

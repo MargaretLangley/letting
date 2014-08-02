@@ -18,14 +18,19 @@ class AddressPage
     click_on 'Delete'
   end
 
+  # v_district - only used for spec testing
+  #
   def district_visible?
     has_css?('.v_district', visible: true)
   end
+
 
   def add_nation
     click_on 'Add a nation line to the address'
   end
 
+  # v_nation only used for spec testing
+  #
   def nation_visible?
     has_css?('.v_nation', visible: true)
   end

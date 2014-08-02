@@ -8,24 +8,18 @@ class AddressDecorator
   end
 
   def district_visiblity
-    js_hooks + (@address.district? ? '' : 'js-revealable')
+    @address.district? ? '' : 'js-revealable'
   end
 
   def add_district_visiblity
-    js_hooks + (@address.district? ? 'js-revealable' : '')
+    @address.district? ? 'js-revealable' : ''
   end
 
   def nation_visiblity
-    js_hooks + (@address.nation? ? '' : 'js-revealable')
+    @address.nation? ? '' : 'js-revealable'
   end
 
   def add_nation_visiblity
-    js_hooks + (@address.nation? ? 'js-revealable' : '')
-  end
-
-  private
-
-  def js_hooks
-    ' js-togglable js-clear '
+    @address.nation? ? 'js-revealable' : ''
   end
 end
