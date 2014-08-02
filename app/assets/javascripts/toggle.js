@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-
   // current panel switch code
   $('.js-toggle').click(function(event) {
     event.preventDefault();
@@ -25,22 +24,11 @@ $( document ).ready(function() {
     $('.js-check-visible').css('display', 'block');
   }
 
-  function onWindowLoad() {
-    $('.js-toggle-on-start').toggle();
-  }
-
+  // When toggle event fired it clears field
+  // Works on the address district and Nation
+  // delete and add cycling.
+  //
   $('.js-clear').on('toggleEventHandler', function() {
     $(this).find(':input').val('');
   });
-
-   // enity specific code - separated from the generic js-toggle code
-   // by event handler.
-  $('.js-entity-event').on('toggleEventHandler', function() {
-    var toggleSelection = $(this).closest('.js-toggle-selection');
-    toggleSelection.find('.model_type').val($(this).data('model-type-to'));
-  });
-
-  $(onWindowLoad);
-
 });
-

@@ -7,23 +7,24 @@ $( document ).ready(function() {
     if( noHiddenChildren(parent) ) { toggleDisableable($(this)); }
   });
 
+  // Hiding a link
+  // We apply a visual affect and clear the fields for reuse.
+
   $('.js-hide-link').click(function(event) {
     event.preventDefault();
     $(this).closest('.js-fieldset').slideToggle('fast');
     $(this).closest('.js-fieldset').find('.js-clearable').val('');
-    var selection = findParentofRevealableElements($(this));
-    if(anyVisibleChildren(selection)) {
-      toggleDisableable($(selection).children('.js-reveal-link'));
-     }
   });
 
-
-  // CHARGE REMOVE FIELDS
+  // Destroying a link - we set the _destroy field to true and
+  // add visual affects of our choosing
 
   $('.js-destroy-link').click(function(event) {
     event.preventDefault();
-    $(this).closest('.js-fieldset').slideToggle('fast');
+    // previous hidden should be a _destroy field
     $(this).prev('input[type=hidden]').val('1')
+    // visual affects
+    $(this).closest('.js-fieldset').slideToggle('fast');
     $(this).closest('.js-fieldset').find('.js-clearable').prop('disabled', true)
   });
 
@@ -40,19 +41,8 @@ $( document ).ready(function() {
     return element.children('.js-revealable:hidden:first');
   }
 
-  function anyVisibleChildren(element) {
-    return element.children('.js-revealable:visible:first').length > 0;
-  }
-
   function toggleDisableable(element) {
     element.toggleClass('disabled');
   }
-
-  function onWindowLoad() {
-     var parent = findParentofRevealableElements($('.js-reveal-link'));
-     if( noHiddenChildren(parent) ) { toggleDisableable($('.js-reveal-link')); }
-  }
-
-  $(onWindowLoad);
 
 });
