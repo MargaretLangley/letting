@@ -24,7 +24,6 @@ class AddressPage
     has_css?('.v_district', visible: true)
   end
 
-
   def add_nation
     click_on 'Add a nation line to the address'
   end
