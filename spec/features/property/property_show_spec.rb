@@ -18,6 +18,10 @@ describe Property, type: :feature do
     expect_agent_info
   end
 
+  # pending
+  it 'should show dormant as no charges levied'
+  # expect(page).to have_text 'No charges levied against this property.'
+
   it 'navigates to index page' do
     click_on 'Accounts'
     expect(page).to have_text 'Actions'

@@ -38,6 +38,7 @@ class Charge < ActiveRecord::Base
   # returns - array of objects with enough information to charge the
   #           associated account
   def next_chargeable date_range
+    return [] if dormant
     allowed_due_dates(date_range).map do |my_date|
       chargeable_info(my_date) unless debits.created_on? my_date
     end.compact

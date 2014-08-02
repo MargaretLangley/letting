@@ -52,12 +52,13 @@ ActiveRecord::Schema.define(version: 20140306151327) do
   add_index "agents", ["property_id"], name: "index_agents_on_property_id", using: :btree
 
   create_table "charges", force: true do |t|
-    t.string   "charge_type",                         null: false
-    t.string   "due_in",                              null: false
-    t.decimal  "amount",      precision: 8, scale: 2, null: false
-    t.date     "start_date",                          null: false
-    t.date     "end_date",                            null: false
-    t.integer  "account_id",                          null: false
+    t.string   "charge_type",                                         null: false
+    t.string   "due_in",                                              null: false
+    t.boolean  "dormant",                             default: false, null: false
+    t.decimal  "amount",      precision: 8, scale: 2,                 null: false
+    t.date     "start_date",                                          null: false
+    t.date     "end_date",                                            null: false
+    t.integer  "account_id",                                          null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

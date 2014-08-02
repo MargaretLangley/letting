@@ -57,12 +57,32 @@ describe Charge, type: :model do
       after(:each)  { Timecop.return }
 
       describe '#next_chargeable' do
-        it 'if charge between dates Advance Date period 25-3- to 28-9'  do
-          # expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
-          #                               Date.new(2016, 3, 25)))
-          # .to eq [chargeable(Date.new(2013, 3, 25)),
-          #         chargeable(Date.new(2013, 9, 28))]
+        it 'creates chargeables if in range'  do
+          expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
+                                        Date.new(2013, 3, 25)))
+            .to eq [chargeable(Date.new(2013, 3, 25))]
         end
+
+        it 'multi year range it charges all due_ons within date-range - ONCE' do
+          expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
+                                        Date.new(2016, 3, 25)))
+            .to eq [chargeable(Date.new(2013, 3, 25)),
+                    chargeable(Date.new(2013, 9, 29))]
+        end
+
+        it 'dormant charges do not create chargeables'  do
+          charge.dormant = true
+          expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
+                                        Date.new(2013, 3, 25)))
+            .to eq []
+        end
+
+        # pending
+        it 'if charge between dates Advance Date period 25-3- to 28-9'
+        # expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
+        #                               Date.new(2016, 3, 25)))
+        # .to eq [chargeable(Date.new(2013, 3, 25)),
+        #         chargeable(Date.new(2013, 9, 28))]
 
         it 'if charge only 1 date Advance Date 1-4 to 31-3'  do
           Timecop.travel(Date.new(2013, 3, 10))
@@ -75,8 +95,12 @@ describe Charge, type: :model do
             .to eq [chargeable(Date.new(2013, 9, 29))]
         end
 
-        it 'return nil if not' do
+        it 'return empty array if no charge' do
           expect(charge.next_chargeable(dates_not_charged_on)).to eq []
+        end
+
+        it 'returns empty array if charge dormant' do
+
         end
       end
 
@@ -114,12 +138,13 @@ describe Charge, type: :model do
       after(:each)  { Timecop.return }
 
       describe '#next_chargeable' do
-        it 'if charge between dates Arrears Date period 25-3- to 28-9'  do
-          # expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
-          #                               Date.new(2016, 3, 25)))
-          # .to eq [chargeable(Date.new(2012, 9, 30)),
-          #         chargeable(Date.new(2013, 3, 25))]
-        end
+        # pending
+        it 'if charge between dates Arrears Date period 25-3- to 28-9'
+        # pending 'spec missing and structure of tests wrong'
+        # expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
+        #                               Date.new(2016, 3, 25)))
+        # .to eq [chargeable(Date.new(2012, 9, 30)),
+        #         chargeable(Date.new(2013, 3, 25))]
       end
     end
   end
@@ -137,8 +162,7 @@ describe Charge, type: :model do
       after(:each)  { Timecop.return }
 
       describe '#next_chargeable' do
-        it 'if charge between dates Midterm Date period 25-3- to 28-9'  do
-        end
+        it 'if charge between dates Midterm Date period 25-3- to 28-9'
       end
     end
   end

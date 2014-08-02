@@ -2,7 +2,7 @@
   <div class='col-1-1 faded'>
     <h3>Charges</h3>
   </div>
-  <div class='col-6-24 vertical-spacer grid-header'>
+  <div class='col-5-24 vertical-spacer grid-header'>
     Charge
   </div>
   <div class='col-2-24 vertical-spacer grid-header'>
@@ -14,8 +14,8 @@
   <div class='col-13-24 vertical-spacer grid-header'>
     Due Date(s)
   </div>
-  <div class='col-1-24 vertical-spacer grid-header'>
-    Do
+  <div class='col-2-24 vertical-spacer grid-header'>
+    Dormant
   </div>
   <% charges.each.with_index do |charge,index| %>
     <%= f.fields_for :charges, charge do |builder| %>

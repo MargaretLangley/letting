@@ -296,16 +296,15 @@ describe Property, type: :feature do
     end
 
     it 'deletes', js: true do
-      property_create! id: 1, human_ref: 8000
+      property_with_charge_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       expect(page).to have_css('.spec-charge-count', count: 1)
-      within '#property_charge_0' do
-        click_on 'Delete'
-      end
+      dormant_checkbox =
+      '//*[@id="property_account_attributes_charges_attributes_0_dormant"]'
+      find(:xpath, dormant_checkbox).set(true)
       update_then_expect_properties_page
-      navigate_to_property_view_page
-      expect(page).to_not have_text 'Ground Rent'
-      expect(page).to have_text 'No charges levied against this property.'
+      navigate_to_edit_page
+      expect(find(:xpath, dormant_checkbox)).to be_checked
     end
   end
 
