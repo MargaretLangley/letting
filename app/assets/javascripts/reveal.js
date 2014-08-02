@@ -1,10 +1,12 @@
+
+
 $( document ).ready(function() {
 
   $('.js-reveal-link').click(function(event) {
     event.preventDefault();
-    var parent = findParentofRevealableElements($(this));
-    firstHiddenChild(parent).slideToggle('fast');
-    if( noHiddenChildren(parent) ) { toggleDisableable($(this)); }
+    $(this).closest('.js-toggle-selection')
+           .children('.js-revealable:hidden:first')
+           .slideToggle('fast');
   });
 
   // Hiding a link
@@ -12,8 +14,8 @@ $( document ).ready(function() {
 
   $('.js-hide-link').click(function(event) {
     event.preventDefault();
-    $(this).closest('.js-fieldset').slideToggle('fast');
-    $(this).closest('.js-fieldset').find('.js-clearable').val('');
+    $(this).closest('.js-toggle-selection').slideToggle('fast');
+    $(this).closest('.js-toggle-selection').find('.js-clear').val('');
   });
 
   // Destroying a link - we set the _destroy field to true and
@@ -24,25 +26,7 @@ $( document ).ready(function() {
     // previous hidden should be a _destroy field
     $(this).prev('input[type=hidden]').val('1')
     // visual affects
-    $(this).closest('.js-fieldset').slideToggle('fast');
-    $(this).closest('.js-fieldset').find('.js-clearable').prop('disabled', true)
+    $(this).closest('.js-toggle-selection').slideToggle('fast');
+    $(this).closest('.js-toggle-selection').find('.js-clear').prop('disabled', true)
   });
-
-
-  function findParentofRevealableElements(element) {
-    return element.closest('.js-reveal-parent');
-  }
-
-  function noHiddenChildren(element) {
-    return element.children('.js-revealable:hidden:first').length === 0;
-  }
-
-  function firstHiddenChild(element) {
-    return element.children('.js-revealable:hidden:first');
-  }
-
-  function toggleDisableable(element) {
-    element.toggleClass('disabled');
-  }
-
 });
