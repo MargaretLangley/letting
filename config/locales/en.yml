@@ -53,6 +53,20 @@ en:
     models:
       debit_generator: Invoicing
 
+  helpers:
+    submit:
+      create: "Create %{model}"
+      update: "Update %{model}"
+      debit_generator:
+        create: "Invoice Charges"
+        update: "Update invoice"
+      property:
+        create: "Create Account"
+        update: "Update Account"
+      payment:
+        create: "Pay Total"
+        update: "Update"
+
   number:
     currency:
         format:

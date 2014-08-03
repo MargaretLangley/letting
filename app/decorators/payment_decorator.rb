@@ -57,8 +57,4 @@ class PaymentDecorator
   def property_decorator
     PropertyDecorator.new @source.account.property
   end
-
-  def submit_message
-    @source.new_record? ?  'pay total'  : 'update'
-  end
 end
