@@ -1,26 +1,37 @@
 <% @title='Login' %>
-<fieldset id='login' class='shell  dialog-box'>
-  <%= form_tag sessions_path do %>
-    <div class='grid'>
-      <div class='col-1-4 vertical-spacer'>
-        <%= label_tag :email %>
+<div class='grid'>
+  <div class='col-1-6 vertical-spacer'>
+    &nbsp;
+  </div>
+  <div class='col-4-6 vertical-spacer'>
+  <fieldset id='login' class='shell  dialog-box'>
+    <%= form_tag sessions_path do %>
+      <p>
+      <div class='grid'>
+        <div class='col-1-4 vertical-spacer'>
+          <%= label_tag :email %>
+        </div>
+        <div class='col-3-4 vertical-spacer no-r-pad'>
+          <%= text_field_tag :email, params[:email], autofocus: true %>
+        </div>
+        <div class='col-1-4 vertical-spacer'>
+          <%= label_tag :password %>
+        </div>
+        <div class='col-3-4 vertical-spacer no-r-pad'>
+          <%= password_field_tag :password %>
+        </div>
+        <div class='col-1-4'>
+          &nbsp;
+        </div>
+        <div class='col-3-4 no-r-pad'>
+          <%= submit_tag "Log In", class: 'primary' %>
+        </div>
       </div>
-      <div class='col-3-4 vertical-spacer no-r-pad'>
-        <%= text_field_tag :email, params[:email], autofocus: true %>
-      </div>
-      <div class='col-1-4 vertical-spacer'>
-        <%= label_tag :password %>
-      </div>
-      <div class='col-3-4 vertical-spacer no-r-pad'>
-        <%= password_field_tag :password %>
-      </div>
-      <div class='col-1-4'>
-        &nbsp;
-      </div>
-      <div class='col-3-4 no-r-pad'>
-        <%= submit_tag "Log In" %>
-      </div>
-    </div>
+      <p>
   <% end %>
-</fieldset>
+  </fieldset>
+  </div>
+<div class='col-1-6 vertical-spacer'>
+  &nbsp;
+</div>
 
