@@ -114,7 +114,7 @@ describe Property, type: :feature do
     end
 
     def update_then_expect_properties_page
-      click_on 'Create/Update Account'
+      click_on 'Update Account'
       expect(current_path).to eq '/properties'
       expect(page).to have_text 'successfully updated!'
     end
@@ -210,7 +210,7 @@ describe Property, type: :feature do
       navigate_to_edit_page
       validate_page
       clear_address_road
-      click_on 'Create/Update Account'
+      click_on 'Update Account'
       expect(current_path).to eq '/properties/1'
       expect(page).to have_text /The property could not be saved./i
     end

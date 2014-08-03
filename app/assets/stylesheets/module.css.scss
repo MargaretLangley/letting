@@ -232,11 +232,15 @@ li.active-subnav a{
 
 \*--------------------------------------------------*/
 
+@mixin ellipsis-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 
 label {
-   overflow: hidden;
-   text-overflow: ellipsis;
-   white-space: nowrap;
+   @include ellipsis-text;
  }
 
 .required{
@@ -244,6 +248,11 @@ label {
   &:after {
     content: ' *';
   }
+}
+
+input[type=submit].primary{
+  width: 60%;
+  padding: 2%;
 }
 
 

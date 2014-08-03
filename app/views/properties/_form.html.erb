@@ -40,9 +40,19 @@
         <%= render 'charges', f: a, charges: property.account.charges %>
       <% end %>
     </div>
+    <hr>
+    <div class='no-print'>
+      <div class='col-2-24'>
+        &nbsp;
+      </div>
+      <div class='col-20-24 c-align'>
+        <%= f.submit class: 'primary' %>
+        or <%= link_to 'Cancel', properties_path, class: 'warn' %>
+      </div>
+      <div class='col-2-24'>
+        &nbsp;
+      </div>
+    </div>
   </fieldset>
 
-  <div class='no-print'>
-    <%= f.submit %> or <%= link_to 'Cancel', properties_path, class: 'warn' %>
-  </div>
 <% end %>

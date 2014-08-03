@@ -12,7 +12,7 @@ describe Property, type: :feature do
     validate_page
     expect(page).to have_css('.spec-entity-count', count: 1)
     fill_in_form
-    click_on 'Create/Update Account'
+    click_on 'Create Account'
     expect(page).to_not have_text 'The property could not be saved.'
     have_we_saved?
     expect_properties_page
@@ -26,7 +26,7 @@ describe Property, type: :feature do
     fill_in_property
     fill_in_property_address
     fill_in_property_entities
-    click_on 'Create/Update Account'
+    click_on 'Create Account'
     expect(current_path).to eq '/properties'
     navigate_to_property_page
     expect_property
@@ -38,7 +38,7 @@ describe Property, type: :feature do
     client_create!
     navigate_to_create_page
     invalidate_page
-    click_on 'Create/Update Account'
+    click_on 'Create Account'
     expect(current_path).to eq '/properties'
     expect(page).to have_text 'The property could not be saved.'
   end
