@@ -70,7 +70,7 @@ describe Client, type: :feature do
     end
 
     it 'navigates to view page' do
-      click_on 'View'
+      click_on 'View file'
       expect(client_page.title).to eq 'Letting - View Client'
     end
   end

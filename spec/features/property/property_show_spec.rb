@@ -24,15 +24,12 @@ describe Property, type: :feature do
 
   it 'navigates to index page' do
     click_on 'Accounts'
-    expect(page).to have_text 'Actions'
-    expect(page).to have_link 'Delete', href: property_path(Property.first)
+    expect(page.title).to eq 'Letting - Accounts'
   end
 
   it 'navigates to edit page' do
-    pending 'edit removed for now - pending until new edit added'
-    click_on 'Edit'
-    expect(page).to have_text 'Title'
-    expect(page).to have_text 'Postcode'
+    first(:link, 'Edit').click
+    expect(page.title).to eq 'Letting - Edit Account'
   end
 
   def expect_property_address

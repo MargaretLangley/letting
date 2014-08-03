@@ -87,4 +87,6 @@ RSpec.configure do |config|
     Elasticsearch::Extensions::Test::Cluster.stop(nodes: 1, port: 9200) \
       if Elasticsearch::Extensions::Test::Cluster.running?
   end
+
+  config.include FontAwesome::Rails::IconHelper
 end

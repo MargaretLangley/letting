@@ -27,18 +27,14 @@ describe Property, type: :feature do
       property_create! id: 1, human_ref: 8000
       navigate_to_edit_page
       click_on 'Accounts'
-      expect(page).to have_text 'Actions'
-      expect(page).to have_link 'Delete', href: property_path(Property.first)
+      expect(page.title).to eq 'Letting - Accounts'
     end
 
     it 'navigates to accounts view page' do
-      skip
       property_create! id: 1, human_ref: 8000
       navigate_to_edit_page
-      click_on 'Accounts'
-      expect(page).to have_text 'Address'
-      expect(page).to_not have_text 'Title'
-      expect(page).to_not have_link 'Delete'
+      click_on 'View file'
+      expect(page.title).to eq 'Letting - View Account'
     end
 
     def navigate_to_edit_page

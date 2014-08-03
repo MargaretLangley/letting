@@ -19,14 +19,12 @@ describe Client, type: :feature do
 
   it 'navigates to index page' do
     click_on 'Clients'
-    expect(page).to have_text 'Actions'
-    expect(page).to have_link 'Delete'
+    expect(page.title).to eq 'Letting - Clients'
   end
 
   it 'navigates to edit page' do
     click_on 'Edit'
-    expect(page).to have_text 'Title'
-    expect(page).to have_text 'Postcode'
+    expect(page.title).to eq 'Letting - Edit Client'
   end
 
   def expect_client_address
