@@ -8,7 +8,7 @@ describe Client, type: :feature do
     log_in
     client_create!.properties << property_new
     visit '/clients/'
-    click_on 'View'
+    find('.view-testing-link', visible: false).click
   end
 
   it '#show' do

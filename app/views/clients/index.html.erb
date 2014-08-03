@@ -2,57 +2,53 @@
 
 <div class='grid shell'>
 
-  <% if @clients.present? %>
-    <div class='col-1-12 vertical-spacer grid-header r-align'>
-      ID
-    </div>
-    <div class='col-1-12 vertical-spacer grid-header'>
-      Intials
-    </div>
-    <div class='col-3-12 vertical-spacer grid-header'>
-      Name
-    </div>
-    <div class='col-1-12 vertical-spacer grid-header r-align'>
-      No
-    </div>
-    <div class='col-4-12 vertical-spacer grid-header'>
-     Road
-    </div>
-    <div class='col-2-12 vertical-spacer grid-header no-print r-align'>
-      Actions
-    </div>
+  <div class='col-1-12 vertical-spacer grid-header r-align'>
+    ID
+  </div>
+  <div class='col-1-12 vertical-spacer grid-header'>
+    Intials
+  </div>
+  <div class='col-3-12 vertical-spacer grid-header'>
+    Name
+  </div>
+  <div class='col-1-12 vertical-spacer grid-header r-align'>
+    No
+  </div>
+  <div class='col-4-12 vertical-spacer grid-header'>
+   Road
+  </div>
+  <div class='col-2-12 vertical-spacer grid-header no-print r-align'>
+    Actions
+  </div>
 
-    <% @clients.each do |client| %>
+  <% @clients.each do |client| %>
+    <div class='table-row' data-link='<%= client_path(client.id) %>'>
 
-      <div class='col-1-12 vertical-spacer r-align grid-row'>
+      <div class='col-1-12 vertical-spacer r-align grid-row inherit-row'>
          <%= link_to client.human_ref, edit_client_path(client) %>
       </div>
-      <div class='col-1-12 vertical-spacer'>
+      <div class='col-1-12 vertical-spacer inherit-row'>
           <%= format_empty_string_as_dash client.entities.first.initials %>
       </div>
-      <div class='col-3-12'>
+      <div class='col-3-12 inherit-row'>
          <%= client.entities.first.name %>
       </div>
-      <div class='col-1-12 r-align'>
-       <% if client.address.road_no? %>
-         <%= client.address.road_no %>
-      <% else %>
-        &nbsp;
-      <% end %>
-    </div>
-      <div class='col-3-12 vertical-spacer'>
-        <%= client.address.road %>
+      <div class='col-1-12 r-align inherit-row'>
+        <% if client.address.road_no? %>
+          <%= client.address.road_no %>
+        <% else %>
+          &nbsp;
+        <% end %>
       </div>
-      <nav class='col-3-12 vertical-spacer r-align no-r-pad'>
-        <%= link_to 'Edit', edit_client_path(client) %> |
-        <%= link_to 'View', client_path(client) %> |
-        <%= link_to 'Delete', client, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </nav>
-    <% end %>
-
-  <% else %>
-    No Clients Found. Try Again.
+      <div class='col-5-12 vertical-spacer inherit-row'>
+        <%= client.address.road %>
+        <%= link_to '.', client_path(client.id), class: 'view-testing-link' %>
+      </div>
+    </div>
+    <div class='col-1-12 vertical-spacer r-align no-r-pad'>
+      <%= link_to fa_icon('edit'), edit_client_path(client.id), title: 'Edit' %> &nbsp;|&nbsp;
+      <%= link_to fa_icon('trash-o'), client, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete' %>
+    </div>
   <% end %>
-
 </div>
 <%= paginate @clients %>

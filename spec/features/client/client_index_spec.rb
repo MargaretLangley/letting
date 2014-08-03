@@ -28,7 +28,7 @@ describe Client, type: :feature do
     end
 
     it 'view' do
-      first(:link, 'View').click
+      first('.view-testing-link', visible: false).click
       expect(page).to have_text '111'
       expect(page).to have_link 'Edit'
       expect(page).to have_text 'Properties Owned'
