@@ -1,0 +1,128 @@
+################################
+# Account Page
+#
+# Encapsulates the Account Page (new and edit)
+#
+# The layer hides the capybara calls to make the functional rspec tests that
+# use this class simpler.
+#
+# rubocop: disable Style/ParameterLists
+#
+class AccountPage
+  include Capybara::DSL
+
+  def new
+    visit '/properties/new'
+    self
+  end
+
+  def edit
+    visit '/properties/'
+    click_on 'Edit'
+    self
+  end
+
+  def button action
+    click_on "#{action} Account"
+    self
+  end
+
+  def click(choice)
+    click_on choice
+  end
+
+  def expect_property(spec, property_id:, client_id:)
+    spec.expect(find_field('Property ID').value).to spec.have_text property_id
+    # spec.expect(find_field('client_id').value).to spec.have_text client_id
+  end
+
+  def property(property_id:, client_id:)
+    fill_in 'Property ID', with: property_id
+    fill_in('client_id', with: client_id)
+  end
+
+  def expect_entity(spec, type:, order: 0, title:, initials:, name:)
+    id_stem = "#{type}_entities_attributes_#{order}"
+    spec.expect(find_field("#{id_stem}_title").value).to spec.have_text title
+    spec.expect(find_field("#{id_stem}_initials").value).to \
+      spec.have_text initials
+    spec.expect(find_field("#{id_stem}_name").value).to spec.have_text name
+  end
+
+  def entity(type:, order: 0, title:, initials:, name:)
+    id_stem = "#{type}_entities_attributes_#{order}"
+    fill_in "#{id_stem}_title", with: title
+    fill_in "#{id_stem}_initials", with: initials
+    fill_in "#{id_stem}_name", with: name
+  end
+
+  def expect_address(spec, type:, flat_no: '', house_name: '', road_no: '',
+                     road: '', town: '', district: '', county: '', postcode: ''
+                    )
+    within type do
+      spec.expect(find_field('Flat no').value).to spec.have_text flat_no
+      spec.expect(find_field('House name').value).to spec.have_text house_name
+      spec.expect(find_field('Road no').value).to spec.have_text road_no
+      spec.expect(find_field('Road').value).to spec.have_text road
+      spec.expect(find_field('Town').value).to spec.have_text town
+      spec.expect(find_field('District').value).to spec.have_text district \
+        if district.present?
+      spec.expect(find_field('County').value).to spec.have_text county
+      spec.expect(find_field('Postcode').value).to spec.have_text postcode
+    end
+  end
+
+  def address(selector:,
+              flat_no: '',
+              house_name: '',
+              road_no:,
+              road:,
+              town:,
+              district: '',
+              county:,
+              postcode:)
+    within selector do
+      fill_in 'Flat no', with: flat_no
+      fill_in 'House name', with: house_name
+      fill_in 'Road no', with: road_no
+      fill_in 'Road', with: road
+      fill_in 'District', with: district if district.present?
+      fill_in 'Town', with: town
+      fill_in 'County', with: county
+      fill_in 'Postcode', with: postcode
+    end
+  end
+
+  def charge(order: 0, charge_type:, due_in:, amount:,
+             start_date: '', end_date: '')
+    id_stem = "property_account_attributes_charges_attributes_#{order}"
+    fill_in "#{id_stem}_charge_type", with: charge_type
+    fill_in "#{id_stem}_due_in", with: due_in
+    fill_in "#{id_stem}_amount", with: amount
+    # fill_in "#{id_stem}_start_date", with: start_date if start_date.present?
+    # fill_in "#{id_stem}_end_date", with: start_date if end_date.present?
+  end
+
+  def due_on(charge_order: 0, due_ons_order: 0, day: 1, month: 1)
+    id_stem = 'property_account_attributes_charges_attributes_' \
+              "#{charge_order}_due_ons_attributes_#{due_ons_order}"
+
+    fill_in "#{id_stem}_day", with: day
+    fill_in "#{id_stem}_month", with: month if month.present?
+  end
+
+  def expect_charge(spec, order: 0, charge_type:, due_in:, amount:,
+                    start_date: '', end_date: '')
+    id_stem = "property_account_attributes_charges_attributes_#{order}"
+    spec.expect(find_field("#{id_stem}_charge_type").value).to \
+      spec.have_text charge_type
+    spec.expect(find_field("#{id_stem}_due_in").value).to spec.have_text due_in
+    spec.expect(find_field("#{id_stem}_amount").value).to spec.have_text amount
+  end
+
+  def successful?(spec)
+    spec.expect(page.title).to spec.eq 'Letting - Accounts'
+    spec.expect(page).to spec.have_text 'successfully'
+    self
+  end
+end
