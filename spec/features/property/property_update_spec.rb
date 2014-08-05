@@ -23,11 +23,11 @@ describe 'Account Update', type: :feature do
     end
 
     it 'updates account', js: true do
-      account.property(property_id: '8001', client_id: '8010')
+      account.property(self, property_id: '8001', client_id: '8008')
       account.address(selector: '#property_address', **house_address_attributes)
       account.entity(type: 'property', **company_attributes)
       account.button('Update').successful?(self).edit
-      account.expect_property(self, property_id: '8001', client_id: '8010')
+      account.expect_property(self, property_id: '8001', client_id: '8008')
       account.expect_address(self,
                              type: '#property_address',
                              **house_address_attributes)

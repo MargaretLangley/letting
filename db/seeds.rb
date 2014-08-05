@@ -1,8 +1,28 @@
-
+##################################################################
+#
 # Seed for testing Database
+#
+# Creates
+#
+# Clients
+# 1 - Mr K.S. Ranjitsinhji
+# 2 - Mr B. Simpson
+# 3 - Mr V. Richards
+#
+# Properties
+#
+# id: 1, human_ref: 1001, client_id: 1, Flat 28 Lords, Hendren
+#                         agent_id: 1   Flat 33 Oval,  Laker
+# id: 2, human_ref: 2002, client_id: 1, Flat 31 Lords, Gatting
+# id: 3, human_ref: 3003, client_id: 2, Flat 31 Tavern, Hearne
+# id: 4, human_ref: 4004, client_id: 3, Green Fields, Robertson
+#
+#
 # **Any new table** which has rows added should appear in pk reset at bottom.
-
 # this starts seeding off with method call at the end of file
+#
+##################################################################
+#
 def generate_seeding
   truncate_tables
   seed_users

@@ -30,7 +30,7 @@ describe Property, type: :feature do
   end
 
   it '#create has validation', js: true do
-    account.property(property_id: '-278', client_id: '-8008')
+    account.property(self, property_id: '-278', client_id: '8008')
     account.button 'Create'
     expect(page.title).to eq 'Letting - New Account'
     expect(page).to have_text 'The property could not be saved.'
@@ -43,7 +43,7 @@ describe Property, type: :feature do
   end
 
   def fill_in_property
-    account.property(property_id: '278', client_id: '8008')
+    account.property(self, property_id: '278', client_id: '8008')
     account.address(selector: '#property_address',
                     **address_attributes.except(:district))
     account.entity(type: 'property', **person_attributes)

@@ -1,3 +1,4 @@
+require 'spec_helper'
 ################################
 # Account Page
 #
@@ -33,12 +34,12 @@ class AccountPage
 
   def expect_property(spec, property_id:, client_id:)
     spec.expect(find_field('Property ID').value).to spec.have_text property_id
-    # spec.expect(find_field('client_id').value).to spec.have_text client_id
+    spec.expect(find_field('property_client_ref').value).to spec.have_text client_id
   end
 
-  def property(property_id:, client_id:)
+  def property(spec, property_id:, client_id:)
     fill_in 'Property ID', with: property_id
-    fill_in('client_id', with: client_id)
+    spec.fill_autocomplete('property_client_ref', with: client_id)
   end
 
   def expect_entity(spec, type:, order: 0, title:, initials:, name:)

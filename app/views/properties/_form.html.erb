@@ -15,7 +15,8 @@
             <%= f.label :client_ref, 'Client ID', class: 'required' %>
           </div>
           <div class='col-3-4 no-r-pad'>
-            <%= f.text_field :client_id, id: 'client_id' %>
+            <%= text_field_tag nil, "#{property.client.try(:human_ref)} #{property.client.try(:entities).try(:full_name)}", :id => 'property_client_ref', data: { autocomplete_source: Client.order(:human_ref).map { |t| { :label => "#{t.human_ref} #{t.entities.full_name}", :value => t.id } } } %>
+            <%= f.hidden_field :client_id, id: 'client_id' %>
           </div>
       </div>
       <div class='col-1-8 vertical-spacer no-r-pad'>

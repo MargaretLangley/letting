@@ -1,4 +1,32 @@
-# rubocop: disable Style/LineLength
+# Code from SO
+# http://stackoverflow.com/questions/13187753/   \
+#  rails3-jquery-autocomplete-how-to-test-with-rspec-and-capybara
+#
+# Error - can't find autocomplete selection =>
+# "expected to find css "ul.ui-autocomplete li.ui-menu-item a"
+# but there were no matches"
+#
+# View Logic
+#
+# <%= text_field_tag nil, "#{property.client.try(:human_ref)}
+#     #{property.client.try(:entities).try(:full_name)}",
+#       :id => 'property_client_ref',
+#       data: { autocomplete_source: Client.order(:human_ref)
+#                  .map { |t| { :label => "#{t.human_ref}
+#                   #{t.entities.full_name}", :value => t.id } } } %>
+# <%= f.hidden_field :client_id, id: 'client_id' %>
+#
+# SpecHelper
+#
+# RSpec.configure do |config|
+#  config.include CapybaraHelper
+# end
+#
+# Rspec
+#
+# fill_autocomplete('property_client_ref', with: client_id)
+#
+## rubocop: disable Style/LineLength
 module CapybaraHelper
   def fill_autocomplete(field, options = {})
     fill_in field, with: options[:with]
