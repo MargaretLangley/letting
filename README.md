@@ -91,8 +91,11 @@ My Reference: Webserver alias: `ssh arran`
 2. `sudo rm /tmp/unicorn.letting_*.sock`
 3. `sudo -u postgres psql`
 4. `postgres=# drop database letting_<environment>;`
+4.1 if you have outstanding backend connections:
+    `SELECT pid FROM pg_stat_activity where pid <> pg_backend_pid();`
+    Then for each connection:
+    `SELECT pg_terminate_backend($1);`
 5. System can then have Production setup again
-
 
 ===
 
