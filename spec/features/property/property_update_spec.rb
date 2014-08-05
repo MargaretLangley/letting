@@ -74,7 +74,7 @@ describe 'Account Update', type: :feature do
   context 'Agentless with charge' do
     before(:each) do
       log_in
-      client = client_create!
+      client_create!
       property_with_monthly_charge_create! human_ref: 8000
       account.edit
     end

@@ -7,7 +7,12 @@ require 'spec_helper'
 # The layer hides the capybara calls to make the functional rspec tests that
 # use this class simpler.
 #
+# Due to Address methods
 # rubocop: disable Style/ParameterLists
+# rubocop: disable Style/MethodLength
+#
+# Temporary until start_date / end_date used
+# rubocop: disable Lint/UnusedMethodArgument
 #
 class AccountPage
   include Capybara::DSL
@@ -34,7 +39,8 @@ class AccountPage
 
   def expect_property(spec, property_id:, client_id:)
     spec.expect(find_field('Property ID').value).to spec.have_text property_id
-    spec.expect(find_field('property_client_ref').value).to spec.have_text client_id
+    spec.expect(find_field('property_client_ref').value).to spec.have_text \
+      client_id
   end
 
   def property(spec, property_id:, client_id:)
