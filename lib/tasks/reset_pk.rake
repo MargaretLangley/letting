@@ -1,7 +1,8 @@
-# Drop, Create, Migrate, Test Prepare and then populate the development
-# Note: db:reset mirrors much of the calls but also db:seed which I didn't want.
-# https://gist.github.com/nithinbekal/3423153
-
+# Each time a row is added to the database the PK is incremented
+# However, with the seed/import this is not happending.
+# At the end of the seed I go through all the tables and make sure the PK
+# points to the next empty row!
+#
 STDOUT.sync = true
 
 namespace :db do

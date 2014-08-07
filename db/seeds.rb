@@ -18,9 +18,6 @@
 # id: 4, human_ref: 4004, client_id: 3, Green Fields, Robertson
 #
 #
-# **Any new table** which has rows added should appear in pk reset at bottom.
-# this starts seeding off with method call at the end of file
-#
 ##################################################################
 #
 def generate_seeding
