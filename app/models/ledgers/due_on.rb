@@ -1,8 +1,10 @@
 ####
 #
+# DueOn
+#
 # The day and month during the year to charge a property.
 #
-# Charges will become due every year into the future. By holding a
+# Charges will become due every year on the described date. By holding a
 # day and month a charge is due we can handle recurring charges.
 #
 # The code is part of the charge system in the accounts.
@@ -10,6 +12,8 @@
 # The class models charges by either being:
 # ON_DATE: holding a day and month or by holding.
 # PER_MONTH: a day and have it reoccur every month.
+#
+# More information: due_ons.rb
 #
 ####
 #
