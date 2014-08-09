@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 20140809150357) do
   end
 
   create_table "charge_structures", force: true do |t|
-    t.integer  "charged_ins_id"
-    t.integer  "charge_cycle_id"
+    t.integer  "charged_in_id",   null: false
+    t.integer  "charge_cycle_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

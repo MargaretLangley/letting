@@ -19,7 +19,7 @@ end
 def charge_structure_attributes **overrides
   {
     charge_cycle_id: 1,
-    charged_ins_id: 1,
+    charged_in_id: 1,
   }.merge overrides
 end
 

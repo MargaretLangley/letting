@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Charge, type: :model do
   let(:charge) do
     charge = Charge.new charge_attributes id: 1
-    charge.build_charge_structure charge_cycle_id: 1, charged_ins_id: 1
+    charge.build_charge_structure charge_cycle_id: 1, charged_in_id: 1
     charge.charge_structure.due_ons.new \
       due_on_attributes_0 charge_structure_id: 1
     charge
@@ -45,7 +45,7 @@ describe Charge, type: :model do
     describe 'charging' do
       let(:charge) do
         charge = Charge.new charge_attributes id: 1, due_in: 'Advance'
-        charge.build_charge_structure charge_cycle_id: 1, charged_ins_id: 1
+        charge.build_charge_structure charge_cycle_id: 1, charged_in_id: 1
         charge.charge_structure.due_ons.new \
           due_on_attributes_0 charge_structure_id: 1, day: 25, month: 3
         charge.charge_structure.due_ons.new \

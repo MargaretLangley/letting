@@ -3,7 +3,7 @@ require 'spec_helper'
 describe DueOns, type: :model do
 
   let(:charge) do
-    ChargeStructure.new charge_cycle_id: 1, charged_ins_id: 1
+    ChargeStructure.new charge_cycle_id: 1, charged_in_id: 1
   end
   let(:due_ons) { charge.due_ons }
 
@@ -107,7 +107,7 @@ describe DueOns, type: :model do
 
       it 'new on date' do
         charge_structure = ChargeStructure.new charge_cycle_id: 1, \
-                                               charged_ins_id: 1
+                                               charged_in_id: 1
         charge_structure.prepare
         charge_structure.due_ons.build day: 24, month: 6
         charge_structure.due_ons.build day: 25, month: 12
@@ -119,7 +119,7 @@ describe DueOns, type: :model do
 
       it 'on date to different on date' do
         charge_structure = ChargeStructure.new charge_cycle_id: 1,
-                                               charged_ins_id: 1
+                                               charged_in_id: 1
         charge_structure.due_ons.build day: 24, month: 6, id: 7
         charge_structure.due_ons.build day: 25, month: 12, id: 8
         charge_structure.due_ons.prepare
@@ -137,7 +137,7 @@ describe DueOns, type: :model do
 
       it 'new per date' do
         charge_structure = ChargeStructure.new charge_cycle_id: 1,
-                                               charged_ins_id: 1
+                                               charged_in_id: 1
         charge_structure.due_ons.prepare
         charge_structure.due_ons.build day: 5, month: -1
         charge_structure.clear_up_form

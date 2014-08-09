@@ -16,10 +16,13 @@ class ChargeStructure < ActiveRecord::Base
   validates :due_ons, presence: true
   has_one :charge, inverse_of: :charge_structure
   belongs_to :charge_cycle
+  belongs_to :charged_in, inverse_of: :charge_structure
 
   delegate :due_dates, to: :due_ons
 
   delegate :prepare, to: :due_ons
 
   delegate :clear_up_form, to: :due_ons
+
+  delegate :name, to: :charged_in, prefix: true
 end
