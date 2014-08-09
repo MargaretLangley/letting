@@ -25,7 +25,7 @@
     <div class='table-row' data-link='<%= client_path(client.id) %>'>
 
       <div class='col-1-12 vertical-spacer r-align grid-row inherit-row'>
-         <%= link_to client.human_ref, edit_client_path(client) %>
+         <%= client.human_ref %>
       </div>
       <div class='col-1-12 vertical-spacer inherit-row'>
           <%= format_empty_string_as_dash client.entities.first.initials %>
