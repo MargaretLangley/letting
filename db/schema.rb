@@ -131,13 +131,11 @@ ActiveRecord::Schema.define(version: 20140809150357) do
     t.integer  "day",                 null: false
     t.integer  "month",               null: false
     t.integer  "year"
-    t.integer  "charge_id"
     t.integer  "charge_structure_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "due_ons", ["charge_id"], name: "index_due_ons_on_charge_id", using: :btree
   add_index "due_ons", ["charge_structure_id"], name: "index_due_ons_on_charge_structure_id", using: :btree
 
   create_table "entities", force: true do |t|

@@ -324,13 +324,6 @@ def create_charges
 end
 
 def create_due_ons
-  # DueOn.create! [
-  #   { id: 1,  day: 25, month: (Date.current + 1.month).month, charge_id: 1 },
-  #   { id: 2,  day: 1,  month: 7, charge_id: 2 },
-  #   { id: 3,  day: 1,  month: (Date.current + 1.month).month, charge_id: 3 },
-  #   { id: 4,  day: 30, month: 9, charge_id: 4 },
-  # ]
-
   DueOn.create! [
     { id: 1,  day: 25,  month: 3, charge_structure_id: 1 },
     { id: 2,  day: 29,  month: 9, charge_structure_id: 1 },
