@@ -5,10 +5,9 @@ describe User, type: :feature do
 
   context '#view' do
     it 'basic user in view page' do
-      user_create! george_attributes
       visit '/users/'
       expect(current_path).to eq '/users/'
-      first(:link, 'View').click
+      find('.view-testing-link', visible: false).click
       expect(page).to have_text 'admin@example.com'
       expect(page).to have_text 'Admin'
     end
