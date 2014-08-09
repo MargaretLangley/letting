@@ -16,6 +16,7 @@ describe Property, type: :feature do
   end
 
   it '#create', js: true  do
+    skip 'charges being changed'
     fill_in_property
     fill_in_agent
     account.button('Create').successful?(self).edit
@@ -24,6 +25,7 @@ describe Property, type: :feature do
   end
 
   it '#creates a account without agent', js: true do
+    skip 'charges being changed'
     fill_in_property
     account.button('Create').successful?(self).edit
     expect_property

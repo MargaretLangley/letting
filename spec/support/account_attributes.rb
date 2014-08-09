@@ -16,6 +16,13 @@ def charge_attributes **overrides
   }.merge overrides
 end
 
+def charge_structure_attributes **overrides
+  {
+    charge_cycle_id: 1,
+    charged_ins_id: 1,
+  }.merge overrides
+end
+
 def due_on_attributes_0 **overrides
   {
     day: 25,

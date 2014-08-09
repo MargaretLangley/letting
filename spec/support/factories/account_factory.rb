@@ -32,7 +32,10 @@ end
 def add_charge_attributes account, args
   charge = account.charges.build charge_attributes \
     args.fetch(:charge_attributes, {})
-  charge.due_ons.build due_on_attributes_0 args.fetch(:due_on_attribute, {})
+  charge.build_charge_structure charge_structure_attributes \
+    args.fetch(:charge_structure_attributes, {})
+  charge.charge_structure.due_ons.build due_on_attributes_0 \
+    args.fetch(:due_on_attribute, {})
 end
 
 def add_debit_attribute account, args

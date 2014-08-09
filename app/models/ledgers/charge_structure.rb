@@ -1,0 +1,25 @@
+# ChargeStructure
+#
+# The Information required to know when a debit is created for a charge
+#
+# A charge is responsible for an amount and a time period it is active.
+# When a charge is due is handled by charge_structure.
+#
+# ChargeStructure contain due_ons - which know when a charge becomes due.
+# Charge cycle is converts the id into readable month cycle (1 is Mar/Sep)
+#
+#
+#
+class ChargeStructure < ActiveRecord::Base
+  include DueOns
+  accepts_nested_attributes_for :due_ons, allow_destroy: true
+  validates :due_ons, presence: true
+  has_one :charge, inverse_of: :charge_structure
+  belongs_to :charge_cycle
+
+  delegate :due_dates, to: :due_ons
+
+  delegate :prepare, to: :due_ons
+
+  delegate :clear_up_form, to: :due_ons
+end

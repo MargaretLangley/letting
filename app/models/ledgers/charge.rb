@@ -14,13 +14,12 @@
 ####
 #
 class Charge < ActiveRecord::Base
-  include DueOns
-  accepts_nested_attributes_for :due_ons, allow_destroy: true
+  belongs_to :charge_structure, inverse_of: :charge
+  accepts_nested_attributes_for :charge_structure
   belongs_to :account
   validates :charge_type, :due_in, presence: true
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
-  validates :due_ons, presence: true
   has_many :debits, dependent: :destroy do
     def created_on? on_date
       self.any? do |debit|
@@ -44,11 +43,15 @@ class Charge < ActiveRecord::Base
     end.compact
   end
 
-  delegate :prepare, to: :due_ons
+  def prepare
+    # maybe should be calling prepare on charge structure
+  end
 
   def clear_up_form
     mark_for_destruction unless edited?
-    due_ons.clear_up_form
+    # FIX_CHARGE
+    # charge_structure.clear_up_form
+    # due_ons.clear_up_form
   end
 
   private
@@ -58,7 +61,8 @@ class Charge < ActiveRecord::Base
   end
 
   def allowed_due_dates date_range
-    due_ons.due_dates(date_range).to_a & (start_date..end_date).to_a
+    charge_structure.due_dates(date_range) & (start_date..end_date).to_a
+    # due_ons.due_dates(date_range).to_a & (start_date..end_date).to_a
   end
 
   # Converts a Charge object into a ChargeableInfo object.
@@ -77,8 +81,10 @@ class Charge < ActiveRecord::Base
   def empty?
     attributes.except(*ignored_attrs).values.all?(&:blank?) &&
     start_date == Date.parse(MIN_DATE) &&
-    end_date == Date.parse(MAX_DATE) &&
-    due_ons.empty?
+    end_date == Date.parse(MAX_DATE)
+    # FIX_CHARGE
+    # maybe should include this - not sure &&
+    # due_ons.empty?
   end
 
   def ignored_attrs

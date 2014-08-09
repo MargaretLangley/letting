@@ -32,7 +32,8 @@ def property_with_monthly_charge_create! **args
   property = base_property args
   add_no_agent property
   charge = property.account.charges.build charge_attributes
-  charge.due_ons.build due_on_monthly_attributes_0
+  charge.build_charge_structure charge_structure_attributes
+  charge.charge_structure.due_ons.build due_on_monthly_attributes_0
   property.save!
   property
 end
@@ -69,14 +70,15 @@ end
 
 def add_charge charge_me
   charge = charge_me.account.charges.build charge_attributes
-  add_due_on_0 charge
-  add_due_on_1 charge
+  charge.build_charge_structure charge_structure_attributes
+  add_due_on_0 charge.charge_structure
+  add_due_on_1 charge.charge_structure
 end
 
-def add_due_on_0 charge
-  charge.due_ons.build due_on_attributes_0
+def add_due_on_0 charge_structure
+  charge_structure.due_ons.build due_on_attributes_0
 end
 
-def add_due_on_1 charge
-  charge.due_ons.build due_on_attributes_1
+def add_due_on_1 charge_structure
+  charge_structure.due_ons.build due_on_attributes_1
 end

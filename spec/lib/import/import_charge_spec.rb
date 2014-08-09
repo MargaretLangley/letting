@@ -13,7 +13,7 @@ require_relative '../../../lib/import/import_charge'
 ####
 #
 module DB
-  describe ImportCharge, :import do
+  describe ImportCharge, :import, broken: true do
     def row
       %q(2002, 2006-12-30 17:17:00, GR, 0, 40.5,  S,) +
       %q(24, 6, 25, 12,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )

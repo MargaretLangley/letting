@@ -1,20 +1,20 @@
 <div id='property_charge_<%= index %>' class='js-selection <%= hide_new_record_unless_first charge, index %>'  >
   <div class='grid'>
-    <div class='col-5-24 vertical-spacer  no-r-pad spec-charge-count'>
+    <div class='col-6-24 vertical-spacer  no-r-pad spec-charge-count'>
       <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
     </div>
-    <div class='col-2-24 vertical-spacer  no-r-pad'>
-      <%= f.text_field :due_in, data: { autocomplete_source: Charge.uniq.pluck(:due_in).sort } %>
+    <div class='col-4-24 vertical-spacer  no-r-pad'>
+      <%= f.select :due_in, ChargeCycle.all.map {|charge_cycle| [charge_cycle.name, charge_cycle.id ] } %>
     </div>
-    <div class='col-2-24 vertical-spacer  no-r-pad'>
+    <div class='col-4-24 vertical-spacer  no-r-pad'>
+      <%= f.grouped_collection_select :due_in, ChargeCycle.all, :charge_structures, :name, :id, :due, include_blank: true %>
+    </div>
+    <div class='col-3-24 vertical-spacer  no-r-pad'>
       <%= f.text_field :amount %>
       <%= f.hidden_field :start_date %>
       <%= f.hidden_field :end_date %>
     </div>
-    <div class='col-13-24 vertical-spacer  no-r-pad'>
-      <%= render 'due_ons', f: f, due_ons: DueOnsDecorator.new(charge.due_ons) %>
-    </div>
-    <div class='col-2-24 vertical-spacer'>
+    <div class='col-7-24 vertical-spacer'>
       <%= f.check_box :dormant, class: 'js-checkbox-toggle' %>
     </div>
   </div>
