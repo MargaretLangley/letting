@@ -253,10 +253,9 @@ li.active-subnav a{
   white-space: nowrap;
 }
 
-
 label {
-   @include ellipsis-text;
- }
+  @include ellipsis-text;
+}
 
 .required{
   font-weight: bold;
@@ -405,13 +404,14 @@ $search-height: 35px;
 \*--------------------------------------------------*/
 
 .flash{
+  width: 60%;
+  margin: 0 20% 0 20%;
   position: absolute;
-  width: 40%;
-  margin: 0 0 0 20%;
   padding: 1.5% 2% 1.5% 2%;
   border-radius: 12px;
   box-shadow: $shadow 0 0 8px;
   cursor: pointer;
+  text-align: center;
 }
 
 .notice{
