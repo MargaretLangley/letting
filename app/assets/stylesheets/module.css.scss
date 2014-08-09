@@ -193,6 +193,7 @@ li.active-subnav a{
     border-radius: 12px;
     background-color: $fieldset;
     box-shadow: $shadow 0 0 8px;
+    @include pie-clearfix;
   }
 }
 
