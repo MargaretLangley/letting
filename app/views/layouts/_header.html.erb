@@ -12,40 +12,25 @@
           <div class='form-wrapper'>
             <%= form_tag send("search_#{params[:controller]}_path"), method: 'get' do %>
               <%= text_field_tag :search , params[:search], placeholder: 'Search here...', data: {autocomplete_source: search_properties_path}, autofocus:true, class: 'max-3-4' %>
-              <button type="submit" class='max-1-4'>Search</button>
+              <button type="submit" class='max-1-4'><i class= 'fa fa-search fa-lg' , title = 'Search'></i></button>
             <% end %>
           </div>
         </div>
       </div>
     </div>
     <div class="col-2-8">
-      <nav>
-        <div class="col-2-24">
-          &nbsp;
-        </div>
-        <div class="col-11-24">
-          <% if current_user %>
-           <i class="fa fa-user"></i>&nbsp;<%= current_user.nickname %>
-          <% else %>
-            <%= link_to 'Log In', login_path, class: 'inverted-link'  %>
-          <% end %>
-        </div>
-        <div class="col-11-24">
-          <% if current_user %>
-           <i class="fa fa-sign-out"></i><%= link_to 'Log Out', logout_path, class: 'inverted-link' %>
-          <% else %>
-            <%= link_to 'Log In', login_path, class: 'inverted-link'  %>
-          <% end %>
-        </div>
-        <div class="col-2-24">
-          &nbsp;
-        </div>
-        <div class="col-11-24">
-          <i class="fa fa-print"></i>&nbsp;<%= link_to 'Print', '#', class: 'js-print-window inverted-link'%>
-        </div>
-        <div class="col-11-24">
-          &nbsp;
-        </div>
+     <nav>
+        <% if current_user %>
+          <i class="fa fa-user fa-lg", title = 'User' ></i>&nbsp;
+          <%= current_user.nickname %>
+          <%= link_to fa_icon('sign-out lg'), logout_path, title: 'Log Out', class: 'inverted-link ll-pad' %>
+          <%= link_to 'Log Out', logout_path, id: 'logout', class: 'inverted-link r-pad' %>
+        <% else %>
+          <%= link_to fa_icon('sign-in lg'), logout_path, title: 'Log In', class: 'inverted-link ll-pad' %>
+          <%= link_to 'Log In', login_path, class: 'inverted-link' %>
+        <% end %>
+        <%= link_to fa_icon('print lg'), '#',title: 'Print', class: 'js-print-window inverted-link l-pad' %>&nbsp;
+        <%= link_to 'Print', '#', class: 'js-print-window inverted-link hide'%>
       </nav>
     </div>
   </div>

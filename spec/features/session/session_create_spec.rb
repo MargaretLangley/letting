@@ -34,7 +34,7 @@ describe 'Session', type: :feature do
   end
 
   def logs_out
-    click_on 'Log Out'
+    click_on('logout')
     expect(page).to have_text /Logged out!/i
     expect(page).to have_text /Log In/i
   end
