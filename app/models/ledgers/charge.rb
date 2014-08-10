@@ -17,7 +17,7 @@ class Charge < ActiveRecord::Base
   belongs_to :charge_structure, inverse_of: :charge
   accepts_nested_attributes_for :charge_structure
   belongs_to :account
-  validates :charge_type, :due_in, presence: true
+  validates :charge_type, presence: true
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
   has_many :debits, dependent: :destroy do
@@ -32,6 +32,13 @@ class Charge < ActiveRecord::Base
     self.start_date = Date.parse MIN_DATE if start_date.blank?
     self.end_date = Date.parse MAX_DATE if end_date.blank?
   end
+
+  def charge_cycle_id
+    charge_structure.charge_cycle_id unless charge_structure.nil?
+  end
+
+  # restults
+  # charge_structure.charged_in.name unless charge_structure.nil?
 
   # date_range - the date range that we can generate charges for.
   # returns - array of objects with enough information to charge the

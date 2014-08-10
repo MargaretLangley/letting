@@ -9,8 +9,7 @@ describe 'debit_generator', type: :feature do
     after  { Timecop.return }
 
     it 'charges a property that matches the search' do
-      # FIX_CHARGE
-      skip 'fix when charge settled'
+      charged_in_create(name: 'Advance')
       property = property_with_charge_create! human_ref: 2002
       Property.import force: true, refresh: true
       # Client required because controller starts invoicing immediately

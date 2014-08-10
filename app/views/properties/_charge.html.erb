@@ -1,13 +1,13 @@
 <div id='property_charge_<%= index %>' class='js-selection <%= hide_new_record_unless_first charge, index %>'  >
-  <div class='grid'>
+  <div class='grid js-dynamic-group'>
     <div class='col-6-24 vertical-spacer  no-r-pad spec-charge-count'>
       <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
     </div>
     <div class='col-4-24 vertical-spacer  no-r-pad'>
-      <%= f.select :due_in, ChargeCycle.all.map {|charge_cycle| [charge_cycle.name, charge_cycle.id ] } %>
+      <%= select_tag "charge_cycle_#{index}", options_for_select( ChargeCycle.all.map {|charge_cycle| [charge_cycle.name, charge_cycle.id ] }, charge.charge_cycle_id ),  { class: 'js-dynamic-filter' } %>
     </div>
     <div class='col-4-24 vertical-spacer  no-r-pad'>
-      <%= f.grouped_collection_select :due_in, ChargeCycle.all, :charge_structures, :name, :id, :due, include_blank: true %>
+      <%= f.grouped_collection_select :charge_structure_id, ChargeCycle.all, :charge_structures, :name, :id, :charged_in_name, { include_blank: true }, { class: 'js-dynamic-result' } %>
     </div>
     <div class='col-3-24 vertical-spacer  no-r-pad'>
       <%= f.text_field :amount %>

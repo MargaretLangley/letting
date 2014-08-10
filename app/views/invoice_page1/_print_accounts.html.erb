@@ -27,8 +27,8 @@
        Arrears
       <% else %>
         <%= item.charge_type %>
-        <%= item.account.charges[0].due_in %>
-        <%= item.account.charges[0].due_ons[0].month %>
+        <%= item.account.charges[0].charge_structure.charged_in_name %>
+        <%= item.account.charges[0].charge_structure.due_ons[0].month %>
       <% end %>
 
       </div>

@@ -7,6 +7,8 @@ describe Property, type: :feature do
   before(:each) do
     log_in
     client_create!
+    account.charge_initialization(charge_cycle: 'Mar/Sep',
+                                  charged_in: 'Advance')
     account.new
   end
 
@@ -16,11 +18,11 @@ describe Property, type: :feature do
   end
 
   it '#create', js: true  do
-    skip 'charges being changed'
-    fill_in_property
+    fill_in_account
     fill_in_agent
-    account.button('Create').successful?(self).edit
-    expect_property
+    account.button('Create')
+    account.successful?(self).edit
+    expect_account
     expect_agent
   end
 
@@ -28,7 +30,7 @@ describe Property, type: :feature do
     skip 'charges being changed'
     fill_in_property
     account.button('Create').successful?(self).edit
-    expect_property
+    expect_account
   end
 
   it '#create has validation', js: true do
@@ -44,13 +46,14 @@ describe Property, type: :feature do
     expect(page).to have_css('.spec-charge-count', count: 4)
   end
 
-  def fill_in_property
+  def fill_in_account
     account.property(self, property_id: '278', client_id: '8008')
     account.address(selector: '#property_address',
                     **address_attributes.except(:district))
     account.entity(type: 'property', **person_attributes)
-    account.charge(**(charge_attributes.except(:account_id)))
-    account.due_on
+    account.charge(**(charge_attributes(charge_cycle: 'Mar/Sep',
+                                        charged_in: 'Advance')
+           .except(:account_id)))
   end
 
   def fill_in_agent
@@ -60,13 +63,15 @@ describe Property, type: :feature do
     account.entity(type: 'property_agent_attributes', **company_attributes)
   end
 
-  def expect_property
+  def expect_account
     account.expect_property(self, property_id: '278', client_id: '8008')
     account.expect_address(self,
                            type: '#property_address',
                            **address_attributes.except(:district))
     account.expect_entity(self, type: 'property', **person_attributes)
-    account.expect_charge(self, **(charge_attributes.except(:account_id)))
+    account.expect_charge(self,
+                          **(charge_attributes(charged_in: 'Advance') \
+                            .except(:account_id)))
   end
 
   def expect_agent

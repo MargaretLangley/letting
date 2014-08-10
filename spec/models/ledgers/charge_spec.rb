@@ -19,11 +19,6 @@ describe Charge, type: :model do
         expect(charge).to_not be_valid
       end
 
-      it 'due in' do
-        charge.due_in = nil
-        expect(charge).to_not be_valid
-      end
-
       it 'amount' do
         charge.amount = nil
         expect(charge).to_not be_valid
@@ -44,7 +39,7 @@ describe Charge, type: :model do
   describe 'methods' do
     describe 'charging' do
       let(:charge) do
-        charge = Charge.new charge_attributes id: 1, due_in: 'Advance'
+        charge = Charge.new charge_attributes id: 1
         charge.build_charge_structure charge_cycle_id: 1, charged_in_id: 1
         charge.charge_structure.due_ons.new \
           due_on_attributes_0 charge_structure_id: 1, day: 25, month: 3

@@ -5,11 +5,22 @@ def account_attributes **overrides
   }.merge overrides
 end
 
+def charge_cycle_attributes **overrides
+  {
+    name: 'Mar/Sep',
+  }.merge overrides
+end
+
+def charged_in_attributes **overrides
+  {
+    name: 'Advance',
+  }.merge overrides
+end
+
 def charge_attributes **overrides
   {
     charge_type: 'Ground Rent',
     account_id: 2,
-    due_in: 'Advance',
     amount: 88.08,
     start_date: '2011-03-25',
     end_date: MAX_DATE,  # app_constants

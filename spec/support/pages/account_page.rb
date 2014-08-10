@@ -100,30 +100,34 @@ class AccountPage
     end
   end
 
-  def charge(order: 0, charge_type:, due_in:, amount:,
+  # create rows used by charge during select
+  # Must occur before opening page
+  #
+  def charge_initialization(charge_cycle:, charged_in:)
+    charge_cycle_create(name: charge_cycle)
+    charged_in_create(name: charged_in)
+  end
+
+  def charge(order: 0, charge_type:, charge_cycle:, charged_in:, amount:,
              start_date: '', end_date: '')
     id_stem = "property_account_attributes_charges_attributes_#{order}"
     fill_in "#{id_stem}_charge_type", with: charge_type
-    fill_in "#{id_stem}_due_in", with: due_in
+    select(charge_cycle, from: "charge_cycle_#{order}")
+    # Not selecting - probably because the initalization process
+    # isn't leaving the options group
+    # select(charged_in, from: "#{id_stem}_charge_structure_id")
     fill_in "#{id_stem}_amount", with: amount
     # fill_in "#{id_stem}_start_date", with: start_date if start_date.present?
     # fill_in "#{id_stem}_end_date", with: start_date if end_date.present?
   end
 
-  def due_on(charge_order: 0, due_ons_order: 0, day: 1, month: 1)
-    id_stem = 'property_account_attributes_charges_attributes_' \
-              "#{charge_order}_due_ons_attributes_#{due_ons_order}"
-
-    fill_in "#{id_stem}_day", with: day
-    fill_in "#{id_stem}_month", with: month if month.present?
-  end
-
-  def expect_charge(spec, order: 0, charge_type:, due_in:, amount:,
+  def expect_charge(spec, order: 0, charge_type:, charged_in:, amount:,
                     start_date: '', end_date: '')
     id_stem = "property_account_attributes_charges_attributes_#{order}"
     spec.expect(find_field("#{id_stem}_charge_type").value).to \
       spec.have_text charge_type
-    spec.expect(find_field("#{id_stem}_due_in").value).to spec.have_text due_in
+    spec.expect(find_field("charge_cycle_#{order}")).to \
+      spec.have_text('Mar/Sep')
     spec.expect(find_field("#{id_stem}_amount").value).to spec.have_text amount
   end
 

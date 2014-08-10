@@ -24,5 +24,8 @@ class ChargeStructure < ActiveRecord::Base
 
   delegate :clear_up_form, to: :due_ons
 
+  # charge_cycle_cycle
+  delegate :cycle, to: :charge_cycle, prefix: true
+  # charged_in_name
   delegate :name, to: :charged_in, prefix: true
 end
