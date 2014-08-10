@@ -24,7 +24,7 @@ describe Client, type: :feature do
     it 'found when present' do
       visit '/clients'
       fill_in 'search', with: 'Wes'
-      click_on 'Search'
+      click_on('search')
       expect(page).to_not have_text '2111'
       expect(page).to have_text '2222'
       expect(page).to have_text '2333'
@@ -33,7 +33,7 @@ describe Client, type: :feature do
     it 'search not found when absent' do
       visit '/clients'
       fill_in 'search', with: '2599'
-      click_on 'Search'
+      click_on('search')
       expect(page).to have_text 'No Matches found. Search again.'
     end
   end
