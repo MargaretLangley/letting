@@ -17,7 +17,7 @@ class Charge < ActiveRecord::Base
   belongs_to :charge_structure, inverse_of: :charge
   accepts_nested_attributes_for :charge_structure
   belongs_to :account
-  validates :charge_type, presence: true
+  validates :charge_type, :charge_structure, presence: true
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
   has_many :debits, dependent: :destroy do

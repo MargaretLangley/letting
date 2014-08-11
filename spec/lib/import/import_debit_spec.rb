@@ -15,6 +15,7 @@ require_relative '../../../lib/import/import_debit'
 module DB
   describe ImportDebit, :import do
     let!(:property) do
+      charge_structure_create
       property_with_charge_create! human_ref: 122
     end
 

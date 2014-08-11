@@ -69,16 +69,5 @@ def add_agent bill_me
 end
 
 def add_charge charge_me
-  charge = charge_me.account.charges.build charge_attributes
-  charge.build_charge_structure charge_structure_attributes
-  add_due_on_0 charge.charge_structure
-  add_due_on_1 charge.charge_structure
-end
-
-def add_due_on_0 charge_structure
-  charge_structure.due_ons.build due_on_attributes_0
-end
-
-def add_due_on_1 charge_structure
-  charge_structure.due_ons.build due_on_attributes_1
+  charge_me.account.charges.build charge_attributes
 end

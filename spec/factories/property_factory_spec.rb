@@ -38,6 +38,7 @@ describe 'Property Factory' do
 
   context 'with_charge' do
     it 'new is valid' do
+      charge_structure_create
       expect(property_with_charge_new).to be_valid
     end
 
@@ -46,11 +47,13 @@ describe 'Property Factory' do
     end
 
     it 'create!' do
+      charge_structure_create
       expect { property_with_charge_create! }.to_not raise_error
     end
 
     context 'and unpaid debit' do
       it 'generated (property created & debited new)' do
+        charge_structure_create
         property = property_with_charge_and_unpaid_debit
         property.account.prepare_for_form
         expect(property.account.debits.size).to eq(1)

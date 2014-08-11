@@ -108,8 +108,8 @@ class AccountPage
     charged_in_create(name: charged_in)
   end
 
-  def charge(order: 0, charge_type:, charge_cycle:, charged_in:, amount:,
-             start_date: '', end_date: '')
+  def charge(order: 0, charge_type:, charge_structure_id:, charge_cycle:,
+             charged_in:, amount:, start_date: '', end_date: '')
     id_stem = "property_account_attributes_charges_attributes_#{order}"
     fill_in "#{id_stem}_charge_type", with: charge_type
     select(charge_cycle, from: "charge_cycle_#{order}")
@@ -121,8 +121,8 @@ class AccountPage
     # fill_in "#{id_stem}_end_date", with: start_date if end_date.present?
   end
 
-  def expect_charge(spec, order: 0, charge_type:, charged_in:, amount:,
-                    start_date: '', end_date: '')
+  def expect_charge(spec, order: 0, charge_type:, charge_structure_id:,
+                    charged_in:, amount:, start_date: '', end_date: '')
     id_stem = "property_account_attributes_charges_attributes_#{order}"
     spec.expect(find_field("#{id_stem}_charge_type").value).to \
       spec.have_text charge_type

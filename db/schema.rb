@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 20140809150357) do
 
   create_table "charges", force: true do |t|
     t.string   "charge_type",                                                 null: false
-    t.integer  "charge_structure_id"
+    t.integer  "charge_structure_id",                                         null: false
     t.boolean  "dormant",                                     default: false, null: false
     t.decimal  "amount",              precision: 8, scale: 2,                 null: false
     t.date     "start_date",                                                  null: false
