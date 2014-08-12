@@ -19,10 +19,10 @@ describe 'ChargeStructure Factory' do
     end
   end
 
-  # describe 'overrides' do
-  #   it('due on') do
-  #     account = charge_structure_new due_on_attribute: { month: 6 }
-  #     expect(charge_structure_new.due_ons[0].month).to eq 6
-  #   end
-  # end
+  describe 'overrides' do
+    it('due on') do
+      structure = charge_structure_new due_on_attributes: { month: 6 }
+      expect(structure.due_ons[0].month).to eq 6
+    end
+  end
 end

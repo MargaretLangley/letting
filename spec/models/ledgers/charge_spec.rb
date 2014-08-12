@@ -1,157 +1,79 @@
 require 'rails_helper'
 
 describe Charge, type: :model do
-  let(:charge) do
-    charge = Charge.new charge_attributes id: 1
-    charge.build_charge_structure charge_cycle_id: 1, charged_in_id: 1
-    charge.charge_structure.due_ons.new \
-      due_on_attributes_0 charge_structure_id: 1
-    charge
-  end
-
-  it('is valid') { expect(charge).to be_valid }
 
   describe 'validations' do
+    before(:each) { charge_structure_create }
+
+    it('is valid') { expect(charge_new).to be_valid }
     describe 'presence' do
-
-      it 'charge type' do
-        charge.charge_type = nil
-        expect(charge).to_not be_valid
-      end
-
-      it 'amount' do
-        charge.amount = nil
-        expect(charge).to_not be_valid
-      end
+      it('charge type') { expect(charge_new charge_type: nil).to_not be_valid }
+      it('amount') { expect(charge_new amount: nil).to_not be_valid }
     end
     describe 'amount' do
-      it 'is a number' do
-        charge.amount = 'nnn'
-        expect(charge).to_not be_valid
-      end
-      it 'has a maximum' do
-        charge.amount = 100_000
-        expect(charge).to_not be_valid
-      end
+      it('is a number') { expect(charge_new amount: 'nn').to_not be_valid }
+      it('has a max') { expect(charge_new amount: 100_000).to_not be_valid }
     end
   end
 
   describe 'methods' do
-    describe 'charging' do
-      let(:charge) do
-        charge = Charge.new charge_attributes id: 1
-        charge.build_charge_structure charge_cycle_id: 1, charged_in_id: 1
-        charge.charge_structure.due_ons.new \
-          due_on_attributes_0 charge_structure_id: 1, day: 25, month: 3
-        charge.charge_structure.due_ons.new \
-          due_on_attributes_0 charge_structure_id: 1, day: 29, month: 9
-
-        # charge = Charge.new charge_attributes id: 1, due_in: 'Advance'
-        # charge.due_ons.new charge_id: 1, day: 25, month: 3
-        # charge.due_ons.new charge_id: 1, day: 29, month: 9
-        charge
-      end
-
+    describe '#next_chargeable' do
       before(:each) { Timecop.travel(Date.new(2013, 1, 31)) }
       after(:each)  { Timecop.return }
 
-      describe '#next_chargeable' do
-        it 'creates chargeables if in range'  do
-          expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
-                                        Date.new(2013, 3, 25)))
-            .to eq [chargeable(Date.new(2013, 3, 25))]
-        end
-
-        it 'multi year range it charges all due_ons within date-range - ONCE' do
-          expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
-                                        Date.new(2016, 3, 25)))
-            .to eq [chargeable(Date.new(2013, 3, 25)),
-                    chargeable(Date.new(2013, 9, 29))]
-        end
-
-        it 'dormant charges do not create chargeables'  do
-          charge.dormant = true
-          expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
-                                        Date.new(2013, 3, 25)))
-            .to eq []
-        end
-
-        # pending
-        it 'if charge between dates Advance Date period 25-3- to 28-9'
-        # expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
-        #                               Date.new(2016, 3, 25)))
-        # .to eq [chargeable(Date.new(2013, 3, 25)),
-        #         chargeable(Date.new(2013, 9, 28))]
-
-        it 'if charge only 1 date Advance Date 1-4 to 31-3'  do
-          Timecop.travel(Date.new(2013, 3, 10))
-        end
-
-        it 'ignores charges which have debits'  do
-          charge.debits.build debit_attributes on_date: '2013-3-25'
-          expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
-                                        Date.new(2016, 3, 25)))
-            .to eq [chargeable(Date.new(2013, 9, 29))]
-        end
-
-        it 'return empty array if no charge' do
-          expect(charge.next_chargeable(dates_not_charged_on)).to eq []
-        end
-
-        it 'returns empty array if charge dormant' do
-
-        end
+      it 'bills if date range covers a due_on'  do
+        charge_structure_create due_on_attributes: { day: 25, month: 3 }
+        charge = charge_create
+        chargeable = ChargeableInfo.from_charge(chargeable_attributes \
+          charge_id: charge.id,
+          on_date: Date.new(2013, 3, 25))
+        expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
+                                      Date.new(2013, 3, 25)))
+          .to eq [chargeable]
       end
 
-      def chargeable date
-        ChargeableInfo.from_charge(chargeable_attributes on_date: date)
+      it 'does not bill if no charge is in date range' do
+        charge_structure_create due_on_attributes: { day: 25, month: 3 }
+        charge = charge_create
+        expect(charge.next_chargeable(Date.new(2013, 2, 1)..\
+                                      Date.new(2013, 3, 24)))
+          .to eq []
       end
 
-      def dates_not_charged_on
-        Date.new(2013, 2, 1)..Date.new(2013, 3, 24)
+      # Would like to move this lower down within charging system
+      it 'bills all due_ons within multi-year range - ONCE' do
+        charge_structure_create due_on_attributes: { day: 25, month: 3 }
+        charge = charge_create
+        chargeable = ChargeableInfo.from_charge(chargeable_attributes \
+          charge_id: charge.id,
+          on_date: Date.new(2013, 3, 25))
+        expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
+                                      Date.new(2016, 3, 25)))
+          .to eq [chargeable]
+      end
+
+      it 'does not bill dormant charges'  do
+        charge_structure_create due_on_attributes: { day: 25, month: 3 }
+        charge = charge_create
+        charge.dormant = true
+        expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
+                                      Date.new(2013, 3, 25)))
+          .to eq []
+      end
+
+      it 'ignores charges which have debits'  do
+        charge_structure_create due_on_attributes: { day: 25, month: 3 }
+        charge = charge_create
+        charge.debits.build debit_attributes on_date: '2013-3-25'
+        expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
+                                      Date.new(2016, 3, 25)))
+          .to eq []
       end
     end
   end
 
-  describe 'methods' do
-    describe 'charging' do
-      let(:charge) do
-        charge = Charge.new charge_attributes id: 1, due_in: 'Arrears'
-        charge.due_ons.new charge_id: 1, day: 25, month: 3
-        charge.due_ons.new charge_id: 1, day: 29, month: 9
-        charge
-      end
-
-      before(:each) { Timecop.travel(Date.new(2013, 1, 31)) }
-      after(:each)  { Timecop.return }
-
-      describe '#next_chargeable' do
-        # pending
-        it 'if charge between dates Arrears Date period 25-3- to 28-9'
-        # pending 'spec missing and structure of tests wrong'
-        # expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
-        #                               Date.new(2016, 3, 25)))
-        # .to eq [chargeable(Date.new(2012, 9, 30)),
-        #         chargeable(Date.new(2013, 3, 25))]
-      end
-    end
-  end
-
-  describe 'methods' do
-    describe 'charging' do
-      let(:charge) do
-        charge = Charge.new charge_attributes id: 1, due_in: 'Midterm'
-        charge.due_ons.new charge_id: 1, day: 25, month: 3
-        charge.due_ons.new charge_id: 1, day: 29, month: 9
-        charge
-      end
-
-      before(:each) { Timecop.travel(Date.new(2013, 1, 31)) }
-      after(:each)  { Timecop.return }
-
-      describe '#next_chargeable' do
-        it 'if charge between dates Midterm Date period 25-3- to 28-9'
-      end
-    end
-  end
+  # FIX_CHARGE
+  it 'displays advanced date'
+  it 'displays arrears date'
+  it 'displays Midterm date'
 end
