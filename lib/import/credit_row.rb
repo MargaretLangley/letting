@@ -1,4 +1,5 @@
 require_relative '../modules/method_missing'
+require_relative 'accounting_row'
 require_relative 'charge_code'
 require_relative 'errors'
 
