@@ -17,6 +17,25 @@ describe Charge, type: :model do
   end
 
   describe 'methods' do
+    describe '#clear_up_form' do
+      it 'keeps charges by default' do
+        expect(Charge.new).to_not be_marked_for_destruction
+      end
+
+      it 'clears new charges if asked' do
+        charge = Charge.new
+        charge.clear_up_form
+        expect(charge).to be_marked_for_destruction
+      end
+
+      it 'keeps new charges if edited' do
+        charge = Charge.new
+        charge.charge_structure_id = 1
+        charge.clear_up_form
+        expect(charge).to_not be_marked_for_destruction
+      end
+    end
+
     describe '#next_chargeable' do
       before(:each) { Timecop.travel(Date.new(2013, 1, 31)) }
       after(:each)  { Timecop.return }
