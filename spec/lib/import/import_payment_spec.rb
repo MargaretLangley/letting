@@ -8,6 +8,7 @@ module DB
   describe ImportPayment, :import do
 
     it 'single credit' do
+      charge_structure_create
       property = property_create! human_ref: 89
       charge_new(account_id: property.account.id).save!
 
