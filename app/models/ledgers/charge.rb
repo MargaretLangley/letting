@@ -56,9 +56,6 @@ class Charge < ActiveRecord::Base
 
   def clear_up_form
     mark_for_destruction unless edited?
-    # FIX_CHARGE
-    # charge_structure.clear_up_form
-    # due_ons.clear_up_form
   end
 
   private
@@ -69,7 +66,6 @@ class Charge < ActiveRecord::Base
 
   def allowed_due_dates date_range
     charge_structure.due_dates(date_range) & (start_date..end_date).to_a
-    # due_ons.due_dates(date_range).to_a & (start_date..end_date).to_a
   end
 
   # Converts a Charge object into a ChargeableInfo object.
@@ -89,9 +85,6 @@ class Charge < ActiveRecord::Base
     attributes.except(*ignored_attrs).values.all?(&:blank?) &&
     start_date == Date.parse(MIN_DATE) &&
     end_date == Date.parse(MAX_DATE)
-    # FIX_CHARGE
-    # maybe should include this - not sure &&
-    # due_ons.empty?
   end
 
   def ignored_attrs

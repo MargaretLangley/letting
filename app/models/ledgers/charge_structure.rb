@@ -28,4 +28,21 @@ class ChargeStructure < ActiveRecord::Base
   delegate :cycle, to: :charge_cycle, prefix: true
   # charged_in_name
   delegate :name, to: :charged_in, prefix: true
+
+
+  # Require this if we are creating and editing charge_structure
+  # Remove this if we don't
+
+  # def clear_up_form
+  # # FIX_CHARGE
+  #   mark_for_destruction unless edited?
+  #   due_ons.clear_up_form
+  # end
+
+  # def empty?
+  # FIX_CHARGE
+  # maybe should include this - not sure &&
+  #  due_ons.empty?
+  # end
+
 end
