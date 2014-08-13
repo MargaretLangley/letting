@@ -88,6 +88,7 @@ end
 group :development, :test do
   gem 'capybara', '~> 2.3.0'
   gem 'capybara-webkit', '~>1.2.0'
+  gem 'selenium-webdriver', '~>2.42.0'
   gem 'guard'
   gem 'guard-livereload'
   gem 'launchy', '~> 2.4.2'
