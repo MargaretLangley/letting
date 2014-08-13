@@ -313,13 +313,13 @@ end
 def create_charges
   Charge.create! [
     { id: 1,             charge_type: 'Ground Rent',    charge_structure_id: 1,
-      due_in: 'Advance', amount: '88.08',               account_id: 1 },
+      amount: '88.08',   account_id: 1 },
     { id: 2,             charge_type: 'Service Charge', charge_structure_id: 1,
-      due_in: 'Advance', amount: '125.08',              account_id: 1 },
+      amount: '125.08',  account_id: 1 },
     { id: 3,             charge_type: 'Ground Rent',    charge_structure_id: 2,
-      due_in: 'Advance', amount: '70.00',   account_id: 2 },
+      amount: '70.00',   account_id: 2 },
     { id: 4,             charge_type: 'Service Charge', charge_structure_id: 2,
-      due_in: 'Advance', amount: '70.00',               account_id: 3 },
+      amount: '70.00',   account_id: 3 },
   ]
 end
 
