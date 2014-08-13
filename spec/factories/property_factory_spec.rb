@@ -42,10 +42,6 @@ describe 'Property Factory' do
       expect(property_with_charge_new).to be_valid
     end
 
-    it 'monthly is valid' do
-      expect(property_with_monthly_charge_create!).to be_valid
-    end
-
     it 'create!' do
       charge_structure_create
       expect { property_with_charge_create! }.to_not raise_error

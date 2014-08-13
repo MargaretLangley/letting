@@ -28,16 +28,6 @@ def property_with_charge_create! **args
   property
 end
 
-def property_with_monthly_charge_create! **args
-  property = base_property args
-  add_no_agent property
-  charge = property.account.charges.build charge_attributes
-  charge.build_charge_structure charge_structure_attributes
-  charge.charge_structure.due_ons.build due_on_monthly_attributes_0
-  property.save!
-  property
-end
-
 # when your running full specs I haven't found reliable way of guaranteeing
 # a primary key will be set to a value. This is a hack to save the object
 # get the key value and put it into the debit - not nice
