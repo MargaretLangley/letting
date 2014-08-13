@@ -64,6 +64,9 @@ ActiveRecord::Schema.define(version: 20140809150357) do
     t.datetime "updated_at"
   end
 
+  add_index "charge_structures", ["charge_cycle_id"], name: "index_charge_structures_on_charge_cycle_id", using: :btree
+  add_index "charge_structures", ["charged_in_id"], name: "index_charge_structures_on_charged_in_id", using: :btree
+
   create_table "charged_ins", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -83,6 +86,7 @@ ActiveRecord::Schema.define(version: 20140809150357) do
   end
 
   add_index "charges", ["account_id"], name: "index_charges_on_account_id", using: :btree
+  add_index "charges", ["charge_structure_id"], name: "index_charges_on_charge_structure_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.integer  "human_ref",  null: false
