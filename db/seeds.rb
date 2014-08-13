@@ -246,80 +246,24 @@ def create_agents
 end
 
 def seed_charges
-  create_charge_cycle
-  create_charged_in
-  create_due_ons
-  charge_structure
   create_charges
   create_account
 end
 
-def create_charge_cycle
-  ChargeCycle.create! [
-    { id: 1, name: 'Mar/Sep'          },
-    { id: 2, name: 'Jun/Dec'          },
-    { id: 3, name: 'Mar/Jun/Sep/Dec'  },
-    { id: 4, name: 'Apr/July/Oct/Jan' },
-    { id: 5, name: 'Yearly'           },
-    { id: 6, name: 'Monthly'          },
-  ]
-end
-
-def create_charged_in
-  ChargedIn.create! [
-    { id: 1, name: 'Advance'          },
-    { id: 2, name: 'Arreas'          },
-    { id: 3, name: 'Mid-Term'  },
-  ]
-end
-
 def charge_structure
-  # commented out 'inactive' as scoping doesn't work and default
-  # scopes can bring in subtle bugs.
-  # http://stackoverflow.com/questions/22047062/ \
-  # rails-4-grouped-collection-select-with-scopes-for-ordering
-  #
+  Rake::Task['db:import:charge_cycle'].invoke
+  Rake::Task['db:import:charged_ins'].invoke
+  create_due_ons
+
+  # Full charge structure is in import_charge_structure.csv
   # charge_cycle 1: 'Mar/Sep'
   # charge_cycle 2: 'Jun/Dec'
   #
   # charged_in_id: 1 Advance
   # charged_in_id: 2 Arrears
-  # charged_in_id: 3 Mid-Term
   ChargeStructure.create! [
     { id:  1, charge_cycle_id: 1, charged_in_id: 1 },
     { id:  2, charge_cycle_id: 1, charged_in_id: 2 },
-    # Commenting out as don't need them for testing (I think!)
-    # { id:  3, charge_cycle_id: 1, charged_in_id: 3 },
-    # { id:  4, charge_cycle_id: 2, charged_in_id: 1 },
-    # { id:  5, charge_cycle_id: 2, charged_in_id: 2 },
-    # { id:  6, charge_cycle_id: 2, charged_in_id: 3 },
-    # { id:  7, charge_cycle_id: 3, charged_in_id: 1 },
-    # { id:  8, charge_cycle_id: 3, charged_in_id: 2 },
-    # { id:  9, charge_cycle_id: 3, charged_in_id: 3 },
-    # { id: 11, charge_cycle_id: 4, charged_in_id: 2 },
-    # { id: 14, charge_cycle_id: 5, charged_in_id: 2 },
-    # { id: 17, charge_cycle_id: 6, charged_in_id: 2 },
-  # These ChargeStructures are not combinations used by any
-  # of the charges in the database
-  # { id: 10, charge_cycle_id: 4, charged_in_id: 1 },
-  # { id: 12, charge_cycle_id: 4, charged_in_id: 3 },
-  # { id: 13, charge_cycle_id: 5, charged_in_id: 1 },
-  # { id: 15, charge_cycle_id: 5, charged_in_id: 3 },
-  # { id: 16, charge_cycle_id: 6, charged_in_id: 1 },
-  # { id: 18, charge_cycle_id: 6, charged_in_id: 3 },
-  ]
-end
-
-def create_charges
-  Charge.create! [
-    { id: 1,             charge_type: 'Ground Rent',    charge_structure_id: 1,
-      amount: '88.08',   account_id: 1 },
-    { id: 2,             charge_type: 'Service Charge', charge_structure_id: 1,
-      amount: '125.08',  account_id: 1 },
-    { id: 3,             charge_type: 'Ground Rent',    charge_structure_id: 2,
-      amount: '70.00',   account_id: 2 },
-    { id: 4,             charge_type: 'Service Charge', charge_structure_id: 2,
-      amount: '70.00',   account_id: 3 },
   ]
 end
 
@@ -329,6 +273,20 @@ def create_due_ons
     { id: 2,  day: 29,  month: 9, charge_structure_id: 1 },
     { id: 3,  day: 25,  month: 3, charge_structure_id: 2 },
     { id: 4,  day: 29,  month: 9, charge_structure_id: 2 },
+  ]
+end
+
+def create_charges
+  charge_structure
+  Charge.create! [
+    { id: 1,             charge_type: 'Ground Rent',    charge_structure_id: 1,
+      amount: '88.08',   account_id: 1 },
+    { id: 2,             charge_type: 'Service Charge', charge_structure_id: 1,
+      amount: '125.08',  account_id: 1 },
+    { id: 3,             charge_type: 'Ground Rent',    charge_structure_id: 2,
+      amount: '70.00',   account_id: 2 },
+    { id: 4,             charge_type: 'Service Charge', charge_structure_id: 2,
+      amount: '70.00',   account_id: 3 },
   ]
 end
 

@@ -10,11 +10,10 @@ namespace :db do
 
     desc "Import users data from CSV file"
     task :users, [:test] => :environment do |task, args|
-      if File.exist?('import_data/patch/users.csv')
-        DB::ImportUser.import users_file
-      else
-        puts missing_users_csv_message
-      end
+      puts missing_users_csv_message \
+        unless File.exist?('import_data/new/users.csv')
+
+      DB::ImportUser.import users_file
       load_test_users if args.test
     end
 
@@ -23,7 +22,7 @@ namespace :db do
     def users_file
       DB::FileImport.to_a 'users',
                           headers: DB::FileHeader.user,
-                          location: 'import_data/patch'
+                          location: 'import_data/new'
     end
 
     def load_test_users
