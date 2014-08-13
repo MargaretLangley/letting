@@ -15,6 +15,7 @@ describe DueOns, type: :model do
       end
       it 'valid if marked for destruction' do
         charge.charged_in = charged_in_create
+        charge.charge_cycle = charge_cycle_create
         (1..13).each { charge.due_ons.build day: 25, month: 3 }
         charge.due_ons.first.mark_for_destruction
         expect(charge).to be_valid

@@ -13,7 +13,7 @@
 class ChargeStructure < ActiveRecord::Base
   include DueOns
   accepts_nested_attributes_for :due_ons, allow_destroy: true
-  validates :charged_in, :due_ons, presence: true
+  validates :charge_cycle, :charged_in, :due_ons, presence: true
   has_one :charge, inverse_of: :charge_structure
   belongs_to :charge_cycle
   belongs_to :charged_in, inverse_of: :charge_structure

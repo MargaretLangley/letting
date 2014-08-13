@@ -59,8 +59,6 @@ describe 'Account Update', type: :feature do
 
     it 'adds date charge' do
       charge_structure_create
-      account.charge_initialization(charge_cycle: 'Mar/Sep',
-                                    charged_in: 'Advance')
       account.edit
       account.charge(**(charge_attributes(charge_cycle: 'Mar/Sep',
                                           charged_in: 'Advance'

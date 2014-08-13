@@ -17,8 +17,6 @@ describe Property, type: :feature do
 
   it '#create', js: true   do
     charge_structure_create
-    account.charge_initialization(charge_cycle: 'Mar/Sep',
-                                  charged_in: 'Advance')
     account.new
     fill_in_account
     fill_in_agent
@@ -30,8 +28,6 @@ describe Property, type: :feature do
 
   it '#creates a account without agent', js: true do
     charge_structure_create
-    account.charge_initialization(charge_cycle: 'Mar/Sep',
-                                  charged_in: 'Advance')
     account.new
     fill_in_account
     account.button('Create').successful?(self).edit
