@@ -4,7 +4,7 @@
       <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
     </div>
     <div class='col-4-24 vertical-spacer  no-r-pad'>
-      <%= select_tag "charge_cycle_#{index}", options_for_select( ChargeCycle.all.map {|charge_cycle| [charge_cycle.name, charge_cycle.id ] }, charge.charge_cycle_id ),  { class: 'js-dynamic-filter' } %>
+      <%= select_tag "charge_cycle_#{index}", options_for_select( ChargeCycle.all.map {|charge_cycle| [charge_cycle.name, charge_cycle.id ] }, charge.charge_cycle_id ), { prompt: 'Please select',  class: 'js-dynamic-filter' } %>
     </div>
     <div class='col-4-24 vertical-spacer  no-r-pad'>
       <%= f.grouped_collection_select :charge_structure_id, ChargeCycle.all, :charge_structures, :name, :id, :charged_in_name, { include_blank: true }, { class: 'js-dynamic-result' } %>

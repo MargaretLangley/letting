@@ -95,8 +95,7 @@ class PropertiesController < ApplicationController
   end
 
   def charges_params
-    %i(id charge_type due_in amount dormant) +
-    [due_ons_attributes: %i(id day month)]
+    %i(id charge_type charge_structure_id amount dormant)
   end
 
   def identy

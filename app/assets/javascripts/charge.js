@@ -17,13 +17,12 @@ $( document ).ready(function() {
   results = $('.js-dynamic-result').html();
   console.log(results);
 
+  // trigger fires the event handler bound element without a user interaction
+  // $('.js-dynamic-filter').trigger('change');
   $('.js-dynamic-filter').change(function(event) {
     event.preventDefault();
     updatePayment($(this));
-  });
-
-  // trigger fires the event handler bound to element without a user interaction
-  // $('.js-dynamic-filter').trigger('change');
+  }).trigger('change');
 
   function updatePayment(toggle) {
     filter = $("option:selected", toggle).html();
@@ -36,12 +35,4 @@ $( document ).ready(function() {
       return $(toggle).closest('.js-dynamic-group').find('.js-dynamic-result').empty();
     }
   }
-
-});
-
-// load - executes when complete page is fully loaded, including all frames, objects and images
-$(window).load(function() {
-  // if I trigger this during ready then capybara webkit tests
-  // fail. If I wait for load it works.
-  $('.js-dynamic-filter').trigger('change');
 });

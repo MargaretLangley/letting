@@ -8,13 +8,11 @@ describe 'Account Update', type: :feature do
     before(:each) do
       log_in
       client = client_create!
-      account.charge_initialization(charge_cycle: 'Mar/Sep',
-                                    charged_in: 'Advance')
       property_create! human_ref: 8000, client_id: client.id
-      account.edit
     end
 
     it 'opens valid page', js: true  do
+      account.edit
       expect(page.title).to eq 'Letting - Edit Account'
       account.expect_property(self, property_id: '8000', client_id: '8008')
       account.expect_address(self,
@@ -25,6 +23,7 @@ describe 'Account Update', type: :feature do
     end
 
     it 'updates account', js: true do
+      account.edit
       account.property(self, property_id: '8001', client_id: '8008')
       account.address(selector: '#property_address', **house_address_attributes)
       account.entity(type: 'property', **company_attributes)
@@ -37,6 +36,7 @@ describe 'Account Update', type: :feature do
     end
 
     it 'adds agent', js: true do
+      account.edit
       check 'Agent'
       account.address(selector: '#agent', **nottingham_address)
       account.entity(type: 'property_agent_attributes', **company_attributes)
@@ -52,14 +52,16 @@ describe 'Account Update', type: :feature do
     end
 
     it 'navigates to accounts view page' do
+      account.edit
       click_on 'View file'
       expect(page.title).to eq 'Letting - View Account'
     end
 
     it 'adds date charge' do
-      skip 'FIX CHARGE'
-      # FIX_CHARGE
-      # Need to get select working for payment
+      charge_structure_create
+      account.charge_initialization(charge_cycle: 'Mar/Sep',
+                                    charged_in: 'Advance')
+      account.edit
       account.charge(**(charge_attributes(charge_cycle: 'Mar/Sep',
                                           charged_in: 'Advance'
                                          ).except(:account_id)))
@@ -74,11 +76,11 @@ describe 'Account Update', type: :feature do
     before(:each) do
       log_in
       client_create!
-      property_with_monthly_charge_create! human_ref: 8000
-      account.edit
     end
 
     it 'can be set to dormant', js: true do
+      property_with_monthly_charge_create! human_ref: 8000
+      account.edit
       expect(page).to have_css('.spec-charge-count', count: 1)
       dormant_checkbox =
       '//*[@id="property_account_attributes_charges_attributes_0_dormant"]'

@@ -29,7 +29,6 @@ class ChargeStructure < ActiveRecord::Base
   # charged_in_name
   delegate :name, to: :charged_in, prefix: true
 
-
   # Require this if we are creating and editing charge_structure
   # Remove this if we don't
 
@@ -44,5 +43,4 @@ class ChargeStructure < ActiveRecord::Base
   # maybe should include this - not sure &&
   #  due_ons.empty?
   # end
-
 end

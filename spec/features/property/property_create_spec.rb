@@ -7,20 +7,19 @@ describe Property, type: :feature do
   before(:each) do
     log_in
     client_create!
-    account.charge_initialization(charge_cycle: 'Mar/Sep',
-                                  charged_in: 'Advance')
-    account.new
   end
 
   it 'opens valid page', js: true  do
+    account.new
     expect(page.title).to eq 'Letting - New Account'
     expect(page).to have_css('.spec-entity-count', count: 1)
   end
 
-  it '#create', js: true  do
-    # FIX_CHARGE
-    # Need to get select working for payment
-    skip 'fix charge'
+  it '#create', js: true   do
+    charge_structure_create
+    account.charge_initialization(charge_cycle: 'Mar/Sep',
+                                  charged_in: 'Advance')
+    account.new
     fill_in_account
     fill_in_agent
     account.button('Create')
@@ -30,13 +29,17 @@ describe Property, type: :feature do
   end
 
   it '#creates a account without agent', js: true do
-    skip 'charges being changed'
-    fill_in_property
+    charge_structure_create
+    account.charge_initialization(charge_cycle: 'Mar/Sep',
+                                  charged_in: 'Advance')
+    account.new
+    fill_in_account
     account.button('Create').successful?(self).edit
     expect_account
   end
 
   it '#create has validation', js: true do
+    account.new
     account.property(self, property_id: '-278', client_id: '8008')
     account.button 'Create'
     expect(page.title).to eq 'Letting - New Account'
@@ -44,6 +47,7 @@ describe Property, type: :feature do
   end
 
   it 'adds charges', js: true do
+    account.new
     expect(page).to have_css('.spec-charge-count', count: 1)
     3.times { click_on 'Add Charge' }
     expect(page).to have_css('.spec-charge-count', count: 4)
