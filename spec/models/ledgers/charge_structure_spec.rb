@@ -8,6 +8,11 @@ RSpec.describe ChargeStructure, type: :model do
     structure
   end
 
+  it 'charged_in_id' do
+    structure.charged_in_id = nil
+    expect(structure).to_not be_valid
+  end
+
   it 'returns referenced attribute as string' do
     expect(structure.charged_in_name).to be_kind_of(String)
   end

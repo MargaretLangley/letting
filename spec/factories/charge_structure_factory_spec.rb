@@ -1,12 +1,15 @@
 require 'rails_helper'
 
 describe 'ChargeStructure Factory' do
-  it 'is valid' do
-    expect(charge_structure_new).to be_valid
-  end
+  describe 'stuff' do
+    it 'is valid' do
+      expect(charge_structure_new).to be_valid
+    end
 
-  it 'is creates' do
-    expect { charge_structure_create }.to change(ChargeStructure, :count).by(1)
+    it 'is creates' do
+      expect { charge_structure_create }
+        .to change(ChargeStructure, :count).by(1)
+    end
   end
 
   describe 'has due_on' do
