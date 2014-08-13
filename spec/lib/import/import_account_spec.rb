@@ -9,7 +9,7 @@ module DB
   describe ImportAccount, :import do
     let!(:property) do
       charge_structure_create
-      property_with_charge_create! human_ref: 122
+      property_with_charge_create human_ref: 122
     end
 
     context 'debit with payment' do
@@ -82,7 +82,7 @@ module DB
       end
 
       it 'parses' do
-        property_with_charge_create! human_ref: 123
+        property_with_charge_create human_ref: 123
         expect { import_account two_properties }.to change(Credit, :count).by 2
         expect(Debit.all.size).to eq(2)
         expect(Property.find_by!(human_ref: 122).account.credits.size)

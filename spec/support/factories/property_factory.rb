@@ -4,12 +4,12 @@ def property_new **args
   property
 end
 
-def property_create! **args
+def property_create **args
   (property = property_new args).save!
   property
 end
 
-def property_with_agent_create! **args
+def property_with_agent_create **args
   property = base_property args
   add_agent property
   property.save!
@@ -23,7 +23,7 @@ def property_with_charge_new **args
   property
 end
 
-def property_with_charge_create! **args
+def property_with_charge_create **args
   (property = property_with_charge_new args).save!
   property
 end

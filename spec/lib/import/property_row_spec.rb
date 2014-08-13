@@ -21,7 +21,7 @@ module DB
 
       context '#client_id' do
         it 'found when present' do
-          client = client_create! human_ref: 11
+          client = client_create human_ref: 11
           expect(row.client_id).to eq client.id
         end
 

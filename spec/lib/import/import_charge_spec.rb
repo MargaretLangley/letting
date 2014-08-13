@@ -21,7 +21,7 @@ module DB
 
     context 'success' do
       before :each do
-        property_create!
+        property_create
       end
 
       it 'One row' do

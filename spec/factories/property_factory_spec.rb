@@ -44,7 +44,7 @@ describe 'Property Factory' do
 
     it 'create!' do
       charge_structure_create
-      expect { property_with_charge_create! }.to_not raise_error
+      expect { property_with_charge_create }.to_not raise_error
     end
 
     context 'and unpaid debit' do

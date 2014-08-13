@@ -9,7 +9,7 @@ module DB
   describe ImportProperty, :import do
     client = nil
     before :each do
-      client = client_create! human_ref: 11
+      client = client_create human_ref: 11
     end
 
     def row

@@ -7,7 +7,7 @@ describe ApplicationHelper, type: :helper do
     end
 
     it 'enables persisted records' do
-      expect(view_link(property_create!)).to_not include 'disabled'
+      expect(view_link(property_create)).to_not include 'disabled'
     end
   end
 end

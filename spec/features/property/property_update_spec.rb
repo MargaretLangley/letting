@@ -7,8 +7,8 @@ describe 'Account Update', type: :feature do
   context 'Agentless' do
     before(:each) do
       log_in
-      client = client_create!
-      property_create! human_ref: 8000, client_id: client.id
+      client = client_create
+      property_create human_ref: 8000, client_id: client.id
     end
 
     it 'opens valid page', js: true  do
@@ -75,12 +75,12 @@ describe 'Account Update', type: :feature do
   context 'Agentless with charge' do
     before(:each) do
       log_in
-      client_create!
+      client_create
     end
 
     it 'can be set to dormant', js: true do
       charge_structure_create
-      property_with_charge_create! human_ref: 8000
+      property_with_charge_create human_ref: 8000
       account.edit
       expect(page).to have_css('.spec-charge-count', count: 1)
       dormant_checkbox =
@@ -94,8 +94,8 @@ describe 'Account Update', type: :feature do
   context 'with Agent' do
     before(:each) do
       log_in
-      client = client_create!
-      property_with_agent_create! human_ref: 8000, client_id: client.id
+      client = client_create
+      property_with_agent_create human_ref: 8000, client_id: client.id
       account.edit
     end
 

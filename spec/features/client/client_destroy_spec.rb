@@ -4,7 +4,7 @@ describe Client, type: :feature do
 
   before(:each) do
     log_in
-    client_create!
+    client_create
   end
 
   it '#destroys' do

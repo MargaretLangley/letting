@@ -75,7 +75,7 @@ describe Account, type: :model do
 
     account = nil
     before :each do
-      account = (property_create! human_ref: 2002).account
+      account = (property_create human_ref: 2002).account
     end
 
     describe '.find_by_human_ref' do

@@ -2,12 +2,6 @@ def account_new **args
   base_account args
 end
 
-def account_create! **args
-  account = base_account args
-  account.save!
-  account
-end
-
 def account_and_charge_new **args
   account = base_account args
   add_charge_attributes account, args

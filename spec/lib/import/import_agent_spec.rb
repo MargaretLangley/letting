@@ -8,7 +8,7 @@ require_relative '../../../lib/import/import_agent'
 module DB
   describe ImportAgent, :import do
     let!(:property) do
-      property_create! human_ref: 122
+      property_create human_ref: 122
     end
 
     def row

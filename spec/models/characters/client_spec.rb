@@ -18,8 +18,8 @@ describe Client, type: :model do
     end
 
     it '#human_ref is unique' do
-      client_create! human_ref: 1
-      expect { client_create! human_ref: 1 }
+      client_create human_ref: 1
+      expect { client_create human_ref: 1 }
         .to raise_error ActiveRecord::RecordInvalid
     end
 
@@ -31,7 +31,7 @@ describe Client, type: :model do
 
   describe 'search' do
     before :each do
-      client_create!
+      client_create
       Client.import force: true, refresh: true
     end
 

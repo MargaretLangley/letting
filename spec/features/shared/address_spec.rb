@@ -8,7 +8,7 @@ describe Address, type: :feature do
     let(:address) { AddressPage.new }
 
     it 'Add district line', js: true do
-      client_create! address_attributes: { district: '' }
+      client_create address_attributes: { district: '' }
       navigate_to_edit_page
       expect(address).to_not be_district_visible
       address.add_district
@@ -18,7 +18,7 @@ describe Address, type: :feature do
     it 'Display district if added', js: true do
       skip 'can not get this working in the test - documentations
       says( Not all drivers support CSS, so the result may be inaccurate.) '
-      client_create! address_attributes: { district: 'Edgbaston' }
+      client_create address_attributes: { district: 'Edgbaston' }
       navigate_to_edit_page
       expect(address).to be_district_visible
       address.delete_district
@@ -26,7 +26,7 @@ describe Address, type: :feature do
     end
 
     it 'Add nation line', js: true do
-      client_create! address_attributes: { nation: '' }
+      client_create address_attributes: { nation: '' }
       navigate_to_edit_page
       expect(address).to_not be_nation_visible
       address.add_nation
@@ -36,7 +36,7 @@ describe Address, type: :feature do
     it 'Display nation if added', js: true do
       skip 'can not get this working in the test - documentations
       says( Not all drivers support CSS, so the result may be inaccurate.) '
-      client_create! address_attributes: { nation: 'Spain' }
+      client_create address_attributes: { nation: 'Spain' }
       navigate_to_edit_page
       expect(address).to be_nation_visible
       address.delete_nation

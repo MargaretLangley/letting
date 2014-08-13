@@ -72,7 +72,7 @@ describe DebitGenerator, type: :model do
       before do
         Timecop.travel(Date.new(2013, 1, 31))
         charge_structure_create
-        property = property_with_charge_create! human_ref: 2002
+        property = property_with_charge_create human_ref: 2002
         Property.import force: true, refresh: true
       end
       after do

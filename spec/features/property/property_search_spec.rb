@@ -8,12 +8,12 @@ describe Property, type: :feature do
   describe '#Search' do
 
     before :each do
-      property_create! human_ref: 111,
-                       address_attributes: { county: 'Worcester' }
-      property_create! human_ref: 222,
-                       address_attributes: { county: 'West Midlands' }
-      property_create! human_ref: 333,
-                       address_attributes: { county: 'West Midlands' }
+      property_create human_ref: 111,
+                      address_attributes: { county: 'Worcester' }
+      property_create human_ref: 222,
+                      address_attributes: { county: 'West Midlands' }
+      property_create human_ref: 333,
+                      address_attributes: { county: 'West Midlands' }
       Property.import force: true, refresh: true
     end
 

@@ -9,7 +9,7 @@ module DB
 
     it 'single credit' do
       charge_structure_create
-      property = property_create! human_ref: 89
+      property = property_create human_ref: 89
       charge_new(account_id: property.account.id).save!
 
       expect { ImportPayment.import parse credit_row }.to \
@@ -19,7 +19,7 @@ module DB
     context 'errors' do
       it 'double import raises error' do
         skip 'will not work until model_prepared can find_model'
-        property = property_create! human_ref: 89
+        property = property_create human_ref: 89
         charge_new(account_id: property.account.id).save!
 
         ImportPayment.import parse credit_row
