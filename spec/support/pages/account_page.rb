@@ -113,7 +113,7 @@ class AccountPage
     id_stem = "property_account_attributes_charges_attributes_#{order}"
     fill_in "#{id_stem}_charge_type", with: charge_type
     select(charge_cycle, from: "charge_cycle_#{order}")
-    select('Advance', from: "#{id_stem}_charge_structure_id")
+    select(charged_in, from: "#{id_stem}_charge_structure_id")
     fill_in "#{id_stem}_amount", with: amount
     # fill_in "#{id_stem}_start_date", with: start_date if start_date.present?
     # fill_in "#{id_stem}_end_date", with: start_date if end_date.present?
