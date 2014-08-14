@@ -10,15 +10,17 @@ module DB
   #
   # Load, assigns and saves Charge model objects into the database
   #
-  # ImportCharge is called as part of the import.rake task. It reads in
-  # a charge.csv file and creates the charge objects and saves them to
-  # charges and due_ons tables.
+  # ImportCharge is called as part of the import.rake task. It reads in a
+  # charge.csv file (called acc_info.csv) and creates the charge objects and
+  # saves them to charges and due_ons tables.
   #
   # ImportCharge has model_prepared and model_assignment called
   # by ImportBase as part of its import_loop. The private code handles
   # converting the charge.csv into charges (the actual amount) and due_ons
   # (the date when the charge is due).
   #
+  # ChargeRow - wrap up the ruby csv row and converts the raw values into
+  #             values and identifiers which the program uses.
   ####
   #
   class ImportCharge < ImportBase
@@ -53,6 +55,7 @@ module DB
     end
 
     def model_assignment
+      byebug
       @model_to_assign.assign_attributes row.attributes
       assign_due_ons
     end
