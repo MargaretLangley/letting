@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe DueOnsDecorator, broken: true do
   let(:due_ons_dec) { DueOnsDecorator.new Charge.new.due_ons }

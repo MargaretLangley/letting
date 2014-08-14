@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Client, type: :feature do
   before(:each) { log_in }

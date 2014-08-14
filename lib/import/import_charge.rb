@@ -55,7 +55,6 @@ module DB
     end
 
     def model_assignment
-      byebug
       @model_to_assign.assign_attributes row.attributes
       assign_due_ons
     end

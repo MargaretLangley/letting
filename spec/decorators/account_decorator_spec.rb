@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe AccountDecorator do
   before { Timecop.travel(Date.new(2013, 1, 31)) }
