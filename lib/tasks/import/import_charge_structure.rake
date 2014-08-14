@@ -23,8 +23,12 @@ namespace :db do
         unless File.exist?(filename)
 
       CSV.foreach(filename, :headers => true) do |row|
-        ChargeStructure.create!(row.to_hash)
+        ChargeStructure.create!(row.to_hash) unless comment(row)
       end
+    end
+
+    def comment row
+      '#' == row['id'].first
     end
   end
 end

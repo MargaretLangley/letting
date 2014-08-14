@@ -13,6 +13,11 @@
 # ON_DATE: holding a day and month or by holding.
 # PER_MONTH: a day and have it reoccur every month.
 #
+# day - day which the charge becomes due
+# month - month which the charge becomes due
+# year - nil on reocurring due_ons
+#        set to year for one off charges.
+#
 # More information: due_ons.rb
 #
 ####
