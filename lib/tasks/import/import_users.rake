@@ -10,10 +10,12 @@ namespace :db do
 
     desc "Import users data from CSV file"
     task :users, [:test] => :environment do |task, args|
-      puts missing_users_csv_message \
-        unless File.exist?('import_data/new/users.csv')
-
-      DB::ImportUser.import users_file
+      if File.exist?('import_data/new/users.csv')
+        # Cannot use Guard clause users_csv is not available on travis runs!
+        DB::ImportUser.import users_file
+      else
+        puts missing_users_csv_message
+      end
       load_test_users if args.test
     end
 
