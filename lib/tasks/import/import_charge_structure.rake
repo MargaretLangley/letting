@@ -8,8 +8,8 @@ require 'csv'
   # charge_cycle 2: 'Jun/Dec'
   # See import_charge_cycle.csv for remainder
 # Column 3 - the billing
-  # charged_in_id: 1 Advance
-  # charged_in_id: 2 Arrears
+  # charged_in_id: 1 Arrears
+  # charged_in_id: 2 Advance
   # charged_in_id: 3 Mid-Term
 
 namespace :db do

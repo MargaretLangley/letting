@@ -259,8 +259,8 @@ def charge_structure
   # charge_cycle 1: 'Mar/Sep'
   # charge_cycle 2: 'Jun/Dec'
   #
-  # charged_in_id: 1 Advance
-  # charged_in_id: 2 Arrears
+  # charged_in_id: 1 Arrears
+  # charged_in_id: 2 Advance
   ChargeStructure.create! [
     { id:  1, charge_cycle_id: 1, charged_in_id: 1 },
     { id:  2, charge_cycle_id: 1, charged_in_id: 2 },
