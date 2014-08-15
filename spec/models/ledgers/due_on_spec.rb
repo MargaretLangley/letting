@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe DueOn, type: :model do
 
@@ -158,6 +158,32 @@ describe DueOn, type: :model do
         due_on.day = nil
         due_on.month = nil
         expect(due_on).to be_empty
+      end
+    end
+
+    describe '<=>' do
+      it 'matches when equal' do
+        due_on = DueOn.new month: 2, day: 2
+        other_due_on = DueOn.new month: 2, day: 2
+        expect(due_on <=> other_due_on).to eq 0
+      end
+
+      it 'a is > b return 1' do
+        due_on = DueOn.new month: 2, day: 2
+        other_due_on = DueOn.new month: 2, day: 1
+        expect(due_on <=> other_due_on).to eq(1)
+      end
+
+      it 'a is < b return -1' do
+        due_on = DueOn.new month: 2, day: 2
+        other_due_on = DueOn.new month: 2, day: 3
+        expect(due_on <=> other_due_on).to eq(-1)
+      end
+
+      it 'nil when not comparable' do
+        due_on = DueOn.new day: 2, month: 2
+        other = 37
+        expect(due_on <=> other).to be_nil
       end
     end
   end

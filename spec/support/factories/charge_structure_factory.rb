@@ -1,3 +1,5 @@
+require_relative 'charge_cycle_factory'
+require_relative 'charged_in_factory'
 
 def charge_structure_new **args
   base_charge_structure args

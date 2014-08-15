@@ -1,6 +1,7 @@
 require_relative 'charge_code'
 require_relative 'errors'
 require_relative '../modules/method_missing'
+# rubocop: disable Rails/Output
 
 module DB
   #####
@@ -18,9 +19,11 @@ module DB
   #
   class ChargeRow
     include MethodMissing
-    DUE_IN_CODE_TO_STRING  = { '0'  => 'Arrears',
-                               '1' => 'Advance',
-                               'M' => 'MidTerm' }
+    # Mapping of imported values to application values
+    # Definitive values charged_in.csv/charged_ins table;
+    DUE_IN_CODE_TO_STRING  = { '0'  => 1,     # Arrears
+                               '1' =>  2,     # Advance
+                               'M' =>  3 }    # Mid_term
     def initialize row
       @source = row
     end
@@ -49,11 +52,37 @@ module DB
       max_dates
     end
 
-    def due_in
+    def charged_in_id
       DUE_IN_CODE_TO_STRING.fetch(due_in_code)
       rescue KeyError
         raise DueInCodeUnknown, due_in_code_message, caller
     end
+
+    def charge_structure_id
+      ChargeStructureMatcher.new(self).id
+      rescue ChargeStuctureUnknown
+        puts property_message +
+          'charge row does not match a structure structure'
+    end
+
+    def each
+      1.upto(4) do |index|
+        break if empty_due_on? day(index), month(index)
+        yield day(index), month(index)
+      end
+    end
+
+    def attributes
+      {
+        charge_type: charge_type,
+        charge_structure_id: charge_structure_id,
+        amount: amount,
+        start_date: start_date,
+        end_date: end_date,
+      }
+    end
+
+    private
 
     def day number
       @source[:"day_#{number}"].to_i
@@ -63,17 +92,9 @@ module DB
       @source[:"month_#{number}"].to_i
     end
 
-    def attributes
-      {
-        charge_type: charge_type,
-        due_in: due_in,
-        amount: amount,
-        start_date: start_date,
-        end_date: end_date,
-      }
+    def empty_due_on? day, month
+      day == 0 && month == 0
     end
-
-    private
 
     def charge_code
       @source[:charge_type]
@@ -103,6 +124,10 @@ module DB
 
     def due_in_code_message
       "Property #{human_ref}: Due in code #{due_in_code} is unknown."
+    end
+
+    def property_message
+      "Property #{human_ref}"
     end
   end
 end

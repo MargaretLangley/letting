@@ -257,10 +257,10 @@ def charge_structure
 
   # Full charge structure is in import_charge_structure.csv
   # charge_cycle 1: 'Mar/Sep'
-  # charge_cycle 2: 'Jun/Dec'
+  # charge_cycle 2: 'Jun/Dec'  (see import_charge_cycle.rake)
   #
   # charged_in_id: 1 Arrears
-  # charged_in_id: 2 Advance
+  # charged_in_id: 2 Advance (see import_charged_id.rake)
   ChargeStructure.create! [
     { id:  1, charge_cycle_id: 1, charged_in_id: 1 },
     { id:  2, charge_cycle_id: 1, charged_in_id: 2 },

@@ -11,23 +11,28 @@
 #
 #
 class ChargeStructure < ActiveRecord::Base
+  include Comparable
   include DueOns
   accepts_nested_attributes_for :due_ons, allow_destroy: true
   validates :charge_cycle, :charged_in, :due_ons, presence: true
   has_one :charge, inverse_of: :charge_structure
+
   belongs_to :charge_cycle
+  # charge_cycle_cycle
+  delegate :name, to: :charge_cycle, prefix: true
+  # charged_in_name
   belongs_to :charged_in, inverse_of: :charge_structure
+  delegate :name, to: :charged_in, prefix: true
 
   delegate :due_dates, to: :due_ons
 
   delegate :prepare, to: :due_ons
-
   delegate :clear_up_form, to: :due_ons
 
-  # charge_cycle_cycle
-  delegate :cycle, to: :charge_cycle, prefix: true
-  # charged_in_name
-  delegate :name, to: :charged_in, prefix: true
+  def <=> other
+    return nil unless other.is_a?(self.class)
+    [charged_in_id, due_ons.sort] <=> [other.charged_in_id, other.due_ons.sort]
+  end
 
   # Require this if we are creating and editing charge_structure
   # Remove this if we don't

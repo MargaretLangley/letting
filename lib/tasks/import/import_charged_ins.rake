@@ -3,13 +3,13 @@ require 'csv'
 ###
 # Import Charged Ins
 #
-# Values attributed to structuring of payments.
+# Key values table id, structuring of payments name
 #
 # Imported into charged_ins table
 # Arrears is 1
 # Advance is 2
 # Mid-Term is 3
-# See table / charged_in.csv for definitive values.
+# See table charged_ins / file charged_in.csv for definitive values.
 #
 ####
 namespace :db do

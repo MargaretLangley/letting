@@ -23,6 +23,7 @@
 ####
 #
 class DueOn < ActiveRecord::Base
+  include Comparable
   belongs_to :charge
   validates :day, :month, presence: true
   validates :day,   numericality: { only_integer: true,
@@ -58,6 +59,11 @@ class DueOn < ActiveRecord::Base
 
   def empty?
     attributes.except(*ignored_attrs).values.all?(&:blank?)
+  end
+
+  def <=> other
+    return nil unless other.is_a?(self.class)
+    [month, day] <=> [other.month, other.day]
   end
 
   private

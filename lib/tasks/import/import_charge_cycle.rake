@@ -1,5 +1,17 @@
 require 'csv'
 
+####
+# Import ChargeCycle
+#
+# Key value table: id, ChargeCycle Name
+#
+# 1 Mar/Sep
+# 2 Jun/Dec
+# 3 Mar/Jun/Sep/Dec
+# 4 Apr/July/Oct/Jan
+# see definitive values in table charge_cycles / file charge_cycle.csv
+#
+####
 namespace :db do
   namespace :import do
 
