@@ -28,7 +28,7 @@
 # due_ons row with Day and Month reference id.
 # PerMonth DueOns are converted from a single DueOn in memory to 12 dueons on
 # the database - this allows the OnDate and PerMonth due_ons to behave the same
-# We simply test for a day and month match.
+# We test for a day and month match.
 #
 ####
 #

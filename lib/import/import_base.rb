@@ -11,7 +11,7 @@ module DB
   # 1. The system finds and prepares the current model from the database
   #     - (if available)
   # 2. Assigns the row values to the model
-  # 3. Any patches are applied - for import data that is just plain wrong but
+  # 3. Any patches are applied - for import data that is plain wrong but
   #    is not going to be fixed in the source database.
   # 4. Save the model
   #
