@@ -21,9 +21,9 @@ module DB
     include MethodMissing
     # Mapping of imported values to application values
     # Definitive values charged_in.csv/charged_ins table;
-    DUE_IN_CODE_TO_STRING  = { '0'  => 1,     # Arrears
-                               '1' =>  2,     # Advance
-                               'M' =>  3 }    # Mid_term
+    LEGACY_CODE_TO_CHARGED_IN  = { '0'  => 1,     # Arrears
+                                   '1' =>  2,     # Advance
+                                   'M' =>  3 }    # Mid_term
     def initialize row
       @source = row
     end
@@ -53,9 +53,9 @@ module DB
     end
 
     def charged_in_id
-      DUE_IN_CODE_TO_STRING.fetch(due_in_code)
+      LEGACY_CODE_TO_CHARGED_IN.fetch(due_in_code)
       rescue KeyError
-        raise DueInCodeUnknown, due_in_code_message, caller
+        raise ChargedInCodeUnknown, charged_in_code_message, caller
     end
 
     def charge_structure_id
@@ -122,7 +122,7 @@ module DB
       'can not be converted into maximum dates per year.'
     end
 
-    def due_in_code_message
+    def charged_in_code_message
       "Property #{human_ref}: Due in code #{due_in_code} is unknown."
     end
 

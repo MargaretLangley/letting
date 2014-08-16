@@ -9,6 +9,6 @@ module DB
   class ChargeStuctureUnknown < Error; end
   class ClientRefUnknown < Error; end
   class PropertyRefUnknown < Error; end
-  class DueInCodeUnknown < Error; end
+  class ChargedInCodeUnknown < Error; end
   class NotIdempotent < Error; end
 end

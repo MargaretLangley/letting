@@ -53,7 +53,8 @@ module DB
 
           it 'errors invalid' do
             bad_code = ChargeRow.new parse_line charge_row_invalid_due_in
-            expect { bad_code.charged_in_id }.to raise_error DueInCodeUnknown
+            expect { bad_code.charged_in_id }
+              .to raise_error ChargedInCodeUnknown
           end
         end
 
