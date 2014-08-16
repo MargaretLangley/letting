@@ -53,7 +53,7 @@ module DB
     end
 
     def charged_in_id
-      LEGACY_CODE_TO_CHARGED_IN.fetch(due_in_code)
+      LEGACY_CODE_TO_CHARGED_IN.fetch(charged_in_code)
       rescue KeyError
         raise ChargedInCodeUnknown, charged_in_code_message, caller
     end
@@ -100,8 +100,8 @@ module DB
       @source[:charge_type]
     end
 
-    def due_in_code
-      @source[:due_in]
+    def charged_in_code
+      @source[:charged_in]
     end
 
     def start_date
@@ -123,7 +123,7 @@ module DB
     end
 
     def charged_in_code_message
-      "Property #{human_ref}: Due in code #{due_in_code} is unknown."
+      "Property #{human_ref}: charged in code #{charged_in_code} is unknown."
     end
 
     def property_message

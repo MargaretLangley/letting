@@ -48,7 +48,7 @@ module DB
 
     def import_balance
       charge = Charge.new charge_type: 'Arrears',
-                          due_in: 'Arrears',
+                          charged_in: 'Arrears',
                           amount: row.amount,
                           account_id: row.account_id,
                           start_date: MIN_DATE,
