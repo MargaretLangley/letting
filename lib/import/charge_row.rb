@@ -62,7 +62,9 @@ module DB
       ChargeStructureMatcher.new(self).id
       rescue ChargeStuctureUnknown
         puts property_message +
-          ' charge row does not match a charge structure'
+          ' charge row does not match a charge structure' +
+          " Legacy charge_type: '#{charge_code}' " +
+          " Legacy charged_in code: '#{charged_in_code}'"
     end
 
     def each
