@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/charge_code'
 # rubocop: disable Style/Documentation
 

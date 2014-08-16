@@ -1,12 +1,12 @@
 require 'csv'
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/file_import'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_charge'
 
 ####
 #
-# import_charge_spec.rb
+# import_charge_spec.rb/home/richard/code/letting/spec/lib/import/import_charge_spec.rb
 #
 # unit testing for charge_row
 #

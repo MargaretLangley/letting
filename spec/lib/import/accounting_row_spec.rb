@@ -1,5 +1,5 @@
 require 'csv'
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/accounting_row'
 require_relative '../../..//lib/import/errors.rb'

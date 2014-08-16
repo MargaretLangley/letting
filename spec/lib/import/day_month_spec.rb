@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/day_month'
 # rubocop: disable Style/Documentation
 

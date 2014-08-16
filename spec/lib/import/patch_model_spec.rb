@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/patch_model'
 # rubocop: disable Style/Documentation
 
