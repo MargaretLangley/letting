@@ -9,11 +9,7 @@ jQuery ->
      #property_charges_attributes_0_charge_type,
      #property_charges_attributes_1_charge_type,
      #property_charges_attributes_2_charge_type,
-     #property_charges_attributes_3_charge_type,
-     #property_charges_attributes_0_due_in,
-     #property_charges_attributes_1_due_in,
-     #property_charges_attributes_2_due_in,
-     #property_charges_attributes_3_due_in').each (index, element) =>
+     #property_charges_attributes_3_charge_type').each (index, element) =>
      $(element).autocomplete
       source: $(element).data('autocomplete-source')
 
