@@ -56,50 +56,6 @@ module DB
 
     def model_assignment
       @model_to_assign.assign_attributes row.attributes
-      assign_due_ons
-    end
-
-    private
-
-    def assign_due_ons
-      day_months = charged_days_in_year
-      @model_to_assign.due_ons
-        .first(day_months.size).each_with_index do |due_on, index|
-        assign_due_on due_on, day_months[index]
-      end
-    end
-
-    def assign_due_on due_on, day_month
-      due_on.attributes = { day: day_month.day, month: day_month.month } \
-                                  unless ignored_date_combination day_month
-    end
-
-    def ignored_date_combination day_month
-      # import data using 0 and -1 to mean null
-      day_month.day == 0 && (day_month.month == 0 || day_month.month == -1)
-    end
-
-    def charged_days_in_year
-      if row.monthly_charge?
-        charged_days_in_year_from_monthly_charge
-      else
-        charged_days_in_year_from_on_date_charge
-      end
-    end
-
-    def charged_days_in_year_from_monthly_charge
-      [*DayMonth.from_day_month(row.day(1), DueOn::PER_MONTH)]
-    end
-
-    def charged_days_in_year_from_on_date_charge
-      day_months = []
-      (1..row.maximum_dates)
-        .each { |index| day_months << day_month_from_row_columns(index) }
-      day_months
-    end
-
-    def day_month_from_row_columns number
-      DayMonth.from_day_month row.day(number), row.month(number)
     end
   end
 end

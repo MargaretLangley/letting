@@ -62,7 +62,7 @@ module DB
       ChargeStructureMatcher.new(self).id
       rescue ChargeStuctureUnknown
         puts property_message +
-          'charge row does not match a structure structure'
+          ' charge row does not match a charge structure'
     end
 
     def each

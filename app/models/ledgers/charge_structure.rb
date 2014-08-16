@@ -29,6 +29,10 @@ class ChargeStructure < ActiveRecord::Base
   delegate :prepare, to: :due_ons
   delegate :clear_up_form, to: :due_ons
 
+  # Convention is == is Matching on values rather than object structure
+  # <=> is called in the implementation of ==
+  # Compares charge_in_id and then each due_on's day and month
+  #
   def <=> other
     return nil unless other.is_a?(self.class)
     [charged_in_id, due_ons.sort] <=> [other.charged_in_id, other.due_ons.sort]

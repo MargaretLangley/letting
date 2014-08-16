@@ -61,6 +61,9 @@ class DueOn < ActiveRecord::Base
     attributes.except(*ignored_attrs).values.all?(&:blank?)
   end
 
+  # Convention is == is Matching on values rather than object structure
+  # <=> is called in the implementation of ==
+  #
   def <=> other
     return nil unless other.is_a?(self.class)
     [month, day] <=> [other.month, other.day]

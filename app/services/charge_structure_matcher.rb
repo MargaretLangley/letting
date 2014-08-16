@@ -15,19 +15,17 @@ require_relative '../../lib/import/errors'
 ####
 #
 class ChargeStructureMatcher
-  @charge_structure = nil
   def initialize charge_row
-    @charge_row = charge_row
-    @charge_structure = \
+    @unidentified_charge_structure = \
       ChargeStructure.new(charged_in_id: charge_row.charged_in_id)
-    @charge_row.each do |day, month|
-      @charge_structure.due_ons.build(day: day, month: month)
+    charge_row.each do |day, month|
+      @unidentified_charge_structure.due_ons.build(day: day, month: month)
     end
   end
 
   def id
     puts 'ChargeStructures table empty' unless ChargeStructure.any?
-    found_structure = find unless find.nil?
+    found_structure = find
     fail DB::ChargeStuctureUnknown unless found_structure
     found_structure.id
   end
@@ -36,7 +34,7 @@ class ChargeStructureMatcher
 
   def find
     ChargeStructure.all.find do |structure|
-      structure == @charge_structure
+      structure == @unidentified_charge_structure
     end
   end
 end
