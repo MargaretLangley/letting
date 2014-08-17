@@ -53,6 +53,9 @@ module DB
     end
 
     def charged_in_id
+      # Hack for when data lies
+      return LEGACY_CODE_TO_CHARGED_IN.fetch('1') \
+        if charge_type_always_advanced
       LEGACY_CODE_TO_CHARGED_IN.fetch(charged_in_code)
       rescue KeyError
         raise ChargedInCodeUnknown, charged_in_code_message, caller
@@ -62,13 +65,13 @@ module DB
       ChargeStructureMatcher.new(self).id
       rescue ChargeStuctureUnknown
         puts property_message +
-          ' charge row does not match a charge structure' +
-          " Legacy charge_type: '#{charge_code}' " +
+          ' charge row does not match a charge structure' \
+          " Legacy charge_type: '#{charge_code}' " \
           " Legacy charged_in code: '#{charged_in_code}'"
     end
 
     def each
-      1.upto(4) do |index|
+      1.upto(maximum_dates) do |index|
         break if empty_due_on? day(index), month(index)
         yield day(index), month(index)
       end
@@ -96,6 +99,12 @@ module DB
 
     def empty_due_on? day, month
       day == 0 && month == 0
+    end
+
+    # charged_in_code is not set properly.
+    # insurance is always advanced but the data left as default - arrears
+    def charge_type_always_advanced
+      charge_type == 'Insurance' || charge_type == 'Garage Insurance'
     end
 
     def charge_code

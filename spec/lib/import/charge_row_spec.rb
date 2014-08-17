@@ -49,16 +49,21 @@ module DB
         end
 
         describe '#charged_in_id' do
-          it('returns valid') { expect(row.charged_in_id).to eq 1 }
+          it('returns valid id') { expect(row.charged_in_id).to eq 1 }
+
+          it 'overridden return for advance only charges' do
+            row = ChargeRow.new parse_line insurance_row
+            expect(row.charged_in_id).to eq 2
+          end
 
           it 'errors invalid' do
-            bad_code = ChargeRow.new parse_line charge_row_invalid_due_in
+            bad_code = ChargeRow.new parse_line charge_row_invalid_charged_in
             expect { bad_code.charged_in_id }
               .to raise_error ChargedInCodeUnknown
           end
         end
 
-        describe '#charge_strucutre_id' do
+        describe '#charge_structure_id' do
           it('returns valid') do
             row = ChargeRow.new parse_line half_charge_row
             structure = ChargeStructure.new(id: 5)
@@ -94,6 +99,15 @@ module DB
               yielded_values << [day, month]
             end
             expect(yielded_values).to eq [[24, 3], [25, 6]]
+          end
+
+          it 'always yields two values for half year charges' do
+            row = ChargeRow.new parse_line half_charge_row_with_4_charges
+            yielded_values = []
+            row.each do |day, month|
+              yielded_values << [day, month]
+            end
+            expect(yielded_values.count).to eq(2)
           end
 
           it 'yields month charges' do
@@ -149,7 +163,19 @@ module DB
       %q( 1901-01-01, 0 )
     end
 
-    def charge_row_invalid_due_in
+    def insurance_row
+      %q( 89, 2006-12-30, Ins, 0, 50.5, S, ) +
+      %q( 24, 3, 25, 6, 0, 0, 0, 0, ) +
+      %q( 1901-01-01, 0 )
+    end
+
+    def half_charge_row_with_4_charges
+      %q( 89, 2006-12-30, H, 0, 50.5, S, ) +
+      %q( 24, 3, 25, 6, 1, 1, 2, 2, ) +
+      %q( 1901-01-01, 0 )
+    end
+
+    def charge_row_invalid_charged_in
       %q( 89, 2006-12-30, GR, X, 50.5, S, ) +
       %q( 24, 3, 25, 6, 25, 9, 31, 12, ) +
       %q( 1901-01-01, 0 )
