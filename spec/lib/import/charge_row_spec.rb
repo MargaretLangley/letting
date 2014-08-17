@@ -11,7 +11,7 @@ require_relative '../../../lib/import/charge_row'
 #
 ####
 module DB
-  describe ChargeRow do
+  describe ChargeRow, :import do
     describe 'credit row' do
       let(:row) { ChargeRow.new parse_line quarter_charge_row }
 

@@ -3,7 +3,7 @@ require_relative '../../../lib/import/patch_model'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe 'PatchModel' do
+  describe 'PatchModel', :import do
     let(:patchee) { client_new human_ref: 800 }
 
     context 'changed?' do

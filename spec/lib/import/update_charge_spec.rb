@@ -3,7 +3,7 @@ require_relative '../../../lib/import/update_charge'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe UpdateCharge do
+  describe UpdateCharge, :import do
     before { Timecop.travel(Date.new(2013, 11, 01)) }
     after  { Timecop.return }
 

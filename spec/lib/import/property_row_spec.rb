@@ -5,7 +5,7 @@ require_relative '../../../lib/import/property_row'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe PropertyRow do
+  describe PropertyRow, :import do
 
     let(:row) { PropertyRow.new parse_line property_row }
 

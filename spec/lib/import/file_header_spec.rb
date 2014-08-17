@@ -3,7 +3,7 @@ require_relative '../../../lib/import/file_header'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe FileHeader do
+  describe FileHeader, :import do
 
     it 'client' do
       fields =

@@ -13,7 +13,7 @@ require_relative '../../..//lib/import/errors.rb'
 ####
 #
 module DB
-  describe AccountingRow do
+  describe AccountingRow, :import do
 
     let(:accounting) { (Class.new { include AccountingRow }).new }
 

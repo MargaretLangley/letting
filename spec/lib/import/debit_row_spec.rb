@@ -12,7 +12,7 @@ require_relative '../../../lib/import/debit_row'
 ####
 #
 module DB
-  describe DebitRow do
+  describe DebitRow, :import do
     let(:row) { DebitRow.new parse_line debit_row }
 
     it 'has human_ref' do

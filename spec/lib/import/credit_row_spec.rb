@@ -5,7 +5,7 @@ require_relative '../../../lib/import/credit_row'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe CreditRow do
+  describe CreditRow, :import do
     let(:row) { CreditRow.new parse_line credit_row }
 
     describe 'readers' do

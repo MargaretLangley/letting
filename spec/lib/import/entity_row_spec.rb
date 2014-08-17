@@ -5,7 +5,7 @@ require_relative '../../../lib/import/entity_row'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe EntityRow do
+  describe EntityRow, :import do
 
     it 'title' do
       entity = EntityRow.new 'Mr', 'A', 'Man'

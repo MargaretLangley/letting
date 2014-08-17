@@ -3,7 +3,7 @@ require_relative '../../../lib/import/charge_values'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe ChargeValues do
+  describe ChargeValues, :import do
     context 'Converts from code' do
       it 'returns a ChargeValues' do
         charge_value = ChargeValues.from_code 'GGR'
