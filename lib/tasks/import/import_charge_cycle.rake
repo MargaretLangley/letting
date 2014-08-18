@@ -22,8 +22,12 @@ namespace :db do
       puts "Charge cycle import: missing #{filename}" unless File.exist?(filename)
 
       CSV.foreach(filename, :headers => true) do |row|
-        ChargeCycle.create!(row.to_hash)
+        ChargeCycle.create!(row.to_hash) unless comment(row)
       end
+    end
+
+    def comment row
+      '#' == row['id'].first
     end
   end
 end
