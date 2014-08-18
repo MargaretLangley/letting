@@ -23,7 +23,11 @@ namespace :db do
         unless File.exist?(filename)
 
       CSV.foreach(filename, :headers => true) do |row|
-        ChargeStructure.create!(row.to_hash) unless comment(row)
+        begin
+          ChargeStructure.create!(row.to_hash) unless comment(row)
+        rescue Exception => exception
+          p "ChargeStructure Create failed (see hash below):", row.to_hash
+        end
       end
     end
 
