@@ -132,15 +132,15 @@ ActiveRecord::Schema.define(version: 20140809150357) do
   add_index "debits", ["debit_generator_id"], name: "index_debits_on_debit_generator_id", using: :btree
 
   create_table "due_ons", force: true do |t|
-    t.integer  "day",                 null: false
-    t.integer  "month",               null: false
+    t.integer  "day",             null: false
+    t.integer  "month",           null: false
     t.integer  "year"
-    t.integer  "charge_structure_id"
+    t.integer  "charge_cycle_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "due_ons", ["charge_structure_id"], name: "index_due_ons_on_charge_structure_id", using: :btree
+  add_index "due_ons", ["charge_cycle_id"], name: "index_due_ons_on_charge_cycle_id", using: :btree
 
   create_table "entities", force: true do |t|
     t.integer  "entitieable_id",   null: false

@@ -20,32 +20,31 @@ module DB
         it 'matches on charged_id and due_ons' do
           structure = ChargeStructure.new(id: 5)
           structure.build_charged_in(id: 1, name: 'arrears')
-          structure.build_charge_cycle(id: 100, name: 'Anything')
-          structure.due_ons.build day: 25, month: 3
-          structure.due_ons.build day: 29, month: 9
+          structure.build_charge_cycle(id: 8, name: 'Anything')
           structure.save!
-          expect(ChargeStructureMatcher.new(row).id).to eq 5
+          expect(ChargeStructureMatcher.new(charged_in_id: 1,
+                                            charge_cycle_id: 8).id)
+            .to eq 5
         end
 
         it 'requires the same charged_id to match' do
           structure = ChargeStructure.new(id: 5)
           structure.build_charged_in(id: 100, name: 'arrears')
-          structure.build_charge_cycle(id: 100, name: 'Anything')
-          structure.due_ons.build day: 25, month: 3
-          structure.due_ons.build day: 29, month: 9
+          structure.build_charge_cycle(id: 8, name: 'Anything')
           structure.save!
-          expect { ChargeStructureMatcher.new(row).id }.to \
-            raise_error ChargeStuctureUnknown
+          expect do ChargeStructureMatcher.new(charged_in_id: 1,
+                                               charge_cycle_id: 8).id
+          end.to raise_error ChargeStuctureUnknown
         end
 
-        it 'requires the same due_ons to match' do
+        it 'requires the same charge cycle to match' do
           structure = ChargeStructure.new(id: 5)
           structure.build_charged_in(id: 1, name: 'arrears')
-          structure.build_charge_cycle(id: 100, name: 'Anything')
-          structure.due_ons.build day: 25, month: 3
+          structure.build_charge_cycle(id: 800, name: 'Anything')
           structure.save!
-          expect { ChargeStructureMatcher.new(row).id }.to \
-            raise_error ChargeStuctureUnknown
+          expect do ChargeStructureMatcher.new(charged_in_id: 1,
+                                               charge_cycle_id: 8).id
+          end.to raise_error ChargeStuctureUnknown
         end
       end
     end

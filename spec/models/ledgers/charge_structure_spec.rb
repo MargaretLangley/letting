@@ -5,7 +5,6 @@ RSpec.describe ChargeStructure, type: :model do
     structure = ChargeStructure.new charge_cycle_id: 1, charged_in_id: 1
     structure.build_charge_cycle id: 1, name: 'Mar/Sep'
     structure.build_charged_in id: 1, name: 'Arrears'
-    structure.due_ons.new day: 25, month: 3, charge_structure_id: 1
     structure
   end
 
@@ -36,7 +35,10 @@ RSpec.describe ChargeStructure, type: :model do
       after(:each)  { Timecop.return }
 
       it 'creates charging date if in range'  do
-        expect(structure.due_dates(Date.new(2013, 3, 25)..\
+        cycle = ChargeCycle.new id: 1, name: 'Mar/Sep'
+        cycle.due_ons.new day: 25, month: 3, charge_cycle_id: 1
+        structure.charge_cycle = cycle
+        expect(structure.charge_cycle.due_dates(Date.new(2013, 3, 25)..\
                                    Date.new(2013, 3, 25)))
           .to eq [Date.new(2013, 3, 25)]
       end
@@ -44,26 +46,8 @@ RSpec.describe ChargeStructure, type: :model do
 
     describe '<=>' do
       it 'matches when equal' do
-        structure = ChargeStructure.new(charged_in_id: 1)
-        structure.due_ons.build day: 1, month: 1
-        structure.due_ons.build day: 6, month: 6
-
-        other = ChargeStructure.new(charged_in_id: 1)
-        other.due_ons.build day: 1, month: 1
-        other.due_ons.build day: 6, month: 6
-
-        expect(structure <=> other).to eq 0
-      end
-
-      it 'order independent' do
-        structure = ChargeStructure.new(charged_in_id: 1)
-        structure.due_ons.build day: 1, month: 1
-        structure.due_ons.build day: 6, month: 6
-
-        other = ChargeStructure.new(charged_in_id: 1)
-        other.due_ons.build day: 6, month: 6
-        other.due_ons.build day: 1, month: 1
-
+        structure = ChargeStructure.new(charged_in_id: 1, charge_cycle_id: 2)
+        other = ChargeStructure.new(charged_in_id: 1, charge_cycle_id: 2)
         expect(structure <=> other).to eq 0
       end
 
@@ -73,35 +57,11 @@ RSpec.describe ChargeStructure, type: :model do
         expect(structure <=> other).to eq(-1)
       end
 
-      it 'uses due_ons to match' do
-        structure = ChargeStructure.new(charged_in_id: 1)
-        structure.due_ons.build day: 1, month: 1
-        structure.due_ons.build day: 6, month: 6
-
-        other = ChargeStructure.new(charged_in_id: 12)
-        other.due_ons.build day: 1, month: 1
-        other.due_ons.build day: 12, month: 12
-
+      it 'uses charge_cycle to match' do
+        structure = ChargeStructure.new(charged_in_id: 1, charge_cycle_id: 2)
+        other = ChargeStructure.new(charged_in_id: 1, charge_cycle_id: 8)
         expect(structure <=> other).to eq(-1)
       end
-    end
-
-  end
-
-  describe 'due_ons' do
-    it 'due_ons' do
-      structure.due_ons.destroy_all
-      expect(structure).to_not be_valid
-    end
-
-    it '#prepare creates children' do
-      structure.prepare
-      expect(structure.due_ons.size).to eq(4)
-    end
-
-    it '#clear_up_form destroys children' do
-      structure.clear_up_form
-      expect(structure.due_ons.size).to eq(1)
     end
   end
 end

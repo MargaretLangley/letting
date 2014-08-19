@@ -29,7 +29,7 @@ module DB
 
     describe '#charge_id' do
       it 'returns valid charge_id' do
-        charge_structure_create
+        charge_structure_create(id: 1)
         property = property_create
         property.account.charges << charge_new(charge_type: 'Rent')
         expect(accounting.charge(account: property.account,

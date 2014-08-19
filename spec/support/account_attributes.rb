@@ -13,6 +13,7 @@ end
 
 def charged_in_attributes **overrides
   {
+    id: 2,
     name: 'Advance',
   }.merge overrides
 end

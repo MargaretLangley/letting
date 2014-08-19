@@ -2,6 +2,7 @@ require_relative 'charge_code'
 require_relative 'errors'
 require_relative '../modules/method_missing'
 # rubocop: disable Rails/Output
+# rubocop: disable Style/MethodCallParentheses
 
 module DB
   #####
@@ -19,6 +20,7 @@ module DB
   #
   class ChargeRow
     include MethodMissing
+    include Enumerable
     # Mapping of imported values to application values
     # Definitive values charged_in.csv/charged_ins table;
     LEGACY_CODE_TO_CHARGED_IN  = { '0'  => 1,     # Arrears
@@ -46,12 +48,6 @@ module DB
       charge
     end
 
-    def maximum_dates
-      max_dates = ChargeCode.to_times_per_year charge_code
-      fail ChargeCodeUnknown, max_dates_message, caller unless max_dates
-      max_dates
-    end
-
     def charged_in_id
       # Hack for when data lies
       return LEGACY_CODE_TO_CHARGED_IN.fetch('1') \
@@ -61,10 +57,12 @@ module DB
         raise ChargedInCodeUnknown, charged_in_code_message, caller
     end
 
-    def charge_structure_id
-      ChargeStructureMatcher.new(self).id
+    def charge_structure_id(charged_in_id: charged_in_id(),
+                            charge_cycle_id: charge_cycle_id())
+      ChargeStructureMatcher.new(charged_in_id: charged_in_id,
+                                 charge_cycle_id: charge_cycle_id).id
       rescue ChargeStuctureUnknown
-        puts property_message +
+        puts "#{ChargeStuctureUnknown} - Property #{human_ref} " +
           ' charge row does not match a charge structure' \
           " Legacy charge_type: '#{charge_code}' " \
           " Legacy charged_in code: '#{charged_in_code}'"
@@ -88,6 +86,19 @@ module DB
     end
 
     private
+
+    def maximum_dates
+      max_dates = ChargeCode.to_times_per_year charge_code
+      fail ChargeCodeUnknown, max_dates_message, caller unless max_dates
+      max_dates
+    end
+
+    def charge_cycle_id
+      ChargeCycleMatcher.new(self).id
+      rescue ChargeCycleUnknown
+        puts "Property #{human_ref} charge row does not match a charge cycle" \
+          " Legacy charge_type: '#{charge_code}' "
+    end
 
     def day number
       @source[:"day_#{number}"].to_i
@@ -124,8 +135,7 @@ module DB
     end
 
     def charge_code_message
-      "Property #{human_ref}: " \
-      "Charge code #{charge_code} can not be converted into a string"
+      "Property #{human_ref}: Charge code #{charge_code} is unknown."
     end
 
     def max_dates_message
@@ -135,10 +145,6 @@ module DB
 
     def charged_in_code_message
       "Property #{human_ref}: charged in code #{charged_in_code} is unknown."
-    end
-
-    def property_message
-      "Property #{human_ref}"
     end
   end
 end

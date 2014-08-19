@@ -13,7 +13,7 @@ require_relative '../../../lib/import/charge_row'
 module DB
   describe ChargeRow, :import do
     describe 'credit row' do
-      let(:row) { ChargeRow.new parse_line quarter_charge_row }
+      let(:row) { ChargeRow.new parse_line base_charge_row }
 
       describe 'attribute' do
         it('amount') { expect(row.amount).to eq 50.5 }
@@ -39,15 +39,6 @@ module DB
           end
         end
 
-        describe '#maximum_dates' do
-          it('returns valid') { expect(row.maximum_dates).to eq 4 }
-
-          it 'errors invalid' do
-            bad_code = ChargeRow.new parse_line charge_row_no_type
-            expect { bad_code.maximum_dates }.to raise_error ChargeCodeUnknown
-          end
-        end
-
         describe '#charged_in_id' do
           it('returns valid id') { expect(row.charged_in_id).to eq 1 }
 
@@ -64,50 +55,57 @@ module DB
         end
 
         describe '#charge_structure_id' do
-          it('returns valid') do
-            row = ChargeRow.new parse_line half_charge_row
-            structure = ChargeStructure.new(id: 5)
-            structure.build_charged_in(id: 1, name: 'arrears')
-            structure.build_charge_cycle(id: 100, name: 'Anything')
-            structure.due_ons.build day: 24, month: 3
-            structure.due_ons.build day: 25, month: 6
-            structure.save!
-            expect(row.charge_structure_id).to eq 5
+          it 'returns valid' do
+            cycle = charge_cycle_create \
+                      id: 5, \
+                      due_on_attributes: { day: 23, month: 3 }
+
+            charge_structure_create \
+              id: 7,
+              charge_cycle: cycle,
+              charged_in: charged_in_create(id: 6)
+
+            row = ChargeRow.new parse_line base_charge_row
+            expect(row.charge_structure_id(charge_cycle_id: 5,
+                                           charged_in_id: 6)).to eq 7
           end
 
           it 'errors invalid' do
-            expect($stdout).to receive(:puts).with(/charge row does not/)
-            charge_structure_create
-            row = ChargeRow.new parse_line quarter_charge_row
+            expect($stdout).to receive(:puts)
+              .with(/charge row does not match a charge structure/)
+            charge_structure_create id: 7
+            row = ChargeRow.new parse_line base_charge_row
             row.charge_structure_id
           end
         end
 
         describe 'iterates' do
-          it 'yields quarter year charges' do
+          it 'yields charges' do
+            row = ChargeRow.new parse_line base_charge_row
             yielded_values = []
             row.each do |day, month|
               yielded_values << [day, month]
             end
-            expect(yielded_values).to eq [[24, 3], [25, 6], [25, 9], [31, 12]]
+            expect(yielded_values).to eq [[25, 3]]
           end
 
-          it 'yields half year charges' do
-            row = ChargeRow.new parse_line half_charge_row
-            yielded_values = []
-            row.each do |day, month|
-              yielded_values << [day, month]
-            end
-            expect(yielded_values).to eq [[24, 3], [25, 6]]
+          it 'stops yields when charges are empty' do
+            expect(ChargeRow.new(parse_line(base_charge_row)).count).to eq 1
+          end
+
+          def quarter_charge_row
+            %q( 89, 2006-12-30, GR, 0, 50.5, S, ) +
+            %q( 24, 3, 25, 6, 25, 9, 31, 12, ) +
+            %q( 1901-01-01, 0 )
+          end
+
+          it 'yields quarter year charges' do
+            expect(ChargeRow.new(parse_line(quarter_charge_row)).count).to eq 4
           end
 
           it 'always yields two values for half year charges' do
             row = ChargeRow.new parse_line half_charge_row_with_4_charges
-            yielded_values = []
-            row.each do |day, month|
-              yielded_values << [day, month]
-            end
-            expect(yielded_values.count).to eq(2)
+            expect(row.count).to eq 2
           end
 
           it 'yields month charges' do
@@ -118,6 +116,11 @@ module DB
             #   yielded_values << [day, month]
             # end
             # expect(yielded_values).to eq [[24, 3]]
+          end
+
+          it 'invalid code for maximum dates throws error' do
+            row = ChargeRow.new parse_line(charge_row_no_type)
+            expect { row.each { |_charge| } }.to raise_error ChargeCodeUnknown
           end
         end
 
@@ -139,15 +142,9 @@ module DB
                      )
     end
 
-    def quarter_charge_row
+    def base_charge_row
       %q( 89, 2006-12-30, GR, 0, 50.5, S, ) +
-      %q( 24, 3, 25, 6, 25, 9, 31, 12, ) +
-      %q( 1901-01-01, 0 )
-    end
-
-    def half_charge_row
-      %q( 89, 2006-12-30, GR, 0, 50.5, S, ) +
-      %q( 24, 3, 25, 6, 0, 0, 0, 0, ) +
+      %q( 25, 3, 0, 0, 0, 0, 0, 0, ) +
       %q( 1901-01-01, 0 )
     end
 

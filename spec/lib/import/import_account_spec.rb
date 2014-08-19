@@ -8,7 +8,7 @@ require_relative '../../../lib/import/import_account'
 module DB
   describe ImportAccount, :import do
     let!(:property) do
-      charge_structure_create
+      charge_structure_create(id: 1)
       property_with_charge_create human_ref: 122
     end
 

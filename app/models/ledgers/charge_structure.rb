@@ -12,9 +12,7 @@
 #
 class ChargeStructure < ActiveRecord::Base
   include Comparable
-  include DueOns
-  accepts_nested_attributes_for :due_ons, allow_destroy: true
-  validates :charge_cycle, :charged_in, :due_ons, presence: true
+  validates :charge_cycle, :charged_in, presence: true
   has_one :charge, inverse_of: :charge_structure
 
   belongs_to :charge_cycle
@@ -24,10 +22,7 @@ class ChargeStructure < ActiveRecord::Base
   belongs_to :charged_in, inverse_of: :charge_structure
   delegate :name, to: :charged_in, prefix: true
 
-  delegate :due_dates, to: :due_ons
-
-  delegate :prepare, to: :due_ons
-  delegate :clear_up_form, to: :due_ons
+  delegate :due_dates, to: :charge_cycle
 
   # Convention is == is Matching on values rather than object structure
   # <=> is called in the implementation of ==
@@ -35,21 +30,7 @@ class ChargeStructure < ActiveRecord::Base
   #
   def <=> other
     return nil unless other.is_a?(self.class)
-    [charged_in_id, due_ons.sort] <=> [other.charged_in_id, other.due_ons.sort]
+    [charged_in_id, charge_cycle_id] <=>
+    [other.charged_in_id, other.charge_cycle_id]
   end
-
-  # Require this if we are creating and editing charge_structure
-  # Remove this if we don't
-
-  # def clear_up_form
-  # # FIX_CHARGE
-  #   mark_for_destruction unless edited?
-  #   due_ons.clear_up_form
-  # end
-
-  # def empty?
-  # FIX_CHARGE
-  # maybe should include this - not sure &&
-  #  due_ons.empty?
-  # end
 end

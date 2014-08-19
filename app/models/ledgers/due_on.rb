@@ -24,7 +24,7 @@
 #
 class DueOn < ActiveRecord::Base
   include Comparable
-  belongs_to :charge
+  belongs_to :charge_cycle
   validates :day, :month, presence: true
   validates :day,   numericality: { only_integer: true,
                                     greater_than: 0,
@@ -72,7 +72,7 @@ class DueOn < ActiveRecord::Base
   private
 
   def ignored_attrs
-    %w(id charge_structure_id created_at updated_at)
+    %w(id charge_cycle_id created_at updated_at)
   end
 
   def charge_year

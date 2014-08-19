@@ -9,8 +9,7 @@ describe 'debit_generator', type: :feature do
     after  { Timecop.return }
 
     it 'charges a property that matches the search' do
-      charged_in = charged_in_create(name: 'Advance')
-      charge_structure_create charged_in_id: charged_in.id
+      charge_structure_create id: 1
       property = property_with_charge_create human_ref: 2002
       Property.import force: true, refresh: true
       # Client required because controller starts invoicing immediately
@@ -26,7 +25,7 @@ describe 'debit_generator', type: :feature do
     end
 
     it 'errors without a valid account' do
-      charge_structure_create
+      charge_structure_create id: 1
       property_with_charge_create human_ref: 99
       debit_gen_page.visit_page.search_term('102-109').search
       expect(debit_gen_page).to be_without_accounts

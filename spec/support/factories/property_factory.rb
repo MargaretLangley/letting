@@ -16,10 +16,14 @@ def property_with_agent_create **args
   property
 end
 
-def property_with_charge_new **args
+def property_with_charge_new charge: nil, **args
   property = base_property args
   add_no_agent property
-  add_charge property
+  if charge
+    property.account.charges << charge
+  else
+    add_charge property
+  end
   property
 end
 

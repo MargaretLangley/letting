@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe DebitGenerator, type: :model do
 
@@ -71,7 +71,7 @@ describe DebitGenerator, type: :model do
       property = nil
       before do
         Timecop.travel(Date.new(2013, 1, 31))
-        charge_structure_create
+        charge_structure_create id: 1
         property = property_with_charge_create human_ref: 2002
         Property.import force: true, refresh: true
       end

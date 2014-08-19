@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe DueOnsDecorator, broken: true do
-  let(:due_ons_dec) { DueOnsDecorator.new Charge.new.due_ons }
+describe DueOnsDecorator do
+  let(:due_ons_dec) { DueOnsDecorator.new ChargeCycle.new.due_ons }
 
   # FIX_CHARGE
   # Not sure what we need at this stage
@@ -9,7 +9,7 @@ describe DueOnsDecorator, broken: true do
   context 'Charge prepare' do
 
     let(:prepared_due_ons) do
-      charge = Charge.new
+      charge = ChargeCycle.new
       charge.prepare
       due_ons_dec = DueOnsDecorator.new charge.due_ons
       due_ons_dec
@@ -21,7 +21,7 @@ describe DueOnsDecorator, broken: true do
 
     context '#per_month' do
       it 'returns one' do
-        due_ons = Charge.new.due_ons
+        due_ons = ChargeCycle.new.due_ons
         (1..12).each.with_index { |index| due_ons.build day: 3, month: index }
         due_on_dec = DueOnsDecorator.new due_ons
         expect(due_on_dec.per_month.day).to eq 3

@@ -52,6 +52,4 @@ RSpec.configure do |config|
   end
 
   config.include FontAwesome::Rails::IconHelper
-
-  config.filter_run_excluding broken: true
 end

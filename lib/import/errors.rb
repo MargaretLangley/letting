@@ -7,6 +7,7 @@ module DB
   class ChargeCodeUnknown < Error; end
   class ChargeTypeUnknown < Error; end
   class ChargeStuctureUnknown < Error; end
+  class ChargeCycleUnknown < Error; end
   class ClientRefUnknown < Error; end
   class PropertyRefUnknown < Error; end
   class ChargedInCodeUnknown < Error; end

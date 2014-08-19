@@ -16,17 +16,14 @@ module DB
   describe ImportCharge, :import do
     def row
       %q(2002, 2006-12-30 17:17:00, GR, 0, 40.5,  S,) +
-      %q(24, 6, 25, 12,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
+      %q(24, 6, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
     end
 
     context 'charge on_date' do
       before :each do
-        structure = ChargeStructure.new(id: 5)
-        structure.build_charged_in(id: 1, name: 'arrears')
-        structure.build_charge_cycle(id: 100, name: 'Anything')
-        structure.due_ons.build day: 24, month: 6
-        structure.due_ons.build day: 25, month: 12
-        structure.save!
+        charge_structure_create(charged_in: charged_in_create(id: 1),
+                                charge_cycle: \
+          charge_cycle_create(due_on: DueOn.new(day: 24, month: 6)))
         property_create human_ref: 2002
       end
 
@@ -54,7 +51,7 @@ module DB
       describe 'multiple imports' do
         def updated_row
           %q(2002, 2006-12-30 17:17:00, GR, 0, 30.5,  S,) +
-          %q(24, 6, 25, 12,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
+          %q(24, 6, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
         end
 
         it 'updated changed charge' do
@@ -68,18 +65,16 @@ module DB
 
     context 'monthly charge' do
       before :each do
-        structure = ChargeStructure.new(id: 5)
-        structure.build_charged_in(id: 1, name: 'arrears')
-        structure.build_charge_cycle(id: 100, name: 'Anything')
-        structure.due_ons.build day: 1, month: 0
-        structure.save!
+        charge_structure_create(charged_in: charged_in_create(id: 1),
+                                charge_cycle: \
+          charge_cycle_create(due_on: DueOn.new(day: 8, month: 0)))
         property_create human_ref: 2002
       end
 
       it 'One monthly row, 12 DueOns' do
         def monthly_row
           %q(2002, 2006-12-30 17:17:00, GR, 0, 40.5,  S,) +
-          %q(1, 0, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
+          %q(8, 0, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
         end
         expect { import_charge monthly_row }.to change(Charge, :count).by 1
       end
