@@ -57,10 +57,10 @@
       <%= property.address.town %>
       </div>
     </div>
-    <div class='col-2-24 vertical-spacer  r-align no-r-pad'>
+    <div class='col-2-24 vertical-spacer  r-align'>
       <% if show_actions %>
-      <%= link_to fa_icon('edit'), edit_property_path(property.id), title: 'Edit' %> |
-      <%= link_to fa_icon('trash-o'), property, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete' %>
+      <%= link_to fa_icon('edit lg'), edit_property_path(property.id), title: 'Edit', class: 'r-pad' %>
+      <%= link_to fa_icon('trash-o lg'), property, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete', class: 'l-pad' %>
       <% end %>
     </div>
   <% end %>

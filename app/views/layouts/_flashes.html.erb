@@ -1,13 +1,5 @@
- <% flash.each do |key, value| %>
- <div class="grid js-close-time flash <%= key %>">
-  <div class='row-clear col-4-24'>
-    &nbsp;
+<% flash.each do |key, value| %>
+  <div class="js-slow-time fa fa-inbox flash <%= key %>">
+    <%= content_tag(:message, value) %>
   </div>
-  <div class='col-19-24 c-align '>
-      <%= content_tag(:label, value) %>
-  </div>
-  <div class='col-1-24 flash-close'>
-    x
-  </div>
-</div>
 <% end %>
