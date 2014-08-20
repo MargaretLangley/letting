@@ -251,9 +251,9 @@ def seed_charges
 end
 
 def charge_structure
-  Rake::Task['db:import:charge_cycle'].invoke
   Rake::Task['db:import:charged_ins'].invoke
   create_due_ons
+  create_charge_cycle
 
   # Full charge structure is in import_charge_structure.csv
   # charge_cycle 1: 'Mar/Sep'
@@ -267,12 +267,19 @@ def charge_structure
   ]
 end
 
+def create_charge_cycle
+  ChargeCycle.create! [
+    { id: 1,  name: 'Mar/Sep', order: 1 },
+    { id: 2,  name: 'Jun/Dec', order: 2 },
+  ]
+end
+
 def create_due_ons
   DueOn.create! [
-    { id: 1,  day: 25,  month: 3, charge_structure_id: 1 },
-    { id: 2,  day: 29,  month: 9, charge_structure_id: 1 },
-    { id: 3,  day: 25,  month: 3, charge_structure_id: 2 },
-    { id: 4,  day: 29,  month: 9, charge_structure_id: 2 },
+    { id: 1,  day: 25,  month: 3, charge_cycle_id: 1 },
+    { id: 2,  day: 29,  month: 9, charge_cycle_id: 1 },
+    { id: 3,  day: 25,  month: 6, charge_cycle_id: 2 },
+    { id: 4,  day: 29,  month: 12, charge_cycle_id: 2 },
   ]
 end
 
