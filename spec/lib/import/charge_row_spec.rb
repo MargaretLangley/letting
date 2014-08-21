@@ -56,7 +56,7 @@ module DB
 
         describe '#charge_structure_id' do
           it 'returns valid' do
-            cycle = charge_cycle_create \
+            cycle = charge_cycle_new \
                       id: 5, \
                       due_on_attributes: { day: 23, month: 3 }
 

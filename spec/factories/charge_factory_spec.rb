@@ -4,7 +4,7 @@ describe 'ChargeFactory' do
 
   let(:charge) { charge_new }
   it('is valid') do
-    charge.charge_structure = charge_structure_create id: 1
+    charge.charge_structure = charge_structure_create
     expect(charge).to be_valid
   end
 

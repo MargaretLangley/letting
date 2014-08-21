@@ -8,22 +8,20 @@ module DB
   describe ImportPayment, :import do
 
     it 'single credit' do
-      property_with_charge_create(human_ref: 89, charge: charge_create(
-        charge_structure: charge_structure_create(id: 1)))
+      property_with_charge_create(human_ref: 89, charge: charge_create)
 
-      expect { ImportPayment.import parse credit_row }.to \
-        change(Credit, :count).by 1
+      expect { ImportPayment.import parse credit_row }
+        .to change(Credit, :count).by 1
     end
 
     context 'errors' do
       it 'double import raises error' do
         skip 'will not work until model_prepared can find_model'
-        property_with_charge_create(human_ref: 89, charge: charge_create(
-        charge_structure: charge_structure_create(id: 1)))
+        property_with_charge_create(human_ref: 89, charge: charge_create)
 
         ImportPayment.import parse credit_row
-        expect { ImportPayment.import parse credit_row }.to \
-          raise_error NotIdempotent
+        expect { ImportPayment.import parse credit_row }
+          .to raise_error NotIdempotent
       end
     end
 
