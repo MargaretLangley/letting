@@ -7,8 +7,7 @@ describe Property, type: :feature do
   before(:each) do
     log_in
     property_with_agent_create id: 1, human_ref: 1000
-    visit '/properties/'
-    find('.view-testing-link', visible: false).click
+    visit '/properties/1'
   end
 
   it '#show' do
