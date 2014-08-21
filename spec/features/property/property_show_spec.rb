@@ -23,6 +23,7 @@ describe Property, type: :feature do
   end
 
   # pending
+  # FIX_CHARGE
   it 'should show dormant as no charges levied'
   # expect(page).to have_text 'No charges levied against this property.'
 
