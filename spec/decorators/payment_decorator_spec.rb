@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe PaymentDecorator do
 
@@ -9,7 +9,7 @@ describe PaymentDecorator do
 
     describe '#property' do
       it 'returns the property' do
-        property = property_create!
+        property = property_create
         payment.account_id = property.account.id
 
         expect(payment.property_decorator.source).to eq property

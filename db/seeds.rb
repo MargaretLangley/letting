@@ -18,9 +18,6 @@
 # id: 4, human_ref: 4004, client_id: 3, Green Fields, Robertson
 #
 #
-# **Any new table** which has rows added should appear in pk reset at bottom.
-# this starts seeding off with method call at the end of file
-#
 ##################################################################
 #
 def generate_seeding
@@ -253,26 +250,50 @@ def seed_charges
   create_account
 end
 
-def create_charges
+def charge_structure
+  Rake::Task['db:import:charged_ins'].invoke
   create_due_ons
-  Charge.create! [
-    { id: 1, charge_type: 'Ground Rent',    due_in: 'Advance',
-      amount: '88.08',  account_id: 1 },
-    { id: 2, charge_type: 'Service Charge', due_in: 'Advance',
-      amount: '125.08', account_id: 1 },
-    { id: 3, charge_type: 'Ground Rent',    due_in: 'Advance',
-      amount: '70.00',  account_id: 2 },
-    { id: 4, charge_type: 'Service Charge', due_in: 'Advance',
-      amount: '70.00',  account_id: 3 },
+  create_charge_cycle
+
+  # Full charge structure is in import_charge_structure.csv
+  # charge_cycle 1: 'Mar/Sep'
+  # charge_cycle 2: 'Jun/Dec'  (see import_charge_cycle.rake)
+  #
+  # charged_in_id: 1 Arrears
+  # charged_in_id: 2 Advance (see import_charged_id.rake)
+  ChargeStructure.create! [
+    { id:  1, charge_cycle_id: 1, charged_in_id: 1 },
+    { id:  2, charge_cycle_id: 1, charged_in_id: 2 },
+  ]
+end
+
+def create_charge_cycle
+  ChargeCycle.create! [
+    { id: 1,  name: 'Mar/Sep', order: 1 },
+    { id: 2,  name: 'Jun/Dec', order: 2 },
   ]
 end
 
 def create_due_ons
   DueOn.create! [
-    { id: 1,  day: 1,  month: (Date.current + 1.month).month, charge_id: 1 },
-    { id: 2,  day: 1,  month: 7, charge_id: 2 },
-    { id: 3,  day: 1,  month: (Date.current + 1.month).month, charge_id: 3 },
-    { id: 4,  day: 30, month: 9, charge_id: 4 },
+    { id: 1,  day: 25,  month: 3, charge_cycle_id: 1 },
+    { id: 2,  day: 29,  month: 9, charge_cycle_id: 1 },
+    { id: 3,  day: 25,  month: 6, charge_cycle_id: 2 },
+    { id: 4,  day: 29,  month: 12, charge_cycle_id: 2 },
+  ]
+end
+
+def create_charges
+  charge_structure
+  Charge.create! [
+    { id: 1,             charge_type: 'Ground Rent',    charge_structure_id: 1,
+      amount: '88.08',   account_id: 1 },
+    { id: 2,             charge_type: 'Service Charge', charge_structure_id: 1,
+      amount: '125.08',  account_id: 1 },
+    { id: 3,             charge_type: 'Ground Rent',    charge_structure_id: 2,
+      amount: '70.00',   account_id: 2 },
+    { id: 4,             charge_type: 'Service Charge', charge_structure_id: 2,
+      amount: '70.00',   account_id: 3 },
   ]
 end
 

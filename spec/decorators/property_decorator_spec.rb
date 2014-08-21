@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe PropertyDecorator do
 
@@ -37,12 +37,12 @@ describe PropertyDecorator do
   describe 'Agent' do
     context 'authorized for property' do
       it 'name returned' do
-        agented_property = PropertyDecorator.new property_with_agent_create!
+        agented_property = PropertyDecorator.new property_with_agent_create
         expect(agented_property.agent_name).to eq 'Rev V. W. Knutt'
       end
 
       it 'address returned' do
-        agented_property = PropertyDecorator.new property_with_agent_create!
+        agented_property = PropertyDecorator.new property_with_agent_create
         expect(agented_property.agent_address_lines[0]).to eq 'Flat 33 The Oval'
       end
     end

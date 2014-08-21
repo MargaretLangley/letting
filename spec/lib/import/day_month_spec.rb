@@ -1,9 +1,9 @@
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/day_month'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe DayMonth do
+  describe DayMonth, :import do
     context 'Converts day and month into object' do
       it 'returns a ChargeValues' do
         daymonth = DayMonth.from_day_month 1, 10

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'Account Factory' do
 
@@ -24,22 +24,12 @@ describe 'Account Factory' do
       expect(account.charges[0].charge_type).to eq 'Ground Rent'
     end
 
-    context 'has due_on' do
-      it('day') { expect(account.charges[0].due_ons[0].day).to eq 25 }
-      it('month') { expect(account.charges[0].due_ons[0].month).to eq 3 }
-    end
-
     context 'overrides' do
 
       it('charge') do
         account =
           account_and_charge_new charge_attributes: { charge_type: 'Rent' }
         expect(account.charges[0].charge_type).to eq 'Rent'
-      end
-
-      it('due on') do
-        account = account_and_charge_new due_on_attribute: { month: 6 }
-        expect(account.charges[0].due_ons[0].month).to eq 6
       end
     end
   end

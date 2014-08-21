@@ -1,9 +1,9 @@
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/charge_code'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe ChargeCode do
+  describe ChargeCode, :import do
     context 'Converts code' do
 
       it '#to_string' do

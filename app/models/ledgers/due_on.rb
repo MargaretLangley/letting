@@ -1,8 +1,10 @@
 ####
 #
+# DueOn
+#
 # The day and month during the year to charge a property.
 #
-# Charges will become due every year into the future. By holding a
+# Charges will become due every year on the described date. By holding a
 # day and month a charge is due we can handle recurring charges.
 #
 # The code is part of the charge system in the accounts.
@@ -11,10 +13,18 @@
 # ON_DATE: holding a day and month or by holding.
 # PER_MONTH: a day and have it reoccur every month.
 #
+# day - day which the charge becomes due
+# month - month which the charge becomes due
+# year - nil on reocurring due_ons
+#        set to year for one off charges.
+#
+# More information: due_ons.rb
+#
 ####
 #
 class DueOn < ActiveRecord::Base
-  belongs_to :charge
+  include Comparable
+  belongs_to :charge_cycle
   validates :day, :month, presence: true
   validates :day,   numericality: { only_integer: true,
                                     greater_than: 0,
@@ -51,10 +61,18 @@ class DueOn < ActiveRecord::Base
     attributes.except(*ignored_attrs).values.all?(&:blank?)
   end
 
+  # Convention is == is Matching on values rather than object structure
+  # <=> is called in the implementation of ==
+  #
+  def <=> other
+    return nil unless other.is_a?(self.class)
+    [month, day] <=> [other.month, other.day]
+  end
+
   private
 
   def ignored_attrs
-    %w(id charge_id created_at updated_at)
+    %w(id charge_cycle_id created_at updated_at)
   end
 
   def charge_year

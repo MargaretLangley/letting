@@ -1,5 +1,5 @@
 require 'csv'
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_payment'
 # rubocop: disable Style/Documentation
@@ -8,7 +8,8 @@ module DB
   describe ImportPayment, :import do
 
     it 'single credit' do
-      property = property_create! human_ref: 89
+      charge_structure_create(id: 1)
+      property = property_create human_ref: 89
       charge_new(account_id: property.account.id).save!
 
       expect { ImportPayment.import parse credit_row }.to \
@@ -18,7 +19,7 @@ module DB
     context 'errors' do
       it 'double import raises error' do
         skip 'will not work until model_prepared can find_model'
-        property = property_create! human_ref: 89
+        property = property_create human_ref: 89
         charge_new(account_id: property.account.id).save!
 
         ImportPayment.import parse credit_row

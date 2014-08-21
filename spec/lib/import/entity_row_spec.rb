@@ -1,11 +1,11 @@
 require 'csv'
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/entity_row'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe EntityRow do
+  describe EntityRow, :import do
 
     it 'title' do
       entity = EntityRow.new 'Mr', 'A', 'Man'

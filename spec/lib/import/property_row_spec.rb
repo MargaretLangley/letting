@@ -1,11 +1,11 @@
 require 'csv'
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/property_row'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe PropertyRow do
+  describe PropertyRow, :import do
 
     let(:row) { PropertyRow.new parse_line property_row }
 
@@ -21,7 +21,7 @@ module DB
 
       context '#client_id' do
         it 'found when present' do
-          client = client_create! human_ref: 11
+          client = client_create human_ref: 11
           expect(row.client_id).to eq client.id
         end
 

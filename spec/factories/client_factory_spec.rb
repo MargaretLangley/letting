@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'Client Factory' do
 
@@ -15,7 +15,7 @@ describe 'Client Factory' do
   it('has entity') { expect(client.entities[0].name).to eq 'Grace' }
   it('has address') { expect(client.address.town).to eq 'Birmingham' }
   it('overrides address') do
-    client = client_create! address_attributes: { town: 'York' }
+    client = client_create address_attributes: { town: 'York' }
     expect(client.address.town).to eq 'York'
   end
 

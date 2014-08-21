@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe AccountDecorator do
   before { Timecop.travel(Date.new(2013, 1, 31)) }
@@ -20,7 +20,7 @@ describe AccountDecorator do
 
   describe 'sorted' do
     let(:account) do
-      account = account_and_charge_new
+      account = account_new
       account.debits.push debit_new on_date: '25/3/2013'
       account.debits.push debit_new on_date: '25/9/2013'
       account.credits.push credit_new on_date: '30/4/2013'
@@ -47,7 +47,7 @@ describe AccountDecorator do
 
   context 'zero balance' do
     let(:account) do
-      account = account_and_charge_new
+      account = account_new
       account.save!
       AccountDecorator.new account
     end
@@ -59,7 +59,7 @@ describe AccountDecorator do
 
   context 'calculated balance' do
     it 'abbrev_items' do
-      account = account_and_charge_new
+      account = account_new
       account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
       account.debits.push debit_new on_date: '25/3/2012', amount: 10.00
       account.credits.push credit_new on_date: '25/4/2012', amount: -5.50

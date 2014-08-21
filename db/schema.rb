@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140306151327) do
+ActiveRecord::Schema.define(version: 20140809150357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,19 +51,43 @@ ActiveRecord::Schema.define(version: 20140306151327) do
 
   add_index "agents", ["property_id"], name: "index_agents_on_property_id", using: :btree
 
+  create_table "charge_cycles", force: true do |t|
+    t.string   "name"
+    t.integer  "order"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "charge_structures", force: true do |t|
+    t.integer  "charged_in_id",   null: false
+    t.integer  "charge_cycle_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "charge_structures", ["charge_cycle_id"], name: "index_charge_structures_on_charge_cycle_id", using: :btree
+  add_index "charge_structures", ["charged_in_id"], name: "index_charge_structures_on_charged_in_id", using: :btree
+
+  create_table "charged_ins", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "charges", force: true do |t|
-    t.string   "charge_type",                                         null: false
-    t.string   "due_in",                                              null: false
-    t.boolean  "dormant",                             default: false, null: false
-    t.decimal  "amount",      precision: 8, scale: 2,                 null: false
-    t.date     "start_date",                                          null: false
-    t.date     "end_date",                                            null: false
-    t.integer  "account_id",                                          null: false
+    t.string   "charge_type",                                                 null: false
+    t.integer  "charge_structure_id",                                         null: false
+    t.boolean  "dormant",                                     default: false, null: false
+    t.decimal  "amount",              precision: 8, scale: 2,                 null: false
+    t.date     "start_date",                                                  null: false
+    t.date     "end_date",                                                    null: false
+    t.integer  "account_id",                                                  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "charges", ["account_id"], name: "index_charges_on_account_id", using: :btree
+  add_index "charges", ["charge_structure_id"], name: "index_charges_on_charge_structure_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.integer  "human_ref",  null: false
@@ -108,15 +132,15 @@ ActiveRecord::Schema.define(version: 20140306151327) do
   add_index "debits", ["debit_generator_id"], name: "index_debits_on_debit_generator_id", using: :btree
 
   create_table "due_ons", force: true do |t|
-    t.integer  "day",        null: false
-    t.integer  "month",      null: false
+    t.integer  "day",             null: false
+    t.integer  "month",           null: false
     t.integer  "year"
-    t.integer  "charge_id"
+    t.integer  "charge_cycle_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "due_ons", ["charge_id"], name: "index_due_ons_on_charge_id", using: :btree
+  add_index "due_ons", ["charge_cycle_id"], name: "index_due_ons_on_charge_cycle_id", using: :btree
 
   create_table "entities", force: true do |t|
     t.integer  "entitieable_id",   null: false

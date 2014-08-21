@@ -10,7 +10,8 @@ namespace :db do
 
     desc "Import users data from CSV file"
     task :users, [:test] => :environment do |task, args|
-      if File.exist?('import_data/patch/users.csv')
+      if File.exist?('import_data/new/users.csv')
+        # Cannot use Guard clause users_csv is not available on travis runs!
         DB::ImportUser.import users_file
       else
         puts missing_users_csv_message
@@ -23,7 +24,7 @@ namespace :db do
     def users_file
       DB::FileImport.to_a 'users',
                           headers: DB::FileHeader.user,
-                          location: 'import_data/patch'
+                          location: 'import_data/new'
     end
 
     def load_test_users

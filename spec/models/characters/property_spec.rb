@@ -19,8 +19,8 @@ describe Property, type: :model do
       end
 
       it '#human_ref is unique' do
-        property_create! human_ref: 8000
-        expect { property_create! human_ref: 8000 }
+        property_create human_ref: 8000
+        expect { property_create human_ref: 8000 }
           .to raise_error ActiveRecord::RecordInvalid
       end
     end
@@ -57,7 +57,7 @@ describe Property, type: :model do
   describe 'search' do
 
     before :each do
-      property_create!
+      property_create
       Property.import force: true, refresh: true
     end
 

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'Account Update', type: :feature do
 
@@ -7,12 +7,12 @@ describe 'Account Update', type: :feature do
   context 'Agentless' do
     before(:each) do
       log_in
-      client = client_create!
-      property_create! human_ref: 8000, client_id: client.id
-      account.edit
+      client = client_create
+      property_create human_ref: 8000, client_id: client.id
     end
 
     it 'opens valid page', js: true  do
+      account.edit
       expect(page.title).to eq 'Letting - Edit Account'
       account.expect_property(self, property_id: '8000', client_id: '8008')
       account.expect_address(self,
@@ -23,6 +23,7 @@ describe 'Account Update', type: :feature do
     end
 
     it 'updates account', js: true do
+      account.edit
       account.property(self, property_id: '8001', client_id: '8008')
       account.address(selector: '#property_address', **house_address_attributes)
       account.entity(type: 'property', **company_attributes)
@@ -35,6 +36,7 @@ describe 'Account Update', type: :feature do
     end
 
     it 'adds agent', js: true do
+      account.edit
       check 'Agent'
       account.address(selector: '#agent', **nottingham_address)
       account.entity(type: 'property_agent_attributes', **company_attributes)
@@ -50,45 +52,34 @@ describe 'Account Update', type: :feature do
     end
 
     it 'navigates to accounts view page' do
+      account.edit
       click_on 'View file'
       expect(page.title).to eq 'Letting - View Account'
     end
 
     it 'adds date charge' do
-      account.charge(**(charge_attributes.except(:account_id)))
-      account.due_on
+      charge_structure_create id: 1
+      account.edit
+      account.charge(**(charge_attributes(charge_cycle: 'Mar/Sep',
+                                          charged_in: 'Advance'
+                                         ).except(:account_id)))
       account.button('Update').successful?(self).edit
-      account.expect_charge(self, **(charge_attributes.except(:account_id)))
-    end
-
-    it 'adds monthly charge', js: true do
-      click_on 'or per month'
-      account.charge(**(charge_attributes.except(:account_id)))
-      # per month due_on
-      account.due_on(due_ons_order: 4, month: '', day: 5)
-      account.button('Update').successful?(self).edit
-      account.expect_charge(self, **(charge_attributes.except(:account_id)))
+      account.expect_charge(self,
+                            **(charge_attributes(charged_in: 'Advance') \
+                            .except(:account_id)))
     end
   end
 
   context 'Agentless with charge' do
     before(:each) do
       log_in
-      client_create!
-      property_with_monthly_charge_create! human_ref: 8000
+      client_create
+    end
+
+    it 'can be set to dormant', js: true do
+      charge_structure_create id: 1
+      property_with_charge_create human_ref: 8000
       account.edit
-    end
-
-    it 'opens a monthly charge correctly' do
-      expect(page).to have_text 'or on date'
-    end
-
-    it 'opens monthly and changes to date charge', js: true do
-      click_on 'or on date'
-      expect(page).to have_text /or per month/i
-    end
-
-    it 'deletes', js: true do
       expect(page).to have_css('.spec-charge-count', count: 1)
       dormant_checkbox =
       '//*[@id="property_account_attributes_charges_attributes_0_dormant"]'
@@ -101,8 +92,8 @@ describe 'Account Update', type: :feature do
   context 'with Agent' do
     before(:each) do
       log_in
-      client = client_create!
-      property_with_agent_create! human_ref: 8000, client_id: client.id
+      client = client_create
+      property_with_agent_create human_ref: 8000, client_id: client.id
       account.edit
     end
 

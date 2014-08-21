@@ -1,6 +1,8 @@
 require_relative 'charge_code'
 require_relative 'errors'
 require_relative '../modules/method_missing'
+# rubocop: disable Rails/Output
+# rubocop: disable Style/MethodCallParentheses
 
 module DB
   #####
@@ -18,9 +20,12 @@ module DB
   #
   class ChargeRow
     include MethodMissing
-    DUE_IN_CODE_TO_STRING  = { '0'  => 'Arrears',
-                               '1' => 'Advance',
-                               'M' => 'MidTerm' }
+    include Enumerable
+    # Mapping of imported values to application values
+    # Definitive values charged_in.csv/charged_ins table;
+    LEGACY_CODE_TO_CHARGED_IN  = { '0'  => 1,     # Arrears
+                                   '1' =>  2,     # Advance
+                                   'M' =>  3 }    # Mid_term
     def initialize row
       @source = row
     end
@@ -43,16 +48,56 @@ module DB
       charge
     end
 
+    def charged_in_id
+      # Hack for when data lies
+      return LEGACY_CODE_TO_CHARGED_IN.fetch('1') \
+        if charge_type_always_advanced
+      LEGACY_CODE_TO_CHARGED_IN.fetch(charged_in_code)
+      rescue KeyError
+        raise ChargedInCodeUnknown, charged_in_code_message, caller
+    end
+
+    def charge_structure_id(charged_in_id: charged_in_id(),
+                            charge_cycle_id: charge_cycle_id())
+      ChargeStructureMatcher.new(charged_in_id: charged_in_id,
+                                 charge_cycle_id: charge_cycle_id).id
+      rescue ChargeStuctureUnknown
+        puts "#{ChargeStuctureUnknown} - Property #{human_ref} " +
+          ' charge row does not match a charge structure' \
+          " Legacy charge_type: '#{charge_code}' " \
+          " Legacy charged_in code: '#{charged_in_code}'"
+    end
+
+    def each
+      1.upto(maximum_dates) do |index|
+        break if empty_due_on? day(index), month(index)
+        yield day(index), month(index)
+      end
+    end
+
+    def attributes
+      {
+        charge_type: charge_type,
+        charge_structure_id: charge_structure_id,
+        amount: amount,
+        start_date: start_date,
+        end_date: end_date,
+      }
+    end
+
+    private
+
     def maximum_dates
       max_dates = ChargeCode.to_times_per_year charge_code
       fail ChargeCodeUnknown, max_dates_message, caller unless max_dates
       max_dates
     end
 
-    def due_in
-      DUE_IN_CODE_TO_STRING.fetch(due_in_code)
-      rescue KeyError
-        raise DueInCodeUnknown, due_in_code_message, caller
+    def charge_cycle_id
+      ChargeCycleMatcher.new(self).id
+      rescue ChargeCycleUnknown
+        puts "Property #{human_ref} charge row does not match a charge cycle" \
+          " Legacy charge_type: '#{charge_code}' "
     end
 
     def day number
@@ -63,24 +108,22 @@ module DB
       @source[:"month_#{number}"].to_i
     end
 
-    def attributes
-      {
-        charge_type: charge_type,
-        due_in: due_in,
-        amount: amount,
-        start_date: start_date,
-        end_date: end_date,
-      }
+    def empty_due_on? day, month
+      day == 0 && month == 0
     end
 
-    private
+    # charged_in_code is not set properly.
+    # insurance is always advanced but the data left as default - arrears
+    def charge_type_always_advanced
+      charge_type == 'Insurance' || charge_type == 'Garage Insurance'
+    end
 
     def charge_code
       @source[:charge_type]
     end
 
-    def due_in_code
-      @source[:due_in]
+    def charged_in_code
+      @source[:charged_in]
     end
 
     def start_date
@@ -92,8 +135,7 @@ module DB
     end
 
     def charge_code_message
-      "Property #{human_ref}: " \
-      "Charge code #{charge_code} can not be converted into a string"
+      "Property #{human_ref}: Charge code #{charge_code} is unknown."
     end
 
     def max_dates_message
@@ -101,8 +143,8 @@ module DB
       'can not be converted into maximum dates per year.'
     end
 
-    def due_in_code_message
-      "Property #{human_ref}: Due in code #{due_in_code} is unknown."
+    def charged_in_code_message
+      "Property #{human_ref}: charged in code #{charged_in_code} is unknown."
     end
   end
 end

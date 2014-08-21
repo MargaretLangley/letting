@@ -1,4 +1,4 @@
-# Drop, Create, Migrate, Test Prepare and then populate the development
+# Trucates all the tables - except schema_migrations
 # Note: db:reset mirrors much of the calls but also db:seed which I didn't want.
 # https://gist.github.com/nithinbekal/3423153
 

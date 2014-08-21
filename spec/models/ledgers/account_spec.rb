@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Account, type: :model do
 
@@ -11,13 +11,17 @@ describe Account, type: :model do
 
     describe '#prepare_debits' do
       it 'generates debits when charges due' do
-        account = account_and_charge_new charge_attributes: { id: 3 }
+        structure = charge_structure_create
+        account = account_and_charge_new(
+          charge_attributes: { id: 3, charge_structure_id: structure.id })
         debits = account.prepare_debits(date_when_charged)
         expect(debits.size).to eq(1)
       end
 
       it 'no debits when no charges due' do
-        account = account_and_charge_new charge_attributes: { id: 3 }
+        structure = charge_structure_create
+        account = account_and_charge_new(
+          charge_attributes: { id: 3, charge_structure_id: structure.id })
         debits = account.prepare_debits(date_not_charged)
         expect(debits.size).to eq(0)
       end
@@ -71,7 +75,7 @@ describe Account, type: :model do
 
     account = nil
     before :each do
-      account = (property_create! human_ref: 2002).account
+      account = (property_create human_ref: 2002).account
     end
 
     describe '.find_by_human_ref' do

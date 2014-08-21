@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../shared/address'
 require_relative '../shared/entity'
 
@@ -6,7 +6,7 @@ describe Property, type: :feature do
 
   before(:each) do
     log_in
-    property_with_agent_create! id: 1, human_ref: 1000
+    property_with_agent_create id: 1, human_ref: 1000
     visit '/properties/'
     find('.view-testing-link', visible: false).click
   end

@@ -1,5 +1,5 @@
 require 'csv'
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/file_import'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_charge'
@@ -16,37 +16,28 @@ module DB
   describe ImportCharge, :import do
     def row
       %q(2002, 2006-12-30 17:17:00, GR, 0, 40.5,  S,) +
-      %q(24, 6, 25, 12,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
+      %q(24, 6, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
     end
 
-    context 'success' do
+    context 'charge on_date' do
       before :each do
-        property_create!
+        charge_structure_create(charged_in: charged_in_create(id: 1),
+                                charge_cycle: \
+          charge_cycle_create(due_on: DueOn.new(day: 24, month: 6)))
+        property_create human_ref: 2002
       end
 
       it 'One row' do
         expect { import_charge row }.to change(Charge, :count).by 1
       end
 
-      it 'One row, 2 DueOns' do
-        expect { import_charge row }.to change(DueOn, :count).by 2
-      end
-
-      it 'One monthly row, 12 DueOns' do
-        def monthly_row
-          %q(2002, 2006-12-30 17:17:00, GR, 0, 40.5,  S,) +
-          %q(1, 0, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
-        end
-        expect { import_charge monthly_row }.to change(DueOn, :count).by 12
-      end
-
-      context 'filter' do
+      describe 'property filter' do
         it 'allows within range' do
           expect { import_charge row, range: 2002..2002 }
             .to change(Charge, :count).by 1
         end
 
-        it 'filters if out of range' do
+        it 'filters when out of range' do
           expect { import_charge row, range: 2000..2001 }
             .to change(Charge, :count).by 0
         end
@@ -57,11 +48,10 @@ module DB
         expect { import_charge row }.to_not change(Charge, :count)
       end
 
-      context 'multiple imports' do
-
+      describe 'multiple imports' do
         def updated_row
           %q(2002, 2006-12-30 17:17:00, GR, 0, 30.5,  S,) +
-          %q(24, 6, 26, 12,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
+          %q(24, 6, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
         end
 
         it 'updated changed charge' do
@@ -69,17 +59,34 @@ module DB
           import_charge updated_row
           charge = Charge.first
           expect(charge.amount).to eq 30.5 #
-          expect(charge.due_ons[0].day).to eq 24 # same
-          expect(charge.due_ons[1].day).to eq 26 # imp one!
         end
       end
     end
 
-    context 'errors' do
-      it 'fails if property does not exist' do
-        expect { import_charge row }
-        .to raise_error ActiveRecord::RecordNotFound,
-                        'Property human_ref: 2002 - Not found'
+    context 'monthly charge' do
+      before :each do
+        charge_structure_create(charged_in: charged_in_create(id: 1),
+                                charge_cycle: \
+          charge_cycle_create(due_on: DueOn.new(day: 8, month: 0)))
+        property_create human_ref: 2002
+      end
+
+      it 'One monthly row, 12 DueOns' do
+        def monthly_row
+          %q(2002, 2006-12-30 17:17:00, GR, 0, 40.5,  S,) +
+          %q(8, 0, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
+        end
+        expect { import_charge monthly_row }.to change(Charge, :count).by 1
+      end
+    end
+
+    describe 'errors' do
+      context 'no property' do
+        it 'fails if property does not exist' do
+          expect { import_charge row }
+          .to raise_error ActiveRecord::RecordNotFound,
+                          'Property human_ref: 2002 - Not found'
+        end
       end
     end
 

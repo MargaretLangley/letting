@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../shared/address'
 require_relative '../shared/entity'
 
@@ -6,7 +6,7 @@ describe Client, type: :feature do
 
   before(:each) do
     log_in
-    client_create!.properties << property_new
+    client_create.properties << property_new
     visit '/clients/'
     find('.view-testing-link', visible: false).click
   end

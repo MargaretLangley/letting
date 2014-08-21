@@ -1,35 +1,25 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'Property Factory' do
 
-  it 'not saves' do
-    property = property_new
-    expect(property.id).to eq nil
+  describe 'default' do
+    it 'creates with human_ref' do
+      expect(property_new.human_ref).to eq 2002
+    end
   end
 
-  it 'id changeable' do
-    property = property_new id: 2
-    expect(property.id).to eq 2
-  end
-
-  it 'creates with human_ref' do
-    property = property_new
-    expect(property.human_ref).to eq 2002
-  end
-
-  it 'human_ref changeable' do
-    property = property_new human_ref: 3001
-    expect(property.human_ref).to eq 3001
-  end
-
-  context 'nested attributes' do
-
-    it 'has nested attributes' do
-      property = property_new human_ref: 3001
-      expect(property.address.road).to eq 'Edgbaston Road'
+  describe 'override' do
+    it 'id changeable' do
+      property = property_new id: 2
+      expect(property.id).to eq 2
     end
 
-    it 'changes nested attributes' do
+    it 'human_ref changeable' do
+      property = property_new human_ref: 3001
+      expect(property.human_ref).to eq 3001
+    end
+
+    it 'address attributes' do
       property = property_new human_ref: 3001,
                               address_attributes: { road: 'Headingly Road' }
       expect(property.address.road).to eq 'Headingly Road'
@@ -37,16 +27,48 @@ describe 'Property Factory' do
   end
 
   context 'with_charge' do
+    describe 'default' do
+      it 'has charge' do
+        property = property_with_charge_create(charge: charge_create(\
+                     charge_structure: charge_structure_create(id: 1)))
+        expect(property.account.charges.first.charge_type).to eq 'Ground Rent'
+      end
+
+      it 'has charged_in' do
+        property_with_charge_create(charge: charge_create( \
+                    charge_structure: charge_structure_create(id: 1)))
+        expect(ChargedIn.first.name).to eq 'Advance'
+      end
+
+      it 'has charge cycle' do
+        property_with_charge_create(charge: charge_create( \
+                     charge_structure: charge_structure_create(id: 1)))
+        expect(ChargeCycle.first.name).to eq 'Mar/Sep'
+      end
+
+      it 'makes due_on' do
+        property_with_charge_create(charge: charge_create( \
+                     charge_structure: charge_structure_create(id: 1)))
+        expect(DueOn.count).to eq 1
+        expect(DueOn.first).to eq DueOn.new(day: 25, month: 3)
+      end
+    end
+
     it 'new is valid' do
+      charge_create charge_structure: charge_structure_create(id: 1)
       expect(property_with_charge_new).to be_valid
     end
 
-    it 'create!' do
-      expect { property_with_charge_create! }.to_not raise_error
+    it 'create' do
+      expect do
+        property_with_charge_create(charge: charge_create( \
+                     charge_structure: charge_structure_create(id: 1)))
+      end.to_not raise_error
     end
 
     context 'and unpaid debit' do
       it 'generated (property created & debited new)' do
+        charge_create charge_structure: charge_structure_create(id: 1)
         property = property_with_charge_and_unpaid_debit
         property.account.prepare_for_form
         expect(property.account.debits.size).to eq(1)

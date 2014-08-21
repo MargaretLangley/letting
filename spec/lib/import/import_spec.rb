@@ -2,7 +2,7 @@ require_relative '../../../lib/import/file_import'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe FileImport do
+  describe FileImport, :import do
 
     context 'to_a' do
       it 'errors if file unknown' do

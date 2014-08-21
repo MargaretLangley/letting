@@ -18,6 +18,10 @@ namespace :db do
     # Stripped out for now but when in parellel with live system. nope
     Rake::Task['db:truncate_all'].execute
     Rake::Task['db:import:users'].invoke(options[:test])
+    Rake::Task['db:import:charge_cycle'].invoke(options[:test])
+    Rake::Task['db:import:charged_ins'].invoke(options[:test])
+    Rake::Task['db:import:due_ons'].invoke
+    Rake::Task['db:import:charge_structure'].invoke
     Rake::Task['db:import:clients'].execute
     Rake::Task['db:import:properties'].invoke(human_ref_range)
     Rake::Task['db:import:agents'].invoke(human_ref_range)

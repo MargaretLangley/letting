@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Payment, type: :feature do
 
@@ -6,6 +6,7 @@ describe Payment, type: :feature do
   before(:each) { log_in }
 
   it 'payment for debit', js: true do
+    charge_structure_create id: 1
     property_with_charge_and_unpaid_debit.save!
     payment_page.visit_new_page
     payment_page.human_ref('2002').search
@@ -27,6 +28,7 @@ describe Payment, type: :feature do
     end
 
     it 'handles errors' do
+      charge_structure_create
       property_with_charge_and_unpaid_debit.save!
       payment_page.visit_new_page
 

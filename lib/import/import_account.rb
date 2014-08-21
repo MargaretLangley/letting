@@ -46,17 +46,14 @@ module DB
       end
     end
 
+    # charge_structure_id is constant found in cyarge_structure.csv
     def import_balance
       charge = Charge.new charge_type: 'Arrears',
-                          due_in: 'Arrears',
+                          charge_structure_id: 14,
                           amount: row.amount,
                           account_id: row.account_id,
                           start_date: MIN_DATE,
                           end_date: MAX_DATE
-
-      charge.due_ons.build day: row.on_date.day,
-                           month: row.on_date.month,
-                           year: row.on_date.year
       charge.save!
       ImportDebit.import [row]
     end

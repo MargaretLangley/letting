@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/file_import'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/patch'
@@ -74,7 +74,7 @@ module DB
       end
 
       it 'works on property' do
-        client_create! human_ref: 11
+        client_create human_ref: 11
         ImportProperty.import(
           parse_property(row),
           patch: Patch.import(Property, parse_property(patch_row))
@@ -104,7 +104,7 @@ module DB
       end
 
       it 'works on Agent' do
-        property_create! human_ref: 122
+        property_create human_ref: 122
         ImportAgent.import parse_agent(row),
                            patch: Patch.import(AgentWithId,
                                                parse_agent(patch_row))
@@ -112,7 +112,7 @@ module DB
       end
 
       it 'patches nation' do
-        property_create! human_ref: 122
+        property_create human_ref: 122
         ImportAgent.import parse_agent(row),
                            patch: Patch.import(AgentWithId,
                                                parse_agent(patch_nation_row))

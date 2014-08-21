@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'Agent Factory' do
   let(:agent) { agent_new }

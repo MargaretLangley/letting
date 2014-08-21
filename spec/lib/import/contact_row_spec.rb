@@ -1,11 +1,11 @@
 require 'csv'
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/contact_row'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe ContactRow do
+  describe ContactRow, :import do
 
     def contact_row
       %q(11,  Mr,  D, Example, Mrs, A N, Other&, 1, ExampleHouse,  2, ) +

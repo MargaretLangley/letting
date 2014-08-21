@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../shared/address'
 
 describe Client, type: :feature do
@@ -8,12 +8,12 @@ describe Client, type: :feature do
   describe '#Search' do
 
     before :each do
-      client_create! human_ref: 2111,
-                     address_attributes: { county: 'Worcester' }
-      client_create! human_ref: 2222,
-                     address_attributes: { county: 'West Midlands' }
-      client_create! human_ref: 2333,
-                     address_attributes: { county: 'West Midlands' }
+      client_create human_ref: 2111,
+                    address_attributes: { county: 'Worcester' }
+      client_create human_ref: 2222,
+                    address_attributes: { county: 'West Midlands' }
+      client_create human_ref: 2333,
+                    address_attributes: { county: 'West Midlands' }
       Client.import force: true, refresh: true
     end
 

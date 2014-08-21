@@ -1,5 +1,5 @@
 require 'csv'
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/account_row'
 
@@ -10,7 +10,7 @@ require_relative '../../../lib/import/account_row'
 #
 ####
 module DB
-  describe AccountRow do
+  describe AccountRow,  :import do
     let(:credit_row) { AccountRow.new parse_line credit_string }
     let(:debit_row) { AccountRow.new parse_line debit_string }
 

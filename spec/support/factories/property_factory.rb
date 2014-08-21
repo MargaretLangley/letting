@@ -4,36 +4,31 @@ def property_new **args
   property
 end
 
-def property_create! **args
+def property_create **args
   (property = property_new args).save!
   property
 end
 
-def property_with_agent_create! **args
+def property_with_agent_create **args
   property = base_property args
   add_agent property
   property.save!
   property
 end
 
-def property_with_charge_new **args
+def property_with_charge_new charge: nil, **args
   property = base_property args
   add_no_agent property
-  add_charge property
+  if charge
+    property.account.charges << charge
+  else
+    add_charge property
+  end
   property
 end
 
-def property_with_charge_create! **args
+def property_with_charge_create **args
   (property = property_with_charge_new args).save!
-  property
-end
-
-def property_with_monthly_charge_create! **args
-  property = base_property args
-  add_no_agent property
-  charge = property.account.charges.build charge_attributes
-  charge.due_ons.build due_on_monthly_attributes_0
-  property.save!
   property
 end
 
@@ -68,15 +63,5 @@ def add_agent bill_me
 end
 
 def add_charge charge_me
-  charge = charge_me.account.charges.build charge_attributes
-  add_due_on_0 charge
-  add_due_on_1 charge
-end
-
-def add_due_on_0 charge
-  charge.due_ons.build due_on_attributes_0
-end
-
-def add_due_on_1 charge
-  charge.due_ons.build due_on_attributes_1
+  charge_me.account.charges.build charge_attributes
 end

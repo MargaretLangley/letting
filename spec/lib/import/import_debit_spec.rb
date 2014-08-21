@@ -1,5 +1,5 @@
 require 'csv'
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../lib/import/file_import'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_debit'
@@ -15,7 +15,8 @@ require_relative '../../../lib/import/import_debit'
 module DB
   describe ImportDebit, :import do
     let!(:property) do
-      property_with_charge_create! human_ref: 122
+      charge_structure_create(id: 1)
+      property_with_charge_create human_ref: 122
     end
 
     context 'one debit' do
