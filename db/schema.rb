@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20140809150357) do
   add_index "charge_structures", ["charged_in_id"], name: "index_charge_structures_on_charged_in_id", using: :btree
 
   create_table "charged_ins", force: true do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
