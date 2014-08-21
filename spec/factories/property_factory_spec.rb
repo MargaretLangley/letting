@@ -61,7 +61,7 @@ describe 'Property Factory' do
 
     it 'create' do
       expect do
-        property_with_charge_create(charge: charge_create( \
+        property_with_charge_create(charge: charge_create(
                      charge_structure: charge_structure_create(id: 1)))
       end.to_not raise_error
     end
