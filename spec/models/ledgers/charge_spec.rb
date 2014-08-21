@@ -98,7 +98,13 @@ describe Charge, type: :model do
   end
 
   # FIX_CHARGE
-  it 'displays advanced date'
-  it 'displays arrears date'
-  it 'displays Midterm date'
+  it 'displays advanced date' do
+    skip 'FIX_CHARGE'
+  end
+  it 'displays arrears date' do
+    skip 'FIX_CHARGE'
+  end
+  it 'displays Midterm date' do
+    skip 'FIX_CHARGE'
+  end
 end

@@ -124,7 +124,7 @@ describe DueOn, type: :model do
     describe '#clear_up_form' do
       it 'is destroyed when empty' do
         # FIX_CHARGE
-        skip
+        skip 'FIX_CHARGE'
       end
     end
 
