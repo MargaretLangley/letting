@@ -15,9 +15,14 @@ describe 'ChargeFactory' do
           .to change(Charge, :count).by(1)
       end
 
-      it 'makes charge type' do
+      it 'has charge type' do
         charge_create
         expect(Charge.first.charge_type).to eq 'Ground Rent'
+      end
+
+      it 'is an active charge' do
+        charge_create
+        expect(Charge.first).to_not be_dormant
       end
 
       describe 'charge_cycle' do
@@ -41,6 +46,11 @@ describe 'ChargeFactory' do
       it 'changes charge type' do
         charge_create charge_type: 'Garage'
         expect(Charge.first.charge_type).to eq 'Garage'
+      end
+
+      it 'can be dormant' do
+        charge_create dormant: true
+        expect(Charge.first).to be_dormant
       end
 
       describe 'charge_cycle' do

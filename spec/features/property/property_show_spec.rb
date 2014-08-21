@@ -16,16 +16,16 @@ describe Property, type: :feature do
   end
 
   it 'shows when charged' do
-    property_with_charge_create(id: 1, charge: charge_create(
-             charge_structure: charge_structure_create(id: 1)))
+    property_with_charge_create(id: 1, charge: charge_create)
     visit '/properties/1'
     expect(page).to have_text 'Ground Rent'
   end
 
-  # pending
-  # FIX_CHARGE
-  it 'should show dormant as no charges levied'
-  # expect(page).to have_text 'No charges levied against this property.'
+  it 'shows charges as dormant' do
+    property_with_charge_create(id: 1, charge: charge_create(dormant: true))
+    visit '/properties/1'
+    expect(page).to have_css '.dormant'
+  end
 
   it 'navigates to index page' do
     property_with_agent_create id: 1, human_ref: 1000
