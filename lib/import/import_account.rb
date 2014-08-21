@@ -36,7 +36,10 @@ module DB
     def import_row
       case
       when row.balance?
-        import_balance if row.amount > 0
+        if row.amount > 0
+          create_balance_charge
+          ImportDebit.import [row]
+        end
       when row.debit?
         ImportDebit.import [row]
       when row.credit?
@@ -46,16 +49,15 @@ module DB
       end
     end
 
-    # charge_structure_id is constant found in cyarge_structure.csv
-    def import_balance
-      charge = Charge.new charge_type: 'Arrears',
-                          charge_structure_id: 14,
-                          amount: row.amount,
-                          account_id: row.account_id,
-                          start_date: MIN_DATE,
-                          end_date: MAX_DATE
-      charge.save!
-      ImportDebit.import [row]
+    # charge_structure_id is constant found in charge_structure.csv
+    # TODO: remove hardcoded charge_structure_id
+    def create_balance_charge
+      Charge.create! charge_type: 'Arrears',
+                     charge_structure_id: 14,
+                     amount: row.amount,
+                     account_id: row.account_id,
+                     start_date: MIN_DATE,
+                     end_date: MAX_DATE
     end
 
     def filtered?
