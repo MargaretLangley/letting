@@ -15,6 +15,13 @@ describe Property, type: :feature do
     expect_agent_info
   end
 
+  it 'shows when charged' do
+    property_with_charge_create(id: 1, charge: charge_create(
+             charge_structure: charge_structure_create(id: 1)))
+    visit '/properties/1'
+    expect(page).to have_text 'Ground Rent'
+  end
+
   # pending
   it 'should show dormant as no charges levied'
   # expect(page).to have_text 'No charges levied against this property.'
@@ -53,13 +60,13 @@ describe Property, type: :feature do
 
   def expect_agent_address
     ['33',
-    'The Oval',
-    '207b',
-    'Vauxhall Street',
-    'Kennington',
-    'London',
-    'Greater London',
-    'SE11 5SS'].each do |line|
+     'The Oval',
+     '207b',
+     'Vauxhall Street',
+     'Kennington',
+     'London',
+     'Greater London',
+     'SE11 5SS'].each do |line|
       expect(page).to have_text line
     end
   end

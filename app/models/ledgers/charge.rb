@@ -28,6 +28,8 @@ class Charge < ActiveRecord::Base
     end
   end
 
+  delegate :charged_in, to: :charge_structure
+
   after_initialize do
     self.start_date = Date.parse MIN_DATE if start_date.blank?
     self.end_date = Date.parse MAX_DATE if end_date.blank?
