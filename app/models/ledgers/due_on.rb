@@ -69,6 +69,10 @@ class DueOn < ActiveRecord::Base
     [month, day] <=> [other.month, other.day]
   end
 
+  def range
+    charge_cycle.range_on make_date
+  end
+
   private
 
   def ignored_attrs

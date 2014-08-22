@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Charge, type: :model do
+describe Charge, :range, type: :model do
 
   describe 'validations' do
     before(:each) { charge_structure_create }
