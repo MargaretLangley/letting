@@ -9,7 +9,7 @@ module DB
   describe ImportAccount, :import do
 
     def property_and_charge(human_ref:)
-      charge_structure_create(id: 1)
+      charge_structure_create
       property_with_charge_create human_ref: human_ref
     end
 

@@ -7,10 +7,14 @@ describe 'ChargeStructure Factory' do
     end
 
     describe 'create' do
-      context 'default' do
+      describe 'default' do
         it 'is created' do
           expect { charge_structure_create }
             .to change(ChargeStructure, :count).by(1)
+        end
+
+        it 'has same id' do
+          expect(charge_structure_create.id).to eq(1)
         end
 
         describe 'charge_cycle' do
@@ -47,7 +51,7 @@ describe 'ChargeStructure Factory' do
         end
         describe 'charge_cycle' do
           it 'can be overriden' do
-            cycle = charge_cycle_create id: 8
+            cycle = charge_cycle_new id: 8
             structure = charge_structure_create charge_cycle: cycle
             expect(structure.charge_cycle.id).to eq 8
           end

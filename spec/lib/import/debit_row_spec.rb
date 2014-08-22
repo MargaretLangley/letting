@@ -31,7 +31,7 @@ module DB
     end
 
     it 'rows attributes are returned' do
-      charge_structure_create id: 1
+      charge_structure_create
       charge_id = property_with_charge_create.account.charges.first.id
       expect(row.attributes[:charge_id]).to eq charge_id
       expect(row.attributes[:on_date]).to eq '2012-03-25 12:00:00'

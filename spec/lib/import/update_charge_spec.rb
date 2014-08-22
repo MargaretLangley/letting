@@ -8,7 +8,7 @@ module DB
     after  { Timecop.return }
 
     it 'ignores a charge without a debit' do
-      charge_structure_create(id: 1)
+      charge_structure_create
       args = { charge_attributes: { start_date: MIN_DATE,
                                     end_date: MAX_DATE } }
       (account = account_and_charge_new args).save!
@@ -18,7 +18,7 @@ module DB
     end
 
     it 'updates only the start of recurring charge' do
-      charge_structure_create(id: 1)
+      charge_structure_create
       args = { charge_attributes: { start_date: MIN_DATE,
                                     end_date: MAX_DATE } }
       (account = account_and_charge_new args).save!
@@ -33,7 +33,7 @@ module DB
     end
 
     it 'updates start and end of charge which has finished' do
-      charge_structure_create(id: 1)
+      charge_structure_create
       args = { charge_attributes: { start_date: MIN_DATE,
                                     end_date: MAX_DATE } }
       (account = account_and_charge_new args).save!

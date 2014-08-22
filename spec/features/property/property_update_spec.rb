@@ -58,7 +58,7 @@ describe 'Account Update', type: :feature do
     end
 
     it 'adds date charge' do
-      charge_structure_create id: 1
+      charge_structure_create
       account.edit
       account.charge(**(charge_attributes(charge_cycle: 'Mar/Sep',
                                           charged_in: 'Advance'
@@ -77,7 +77,7 @@ describe 'Account Update', type: :feature do
     end
 
     it 'can be set to dormant', js: true do
-      charge_structure_create id: 1
+      charge_structure_create
       property_with_charge_create human_ref: 8000
       account.edit
       expect(page).to have_css('.spec-charge-count', count: 1)

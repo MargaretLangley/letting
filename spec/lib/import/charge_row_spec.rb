@@ -56,7 +56,7 @@ module DB
 
         describe '#charge_structure_id' do
           it 'returns valid' do
-            cycle = charge_cycle_create \
+            cycle = charge_cycle_new \
                       id: 5, \
                       due_on_attributes: { day: 23, month: 3 }
 
@@ -109,7 +109,8 @@ module DB
           end
 
           it 'yields month charges' do
-            skip 'Need month charge to be defined ... if anything?'
+            # FIX_CHARGE
+            skip 'FIX_CHARGE Need month charge to be defined ... if anything?'
             # row = ChargeRow.new parse_line charge_monthly_row
             # yielded_values = []
             # row.each do |day, month|

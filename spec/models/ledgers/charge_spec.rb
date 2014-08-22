@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Charge, type: :model do
 
   describe 'validations' do
-    before(:each) { charge_structure_create id: 1 }
+    before(:each) { charge_structure_create }
 
     it('is valid') { expect(charge_new).to be_valid }
     describe 'presence' do
@@ -42,8 +42,7 @@ describe Charge, type: :model do
 
       it 'bills if date range covers a due_on'  do
         structure = \
-          charge_structure_create id: 1,
-                                  due_on_attributes: { day: 25, month: 3 }
+          charge_structure_create due_on_attributes: { day: 25, month: 3 }
         charge = charge_create charge_structure: structure
 
         chargeable = ChargeableInfo.from_charge(chargeable_attributes \
@@ -56,8 +55,7 @@ describe Charge, type: :model do
 
       it 'does not bill if no charge is in date range' do
         structure = \
-          charge_structure_create id: 1,
-                                  due_on_attributes: { day: 25, month: 3 }
+          charge_structure_create due_on_attributes: { day: 25, month: 3 }
         charge = charge_create charge_structure: structure
         expect(charge.next_chargeable(Date.new(2013, 2, 1)..\
                                       Date.new(2013, 3, 24)))
@@ -67,8 +65,7 @@ describe Charge, type: :model do
       # Would like to move this lower down within charging system
       it 'bills all due_ons within multi-year range - ONCE' do
         structure = \
-          charge_structure_create id: 1,
-                                  due_on_attributes: { day: 25, month: 3 }
+          charge_structure_create due_on_attributes: { day: 25, month: 3 }
         charge = charge_create charge_structure: structure
         chargeable = ChargeableInfo.from_charge(chargeable_attributes \
           charge_id: charge.id,
@@ -80,8 +77,7 @@ describe Charge, type: :model do
 
       it 'does not bill dormant charges'  do
         structure = \
-          charge_structure_create id: 1,
-                                  due_on_attributes: { day: 25, month: 3 }
+          charge_structure_create due_on_attributes: { day: 25, month: 3 }
         charge = charge_create charge_structure: structure
         charge.dormant = true
         expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
@@ -91,8 +87,7 @@ describe Charge, type: :model do
 
       it 'ignores charges which have debits'  do
         structure = \
-          charge_structure_create id: 1,
-                                  due_on_attributes: { day: 25, month: 3 }
+          charge_structure_create due_on_attributes: { day: 25, month: 3 }
         charge = charge_create charge_structure: structure
         charge.debits.build debit_attributes on_date: '2013-3-25'
         expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
@@ -103,7 +98,13 @@ describe Charge, type: :model do
   end
 
   # FIX_CHARGE
-  it 'displays advanced date'
-  it 'displays arrears date'
-  it 'displays Midterm date'
+  it 'displays advanced date' do
+    skip 'FIX_CHARGE'
+  end
+  it 'displays arrears date' do
+    skip 'FIX_CHARGE'
+  end
+  it 'displays Midterm date' do
+    skip 'FIX_CHARGE'
+  end
 end

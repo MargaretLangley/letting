@@ -98,16 +98,6 @@ a.view-testing-link{
 
 \*--------------------------------------------------*/
 
-/* faded holds the switch for printing.
-   To change heading color for printing change
-   $secondary-print-text in _colors.scss.  */
-
-.faded{
-  color: $secondary-text;
-  @media print {
-        color: $secondary-print-text;
-  }
-}
 
 .r-align{
   text-align: right;
@@ -119,6 +109,26 @@ a.view-testing-link{
 
 .no-warp{
   white-space: nowrap;
+}
+
+/* faded holds the switch for printing.
+   To change heading color for printing change
+   $secondary-print-text in _colors.scss.  */
+
+.faded{
+  color: $secondary-text;
+  @media print {
+        color: $secondary-print-text;
+  }
+}
+
+/*
+  Charge using a special class so I can test it if a dormant charge has been
+  faded. The css 'faded' class is already used on the page for headings.
+*/
+
+.dormant{
+  @extend .faded;
 }
 
 

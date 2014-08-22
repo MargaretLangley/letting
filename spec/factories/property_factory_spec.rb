@@ -29,46 +29,41 @@ describe 'Property Factory' do
   context 'with_charge' do
     describe 'default' do
       it 'has charge' do
-        property = property_with_charge_create(charge: charge_create(\
-                     charge_structure: charge_structure_create(id: 1)))
+        property = property_with_charge_create(charge: charge_create)
         expect(property.account.charges.first.charge_type).to eq 'Ground Rent'
       end
 
       it 'has charged_in' do
-        property_with_charge_create(charge: charge_create( \
-                    charge_structure: charge_structure_create(id: 1)))
+        property_with_charge_create(charge: charge_create)
         expect(ChargedIn.first.name).to eq 'Advance'
       end
 
       it 'has charge cycle' do
-        property_with_charge_create(charge: charge_create( \
-                     charge_structure: charge_structure_create(id: 1)))
+        property_with_charge_create(charge: charge_create)
         expect(ChargeCycle.first.name).to eq 'Mar/Sep'
       end
 
       it 'makes due_on' do
-        property_with_charge_create(charge: charge_create( \
-                     charge_structure: charge_structure_create(id: 1)))
+        property_with_charge_create(charge: charge_create)
         expect(DueOn.count).to eq 1
         expect(DueOn.first).to eq DueOn.new(day: 25, month: 3)
       end
     end
 
     it 'new is valid' do
-      charge_create charge_structure: charge_structure_create(id: 1)
+      charge_create
       expect(property_with_charge_new).to be_valid
     end
 
     it 'create' do
       expect do
-        property_with_charge_create(charge: charge_create(
-                     charge_structure: charge_structure_create(id: 1)))
+        property_with_charge_create(charge: charge_create)
       end.to_not raise_error
     end
 
     context 'and unpaid debit' do
       it 'generated (property created & debited new)' do
-        charge_create charge_structure: charge_structure_create(id: 1)
+        charge_create
         property = property_with_charge_and_unpaid_debit
         property.account.prepare_for_form
         expect(property.account.debits.size).to eq(1)
