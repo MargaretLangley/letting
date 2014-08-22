@@ -10,6 +10,9 @@ class ChargeCycle < ActiveRecord::Base
   def due_dates date_range
     due_ons.due_dates(date_range).to_a
   end
+    # charge_cycle_create id: 1
+    # charge_cycle_create name: 'Jan/July'
+    # charge_cycle_create order: 1
 
   def <=> other
     return nil unless other.is_a?(self.class)

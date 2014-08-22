@@ -420,6 +420,11 @@ $search-height: 35px;
   background-color: rgba($flash-notice, $flash-opacity);
 }
 
+.save{
+  border: 1px solid lighten($flash-notice, 20%);
+  background-color: rgba($flash-notice, $flash-opacity);
+}
+
 .alert{
   border: 1px solid lighten($flash-alert, 20%);
   background-color: rgba($flash-alert, $flash-opacity);

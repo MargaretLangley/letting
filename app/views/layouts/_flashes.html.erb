@@ -1,5 +1,15 @@
 <% flash.each do |key, value| %>
-  <div class="js-slow-time fa fa-inbox flash <%= key %>">
+  <div class="js-slow-time flash <%= key %>">
+
+    <% case key %>
+    <% when 'save' %>
+      <i class="fa fa-save fa-lg" > </i>
+    <% when 'delete' %>
+      <i class="fa fa-eraser fa-lg" > </i>
+    <% else  %>
+      <i class="fa fa-info fa-lg" > </i>
+    <% end  %>
     <%= content_tag(:message, value) %>
+
   </div>
 <% end %>

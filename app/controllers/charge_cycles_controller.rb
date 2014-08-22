@@ -4,11 +4,11 @@
 #
 # Why does this class exist?
 #
-#
+# To allow the creation and update of charges in the accounts system
 #
 # How does this fit into the larger system?
 #
-#
+# Charge cycles are used in the ledger accounts to determine when a charge becomes due
 #
 ####
 #
@@ -26,10 +26,21 @@ class ChargeCyclesController < ApplicationController
     @charge_cycle = ChargeCycle.find params[:id]
   end
 
+  def update
+    @charge_cycle = ChargeCycle.find params[:id]
+    if @charge_cycle.update charge_cycles_params
+      redirect_to charge_cycles_path, flash: {save: charge_cycle_updated_message}
+    else
+      render :edit
+    end
+  end
+
   def create
     @charge_cycle = ChargeCycle.new charge_cycles_params
     if @charge_cycle.save
-      redirect_to charge_cycles_path, notice: charge_cycle_created_message
+      redirect_to charge_cycles_path, flash: {save: charge_cycle_created_message}
+    else
+      render :new
     end
   end
 
@@ -37,7 +48,7 @@ class ChargeCyclesController < ApplicationController
     @charge_cycle = ChargeCycle.find(params[:id])
     alert_message = charge_cycle_deleted_message
     @charge_cycle.destroy
-    redirect_to charge_cycles_path, alert: alert_message
+    redirect_to charge_cycles_path, alert: charge_cycle_deleted_message
   end
 
   private
