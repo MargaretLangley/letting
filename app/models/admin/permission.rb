@@ -34,6 +34,7 @@ class Permission < Struct.new(:user)
 
   def user_controllers
     %w(accounts
+       charge_cycles
        clients
        debits
        debit_generators
