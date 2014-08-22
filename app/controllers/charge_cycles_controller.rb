@@ -27,9 +27,9 @@ class ChargeCyclesController < ApplicationController
   end
 
   def create
-    @charge_cycle = ChargeCycle.new clients_params
+    @charge_cycle = ChargeCycle.new charge_cycles_params
     if @charge_cycle.save
-      redirect_to charge_cycles_path, notice: client_created_message
+      redirect_to charge_cycles_path, notice: charge_cycle_created_message
     end
   end
 

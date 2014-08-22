@@ -2,6 +2,8 @@
   <ul class='shell'>
     <li class="<%= active_nav? 'properties' %>"><%= link_to 'Accounts', properties_path %></li>
     <li class="active-subnav <%= menu_folded? 'properties' %>"><%= link_to 'New Account', new_property_path %></li>
+    <li class="<%= active_nav? "charge_cycles" %>"><%= link_to 'Charge Cycles', charge_cycles_path %></li>
+    <li class="active-subnav <%= menu_folded? 'charge_cycles' %>"><%= link_to 'New Charge Cycle', new_charge_cycle_path %></li>
     <li class="<%= active_nav? "clients" %>"><%= link_to 'Clients', clients_path %></li>
     <li class="active-subnav <%= menu_folded? 'clients' %>"><%= link_to 'New Client', new_client_path %></li>
     <li class="<%= active_nav? 'debit_generators' %>"><%= link_to 'Invoices', debit_generators_path %></li>
