@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ChargeCycle, type: :model do
+RSpec.describe ChargeCycle, :range, type: :model do
   let(:cycle) do
     cycle = ChargeCycle.new id: 1, name: 'Mar/Sep'
     cycle.due_ons.new day: 25, month: 3, charge_cycle_id: 1
@@ -82,6 +82,24 @@ RSpec.describe ChargeCycle, type: :model do
       expect(cycle.due_ons
                   .reject { |due_on| due_on.marked_for_destruction? }.size)
         .to eq(1)
+    end
+  end
+
+  describe 'range' do
+    before { Timecop.travel(Date.new(2014, 1, 31)) }
+    after  { Timecop.return }
+    # currently returning the 'on_date' which initialized
+    # the Repeat range - but will eventually be the range
+    it 'due on can find their range' do
+      cycle = ChargeCycle.new(name: 'Mar/Sep')
+      cycle.due_ons.build day: 6, month: 6
+      expect(cycle.range_on Date.new(2014, 6, 6)).to eq Date.new(2014, 6, 6)
+    end
+
+    it 'errors when due on not found' do
+      cycle = ChargeCycle.new(name: 'Mar/Sep')
+      cycle.due_ons.build day: 12, month: 12
+      expect(cycle.range_on Date.new(2014, 6, 6)).to eq :missing_due_on
     end
   end
 end
