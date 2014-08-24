@@ -1,14 +1,20 @@
 # ChargeStructure
 #
-# The Information required to know when a debit is created for a charge
+# Contains the information which is shared between charges.
 #
-# A charge is responsible for an amount and a time period it is active.
-# When a charge is due is handled by charge_structure.
+# Charges are made out of unique information and information shared between
+# many charges - for example charges occur on only a few days of the year
+#
 #
 # ChargeStructure contain due_ons - which know when a charge becomes due.
 # Charge cycle is converts the id into readable month cycle (1 is Mar/Sep)
 #
 #
+#  KEEP CHARGE STRUCTURE UNTIL charge_cycle can deliver
+#  ranges for arrears and advance etc.
+#  At this point ...
+#  charge belongs_to charged_in
+#  charge belongs_to charge_cycle
 #
 class ChargeStructure < ActiveRecord::Base
   include Comparable
