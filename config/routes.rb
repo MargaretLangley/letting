@@ -36,7 +36,7 @@ Letting::Application.routes.draw do
     end
   end
 
-  resources :charge_cycles, only: [:index, :new, :create, :edit, :update, :destroy] do
+  resources :charge_cycles, only: [:index, :new, :create, :edit, :update, :destroy, :show] do
     collection do
       get :search
     end

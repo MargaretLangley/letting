@@ -13,7 +13,7 @@
   </div>
 
  <% @charge_cycles.each do |charge_cycle| %>
-    <div class='table-row' data-link='<%= edit_charge_cycle_path(charge_cycle) %>'>
+    <div class='table-row' data-link='<%= charge_cycle_path(charge_cycle) %>'>
 
       <div class='col-1-3 vertical-spacer inherit-row'>
        <%= charge_cycle.name %>

@@ -18,6 +18,10 @@ class ChargeCyclesController < ApplicationController
     @charge_cycles = ChargeCycle.all
   end
 
+  def show
+    @charge_cycle = ChargeCycle.find params[:id]
+  end
+
   def new
     @charge_cycle = ChargeCycle.new
   end
@@ -56,7 +60,8 @@ class ChargeCyclesController < ApplicationController
   def charge_cycles_params
     params
     .require(:charge_cycle)
-    .permit(:name, :order)
+    .permit :name, :order,
+     due_ons_attributes: [:id, :charge_cycle_id, :day, :month, :year ]
   end
 
   def identy
