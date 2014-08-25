@@ -6,7 +6,7 @@ describe AccountDecorator do
 
   describe 'running-balance' do
     it 'keeps a working balance' do
-      account = AccountDecorator.new account_and_charge_new
+      account = AccountDecorator.new account_new charge: charge_new
       account.debits.push debit_new on_date: '25/9/2012', amount: 5.00
       account.debits.push debit_new on_date: '25/9/2013', amount: 10.00
       account.credits.push credit_new on_date: '25/9/2014', amount: -12.00

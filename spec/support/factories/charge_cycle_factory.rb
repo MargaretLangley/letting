@@ -16,3 +16,7 @@ def charge_cycle_create due_on: due_on, **args
   cycle.save!
   cycle
 end
+
+def charge_cycle_name(id:)
+  ChargeCycle.find(id).name
+end

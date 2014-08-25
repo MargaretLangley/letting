@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20140809150357) do
   end
 
   create_table "charge_structures", force: true do |t|
-    t.integer  "charged_in_id",   null: false
+    t.integer  "charged_in_id"
     t.integer  "charge_cycle_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -75,19 +75,21 @@ ActiveRecord::Schema.define(version: 20140809150357) do
   end
 
   create_table "charges", force: true do |t|
-    t.string   "charge_type",                                                 null: false
-    t.integer  "charge_structure_id",                                         null: false
-    t.boolean  "dormant",                                     default: false, null: false
-    t.decimal  "amount",              precision: 8, scale: 2,                 null: false
-    t.date     "start_date",                                                  null: false
-    t.date     "end_date",                                                    null: false
-    t.integer  "account_id",                                                  null: false
+    t.string   "charge_type",                                             null: false
+    t.integer  "charge_cycle_id",                                         null: false
+    t.integer  "charged_in_id",                                           null: false
+    t.boolean  "dormant",                                 default: false, null: false
+    t.decimal  "amount",          precision: 8, scale: 2,                 null: false
+    t.date     "start_date",                                              null: false
+    t.date     "end_date",                                                null: false
+    t.integer  "account_id",                                              null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "charges", ["account_id"], name: "index_charges_on_account_id", using: :btree
-  add_index "charges", ["charge_structure_id"], name: "index_charges_on_charge_structure_id", using: :btree
+  add_index "charges", ["charge_cycle_id"], name: "index_charges_on_charge_cycle_id", using: :btree
+  add_index "charges", ["charged_in_id"], name: "index_charges_on_charged_in_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.integer  "human_ref",  null: false

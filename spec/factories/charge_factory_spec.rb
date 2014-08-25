@@ -2,10 +2,17 @@ require 'rails_helper'
 
 describe 'ChargeFactory' do
 
-  let(:charge) { charge_new }
-  it('is valid') do
-    charge.charge_structure = charge_structure_create
-    expect(charge).to be_valid
+  describe 'new' do
+    it('is valid') do
+      expect(charge_new).to be_valid
+    end
+    it('has type') { expect(charge_new.charge_type).to eq 'Ground Rent' }
+    it('has cycle') { expect(charge_new.charge_cycle.name).to eq 'Mar/Sep' }
+    it('has due_ons') { expect(charge_new.charge_cycle.due_ons.size).to eq 1 }
+    it 'has expected due date' do
+      expect(charge_new.charge_cycle.due_ons[0])
+        .to eq DueOn.new(day: 25, month: 3)
+    end
   end
 
   describe 'create' do
@@ -53,14 +60,17 @@ describe 'ChargeFactory' do
         expect(Charge.first).to be_dormant
       end
 
+      it 'can override charged_in' do
+        charge_create charged_in: charged_in_create(id: 1, name: 'mid-term')
+        expect(ChargedIn.first.name).to eq 'mid-term'
+      end
+
       describe 'charge_cycle' do
         it 'makes due_on' do
-          charge_create charge_structure: \
-            charge_structure_create(charge_cycle: charge_cycle_create(id: 5))
-          expect(ChargeStructure.first.charge_cycle.id).to eq(5)
+          charge_create charge_cycle: charge_cycle_create(id: 5)
+          expect(ChargeCycle.first.id).to eq(5)
         end
       end
     end
   end
-
 end

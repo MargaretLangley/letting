@@ -31,7 +31,7 @@ class DebitGenerator < ActiveRecord::Base
     self.end_date = default_end_date if end_date.blank?
   end
 
-  def generate
+  def generate accounts: accounts()
     accounts.each do |account|
       debits.push(*account.prepare_debits(start_date..end_date))
     end
@@ -49,13 +49,13 @@ class DebitGenerator < ActiveRecord::Base
     end_date == other.end_date
   end
 
-  private
-
   # search_string - property, human, ref 1098 or range of the form
   #                 1098 - 2000
-  def accounts
-    @accounts ||= Account.between?(search_string)
+  def accounts query: search_string
+    @accounts ||= Account.between?(query)
   end
+
+  private
 
   def default_start_date
     Date.current

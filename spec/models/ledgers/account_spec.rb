@@ -11,17 +11,15 @@ describe Account, type: :model do
 
     describe '#prepare_debits' do
       it 'generates debits when charges due' do
-        structure = charge_structure_create
-        account = account_and_charge_new(
-          charge_attributes: { id: 3, charge_structure_id: structure.id })
+        # FIX_CHARGE charge_new should take dates to
+        # stop mystery guest
+        account = account_new charge: charge_new
         debits = account.prepare_debits(date_when_charged)
         expect(debits.size).to eq(1)
       end
 
       it 'no debits when no charges due' do
-        structure = charge_structure_create
-        account = account_and_charge_new(
-          charge_attributes: { id: 3, charge_structure_id: structure.id })
+        account = account_new charge: charge_new
         debits = account.prepare_debits(date_not_charged)
         expect(debits.size).to eq(0)
       end
@@ -55,7 +53,7 @@ describe Account, type: :model do
 
   describe '#balance' do
     it 'calculates balance' do
-      account = account_and_charge_new
+      account = account_new
       account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
       account.credits.push credit_new on_date: '25/4/2012', amount: -11.00
       expect(account.balance Date.new 2013, 1, 1).to \
@@ -63,7 +61,7 @@ describe Account, type: :model do
     end
 
     it 'ignores entires after date' do
-      account = account_and_charge_new
+      account = account_new
       account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
       account.credits.push credit_new on_date: '25/4/2012', amount: -5.50
       expect(account.balance Date.new 2012, 4, 24).to \
@@ -75,7 +73,7 @@ describe Account, type: :model do
 
     account = nil
     before :each do
-      account = (property_create human_ref: 2002).account
+      account = property_create(account: account_new).account
     end
 
     describe '.find_by_human_ref' do

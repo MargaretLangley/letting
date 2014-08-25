@@ -57,15 +57,11 @@ module DB
         raise ChargedInCodeUnknown, charged_in_code_message, caller
     end
 
-    def charge_structure_id(charged_in_id: charged_in_id(),
-                            charge_cycle_id: charge_cycle_id())
-      ChargeStructureMatcher.new(charged_in_id: charged_in_id,
-                                 charge_cycle_id: charge_cycle_id).id
-      rescue ChargeStuctureUnknown
-        puts "#{ChargeStuctureUnknown} - Property #{human_ref} " +
-          ' charge row does not match a charge structure' \
-          " Legacy charge_type: '#{charge_code}' " \
-          " Legacy charged_in code: '#{charged_in_code}'"
+    def charge_cycle_id
+      ChargeCycleMatcher.new(self).id
+      rescue ChargeCycleUnknown
+        puts "Property #{human_ref} charge row does not match a charge cycle" \
+          " Legacy charge_type: '#{charge_code}' "
     end
 
     def each
@@ -78,7 +74,8 @@ module DB
     def attributes
       {
         charge_type: charge_type,
-        charge_structure_id: charge_structure_id,
+        charged_in_id: charged_in_id,
+        charge_cycle_id: charge_cycle_id,
         amount: amount,
         start_date: start_date,
         end_date: end_date,
@@ -93,12 +90,6 @@ module DB
       max_dates
     end
 
-    def charge_cycle_id
-      ChargeCycleMatcher.new(self).id
-      rescue ChargeCycleUnknown
-        puts "Property #{human_ref} charge row does not match a charge cycle" \
-          " Legacy charge_type: '#{charge_code}' "
-    end
 
     def day number
       @source[:"day_#{number}"].to_i

@@ -8,11 +8,6 @@ require_relative '../../../lib/import/import_account'
 module DB
   describe ImportAccount, :import do
 
-    def property_and_charge(human_ref:)
-      charge_structure_create
-      property_with_charge_create human_ref: human_ref
-    end
-
     describe 'debit with payment' do
       def debit_with_payment
         %q(122, GR, 2011-12-25 00:00:00, Ground Rent..., 47.5,    0, 47.5
@@ -20,7 +15,8 @@ module DB
       end
 
       it 'parsed' do
-        property_and_charge human_ref: 122
+        property_create(human_ref: 122,
+                       account: account_new(charge: charge_new))
         expect { ImportAccount.import parse debit_with_payment }
           .to change(Payment, :count).by 1
       end
@@ -35,7 +31,8 @@ module DB
       end
 
       it 'parsed' do
-        property_and_charge human_ref: 122
+        property_create(human_ref: 122,
+                        account: account_new(charge: charge_new))
         expect do
           ImportAccount.import parse two_debits_1_payment
         end.to change(Credit, :count).by 1
@@ -52,7 +49,8 @@ module DB
       end
 
       it 'parses' do
-        property_and_charge human_ref: 122
+        property_create(human_ref: 122,
+                        account: account_new(charge: charge_new))
         expect { ImportAccount.import parse payment_covering_2_debits }
           .to change(Credit, :count).by 1
         expect(Debit.all.size).to eq(2)
@@ -66,13 +64,15 @@ module DB
       end
 
       it 'allows within range' do
-        property_and_charge human_ref: 122
+        property_create(human_ref: 122,
+                        account: account_new(charge: charge_new))
         expect { import_account single_row, range: 122..122 }
           .to change(Debit, :count).by 1
       end
 
       it 'filters if out of range' do
-        property_and_charge human_ref: 122
+        property_create(human_ref: 122,
+                        account: account_new(charge: charge_new))
         expect { import_account single_row, range: 100..121 }
           .to change(Debit, :count).by 0
       end
@@ -87,8 +87,10 @@ module DB
       end
 
       it 'parses' do
-        property_and_charge human_ref: 122
-        property_with_charge_create human_ref: 123
+        property_create(human_ref: 122,
+                        account: account_new(id: 1, charge: charge_new))
+        property_create(human_ref: 123,
+                        account: account_new(id: 2, charge: charge_new))
         expect { import_account two_properties }.to change(Credit, :count).by 2
         expect(Debit.all.size).to eq(2)
         expect(Property.find_by!(human_ref: 122).account.credits.size)
@@ -103,7 +105,8 @@ module DB
         %q(122, XX, 2011-08-01 00:00:00, ,                  0,    0,    0)
       end
       it 'error if row type unknown' do
-        property_and_charge human_ref: 122
+        property_create(human_ref: 122,
+                        account: account_new(charge: charge_new))
         expect { import_account unknown_row }
           .to raise_error AccountRowTypeUnknown, \
                           'Unknown Row Property:122, charge_code: XX'
@@ -115,7 +118,8 @@ module DB
         %q(122, Bal, 2011-08-01 00:00:00, ,                  0,    0,    0)
       end
       it 'ignores empty balance' do
-        property_and_charge human_ref: 122
+        property_create(human_ref: 122,
+                        account: account_new(charge: charge_new))
         import_account balance_empty
         expect(Charge.all.size).to eq(1)
         expect(Credit.all.size).to eq(0)
@@ -128,8 +132,9 @@ module DB
       end
 
       it 'handles non-zero balance' do
-        property_create human_ref: 122
-        charge_structure_create id: 14
+        skip 'FIX_CHARNGE charge_structure  => charge_cycle_id'
+        property_create(human_ref: 122,
+                        account: account_new(charge: charge_new))
         expect { ImportAccount.import parse balance_non_zero }
           .to change(Charge, :count).by 1
         expect(Debit.all.size).to eq(1)
@@ -143,7 +148,8 @@ module DB
       end
 
       it 'parses' do
-        property_and_charge human_ref: 122
+        property_create(human_ref: 122,
+                        account: account_new(charge: charge_new))
         ImportAccount.import parse advance_payment
         expect(Credit.all.size).to eq(1)
         expect(Debit.all.size).to eq(1)

@@ -13,13 +13,13 @@ require_relative '../../../lib/import/debit_row'
 #
 module DB
   describe DebitRow, :import do
-    let(:row) { DebitRow.new parse_line debit_row }
-
     it 'has human_ref' do
+      row = DebitRow.new parse_line debit_row
       expect(row.human_ref).to eq '2002'
     end
 
     it 'calculates amount' do
+      row = DebitRow.new parse_line debit_row
       expect(row.amount).to eq 50.5
     end
 
@@ -31,9 +31,10 @@ module DB
     end
 
     it 'rows attributes are returned' do
-      charge_structure_create
-      charge_id = property_with_charge_create.account.charges.first.id
-      expect(row.attributes[:charge_id]).to eq charge_id
+      row = DebitRow.new parse_line debit_row
+      charge = charge_new charge_type: 'Insurance'
+      property_create account: account_new(charge: charge)
+      expect(row.attributes[:charge_id]).to eq charge.id
       expect(row.attributes[:on_date]).to eq '2012-03-25 12:00:00'
       expect(row.attributes[:amount]).to eq 50.5
       expect(row.attributes[:debit_generator_id]).to eq(-1)
@@ -48,7 +49,7 @@ module DB
     end
 
     def debit_row
-      %q(2002, GR, 2012-03-25 12:00:00, Ground Rent, 50.5, 0, 0)
+      %q(2002, Ins, 2012-03-25 12:00:00, Insurance, 50.5, 0, 0)
     end
 
     def debit_negative_credit

@@ -21,7 +21,8 @@ end
 def charge_attributes **overrides
   {
     charge_type: 'Ground Rent',
-    charge_structure_id: 1,
+    charge_cycle_id: 1,
+    charged_in_id: 2,
     account_id: 2,
     amount: 88.08,
     start_date: '2011-03-25',

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe PropertiesHelper, type: :helper do
   describe '#hide_new_record_unless_first' do
@@ -17,7 +17,9 @@ describe PropertiesHelper, type: :helper do
     end
 
     it 'displays if valid' do
-      charge = property_with_charge_new.account.charges.first
+      charge = property_new(human_ref: 2002,
+                            account: account_new(charge: charge_new))
+                 .account.charges.first
       expect(hide_new_record_unless_first(charge, 0)).to be_blank
     end
   end

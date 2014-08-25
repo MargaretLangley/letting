@@ -10,7 +10,7 @@ class ChargeCycleMatcher
   end
 
   def id
-    puts 'ChargeCycle table empty' unless ChargeCycle.any?
+    return puts 'ChargeCycle table has no records' unless ChargeCycle.any?
     found_structure = find
     fail DB::ChargeCycleUnknown unless found_structure
     found_structure.id

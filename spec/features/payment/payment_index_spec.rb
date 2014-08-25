@@ -35,7 +35,7 @@ describe 'Payment index', type: :feature do
   before(:each) { log_in }
 
   it 'all' do
-    property = property_create
+    property = property_create account: account_new
     Payment.create! payment_attributes account_id: property
            .account.id
     payment_index.visit_page
@@ -61,7 +61,7 @@ describe 'Payment index', type: :feature do
   end
 
   it '#destroys a property' do
-    property = property_create
+    property = property_create account: account_new
     Payment.create! payment_attributes account_id: property.account.id
     payment_index.visit_page
     expect { payment_index.delete }.to change(Payment, :count).by(-1)

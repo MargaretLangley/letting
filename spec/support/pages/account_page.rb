@@ -100,27 +100,19 @@ class AccountPage
     end
   end
 
-  # create rows used by charge during select
-  # Must occur before opening page
-  #
-  def charge_initialization(charge_cycle:, charged_in:)
-    charge_cycle_create(name: charge_cycle)
-    charged_in_create(name: charged_in)
-  end
-
-  def charge(order: 0, charge_type:, charge_structure_id:, charge_cycle:,
-             charged_in:, amount:, start_date: '', end_date: '')
+  def charge(order: 0, charge_type:, charge_cycle_id:,
+             charged_in_id:, amount:, start_date: '', end_date: '')
     id_stem = "property_account_attributes_charges_attributes_#{order}"
     fill_in "#{id_stem}_charge_type", with: charge_type
-    select(charge_cycle, from: "charge_cycle_#{order}")
-    select(charged_in, from: "#{id_stem}_charge_structure_id")
+    select(charge_cycle_name(id: charge_cycle_id), from: "charge_cycle_#{order}")
+    select(charged_in_name(id: charged_in_id), from: "#{id_stem}_charge_structure_id")
     fill_in "#{id_stem}_amount", with: amount
     # fill_in "#{id_stem}_start_date", with: start_date if start_date.present?
     # fill_in "#{id_stem}_end_date", with: start_date if end_date.present?
   end
 
   def expect_charge(spec, order: 0, charge_type:, charge_structure_id:,
-                    charged_in:, amount:, start_date: '', end_date: '')
+                    charged_in_id:, amount:, start_date: '', end_date: '')
     id_stem = "property_account_attributes_charges_attributes_#{order}"
     spec.expect(find_field("#{id_stem}_charge_type").value).to \
       spec.have_text charge_type

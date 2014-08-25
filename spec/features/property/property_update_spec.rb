@@ -61,11 +61,11 @@ describe 'Account Update', type: :feature do
       charge_structure_create
       account.edit
       account.charge(**(charge_attributes(charge_cycle: 'Mar/Sep',
-                                          charged_in: 'Advance'
+                                          charged_in_id: 2
                                          ).except(:account_id)))
       account.button('Update').successful?(self).edit
       account.expect_charge(self,
-                            **(charge_attributes(charged_in: 'Advance') \
+                            **(charge_attributes(charged_in_id: 2) \
                             .except(:account_id)))
     end
   end

@@ -7,68 +7,56 @@ describe Property, type: :feature do
   before(:each) { log_in }
 
   it 'shows record' do
-    property_with_agent_create id: 1, human_ref: 1000
+    property = property_create \
+      id: 1,
+      human_ref: 1000,
+      agent: agent_new(entities: [Entity.new(name: 'Bell') ],
+                       address:(address_new road: 'Wiggiton')),
+      account: account_new
     visit '/properties/1'
     expect(page.title).to eq 'Letting - View Account'
-    expect_property_address
-    expect_property_entity
-    expect_agent_info
+    expect_property entity: 'Mr W. G. Grace'
+    expect_agent_info entity: 'Bell', road: 'Wiggiton'
+  end
+
+  def expect_property entity: entity
+    expect(page).to have_text entity
+    expect(page).to have_text '1000'
+    expect_address_edgbaston
+  end
+
+  def expect_agent_info entity: entity, road: road
+    expect(page).to have_text entity
+    [ road ].each do |line|
+      expect(page).to have_text line
+    end
   end
 
   it 'shows when charged' do
-    property_with_charge_create(id: 1, charge: charge_create)
+    charge = charge_create(charge_type: 'Rent')
+    property_create id: 1, account: account_new(charge: charge)
     visit '/properties/1'
-    expect(page).to have_text 'Ground Rent'
+    expect(page).to have_text 'Rent'
   end
 
   it 'shows charges as dormant' do
-    property_with_charge_create(id: 1, charge: charge_create(dormant: true))
+    charge = charge_create(dormant: true)
+    property_create id: 1, account: account_new(charge: charge)
     visit '/properties/1'
     expect(page).to have_css '.dormant'
   end
 
   it 'navigates to index page' do
-    property_with_agent_create id: 1, human_ref: 1000
+    property_create id: 1, account: account_new
     visit '/properties/1'
     click_on 'Accounts'
     expect(page.title).to eq 'Letting - Accounts'
   end
 
   it 'navigates to edit page' do
-    property_with_agent_create id: 1, human_ref: 1000
+    property_create id: 1, account: account_new
     visit '/properties/1'
     first(:link, 'Edit').click
     expect(page.title).to eq 'Letting - Edit Account'
-  end
-
-  def expect_property_address
-    expect(page).to have_text '1000'
-    expect_address_edgbaston
-  end
-
-  def expect_property_entity
-    expect(page).to have_text 'Mr W. G. Grace'
-  end
-
-  def expect_agent_info
-    expect_agent_entity
-    expect_agent_address
-  end
-
-  def expect_agent_entity
-    expect(page).to have_text 'Rev V. W. Knutt'
-  end
-
-  def expect_agent_address
-    ['33',
-     'The Oval',
-     '207b',
-     'Vauxhall Street',
-     'Kennington',
-     'London',
-     'Greater London',
-     'SE11 5SS'].each do |line|
-      expect(page).to have_text line
-    end
   end
 end

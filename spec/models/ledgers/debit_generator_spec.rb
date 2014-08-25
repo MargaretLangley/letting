@@ -68,20 +68,12 @@ describe DebitGenerator, type: :model do
 
   describe 'methods' do
     describe '#generate' do
-      property = nil
-      before do
-        Timecop.travel(Date.new(2013, 1, 31))
-        charge_structure_create
-        property = property_with_charge_create human_ref: 2002
-        Property.import force: true, refresh: true
-      end
-      after do
-        Property.__elasticsearch__.delete_index!
-        Timecop.return
-      end
+      before { Timecop.travel(Date.new(2013, 1, 31)) }
+      after { Timecop.return }
 
       it 'creates debits' do
-        (generator = DebitGenerator.new(search_string: '2002')).generate
+        property = property_new(account: account_new(charge: charge_new))
+        (generator = DebitGenerator.new).generate accounts: [property.account]
         generated_debits = generator.debits.select(&:new_record?)
         expect(generated_debits.size).to eq(1)
         expect(generated_debits.first)
@@ -91,19 +83,37 @@ describe DebitGenerator, type: :model do
       end
 
       it 'only makes unique debits' do
-        debit_gen = DebitGenerator.new(search_string: '2002')
-        debit_gen.generate
-        debit_gen.save!
-        debit_gen = DebitGenerator.new(search_string: '2002',
-                                       start_date: Date.current + 1.day)
-        debit_gen.generate
-        expect { debit_gen.save! }.to raise_error
+        property = property_create human_ref: 2002,
+                                   account: account_new(charge: charge_new)
+        (generator = DebitGenerator.new(search_string: '2002'))
+          .generate accounts: [property.account]
+        generator.save!
+
+        (generator = DebitGenerator.new(search_string: '2002',
+                                        start_date: Date.current + 1.day))
+          .generate accounts: [property.account]
+        expect { generator.save! }.to raise_error
       end
 
-      it 'returns no match when string does not match an account' do
-        (generator = DebitGenerator.new(search_string: '2003')).generate
-        generated_debits = generator.debits.select(&:new_record?)
-        expect(generated_debits.size).to eq(0)
+    end
+
+    describe '#accounts query:' do
+      it 'returns accounts matching a query' do
+        property_create human_ref: 2002,
+                        account: account_new(charge: charge_new)
+        expect(DebitGenerator.new().accounts(query: '2002').size).to eq 1
+      end
+
+      it 'can set the query string with the initiailzer' do
+        property_create human_ref: 2002,
+                        account: account_new(charge: charge_new)
+        expect(DebitGenerator.new(search_string: '2002').accounts.size).to eq 1
+      end
+
+      it 'no accounts when query has no matches' do
+        property_create human_ref: 2002,
+                        account: account_new(charge: charge_new)
+        expect(DebitGenerator.new().accounts(query: '2003').size).to eq 0
       end
     end
 

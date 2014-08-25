@@ -250,23 +250,6 @@ def seed_charges
   create_account
 end
 
-def charge_structure
-  Rake::Task['db:import:charged_ins'].invoke
-  create_due_ons
-  create_charge_cycle
-
-  # Full charge structure is in import_charge_structure.csv
-  # charge_cycle 1: 'Mar/Sep'
-  # charge_cycle 2: 'Jun/Dec'  (see import_charge_cycle.rake)
-  #
-  # charged_in_id: 1 Arrears
-  # charged_in_id: 2 Advance (see import_charged_id.rake)
-  ChargeStructure.create! [
-    { id:  1, charge_cycle_id: 1, charged_in_id: 1 },
-    { id:  2, charge_cycle_id: 1, charged_in_id: 2 },
-  ]
-end
-
 def create_charge_cycle
   ChargeCycle.create! [
     { id: 1,  name: 'Mar/Sep', order: 1 },
@@ -284,15 +267,18 @@ def create_due_ons
 end
 
 def create_charges
-  charge_structure
+  Rake::Task['db:import:charged_ins'].invoke
+  create_due_ons
+  create_charge_cycle
+
   Charge.create! [
-    { id: 1,             charge_type: 'Ground Rent',    charge_structure_id: 1,
+    { id: 1,             charge_type: 'Ground Rent',    charge_cycle_id: 1,  charged_in_id: 1,
       amount: '88.08',   account_id: 1 },
-    { id: 2,             charge_type: 'Service Charge', charge_structure_id: 1,
+    { id: 2,             charge_type: 'Service Charge', charge_cycle_id: 1,  charged_in_id: 1,
       amount: '125.08',  account_id: 1 },
-    { id: 3,             charge_type: 'Ground Rent',    charge_structure_id: 2,
+    { id: 3,             charge_type: 'Ground Rent',    charge_cycle_id: 1,  charged_in_id: 2,
       amount: '70.00',   account_id: 2 },
-    { id: 4,             charge_type: 'Service Charge', charge_structure_id: 2,
+    { id: 4,             charge_type: 'Service Charge', charge_cycle_id: 1, charged_in_id: 2,
       amount: '70.00',   account_id: 3 },
   ]
 end

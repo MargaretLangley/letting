@@ -8,7 +8,7 @@ module DB
   describe ImportPayment, :import do
 
     it 'single credit' do
-      property_with_charge_create(human_ref: 89, charge: charge_create)
+      property_create human_ref: 89, account: account_new(charge: charge_create)
 
       expect { ImportPayment.import parse credit_row }
         .to change(Credit, :count).by 1

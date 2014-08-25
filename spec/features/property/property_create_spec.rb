@@ -16,7 +16,8 @@ describe Property, type: :feature do
   end
 
   it '#create', js: true   do
-    charge_structure_create
+    charge_cycle_create(id: 1, name: 'Mar/Sep')
+    charged_in_create(name: 'Arrears')
     account.new
     fill_in_account
     fill_in_agent
@@ -54,8 +55,8 @@ describe Property, type: :feature do
     account.address(selector: '#property_address',
                     **address_attributes.except(:district))
     account.entity(type: 'property', **person_attributes)
-    account.charge(**(charge_attributes(charge_cycle: 'Mar/Sep',
-                                        charged_in: 'Advance')
+    account.charge(**(charge_attributes(charge_cycle_id: 1,
+                                        charged_in_id: 2)
            .except(:account_id)))
   end
 
@@ -73,7 +74,7 @@ describe Property, type: :feature do
                            **address_attributes.except(:district))
     account.expect_entity(self, type: 'property', **person_attributes)
     account.expect_charge(self,
-                          **(charge_attributes(charged_in: 'Advance') \
+                          **(charge_attributes(charged_in_id: 2) \
                             .except(:account_id)))
   end
 

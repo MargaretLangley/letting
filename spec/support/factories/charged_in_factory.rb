@@ -5,3 +5,7 @@ end
 def charged_in_new **args
   ChargedIn.new charged_in_attributes args
 end
+
+def charged_in_name(id:)
+  ChargedIn.find(id).name
+end

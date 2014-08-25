@@ -14,10 +14,12 @@
 ####
 #
 class Charge < ActiveRecord::Base
-  belongs_to :charge_structure, inverse_of: :charge
-  accepts_nested_attributes_for :charge_structure
   belongs_to :account
-  validates :charge_type, :charge_structure, presence: true
+  # charged_in_name
+  belongs_to :charged_in, inverse_of: :charges
+  belongs_to :charge_cycle, inverse_of: :charges
+  delegate :name, to: :charged_in, prefix: true
+  validates :charge_type, presence: true
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
   has_many :debits, dependent: :destroy do
@@ -28,15 +30,9 @@ class Charge < ActiveRecord::Base
     end
   end
 
-  delegate :charged_in, to: :charge_structure
-
   after_initialize do
     self.start_date = Date.parse MIN_DATE if start_date.blank?
     self.end_date = Date.parse MAX_DATE if end_date.blank?
-  end
-
-  def charge_cycle_id
-    charge_structure.charge_cycle_id unless charge_structure.nil?
   end
 
   # restults
@@ -67,7 +63,7 @@ class Charge < ActiveRecord::Base
   end
 
   def allowed_due_dates date_range
-    charge_structure.due_dates(date_range) & (start_date..end_date).to_a
+    charge_cycle.due_dates(date_range) & (start_date..end_date).to_a
   end
 
   # Converts a Charge object into a ChargeableInfo object.

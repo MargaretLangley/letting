@@ -54,28 +54,23 @@ module DB
           end
         end
 
-        describe '#charge_structure_id' do
-          it 'returns valid' do
-            cycle = charge_cycle_new \
-                      id: 5, \
-                      due_on_attributes: { day: 23, month: 3 }
-
-            charge_structure_create \
-              id: 7,
-              charge_cycle: cycle,
-              charged_in: charged_in_create(id: 6)
-
-            row = ChargeRow.new parse_line base_charge_row
-            expect(row.charge_structure_id(charge_cycle_id: 5,
-                                           charged_in_id: 6)).to eq 7
+        describe '#charge_cycle_id' do
+          it('returns valid id') do
+            charge_cycle_create id: 3, due_on: DueOn.new(day: 25, month: 3)
+            expect(row.charge_cycle_id).to eq 3
           end
 
-          it 'errors invalid' do
+          it 'messages when no charge cycles' do
             expect($stdout).to receive(:puts)
-              .with(/charge row does not match a charge structure/)
-            charge_structure_create id: 7
-            row = ChargeRow.new parse_line base_charge_row
-            row.charge_structure_id
+              .with(/ChargeCycle table has no records/)
+            row.charge_cycle_id
+          end
+
+          it 'messages on unknown cycle' do
+            charge_cycle_create id: 3, due_on: DueOn.new(day: 10, month: 10)
+            expect($stdout).to receive(:puts)
+              .with(/charge row does not match a charge cycle/)
+            row.charge_cycle_id
           end
         end
 
