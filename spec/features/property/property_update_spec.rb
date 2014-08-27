@@ -8,7 +8,9 @@ describe 'Account Update', type: :feature do
     before(:each) do
       log_in
       client = client_create
-      property_create human_ref: 8000, client_id: client.id
+      property_create human_ref: 8000,
+                      client_id: client.id,
+                      account: account_new
     end
 
     it 'opens valid page', js: true  do
@@ -58,9 +60,11 @@ describe 'Account Update', type: :feature do
     end
 
     it 'adds date charge' do
-      charge_structure_create
+      charge_cycle_create(id: 1, name: 'Mar/Sep')
+      charged_in_create(id: 2, name: 'Advance')
+      cycle_charged_in_create id: 1, charge_cycle_id: 1, charged_in_id: 2
       account.edit
-      account.charge(**(charge_attributes(charge_cycle: 'Mar/Sep',
+      account.charge(**(charge_attributes(charge_cycle_id: 1,
                                           charged_in_id: 2
                                          ).except(:account_id)))
       account.button('Update').successful?(self).edit
@@ -77,8 +81,11 @@ describe 'Account Update', type: :feature do
     end
 
     it 'can be set to dormant', js: true do
-      charge_structure_create
-      property_with_charge_create human_ref: 8000
+      charge_cycle = charge_cycle_create(id: 1, name: 'Mar/Sep')
+      charged_in = charged_in_create(id: 2, name: 'Advance')
+      cycle_charged_in_create id: 1, charge_cycle_id: 1, charged_in_id: 2
+      charge = charge_new(charged_in: charged_in, charge_cycle: charge_cycle)
+      property_create human_ref: 8000, account: account_new(charge: charge)
       account.edit
       expect(page).to have_css('.spec-charge-count', count: 1)
       dormant_checkbox =

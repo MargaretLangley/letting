@@ -21,6 +21,7 @@ module DB
 
     context 'charge on_date' do
       before :each do
+        charged_in_create id: 1, name: 'Arrears'
         charge_cycle_create due_on: DueOn.new(day: 25, month: 3)
         property_create(human_ref: 2002, account: account_new(id: 1))
       end
@@ -63,6 +64,7 @@ module DB
 
     context 'monthly charge' do
       before :each do
+        charged_in_create id: 1, name: 'Arrears'
         charge_cycle_create due_on: DueOn.new(day: 8, month: 0)
         property_create(human_ref: 2002, account: account_new(id: 1))
       end

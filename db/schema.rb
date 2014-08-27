@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140809150357) do
+ActiveRecord::Schema.define(version: 20140827133520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,16 @@ ActiveRecord::Schema.define(version: 20140809150357) do
   add_index "credits", ["account_id"], name: "index_credits_on_account_id", using: :btree
   add_index "credits", ["charge_id"], name: "index_credits_on_charge_id", using: :btree
   add_index "credits", ["payment_id"], name: "index_credits_on_payment_id", using: :btree
+
+  create_table "cycle_charged_ins", force: true do |t|
+    t.integer  "charge_cycle_id"
+    t.integer  "charged_in_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cycle_charged_ins", ["charge_cycle_id"], name: "index_cycle_charged_ins_on_charge_cycle_id", using: :btree
+  add_index "cycle_charged_ins", ["charged_in_id"], name: "index_cycle_charged_ins_on_charged_in_id", using: :btree
 
   create_table "debit_generators", force: true do |t|
     t.string   "search_string", null: false

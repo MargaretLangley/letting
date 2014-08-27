@@ -101,7 +101,7 @@ describe DebitGenerator, type: :model do
       it 'returns accounts matching a query' do
         property_create human_ref: 2002,
                         account: account_new(charge: charge_new)
-        expect(DebitGenerator.new().accounts(query: '2002').size).to eq 1
+        expect(DebitGenerator.new.accounts(query: '2002').size).to eq 1
       end
 
       it 'can set the query string with the initiailzer' do
@@ -113,7 +113,7 @@ describe DebitGenerator, type: :model do
       it 'no accounts when query has no matches' do
         property_create human_ref: 2002,
                         account: account_new(charge: charge_new)
-        expect(DebitGenerator.new().accounts(query: '2003').size).to eq 0
+        expect(DebitGenerator.new.accounts(query: '2003').size).to eq 0
       end
     end
 

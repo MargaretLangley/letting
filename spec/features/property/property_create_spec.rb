@@ -17,22 +17,30 @@ describe Property, type: :feature do
 
   it '#create', js: true   do
     charge_cycle_create(id: 1, name: 'Mar/Sep')
-    charged_in_create(name: 'Arrears')
+    charged_in_create(id: 1, name: 'Arrears')
+    cycle_charged_in_create id: 1, charge_cycle_id: 1, charged_in_id: 1
     account.new
-    fill_in_account
+    fill_in_account property_ref: 278,
+                    client_ref: '8008',
+                    charge_cycle_id: 1,
+                    charged_in_id: 1
     fill_in_agent
-    account.button('Create')
-    account.successful?(self).edit
-    expect_account
+    account.button('Create').successful?(self).edit
+    expect_account property_ref: '278', client_ref: '8008', charged_in_id: 1
     expect_agent
   end
 
   it '#creates a account without agent', js: true do
-    charge_structure_create
+    charge_cycle_create(id: 1, name: 'Mar/Sep')
+    charged_in_create(id: 2, name: 'Advance')
+    cycle_charged_in_create id: 1, charge_cycle_id: 1, charged_in_id: 2
     account.new
-    fill_in_account
+    fill_in_account property_ref: 278,
+                    client_ref: '8008',
+                    charge_cycle_id: 1,
+                    charged_in_id: 2
     account.button('Create').successful?(self).edit
-    expect_account
+    expect_account property_ref: '278', client_ref: '8008', charged_in_id: 2
   end
 
   it '#create has validation', js: true do
@@ -50,13 +58,16 @@ describe Property, type: :feature do
     expect(page).to have_css('.spec-charge-count', count: 4)
   end
 
-  def fill_in_account
-    account.property(self, property_id: '278', client_id: '8008')
+  def fill_in_account(property_ref:,
+                      client_ref:,
+                      charge_cycle_id:,
+                      charged_in_id:)
+    account.property(self, property_id: property_ref, client_id: client_ref)
     account.address(selector: '#property_address',
                     **address_attributes.except(:district))
     account.entity(type: 'property', **person_attributes)
-    account.charge(**(charge_attributes(charge_cycle_id: 1,
-                                        charged_in_id: 2)
+    account.charge(**(charge_attributes(charge_cycle_id: charge_cycle_id,
+                                        charged_in_id: charged_in_id)
            .except(:account_id)))
   end
 
@@ -67,14 +78,16 @@ describe Property, type: :feature do
     account.entity(type: 'property_agent_attributes', **company_attributes)
   end
 
-  def expect_account
-    account.expect_property(self, property_id: '278', client_id: '8008')
+  def expect_account(property_ref:, client_ref:, charged_in_id:)
+    account.expect_property self,
+                            property_id: property_ref,
+                            client_id: client_ref
     account.expect_address(self,
                            type: '#property_address',
                            **address_attributes.except(:district))
     account.expect_entity(self, type: 'property', **person_attributes)
     account.expect_charge(self,
-                          **(charge_attributes(charged_in_id: 2) \
+                          **(charge_attributes(charged_in_id: charged_in_id) \
                             .except(:account_id)))
   end
 

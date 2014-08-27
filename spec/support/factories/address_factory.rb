@@ -12,7 +12,7 @@ def address_create(road: nil, town: nil, county: nil, **args)
   address
 end
 
-def base_address  prepare, **args
+def base_address  _prepare, **args
   address = Address.new min_address_attributes args
   address
 end

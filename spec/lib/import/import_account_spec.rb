@@ -16,7 +16,7 @@ module DB
 
       it 'parsed' do
         property_create(human_ref: 122,
-                       account: account_new(charge: charge_new))
+                        account: account_new(charge: charge_new))
         expect { ImportAccount.import parse debit_with_payment }
           .to change(Payment, :count).by 1
       end
@@ -87,10 +87,14 @@ module DB
       end
 
       it 'parses' do
-        property_create(human_ref: 122,
-                        account: account_new(id: 1, charge: charge_new))
-        property_create(human_ref: 123,
-                        account: account_new(id: 2, charge: charge_new))
+        property_create human_ref: 122,
+                        account: account_new(id: 1, charge: charge_new)
+        # charge_new by default creates a charged_in but this is not wanted
+        # when creating property twice.
+        charge = charge_new(charged_in: nil)
+        property_create human_ref: 123,
+                        account: account_new(id: 2,
+                                             charge: charge)
         expect { import_account two_properties }.to change(Credit, :count).by 2
         expect(Debit.all.size).to eq(2)
         expect(Property.find_by!(human_ref: 122).account.credits.size)

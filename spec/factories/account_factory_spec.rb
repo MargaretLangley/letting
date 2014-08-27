@@ -23,8 +23,9 @@ describe 'Account Factory' do
           .to eq 'Mar/Sep'
       end
       it 'has due_on' do
-        expect(account_new(charge: charge_new).charges[0].charge_cycle.due_ons[0])
-          .to eq DueOn.new(day: 25, month: 3)
+        expect(account_new(charge: charge_new)
+          .charges[0].charge_cycle.due_ons[0])
+            .to eq DueOn.new(day: 25, month: 3)
       end
     end
     describe 'adding debit' do
