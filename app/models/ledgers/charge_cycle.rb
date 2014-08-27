@@ -17,15 +17,14 @@ class ChargeCycle < ActiveRecord::Base
   has_many :charge_structures
   include DueOns
   accepts_nested_attributes_for :due_ons, allow_destroy: true
+  before_validation :clear_up_form
 
   delegate :prepare, to: :due_ons
+  delegate :clear_up_form, to: :due_ons
 
   def due_dates date_range
     due_ons.due_dates(date_range).to_a
   end
-    # charge_cycle_create id: 1
-    # charge_cycle_create name: 'Jan/July'
-    # charge_cycle_create order: 1
 
   def <=> other
     return nil unless other.is_a?(self.class)
@@ -42,21 +41,4 @@ class ChargeCycle < ActiveRecord::Base
     found_date = @range.find date
     found_date ? found_date.date : :missing_due_on
   end
-
-  delegate :clear_up_form, to: :due_ons
-
-  # Require this if we are creating and editing charge_structure
-  # Remove this if we don't
-
-  # def clear_up_form
-  # # FIX_CHARGE
-  #   mark_for_destruction unless edited?
-  #   due_ons.clear_up_form
-  # end
-
-  # def empty?
-  # FIX_CHARGE
-  # maybe should include this - not sure &&
-  #  due_ons.empty?
-  # end
 end
