@@ -16,15 +16,13 @@ module DB
   describe ImportCharge, :import do
     def row
       %q(2002, 2006-12-30 17:17:00, GR, 0, 40.5,  S,) +
-      %q(24, 6, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
+      %q(25, 3, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
     end
 
     context 'charge on_date' do
       before :each do
-        charge_structure_create(charged_in: charged_in_create(id: 1),
-                                charge_cycle: \
-          charge_cycle_create(due_on: DueOn.new(day: 24, month: 6)))
-        property_create human_ref: 2002
+        charge_cycle_create due_on: DueOn.new(day: 25, month: 3)
+        property_create(human_ref: 2002, account: account_new(id: 1))
       end
 
       it 'One row' do
@@ -51,7 +49,7 @@ module DB
       describe 'multiple imports' do
         def updated_row
           %q(2002, 2006-12-30 17:17:00, GR, 0, 30.5,  S,) +
-          %q(24, 6, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
+          %q(25, 3, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
         end
 
         it 'updated changed charge' do
@@ -65,10 +63,8 @@ module DB
 
     context 'monthly charge' do
       before :each do
-        charge_structure_create(charged_in: charged_in_create(id: 1),
-                                charge_cycle: \
-          charge_cycle_create(due_on: DueOn.new(day: 8, month: 0)))
-        property_create human_ref: 2002
+        charge_cycle_create due_on: DueOn.new(day: 8, month: 0)
+        property_create(human_ref: 2002, account: account_new(id: 1))
       end
 
       it 'One monthly row, 12 DueOns' do

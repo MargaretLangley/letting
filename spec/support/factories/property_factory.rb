@@ -1,11 +1,14 @@
-def property_new **args
-  property = base_property args
+def property_new account: nil, agent: nil, client: nil, prepare: false, **args
+  property = base_property prepare, args
   add_no_agent property
+  property.account = account if account
+  property.agent = agent if agent
+  property.client = client if client
   property
 end
 
-def property_create **args
-  (property = property_new args).save!
+def property_create(account: nil, agent: nil, client: nil, **args)
+  (property = property_new(account: account, agent: agent, client: client, **args)).save!
   property
 end
 
@@ -13,17 +16,6 @@ def property_with_agent_create **args
   property = base_property args
   add_agent property
   property.save!
-  property
-end
-
-def property_with_charge_new charge: nil, **args
-  property = base_property args
-  add_no_agent property
-  if charge
-    property.account.charges << charge
-  else
-    add_charge property
-  end
   property
 end
 
@@ -44,9 +36,20 @@ end
 
 private
 
-def base_property **args
+def property_with_charge_new charge: nil, **args
+  property = base_property args
+  add_no_agent property
+  if charge
+    property.account.charges << charge
+  else
+    add_charge property
+  end
+  property
+end
+
+def base_property  prepare, **args
   property = Property.new property_attributes args
-  property.prepare_for_form
+  property.prepare_for_form if prepare
   property.build_address address_attributes args.fetch(:address_attributes, {})
   property.entities.build person_entity_attributes
   property

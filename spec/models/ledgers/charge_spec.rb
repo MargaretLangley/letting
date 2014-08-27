@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Charge, :range, type: :model do
 
   describe 'validations' do
-    before(:each) { charge_structure_create }
+    before(:each) {  }
 
     it('is valid') { expect(charge_new).to be_valid }
     describe 'presence' do
@@ -30,7 +30,7 @@ describe Charge, :range, type: :model do
 
       it 'keeps new charges if edited' do
         charge = Charge.new
-        charge.charge_structure_id = 1
+        charge.charged_in_id = 1
         charge.clear_up_form
         expect(charge).to_not be_marked_for_destruction
       end
@@ -41,9 +41,8 @@ describe Charge, :range, type: :model do
       after(:each)  { Timecop.return }
 
       it 'bills if date range covers a due_on'  do
-        structure = \
-          charge_structure_create due_on_attributes: { day: 25, month: 3 }
-        charge = charge_create charge_structure: structure
+        charge = charge_create charge_cycle: \
+                   charge_cycle_create(due_on: DueOn.new(day: 25, month: 3))
 
         chargeable = ChargeableInfo.from_charge(chargeable_attributes \
           charge_id: charge.id,
@@ -54,9 +53,8 @@ describe Charge, :range, type: :model do
       end
 
       it 'does not bill if no charge is in date range' do
-        structure = \
-          charge_structure_create due_on_attributes: { day: 25, month: 3 }
-        charge = charge_create charge_structure: structure
+        charge = charge_create charge_cycle: \
+                   charge_cycle_create(due_on: DueOn.new(day: 25, month: 3))
         expect(charge.next_chargeable(Date.new(2013, 2, 1)..\
                                       Date.new(2013, 3, 24)))
           .to eq []
@@ -64,9 +62,8 @@ describe Charge, :range, type: :model do
 
       # Would like to move this lower down within charging system
       it 'bills all due_ons within multi-year range - ONCE' do
-        structure = \
-          charge_structure_create due_on_attributes: { day: 25, month: 3 }
-        charge = charge_create charge_structure: structure
+        charge = charge_create charge_cycle: \
+                   charge_cycle_create(due_on: DueOn.new(day: 25, month: 3))
         chargeable = ChargeableInfo.from_charge(chargeable_attributes \
           charge_id: charge.id,
           on_date: Date.new(2013, 3, 25))
@@ -76,9 +73,8 @@ describe Charge, :range, type: :model do
       end
 
       it 'does not bill dormant charges'  do
-        structure = \
-          charge_structure_create due_on_attributes: { day: 25, month: 3 }
-        charge = charge_create charge_structure: structure
+        charge = charge_create charge_cycle: \
+                   charge_cycle_create(due_on: DueOn.new(day: 25, month: 3))
         charge.dormant = true
         expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
                                       Date.new(2013, 3, 25)))
@@ -86,9 +82,8 @@ describe Charge, :range, type: :model do
       end
 
       it 'ignores charges which have debits'  do
-        structure = \
-          charge_structure_create due_on_attributes: { day: 25, month: 3 }
-        charge = charge_create charge_structure: structure
+        charge = charge_create charge_cycle: \
+                   charge_cycle_create(due_on: DueOn.new(day: 25, month: 3))
         charge.debits.build debit_attributes on_date: '2013-3-25'
         expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
                                       Date.new(2016, 3, 25)))

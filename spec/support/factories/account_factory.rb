@@ -1,10 +1,6 @@
-def account_new **args
-  base_account args
-end
-
-def account_and_charge_new **args
+def account_new charge: nil, **args
   account = base_account args
-  add_charge_attributes account, args
+  account.charges << charge if charge
   account
 end
 
@@ -21,10 +17,6 @@ def base_account **args
   account.id = args[:id] if args[:id]
   account.property_id = args[:property_id] if args[:property_id]
   account
-end
-
-def add_charge_attributes account, args
-  account.charges.build charge_attributes args.fetch(:charge_attributes, {})
 end
 
 def add_debit_attribute account, args

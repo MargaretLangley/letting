@@ -51,9 +51,12 @@ module DB
 
     # charge_structure_id is constant found in charge_structure.csv
     # TODO: remove hardcoded charge_structure_id
+    # charged_in_id: 1 = Arrears
+    # FIX_CHARGE check it gets the correct charge_cycle_id
     def create_balance_charge
       Charge.create! charge_type: 'Arrears',
                      charge_structure_id: 14,
+                     charged_in_id: 1,
                      amount: row.amount,
                      account_id: row.account_id,
                      start_date: MIN_DATE,

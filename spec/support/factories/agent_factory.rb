@@ -1,5 +1,8 @@
-def agent_new **args
-  base_agent args
+def agent_new address: address, entities: entities, **args
+  agent = base_agent args
+  agent.address = address if address
+  agent.entities = entities if entities
+  agent
 end
 
 def nameless_agent **args

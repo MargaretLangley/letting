@@ -37,13 +37,15 @@ describe PropertyDecorator do
   describe 'Agent' do
     context 'authorized for property' do
       it 'name returned' do
-        agented_property = PropertyDecorator.new property_with_agent_create
-        expect(agented_property.agent_name).to eq 'Rev V. W. Knutt'
+        agent = agent_new entities: [Entity.new(name: 'Willis') ]
+        property = PropertyDecorator.new property_create agent: agent
+        expect(property.agent_name).to eq 'Willis'
       end
 
       it 'address returned' do
-        agented_property = PropertyDecorator.new property_with_agent_create
-        expect(agented_property.agent_address_lines[0]).to eq 'Flat 33 The Oval'
+        agent = agent_new address: address_new(road: 'Wiggiton')
+        property = PropertyDecorator.new property_create agent: agent
+        expect(property.agent_address_lines[0]).to eq 'Wiggiton'
       end
     end
 

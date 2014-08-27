@@ -23,4 +23,11 @@ describe 'ChargedIn Factory' do
       end
     end
   end
+
+  describe 'charged_in_name' do
+    it 'finds name when present' do
+      charged_in_create id: 2, name: 'Advance'
+      expect(charged_in_name(id: 2)).to eq 'Advance'
+    end
+  end
 end

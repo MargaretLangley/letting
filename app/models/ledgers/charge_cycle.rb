@@ -14,7 +14,7 @@
 class ChargeCycle < ActiveRecord::Base
   include Comparable
   validates :due_ons, presence: true
-  has_many :charge_structures
+  has_many :charges, inverse_of: :charge_cycle
   include DueOns
   accepts_nested_attributes_for :due_ons, allow_destroy: true
 

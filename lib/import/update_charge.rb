@@ -30,7 +30,7 @@ module DB
         @charge = charge
         @charge.start_date = first_debit.on_date if first_debit
         @charge.end_date = last_debit.on_date if stopped_debiting?
-        charge.save!
+        @charge.save!
       end
     end
 
