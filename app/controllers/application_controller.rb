@@ -20,8 +20,13 @@ class ApplicationController < ActionController::Base
 
   delegate :allow?, to: :current_permission
   helper_method :allow?
+  helper_method :search_flag
 
   protected
+
+  def search_flag
+    true
+  end
 
   def address_params
     %i(county district flat_no house_name nation road road_no town type \

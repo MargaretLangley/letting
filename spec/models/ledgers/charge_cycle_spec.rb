@@ -78,7 +78,7 @@ RSpec.describe ChargeCycle, :range, type: :model do
       cycle = ChargeCycle.new(name: 'Mar/Sep')
       cycle.due_ons.build day: 1, month: 1
       cycle.prepare
-      cycle.clear_up_form
+      cycle.valid?
       expect(cycle.due_ons
                   .reject { |due_on| due_on.marked_for_destruction? }.size)
         .to eq(1)

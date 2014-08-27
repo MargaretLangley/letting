@@ -8,12 +8,12 @@
 #
 # How does this fit into the larger system?
 #
-# Charge cycles are used in the ledger accounts to determine when a charge becomes due
+# Charge cycles are used in the ledger accounts to determine
+# when a charge becomes due
 #
 ####
 #
 class ChargeCyclesController < ApplicationController
-
   def index
     @charge_cycles = ChargeCycle.all
   end
@@ -33,7 +33,8 @@ class ChargeCyclesController < ApplicationController
   def update
     @charge_cycle = ChargeCycle.find params[:id]
     if @charge_cycle.update charge_cycles_params
-      redirect_to charge_cycles_path, flash: {save: charge_cycle_updated_message}
+      redirect_to charge_cycles_path,
+                  flash: { save: charge_cycle_updated_message }
     else
       render :edit
     end
@@ -42,7 +43,8 @@ class ChargeCyclesController < ApplicationController
   def create
     @charge_cycle = ChargeCycle.new charge_cycles_params
     if @charge_cycle.save
-      redirect_to charge_cycles_path, flash: {save: charge_cycle_created_message}
+      redirect_to charge_cycles_path,
+                  flash: { save: charge_cycle_created_message }
     else
       render :new
     end
@@ -50,18 +52,22 @@ class ChargeCyclesController < ApplicationController
 
   def destroy
     @charge_cycle = ChargeCycle.find(params[:id])
-    alert_message = charge_cycle_deleted_message
     @charge_cycle.destroy
     redirect_to charge_cycles_path, alert: charge_cycle_deleted_message
   end
 
   private
 
+  def search_flag
+    false
+  end
+
   def charge_cycles_params
     params
     .require(:charge_cycle)
     .permit :name, :order,
-     due_ons_attributes: [:id, :charge_cycle_id, :day, :month, :year ]
+            due_ons_attributes: [:id, :charge_cycle_id, :day,
+                                 :month, :year]
   end
 
   def identy
@@ -79,5 +85,4 @@ class ChargeCyclesController < ApplicationController
   def charge_cycle_deleted_message
     "#{identy} successfully deleted!"
   end
-
 end
