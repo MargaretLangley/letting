@@ -1,12 +1,7 @@
-def account_new charge: nil, **args
+def account_new charge: nil, debit: nil, **args
   account = base_account args
   account.charges << charge if charge
-  account
-end
-
-def account_and_debit **args
-  account = base_account args
-  add_debit_attribute account, args
+  account.debits << debit if debit
   account
 end
 

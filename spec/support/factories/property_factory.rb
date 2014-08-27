@@ -1,4 +1,8 @@
-def property_new account: nil, agent: nil, client: nil, prepare: false, **args
+def property_new account: nil,
+                 agent: nil,
+                 client: nil,
+                 prepare: false,
+                 **args
   property = base_property prepare, args
   add_no_agent property
   property.account = account if account
@@ -7,8 +11,14 @@ def property_new account: nil, agent: nil, client: nil, prepare: false, **args
   property
 end
 
-def property_create(account: nil, agent: nil, client: nil, **args)
-  (property = property_new(account: account, agent: agent, client: client, **args)).save!
+def property_create account: nil,
+                    agent: nil,
+                    client: nil,
+                    **args
+  (property = property_new(account: account,
+                           agent: agent,
+                           client: client,
+                           **args)).save!
   property
 end
 
@@ -21,16 +31,6 @@ end
 
 def property_with_charge_create **args
   (property = property_with_charge_new args).save!
-  property
-end
-
-# when your running full specs I haven't found reliable way of guaranteeing
-# a primary key will be set to a value. This is a hack to save the object
-# get the key value and put it into the debit - not nice
-def property_with_charge_and_unpaid_debit
-  (property = property_with_charge_new).save!
-  property.account.debits.build debit_attributes \
-    charge_id: property.account.charges.first.id
   property
 end
 

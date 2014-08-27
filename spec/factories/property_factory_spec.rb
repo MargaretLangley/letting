@@ -97,14 +97,5 @@ describe 'Property Factory' do
         property_with_charge_create(charge: charge_create)
       end.to_not raise_error
     end
-
-    context 'and unpaid debit' do
-      it 'generated (property created & debited new)' do
-        charge_create
-        property = property_with_charge_and_unpaid_debit
-        property.account.prepare_for_form
-        expect(property.account.debits.size).to eq(1)
-      end
-    end
   end
 end
