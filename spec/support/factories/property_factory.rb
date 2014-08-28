@@ -29,23 +29,7 @@ def property_with_agent_create **args
   property
 end
 
-def property_with_charge_create **args
-  (property = property_with_charge_new args).save!
-  property
-end
-
 private
-
-def property_with_charge_new charge: nil, **args
-  property = base_property args
-  add_no_agent property
-  if charge
-    property.account.charges << charge
-  else
-    add_charge property
-  end
-  property
-end
 
 def base_property  prepare, **args
   property = Property.new property_attributes args
@@ -63,8 +47,4 @@ def add_agent bill_me
   bill_me.build_agent authorized: true
   bill_me.agent.build_address oval_address_attributes
   bill_me.agent.entities.build oval_person_entity_attributes
-end
-
-def add_charge charge_me
-  charge_me.account.charges.build charge_attributes
 end
