@@ -37,7 +37,7 @@ describe PropertyDecorator do
   describe 'Agent' do
     context 'authorized for property' do
       it 'name returned' do
-        agent = agent_new entities: [Entity.new(name: 'Willis') ]
+        agent = agent_new entities: [Entity.new(name: 'Willis')]
         property = PropertyDecorator.new property_create agent: agent
         expect(property.agent_name).to eq 'Willis'
       end

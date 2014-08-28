@@ -7,12 +7,11 @@ describe Property, type: :feature do
   before(:each) { log_in }
 
   it 'shows record' do
-    property = property_create \
-      id: 1,
-      human_ref: 1000,
-      agent: agent_new(entities: [Entity.new(name: 'Bell') ],
-                       address:(address_new road: 'Wiggiton')),
-      account: account_new
+    property_create id: 1,
+                    human_ref: 1000,
+                    agent: agent_new(entities: [Entity.new(name: 'Bell')],
+                                     address: address_new(road: 'Wiggiton')),
+                    account: account_new
     visit '/properties/1'
     expect(page.title).to eq 'Letting - View Account'
     expect_property entity: 'Mr W. G. Grace'
@@ -27,7 +26,7 @@ describe Property, type: :feature do
 
   def expect_agent_info entity: entity, road: road
     expect(page).to have_text entity
-    [ road ].each do |line|
+    [road].each do |line|
       expect(page).to have_text line
     end
   end

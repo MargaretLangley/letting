@@ -3,12 +3,14 @@ require 'rails_helper'
 describe Charge, :range, type: :model do
 
   describe 'validations' do
-    before(:each) {  }
-
     it('is valid') { expect(charge_new).to be_valid }
     describe 'presence' do
       it('charge type') { expect(charge_new charge_type: nil).to_not be_valid }
       it('amount') { expect(charge_new amount: nil).to_not be_valid }
+      it('charge_cycle') do
+        expect(charge_new charge_cycle: nil).to_not be_valid
+      end
+      it('charged_in') { expect(charge_new charged_in: nil).to_not be_valid }
     end
     describe 'amount' do
       it('is a number') { expect(charge_new amount: 'nn').to_not be_valid }

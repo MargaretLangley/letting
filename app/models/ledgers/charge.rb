@@ -19,7 +19,7 @@ class Charge < ActiveRecord::Base
   belongs_to :charged_in, inverse_of: :charges
   belongs_to :charge_cycle, inverse_of: :charges
   delegate :name, to: :charged_in, prefix: true
-  validates :charge_type, presence: true
+  validates :charge_type, :charge_cycle, :charged_in, presence: true
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
   has_many :debits, dependent: :destroy do

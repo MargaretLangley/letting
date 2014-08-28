@@ -90,7 +90,6 @@ module DB
       max_dates
     end
 
-
     def day number
       @source[:"day_#{number}"].to_i
     end

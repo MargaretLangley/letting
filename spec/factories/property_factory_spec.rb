@@ -36,7 +36,7 @@ describe 'Property Factory' do
   end
 
   describe 'create' do
-    it('valid') { expect(property_create ).to be_valid }
+    it('valid') { expect(property_create).to be_valid }
 
     describe 'default' do
       it('has human_ref') { expect(property_create.human_ref).to eq 2002 }
@@ -50,18 +50,18 @@ describe 'Property Factory' do
 
     describe 'adding' do
       it 'can add charge' do
-        property = property_create(account: account_new(charge: charge_new))
+        property_create(account: account_new(charge: charge_new))
         expect(Property.first.account.charges[0].charge_type)
           .to eq 'Ground Rent'
       end
 
       it 'can add agent' do
-        property = property_create agent: agent_new
+        property_create agent: agent_new
         expect(Property.first.agent.entities.full_name).to eq 'Mr W. G. Grace'
       end
 
       it 'can add client' do
-        property = property_create client: client_create(human_ref: 202)
+        property_create client: client_create(human_ref: 202)
         expect(Property.first.client.human_ref).to eq 202
       end
     end
@@ -75,7 +75,7 @@ describe 'Property Factory' do
       end
 
       it 'has charged_in' do
-        skip 'for now' #FIX_CHARGE
+        skip 'for now' # FIX_CHARGE
         property_with_charge_create(charge: charge_create)
         expect(ChargedIn.first.name).to eq 'Advance'
       end
@@ -96,15 +96,6 @@ describe 'Property Factory' do
       expect do
         property_with_charge_create(charge: charge_create)
       end.to_not raise_error
-    end
-
-    context 'and unpaid debit' do
-      it 'generated (property created & debited new)' do
-        charge_create
-        property = property_with_charge_and_unpaid_debit
-        property.account.prepare_for_form
-        expect(property.account.debits.size).to eq(1)
-      end
     end
   end
 end

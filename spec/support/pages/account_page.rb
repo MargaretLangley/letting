@@ -104,20 +104,23 @@ class AccountPage
              charged_in_id:, amount:, start_date: '', end_date: '')
     id_stem = "property_account_attributes_charges_attributes_#{order}"
     fill_in "#{id_stem}_charge_type", with: charge_type
-    select(charge_cycle_name(id: charge_cycle_id), from: "charge_cycle_#{order}")
-    select(charged_in_name(id: charged_in_id), from: "#{id_stem}_charge_structure_id")
+    select(charge_cycle_name(id: charge_cycle_id),
+           from: "#{id_stem}_charge_cycle_id")
+    select(charged_in_name(id: charged_in_id), from: "#{id_stem}_charged_in_id")
     fill_in "#{id_stem}_amount", with: amount
     # fill_in "#{id_stem}_start_date", with: start_date if start_date.present?
     # fill_in "#{id_stem}_end_date", with: start_date if end_date.present?
   end
 
-  def expect_charge(spec, order: 0, charge_type:, charge_structure_id:,
+  def expect_charge(spec, order: 0, charge_type:, charge_cycle_id:,
                     charged_in_id:, amount:, start_date: '', end_date: '')
     id_stem = "property_account_attributes_charges_attributes_#{order}"
     spec.expect(find_field("#{id_stem}_charge_type").value).to \
       spec.have_text charge_type
-    spec.expect(find_field("charge_cycle_#{order}")).to \
-      spec.have_text('Mar/Sep')
+    spec.expect(find_field("#{id_stem}_charge_cycle_id")).to \
+      spec.have_text charge_cycle_name id: charge_cycle_id
+    spec.expect(find_field("#{id_stem}_charged_in_id")).to \
+      spec.have_text charged_in_name id: charged_in_id
     spec.expect(find_field("#{id_stem}_amount").value).to spec.have_text amount
   end
 

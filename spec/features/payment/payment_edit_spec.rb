@@ -48,7 +48,8 @@ describe Payment, type: :feature do
   before(:each) { log_in }
 
   it 'payment for debit - no double payments', js: true do
-    skip 'works if have save_and_open_page pfft'
+    skip '# FIX_CHARGE'
+    # skip 'works if have save_and_open_page pfft'
     payment = create_payment_to_edit
     payment_edit_page.visit_edit_page(payment.id)
     payment_edit_page.payment 44.00
@@ -70,7 +71,8 @@ describe Payment, type: :feature do
   def create_payment_to_edit
     # I am using payment.create before running edit
     # This dependency makes it very fragile. Needs replacing
-    (property = property_with_charge_and_unpaid_debit).save!
+    property = \
+      property_create account: account_new(charge: charge_new, debit: debit_new)
     payment_page.visit_new_page
     payment_page.human_ref('2002').search
     payment_page.payment 88.08

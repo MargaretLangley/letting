@@ -250,26 +250,10 @@ def seed_charges
   create_account
 end
 
-def create_charge_cycle
-  ChargeCycle.create! [
-    { id: 1,  name: 'Mar/Sep', order: 1 },
-    { id: 2,  name: 'Jun/Dec', order: 2 },
-  ]
-end
-
-def create_due_ons
-  DueOn.create! [
-    { id: 1,  day: 25,  month: 3, charge_cycle_id: 1 },
-    { id: 2,  day: 29,  month: 9, charge_cycle_id: 1 },
-    { id: 3,  day: 25,  month: 6, charge_cycle_id: 2 },
-    { id: 4,  day: 29,  month: 12, charge_cycle_id: 2 },
-  ]
-end
-
 def create_charges
   Rake::Task['db:import:charged_ins'].invoke
-  create_due_ons
   create_charge_cycle
+  create_cycle_charged_ins
 
   Charge.create! [
     { id: 1,             charge_type: 'Ground Rent',    charge_cycle_id: 1,  charged_in_id: 1,
@@ -280,6 +264,27 @@ def create_charges
       amount: '70.00',   account_id: 2 },
     { id: 4,             charge_type: 'Service Charge', charge_cycle_id: 1, charged_in_id: 2,
       amount: '70.00',   account_id: 3 },
+  ]
+end
+
+def create_charge_cycle
+  DueOn.create! [
+    { id: 1,  day: 25,  month: 3, charge_cycle_id: 1 },
+    { id: 2,  day: 29,  month: 9, charge_cycle_id: 1 },
+    { id: 3,  day: 25,  month: 6, charge_cycle_id: 2 },
+    { id: 4,  day: 29,  month: 12, charge_cycle_id: 2 },
+  ]
+  ChargeCycle.create! [
+    { id: 1,  name: 'Mar/Sep', order: 1 },
+    { id: 2,  name: 'Jun/Dec', order: 2 },
+  ]
+end
+
+def create_cycle_charged_ins
+  CycleChargedIn.create! [
+    { id: 1, charge_cycle_id: 1, charged_in_id: 1 },
+    { id: 2, charge_cycle_id: 1, charged_in_id: 2 },
+    { id: 3, charge_cycle_id: 2, charged_in_id: 1 },
   ]
 end
 

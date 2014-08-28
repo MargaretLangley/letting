@@ -95,7 +95,7 @@ class PropertiesController < ApplicationController
   end
 
   def charges_params
-    %i(id charge_type charged_in_id charge_structure_id amount dormant)
+    %i(id charge_type charge_cycle_id charged_in_id amount dormant)
   end
 
   def identy
