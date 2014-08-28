@@ -100,7 +100,9 @@ describe 'Account Update', type: :feature do
     before(:each) do
       log_in
       client = client_create
-      property_with_agent_create human_ref: 8000, client_id: client.id
+      agent = agent_new entities: [Entity.new(name: 'Willis')],
+                        address: address_new(road: 'Wiggiton')
+      property_create agent: agent, client: client
       account.edit
     end
 
@@ -108,10 +110,10 @@ describe 'Account Update', type: :feature do
       expect(find_field('Agent')).to be_checked
       account.expect_address(self,
                              type: '#property_agent_address',
-                             **oval_address_attributes)
+                             **min_address_attributes(road: 'Wiggiton'))
       account.expect_entity(self,
                             type: 'property_agent_attributes',
-                            **oval_person_entity_attributes)
+                            name: 'Willis')
     end
 
     it 'updates agent' do
