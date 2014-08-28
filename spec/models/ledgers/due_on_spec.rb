@@ -122,9 +122,39 @@ describe DueOn, type: :model do
     end
 
     describe '#clear_up_form' do
-      it 'is destroyed when empty' do
-        # FIX_CHARGE
-        skip 'FIX_CHARGE'
+      class DummyDueOns
+        def initialize new: true
+          @new = new
+        end
+        def new?
+          @new
+        end
+      end
+      context 'new' do
+        it 'saveable when valid' do
+          due_on = due_on_new day: 1, month: nil
+          due_on.clear_up_form DummyDueOns.new new: true
+          expect(due_on).to_not be_marked_for_destruction
+        end
+
+        it 'destroyed when invalid' do
+          due_on = due_on_new day: nil, month: nil
+          due_on.clear_up_form DummyDueOns.new new: true
+          expect(due_on).to be_marked_for_destruction
+        end
+      end
+      context 'previously saved' do
+        it 'saved if parent is saved' do
+          due_on = due_on_create day: 1, month: 1
+          due_on.clear_up_form DummyDueOns.new new: false
+          expect(due_on).to_not be_marked_for_destruction
+        end
+
+        it 'destroyed if parent is new' do
+          due_on = due_on_create day: 1, month: 1
+          due_on.clear_up_form DummyDueOns.new new: true
+          expect(due_on).to be_marked_for_destruction
+        end
       end
     end
 
