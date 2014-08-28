@@ -13,24 +13,30 @@ describe 'Account Factory' do
       end
       it('has no charge') { expect(Charge.count).to eq 0 }
     end
-    describe 'adding charge' do
-      it 'has charge' do
+    describe 'adding' do
+      it 'can add charge' do
         expect(account_new(charge: charge_new).charges[0].charge_type)
           .to eq 'Ground Rent'
       end
-      it 'has charge_cycle' do
+      it 'can add charge_cycle' do
         expect(account_new(charge: charge_new).charges[0].charge_cycle.name)
           .to eq 'Mar/Sep'
       end
-      it 'has due_on' do
+      it 'can add due_on' do
         expect(account_new(charge: charge_new)
           .charges[0].charge_cycle.due_ons[0])
             .to eq DueOn.new(day: 25, month: 3)
       end
-    end
-    describe 'adding debit' do
       it 'can add debit' do
         expect(account_new(debit: debit_new(amount: 17)).debits[0].amount)
+          .to eq 17
+      end
+      it 'can add credit' do
+        expect(account_new(credit: credit_new(amount: 17)).credits[0].amount)
+          .to eq 17
+      end
+      it 'can add payment' do
+        expect(account_new(payment: payment_new(amount: 17)).payments[0].amount)
           .to eq 17
       end
     end
