@@ -1,3 +1,14 @@
+#####
+#
+# SearchSuggestion
+#
+# Adds autosuggestion to forms - see properties.js.coffee.
+# Code from Railscasts - not fully hooked up - requires indexing
+# which needs to be automated.
+# http://railscasts.com/episodes/102-auto-complete-association-revised
+#
+# TODO: Decide if you want to keep it.
+#
 class SearchSuggestion < ActiveRecord::Base
   def self.terms_for prefix
     suggestions = where('term ilike ?', "#{prefix}_%")

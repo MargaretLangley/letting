@@ -1,3 +1,13 @@
+####
+#
+# AuthMacros
+#
+# functional tests require that the test user logs in to the system.
+# These macros allow all functional tests to login.
+#  - Included through the rails helper
+#
+####
+#
 module AuthMacros
   def log_in **attributes
     current_user = User.create! user_attributes attributes

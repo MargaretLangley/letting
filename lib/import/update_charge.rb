@@ -1,18 +1,18 @@
-####
-#
-# UpdateCharge
-#
-# Charges run from a start_date to an end date. The previous system
-# deleted charges that were stopped. This system bands the range
-# that a charge has been active. It has to derive this data from
-# debits that have been made against the charge.
-#
-# UpdateCharge requires Charges and debits to be loaded into the
-# database to work.
-#
-####
-#
 module DB
+  ####
+  #
+  # UpdateCharge
+  #
+  # Charges run from a start_date to an end date. The previous system
+  # deleted charges that were stopped. This system bands the range
+  # that a charge has been active. It has to derive this data from
+  # debits that have been made against the charge.
+  #
+  # UpdateCharge requires Charges and debits to be loaded into the
+  # database to work.
+  #
+  ####
+  #
   class UpdateCharge
     def self.do
       new.update

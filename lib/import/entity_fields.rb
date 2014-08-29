@@ -2,7 +2,19 @@ require_relative '../modules/method_missing'
 require_relative 'errors'
 
 module DB
-  class EntityRow
+  ####
+  #
+  # EntityFields
+  #
+  # Wraps around the entity fields used in a row.
+  #
+  # Entity row provides an interface to fields used for importing contact
+  # rows (contact rows are found in agent (import_agent), client(import_client)
+  # and property data (import_property).
+  #
+  ####
+  #
+  class EntityFields
     def initialize title, initials, name
       @title = top_punctuation(title).strip
       @initials = initials.strip

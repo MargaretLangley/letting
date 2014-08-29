@@ -1,3 +1,17 @@
+####
+#
+# SearchDate
+#
+# Validates a date and converts it into a datetime covering
+# that date. Used for Payment search which requires you to
+# search a day.
+#
+# Matching a DateTime is awkward - either you round it to the nearest date
+# (can be a problem as it's impossible to reverse the process) or you form
+# a range. This is the range soluiton.
+#
+####
+#
 class SearchDate
   def initialize date
     @date = date

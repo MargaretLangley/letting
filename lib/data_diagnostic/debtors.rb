@@ -1,3 +1,12 @@
+####
+#
+# Debtors
+#
+# Data Analysis - picks out the problem (in debt) accounts - for further
+# testing.
+#
+####
+#
 class Debtors
   attr_reader :account
   attr_reader :human_ref_range

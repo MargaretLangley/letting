@@ -1,4 +1,19 @@
 module DB
+  ####
+  # PatchModel
+  #
+  # Holds the information used to correct models which contain incorrect data.
+  #
+  #
+  # Patch.rb reads in patch files and creates a collection of PatchModels -
+  # these objects. The models can then match and update models with 'wrong'
+  # information during the general import.
+  #
+  # see patch.rb for more information
+  #
+  # rubocop: disable Rails/Output
+  ###
+  #
   class PatchModel
     def initialize model
       @model = model
@@ -13,7 +28,6 @@ module DB
       # Import is not a rails app and should not go to logger
       # Comment not at top because I want violation for not
       # documenting class
-      # rubocop: disable Rails/Output
       puts changed_message patchee_model if changed
       changed
     end

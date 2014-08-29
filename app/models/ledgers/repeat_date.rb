@@ -1,3 +1,14 @@
+####
+#
+# RepeatDate
+#
+# Abstraction for repeating dates (day month combinations
+# that appear every year).
+#
+# TODO: Do we need this abstraction?
+#
+####
+#
 class RepeatDate
   include Comparable
   attr_reader :date
