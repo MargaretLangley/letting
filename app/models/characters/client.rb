@@ -1,6 +1,8 @@
 ####
 #
-# A client is paid by the letting agency for collected payments
+# Client
+#
+# Clients
 #
 # Clients have a number of properties. Clients have an address
 # and contact information (address and entity).

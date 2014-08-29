@@ -1,3 +1,15 @@
+####
+#
+# User
+#
+# User represents a login into the application
+#
+# A new user has to be checked for a valid email
+# and the password has to be confirmed.
+#
+#
+####
+#
 class User < ActiveRecord::Base
   has_secure_password
   validates :nickname, presence: true

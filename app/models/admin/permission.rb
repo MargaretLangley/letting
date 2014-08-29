@@ -16,6 +16,8 @@
 #                                and edit users but otherwise the same as a
 #                                user
 #
+# rubocop: disable Style/MethodLength
+#
 ####
 #
 class Permission < Struct.new(:user)
