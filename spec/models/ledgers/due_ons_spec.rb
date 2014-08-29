@@ -135,7 +135,6 @@ describe DueOns, type: :model do
         cycle = ChargeCycle.new id: 1
         cycle.due_ons.prepare
         cycle.due_ons.build day: 5, month: -1
-        cycle.clear_up_form
         cycle.save!
         load = ChargeCycle.find(cycle.id)
         expect(load.due_ons.size).to eq(12)
@@ -145,12 +144,10 @@ describe DueOns, type: :model do
         charge_per_date = ChargeCycle.new id: 1
         charge_per_date.prepare
         charge_per_date.due_ons.build day: 24, month: -1
-        charge_per_date.clear_up_form
         charge_per_date.save!
         charge_diff_date = ChargeCycle.find(charge_per_date.id)
         charge_diff_date.prepare
         charge_diff_date.due_ons.build day: 10, month: -1
-        charge_diff_date.clear_up_form
         charge_diff_date.save!
         charge_reload = ChargeCycle.find(charge_per_date.id)
         expect(charge_reload.due_ons.size).to eq(12)
@@ -160,12 +157,10 @@ describe DueOns, type: :model do
         charge = ChargeCycle.new id: 1
         charge.prepare
         charge.due_ons.build day: 24, month: -1
-        charge.clear_up_form
         charge.save!
         reload = ChargeCycle.find(charge.id)
         reload.prepare
         reload.due_ons.build day: 24, month: -1
-        reload.clear_up_form
         reload.save!
         reload2 = ChargeCycle.find(charge.id)
         reload2.prepare
@@ -177,12 +172,10 @@ describe DueOns, type: :model do
         charge.due_ons.build day: 24, month: 6
         charge.due_ons.build day: 25, month: 12
         charge.prepare
-        charge.clear_up_form
         charge.save!
         reload = ChargeCycle.find(charge.id)
         reload.prepare
         reload.due_ons.build day: 10, month: -1
-        reload.clear_up_form
         reload.save!
         reload2 = ChargeCycle.find(charge.id)
         expect(reload2.due_ons.size).to eq(12)
@@ -192,13 +185,11 @@ describe DueOns, type: :model do
         charge = ChargeCycle.new id: 1
         charge.prepare
         charge.due_ons.build day: 24, month: -1
-        charge.clear_up_form
         charge.save!
         reload = ChargeCycle.find(charge.id)
         reload.prepare
         reload.due_ons.build day: 1, month: 5
         reload.due_ons.build day: 1, month: 11
-        reload.clear_up_form
         reload.save!
         reload2 = ChargeCycle.find(charge.id)
         expect(reload2.due_ons.size).to eq(2)

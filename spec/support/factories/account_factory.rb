@@ -1,4 +1,4 @@
-def account_new charge: nil, credit: nil, debit: nil, payment: nil,**args
+def account_new charge: nil, credit: nil, debit: nil, payment: nil, **args
   account = base_account args
   account.charges << charge if charge
   account.credits << credit if credit

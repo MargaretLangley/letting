@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+# rubocop: disable Style/TrivialAccessors
+
 describe DueOn, type: :model do
 
   let(:due_on) { DueOn.new due_on_attributes_0 charge_cycle_id: 1 }
@@ -126,6 +128,7 @@ describe DueOn, type: :model do
         def initialize new: true
           @new = new
         end
+
         def new?
           @new
         end

@@ -7,6 +7,9 @@ describe 'DueOn Factory' do
   end
 
   describe 'created' do
-    it('can be created') { expect(due_on_create day: 1, month: 1).to be_persisted }
+    it('can be created') do
+      expect(due_on_create day: 1, month: 1)
+        .to be_persisted
+    end
   end
 end

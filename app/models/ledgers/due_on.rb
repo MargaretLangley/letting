@@ -75,6 +75,14 @@ class DueOn < ActiveRecord::Base
 
   private
 
+  def to_s
+    "id: #{id.inspect}, " \
+    "day: #{day.inspect}, " \
+    "month: #{month.inspect}, " \
+    "year: #{year.inspect}, " \
+    "Destroy?: #{marked_for_destruction?} "
+  end
+
   def ignored_attrs
     %w(id charge_cycle_id created_at updated_at)
   end
