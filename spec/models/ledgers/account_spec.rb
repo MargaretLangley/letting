@@ -11,25 +11,19 @@ describe Account, type: :model do
 
     describe '#prepare_debits' do
       it 'generates debits when charges due' do
-        # FIX_CHARGE charge_new should take dates to
-        # stop mystery guest
-        account = account_new charge: charge_new
-        debits = account.prepare_debits(date_when_charged)
+        account = account_new charge: charge_new(charge_cycle: \
+          charge_cycle_create(due_on: DueOn.new(day: 25, month: 3)))
+        debits = account.prepare_debits(\
+                           Date.new(2013, 3, 25)..Date.new(2013, 3, 25))
         expect(debits.size).to eq(1)
       end
 
       it 'no debits when no charges due' do
-        account = account_new charge: charge_new
-        debits = account.prepare_debits(date_not_charged)
+        account = account_new charge: charge_new(charge_cycle: \
+          charge_cycle_create(due_on: DueOn.new(day: 25, month: 3)))
+        debits = account.prepare_debits(\
+                          Date.new(2013, 3, 26)..Date.new(2013, 3, 26))
         expect(debits.size).to eq(0)
-      end
-
-      def date_when_charged
-        Date.new(2013, 3, 25)..Date.new(2013, 3, 25)
-      end
-
-      def date_not_charged
-        Date.new(2013, 3, 26)..Date.new(2013, 3, 26)
       end
     end
 

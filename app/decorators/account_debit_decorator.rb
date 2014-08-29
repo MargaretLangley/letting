@@ -1,5 +1,13 @@
 require_relative '../../lib/modules/method_missing'
 
+###
+#
+# AccountDebitDecorator
+#
+# Adds display logic to the debit business object.
+#
+##
+#
 class AccountDebitDecorator
   include MethodMissing
   include ActionView::Helpers::NumberHelper

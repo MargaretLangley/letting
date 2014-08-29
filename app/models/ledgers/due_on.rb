@@ -54,7 +54,7 @@ class DueOn < ActiveRecord::Base
 
   def clear_up_form due_ons
     mark_for_destruction if empty?
-    mark_for_destruction if due_ons.new? && self.persisted?
+    mark_for_destruction if self.persisted? && due_ons.new?
   end
 
   def empty?
@@ -74,6 +74,14 @@ class DueOn < ActiveRecord::Base
   end
 
   private
+
+  def to_s
+    "id: #{id.inspect}, " \
+    "day: #{day.inspect}, " \
+    "month: #{month.inspect}, " \
+    "year: #{year.inspect}, " \
+    "Destroy?: #{marked_for_destruction?} "
+  end
 
   def ignored_attrs
     %w(id charge_cycle_id created_at updated_at)

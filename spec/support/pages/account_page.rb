@@ -48,7 +48,7 @@ class AccountPage
     spec.fill_autocomplete('property_client_ref', with: client_id)
   end
 
-  def expect_entity(spec, type:, order: 0, title:, initials:, name:)
+  def expect_entity(spec, type:, order: 0, title: '', initials: '', name:)
     id_stem = "#{type}_entities_attributes_#{order}"
     spec.expect(find_field("#{id_stem}_title").value).to spec.have_text title
     spec.expect(find_field("#{id_stem}_initials").value).to \

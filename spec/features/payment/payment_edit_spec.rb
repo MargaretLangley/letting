@@ -48,9 +48,11 @@ describe Payment, type: :feature do
   before(:each) { log_in }
 
   it 'payment for debit - no double payments', js: true do
-    skip '# FIX_CHARGE'
-    # skip 'works if have save_and_open_page pfft'
-    payment = create_payment_to_edit
+    skip 'sort out payments when charges settled'
+    payment = payment_new
+    property_create account: account_new(charge: charge_new,
+                                         debit: debit_new,
+                                         payment: payment)
     payment_edit_page.visit_edit_page(payment.id)
     payment_edit_page.payment 44.00
     payment_edit_page.update_payment
@@ -59,25 +61,15 @@ describe Payment, type: :feature do
 
   context 'error' do
     it 'handles errors' do
-      skip
-      payment = create_payment_to_edit
+      skip 'sort out payments when charges settled'
+      payment = payment_new
+      property_create account: account_new(charge: charge_new,
+                                           debit: debit_new,
+                                           payment: payment)
       payment_edit_page.visit_edit_page(payment.id)
       payment_edit_page.payment(100_000_000)
       payment_edit_page.update_payment
       expect(payment_edit_page).to be_errored
     end
   end
-
-  def create_payment_to_edit
-    # I am using payment.create before running edit
-    # This dependency makes it very fragile. Needs replacing
-    property = \
-      property_create account: account_new(charge: charge_new, debit: debit_new)
-    payment_page.visit_new_page
-    payment_page.human_ref('2002').search
-    payment_page.payment 88.08
-    payment_page.click_create_payment
-    property.account.payments.first
-  end
-
 end

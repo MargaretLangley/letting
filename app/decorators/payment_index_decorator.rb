@@ -1,3 +1,9 @@
+#######
+#
+# PaymentIndexDecorator
+#
+# Adds display logic to payment business object.
+#
 class PaymentIndexDecorator
   include MethodMissing
   extend ActiveModel::Callbacks

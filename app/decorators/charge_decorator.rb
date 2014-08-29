@@ -1,3 +1,9 @@
+###
+# ChargeDecorator
+#
+# Adds display logic to the charge business object.
+##
+#
 class ChargeDecorator
   include MethodMissing
   attr_reader :source

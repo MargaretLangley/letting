@@ -1,11 +1,13 @@
 require_relative '../../lib/modules/method_missing'
 
+####
+#
 # AccountDecorator
 #
 # AccountDecorator prepares credits and debits and allows them
 # to be viewed
 #
-#
+####
 #
 class AccountDecorator
   include MethodMissing

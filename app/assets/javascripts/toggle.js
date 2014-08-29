@@ -5,6 +5,9 @@
 //    slide it's js-togglable chidren
 // 4) Trigger toggleEventHandler - which moves up the DOM until it is handled
 // 5) Hits the js-clear handler (or not) which clears the html component
+//
+// Toggle used in Address.html and the address_decorator -
+// see address_decorator for further information.
 
 $( document ).ready(function() {
   // Initialization of check box state

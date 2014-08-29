@@ -1,7 +1,7 @@
 require_relative '../../lib/modules/method_missing'
 ####
 #
-# PropertyDecorator
+# PaymentDecorator
 #
 # Adds behavior to the payment object
 #
@@ -30,7 +30,7 @@ class PaymentDecorator
   # role in the payment - hence decorator.
   attr_accessor :human_ref
 
-  def initialize(payment, human_ref:)
+  def initialize(payment, human_ref: nil)
     @source = payment
     @human_ref = human_ref
     # Hackfix to get credits negative when saving in the payments

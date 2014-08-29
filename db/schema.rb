@@ -58,16 +58,6 @@ ActiveRecord::Schema.define(version: 20140827133520) do
     t.datetime "updated_at"
   end
 
-  create_table "charge_structures", force: true do |t|
-    t.integer  "charged_in_id"
-    t.integer  "charge_cycle_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "charge_structures", ["charge_cycle_id"], name: "index_charge_structures_on_charge_cycle_id", using: :btree
-  add_index "charge_structures", ["charged_in_id"], name: "index_charge_structures_on_charged_in_id", using: :btree
-
   create_table "charged_ins", force: true do |t|
     t.string   "name",       null: false
     t.datetime "created_at"

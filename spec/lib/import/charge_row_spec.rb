@@ -104,8 +104,7 @@ module DB
           end
 
           it 'yields month charges' do
-            # FIX_CHARGE
-            skip 'FIX_CHARGE Need month charge to be defined ... if anything?'
+            skip '# FIX_CHARGE Need month charge to be defined ... if anything?'
             # row = ChargeRow.new parse_line charge_monthly_row
             # yielded_values = []
             # row.each do |day, month|

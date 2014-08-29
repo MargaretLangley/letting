@@ -29,9 +29,3 @@ Style/TrailingComma:
   Enabled: false
 Style/UnneededPercentQ:
   Enabled: false
-
-#
-# Styles we are trying to put into our code!
-# Offense count: 28
-Style/Documentation:
- Enabled: false
