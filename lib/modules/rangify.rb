@@ -1,3 +1,14 @@
+####
+#
+# Rangify
+#
+# Class for coping with range string represenation
+#
+# Rangify is used for the rake tasks to handle string representations of ranges
+# Used to turn strings with dashes (-) into integer arrays.
+#
+####
+#
 class Rangify
   attr_reader :range_as_str
 

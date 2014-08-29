@@ -1,6 +1,6 @@
 require_relative 'import_base'
 require_relative 'property_row'
-require_relative 'contact_row'
+require_relative 'contact_fields'
 
 module DB
   ####
@@ -47,7 +47,7 @@ module DB
       @model_to_assign.assign_attributes human_ref: row.human_ref,
                                          client_id: row.client_id
       @model_to_assign.agent.authorized = false if model_is_new
-      ContactRow.new(row).update_for @model_to_assign
+      ContactFields.new(row).update_for @model_to_assign
     end
 
     def model_is_new

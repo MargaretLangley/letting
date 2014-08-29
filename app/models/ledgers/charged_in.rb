@@ -1,3 +1,12 @@
+####
+#
+# ChargedIn
+#
+# Invoice payment order - advance, arrears or mid-term
+# This is a collection that the Charge object references.
+#
+####
+#
 class ChargedIn < ActiveRecord::Base
   has_many :charges, inverse_of: :charged_in
 

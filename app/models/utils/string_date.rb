@@ -1,3 +1,11 @@
+####
+#
+# StringDate
+#
+# Safe Parsing of a string into a date.
+#
+####
+#
 class StringDate
   def initialize datestring
     @datestring = datestring

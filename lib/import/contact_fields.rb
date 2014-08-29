@@ -1,12 +1,12 @@
 require_relative '../modules/method_missing'
-require_relative 'entity_row'
+require_relative 'entity_fields'
 
 # rubocop: disable Style/MethodLength
 
 module DB
   ####
   #
-  # ContactRow
+  # ContactFields
   # Wrapps around an imported row of data
   #
   # Called during the importing of any entity - property, agent
@@ -14,15 +14,15 @@ module DB
   #
   ####
   #
-  class ContactRow
+  class ContactFields
     include MethodMissing
     attr_reader :entities
 
     def initialize row
       @row = row
       @entities = []
-      @entities << EntityRow.new(row[:title1], row[:initials1], row[:name1])
-      @entities << EntityRow.new(row[:title2], row[:initials2], row[:name2])
+      @entities << EntityFields.new(row[:title1], row[:initials1], row[:name1])
+      @entities << EntityFields.new(row[:title2], row[:initials2], row[:name2])
     end
 
     def update_for contact

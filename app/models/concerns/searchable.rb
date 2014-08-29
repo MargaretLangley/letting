@@ -1,3 +1,14 @@
+####
+#
+# Searhable
+#
+# Configures the Elasticsearch searching method
+#
+# Adds a 'search' method to any class it is included into allowing full-text
+# search - currently only used in Client and Property.
+#
+####
+#
 module Searchable
   extend ActiveSupport::Concern
 

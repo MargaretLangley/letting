@@ -18,7 +18,7 @@ module DB
       %q(E10 7EX)
     end
 
-    def one_entity_row
+    def one_entity_fields
       %q(11,  Mr,  D, Example, , , , 1, ExampleHouse,  2, ) +
       %q(Example Street, ,Example Town,  Example County,  E10 7EX)
     end
@@ -33,7 +33,7 @@ module DB
     end
 
     it 'adds one entity when second entity blank' do
-      expect { import_client one_entity_row }.to change(Entity, :count).by 1
+      expect { import_client one_entity_fields }.to change(Entity, :count).by 1
     end
 
     it 'ordered by creation' do
@@ -53,7 +53,8 @@ module DB
 
       it 'removes deleted second entities' do
         import_client row
-        expect { import_client one_entity_row }.to change(Entity, :count).by(-1)
+        expect { import_client one_entity_fields }
+          .to change(Entity, :count).by(-1)
       end
     end
 

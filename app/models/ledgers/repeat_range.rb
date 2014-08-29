@@ -1,3 +1,14 @@
+####
+#
+# RepeatRange
+#
+# RepeatingDate - is Day, Month pairings that occur every year.
+# RepeatingRange takes a list of repeating dates and turns them
+# into ranges. Invoicing choice (advance, arrears, or mid-term)
+# affect the range dates.
+#
+####
+#
 class RepeatRange
   include Comparable
   include Enumerable

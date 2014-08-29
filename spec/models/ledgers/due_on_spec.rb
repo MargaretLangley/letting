@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 # rubocop: disable Style/TrivialAccessors
+# rubocop: disable Style/Documentation
 
 describe DueOn, type: :model do
 

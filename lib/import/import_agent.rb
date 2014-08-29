@@ -1,5 +1,5 @@
 require_relative 'import_base'
-require_relative 'contact_row'
+require_relative 'contact_fields'
 
 module DB
   ####
@@ -9,7 +9,9 @@ module DB
   # Imports agents (shipping addreses for properties)
   #
   # Uses ImportBase and is called during the import process and at no
-  # other time.
+  # other time. ImportAgent reads in Address2.csv information. It expect that
+  # properties information (properties.csv) has already been read in
+  # this with property information
   #
   ####
   #
@@ -38,7 +40,7 @@ module DB
     def model_assignment
       @model_to_assign.assign_attributes authorized: true
       @model_to_assign.human_ref = row[:human_ref].to_i
-      ContactRow.new(row).update_for @model_to_assign
+      ContactFields.new(row).update_for @model_to_assign
     end
   end
 end

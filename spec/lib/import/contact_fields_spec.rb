@@ -1,13 +1,13 @@
 require 'csv'
 require 'rails_helper'
 require_relative '../../../lib/import/file_header'
-require_relative '../../../lib/import/contact_row'
+require_relative '../../../lib/import/contact_fields'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe ContactRow, :import do
+  describe ContactFields, :import do
 
-    def contact_row
+    def contact_fields
       %q(11,  Mr,  D, Example, Mrs, A N, Other&, 1, ExampleHouse,  2, ) +
       %q(Example Street, District ,Example Town,  Example County,) +
       %q(E10 7EX, SPAIN)
@@ -15,7 +15,7 @@ module DB
 
     context 'entity' do
       it 'title' do
-        row = ContactRow.new parse_line contact_row
+        row = ContactFields.new parse_line contact_fields
         expect(row.entities.length).to eq 2
       end
     end
@@ -23,7 +23,7 @@ module DB
     describe '#update_for' do
       it 'updates address from row' do
         client = client_new
-        ContactRow.new(parse_line contact_row).update_for client
+        ContactFields.new(parse_line contact_fields).update_for client
 
         expect(client.address.flat_no).to eq '1'
         expect(client.address.house_name).to eq 'ExampleHouse'
@@ -44,7 +44,7 @@ module DB
         %q(E10 7EX, SPAIN)
 
         client = client_new address_attributes: { town: 'this town is changed' }
-        ContactRow.new(parse_line lower_case_town_row).update_for client
+        ContactFields.new(parse_line lower_case_town_row).update_for client
         expect(client.address.town).to eq 'Example Town'
       end
     end

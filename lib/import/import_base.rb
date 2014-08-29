@@ -1,4 +1,4 @@
-require_relative 'contact_row'
+require_relative 'contact_fields'
 module DB
   ####
   #
@@ -29,7 +29,7 @@ module DB
     # contents - data to be imported - array of arrays indexed
     #            by row no and header symbols.
     # range    - the rows to be imported, default nil
-    # patch    - the corrections to the contents, default nil
+    # patch    - a collection of corrections to the contents, default nil
     #
     def self.import(contents, range: nil, patch: nil)
       new(contents, range, patch).import_loop

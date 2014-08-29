@@ -1,18 +1,25 @@
 require_relative 'patch_model'
-require_relative 'contact_row'
+require_relative 'contact_fields'
 
 module DB
   ####
   #
   # Patch
   #
-  # Overrides data in models that needs updating but we are unable to upudate
+  # Overrides data in models that needs updating but we are unable to update
   # source.
   #
-  # Currently, this updates client and agent data
+  # Some of the legacy data is incorrect but we are unable to change the source
+  # database. A solution to this is to 'patch' (correct) the incoming data.
   #
-  # Called during the import process only. It updates only those read in
-  # during build_patching models.
+  # There are a number of patch files - one for each set of models that requires
+  # an update.
+  #
+  # Patch runs ahead of the import_base process - allowing the system to create
+  # a collection of models that need to be changed. These are presented to the
+  # import_base system and can be used to update matching models.
+  #
+  # Currently, this updates client and agent data
   #
   ####
   #
@@ -43,7 +50,7 @@ module DB
       @model_to_assign = @model_class.new
       @model_to_assign.human_ref = row[:human_ref].to_i
       @model_to_assign.prepare_for_form
-      ContactRow.new(row).update_for @model_to_assign
+      ContactFields.new(row).update_for @model_to_assign
     end
 
     def patch_models_add

@@ -1,6 +1,14 @@
-# config/initializers/postgresql_database_tasks.rb
 module ActiveRecord
   module Tasks
+    ####
+    #
+    # PostgreSQLDatabaseTaks
+    #
+    # Terminating connections to the database when full access is
+    # required - eg when upgrading the database.
+    #
+    # TODO: decide if we are using this code.
+    #
     class PostgreSQLDatabaseTasks
       def drop
         establish_master_connection
