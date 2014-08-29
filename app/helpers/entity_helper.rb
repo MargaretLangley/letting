@@ -1,3 +1,17 @@
+###
+#
+# EntityHelper
+#
+# View logic over business, entity, object logic.
+#
+# View: _entity.html.erb
+# Behaviour: reveal.js - js-hide-link, js-destroy-link
+#
+# TODO: Toggling View - another example of it used in code
+#       Look to see if this toggling code can be amalgamated
+#
+####
+#
 module EntityHelper
   def first_record? index
     return false if index > 0

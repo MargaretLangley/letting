@@ -1,5 +1,13 @@
 require_relative '../../lib/modules/method_missing'
 
+###
+#
+# AccountCreditDecorator
+#
+# Adds display logic to the credit business object.
+#
+##
+#
 class AccountCreditDecorator
   include MethodMissing
   include ActionView::Helpers::NumberHelper

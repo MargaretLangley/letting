@@ -50,10 +50,9 @@ describe Payment, type: :feature do
   it 'payment for debit - no double payments', js: true do
     skip 'sort out payments when charges settled'
     payment = payment_new
-    property = \
-      property_create account: account_new(charge: charge_new,
-                                           debit: debit_new,
-                                           payment: payment)
+    property_create account: account_new(charge: charge_new,
+                                         debit: debit_new,
+                                         payment: payment)
     payment_edit_page.visit_edit_page(payment.id)
     payment_edit_page.payment 44.00
     payment_edit_page.update_payment
@@ -64,7 +63,6 @@ describe Payment, type: :feature do
     it 'handles errors' do
       skip 'sort out payments when charges settled'
       payment = payment_new
-      property = \
       property_create account: account_new(charge: charge_new,
                                            debit: debit_new,
                                            payment: payment)

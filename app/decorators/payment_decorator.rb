@@ -1,7 +1,7 @@
 require_relative '../../lib/modules/method_missing'
 ####
 #
-# PropertyDecorator
+# PaymentDecorator
 #
 # Adds behavior to the payment object
 #

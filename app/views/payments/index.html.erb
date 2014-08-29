@@ -3,4 +3,67 @@
   Find which payments were entered on a day
   <%= render 'payments/index/search' %>
 </div>
-<%= render 'payments/index/index_table', payments: @payments %>
+
+<div class='grid shell'>
+  <div class='col-1-12 vertical-spacer grid-header r-align'>
+    Account
+  </div>
+  <div class='col-3-12 vertical-spacer grid-header'>
+    Name
+  </div>
+  <div class='col-3-12 vertical-spacer grid-header'>
+   Date
+  </div>
+  <div class='col-1-12 vertical-spacer grid-header r-align'>
+    Amount
+  </div>
+  <div class='col-2-12 vertical-spacer grid-header r-align'>
+   Balance
+  </div>
+  <div class='col-2-12 vertical-spacer grid-header no-print r-align'>
+   Actions
+  </div>
+
+ <% @payments.each do |payment|
+      payment_dec = PaymentIndexDecorator.new payment
+      %>
+  <div class='col-1-12 vertical-spacer grid-row r-align'>
+     <%= payment_dec.property_ref %>
+  </div>
+  <div class='col-3-12 vertical-spacer'>
+    <%= payment_dec.full_name %>
+  </div>
+  <div class='col-3-12 vertical-spacer'>
+   <%= payment_dec.on_date %>
+  </div>
+  <div class='col-1-12 vertical-spacer r-align'>
+    <%= payment_dec.amount %>
+  </div>
+  <div class='col-2-12 vertical-spacer r-align'>
+   <%= payment_dec.balance %>
+  </div>
+  <nav class='col-2-12 vertical-spacer r-align'>
+          <%= link_to 'Edit', edit_payment_path(payment) %> |
+        <%= link_to 'Delete', payment, method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+  </nav>
+<% end %>
+
+<div class='col-1-12 vertical-spacer grid-row r-align'>
+     &nbsp;
+  </div>
+  <div class='col-3-12 vertical-spacer'>
+    &nbsp;
+  </div>
+  <div class='col-3-12 vertical-spacer'>
+  Total
+  </div>
+  <div class='col-1-12 vertical-spacer r-align'>
+    <%= number_to_currency @payments.sum('amount') %>
+  </div>
+  <div class='col-2-12 vertical-spacer r-align'>
+   &nbsp;
+  </div>
+  <nav class='col-2-12 vertical-spacer r-align'>
+    &nbsp;
+  </nav>
+</div>
