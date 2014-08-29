@@ -1,15 +1,28 @@
 require 'rails_helper'
 
 describe ChargeCycle, type: :feature do
-  let(:charge_cycle_create_page) { ChargeCycle.new }
   before(:each) { log_in admin_attributes }
 
   it 'creates a charge cycle' do
     visit '/charge_cycles/new'
-    # charge_cycle_create_page.fill_form('April/Nov', '34')
-    # charge_cycle_create_page.click
-    # expect(page).to have_text /successfully created!/i
-    # expect(page).to have_text 'New'
+    expect(page.title).to eq 'Letting - New Charge Cycles'
+    fill_in 'Name', with: 'April/Nov'
+    fill_in 'Order', with: '44'
+    due_on(day: 10, month: 2)
+    click_on 'Create Charge cycle'
+    expect(page).to have_text /successfully created!/i
   end
 
- end
+  def due_on(order: 0, day:, month:, year: nil)
+    id_stem = "charge_cycle_due_ons_attributes_#{order}"
+    fill_in "#{id_stem}_day", with: day
+    fill_in "#{id_stem}_month", with: month
+    fill_in "#{id_stem}_year", with: year
+  end
+
+  it 'errors on bad info' do
+    skip 'implement me - this is the only error test'
+    # other error tests should be implemented in the model
+  end
+
+end

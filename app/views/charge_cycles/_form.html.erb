@@ -13,64 +13,65 @@
 
     </div>
 
-    <div class="grid">
-      <div class='col-1-4 '>
+    <div class='grid' >
+      <div class='col-1-4 vertical-spacer'>
         &nbsp;
       </div>
-      <div class='col-1-4 vertical-spacer faded'>
+      <div class='col-1-8 faded'>
        <%= f.label :name %>
       </div>
-      <div class='col-2-4 vertical-spacer'>
+      <div class='col-1-8'>
         <%= f.text_field :name %>
       </div>
 
-      <div class='col-1-4 '>
+      <div class='col-1-4 vertical-spacer grid-row'>
         &nbsp;
       </div>
 
-      <div class='col-1-4 vertical-spacer faded'>
+      <div class='col-1-8 faded'>
        <%= f.label :order %>
       </div>
-      <div class='col-2-4 vertical-spacer textrmargin'>
-        <%= f.text_field :order %>
+      <div class='col-1-8'>
+        <%= f.text_field :order, class: 'r-align'%>
       </div>
 
       <hr class = 'faded'>
-      <div class='col-1-4 '>
-        &nbsp;
-      </div>
 
-      <div class='col-1-6 vertical-spacer faded'>
+      <div class='col-2-8 grid-row'>
+          &nbsp;
+        </div>
+
+      <div class='col-1-8 faded'>
         Due Ons
       </div>
-      <div class='col-1-6 vertical-spacer'>
+
+       <div class='col-1-8 vertical-spacer r-align'>
         <div class='faded'> Day</div>
       </div>
-      <div class='col-1-6 vertical-spacer'>
+      <div class='col-1-8 vertical-spacer r-align'>
         <div class='faded'> Month </div>
       </div>
-      <div class='col-1-6 vertical-spacer'>
+      <div class='col-1-8 vertical-spacer r-align'>
         <div class='faded'> Year </div>
       </div>
 
       <%= f.fields_for :due_ons do |builder| %>
 
-        <div class='col-1-4'>
+        <div class='col-3-8 grid-row'>
           &nbsp;
         </div>
-        <div class='col-1-6'>
-          &nbsp;
+
+        <div class='col-1-8'>
+          <%= builder.text_field :day, class: 'r-align' %>
         </div>
-        <div class='col-1-6 vertical-spacer'>
-          <%= builder.text_field :day %>
+        <div class='col-1-8'>
+          <%= builder.text_field :month, class: 'r-align' %>
         </div>
-        <div class='col-1-6 vertical-spacer'>
-          <%= builder.text_field :month %>
-        </div>
-        <div class='col-1-6 vertical-spacer'>
-          <%= builder.text_field :year %>
+        <div class='col-1-8 vertical-spacer'>
+          <%= builder.text_field :year, class: 'r-align' %>
         </div>
       <% end %>
+
     </div>
 
     <hr>

@@ -24,10 +24,12 @@ class ChargeCyclesController < ApplicationController
 
   def new
     @charge_cycle = ChargeCycle.new
+    @charge_cycle.prepare
   end
 
   def edit
     @charge_cycle = ChargeCycle.find params[:id]
+    @charge_cycle.prepare
   end
 
   def update
@@ -46,6 +48,7 @@ class ChargeCyclesController < ApplicationController
       redirect_to charge_cycles_path,
                   flash: { save: charge_cycle_created_message }
     else
+      @charge_cycle.prepare
       render :new
     end
   end

@@ -10,7 +10,7 @@ function readyFn( jQuery ) {
 }
 
 function slowFn( jQuery ) {
-  setTimeout(function () { $('.js-slow-time').slideToggle('slow'); }, 9000);
+  setTimeout(function () { $('.js-slow-time').slideToggle('slow'); }, 7000);
 }
 
 $( document ).ready( readyFn );

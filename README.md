@@ -120,7 +120,7 @@ My Reference: Webserver alias: `ssh arran`
 
 ####3. TROUBLESHOOTING
 ####3.1. Reset the database
-Sometimes when you are changing a project the database will not allow you to delete it due to open connections to it. If you cannot close the connections you will have to reset the database. If this is the case follow this
+Sometimes when you are changing a project the database will not allow you to delete it due to open connections to it. If you cannot close the connections you will have to reset the database. If this is the case follow this:
 
 1. Remove any backend connections
   1. local dev: `rake db:terminate RAILS_ENV=test`
@@ -132,8 +132,6 @@ Sometimes when you are changing a project the database will not allow you to del
 
 ####3.2 Running rails console in prouction
 `bundle exec rails c production`
-
-
 ===
 
 
