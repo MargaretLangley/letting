@@ -8,7 +8,6 @@
 #
 ####
 #
-
 class Notice < ActiveRecord::Base
   belongs_to :sheet
   validates :instruction, presence: true, allow_blank: true
