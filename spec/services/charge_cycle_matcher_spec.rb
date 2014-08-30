@@ -13,39 +13,22 @@ require_relative '../../lib/import/file_header'
 #
 module DB
   describe ChargeCycleMatcher do
-    context 'credit row' do
-      let(:row) { ChargeRow.new parse_line mar_sep_charge_row }
+    it 'matches on due_ons' do
+      cycle = ChargeCycle.new(id: 100, name: 'Anything')
+      cycle.due_ons.build day: 25, month: 3
+      cycle.due_ons.build day: 29, month: 9
+      cycle.save!
+      day_months = [[25, 3], [29, 9]]
+      expect(ChargeCycleMatcher.new(day_months: day_months).id).to eq 100
+    end
 
-      it 'matches on due_ons' do
-        cycle = ChargeCycle.new(id: 100, name: 'Anything')
-        cycle.due_ons.build day: 25, month: 3
-        cycle.due_ons.build day: 29, month: 9
-        cycle.save!
-        expect(ChargeCycleMatcher.new(row).id).to eq 100
-      end
-
-      it 'distinct when due_ons different' do
-        cycle = ChargeCycle.new(id: 100, name: 'Anything')
-        cycle.due_ons.build day: 25, month: 3
-        cycle.due_ons.build day: 31, month: 12
-        cycle.save!
-        expect { ChargeCycleMatcher.new(row).id }.to \
-          raise_error ChargeCycleUnknown
-      end
-
-      def parse_line row_string
-        CSV.parse_line(row_string,
-                       headers: FileHeader.charge,
-                       header_converters: :symbol,
-                       converters: -> (field) { field ? field.strip : nil }
-                     )
-      end
-
-      def mar_sep_charge_row
-        %q( 89, 2006-12-30, GR, 0, 50.5, S, ) +
-        %q( 25, 3, 29, 9, 0, 0, 0, 0, ) +
-        %q( 1901-01-01, 0 )
-      end
+    it 'distinct when due_ons different' do
+      cycle = ChargeCycle.new(id: 100, name: 'Anything')
+      cycle.due_ons.build day: 19, month: 3
+      cycle.save!
+      day_months = [[25, 3]]
+      expect { ChargeCycleMatcher.new(day_months: day_months).id }.to \
+        raise_error ChargeCycleUnknown
     end
   end
 end

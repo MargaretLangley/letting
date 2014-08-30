@@ -67,48 +67,39 @@ module DB
           end
         end
 
-        describe 'iterates' do
-          it 'yields charges' do
+        describe '#day_months' do
+          it 'creates day and months' do
             row = ChargeRow.new parse_line base_charge_row
-            yielded_values = []
-            row.each do |day, month|
-              yielded_values << [day, month]
-            end
-            expect(yielded_values).to eq [[25, 3]]
+            expect(row.day_months).to eq [[25, 3]]
           end
 
-          it 'stops yields when charges are empty' do
-            expect(ChargeRow.new(parse_line(base_charge_row)).count).to eq 1
-          end
-
-          def quarter_charge_row
-            %q( 89, 2006-12-30, GR, 0, 50.5, S, ) +
-            %q( 24, 3, 25, 6, 25, 9, 31, 12, ) +
-            %q( 1901-01-01, 0 )
+          it 'produces elements until empty' do
+            expect(ChargeRow.new(parse_line(base_charge_row)).day_months.count)
+              .to eq 1
           end
 
           it 'yields quarter year charges' do
-            expect(ChargeRow.new(parse_line(quarter_charge_row)).count).to eq 4
+            quarter_charge_row = \
+            %q( 89, , GR, 0, 5, S, 24, 3, 25, 6, 25, 9, 31, 12, , 0)
+            expect(ChargeRow.new(parse_line(quarter_charge_row))
+                            .day_months.count)
+              .to eq 4
           end
 
           it 'always yields two values for half year charges' do
             row = ChargeRow.new parse_line half_charge_row_with_4_charges
-            expect(row.count).to eq 2
+            expect(row.day_months.count).to eq 2
           end
 
-          it 'yields month charges' do
-            skip '# FIX_CHARGE Need month charge to be defined ... if anything?'
-            # row = ChargeRow.new parse_line charge_monthly_row
-            # yielded_values = []
-            # row.each do |day, month|
-            #   yielded_values << [day, month]
-            # end
-            # expect(yielded_values).to eq [[24, 3]]
+          it 'creates monthly day and months' do
+            row = ChargeRow.new parse_line charge_monthly_row
+            expect(row.day_months.count).to eq 12
+            expect(row.day_months[0..1]).to eq [[24, 1], [24, 2]]
           end
 
           it 'invalid code for maximum dates throws error' do
             row = ChargeRow.new parse_line(charge_row_no_type)
-            expect { row.each { |_charge| } }.to raise_error ChargeCodeUnknown
+            expect { row.day_months }.to raise_error ChargeCodeUnknown
           end
         end
 
@@ -137,8 +128,8 @@ module DB
     end
 
     def charge_monthly_row
-      %q( 89, 2006-12-30, GR, 0, 50.5, S, ) +
-      %q( 24, 0, 0, 0, 0, 0, 0, 0, ) +
+      %q( 89, 2006-12-30, M, 0, 50.5, S, ) +
+      %q( 24, 7, 20, 12, 0, 0, 0, 0, ) +
       %q( 1901-01-01, 0 )
     end
 

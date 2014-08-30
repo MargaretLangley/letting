@@ -21,7 +21,6 @@ module DB
   #
   class ChargeRow
     include MethodMissing
-    include Enumerable
 
     def initialize row
       @source = row
@@ -42,7 +41,7 @@ module DB
     end
 
     def charge_cycle_id
-      ChargeCycleMatcher.new(self).id
+      ChargeCycleMatcher.new(day_months: day_months).id
       rescue ChargeCycleUnknown
         puts "Property #{human_ref} charge row does not match a charge cycle" \
           " Legacy charge_type: '#{charge_code}' "
@@ -52,11 +51,16 @@ module DB
       @source[:amount].to_f
     end
 
-    def each
+    # Provides a way of charge_cycle_matcher to access all the dates
+    # that the charge are invoiced - allowing a charge_cycle matching.
+    def day_months
+      return create_monthly_dates day(1) if monthly?
+      day_months = []
       1.upto(maximum_dates) do |index|
         break if empty_due_on? day(index), month(index)
-        yield day(index), month(index)
+        day_months << [day(index), month(index)]
       end
+      day_months
     end
 
     def attributes
@@ -72,6 +76,15 @@ module DB
 
     private
 
+    # charge_cycle_matcher requires charge_code as 'M' (momth) is a speical case
+    def monthly?
+      charge_code == 'M'
+    end
+
+    def create_monthly_dates day_of_the_month
+      (1..12).each.map { |month| [day_of_the_month, month] }
+    end
+
     def human_ref
       @source[:human_ref]
     end
@@ -80,6 +93,10 @@ module DB
       max_dates = ChargeCode.to_times_per_year charge_code
       fail ChargeCodeUnknown, max_dates_message, caller unless max_dates
       max_dates
+    end
+
+    def charge_code
+      @source[:charge_type]
     end
 
     def day number
@@ -92,10 +109,6 @@ module DB
 
     def empty_due_on? day, month
       day == 0 && month == 0
-    end
-
-    def charge_code
-      @source[:charge_type]
     end
 
     def charged_in_code

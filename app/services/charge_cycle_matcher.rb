@@ -15,9 +15,9 @@ require_relative '../../lib/import/errors'
 ####
 #
 class ChargeCycleMatcher
-  def initialize charge_row
+  def initialize(day_months:)
     @unidentified_charge_cycle = ChargeCycle.new(name: 'unknown')
-    charge_row.each do |day, month|
+    day_months.each do |day, month|
       @unidentified_charge_cycle.due_ons.build(day: day, month: month)
     end
   end
