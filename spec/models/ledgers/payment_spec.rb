@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Payment, type: :model do
+describe Payment, :ledgers, type: :model do
 
   let(:payment) { Payment.new payment_attributes }
   it('is valid') { expect(payment).to be_valid }

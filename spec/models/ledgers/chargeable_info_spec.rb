@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ChargeableInfo, type: :model do
+describe ChargeableInfo, :ledgers, type: :model do
 
   let(:chargeable_info) do
     ChargeableInfo.from_charge charge_id: 1,

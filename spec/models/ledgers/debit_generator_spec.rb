@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe DebitGenerator, type: :model do
+describe DebitGenerator, :ledgers, type: :model do
 
   let(:debit_gen) { debit_generator_new }
 

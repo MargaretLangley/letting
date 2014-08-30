@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ChargedIn, type: :model do
+RSpec.describe ChargedIn, :ledgers, type: :model do
   it 'is valid' do
     expect(ChargedIn.new name: 'Advance').to be_valid
   end

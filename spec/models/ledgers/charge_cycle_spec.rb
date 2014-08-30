@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ChargeCycle, :range, type: :model do
+RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
   let(:cycle) do
     cycle = ChargeCycle.new id: 1, name: 'Mar/Sep'
     cycle.due_ons.new day: 25, month: 3, charge_cycle_id: 1
@@ -11,14 +11,14 @@ RSpec.describe ChargeCycle, :range, type: :model do
     expect(cycle).to be_valid
   end
 
-  describe '#due_dates' do
+  describe '#due_between?' do
     before(:each) { Timecop.travel(Date.new(2013, 1, 31)) }
     after(:each)  { Timecop.return }
 
     it 'creates charging date if in range'  do
       cycle = ChargeCycle.new id: 1, name: 'Mar/Sep'
       cycle.due_ons.new day: 25, month: 3, charge_cycle_id: 1
-      expect(cycle.due_dates(Date.new(2013, 3, 25)..Date.new(2013, 3, 25)))
+      expect(cycle.due_between?(Date.new(2013, 3, 25)..Date.new(2013, 3, 25)))
         .to eq [Date.new(2013, 3, 25)]
     end
   end

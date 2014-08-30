@@ -35,7 +35,7 @@ class Charge < ActiveRecord::Base
     self.end_date = Date.parse MAX_DATE if end_date.blank?
   end
 
-  # restults
+  # results
   # charge_structure.charged_in.name unless charge_structure.nil?
 
   # date_range - the date range that we can generate charges for.
@@ -63,7 +63,7 @@ class Charge < ActiveRecord::Base
   end
 
   def allowed_due_dates date_range
-    charge_cycle.due_dates(date_range) & (start_date..end_date).to_a
+    charge_cycle.due_between?(date_range) & (start_date..end_date).to_a
   end
 
   # Converts a Charge object into a ChargeableInfo object.

@@ -25,8 +25,8 @@ class ChargeCycle < ActiveRecord::Base
   delegate :prepare, to: :due_ons
   delegate :clear_up_form, to: :due_ons
 
-  def due_dates date_range
-    due_ons.due_dates(date_range).to_a
+  def due_between? date_range
+    due_ons.due_between?(date_range).to_a
   end
 
   def <=> other
@@ -39,8 +39,8 @@ class ChargeCycle < ActiveRecord::Base
   # eventually be a date
   def range_on date
     @range ||= RepeatRange.new \
-                 dates: due_ons.due_dates(Time.now.beginning_of_year..\
-                                          Time.now.end_of_year)
+                 dates: due_ons.due_between?(Time.now.beginning_of_year..\
+                                            Time.now.end_of_year)
     found_date = @range.find date
     found_date ? found_date.date : :missing_due_on
   end

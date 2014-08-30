@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe RepeatRange, :range do
+describe RepeatRange, :ledgers, :range do
 
   describe 'initializes' do
     it 'empty' do

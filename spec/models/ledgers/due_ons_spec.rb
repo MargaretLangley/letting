@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe DueOns, type: :model do
+describe DueOns, :ledgers, type: :model do
 
   let(:cycle) { ChargeCycle.new id: 1 }
   let(:due_ons) { cycle.due_ons }
@@ -21,20 +21,20 @@ describe DueOns, type: :model do
 
   context 'methods' do
 
-    context '#due_dates' do
+    context '#due_between?' do
       before { Timecop.travel Date.new 2013, 4, 1 }
       after { Timecop.return }
 
       it 'returns date when range in due date' do
         due_ons.build day: 4, month: 4
         due_ons.build day: 3, month: 5
-        expect(due_ons.due_dates date_range_covering_due_on)
+        expect(due_ons.due_between? date_range_covering_due_on)
           .to eq [Date.new(2013, 4, 4), Date.new(2013, 5, 3)]
       end
 
       it 'returns nils when range outside due date' do
         due_ons.build day: 1, month: 2
-        expect(due_ons.due_dates date_range_missing_due_on)
+        expect(due_ons.due_between? date_range_missing_due_on)
           .to be_empty
       end
     end

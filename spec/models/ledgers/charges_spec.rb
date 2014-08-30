@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Charges', type: :model do
+describe 'Charges', :ledgers, type: :model do
   before { Timecop.travel(Date.new(2013, 1, 31)) }
   after { Timecop.return }
 

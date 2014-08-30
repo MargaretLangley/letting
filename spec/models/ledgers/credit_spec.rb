@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Credit, type: :model do
+describe Credit, :ledgers, type: :model do
 
   let(:credit) { credit_new amount: -88.08 }
   it('is valid') { expect(credit).to be_valid }

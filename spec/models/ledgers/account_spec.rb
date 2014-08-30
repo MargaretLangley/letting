@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Account, type: :model do
+describe Account, :ledgers, type: :model do
 
   let(:account) { account_new  }
   it('is valid') { expect(account).to be_valid }

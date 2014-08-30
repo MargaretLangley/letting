@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe RepeatDate, :range do
+describe RepeatDate, :ledgers, :range do
   before { Timecop.travel(Date.new(2014, 3, 25)) }
 
   describe 'create' do

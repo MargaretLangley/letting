@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Settlement, type: :model do
+describe Settlement, :ledgers, type: :model do
   describe 'resolve' do
     describe 'matched settlement' do
       it 'completes when settlement == offset' do
