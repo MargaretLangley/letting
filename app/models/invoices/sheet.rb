@@ -4,7 +4,8 @@
 #
 # Sheet holds the general information needed for an
 # invoice printout, excluding individual account
-# and property information.
+# and property information. Allows editing of
+# this information,
 # 1st page includes the agent F&L Adams details,
 # and text needed on invoice
 # 2nd page holds details of 'Notice of Rent Due,'
