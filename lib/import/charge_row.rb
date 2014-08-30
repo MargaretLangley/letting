@@ -34,7 +34,9 @@ module DB
     end
 
     def charged_in_id
-      ChargedInFields.new(charged_in_code: charged_in_code, charge_type: charge_type).id
+      ChargedInFields.new(charged_in_code: charged_in_code,
+                          charge_type: charge_type)
+                     .id
       rescue KeyError
         raise ChargedInCodeUnknown, charged_in_code_message, caller
     end
@@ -71,7 +73,7 @@ module DB
     private
 
     def human_ref
-       @source[:human_ref]
+      @source[:human_ref]
     end
 
     def maximum_dates
