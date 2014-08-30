@@ -1,5 +1,6 @@
 require_relative 'charge_code'
 require_relative 'errors'
+require_relative 'charged_in_fields'
 require_relative '../modules/method_missing'
 # rubocop: disable Rails/Output
 # rubocop: disable Style/MethodCallParentheses
@@ -21,25 +22,9 @@ module DB
   class ChargeRow
     include MethodMissing
     include Enumerable
-    # Mapping of imported values to application values
-    # Definitive values charged_in.csv/charged_ins table;
-    LEGACY_CODE_TO_CHARGED_IN  = { '0'  => 1,     # Arrears
-                                   '1' =>  2,     # Advance
-                                   'M' =>  3 }    # Mid_term
+
     def initialize row
       @source = row
-    end
-
-    def human_ref
-      @source[:human_ref]
-    end
-
-    def monthly_charge?
-      month(1) == 0
-    end
-
-    def amount
-      @source[:amount].to_f
     end
 
     def charge_type
@@ -49,10 +34,7 @@ module DB
     end
 
     def charged_in_id
-      # Hack for when data lies
-      return LEGACY_CODE_TO_CHARGED_IN.fetch('1') \
-        if charge_type_always_advanced
-      LEGACY_CODE_TO_CHARGED_IN.fetch(charged_in_code)
+      ChargedInFields.new(charged_in_code: charged_in_code, charge_type: charge_type).id
       rescue KeyError
         raise ChargedInCodeUnknown, charged_in_code_message, caller
     end
@@ -62,6 +44,10 @@ module DB
       rescue ChargeCycleUnknown
         puts "Property #{human_ref} charge row does not match a charge cycle" \
           " Legacy charge_type: '#{charge_code}' "
+    end
+
+    def amount
+      @source[:amount].to_f
     end
 
     def each
@@ -84,6 +70,10 @@ module DB
 
     private
 
+    def human_ref
+       @source[:human_ref]
+    end
+
     def maximum_dates
       max_dates = ChargeCode.to_times_per_year charge_code
       fail ChargeCodeUnknown, max_dates_message, caller unless max_dates
@@ -100,12 +90,6 @@ module DB
 
     def empty_due_on? day, month
       day == 0 && month == 0
-    end
-
-    # charged_in_code is not set properly.
-    # insurance is always advanced but the data left as default - arrears
-    def charge_type_always_advanced
-      charge_type == 'Insurance' || charge_type == 'Garage Insurance'
     end
 
     def charge_code

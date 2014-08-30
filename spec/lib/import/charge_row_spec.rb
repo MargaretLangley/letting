@@ -9,6 +9,8 @@ require_relative '../../../lib/import/charge_row'
 #
 # unit testing for charge_row
 #
+# ChargeRow wraps up acc_info.csv rows - used by ImportCharge
+#
 ####
 module DB
   describe ChargeRow, :import do
@@ -20,15 +22,6 @@ module DB
       end
 
       describe 'methods' do
-        describe '#monthly_charge?' do
-          it 'true for monthly' do
-            monthly = ChargeRow.new parse_line charge_monthly_row
-            expect(monthly.monthly_charge?).to be true
-          end
-          it 'false for on dated' do
-            expect(row.monthly_charge?).to be false
-          end
-        end
 
         describe '#charge_type' do
           it('returns valid') { expect(row.charge_type).to eq 'Ground Rent' }
