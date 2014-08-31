@@ -36,7 +36,10 @@ Letting::Application.routes.draw do
     end
   end
 
-  resources :charge_cycles do
+  resources :charge_cycles  do
+    collection do
+      get :search
+    end
   end
 
   resources :payments,

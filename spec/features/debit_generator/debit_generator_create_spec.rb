@@ -9,6 +9,7 @@ describe 'debit_generator', type: :feature do
     after  { Timecop.return }
 
     it 'charges a property that matches the search' do
+
       charge = charge_new charge_type: 'Rent',
                           charged_in: charged_in_create(id: 2)
       property_create human_ref: 87,

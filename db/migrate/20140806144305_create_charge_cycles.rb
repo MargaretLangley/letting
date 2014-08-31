@@ -4,7 +4,7 @@
 class CreateChargeCycles < ActiveRecord::Migration
   def change
     create_table :charge_cycles do |t|
-      t.string :name
+      t.string :name, null: false
       t.integer :order
       t.timestamps
     end

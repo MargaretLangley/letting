@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe DueOns, :ledgers, type: :model do
 
-  let(:cycle) { ChargeCycle.new id: 1 }
+  let(:cycle) { ChargeCycle.new id: 1, name: 'Anything' }
   let(:due_ons) { cycle.due_ons }
 
   context 'validates' do
@@ -104,7 +104,7 @@ describe DueOns, :ledgers, type: :model do
     context 'creating, saving and loading' do
 
       it 'new on date' do
-        cycle = ChargeCycle.new id: 1
+        cycle = ChargeCycle.new id: 1, name: 'Anything'
         cycle.prepare
         cycle.due_ons.build day: 24, month: 6
         cycle.due_ons.build day: 25, month: 12
@@ -115,7 +115,7 @@ describe DueOns, :ledgers, type: :model do
       end
 
       it 'on date to different on date' do
-        cycle = ChargeCycle.new id: 1
+        cycle = ChargeCycle.new id: 1, name: 'Anything'
         cycle.due_ons.build day: 24, month: 6, id: 7
         cycle.due_ons.build day: 25, month: 12, id: 8
         cycle.due_ons.prepare
@@ -132,7 +132,7 @@ describe DueOns, :ledgers, type: :model do
       end
 
       it 'new per date' do
-        cycle = ChargeCycle.new id: 1
+        cycle = ChargeCycle.new id: 1, name: 'Anything'
         cycle.due_ons.prepare
         cycle.due_ons.build day: 5, month: -1
         cycle.save!
@@ -141,7 +141,7 @@ describe DueOns, :ledgers, type: :model do
       end
 
       it 'per month to different per month' do
-        charge_per_date = ChargeCycle.new id: 1
+        charge_per_date = ChargeCycle.new id: 1, name: 'Anything'
         charge_per_date.prepare
         charge_per_date.due_ons.build day: 24, month: -1
         charge_per_date.save!
@@ -154,7 +154,7 @@ describe DueOns, :ledgers, type: :model do
       end
 
       it 'per month to same per month' do
-        charge = ChargeCycle.new id: 1
+        charge = ChargeCycle.new id: 1, name: 'Anything'
         charge.prepare
         charge.due_ons.build day: 24, month: -1
         charge.save!
@@ -168,7 +168,7 @@ describe DueOns, :ledgers, type: :model do
       end
 
       it 'on date to per month' do
-        charge = ChargeCycle.new id: 1
+        charge = ChargeCycle.new id: 1, name: 'Anything'
         charge.due_ons.build day: 24, month: 6
         charge.due_ons.build day: 25, month: 12
         charge.prepare
@@ -182,7 +182,7 @@ describe DueOns, :ledgers, type: :model do
       end
 
       it 'per month to on date' do
-        charge = ChargeCycle.new id: 1
+        charge = ChargeCycle.new id: 1, name: 'Anything'
         charge.prepare
         charge.due_ons.build day: 24, month: -1
         charge.save!
