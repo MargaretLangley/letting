@@ -3,15 +3,16 @@
 </div>
 
 <div class='widemargin'>
-  Payment should be made to <%= render file: 'invoice_texts/name.txt' %>
+  Payment should be made to <%= sheet.invoice_name %>
 </div>
 <div class='insert'>
   [insert address]
 </div>
 
 <div class='widemargin'>
-  at <%= render file: 'invoice_texts/add1.txt' %>
-  <%= render file: 'invoice_texts/add2.txt' %>
-  <%= render file: 'invoice_texts/add3.txt' %>
-  <%= render file: 'invoice_texts/postcode.txt' %>
+  at <%= sheet.address.road_no %>
+  <%= sheet.address.road %>
+  <%= sheet.address.town %>
+  <%= sheet.address.county %>
+  <%= sheet.address.postcode %>
 </div>

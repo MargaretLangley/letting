@@ -1,17 +1,20 @@
 <div class='p2head'>
-	<%= render file: 'invoice_texts/name.txt' %>
+	<%= sheet.invoice_name %>
 	<br>
-	<%= render file: 'invoice_texts/add1.txt' %>
-	<%= render file: 'invoice_texts/add2.txt' %>
-	<%= render file: 'invoice_texts/add3.txt' %>
-	<%= render file: 'invoice_texts/postcode.txt' %>
+  <%= sheet.address.road_no %>
+  <%= sheet.address.road %>
+  <%= sheet.address.town %>
+  <%= sheet.address.county %>
+  <%= sheet.address.postcode %>	<br>
+	Telephone: <%= sheet.phone %>
 	<br>
-	Telephone: <%= render file: 'invoice_texts/phone.txt' %>
-	<br>
-	VAT Reg No: <%= render file: 'invoice_texts/vat.txt' %>
+	VAT Reg No: <%= sheet.vat %>
 </div>
 <br>
+
+<% page2 = Sheet.find(2) %>
+
 <div class='actref'>
-	Commonhold and Leasehold Reform Act 2002, section 166
+	 <%= page2.heading1 %>
 </div>
 <br>

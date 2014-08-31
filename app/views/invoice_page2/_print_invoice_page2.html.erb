@@ -1,7 +1,8 @@
-<%= render 'invoice_page2/print_p2_heading' %>
+<%= render 'invoice_page2/print_p2_heading',sheet: Sheet.find(1) %>
 
+<% @sheet = Sheet.find(2) %>
 <div class='res-longlease'>
-	Notice to long leaseholders of rent due Ref No  <%= object.human_ref %>
+<%= @sheet.heading2 %> <%= object.human_ref %>
 </div>
 <p>
 </p>
@@ -43,7 +44,8 @@
 </div>
 <br>
 
-<%= render 'invoice_page2/print_payto_agent_address' %>
+
+<%= render 'invoice_page2/print_payto_agent_address', sheet: Sheet.find(1)  %>
 
 <div class='insert'>
   [insert name of landlord(s) and if not given above, address]

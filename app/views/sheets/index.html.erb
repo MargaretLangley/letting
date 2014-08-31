@@ -6,26 +6,32 @@
     <div class='col-1-4 vertical-spacer grid-header r-align'>
       Page number
     </div>
-    <div class='col-1-4 vertical-spacer grid-header'>
+    <div class='col-1-4 grid-header'>
       Contains
     </div>
-    <div class='col-1-4 vertical-spacer grid-header'>
+    <div class='col-1-4 grid-header'>
       Actions
     </div>
 
     <% @sheets.each do |sheet| %>
+      <div class='table-row' data-link='<%= sheet_path(sheet) %>'>
+
       <div class='col-1-4 vertical-spacer grid-row r-align'>
-        <%= link_to sheet.id, edit_sheet_path(sheet) %>
+        <%= link_to sheet.id, sheet_path(sheet) %>
       </div>
       <div class='col-1-4 vertical-spacer'>
        <%= sheet.description %>
       </div>
       <div>
         <nav class='col-1-4 vertical-spacer'>
-          <%= link_to 'Edit', edit_sheet_path(sheet) %> |
-          <%= link_to 'View', sheet_path(sheet) %>
+<%= link_to fa_icon('edit lg'), edit_sheet_path(sheet), title: 'Edit', class: 'r-pad icon-large' %>
+
+<%= link_to fa_icon('file lg'), sheet_path(sheet), title: 'View', class: 'r-pad icon-large' %>
+
+
         </nav>
       </div>
+    </div>
     <% end %>
   <% else %>
     No Pages Found
