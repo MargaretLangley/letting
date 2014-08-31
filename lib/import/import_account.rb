@@ -50,16 +50,15 @@ module DB
     end
 
     # charge_cycle_id is constant found in charge_cycle.csv
-    # FIX_CHARGE: remove hardcoded charge_cycle_id
-    # charged_in_id: 1 = Arrears
     def create_balance_charge
-      Charge.create! charge_type: 'Arrears',
-                     charge_cycle_id: 10,
-                     charged_in_id: 1,
-                     amount: row.amount,
-                     account_id: row.account_id,
-                     start_date: MIN_DATE,
-                     end_date: MAX_DATE
+      Charge.create! \
+        charge_type: 'Arrears',
+        charge_cycle_id: ChargeCycle.find_by(name: 'Yearly - Jan 1st').id,
+        charged_in_id: ChargedIn.find_by(name: 'Arrears').id,
+        amount: row.amount,
+        account_id: row.account_id,
+        start_date: MIN_DATE,
+        end_date: MAX_DATE
     end
 
     def filtered?
