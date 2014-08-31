@@ -35,9 +35,6 @@ class Charge < ActiveRecord::Base
     self.end_date = Date.parse MAX_DATE if end_date.blank?
   end
 
-  # results
-  # charge_structure.charged_in.name unless charge_structure.nil?
-
   # date_range - the date range that we can generate charges for.
   # returns - array of objects with enough information to charge the
   #           associated account

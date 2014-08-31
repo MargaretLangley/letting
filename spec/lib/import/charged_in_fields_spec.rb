@@ -33,7 +33,7 @@ module DB
         it 'errors when invalid code and unknown charge_type' do
           bad_charged = ChargedInFields.new charged_in_code: 'U',
                                             charge_type: 'unknown'
-          expect{ bad_charged.id }.to raise_error KeyError
+          expect { bad_charged.id }.to raise_error KeyError
         end
 
         it 'returns charge_type code over charged_in_code' do

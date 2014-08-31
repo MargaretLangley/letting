@@ -30,18 +30,6 @@ def charge_attributes **overrides
   }.merge overrides
 end
 
-# Try to avoid setting pk but if charge_structure is called in quick
-# succession and id is not fixed to 1. Then test that are relying on
-# a charge_strucutre of 1 will fail.
-#
-def charge_structure_attributes **overrides
-  {
-    id: 1,
-    charge_cycle_id: 1,
-    charged_in_id: 1,
-  }.merge overrides
-end
-
 def due_on_attributes_0 **overrides
   {
     day: 25,

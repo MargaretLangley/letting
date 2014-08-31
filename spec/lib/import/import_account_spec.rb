@@ -136,9 +136,11 @@ module DB
       end
 
       it 'handles non-zero balance' do
-        skip 'FIX_CHARNGE charge_structure  => charge_cycle_id'
+        charged_in = charged_in_create id: 1, name: 'Advanced'
+        cycle = charge_cycle_create id: 10, name: 'Yearly', order: 1
+        charge = charge_new charge_cycle: cgdycle, charged_in: charged_in
         property_create(human_ref: 122,
-                        account: account_new(charge: charge_new))
+                        account: account_new(charge: charge))
         expect { ImportAccount.import parse balance_non_zero }
           .to change(Charge, :count).by 1
         expect(Debit.all.size).to eq(1)
