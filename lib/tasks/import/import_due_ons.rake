@@ -3,12 +3,14 @@ require 'csv'
 # CSV Columns
 #
 # Column 1 - id
-# Column 2 - ChargeStructure (1-10)
-  # 1 = 'Mar 25th/Sep 29th', 'Arrears'
-  # 2 = 'Jun 24th/Dec 25th', 'Arrears'
-  # See ChargeStructure CSV for more information.
-# Column 3 - Month (1-12)
-# Column 4 - Day (1 - 31)
+# Column 2 - Ref ChargeCycle (1-12 currently)
+  # Charge Cycle structure
+  # id, name, order
+  # 1, 'Mar 25th/Sep 29th', 3
+  # See ChargeCycle CSV for more examples.
+# Column 3 - Year (nil or 2014-2015)
+# Column 4 - Month (1-12)
+# Column 5 - Day (1 - 31)
 
 namespace :db do
   namespace :import do
