@@ -13,6 +13,7 @@
 #
 class ChargeCycle < ActiveRecord::Base
   include Comparable
+  validates :name, presence: true
   validates :due_ons, presence: true
   has_many :charges, inverse_of: :charge_cycle
 

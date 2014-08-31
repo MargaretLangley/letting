@@ -40,6 +40,12 @@ class DueOn < ActiveRecord::Base
   PER_MONTH = -1
   ON_DATE = 0
 
+  # before_save :beforey
+
+  # def beforey
+  #   byebug
+  # end
+
   def monthly?
     month == PER_MONTH
   end
