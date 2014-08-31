@@ -102,4 +102,15 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
       expect(cycle.range_on Date.new(2014, 6, 6)).to eq :missing_due_on
     end
   end
+
+  describe 'validation' do
+
+    it 'does not validate for a nil name' do
+      cycle = ChargeCycle.new(order: 14)
+      cycle.due_ons.build day: 21, month: 3
+      cycle.due_ons.build day: 22, month: 9
+      expect(cycle).to_not be_valid
+    end
+  end
+
 end

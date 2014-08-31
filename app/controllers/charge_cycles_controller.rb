@@ -27,6 +27,18 @@ class ChargeCyclesController < ApplicationController
     @charge_cycle.prepare
   end
 
+  def create
+    @charge_cycle = ChargeCycle.new charge_cycles_params
+    # byebug
+    if @charge_cycle.save
+      redirect_to charge_cycles_path,
+                  flash: { save: charge_cycle_created_message }
+    else
+      @charge_cycle.prepare
+      render :new
+    end
+  end
+
   def edit
     @charge_cycle = ChargeCycle.find params[:id]
     @charge_cycle.prepare
@@ -34,22 +46,13 @@ class ChargeCyclesController < ApplicationController
 
   def update
     @charge_cycle = ChargeCycle.find params[:id]
-    if @charge_cycle.update charge_cycles_params
+    @charge_cycle.assign_attributes charge_cycles_params
+    # byebug
+    if @charge_cycle.save
       redirect_to charge_cycles_path,
                   flash: { save: charge_cycle_updated_message }
     else
       render :edit
-    end
-  end
-
-  def create
-    @charge_cycle = ChargeCycle.new charge_cycles_params
-    if @charge_cycle.save
-      redirect_to charge_cycles_path,
-                  flash: { save: charge_cycle_created_message }
-    else
-      @charge_cycle.prepare
-      render :new
     end
   end
 
