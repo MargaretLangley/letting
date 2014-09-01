@@ -21,8 +21,7 @@ class Credit < ActiveRecord::Base
   has_many :settlements, dependent: :destroy
 
   validates :charge_id, :on_date, presence: true
-  validates :amount, numericality:
-                     { greater_than: -100_000, less_than: 0 }
+  validates :amount, credit: true
   before_save :reconcile
 
   after_initialize do
@@ -45,6 +44,10 @@ class Credit < ActiveRecord::Base
 
   def spent?
     outstanding.round(2) == 0.00
+  end
+
+  def reverse
+    self.amount *= -1
   end
 
   # charge_id - the charge you are querying for unspent credits.

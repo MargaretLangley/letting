@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Credit, :ledgers, type: :model do
 
@@ -103,7 +103,7 @@ describe Credit, :ledgers, type: :model do
       end
     end
 
-    context '#spent?' do
+    describe '#spent?' do
       it 'false without credit' do
         credit = Credit.create! credit_attributes amount: (-88.07)
         credit.save!
@@ -115,6 +115,12 @@ describe Credit, :ledgers, type: :model do
         Debit.create! debit_attributes amount: 8.00
         credit.save!
         expect(credit).to be_spent
+      end
+    end
+    describe '#reverse' do
+      it 'reverses amount sign' do
+        (credit = credit_new(amount: -40)).reverse
+        expect(credit.amount).to eq 40
       end
     end
   end

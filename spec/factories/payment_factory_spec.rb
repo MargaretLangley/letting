@@ -1,35 +1,25 @@
 require 'rails_helper'
 
 describe 'payment' do
-  let(:payment) { payment_new }
 
-  it 'valid' do
-    expect(payment).to be_valid
-  end
-
-  context 'changes date' do
-    it 'on payment' do
-      payment = payment_new on_date: '2012-03-25'
-      expect(payment.on_date).to eq Date.new(2012, 03, 25)
-    end
-  end
-
-  context 'credit' do
-    before :each do
-      payment.credits << credit_new
+  describe 'payment_new' do
+    describe 'default' do
+      it('is valid') { expect(payment_new).to be_valid }
     end
 
-    it 'present' do
-      expect(payment.credits.first.amount).to eq(-88.08)
+    describe 'override' do
+      it 'on date' do
+        expect(payment_new(on_date: '2012-03-25').on_date)
+          .to eq Date.new(2012, 03, 25)
+      end
+      it('changes amount') { expect(payment_new(amount: 1).amount).to eq 1 }
     end
 
-    it 'add later date' do
-      payment.credits << credit_new(on_date: '2014-03-25')
-      expect(payment.credits.last.on_date).to eq Date.new(2014, 03, 25)
-    end
-
-    it 'saves' do
-      expect { payment.save! }.to_not raise_error
+    describe 'adds' do
+      it 'credits' do
+        payment = payment_new credit: credit_new
+        expect(payment.credits.size).to eq 1
+      end
     end
   end
 end

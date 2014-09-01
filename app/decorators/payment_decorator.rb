@@ -33,23 +33,14 @@ class PaymentDecorator
   def initialize(payment, human_ref: nil)
     @source = payment
     @human_ref = human_ref
-    # Hackfix to get credits negative when saving in the payments
-    # controller - users like to work with postive numbers but credits
-    # are negative - so need to reverse sign before credit saved.
-    @source.credits.each do |credit|
-      credit.amount *= -1
-    end
   end
 
   def prepare_for_form
     @source.prepare
   end
 
-  # Hackfix to get credits positive when presenting payment credits
-  # to the user (actually negative) - so we change the sign here.
   def credits_decorated
     @source.credits.map do |credit|
-      credit.amount *= -1
       CreditDecorator.new credit
     end.sort_by(&:charge_type)
   end

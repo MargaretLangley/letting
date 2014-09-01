@@ -2,74 +2,72 @@ require 'rails_helper'
 
 describe Payment, :ledgers, type: :model do
 
-  let(:payment) { Payment.new payment_attributes }
-  it('is valid') { expect(payment).to be_valid }
-
   context 'validation' do
+    it('is valid') { expect(payment_new).to be_valid }
     it 'requires account' do
-      payment.account_id = nil
-      expect(payment).to_not be_valid
+      expect(payment_new(account_id: nil)).to_not be_valid
     end
     it 'requires date' do
+      payment = payment_new
+      # note: default_initialization for on_date
       payment.on_date = nil
       expect(payment).to_not be_valid
     end
-    it 'requires amount' do
-      payment.amount = nil
-      expect(payment).to_not be_valid
-    end
+    it('requires amount') { expect(payment_new(amount: nil)).to_not be_valid }
   end
 
-  context 'default inialization' do
-    let(:payment) { Payment.new }
+  describe 'default inialization' do
     before { Timecop.travel(Date.new(2013, 9, 30)) }
     after { Timecop.return }
-
-    it 'has on_date' do
-      expect(payment.on_date).to eq Date.new 2013, 9, 30
+    it 'sets on_date to today' do
+      expect(payment_new(on_date: nil).on_date).to eq Date.new 2013, 9, 30
     end
   end
 
-  context 'methods' do
-
-    context '#account_exists?' do
+  describe 'methods' do
+    describe '#account_exists?' do
       it 'true if account known' do
-        payment.account = Account.new id: 100
+        (payment = payment_new).account = Account.new id: 100
         expect(payment).to be_account_exists
       end
 
       it 'false if no account' do
-        payment.account = nil
+        (payment = payment_new).account = nil
         expect(payment).to_not be_account_exists
       end
     end
 
-    context '#prepare' do
-      before :each do
-        payment.account = account_new
-      end
+    describe '#prepare' do
       it 'handles no credits' do
+        (payment = payment_new).account = account_new
         payment.prepare
         expect(payment.credits.size).to eq(0)
       end
       it 'adds returned credits' do
+        (payment = payment_new).account = account_new
         allow(payment.account).to receive(:charges).and_return [charge_new]
         payment.prepare
         expect(payment.credits.size).to eq(1)
       end
     end
 
-    context '#clear_up' do
+    describe '#reverse_credits' do
+      it 'changes credit sign' do
+        payment = payment_new(credit: credit_new(amount: -10))
+        payment.reverse_credits
+        expect(payment.credits.first.amount).to eq 10
+      end
+    end
+
+    describe '#clear_up' do
       it 'removes credits with no amounts' do
-        credit = payment.credits.build amount: 0
-        payment.clear_up
-        expect(credit).to be_marked_for_destruction
+        (payment = payment_new(credit: credit_new(amount: 0))).clear_up
+        expect(payment.credits.first).to be_marked_for_destruction
       end
 
       it 'saves credits with none-zero amount' do
-        credit = payment.credits.build amount: 10
-        payment.clear_up
-        expect(credit).to_not be_marked_for_destruction
+        (payment = payment_new(credit: credit_new(amount: 1))).clear_up
+        expect(payment.credits.first).to_not be_marked_for_destruction
       end
     end
 

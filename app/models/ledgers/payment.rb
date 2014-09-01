@@ -15,6 +15,10 @@ class Payment < ActiveRecord::Base
     def clear_up
       each(&:clear_up)
     end
+
+    def reverse
+      each(&:reverse)
+    end
   end
   before_validation :clear_up
 
@@ -27,6 +31,10 @@ class Payment < ActiveRecord::Base
 
   def account_exists?
     account.present?
+  end
+
+  def reverse_credits
+    credits.reverse
   end
 
   def prepare

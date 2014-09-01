@@ -24,7 +24,7 @@ class PaymentEditPage
   end
 
   def update_payment
-    click_on 'update'
+    click_on 'Update'
     self
   end
 
@@ -48,26 +48,26 @@ describe Payment, type: :feature do
   before(:each) { log_in }
 
   it 'payment for debit - no double payments', js: true do
-    skip 'sort out payments when charges settled'
-    payment = payment_new
-    property_create account: account_new(charge: charge_new,
+    charge = charge_create
+    payment = payment_new credit: credit_new(amount: -88, charge_id: charge.id)
+    property_create account: account_new(charge: charge,
                                          debit: debit_new,
                                          payment: payment)
     payment_edit_page.visit_edit_page(payment.id)
     payment_edit_page.payment 44.00
     payment_edit_page.update_payment
     expect(payment_edit_page).to be_successful
+    expect(Credit.first.amount).to eq(-44.00)
   end
 
   context 'error' do
     it 'handles errors' do
-      skip 'sort out payments when charges settled'
-      payment = payment_new
+      payment = payment_new credit: credit_new(amount: -88)
       property_create account: account_new(charge: charge_new,
                                            debit: debit_new,
                                            payment: payment)
       payment_edit_page.visit_edit_page(payment.id)
-      payment_edit_page.payment(100_000_000)
+      payment_edit_page.payment(-100_000_000)
       payment_edit_page.update_payment
       expect(payment_edit_page).to be_errored
     end
