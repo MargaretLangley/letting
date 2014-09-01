@@ -21,6 +21,9 @@
 
 <div class='insert'>
   [address of premises to which the long lease releates]
+  ****
+  <%= @sheet.notices[0].instruction %>
+  ****
 </div>
 <div class='widemargin'>
 	This notice is given in respect of
@@ -44,8 +47,7 @@
 </div>
 <br>
 
-
-<%= render 'invoice_page2/print_payto_agent_address', sheet: Sheet.find(1)  %>
+<%= render 'invoice_page2/print_payto_agent_address', sheet: Sheet.find(1) %>
 
 <div class='insert'>
   [insert name of landlord(s) and if not given above, address]
@@ -57,4 +59,4 @@
  	<%= render 'shared/show_1_line_address', addressee: object.client %>
 </div>
 
-<%= render 'invoice_page2/print_notices_notes' %>
+<%= render 'invoice_page2/print_notices_notes',sheet: Sheet.find(2) %>

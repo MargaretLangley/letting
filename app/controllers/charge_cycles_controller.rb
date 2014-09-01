@@ -64,10 +64,6 @@ class ChargeCyclesController < ApplicationController
 
   private
 
-  def search_flag
-    false
-  end
-
   def charge_cycles_params
     params
     .require(:charge_cycle)

@@ -17,10 +17,6 @@ describe ChargeCycle, type: :feature do
       expect(page).to have_text '6'
     end
 
-    it 'has no search' do
-      expect(page).to_not have_text 'Search here'
-    end
-
     it 'has edit link' do
       first(:link, 'Edit').click
       expect(page.title).to eq 'Letting - Edit Charge Cycles'
