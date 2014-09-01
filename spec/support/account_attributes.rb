@@ -8,6 +8,7 @@ end
 def charge_cycle_attributes **overrides
   {
     name: 'Mar/Sep',
+    order: 1,
   }.merge overrides
 end
 

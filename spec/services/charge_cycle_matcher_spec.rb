@@ -14,7 +14,7 @@ require_relative '../../lib/import/file_header'
 module DB
   describe ChargeCycleMatcher do
     it 'matches on due_ons' do
-      cycle = ChargeCycle.new(id: 100, name: 'Anything')
+      cycle = ChargeCycle.new(id: 100, name: 'Anything', order: 5)
       cycle.due_ons.build day: 25, month: 3
       cycle.due_ons.build day: 29, month: 9
       cycle.save!
@@ -23,7 +23,7 @@ module DB
     end
 
     it 'distinct when due_ons different' do
-      cycle = ChargeCycle.new(id: 100, name: 'Anything')
+      cycle = ChargeCycle.new(id: 100, name: 'Anything', order: 5)
       cycle.due_ons.build day: 19, month: 3
       cycle.save!
       day_months = [[25, 3]]

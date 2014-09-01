@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
   let(:cycle) do
-    cycle = ChargeCycle.new id: 1, name: 'Mar/Sep'
+    cycle = ChargeCycle.new id: 1, name: 'Mar/Sep', order: 16
     cycle.due_ons.new day: 25, month: 3, charge_cycle_id: 1
     cycle
   end
@@ -15,6 +15,10 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
     it 'does not validate for a nil name' do
       expect(charge_cycle_new name: '').to_not be_valid
     end
+
+    it 'does not validate for a nil order' do
+      expect(charge_cycle_new order: '').to_not be_valid
+    end
   end
 
   describe '#due_between?' do
@@ -22,7 +26,7 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
     after(:each)  { Timecop.return }
 
     it 'creates charging date if in range'  do
-      cycle = ChargeCycle.new id: 1, name: 'Mar/Sep'
+      cycle = ChargeCycle.new id: 1, name: 'Mar/Sep', order: '42'
       cycle.due_ons.new day: 25, month: 3, charge_cycle_id: 1
       expect(cycle.due_between?(Date.new(2013, 3, 25)..Date.new(2013, 3, 25)))
         .to eq [Date.new(2013, 3, 25)]
