@@ -209,10 +209,10 @@ ActiveRecord::Schema.define(version: 20140827133520) do
     t.string   "invoice_name", null: false
     t.string   "phone",        null: false
     t.string   "vat",          null: false
-    t.string   "heading1",     null: false
-    t.string   "heading2",     null: false
-    t.text     "advice1",      null: false
-    t.text     "advice2",      null: false
+    t.string   "heading1"
+    t.string   "heading2"
+    t.text     "advice1"
+    t.text     "advice2"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

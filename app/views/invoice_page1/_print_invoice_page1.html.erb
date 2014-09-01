@@ -1,7 +1,9 @@
 <div class='print-only margwide'>
   <% if false %>
     <% @sheet = Sheet.find(1) %>
-    <%= render 'invoice_page1/print_invoice_heading',sheet: @sheet %>
+    <div class='print-only'>
+      <%= render 'invoice_page1/print_invoice_heading',sheet: @sheet %>
+    </div>
     <%= render partial: 'invoice_page1/print_ref_date', locals: {property_object: property_object, date_object: date_object} %>
     <%= render 'invoice_page1/print_agent', object: property_object %>
     <%= render 'invoice_page1/print_property_address', object: property_object %>
