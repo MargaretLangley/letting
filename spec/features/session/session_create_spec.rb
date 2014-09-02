@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Session', type: :feature do
   it '#creates' do
-    user_create! user_attributes
+    user_create user_attributes
     navigates_to_create_page
     fill_in_login
     expect_to

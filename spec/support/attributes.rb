@@ -139,16 +139,6 @@ def admin_attributes **overrides
   }.merge overrides
 end
 
-def george_attributes **overrides
-  {
-    nickname: 'george',
-    email: 'george@ulyett.com',
-    password: 'password',
-    password_confirmation: 'password',
-    admin: true
-  }.merge overrides
-end
-
 def sheet_attributes **overrides
   {
     id: 1,

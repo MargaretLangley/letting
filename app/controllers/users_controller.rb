@@ -14,7 +14,7 @@
 #
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = User.order(:nickname).page(params[:page]).load
   end
 
   def show
