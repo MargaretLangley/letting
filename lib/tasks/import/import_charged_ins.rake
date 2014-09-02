@@ -19,11 +19,29 @@ namespace :db do
 
     desc "Import charged in data from CSV file"
     task :charged_ins do
-      puts "ChargedIn import: missing #{filename}" unless File.exist?(filename)
-
-      CSV.foreach(filename, :headers => true) do |row|
-        ChargedIn.create!(row.to_hash)
+      if File.exist?(filename)
+        CSV.foreach(filename, :headers => true) do |row|
+          ChargedIn.create!(row.to_hash)
+        end
+      else
+        puts "ChargedIn import: missing #{filename}"
+        load_test_charged_in
       end
+    end
+
+    private
+
+    def load_test_charged_in
+      ChargedIn.create! [
+        {
+          id: 1,
+          name: 'Arrears'
+        },
+        {
+          id: 2,
+          name: 'Advance'
+        }
+      ]
     end
   end
 end
