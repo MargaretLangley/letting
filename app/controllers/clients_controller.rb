@@ -12,21 +12,7 @@
 #
 class ClientsController < ApplicationController
   def index
-    @clients = Client.page(params[:page]).load
-  end
-
-  def search
-    # What happens for unique_search?
-    @clients = Client.search(params[:search]).page(params[:page]).records
-    return render action: 'index' if @clients.present?
-
-    if params[:search].present?
-      flash.now[:alert] = 'No Matches found. Search again.'
-      @clients = Client.page(params[:page]).load
-      render :index
-    else
-      redirect_to clients_path
-    end
+    @records = Client.page(params[:page]).load
   end
 
   def show
@@ -70,10 +56,6 @@ class ClientsController < ApplicationController
   end
 
   private
-
-  def search_param
-    params[:search]
-  end
 
   def clients_params
     params

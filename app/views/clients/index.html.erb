@@ -21,7 +21,7 @@
     Actions
   </div>
 
-  <% @clients.each do |client| %>
+  <% @records.each do |client| %>
     <div class='table-row' data-link='<%= client_path(client.id) %>'>
 
       <div class='col-1-12 vertical-spacer r-align grid-row inherit-row'>
@@ -51,4 +51,4 @@
     </div>
   <% end %>
 </div>
-<%= paginate @clients %>
+<%= paginate @records %>

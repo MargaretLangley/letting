@@ -44,6 +44,7 @@ class Permission < Struct.new(:user)
        invoices
        properties
        payments
+       search
        search_suggestions
        sheets)
   end

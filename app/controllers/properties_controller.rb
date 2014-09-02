@@ -16,21 +16,7 @@
 #
 class PropertiesController < ApplicationController
   def index
-    @properties = Property.page(params[:page]).load
-  end
-
-  def search
-    # What happens for unique_search?
-    @properties = Property.search(params[:search]).page(params[:page]).records
-    return render action: 'index' if @properties.present?
-
-    if params[:search].present?
-      flash.now[:alert] = 'No Matches found. Search again.'
-      @properties = Property.page(params[:page]).load
-      render :index
-    else
-      redirect_to properties_path
-    end
+    @records = Property.page(params[:page]).load
   end
 
   def show

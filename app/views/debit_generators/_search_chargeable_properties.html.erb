@@ -1,7 +1,7 @@
 <h3>Which properties to invoice?</h3>
   <div class="grid vertical-spacer">
     <div class="col-1-3">
-    <%= debit_gen_form.text_field :search_string, data: {autocomplete_source: search_properties_path}, autofocus:true %>
+    <%= debit_gen_form.text_field :search_string, data: {autocomplete_source: search_path}, autofocus:true %>
     </div>
     <div class="col-2-3">
     <%= debit_gen_form.submit 'Search' %>
