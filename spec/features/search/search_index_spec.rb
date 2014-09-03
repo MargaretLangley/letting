@@ -1,13 +1,22 @@
 require 'rails_helper'
-require_relative '../shared/address'
 
-describe Property, type: :feature do
-
+describe 'Search index', type: :feature do
   before(:each) { log_in }
 
-  describe '#Search' do
+  describe 'index' do
+    it 'visits literal matches' do
+      property_create human_ref: 111,
+                      account: account_new(id: 1, charge: charge_new(id: 1))
+      property_create human_ref: 222,
+                      account: account_new(id: 2, charge: charge_new(id: 2))
+      visit '/properties'
+      fill_in 'search', with: '222'
+      click_on('search')
+      expect(page.title).to eq 'Letting - View Account'
+      expect(page).to have_text '222'
+    end
 
-    before :each do
+    it 'indexes full-text search' do
       property_create human_ref: 111,
                       address_attributes: { county: 'Worcester' }
       property_create human_ref: 222,
@@ -15,29 +24,23 @@ describe Property, type: :feature do
       property_create human_ref: 333,
                       address_attributes: { county: 'West Midlands' }
       Property.import force: true, refresh: true
-    end
-
-    after :each do
-      Property.__elasticsearch__.delete_index!
-    end
-
-    it 'found when present' do
       visit '/properties'
       fill_in 'search', with: 'Wes'
       click_on('search')
       expect(page).to_not have_text '111'
       expect(page).to have_text '222'
       expect(page).to have_text '333'
+      Property.__elasticsearch__.delete_index!
     end
 
-    # Occasional Fail
-    # Failure/Error: Failure/Error: expect(page).to \
-    # have_text 'No Matches found. Search again.'
     it 'search not found when absent' do
+      property_create human_ref: 111
+      Property.import force: true, refresh: true
       visit '/properties'
       fill_in 'search', with: '599'
       click_on('search')
       expect(page).to have_text 'No Matches found. Search again.'
+      Property.__elasticsearch__.delete_index!
     end
   end
 end
