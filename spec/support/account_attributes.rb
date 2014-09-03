@@ -12,13 +12,6 @@ def charge_cycle_attributes **overrides
   }.merge overrides
 end
 
-def charged_in_attributes **overrides
-  {
-    id: 2,
-    name: 'Advance',
-  }.merge overrides
-end
-
 def charge_attributes **overrides
   {
     charge_type: 'Ground Rent',

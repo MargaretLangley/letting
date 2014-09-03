@@ -22,6 +22,12 @@ describe 'ChargedIn Factory' do
         expect { charged_in_create }.to change(ChargedIn, :count).by(1)
       end
     end
+
+    it 'finds if the name is known and creates when the name is unknown' do
+      charged_in_create name: 'Advance'
+      charged_in_create name: 'Advance'
+      expect(ChargedIn.count).to eq 1
+    end
   end
 
   describe 'charged_in_name' do
