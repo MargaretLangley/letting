@@ -46,7 +46,7 @@ class Payment < ActiveRecord::Base
 
   def self.payments_on date
     date ||= Date.current.to_s
-    return [] unless SearchDate.new(date).valid_date?
+    return Payment.none unless SearchDate.new(date).valid_date?
     Payment.includes(account: [:property])
            .where(created_at: SearchDate.new(date).day_range)
   end

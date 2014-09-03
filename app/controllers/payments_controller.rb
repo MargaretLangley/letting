@@ -18,7 +18,8 @@
 #
 class PaymentsController < ApplicationController
   def index
-    @payments = Payment.payments_on(params[:search])
+    params[:payment_search] ||= Date.today.to_s
+    @payments = Payment.payments_on(params['payment_search'])
                        .page(params[:page])
                        .load
   end

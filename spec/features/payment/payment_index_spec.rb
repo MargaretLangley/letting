@@ -10,8 +10,8 @@ class PaymentIndexPage
   end
 
   def search search_string = ''
-    fill_in 'search', with: search_string
-    click_on 'Search'
+    fill_in 'payment_search', with: search_string
+    click_on 'Payment Search'
     self
   end
 
@@ -35,34 +35,30 @@ describe 'Payment index', type: :feature do
   before(:each) { log_in }
 
   it 'all' do
-    property = property_create account: account_new
-    Payment.create! payment_attributes account_id: property
-           .account.id
+    property_create account: account_new(payment: payment_new)
     payment_index.visit_page
     expect(payment_index).to be_having_payment
   end
 
-  it 'search' do
-    skip 'search'
-    property = property_create
-    Payment.create! payment_attributes account_id: property.account.id
-    payment_index.visit_page
-    payment_index.search Date.current.to_s
-    expect(payment_index).to be_having_payment
-  end
+  describe 'payment search' do
+    it 'matches transactions on the same day' do
+      property_create account: account_new(payment: payment_new)
+      payment_index.visit_page
+      payment_index.search Date.current.to_s
+      expect(payment_index).to be_having_payment
+    end
 
-  it 'failed search' do
-    skip 'search'
-    property = property_create
-    Payment.create! payment_attributes account_id: property.account.id
-    payment_index.visit_page
-    payment_index.search '2003'
-    expect(payment_index).to_not be_having_payment
+    it 'misses transactions on a different day' do
+      payment = payment_new(on_date: '2014/01/25')
+      property_create account: account_new(payment: payment)
+      payment_index.visit_page
+      payment_index.search '2000/01/01'
+      expect(payment_index).to_not be_having_payment
+    end
   end
 
   it '#destroys a property' do
-    property = property_create account: account_new
-    Payment.create! payment_attributes account_id: property.account.id
+    property_create account: account_new(payment: payment_new)
     payment_index.visit_page
     expect { payment_index.delete }.to change(Payment, :count).by(-1)
     expect(payment_index).to be_deleted
