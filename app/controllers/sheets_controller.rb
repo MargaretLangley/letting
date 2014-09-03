@@ -13,7 +13,7 @@
 #
 class SheetsController < ApplicationController
   def index
-    @sheets = Sheet.all
+    @sheets = Sheet.order(:id)
   end
 
   def show
