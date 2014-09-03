@@ -15,7 +15,7 @@
 #
 class ChargeCyclesController < ApplicationController
   def index
-    @charge_cycles = ChargeCycle.all
+    @charge_cycles = ChargeCycle.order(:order)
   end
 
   def show
