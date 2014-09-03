@@ -94,14 +94,7 @@ describe Charge, :ledgers, :range, type: :model do
     end
   end
 
-  # FIX_CHARGE
-  it 'displays advanced date' do
-    skip 'FIX_CHARGE'
-  end
-  it 'displays arrears date' do
-    skip 'FIX_CHARGE'
-  end
-  it 'displays Midterm date' do
+  it 'charge displays range' do
     skip 'FIX_CHARGE'
   end
 end
