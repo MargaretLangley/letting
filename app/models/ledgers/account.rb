@@ -79,7 +79,7 @@ class Account < ActiveRecord::Base
   # query - an account or account range, '2002 - 3000'
   #
   def self.between? human_ref_range
-    return [] if human_ref_range.nil?
+    return Account.none if human_ref_range.nil?
     human_refs = human_ref_range.split('-')
     human_refs << human_refs.first if human_refs.size == 1
     Account.includes(:property)
