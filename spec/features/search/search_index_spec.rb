@@ -33,6 +33,16 @@ describe 'Search index', type: :feature do
       Property.__elasticsearch__.delete_index!
     end
 
+    it 'empty search returns a default result set' do
+      property_create human_ref: 111
+      Property.import force: true, refresh: true
+      visit '/properties'
+      fill_in 'search', with: ''
+      click_on('search')
+      expect(page).to have_text '111'
+      Property.__elasticsearch__.delete_index!
+    end
+
     it 'search not found when absent' do
       property_create human_ref: 111
       Property.import force: true, refresh: true
