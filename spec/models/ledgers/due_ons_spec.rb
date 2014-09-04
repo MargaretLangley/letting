@@ -47,13 +47,12 @@ describe DueOns, :ledgers, type: :model do
       end
     end
 
-    context '#clears_up_form' do
-      it 'leaves valid or partially filled due_ons' do
-        due_ons.build due_on_attributes_0
-        due_ons.build
+    context '#clear_up_form' do
+      it 'will destroy empty due_ons' do
+        due_ons.build day: nil, month: nil
         due_ons.clear_up_form
         expect(due_ons.reject { |due_on| due_on.marked_for_destruction? }.size)
-                      .to eq(1)
+                      .to eq(0)
       end
     end
 
@@ -88,15 +87,15 @@ describe DueOns, :ledgers, type: :model do
         end
       end
 
-      context '#new?' do
+      context '#includes_new?' do
         it 'true with new persistable record' do
-          due_ons.build due_on_attributes_0
-          expect(due_ons).to be_new
+          due_ons.build day: 1, month: 1
+          expect(due_ons).to be_includes_new
         end
 
         it 'false with new empty record' do
           due_ons.build
-          expect(due_ons).to_not be_new
+          expect(due_ons).to_not be_includes_new
         end
       end
     end
@@ -108,7 +107,6 @@ describe DueOns, :ledgers, type: :model do
         cycle.prepare
         cycle.due_ons.build day: 24, month: 6
         cycle.due_ons.build day: 25, month: 12
-        cycle.clear_up_form
         cycle.save!
         reload = ChargeCycle.find(cycle.id)
         expect(reload.due_ons.size).to eq(2)
@@ -119,13 +117,11 @@ describe DueOns, :ledgers, type: :model do
         cycle.due_ons.build day: 24, month: 6, id: 7
         cycle.due_ons.build day: 25, month: 12, id: 8
         cycle.due_ons.prepare
-        cycle.clear_up_form
         cycle.save!
         load = ChargeCycle.find(cycle.id)
         load.due_ons.prepare
         load.due_ons[0].update day: 5, month: 1
         load.due_ons[1].update day: '', month: ''
-        load.clear_up_form
         load.save!
         reloaded = ChargeCycle.find(cycle.id)
         expect(reloaded.due_ons.size).to eq(1)

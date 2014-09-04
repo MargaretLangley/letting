@@ -4,123 +4,51 @@ require 'rails_helper'
 # rubocop: disable Style/Documentation
 
 describe DueOn, :ledgers, type: :model do
-
-  let(:due_on) { DueOn.new due_on_attributes_0 charge_cycle_id: 1 }
-  it('is valid') { expect(due_on).to be_valid }
+  it('is valid') { expect(due_on_new).to be_valid }
 
   describe 'Attribute' do
     describe 'day' do
-      it 'presence' do
-        due_on.day = nil
-        expect(due_on).to_not be_valid
-      end
-
-      it 'numeric' do
-        due_on.day = 'ab'
-        expect(due_on).to_not be_valid
-      end
-
-      it 'integer' do
-        due_on.day = 8.3
-        expect(due_on).to_not be_valid
-      end
-
-      it 'greater than 0' do
-        due_on.day = 0
-        expect(due_on).to_not be_valid
-      end
-
-      it 'not less than 32' do
-        due_on.day = 32
-        expect(due_on).to_not be_valid
-      end
+      it('is required')   { expect(due_on_new day: nil).to_not be_valid }
+      it('is numeric')    { expect(due_on_new day: 'ab').to_not be_valid }
+      it('is an integer') { expect(due_on_new day: 8.3).to_not be_valid }
+      it('is > 0')        { expect(due_on_new day: 0).to_not be_valid }
+      it('is < 32')       { expect(due_on_new day: 32).to_not be_valid }
     end
 
-    context 'month' do
-      it 'presence' do
-        due_on.month = nil
-        expect(due_on).to_not be_valid
-      end
-
-      it 'numeric' do
-        due_on.month = 'ab'
-        expect(due_on).to_not be_valid
-      end
-
-      it 'integer' do
-        due_on.month = 8.3
-        expect(due_on).to_not be_valid
-      end
-
-      it 'not negative' do
-        due_on.month = -3
-        expect(due_on).to_not be_valid
-      end
-
-      it 'not less than 13' do
-        due_on.month = 13
-        expect(due_on).to_not be_valid
-      end
+    describe 'month' do
+      it('is required')   { expect(due_on_new month: nil).to_not be_valid }
+      it('is numeric')    { expect(due_on_new month: 'ab').to_not be_valid }
+      it('is an integer') { expect(due_on_new month: 8.3).to_not be_valid }
+      it('is > -1')        { expect(due_on_new month: -2).to_not be_valid }
+      it('is < 13')       { expect(due_on_new month: 13).to_not be_valid }
     end
 
     describe 'year' do
-
-      it 'numeric' do
-        due_on.year = 'ab'
-        expect(due_on).to_not be_valid
-      end
-
-      it 'integer' do
-        due_on.year = 8.3
-        expect(due_on).to_not be_valid
-      end
-
-      it 'not less than 1990' do
-        due_on.year = 1989
-        expect(due_on).to_not be_valid
-      end
-
-      it 'less than 2030' do
-        due_on.year = 2030
-        expect(due_on).to_not be_valid
-      end
-
+      it('is numeric')    { expect(due_on_new year: 'ab').to_not be_valid }
+      it('is an integer') { expect(due_on_new year: 8.3).to_not be_valid }
+      it('is >= 1990')    { expect(due_on_new year: 1989).to_not be_valid }
+      it('is < 2030')     { expect(due_on_new year: 2030).to_not be_valid }
     end
   end
 
   describe 'methods' do
-
     describe '#monthly?' do
-      it 'recognises when not per month' do
-        due_on.day = 25
-        due_on.month = 3
-        expect(due_on).to_not be_monthly
-      end
-      it 'recognises per month' do
-        due_on.day = 25
-        due_on.month = -1
-        expect(due_on).to be_monthly
-      end
+      it('is certified') { expect(due_on_new day: 25, month: -1).to be_monthly }
+      it('is denied') { expect(due_on_new day: 25, month: 3).to_not be_monthly }
     end
 
     describe '#between?' do
       before { Timecop.travel Date.new 2013, 1, 31 }
       after { Timecop.return }
 
-      it 'true range covers due_on' do
-        expect(due_on.between? charge_due_on_date).to be true
+      it 'is true when the range covers due_on' do
+        expect(due_on_new(day: 25, month:3)
+          .between? Time.new(2013, 3, 25) .. Date.new(2013, 3, 25)).to be true
       end
 
-      it 'false range misses due_on' do
-        expect(due_on.between? no_charge_on_dates).to be false
-      end
-
-      def charge_due_on_date
-        Time.new(2013, 3, 25) .. Date.new(2013, 3, 25)
-      end
-
-      def no_charge_on_dates
-        Date.new(2013, 2, 25) .. Date.new(2013, 3, 24)
+      it 'is false when range misses due_on' do
+        expect(due_on_new(day: 1, month:1)
+          .between? Time.new(2013, 3, 25) .. Date.new(2013, 3, 25)).to be false
       end
     end
 
@@ -130,7 +58,7 @@ describe DueOn, :ledgers, type: :model do
           @new = new
         end
 
-        def new?
+        def includes_new?
           @new
         end
       end
@@ -163,62 +91,52 @@ describe DueOn, :ledgers, type: :model do
     end
 
     describe '#makedate' do
-      it 'this year before charge on_date' do
-        Timecop.travel Date.new 2014, 3, 25
-        expect(due_on.make_date).to eq Date.new(2014, 3, 25)
-        Timecop.return
+      before { Timecop.travel Date.new 2014, 3, 25 }
+      after { Timecop.return }
+
+      it 'before the date it creates a date with this year' do
+        expect(due_on_new(day: 25, month: 3).make_date)
+          .to eq Date.new(2014, 3, 25)
       end
 
-      it 'next year after charge on_date' do
-        Timecop.travel Date.new 2014, 3, 26
-        expect(due_on.make_date).to eq Date.new(2015, 3, 25)
-        Timecop.return
+      it 'after the date it creates a date with next year' do
+        expect(due_on_new(day: 23, month: 3).make_date)
+          .to eq Date.new(2015, 3, 23)
       end
 
-      context 'year set' do
-        it 'uses the set year' do
-          Timecop.travel Date.new 2014, 3, 25
-          due_on.year = 2015
-          expect(due_on.make_date).to eq Date.new(2015, 3, 25)
-          Timecop.return
-        end
+      it 'uses any set year' do
+        expect(due_on_new(day: 23, month: 3, year: 2020).make_date)
+        .to eq Date.new(2020, 3, 23)
       end
     end
 
     describe '#empty?' do
       it 'with attributes not empty' do
-        expect(due_on).to_not be_empty
+        expect(due_on_new day: 25, month: 3).to_not be_empty
       end
       it 'without attributes empty' do
-        due_on.day = nil
-        due_on.month = nil
-        expect(due_on).to be_empty
+        expect(due_on_new day: nil, month: nil).to be_empty
       end
     end
 
     describe '<=>' do
       it 'matches when equal' do
-        due_on = DueOn.new month: 2, day: 2
-        other_due_on = DueOn.new month: 2, day: 2
-        expect(due_on <=> other_due_on).to eq 0
+        expect(due_on_new(day: 2, month: 2) <=>
+          due_on_new(day: 2, month: 2)).to eq(0)
       end
 
       it 'a is > b return 1' do
-        due_on = DueOn.new month: 2, day: 2
-        other_due_on = DueOn.new month: 2, day: 1
-        expect(due_on <=> other_due_on).to eq(1)
+        expect(due_on_new(day: 2, month: 2) <=>
+          due_on_new(day: 2, month: 1)).to eq(1)
       end
 
       it 'a is < b return -1' do
-        due_on = DueOn.new month: 2, day: 2
-        other_due_on = DueOn.new month: 2, day: 3
-        expect(due_on <=> other_due_on).to eq(-1)
+        expect(due_on_new(day: 2, month: 2) <=>
+          due_on_new(day: 2, month: 3)).to eq(-1)
       end
 
       it 'nil when not comparable' do
-        due_on = DueOn.new day: 2, month: 2
-        other = 37
-        expect(due_on <=> other).to be_nil
+        expect(due_on_new(day: 2, month: 2) <=> 37).to be_nil
       end
     end
   end
