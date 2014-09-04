@@ -16,8 +16,6 @@ module DB
 
     context 'errors' do
       it 'double import raises error' do
-        skip 'will not work until model_prepared can find_model'
-        # BEST GUESS: property_create had to change over while test not working
         property_create human_ref: 89, account: account_new(charge: charge_new)
 
         ImportPayment.import parse credit_row

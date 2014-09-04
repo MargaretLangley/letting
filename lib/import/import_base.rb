@@ -80,6 +80,10 @@ module DB
 
     private
 
+    def find_model _model_class
+      fail NotImplementedError
+    end
+
     def find_model! model_class
       model = find_model(model_class)
       fail_parent_record_not_found model_class if model.none?
