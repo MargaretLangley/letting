@@ -20,9 +20,9 @@ describe ChargeCycle, type: :feature do
     fill_in "#{id_stem}_year", with: year
   end
 
-  it 'errors on bad info' do
-    skip 'implement me - this is the only error test'
-    # other error tests should be implemented in the model
+  it 'displays form errors' do
+    visit '/charge_cycles/new'
+    click_on 'Create Charge cycle'
+    expect(page).to have_css '[data-role="errors"]'
   end
-
 end
