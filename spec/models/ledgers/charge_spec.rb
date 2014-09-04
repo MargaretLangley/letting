@@ -44,7 +44,7 @@ describe Charge, :ledgers, :range, type: :model do
 
       it 'bills if date range covers a due_on'  do
         charge = charge_create charge_cycle: \
-                   charge_cycle_create(due_on: DueOn.new(day: 25, month: 3))
+                   charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
 
         chargeable = ChargeableInfo.from_charge(chargeable_attributes \
           charge_id: charge.id,
@@ -56,7 +56,7 @@ describe Charge, :ledgers, :range, type: :model do
 
       it 'does not bill if no charge is in date range' do
         charge = charge_create charge_cycle: \
-                   charge_cycle_create(due_on: DueOn.new(day: 25, month: 3))
+                   charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
         expect(charge.next_chargeable(Date.new(2013, 2, 1)..\
                                       Date.new(2013, 3, 24)))
           .to eq []
@@ -65,7 +65,7 @@ describe Charge, :ledgers, :range, type: :model do
       # Would like to move this lower down within charging system
       it 'bills all due_ons within multi-year range - ONCE' do
         charge = charge_create charge_cycle: \
-                   charge_cycle_create(due_on: DueOn.new(day: 25, month: 3))
+                   charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
         chargeable = ChargeableInfo.from_charge(chargeable_attributes \
           charge_id: charge.id,
           on_date: Date.new(2013, 3, 25))
@@ -76,7 +76,7 @@ describe Charge, :ledgers, :range, type: :model do
 
       it 'does not bill dormant charges'  do
         charge = charge_create charge_cycle: \
-                   charge_cycle_create(due_on: DueOn.new(day: 25, month: 3))
+                   charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
         charge.dormant = true
         expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
                                       Date.new(2013, 3, 25)))
@@ -85,7 +85,7 @@ describe Charge, :ledgers, :range, type: :model do
 
       it 'ignores charges which have debits'  do
         charge = charge_create charge_cycle: \
-                   charge_cycle_create(due_on: DueOn.new(day: 25, month: 3))
+                   charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
         charge.debits.build debit_attributes on_date: '2013-3-25'
         expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
                                       Date.new(2016, 3, 25)))

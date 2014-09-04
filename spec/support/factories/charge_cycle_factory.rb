@@ -1,18 +1,17 @@
-def charge_cycle_new **args
-  cycle = ChargeCycle.new charge_cycle_attributes \
-                          args.except(:due_on_attributes)
-  cycle.due_ons.build due_on_attributes_0 args.fetch(:due_on_attributes, {})
+def charge_cycle_new name: 'Mar/Sep',
+                     order: 1,
+                     due_ons: [DueOn.new(day: 25, month: 3)]
+  cycle = ChargeCycle.new name: name, order: order
+  cycle.due_ons = due_ons if due_ons
   cycle
 end
 
-def charge_cycle_create due_on: due_on, **args
-  cycle = ChargeCycle.new charge_cycle_attributes args
-    .except(:due_on_attributes)
-  if due_on
-    cycle.due_ons << due_on
-  else
-    cycle.due_ons.build due_on_attributes_0 args.fetch(:due_on_attributes, {})
-  end
+def charge_cycle_create id: 1,
+                        name: 'Mar/Sep',
+                        order: 1,
+                        due_ons: [DueOn.new(day: 25, month: 3)]
+  cycle = ChargeCycle.new id: id, name: name, order: order
+  cycle.due_ons = due_ons if due_ons
   cycle.save!
   cycle
 end

@@ -4,7 +4,7 @@ describe ChargeCycle, type: :feature do
 
   before(:each) do
     log_in
-    charge_cycle_create name: 'Jan/July', order: 6
+    charge_cycle_create id: 1, name: 'Jan/July', order: 6
   end
 
   context '#index' do
@@ -29,7 +29,7 @@ describe ChargeCycle, type: :feature do
     end
 
     it 'has ordered list' do
-      charge_cycle_create name: 'Feb/July', order: 2
+      charge_cycle_create id: 2, name: 'Feb/July', order: 2
       visit '/charge_cycles/'
       first(:link, 'Edit').click
       expect(find_field('Name').value).to have_text 'Feb/July'

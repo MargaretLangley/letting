@@ -24,27 +24,6 @@ def charge_attributes **overrides
   }.merge overrides
 end
 
-def due_on_attributes_0 **overrides
-  {
-    day: 25,
-    month: 3,
-  }.merge overrides
-end
-
-def due_on_attributes_1 **overrides
-  {
-    day: 29,
-    month: 9,
-  }.merge overrides
-end
-
-def due_on_monthly_attributes_0 **overrides
-  {
-    day: 1,
-    month: -1,
-  }.merge overrides
-end
-
 def chargeable_attributes **overrides
   {
     charge_id: 1,

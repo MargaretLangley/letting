@@ -15,7 +15,7 @@ describe 'ChargeCycle Factory' do
     end
     describe 'overrides' do
       it('due on') do
-        cycle = charge_cycle_new due_on_attributes: { month: 6 }
+        cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
         expect(cycle.due_ons[0].month).to eq 6
       end
     end
@@ -36,13 +36,21 @@ describe 'ChargeCycle Factory' do
         charge_cycle_create
         expect(DueOn.first).to eq DueOn.new(day: 25, month: 3)
       end
+
+      describe 'adds' do
+        it 'due_ons' do
+          charge_cycle_create due_ons: [DueOn.new(day: 2, month: 3)]
+          expect(ChargeCycle.first.due_ons.first)
+            .to eq DueOn.new(day: 2, month: 3)
+        end
+      end
     end
 
     describe 'overrides' do
       it('id') { expect((charge_cycle_create id: 7).id).to eq 7 }
 
       it 'due on' do
-        charge_cycle_create due_on: DueOn.new(day: 6, month: 10)
+        charge_cycle_create due_ons: [DueOn.new(day: 6, month: 10)]
         expect(DueOn.first).to eq DueOn.new(day: 6, month: 10)
       end
     end

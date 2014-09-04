@@ -49,7 +49,7 @@ module DB
 
         describe '#charge_cycle_id' do
           it('returns valid id') do
-            charge_cycle_create id: 3, due_on: DueOn.new(day: 25, month: 3)
+            charge_cycle_create id: 3, due_ons: [DueOn.new(day: 25, month: 3)]
             expect(row.charge_cycle_id).to eq 3
           end
 
@@ -60,7 +60,7 @@ module DB
           end
 
           it 'messages on unknown cycle' do
-            charge_cycle_create id: 3, due_on: DueOn.new(day: 10, month: 10)
+            charge_cycle_create id: 3, due_ons: [DueOn.new(day: 10, month: 10)]
             expect($stdout).to receive(:puts)
               .with(/charge row does not match a charge cycle/)
             row.charge_cycle_id

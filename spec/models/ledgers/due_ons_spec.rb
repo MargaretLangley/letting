@@ -62,7 +62,7 @@ describe DueOns, :ledgers, type: :model do
       end
 
       it 'not empty when something in it' do
-        due_ons.build due_on_attributes_0
+        due_ons.build day: 1, month: 3
         expect(due_ons).to_not be_empty
       end
     end
