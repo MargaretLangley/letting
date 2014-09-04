@@ -11,6 +11,8 @@
 # folded - alias css hidden
 # flatten - for understanding only - it has no CSS styling.
 #
+# controller_name is a constant, converted from the class name
+#
 ####
 #
 module NavigationHelper
