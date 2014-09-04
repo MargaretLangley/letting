@@ -31,7 +31,7 @@ class Credit < ActiveRecord::Base
   delegate :charge_type, to: :charge
 
   def clear_up
-    mark_for_destruction if amount.nil? || amount.round(2) == 0
+    mark_for_destruction if amount.nil? || amount.round(2).zero?
   end
 
   # outstanding is the amount left unpaid
@@ -43,7 +43,7 @@ class Credit < ActiveRecord::Base
   end
 
   def spent?
-    outstanding.round(2) == 0.00
+    outstanding.round(2).zero?
   end
 
   def reverse

@@ -108,7 +108,7 @@ module DB
     end
 
     def empty_due_on? day, month
-      day == 0 && month == 0
+      day.zero? && month.zero?
     end
 
     def charged_in_code

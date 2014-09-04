@@ -32,7 +32,7 @@ class Settlement < ActiveRecord::Base
   def self.resolve settle, offsets
     offsets.each do |offsetable|
       settle -= pay = [settle, offsetable.outstanding].min
-      break if pay.round(2) == 0.00
+      break if pay.round(2).zero?
       yield offsetable, pay
     end
   end
