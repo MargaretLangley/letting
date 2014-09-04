@@ -44,7 +44,7 @@ module DB
       ChargeCycleMatcher.new(day_months: day_months).id
       rescue ChargeCycleUnknown
         puts "Property #{human_ref} charge row does not match a charge cycle" \
-          " Legacy charge_type: '#{charge_code}' "
+          " (For legacy charge_type: '#{charge_code}') "
     end
 
     def amount
