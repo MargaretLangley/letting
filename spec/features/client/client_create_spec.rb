@@ -34,9 +34,9 @@ describe Client, type: :feature do
       client_page.expect_address(self, address_attributes(town: 'York'))
     end
 
-    it 'can validate' do
+    it 'displays form errors' do
       client_page.button('Create')
-      expect(page).to have_text 'The client could not be saved.'
+      expect(page).to have_css '[data-role="errors"]'
     end
 
     it 'can cancel' do

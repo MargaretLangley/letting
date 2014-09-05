@@ -26,4 +26,12 @@ class UserCreatePage
       fill_in 'Password confirmation', with: confirmation
     end
   end
+
+  def errored?
+    has_css? '[data-role="errors"]'
+  end
+
+  def successful?
+    has_content? /successfully created/i
+  end
 end
