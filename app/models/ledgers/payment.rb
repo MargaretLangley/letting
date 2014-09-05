@@ -23,8 +23,9 @@ class Payment < ActiveRecord::Base
   before_validation :clear_up
 
   accepts_nested_attributes_for :credits, allow_destroy: true
-  validates :account_id, :amount, :on_date, presence: true
-
+  validates :account_id, :on_date, presence: true
+  validates :amount, numericality: { other_than: 0,
+                                     message: 'should not be zero.' }
   after_initialize do
     self.on_date = Date.current if on_date.blank?
   end
