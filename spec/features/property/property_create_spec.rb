@@ -58,6 +58,12 @@ describe Property, type: :feature do
     expect(page).to have_css('.spec-charge-count', count: 4)
   end
 
+  it 'displays form errors' do
+    account.new
+    account.button 'Create'
+    expect(page).to have_css '[data-role="errors"]'
+  end
+
   def fill_in_account(property_ref:,
                       client_ref:,
                       charge_cycle_id:,
