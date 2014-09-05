@@ -6,11 +6,13 @@ describe Payment, type: :feature do
   before(:each) { log_in }
 
   it 'payment for debit', js: true do
+    skip 'payment is negative value'
     property_create account: account_new(charge: charge_new, debit: debit_new)
     payment_page.visit_new_page
     payment_page.human_ref('2002').search
     a_property_is_found
     property_receivables?
+    expect(payment_page.payment).to eq(88.08)
     payment_page.payment 88.08
     payment_page.click_create_payment
     payment_is_created
@@ -31,7 +33,7 @@ describe Payment, type: :feature do
       payment_page.visit_new_page
 
       payment_page.human_ref('2002').search
-      payment_page.payment(100_000_000)
+      payment_page.payment = 100_000_000
       payment_page.click_create_payment
       expect(payment_page).to be_errored
     end

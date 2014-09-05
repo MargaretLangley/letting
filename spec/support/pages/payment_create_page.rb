@@ -20,8 +20,12 @@ class PaymentCreatePage
     self
   end
 
-  def payment amount
+  def payment= amount
     fill_in 'payment_credits_attributes_0_amount', with: amount
+  end
+
+  def payment
+    find_field('payment_credits_attributes_0_amount').value
   end
 
   def search
