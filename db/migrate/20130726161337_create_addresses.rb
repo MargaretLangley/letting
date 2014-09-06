@@ -1,3 +1,6 @@
+#
+# polymorphic: true => two columns addressable_id and addressable_type
+#
 class CreateAddresses < ActiveRecord::Migration
   def change
     create_table :addresses do |t|

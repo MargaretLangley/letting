@@ -1,8 +1,10 @@
+#
+# polymorphic: true => two columns entitieable_id and enitieable_type
+#
 class CreateEntities < ActiveRecord::Migration
   def change
     create_table :entities do |t|
-      t.integer :entitieable_id, null: false
-      t.string  :entitieable_type, null: false
+      t.belongs_to :entitieable, polymorphic: true, null: false
       t.string :title
       t.string :initials
       t.string :name, null: false
