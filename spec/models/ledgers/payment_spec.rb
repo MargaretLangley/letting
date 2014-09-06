@@ -13,7 +13,10 @@ describe Payment, :ledgers, type: :model do
       payment.on_date = nil
       expect(payment).to_not be_valid
     end
+
     it('requires amount') { expect(payment_new(amount: nil)).to_not be_valid }
+
+    it('fails zero amount') { expect(payment_new(amount: 0)).to_not be_valid }
   end
 
   describe 'default inialization' do
