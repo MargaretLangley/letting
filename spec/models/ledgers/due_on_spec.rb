@@ -59,7 +59,7 @@ describe DueOn, :ledgers, type: :model do
           @new = new
         end
 
-        def includes_new?
+        def includes_new_monthly?
           @new
         end
       end

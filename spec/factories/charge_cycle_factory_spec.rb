@@ -38,10 +38,16 @@ describe 'ChargeCycle Factory' do
       end
 
       describe 'adds' do
-        it 'due_ons' do
+        it 'due date due_ons' do
           charge_cycle_create due_ons: [DueOn.new(day: 2, month: 3)]
           expect(ChargeCycle.first.due_ons.first)
             .to eq DueOn.new(day: 2, month: 3)
+        end
+
+        it 'per month due_ons' do
+          charge_cycle_create due_ons: [DueOn.new(day: 2, month: -1)]
+          expect(ChargeCycle.first.due_ons.size)
+            .to eq(12)
         end
       end
     end
