@@ -170,29 +170,6 @@ describe DueOns, :ledgers, type: :model do
         cycle.prepare
         expect(cycle.due_ons.size).to eq(12)
       end
-
-      # Not the same as assigning a tribute (which I can't get to work)
-      # But it seems to add another due_on with he same id.
-      it 'on date to per month' do
-        charge_cycle_create due_ons: [DueOn.new(id: 1, day: 24, month: 6)]
-        (cycle = ChargeCycle.first)
-        cycle.due_ons.build "id"=>"1", "day"=>"15", "month"=>"-1", "year"=>""
-        cycle.save!
-        expect(ChargeCycle.first.due_ons.size).to eq(12)
-      end
-
-      it 'per month to on date' do
-        skip 'was not working but will not be needed'
-        charge_cycle_create due_ons: [DueOn.new(day: 24, month: -1)]
-        (cycle = ChargeCycle.first).prepare
-        cycle.due_ons.build day: 1, month: 5
-        cycle.save!
-        expect(ChargeCycle.first.due_ons.size).to eq(1)
-      end
-
-      it 'what happens if per_month day same as on date day' do
-        'Edge case that I should consider'
-      end
     end
   end
 end
