@@ -83,12 +83,22 @@ module DB
           expect(row.day_months).to eq [[25, 3]]
         end
 
-        it 'produces elements until empty' do
-          expect(ChargeRow.new(parse_line(base_charge_row)).day_months.count)
-            .to eq 1
+        describe 'produces day month pairs' do
+          it 'stops on empty due date (0,0)' do
+            base_charge_row = %q(9,, GR, 0, 5.5, S, 1, 1, 0, 0, 0, 0, 0, 0,, 0)
+            expect(ChargeRow.new(parse_line(base_charge_row)).day_months.count)
+              .to eq 1
+          end
+
+          # A few properties (e.g. 7022 have 0, -1 as empty due date)
+          it 'stops on empty due date (0,-1)' do
+            base_charge_row = %q(9,, GR, 0, 5.5, S, 1, 1, 0, -1, 0, 0, 0, 0,, 0)
+            expect(ChargeRow.new(parse_line(base_charge_row)).day_months.count)
+              .to eq 1
+          end
         end
 
-        it 'yields quarter year charges' do
+        it 'maximum day month pairs of 4' do
           quarter_charge = %q(9,, GR, 0, 5, S, 1, 1, 2, 2, 3, 3, 4, 4,, 0)
           expect(ChargeRow.new(parse_line quarter_charge).day_months.count)
             .to eq 4

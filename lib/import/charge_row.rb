@@ -107,8 +107,10 @@ module DB
       @source[:"month_#{number}"].to_i
     end
 
+    # most due_ons use empty day month pairing of (0,0)
+    # a few, e.g. 7022, use (0,-1)
     def empty_due_on? day, month
-      day.zero? && month.zero?
+      day.zero? && month.zero? || day.zero? && month == -1
     end
 
     def charged_in_code
