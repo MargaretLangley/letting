@@ -28,8 +28,8 @@ class Debit < ActiveRecord::Base
   belongs_to :charge
 
   validates :charge_id, :on_date, presence: true
+  # custom valiates - numericality did not think -99_000 > -100_000
   validates :amount, amount: true
-  validates :amount, numericality: { less_than: 100_000 }
   before_save :reconcile
 
   delegate :charge_type, to: :charge

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 # rubocop: disable Style/Documentation
 
 class AmountValidatable
@@ -13,47 +13,23 @@ end
 
 describe 'Amount' do
 
-  let(:validatable) { AmountValidatable.new 88.88 }
-
-  it 'true' do
-    expect(validatable).to be_valid
+  def validator_new amount
+    AmountValidatable.new amount
   end
 
-  context 'false' do
-    it 'negative number' do
-      validatable.amount = -1
-      expect(validatable).to_not be_valid
+  describe 'amount' do
+    it('is a number') { expect(validator_new('nan')).to_not be_valid }
+    it('has a max') { expect(validator_new(100_000)).to_not be_valid }
+    it('is valid under max') do
+      expect(validator_new(99_999.99)).to be_valid
     end
-    it 'none numeric' do
-      validatable.amount = 'bat'
-      expect(validatable).to_not be_valid
-    end
-    it 'nil' do
-      validatable.amount = nil
-      expect(validatable).to_not be_valid
-    end
+    it('has a min') { expect(validator_new(-100_000)).to_not be_valid }
+    it('is valid under max') { expect(validator_new(-99_999.99)).to be_valid }
   end
 
   it 'sets error' do
-    validatable.amount = -0.01
+    validatable = validator_new(-100_000.01)
     validatable.valid?
     expect(validatable.errors[:amount].size).to eq(1)
-  end
-
-  context 'amount' do
-    it 'One penny is valid' do
-      validatable.amount = 0.01
-      expect(validatable).to be_valid
-    end
-
-    it 'two digits only' do
-      validatable.amount = 0.00001
-      expect(validatable).to_not be_valid
-    end
-
-    it 'positive numbers' do
-      validatable.amount = -1.00
-      expect(validatable).to_not be_valid
-    end
   end
 end

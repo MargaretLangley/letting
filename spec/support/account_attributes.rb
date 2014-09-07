@@ -14,16 +14,6 @@ def chargeable_attributes **overrides
   }.merge overrides
 end
 
-def debit_attributes **overrides
-  {
-    account_id: 1,
-    debit_generator_id: 1,
-    charge_id: 1,
-    on_date: '25/3/2013',
-    amount: 88.08,
-  }.merge overrides
-end
-
 def debit_generator_attributes **overrides
   {
     search_string: 'Lords',

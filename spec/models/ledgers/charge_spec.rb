@@ -86,7 +86,7 @@ describe Charge, :ledgers, :range, type: :model do
       it 'ignores charges which have debits'  do
         charge = charge_create charge_cycle: \
                    charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
-        charge.debits.build debit_attributes on_date: '2013-3-25'
+        charge.debits << debit_new(on_date: '2013-3-25')
         expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
                                       Date.new(2016, 3, 25)))
           .to eq []

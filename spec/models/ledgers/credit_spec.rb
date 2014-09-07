@@ -7,35 +7,36 @@ describe Credit, :ledgers, type: :model do
 
   describe 'validates' do
     describe 'presence' do
-      it('charge_id') { expect(credit_new(charge_id: nil)).to_not be_valid }
+      it('charge_id') { expect(credit_new charge_id: nil).to_not be_valid }
       it 'on_date' do
-        credit.on_date = nil
+        (credit = credit_new).on_date = nil
         expect(credit).to_not be_valid
       end
-      it('amount') { expect(credit_new(amount: nil)).to_not be_valid }
+      it('amount') { expect(credit_new amount: nil).to_not be_valid }
     end
 
     describe 'amount' do
-      it('is a number') { expect(credit_new(amount: 'nan')).to_not be_valid }
-      it('has a max') { expect(credit_new(amount: 0)).to_not be_valid }
-      it('is valid under max') { expect(credit_new(amount: -0.01)).to be_valid }
-      it('has a min') { expect(credit_new(amount: -100_000)).to_not be_valid }
+      it('is a number') { expect(credit_new amount: 'nan').to_not be_valid }
+      it('has a max') { expect(credit_new amount: 100_000).to_not be_valid }
+      it('is valid under max') do
+        expect(credit_new amount: 99_999.99).to be_valid
+      end
+      it('has a min') { expect(credit_new amount: -100_000).to_not be_valid }
       it('is valid under min') do
-        expect(credit_new(amount: -99_999.99)).to be_valid
+        expect(credit_new amount: -99_999.99).to be_valid
       end
     end
   end
 
   context 'default inialization' do
     let(:credit) do
-      debit = Debit.create! debit_attributes
-      debit.credits.build
+
     end
-    before { Timecop.travel(Date.new(2013, 9, 30)) }
+    before { Timecop.travel Date.new(2013, 9, 30) }
     after { Timecop.return }
 
     it 'has on_date' do
-      expect(credit.on_date).to eq Date.new 2013, 9, 30
+      expect(credit_new(on_date: nil).on_date).to eq Date.new 2013, 9, 30
     end
   end
 
@@ -69,7 +70,7 @@ describe Credit, :ledgers, type: :model do
 
       it 'multiple credits are added' do
         credit = credit_new amount: -6.00
-        Debit.create! debit_attributes amount: 4.00
+        debit_create amount: 4.00
         credit.save!
         expect(credit.outstanding).to eq(2.00)
       end
@@ -82,7 +83,7 @@ describe Credit, :ledgers, type: :model do
 
       it 'true when spent' do
         credit = credit_create amount: (-8.00)
-        Debit.create! debit_attributes amount: 8.00
+        debit_create amount: 8.00
         credit.save!
         expect(credit).to be_spent
       end

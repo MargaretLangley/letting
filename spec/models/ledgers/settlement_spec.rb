@@ -16,18 +16,14 @@ describe Settlement, :ledgers, type: :model do
       end
 
       it 'handles debit being the offset' do
-        offset = Debit.create! debit_attributes amount: 3.00
+        offset = debit_create amount: 3.00
         expect { |b| Settlement.resolve(3.00, [offset], &b) }
           .to yield_with_args(offset, 3.00)
-
       end
 
       it 'handles summed debits being the offset' do
-        offsets = [Debit.create!(debit_attributes on_date: '25/3/2013',
-                                                  amount: 3.00),
-                   Debit.create!(debit_attributes amount: 3.00,
-                                                  on_date: '25/3/2014')
-                  ]
+        offsets = [debit_create(on_date: '25/3/2013', amount: 3.00),
+                   debit_create(on_date: '25/3/2014', amount: 3.00)]
         expect { |b| Settlement.resolve(6.00, offsets, &b) }
           .to yield_successive_args([offsets[0], 3.00], [offsets[1], 3.00])
       end

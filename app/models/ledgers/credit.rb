@@ -21,7 +21,8 @@ class Credit < ActiveRecord::Base
   has_many :settlements, dependent: :destroy
 
   validates :charge_id, :on_date, presence: true
-  validates :amount, credit: true
+  # custom valiates - numericality did not think -99_000 > -100_000
+  validates :amount, amount: true
   before_save :reconcile
 
   after_initialize do

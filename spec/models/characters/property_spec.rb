@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Property, type: :model do
 
@@ -54,7 +54,7 @@ describe Property, type: :model do
     end
   end
 
-  describe 'search' do
+  describe 'search', :slow do
 
     before :each do
       property_create

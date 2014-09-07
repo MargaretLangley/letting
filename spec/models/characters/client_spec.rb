@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Client, type: :model do
 
@@ -29,22 +29,17 @@ describe Client, type: :model do
     end
   end
 
-  describe 'search' do
-    before :each do
-      client_create
+  describe '#search', :slow do
+    before(:each) do
+      client_create human_ref: '8008'
       Client.import force: true, refresh: true
     end
+    after(:each) { Client.__elasticsearch__.delete_index! }
 
-    after :each do
-      Client.__elasticsearch__.delete_index!
-    end
-
-    describe '#search' do
-      it('human id') { expect(Client.search('8008').results.total).to eq 1 }
-      it('names') { expect(Client.search('Grac').results.total).to eq 1 }
-      it('house') { expect(Client.search('Hil').results.total).to eq 1 }
-      it('roads') { expect(Client.search('Edg').results.total).to eq 1 }
-      it('towns') { expect(Client.search('Bir').results.total).to eq 1 }
-    end
+    it('human id') { expect(Client.search('8008').results.total).to eq 1 }
+    it('names') { expect(Client.search('Grac').results.total).to eq 1 }
+    it('house') { expect(Client.search('Hil').results.total).to eq 1 }
+    it('roads') { expect(Client.search('Edg').results.total).to eq 1 }
+    it('towns') { expect(Client.search('Bir').results.total).to eq 1 }
   end
 end

@@ -30,8 +30,8 @@ def base_credit(payment_id:, account_id:, charge_id:, on_date:, amount:)
   credit = Credit.new payment_id: payment_id,
                       account_id: account_id,
                       charge_id: charge_id,
-                      on_date: on_date,
                       amount: amount
+  credit.on_date = on_date if on_date
   allow(credit).to receive(:debit_outstanding).and_return(-88.08)
   credit
 end

@@ -162,7 +162,7 @@ describe DebitGenerator, :ledgers, type: :model do
                                    .merge(accounts: [Object.new])
                                    .merge(overrides)
                                    )
-    debit_gen.debits.build debit_attributes
+    debit_gen.debits << debit_new
     debit_gen
   end
 end

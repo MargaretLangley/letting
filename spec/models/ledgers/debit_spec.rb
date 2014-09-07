@@ -1,53 +1,36 @@
+# rubocop: disable  Lint/UselessComparison
 require 'rails_helper'
 
 describe Debit, :ledgers, type: :model do
 
-  let(:debit) { Debit.new debit_attributes }
   let(:account) { Account.new id: 1, account_id: 1 }
-  it('is valid') { expect(debit).to be_valid }
+  it('is valid') { expect(debit_new).to be_valid }
 
   describe 'validates' do
     describe 'presence' do
-
-      it 'charge_id' do
-        debit.charge_id = nil
-        expect(debit).to_not be_valid
-      end
-
-      it 'on_date' do
-        debit.on_date = nil
-        expect(debit).to_not be_valid
-      end
-
-      it 'amount' do
-        debit.amount = nil
-        expect(debit).to_not be_valid
-      end
+      it('charge_id') { expect(debit_new charge_id: nil).to_not be_valid }
+      it('on_date') { expect(debit_new on_date: nil).to_not be_valid }
+      it('amount') { debit_new amount: nil }
     end
     describe 'amount' do
-      it 'is numeric' do
-        debit.amount = 'nnn'
-        expect(debit).to_not be_valid
+      it('is a number') { expect(debit_new(amount: 'nan')).to_not be_valid }
+      it('has a max') { expect(debit_new(amount: 100_000)).to_not be_valid }
+      it('is valid under max') do
+        expect(debit_new(amount: 99_999.99)).to be_valid
       end
-      it 'has a maximum' do
-        debit.amount = 100_000
-        expect(debit).to_not be_valid
+      it('has a min') { expect(debit_new(amount: -100_000)).to_not be_valid }
+      it('is valid under max') do
+        expect(debit_new(amount: -99_999.99)).to be_valid
       end
     end
-
   end
 
   describe 'class method' do
     describe '.available' do
-
       it 'orders debits by date' do
-        last  = create_debit Date.new(2013, 4, 1)
-        first = create_debit Date.new(2012, 4, 1)
+        last  = debit_create on_date: Date.new(2013, 4, 1)
+        first = debit_create on_date: Date.new(2012, 4, 1)
         expect(Debit.available first.charge_id).to eq [first, last]
-      end
-
-      def create_debit on_date
-        Debit.create! debit_attributes on_date: on_date
       end
     end
   end
@@ -56,7 +39,7 @@ describe Debit, :ledgers, type: :model do
 
     describe '#charge_type' do
       it 'returned when charge present' do
-        debit.charge = charge_new charge_type: 'Rent'
+        (debit = debit_new).charge = charge_new charge_type: 'Rent'
         expect(debit.charge_type).to eq 'Rent'
       end
 
@@ -67,25 +50,25 @@ describe Debit, :ledgers, type: :model do
 
     describe '#outstanding' do
       it 'returns amount if nothing paid' do
-        expect(debit.outstanding).to eq 88.08
+        expect(debit_new.outstanding).to eq 88.08
       end
 
       it 'multiple credits are added' do
         credit_create amount: -44.04
-        debit.save!
+        (debit = debit_new).save!
         expect(debit.outstanding).to eq 44.04
       end
     end
 
     describe '#paid?' do
       it 'false without credit' do
-        debit  = Debit.create! debit_attributes amount: 88.08
+        debit = debit_create amount: 88.08
         debit.save!
         expect(debit).to_not be_paid
       end
 
       it 'true when paid in full' do
-        debit  = Debit.create! debit_attributes amount: 88.08
+        debit = debit_create amount: 88.08
         credit_create amount: -88.08
         debit.save!
         expect(debit).to be_paid
@@ -94,21 +77,15 @@ describe Debit, :ledgers, type: :model do
 
     describe '#==' do
       it 'returns equal objects as being the same' do
-        lhs = Debit.new debit_attributes
-        rhs = Debit.new debit_attributes
-        expect(lhs == rhs).to be true
+        expect(debit_new == debit_new).to be true
       end
 
       it 'returns unequal objects as being different' do
-        lhs = Debit.new debit_attributes charge_id: 101
-        rhs = Debit.new debit_attributes charge_id: 100
-        expect(lhs == rhs).to be false
+        expect(debit_new(charge_id: 1) == debit_new(charge_id: 2)).to be false
       end
 
       it 'returns nil objects are different classes' do
-        lhs = Debit.new debit_attributes
-        rhs = 'I am a string not a debit'
-        expect(lhs == rhs).to be_nil
+        expect(debit_new == 'I am a string not a debit').to be_nil
       end
     end
   end

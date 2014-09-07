@@ -16,7 +16,7 @@ describe 'Search index', type: :feature do
       expect(page).to have_text '222'
     end
 
-    it 'indexes full-text search' do
+    it 'indexes full-text search', :slow  do
       property_create human_ref: 111,
                       address_attributes: { county: 'Worcester' }
       property_create human_ref: 222,
@@ -33,7 +33,7 @@ describe 'Search index', type: :feature do
       Property.__elasticsearch__.delete_index!
     end
 
-    it 'empty search returns a default result set' do
+    it 'empty search returns a default result set', :slow  do
       property_create human_ref: 111
       Property.import force: true, refresh: true
       visit '/properties'
@@ -43,7 +43,7 @@ describe 'Search index', type: :feature do
       Property.__elasticsearch__.delete_index!
     end
 
-    it 'search not found when absent' do
+    it 'search not found when absent', :slow  do
       property_create human_ref: 111
       Property.import force: true, refresh: true
       visit '/properties'
