@@ -12,13 +12,14 @@ namespace :db do
 
     desc "Import invoice text from CSV file"
     task :sheet do
-      puts "Sheet import: missing #{filename}" unless File.exist?(filename)
-
-      CSV.foreach(filename, :headers => true) do |row|
-        begin
-          Sheet.create!(row.to_hash)
-        rescue Exception => exception
-          p "Sheet Create failed (see hash below):", row.to_hash
+      if File.exist?(filename)
+        puts "Sheet imported: #{filename}"
+        CSV.foreach(filename, :headers => true) do |row|
+          begin
+            Sheet.create!(row.to_hash)
+          rescue Exception => exception
+            p "Sheet Create failed (see hash below):", row.to_hash
+          end
         end
       end
     end

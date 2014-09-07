@@ -381,8 +381,8 @@ def create_sheets
   Sheet.create! [
     {
       id: 3,
-      description: 'Page 3 Invoice',
-      invoice_name: 'Mr Seed',
+      description: 'Page 1 seed',
+      invoice_name: 'F & L Adams',
       phone: '01215030992',
       vat: '277 9904 95',
       heading1:  'Residential Lettings & Property Management',
@@ -394,7 +394,7 @@ Postal Orders sent through the post shall be at the sender's risk until actually
     },
     {
       id: 4,
-      description: 'Page 4 Notice of Rent Due',
+      description: 'Page 2 Notice of Rent Due seed',
       invoice_name: 'Seedbod',
       phone: '01215030992',
       vat: '277 9904 95',
@@ -412,7 +412,6 @@ Postal Orders sent through the post shall be at the sender's risk until actually
   ]
 end
 
-
 def create_sheet_addresses
   Address.create! [
     {
@@ -421,7 +420,7 @@ def create_sheet_addresses
       flat_no:  '',
       house_name: '',
       road_no:  '2',
-      road:     'Seedwood Street',
+      road:     'Attwood Street',
       district: '',
       town:     'Halesowen',
       county:   'West Midlands',
