@@ -32,7 +32,7 @@ class PaymentsController < ApplicationController
     account = Account.find_by_human_ref(human_ref)
     @payment = PaymentDecorator.new(Payment.new(account: account),
                                     human_ref: human_ref)
-    @payment.reverse_credits
+    @payment.negate
     @payment.prepare_for_form
   end
 
@@ -53,7 +53,6 @@ class PaymentsController < ApplicationController
     @payment = PaymentDecorator
                  .new(Payment.new(payment_params.except(:human_ref)),
                       human_ref: payment_params[:human_ref])
-    @payment.reverse_credits
     if @payment.save
       redirect_to new_payment_path, notice: created_message
     else
@@ -63,13 +62,12 @@ class PaymentsController < ApplicationController
 
   def edit
     @payment = PaymentDecorator.new Payment.find params[:id]
-    @payment.reverse_credits
+    @payment.negate
   end
 
   def update
     @payment = PaymentDecorator.new Payment.find params[:id]
     @payment.assign_attributes payment_params.except(:human_ref)
-    @payment.reverse_credits
     if @payment.save
       redirect_to new_payment_path, notice: updated_message
     else

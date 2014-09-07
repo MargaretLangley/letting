@@ -46,7 +46,7 @@ class Credit < ActiveRecord::Base
     outstanding.round(2).zero?
   end
 
-  def reverse
+  def negate
     self.amount *= -1
   end
 

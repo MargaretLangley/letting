@@ -7,16 +7,14 @@ describe Payment, :ledgers, type: :model do
     it 'requires account' do
       expect(payment_new(account_id: nil)).to_not be_valid
     end
+    it('requires amount') { expect(payment_new(amount: nil)).to_not be_valid }
+    it('fails zero amount') { expect(payment_new(amount: 0)).to_not be_valid }
     it 'requires date' do
       payment = payment_new
       # note: default_initialization for on_date
       payment.on_date = nil
       expect(payment).to_not be_valid
     end
-
-    it('requires amount') { expect(payment_new(amount: nil)).to_not be_valid }
-
-    it('fails zero amount') { expect(payment_new(amount: 0)).to_not be_valid }
   end
 
   describe 'default inialization' do
@@ -54,10 +52,10 @@ describe Payment, :ledgers, type: :model do
       end
     end
 
-    describe '#reverse_credits' do
-      it 'changes credit sign' do
+    describe '#negate' do
+      it 'credit sign change' do
         payment = payment_new(credit: credit_new(amount: -10))
-        payment.reverse_credits
+        payment.negate
         expect(payment.credits.first.amount).to eq 10
       end
     end
@@ -77,19 +75,19 @@ describe Payment, :ledgers, type: :model do
     describe '#payments_on' do
       it('returns payments on queried day') do
         account = property_create(account: account_new).account
-        payment = Payment.create! payment_attributes account_id: account.id
+        payment = payment_create account_id: account.id
         expect(Payment.payments_on(Date.current.to_s)).to eq [payment]
       end
 
       it('returns nothing on days without a transaction.') do
         account = property_create(account: account_new).account
-        Payment.create! payment_attributes account_id: account.id
+        payment_create account_id: account.id
         expect((Payment.payments_on('2000-1-1'))).to eq []
       end
 
       it('returns nothing if invalid date') do
         account = property_create(account: account_new).account
-        Payment.create! payment_attributes account_id: account.id
+        payment_create account_id: account.id
         expect((Payment.payments_on('2012-x'))).to eq []
       end
     end

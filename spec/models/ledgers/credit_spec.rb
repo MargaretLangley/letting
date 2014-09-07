@@ -5,46 +5,23 @@ describe Credit, :ledgers, type: :model do
   let(:credit) { credit_new amount: -88.08 }
   it('is valid') { expect(credit).to be_valid }
 
-  context 'validates' do
-    context 'presence' do
-      it 'charge_id' do
-        credit.charge_id = nil
-        expect(credit).to_not be_valid
-      end
+  describe 'validates' do
+    describe 'presence' do
+      it('charge_id') { expect(credit_new(charge_id: nil)).to_not be_valid }
       it 'on_date' do
         credit.on_date = nil
         expect(credit).to_not be_valid
       end
-      it 'amount' do
-        credit.amount = nil
-        expect(credit).to_not be_valid
-      end
+      it('amount') { expect(credit_new(amount: nil)).to_not be_valid }
     end
 
-    context 'amount' do
-      it 'is a number' do
-        credit.amount = 'nnn'
-        expect(credit).to_not be_valid
-      end
-
-      it 'has a positive limit' do
-        credit.amount = 0
-        expect(credit).to_not be_valid
-      end
-
-      it 'valid beneath positive limit' do
-        credit.amount = -0.01
-        expect(credit).to be_valid
-      end
-
-      it 'has a negative limit' do
-        credit.amount = -100_000
-        expect(credit).to_not be_valid
-      end
-
-      it 'valid above negative limit' do
-        credit.amount = -99_000.99
-        expect(credit).to be_valid
+    describe 'amount' do
+      it('is a number') { expect(credit_new(amount: 'nan')).to_not be_valid }
+      it('has a max') { expect(credit_new(amount: 0)).to_not be_valid }
+      it('is valid under max') { expect(credit_new(amount: -0.01)).to be_valid }
+      it('has a min') { expect(credit_new(amount: -100_000)).to_not be_valid }
+      it('is valid under min') do
+        expect(credit_new(amount: -99_999.99)).to be_valid
       end
     end
   end
@@ -62,17 +39,12 @@ describe Credit, :ledgers, type: :model do
     end
   end
 
-  context 'class method' do
-    context '.available' do
-
+  describe 'class method' do
+    describe '.available' do
       it 'orders credits by date' do
-        last  = create_credit Date.new(2013, 4, 1)
-        first = create_credit Date.new(2012, 4, 1)
+        last  = credit_create on_date: Date.new(2013, 4, 1)
+        first = credit_create on_date: Date.new(2012, 4, 1)
         expect(Credit.available first.charge_id).to eq [first, last]
-      end
-
-      def create_credit on_date
-        Credit.create! credit_attributes on_date: on_date
       end
     end
   end
@@ -81,18 +53,18 @@ describe Credit, :ledgers, type: :model do
 
     context '#charge_type' do
       it 'returned when charge present' do
-        credit.charge = Charge.new charge_attributes
+        (credit = credit_new).charge = Charge.new charge_attributes
         expect(credit.charge_type).to eq 'Ground Rent'
       end
 
       it 'errors when charge missing' do
-        expect { credit.charge_type }.to raise_error
+        expect { credit_new(charge: nil).charge_type }.to raise_error
       end
     end
 
     context '#outstanding' do
       it 'returns amount if nothing paid' do
-        expect(credit.outstanding).to eq(88.08)
+        expect(credit_new.outstanding).to eq(88.08)
       end
 
       it 'multiple credits are added' do
@@ -105,21 +77,19 @@ describe Credit, :ledgers, type: :model do
 
     describe '#spent?' do
       it 'false without credit' do
-        credit = Credit.create! credit_attributes amount: (-88.07)
-        credit.save!
-        expect(credit).to_not be_spent
+        expect(credit_create amount: (-88.07)).to_not be_spent
       end
 
       it 'true when spent' do
-        credit = Credit.create! credit_attributes amount: (-8.00)
+        credit = credit_create amount: (-8.00)
         Debit.create! debit_attributes amount: 8.00
         credit.save!
         expect(credit).to be_spent
       end
     end
-    describe '#reverse' do
-      it 'reverses amount sign' do
-        (credit = credit_new(amount: -40)).reverse
+    describe '#negate' do
+      it 'amount sign change' do
+        (credit = credit_new(amount: -40)).negate
         expect(credit.amount).to eq 40
       end
     end

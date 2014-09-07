@@ -1,17 +1,16 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Settlement, :ledgers, type: :model do
   describe 'resolve' do
     describe 'matched settlement' do
       it 'completes when settlement == offset' do
-        offset = Credit.create! credit_attributes amount: -3.00
+        offset = credit_create amount: -3.00
         expect { |b| Settlement.resolve(3.00, [offset], &b) }
           .to yield_with_args(offset, 3.00)
       end
 
       it 'completes when settlement == summed offsets' do
-        offsets = [Credit.create!(credit_attributes amount: -4.00),
-                   Credit.create!(credit_attributes amount: -2.00)]
+        offsets = [credit_create(amount: -4.00), credit_create(amount: -2.00)]
         expect { |b| Settlement.resolve(6.00, offsets, &b) }
           .to yield_successive_args([offsets[0], 4.00], [offsets[1], 2.00])
       end
@@ -36,13 +35,13 @@ describe Settlement, :ledgers, type: :model do
 
     describe 'maximum settlement' do
       it 'returns a settlement no more than settle ' do
-        offset = Credit.create! credit_attributes amount: -5.00
+        offset = credit_create amount: -5.00
         expect { |b| Settlement.resolve(4.00, [offset], &b) }
           .to yield_with_args(offset, 4.00)
       end
 
       it 'returns a settlement no more than offset(s)' do
-        offset = Credit.create! credit_attributes amount: -3.00
+        offset = credit_create amount: -3.00
         expect { |b| Settlement.resolve(4.00, [offset], &b) }
           .to yield_with_args(offset, 3.00)
       end

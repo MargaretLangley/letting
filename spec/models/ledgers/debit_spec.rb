@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Debit, :ledgers, type: :model do
 
@@ -71,7 +71,7 @@ describe Debit, :ledgers, type: :model do
       end
 
       it 'multiple credits are added' do
-        Credit.create! credit_attributes amount: -44.04
+        credit_create amount: -44.04
         debit.save!
         expect(debit.outstanding).to eq 44.04
       end
@@ -86,7 +86,7 @@ describe Debit, :ledgers, type: :model do
 
       it 'true when paid in full' do
         debit  = Debit.create! debit_attributes amount: 88.08
-        Credit.create! credit_attributes amount: -88.08
+        credit_create amount: -88.08
         debit.save!
         expect(debit).to be_paid
       end

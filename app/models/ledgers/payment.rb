@@ -16,8 +16,8 @@ class Payment < ActiveRecord::Base
       each(&:clear_up)
     end
 
-    def reverse
-      each(&:reverse)
+    def negate
+      each(&:negate)
     end
   end
   before_validation :clear_up
@@ -27,6 +27,7 @@ class Payment < ActiveRecord::Base
   validates :amount, numericality: { other_than: 0,
                                      message: 'should not be zero.' }
   after_initialize do
+    self.amount = 0
     self.on_date = Date.current if on_date.blank?
   end
 
@@ -34,8 +35,9 @@ class Payment < ActiveRecord::Base
     account.present?
   end
 
-  def reverse_credits
-    credits.reverse
+  def negate
+    self.amount *= -1
+    credits.negate
   end
 
   def prepare
@@ -43,7 +45,10 @@ class Payment < ActiveRecord::Base
     credits.push(*account.prepare_credits)
   end
 
-  delegate :clear_up, to: :credits
+  def clear_up
+    negate
+    credits.clear_up
+  end
 
   def self.payments_on date
     date ||= Date.current.to_s
