@@ -368,7 +368,11 @@ def create_date months_ago
 end
 
 def seed_sheets
+  Rake::Task['db:import:sheet'].invoke
   create_sheets
+
+  Rake::Task['db:import:sheet_address'].invoke
+
   create_sheet_addresses
   create_notices
 end
@@ -376,22 +380,22 @@ end
 def create_sheets
   Sheet.create! [
     {
-      id: 1,
-      description: 'Page 1 Invoice',
-      invoice_name: 'F & L Adams',
+      id: 3,
+      description: 'Page 3 Invoice',
+      invoice_name: 'Mr Seed',
       phone: '01215030992',
       vat: '277 9904 95',
       heading1:  'Residential Lettings & Property Management',
       heading2:  'Invoice',
       advice1:  'Hearby give you notice pursuant to Section 48 of the Landlord and Tenant Act 1987 that the address in England and Wales at which notices (including notices in proceedings) may be served on your Landlord by you is:',
       advice2:  "Remittance Advice
-       If paying by cheque, please detach and forward only the tear-off counterfoil of this account.CHEQUES ACT 1957: Receipts are not issued for cheque payments unless specifically requested in which case the account should be sent INTACT, endorsed RECEIPT REQUIRED together with a STAMPED ADDRESSED ENVELOPE.  PLEASE MAKE CHEQUES PAYABLE TO F&L ADAMS.
+       If paying by cheque, please detach and forward only the tear-off counterfoil of this account. CHEQUES ACT 1957: Receipts are not issued for cheque payments unless specifically requested in which case the account should be sent INTACT, endorsed RECEIPT REQUIRED together with a STAMPED ADDRESSED ENVELOPE.  PLEASE MAKE CHEQUES PAYABLE TO F&L ADAMS.
 Postal Orders sent through the post shall be at the sender's risk until actually received.",
     },
     {
-      id: 2,
-      description: 'Page 2 Notice of Rent Due',
-      invoice_name: 'F & L Adams',
+      id: 4,
+      description: 'Page 4 Notice of Rent Due',
+      invoice_name: 'Seedbod',
       phone: '01215030992',
       vat: '277 9904 95',
       heading1:  'Commonhold and Leasehold Reform Act 2002, section 166',
@@ -408,15 +412,16 @@ Postal Orders sent through the post shall be at the sender's risk until actually
   ]
 end
 
+
 def create_sheet_addresses
   Address.create! [
     {
-      addressable_id: 1,
+      addressable_id: 2,
       addressable_type: 'Sheet',
       flat_no:  '',
       house_name: '',
       road_no:  '2',
-      road:     'Attwood Street',
+      road:     'Seedwood Street',
       district: '',
       town:     'Halesowen',
       county:   'West Midlands',
@@ -432,7 +437,7 @@ def create_notices
       sheet_id: 2,
       instruction: '[Insert name(s)of leaseholder(s)] (note 1)',
       clause: 'To',
-      proxy: 'Mr & Mrs Jones',
+      proxy: 'Mr & Mrs Notice',
     },
     {
       id: 11,
@@ -461,7 +466,7 @@ def create_notices
       sheet_id: 2,
       instruction: '[insert name of landlord(s) or if payment should be made to an agent name of agent]',
       clause: 'Payment should be made to ',
-      proxy: 'F & L Adams',
+      proxy: 'Noticer',
     },
 
     {
