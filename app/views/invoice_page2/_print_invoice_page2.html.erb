@@ -1,33 +1,30 @@
 <%= render 'invoice_page2/print_p2_heading',sheet: Sheet.find(1) %>
-
 <% @sheet = Sheet.find(2) %>
 <div class='res-longlease'>
-<%= @sheet.heading2 %> <%= object.human_ref %>
+  <%= @sheet.heading2 %> <%= object.human_ref %>
 </div>
 <p>
 </p>
 
 <div class='insert'>
-	[insert name(s) of leaseholder(s)] (note 1)
+  [insert name(s) of leaseholder(s)] (note 1)
 </div>
 <div class='widemargin'>
- To
+  To
   <% if object.entities.any? %>
-      <% object.entities.each do |entity| %>
-    	<%= render 'shared/show_entity', object: entity %>
-   <% end %>
+    <% object.entities.each do |entity| %>
+      <%= render 'shared/show_entity', object: entity %>
+    <% end %>
   <% end %>
 </div>
 
 <div class='insert'>
   [address of premises to which the long lease releates]
-  ****
   <%= @sheet.notices[0].instruction %>
-  ****
 </div>
 <div class='widemargin'>
-	This notice is given in respect of
-	<br>
+  This notice is given in respect of
+  <br>
    <%= render 'shared/address_lines', lines: object.address.address_lines %>
 </div>
 
@@ -35,7 +32,7 @@
   [insert date {note 2)}]
 </div>
 <div class='widemargin'>
-	It requires you to pay rent of <%= due_object %> on <%= date_object %>
+  It requires you to pay rent of <%= due_object %> on <%= date_object %>
 </div>
 <br>
 
@@ -43,7 +40,7 @@
   [state period]
 </div>
 <div class='widemargin'>
-	The rent is payable in respect of the period
+  The rent is payable in respect of the period
 </div>
 <br>
 
@@ -54,9 +51,9 @@
 </div>
 
 <div class='widemargin'>
- This notice is given by <%= object.client.entities.full_name %>
-<br>
- 	<%= render 'shared/show_1_line_address', addressee: object.client %>
+  This notice is given by <%= object.client.entities.full_name %>
+  <br>
+  <%= render 'shared/show_1_line_address', addressee: object.client %>
 </div>
 
 <%= render 'invoice_page2/print_notices_notes',sheet: Sheet.find(2) %>

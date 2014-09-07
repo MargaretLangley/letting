@@ -18,6 +18,13 @@ describe 'debit_generator', type: :feature do
                       client: client_create,
                       account: account_new(charge: charge)
 
+      sheet_create id: 1,
+                   description: 'Page 1 Invoice',
+                   invoice_name: 'Bell',
+                   phone: '01710008',
+                   vat: '89',
+                   heading2: 'give you notice pursuant'
+
       debit_gen_page.visit_page.search_term('87').search
       expect(page).to have_text '87'
       expect(page).to have_text 'Rent'
