@@ -56,8 +56,8 @@ describe Debit, :ledgers, type: :model do
 
     describe '#charge_type' do
       it 'returned when charge present' do
-        debit.charge = Charge.new charge_attributes
-        expect(debit.charge_type).to eq 'Ground Rent'
+        debit.charge = charge_new charge_type: 'Rent'
+        expect(debit.charge_type).to eq 'Rent'
       end
 
       it 'errors when charge missing' do

@@ -53,8 +53,8 @@ describe Credit, :ledgers, type: :model do
 
     context '#charge_type' do
       it 'returned when charge present' do
-        (credit = credit_new).charge = Charge.new charge_attributes
-        expect(credit.charge_type).to eq 'Ground Rent'
+        (credit = credit_new).charge = charge_new charge_type: 'Rent'
+        expect(credit.charge_type).to eq 'Rent'
       end
 
       it 'errors when charge missing' do

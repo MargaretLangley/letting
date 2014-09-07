@@ -89,12 +89,8 @@ module DB
       it 'parses' do
         property_create human_ref: 122,
                         account: account_new(id: 1, charge: charge_new)
-        # charge_new by default creates a charged_in but this is not wanted
-        # when creating property twice.
-        charge = charge_new(charged_in: nil)
         property_create human_ref: 123,
-                        account: account_new(id: 2,
-                                             charge: charge)
+                        account: account_new(id: 2, charge: charge_new)
         expect { import_account two_properties }.to change(Credit, :count).by 2
         expect(Debit.all.size).to eq(2)
         expect(Property.find_by!(human_ref: 122).account.credits.size)

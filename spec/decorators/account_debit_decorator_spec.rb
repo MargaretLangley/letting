@@ -6,8 +6,8 @@ describe AccountDebitDecorator do
 
   context 'attributes has' do
     it 'charge_type' do
-      debit_dec.charge = Charge.new charge_attributes
-      expect(debit_dec.charge_type).to eq 'Ground Rent'
+      debit_dec.charge = charge_new charge_type: 'Rent'
+      expect(debit_dec.charge_type).to eq 'Rent'
     end
 
     it 'date' do

@@ -60,17 +60,13 @@ describe 'Account Update', type: :feature do
     end
 
     it 'adds date charge' do
-      charge_cycle_create(id: 1, name: 'Mar/Sep')
-      charged_in_create(id: 2, name: 'Advance')
       cycle_charged_in_create id: 1, charge_cycle_id: 1, charged_in_id: 2
+      charge = \
+        charge_create charged_in: charged_in_create(id: 2, name: 'Advance')
       account.edit
-      account.charge(**(charge_attributes(charge_cycle_id: 1,
-                                          charged_in_id: 2
-                                         ).except(:account_id)))
+      account.charge charge: charge
       account.button('Update').successful?(self).edit
-      account.expect_charge(self,
-                            **(charge_attributes(charged_in_id: 2) \
-                            .except(:account_id)))
+      account.expect_charge self, charge: charge
     end
   end
 

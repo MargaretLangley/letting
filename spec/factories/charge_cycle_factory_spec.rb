@@ -32,11 +32,6 @@ describe 'ChargeCycle Factory' do
         expect { charge_cycle_create }.to change(DueOn, :count).by(1)
       end
 
-      it 'makes due_on' do
-        charge_cycle_create
-        expect(DueOn.first).to eq DueOn.new(day: 25, month: 3)
-      end
-
       describe 'adds' do
         it 'due date due_ons' do
           charge_cycle_create due_ons: [DueOn.new(day: 2, month: 3)]

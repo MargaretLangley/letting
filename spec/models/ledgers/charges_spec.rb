@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'Charges', :ledgers, type: :model do
   before { Timecop.travel(Date.new(2013, 1, 31)) }
@@ -13,7 +13,7 @@ describe 'Charges', :ledgers, type: :model do
   end
 
   it '#cleans up form' do
-    charges.build charge_attributes
+    charges << charge_new
     charges.prepare
     charges.clear_up_form
     expect(charges.reject(&:marked_for_destruction?).size).to eq(1)

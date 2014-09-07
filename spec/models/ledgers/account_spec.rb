@@ -33,12 +33,12 @@ describe Account, :ledgers, type: :model do
       end
 
       it 'one charge, one credit' do
-        account.charges.build charge_attributes
+        account.charges << charge_new
         expect(account.prepare_credits.size).to eq(1)
       end
 
       it 'generates negative amounted credits' do
-        account.charges.build charge_attributes
+        account.charges << charge_new
         expect(account.prepare_credits.first.amount).to be < 0
       end
     end
