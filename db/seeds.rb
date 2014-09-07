@@ -353,13 +353,11 @@ def create_credits
 end
 
 def create_payment
-  Payment.create! [
-    { id: 1,
-      account_id: 1,
-      on_date: create_date(15),
-      amount: 88.08,
-    }
-  ]
+  payment = Payment.new id: 1,
+                        account_id: 1,
+                        on_date: create_date(15)
+  payment.amount = 88.08
+  payment.save!
 end
 
 def create_date months_ago
