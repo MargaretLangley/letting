@@ -98,7 +98,7 @@ group :development, :test do
   gem 'byebug', '~> 3.1.2'
   gem 'rubocop', require: false
   gem 'rack-mini-profiler', '~>0.9.0'
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails', '~> 3.1.0'
 end
 
 group :test do
