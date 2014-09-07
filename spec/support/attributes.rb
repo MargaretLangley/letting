@@ -103,14 +103,6 @@ def company_attributes **overrides
   }.merge overrides
 end
 
-def company_entity_attributes **overrides
-  {
-    title: '',
-    initials: '',
-    name: 'ICC'
-  }.merge overrides
-end
-
 def oval_person_entity_attributes **overrides
   {
     title: 'Rev',
