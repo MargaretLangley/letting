@@ -3,7 +3,7 @@ begin
 
   desc 'Run all tests regardless of tags'
   RSpec::Core::RakeTask.new('spec:all') do |task|
-    task.pattern = './spec/**/*_spec.rb'
+    task.pattern = 'spec/**/*_spec.rb'
     # Load the tagless options file
     task.rspec_opts = '-O .rspec-no-tags'
   end

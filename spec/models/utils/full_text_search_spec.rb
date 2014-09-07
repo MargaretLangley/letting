@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe FullTextSearch, type: :model do
-  describe '#go' do
+  describe '#go', :slow do
     it 'return default when nothing matching' do
       property_create client_id: 89
       Property.import force: true, refresh: true
