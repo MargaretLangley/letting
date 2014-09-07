@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Account Factory' do
 
-  describe 'account_new' do
+  describe 'new' do
     describe 'default' do
       it('is valid') { expect(account_new).to be_valid }
       it('no id') { expect(account_new.id).to eq 1 }
@@ -13,7 +13,7 @@ describe 'Account Factory' do
       end
       it('has no charge') { expect(Charge.count).to eq 0 }
     end
-    describe 'adding' do
+    describe 'adds' do
       it 'can add charge' do
         expect(account_new(charge: charge_new).charges[0].charge_type)
           .to eq 'Ground Rent'

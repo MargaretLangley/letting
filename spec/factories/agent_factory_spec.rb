@@ -8,12 +8,12 @@ describe 'Agent Factory' do
   end
 
   describe 'overrides' do
-    it 'changes name' do
+    it 'alters name' do
       agent = agent_new entities: [Entity.new(name: 'Bell')]
       expect(agent.entities.first.name).to eq 'Bell'
     end
 
-    it 'changes address' do
+    it 'alters address' do
       agent = agent_new address: address_new(road: 'Wiggiton')
       expect(agent.address.road).to eq 'Wiggiton'
     end
