@@ -27,7 +27,7 @@ class Payment < ActiveRecord::Base
   validates :amount, numericality: { other_than: 0,
                                      message: 'should not be zero.' }
   after_initialize do
-    self.amount = 0
+    self.amount = 0 if amount.blank?
     self.on_date = Date.current if on_date.blank?
   end
 

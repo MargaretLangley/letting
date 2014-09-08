@@ -7,8 +7,8 @@ describe Payment, :ledgers, type: :model do
     it 'requires account' do
       expect(payment_new(account_id: nil)).to_not be_valid
     end
-    it('requires amount') { expect(payment_new(amount: nil)).to_not be_valid }
-    it('fails zero amount') { expect(payment_new(amount: 0)).to_not be_valid }
+    it('requires amount') { expect(payment_new amount: nil).to_not be_valid }
+    it('fails zero amount') { expect(payment_new amount: 0).to_not be_valid }
     it 'requires date' do
       payment = payment_new
       # note: default_initialization for on_date
@@ -17,11 +17,26 @@ describe Payment, :ledgers, type: :model do
     end
   end
 
-  describe 'default inialization' do
-    before { Timecop.travel(Date.new(2013, 9, 30)) }
-    after { Timecop.return }
-    it 'sets on_date to today' do
-      expect(payment_new(on_date: nil).on_date).to eq Date.new 2013, 9, 30
+  describe 'inialization' do
+    before { Timecop.travel Date.new(2013, 9, 30) }
+    after  { Timecop.return }
+    describe 'on_date' do
+      it 'sets nil on_date to today' do
+        expect(payment_new(on_date: nil).on_date).to eq Date.new 2013, 9, 30
+      end
+      it 'leaves defined on_date intact' do
+        payment = payment_create on_date: Date.new(2014, 1, 30)
+        expect(payment.on_date).to eq Date.new 2014, 1, 30
+      end
+    end
+    describe 'amount' do
+      it 'sets nil amount to 0' do
+        expect(payment_new(amount: nil).amount).to eq 0
+      end
+      it 'leaves defined amounts intact' do
+        payment = payment_create amount: 10.50
+        expect(Payment.find(payment.id).amount).to eq(-10.50)
+      end
     end
   end
 
@@ -54,7 +69,7 @@ describe Payment, :ledgers, type: :model do
 
     describe '#negate' do
       it 'credit sign change' do
-        payment = payment_new(credit: credit_new(amount: -10))
+        payment = payment_new credit: credit_new(amount: -10)
         payment.negate
         expect(payment.credits.first.amount).to eq 10
       end
@@ -62,33 +77,33 @@ describe Payment, :ledgers, type: :model do
 
     describe '#clear_up' do
       it 'removes credits with no amounts' do
-        (payment = payment_new(credit: credit_new(amount: 0))).clear_up
+        (payment = payment_new credit: credit_new(amount: 0)).clear_up
         expect(payment.credits.first).to be_marked_for_destruction
       end
 
       it 'saves credits with none-zero amount' do
-        (payment = payment_new(credit: credit_new(amount: 1))).clear_up
+        (payment = payment_new credit: credit_new(amount: 1)).clear_up
         expect(payment.credits.first).to_not be_marked_for_destruction
       end
     end
 
     describe '#payments_on' do
-      it('returns payments on queried day') do
+      it 'returns payments on queried day' do
         account = property_create(account: account_new).account
         payment = payment_create account_id: account.id
-        expect(Payment.payments_on(Date.current.to_s)).to eq [payment]
+        expect(Payment.payments_on Date.current.to_s).to eq [payment]
       end
 
-      it('returns nothing on days without a transaction.') do
+      it 'returns nothing on days without a transaction.' do
         account = property_create(account: account_new).account
         payment_create account_id: account.id
-        expect((Payment.payments_on('2000-1-1'))).to eq []
+        expect(Payment.payments_on '2000-1-1').to eq []
       end
 
-      it('returns nothing if invalid date') do
+      it 'returns nothing if invalid date' do
         account = property_create(account: account_new).account
         payment_create account_id: account.id
-        expect((Payment.payments_on('2012-x'))).to eq []
+        expect(Payment.payments_on '2012-x').to eq []
       end
     end
   end
