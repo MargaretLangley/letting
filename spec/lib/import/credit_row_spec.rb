@@ -15,7 +15,7 @@ module DB
       it('human_ref') { expect(row.human_ref).to eq '9' }
       it('charge_code') { expect(row.charge_code).to eq 'GR' }
       it('on_date') { expect(row.on_date).to eq '2012-03-25 12:00:00' }
-      it('amount without negation') { expect(row.amount).to eq(-5.5) }
+      it('amount without negation') { expect(row.amount).to eq('5.5') }
     end
 
     def parse_line row_string

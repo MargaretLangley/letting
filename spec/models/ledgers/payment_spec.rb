@@ -68,6 +68,16 @@ describe Payment, :ledgers, type: :model do
     end
 
     describe '#negate' do
+      it 'amount sign change' do
+        payment = payment_new amount: -10
+        payment.negate
+        expect(payment.amount).to eq 10
+      end
+      it 'amount double sign change' do
+        payment = payment_new amount: -10
+        payment.negate.negate
+        expect(payment.amount).to eq(-10)
+      end
       it 'credit sign change' do
         payment = payment_new credit: credit_new(amount: -10)
         payment.negate
@@ -84,26 +94,6 @@ describe Payment, :ledgers, type: :model do
       it 'saves credits with none-zero amount' do
         (payment = payment_new credit: credit_new(amount: 1)).clear_up
         expect(payment.credits.first).to_not be_marked_for_destruction
-      end
-    end
-
-    describe '#payments_on' do
-      it 'returns payments on queried day' do
-        account = property_create(account: account_new).account
-        payment = payment_create account_id: account.id
-        expect(Payment.payments_on Date.current.to_s).to eq [payment]
-      end
-
-      it 'returns nothing on days without a transaction.' do
-        account = property_create(account: account_new).account
-        payment_create account_id: account.id
-        expect(Payment.payments_on '2000-1-1').to eq []
-      end
-
-      it 'returns nothing if invalid date' do
-        account = property_create(account: account_new).account
-        payment_create account_id: account.id
-        expect(Payment.payments_on '2012-x').to eq []
       end
     end
   end

@@ -42,9 +42,10 @@ describe 'Payment index', type: :feature do
 
   describe 'payment search' do
     it 'matches transactions on the same day' do
-      property_create account: account_new(payment: payment_new)
+      payment = payment_new(on_date: '30/4/2013')
+      property_create account: account_new(payment: payment)
       payment_index.visit_page
-      payment_index.search Date.current.to_s
+      payment_index.search Date.new(2013, 4, 30).to_s
       expect(payment_index).to be_having_payment
     end
 

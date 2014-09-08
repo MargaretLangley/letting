@@ -38,6 +38,7 @@ class Payment < ActiveRecord::Base
   def negate
     self.amount *= -1
     credits.negate
+    self
   end
 
   def prepare
@@ -48,12 +49,5 @@ class Payment < ActiveRecord::Base
   def clear_up
     negate
     credits.clear_up
-  end
-
-  def self.payments_on date
-    date ||= Date.current.to_s
-    return Payment.none unless SearchDate.new(date).valid_date?
-    Payment.includes(account: [:property])
-           .where(created_at: SearchDate.new(date).day_range)
   end
 end

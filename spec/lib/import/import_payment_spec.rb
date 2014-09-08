@@ -15,13 +15,15 @@ module DB
 
     describe 'negates' do
       it 'changes sign on payments' do
-        property_create human_ref: 89, account: account_new(charge: charge_create)
+        property_create human_ref: 89,
+                        account: account_new(charge: charge_create)
 
         ImportPayment.import parse credit_row human_ref: 89, amount: 50.5
         expect(Payment.first.amount).to eq(-50.5)
       end
       it 'changes sign on credits' do
-        property_create human_ref: 89, account: account_new(charge: charge_create)
+        property_create human_ref: 89,
+                        account: account_new(charge: charge_create)
 
         ImportPayment.import parse credit_row human_ref: 89, amount: 50.5
         expect(Credit.first.amount).to eq(-50.5)

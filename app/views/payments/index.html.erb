@@ -17,65 +17,66 @@
   </div>
   <p>&nbsp;</p>
 
-  <div class='grid-row col-1-12 vertical-spacer grid-header r-align'>
+  <div class='grid-row col-2-24 vertical-spacer grid-header r-align'>
     Account
   </div>
-  <div class='col-3-12 vertical-spacer grid-header'>
+  <div class='col-6-24 vertical-spacer grid-header'>
     Name
   </div>
-  <div class='col-3-12 vertical-spacer grid-header'>
+  <div class='col-6-24 vertical-spacer grid-header'>
    Date
   </div>
-  <div class='col-1-12 vertical-spacer grid-header r-align'>
+  <div class='col-2-24 vertical-spacer grid-header r-align'>
     Amount
   </div>
-  <div class='col-2-12 vertical-spacer grid-header r-align'>
+  <div class='col-4-24 vertical-spacer grid-header r-align'>
    Balance
   </div>
-  <div class='col-2-12 vertical-spacer grid-header no-print r-align'>
+  <div class='col-4-24 vertical-spacer grid-header no-print r-align'>
    Actions
   </div>
 
- <% @payments.each do |payment|
+ <% decorate_payments = Payments.new(@payments)
+    decorate_payments.to_a.each do |payment|
       payment_dec = PaymentIndexDecorator.new payment
       %>
-  <div class='col-1-12 vertical-spacer grid-row r-align'>
+  <div class='col-2-24 vertical-spacer grid-row r-align'>
      <%= payment_dec.property_ref %>
   </div>
-  <div class='col-3-12 vertical-spacer'>
+  <div class='col-6-24 vertical-spacer'>
     <%= payment_dec.full_name %>
   </div>
-  <div class='col-3-12 vertical-spacer'>
+  <div class='col-6-24 vertical-spacer'>
    <%= payment_dec.on_date %>
   </div>
-  <div class='col-1-12 vertical-spacer r-align'>
+  <div class='col-2-24 vertical-spacer r-align'>
     <%= payment_dec.amount %>
   </div>
-  <div class='col-2-12 vertical-spacer r-align'>
+  <div class='col-4-24 vertical-spacer r-align'>
    <%= payment_dec.balance %>
   </div>
-  <nav class='col-2-12 vertical-spacer r-align'>
-          <%= link_to 'Edit', edit_payment_path(payment) %> |
-        <%= link_to 'Delete', payment, method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+  <nav class='col-4-24 vertical-spacer r-align'>
+    <%= link_to fa_icon('edit lg'), edit_payment_path(payment), title: 'Edit', class: 'r-pad' %>
+    <%= link_to fa_icon('trash-o lg'), payment, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete', class: 'l-pad' %>
   </nav>
 <% end %>
 
-<div class='col-1-12 vertical-spacer grid-row r-align'>
+<div class='col-2-24 vertical-spacer grid-row r-align'>
      &nbsp;
   </div>
-  <div class='col-3-12 vertical-spacer'>
+  <div class='col-6-24 vertical-spacer'>
     &nbsp;
   </div>
-  <div class='col-3-12 vertical-spacer'>
+  <div class='col-6-24 vertical-spacer'>
   Total
   </div>
-  <div class='col-1-12 vertical-spacer r-align'>
-    <%= number_to_currency @payments.sum('amount') %>
+  <div class='col-2-24 vertical-spacer r-align'>
+    <%= number_to_currency decorate_payments.sum %>
   </div>
-  <div class='col-2-12 vertical-spacer r-align'>
+  <div class='col-4-24 vertical-spacer r-align'>
    &nbsp;
   </div>
-  <nav class='col-2-12 vertical-spacer r-align'>
+  <nav class='col-4-24 vertical-spacer r-align'>
     &nbsp;
   </nav>
 </div>
