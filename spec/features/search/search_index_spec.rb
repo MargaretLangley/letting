@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Search index', type: :feature do
   before(:each) { log_in }
 
-  describe 'index' do
+  describe 'index', :search do
     it 'visits literal matches' do
       property_create human_ref: 111,
                       account: account_new(id: 1, charge: charge_new)
@@ -16,7 +16,7 @@ describe 'Search index', type: :feature do
       expect(page).to have_text '222'
     end
 
-    it 'indexes full-text search', :slow  do
+    it 'indexes full-text search' do
       property_create human_ref: 111,
                       address_attributes: { county: 'Worcester' }
       property_create human_ref: 222,
@@ -33,7 +33,7 @@ describe 'Search index', type: :feature do
       Property.__elasticsearch__.delete_index!
     end
 
-    it 'empty search returns a default result set', :slow  do
+    it 'empty search returns a default result set' do
       property_create human_ref: 111
       Property.import force: true, refresh: true
       visit '/properties'
@@ -43,7 +43,7 @@ describe 'Search index', type: :feature do
       Property.__elasticsearch__.delete_index!
     end
 
-    it 'search not found when absent', :slow  do
+    it 'search not found when absent' do
       property_create human_ref: 111
       Property.import force: true, refresh: true
       visit '/properties'

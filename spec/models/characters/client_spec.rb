@@ -29,7 +29,7 @@ describe Client, type: :model do
     end
   end
 
-  describe '#search', :slow do
+  describe '#search', :search do
     before(:each) do
       client_create human_ref: '8008'
       Client.import force: true, refresh: true

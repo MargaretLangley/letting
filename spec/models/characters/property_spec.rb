@@ -54,7 +54,7 @@ describe Property, type: :model do
     end
   end
 
-  describe 'search', :slow do
+  describe 'search', :search do
 
     before :each do
       property_create
