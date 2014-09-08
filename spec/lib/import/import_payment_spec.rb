@@ -6,7 +6,6 @@ require_relative '../../../lib/import/import_payment'
 
 module DB
   describe ImportPayment, :import do
-
     it 'single credit' do
       property_create human_ref: 89, account: account_new(charge: charge_create)
 
@@ -14,22 +13,33 @@ module DB
         .to change(Credit, :count).by 1
     end
 
-    it 'creates negative payments' do
-      ImportPayment.import parse credit_row
+    describe 'negates' do
+      it 'changes sign on payments' do
+        property_create human_ref: 89, account: account_new(charge: charge_create)
+
+        ImportPayment.import parse credit_row human_ref: 89, amount: 50.5
+        expect(Payment.first.amount).to eq(-50.5)
+      end
+      it 'changes sign on credits' do
+        property_create human_ref: 89, account: account_new(charge: charge_create)
+
+        ImportPayment.import parse credit_row human_ref: 89, amount: 50.5
+        expect(Credit.first.amount).to eq(-50.5)
+      end
     end
 
-    context 'errors' do
+    describe 'errors' do
       it 'double import raises error' do
         property_create human_ref: 89, account: account_new(charge: charge_new)
 
-        ImportPayment.import parse credit_row
-        expect { ImportPayment.import parse credit_row }
+        ImportPayment.import parse credit_row human_ref: 89
+        expect { ImportPayment.import parse credit_row(human_ref: 89) }
           .to raise_error NotIdempotent
       end
     end
 
-    def credit_row
-      %q(89, GR, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0)
+    def credit_row human_ref: 89, amount: 50.5
+      %Q(#{human_ref}, GR, 2012-03-25 12:00:00, Ground Rent, 0, #{amount} , 0)
     end
 
     def parse row_string

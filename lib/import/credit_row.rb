@@ -47,7 +47,7 @@ module DB
     # credit amounts are imported (from acc_items) without a sign
     #
     def amount
-      @source[:credit].to_f * -1
+      @source[:credit]
     end
 
     def account_id
