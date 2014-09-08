@@ -32,6 +32,8 @@ class FullTextSearch
     { success: false, records: Property.all, render: 'properties/index' }
   end
 
+  # Instantiate class from name string
+  # Object.const_get(@type).search(@query)
   def results
     case @type
     when 'clients'

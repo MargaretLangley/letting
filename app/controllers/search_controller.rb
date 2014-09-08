@@ -15,12 +15,10 @@
 #
 class SearchController < ApplicationController
   def index
-    if exact_match = LiteralSearch.go(params[:search])
-      redirect_to exact_match
+    if match = LiteralSearch.search(type: model, query: params[:search]).go
+      redirect_to match
     else
-      results = FullTextSearch.search(type: referer_controller,
-                                      query: params[:search])
-                              .go
+      results = FullTextSearch.search(type: model, query: params[:search]).go
       flash_no_results if results[:success] == false && params[:search].present?
       @records = results[:records].page(params[:page])
       render results[:render]
@@ -29,8 +27,9 @@ class SearchController < ApplicationController
 
   private
 
-  def referer_controller
-    Rails.application.routes.recognize_path(request.referrer)[:controller]
+  def model
+    (Rails.application.routes.recognize_path(request.referrer)[:controller])
+      .classify
   end
 
   def flash_no_results
