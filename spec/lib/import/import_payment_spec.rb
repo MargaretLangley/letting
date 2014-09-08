@@ -14,6 +14,10 @@ module DB
         .to change(Credit, :count).by 1
     end
 
+    it 'creates negative payments' do
+      ImportPayment.import parse credit_row
+    end
+
     context 'errors' do
       it 'double import raises error' do
         property_create human_ref: 89, account: account_new(charge: charge_new)

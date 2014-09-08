@@ -6,24 +6,16 @@ require_relative '../../../lib/import/credit_row'
 
 module DB
   describe CreditRow, :import do
-    let(:row) { CreditRow.new parse_line credit_row }
-
-    describe 'readers' do
-      it 'human_ref' do
-        expect(row.human_ref).to eq '89'
+    describe 'row' do
+      let(:row) { CreditRow.new parse_line credit_row }
+      def credit_row
+        %q(9, GR, 2012-03-25 12:00:00, Ground Rent, 0, 5.5, 0)
       end
 
-      it 'charge_code' do
-        expect(row.charge_code).to eq 'GR'
-      end
-
-      it 'on_date' do
-        expect(row.on_date).to eq '2012-03-25 12:00:00'
-      end
-
-      it 'has a negative amount' do
-        expect(row.amount).to eq(-50.5)
-      end
+      it('human_ref') { expect(row.human_ref).to eq '9' }
+      it('charge_code') { expect(row.charge_code).to eq 'GR' }
+      it('on_date') { expect(row.on_date).to eq '2012-03-25 12:00:00' }
+      it('negates amount') { expect(row.amount).to eq(-5.5) }
     end
 
     def parse_line row_string
@@ -32,10 +24,6 @@ module DB
                      header_converters: :symbol,
                      converters: -> (field) { field ? field.strip : nil }
                     )
-    end
-
-    def credit_row
-      %q(89, GR, 2012-03-25 12:00:00, Ground Rent, 0, 50.5, 0)
     end
   end
 end
