@@ -15,6 +15,7 @@
 #
 class SearchController < ApplicationController
   def index
+    byebug
     if match = LiteralSearch.search(type: model, query: params[:search]).go
       redirect_to match
     else

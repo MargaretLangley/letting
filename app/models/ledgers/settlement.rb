@@ -2,7 +2,15 @@
 #
 # Settlement
 #
-# Settlement is how the ledgers system pays debits or spends credits.
+# Settlement allows the ledgers system to pays debits and spends credits.
+#
+# How does it fit into ledgers ?
+#
+# Payments create credits and the DebitGenerator, through charges, debits.
+# However they only have an affect once a debit is paid off or a credit
+# is spent. This is the role of settlements which bridges credits and debits.
+#
+# In detail
 #
 # Debits and Credits are created, but they cannot be paid or spent until
 # a settlement is generated. Settlements link a credit to a debit.
@@ -13,6 +21,8 @@
 #
 # When a credit has been spent or a debit paid it is ignored by the
 # settlement system.
+#
+# Settlements is the solution to advance payments.
 #
 ####
 #
