@@ -275,8 +275,8 @@ def create_charge_cycle
     { id: 4,  day: 29,  month: 12, charge_cycle_id: 2 },
   ]
   ChargeCycle.create! [
-    { id: 1,  name: 'Mar/Sep', order: 1 },
-    { id: 2,  name: 'Jun/Dec', order: 2 },
+    { id: 1,  name: 'Mar/Sep', order: 1, period_type: 'term' },
+    { id: 2,  name: 'Jun/Dec', order: 2, period_type: 'term' },
   ]
 end
 

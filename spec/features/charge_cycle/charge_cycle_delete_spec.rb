@@ -6,7 +6,8 @@ describe ChargeCycle, type: :feature do
     log_in
     charge_cycle_create id: 3,
                         name: 'Jan/July',
-                        order: 6
+                        order: 6,
+                        period_type: 'term'
     visit '/charge_cycles/'
   end
 

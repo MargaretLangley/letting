@@ -7,6 +7,7 @@ describe ChargeCycle, type: :feature do
     charge_cycle_create id: 3,
                         name: 'Jan/July',
                         order: 11,
+                        period_type: 'term',
                         due_ons: [DueOn.new(day: 6, month: 10)]
     visit '/charge_cycles/3/edit'
   end

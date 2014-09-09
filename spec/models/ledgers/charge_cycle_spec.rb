@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
   let(:cycle) do
-    cycle = ChargeCycle.new id: 1, name: 'Mar/Sep', order: 16
+    cycle = ChargeCycle.new id: 1, name: 'Mar/Sep', order: 16, period_type: 'term'
     cycle.due_ons.new day: 25, month: 3, charge_cycle_id: 1
     cycle
   end

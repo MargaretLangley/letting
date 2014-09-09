@@ -4,7 +4,7 @@ describe ChargeCycle, type: :feature do
 
   before(:each) do
     log_in
-    charge_cycle_create id: 1, name: 'Jan/July', order: 6
+    charge_cycle_create id: 1, name: 'Jan/July', order: 6, period_type: 'term'
   end
 
   context '#index' do
