@@ -16,7 +16,9 @@ class PaymentCreatePage
   end
 
   def human_ref property
-    fill_in 'payment_human_ref', with: property
+    # TODO: search text is search (small s) search button is Search (large s)
+    # change confusing names
+    fill_in 'search', with: property
     self
   end
 
@@ -29,9 +31,7 @@ class PaymentCreatePage
   end
 
   def search
-    within_fieldset 'payment' do
-      click_on 'Search'
-    end
+    click_on 'Search'
     self
   end
 

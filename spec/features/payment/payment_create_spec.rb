@@ -6,14 +6,13 @@ describe Payment, type: :feature do
   before(:each) { log_in }
 
   it 'payment for debit', js: true do
-    skip 'payment is negative value'
     property_create account: account_new(charge: charge_new, debit: debit_new)
     payment_page.visit_new_page
     payment_page.human_ref('2002').search
     a_property_is_found
     property_receivables?
-    expect(payment_page.payment).to eq(88.08)
-    payment_page.payment 88.08
+    expect(payment_page.payment).to eq('88.08')
+    payment_page.payment = 88.08
     payment_page.click_create_payment
     payment_is_created
   end
@@ -21,15 +20,18 @@ describe Payment, type: :feature do
   context 'error' do
 
     it 'searched property unknown' do
+      skip 'currently it does full text search on properties'
+      # expects [data-role="unknown-property"]
       payment_page.visit_new_page
 
       payment_page.human_ref('800').search
-
+      save_and_open_page
       no_property_found
     end
 
-    it 'handles errors' do
-      property_create account: account_new(charge: charge_new, debit: debit_new)
+    it 'displays form errors' do
+      property_create human_ref: '2002',
+                      account: account_new(charge: charge_new, debit: debit_new)
       payment_page.visit_new_page
 
       payment_page.human_ref('2002').search

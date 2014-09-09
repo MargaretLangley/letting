@@ -24,15 +24,14 @@ class PaymentsController < ApplicationController
   end
 
   def new
-    prepare_for_new_action human_ref: params[:human_ref]
+    prepare_for_new_action account_id: params[:id]
   end
 
-  def prepare_for_new_action(human_ref:)
-    account = Account.find_by_human_ref(human_ref)
-    @payment = PaymentDecorator.new(Payment.new(account: account),
-                                    human_ref: human_ref)
-    @payment.negate
+  def prepare_for_new_action(account_id:)
+    account = Account.find_by id: account_id
+    @payment = PaymentDecorator.new(Payment.new account: account)
     @payment.prepare_for_form
+    @payment.negate
   end
 
   def create
@@ -44,14 +43,13 @@ class PaymentsController < ApplicationController
   end
 
   def show_payment
-    prepare_for_new_action search_params.symbolize_keys
+    prepare_for_new_action account_id: nil
     render :new
   end
 
   def create_payment
     @payment = PaymentDecorator
-                 .new(Payment.new(payment_params.except(:human_ref)),
-                      human_ref: payment_params[:human_ref])
+                 .new(Payment.new(payment_params.except(:human_ref)))
     if @payment.save
       redirect_to new_payment_path, notice: created_message
     else

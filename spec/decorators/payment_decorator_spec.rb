@@ -6,7 +6,7 @@ describe PaymentDecorator do
     describe '#property' do
       it 'returns the property' do
         property = property_create account: account_new
-        payment = PaymentDecorator.new payment_new, human_ref: nil
+        payment = PaymentDecorator.new payment_new
         payment.account_id = property.account.id
 
         expect(payment.property_decorator.source).to eq property

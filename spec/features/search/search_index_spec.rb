@@ -27,7 +27,6 @@ describe 'Search index', type: :feature do
       visit '/properties'
       fill_in 'search', with: 'Wes'
       click_on 'search'
-      save_and_open_page
       expect(page).to_not have_text '111'
       expect(page).to have_text '222'
       expect(page).to have_text '333'

@@ -10,16 +10,20 @@
 # FullTextSearch is responsible for the fuzzy searching.
 #
 # rubocop: disable Lint/AssignmentInCondition
+# REFACTOR index TODO:
+# rubocop: disable  Style/MethodLength
 #
 ####
 #
 class SearchController < ApplicationController
   def index
     session[:search_model] = referer_model unless referer_model == 'Search'
-
-    if match = LiteralSearch.search(type:  session[:search_model],
-                                    query: params[:search]).go
-      redirect_to match
+    match = LiteralSearch.search(type:  session[:search_model],
+                                 query: params[:search]).go
+    if match[:record_id] || match[:process_empty] == 'true'
+      redirect_to controller: match[:controller],
+                  action: match[:action],
+                  id: match[:record_id]
     else
       results = full_text_search search_model: session[:search_model],
                                  query: params[:search]

@@ -15,7 +15,7 @@
     <%= payment_form.label 'Cheque' %>
   </div>
   <div class="col-3-8 cell">
-    <%= payment_form.date_field :on_date %>
+    <%= payment_form.date_field :on_date, disabled: true %>
   </div>
   <div class="col-3-8 cell pick-out">
     <%= payment_form.hidden_field :account_id %>

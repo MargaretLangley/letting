@@ -61,7 +61,7 @@ describe Payment, type: :feature do
   end
 
   context 'error' do
-    it 'handles errors' do
+    it 'displays form errors' do
       payment = payment_new credit: credit_new(amount: -88)
       property_create account: account_new(charge: charge_new,
                                            debit: debit_new,
