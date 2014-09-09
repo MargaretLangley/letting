@@ -33,6 +33,19 @@ describe 'Search index', type: :feature do
       Property.__elasticsearch__.delete_index!
     end
 
+    it 'handles multiple requests' do
+      property_create human_ref: 111,
+                      address_attributes: { county: 'Worcester' }
+      Property.import force: true, refresh: true
+      visit '/properties'
+      fill_in 'search', with: 'Wor'
+      click_on 'search'
+      expect(page).to have_text '111'
+      click_on 'search'
+      expect(page).to have_text '111'
+      Property.__elasticsearch__.delete_index!
+    end
+
     it 'empty search returns a default result set' do
       property_create human_ref: 111
       Property.import force: true, refresh: true
