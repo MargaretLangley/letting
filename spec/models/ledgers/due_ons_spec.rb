@@ -2,7 +2,9 @@ require 'rails_helper'
 
 describe DueOns, :ledgers, type: :model do
 
-  let(:cycle) { ChargeCycle.new id: 1, name: 'Anything', order: 1, period_type: 'term'  }
+  let(:cycle) do
+    ChargeCycle.new id: 1, name: 'Anything', order: 1, period_type: 'term'
+  end
   let(:due_ons) { cycle.due_ons }
 
   context 'validates' do

@@ -1,3 +1,5 @@
+# rubocop: disable Style/LineLength
+
 require 'rails_helper'
 
 describe 'ChargeCycle Factory' do

@@ -1,10 +1,14 @@
+# rubocop: disable Style/MethodLength
+# rubocop: disable Style/ParameterLists
+
 def charge_cycle_new name: 'Mar/Sep',
                      order: 1,
                      period_type: 'term',
                      due_ons: [DueOn.new(day: 25, month: 3)],
                      prepare: false
-  cycle = ChargeCycle.new name: name, order: order,
-                           period_type: period_type
+  cycle = ChargeCycle.new name: name,
+                          order: order,
+                          period_type: period_type
   cycle.due_ons = due_ons if due_ons
   cycle.prepare if prepare
   cycle

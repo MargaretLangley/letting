@@ -28,6 +28,10 @@ class ChargeCycle < ActiveRecord::Base
   delegate :prepare, to: :due_ons
   delegate :clear_up_form, to: :due_ons
 
+  after_initialize do
+    self.period_type = 'term' if period_type.blank?
+  end
+
   def due_between? date_range
     due_ons.due_between?(date_range).to_a
   end

@@ -1,31 +1,32 @@
+# rubocop: disable Style/LineLength
+
 require 'rails_helper'
 
 RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
   let(:cycle) do
-    cycle = ChargeCycle.new id: 1, name: 'Mar/Sep', order: 16, period_type: 'term'
+    cycle = ChargeCycle.new id: 1,
+                            name: 'Mar/Sep',
+                            order: 16,
+                            period_type: 'term'
     cycle.due_ons.new day: 25, month: 3, charge_cycle_id: 1
     cycle
   end
 
   describe 'validation' do
-    it 'returns valid' do
-      expect(cycle).to be_valid
-    end
-
-    it 'does not validate for a nil name' do
-      expect(charge_cycle_new name: '').to_not be_valid
-    end
-
-    it 'does not validate for a nil order' do
-      expect(charge_cycle_new order: '').to_not be_valid
+    it('returns valid') { expect(cycle).to be_valid }
+    it('requires a name') { expect(charge_cycle_new name: '').to_not be_valid }
+    it('requires an order') { expect(charge_cycle_new order: '').to_not be_valid }
+    it 'requires a period_type' do
+      (charge_cycle = charge_cycle_new).period_type = ''
+      expect(charge_cycle).to_not be_valid
     end
   end
 
   describe '#due_between?' do
-    before(:each) { Timecop.travel(Date.new(2013, 1, 31)) }
+    before(:each) { Timecop.travel Date.new(2013, 1, 31) }
     after(:each)  { Timecop.return }
 
-    it 'creates charging date if in range'  do
+    it 'creates a charging date when in range'  do
       cycle = ChargeCycle.new id: 1, name: 'Mar/Sep', order: '42'
       cycle.due_ons.new day: 25, month: 3, charge_cycle_id: 1
       expect(cycle.due_between?(Date.new(2013, 3, 25)..Date.new(2013, 3, 25)))
@@ -46,7 +47,7 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
       expect(cycle <=> other).to eq 0
     end
 
-    it 'order independent' do
+    it 'is order independent' do
       cycle = ChargeCycle.new(name: 'Mar/Sep')
       cycle.due_ons.build day: 1, month: 1
       cycle.due_ons.build day: 6, month: 6
@@ -112,5 +113,4 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
       expect(cycle.range_on Date.new(2014, 6, 6)).to eq :missing_due_on
     end
   end
-
 end
