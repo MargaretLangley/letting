@@ -6,17 +6,18 @@ require_relative '../../../lib/import/credit_row'
 
 module DB
   describe CreditRow, :import do
-    describe 'row' do
-      let(:row) { CreditRow.new parse_line credit_row }
-      def credit_row
-        %q(9, GR, 2012-03-25 12:00:00, Ground Rent, 0, 5.5, 0)
-      end
-
-      it('human_ref') { expect(row.human_ref).to eq '9' }
-      it('charge_code') { expect(row.charge_code).to eq 'GR' }
-      it('on_date') { expect(row.on_date).to eq '2012-03-25 12:00:00' }
-      it('amount without negation') { expect(row.amount).to eq('5.5') }
+    def row human_ref: 9,
+            charge_code: 'GR',
+            date: '2012-03-25 12:00:00',
+            amount: 5.5
+      CreditRow.new parse_line \
+        %Q(#{human_ref}, #{charge_code}, #{date}, Ground Rent, 0, #{amount}, 0)
     end
+
+    it('human_ref') { expect(row(human_ref: 9).human_ref).to eq '9' }
+    it('charge_code') { expect(row(charge_code: 'GR').charge_code).to eq 'GR' }
+    it('on_date') { expect(row.on_date).to eq '2012-03-25 12:00:00' }
+    it('amount') { expect(row(amount: '5.5').amount).to eq('5.5') }
 
     def parse_line row_string
       CSV.parse_line(row_string,
