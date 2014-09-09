@@ -1,11 +1,19 @@
 ####
 #
-# Searhable
+# Searchable
 #
 # Configures the Elasticsearch searching method
 #
 # Adds a 'search' method to any class it is included into allowing full-text
 # search - currently only used in Client and Property.
+#
+# NGrams don't always seem to work - seems to occasional match whole word but
+# not the ngrame (so for London: matches London and not Lond)
+#
+# Always works:
+# rails c
+# Property.import force: true, refresh: true
+# Client.import force: true, refresh: true
 #
 ####
 #
