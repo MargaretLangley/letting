@@ -10,8 +10,8 @@
     <li class="active-subnav <%= sub_menu_folded? 'debit_generators' %>"><%= link_to 'New Invoice', new_debit_generator_path %></li>
     <li class="active-subnav <%= sub_menu_folded? 'debit_generators' %>"><%= link_to 'Text Update', sheets_path %></li>
    <li class="active-subnav <%= sub_menu_folded? 'sheets' %>"><%= link_to 'Text Update', sheets_path %></li>
-    <li class="<%= main_menu_active? "payments" %>"><%= link_to 'Payments', payments_path %></li>
-    <li class="active-subnav <%= sub_menu_folded? 'payments' %>"><%= link_to 'New Payment', new_payment_path %></li>
+    <li class="<%= main_menu_active? "payments" %>"><%= link_to 'New Payment', new_payment_path %></li>
+    <li class="active-subnav <%= sub_menu_folded? 'payments' %>"><%= link_to 'Payments', payments_path %></li>
     <% if allow? "users", "" %>
         <li class="<%= main_menu_active? 'users' %>"><%= link_to 'Users', users_path %></li>
         <li class="active-subnav <%= sub_menu_folded? 'users' %>"><%= link_to 'New User', new_user_path %></li>
