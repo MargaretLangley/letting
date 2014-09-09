@@ -1,6 +1,8 @@
 <%= form_for charge_cycle do |f| %>
   <%= render 'shared/errors', object: charge_cycle %>
 
+  <% charge_cycle.period_type = 'monthly' %>
+
   <fieldset id='charge_cycle' class='shell'>
 
     <div class="grid">
@@ -54,12 +56,6 @@
 
         <div class='col-1-8'>
           <%= builder.text_field :day, class: 'r-align' %>
-        </div>
-       <div class='col-1-8'>
-          <%= builder.text_field :month, class: 'r-align' %>
-        </div>
-       <div class='col-1-8 vertical-spacer'>
-          <%= builder.text_field :year, class: 'r-align' %>
         </div>
 
        <% end %>
