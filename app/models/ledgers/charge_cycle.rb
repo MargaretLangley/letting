@@ -30,6 +30,7 @@ class ChargeCycle < ActiveRecord::Base
 
   after_initialize do
     self.period_type = 'term' if period_type.blank?
+    # self.dueons.month = 0 if dueons.month.blank?
   end
 
   def due_between? date_range
