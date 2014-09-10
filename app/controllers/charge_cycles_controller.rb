@@ -22,6 +22,11 @@ class ChargeCyclesController < ApplicationController
     @charge_cycle = ChargeCycle.find params[:id]
   end
 
+  def newmonth
+    @charge_cycle = ChargeCycle.new
+    @charge_cycle.prepare
+  end
+
   def new
     @charge_cycle = ChargeCycle.new
     @charge_cycle.prepare

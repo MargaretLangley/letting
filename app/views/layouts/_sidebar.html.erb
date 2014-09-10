@@ -4,6 +4,7 @@
     <li class="active-subnav <%= sub_menu_folded? 'properties' %>"><%= link_to 'New Account', new_property_path %></li>
     <li class="<%= main_menu_active? "charge_cycles" %>"><%= link_to 'Charge Cycles', charge_cycles_path %></li>
     <li class="active-subnav <%= sub_menu_folded? 'charge_cycles' %>"><%= link_to 'New Charge Cycle', new_charge_cycle_path %></li>
+    <li class="active-subnav <%= sub_menu_folded? 'charge_cycles' %>"><%= link_to 'New Monthly Charge Cycle', newmonth_charge_cycles_path %></li>
     <li class="<%= main_menu_active? "clients" %>"><%= link_to 'Clients', clients_path %></li>
     <li class="active-subnav <%= sub_menu_folded? 'clients' %>"><%= link_to 'New Client', new_client_path %></li>
     <li class="<%= main_menu_active? 'debit_generators' %>"><%= link_to 'Invoices', debit_generators_path %></li>
