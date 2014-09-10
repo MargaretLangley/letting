@@ -66,13 +66,13 @@ a.view-testing-link{
   color: $primary-text;
 }
 
-/* Wanted to emphasise the payment column. However it
-   looks odd if elements are at the point the colour
-   changes. So I've padded it. Only used on payment */
+/* Wanted to emphasise the payment column in new_payment. However it looks odd
+   if elements are at the point the colour changes. So I have avoided text near
+   the color change. Note: margins do not have background color.
+   Only used on payment
+*/
 
 .pick-out{
-  padding-right: 2.5%;
-  padding-left: 2.5%;
   background-color: darken($fieldset, 5%);
 }
 
@@ -87,6 +87,7 @@ a.view-testing-link{
 
 .grid-header{
   @extend .faded;
+  padding-top: 1%; /* added for new_payment */
   border-bottom: 1px solid $muted-border;
   overflow: hidden;
   white-space: nowrap;
@@ -348,9 +349,9 @@ $search-height: 35px;
   @mixin base-button {
     margin: 0 1% 2% 1%;
     padding: 2%;
-    border: 1px solid lighten($muted-border, 20%);
+    border: 1px solid darken($secondary-button, 15%);
     border-radius: 5px;
-    background-color: $secondary-button;
+    background-color: darken($secondary-button, 0%);
     box-shadow: $shadow 0 0 4px;
     color: black;
     font-size: 1.2em;
@@ -361,11 +362,11 @@ $search-height: 35px;
     }
   }
 
-  a.simple-button{
+  .simple-button{
     @include base-button;
   }
 
-  a.simple-button[disabled]{
+  .simple-button[disabled]{
     background-color: $disabled-background;
     color: white;
     text-decoration: none;
@@ -374,7 +375,7 @@ $search-height: 35px;
     }
   }
 
-  a.delete-button{
+  .delete-button{
     @include base-button;
     text-decoration: none;
   }

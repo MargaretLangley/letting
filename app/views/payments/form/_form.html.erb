@@ -1,6 +1,24 @@
 <%= form_for payment do |payment_form| %>
   <%= render 'shared/errors', object: payment.source %>
   <fieldset id='payment' class='shell'>
-    <%= render 'payments/form/create_payment', payment: payment, payment_form: payment_form %>
+    <div class='overlay-parent'>
+    <h2>Property</h2>
+    <% if payment.account_exists? %>
+      <div class="grid">
+        <div class="col-5-12">
+          <%= render 'payments/form/address', property: payment.property_decorator %>
+        </div>
+        <div class="col-7-12">
+        </div>
+      </div>
+      <%= render 'payments/form/payment_received', payment: payment, payment_form: payment_form  %>
+      <div class="grid js-totalizer">
+        <%= render 'payments/form/credits', payment: payment, payment_form: payment_form  %>
+        <%= render 'payments/form/total', payment: payment, payment_form: payment_form %>
+      </div>
+    <% else %>
+     <%= render 'payments/form/unknown_property' %>
+    <% end %>
+  </div>
   </fieldset>
 <% end %>
