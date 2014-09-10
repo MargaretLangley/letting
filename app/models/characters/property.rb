@@ -23,6 +23,9 @@ class Property < ActiveRecord::Base
   validates :entities, presence: true
   before_validation :clear_up_form
 
+  delegate :address_lines, to: :address
+  delegate :abbreviated_address, to: :address
+
   def occupier
     entities.full_name
   end

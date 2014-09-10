@@ -1,6 +1,8 @@
 <div id='address'>
   <%= property.occupier %><br>
-  <%= property.abbreviated_address %>&hellip;<br>
+  <% property.abbreviated_address.each do |line| %>
+    <%= line %><br>
+  <% end %>
 </div>
 <div id='js-popup' class='shell  overlay  popup'>
   <%= property.occupier %><br>

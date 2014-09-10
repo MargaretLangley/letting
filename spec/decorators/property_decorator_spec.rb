@@ -26,14 +26,6 @@ describe PropertyDecorator do
     expect(property.occupier).to eq 'Mr W. G. Grace'
   end
 
-  it 'writes flat property' do
-    expect(property.address_lines[0]).to eq 'Flat 47 Hillbank House'
-  end
-
-  it 'generates abbrivated address' do
-    expect(property.abbreviated_address).to eq 'Flat 47 Hillbank House'
-  end
-
   describe 'Agent' do
     context 'authorized for property' do
       it 'name returned' do

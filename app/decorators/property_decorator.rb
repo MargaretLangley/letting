@@ -22,10 +22,6 @@ class PropertyDecorator
     client && client.human_ref
   end
 
-  def address_lines
-    source.address.address_lines
-  end
-
   def agent_name
     if source.agent.authorized?
       source.agent.entities.full_name
@@ -40,9 +36,5 @@ class PropertyDecorator
     else
       ['-']
     end
-  end
-
-  def abbreviated_address
-    source.address.abbreviated_address
   end
 end

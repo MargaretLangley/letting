@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Address, type: :model do
 
@@ -157,11 +157,13 @@ describe Address, type: :model do
     describe 'abbreviated_address' do
       it 'generates flat address' do
         address = Address.new address_attributes
-        expect(address.abbreviated_address).to eq 'Flat 47 Hillbank House'
+        expect(address.abbreviated_address).to eq ['Flat 47 Hillbank House',
+                                                   'Birmingham']
       end
       it 'generates house address' do
         house = Address.new house_address_attributes
-        expect(house.abbreviated_address).to eq '294 Edgbaston Road'
+        expect(house.abbreviated_address).to eq ['294 Edgbaston Road',
+                                                 'Birmingham']
       end
     end
 
