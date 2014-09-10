@@ -19,11 +19,7 @@ Letting::Application.routes.draw do
   resources :charges
   resources :debit_generators, only: [:new, :create, :index]
 
-  resources :charge_cycles do
-    collection do
-      get 'newmonth'
-    end
-  end
+  resources :charge_cycles
 
   resources :payments
   resources :invoices, only: [:index, :show]
