@@ -29,8 +29,7 @@ class ChargeCycle < ActiveRecord::Base
   delegate :clear_up_form, to: :due_ons
 
   after_initialize do
-    self.period_type = 'term' if period_type.blank?
-    # self.dueons.month = 0 if dueons.month.blank?
+    self.period_type ||= 'term'
   end
 
   def due_between? date_range
