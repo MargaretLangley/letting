@@ -47,7 +47,8 @@ class Address < ActiveRecord::Base
   end
 
   def abbreviated_address
-    [flat_house_line.blank? ? road_line : flat_line, town]
+    [flat_house_line.blank? ? road_line : flat_line,
+     town.blank? ? county : town]
   end
 
   def empty?

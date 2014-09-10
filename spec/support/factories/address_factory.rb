@@ -1,18 +1,42 @@
+# rubocop: disable Style/MethodLength
+# rubocop: disable Style/ParameterLists
 
-def address_new road: nil, town: nil, county: nil, prepare: false, **args
-  address = base_address prepare, args
-  address.road = road if road
-  address.town = town if town
-  address.county = county if county
-  address
+def address_new flat_no: '',
+                house_name: '',
+                road_no: '',
+                road: 'Edgbaston Road',
+                district: '',
+                town: 'Birmingham',
+                county: 'West Midlands',
+                postcode: '',
+                nation: ''
+  base_address flat_no: flat_no,
+               house_name: house_name,
+               road_no: road_no,
+               road: road,
+               district: district,
+               town: town,
+               county: county,
+               postcode: postcode,
+               nation: nation
 end
 
-def address_create(road: nil, town: nil, county: nil, **args)
-  (address = address_new(road: road, town: town, county: county, **args)).save!
-  address
-end
-
-def base_address  _prepare, **args
-  address = Address.new min_address_attributes args
-  address
+def base_address(flat_no:,
+                 house_name:,
+                 road_no:,
+                 road:,
+                 district:,
+                 town:,
+                 county:,
+                 postcode:,
+                 nation:)
+  Address.new flat_no: flat_no,
+              house_name: house_name,
+              road_no: road_no,
+              road: road,
+              district: district,
+              town: town,
+              county: county,
+              postcode: postcode,
+              nation: nation
 end
