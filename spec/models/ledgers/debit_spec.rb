@@ -22,6 +22,7 @@ describe Debit, :ledgers, type: :model do
       it('is valid under max') do
         expect(debit_new(amount: -99_999.99)).to be_valid
       end
+      it('fails zero amount') { expect(debit_new amount: 0).to_not be_valid }
     end
   end
 

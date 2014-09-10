@@ -31,6 +31,7 @@ class AmountValidator < ActiveModel::EachValidator
   end
 
   def error_message value
-    "must be a decimal between -£100,000 and £100,000. Currently: #{value}"
+    'must be a none zero decimal between -£100,000 and £100,000.' \
+    " Currently: #{value}"
   end
 end

@@ -12,9 +12,7 @@ describe Credit, :ledgers, type: :model do
         (credit = credit_new).on_date = nil
         expect(credit).to_not be_valid
       end
-      it('amount') { expect(credit_new amount: nil).to_not be_valid }
     end
-
     describe 'amount' do
       it('is a number') { expect(credit_new amount: 'nan').to_not be_valid }
       it('has a max') { expect(credit_new amount: 100_000).to_not be_valid }
@@ -25,13 +23,11 @@ describe Credit, :ledgers, type: :model do
       it('is valid under min') do
         expect(credit_new amount: -99_999.99).to be_valid
       end
+      it('fails zero amount') { expect(credit_new amount: 0).to_not be_valid }
     end
   end
 
   context 'default inialization' do
-    let(:credit) do
-
-    end
     before { Timecop.travel Date.new(2013, 9, 30) }
     after { Timecop.return }
 

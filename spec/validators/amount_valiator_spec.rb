@@ -25,6 +25,7 @@ describe 'Amount' do
     end
     it('has a min') { expect(validator_new(-100_000)).to_not be_valid }
     it('is valid under max') { expect(validator_new(-99_999.99)).to be_valid }
+    it('fails zero amount') { expect(validator_new amount: 0).to_not be_valid }
   end
 
   it 'sets error' do

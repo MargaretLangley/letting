@@ -2,13 +2,24 @@ require 'rails_helper'
 
 describe Payment, :ledgers, type: :model do
 
-  context 'validation' do
+  describe 'validates' do
     it('is valid') { expect(payment_new).to be_valid }
     it 'requires account' do
       expect(payment_new(account_id: nil)).to_not be_valid
     end
-    it('requires amount') { expect(payment_new amount: nil).to_not be_valid }
-    it('fails zero amount') { expect(payment_new amount: 0).to_not be_valid }
+    describe 'amount' do
+      it('requires amount') { expect(payment_new amount: nil).to_not be_valid }
+      it('is a number') { expect(payment_new amount: 'nan').to_not be_valid }
+      it('has a max') { expect(payment_new amount: 100_000).to_not be_valid }
+      it('is valid under max') do
+        expect(payment_new amount: 99_999.99).to be_valid
+      end
+      it('has a min') { expect(payment_new amount: -100_000).to_not be_valid }
+      it('is valid under min') do
+        expect(payment_new amount: -99_999.99).to be_valid
+      end
+      it('fails zero amount') { expect(payment_new amount: 0).to_not be_valid }
+    end
     it 'requires date' do
       payment = payment_new
       # note: default_initialization for on_date
