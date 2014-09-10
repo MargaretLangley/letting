@@ -23,7 +23,7 @@ class ChargeCyclesController < ApplicationController
   end
 
   def new
-    @charge_cycle = ChargeCycle.new
+    @charge_cycle = ChargeCycle.new period_type: params[:period]
     @charge_cycle.prepare
   end
 
