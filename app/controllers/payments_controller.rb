@@ -51,8 +51,10 @@ class PaymentsController < ApplicationController
     @payment = PaymentDecorator
                  .new(Payment.new(payment_params.except(:human_ref)))
     if @payment.save
+      @payment.negate
       redirect_to new_payment_path, notice: created_message
     else
+      @payment.negate
       render :new
     end
   end
@@ -64,8 +66,9 @@ class PaymentsController < ApplicationController
 
   def update
     @payment = PaymentDecorator.new Payment.find params[:id]
-    @payment.assign_attributes payment_params.except(:human_ref)
+    @payment.assign_attributes payment_params
     if @payment.save
+      @payment.negate
       redirect_to new_payment_path, notice: updated_message
     else
       render :edit

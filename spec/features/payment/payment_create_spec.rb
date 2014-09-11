@@ -38,6 +38,7 @@ describe Payment, :payment, type: :feature do
       payment_page.payment = 100_000_000
       payment_page.pay
       expect(payment_page).to be_errored
+      payment_has_been_negated?
     end
   end
 
@@ -47,5 +48,9 @@ describe Payment, :payment, type: :feature do
 
   def property_receivables?
     expect(payment_page).to be_receivables
+  end
+
+  def payment_has_been_negated?
+     expect(payment_page.payment.to_i).to be > 0
   end
 end
