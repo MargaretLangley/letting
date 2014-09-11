@@ -1,17 +1,24 @@
 ######
-# UserCreatePage
+# PaymentPage
 #
-# Encapsulates the PaymentNewPage - despite the name (new/create)
+# Encapsulates the PaymentPage
 #
-# The layer hides the capybara calls to make the functional rspec tests that
-# use this class simpler.
+# The layer hides the capybara calls to make the functional rspec tests use
+# a higher level of abstraction.
+# http://robots.thoughtbot.com/acceptance-tests-at-a-single-level-of-abstraction
+#
 #####
 #
-class PaymentCreatePage
+class PaymentPage
   include Capybara::DSL
 
-  def visit_new_page
+  def visit_new
     visit '/payments/new'
+    self
+  end
+
+  def visit_edit payment_id
+    visit "/payments/#{payment_id}/edit"
     self
   end
 
@@ -33,28 +40,24 @@ class PaymentCreatePage
     self
   end
 
-  def click_create_payment
-    click_on 'Pay Total'
+  def pay
+    click_on 'submit'
     self
-  end
-
-  def on_page?
-    current_path == '/payments/new'
   end
 
   def empty_search?
     has_css? '[data-role="unknown-property"]'
   end
 
-  def errored?
-    has_css? '[data-role="errors"]'
-  end
-
   def receivables?
     has_css? '[data-role="receivables"]'
   end
 
+  def errored?
+    has_css? '[data-role="errors"]'
+  end
+
   def successful?
-    has_content? /successfully created/i
+    has_content? /successfully/i
   end
 end
