@@ -463,7 +463,6 @@ $search-height: 35px;
 
 @mixin base-overlay {
   position: absolute;
-  top: 10%;  /* arbitary small amount to move it away from top border */
   right: 0;
   left: 0;
   margin-right: auto;
@@ -479,7 +478,6 @@ $search-height: 35px;
 
 .overlay{
   @include base-overlay;
-  top: 10%;  /* arbitary small amount to move it away from top border */
 }
 
 .low-overlay{
