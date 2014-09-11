@@ -44,8 +44,12 @@ module DueOns
                               .map { |due_on| due_on.make_date }
       end
 
-      def prepare
-        (size...MAX_DISPLAYED_DUE_ONS).each { build }
+      def prepare(type:)
+        (size...find_max_size(type)).each { build }
+      end
+
+      def find_max_size period_type
+        period_type  == 'monthly' ?  1  :  MAX_DISPLAYED_DUE_ONS
       end
 
       def clear_up_form

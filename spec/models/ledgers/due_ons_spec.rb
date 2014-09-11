@@ -3,7 +3,10 @@ require 'rails_helper'
 describe DueOns, :ledgers, type: :model do
 
   let(:cycle) do
-    ChargeCycle.new id: 1, name: 'Anything', order: 1, period_type: 'term'
+    ChargeCycle.new id: 1,
+                    name: 'Anything',
+                    order: 1,
+                    period_type: 'term'
   end
   let(:due_ons) { cycle.due_ons }
 
@@ -61,26 +64,42 @@ describe DueOns, :ledgers, type: :model do
         end
       end
 
-      it '#prepare fills collection with with empty due_on' do
-        due_ons = charge_cycle_new(due_ons: nil).due_ons
-        expect(due_ons.size).to eq(0)
-        due_ons.prepare
-        expect(due_ons.size).to eq(4)
+      describe 'form preparation' do
+        context 'term' do
+          it '#prepare creates children' do
+            due_ons = charge_cycle_new(due_ons: nil).due_ons
+            expect(due_ons.size).to eq(0)
+
+            due_ons.prepare type: 'term'
+            expect(due_ons.size).to eq(4)
+          end
+        end
+
+        context 'monthly' do   # we create the context
+          # this fails but we need it to pass
+          it '#prepare creates children' do
+            due_ons = charge_cycle_new(due_ons: nil).due_ons
+            expect(due_ons.size).to eq(0)
+
+            due_ons.prepare type: 'monthly'
+            expect(due_ons.size).to eq(1)
+          end
+        end
+
+        it '#clear_up_form destroys empty due_ons' do
+          due_ons.build day: nil, month: nil
+          due_ons.clear_up_form
+          expect(due_ons.reject { |due_on| due_on.marked_for_destruction? }
+          .size).to eq(0)
+        end
       end
 
-      it '#clear_up_form destroys empty due_ons' do
-        due_ons.build day: nil, month: nil
-        due_ons.clear_up_form
-        expect(due_ons.reject { |due_on| due_on.marked_for_destruction? }.size)
-                      .to eq(0)
-      end
-    end
-
-    context '#monthly?' do
-      context 'by number' do
-        it '12 persistable due_ons monthly charge' do
-          (1..12).each { due_ons.build day: 1, month: 1 }
-          expect(due_ons).to be_monthly
+      context '#monthly?' do
+        context 'by number' do
+          it '12 persistable due_ons monthly charge' do
+            (1..12).each { due_ons.build day: 1, month: 1 }
+            expect(due_ons).to be_monthly
+          end
         end
 
         it '< 12 persistable due_ons not monthly' do
@@ -89,6 +108,7 @@ describe DueOns, :ledgers, type: :model do
           expect(due_ons).to_not be_monthly
         end
       end
+
       context 'by per_month due_on' do
         it 'is not per month without it' do
           due_ons.build day: 1, month: -1
