@@ -51,6 +51,6 @@ describe Payment, :payment, type: :feature do
   end
 
   def payment_has_been_negated?
-     expect(payment_page.payment.to_i).to be > 0
+    expect(payment_page.payment.to_i).to be > 0
   end
 end
