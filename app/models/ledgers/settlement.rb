@@ -30,7 +30,7 @@ class Settlement < ActiveRecord::Base
   belongs_to :credit
   belongs_to :debit
 
-  validates :credit_id, :debit_id, :amount, presence: true
+  validates :credit, :debit, :amount, presence: true
 
   # resolving settlement with credits
   # The amount of the settlement depends on the value(s) of
