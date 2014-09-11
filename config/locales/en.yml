@@ -83,7 +83,7 @@ en:
       short: "%d %b %y"
   time:
     formats:
-      human: "%d %b %Y"
+      human: "%d %b %Y %H:%M"
 
   instruction:
     debit_generators:

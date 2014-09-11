@@ -7,7 +7,7 @@ describe PaymentIndexDecorator do
 
   context 'methods' do
     it '#on_date returned' do
-      expect(decorator.on_date).to eq '30 Apr 2013'
+      expect(decorator.on_date).to eq '30 Apr 2013 00:00'
     end
 
     it '#amount' do
