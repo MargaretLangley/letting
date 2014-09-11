@@ -19,14 +19,14 @@ class SearchController < ApplicationController
   def index
     session[:search_model] = referer_model unless referer_model == 'Search'
     match = LiteralSearch.search(type:  session[:search_model],
-                                 query: params[:search]).go
+                                 query: params[:search_terms]).go
     if match[:record_id] || match[:process_empty] == 'true'
       redirect_to controller: match[:controller],
                   action: match[:action],
                   id: match[:record_id]
     else
       results = full_text_search search_model: session[:search_model],
-                                 query: params[:search]
+                                 query: params[:search_terms]
       @records = results[:records].page(params[:page])
       render results[:render]
     end

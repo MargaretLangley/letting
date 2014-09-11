@@ -16,9 +16,7 @@ class PaymentCreatePage
   end
 
   def human_ref property
-    # TODO: search text is search (small s) search button is Search (large s)
-    # change confusing names
-    fill_in 'search', with: property
+    fill_in 'search_terms', with: property
     self
   end
 

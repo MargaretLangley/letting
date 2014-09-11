@@ -10,7 +10,7 @@ describe 'Search index', type: :feature do
       property_create human_ref: 222,
                       account: account_new(id: 2, charge: charge_new)
       visit '/properties'
-      fill_in 'search', with: '222'
+      fill_in 'search_terms', with: '222'
       click_on 'search'
       expect(page.title).to eq 'Letting - View Account'
       expect(page).to have_text '222'
@@ -25,7 +25,7 @@ describe 'Search index', type: :feature do
                       address_attributes: { county: 'West Midlands' }
       Property.import force: true, refresh: true
       visit '/properties'
-      fill_in 'search', with: 'Wes'
+      fill_in 'search_terms', with: 'Wes'
       click_on 'search'
       expect(page).to_not have_text '111'
       expect(page).to have_text '222'
@@ -38,7 +38,7 @@ describe 'Search index', type: :feature do
                       address_attributes: { county: 'Worcester' }
       Property.import force: true, refresh: true
       visit '/properties'
-      fill_in 'search', with: 'Wor'
+      fill_in 'search_terms', with: 'Wor'
       click_on 'search'
       expect(page).to have_text '111'
       click_on 'search'
@@ -50,7 +50,7 @@ describe 'Search index', type: :feature do
       property_create human_ref: 111
       Property.import force: true, refresh: true
       visit '/properties'
-      fill_in 'search', with: ''
+      fill_in 'search_terms', with: ''
       click_on 'search'
       expect(page).to have_text '111'
       Property.__elasticsearch__.delete_index!
@@ -60,7 +60,7 @@ describe 'Search index', type: :feature do
       property_create human_ref: 111
       Property.import force: true, refresh: true
       visit '/properties'
-      fill_in 'search', with: '599'
+      fill_in 'search_terms', with: '599'
       click_on 'search'
       expect(page).to have_text 'No Matches found. Search again.'
       Property.__elasticsearch__.delete_index!
