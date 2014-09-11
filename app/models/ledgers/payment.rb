@@ -28,7 +28,7 @@ class Payment < ActiveRecord::Base
 
   after_initialize do
     self.amount = 0 if amount.blank?
-    self.on_date = Date.current if on_date.blank?
+    self.on_date = DateTime.current if on_date.blank?
   end
 
   def account_exists?

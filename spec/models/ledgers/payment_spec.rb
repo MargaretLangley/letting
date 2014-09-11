@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Payment, :ledgers, type: :model do
+describe Payment, :payment, :ledgers, type: :model do
 
   describe 'validates' do
     it('is valid') { expect(payment_new).to be_valid }
@@ -28,16 +28,18 @@ describe Payment, :ledgers, type: :model do
     end
   end
 
-  describe 'inialization' do
-    before { Timecop.travel Date.new(2013, 9, 30) }
+  describe 'initialize' do
+    # changing for Date to DateTime - so I want test to fail if we use date
+    before { Timecop.travel Time.local(2013, 9, 30, 2, 0) }
     after  { Timecop.return }
     describe 'on_date' do
       it 'sets nil on_date to today' do
-        expect(payment_new(on_date: nil).on_date).to eq Date.new 2013, 9, 30
+        expect(payment_new(on_date: nil).on_date)
+          .to be_within(1.second).of DateTime.now
       end
       it 'leaves defined on_date intact' do
-        payment = payment_create on_date: Date.new(2014, 1, 30)
-        expect(payment.on_date).to eq Date.new 2014, 1, 30
+        payment = payment_create on_date: Time.local(2013, 9, 30, 2, 0)
+        expect(payment.on_date).to eq Time.local(2013, 9, 30, 2, 0)
       end
     end
     describe 'amount' do
