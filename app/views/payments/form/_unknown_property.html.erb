@@ -1,4 +1,4 @@
 <div class='shell  overlay top-9-12' data-role='unknown-property'>
   <%= t('instruction.payments.property_payment') %>
-  <%= link_to '109', new_payment_path(human_ref: 109) %>
+  <%= link_to Account.first.property.human_ref, new_payment_path(id: Account.first.id) %>
 </div>
