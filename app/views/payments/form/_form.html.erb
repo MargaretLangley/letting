@@ -2,19 +2,34 @@
   <%= render 'shared/errors', object: payment.source %>
   <fieldset id='payment' class='shell'>
     <div class='overlay-parent'>
-    <h2>Property</h2>
-    <% if payment.account_exists? %>
-      <div class="grid">
-        <div class="col-3-12">
-          <h1>ID: <%= payment.account.property.human_ref %></h1>
+      <div class='grid'>
+        <div class='col-3-12'>
+          <h2>Property</h2>
+          <h1>ID: <%= payment.human_ref %></h1>
         </div>
-        <div class="col-5-12">
-          <%= render 'payments/form/address', property: payment.property_decorator %>
+        <div class='col-6-12'>
+          <br>
+          <br>
+          <% if payment.account_exists? %>
+            <%= render 'payments/form/address', property: payment.property_decorator %>
+          <% end %>
         </div>
-        <div class="col-4-12">
-          &nbsp;
+        <div class='col-3-12 shell'>
+          <div class="col-6-12">
+            Last<br>
+            Day's Total
+          </div>
+          <div class="col-3-12 r-align">
+            <%= payment.last_human_ref %><br>
+            &nbsp;
+          </div>
+          <div class="col-3-12 r-align">
+            <%= link_to payment.last_amount, edit_payment_path(Payments.last), class: 'hover-link'%><br>
+            <%= link_to payment.todays_takings, payments_path, class: 'hover-link' %>
+          </div>
         </div>
       </div>
+    <% if payment.account_exists? %>
       <%= render 'payments/form/payment_received', payment: payment, payment_form: payment_form  %>
       <div class="grid js-totalizer">
         <%= render 'payments/form/credits', payment: payment, payment_form: payment_form  %>
@@ -23,6 +38,6 @@
     <% else %>
      <%= render 'payments/form/unknown_property' %>
     <% end %>
-  </div>
+    </div>
   </fieldset>
 <% end %>

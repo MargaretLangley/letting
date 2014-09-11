@@ -24,10 +24,16 @@ class PaymentDecorator
   extend ActiveModel::Callbacks
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
+  include ActionView::Helpers::NumberHelper
   attr_reader :source
 
   def initialize payment
     @source = payment
+  end
+
+  def human_ref
+    return '-' unless @source.account
+    @source.account.property.human_ref
   end
 
   def prepare_for_form
@@ -42,5 +48,28 @@ class PaymentDecorator
 
   def property_decorator
     PropertyDecorator.new @source.account.property
+  end
+
+  def last_amount
+    return '-' if last_payment == :no_last_payment
+    number_to_currency last_payment.negate.amount
+  end
+
+  def last_human_ref
+    return '-' if last_payment == :no_last_payment
+    last_payment.account.property.human_ref
+  end
+
+  def todays_takings
+    number_to_currency Payments.on
+                               .map { |payment| payment.negate }
+                               .map(&:amount).inject(0, &:+)
+  end
+
+  private
+
+  def last_payment
+    return :no_last_payment if Payments.last == :no_last_payment
+    Payments.last
   end
 end

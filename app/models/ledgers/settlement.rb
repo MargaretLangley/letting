@@ -32,12 +32,13 @@ class Settlement < ActiveRecord::Base
 
   validates :credit, :debit, :amount, presence: true
 
-  # resolving settlement with credits
+  # resolving settlement of credits with debits - and visa versa.
   # The amount of the settlement depends on the value(s) of
-  # unpaid credit.
+  # unpaid credit or outstanding debit.
   #
-  # settle - the amount thatat has not been offset against.
-  # offsets - unspent offsets (we assume it's for this charge)
+  # settle -  currency amount that has not been offset against.
+  # offsets - unspent offsets for this charge - if a debit is offset
+  #           by credits and credits by debits.
   #
   def self.resolve settle, offsets
     offsets.each do |offsetable|
