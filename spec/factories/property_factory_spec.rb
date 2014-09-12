@@ -20,14 +20,14 @@ describe 'Property Factory' do
       end
     end
     describe 'adds' do
+      it 'can add account' do
+        property = property_new account: account_new(id: 70)
+        expect(property.account.id).to eq 70
+      end
+
       it 'can add agent' do
         property = property_new agent: agent_new
         expect(property.agent.full_name).to eq 'Mr W. G. Grace'
-      end
-
-      it 'can add charge' do
-        property = property_new(account: account_new(charge: charge_new))
-        expect(property.account.charges[0].charge_type).to eq 'Ground Rent'
       end
 
       it 'can add client' do
@@ -50,10 +50,9 @@ describe 'Property Factory' do
     end
 
     describe 'adds' do
-      it 'can add charge' do
-        property_create(account: account_new(charge: charge_new))
-        expect(Property.first.account.charges[0].charge_type)
-          .to eq 'Ground Rent'
+      it 'can add account' do
+        property_create(account: account_new(id: 71))
+        expect(Property.first.account.id).to eq 71
       end
 
       it 'can add agent' do
