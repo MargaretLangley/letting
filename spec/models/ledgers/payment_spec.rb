@@ -28,7 +28,7 @@ describe Payment, :payment, :ledgers, type: :model do
     end
   end
 
- describe 'initialize' do
+  describe 'initialize' do
     # changing for Date to DateTime - so I want test to fail if we use date
     before { Timecop.travel Time.local(2013, 9, 30, 2, 0) }
     after  { Timecop.return }
