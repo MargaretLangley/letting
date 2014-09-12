@@ -23,13 +23,7 @@ class FullTextSearch
   end
 
   def go
-    captured = results
-    captured = default if captured[:records].count.zero?
-    captured
-  end
-
-  def default
-    { success: false, records: Property.all, render: 'properties/index' }
+    results
   end
 
   # Instantiate class from name string
@@ -37,23 +31,29 @@ class FullTextSearch
   def results
     case @type
     when 'Client'
-      {
-        success: true,
-        records: Client.search(@query).records,
-        render: 'clients/index'
-      }
+      success = true
+      records = Client.search(@query).records
+      if records.count.zero?
+        success = false
+        records = Client.all
+      end
+      { success: success, records: records, render: 'clients/index' }
     when 'Payment'
-      {
-        success: true,
-        records: Payment.search(@query).records,
-        render: 'payments/index'
-      }
+      success = true
+      records = Payment.search(@query).records
+      if records.count.zero?
+        success = false
+        records = Payment.all
+      end
+      { success: success, records: records, render: 'payments/index' }
     else
-      {
-        success: true,
-        records: Property.search(@query).records,
-        render: 'properties/index'
-      }
+      success = true
+      records = Property.search(@query).records
+      if records.count.zero?
+        success = false
+        records = Property.all
+      end
+      { success: success, records: records, render: 'properties/index' }
     end
   end
 end
