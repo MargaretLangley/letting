@@ -56,6 +56,7 @@
    <%= payment_dec.balance %>
   </div>
   <nav class='col-4-24 vertical-spacer r-align'>
+    <%= link_to fa_icon('plus 2x'), new_payment_path(id: payment.account.id), title: 'Edit', class: 'r-pad' %>
     <%= link_to fa_icon('edit lg'), edit_payment_path(payment), title: 'Edit', class: 'r-pad' %>
     <%= link_to fa_icon('trash-o lg'), payment, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete', class: 'l-pad' %>
   </nav>
