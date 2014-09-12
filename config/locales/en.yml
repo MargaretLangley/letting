@@ -89,6 +89,6 @@ en:
     debit_generators:
       property_charge:  "Search for the properties to charge in the above search box.\nCommon searches are roads, flats and property id ranges. With property ranges use a hyphen e.g. 100-200"
     payments:
-      property_payment: "To book a payment against a property search for the property in the search box. Example 109, a property identifier"
+      property_payment: "To book a payment against a property, search for the property in the above box. This easiest way is by property identifier, %{property_id}, but %{owner} and %{amount} are also supported."
     properties:
       agent:          "Billing is currently to the occupier address. If the bill should go to an agent click the 'Agent' checkbox and fill in the agent's details."

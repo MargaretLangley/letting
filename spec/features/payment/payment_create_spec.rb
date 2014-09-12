@@ -6,6 +6,7 @@ describe Payment, :payment, type: :feature do
   before(:each) { log_in }
 
   it 'payment for debit', js: true do
+    payment_create # required for unknown_property message
     property_create account: account_new(charge: charge_new, debit: debit_new)
     payment_page.visit_new
     payment_page.human_ref('2002').search
@@ -17,29 +18,17 @@ describe Payment, :payment, type: :feature do
     payment_is_created
   end
 
-  describe 'error' do
+  it 'displays form errors' do
+    payment_create
+    property_create human_ref: '2002',
+                    account: account_new(charge: charge_new, debit: debit_new)
+    payment_page.visit_new
 
-    it 'searched property unknown' do
-      skip 'currently it does full text search on properties'
-      # expects [data-role="unknown-property"]
-      payment_page.visit_new
-
-      payment_page.human_ref('800').search
-      save_and_open_page
-      expect(payment_page).to be_empty_search
-    end
-
-    it 'displays form errors' do
-      property_create human_ref: '2002',
-                      account: account_new(charge: charge_new, debit: debit_new)
-      payment_page.visit_new
-
-      payment_page.human_ref('2002').search
-      payment_page.payment = 100_000_000
-      payment_page.pay
-      expect(payment_page).to be_errored
-      payment_has_been_negated?
-    end
+    payment_page.human_ref('2002').search
+    payment_page.payment = 100_000_000
+    payment_page.pay
+    expect(payment_page).to be_errored
+    payment_has_been_negated?
   end
 
   def payment_is_created
