@@ -36,7 +36,7 @@
    Actions
   </div>
 
- <% decorate_payments = Payments.new(@payments)
+ <% decorate_payments = Payments.new(@records)
     decorate_payments.to_a.each do |payment|
       payment_dec = PaymentIndexDecorator.new payment
       %>

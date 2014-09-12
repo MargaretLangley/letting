@@ -22,6 +22,13 @@
 #
 class Account < ActiveRecord::Base
   belongs_to :property, inverse_of: :account
+  def holder
+    property.occupier
+  end
+
+  def address
+    property.address_lines
+  end
   has_many :debits, dependent: :destroy
   accepts_nested_attributes_for :debits, allow_destroy: true
   has_many :credits, dependent: :destroy

@@ -10,10 +10,11 @@
 # NGrams don't always seem to work - seems to occasional match whole word but
 # not the ngrame (so for London: matches London and not Lond)
 #
-# Always works:
+# Always works (see also Readme):
 # rails c
 # Property.import force: true, refresh: true
 # Client.import force: true, refresh: true
+# Payment.import force: true, refresh: true
 #
 ####
 #

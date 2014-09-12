@@ -50,4 +50,13 @@ class Payment < ActiveRecord::Base
     negate
     credits.clear_up
   end
+
+  include Searchable
+  # Elasticsearch uses generates json document for payment index
+  def as_indexed_json(_options = {})
+    as_json(
+      include: {
+        account: { methods: [:holder, :address] }
+      })
+  end
 end

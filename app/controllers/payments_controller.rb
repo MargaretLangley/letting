@@ -19,7 +19,7 @@
 class PaymentsController < ApplicationController
   def index
     params[:payment_search] ||= Payments.last_on_date
-    @payments = Payments.on(date: params[:payment_search])
+    @records = Payments.on(date: params[:payment_search])
                         .page(params[:page])
   end
 

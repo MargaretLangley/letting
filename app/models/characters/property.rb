@@ -46,9 +46,7 @@ class Property < ActiveRecord::Base
   delegate :bill_to, to: :agent
 
   include Searchable
-  # Generates json document for the property record
-  # Used by Elasticsearch
-  #
+  # Elasticsearch uses generates json document for property index
   def as_indexed_json(_options = {})
     as_json(
       methods: :occupier,

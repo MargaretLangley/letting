@@ -36,11 +36,17 @@ class FullTextSearch
   # Object.const_get(@type).search(@query)
   def results
     case @type
-    when 'clients'
+    when 'Client'
       {
         success: true,
         records: Client.search(@query).records,
         render: 'clients/index'
+      }
+    when 'Payment'
+      {
+        success: true,
+        records: Payment.search(@query).records,
+        render: 'payments/index'
       }
     else
       {

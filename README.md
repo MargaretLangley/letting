@@ -76,6 +76,7 @@ Repeat each time you want to delete and restore the database.
      `bundle exec rails c production`
     `Property.import force: true, refresh: true`
     `Client.import force: true, refresh: true`
+    `Payment.import force: true, refresh: true`
 
 
 
