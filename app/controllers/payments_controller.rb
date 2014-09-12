@@ -18,7 +18,7 @@
 #
 class PaymentsController < ApplicationController
   def index
-    params[:payment_search] ||= Payments.last_on_date
+    params[:payment_search] ||= Payments.last_booked_on
     @records = Payments.on(date: params[:payment_search])
                         .page(params[:page])
   end
@@ -114,7 +114,7 @@ class PaymentsController < ApplicationController
     params.require(:payment)
      .permit :id,
              :account_id,
-             :on_date,
+             :booked_on,
              :amount,
              :human_ref,
              credits_attributes: credit_attributes

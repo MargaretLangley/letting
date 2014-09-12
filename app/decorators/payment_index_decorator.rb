@@ -28,8 +28,8 @@ class PaymentIndexDecorator
   def charge
   end
 
-  def on_date
-    I18n.l @source.on_date, format: :human
+  def booked_on
+    I18n.l @source.booked_on, format: :human
   end
 
   def amount
@@ -37,6 +37,6 @@ class PaymentIndexDecorator
   end
 
   def balance
-    number_to_currency @source.account.balance StringDate.new(on_date).to_date
+    number_to_currency @source.account.balance StringDate.new(booked_on).to_date
   end
 end

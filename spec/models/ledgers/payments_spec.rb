@@ -17,18 +17,18 @@ describe Payments do
       expect(payments.sum).to eq 30
     end
 
-    describe '.last_on_date' do
+    describe '.last_booked_on' do
       before { Timecop.travel '2014-06-25' }
       after { Timecop.return }
 
       it 'returns today if no payments at all (unlikely)' do
-        expect(Payments.last_on_date).to eq '2014-06-25'
+        expect(Payments.last_booked_on).to eq '2014-06-25'
       end
 
       it 'returns the last day a payment was made' do
-        payment_create(on_date: '2014-03-25')
-        payment_create(on_date: '2014-06-25')
-        expect(Payments.last_on_date).to eq '2014-06-25'
+        payment_create(booked_on: '2014-03-25')
+        payment_create(booked_on: '2014-06-25')
+        expect(Payments.last_booked_on).to eq '2014-06-25'
       end
     end
 
@@ -36,7 +36,7 @@ describe Payments do
       it 'returns payments on queried day' do
         account = property_create(account: account_new).account
         payment = payment_create account_id: account.id,
-                                 on_date: '1/Sep/2014 16:29:30 +0100'
+                                 booked_on: '1/Sep/2014 16:29:30 +0100'
                                             .to_datetime
         expect(Payments.on(date: '2014-09-01').to_a).to eq [payment]
       end

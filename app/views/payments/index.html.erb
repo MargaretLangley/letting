@@ -4,7 +4,7 @@
 
     <%= form_tag payments_path, method: 'get' do %>
       <div class='col-3-12 vertical-spacer'>
-        Payments entered on:
+        Payments booked on:
       </div>
       <div class='col-5-12 vertical-spacer'>
         <%= date_field_tag :payment_search, params[:payment_search], autofocus: true, class: 'width-3-4' %>
@@ -24,7 +24,7 @@
     Name
   </div>
   <div class='col-6-24 vertical-spacer grid-header'>
-   Date
+    Booked On
   </div>
   <div class='col-2-24 vertical-spacer grid-header r-align'>
     Amount
@@ -47,7 +47,7 @@
     <%= payment_dec.full_name %>
   </div>
   <div class='col-6-24 vertical-spacer'>
-   <%= payment_dec.on_date %>
+   <%= payment_dec.booked_on %>
   </div>
   <div class='col-2-24 vertical-spacer r-align'>
     <%= payment_dec.amount %>

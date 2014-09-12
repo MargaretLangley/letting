@@ -23,12 +23,12 @@ class Payment < ActiveRecord::Base
   before_validation :clear_up
 
   accepts_nested_attributes_for :credits, allow_destroy: true
-  validates :account_id, :on_date, presence: true
+  validates :account_id, :booked_on, presence: true
   validates :amount, amount: true
 
   after_initialize do
     self.amount = 0 if amount.blank?
-    self.on_date = DateTime.current if on_date.blank?
+    self.booked_on = DateTime.current if booked_on.blank?
   end
 
   def account_exists?

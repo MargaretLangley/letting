@@ -355,7 +355,7 @@ end
 def create_payment
   payment = Payment.new id: 1,
                         account_id: 1,
-                        on_date: create_date(15)
+                        booked_on: create_date(15)
   payment.amount = 88.08
   payment.save!
 end

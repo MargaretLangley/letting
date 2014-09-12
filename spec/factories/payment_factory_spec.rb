@@ -8,7 +8,7 @@ describe 'payment' do
 
     describe 'overrides' do
       it 'alters on date' do
-        expect(payment_new(on_date: '2012-03-25').on_date)
+        expect(payment_new(booked_on: '2012-03-25').booked_on)
           .to eq Date.new(2012, 03, 25)
       end
       it('alters amount') { expect(payment_new(amount: 1).amount).to eq 1 }
@@ -29,7 +29,7 @@ describe 'payment' do
       end
       it('has amount') { expect(payment_create.amount).to eq(-88.08) }
       it('has date') do
-        expect(payment_create.on_date.to_date).to eq Date.new 2013, 4, 30
+        expect(payment_create.booked_on.to_date).to eq Date.new 2013, 4, 30
       end
     end
     describe 'overrides' do
@@ -37,7 +37,7 @@ describe 'payment' do
         expect(payment_create(amount: 35.50).amount).to eq(-35.50)
       end
       it 'alters date' do
-        expect(payment_create(on_date: '10/6/2014').on_date.to_date)
+        expect(payment_create(booked_on: '10/6/2014').booked_on.to_date)
           .to eq Date.new 2014, 6, 10
       end
     end

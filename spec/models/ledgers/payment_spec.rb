@@ -22,8 +22,8 @@ describe Payment, :payment, :ledgers, type: :model do
     end
     it 'requires date' do
       payment = payment_new
-      # note: default_initialization for on_date
-      payment.on_date = nil
+      # note: default_initialization for booked_on
+      payment.booked_on = nil
       expect(payment).to_not be_valid
     end
   end
@@ -32,14 +32,14 @@ describe Payment, :payment, :ledgers, type: :model do
     # changing for Date to DateTime - so I want test to fail if we use date
     before { Timecop.travel Time.local(2013, 9, 30, 2, 0) }
     after  { Timecop.return }
-    describe 'on_date' do
-      it 'sets nil on_date to today' do
-        expect(payment_new(on_date: nil).on_date)
+    describe 'booked_on' do
+      it 'sets nil booked_on to today' do
+        expect(payment_new(booked_on: nil).booked_on)
           .to be_within(1.second).of DateTime.now
       end
-      it 'leaves defined on_date intact' do
-        payment = payment_create on_date: Time.local(2013, 9, 30, 2, 0)
-        expect(payment.on_date).to eq Time.local(2013, 9, 30, 2, 0)
+      it 'leaves defined booked_on intact' do
+        payment = payment_create booked_on: Time.local(2013, 9, 30, 2, 0)
+        expect(payment.booked_on).to eq Time.local(2013, 9, 30, 2, 0)
       end
     end
     describe 'amount' do

@@ -6,8 +6,8 @@ describe PaymentIndexDecorator do
   let(:decorator) { PaymentIndexDecorator.new source }
 
   context 'methods' do
-    it '#on_date returned' do
-      expect(decorator.on_date).to eq '30 Apr 2013 00:00'
+    it '#booked_on returned' do
+      expect(decorator.booked_on).to eq '30 Apr 2013 00:00'
     end
 
     it '#amount' do
