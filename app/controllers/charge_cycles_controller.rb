@@ -33,6 +33,7 @@ class ChargeCyclesController < ApplicationController
       redirect_to charge_cycles_path,
                   flash: { save: charge_cycle_created_message }
     else
+      byebug
       @charge_cycle.prepare
       render :new
     end
