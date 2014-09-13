@@ -6,7 +6,10 @@ describe Client, type: :feature do
 
   before(:each) do
     log_in
-    client_create.properties << property_new
+    client_create(
+       human_ref: 8008,
+       entities: [Entity.new(title: 'Mr', initials: 'W G', name: 'Grace')])
+      .properties << property_new
     visit '/clients/'
     find('.view-testing-link', visible: false).click
   end

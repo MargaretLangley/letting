@@ -5,7 +5,9 @@ describe Client, type: :feature do
   before(:each) do
     log_in
     client_create human_ref: 111,
-                  address_attributes: { road: 'Vauxall Lane' }
+                  entities: [Entity.new(title: 'Mr',
+                                        initials: 'W G',
+                                        name: 'Grace')]
     client_create human_ref: 222
     client_create human_ref: 333
     visit '/clients/'

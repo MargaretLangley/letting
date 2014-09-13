@@ -7,7 +7,7 @@ describe 'Account Update', type: :feature do
   context 'Agentless' do
     before(:each) do
       log_in
-      client = client_create
+      client = client_create human_ref: 8008
       property_create human_ref: 8000,
                       client_id: client.id,
                       account: account_new

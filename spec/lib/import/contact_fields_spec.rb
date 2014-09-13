@@ -43,7 +43,8 @@ module DB
         %q(Example Street, District ,example town,  Example County,  ) +
         %q(E10 7EX, SPAIN)
 
-        client = client_new address_attributes: { town: 'this town is changed' }
+        client = client_new address: address_new(town: 'this town is changed')
+
         ContactFields.new(parse_line lower_case_town_row).update_for client
         expect(client.address.town).to eq 'Example Town'
       end

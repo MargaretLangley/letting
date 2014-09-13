@@ -1,30 +1,14 @@
-def client_new **args
-  base_client args
+def client_new human_ref: 354,
+               address: address_new,
+               entities: [Entity.new(title: 'Mr', initials: 'M', name: 'Prior')]
+  Client.new human_ref: human_ref, address: address, entities: entities
 end
 
-def client_create **args
-  client = base_client args
+def client_create(
+  human_ref: 354,
+  address: address_new,
+  entities: [Entity.new(title: 'Mr', initials: 'M', name: 'Prior')])
+  client = Client.new human_ref: human_ref, address: address, entities: entities
   client.save!
-  client
-end
-
-def entitiless_client_create **args
-  client = entitless_base_client args
-  client.save!
-  client
-end
-
-private
-
-def base_client **args
-  client = Client.new client_attributes args
-  client.build_address address_attributes args.fetch(:address_attributes, {})
-  client.entities.build person_entity_attributes
-  client
-end
-
-def entitless_base_client **args
-  client = Client.new client_attributes args
-  client.build_address address_attributes args.fetch(:address_attributes, {})
   client
 end
