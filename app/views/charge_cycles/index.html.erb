@@ -24,8 +24,12 @@
          <div class='col-1-6 inherit-row'>
        <%= charge_cycle.order %>
       </div>
-         <div class='col-1-6 inherit-row r-align'>
-       <%= charge_cycle.period_type %>
+      <div class='col-1-6 inherit-row r-align'>
+        <% if charge_cycle.period_type == 'monthly' %>
+          monthly
+        <% else %>
+          &nbsp;
+        <% end %>
       </div>
             <nav class='col-1-6 no-print r-align'>
         <%= link_to fa_icon('edit lg'), edit_charge_cycle_path(charge_cycle), title: 'Edit', class: 'r-pad icon-large' %>
