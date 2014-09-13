@@ -31,15 +31,19 @@ describe Client, type: :model do
 
   describe '#search', :search do
     before(:each) do
-      client_create human_ref: '8008'
+      client_create \
+        human_ref: '8008',
+        entities: [Entity.new(title: 'Mr', initials: 'I', name: 'Bell')],
+        address: address_new(house_name: 'Hill', road: 'Edge', town: 'Birm')
+
       Client.import force: true, refresh: true
     end
     after(:each) { Client.__elasticsearch__.delete_index! }
 
-    it('human id') { expect(Client.search('8008').results.total).to eq 1 }
-    it('names') { expect(Client.search('Grac').results.total).to eq 1 }
-    it('house') { expect(Client.search('Hil').results.total).to eq 1 }
-    it('roads') { expect(Client.search('Edg').results.total).to eq 1 }
-    it('towns') { expect(Client.search('Bir').results.total).to eq 1 }
+    it('finds human_id') { expect(Client.search('8008').results.total).to eq 1 }
+    it('finds names') { expect(Client.search('Bell').results.total).to eq 1 }
+    it('finds houses') { expect(Client.search('Hil').results.total).to eq 1 }
+    it('finds roads') { expect(Client.search('Edg').results.total).to eq 1 }
+    it('finds towns') { expect(Client.search('Bir').results.total).to eq 1 }
   end
 end

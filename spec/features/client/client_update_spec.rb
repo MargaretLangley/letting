@@ -22,10 +22,7 @@ describe Client, type: :feature do
 
   context 'with one entity' do
     before(:each) do
-      entitiless_client_create \
-        human_ref: 301,
-        entities_attributes: { '0' => orig_person },
-        address_attributes: { town: 'London' }
+      client_create human_ref: 301
       client_page.edit
     end
 
@@ -36,6 +33,7 @@ describe Client, type: :feature do
 
     # Note ** combines keywords (order + amend_person) - splatted into call
     it 'ammends', js: true do
+      client_page.click 'Add district'
       client_page.fill_in_client_id(278)
       client_page.fill_in_entity(order: 0, **amend_person(name: 'Smit'))
       client_page.fill_in_address(address_attributes(town: 'York'))
@@ -77,10 +75,10 @@ describe Client, type: :feature do
 
   context 'with two entity' do
     before(:each) do
-      entitiless_client_create \
+      client_create \
         human_ref: 301,
-        entities_attributes: { '0' => orig_person, '1' => add_person },
-        address_attributes: { town: 'London' }
+        entities: [Entity.new(title: 'Mr', initials: 'I', name: 'Bell'),
+                   Entity.new(title: 'Mr', initials: 'M', name: 'Prior')]
       client_page.edit
     end
 

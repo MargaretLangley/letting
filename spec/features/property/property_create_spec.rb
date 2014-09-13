@@ -6,7 +6,7 @@ describe Property, type: :feature do
 
   before(:each) do
     log_in
-    client_create
+    client_create human_ref: 8008
   end
 
   it 'opens valid page', js: true  do
@@ -19,10 +19,10 @@ describe Property, type: :feature do
     cycle_charged_in_create id: 1, charge_cycle_id: 1, charged_in_id: 1
     charge = charge_create charged_in: charged_in_create(id: 1, name: 'Arrears')
     account.new
-    fill_in_account property_ref: 278, client_ref: '8008', charge: charge
+    fill_in_account property_ref: 278, client_ref: 8008, charge: charge
     fill_in_agent
     account.button('Create').successful?(self).edit
-    expect_account property_ref: '278', client_ref: '8008', charge: charge
+    expect_account property_ref: '278', client_ref: 8008, charge: charge
     expect_agent
   end
 
@@ -35,12 +35,12 @@ describe Property, type: :feature do
                     charge: charge
 
     account.button('Create').successful?(self).edit
-    expect_account property_ref: '278', client_ref: '8008', charge: charge
+    expect_account property_ref: '278', client_ref: 8008, charge: charge
   end
 
   it '#create has validation', js: true do
     account.new
-    account.property(self, property_id: '-278', client_id: '8008')
+    account.property(self, property_id: '-278', client_id: 8008)
     account.button 'Create'
     expect(page.title).to eq 'Letting - New Account'
     expect(page).to have_text 'The property could not be saved.'
