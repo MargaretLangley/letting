@@ -52,10 +52,6 @@
 
       <%= f.fields_for :due_ons do |builder| %>
 
-        <div class='col-3-8 grid-row'>
-          &nbsp;
-        </div>
-
         <div class='col-1-8'>
           <%= builder.text_field :day, class: 'r-align' %>
           <%= builder.hidden_field :month, value: -1 %>
