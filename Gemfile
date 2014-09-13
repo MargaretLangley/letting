@@ -48,9 +48,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem "font-awesome-rails"
 
 # Search Gems
-gem 'elasticsearch', '~> 1.0.0'
-gem 'elasticsearch-model', '~> 0.1.4'
-gem 'elasticsearch-rails', '~> 0.1.4'
+gem 'elasticsearch', '~> 1.0.5'
+gem 'elasticsearch-model', '~> 0.1.5'
+gem 'elasticsearch-rails', '~> 0.1.5'
 # Create es test node
 gem 'elasticsearch-extensions', group: :test
 
