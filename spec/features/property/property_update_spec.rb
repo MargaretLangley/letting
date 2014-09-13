@@ -98,7 +98,7 @@ describe 'Account Update', type: :feature do
       client = client_create
       agent = agent_new entities: [Entity.new(name: 'Willis')],
                         address: address_new(road: 'Wiggiton')
-      property_create agent: agent, client: client
+      property_create account: account_new, agent: agent, client: client
       account.edit
     end
 

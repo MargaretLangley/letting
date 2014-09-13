@@ -23,6 +23,11 @@ class PaymentsController < ApplicationController
                         .page(params[:page])
   end
 
+  def show
+    @payment = PaymentDecorator.new Payment.find params[:id]
+    @payment.negate
+  end
+
   def new
     prepare_for_new_action account_id: params[:id]
   end

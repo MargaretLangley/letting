@@ -18,10 +18,13 @@ describe 'Search index', type: :feature do
 
     it 'indexes full-text search' do
       property_create human_ref: 111,
+                      account: account_new(id: 5),
                       address_attributes: { county: 'Worcester' }
       property_create human_ref: 222,
+                      account: account_new(id: 6),
                       address_attributes: { county: 'West Midlands' }
       property_create human_ref: 333,
+                      account: account_new(id: 7),
                       address_attributes: { county: 'West Midlands' }
       Property.import force: true, refresh: true
       visit '/properties'
@@ -35,6 +38,7 @@ describe 'Search index', type: :feature do
 
     it 'handles multiple requests' do
       property_create human_ref: 111,
+                      account: account_new,
                       address_attributes: { county: 'Worcester' }
       Property.import force: true, refresh: true
       visit '/properties'
@@ -47,7 +51,7 @@ describe 'Search index', type: :feature do
     end
 
     it 'empty search returns a default result set' do
-      property_create human_ref: 111
+      property_create human_ref: 111, account: account_new
       Property.import force: true, refresh: true
       visit '/properties'
       fill_in 'search_terms', with: ''
@@ -57,7 +61,7 @@ describe 'Search index', type: :feature do
     end
 
     it 'search not found when absent' do
-      property_create human_ref: 111
+      property_create human_ref: 111, account: account_new
       Property.import force: true, refresh: true
       visit '/properties'
       fill_in 'search_terms', with: '599'

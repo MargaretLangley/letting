@@ -1,0 +1,30 @@
+<hr/>
+<h2>Payment Received</h2>
+<div class="grid">
+  <div class="col-6-24 grid-header">
+    Type
+  </div>
+  <div class="col-9-24 grid-header">
+    Booked On
+  </div>
+  <div class="col-1-24 grid-header pick-out">
+    &nbsp;
+  </div>
+  <div class="col-8-24 grid-header pick-out">
+    Payment Amount
+  </div>
+
+  <div class="col-6-24 cell">
+    Cheque
+  </div>
+  <div class="col-9-24 cell">
+    <%= l payment.booked_on, format: :human %>
+  </div>
+  <div class="col-1-24 cell pick-out">
+    &nbsp;
+  </div>
+  <div class="col-8-24 cell pick-out">
+    <h1><%= fa_icon('certificate') %>&nbsp;Paid</h1>
+    &nbsp; <%= text_field_tag 'Paid','Paid' %>
+  </div>
+</div>

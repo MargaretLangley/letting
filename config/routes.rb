@@ -21,8 +21,7 @@ Letting::Application.routes.draw do
 
   resources :charge_cycles
 
-  resources :payments,
-            only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :payments
   resources :invoices, only: [:index, :show]
   resources :sheets
 end

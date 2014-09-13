@@ -8,9 +8,9 @@ describe Property, type: :feature do
   context '#index' do
 
     it 'basic' do
-      property_create human_ref: 111
-      property_create human_ref: 222
-      property_create human_ref: 333
+      property_create human_ref: 111, account: account_new(id: 4)
+      property_create human_ref: 222, account: account_new(id: 5)
+      property_create human_ref: 333, account: account_new(id: 6)
 
       visit '/properties/'
       # shows more than one row

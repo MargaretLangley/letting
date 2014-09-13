@@ -1,0 +1,26 @@
+<% @title='View Payment' %>
+<% payment = @payment %>
+<fieldset id='payment' class='shell'>
+  <div class='overlay-parent'>
+    <div class='grid'>
+      <div class='col-3-12'>
+        <h2>Property</h2>
+        <h1>ID: <%= payment.human_ref %></h1>
+      </div>
+      <div class='col-6-12'>
+        <br>
+        <br>
+          <%= render 'payments/form/address', property: payment.property_decorator %>
+      </div>
+      <div class='col-3-12'>
+        <%= link_to fa_icon('edit 2x'), edit_payment_path(@payment.id), class: 'simple-button float-right', title: 'Edit' %>
+        <%= link_to fa_icon('gbp 2x'), new_payment_path(id: payment.account.id), title: 'Add New Payment', class: 'simple-button float-right r-pad' %>
+      </div>
+    </div>
+    <%= render 'payments/show/payment_received', payment: payment  %>
+    <div class="grid js-totalizer">
+      <%= render 'payments/show/credits', payment: payment  %>
+      <%= render 'payments/show/total', payment: payment %>
+    </div>
+  </div>
+</fieldset>

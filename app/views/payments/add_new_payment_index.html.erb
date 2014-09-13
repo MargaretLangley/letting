@@ -1,21 +1,6 @@
 <% @title='Payments' %>
 <div class='grid shell'>
-  <div class='no-print'>
-
-    <%= form_tag payments_path, method: 'get' do %>
-      <div class='col-3-12 vertical-spacer'>
-        Payments booked on:
-      </div>
-      <div class='col-5-12 vertical-spacer'>
-        <%= date_field_tag :payment_search, params[:payment_search], autofocus: true, class: 'width-3-4' %>
-        <button type="submit" class='width-1-6' id = 'payment-search' title = 'Payment Search' ><i class= 'fa fa-search fa-lg'></i></button>
-      </div>
-      <div class='col-4-12 vertical-spacer'>
-        &nbsp;
-      </div>
-    <% end %>
-  </div>
-  <p>&nbsp;</p>
+  <h2>New Payment</h2>
 
   <div class='grid-row col-2-24 vertical-spacer grid-header r-align'>
     Account
@@ -40,7 +25,7 @@
     decorate_payments.to_a.each do |payment|
       payment_dec = PaymentIndexDecorator.new payment
       %>
-  <div class='table-row' data-link='<%= payment_path(payment.id) %>'>
+  <div class='table-row' data-link='<%= new_payment_path(id: payment.account.id) %>'>
     <div class='col-2-24 vertical-spacer inherit-row grid-row r-align'>
        <%= payment_dec.property_ref %>
     </div>
@@ -58,9 +43,8 @@
     </div>
   </div>
   <div class='col-4-24 vertical-spacer r-align'>
-    <%= link_to fa_icon('gbp lg'), new_payment_path(id: payment.account.id), title: 'Add New Payment', class: 'r-pad' %>
+    <%= link_to fa_icon('gbp lg'), new_payment_path(id: payment.account.id), title: 'Add New Payment', class: 'simple-button r-pad' %>
     <%= link_to fa_icon('edit lg'), edit_payment_path(payment), title: 'Edit', class: 'r-pad' %>
-    <%= link_to fa_icon('trash-o lg'), payment, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete', class: 'r-pad' %>
   </div>
 <% end %>
 

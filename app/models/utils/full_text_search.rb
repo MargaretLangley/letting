@@ -45,7 +45,9 @@ class FullTextSearch
         success = false
         records = Payment.all
       end
-      { success: success, records: records, render: 'payments/index' }
+      { success: success,
+        records: records,
+        render: 'payments/add_new_payment_index' }
     else
       success = true
       records = Property.search(@query).records

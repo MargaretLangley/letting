@@ -43,7 +43,7 @@
       <div class='col-2-24 vertical-spacer r-align inherit-row'>
        <%= format_empty_string_as_dash property.address.flat_no %>
       </div>
-      <div class='col-3-24 vertical-spacer inherit-row'>
+      <div class='col-2-24 vertical-spacer inherit-row'>
        <%= format_empty_string_as_dash property.address.house_name %>
        <%= link_to '.', property_path(property.id), class: 'view-testing-link' %>
       </div>
@@ -57,8 +57,9 @@
       <%= property.address.town %>
       </div>
     </div>
-    <div class='col-2-24 vertical-spacer no-print r-align'>
+    <div class='col-3-24 vertical-spacer no-print r-align'>
       <% if show_actions %>
+      <%= link_to fa_icon('gbp'), new_payment_path(id: property.account.id), title: 'Add New Payment', class: 'simple-button r-pad' %>&nbsp;
       <%= link_to fa_icon('edit lg'), edit_property_path(property.id), title: 'Edit', class: 'r-pad' %>
       <%= link_to fa_icon('trash-o lg'), property, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete', class: 'l-pad' %>
       <% end %>

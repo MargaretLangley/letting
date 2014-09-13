@@ -40,7 +40,7 @@ describe FullTextSearch, type: :model do
       results = FullTextSearch.search(type: 'Payment', query: '40.35').go
       expect(results[:success]).to eq true
       expect(results[:records].first.amount).to eq 40.35
-      expect(results[:render]).to eq 'payments/index'
+      expect(results[:render]).to eq 'payments/add_new_payment_index'
       Payment.__elasticsearch__.delete_index!
     end
   end
