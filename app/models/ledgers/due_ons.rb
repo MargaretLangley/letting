@@ -18,7 +18,8 @@
 #
 # If a charge happens on a few dates in the year you use a number of OnDates
 # If a charge occurs on each month then you use a PerDate. To create PerMonth
-# DueOns we pass a dueon with a Day 1-31 and Month -1 (DueOn::PerDate)
+# DueOns we pass a dueon with a Day 1-31 and Month -1 (DueOn::PerDate) via the
+# default in a hidden field.
 #
 # As long as this is different from the current due on we delete
 # all the other DueOns in the collection (including the PerMonth DueOn)

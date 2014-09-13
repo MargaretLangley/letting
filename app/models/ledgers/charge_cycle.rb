@@ -27,10 +27,6 @@ class ChargeCycle < ActiveRecord::Base
 
   delegate :clear_up_form, to: :due_ons
 
-  after_initialize do
-    self.period_type ||= 'term'
-  end
-
   def prepare
     due_ons.prepare type: period_type
   end

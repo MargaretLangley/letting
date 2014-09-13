@@ -12,15 +12,6 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
     end
   end
 
-  describe 'initializes' do
-    it 'sets nil period_type to term' do
-      expect(charge_cycle_new(period_type: nil).period_type).to eq 'term'
-    end
-    it 'leaves a defined period_type intact' do
-      expect(charge_cycle_new(period_type: 'monthly').period_type).to eq 'monthly'
-    end
-  end
-
   describe '#due_between?' do
     before(:each) { Timecop.travel Date.new(2013, 1, 31) }
     after(:each)  { Timecop.return }
