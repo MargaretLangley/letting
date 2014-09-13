@@ -5,12 +5,6 @@ describe 'Account Factory' do
   describe 'new' do
     describe 'default' do
       it('is valid') { expect(account_new).to be_valid }
-      it('no id') { expect(account_new.id).to eq 1 }
-      it('change id') { expect(account_new(id: 2).id).to eq 2 }
-      it('has property') { expect(account_new.property_id).to eq 1 }
-      it 'change property' do
-        expect(account_new(property_id: 2).property_id).to eq 2
-      end
       it('has no charge') { expect(Charge.count).to eq 0 }
     end
     describe 'adds' do

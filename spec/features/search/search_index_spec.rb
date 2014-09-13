@@ -6,9 +6,9 @@ describe 'Search index', type: :feature do
   describe 'index', :search do
     it 'visits literal matches' do
       property_create human_ref: 111,
-                      account: account_new(id: 1, charge: charge_new)
+                      account: account_new(charge: charge_new)
       property_create human_ref: 222,
-                      account: account_new(id: 2, charge: charge_new)
+                      account: account_new(charge: charge_new)
       visit '/properties'
       fill_in 'search_terms', with: '222'
       click_on 'search'
@@ -18,13 +18,13 @@ describe 'Search index', type: :feature do
 
     it 'indexes full-text search' do
       property_create human_ref: 111,
-                      account: account_new(id: 5),
+                      account: account_new,
                       address_attributes: { county: 'Worcester' }
       property_create human_ref: 222,
-                      account: account_new(id: 6),
+                      account: account_new,
                       address_attributes: { county: 'West Midlands' }
       property_create human_ref: 333,
-                      account: account_new(id: 7),
+                      account: account_new,
                       address_attributes: { county: 'West Midlands' }
       Property.import force: true, refresh: true
       visit '/properties'

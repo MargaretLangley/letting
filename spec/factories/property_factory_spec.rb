@@ -21,8 +21,7 @@ describe 'Property Factory' do
     end
     describe 'adds' do
       it 'can add account' do
-        property = property_new account: account_new(id: 70)
-        expect(property.account.id).to eq 70
+        expect(property_new(account: account_new).account).to_not be_nil
       end
 
       it 'can add agent' do
@@ -51,8 +50,8 @@ describe 'Property Factory' do
 
     describe 'adds' do
       it 'can add account' do
-        property_create(account: account_new(id: 71))
-        expect(Property.first.account.id).to eq 71
+        expect { property_create account: account_new }
+          .to change(Account, :count).by(1)
       end
 
       it 'can add agent' do

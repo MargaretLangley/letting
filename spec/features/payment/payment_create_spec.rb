@@ -6,8 +6,9 @@ describe Payment, :payment, type: :feature do
   before(:each) { log_in }
 
   it 'payment for debit', js: true do
-    payment_create # required for unknown_property message
-    property_create account: account_new(charge: charge_new, debit: debit_new)
+    property_create account: account_new(payment: payment_new,
+                                         charge: charge_new,
+                                         debit: debit_new)
     payment_page.visit_new
     payment_page.human_ref('2002').search
     expect(payment_page).to_not be_empty_search
@@ -19,9 +20,10 @@ describe Payment, :payment, type: :feature do
   end
 
   it 'displays form errors' do
-    payment_create
     property_create human_ref: '2002',
-                    account: account_new(charge: charge_new, debit: debit_new)
+                    account: account_new(payment: payment_new,
+                                         charge: charge_new,
+                                         debit: debit_new)
     payment_page.visit_new
 
     payment_page.human_ref('2002').search

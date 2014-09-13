@@ -88,9 +88,9 @@ module DB
 
       it 'parses' do
         property_create human_ref: 122,
-                        account: account_new(id: 1, charge: charge_new)
+                        account: account_new(charge: charge_new)
         property_create human_ref: 123,
-                        account: account_new(id: 2, charge: charge_new)
+                        account: account_new(charge: charge_new)
         expect { import_account two_properties }.to change(Credit, :count).by 2
         expect(Debit.all.size).to eq(2)
         expect(Property.find_by!(human_ref: 122).account.credits.size)

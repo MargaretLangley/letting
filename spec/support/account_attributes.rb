@@ -1,10 +1,3 @@
-def account_attributes **overrides
-  {
-    id: 1,
-    property_id: 1,
-  }.merge overrides
-end
-
 def chargeable_attributes **overrides
   {
     charge_id: 1,
