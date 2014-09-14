@@ -1,37 +1,38 @@
-def property_new account: nil,
-                 agent: nil,
-                 client: nil,
-                 prepare: false,
-                 **args
-  property = base_property prepare, args
-  add_no_agent property
-  property.account = account if account
-  property.agent = agent if agent
-  property.client = client if client
-  property
-end
+# rubocop: disable Style/MethodLength
+# rubocop: disable Style/ParameterLists
 
-def property_create account: nil,
-                    agent: nil,
-                    client: nil,
-                    **args
-  (property = property_new(account: account,
-                           agent: agent,
-                           client: client,
-                           **args)).save!
-  property
-end
-
-private
-
-def base_property  prepare, **args
-  property = Property.new property_attributes args
+def property_new \
+    human_ref: 2002,
+    occupiers: [Entity.new(title: 'Mr', initials: 'W G', name: 'Grace')],
+    address: address_new,
+    account: nil,
+    agent: nil,
+    prepare: false
+  property = Property.new human_ref: human_ref
   property.prepare_for_form if prepare
-  property.build_address address_attributes args.fetch(:address_attributes, {})
-  property.entities.build person_entity_attributes
+  property.address = address
+  property.entities = occupiers if occupiers
+  property.account = account if account
+  property.build_agent authorized: false
+  property.agent = agent if agent
   property
 end
 
-def add_no_agent bill_me
-  bill_me.build_agent authorized: false
+def property_create \
+  id: nil,
+  human_ref: 2002,
+  occupiers: [Entity.new(title: 'Mr', initials: 'W G', name: 'Grace')],
+  address: address_new,
+  account: nil,
+  agent: nil,
+  prepare: false
+  property = property_new human_ref: human_ref,
+                          occupiers: occupiers,
+                          address: address,
+                          account: account,
+                          agent: agent,
+                          prepare: prepare
+  property.id = id if id
+  property.save!
+  property
 end

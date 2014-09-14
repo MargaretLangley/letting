@@ -23,9 +23,6 @@ describe Property, type: :feature do
 
     def expect_index_address
       [
-        '47',             # Flat No
-        'Hillbank House', # House Name
-        '294',            # House No
         'Edgbaston Road', # Road
         'Birmingham'      # Town
       ].each do |line|

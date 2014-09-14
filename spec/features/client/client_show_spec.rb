@@ -30,7 +30,7 @@ describe Client, type: :feature do
 
   def expect_client_address
     expect(page).to have_text '8008'
-    expect_address_edgbaston
+    expect(page).to have_text 'Edgbaston'
   end
 
   def expect_client_entity
@@ -41,28 +41,5 @@ describe Client, type: :feature do
 
   def expect_property
     expect(page).to have_text '2002'
-  end
-
-  def expect_address_edgbaston
-    expect_index_address
-    [
-      'Edgbaston',      # district
-      'West Midlands',  # county
-      'B5 7QU'          # postcode
-    ].each do |line|
-      expect(page).to have_text line
-    end
-  end
-
-  def expect_index_address
-    [
-      '47',             # Flat No
-      'Hillbank House', # House Name
-      '294',            # House No
-      'Edgbaston Road', # Road
-      'Birmingham'      # Town
-    ].each do |line|
-      expect(page).to have_text line
-    end
   end
 end

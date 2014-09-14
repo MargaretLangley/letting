@@ -18,7 +18,7 @@ class Property < ActiveRecord::Base
   has_one :agent, dependent: :destroy, inverse_of: :property
   accepts_nested_attributes_for :agent, allow_destroy: true
 
-  validates :human_ref, :client_id, numericality: true
+  validates :human_ref, numericality: true
   validates :human_ref, uniqueness: true
   validates :entities, presence: true
   before_validation :clear_up_form

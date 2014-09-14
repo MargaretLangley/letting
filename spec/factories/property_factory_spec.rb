@@ -9,14 +9,13 @@ describe 'Property Factory' do
     end
 
     describe 'overrides' do
-      it('alters id') { expect(property_new(id: 2).id).to eq 2 }
       it 'alters human_ref' do
         expect(property_new(human_ref: 8).human_ref).to eq 8
       end
       it 'alters address' do
         property = property_new human_ref: 3001,
-                                address_attributes: { road: 'Headingly Road' }
-        expect(property.address.road).to eq 'Headingly Road'
+                                address: address_new(road: 'Hill')
+        expect(property.address.road).to eq 'Hill'
       end
     end
     describe 'adds' do
@@ -28,15 +27,12 @@ describe 'Property Factory' do
         property = property_new agent: agent_new
         expect(property.agent.full_name).to eq 'Mr W. G. Grace'
       end
-
-      it 'can add client' do
-        property = property_new client: client_create(human_ref: 202)
-        expect(property.client.human_ref).to eq 202
-      end
     end
   end
 
   describe 'create' do
+    it('alters id') { expect(property_create(id: 2).id).to eq 2 }
+
     describe 'default' do
       it('is created') { expect(property_create).to be_valid }
       it('has human_ref') { expect(property_create.human_ref).to eq 2002 }
@@ -57,11 +53,6 @@ describe 'Property Factory' do
       it 'can add agent' do
         property_create agent: agent_new
         expect(Property.first.agent.entities.full_name).to eq 'Mr W. G. Grace'
-      end
-
-      it 'can add client' do
-        property_create client: client_create(human_ref: 202)
-        expect(Property.first.client.human_ref).to eq 202
       end
     end
   end

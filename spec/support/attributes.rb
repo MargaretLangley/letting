@@ -2,13 +2,6 @@
 #
 # rubocop: disable Style/MethodLength
 
-def property_attributes **overrides
-  {
-    human_ref: 2002,
-    client_id: 8989,
-  }.merge overrides
-end
-
 def agent_attributes **overrides
   {
     authorized: true,
@@ -16,35 +9,10 @@ def agent_attributes **overrides
   }.merge overrides
 end
 
-def client_attributes **overrides
-  {
-    human_ref: 8008,
-  }.merge overrides
-end
-
-def min_address_attributes **overrides
-  {
-    road:     'Edgbaston Road',
-    town:     'Birmingham',
-    county:   'West Midlands',
-  }.merge overrides
-end
-
 def address_attributes **overrides
   {
     flat_no:  '47',
     house_name: 'Hillbank House',
-    road_no:  '294',
-    road:     'Edgbaston Road',
-    district: 'Edgbaston',
-    town:     'Birmingham',
-    county:   'West Midlands',
-    postcode: 'B5 7QU'
-  }.merge overrides
-end
-
-def house_address_attributes **overrides
-  {
     road_no:  '294',
     road:     'Edgbaston Road',
     district: 'Edgbaston',

@@ -19,13 +19,13 @@ describe 'Search index', type: :feature do
     it 'indexes full-text search' do
       property_create human_ref: 111,
                       account: account_new,
-                      address_attributes: { county: 'Worcester' }
+                      address: address_new(county: 'Worcester')
       property_create human_ref: 222,
                       account: account_new,
-                      address_attributes: { county: 'West Midlands' }
+                      address: address_new(county: 'West Midlands')
       property_create human_ref: 333,
                       account: account_new,
-                      address_attributes: { county: 'West Midlands' }
+                      address: address_new(county: 'West Midlands')
       Property.import force: true, refresh: true
       visit '/properties'
       fill_in 'search_terms', with: 'Wes'
@@ -39,7 +39,7 @@ describe 'Search index', type: :feature do
     it 'handles multiple requests' do
       property_create human_ref: 111,
                       account: account_new,
-                      address_attributes: { county: 'Worcester' }
+                      address: address_new(county: 'Worcester')
       Property.import force: true, refresh: true
       visit '/properties'
       fill_in 'search_terms', with: 'Wor'

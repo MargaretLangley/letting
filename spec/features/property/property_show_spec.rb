@@ -19,7 +19,7 @@ describe Property, type: :feature do
   def expect_property entity: entity
     expect(page).to have_text entity
     expect(page).to have_text '1000'
-    expect_address_edgbaston
+    expect(page).to have_text 'Edgbaston'
   end
 
   def expect_agent_info entity: entity, road: road
@@ -37,8 +37,8 @@ describe Property, type: :feature do
   end
 
   it 'shows charges as dormant' do
-    charge = charge_create(dormant: true)
-    property_create id: 1, account: account_new(charge: charge)
+    property_create id: 1,
+                    account: account_new(charge: charge_new(dormant: true))
     visit '/properties/1'
     expect(page).to have_css '.dormant'
   end
@@ -55,28 +55,5 @@ describe Property, type: :feature do
     visit '/properties/1'
     first(:link, 'Edit').click
     expect(page.title).to eq 'Letting - Edit Account'
-  end
-
-  def expect_address_edgbaston
-    expect_index_address
-    [
-      'Edgbaston',      # district
-      'West Midlands',  # county
-      'B5 7QU'          # postcode
-    ].each do |line|
-      expect(page).to have_text line
-    end
-  end
-
-  def expect_index_address
-    [
-      '47',             # Flat No
-      'Hillbank House', # House Name
-      '294',            # House No
-      'Edgbaston Road', # Road
-      'Birmingham'      # Town
-    ].each do |line|
-      expect(page).to have_text line
-    end
   end
 end

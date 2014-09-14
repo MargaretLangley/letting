@@ -1,69 +1,41 @@
 require 'rails_helper'
 
 describe Property, type: :model do
-
-  let(:property) { property_new }
-  it('is valid') { expect(property).to be_valid }
+  it('is valid') { expect(property_new).to be_valid }
 
   describe 'validations' do
-    describe 'human_ref' do
-
-      it 'is present' do
-        property.human_ref = nil
-        expect(property).to_not be_valid
-      end
-
-      it 'is a number' do
-        property.human_ref = 'Not numbers'
-        expect(property).to_not be_valid
-      end
-
-      it '#human_ref is unique' do
+    describe '#human_ref' do
+      it('is present') { expect(property_new(human_ref: nil)).to_not be_valid }
+      it('is a number') { expect(property_new(human_ref: 'n')).to_not be_valid }
+      it 'is unique' do
         property_create human_ref: 8000
         expect { property_create human_ref: 8000 }
           .to raise_error ActiveRecord::RecordInvalid
       end
     end
-
-    describe 'client_id' do
-      it('required') do
-        property.client_id = nil
-        expect(property).to_not be_valid
-      end
-
-      it '#numeric' do
-        property.client_id = 'Not numbers'
-        expect(property).to_not be_valid
-      end
-    end
   end
 
   describe 'Methods' do
-
     describe '#bill_to' do
-      let(:property) { property_new }
-
-      it 'property with no agent' do
+      it 'invoices the property without an agent' do
+        property = property_new
         expect(property.bill_to).to eq property
       end
 
-      it 'agent when using it' do
-        property.agent.authorized = true
+      it 'invoices agent when available' do
+        (property = property_new).agent.authorized = true
         expect(property.bill_to).to eq property.agent
       end
     end
   end
 
   describe 'search', :search do
-
     before :each do
-      property_create
+      property_create address: address_new(house_name: 'Hill')
       Property.import force: true, refresh: true
     end
 
-    after :each do
-      Property.__elasticsearch__.delete_index!
-    end
+    after(:each) { Property.__elasticsearch__.delete_index! }
 
     describe '.search' do
       it('human id') { expect(Property.search('2002').results.total).to eq 1 }
