@@ -3,10 +3,9 @@ require 'rails_helper'
 describe ChargeCycle, type: :feature do
 
   before(:each) do
-    log_in
+    log_in admin_attributes
     charge_cycle_create id: 1, name: 'Jan/July', order: 6, period_type: 'term'
   end
-
   context '#index' do
 
     it 'basic' do

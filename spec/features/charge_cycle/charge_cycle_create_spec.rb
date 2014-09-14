@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe ChargeCycle, type: :feature do
+
   before(:each) { log_in admin_attributes }
 
   it 'creates a charge cycle' do
