@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Sheet, type: :feature do
 
   before(:each) do
-    log_in
+    log_in admin_attributes
     sheet_create id: 1,
                  description: 'Page 1 Invoice',
                  invoice_name: 'Bell',

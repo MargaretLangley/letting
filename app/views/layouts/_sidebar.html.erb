@@ -11,10 +11,16 @@
 
     <li class="<%= main_menu_active? "clients" %>"><%= link_to 'Clients', clients_path %></li>
     <li class="active-subnav <%= sub_menu_folded? 'clients' %>"><%= link_to 'New Client', new_client_path %></li>
+
     <li class="<%= main_menu_active? 'debit_generators' %>"><%= link_to 'Invoices', debit_generators_path %></li>
     <li class="active-subnav <%= sub_menu_folded? 'debit_generators' %>"><%= link_to 'New Invoice', new_debit_generator_path %></li>
+
+ <% if allow? "users", "" %>
     <li class="active-subnav <%= sub_menu_folded? 'debit_generators' %>"><%= link_to 'Text Update', sheets_path %></li>
+
    <li class="active-subnav <%= sub_menu_folded? 'sheets' %>"><%= link_to 'Text Update', sheets_path %></li>
+    <% end %>
+
     <li class="<%= main_menu_active? "payments" %>"><%= link_to 'New Payment', new_payment_path %></li>
     <li class="active-subnav <%= sub_menu_folded? 'payments' %>"><%= link_to 'Payments', payments_path %></li>
 

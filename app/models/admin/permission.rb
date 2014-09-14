@@ -44,12 +44,12 @@ class Permission < Struct.new(:user)
        properties
        payments
        search
-       search_suggestions
-       sheets)
+       search_suggestions)
   end
 
   def admin_controllers
     %w(users
-       charge_cycles)
+       charge_cycles
+       sheets)
   end
 end
