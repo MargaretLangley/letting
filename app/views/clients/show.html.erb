@@ -28,7 +28,7 @@
     Address
   </div>
   <div class='col-3-4 vertical-spacer'>
-    <%= render 'shared/address_lines', lines: @client.address.address_lines %>
+    <%= render 'addresses/view', lines: @client.address.address_lines %>
   </div>
   <div class='col-1-1 vertical-spacer faded'>
     Properties Owned
@@ -45,7 +45,7 @@
        <%= property.human_ref %>
     </div>
     <div class='col-7-8 vertical-spacer no-r-pad'>
-     <%= render 'shared/show_1_line_address', addressee: property %>
+     <%= render 'addresses/view_on_one_line', addressee: property %>
     </div>
   <% end %>
 </div>

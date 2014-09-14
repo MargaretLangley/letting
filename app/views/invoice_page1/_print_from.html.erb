@@ -2,8 +2,8 @@
    From:
    <% if object.entities.any? %>
      <% object.entities.each do |entity| %>
-	   <%= render 'shared/show_entity', object: entity %>
+	   <%= render 'entities/view', object: entity %>
 	 <% end %>
-     <%= render 'shared/show_1_line_address', addressee: object.bill_to %>
+     <%= render 'addresses/view_on_one_line', addressee: object.bill_to %>
    <% end %>
 </div>

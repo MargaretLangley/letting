@@ -13,7 +13,7 @@
   To
   <% if object.entities.any? %>
     <% object.entities.each do |entity| %>
-      <%= render 'shared/show_entity', object: entity %>
+      <%= render 'entities/view', object: entity %>
     <% end %>
   <% end %>
 </div>
@@ -25,7 +25,7 @@
 <div class='widemargin'>
   This notice is given in respect of
   <br>
-   <%= render 'shared/address_lines', lines: object.address.address_lines %>
+   <%= render 'addresses/view', lines: object.address.address_lines %>
 </div>
 
 <div class='insert'>
@@ -53,7 +53,7 @@
 <div class='widemargin'>
   This notice is given by <%= object.client.entities.full_name %>
   <br>
-  <%= render 'shared/show_1_line_address', addressee: object.client %>
+  <%= render 'addresses/view_on_one_line', addressee: object.client %>
 </div>
 
 <%= render 'invoice_page2/print_notices_notes',sheet: Sheet.find(2) %>

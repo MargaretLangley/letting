@@ -1,7 +1,7 @@
 <div class='c-align'>
   <%= Sheet.find(1).invoice_name %>
   <br>
-  <%= render 'shared/show_1_line_address', addressee: Sheet.find(1) %>
+  <%= render 'addresses/view_on_one_line', addressee: Sheet.find(1) %>
   <br>
   Tel: <%= Sheet.find(1).phone %>
   <br>

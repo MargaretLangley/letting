@@ -1,0 +1,37 @@
+<div class='js-toggle-selection'>
+  <div class='col-6-24 vertical-spacer grid-header faded no-r-pad'>
+    Title
+  </div>
+  <div class='col-5-24 vertical-spacer grid-header faded no-r-pad'>
+    Initials
+  </div>
+  <div class='col-11-24 vertical-spacer grid-header faded no-r-pad'>
+    Name
+  </div>
+  <div class='col-2-24 vertical-spacer grid-header faded no-r-pad'>
+    Do
+  </div>
+  <% entitieable.entities.each.with_index do |entity, index| %>
+    <%= f.fields_for :entities, entity do |builder| %>
+      <div id='<%= entity_field_id(entitieable, index) %>' class='grid js-toggle-selection <%= "#{hide_new_record_unless_first entity, index} " %>' >
+        <div class='col-6-24 vertical-spacer no-r-pad spec-entity-count'>
+          <%= builder.text_field :title, class: 'js-clear' %>
+        </div>
+
+        <div class='col-5-24 vertical-spacer no-r-pad'>
+          <%= builder.text_field :initials, class: 'js-clear' %>
+        </div>
+        <div class='col-11-24 vertical-spacer no-r-pad'>
+          <%= builder.text_field :name, class: 'js-clear' %>
+        </div>
+        <div class='col-2-24 vertical-spacer'>
+          <%= builder.hidden_field :_destroy %>
+          <%= link_to_if(!first_record?(index), fa_icon('trash-o'), '#', class:"delete-button #{hide_or_destroy entity}", title: 'Delete Person') %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <div class='col-1-1 vertical-spacer'>
+    <%= link_to fa_icon('plus lg'), '#', class: 'js-reveal-link', title: 'Add Person' %>
+  </div>
+</div>

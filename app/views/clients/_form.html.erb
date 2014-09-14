@@ -17,9 +17,9 @@
       </div>
       <div class='col-4-4 vertical-spacer no-r-pad'>
         <hr>
-        <%= render 'shared/entities', f: f, entitieable: client %>
+        <%= render 'entities/form', f: f, entitieable: client %>
         <hr>
-        <%= render 'shared/address', f: f, parent: 'client', address: AddressDecorator.new(client.address) %>
+        <%= render 'addresses/form', f: f, parent: 'client', address: AddressDecorator.new(client.address) %>
       </div>
       <hr>
       <div class='col-1-4 no-print'>
