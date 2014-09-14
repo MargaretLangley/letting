@@ -14,12 +14,12 @@
     </div>
 
     <% @sheets.each do |sheet| %>
-      <div class='table-row' data-link='<%= sheet_path(sheet) %>'>
+      <div class='table-row' data-link='<%= sheet_path(sheet.id) %>'>
 
-      <div class='col-1-4 vertical-spacer grid-row r-align'>
-        <%= link_to sheet.id, sheet_path(sheet) %>
+      <div class='col-1-4 vertical-spacer inherit-row grid-row r-align'>
+        <%= sheet.id %>
       </div>
-      <div class='col-1-4 vertical-spacer'>
+      <div class='col-1-4 vertical-spacer inherit-row'>
        <%= sheet.description %>
       </div>
       <div>
