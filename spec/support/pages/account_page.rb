@@ -63,40 +63,32 @@ class AccountPage
     fill_in "#{id_stem}_name", with: name
   end
 
-  def expect_address(spec, type:, flat_no: '', house_name: '', road_no: '',
-                     road: '', town: '', district: '', county: '', postcode: ''
-                    )
+  def expect_address(spec, type:, address:)
     within type do
-      spec.expect(find_field('Flat no').value).to spec.have_text flat_no
-      spec.expect(find_field('House name').value).to spec.have_text house_name
-      spec.expect(find_field('Road no').value).to spec.have_text road_no
-      spec.expect(find_field('Road').value).to spec.have_text road
-      spec.expect(find_field('Town').value).to spec.have_text town
-      spec.expect(find_field('District').value).to spec.have_text district \
-        if district.present?
-      spec.expect(find_field('County').value).to spec.have_text county
-      spec.expect(find_field('Postcode').value).to spec.have_text postcode
+      spec.expect(find_field('Flat no').value).to spec.have_text address.flat_no
+      spec.expect(find_field('House name').value)
+        .to spec.have_text address.house_name
+      spec.expect(find_field('Road no').value).to spec.have_text address.road_no
+      spec.expect(find_field('Road').value).to spec.have_text address.road
+      spec.expect(find_field('Town').value).to spec.have_text address.town
+      spec.expect(find_field('District').value)
+        .to spec.have_text address.district if address.district.present?
+      spec.expect(find_field('County').value).to spec.have_text address.county
+      spec.expect(find_field('Postcode').value)
+        .to spec.have_text address.postcode
     end
   end
 
-  def address(selector:,
-              flat_no: '',
-              house_name: '',
-              road_no:,
-              road:,
-              town:,
-              district: '',
-              county:,
-              postcode:)
+  def address(selector:, address:)
     within selector do
-      fill_in 'Flat no', with: flat_no
-      fill_in 'House name', with: house_name
-      fill_in 'Road no', with: road_no
-      fill_in 'Road', with: road
-      fill_in 'District', with: district if district.present?
-      fill_in 'Town', with: town
-      fill_in 'County', with: county
-      fill_in 'Postcode', with: postcode
+      fill_in 'Flat no', with: address.flat_no
+      fill_in 'House name', with: address.house_name
+      fill_in 'Road no', with: address.road_no
+      fill_in 'Road', with: address.road
+      fill_in 'District', with: address.district if address.district.present?
+      fill_in 'Town', with: address.town
+      fill_in 'County', with: address.county
+      fill_in 'Postcode', with: address.postcode
     end
   end
 
@@ -122,7 +114,7 @@ class AccountPage
       .to spec.have_text charge.amount
   end
 
-  def successful?(spec)
+  def successful? spec
     spec.expect(page.title).to spec.eq 'Letting - Accounts'
     spec.expect(page).to spec.have_text 'successfully'
     self

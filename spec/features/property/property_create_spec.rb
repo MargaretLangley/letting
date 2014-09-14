@@ -3,11 +3,7 @@ require 'rails_helper'
 describe Property, type: :feature do
 
   let(:account) { AccountPage.new }
-
-  before(:each) do
-    log_in
-    client_create human_ref: 8008
-  end
+  before(:each) { log_in }
 
   it 'opens valid page', js: true  do
     account.new
@@ -16,31 +12,34 @@ describe Property, type: :feature do
   end
 
   it '#create', js: true   do
+    client_create human_ref: 8008
     cycle_charged_in_create id: 1, charge_cycle_id: 1, charged_in_id: 1
     charge = charge_create charged_in: charged_in_create(id: 1, name: 'Arrears')
+
     account.new
     fill_in_account property_ref: 278, client_ref: 8008, charge: charge
-    fill_in_agent
+    fill_in_agent address: address_new
     account.button('Create').successful?(self).edit
     expect_account property_ref: '278', client_ref: 8008, charge: charge
     expect_agent
   end
 
   it '#creates a account without agent', js: true do
+    client_create human_ref: 8008
     cycle_charged_in_create id: 1, charge_cycle_id: 1, charged_in_id: 2
     charge = charge_create charged_in: charged_in_create(id: 2, name: 'Advance')
-    account.new
-    fill_in_account property_ref: 278,
-                    client_ref: '8008',
-                    charge: charge
 
+    account.new
+    fill_in_account property_ref: 278, client_ref: '8008', charge: charge
     account.button('Create').successful?(self).edit
     expect_account property_ref: '278', client_ref: 8008, charge: charge
   end
 
   it '#create has validation', js: true do
+    client_create human_ref: 8008
+
     account.new
-    account.property(self, property_id: '-278', client_id: 8008)
+    account.property self, property_id: '-278', client_id: 8008
     account.button 'Create'
     expect(page.title).to eq 'Letting - New Account'
     expect(page).to have_text 'The property could not be saved.'
@@ -59,20 +58,16 @@ describe Property, type: :feature do
     expect(page).to have_css '[data-role="errors"]'
   end
 
-  def fill_in_account(property_ref:,
-                      client_ref:,
-                      charge:)
-    account.property(self, property_id: property_ref, client_id: client_ref)
-    account.address(selector: '#property_address',
-                    **address_attributes.except(:district))
+  def fill_in_account(property_ref:, client_ref:, charge:)
+    account.property self, property_id: property_ref, client_id: client_ref
+    account.address selector: '#property_address', address: address_new
     account.entity(type: 'property', **person_attributes)
     account.charge charge: charge
   end
 
-  def fill_in_agent
+  def fill_in_agent(address:)
     check 'Agent'
-    account.address(selector: '#agent',
-                    **house_address_attributes.except(:district))
+    account.address selector: '#agent', address: address
     account.entity(type: 'property_agent_attributes', **company_attributes)
   end
 
@@ -80,19 +75,19 @@ describe Property, type: :feature do
     account.expect_property self,
                             property_id: property_ref,
                             client_id: client_ref
-    account.expect_address(self,
+    account.expect_address self,
                            type: '#property_address',
-                           **address_attributes.except(:district))
+                           address: address_new
     account.expect_entity self, type: 'property', **person_attributes
     account.expect_charge self, charge: charge
   end
 
   def expect_agent
-    account.expect_address(self,
+    account.expect_address self,
                            type: '#property_agent_address',
-                           **house_address_attributes.except(:district))
-    account.expect_entity(self,
+                           address: address_new
+    account.expect_entity self,
                           type: 'property_agent_attributes',
-                          **company_attributes)
+                          **company_attributes
   end
 end

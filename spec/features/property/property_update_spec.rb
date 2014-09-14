@@ -16,41 +16,41 @@ describe 'Account Update', type: :feature do
     it 'opens valid page', js: true  do
       account.edit
       expect(page.title).to eq 'Letting - Edit Account'
-      account.expect_property(self, property_id: '8000', client_id: '8008')
-      account.expect_address(self,
+      account.expect_property self, property_id: '8000', client_id: '8008'
+      account.expect_address self,
                              type: '#property_address',
-                             **address_attributes)
-      account.expect_entity(self, type: 'property', **person_attributes)
+                             address: address_new
+      account.expect_entity self, type: 'property', **person_attributes
       # charge?
     end
 
     it 'updates account', js: true do
       account.edit
-      account.property(self, property_id: '8001', client_id: '8008')
-      account.address(selector: '#property_address', **house_address_attributes)
-      account.entity(type: 'property', **company_attributes)
+      account.property self, property_id: '8001', client_id: '8008'
+      account.address selector: '#property_address', address: address_new
+      account.entity type: 'property', **company_attributes
       account.button('Update').successful?(self).edit
-      account.expect_property(self, property_id: '8001', client_id: '8008')
-      account.expect_address(self,
+      account.expect_property self, property_id: '8001', client_id: '8008'
+      account.expect_address self,
                              type: '#property_address',
-                             **house_address_attributes)
-      account.expect_entity(self, type: 'property', **company_attributes)
+                             address: address_new
+      account.expect_entity self, type: 'property', **company_attributes
     end
 
     it 'adds agent', js: true do
       account.edit
       check 'Agent'
-      account.address(selector: '#agent', **nottingham_address)
-      account.entity(type: 'property_agent_attributes', **company_attributes)
+      account.address selector: '#agent', address: address_new
+      account.entity type: 'property_agent_attributes', **company_attributes
 
       account.button('Update').successful?(self).edit
       expect(find_field('Agent')).to be_checked
-      account.expect_address(self,
+      account.expect_address self,
                              type: '#property_agent_address',
-                             **nottingham_address)
-      account.expect_entity(self,
+                             address: address_new
+      account.expect_entity self,
                             type: 'property_agent_attributes',
-                            **company_attributes)
+                            **company_attributes
     end
 
     it 'navigates to accounts view page' do
@@ -104,22 +104,22 @@ describe 'Account Update', type: :feature do
 
     it 'opens property with agent', js: true  do
       expect(find_field('Agent')).to be_checked
-      account.expect_address(self,
+      account.expect_address self,
                              type: '#property_agent_address',
-                             **min_address_attributes(road: 'Wiggiton'))
+                             address: address_new(road: 'Wiggiton')
       account.expect_entity(self,
                             type: 'property_agent_attributes',
                             name: 'Willis')
     end
 
     it 'updates agent' do
-      account.address(selector: '#agent', **nottingham_address)
+      account.address(selector: '#agent', address: address_new)
       account.entity(type: 'property_agent_attributes', **company_attributes)
 
       account.button('Update').successful?(self).edit
-      account.expect_address(self,
+      account.expect_address self,
                              type: '#property_agent_address',
-                             **nottingham_address)
+                             address: address_new
       account.expect_entity(self,
                             type: 'property_agent_attributes',
                             **company_attributes)

@@ -22,15 +22,15 @@ describe Property, type: :feature do
     end
 
     def expect_index_address
-    [
-      '47',             # Flat No
-      'Hillbank House', # House Name
-      '294',            # House No
-      'Edgbaston Road', # Road
-      'Birmingham'      # Town
-    ].each do |line|
-      expect(page).to have_text line
+      [
+        '47',             # Flat No
+        'Hillbank House', # House Name
+        '294',            # House No
+        'Edgbaston Road', # Road
+        'Birmingham'      # Town
+      ].each do |line|
+        expect(page).to have_text line
+      end
     end
-  end
   end
 end

@@ -67,18 +67,6 @@ def oval_address_attributes **overrides
   }.merge overrides
 end
 
-def nottingham_address
-  {
-    flat_no:    '471',
-    house_name: 'Trent Bridge',
-    road_no:    '63c',
-    road:       'Radcliffe Road',
-    town:       'Nottingham',
-    county:     'Notts',
-    postcode:   'NG2 6AG',
-  }
-end
-
 def person_entity_attributes **overrides
   {
     title: 'Mr',
