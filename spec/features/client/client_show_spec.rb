@@ -1,6 +1,4 @@
 require 'rails_helper'
-require_relative '../shared/address'
-require_relative '../shared/entity'
 
 describe Client, type: :feature do
 
@@ -36,11 +34,35 @@ describe Client, type: :feature do
   end
 
   def expect_client_entity
-    expect_entity_wg_grace
+    expect(page).to have_text 'Mr'
+    expect(page).to have_text 'W. G.'
+    expect(page).to have_text 'Grace'
   end
 
   def expect_property
     expect(page).to have_text '2002'
   end
 
+  def expect_address_edgbaston
+    expect_index_address
+    [
+      'Edgbaston',      # district
+      'West Midlands',  # county
+      'B5 7QU'          # postcode
+    ].each do |line|
+      expect(page).to have_text line
+    end
+  end
+
+  def expect_index_address
+    [
+      '47',             # Flat No
+      'Hillbank House', # House Name
+      '294',            # House No
+      'Edgbaston Road', # Road
+      'Birmingham'      # Town
+    ].each do |line|
+      expect(page).to have_text line
+    end
+  end
 end

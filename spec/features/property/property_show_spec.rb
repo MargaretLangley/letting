@@ -1,6 +1,4 @@
 require 'rails_helper'
-require_relative '../shared/address'
-require_relative '../shared/entity'
 
 describe Property, type: :feature do
 
@@ -57,5 +55,28 @@ describe Property, type: :feature do
     visit '/properties/1'
     first(:link, 'Edit').click
     expect(page.title).to eq 'Letting - Edit Account'
+  end
+
+  def expect_address_edgbaston
+    expect_index_address
+    [
+      'Edgbaston',      # district
+      'West Midlands',  # county
+      'B5 7QU'          # postcode
+    ].each do |line|
+      expect(page).to have_text line
+    end
+  end
+
+  def expect_index_address
+    [
+      '47',             # Flat No
+      'Hillbank House', # House Name
+      '294',            # House No
+      'Edgbaston Road', # Road
+      'Birmingham'      # Town
+    ].each do |line|
+      expect(page).to have_text line
+    end
   end
 end
