@@ -24,13 +24,25 @@ describe 'Client Factory' do
         address = address_new road: 'High St'
         expect(client_new(address: address).address.road).to eq 'High St'
       end
+
+      it 'properties' do
+        expect(client_new(property: property_new).properties.first.human_ref)
+          .to eq 2002
+      end
     end
   end
 
   describe 'create' do
-    context 'default' do
+    describe 'default' do
       it 'is created' do
         expect { client_create }.to change(Client, :count).by(1)
+      end
+    end
+
+    describe 'adds' do
+      it 'properties' do
+        expect { client_create property: property_new }
+          .to change(Property, :count).by(1)
       end
     end
   end
