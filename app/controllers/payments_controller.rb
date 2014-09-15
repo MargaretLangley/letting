@@ -40,19 +40,6 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    if search_payments?
-      show_payment
-    else
-      create_payment
-    end
-  end
-
-  def show_payment
-    prepare_for_new_action account_id: nil
-    render :new
-  end
-
-  def create_payment
     @payment = PaymentDecorator
                  .new(Payment.new(payment_params.except(:human_ref)))
     if @payment.save
@@ -62,6 +49,11 @@ class PaymentsController < ApplicationController
       @payment.negate
       render :new
     end
+  end
+
+  def show_payment
+    prepare_for_new_action account_id: nil
+    render :new
   end
 
   def edit
@@ -78,10 +70,6 @@ class PaymentsController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def search_payments?
-    params[:commit] == 'Search'
   end
 
   def destroy
@@ -109,10 +97,6 @@ class PaymentsController < ApplicationController
     "Ref: '#{@payment.account.property.human_ref}' " \
     "Name: '#{@payment.account.property.occupier}' " \
     "Amount: '£#{@payment.amount}'"
-  end
-
-  def search_params
-    params.require(:payment).permit :human_ref
   end
 
   def payment_params
