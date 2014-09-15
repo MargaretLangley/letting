@@ -61,10 +61,10 @@ gem 'unicorn', '~> 4.8.0'
 gem 'rack-dev-mark', '~> 0.6.0'
 
 group :development do
-  gem 'better_errors', '~> 1.1.0'
+  gem 'better_errors', '~> 2.0.0'
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'brakeman', '~>2.6.0', require: false
-  gem 'bullet', '~>4.11.0'
+  gem 'bullet', '~>4.13.0'
   gem 'rails_best_practices', '~>1.15.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -86,16 +86,16 @@ group :development do
 end
 
 group :development, :test do
-  gem 'capybara', '~> 2.3.0'
-  gem 'capybara-webkit', '~>1.2.0'
-  gem 'selenium-webdriver', '~>2.42.0'
+  gem 'capybara', '~> 2.4.0'
+  gem 'capybara-webkit', '~>1.3.0'
+  gem 'selenium-webdriver', '~>2.43.0'
   gem 'guard'
   gem 'guard-livereload'
   gem 'launchy', '~> 2.4.2'
   gem 'pry-rails', '~>0.3.2'
   gem 'rb-readline'
   gem 'pry-stack_explorer', '~>0.4.9.0'
-  gem 'byebug', '~> 3.1.2'
+  gem 'byebug', '~> 3.4.0'
   gem 'rubocop', require: false
   gem 'rack-mini-profiler', '~>0.9.0'
   gem 'rspec-rails', '~> 3.1.0'
