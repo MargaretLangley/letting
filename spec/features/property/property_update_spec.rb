@@ -67,6 +67,14 @@ describe 'Account Update', type: :feature do
       account.button('Update').successful?(self).edit
       account.expect_charge self, charge: charge
     end
+
+    it 'displays form errors' do
+      account.edit
+      account.address selector: '#property_address',
+                      address: address_new(road: '')
+      account.button 'Update'
+      expect(page).to have_css '[data-role="errors"]'
+    end
   end
 
   context 'Agentless with charge' do
