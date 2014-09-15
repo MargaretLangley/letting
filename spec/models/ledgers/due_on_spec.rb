@@ -33,11 +33,6 @@ describe DueOn, :ledgers, type: :model do
   end
 
   describe 'methods' do
-    describe '#monthly?' do
-      it('is certified') { expect(due_on_new day: 25, month: -1).to be_monthly }
-      it('is denied') { expect(due_on_new day: 25, month: 3).to_not be_monthly }
-    end
-
     describe '#between?' do
       before { Timecop.travel Date.new 2013, 1, 31 }
       after { Timecop.return }
@@ -54,38 +49,16 @@ describe DueOn, :ledgers, type: :model do
     end
 
     describe '#clear_up_form' do
-      class DummyDueOns
-        def initialize new: true
-          @new = new
-        end
-
-        def includes_new_monthly?
-          @new
-        end
-      end
       context 'new' do
         it 'saveable when valid' do
           due_on = due_on_new day: 1, month: nil
-          due_on.clear_up_form DummyDueOns.new new: true
+          due_on.clear_up_form
           expect(due_on).to_not be_marked_for_destruction
         end
 
         it 'destroyed when invalid' do
           due_on = due_on_new day: nil, month: nil
-          due_on.clear_up_form DummyDueOns.new new: true
-          expect(due_on).to be_marked_for_destruction
-        end
-      end
-      context 'previously saved' do
-        it 'saved if parent is saved' do
-          due_on = due_on_create day: 1, month: 1
-          due_on.clear_up_form DummyDueOns.new new: false
-          expect(due_on).to_not be_marked_for_destruction
-        end
-
-        it 'destroyed if parent is new' do
-          due_on = due_on_create day: 1, month: 1
-          due_on.clear_up_form DummyDueOns.new new: true
+          due_on.clear_up_form
           expect(due_on).to be_marked_for_destruction
         end
       end

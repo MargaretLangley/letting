@@ -9,10 +9,6 @@
 #
 # The code is part of the charge system in the accounts.
 #
-# The class models charges by either being:
-# ON_DATE: holding a day and month or by holding.
-# PER_MONTH: a day and have it reoccur every month.
-#
 # day - day which the charge becomes due
 # month - month which the charge becomes due
 # year - nil on reocurring due_ons
@@ -37,13 +33,6 @@ class DueOn < ActiveRecord::Base
                                    greater_than: 1990,
                                    less_than: 2030 },
                    allow_nil: true
-  PER_MONTH = -1
-  ON_DATE = 0
-
-  def monthly?
-    month == PER_MONTH
-  end
-
   def between? date_range
     date_range.cover? make_date
   end
@@ -52,9 +41,8 @@ class DueOn < ActiveRecord::Base
     Date.new charge_year, month, day
   end
 
-  def clear_up_form due_ons
+  def clear_up_form
     mark_for_destruction if empty?
-    mark_for_destruction if self.persisted? && due_ons.includes_new_monthly?
   end
 
   def empty?

@@ -30,23 +30,7 @@ class DueOnsDecorator
     @source.to_a.take(DueOns::MAX_DISPLAYED_DUE_ONS)
   end
 
-  def per_month
-    if monthly?
-      DueOn.new day: first_day_or_empty, month: DueOn::PER_MONTH
-    else
-      DueOn.new day: '', month: ''
-    end
-  end
-
   def first_day_or_empty
     @source.first.present? ? @source.first.day : ''
-  end
-
-  def hidden_side? side
-    if monthly?
-      side == DueOn::PER_MONTH ? '' : 'js-revealable'
-    else
-      side == DueOn::ON_DATE ? '' : 'js-revealable'
-    end
   end
 end

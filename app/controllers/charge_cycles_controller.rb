@@ -29,11 +29,11 @@ class ChargeCyclesController < ApplicationController
 
   def create
     @charge_cycle = ChargeCycle.new charge_cycles_params
+    @charge_cycle.prepare
     if @charge_cycle.save
       redirect_to charge_cycles_path,
                   flash: { save: charge_cycle_created_message }
     else
-      @charge_cycle.prepare
       render :new
     end
   end

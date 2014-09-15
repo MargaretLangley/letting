@@ -63,134 +63,61 @@ describe DueOns, :ledgers, type: :model do
             .to_not be_empty
         end
       end
-
-      describe 'form preparation' do
-        context 'term' do
-          it '#prepare creates children' do
-            due_ons = charge_cycle_new(due_ons: nil).due_ons
-            expect(due_ons.size).to eq(0)
-
-            due_ons.prepare type: 'term'
-            expect(due_ons.size).to eq(4)
-          end
-        end
-
-        context 'monthly' do   # we create the context
-          # this fails but we need it to pass
-          it '#prepare creates children' do
-            due_ons = charge_cycle_new(due_ons: nil).due_ons
-            expect(due_ons.size).to eq(0)
-
-            due_ons.prepare type: 'monthly'
-            expect(due_ons.size).to eq(1)
-          end
-        end
-
-        it '#clear_up_form destroys empty due_ons' do
-          due_ons.build day: nil, month: nil
-          due_ons.clear_up_form
-          expect(due_ons.reject { |due_on| due_on.marked_for_destruction? }
-          .size).to eq(0)
-        end
-      end
-
-      context '#monthly?' do
-        context 'by number' do
-          it '12 persistable due_ons monthly charge' do
-            (1..12).each { due_ons.build day: 1, month: 1 }
-            expect(due_ons).to be_monthly
-          end
-        end
-
-        it '< 12 persistable due_ons not monthly' do
-          (1..11).each { due_ons.build day: 1, month: 1 }
-          due_ons.build
-          expect(due_ons).to_not be_monthly
-        end
-      end
-
-      context 'by per_month due_on' do
-        it 'is not per month without it' do
-          due_ons.build day: 1, month: -1
-          expect(due_ons).to be_monthly
-        end
-      end
-
-      context '#includes_new_monthly?' do
-        it 'true with new persistable record' do
-          due_ons.build day: 1, month: -1
-          expect(due_ons).to be_includes_new_monthly
-        end
-
-        it 'false with new empty record' do
-          due_ons.build
-          expect(due_ons).to_not be_includes_new_monthly
-        end
-      end
     end
 
-    context 'creating, saving and loading' do
+    describe 'creating, saving and loading' do
+      context 'term' do
+        it 'new on date' do
+          (cycle = charge_cycle_new due_ons: [DueOn.new(day: 24, month: 6),
+                                              DueOn.new(day: 25, month: 12)])
+            .prepare
+          expect(cycle.due_ons.size).to eq(4)
+          cycle.save!
+          expect(ChargeCycle.first.due_ons.size).to eq(2)
+        end
 
-      it 'new on date' do
-        (cycle = charge_cycle_new due_ons: [DueOn.new(day: 24, month: 6),
-                                            DueOn.new(day: 25, month: 12)])
-          .prepare
-        expect(cycle.due_ons.size).to eq(4)
-        cycle.save!
-        expect(ChargeCycle.first.due_ons.size).to eq(2)
+        it 'updates on_date' do
+          charge_cycle_create due_ons: [DueOn.new(id: 1, day: 24, month: 6)]
+          (cycle = ChargeCycle.first).prepare
+          cycle.due_ons[0].day = 23
+          cycle.save!
+          expect(ChargeCycle.first.due_ons.size).to eq(1)
+        end
+
+        it 'adds on_date' do
+          charge_cycle_create due_ons: [DueOn.new(day: 24, month: 6)]
+          (cycle = ChargeCycle.first).prepare
+          cycle.due_ons[1].attributes =  { 'day' => '14', 'month' => '9' }
+          cycle.save!
+          expect(ChargeCycle.first.due_ons.size).to eq(2)
+        end
+
+        it 'removes on_date' do
+          charge_cycle_create due_ons: [DueOn.new(day: 24, month: 6),
+                                        DueOn.new(day: 25, month: 12)]
+          (cycle = ChargeCycle.first).prepare
+          cycle.due_ons[1].attributes =  { 'day' => '', 'month' => '' }
+          cycle.save!
+          expect(ChargeCycle.first.due_ons.size).to eq(1)
+        end
       end
 
-      it 'updates on_date' do
-        charge_cycle_create due_ons: [DueOn.new(id: 1, day: 24, month: 6)]
-        (cycle = ChargeCycle.first).prepare
-        cycle.due_ons[0].day = 23
-        cycle.save!
-        expect(ChargeCycle.first.due_ons.size).to eq(1)
-      end
+      context 'monthly' do
+        it 'new per date' do
+          (cycle = charge_cycle_new period_type: 'monthly', due_ons: nil)
+            .prepare
+          cycle.due_ons[0].update day: 5
+          cycle.save!
+          expect(ChargeCycle.first.due_ons.size).to eq(12)
+        end
 
-      it 'adds on_date' do
-        charge_cycle_create due_ons: [DueOn.new(day: 24, month: 6)]
-        (cycle = ChargeCycle.first).prepare
-        cycle.due_ons[1].attributes =  { 'day' => '14', 'month' => '9' }
-        cycle.save!
-        expect(ChargeCycle.first.due_ons.size).to eq(2)
-      end
+        it 'per month to different per month' do
+          skip 'implement'
+        end
 
-      it 'removes on_date' do
-        charge_cycle_create due_ons: [DueOn.new(day: 24, month: 6),
-                                      DueOn.new(day: 25, month: 12)]
-        (cycle = ChargeCycle.first).prepare
-        cycle.due_ons[1].attributes =  { 'day' => '', 'month' => '' }
-        cycle.save!
-        expect(ChargeCycle.first.due_ons.size).to eq(1)
-      end
-
-      it 'new per date' do
-        (cycle = charge_cycle_new due_ons: nil).prepare
-        cycle.due_ons[0].update day: 5, month: -1
-        cycle.save!
-        expect(ChargeCycle.first.due_ons.size).to eq(12)
-      end
-
-      it 'per month to different per month' do
-        charge_cycle_create due_ons: [DueOn.new(day: 24, month: -1)]
-        (cycle = ChargeCycle.first).prepare
-        # Fails
-        # cycle.due_ons[0].update day: 5, month: -1
-        # Passes
-        cycle.due_ons.build day: 10, month: -1
-        cycle.save!
-        expect(ChargeCycle.first.due_ons.size).to eq(12)
-      end
-
-      it 'per month to same per month' do
-        charge_cycle_create due_ons: [DueOn.new(day: 24, month: -1)]
-        (cycle = ChargeCycle.first).prepare
-        cycle.due_ons.build day: 24, month: -1
-        cycle.save!
-        cycle = ChargeCycle.first
-        cycle.prepare
-        expect(cycle.due_ons.size).to eq(12)
+        it 'per month to same per month' do
+          skip 'implement'
+        end
       end
     end
   end

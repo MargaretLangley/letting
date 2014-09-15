@@ -46,35 +46,31 @@ module DueOns
       end
 
       def prepare(type:)
+        @type = type
         (size...find_max_size(type)).each { build }
       end
 
-      def find_max_size period_type
-        period_type  == 'monthly' ?  1  :  MAX_DISPLAYED_DUE_ONS
+      def find_max_size _period_type
+        monthly? ?  MAX_DUE_ONS  :  MAX_DISPLAYED_DUE_ONS
       end
 
       def clear_up_form
+        to_monthly if monthly? && self[0].day
         clear_up_all
-        to_monthly if monthly_due_on
-        destruction_if :monthly? if monthly_due_on
       end
 
       def empty?
         self.all?(&:empty?)
       end
 
-      def monthly?
-        max_due_ons || monthly_due_on
-      end
-
-      def includes_new_monthly?
-        reject(&:empty?).select(&:monthly?).find(&:new_record?)
-      end
-
       private
 
+      def monthly?
+        @type == 'monthly'
+      end
+
       def clear_up_all
-        each { |due_on| due_on.clear_up_form self }
+        each { |due_on| due_on.clear_up_form }
       end
 
       def destruction_if matcher
@@ -85,13 +81,11 @@ module DueOns
         reject(&:empty?).size == MAX_DUE_ONS
       end
 
-      def monthly_due_on
-        find(&:monthly?)
-      end
-
       def to_monthly
-        (1..MAX_DUE_ONS)
-        .each { |month| build day: monthly_due_on.day, month: month }
+        (0...MAX_DUE_ONS).each do |item|
+          self[item].day = self[0].day
+          self[item].month = item + 1
+        end
       end
 
       def ordered_by_occurrence
@@ -102,7 +96,8 @@ module DueOns
     validate :due_ons_size
 
     def due_ons_size
-      errors.add :due_ons, 'Too many due_ons' if persitable_due_ons.size > 12
+      errors.add :due_ons, 'Too many due_ons' \
+        if persitable_due_ons.size > MAX_DUE_ONS
     end
 
     def persitable_due_ons

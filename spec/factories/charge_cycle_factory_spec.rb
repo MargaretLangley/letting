@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-describe 'ChargeCycle Factory' do
+describe 'ChargeCycle Factory', :ledgers do
 
   describe 'new' do
     context 'default' do
       it('has name') { expect(charge_cycle_new.name).to eq 'Mar/Sep' }
-      it('has period_type') { expect(charge_cycle_new.period_type).to eq 'term' }
+      it('has term period_type') { expect(charge_cycle_new.period_type).to eq 'term' }
       it 'has due_on' do
         expect(charge_cycle_new.due_ons.size).to eq 1
       end
@@ -17,7 +17,10 @@ describe 'ChargeCycle Factory' do
       end
     end
     describe 'overrides' do
-      it('due on') do
+      it 'changes period_type' do
+        charge_cycle_new period_type: ''
+      end
+      it 'changes due ons' do
         cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
         expect(cycle.due_ons[0].month).to eq 6
       end
@@ -43,9 +46,10 @@ describe 'ChargeCycle Factory' do
         end
 
         it 'per month due_ons' do
-          charge_cycle_create due_ons: [DueOn.new(day: 2, month: -1)]
-          expect(ChargeCycle.first.due_ons.size)
-            .to eq(12)
+          charge_cycle_create period_type: 'monthly',
+                              due_ons: [DueOn.new(day: 2)],
+                              prepare: true
+          expect(ChargeCycle.first.due_ons.size).to eq(12)
         end
       end
     end

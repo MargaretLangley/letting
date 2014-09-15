@@ -55,20 +55,51 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
   end
 
   describe 'form preparation' do
-    it '#prepare creates children' do
-      cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 3)]
-      expect(cycle.due_ons.size).to eq(1)
-      cycle.prepare
-      expect(cycle.due_ons.size).to eq(4)
+    context 'term' do
+      it '#prepare creates children' do
+        cycle = charge_cycle_new period_type: 'term', due_ons: nil
+        expect(cycle.due_ons.size).to eq(0)
+        cycle.prepare
+        expect(cycle.due_ons.size).to eq(4)
+      end
+
+      it '#clear_up_form destroys children' do
+        cycle = charge_cycle_new period_type: 'term',
+                                 due_ons: [DueOn.new(day: 25, month: 3)]
+        cycle.prepare
+        cycle.valid?
+        expect(cycle.due_ons
+                    .reject { |due_on| due_on.marked_for_destruction? }.size)
+          .to eq(1)
+      end
     end
 
-    it '#clear_up_form destroys children' do
-      cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 3)]
-      cycle.prepare
-      cycle.valid?
-      expect(cycle.due_ons
-                  .reject { |due_on| due_on.marked_for_destruction? }.size)
-        .to eq(1)
+    context 'monthly' do
+      it '#prepare creates children' do
+        cycle = charge_cycle_new period_type: 'monthly', due_ons: nil
+        expect(cycle.due_ons.size).to eq(0)
+        cycle.prepare
+        expect(cycle.due_ons.size).to eq(12)
+      end
+
+      it '#clear_up_form keeps children if day set' do
+        cycle = charge_cycle_new period_type: 'monthly', due_ons: nil
+        cycle.prepare
+        cycle.valid?
+        expect(cycle.due_ons
+                    .reject { |due_on| due_on.marked_for_destruction? }.size)
+          .to eq(0)
+      end
+
+      it '#clear_up_form destroys children if empty' do
+        cycle = charge_cycle_new period_type: 'monthly',
+                                 due_ons: [DueOn.new(day: 25, month: 3)]
+        cycle.prepare
+        cycle.valid?
+        expect(cycle.due_ons
+                    .reject { |due_on| due_on.marked_for_destruction? }.size)
+          .to eq(12)
+      end
     end
   end
 
