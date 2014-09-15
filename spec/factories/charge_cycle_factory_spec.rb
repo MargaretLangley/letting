@@ -1,3 +1,5 @@
+# rubocop: disable Style/LineLength
+
 require 'rails_helper'
 
 describe 'ChargeCycle Factory' do
@@ -5,6 +7,7 @@ describe 'ChargeCycle Factory' do
   describe 'new' do
     context 'default' do
       it('has name') { expect(charge_cycle_new.name).to eq 'Mar/Sep' }
+      it('has period_type') { expect(charge_cycle_new.period_type).to eq 'term' }
       it 'has due_on' do
         expect(charge_cycle_new.due_ons.size).to eq 1
       end

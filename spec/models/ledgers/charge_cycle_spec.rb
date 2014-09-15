@@ -1,33 +1,23 @@
 require 'rails_helper'
+# rubocop: disable Style/LineLength
 
 RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
-  let(:cycle) do
-    cycle = ChargeCycle.new id: 1, name: 'Mar/Sep', order: 16
-    cycle.due_ons.new day: 25, month: 3, charge_cycle_id: 1
-    cycle
-  end
-
-  describe 'validation' do
-    it 'returns valid' do
-      expect(cycle).to be_valid
-    end
-
-    it 'does not validate for a nil name' do
-      expect(charge_cycle_new name: '').to_not be_valid
-    end
-
-    it 'does not validate for a nil order' do
-      expect(charge_cycle_new order: '').to_not be_valid
+  describe 'validates' do
+    it('returns valid') { expect(charge_cycle_new).to be_valid }
+    it('requires a name') { expect(charge_cycle_new name: '').to_not be_valid }
+    it('requires an order') { expect(charge_cycle_new order: '').to_not be_valid }
+    it 'requires a period_type' do
+      (charge_cycle = charge_cycle_new).period_type = ''
+      expect(charge_cycle).to_not be_valid
     end
   end
 
   describe '#due_between?' do
-    before(:each) { Timecop.travel(Date.new(2013, 1, 31)) }
+    before(:each) { Timecop.travel Date.new(2013, 1, 31) }
     after(:each)  { Timecop.return }
 
-    it 'creates charging date if in range'  do
-      cycle = ChargeCycle.new id: 1, name: 'Mar/Sep', order: '42'
-      cycle.due_ons.new day: 25, month: 3, charge_cycle_id: 1
+    it 'creates a charging date when in range'  do
+      cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 3)]
       expect(cycle.due_between?(Date.new(2013, 3, 25)..Date.new(2013, 3, 25)))
         .to eq [Date.new(2013, 3, 25)]
     end
@@ -35,58 +25,45 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
 
   describe '<=>' do
     it 'matches when equal' do
-      cycle = ChargeCycle.new(name: 'Mar/Sep')
-      cycle.due_ons.build day: 1, month: 1
-      cycle.due_ons.build day: 6, month: 6
-
-      other = ChargeCycle.new(name: 'Mar/Sep')
-      other.due_ons.build day: 1, month: 1
-      other.due_ons.build day: 6, month: 6
-
+      cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 3)]
+      other = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 3)]
       expect(cycle <=> other).to eq 0
     end
 
-    it 'order independent' do
-      cycle = ChargeCycle.new(name: 'Mar/Sep')
-      cycle.due_ons.build day: 1, month: 1
-      cycle.due_ons.build day: 6, month: 6
+    it 'is order independent' do
+      cycle = charge_cycle_new due_ons: [DueOn.new(day: 1, month: 1),
+                                         DueOn.new(day: 6, month: 6)]
 
-      other = ChargeCycle.new(name: 'Sep/Mar')
-      other.due_ons.build day: 6, month: 6
-      other.due_ons.build day: 1, month: 1
-
+      other = charge_cycle_new due_ons: [DueOn.new(day: 6, month: 6),
+                                         DueOn.new(day: 1, month: 1)]
       expect(cycle <=> other).to eq 0
     end
 
-    it 'uses due_ons to match' do
-      cycle = ChargeCycle.new(name: 'Mar/Sep')
-      cycle.due_ons.build day: 1, month: 1
-      cycle.due_ons.build day: 6, month: 6
+    it 'ignores cycle name in matching' do
+      cycle = charge_cycle_new name: 'Mar/Sep',
+                               due_ons: [DueOn.new(day: 1, month: 1)]
+      other = charge_cycle_new name: 'Jan/Dec',
+                               due_ons: [DueOn.new(day: 1, month: 1)]
+      expect(cycle <=> other).to eq 0
+    end
 
-      other = ChargeCycle.new(name: 'Jan/Dec')
-      other.due_ons.build day: 1, month: 1
-      other.due_ons.build day: 12, month: 12
-
+    it 'does not match a cycle with different due_on' do
+      cycle = charge_cycle_new due_ons: [DueOn.new(day: 1, month: 1)]
+      other = charge_cycle_new due_ons: [DueOn.new(day: 6, month: 6)]
       expect(cycle <=> other).to eq(-1)
     end
   end
 
   describe 'form preparation' do
-    it 'due_ons' do
-      cycle = ChargeCycle.new(name: 'Mar/Sep')
-      cycle.due_ons.destroy_all
-      expect(cycle).to_not be_valid
-    end
-
     it '#prepare creates children' do
-      cycle = ChargeCycle.new(name: 'Mar/Sep')
+      cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 3)]
+      expect(cycle.due_ons.size).to eq(1)
       cycle.prepare
       expect(cycle.due_ons.size).to eq(4)
     end
 
     it '#clear_up_form destroys children' do
-      cycle = ChargeCycle.new(name: 'Mar/Sep')
-      cycle.due_ons.build day: 1, month: 1
+      cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 3)]
       cycle.prepare
       cycle.valid?
       expect(cycle.due_ons
@@ -96,21 +73,18 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
   end
 
   describe 'range' do
-    before { Timecop.travel(Date.new(2014, 1, 31)) }
+    before { Timecop.travel Date.new(2014, 1, 31) }
     after  { Timecop.return }
     # currently returning the 'on_date' which initialized
     # the Repeat range - but will eventually be the range
     it 'due on can find their range' do
-      cycle = ChargeCycle.new(name: 'Mar/Sep')
-      cycle.due_ons.build day: 6, month: 6
+      cycle = charge_cycle_new due_ons: [DueOn.new(day: 6, month: 6)]
       expect(cycle.range_on Date.new(2014, 6, 6)).to eq Date.new(2014, 6, 6)
     end
 
     it 'errors when due on not found' do
-      cycle = ChargeCycle.new(name: 'Mar/Sep')
-      cycle.due_ons.build day: 12, month: 12
+      cycle = charge_cycle_new due_ons: [DueOn.new(day: 12, month: 12)]
       expect(cycle.range_on Date.new(2014, 6, 6)).to eq :missing_due_on
     end
   end
-
 end

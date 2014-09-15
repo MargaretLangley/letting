@@ -18,7 +18,8 @@
 #
 # If a charge happens on a few dates in the year you use a number of OnDates
 # If a charge occurs on each month then you use a PerDate. To create PerMonth
-# DueOns we pass a dueon with a Day 1-31 and Month -1 (DueOn::PerDate)
+# DueOns we pass a dueon with a Day 1-31 and Month -1 (DueOn::PerDate) via the
+# default in a hidden field.
 #
 # As long as this is different from the current due on we delete
 # all the other DueOns in the collection (including the PerMonth DueOn)
@@ -44,8 +45,12 @@ module DueOns
                               .map { |due_on| due_on.make_date }
       end
 
-      def prepare
-        (size...MAX_DISPLAYED_DUE_ONS).each { build }
+      def prepare(type:)
+        (size...find_max_size(type)).each { build }
+      end
+
+      def find_max_size period_type
+        period_type  == 'monthly' ?  1  :  MAX_DISPLAYED_DUE_ONS
       end
 
       def clear_up_form

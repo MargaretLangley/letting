@@ -15,6 +15,7 @@ class ChargeCycle < ActiveRecord::Base
   include Comparable
   validates :name, presence: true
   validates :order, presence: true
+  validates :period_type, presence: true
   validates :due_ons, presence: true
   has_many :charges, inverse_of: :charge_cycle
 
@@ -24,8 +25,11 @@ class ChargeCycle < ActiveRecord::Base
   accepts_nested_attributes_for :due_ons, allow_destroy: true
   before_validation :clear_up_form
 
-  delegate :prepare, to: :due_ons
   delegate :clear_up_form, to: :due_ons
+
+  def prepare
+    due_ons.prepare type: period_type
+  end
 
   def due_between? date_range
     due_ons.due_between?(date_range).to_a

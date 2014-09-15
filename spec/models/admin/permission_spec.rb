@@ -30,6 +30,12 @@ describe Permission, type: :model do
     it('clients#update') { is_expected.not_to allow?('clients', 'update') }
     it('clients#destroy') { is_expected.not_to allow?('clients', 'destroy') }
 
+    it('charge_cycles#index') { is_expected.not_to allow?('charge_cycles', 'index') }
+    it('charge_cycles#create') { is_expected.not_to allow?('charge_cycles', 'create') }
+    it('charge_cycles#edit') { is_expected.not_to allow?('charge_cycles', 'edit') }
+    it('charge_cycles#update') { is_expected.not_to allow?('charge_cycles', 'update') }
+    it('charge_cycles#destroy') { is_expected.not_to allow?('charge_cycles', 'destroy') }
+
     it('users#index') { is_expected.not_to allow?('users', 'index') }
     it('users#create') { is_expected.not_to allow?('users', 'create') }
     it('users#edit') { is_expected.not_to allow?('users', 'edit') }
@@ -57,6 +63,12 @@ describe Permission, type: :model do
     it('clients#edit') { is_expected.to allow?('clients', 'edit') }
     it('clients#update') { is_expected.to allow?('clients', 'update') }
     it('clients#destroy') { is_expected.to allow?('clients', 'destroy') }
+
+    it('charge_cycles#index') { is_expected.not_to allow?('charge_cycles', 'index') }
+    it('charge_cycles#create') { is_expected.not_to allow?('charge_cycles', 'create') }
+    it('charge_cycles#edit') { is_expected.not_to allow?('charge_cycles', 'edit') }
+    it('charge_cycles#update') { is_expected.not_to allow?('charge_cycles', 'update') }
+    it('charge_cycles#destroy') { is_expected.not_to allow?('charge_cycles', 'destroy') }
 
   end
 

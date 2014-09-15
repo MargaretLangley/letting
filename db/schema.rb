@@ -52,8 +52,9 @@ ActiveRecord::Schema.define(version: 20140827133520) do
   add_index "agents", ["property_id"], name: "index_agents_on_property_id", using: :btree
 
   create_table "charge_cycles", force: true do |t|
-    t.string   "name",       null: false
-    t.integer  "order",      null: false
+    t.string   "name",        null: false
+    t.integer  "order",       null: false
+    t.string   "period_type", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

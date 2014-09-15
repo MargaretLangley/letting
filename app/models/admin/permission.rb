@@ -36,7 +36,6 @@ class Permission < Struct.new(:user)
 
   def user_controllers
     %w(accounts
-       charge_cycles
        clients
        debits
        debit_generators
@@ -45,11 +44,12 @@ class Permission < Struct.new(:user)
        properties
        payments
        search
-       search_suggestions
-       sheets)
+       search_suggestions)
   end
 
   def admin_controllers
-    %w(users)
+    %w(users
+       charge_cycles
+       sheets)
   end
 end
