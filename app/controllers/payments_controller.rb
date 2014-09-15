@@ -51,11 +51,6 @@ class PaymentsController < ApplicationController
     end
   end
 
-  def show_payment
-    prepare_for_new_action account_id: nil
-    render :new
-  end
-
   def edit
     @payment = PaymentDecorator.new Payment.find params[:id]
     @payment.negate
