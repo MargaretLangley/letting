@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'debit_generator', type: :feature do
+describe 'debit_generator', :ledgers, type: :feature do
 
   before(:each) do
     log_in

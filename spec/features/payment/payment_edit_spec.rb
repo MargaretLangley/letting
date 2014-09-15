@@ -1,7 +1,7 @@
 require 'rails_helper'
 # rubocop: disable Style/Documentation
 
-describe Payment, :payment, type: :feature do
+describe Payment, :ledgers, :payment, type: :feature do
 
   let(:payment_page) { PaymentPage.new }
   before(:each) { log_in }

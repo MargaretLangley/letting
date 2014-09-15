@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ChargeCycle, type: :feature do
+describe ChargeCycle, :ledgers, type: :feature do
 
   before(:each) do
     log_in admin_attributes
