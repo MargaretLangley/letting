@@ -7,8 +7,8 @@ describe Payment, type: :feature do
   it 'shows record' do
     property_create id: 1,
                     account: account_new(payment: payment_new,
-                    charge: charge_new,
-                    debit: debit_new)
+                                         charge: charge_new,
+                                         debit: debit_new)
     visit '/payments/1'
     expect(page.title).to eq 'Letting - View Payment'
   end
