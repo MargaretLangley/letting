@@ -150,7 +150,6 @@ nav{
   width: 100%;
 }
 
-
 li a{
   display: block;
   padding: 4%;
@@ -500,22 +499,12 @@ $search-height: 35px;
 
 \*--------------------------------------------------*/
 
-
-ul.ui-autocomplete{
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  border: solid 1px $muted-border;
-  list-style: none;
-  cursor: default;
-  li{
-    margin: 0;
-    padding: 0;
-    border-top: solid 1px $muted-border;
-  }
+.ui-menu .ui-menu-item a{
+  background-color: darken($fieldset, 5%);
+  color: black;
+  border-radius: 5px;
+  border: 1px solid darken($fieldset, 10%);
 }
-
-
 
 /*--------------------------------------------------*\
 
