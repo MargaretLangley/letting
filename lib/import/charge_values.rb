@@ -15,7 +15,7 @@ module DB
     attr_reader :max_dates_per_year
 
     def self.from_code(code)
-      new ChargeCode.to_string(code), ChargeCode.to_times_per_year(code)
+      new ChargeCode.to_string(code), ChargeCode.day_month_pairs(code)
     end
 
     def initialize charge_code, max_dates_per_year

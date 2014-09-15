@@ -23,7 +23,7 @@ module DB
       end
     end
 
-    def self.to_times_per_year code
+    def self.day_month_pairs code
       case code
       when 'GR', 'GGR', 'GIns', 'Ins', 'Q' then 4
       when 'H' then 2

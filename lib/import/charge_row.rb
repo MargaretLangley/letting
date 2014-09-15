@@ -90,7 +90,7 @@ module DB
     end
 
     def maximum_dates
-      max_dates = ChargeCode.to_times_per_year charge_code
+      max_dates = ChargeCode.day_month_pairs charge_code
       fail ChargeCodeUnknown, max_dates_message, caller unless max_dates
       max_dates
     end
