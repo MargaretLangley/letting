@@ -367,64 +367,9 @@ end
 
 def seed_sheets
   Rake::Task['db:import:sheet'].invoke
-  create_sheets
-
   Rake::Task['db:import:sheet_address'].invoke
 
-  create_sheet_addresses
   create_notices
-end
-
-def create_sheets
-  Sheet.create! [
-    {
-      id: 3,
-      description: 'Page 1 seed',
-      invoice_name: 'F & L Adams',
-      phone: '01215030992',
-      vat: '277 9904 95',
-      heading1:  'Residential Lettings & Property Management',
-      heading2:  'Invoice',
-      advice1:  'Hearby give you notice pursuant to Section 48 of the Landlord and Tenant Act 1987 that the address in England and Wales at which notices (including notices in proceedings) may be served on your Landlord by you is:',
-      advice2:  "Remittance Advice
-       If paying by cheque, please detach and forward only the tear-off counterfoil of this account. CHEQUES ACT 1957: Receipts are not issued for cheque payments unless specifically requested in which case the account should be sent INTACT, endorsed RECEIPT REQUIRED together with a STAMPED ADDRESSED ENVELOPE.  PLEASE MAKE CHEQUES PAYABLE TO F&L ADAMS.
-Postal Orders sent through the post shall be at the sender's risk until actually received.",
-    },
-    {
-      id: 4,
-      description: 'Page 2 Notice of Rent Due seed',
-      invoice_name: 'Seedbod',
-      phone: '01215030992',
-      vat: '277 9904 95',
-      heading1:  'Commonhold and Leasehold Reform Act 2002, section 166',
-      heading2:  'Notice to long leaseholders of rent due Ref No',
-      advice1:  "NOTICE FOR LEASEHOLDERS
-       Read this notice carefully. It sets out the amount of rent due from you and the date by which you must pay it. You are advised to seek help immediately, if you cannot pay, or dispute the amount. Those who can help you include a citizens' advice bureau, a housing advice service, a law centre and a solicitor. Show this notice and a copy of your lease to whoever helps you.
-
-      The landlord may be able to claim additional sums from you if you do not pay by the date specified in this notice. You have the right to challenge the reasonableness of any additional sums at a leasehold valuation tribunal. Section 167 of the Commonhold and Leasehold Reform Act 2002 and regulations made under it prevent your landlord from forfeiting your lease for non-payment of rent, service charges or administration charges (or a combination of them) if the amount owed is £350 or less, or none of the unpaid amount has been outstanding for more than three years.",
-      advice2:  "NOTES FOR LANDLORDS
-         1. If you send this notice by post, address it to the leaseholder at the dwelling in respect of which the payment is due, unless he has notified you in writing of a different address in England or Wales at which he wishes to be given notice under section 166 of the Commonhold and Leasehold Reform Act 2002.
-
-       2. This date must not be either less than 30 days or more than 60 days after the day on which this notice is given or before that on which the leaseholder would have been liable to make the payment in accordance with the lease.",
-    }
-  ]
-end
-
-def create_sheet_addresses
-  Address.create! [
-    {
-      addressable_id: 2,
-      addressable_type: 'Sheet',
-      flat_no:  '',
-      house_name: '',
-      road_no:  '2',
-      road:     'Attwood Street',
-      district: '',
-      town:     'Halesowen',
-      county:   'West Midlands',
-      postcode: 'B63 3UE'
-    },
-  ]
 end
 
 def create_notices

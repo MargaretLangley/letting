@@ -20,20 +20,6 @@ class SheetsController < ApplicationController
     @sheet = Sheet.find params[:id]
   end
 
-  def new
-    @sheet = Sheet.new
-  end
-
-  def create
-    @sheet = Sheet.new sheets_params
-    if @sheet.save
-      redirect_to sheets_path, notice: 'Invoice information successfully ' \
-                                       'created!'
-    else
-      render :new
-    end
-  end
-
   def edit
     @sheet = Sheet.find params[:id]
   end
@@ -46,13 +32,6 @@ class SheetsController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def destroy
-    @sheet = Sheet.find(params[:id])
-    alert_message = sheet_deleted_message
-    @sheet.destroy
-    redirect_to sheets_path, alert: alert_message
   end
 
   private

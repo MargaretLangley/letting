@@ -15,7 +15,6 @@ namespace :db do
     desc "Import invoice text F&L Adam's address from CSV file"
     task :sheet_address do
       if File.exist?(filename)
-        puts "Sheet Address imported: #{filename}"
         CSV.foreach(filename, headers: true) do |row|
           begin
             Address.create!(row.to_hash)
@@ -23,7 +22,9 @@ namespace :db do
             p 'Sheet Address Create failed (see hash below):', row.to_hash
           end
         end
-      end
+      else
+        puts "Sheet Address not found: #{filename}"
+       end
     end
   end
 end
