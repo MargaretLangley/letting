@@ -6,6 +6,12 @@ describe 'Property Factory' do
     describe 'default' do
       it('is valid') { expect(property_new).to be_valid }
       it('has human_ref') { expect(property_new.human_ref).to eq 2002 }
+
+      describe 'makes' do
+        it 'address' do
+          expect(property_new.address).to_not be_nil
+        end
+      end
     end
 
     describe 'overrides' do
