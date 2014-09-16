@@ -84,6 +84,7 @@ describe DueOn, :ledgers, type: :model do
       end
     end
 
+    # public as it is called by due_ons.empty?
     describe '#empty?' do
       it 'with attributes not empty' do
         expect(due_on_new day: 25, month: 3).to_not be_empty
@@ -91,6 +92,11 @@ describe DueOn, :ledgers, type: :model do
       it 'without attributes empty' do
         expect(due_on_new day: nil, month: nil).to be_empty
       end
+    end
+
+    it 'outputs #to_s' do
+      expect(due_on_new.to_s)
+        .to eq 'id: nil, day: 25, month: 3, year: nil, Destroy?: false'
     end
 
     describe '<=>' do
