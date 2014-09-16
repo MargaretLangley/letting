@@ -42,7 +42,7 @@ module DueOns
 
       def due_between? date_range
         ordered_by_occurrence.select { |due_on| due_on.between? date_range }
-                              .map { |due_on| due_on.make_date }
+                              .map(&:make_date)
       end
 
       def prepare(type:)
@@ -70,7 +70,7 @@ module DueOns
       end
 
       def clear_up_all
-        each { |due_on| due_on.clear_up_form }
+        each(&:clear_up_form)
       end
 
       def destruction_if matcher

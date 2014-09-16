@@ -39,12 +39,12 @@ describe DueOn, :ledgers, type: :model do
 
       it 'is true when the range covers due_on' do
         expect(due_on_new(day: 25, month: 3)
-          .between? Time.new(2013, 3, 25) .. Date.new(2013, 3, 25)).to be true
+          .between? Time.new(2013, 3, 25)..Date.new(2013, 3, 25)).to be true
       end
 
       it 'is false when range misses due_on' do
         expect(due_on_new(day: 1, month: 1)
-          .between? Time.new(2013, 3, 25) .. Date.new(2013, 3, 25)).to be false
+          .between? Time.new(2013, 3, 25)..Date.new(2013, 3, 25)).to be false
       end
     end
 

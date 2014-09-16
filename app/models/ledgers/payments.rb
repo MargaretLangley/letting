@@ -14,7 +14,7 @@
 #
 class Payments
   def initialize payments
-    @payments = payments.map { |payment| payment.negate }
+    @payments = payments.map(&:negate)
   end
 
   def to_a

@@ -72,7 +72,7 @@ class Account < ActiveRecord::Base
   def balance date
     date ||= Date.current
     (credits + debits).select { |transaction| transaction.on_date <= date }
-                      .map { |transaction| transaction.amount }.inject(0, :+)
+                      .map(&:amount).inject(0, :+)
   end
 
   # Finds and returns a matching Account

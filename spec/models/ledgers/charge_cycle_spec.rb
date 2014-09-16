@@ -69,7 +69,7 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
         cycle.prepare
         cycle.valid?
         expect(cycle.due_ons
-                    .reject { |due_on| due_on.marked_for_destruction? }.size)
+                    .reject(&:marked_for_destruction?).size)
           .to eq(1)
       end
     end
@@ -87,7 +87,7 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
         cycle.prepare
         cycle.valid?
         expect(cycle.due_ons
-                    .reject { |due_on| due_on.marked_for_destruction? }.size)
+                    .reject(&:marked_for_destruction?).size)
           .to eq(0)
       end
 
@@ -97,7 +97,7 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
         cycle.prepare
         cycle.valid?
         expect(cycle.due_ons
-                    .reject { |due_on| due_on.marked_for_destruction? }.size)
+                    .reject(&:marked_for_destruction?).size)
           .to eq(12)
       end
     end

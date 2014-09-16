@@ -62,7 +62,7 @@ class PaymentDecorator
 
   def todays_takings
     number_to_currency Payments.on
-                               .map { |payment| payment.negate }
+                               .map(&:negate)
                                .map(&:amount).inject(0, &:+)
   end
 

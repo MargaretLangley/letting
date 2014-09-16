@@ -44,11 +44,11 @@ describe DueOns, :ledgers, type: :model do
       end
 
       def date_range_covering_due_on
-        Date.new(2013, 4, 4) .. Date.new(2013, 5, 5)
+        Date.new(2013, 4, 4)..Date.new(2013, 5, 5)
       end
 
       def date_range_missing_due_on
-        Date.new(2013, 4, 4) .. Date.new(2013, 5, 2)
+        Date.new(2013, 4, 4)..Date.new(2013, 5, 2)
       end
     end
 
