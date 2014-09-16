@@ -1,4 +1,4 @@
-# rubocop: disable Style/MethodLength
+# rubocop: disable Metrics/MethodLength
 
 def debit_new account_id: 1,
               debit_generator_id: 1,

@@ -4,7 +4,7 @@
 #
 # Shared helper methods
 #
-# rubocop: disable Style/MethodLength
+# rubocop: disable Metrics/MethodLength
 #
 ####
 #

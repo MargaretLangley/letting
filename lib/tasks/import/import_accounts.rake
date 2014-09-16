@@ -8,8 +8,8 @@ STDOUT.sync = true
 namespace :db do
   namespace :import do
 
-    desc "Import accounting information from CSV file"
-    task :accounts, [:range] => :environment do |task, args|
+    desc 'Import accounting information from CSV file'
+    task :accounts, [:range] => :environment do |_task, args|
       DB::ImportAccount.import accounts_file,
                                range: Rangify.from_str(args.range).to_i
     end

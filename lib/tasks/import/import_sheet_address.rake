@@ -16,11 +16,11 @@ namespace :db do
     task :sheet_address do
       if File.exist?(filename)
         puts "Sheet Address imported: #{filename}"
-        CSV.foreach(filename, :headers => true) do |row|
+        CSV.foreach(filename, headers: true) do |row|
           begin
             Address.create!(row.to_hash)
-          rescue Exception => exception
-            p "Sheet Address Create failed (see hash below):", row.to_hash
+          rescue
+            p 'Sheet Address Create failed (see hash below):', row.to_hash
           end
         end
       end

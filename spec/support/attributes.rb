@@ -1,6 +1,6 @@
 # Attributes are for initilizing test objects.
 #
-# rubocop: disable Style/MethodLength
+# rubocop: disable Metrics/MethodLength
 
 def agent_attributes **overrides
   {

@@ -1,5 +1,5 @@
-# rubocop: disable Style/MethodLength
-# rubocop: disable Style/ParameterLists
+# rubocop: disable Metrics/MethodLength
+# rubocop: disable Metrics/ParameterLists
 
 def address_new flat_no: '',
                 house_name: '',

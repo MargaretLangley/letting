@@ -1,5 +1,5 @@
 begin
- require 'rspec/core/rake_task'
+  require 'rspec/core/rake_task'
 
   desc 'Run all tests regardless of tags'
   RSpec::Core::RakeTask.new('spec:all') do |task|
@@ -10,9 +10,9 @@ begin
 
   task 'spec:all' => 'db:test:prepare'
 
-rescue LoadError => e
-  desc 'Run all tests regardless of tags'
-  task 'spec:all' do
-    abort 'spec:all rake task is not available.'
-  end
+ rescue LoadError
+   desc 'Run all tests regardless of tags'
+   task 'spec:all' do
+     abort 'spec:all rake task is not available.'
+   end
 end

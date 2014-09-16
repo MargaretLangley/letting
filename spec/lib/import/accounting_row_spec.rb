@@ -51,8 +51,9 @@ module DB
 
       it 'errors invalid code' do
         property_create human_ref: 89
-        expect do accounting.charge_code_to_s(charge_code: 'UkwDDn',
-                                              human_ref: 89)
+        expect do
+          accounting.charge_code_to_s(charge_code: 'UkwDDn',
+                                      human_ref: 89)
         end.to raise_error ChargeCodeUnknown
       end
     end

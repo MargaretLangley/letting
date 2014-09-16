@@ -1,4 +1,4 @@
-# rubocop: disable Style/MethodLength
+# rubocop: disable Metrics/MethodLength
 
 def credit_new payment_id: 1,
                account_id: 1,

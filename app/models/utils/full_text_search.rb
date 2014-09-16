@@ -8,7 +8,7 @@
 # and the application. Calls search methods which are generated
 # by the elasticsearch gem and the searchable moddule.
 #
-# rubocop: disable Style/MethodLength
+# rubocop: disable Metrics/MethodLength
 #
 ####
 #

@@ -1,5 +1,5 @@
 require 'rails_helper'
-# rubocop: disable Style/LineLength
+# rubocop: disable Metrics/LineLength
 
 RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
   describe 'validates' do

@@ -23,7 +23,7 @@ Lint/AmbiguousRegexpLiteral:
   Enabled: false
 Style/MethodDefParentheses:
   Enabled: false
-Style/MethodLength:
+Metrics/MethodLength:
   Max: 10
 Style/TrailingComma:
   Enabled: false

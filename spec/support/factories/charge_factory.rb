@@ -1,5 +1,5 @@
-# rubocop: disable Style/ParameterLists
-# rubocop: disable Style/MethodLength
+# rubocop: disable Metrics/ParameterLists
+# rubocop: disable Metrics/MethodLength
 
 def charge_new account_id: 2,
                charge_type: 'Ground Rent',

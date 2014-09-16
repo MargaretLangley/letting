@@ -10,15 +10,15 @@ namespace :db do
 
     filename = 'import_data/new/sheet.csv'
 
-    desc "Import invoice text from CSV file"
+    desc 'Import invoice text from CSV file'
     task :sheet do
       if File.exist?(filename)
         puts "Sheet imported: #{filename}"
-        CSV.foreach(filename, :headers => true) do |row|
+        CSV.foreach(filename, headers: true) do |row|
           begin
             Sheet.create!(row.to_hash)
-          rescue Exception => exception
-            p "Sheet Create failed (see hash below):", row.to_hash
+          rescue
+            p 'Sheet Create failed (see hash below):', row.to_hash
           end
         end
       end

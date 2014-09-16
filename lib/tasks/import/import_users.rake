@@ -1,3 +1,4 @@
+# rubocop: disable Metrics/MethodLength
 require 'csv'
 require_relative '../../import/file_import'
 require_relative '../../import/file_header'
@@ -8,8 +9,8 @@ STDOUT.sync = true
 namespace :db do
   namespace :import do
 
-    desc "Import users data from CSV file"
-    task :users, [:test] => :environment do |task, args|
+    desc 'Import users data from CSV file'
+    task :users, [:test] => :environment do |_task, args|
       if File.exist?('import_data/new/users.csv')
         # Cannot use Guard clause users_csv is not available on travis runs!
         DB::ImportUser.import users_file
@@ -47,7 +48,7 @@ namespace :db do
     end
 
     def missing_users_csv_message
-      "Warning: users.csv is missing - " \
+      'Warning: users.csv is missing - ' \
       "only test users 'admin' and 'user' can be imported."
     end
   end

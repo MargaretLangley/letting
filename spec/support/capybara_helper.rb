@@ -26,16 +26,16 @@
 #
 # fill_autocomplete('property_client_ref', with: client_id)
 #
-## rubocop: disable Style/LineLength
+## rubocop: disable Metrics/LineLength
 module CapybaraHelper
   def fill_autocomplete(field, with: '', select: '')
     fill_in field, with: with
 
-    page.execute_script %Q{ $('##{field}').trigger('focus') }
-    page.execute_script %Q{ $('##{field}').trigger('keydown') }
-    selector = %Q{ul.ui-autocomplete li.ui-menu-item a:contains("#{select}")}
+    page.execute_script %{ $('##{field}').trigger('focus') }
+    page.execute_script %{ $('##{field}').trigger('keydown') }
+    selector = %{ul.ui-autocomplete li.ui-menu-item a:contains("#{select}")}
 
     expect(page).to have_selector('ul.ui-autocomplete li.ui-menu-item a')
-    page.execute_script %Q{ $('#{selector}').trigger('mouseenter').click() }
+    page.execute_script %{ $('#{selector}').trigger('mouseenter').click() }
   end
 end

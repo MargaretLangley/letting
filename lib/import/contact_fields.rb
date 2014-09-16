@@ -1,7 +1,7 @@
 require_relative '../modules/method_missing'
 require_relative 'entity_fields'
 
-# rubocop: disable Style/MethodLength
+# rubocop: disable Metrics/MethodLength
 
 module DB
   ####

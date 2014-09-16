@@ -6,7 +6,7 @@
 # The layer hides the capybara calls to make the functional rspec tests that
 # use this class simpler.
 #
-# rubocop: disable Style/ParameterLists
+# rubocop: disable Metrics/ParameterLists
 #
 class ClientPage
   include Capybara::DSL

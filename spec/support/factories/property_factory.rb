@@ -1,5 +1,5 @@
-# rubocop: disable Style/MethodLength
-# rubocop: disable Style/ParameterLists
+# rubocop: disable Metrics/MethodLength
+# rubocop: disable Metrics/ParameterLists
 
 def property_new \
     human_ref: 2002,

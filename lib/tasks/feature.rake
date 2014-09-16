@@ -3,13 +3,13 @@
 begin
   require 'rspec/core/rake_task'
 
-  desc "Run all but the slow and feature specs"
+  desc 'Run all but the slow and feature specs'
   RSpec::Core::RakeTask.new('spec:feature') do |t|
-    t.pattern = "spec/features/**/*_spec.rb"
+    t.pattern = 'spec/features/**/*_spec.rb'
   end
 
   task 'feature' => 'db:test:prepare'
-rescue LoadError => e
+rescue LoadError
   desc 'Run all fast tests'
   task 'spec:feature' do
     abort 'spec:feature rake task is not available.'

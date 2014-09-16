@@ -6,7 +6,7 @@
 #
 # Used by search Controller
 #
-# rubocop: disable  Style/MethodLength
+# rubocop: disable  Metrics/MethodLength
 #
 ####
 #

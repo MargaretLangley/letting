@@ -2,7 +2,7 @@
 # rake db:terminate RAILS_ENV=test
 namespace :db do
   desc "Fix 'database is being accessed by other users'"
-  task :terminate => :environment do
+  task terminate: :environment do
     ActiveRecord::Base.connection.execute <<-SQL
       SELECT
         pg_terminate_backend(pid)
@@ -17,4 +17,4 @@ namespace :db do
   end
 end
 
-Rake::Task["db:drop"].enhance ["db:terminate"]
+Rake::Task['db:drop'].enhance ['db:terminate']

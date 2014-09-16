@@ -11,7 +11,7 @@
 #
 # rubocop: disable Lint/AssignmentInCondition
 # REFACTOR index TODO:
-# rubocop: disable  Style/MethodLength
+# rubocop: disable  Metrics/MethodLength
 #
 ####
 #

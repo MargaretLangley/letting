@@ -17,10 +17,10 @@ namespace :db do
 
     filename = 'import_data/new/charged_in.csv'
 
-    desc "Import charged in data from CSV file"
+    desc 'Import charged in data from CSV file'
     task :charged_ins do
       if File.exist?(filename)
-        CSV.foreach(filename, :headers => true) do |row|
+        CSV.foreach(filename, headers: true) do |row|
           ChargedIn.create!(row.to_hash)
         end
       else

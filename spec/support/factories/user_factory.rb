@@ -1,4 +1,4 @@
-# rubocop: disable Style/MethodLength
+# rubocop: disable Metrics/MethodLength
 
 def user_create nickname: 'user',
                  email: 'user@example.com',

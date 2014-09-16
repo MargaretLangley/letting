@@ -8,8 +8,8 @@ STDOUT.sync = true
 namespace :db do
   namespace :import do
 
-    desc "Import clients data from CSV file"
-    task :charges, [:range] => :environment do |task, args|
+    desc 'Import clients data from CSV file'
+    task :charges, [:range] => :environment do |_task, args|
       range = Rangify.from_str(args.range).to_i
       DB::ImportCharge.import charges_file('acc_info'), range: range
       DB::ImportCharge.import patch_charges('acc_info_deleted'), range: range
@@ -21,14 +21,10 @@ namespace :db do
                           location: 'import_data/legacy'
     end
 
-    def patch_charges file_name
+    def patch_charges _file_name
       DB::FileImport.to_a 'acc_info_deleted',
                           headers: DB::FileHeader.charge,
                           location: 'import_data/patch'
     end
   end
 end
-
-
-
-

@@ -6,15 +6,16 @@ STDOUT.sync = true
 
 namespace :db do
 
-  desc "Raise an error unless development environment"
+  desc 'Raise an error unless development environment'
   task :dev_warning do
-    raise "You should only perform this task in development." unless Rails.env == 'development'
+    fail 'You should only perform this task in development.' \
+      unless Rails.env == 'development'
   end
 
-  desc "Get app databases back to base state: db:drop, db:create, db:migrate, db:test:prepare, db:populate"
+  desc 'Get app to base state: drop, create, migrate, test:prepare, populate'
   task reboot: [
     'environment',
-    #'db:dev_warning',
+    # 'db:dev_warning',
     'db:drop',
     'db:create',
     'db:migrate',

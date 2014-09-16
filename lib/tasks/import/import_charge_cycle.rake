@@ -17,15 +17,16 @@ namespace :db do
 
     filename = 'import_data/new/charge_cycle.csv'
 
-    desc "Import charge cycles from CSV file"
+    desc 'Import charge cycles from CSV file'
     task :charge_cycle do
-      puts "Charge cycle import: missing #{filename}" unless File.exist?(filename)
+      puts "Charge cycle import: missing #{filename}" \
+        unless File.exist?(filename)
 
-      CSV.foreach(filename, :headers => true) do |row|
+      CSV.foreach(filename, headers: true) do |row|
         begin
           ChargeCycle.create!(row.to_hash) unless comment(row)
-        rescue Exception => exception
-            p "ChargeCycle Create failed (see hash below):", row.to_hash
+        rescue
+          p 'ChargeCycle Create failed (see hash below):', row.to_hash
         end
       end
     end

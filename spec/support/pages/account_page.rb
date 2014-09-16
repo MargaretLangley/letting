@@ -8,8 +8,8 @@ require 'spec_helper'
 # use this class simpler.
 #
 # Due to Address methods
-# rubocop: disable Style/ParameterLists
-# rubocop: disable Style/MethodLength
+# rubocop: disable Metrics/ParameterLists
+# rubocop: disable Metrics/MethodLength
 #
 # Temporary until start_date / end_date used
 # rubocop: disable Lint/UnusedMethodArgument

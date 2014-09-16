@@ -1,4 +1,4 @@
-# rubocop: disable Style/ParameterLists
+# rubocop: disable Metrics/ParameterLists
 
 def sheet_new id: 4,
               description: 'Page 1 Invoice',

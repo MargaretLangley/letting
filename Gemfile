@@ -43,9 +43,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-
 # font icon
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 
 # Search Gems
 gem 'elasticsearch', '~> 1.0.5'
@@ -66,10 +65,10 @@ group :development do
   gem 'brakeman', '~>2.6.0', require: false
   gem 'bullet', '~>4.13.0'
   gem 'rails_best_practices', '~>1.15.1'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'rubocop', '~> 0.25.0', require: false
+  gem 'rubycritic', require: false
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'rubycritic', require: false
 end
 
 # Use Capistrano for deployment
@@ -96,7 +95,6 @@ group :development, :test do
   gem 'rb-readline'
   gem 'pry-stack_explorer', '~>0.4.9.0'
   gem 'byebug', '~> 3.4.0'
-  gem 'rubocop', require: false
   gem 'rack-mini-profiler', '~>0.9.0'
   gem 'rspec-rails', '~> 3.1.0'
 end

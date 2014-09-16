@@ -41,7 +41,7 @@ module DB
     end
 
     def credit_row human_ref: 89, amount: 50.5
-      %Q(#{human_ref}, GR, 2012-03-25 12:00:00, Ground Rent, 0, #{amount} , 0)
+      %(#{human_ref}, GR, 2012-03-25 12:00:00, Ground Rent, 0, #{amount} , 0)
     end
 
     def parse row_string

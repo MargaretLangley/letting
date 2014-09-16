@@ -11,7 +11,7 @@ module DB
             date: '2012-03-25 12:00:00',
             amount: 5.5
       CreditRow.new parse_line \
-        %Q(#{human_ref}, #{charge_code}, #{date}, Ground Rent, 0, #{amount}, 0)
+        %(#{human_ref}, #{charge_code}, #{date}, Ground Rent, 0, #{amount}, 0)
     end
 
     it('human_ref') { expect(row(human_ref: 9).human_ref).to eq '9' }

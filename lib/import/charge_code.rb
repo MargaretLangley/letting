@@ -8,7 +8,7 @@ module DB
   # Used in importing charges and account rows.
   #
   # to_string has CyclomaticComplexity of 7 with 6 acceptable.
-  # rubocop:disable  Style/CyclomaticComplexity
+  # rubocop:disable  Metrics/CyclomaticComplexity
   ####
   #
   class ChargeCode

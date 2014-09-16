@@ -16,7 +16,7 @@
 #                                and edit users but otherwise the same as a
 #                                user
 #
-# rubocop: disable Style/MethodLength
+# rubocop: disable Metrics/MethodLength
 #
 ####
 #

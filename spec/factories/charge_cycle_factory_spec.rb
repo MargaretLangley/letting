@@ -1,4 +1,4 @@
-# rubocop: disable Style/LineLength
+# rubocop: disable Metrics/LineLength
 
 require 'rails_helper'
 

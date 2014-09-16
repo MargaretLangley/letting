@@ -17,7 +17,7 @@ module DB
   # Debit is called when the account is to be debited by a charge.
   # Credit is called when the account is to be credited by a charge
   #
-  # rubocop: disable Style/MethodLength
+  # rubocop: disable Metrics/MethodLength
   ####
   #
   class ImportAccount < ImportBase
