@@ -23,5 +23,5 @@ Letting::Application.routes.draw do
 
   resources :payments
   resources :invoices, only: [:index, :show]
-  resources :sheets
+  resources :sheets, only: [:index, :show, :edit, :update]
 end
