@@ -1,29 +1,30 @@
 require 'rails_helper'
 
 describe AccountCreditDecorator do
-
-  let(:credit_dec) { AccountCreditDecorator.new credit_new }
-
   describe 'accessors for' do
     it '#charge_type' do
+      credit_dec = AccountCreditDecorator.new credit_new(on_date: '10/6/2014')
       credit_dec.charge = charge_new charge_type: 'Rent'
       expect(credit_dec.charge_type).to eq 'Rent'
     end
 
-    it '#date' do
-      expect(credit_dec.on_date).to eq Date.new 2013, 4, 30
+    it '#date is expected form' do
+      credit_dec = AccountCreditDecorator.new credit_new(on_date: '10/6/2014')
+      expect(credit_dec.date).to eq '10 Jun 14'
     end
 
     it '#due' do
-      expect(credit_dec.due).to eq ''
+      expect(AccountCreditDecorator.new(credit_new).due).to eq ''
     end
 
     it '#payment' do
-      expect(credit_dec.payment).to eq '88.08'
+      credit_dec = AccountCreditDecorator.new credit_new(amount: 90.15)
+      expect(credit_dec.payment).to eq '-90.15'
     end
 
     it '#amount' do
-      expect(credit_dec.amount).to eq(-88.08)
+      credit_dec = AccountCreditDecorator.new credit_new(amount: 32.05)
+      expect(credit_dec.amount).to eq(32.05)
     end
   end
 end
