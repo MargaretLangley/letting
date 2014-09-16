@@ -1,7 +1,5 @@
 require 'coveralls'
 Coveralls.wear!('rails')
-# require 'simplecov'
-# SimpleCov.start
 
 require 'database_cleaner'
 
