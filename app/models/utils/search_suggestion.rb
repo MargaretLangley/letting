@@ -2,6 +2,11 @@
 #
 # SearchSuggestion
 #
+# Provides suggestions while filling in forms
+#
+# Suggestions are created by running rake search_suggestions:index
+# This calles the index_roperties method which adds items ....
+#
 # Adds autosuggestion to forms - see properties.js.coffee.
 # Code from Railscasts - not fully hooked up - requires indexing
 # which needs to be automated.
