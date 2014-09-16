@@ -8,7 +8,8 @@ def charge_new account_id: 2,
                start_date: '2011-03-25',
                end_date: MAX_DATE,  # app_constants
                charge_cycle: charge_cycle_new,
-               charged_in: charged_in_new
+               charged_in: charged_in_new,
+               debits: nil
 
   base_charge account_id: account_id,
               charge_type: charge_type,
@@ -17,7 +18,8 @@ def charge_new account_id: 2,
               start_date: start_date,
               end_date: end_date,
               charge_cycle: charge_cycle,
-              charged_in: charged_in
+              charged_in: charged_in,
+              debits: debits
 end
 
 def charge_create account_id: 2,
@@ -27,7 +29,8 @@ def charge_create account_id: 2,
                   start_date: '2011-03-25',
                   end_date: MAX_DATE,  # app_constants
                   charge_cycle: charge_cycle_create,
-                  charged_in: charged_in_create
+                  charged_in: charged_in_create,
+                  debits: nil
 
   charge = base_charge account_id: account_id,
                        charge_type: charge_type,
@@ -36,7 +39,8 @@ def charge_create account_id: 2,
                        start_date: start_date,
                        end_date: end_date,
                        charge_cycle: charge_cycle,
-                       charged_in: charged_in
+                       charged_in: charged_in,
+                       debits: debits
   charge.save!
   charge
 end
@@ -48,7 +52,8 @@ def base_charge(account_id:,
                 start_date:,
                 end_date:,
                 charge_cycle:,
-                charged_in:)
+                charged_in:,
+                debits:)
   charge = Charge.new account_id: account_id,
                       charge_type: charge_type,
                       amount: amount,
@@ -59,5 +64,6 @@ def base_charge(account_id:,
                       charged_in: charged_in
   charge.charge_cycle = charge_cycle if charge_cycle
   charge.charged_in = charged_in if charged_in
+  charge.debits = debits if debits
   charge
 end

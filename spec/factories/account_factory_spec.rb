@@ -22,7 +22,7 @@ describe 'Account Factory' do
             .to eq DueOn.new(day: 25, month: 3)
       end
       it 'can add debit' do
-        expect(account_new(debit: debit_new(amount: 17)).debits[0].amount)
+        expect(account_new(debits: [debit_new(amount: 17)]).debits[0].amount)
           .to eq 17
       end
       it 'can add credit' do

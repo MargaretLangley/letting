@@ -20,7 +20,7 @@ module DB
 
     def update
       assign_range_dates
-      update_recent_stopped_charges
+      # update_recently_stopped_charges
     end
 
     private
@@ -50,17 +50,20 @@ module DB
       Date.current - 1.years
     end
 
-    def update_recent_stopped_charges
-      # It's a hack while only 1 needs to be changed
-      property = Property.find_by(human_ref: 6531)
-      return unless property
+    # If I need an end date for a charge ending within a year
+    #
+    # def update_recently_stopped_charges
+    #   # It's a hack while only a few recently stoped charges
+    #   # need an end date added to them.
+    #   property = Property.find_by(human_ref: 6531)
+    #   return unless property
 
-      charge = property.account.charges.find_by(charge_type: 'Insurance')
-      return unless charge.present?
+    #   charge = property.account.charges.find_by(charge_type: 'Insurance')
+    #   return unless charge.present?
 
-      @charge = charge
-      @charge.end_date = last_debit.on_date
-      charge.save!
-    end
+    #   @charge = charge
+    #   @charge.end_date = last_debit.on_date
+    #   charge.save!
+    # end
   end
 end

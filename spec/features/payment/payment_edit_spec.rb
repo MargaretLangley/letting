@@ -10,7 +10,7 @@ describe Payment, :ledgers, :payment, type: :feature do
     charge = charge_create
     payment = payment_new credit: credit_new(amount: -88, charge_id: charge.id)
     property_create account: account_new(charge: charge,
-                                         debit: debit_new,
+                                         debits: [debit_new],
                                          payment: payment)
 
     payment_page.visit_edit payment.id
@@ -25,7 +25,7 @@ describe Payment, :ledgers, :payment, type: :feature do
     it 'displays form errors' do
       payment = payment_new credit: credit_new(amount: -88)
       property_create account: account_new(charge: charge_new,
-                                           debit: debit_new,
+                                           debits: [debit_new],
                                            payment: payment)
 
       payment_page.visit_edit payment.id
