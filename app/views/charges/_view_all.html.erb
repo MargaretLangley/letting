@@ -20,7 +20,7 @@
 
 
 <% if charges.any? %>
-  <%= render partial: '/properties/show/charge', collection: charges, as: :model_charge %>
+  <%= render partial: 'charges/charge', collection: charges, as: :model_charge %>
 <% else %>
   No charges levied against this property.
 <% end %>

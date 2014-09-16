@@ -19,6 +19,11 @@ describe Charge, :ledgers, :range, type: :model do
   end
 
   describe 'methods' do
+
+    it 'responds to monthly' do
+      expect(charge_new).to_not be_monthly
+    end
+
     describe '#clear_up_form' do
       it 'keeps charges by default' do
         expect(Charge.new).to_not be_marked_for_destruction

@@ -12,6 +12,16 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
     end
   end
 
+  describe '#monthly?' do
+    it 'is monthly when intialized monthly' do
+      expect(charge_cycle_new(period_type: 'monthly')).to be_monthly
+    end
+
+    it 'is not monthly when initialized term' do
+      expect(charge_cycle_new(period_type: 'term')).to_not be_monthly
+    end
+  end
+
   describe '#due_between?' do
     before(:each) { Timecop.travel Date.new(2013, 1, 31) }
     after(:each)  { Timecop.return }

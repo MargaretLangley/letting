@@ -28,6 +28,10 @@ class ChargeCycle < ActiveRecord::Base
 
   delegate :clear_up_form, to: :due_ons
 
+  def monthly?
+    period_type == 'monthly'
+  end
+
   def prepare
     due_ons.prepare type: period_type
   end

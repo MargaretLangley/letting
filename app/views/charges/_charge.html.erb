@@ -10,11 +10,10 @@
     <%= number_to_currency charge.amount %>
   </div>
   <div class='col-4-12 vertical-spacer'>
-    <% dec_due_ons = DueOnsDecorator.new(charge.charge_cycle.due_ons)%>
-    <% if dec_due_ons.monthly? %>
-     <%= "- due #{dec_due_ons.per_month.day.ordinalize} of the month" %>
+    <% if charge.monthly? %>
+     <%= "- due #{charge.charge_cycle.due_ons.first.day.ordinalize} of the month" %>
     <% elsif %>
-       <%= render partial: '/properties/show/due_on', collection: dec_due_ons %>
+       <%= render partial: 'due_ons/due_on', collection: charge.charge_cycle.due_ons %>
     <% end %>
   </div>
   <div class='col-1-12 vertical-spacer c-align'>

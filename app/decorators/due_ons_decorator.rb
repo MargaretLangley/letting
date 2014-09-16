@@ -29,8 +29,4 @@ class DueOnsDecorator
   def by_date
     @source.to_a.take(DueOns::MAX_DISPLAYED_DUE_ONS)
   end
-
-  def first_day_or_empty
-    @source.first.present? ? @source.first.day : ''
-  end
 end

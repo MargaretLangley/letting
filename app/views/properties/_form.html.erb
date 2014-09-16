@@ -35,8 +35,8 @@
     </div>
     <hr>
     <div class='grid'>
-      <%= f.fields_for :account do |a| %>
-        <%= render 'charges', f: a, charges: property.account.charges %>
+      <%= f.fields_for :account do |account_fields| %>
+        <%= render 'charges/form', builder: account_fields, charges: property.account.charges %>
       <% end %>
     </div>
     <hr>

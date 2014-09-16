@@ -15,6 +15,10 @@ describe DueOnsDecorator do
       due_ons_dec
     end
 
+    it '#id' do
+      expect(prepared_due_ons.id 3).to eq 'property_charge_3'
+    end
+
     it '#by_date' do
       expect(prepared_due_ons.by_date.size).to eq 4
     end
