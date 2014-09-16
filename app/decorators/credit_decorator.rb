@@ -28,10 +28,4 @@ class CreditDecorator
   def owing
     Debit.available(charge_id).to_a.sum(&:outstanding)
   end
-
-  private
-
-  def debit
-    @source.debit
-  end
 end
