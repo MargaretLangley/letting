@@ -1,7 +1,6 @@
 <div class='print-only margwide'>
   <% @sheet = Sheet.find(1) %>
 
-  <% if false %>
   <%= render 'invoice_page1/print_invoice_heading',sheet: @sheet %>
 
   <div class='print-only'>
@@ -16,6 +15,5 @@
     <%= render 'invoice_page1/print_from', object: property_object %>
     <%= render 'invoice_page1/print_short_accounts', items: AccountDecorator.new(property_object.account).abbrev_items %>
   </div>
-  <% end %>
 
 </div>
