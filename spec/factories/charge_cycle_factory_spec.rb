@@ -62,5 +62,11 @@ describe 'ChargeCycle Factory', :ledgers do
         expect(DueOn.first).to eq DueOn.new(day: 6, month: 10)
       end
     end
+
+    describe 'creates monthly' do
+      it 'is valid' do
+        expect(charge_cycle_monthly_create.due_ons.count).to eq(12)
+      end
+    end
   end
 end

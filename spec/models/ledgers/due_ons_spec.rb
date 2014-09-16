@@ -103,7 +103,7 @@ describe DueOns, :ledgers, type: :model do
       end
 
       context 'monthly' do
-        it 'new per date' do
+        it 'new monthly' do
           (cycle = charge_cycle_new period_type: 'monthly', due_ons: nil)
             .prepare
           cycle.due_ons[0].update day: 5
@@ -111,12 +111,11 @@ describe DueOns, :ledgers, type: :model do
           expect(ChargeCycle.first.due_ons.size).to eq(12)
         end
 
-        it 'per month to different per month' do
-          skip 'implement'
-        end
-
-        it 'per month to same per month' do
-          skip 'implement'
+        it 'chages to different monthly' do
+          cycle = charge_cycle_monthly_create day: 2, prepare: true
+          cycle.due_ons[0].update day: 3
+          cycle.save!
+          expect(ChargeCycle.first.due_ons[11].day).to eq(3)
         end
       end
     end

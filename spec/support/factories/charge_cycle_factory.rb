@@ -30,6 +30,22 @@ def charge_cycle_create id: 1,
   cycle
 end
 
+def charge_cycle_monthly_create id: 1,
+                        name: 'First',
+                        order: 1,
+                        period_type: 'monthly',
+                        day: 1,
+                        prepare: false
+  cycle = ChargeCycle.new id: id,
+                          name: name,
+                          order: order,
+                          period_type: period_type
+  (1..12).each { |month| cycle.due_ons << [DueOn.new(day: day, month: month)] }
+  cycle.prepare if prepare
+  cycle.save!
+  cycle
+end
+
 def charge_cycle_name(id:)
   ChargeCycle.find(id).name
 end
