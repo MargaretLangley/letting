@@ -9,15 +9,35 @@
     End Date
   </div>
 
-  <% debit_generators.each do |debit_generator| %>
-    <div class='col-1-3 vertical-spacer grid-row'>
-      <%= debit_generator.search_string %>
-    </div>
-    <div class='col-1-3 vertical-spacer'>
-      <%= l debit_generator.start_date %>
-    </div>
-    <div class='col-1-3 vertical-spacer no-r-pad'>
-      <%= l debit_generator.end_date %>
-    </div>
+  <% debit_generators.each_with_index do |debit_generator, index| %>
+    <% if index == 0 %>
+      <div class='col-1-1 pick-out'>
+        <div class='col-5-8 vertical-spacer'>
+          <h3>
+            Invoice Range is <%= DebitGenerator.last.search_string %>
+            <br>
+            Note : Before printing ensure options:
+            <br>
+            Two-sided option should be set
+            <br>
+            Header & footer should NOT be set
+          </h3>
+        </div>
+        <div class='col-3-8 vertical-spacer pick-out'>
+        <br>
+        <%= link_to 'Print Invoices', '#', class: 'js-print-window simple-button'%>
+        </div>
+      </div>
+    <% else %>
+      <div class='col-1-3 vertical-spacer grid-row'>
+        <%= debit_generator.search_string %>
+      </div>
+      <div class='col-1-3 vertical-spacer'>
+        <%= l debit_generator.start_date %>
+      </div>
+      <div class='col-1-3 vertical-spacer no-r-pad'>
+        <%= l debit_generator.end_date %>
+      </div>
+    <% end %>
   <% end %>
  </div>
