@@ -33,7 +33,7 @@ gem 'jquery-ui-rails', '~> 4.1.0'
 gem 'turbolinks', '~> 2.2.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0.2'
+gem 'jbuilder', '~> 2.1.0'
 
 gem 'kaminari', '~> 0.16.1'
 
@@ -57,7 +57,7 @@ gem 'elasticsearch-extensions', group: :test
 gem 'unicorn', '~> 4.8.0'
 
 # corner banner on staging environment
-gem 'rack-dev-mark', '~> 0.6.0'
+gem 'rack-dev-mark', '~> 0.7.0'
 
 group :development do
   gem 'better_errors', '~> 2.0.0'
