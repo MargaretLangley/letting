@@ -22,11 +22,11 @@ describe LiteralSearch, type: :model do
         .to eq client.id
     end
 
-    it 'returns an exact invoice' do
+    it 'returns an exact invoicing' do
       ac_1 = (property_create human_ref: '100', account: account_new).account.id
       ac_2 = (property_create human_ref: '200', account: account_new).account.id
-      expect(LiteralSearch.search(type: 'Invoice', query: '100-200')
-                          .go[:record_id].pluck(:id))
+      expect(LiteralSearch.search(type: 'Invoicing', query: '100-200')
+                          .go[:record_id])
         .to eq [ac_1, ac_2]
     end
 

@@ -43,11 +43,11 @@ class LiteralSearch
         action: 'show',
         record_id: id_or_nil(Client.find_by human_ref: @query)
       }
-    when 'Invoice'
+    when 'Invoicing'
       {
-        controller: 'invoices',
+        controller: 'invoicings',
         action: 'new',
-        record_id: Account.between?(@query)
+        record_id: Account.between?(@query).pluck(:id)
       }
     when 'Payment'
       {

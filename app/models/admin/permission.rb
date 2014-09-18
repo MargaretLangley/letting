@@ -40,7 +40,7 @@ class Permission < Struct.new(:user)
        debits
        debit_generators
        errors
-       invoices
+       invoicings
        properties
        payments
        search

@@ -14,6 +14,28 @@
             <%= form_tag search_path, method: 'get' do %>
               <%= text_field_tag :search_terms, params[:search_terms], placeholder: 'Search here...', title: 'Search', data: {autocomplete_source: search_path}, autofocus:true, class: 'max-3-4' %>
               <button type="submit" class='max-1-4' id = 'search' title = 'Search' ><i class= 'fa fa-search fa-lg'></i></button>
+              <% if controller.controller_name == 'debit_generators' &&controller.action_name == 'new' %>
+                <div class='js-toggle-selection'>
+                  <div class='js-togglable'>
+                    <h4>Search for new charges within the next 8 weeks
+                      <a href='#' class='js-toggle '> or choose dates</a>
+                    </h4>
+                  </div>
+                  <div class='js-togglable js-revealable'>
+                    <h4>Search for new charges within choosen dates
+                      <a href='#' class='js-toggle '> or default to the next 8 weeks</a>
+                    </h4>
+                    <div class="col-1-2">
+                      <%= label_tag :start_date %>
+                      <%= date_field_tag :start_date  %>
+                    </div>
+                    <div class="col-1-2">
+                      <%= label_tag :end_date %>
+                      <%= date_field_tag :end_date %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
             <% end %>
           </div>
         </div>
