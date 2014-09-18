@@ -1,47 +1,51 @@
 <hr/>
 <div class='overlay-parent'>
-  <h2>Invoiced Charges</h2>
-  <div class='faded'>
-    Invoice Date
+  <div class="col-1-24">
+    &nbsp;
   </div>
-  <div class="grid vertical-spacer">
-    <div class="col-1-8 faded">
-      Search<br>
-      Range
+  <div class="col-14-24">
+    <div class='col-1-1 vertical-spacer'>
+      <h2>Invoiced Charges</h2>
     </div>
-    <div class="col-3-8">
+    <div class='grid-row col-3-8 vertical-spacer'>
+      Search Terms
+    </div>
+    <div class='col-5-8 vertical-spacer'>
+      &nbsp;
+    </div>
+    <div class='grid-row col-3-8 vertical-spacer faded'>
+      Properties
+    </div>
+    <div class='col-5-8 vertical-spacer'>
       <%= "#{debit_generator.search_string}" %>
-      <br>
+    </div>
+    <div class='grid-row col-3-8 vertical-spacer faded'>
+      Invoiceable Dates
+    </div>
+    <div class='col-5-8 vertical-spacer'>
       <%= "#{search_range}" %>
     </div>
-    <div class="col-1-2">
-      <%= debit_gen_form.submit name: 'create' , disabled: debit_generator.debitless?, class: 'width-2-3' %> or
-      <%= link_to_unless debit_generator.debitless? ,'Cancel', debit_generators_path, class: 'warn'  %>
+    <div class="grid-row col-3-8 vertical-spacer faded">
+      Invoice Date
+    </div>
+    <div class='col-3-8 vertical-spacer'>
+      (TODO: date to be coded)
+    </div>
+    <div class='col-2-8 vertical-spacer'>
+      &nbsp;
     </div>
   </div>
-
-  <div class='grid'>
-    <div class='col-2-12 vertical-spacer grid-header r-align'>
-      ID
-    </div>
-    <div class='col-1-12 vertical-spacer grid-header'>
-      Type
-    </div>
-    <div class='col-3-12 vertical-spacer grid-header'>
-      Charge
-    </div>
-    <div class='col-3-12 vertical-spacer grid-header r-align'>
-      Date
-    </div>
-    <div class='col-3-12 vertical-spacer grid-header r-align'>
-     Amount
-    </div>
+  <div class="col-9-24">
+    </br></br></br>
+    <%= debit_gen_form.submit name: 'create' , disabled: debit_generator.debitless?, class: 'width-2-3' %> or
+    <%= link_to_unless debit_generator.debitless? ,'Cancel', debit_generators_path, class: 'warn'  %>
   </div>
 
   <% if debit_generator.debitless? %>
-    <%= render 'no_chargeable_properties' %>
+    <div class='shell  overlay top-3-12'>
+      <%= t('instruction.debit_generators.property_charge') %>
+    </div>
   <% else %>
    <%= render 'debits', debit_gen_form: debit_gen_form, debits: debit_generator.debits %>
   <% end %>
-
 </div>
