@@ -1,32 +1,29 @@
+<% if allow? "users", "" %>
+  <nav class='nav-shell'>
+    <ul class='shell'>
+      <h4>&nbsp;Admin</h4>
+      <li class="<%= main_menu_active? "charge_cycles" %>"><%= link_to 'Charge Cycles', charge_cycles_path %></li>
+      <li class="active-subnav <%= sub_menu_folded? 'charge_cycles' %>"><%= link_to 'New Charge Cycle', new_charge_cycle_path(period: 'term') %></li>
+      <li class="active-subnav <%= sub_menu_folded? 'charge_cycles' %>"><%= link_to 'New Monthly Charge Cycle', new_charge_cycle_path(period: 'monthly') %></li>
+
+      <li class="<%= main_menu_active? 'users' %>"><%= link_to 'Users', users_path %></li>
+      <li class="active-subnav <%= sub_menu_folded? 'users' %>"><%= link_to 'New User', new_user_path %></li>
+      <li class="<%= main_menu_active? 'sheets' %>"><%= link_to 'Invoice Text', sheets_path %></li>
+    </ul>
+  </nav>
+<% end %>
+
 <nav class='nav-shell'>
   <ul class='shell'>
+    <h4>&nbsp;Menu</h4>
     <li class="<%= main_menu_active? 'properties' %>"><%= link_to 'Accounts', properties_path %></li>
     <li class="active-subnav <%= sub_menu_folded? 'properties' %>"><%= link_to 'New Account', new_property_path %></li>
-
-    <% if allow? "users", "" %>
-        <li class="<%= main_menu_active? "charge_cycles" %>"><%= link_to 'Charge Cycles', charge_cycles_path %></li>
-        <li class="active-subnav <%= sub_menu_folded? 'charge_cycles' %>"><%= link_to 'New Charge Cycle', new_charge_cycle_path(period: 'term') %></li>
-        <li class="active-subnav <%= sub_menu_folded? 'charge_cycles' %>"><%= link_to 'New Monthly Charge Cycle', new_charge_cycle_path(period: 'monthly') %></li>
-    <% end %>
-
     <li class="<%= main_menu_active? "clients" %>"><%= link_to 'Clients', clients_path %></li>
     <li class="active-subnav <%= sub_menu_folded? 'clients' %>"><%= link_to 'New Client', new_client_path %></li>
 
     <li class="<%= main_menu_active? 'debit_generators' %>"><%= link_to 'Invoices', debit_generators_path %></li>
     <li class="active-subnav <%= sub_menu_folded? 'debit_generators' %>"><%= link_to 'New Invoice', new_debit_generator_path %></li>
-
- <% if allow? "users", "" %>
-    <li class="active-subnav <%= sub_menu_folded? 'debit_generators' %>"><%= link_to 'Text Update', sheets_path %></li>
-
-   <li class="active-subnav <%= sub_menu_folded? 'sheets' %>"><%= link_to 'Text Update', sheets_path %></li>
-    <% end %>
-
     <li class="<%= main_menu_active? "payments" %>"><%= link_to 'New Payment', new_payment_path %></li>
     <li class="active-subnav <%= sub_menu_folded? 'payments' %>"><%= link_to 'Payments', payments_path %></li>
-
-    <% if allow? "users", "" %>
-        <li class="<%= main_menu_active? 'users' %>"><%= link_to 'Users', users_path %></li>
-        <li class="active-subnav <%= sub_menu_folded? 'users' %>"><%= link_to 'New User', new_user_path %></li>
-    <% end %>
   </ul>
 </nav>
