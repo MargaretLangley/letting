@@ -5,10 +5,10 @@
 # Base Class for all the applications controller. chiefly it supplies current
 # user and authorization.
 #
-# Appliction supplies current_user - so a controller and views have a common
+# Application supplies current_user - so a controller and views have a common
 # way to access the current user and the authorization system.
 #
-# The class also provides, eclecitcly, params used by a few of the classes.
+# The class also provides, eclectically, params used by a few of the classes.
 #
 #####
 #

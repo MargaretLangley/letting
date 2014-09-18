@@ -3,7 +3,7 @@ require_relative '../../lib/modules/method_missing'
 #
 # PropertyDecorator
 #
-# Adds behavior to the property object
+# Adds behaviour to the property object
 #
 # Used when the property has need for behaviour outside of the core
 # of the model. Specifically for display information.

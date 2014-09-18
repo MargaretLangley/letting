@@ -2,13 +2,13 @@
 #
 # SessionsController
 #
-# Handles the authentication into the sysem.
+# Handles the authentication into the system.
 #
 # Users 'log into' the system when a create action occurs.
 # Users 'log out' of the system when a destroy action occurs.
 #
 # When a user authenticates the user_id it is saved in the session.
-# The application acesses the user_id through the application_controller using
+# The application accesses the user_id through the application_controller using
 # the current_user. Each request has the session's user_id verify against the
 # the application database's users table.
 #

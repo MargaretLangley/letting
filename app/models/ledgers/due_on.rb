@@ -11,7 +11,7 @@
 #
 # day - day which the charge becomes due
 # month - month which the charge becomes due
-# year - nil on reocurring due_ons
+# year - nil on recurring due_ons
 #        set to year for one off charges.
 #
 # More information: due_ons.rb

@@ -6,10 +6,10 @@
 # a property should become due a charge.
 #
 # The code is part of the charge system in the accounts. Charges are
-# associated with a propertie's account. When an operator decides they want to
+# associated with a property's account. When an operator decides they want to
 # bill a group of properties. Charges are generated according to this
 # information using the debit generator. The information is passed, as a
-# chargeable, to becomes a debit in the propertie's account.debits
+# chargeable, to becomes a debit in the property's account.debits
 #
 ####
 #

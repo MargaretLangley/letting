@@ -9,7 +9,7 @@
 #
 # How does it fit into the larger system?
 #
-# Coverts due charges into debits. The debits are then used for invoicing
+# Converts due charges into debits. The debits are then used for invoicing
 # owing debits and later credits through payments.
 #
 ####

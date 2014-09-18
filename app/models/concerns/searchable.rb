@@ -24,7 +24,7 @@ module Searchable
   included do
     include Elasticsearch::Model
     include Elasticsearch::Model::Callbacks
-    # collection is pluraized version of the model_name
+    # collection is pluralized version of the model_name
     index_name [Rails.env, model_name.collection.gsub(/\//, '-')].join('_')
 
     settings(

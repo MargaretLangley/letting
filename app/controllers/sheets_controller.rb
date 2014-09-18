@@ -6,7 +6,7 @@
 #
 # Sheets are used to create invoices,
 # they hold data needed to produce heading,
-# Adam's address, notes and items on onvoice and
+# Adam's address, notes and items on invoice and
 # notice of rent due.
 #
 ####

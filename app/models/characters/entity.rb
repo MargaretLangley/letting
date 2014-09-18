@@ -4,7 +4,7 @@
 #
 # Why does this class exist?
 #
-# represents a person (indivicual or a company) in the application.
+# represents a person (individual or a company) in the application.
 #
 # How does this fit into the larger system
 #

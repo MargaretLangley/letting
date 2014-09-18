@@ -3,9 +3,9 @@ require_relative '../../lib/modules/method_missing'
 #
 # PaymentDecorator
 #
-# Adds behavior to the payment object
+# Adds behaviour to the payment object
 #
-# Used when the payment has need for behviour outside of the core
+# Used when the payment has need for behaviour outside of the core
 # of the model. Specifically for display information.
 #
 # The main issue is with credit signs. The accounts system maintains negative

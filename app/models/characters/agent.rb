@@ -2,7 +2,7 @@
 #
 # Agent
 #
-# Provides a contact, agent, address spearate from the property
+# Provides a contact, agent, address separate from the property
 #
 # Agent provides the property with a separate contact address
 # if it is needed.
@@ -31,7 +31,7 @@ class Agent < ActiveRecord::Base
     end
   end
 
-  # flattening data structure for json conversion
+  # flattening data structure for JSON conversion
   def full_name
     bill_to.entities.full_name
   end

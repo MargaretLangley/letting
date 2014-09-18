@@ -2,7 +2,7 @@
 #
 # Payment
 #
-# When a payment is recieved from a tenant it is represented by the payment
+# When a payment is received from a tenant it is represented by the payment
 # object on the database.
 #
 # Payments are a collection of credits which offset against debits.
@@ -52,7 +52,7 @@ class Payment < ActiveRecord::Base
   end
 
   include Searchable
-  # Elasticsearch uses generates json document for payment index
+  # Elasticsearch uses generates JSON document for payment index
   def as_indexed_json(_options = {})
     as_json(
       include: {

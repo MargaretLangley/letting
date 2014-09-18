@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new users_params
     if @user.save
-      redirect_to users_path, notice: "#{identy} successfully created!"
+      redirect_to users_path, notice: "#{identity} successfully created!"
     else
       render :new
     end
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find params[:id]
     if @user.update users_params
-      redirect_to users_path, notice: "#{identy} successfully updated!"
+      redirect_to users_path, notice: "#{identity} successfully updated!"
     else
       render :edit
     end
@@ -56,12 +56,12 @@ class UsersController < ApplicationController
 
   private
 
-  def identy
+  def identity
     "#{@user.email} ( id #{@user.id})"
   end
 
   def user_deleted_message
-    "#{identy} successfully deleted!"
+    "#{identity} successfully deleted!"
   end
 
   def users_params

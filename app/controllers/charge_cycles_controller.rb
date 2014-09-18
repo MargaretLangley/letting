@@ -70,19 +70,19 @@ class ChargeCyclesController < ApplicationController
                                  :month, :year]
   end
 
-  def identy
+  def identity
     "Charge Cycle '#{@charge_cycle.name} #{@charge_cycle.order}'"
   end
 
   def charge_cycle_created_message
-    "#{identy} successfully created!"
+    "#{identity} successfully created!"
   end
 
   def charge_cycle_updated_message
-    "#{identy} successfully updated!"
+    "#{identity} successfully updated!"
   end
 
   def charge_cycle_deleted_message
-    "#{identy} successfully deleted!"
+    "#{identity} successfully deleted!"
   end
 end

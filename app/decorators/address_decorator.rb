@@ -6,13 +6,13 @@ require_relative '../../lib/modules/method_missing'
 #
 # Adding html and css code to address objects.
 #
-# AddressDecorator is responsbile for adding, or not, js actitve classes to the
+# AddressDecorator is responsible for adding, or not, js active classes to the
 # address object used in property and client.
 #
-# Decorator initializes visability of objects:
+# Decorator initializes viability of objects:
 # By default this is district text element hidden and the add button district
 # visible. This is reversed once district has been added. The decorator use:
-# js-revealable - 'display: none;' to init visibility.
+# js-revealable - 'display: none;' to initialize visibility.
 #
 # Toggling visibility
 #

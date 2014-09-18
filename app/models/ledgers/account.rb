@@ -47,7 +47,7 @@ class Account < ActiveRecord::Base
   MAX_CHARGES = 4
   accepts_nested_attributes_for :charges, allow_destroy: true
 
-  # For each charge it finds the next time it can be charged,if any,
+  # For each charge it finds the next time it can be charged, if any,
   # and creates a debit.
   # date_range - dates which we prepare debits over
   #
@@ -82,7 +82,7 @@ class Account < ActiveRecord::Base
     Account.between?(human_ref).first
   end
 
-  # Searchs for matching accounts between a range
+  # Searches for matching accounts between a range
   # query - an account or account range, '2002 - 3000'
   #
   def self.between? human_ref_range

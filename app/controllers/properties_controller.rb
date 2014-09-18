@@ -84,20 +84,20 @@ class PropertiesController < ApplicationController
     %i(id charge_type charge_cycle_id charged_in_id amount dormant)
   end
 
-  def identy
+  def identity
     property = PropertyDecorator.new @property
     "Property 'ID #{property.human_ref}, #{property.abbreviated_address}'"
   end
 
   def property_created_message
-    "#{identy} successfully created!"
+    "#{identity} successfully created!"
   end
 
   def property_updated_message
-    "#{identy} successfully updated!"
+    "#{identity} successfully updated!"
   end
 
   def property_deleted_message
-    "#{identy} successfully deleted!"
+    "#{identity} successfully deleted!"
   end
 end
