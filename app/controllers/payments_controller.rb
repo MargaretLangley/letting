@@ -4,10 +4,10 @@
 #
 # Restful actions on the Payments resource
 #
-# Payments resource covers crediting the debits that the tennats are
+# Payments resource covers crediting the debits that the tenants are
 # charged by the debt generator / invoicing system.
 #
-# Payments are operator generated resources. When a payment is recieved
+# Payments are operator generated resources. When a payment is received
 # (by standing order or cheque) - it is entered into the system through
 # this resource.
 #
@@ -74,18 +74,18 @@ class PaymentsController < ApplicationController
   private
 
   def created_message
-    "Payment #{identy} successfully created"
+    "Payment #{identity} successfully created"
   end
 
   def updated_message
-    "#{identy} successfully updated!"
+    "#{identity} successfully updated!"
   end
 
   def deleted_message
     'payment successfully deleted!'
   end
 
-  def identy
+  def identity
     "Ref: '#{@payment.account.property.human_ref}' " \
     "Name: '#{@payment.account.property.occupier}' " \
     "Amount: '£#{@payment.amount}'"

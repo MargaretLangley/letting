@@ -474,8 +474,6 @@ $search-height: 35px;
   font-size:1.4em;
 }
 
-
-
 .overlay{
   @include base-overlay;
 }
@@ -485,17 +483,9 @@ $search-height: 35px;
   top: 100%;
 }
 
-
-.popup{
-  display: none;
-}
-
-
-
-
 /*--------------------------------------------------*\
 
-  $AUTOCOMPLETE
+  $AUTO-COMPLETE
 
 \*--------------------------------------------------*/
 

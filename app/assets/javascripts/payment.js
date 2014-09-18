@@ -6,12 +6,6 @@ $(function () {
    $('.js-amount').keyup(function(){
       calculateTotal(this);
   });
-
- $('#address').hover(function() {
-      $('#js-popup').show();
-  }, function() {
-      $('#js-popup').hide();
-  });
 });
 
 function calculateTotal( src ) {

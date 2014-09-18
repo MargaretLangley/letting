@@ -6,8 +6,8 @@
 // # Select boxes using class identifier instead of id (as we need) more than one
 // # selected box on the same form.
 // # js-dynamic-group - outer box containing the related select boxes.
-// # js-dynamic-filter - selecting dropdown filters the results
-// # js-dynamic-result - the dropdown whose results are reduced by the filtering.
+// # js-dynamic-filter - selecting drop-down filters the results
+// # js-dynamic-result - the drop-down whose results are reduced by the filtering.
 // #
 // #
 
