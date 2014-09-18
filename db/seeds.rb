@@ -368,65 +368,7 @@ end
 def seed_sheets
   Rake::Task['db:import:sheet'].invoke
   Rake::Task['db:import:sheet_address'].invoke
-
-  create_notices
-end
-
-def create_notices
-  Notice.create! [
-    {
-      id: 10,
-      sheet_id: 2,
-      instruction: '[Insert name(s)of leaseholder(s)] (note 1)',
-      clause: 'To',
-      proxy: 'Mr & Mrs Notice',
-    },
-    {
-      id: 11,
-      sheet_id: 2,
-      instruction: '[address of premises to which the long lease relates]',
-      clause: 'This notice is given in respect of',
-      proxy: '11 Lichfield Road',
-    },
-    {
-      id: 12,
-      sheet_id: 2,
-      instruction: '[Insert date (note 2)]',
-      clause: 'It requires you to pay rent of',
-      proxy: '£20 on 25th March 2016',
-    },
-    {
-      id: 13,
-      sheet_id: 2,
-      instruction: '[state period]',
-      clause: 'The rent is payable in respect of the period',
-      proxy: '26th Sept 2015 to 25th March 2016',
-    },
-
-    {
-      id: 14,
-      sheet_id: 2,
-      instruction: '[insert name of landlord(s) or if payment should be made to an agent name of agent]',
-      clause: 'Payment should be made to ',
-      proxy: 'Noticer',
-    },
-
-    {
-      id: 15,
-      sheet_id: 2,
-      instruction: '[insert address]',
-      clause: 'at ',
-      proxy: '2 Attwood Street',
-    },
-
-    {
-      id: 16,
-      sheet_id: 2,
-      instruction: '[insert name of landlord(s) and if not given above, address]',
-      clause: 'This notice is given by',
-      proxy: 'CLIENT NAME',
-    },
-  ]
+  Rake::Task['db:import:sheet_notice'].invoke
 end
 
 def reset_pk_sequenece_on_each_table_used
