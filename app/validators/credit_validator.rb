@@ -22,7 +22,7 @@ class CreditValidator < ActiveModel::EachValidator
   # Fortunately, 0 is invalid - otherwise opaque string matching required.
   #
   def validate_each(record, attribute, value)
-    return if value && ( value != 0 && value > -100_000 && value < 100_000)
+    return if value && (value != 0 && value > -100_000 && value < 100_000)
 
     record.errors.add attribute, error_message(value)
   end

@@ -13,9 +13,9 @@ gem 'pg', '~>0.17.0'
 
 gem 'equalizer'
 
-# Use SCSS for stylesheets
+# Use SCSS for style-sheets
 gem 'sass-rails', '~> 4.0.3'
-gem 'sprockets', '~>2.11.0' # bugfix 3376e59
+gem 'sprockets', '~>2.11.0' # bug-fix 3376e59
 gem 'autoprefixer-rails'
 gem 'compass-rails'
 
