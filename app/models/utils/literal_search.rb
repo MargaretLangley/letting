@@ -7,6 +7,8 @@
 # Used by search Controller
 #
 # rubocop: disable  Metrics/MethodLength
+# TODO: remove CyclomaticComplexity
+# rubocop: disable Metrics/CyclomaticComplexity
 #
 ####
 #
@@ -29,11 +31,23 @@ class LiteralSearch
 
   def type_query
     case @type
+    when 'ChargeCycle'
+      {
+        controller: 'charge_cycles',
+        action: 'show',
+        record_id: id_or_nil(ChargeCycle.find_by name: @query)
+      }
     when 'Client'
       {
         controller: 'clients',
         action: 'show',
         record_id: id_or_nil(Client.find_by human_ref: @query)
+      }
+    when 'Invoice'
+      {
+        controller: 'invoices',
+        action: 'new',
+        record_id: Account.between?(@query)
       }
     when 'Payment'
       {
@@ -53,12 +67,6 @@ class LiteralSearch
         controller: 'users',
         action: 'show',
         record_id: id_or_nil(User.find_by nickname: @query)
-      }
-    when 'ChargeCycle'
-      {
-        controller: 'charge_cycles',
-        action: 'show',
-        record_id: id_or_nil(ChargeCycle.find_by name: @query)
       }
     else
       fail NotImplementedError, "Missing type: #{@type}"

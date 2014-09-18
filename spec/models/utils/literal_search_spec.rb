@@ -9,30 +9,50 @@ describe LiteralSearch, type: :model do
         .to eq nil
     end
 
-    it 'return an exact property ref' do
+    it 'returns an exact charge cycle' do
+      cycle = charge_cycle_create name: 'Mar/Sep'
+      expect(LiteralSearch.search(type: 'ChargeCycle', query: 'Mar/Sep')
+                          .go[:record_id])
+        .to eq cycle.id
+    end
+
+    it 'returns an exact client ref' do
+      client = client_create human_ref: '101'
+      expect(LiteralSearch.search(type: 'Client', query: '101').go[:record_id])
+        .to eq client.id
+    end
+
+    it 'returns an exact invoice' do
+      ac_1 = (property_create human_ref: '100', account: account_new).account.id
+      ac_2 = (property_create human_ref: '200', account: account_new).account.id
+      expect(LiteralSearch.search(type: 'Invoice', query: '100-200')
+                          .go[:record_id].pluck(:id))
+        .to eq [ac_1, ac_2]
+    end
+
+    it 'returns an exact payment ref' do
+      property = property_create human_ref: '100', account: account_new
+      expect(LiteralSearch.search(type: 'Payment', query: '100')
+                          .go[:record_id])
+        .to eq property.account.id
+    end
+
+    it 'returns an exact property ref' do
       property = property_create human_ref: '100'
       expect(LiteralSearch.search(type: 'Property', query: '100')
                           .go[:record_id])
         .to eq property.id
     end
 
-    it 'return an exact client ref' do
-      client = client_create human_ref: '101'
-      expect(LiteralSearch.search(type: 'Client', query: '101').go[:record_id])
-        .to eq client.id
-    end
-
-    it 'return an exact user' do
+    it 'returns an exact user' do
       user = user_create nickname: 'george'
       expect(LiteralSearch.search(type: 'User', query: 'george').go[:record_id])
         .to eq user.id
     end
 
-    it 'return an exact charge cycle' do
-      cycle = charge_cycle_create name: 'Mar/Sep'
-      expect(LiteralSearch.search(type: 'ChargeCycle', query: 'Mar/Sep')
-                          .go[:record_id])
-        .to eq cycle.id
+    it 'errors on unknown type' do
+      expect { LiteralSearch.search(type: 'X', query: 'y').go[:record_id] }
+        .to raise_error NotImplementedError
     end
   end
 
