@@ -28,12 +28,9 @@ class PaymentsController < ApplicationController
     @payment.negate
   end
 
+  # params[:id] is the account_id returned from search_controller
   def new
-    prepare_for_new_action account_id: params[:id]
-  end
-
-  def prepare_for_new_action(account_id:)
-    account = Account.find_by id: account_id
+    account = Account.find_by id: params[:id]
     @payment = PaymentDecorator.new(Payment.new account: account)
     @payment.prepare_for_form
     @payment.negate
