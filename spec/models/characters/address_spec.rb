@@ -91,6 +91,11 @@ describe Address, type: :model do
       end
     end
 
+    it 'outputs #text' do
+      house = Address.new flat_no: '17', road: 'Edge Road', town: 'Brum'
+      expect(house.text).to eq "Flat 17\nEdge Road\nBrum"
+    end
+
     context '#empty?' do
       it('starts empty') { expect(Address.new).to be_empty }
 

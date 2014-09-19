@@ -51,6 +51,10 @@ class Address < ActiveRecord::Base
      town.blank? ? county : town]
   end
 
+  def text
+    address_lines.delete_if(&:empty?).join "\n"
+  end
+
   def empty?
     attributes.except(*ignored_attrs).values.all?(&:blank?)
   end
