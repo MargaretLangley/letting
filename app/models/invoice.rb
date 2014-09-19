@@ -1,16 +1,14 @@
-# Invoice Data
+# Invoice Requires
 #
+# Agent
+# - Compound Name and address
+# Property Ref
 # Invoice Date
-# Total Owing
-# Client
-#   - Name, client address
-# Property
-#   - Property Ref
-#   - Occupier's name & Address
-#   - Agent
-#     - Name & address
+# Property Address
+# Arrears
+#  - balance on the account on that day
 #
-# Invoiceable (data for each invoice item)
+# Invoice item
 #   - Invoice Type  (GR Ins, Service Charge etc)
 #   - Date Due
 #   - Description
@@ -18,11 +16,24 @@
 #   - Balance
 #   - Time Period the charge covers
 #
-#  Arrears
-#   - Total arrears (not even date)
+# - Total Owing
+#
+# Client
+#   - Compound Name and address
 #
 class Invoice < ActiveRecord::Base
-  include Contact
+  def prepare(invoice_date:, account:)
+    # self.agent = < agent name and address >
+    self.property_ref = account.property.human_ref
+    self.invoice_date = invoice_date
 
-  # Client  Name, client address
+    self.property_address = account.property.address.text
+
+    self.arrears = account.balance
+    # items
+    # self.total_arrears = < sum >
+    self.client = account.property.client.full_name +
+                  account.property.client.address.text
+    self
+  end
 end

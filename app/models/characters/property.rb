@@ -23,6 +23,7 @@ class Property < ActiveRecord::Base
   validates :entities, presence: true
   before_validation :clear_up_form
 
+  delegate :text, to: :address, prefix: true
   delegate :abbreviated_address, to: :address
 
   def occupier

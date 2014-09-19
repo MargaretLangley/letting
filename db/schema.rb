@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827133520) do
+ActiveRecord::Schema.define(version: 20140919091254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,6 +156,23 @@ ActiveRecord::Schema.define(version: 20140827133520) do
   end
 
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
+
+  create_table "invoices", force: true do |t|
+    t.date     "invoice_date",                           null: false
+    t.string   "occupier",                               null: false
+    t.text     "address",                                null: false
+    t.integer  "property_ref",                           null: false
+    t.string   "client_name",                            null: false
+    t.text     "client_address",                         null: false
+    t.decimal  "arrears",        precision: 8, scale: 2, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invoicings", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "notices", force: true do |t|
     t.integer  "sheet_id"
