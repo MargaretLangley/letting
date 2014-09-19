@@ -37,7 +37,8 @@ describe PropertyDecorator do
       it 'address returned' do
         agent = agent_new address: address_new(road: 'Wiggiton')
         property = PropertyDecorator.new property_create agent: agent
-        expect(property.agent_address_lines[0]).to eq 'Wiggiton'
+        expect(property.agent.address_text)
+          .to eq "Wiggiton\nBirmingham\nWest Midlands"
       end
     end
 

@@ -37,8 +37,8 @@
   Address
 </div>
 <div class='col-3-8 vertical-spacer'>
-  <%= render 'addresses/view', lines: property.address_lines %>
+  <%= simple_format(property.address.text, {}, wrapper_tag: 'div') %>
 </div>
 <div class='col-3-8 vertical-spacer'>
-  <%= render 'addresses/view', lines: property.agent_address_lines %>
+  <%= simple_format(property.agent_address_lines, {}, wrapper_tag: 'div') %>
 </div>

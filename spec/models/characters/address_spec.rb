@@ -55,23 +55,6 @@ describe Address, type: :model do
   end
 
   describe 'methods' do
-    describe '#address_lines' do
-      it 'writes flat property' do
-        address = Address.new address_attributes
-        expect(address.address_lines).to contain_exactly \
-          'Flat 47 Hillbank House',
-          '294 Edgbaston Road',
-          'Edgbaston',
-          'Birmingham',
-          'West Midlands',
-          'B5 7QU'
-      end
-
-      it 'writes house from road' do
-        expect(Address.new(road: 'Highroad').address_lines[0]).to eq 'Highroad'
-      end
-    end
-
     describe 'abbreviated_address' do
       it 'adds flat when present' do
         address = Address.new flat_no: '47', house_name: 'Hill', town: 'Brum'

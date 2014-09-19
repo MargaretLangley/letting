@@ -4,6 +4,6 @@
 	     <%= render 'entities/view', object: entity %>
 	  <% end %>
 	  <br>
-	   <%= render 'addresses/view', lines: object.bill_to.address.address_lines %>
+     <%= simple_format(object.bill_to.address.text, {}, wrapper_tag: 'div') %>
    <% end %>
 </div>

@@ -36,8 +36,8 @@ class Agent < ActiveRecord::Base
     bill_to.entities.full_name
   end
 
-  def address_lines
-    bill_to.address.address_lines.join ' '
+  def address_text
+    bill_to.address.text
   end
 
   private

@@ -34,18 +34,6 @@ class Address < ActiveRecord::Base
             length: { minimum: MIN_POSTCODE, maximum: MAX_POSTCODE },
             allow_blank: true
 
-  def address_lines
-    [
-      flat_line,
-      road_line,
-      district,
-      town,
-      county,
-      postcode,
-      nation
-    ].compact
-  end
-
   def abbreviated_address
     [flat_house_line.blank? ? road_line : flat_line,
      town.blank? ? county : town]
@@ -79,6 +67,18 @@ class Address < ActiveRecord::Base
 
   def flat_house_line
     "#{flat_no} #{house_name}".strip
+  end
+
+  def address_lines
+    [
+      flat_line,
+      road_line,
+      district,
+      town,
+      county,
+      postcode,
+      nation
+    ].compact
   end
 
   def ignored_attrs

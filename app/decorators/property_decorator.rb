@@ -32,7 +32,7 @@ class PropertyDecorator
 
   def agent_address_lines
     if source.agent.authorized?
-      source.agent.address.address_lines
+      source.agent.address.text
     else
       ['-']
     end

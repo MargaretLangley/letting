@@ -27,7 +27,7 @@ class Account < ActiveRecord::Base
   end
 
   def address
-    property.address_lines
+    property.address.text
   end
   has_many :debits, dependent: :destroy
   accepts_nested_attributes_for :debits, allow_destroy: true

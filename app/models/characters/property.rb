@@ -23,7 +23,6 @@ class Property < ActiveRecord::Base
   validates :entities, presence: true
   before_validation :clear_up_form
 
-  delegate :address_lines, to: :address
   delegate :abbreviated_address, to: :address
 
   def occupier
@@ -52,7 +51,7 @@ class Property < ActiveRecord::Base
       methods: :occupier,
       include: {
         address: {},
-        agent: { methods: [:address_lines, :full_name],
+        agent: { methods: [:address_text, :full_name],
                  only: [:address_lines, :full_name] }
       })
   end

@@ -28,7 +28,7 @@
     Address
   </div>
   <div class='col-3-4 vertical-spacer'>
-    <%= render 'addresses/view', lines: @client.address.address_lines %>
+    <%= simple_format(@client.address.text, {}, wrapper_tag: 'div') %>
   </div>
   <div class='col-1-1 vertical-spacer faded'>
     Properties Owned
