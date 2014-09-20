@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Invoice Factory' do
-  describe 'new' do
+  describe 'default' do
     it('is valid') { expect(invoice_new).to be_valid }
   end
 
@@ -19,25 +19,18 @@ describe 'Invoice Factory' do
       expect(invoice_new(property_ref: 87).property_ref).to eq(87)
     end
 
-    it 'sets occupier' do
-      property = property_new(occupiers: [Entity.new(name: 'Grace')])
-      expect(invoice_new(property: property).occupier).to eq 'Grace'
-    end
-
     it 'sets property address' do
       address = address_new(road: 'New Road')
-      expect(invoice_new(property: property_new(address: address)).address)
+      expect(invoice_new(property_address: address).property_address)
         .to eq "New Road\nBirmingham\nWest Midlands"
     end
 
-    it 'sets client name' do
-      expect(invoice_new(client_name: 'M. Pi').client_name).to eq 'M. Pi'
-    end
-
-    it 'sets client address' do
-      address = "New Road\nBrum\nWest Mids"
-      expect(invoice_new(client_address: address).client_address)
-        .to eq "New Road\nBrum\nWest Mids"
+    it 'sets client' do
+      client = \
+      client_new entities: [Entity.new(name: 'Bell')],
+                 address: address_new(road: 'New', town: 'Brum', county: 'West')
+      expect(invoice_new(client: client.to_s).client)
+        .to eq "Bell\nNew\nBrum\nWest"
     end
   end
 end

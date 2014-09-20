@@ -22,7 +22,7 @@ class Agent < ActiveRecord::Base
     authorized? ? self : property
   end
 
-  def to_address
+  def to_billing
     return unless authorized
     full_name + "\n" + address_text
   end

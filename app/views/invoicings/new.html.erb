@@ -1,2 +1,46 @@
 <% @title='New Invoicing' %>
 
+<%= form_for @invoicing do |f| %>
+  <%= render 'shared/errors', object: @invoicing %>
+
+<div id='invoicing' class='shell' style='position: relative;'>
+  <div class='overlay-parent'>
+    <div class="col-1-24">
+      &nbsp;
+    </div>
+    <div class="col-14-24">
+      <div class='col-1-1 vertical-spacer'>
+        <h2>Invoicing</h2>
+      </div>
+      <div class='grid-row col-3-8 vertical-spacer'>
+        Search Terms
+      </div>
+      <div class='col-5-8 vertical-spacer'>
+        &nbsp;
+      </div>
+      <div class='grid-row col-3-8 vertical-spacer faded'>
+        Properties
+      </div>
+      <div class='col-5-8 vertical-spacer'>
+        <%= @invoicing.property_range %>
+      </div>
+      <div class='grid-row col-3-8 vertical-spacer faded'>
+        Invoiceable Dates
+      </div>
+      <div class='col-5-8 vertical-spacer'>
+        search range
+      </div>
+      <div class="grid-row col-3-8 vertical-spacer faded">
+        Invoice Date
+      </div>
+      <div class='col-3-8 vertical-spacer'>
+        (TODO: date to be coded)
+      </div>
+      <div class='col-2-8 vertical-spacer'>
+        &nbsp;
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+

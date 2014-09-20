@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140919091254) do
+ActiveRecord::Schema.define(version: 20140920193251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,8 +157,22 @@ ActiveRecord::Schema.define(version: 20140919091254) do
 
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
 
+  create_table "invoice_items", force: true do |t|
+    t.integer  "invoice_id",  null: false
+    t.string   "charge_type"
+    t.date     "date_due"
+    t.string   "description"
+    t.decimal  "amount"
+    t.string   "range"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "invoice_items", ["invoice_id"], name: "index_invoice_items_on_invoice_id", using: :btree
+
   create_table "invoices", force: true do |t|
-    t.text     "agent",                                    null: false
+    t.integer  "invoicing_id"
+    t.text     "billing_address",                          null: false
     t.integer  "property_ref",                             null: false
     t.date     "invoice_date",                             null: false
     t.text     "property_address",                         null: false
@@ -169,7 +183,10 @@ ActiveRecord::Schema.define(version: 20140919091254) do
     t.datetime "updated_at"
   end
 
+  add_index "invoices", ["invoicing_id"], name: "index_invoices_on_invoicing_id", using: :btree
+
   create_table "invoicings", force: true do |t|
+    t.string   "property_range"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

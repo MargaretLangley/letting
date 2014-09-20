@@ -8,7 +8,8 @@
 #
 class InvoicingsController < ApplicationController
   def new
-    accounts = params[:id]
+    @invoicing = Invoicing.new
+    @invoicing.generate account_ids: params[:id] if params[:id]
   end
 
   def create

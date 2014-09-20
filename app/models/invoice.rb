@@ -9,7 +9,7 @@
 #  - balance on the account on that day
 #
 # Invoice item
-#   - Invoice Type  (GR Ins, Service Charge etc)
+#   - Charge Type
 #   - Date Due
 #   - Description
 #   - Amount
@@ -22,18 +22,33 @@
 #   - Compound Name and address
 #
 class Invoice < ActiveRecord::Base
-  def prepare(invoice_date:, account:)
-    # self.agent = < agent name and address >
+  belongs_to :invoicing
+  validates :invoice_date,
+            :property_ref,
+            :property_address,
+            :arrears,
+            presence: true
+
+  def prepare(invoice_date: Date.current, account:)
+    self.billing_address = account.property.bill_to_s
     self.property_ref = account.property.human_ref
     self.invoice_date = invoice_date
 
-    self.property_address = account.property.address.text
+    self.property_address = account.property.to_address
 
     self.arrears = account.balance
     # items
     # self.total_arrears = < sum >
-    self.client = account.property.client.full_name +
-                  account.property.client.address.text
+    self.client = account.property.client.to_s
     self
+  end
+
+  def to_s
+    p "Billing Address: #{billing_address.inspect}",
+      "Property Ref: #{property_ref.inspect}",
+      "Invoice Date: #{invoice_date.inspect}",
+      "Property Address: #{property_address.inspect}",
+      "Arrears: #{arrears.inspect}",
+      "client: #{client.inspect}"
   end
 end

@@ -44,11 +44,16 @@ class Property < ActiveRecord::Base
   end
 
   def bill_to_s
-    agent.bill_to.to_address
+    agent.bill_to.to_billing
+  end
+
+  def to_billing
+    occupier + "\n" + address.text
   end
 
   def to_address
-    occupier + "\n" + address.text
+    return unless address
+    address.text
   end
 
   delegate :bill_to, to: :agent

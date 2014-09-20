@@ -14,7 +14,7 @@
             <%= form_tag search_path, method: 'get' do %>
               <%= text_field_tag :search_terms, params[:search_terms], placeholder: 'Search here...', title: 'Search', data: {autocomplete_source: search_path}, autofocus:true, class: 'max-3-4' %>
               <button type="submit" class='max-1-4' id = 'search' title = 'Search' ><i class= 'fa fa-search fa-lg'></i></button>
-              <% if controller.controller_name == 'debit_generators' &&controller.action_name == 'new' %>
+              <% if controller.controller_name == 'invoicings' && controller.action_name == 'new' %>
                 <div class='js-toggle-selection'>
                   <div class='js-togglable'>
                     <h4>Search for new charges within the next 8 weeks

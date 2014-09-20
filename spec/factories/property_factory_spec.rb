@@ -34,7 +34,7 @@ describe 'Property Factory' do
                                          address:  address_new(road: 'New',
                                                                town: 'Brum',
                                                                county: 'West'))
-        expect(Property.first.agent.to_address).to eq "Prior\nNew\nBrum\nWest"
+        expect(Property.first.agent.to_billing).to eq "Prior\nNew\nBrum\nWest"
       end
     end
   end
