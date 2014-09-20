@@ -17,14 +17,39 @@ describe Property, type: :model do
 
   describe 'Methods' do
     describe '#bill_to' do
-      it 'invoices the property without an agent' do
-        property = property_new
-        expect(property.bill_to).to eq property
+      context 'without agent' do
+        property = nil
+        before do
+          agent = agent_new authorized: false,
+                            entities: [Entity.new(name: 'Bel')],
+                            address: address_new(road: 'Old', town: 'York')
+          property = property_new occupiers: [Entity.new(name: 'Grace')],
+                                  address: address_new(road: 'New', town: 'Bm'),
+                                  agent: agent
+        end
+        it 'invoices the property' do
+          expect(property.bill_to).to eq property
+        end
+        it 'displays property text' do
+          expect(property.bill_to_s).to eq "Grace\nNew\nBm\nWest Midlands"
+        end
       end
-
-      it 'invoices agent when available' do
-        (property = property_new).agent.authorized = true
-        expect(property.bill_to).to eq property.agent
+      context 'with agent' do
+        property = nil
+        before do
+          agent = agent_new authorized: true,
+                            entities: [Entity.new(name: 'Bel')],
+                            address: address_new(road: 'Old', town: 'York')
+          property = property_new occupiers: [Entity.new(name: 'Grace')],
+                                  address: address_new(road: 'New', town: 'Bm'),
+                                  agent: agent
+        end
+        it 'invoices the agent' do
+          expect(property.bill_to).to eq property.agent
+        end
+        it 'displays property text' do
+          expect(property.bill_to_s).to eq "Bel\nOld\nYork\nWest Midlands"
+        end
       end
     end
   end

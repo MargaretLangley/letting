@@ -42,6 +42,14 @@ class Property < ActiveRecord::Base
     account.clear_up_form if account.present?
   end
 
+  def bill_to_s
+    agent.bill_to.to_address
+  end
+
+  def to_address
+    occupier + "\n" + address.text
+  end
+
   delegate :bill_to, to: :agent
 
   include Searchable
@@ -51,8 +59,7 @@ class Property < ActiveRecord::Base
       methods: :occupier,
       include: {
         address: {},
-        agent: { methods: [:address_text, :full_name],
-                 only: [:address_lines, :full_name] }
+        agent: { methods: [:to_address], only: [:to_address] }
       })
   end
 end

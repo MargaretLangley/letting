@@ -30,8 +30,11 @@ describe 'Property Factory' do
       end
 
       it 'can add agent' do
-        property = property_new agent: agent_new
-        expect(property.agent.full_name).to eq 'Mr W. G. Grace'
+        property_create agent: agent_new(entities: [Entity.new(name: 'Prior')],
+                                         address:  address_new(road: 'New',
+                                                               town: 'Brum',
+                                                               county: 'West'))
+        expect(Property.first.agent.to_address).to eq "Prior\nNew\nBrum\nWest"
       end
     end
   end
@@ -57,8 +60,8 @@ describe 'Property Factory' do
       end
 
       it 'can add agent' do
-        property_create agent: agent_new
-        expect(Property.first.agent.entities.full_name).to eq 'Mr W. G. Grace'
+        property_create agent: agent_new(entities: [Entity.new(name: 'Prior')])
+        expect(Property.first.agent.entities.full_name).to eq 'Prior'
       end
     end
   end

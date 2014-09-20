@@ -2,13 +2,6 @@
 #
 # rubocop: disable Metrics/MethodLength
 
-def agent_attributes **overrides
-  {
-    authorized: true,
-    property_id: 1,
-  }.merge overrides
-end
-
 def address_attributes **overrides
   {
     flat_no:  '47',
