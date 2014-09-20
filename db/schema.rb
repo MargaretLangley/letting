@@ -158,13 +158,13 @@ ActiveRecord::Schema.define(version: 20140919091254) do
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
 
   create_table "invoices", force: true do |t|
-    t.date     "invoice_date",                           null: false
-    t.string   "occupier",                               null: false
-    t.text     "address",                                null: false
-    t.integer  "property_ref",                           null: false
-    t.string   "client_name",                            null: false
-    t.text     "client_address",                         null: false
-    t.decimal  "arrears",        precision: 8, scale: 2, null: false
+    t.text     "agent",                                    null: false
+    t.integer  "property_ref",                             null: false
+    t.date     "invoice_date",                             null: false
+    t.text     "property_address",                         null: false
+    t.decimal  "arrears",          precision: 8, scale: 2, null: false
+    t.decimal  "total_arrears",    precision: 8, scale: 2, null: false
+    t.text     "client",                                   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
