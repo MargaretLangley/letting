@@ -33,7 +33,7 @@ class AccountDecorator
   private
 
   def balance_bought_forward date_of
-    AccountBalanceDecorator.new(@source.balance(date_of), date_of)
+    AccountBalanceDecorator.new(@source.balance(to_date: date_of), date_of)
   end
 
   def ordered_items

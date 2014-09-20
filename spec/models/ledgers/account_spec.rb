@@ -50,16 +50,16 @@ describe Account, :ledgers, type: :model do
       account = account_new
       account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
       account.credits.push credit_new on_date: '25/4/2012', amount: -11.00
-      expect(account.balance Date.new 2013, 1, 1).to \
-        eq BigDecimal.new('-1.00')
+      expect(account.balance to_date: Date.new(2013, 1, 1))
+        .to eq BigDecimal.new('-1.00')
     end
 
-    it 'ignores entires after date' do
+    it 'ignores entries after date' do
       account = account_new
       account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
       account.credits.push credit_new on_date: '25/4/2012', amount: -5.50
-      expect(account.balance Date.new 2012, 4, 24).to \
-        eq BigDecimal.new('10.00')
+      expect(account.balance to_date: Date.new(2012, 4, 24))
+        .to eq BigDecimal.new('10.00')
     end
   end
 

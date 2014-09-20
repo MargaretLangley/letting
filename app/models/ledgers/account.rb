@@ -69,9 +69,8 @@ class Account < ActiveRecord::Base
 
   delegate :clear_up_form, to: :charges
 
-  def balance date
-    date ||= Date.current
-    (credits + debits).select { |transaction| transaction.on_date <= date }
+  def balance to_date: Date.current
+    (credits + debits).select { |transaction| transaction.on_date <= to_date }
                       .map(&:amount).inject(0, :+)
   end
 
