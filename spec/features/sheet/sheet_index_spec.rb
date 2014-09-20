@@ -4,17 +4,12 @@ describe Sheet, type: :feature do
 
   before(:each) do
     log_in admin_attributes
-    sheet_create id: 2,
-                 description: 'Page 2',
-                 invoice_name: 'Morgan',
-                 phone: '01710008',
-                 vat: '89',
-                 heading2: 'give you notice pursuant'
   end
 
   context '#index' do
 
     it 'checks data' do
+      sheet_create id: 2, description: 'Page 2'
       visit '/sheets/'
       expect(page).to have_title 'Letting - Sheet'
       expect(page).to have_text 'Page 2'
@@ -23,18 +18,14 @@ describe Sheet, type: :feature do
     end
 
     it 'has edit link' do
+      sheet_create
       visit '/sheets/'
       click_on 'Edit'
       expect(page.title).to eq 'Letting - Edit Sheet'
     end
 
     it 'has ordered list' do
-      sheet_create id: 1,
-                   description: 'Page 1',
-                   invoice_name: 'Morgan',
-                   phone: '01710008',
-                   vat: '89',
-                   heading2: 'give you notice pursuant'
+      sheet_create id: 1, invoice_name: 'Morgan'
       visit '/sheets/'
       first(:link, 'Edit').click
       expect(page).to have_text 'Page 1'

@@ -2,31 +2,6 @@
 
 <div class="grid">
 
-  <div class='col-1-2'>
-    <h2><%= sheet.description %></h2>
-  </div>
-  <div class='col-1-2 no-r-pad'>
-    <%= view_link(sheet) %>
-  </div>
-  <div class='grid-row col-1-4 vertical-spacer'>
-    <%= f.label :invoice_name, 'Invoice Name' %>
-  </div>
-  <div class='col-3-4 vertical-spacer'>
-    <%= f.text_field :invoice_name %>
-  </div>
-  <div class='col-1-4 vertical-spacer'>
-    <%= f.label :phone, 'Telephone' %>
-  </div>
-  <div class='col-3-4 vertical-spacer'>
-    <%= f.text_field :phone %>
-  </div>
-  <div class='col-1-4 vertical-spacer'>
-    <%= f.label :vat, 'VAT' %>
-  </div>
-  <div class='col-3-4 vertical-spacer'>
-    <%= f.text_field :vat %>
-  </div>
-
   <div class='col-1-4 vertical-spacer'>
     <%= f.label :heading1, '1st Heading' %>
   </div>
@@ -53,7 +28,3 @@
   </div>
 
 </div>
-
-<%= f.fields_for :notices, f.object.notices.order(:id) do |builder| %>
- <%= render 'notice_form', f: builder %>
-<% end %>

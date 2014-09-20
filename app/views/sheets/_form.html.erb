@@ -1,19 +1,18 @@
-
 <%= form_for sheet do |f| %>
-
-  <fieldset id='sheet' class='shell'>
-    <%= render 'text_fields', f: f, parent: 'sheet', sheet: sheet %>
-
+  <div id='sheet' class='shell'>
     <% if sheet.id == 1 %>
-      <%= render 'addresses/form', f: f, parent: 'sheet', address: AddressDecorator.new(sheet.address) %>
+      <%= render 'name_phone', f: f, parent: 'sheet', sheet: sheet %>
+      <%= render 'text_fields', f: f, parent: 'sheet', sheet: sheet %>
+   `  <%= render 'addresses/form', f: f, parent: 'sheet', address: AddressDecorator.new(sheet.address) %>
+    <% else %>
+      <%= render 'text_fields', f: f, sheet: sheet %>
+      <%= render 'notices/form', f: f %>
     <% end %>
-
-      <div class='col-1-4 no-print'>
-        &nbsp;
-      </div>
-
-    <div class=' col-3-4 no-r-pad no-print'>
-      <%= f.submit class: 'primary  simple-button' %> or <%= link_to 'Cancel', sheets_path, class: 'warn' %>
+    <div class='col-1-4 no-print'>
+      &nbsp;
     </div>
-  </fieldset>
+    <div class=' col-3-4 no-r-pad no-print'>
+      <%= f.submit 'Update Invoice Text', class: 'primary simple-button' %> or <%= link_to 'Cancel', sheets_path, class: 'warn' %>
+    </div>
+  </div>
 <% end %>
