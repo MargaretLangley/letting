@@ -1,4 +1,4 @@
-###
+##
 #
 # SheetsController
 #
@@ -27,7 +27,7 @@ class SheetsController < ApplicationController
   def update
     @sheet = Sheet.find params[:id]
     if @sheet.update sheets_params
-      redirect_to sheets_path, notice: 'Invoice information successfully ' \
+      redirect_to sheets_path, notice: 'Invoice Texts successfully ' \
                                        'updated!'
     else
       render :edit
