@@ -3,19 +3,24 @@ require 'rails_helper'
 describe 'Agent Factory' do
   describe 'default' do
     it('is valid') { expect(agent_new).to be_valid }
-    it('has name') { expect(agent_new.full_name).to eq 'Mr W. G. Grace' }
+    it 'has address' do
+      expect(agent_new.to_address)
+        .to eq "Mr M. Prior\nEdgbaston Road\nBirmingham\nWest Midlands"
+    end
     it('has road') { expect(agent_new.address.road).to eq 'Edgbaston Road' }
   end
 
   describe 'overrides' do
-    it 'alters name' do
-      agent = agent_new entities: [Entity.new(name: 'Bell')]
-      expect(agent.entities.first.name).to eq 'Bell'
+    it 'alters entity' do
+      entities = [Entity.new(title: 'Mr', initials: 'I', name: 'Bell')]
+      expect(agent_new(entities: entities).to_address)
+        .to eq "Mr I. Bell\nEdgbaston Road\nBirmingham\nWest Midlands"
     end
 
     it 'alters address' do
       agent = agent_new address: address_new(road: 'Wiggiton')
-      expect(agent.address.road).to eq 'Wiggiton'
+      expect(agent.to_address)
+        .to eq "Mr M. Prior\nWiggiton\nBirmingham\nWest Midlands"
     end
   end
 end

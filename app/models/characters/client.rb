@@ -24,14 +24,14 @@ class Client < ActiveRecord::Base
     prepare_contact
   end
 
+  def to_s
+    full_name + "\n" + address.text
+  end
+
   delegate :clear_up_form, to: :entities
 
   include Searchable
   def as_indexed_json(_options = {})
-    as_json(
-      methods: :full_name,
-      include: {
-        address: {}
-      })
+    as_json(methods: :to_s)
   end
 end

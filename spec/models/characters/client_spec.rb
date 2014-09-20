@@ -2,30 +2,28 @@ require 'rails_helper'
 
 describe Client, type: :model do
 
-  let(:client) { client_new  }
-
   describe 'validations' do
-    it('is valid') { expect(client).to be_valid }
+    it('is valid') { expect(client_new).to be_valid }
 
-    it '#human_ref is present' do
-      client.human_ref = nil
-      expect(client).to_not be_valid
+    describe '#human_ref' do
+      it('is needed') { expect(client_new(human_ref: nil)).to_not be_valid }
+      it('is a number') { expect(client_new(human_ref: 'nan')).to_not be_valid }
+      it 'is unique' do
+        client_create human_ref: 1
+        expect { client_create human_ref: 1 }
+          .to raise_error ActiveRecord::RecordInvalid
+      end
+      it 'has a name' do
+        (client = client_new).entities.destroy_all
+        expect(client).to_not be_valid
+      end
     end
+  end
 
-    it 'validates it is a number' do
-      client.human_ref = 'Not numbers'
-      expect(client).to_not be_valid
-    end
-
-    it '#human_ref is unique' do
-      client_create human_ref: 1
-      expect { client_create human_ref: 1 }
-        .to raise_error ActiveRecord::RecordInvalid
-    end
-
-    it 'has at least one child' do
-      client.entities.destroy_all
-      expect(client).to_not be_valid
+  describe 'method' do
+    it 'returns client as text' do
+      expect(client_new.to_s)
+        .to eq "Mr M. Prior\nEdgbaston Road\nBirmingham\nWest Midlands"
     end
   end
 

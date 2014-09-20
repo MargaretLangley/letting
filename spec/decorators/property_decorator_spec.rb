@@ -27,22 +27,22 @@ describe PropertyDecorator do
   end
 
   describe 'Agent' do
-    context 'authorized for property' do
+    context 'with agent' do
       it 'name returned' do
         agent = agent_new entities: [Entity.new(name: 'Willis')]
-        property = PropertyDecorator.new property_create agent: agent
-        expect(property.agent_name).to eq 'Willis'
+        decorator = PropertyDecorator.new property_create agent: agent
+        expect(decorator.agent_name).to eq 'Willis'
       end
 
       it 'address returned' do
         agent = agent_new address: address_new(road: 'Wiggiton')
-        property = PropertyDecorator.new property_create agent: agent
-        expect(property.agent.address_text)
+        decorator = PropertyDecorator.new property_create agent: agent
+        expect(decorator.agent.address.text)
           .to eq "Wiggiton\nBirmingham\nWest Midlands"
       end
     end
 
-    context 'unauthored for property' do
+    context 'without agent' do
       it 'name missing' do
         expect(property.agent_name).to eq 'None'
       end

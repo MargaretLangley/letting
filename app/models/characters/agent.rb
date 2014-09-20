@@ -15,8 +15,16 @@ class Agent < ActiveRecord::Base
   validates :entities, presence: true, if: :authorized?
   before_validation :clear_up_form
 
+  delegate :full_name, to: :entities
+  delegate :text, to: :address, prefix: true
+
   def bill_to
     authorized? ? self : property
+  end
+
+  def to_address
+    return unless authorized
+    full_name + "\n" + address_text
   end
 
   def prepare_for_form
@@ -29,15 +37,6 @@ class Agent < ActiveRecord::Base
     else
       erase_form
     end
-  end
-
-  # flattening data structure for JSON conversion
-  def full_name
-    bill_to.entities.full_name
-  end
-
-  def address_text
-    bill_to.address.text
   end
 
   private
