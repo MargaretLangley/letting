@@ -2,7 +2,7 @@
 #
 # Sheet
 #
-# Sheet holds the general information needed for an
+# Sheet/Invoice Text holds the general information needed for an
 # invoice printout, excluding individual account
 # and property information. Allows editing of
 # this information,
@@ -14,9 +14,11 @@
 ####
 #
 class Sheet < ActiveRecord::Base
+  validates :description, presence: true
   validates :invoice_name, presence: true
   validates :phone, presence: true
   validates :vat, presence: true
+  validates :heading1, presence: true
   has_one :address, class_name: 'Address',
                     dependent: :destroy,
                     as: :addressable
