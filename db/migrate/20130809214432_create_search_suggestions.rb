@@ -1,8 +1,8 @@
 class CreateSearchSuggestions < ActiveRecord::Migration
   def change
     create_table :search_suggestions do |t|
-      t.string :term
-      t.integer :popularity
+      t.string :term, null: false
+      t.integer :popularity, null: false
 
       t.timestamps
     end

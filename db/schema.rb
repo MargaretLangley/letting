@@ -222,16 +222,16 @@ ActiveRecord::Schema.define(version: 20140920193251) do
   add_index "properties", ["client_id"], name: "index_properties_on_client_id", using: :btree
 
   create_table "search_suggestions", force: true do |t|
-    t.string   "term"
-    t.integer  "popularity"
+    t.string   "term",       null: false
+    t.integer  "popularity", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "settlements", force: true do |t|
     t.decimal  "amount",     precision: 8, scale: 2, null: false
-    t.integer  "credit_id"
-    t.integer  "debit_id"
+    t.integer  "credit_id",                          null: false
+    t.integer  "debit_id",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
