@@ -1,5 +1,14 @@
 <%= form_for sheet do |f| %>
+
   <div id='sheet' class='shell'>
+    <%= render 'shared/errors', object: sheet %>
+  <div class='col-1-2'>
+    <h2><%= sheet.description %></h2>
+  </div>
+  <div class='col-1-2 no-r-pad'>
+    <%= view_link(sheet) %>
+  </div>
+
     <% if sheet.id == 1 %>
       <%= render 'name_phone', f: f, parent: 'sheet', sheet: sheet %>
       <%= render 'text_fields', f: f, parent: 'sheet', sheet: sheet %>

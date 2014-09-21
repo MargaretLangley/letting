@@ -36,12 +36,10 @@ describe Sheet, type: :feature do
   end
 
   it 'finds data on 2nd page and errors' do
-    skip 'TODO: Margaret make this error'
     sheet_create id: 2
     visit '/sheets/2/edit'
     expect(page.title). to eq 'Letting - Edit Invoice Text'
-    # One option: fill IN BLANK something that is require
-    fill_in 'Invoice', with: ''
+    fill_in '1st Heading', with: ''
     click_on 'Update Invoice Text'
     expect(page).to have_css '[data-role="errors"]'
   end
