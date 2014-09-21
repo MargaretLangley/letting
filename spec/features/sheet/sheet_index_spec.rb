@@ -11,7 +11,7 @@ describe Sheet, type: :feature do
     it 'checks data' do
       sheet_create id: 2, description: 'Page 2'
       visit '/sheets/'
-      expect(page).to have_title 'Letting - Sheet'
+      expect(page).to have_title 'Letting - Invoice Texts'
       expect(page).to have_text 'Page 2'
       expect(page).to have_link 'Edit'
       expect(page).to have_link 'View'
@@ -21,7 +21,7 @@ describe Sheet, type: :feature do
       sheet_create
       visit '/sheets/'
       click_on 'Edit'
-      expect(page.title).to eq 'Letting - Edit Sheet'
+      expect(page.title).to eq 'Letting - Edit Invoice Text'
     end
 
     it 'has ordered list' do

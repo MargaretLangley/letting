@@ -10,7 +10,7 @@ describe ChargeCycle, :ledgers, type: :feature do
     fill_in 'Name', with: 'April/Nov'
     fill_in 'Order', with: '44'
     due_on(day: 10, month: 2)
-    click_on 'Create Charge cycle'
+    click_on 'Create Charge Cycle'
     expect(page).to have_text /successfully created!/i
   end
 
@@ -23,7 +23,7 @@ describe ChargeCycle, :ledgers, type: :feature do
 
   it 'displays form errors' do
     visit '/charge_cycles/new?period=term'
-    click_on 'Create Charge cycle'
+    click_on 'Create Charge Cycle'
     expect(page).to have_css '[data-role="errors"]'
   end
 end

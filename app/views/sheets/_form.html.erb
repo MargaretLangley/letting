@@ -11,8 +11,8 @@
     <div class='col-1-4 no-print'>
       &nbsp;
     </div>
-    <div class=' col-3-4 no-r-pad no-print'>
-      <%= f.submit 'Update Invoice Text', class: 'primary simple-button' %> or <%= link_to 'Cancel', sheets_path, class: 'warn' %>
+      <div class='col-3-4 no-r-pad no-print'>
+        <%= f.button submit: '', class: 'primary submit-button', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Invoice Text..."} %> or <%= link_to 'Cancel', sheets_path, class: 'warn' %>
     </div>
   </div>
 <% end %>
