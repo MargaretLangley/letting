@@ -10,7 +10,7 @@ describe AccountCreditDecorator do
 
     it '#date is expected form' do
       credit_dec = AccountCreditDecorator.new credit_new(on_date: '10/6/2014')
-      expect(credit_dec.date).to eq '10 Jun 14'
+      expect(credit_dec.date).to eq '10/Jun/14'
     end
 
     it '#due' do
