@@ -18,7 +18,7 @@ describe ChargeCycle, :ledgers, type: :feature do
       fill_in 'Name', with: 'April/Nov'
       fill_in 'Order', with: '44'
       due_on(day: 10, month: 2)
-      click_on 'Update Charge cycle'
+      click_on 'Update Charge Cycle'
       expect(page). to have_text /successfully updated!/i
     end
 
@@ -48,7 +48,7 @@ describe ChargeCycle, :ledgers, type: :feature do
       fill_in 'Name', with: 'New Monthly'
       fill_in 'Order', with: '21'
       due_on(day: 12, month: 0)
-      click_on 'Update Charge cycle'
+      click_on 'Update Charge Cycle'
       expect(page). to have_text /successfully updated!/i
     end
 

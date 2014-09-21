@@ -10,7 +10,7 @@ describe Sheet, type: :feature do
     it 'finds data on 1st page' do
       sheet_create id: 1, vat: '89', address: address_new(road: 'High')
       visit '/sheets/1/edit'
-      expect(page.title). to eq 'Letting - Edit Sheet'
+      expect(page.title). to eq 'Letting - Edit Invoice Text'
       expect(find_field('VAT').value).to have_text '89'
       expect(find_field('Road').value).to have_text 'High'
     end
@@ -18,9 +18,9 @@ describe Sheet, type: :feature do
     it 'has views link' do
       sheet_create id: 1
       visit '/sheets/1/edit'
-      expect(page.title). to eq 'Letting - Edit Sheet'
+      expect(page.title). to eq 'Letting - Edit Invoice Text'
       click_on('View')
-      expect(page.title). to eq 'Letting - View Sheet'
+      expect(page.title). to eq 'Letting - View Invoice Texts'
     end
   end
 
@@ -28,7 +28,7 @@ describe Sheet, type: :feature do
     it 'finds data on 2nd page and succeeds' do
       sheet_create id: 2
       visit '/sheets/2/edit'
-      expect(page.title). to eq 'Letting - Edit Sheet'
+      expect(page.title). to eq 'Letting - Edit Invoice Text'
       fill_in '2nd Heading', with: 'Bowled Out!'
       click_on 'Update Invoice Text'
       expect(page). to have_text /successfully updated!/i
@@ -39,10 +39,10 @@ describe Sheet, type: :feature do
     skip 'TODO: Margaret make this error'
     sheet_create id: 2
     visit '/sheets/2/edit'
-    expect(page.title). to eq 'Letting - Edit Sheet'
+    expect(page.title). to eq 'Letting - Edit Invoice Text'
     # One option: fill IN BLANK something that is require
     fill_in 'Invoice', with: ''
-    click_on 'Update Sheet'
+    click_on 'Update Invoice Text'
     expect(page).to have_css '[data-role="errors"]'
   end
 end

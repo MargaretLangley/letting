@@ -11,7 +11,7 @@ describe Sheet, type: :feature do
   context '#view' do
     it 'finds view page 1' do
       visit '/sheets/1'
-      expect(page.title). to eq 'Letting - View Sheet'
+      expect(page.title). to eq 'Letting - View Invoice Texts'
     end
 
     it 'finds address' do
@@ -21,9 +21,9 @@ describe Sheet, type: :feature do
 
     it 'has edit link' do
       visit '/sheets/1'
-      expect(page.title). to eq 'Letting - View Sheet'
+      expect(page.title). to eq 'Letting - View Invoice Texts'
       click_on('Edit')
-      expect(page.title). to eq 'Letting - Edit Sheet'
+      expect(page.title). to eq 'Letting - Edit Invoice Text'
     end
   end
 end

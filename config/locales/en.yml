@@ -60,12 +60,17 @@ en:
       debit_generator:
         create: "Invoice Charges"
         update: "Update invoice"
+      charge_cycle:
+        create: "Create Charge Cycle"
+        update: "Update Charge Cycle"
       property:
         create: "Create Account"
         update: "Update Account"
       payment:
         create: "Pay Total"
         update: "Update"
+      sheet:
+        update: "Update Invoice Text"
 
   number:
     currency:
