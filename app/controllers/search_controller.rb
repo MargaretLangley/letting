@@ -24,7 +24,9 @@ class SearchController < ApplicationController
       redirect_to controller: match[:controller],
                   action: match[:action],
                   id: match[:record_id],
-                  search_terms: params[:search_terms]
+                  search_terms: params[:search_terms],
+                  start_date: params[:start_date],
+                  end_date: params[:end_date]
     else
       results = full_text_search search_model: session[:search_model],
                                  query: params[:search_terms]

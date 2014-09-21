@@ -186,7 +186,9 @@ ActiveRecord::Schema.define(version: 20140920193251) do
   add_index "invoices", ["invoicing_id"], name: "index_invoices_on_invoicing_id", using: :btree
 
   create_table "invoicings", force: true do |t|
-    t.string   "property_range"
+    t.string   "property_range", null: false
+    t.date     "start_date",     null: false
+    t.date     "end_date",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
