@@ -13,14 +13,19 @@ module ApplicationHelper
     a_string.blank? ? '-'  : a_string
   end
 
-  def minimum_range_information(start_date:, end_date:)
-    if start_date.year == end_date.year
-      "#{I18n.l start_date, format: :month_date} - "\
-        "#{I18n.l end_date, format: :month_date}"
+  def noticable_date_range(start_date:, end_date:)
+    if (start_date && start_date.year) == (end_date && end_date.year)
+      "#{safe_date(date: start_date, format: :month_date)} - "\
+      "#{safe_date(date: end_date, format: :month_date)}"
     else
-      "#{I18n.l start_date, format: :short} - "\
-        "#{I18n.l end_date, format: :short}"
+      "#{safe_date(date: start_date, format: :short)} - "\
+      "#{safe_date(date: end_date, format: :short)}"
     end
+  end
+
+  def safe_date(date:, format:)
+    return '' unless date
+    "#{I18n.l date, format: format}"
   end
 
   def view_link model

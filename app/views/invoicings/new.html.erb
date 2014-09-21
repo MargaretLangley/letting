@@ -34,7 +34,9 @@
         Invoice Date
       </div>
       <div class='col-3-8 vertical-spacer'>
-        (TODO: date to be coded)
+        <%= noticable_date_range start_date: @invoicing.start_date, end_date: @invoicing.end_date %>
+          <%= f.hidden_field :start_date %>
+          <%= f.hidden_field :end_date %>
       </div>
       <div class='col-2-8 vertical-spacer'>
         &nbsp;
