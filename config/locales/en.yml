@@ -85,7 +85,8 @@ en:
     formats:
       #strftime
       default: "%d/%m/%Y"
-      short: "%d %b %y"
+      short: "%d/%b/%y"
+      month_date: "%d/%b"
   time:
     formats:
       human: "%d %b %Y %H:%M"
