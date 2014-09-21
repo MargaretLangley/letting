@@ -12,8 +12,6 @@
 # which needs to be automated.
 # http://railscasts.com/episodes/102-auto-complete-association-revised
 #
-# TODO: Decide if you want to keep it.
-#
 class SearchSuggestion < ActiveRecord::Base
   def self.terms_for prefix
     suggestions = where('term ilike ?', "#{prefix}_%")
@@ -22,9 +20,9 @@ class SearchSuggestion < ActiveRecord::Base
 
   def self.index_properties
     Property.find_each do |property|
-      index_term(property.address.house_name)
-      index_term(property.address.road)
-      index_term(property.address.town)
+      index_term(property.address.house_name) if property.address.house_name
+      index_term(property.address.road) if property.address.road
+      index_term(property.address.town) if property.address.town
     end
   end
 

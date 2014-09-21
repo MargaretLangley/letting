@@ -188,8 +188,8 @@ ActiveRecord::Schema.define(version: 20140827133520) do
   add_index "properties", ["client_id"], name: "index_properties_on_client_id", using: :btree
 
   create_table "search_suggestions", force: true do |t|
-    t.string   "term"
-    t.integer  "popularity"
+    t.string   "term",       null: false
+    t.integer  "popularity", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
