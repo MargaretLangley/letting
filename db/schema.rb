@@ -196,8 +196,8 @@ ActiveRecord::Schema.define(version: 20140827133520) do
 
   create_table "settlements", force: true do |t|
     t.decimal  "amount",     precision: 8, scale: 2, null: false
-    t.integer  "credit_id"
-    t.integer  "debit_id"
+    t.integer  "credit_id",                          null: false
+    t.integer  "debit_id",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
