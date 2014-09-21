@@ -69,5 +69,28 @@ describe 'Search index', type: :feature do
       expect(page).to have_text 'No Matches found. Search again.'
       Property.__elasticsearch__.delete_index!
     end
+
+    describe 'search terms' do
+      it 'remembered for literal search' do
+        property_create human_ref: 111,
+                        account: account_new(charge: charge_new)
+        visit '/properties'
+        fill_in 'search_terms', with: '111'
+        click_on 'search'
+        expect(find_field('search_terms').value).to have_text '111'
+      end
+
+      it 'remembered for full-text search' do
+        property_create human_ref: 111,
+                        account: account_new,
+                        address: address_new(county: 'Worcester')
+        Property.import force: true, refresh: true
+        visit '/properties'
+        fill_in 'search_terms', with: 'Wor'
+        click_on 'search'
+        expect(find_field('search_terms').value).to have_text 'Wor'
+        Property.__elasticsearch__.delete_index!
+      end
+    end
   end
 end

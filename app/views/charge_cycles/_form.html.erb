@@ -81,8 +81,7 @@
       &nbsp;
     </div>
     <div class='col-3-4 no-r-pad no-print'>
-      <%= f.submit class: 'primary simple-button' %> or <%= link_to 'Cancel', charge_cycles_path, class: 'warn' %>
-    </div>
-
+      <%= f.button submit: '', class: "primary submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Charge Cycle..."} %> or <%= link_to 'Cancel', charge_cycles_path, class: 'warn' %>
+   </div>
   </fieldset>
 <% end %>

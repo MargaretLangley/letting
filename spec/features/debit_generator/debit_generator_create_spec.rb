@@ -23,7 +23,7 @@ describe 'debit_generator', :ledgers, type: :feature do
                    invoice_name: 'Bell',
                    phone: '01710008',
                    vat: '89',
-                   heading2: 'give you notice pursuant'
+                   heading1: 'give you notice pursuant'
 
       debit_gen_page.visit_page.search_term('87').search
       expect(page).to have_text '87'

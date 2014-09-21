@@ -6,14 +6,14 @@ def sheet_new id: nil,
               invoice_name: 'Bell',
               phone: '01710008',
               vat: '89',
-              heading2: nil,
+              heading1: 'Heads up',
               address: address_new
   Sheet.new id: id,
             description: description,
             invoice_name: invoice_name,
             phone: phone,
             vat: vat,
-            heading2: heading2,
+            heading1: heading1,
             address: address
 end
 
@@ -22,13 +22,13 @@ def sheet_create(id: nil,
                  invoice_name: 'Bell',
                  phone: '01710008',
                  vat: '89',
-                 heading2: nil,
+                 heading1: 'Heads up',
                  address: address_new)
   Sheet.create! id: id,
                 description: description,
                 invoice_name: invoice_name,
                 phone: phone,
                 vat: vat,
-                heading2: heading2,
+                heading1: heading1,
                 address: address
 end

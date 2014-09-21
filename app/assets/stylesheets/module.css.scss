@@ -375,6 +375,20 @@ $search-height: 35px;
     }
   }
 
+  .submit-button{
+    @include base-button;
+    width: 40%;
+  }
+
+  .submit-button[disabled]{
+    background-color: $primary-button;
+    color: white;
+    text-decoration: none;
+    &:hover,
+    &:active{
+    }
+  }
+
   .delete-button{
     @include base-button;
     text-decoration: none;
