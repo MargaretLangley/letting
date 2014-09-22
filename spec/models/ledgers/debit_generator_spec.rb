@@ -162,7 +162,8 @@ describe DebitGenerator, :ledgers, type: :model do
                                    .merge(accounts: [Object.new])
                                    .merge(overrides)
                                    )
-    debit_gen.debits << debit_new
+    charge = charge_new(debits: [debit_new])
+    debit_gen.debits << charge.debits.first
     debit_gen
   end
 end

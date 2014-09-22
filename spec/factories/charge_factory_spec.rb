@@ -30,6 +30,12 @@ describe 'ChargeFactory' do
           expect(charge_new(debits: [debit_new]).debits.first.amount)
             .to eq 88.08
         end
+
+        it 'displays charge type through debit' do
+          debit = charge_new(charge_type: 'Rent', debits: [debit_new])
+                    .debits.first
+          expect(debit.charge_type).to eq 'Rent'
+        end
       end
     end
   end

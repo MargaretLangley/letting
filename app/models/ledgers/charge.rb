@@ -22,7 +22,8 @@ class Charge < ActiveRecord::Base
   validates :charge_type, :charge_cycle, :charged_in, presence: true
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
-  has_many :debits, dependent: :destroy do
+  has_many :credits, dependent: :destroy, inverse_of: :charge
+  has_many :debits, dependent: :destroy, inverse_of: :charge do
     def created_on? on_date
       self.any? do |debit|
         debit.on_date == on_date

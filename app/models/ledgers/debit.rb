@@ -25,9 +25,9 @@ class Debit < ActiveRecord::Base
   belongs_to :debit_generator
   has_many :credits, through: :settlements
   has_many :settlements, dependent: :destroy
-  belongs_to :charge
+  belongs_to :charge, inverse_of: :debits
 
-  validates :charge_id, :on_date, presence: true
+  validates :charge, :on_date, presence: true
   # custom validates - numericality did not think -99_000 > -100_000
   validates :amount, amount: true
   before_save :reconcile

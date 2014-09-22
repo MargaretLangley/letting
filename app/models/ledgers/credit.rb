@@ -16,11 +16,11 @@
 class Credit < ActiveRecord::Base
   belongs_to :payment
   belongs_to :account
-  belongs_to :charge
+  belongs_to :charge, inverse_of: :credits
   has_many :debits, through: :settlements
   has_many :settlements, dependent: :destroy
 
-  validates :charge_id, :on_date, presence: true
+  validates :charge, :on_date, presence: true
   # custom validates - numericality did not think -99_000 > -100_000
   validates :amount, amount: true
   before_save :reconcile
