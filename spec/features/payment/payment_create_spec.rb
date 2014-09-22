@@ -6,9 +6,9 @@ describe Payment, :ledgers, :payment, type: :feature do
   before(:each) { log_in }
 
   it 'payment for debit', js: true do
-    property_create account: account_new(payment: payment_new,
-                                         charge: charge_new,
-                                         debits: [debit_new])
+    property_create \
+      account: account_new(payment: payment_new,
+                           charge: charge_new(debits: [debit_new]))
     payment_page.visit_new
     payment_page.human_ref('2002').search
     expect(payment_page).to_not be_empty_search
@@ -20,10 +20,10 @@ describe Payment, :ledgers, :payment, type: :feature do
   end
 
   it 'displays form errors' do
-    property_create human_ref: '2002',
-                    account: account_new(payment: payment_new,
-                                         charge: charge_new,
-                                         debits: [debit_new])
+    property_create \
+      human_ref: '2002',
+      account: account_new(payment: payment_new,
+                           charge: charge_new(debits: [debit_new]))
     payment_page.visit_new
 
     payment_page.human_ref('2002').search

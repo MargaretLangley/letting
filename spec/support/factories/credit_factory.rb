@@ -1,37 +1,36 @@
+# rubocop: disable Metrics/ParameterLists
 # rubocop: disable Metrics/MethodLength
 
 def credit_new payment_id: 1,
                account_id: 1,
-               charge_id: 1,
+               charge_id: nil,
+               charge: nil,
                on_date: '30/4/2013',
                amount: -88.08
-  base_credit payment_id: payment_id,
-              account_id: account_id,
-              charge_id: charge_id,
-              on_date: on_date,
-              amount: amount
-end
 
-def credit_create payment_id: 1,
-                  account_id: 1,
-                  charge_id: 1,
-                  on_date: '30/4/2013',
-                  amount: -88.08
-  credit = base_credit payment_id: payment_id,
-                       account_id: account_id,
-                       charge_id: charge_id,
-                       on_date: on_date,
-                       amount: amount
-  credit.save!
-  credit
-end
-
-def base_credit(payment_id:, account_id:, charge_id:, on_date:, amount:)
   credit = Credit.new payment_id: payment_id,
                       account_id: account_id,
                       charge_id: charge_id,
                       amount: amount
   credit.on_date = on_date if on_date
+  credit.charge_id = charge_id if charge_id
+  credit.charge = charge if charge
   allow(credit).to receive(:debit_outstanding).and_return(-88.08)
+  credit
+end
+
+def credit_create payment_id: 1,
+                  account_id: 1,
+                  charge_id: nil,
+                  charge: nil,
+                  on_date: '30/4/2013',
+                  amount: -88.08
+  credit = credit_new payment_id: payment_id,
+                      account_id: account_id,
+                      charge_id: charge_id,
+                      charge: charge,
+                      on_date: on_date,
+                      amount: amount
+  credit.save!
   credit
 end

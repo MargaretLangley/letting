@@ -21,9 +21,10 @@ describe AccountDecorator do
   describe 'sorted' do
     let(:account) do
       account = account_new
-      account.debits.push debit_new on_date: '25/3/2013'
-      account.debits.push debit_new on_date: '25/9/2013'
-      account.credits.push credit_new on_date: '30/4/2013'
+      charge = charge_new
+      account.debits.push debit_new charge: charge, on_date: '25/3/2013'
+      account.debits.push debit_new charge: charge, on_date: '25/9/2013'
+      account.credits.push credit_new charge: charge, on_date: '30/4/2013'
       account.save!
       AccountDecorator.new account
     end
@@ -60,9 +61,16 @@ describe AccountDecorator do
   context 'calculated balance' do
     it 'abbrev_items' do
       account = account_new
-      account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
-      account.debits.push debit_new on_date: '25/3/2012', amount: 10.00
-      account.credits.push credit_new on_date: '25/4/2012', amount: -5.50
+      charge = charge_new
+      account.debits.push debit_new charge: charge,
+                                    on_date: '25/3/2011',
+                                    amount: 10.00
+      account.debits.push debit_new charge: charge,
+                                    on_date: '25/3/2012',
+                                    amount: 10.00
+      account.credits.push credit_new charge: charge,
+                                      on_date: '25/4/2012',
+                                      amount: -5.50
       account.save!
       dec = AccountDecorator.new account
 

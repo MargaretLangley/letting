@@ -7,12 +7,9 @@ describe Payment, :ledgers, :payment, type: :feature do
   before(:each) { log_in }
 
   it 'payment for debit - no double payments', js: true do
-    charge = charge_create
+    charge = charge_create debits: [debit_new]
     payment = payment_new credit: credit_new(amount: -88, charge_id: charge.id)
-    property_create account: account_new(charge: charge,
-                                         debits: [debit_new],
-                                         payment: payment)
-
+    property_create account: account_new(payment: payment, charge: charge)
     payment_page.visit_edit payment.id
     payment_page.payment = 44.00
     payment_page.pay
@@ -23,11 +20,11 @@ describe Payment, :ledgers, :payment, type: :feature do
 
   context 'error' do
     it 'displays form errors' do
-      payment = payment_new credit: credit_new(amount: -88)
-      property_create account: account_new(charge: charge_new,
-                                           debits: [debit_new],
-                                           payment: payment)
-
+      charge = charge_new(debits: [debit_new])
+      payment = payment_new credit: credit_new(charge: charge, amount: -88)
+      property_create \
+        account: account_new(payment: payment,
+                             charge: charge)
       payment_page.visit_edit payment.id
       payment_page.payment = -100_000_000
       payment_page.pay
