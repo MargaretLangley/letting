@@ -9,11 +9,12 @@ RSpec.describe Invoice, type: :model do
       (invoice = Invoice.new).property_address = nil
       expect(invoice).to_not be_valid
     end
+    it('products') { expect(invoice_new products: nil).to_not be_valid }
     it('arrears') { expect(invoice_new arrears: nil).to_not be_valid }
   end
 
   describe 'methods' do
-    describe 'prepare' do
+    describe '#prepare' do
       it 'sets billing_address' do
         invoice = Invoice.new
         agent = agent_new(entities: [Entity.new(name: 'Lock')])
@@ -54,6 +55,16 @@ RSpec.describe Invoice, type: :model do
                       property: property_new(account: account_new)
         expect(invoice.prepare(account: Account.first).client)
           .to eq "Bell\nEdgbaston Road\nBirmingham\nWest Midlands"
+      end
+    end
+    describe '#prepare_products' do
+       it 'adds an debit' do
+        invoice = Invoice.new
+        charge = charge_new debits: [debit_new]
+        byebug
+        invoice.prepare_products debits: charge.debits
+        expect(invoice.products)
+          .to eq Product.new
       end
     end
   end

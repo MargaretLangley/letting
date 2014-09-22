@@ -157,19 +157,6 @@ ActiveRecord::Schema.define(version: 20140920193251) do
 
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
 
-  create_table "invoice_items", force: true do |t|
-    t.integer  "invoice_id",  null: false
-    t.string   "charge_type"
-    t.date     "date_due"
-    t.string   "description"
-    t.decimal  "amount"
-    t.string   "range"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "invoice_items", ["invoice_id"], name: "index_invoice_items_on_invoice_id", using: :btree
-
   create_table "invoices", force: true do |t|
     t.integer  "invoicing_id"
     t.text     "billing_address",                          null: false
@@ -213,6 +200,18 @@ ActiveRecord::Schema.define(version: 20140920193251) do
   end
 
   add_index "payments", ["account_id"], name: "index_payments_on_account_id", using: :btree
+
+  create_table "products", force: true do |t|
+    t.integer  "invoice_id",  null: false
+    t.string   "charge_type"
+    t.date     "date_due"
+    t.decimal  "amount"
+    t.string   "range"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "products", ["invoice_id"], name: "index_products_on_invoice_id", using: :btree
 
   create_table "properties", force: true do |t|
     t.integer  "human_ref",  null: false

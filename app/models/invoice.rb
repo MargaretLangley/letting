@@ -23,7 +23,9 @@
 #
 class Invoice < ActiveRecord::Base
   belongs_to :invoicing
-  validates :invoice_date,
+  has_many :products
+  validates :products,
+            :invoice_date,
             :property_ref,
             :property_address,
             :arrears,
@@ -41,6 +43,12 @@ class Invoice < ActiveRecord::Base
     # self.total_arrears = < sum >
     self.client = account.property.client.to_s
     self
+  end
+
+  def prepare_products(debits:)
+    debits.map do |debit|
+      Product.new charge_type: debit.charge_type
+    end
   end
 
   def to_s

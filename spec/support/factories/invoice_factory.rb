@@ -6,7 +6,8 @@ def invoice_new invoice_date: '2014/06/30',
                 property_address: address_new,
                 property_ref: 108,
                 client: "Lord Harris\nNew Road\nEdge\nBrum",
-                arrears: 20.20
+                arrears: 20.20,
+                products: [ product_new ]
 
   account.property.human_ref = property_ref
   account.property.address = property_address
@@ -16,5 +17,6 @@ def invoice_new invoice_date: '2014/06/30',
                   account: account
   invoice.client = client
   invoice.arrears = arrears
+  invoice.products = products if products
   invoice
 end

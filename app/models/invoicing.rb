@@ -5,7 +5,9 @@ class Invoicing < ActiveRecord::Base
     accounts = Account.find account_ids
     self.property_range = properties_range(accounts)
     accounts.each do |account|
-      invoices.build.prepare account: account
+      invoice = invoices.build
+      invoice.prepare account: account
+      invoice.prepare_products debits: account.prepare_debits(start_date..end_date)
     end
   end
 
