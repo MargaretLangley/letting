@@ -33,7 +33,7 @@ class Account < ActiveRecord::Base
   accepts_nested_attributes_for :debits, allow_destroy: true
   has_many :credits, dependent: :destroy
   accepts_nested_attributes_for :credits, allow_destroy: true
-  has_many :payments, dependent: :destroy
+  has_many :payments, dependent: :destroy, inverse_of: :account
   has_many :charges, dependent: :destroy do
     def prepare
       (size...MAX_CHARGES).each { build }
