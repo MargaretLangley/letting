@@ -58,13 +58,10 @@ RSpec.describe Invoice, type: :model do
       end
     end
     describe '#prepare_products' do
-       it 'adds an debit' do
-        invoice = Invoice.new
-        charge = charge_new debits: [debit_new]
-        byebug
-        invoice.prepare_products debits: charge.debits
-        expect(invoice.products)
-          .to eq Product.new
+       it 'adds a debit' do
+         invoice = Invoice.new
+         x = invoice.prepare_products debits: [debit_new(charge: charge_new)]
+         expect(x).to eq Product.new
       end
     end
   end
