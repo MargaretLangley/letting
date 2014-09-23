@@ -55,11 +55,11 @@ class Invoice < ActiveRecord::Base
   end
 
   def to_s
-    p "Billing Address: #{billing_address.inspect}",
-      "Property Ref: #{property_ref.inspect}",
-      "Invoice Date: #{invoice_date.inspect}",
-      "Property Address: #{property_address.inspect}",
-      "Arrears: #{arrears.inspect}",
-      "client: #{client.inspect}"
+    "Billing Address: #{billing_address.inspect}\n"\
+    "Property Ref: #{property_ref.inspect}\n"\
+    "Invoice Date: #{invoice_date.inspect}\n"\
+    "Property Address: #{property_address.inspect}\n"\
+    "Arrears: #{arrears.inspect}\n"\
+    "client: #{client.inspect}\n"
   end
 end

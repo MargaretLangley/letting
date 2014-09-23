@@ -51,7 +51,7 @@ class Account < ActiveRecord::Base
   # and creates a debit.
   # date_range - dates which we prepare debits over
   #
-  def prepare_debits date_range
+  def make_debits date_range
     charges.map do |charge|
       charge.next_chargeable(date_range).map do |chargeable|
         Debit.new(chargeable.to_hash)

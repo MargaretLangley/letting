@@ -9,11 +9,11 @@ describe Account, :ledgers, type: :model do
     before { Timecop.travel(Date.new(2013, 1, 31)) }
     after { Timecop.return }
 
-    describe '#prepare_debits' do
+    describe '#make_debits' do
       it 'generates debits when charges due' do
         account = account_new charge: charge_new(charge_cycle: \
           charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)]))
-        debits = account.prepare_debits(\
+        debits = account.make_debits(\
                            Date.new(2013, 3, 25)..Date.new(2013, 3, 25))
         expect(debits.size).to eq(1)
       end
@@ -21,7 +21,7 @@ describe Account, :ledgers, type: :model do
       it 'no debits when no charges due' do
         account = account_new charge: charge_new(charge_cycle: \
           charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)]))
-        debits = account.prepare_debits(\
+        debits = account.make_debits(\
                           Date.new(2013, 3, 26)..Date.new(2013, 3, 26))
         expect(debits.size).to eq(0)
       end

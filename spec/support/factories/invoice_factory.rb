@@ -7,7 +7,7 @@ def invoice_new invoice_date: '2014/06/30',
                 property_ref: 108,
                 client: "Lord Harris\nNew Road\nEdge\nBrum",
                 arrears: 20.20,
-                products: [ product_new ]
+                products: [product_new]
 
   account.property.human_ref = property_ref
   account.property.address = property_address

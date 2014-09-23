@@ -5,8 +5,7 @@ def product_new \
   range: '30/9/2010 to 25/3/20011'
 
   Product.new charge_type: charge_type,
-                date_due: date_due,
-                amount: amount,
-                range: range
+              date_due: date_due,
+              amount: amount,
+              range: range
 end
-
