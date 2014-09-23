@@ -43,25 +43,28 @@ RSpec.describe Invoice, type: :model do
         expect(invoice.property_address).to eq "New\nBrum\nWest Midlands"
       end
       it 'sets balance' do
-        invoice = Invoice.new
-        account = account_new credit: credit_new(amount: 17)
+        account = account_new credit: credit_new(amount: 7)
         property = property_new account: account
-        expect(invoice.prepare(account: property.account).arrears).to eq(17.0)
+        expect(Invoice.new.prepare(account: property.account).arrears).to eq(7)
       end
       it 'sets client' do
-        invoice = Invoice.new
         account = account_new
         client_create entities: [Entity.new(name: 'Bell')],
                       property: property_new(account: account_new)
-        expect(invoice.prepare(account: Account.first).client)
+        expect(Invoice.new.prepare(account: Account.first).client)
           .to eq "Bell\nEdgbaston Road\nBirmingham\nWest Midlands"
       end
     end
     describe '#prepare_products' do
-       it 'adds a debit' do
-         invoice = Invoice.new
-         x = invoice.prepare_products debits: [debit_new(charge: charge_new)]
-         expect(x).to eq Product.new
+      it 'adds a debit' do
+        debit = debit_new(charge: charge_new(charge_type: 'Rent'),
+                           on_date: '2014-03-25',
+                           amount: 20.15)
+
+        expect(Invoice.new.prepare_products debits: [debit])
+          .to eq [Product.new(charge_type: 'Rent',
+                              date_due: '2014-03-25',
+                              amount: 20.15) ]
       end
     end
   end
