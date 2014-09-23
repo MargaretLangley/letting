@@ -12,9 +12,9 @@ namespace :db do
     desc 'Import agent addresses data from CSV file'
     task :agents, [:range] => :environment do |_task, args|
       DB::ImportAgent.import agent_file,
-                             range: Rangify.from_str(args.rang e).to_i,
-                             patch: DB::Patch.import(Agen tWithId,
-                                                          patch_file)
+                             range: Rangify.from_str(args.range).to_i,
+                             patch: DB::Patch.import(AgentWithId,
+                                                     patch_file)
     end
 
     def agent_file
