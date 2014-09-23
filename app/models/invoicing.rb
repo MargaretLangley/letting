@@ -16,8 +16,9 @@ class Invoicing < ActiveRecord::Base
   has_many :invoices
 
   def generate(account_ids:)
-    accounts = Account.find(account_ids)
-                 .select { |account| account.make_debits?(start_date..end_date) }
+    accounts =
+      Account.find(account_ids)
+             .select { |account| account.make_debits?(start_date..end_date) }
     self.property_range = properties_range(accounts)
     accounts.each do |account|
       invoice = invoices.build
