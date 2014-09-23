@@ -89,17 +89,27 @@ describe Debit, :ledgers, type: :model do
       end
     end
 
-    describe '#==' do
-      it 'returns equal objects as being the same' do
-        expect(debit_new == debit_new).to be true
+    describe '#<=>' do
+      it 'returns 0 when equal' do
+        lhs = debit_new charge_id: 1, on_date: '2014-01-02', amount: 5.00
+        rhs = debit_new charge_id: 1, on_date: '2014-01-02', amount: 5.00
+        expect(lhs <=> rhs).to eq(0)
       end
 
-      it 'returns unequal objects as being different' do
-        expect(debit_new(amount: 1) == debit_new(amount: 2)).to be false
+      it 'returns 1 when lhs > rhs' do
+        lhs = debit_new charge_id: 1, on_date: '2014-01-02', amount: 6.00
+        rhs = debit_new charge_id: 1, on_date: '2014-01-02', amount: 5.00
+        expect(lhs <=> rhs).to eq(1)
       end
 
-      it 'returns nil objects are different classes' do
-        expect(debit_new == 'I am a string not a debit').to be_nil
+      it 'returns -1 when lhs < rhs' do
+        lhs = debit_new charge_id: 1, on_date: '2014-01-02', amount: 5.00
+        rhs = debit_new charge_id: 2, on_date: '2014-01-02', amount: 5.00
+        expect(lhs <=> rhs).to eq(-1)
+      end
+
+      it 'returns nil when not comparable' do
+        expect(debit_new <=> 37).to be_nil
       end
     end
   end

@@ -21,6 +21,7 @@
 ####
 #
 class Debit < ActiveRecord::Base
+  include Comparable
   belongs_to :account
   belongs_to :debit_generator
   has_many :credits, through: :settlements
@@ -44,11 +45,10 @@ class Debit < ActiveRecord::Base
 
   # Value equality - not sure if that is what is required
   #
-  def == other
+  def <=> other
     return nil unless other.is_a?(self.class)
-    charge_id == other.charge_id &&
-    on_date == other.on_date &&
-    amount == other.amount
+    [charge_id, on_date, amount] <=>
+      [other.charge_id, other.on_date, other.amount]
   end
 
   # charge_id - the charge's being queried for unpaid debits.

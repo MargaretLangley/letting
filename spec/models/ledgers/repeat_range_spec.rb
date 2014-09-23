@@ -76,4 +76,28 @@ describe RepeatRange, :ledgers, :range do
                  RepeatDate.new(year: 2014, month: 9, day: 29)]]
     end
   end
+
+  describe '#<=>' do
+    it 'returns 0 when equal' do
+      lhs = RepeatRange.new dates: [Date.new(2014, 3, 1)]
+      rhs = RepeatRange.new dates: [Date.new(2014, 3, 1)]
+      expect(lhs <=> rhs).to eq(0)
+    end
+
+    it 'returns 1 when lhs > rhs' do
+      lhs = RepeatRange.new dates: [Date.new(2014, 4, 1)]
+      rhs = RepeatRange.new dates: [Date.new(2014, 3, 1)]
+      expect(lhs <=> rhs).to eq(1)
+    end
+
+    it 'returns -1 when a < b' do
+      lhs = RepeatRange.new dates: [Date.new(2014, 3, 1)]
+      rhs = RepeatRange.new dates: [Date.new(2014, 4, 1)]
+      expect(lhs <=> rhs).to eq(-1)
+    end
+
+    it 'returns nil when not comparable' do
+      expect(RepeatRange.new <=> 37).to be_nil
+    end
+  end
 end

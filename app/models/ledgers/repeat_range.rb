@@ -14,7 +14,7 @@ class RepeatRange
   include Enumerable
   attr_reader :dates_in_year
 
-  def initialize(dates: dates, repeat_dates: repeat_dates)
+  def initialize dates: nil, repeat_dates: nil
     @dates_in_year = []
     @dates_in_year = dates.map { |date| RepeatDate.new date: date } if dates
     @dates_in_year = repeat_dates if repeat_dates
@@ -46,6 +46,11 @@ class RepeatRange
     @dates_in_year.find { |repeat_date| repeat_date.date == identify }
   end
 
+  def <=> other
+    return nil unless other.is_a?(self.class)
+    [dates_in_year] <=> [other.dates_in_year]
+  end
+
   private
 
   # Creating the start pairs for arrears date ranges.
@@ -68,9 +73,5 @@ class RepeatRange
     advance = @dates_in_year.rotate(1).map(&:to_yesterday)
     advance[-1] = advance[-1].next_year
     advance
-  end
-
-  def <=> other
-    [@dates_in_year.each] <=> [other.dates_in_year.each]
   end
 end
