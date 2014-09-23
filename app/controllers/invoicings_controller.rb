@@ -23,7 +23,6 @@ class InvoicingsController < ApplicationController
     end
   end
 
-
   def invoicing_params
     params.require(:invoicing)
       .permit :property_range,

@@ -94,6 +94,7 @@ en:
   instruction:
     debit_generators:
       property_charge:  "Search for the properties to charge in the above search box.\nCommon searches are roads, flats and property id ranges. With property ranges use a hyphen e.g. 100-200"
+    invoicing: "To invoice properties, search by entering a property range, two property IDs with a hyphen '-' between them 109-123. %{property_id_range}."
     payments:
       property_payment: "To book a payment against a property, search for the property in the above box. This easiest way is by property identifier, %{property_id}, but %{owner} and %{amount} are also supported."
     properties:

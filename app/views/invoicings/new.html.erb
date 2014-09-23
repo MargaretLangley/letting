@@ -48,10 +48,20 @@
     <div class='col-3-24 vertical-spacer grid-header r-align'>
       Property ID
     </div>
-    <div class='col-21-24 vertical-spacer grid-header'>
+    <div class='col-5-24 vertical-spacer grid-header'>
+      Billing Agent
+    </div>
+    <div class='col-5-24 vertical-spacer grid-header'>
       Billing Address
     </div>
-    <%= render @invoicing.invoices %>
+    <div class='col-11-24 vertical-spacer grid-header'>
+      Charge
+    </div>
+    <% if @invoicing.invoices.size.zero? %>
+      <%= render partial: 'invoicings/unknown_invoice' %>
+    <% else %>
+      <%= render @invoicing.invoices %>
+    <% end %>
   </div>
   <div class="grid-row col-1-24">
     &nbsp;

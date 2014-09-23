@@ -46,7 +46,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def prepare_products(debits:)
-    debits.map do |debit|
+    self.products = debits.map do |debit|
       Product.new charge_type: debit.charge_type,
                   date_due: debit.on_date,
                   amount: debit.amount
