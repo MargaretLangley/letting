@@ -33,14 +33,14 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
     end
   end
 
-  describe '<=>' do
-    it 'matches when equal' do
+  describe '#<=>' do
+    it 'returns 0 when equal' do
       cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 3)]
       other = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 3)]
       expect(cycle <=> other).to eq 0
     end
 
-    it 'is order independent' do
+    it 'equality is order independent' do
       cycle = charge_cycle_new due_ons: [DueOn.new(day: 1, month: 1),
                                          DueOn.new(day: 6, month: 6)]
 
@@ -57,10 +57,20 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
       expect(cycle <=> other).to eq 0
     end
 
-    it 'does not match a cycle with different due_on' do
-      cycle = charge_cycle_new due_ons: [DueOn.new(day: 1, month: 1)]
-      other = charge_cycle_new due_ons: [DueOn.new(day: 6, month: 6)]
-      expect(cycle <=> other).to eq(-1)
+    it 'returns 1 when lhs > rhs' do
+      lhs = charge_cycle_new due_ons: [DueOn.new(day: 6, month: 6)]
+      rhs = charge_cycle_new due_ons: [DueOn.new(day: 1, month: 1)]
+      expect(lhs <=> rhs).to eq(1)
+    end
+
+    it 'returns -1 when lhs < rhs' do
+      lhs = charge_cycle_new due_ons: [DueOn.new(day: 1, month: 1)]
+      rhs = charge_cycle_new due_ons: [DueOn.new(day: 6, month: 6)]
+      expect(lhs <=> rhs).to eq(-1)
+    end
+
+    it 'returns nil when not comparable' do
+      expect(due_on_new(day: 2, month: 2) <=> 37).to be_nil
     end
   end
 

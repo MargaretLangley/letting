@@ -52,6 +52,7 @@ class RepeatDate
   end
 
   def <=> other
+    return nil unless other.is_a?(self.class)
     [date] <=> [other.date]
   end
 end

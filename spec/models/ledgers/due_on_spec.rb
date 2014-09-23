@@ -99,23 +99,23 @@ describe DueOn, :ledgers, type: :model do
         .to eq 'id: nil, day: 25, month: 3, year: nil, Destroy?: false'
     end
 
-    describe '<=>' do
-      it 'matches when equal' do
+    describe '#<=>' do
+      it 'returns 0 when equal' do
         expect(due_on_new(day: 2, month: 2) <=>
           due_on_new(day: 2, month: 2)).to eq(0)
       end
 
-      it 'a is > b return 1' do
+      it 'returns 1 when lhs > rhs' do
         expect(due_on_new(day: 2, month: 2) <=>
           due_on_new(day: 2, month: 1)).to eq(1)
       end
 
-      it 'a is < b return -1' do
+      it 'returns -1 when lhs < rhs' do
         expect(due_on_new(day: 2, month: 2) <=>
           due_on_new(day: 2, month: 3)).to eq(-1)
       end
 
-      it 'nil when not comparable' do
+      it 'returns nil when not comparable' do
         expect(due_on_new(day: 2, month: 2) <=> 37).to be_nil
       end
     end

@@ -15,6 +15,7 @@
 ####
 #
 class DebitGenerator < ActiveRecord::Base
+  include Comparable
   has_many :debits, -> { uniq }, dependent: :destroy
   attr_accessor :accounts
   validates :search_string, uniqueness: { scope: [:start_date, :end_date] },
@@ -42,11 +43,10 @@ class DebitGenerator < ActiveRecord::Base
   end
 
   # simple value equality - (not sure if that's what I need)
-  def == other
+  def <=> other
     return nil unless other.is_a?(self.class)
-    search_string == other.search_string &&
-    start_date == other.start_date &&
-    end_date == other.end_date
+    [search_string, start_date, end_date] <=>
+      [other.search_string, other.start_date, other.end_date]
   end
 
   # search_string - property, human, ref 1098 or range of the form

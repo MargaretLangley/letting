@@ -3,7 +3,7 @@ require_relative '../../import/file_import'
 require_relative '../../import/file_header'
 require_relative '../../import/import_agent'
 
-# Without this you won't see stdoutput until finished running
+# Without this you won't see standard output until finished running
 STDOUT.sync = true
 
 namespace :db do
@@ -12,9 +12,9 @@ namespace :db do
     desc 'Import agent addresses data from CSV file'
     task :agents, [:range] => :environment do |_task, args|
       DB::ImportAgent.import agent_file,
-                             range: Rangify.from_str(args.rang e).to_i,
-                             patch: DB::Patch.import(Agen tWithId,
-                                                          patch_file)
+                             range: Rangify.from_str(args.range).to_i,
+                             patch: DB::Patch.import(AgentWithId,
+                                                     patch_file)
     end
 
     def agent_file

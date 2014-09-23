@@ -126,23 +126,29 @@ describe DebitGenerator, :ledgers, type: :model do
       end
     end
 
-    describe '#==' do
-      it 'returns equal objects as being the same' do
+    describe '#<=>' do
+      it 'returns 0 when equal' do
         lhs = debit_generator_new
         rhs = debit_generator_new
-        expect(lhs == rhs).to be true
+        expect(lhs <=> rhs).to eq(0)
       end
 
-      it 'returns unequal objects as being different' do
+      it 'returns 1 when lhs > rhs' do
+        lhs = debit_generator_new(search_string: '102')
+        rhs = debit_generator_new(search_string: '101')
+        expect(lhs <=> rhs).to eq(1)
+      end
+
+      it 'returns 1 when lhs < rhs' do
         lhs = debit_generator_new(search_string: '101')
         rhs = debit_generator_new(search_string: '102')
-        expect(lhs == rhs).to be false
+        expect(lhs <=> rhs).to eq(-1)
       end
 
-      it 'returns nil objects are different classes' do
+      it 'returns nil when not comparable' do
         lhs = debit_generator_new
         rhs = 'I am a string not a debit'
-        expect(lhs == rhs).to be_nil
+        expect(lhs <=> rhs).to be_nil
       end
     end
 

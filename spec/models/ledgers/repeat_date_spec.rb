@@ -48,4 +48,28 @@ describe RepeatDate, :ledgers, :range do
       expect(day_month.next_year.year).to eq 2015
     end
   end
+
+  describe '#<=>' do
+    it 'returns 0 when equal' do
+      a = RepeatDate.new day: 1, month: 1, year: 2014
+      b = RepeatDate.new day: 1, month: 1, year: 2014
+      expect(a <=> b).to eq(0)
+    end
+
+    it 'returns 1 when a > b' do
+      a = RepeatDate.new day: 2, month: 1, year: 2014
+      b = RepeatDate.new day: 1, month: 1, year: 2014
+      expect(a <=> b).to eq(1)
+    end
+
+    it 'returns -1 when a < b' do
+      a = RepeatDate.new day: 1, month: 1, year: 2014
+      b = RepeatDate.new day: 2, month: 1, year: 2014
+      expect(a <=> b).to eq(-1)
+    end
+
+    it 'returns nil when not comparable' do
+      expect(RepeatDate.new <=> 37).to be_nil
+    end
+  end
 end
