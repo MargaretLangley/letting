@@ -59,7 +59,7 @@ class Account < ActiveRecord::Base
     end.flatten
   end
 
-  def prepare_credits
+  def make_credits
     charges.map { |charge| create_credit charge }
   end
 

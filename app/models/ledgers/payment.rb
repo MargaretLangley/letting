@@ -43,7 +43,7 @@ class Payment < ActiveRecord::Base
 
   def prepare
     return unless account_exists?
-    credits.push(*account.prepare_credits)
+    credits.push(*account.make_credits)
   end
 
   def clear_up

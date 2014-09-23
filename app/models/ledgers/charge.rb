@@ -40,7 +40,7 @@ class Charge < ActiveRecord::Base
 
   # date_range - the date range that we can generate charges for.
   # returns - array of objects with enough information to charge the
-  #           associated account
+  #           associated account. Empty array if nothing charged.
   def next_chargeable date_range
     return [] if dormant
     allowed_due_dates(date_range).map do |my_date|
