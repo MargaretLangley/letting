@@ -23,6 +23,22 @@ describe Account, :ledgers, type: :model do
       end
     end
 
+    describe '#make_debits?' do
+      it 'returns true if debits would be made' do
+        account = account_new charge: charge_new(charge_cycle: \
+          charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
+        expect(account.make_debits? Date.new(2013, 3, 5)..Date.new(2013, 3, 5))
+          .to be true
+      end
+
+      it 'returns false if debits would not be made' do
+        account = account_new charge: charge_new(charge_cycle: \
+          charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
+        expect(account.make_debits? Date.new(2013, 3, 6)..Date.new(2013, 3, 6))
+          .to be false
+      end
+    end
+
     describe '#make_credits' do
       it 'empty charges, empty credits ' do
         expect(account_new.make_credits.size).to eq(0)

@@ -59,6 +59,15 @@ class Account < ActiveRecord::Base
     end.flatten
   end
 
+  def make_debits? date_range
+    charges.map do |charge|
+      charge.next_chargeable(date_range).map do
+        return true
+      end
+    end
+    false
+  end
+
   def make_credits
     charges.map { |charge| create_credit charge }
   end
