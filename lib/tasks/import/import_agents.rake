@@ -3,7 +3,7 @@ require_relative '../../import/file_import'
 require_relative '../../import/file_header'
 require_relative '../../import/import_agent'
 
-# Without this you won't see stdoutput until finished running
+# Without this you won't see standard output until finished running
 STDOUT.sync = true
 
 namespace :db do
