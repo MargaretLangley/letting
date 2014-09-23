@@ -10,7 +10,7 @@
 ####
 #
 class Payment < ActiveRecord::Base
-  belongs_to :account
+  belongs_to :account, inverse_of: :payments
   has_many :credits, dependent: :destroy do
     def clear_up
       each(&:clear_up)
@@ -23,7 +23,7 @@ class Payment < ActiveRecord::Base
   before_validation :clear_up
 
   accepts_nested_attributes_for :credits, allow_destroy: true
-  validates :account_id, :booked_on, presence: true
+  validates :account, :booked_on, presence: true
   validates :amount, amount: true
 
   after_initialize do

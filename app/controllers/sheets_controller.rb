@@ -46,6 +46,6 @@ class SheetsController < ApplicationController
   end
 
   def notices_params
-    %i(id instruction clause proxy)
+    %i(id instruction fill_in sample)
   end
 end

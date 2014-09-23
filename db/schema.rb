@@ -182,9 +182,9 @@ ActiveRecord::Schema.define(version: 20140920193251) do
 
   create_table "notices", force: true do |t|
     t.integer  "sheet_id"
-    t.string   "instruction"
-    t.string   "clause"
-    t.string   "proxy"
+    t.string   "instruction", null: false
+    t.string   "fill_in",     null: false
+    t.string   "sample",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

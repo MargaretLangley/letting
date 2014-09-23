@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Payment, :payment, :ledgers, type: :model do
 
   describe 'validates' do
-    it('is valid') { expect(payment_new).to be_valid }
+    it('is valid') { expect(payment_new account: account_new).to be_valid }
     it 'requires account' do
       expect(payment_new(account_id: nil)).to_not be_valid
     end
@@ -11,12 +11,12 @@ describe Payment, :payment, :ledgers, type: :model do
       it('requires amount') { expect(payment_new amount: nil).to_not be_valid }
       it('is a number') { expect(payment_new amount: 'nan').to_not be_valid }
       it('has a max') { expect(payment_new amount: 100_000).to_not be_valid }
-      it('is valid under max') do
-        expect(payment_new amount: 99_999.99).to be_valid
+      it 'is valid under max' do
+        expect(payment_new account: account_new, amount: 99_999.99).to be_valid
       end
       it('has a min') { expect(payment_new amount: -100_000).to_not be_valid }
-      it('is valid under min') do
-        expect(payment_new amount: -99_999.99).to be_valid
+      it 'is valid under min' do
+        expect(payment_new account: account_new, amount: -99_999.99).to be_valid
       end
       it('fails zero amount') { expect(payment_new amount: 0).to_not be_valid }
     end
@@ -38,7 +38,8 @@ describe Payment, :payment, :ledgers, type: :model do
           .to be_within(1.second).of DateTime.now
       end
       it 'leaves defined booked_on intact' do
-        payment = payment_create booked_on: Time.local(2013, 9, 30, 2, 0)
+        payment = payment_create account: account_new,
+                                 booked_on: Time.local(2013, 9, 30, 2, 0)
         expect(payment.booked_on).to eq Time.local(2013, 9, 30, 2, 0)
       end
     end
@@ -47,7 +48,7 @@ describe Payment, :payment, :ledgers, type: :model do
         expect(payment_new(amount: nil).amount).to eq 0
       end
       it 'leaves defined amounts intact' do
-        payment = payment_create amount: 10.50
+        payment = payment_create account: account_new, amount: 10.50
         expect(Payment.find(payment.id).amount).to eq(-10.50)
       end
     end
