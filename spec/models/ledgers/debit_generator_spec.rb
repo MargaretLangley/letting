@@ -54,7 +54,7 @@ describe DebitGenerator, :ledgers, type: :model do
 
   context 'New DebitGenerator' do
     let(:debit_gen) { DebitGenerator.new }
-    before { Timecop.travel(Date.new(2013, 9, 30)) }
+    before { Timecop.travel Date.new(2013, 9, 30) }
     after { Timecop.return }
 
     it 'has a start date' do
@@ -68,7 +68,7 @@ describe DebitGenerator, :ledgers, type: :model do
 
   describe 'methods' do
     describe '#generate' do
-      before { Timecop.travel(Date.new(2013, 1, 31)) }
+      before { Timecop.travel Date.new(2013, 1, 31) }
       after { Timecop.return }
 
       it 'creates debits' do

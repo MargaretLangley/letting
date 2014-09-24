@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe AccountDecorator do
-  before { Timecop.travel(Date.new(2013, 1, 31)) }
+  before { Timecop.travel Date.new(2013, 1, 31) }
   after { Timecop.return }
 
   describe 'running-balance' do

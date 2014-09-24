@@ -12,7 +12,7 @@ RSpec.describe Invoicing, type: :model do
   end
 
   describe '#invoicable_accounts' do
-    before { Timecop.travel(Date.new(2014, 6, 1)) }
+    before { Timecop.travel Date.new(2014, 6, 1) }
     after { Timecop.return }
     it 'returns accounts to invoice' do
       cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 6)]

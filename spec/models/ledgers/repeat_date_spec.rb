@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe RepeatDate, :ledgers, :range do
-  before { Timecop.travel(Date.new(2014, 3, 25)) }
+  before { Timecop.travel Date.new(2014, 3, 25) }
 
   describe 'create' do
     describe 'with date' do
@@ -27,7 +27,7 @@ describe RepeatDate, :ledgers, :range do
       end
 
       describe 'defaults' do
-        before { Timecop.travel(Date.new(2014, 3, 25)) }
+        before { Timecop.travel Date.new(2014, 3, 25) }
 
         it 'has expected day' do
           day_month = RepeatDate.new

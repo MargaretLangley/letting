@@ -44,7 +44,7 @@ describe Charge, :ledgers, :range, type: :model do
     end
 
     describe '#next_chargeable' do
-      before(:each) { Timecop.travel(Date.new(2013, 1, 31)) }
+      before(:each) { Timecop.travel Date.new(2013, 1, 31) }
       after(:each)  { Timecop.return }
 
       it 'bills if date range covers a due_on'  do

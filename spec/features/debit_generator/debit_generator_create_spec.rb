@@ -5,7 +5,7 @@ describe 'debit_generator', :ledgers, type: :feature do
   before(:each) { log_in }
 
   describe '#create' do
-    before { Timecop.travel(Date.new(2013, 1, 31)) }
+    before { Timecop.travel Date.new(2013, 1, 31) }
     after  { Timecop.return }
 
     it 'charges a property that matches the search' do
