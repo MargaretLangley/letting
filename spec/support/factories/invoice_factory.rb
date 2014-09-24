@@ -2,7 +2,7 @@
 # rubocop: disable Metrics/MethodLength
 
 def invoice_new invoice_date: '2014/06/30',
-                account: property_new(account: account_new).account,
+                account: account_new(property: property_new),
                 property_address: address_new,
                 property_ref: 108,
                 client: "Lord Harris\nNew Road\nEdge\nBrum",

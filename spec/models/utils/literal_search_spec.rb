@@ -23,18 +23,19 @@ describe LiteralSearch, type: :model do
     end
 
     it 'returns an exact invoicing' do
-      ac_1 = (property_create human_ref: '100', account: account_new).account.id
-      ac_2 = (property_create human_ref: '200', account: account_new).account.id
+      ac_1 = account_create(property: property_new(human_ref: '100')).id
+      ac_2 = account_create(property: property_new(human_ref: '200')).id
       expect(LiteralSearch.search(type: 'Invoicing', query: '100-200')
                           .go[:record_id])
         .to eq [ac_1, ac_2]
     end
 
+    # TODO: why is it talking about payment_ref when it expects an account id?
     it 'returns an exact payment ref' do
-      property = property_create human_ref: '100', account: account_new
+      account = account_create property: property_new(human_ref: '100')
       expect(LiteralSearch.search(type: 'Payment', query: '100')
                           .go[:record_id])
-        .to eq property.account.id
+        .to eq account.id
     end
 
     it 'returns an exact property ref' do

@@ -19,8 +19,8 @@ module DB
 
     describe '#account_id' do
       it 'returns valid' do
-        property = property_create human_ref: 89, account: account_new
-        expect(accounting.account(human_ref: 89).id).to eq property.account.id
+        account = account_create property: property_new(human_ref: 89)
+        expect(accounting.account(human_ref: 89).id).to eq account.id
       end
       it 'errors invalid' do
         expect { accounting.account.id }.to raise_error PropertyRefUnknown
@@ -30,13 +30,12 @@ module DB
     describe '#charge_id' do
       it 'returns valid charge_id' do
         charge = charge_new charge_type: 'Rent'
-        property = property_create account: account_new(charge: charge)
-        expect(accounting.charge(account: property.account,
-                                 charge_type: 'Rent'))
-          .to eq property.account.charges.first
+        account = account_create charge: charge, property: property_new
+        expect(accounting.charge(account: account, charge_type: 'Rent'))
+          .to eq account.charges.first
       end
       it 'errors if charge unknown' do
-        account = property_create(account: account_new).account
+        account = account_create property: property_new
         expect { accounting.charge(account: account, charge_type: 'unknown') }
           .to raise_error ChargeUnknown
       end

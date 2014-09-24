@@ -34,7 +34,7 @@ describe Payments do
 
     describe '#on' do
       it 'returns payments on queried day' do
-        account = property_create(account: account_new).account
+        account = account_create property: property_new
         payment = payment_create account_id: account.id,
                                  booked_on: '1/Sep/2014 16:29:30 +0100'
                                             .to_datetime
@@ -42,13 +42,13 @@ describe Payments do
       end
 
       it 'returns nothing on days without a transaction.' do
-        account = property_create(account: account_new).account
+        account = account_create property: property_new
         payment_create account_id: account.id
         expect(Payments.on(date: '2000-1-1').to_a).to eq []
       end
 
       it 'returns nothing if invalid date' do
-        account = property_create(account: account_new).account
+        account = account_create property: property_new
         payment_create account_id: account.id
         expect(Payments.on date: '2012-x').to eq []
       end
