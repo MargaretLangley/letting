@@ -26,6 +26,11 @@ describe 'ChargeFactory' do
       end
 
       describe 'adds' do
+        it 'can add charge_cycle' do
+          cycle = charge_cycle_new name: 'Mar'
+          expect(charge_new(charge_cycle: cycle).charge_cycle.name).to eq 'Mar'
+        end
+
         it 'shovels debit' do
           expect(charge_new(debits: [debit_new]).debits.first.amount)
             .to eq 88.08
