@@ -11,7 +11,7 @@ RSpec.describe Invoicing, type: :model do
     it('invoices') { expect(invoicing_new invoices: nil).to_not be_valid }
   end
 
-  describe '#invoicable_accounts' do
+  describe '#invoiceable_accounts' do
     before { Timecop.travel Date.new(2014, 6, 1) }
     after { Timecop.return }
     it 'returns accounts to invoice' do
@@ -19,7 +19,7 @@ RSpec.describe Invoicing, type: :model do
       account = account_create charge: charge_new(charge_cycle: cycle)
       invoicing = invoicing_new start_date: '2014-06-22', end_date: '2014-06-30'
 
-      expect(invoicing.invoicable_accounts account_ids: [account.id])
+      expect(invoicing.invoiceable_accounts accounts: [account])
         .to eq [account]
     end
 
@@ -28,7 +28,18 @@ RSpec.describe Invoicing, type: :model do
       account = account_create charge: charge_new(charge_cycle: cycle)
       invoicing = invoicing_new start_date: '2014-06-22', end_date: '2014-06-24'
 
-      expect(invoicing.invoicable_accounts account_ids: [account.id]).to eq []
+      expect(invoicing.invoiceable_accounts accounts: [account]).to eq []
+    end
+  end
+
+  describe '#invoiceable?' do
+    it 'returns true when invoiceable' do
+      expect(Invoicing.new.invoiceable? invoiceable_accounts: [account_new])
+        .to be true
+    end
+
+    it 'returns false when not invoiceable' do
+      expect(Invoicing.new.invoiceable? invoiceable_accounts: []).to be false
     end
   end
 
