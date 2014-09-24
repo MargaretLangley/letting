@@ -80,8 +80,8 @@ describe 'ChargeFactory' do
       it('flips dormant') { expect(charge_create dormant: true).to be_dormant }
 
       it 'alters charged_in' do
-        charge_create charged_in: charged_in_create(id: 1, name: 'mid-term')
-        expect(ChargedIn.first.name).to eq 'mid-term'
+        charge_create charged_in: charged_in_create(id: 1, name: 'Mid-Term')
+        expect(ChargedIn.first.name).to eq 'Mid-Term'
       end
     end
 

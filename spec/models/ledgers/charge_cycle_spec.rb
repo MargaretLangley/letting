@@ -10,6 +10,18 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
       (charge_cycle = charge_cycle_new).period_type = ''
       expect(charge_cycle).to_not be_valid
     end
+    it 'includes period_type of term' do
+      (charge_cycle = charge_cycle_new).period_type = 'term'
+      expect(charge_cycle).to be_valid
+    end
+    it 'includes period_type of monthly' do
+      (charge_cycle = charge_cycle_new).period_type = 'monthly'
+      expect(charge_cycle).to be_valid
+    end
+    it 'no other period_type accepted' do
+      (charge_cycle = charge_cycle_new).period_type = 'anything'
+      expect(charge_cycle).to_not be_valid
+    end
   end
 
   describe '#monthly?' do
@@ -123,7 +135,7 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
     end
   end
 
-  describe 'range' do
+  describe '#range_on' do
     before { Timecop.travel Date.new(2014, 1, 31) }
     after  { Timecop.return }
     # currently returning the 'on_date' which initialized
