@@ -4,7 +4,7 @@ require 'rails_helper'
 class PaymentIndexPage
   include Capybara::DSL
 
-  def visit_page
+  def enter
     visit '/payments'
     self
   end
@@ -36,7 +36,7 @@ describe 'Payment index', :ledgers, type: :feature do
 
   it 'all' do
     property_create account: account_new(payment: payment_new)
-    payment_index.visit_page
+    payment_index.enter
     expect(payment_index).to be_having_payment
   end
 
@@ -44,7 +44,7 @@ describe 'Payment index', :ledgers, type: :feature do
     it 'matches transactions on the same day' do
       payment = payment_new(booked_on: '30/4/2013')
       property_create account: account_new(payment: payment)
-      payment_index.visit_page
+      payment_index.enter
       payment_index.search Date.new(2013, 4, 30).to_s
       expect(payment_index).to be_having_payment
     end
@@ -52,7 +52,7 @@ describe 'Payment index', :ledgers, type: :feature do
     it 'misses transactions on a different day' do
       payment = payment_new(booked_on: '2014/01/25')
       property_create account: account_new(payment: payment)
-      payment_index.visit_page
+      payment_index.enter
       payment_index.search '2000/01/01'
       expect(payment_index).to_not be_having_payment
     end
@@ -60,7 +60,7 @@ describe 'Payment index', :ledgers, type: :feature do
 
   it '#destroys a property' do
     property_create account: account_new(payment: payment_new)
-    payment_index.visit_page
+    payment_index.enter
     expect { payment_index.delete }.to change(Payment, :count).by(-1)
     expect(payment_index).to be_deleted
   end

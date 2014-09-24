@@ -9,7 +9,7 @@
 #
 class UserCreatePage
   include Capybara::DSL
-  def visit_page
+  def enter
     visit '/users/new'
     self
   end

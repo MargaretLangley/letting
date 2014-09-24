@@ -25,7 +25,7 @@ describe 'debit_generator', :ledgers, type: :feature do
                    vat: '89',
                    heading1: 'give you notice pursuant'
 
-      debit_gen_page.visit_page.search_term('87').search
+      debit_gen_page.enter.search_term('87').search
       expect(page).to have_text '87'
       expect(page).to have_text 'Rent'
       debit_gen_page.make_charges
@@ -35,7 +35,7 @@ describe 'debit_generator', :ledgers, type: :feature do
     it 'errors on queries without a valid account' do
       charge = charge_new charged_in: charged_in_create(id: 2)
       property_create human_ref: 87, account: account_new(charge: charge)
-      debit_gen_page.visit_page.search_term('102-109').search
+      debit_gen_page.enter.search_term('102-109').search
       expect(debit_gen_page).to be_without_accounts
     end
   end

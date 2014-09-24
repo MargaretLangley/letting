@@ -10,7 +10,7 @@
 class DebitGeneratorCreatePage
   include Capybara::DSL
 
-  def visit_page
+  def enter
     visit '/debit_generators/new'
     self
   end

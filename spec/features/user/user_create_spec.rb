@@ -5,7 +5,7 @@ describe User, type: :feature do
   before(:each) { log_in admin_attributes }
 
   it 'creates a user' do
-    user_page.visit_page
+    user_page.enter
     user_page.fill_form 'newuser', 'newuser@example.com', 'password', 'password'
     user_page.click
     expect(user_page).to be_successful
@@ -13,7 +13,7 @@ describe User, type: :feature do
   end
 
   it 'displays form errors' do
-    user_page.visit_page
+    user_page.enter
     user_page.click
     expect(user_page).to be_errored
   end
