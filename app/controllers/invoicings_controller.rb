@@ -8,8 +8,7 @@
 #
 class InvoicingsController < ApplicationController
   def new
-    @invoicing = Invoicing.new property_range: params[:search_terms],
-                               start_date: params[:start_date],
+    @invoicing = Invoicing.new start_date: params[:start_date],
                                end_date: params[:end_date]
     @invoicing.generate account_ids: params[:id] if params[:id]
   end

@@ -14,20 +14,32 @@
 #
 class Invoicing < ActiveRecord::Base
   has_many :invoices
+  validates :property_range, :start_date, :end_date, :invoices, presence: true
 
   def generate(account_ids:)
-    accounts =
-      Account.find(account_ids)
-             .select { |account| account.make_debits?(start_date..end_date) }
-    self.property_range = properties_range(accounts)
+    accounts = invoicable_accounts account_ids: account_ids
+    self.property_range = make_properties_range accounts
+    make_invoices accounts: accounts
+  end
+
+  def invoicable_accounts(account_ids:)
+    Account.find(account_ids)
+           .select { |account| account.make_debits?(start_date..end_date) }
+  end
+
+  def make_properties_range accounts
+    "#{accounts.first.property.human_ref} - #{accounts.last.property.human_ref}"
+  end
+
+  def make_invoices(accounts:)
     accounts.each do |account|
-      invoice = invoices.build
-      invoice.prepare account: account
-      invoice.prepare_products debits: account.make_debits(start_date..end_date)
+      make_invoice account: account,
+                   debits: account.make_debits(start_date..end_date)
     end
   end
 
-  def properties_range accounts
-    "#{accounts.first.property.human_ref} - #{accounts.last.property.human_ref}"
+  def make_invoice(invoice: invoices.build, account:, debits:)
+    invoice.prepare account: account
+    invoice.prepare_products debits: debits
   end
 end
