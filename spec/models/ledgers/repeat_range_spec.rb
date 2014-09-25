@@ -1,103 +1,58 @@
 require 'rails_helper'
 
 describe RepeatRange, :ledgers, :range do
+  before { Timecop.travel Date.new(2014, 1, 31) }
+  after  { Timecop.return }
 
   describe 'initializes' do
-    it 'empty' do
-      repeat = RepeatRange.new
-      expect(repeat.dates_in_year.length).to eq 0
-    end
+    # validation?
+    # it 'empty' do
+    # end
 
     it 'can use dates' do
-      repeat = RepeatRange.new(dates: [Date.new(2014, 3, 1)])
+      repeat = RepeatRange.new charged_in: 'Advance',
+                               billed_on: '2014-06-06',
+                               dates: [Date.new(2014, 6, 5)]
       expect(repeat.dates_in_year.length).to eq 1
-      expect(repeat.dates_in_year.first.month).to eq 3
+      expect(repeat.dates_in_year.first.month).to eq 6
     end
 
     it 'can use repeat dates' do
-      repeat = RepeatRange.new(
-                 repeat_dates: [RepeatDate.new(year: 2014, month: 5, day: 4)])
+      repeat = RepeatRange.new \
+                 charged_in: 'Advance',
+                 billed_on: '2014-06-05',
+                 repeat_dates: [RepeatDate.new(year: 2014, month: 6, day: 5)]
       expect(repeat.dates_in_year.length).to eq 1
-      expect(repeat.dates_in_year.first.month).to eq 5
+      expect(repeat.dates_in_year.first.month).to eq 6
     end
   end
 
-  it 'pushes' do
-    repeat = RepeatRange.new
-    repeat.push repeat_date: RepeatDate.new(year: 2014, month: 2, day: 1)
-    expect(repeat.dates_in_year.length).to eq 1
-  end
-
-  describe 'find by' do
-    it 'matches on date' do
-      repeat = RepeatRange.new
-      repeat.push repeat_date: RepeatDate.new(year: 2014, month: 3, day: 25)
-      repeat.push repeat_date: RepeatDate.new(year: 2014, month: 9, day: 30)
-      expect(repeat.find Date.new(2014, 9, 30)).to eq repeat.dates_in_year.last
+  describe '#billing_period2' do
+    before { Timecop.travel Date.new(2014, 1, 31) }
+    after  { Timecop.return }
+    # currently returning the 'on_date' which initialized
+    # the Repeat range - but will eventually be the range
+    it 'finds advanced range' do
+      repeat = RepeatRange.new charged_in: 'Advance',
+                               billed_on: Date.new(2014, 6, 6),
+                               dates: [Date.new(2014, 6, 6)]
+      expect(repeat.billing_period)
+        .to eq Date.new(2014, 6, 6)..Date.new(2015, 6, 5)
     end
 
-    it 'does not match when identifying an unknown' do
-      repeat = RepeatRange.new
-      repeat.push repeat_date: RepeatDate.new(year: 2014, month: 3, day: 25)
-      expect(repeat.find Date.new(2014, 9, 30)).to be_nil
-    end
-  end
-
-  describe 'advanced' do
-    it 'one date' do
-      repeat = RepeatRange.new
-      repeat.push repeat_date: RepeatDate.new(year: 2014, month: 4, day: 1)
-      expect(repeat.advance_ranges)
-        .to eq [[RepeatDate.new(day: 1, month: 4, year: 2014),
-                 RepeatDate.new(day: 31, month: 3, year: 2015)]]
+    it 'finds arrears range' do
+      repeat = RepeatRange.new charged_in: 'Arrears',
+                               billed_on: Date.new(2014, 6, 6),
+                               dates: [Date.new(2014, 6, 6)]
+      expect(repeat.billing_period)
+        .to eq Date.new(2013, 6, 7)..Date.new(2014, 6, 6)
     end
 
-    it 'two dates' do
-      repeat = RepeatRange.new
-      repeat.push repeat_date: RepeatDate.new(year: 2014, month: 3, day: 25)
-      repeat.push repeat_date: RepeatDate.new(year: 2014, month: 9, day: 29)
-      expect(repeat.advance_ranges)
-        .to eq [[RepeatDate.new(year: 2014, month: 3, day: 25),
-                 RepeatDate.new(year: 2014, month: 9, day: 28)],
-                [RepeatDate.new(year: 2014, month: 9, day: 29),
-                 RepeatDate.new(year: 2015, month: 3, day: 24)]]
-    end
-  end
-
-  describe 'arrears' do
-    it 'two dates' do
-      repeat = RepeatRange.new
-      repeat.push repeat_date: RepeatDate.new(year: 2014, month: 3, day: 25)
-      repeat.push repeat_date: RepeatDate.new(year: 2014, month: 9, day: 29)
-      expect(repeat.arrears_ranges)
-        .to eq [[RepeatDate.new(year: 2013, month: 9, day: 30),
-                 RepeatDate.new(year: 2014, month: 3, day: 25)],
-                [RepeatDate.new(year: 2014, month: 3, day: 26),
-                 RepeatDate.new(year: 2014, month: 9, day: 29)]]
-    end
-  end
-
-  describe '#<=>' do
-    it 'returns 0 when equal' do
-      lhs = RepeatRange.new dates: [Date.new(2014, 3, 1)]
-      rhs = RepeatRange.new dates: [Date.new(2014, 3, 1)]
-      expect(lhs <=> rhs).to eq(0)
-    end
-
-    it 'returns 1 when lhs > rhs' do
-      lhs = RepeatRange.new dates: [Date.new(2014, 4, 1)]
-      rhs = RepeatRange.new dates: [Date.new(2014, 3, 1)]
-      expect(lhs <=> rhs).to eq(1)
-    end
-
-    it 'returns -1 when a < b' do
-      lhs = RepeatRange.new dates: [Date.new(2014, 3, 1)]
-      rhs = RepeatRange.new dates: [Date.new(2014, 4, 1)]
-      expect(lhs <=> rhs).to eq(-1)
-    end
-
-    it 'returns nil when not comparable' do
-      expect(RepeatRange.new <=> 37).to be_nil
+    it 'errors when due on not found' do
+      repeat = RepeatRange.new charged_in: 'Advance',
+                               billed_on: Date.new(2014, 12, 12),
+                               dates: [Date.new(2014, 6, 6)]
+      expect(repeat.billing_period).to eq :missing_due_on
     end
   end
 end

@@ -87,4 +87,11 @@ describe RepeatDate, :ledgers, :range do
       expect(RepeatDate.new <=> 37).to be_nil
     end
   end
+
+  describe '#date' do
+    it 'returns date' do
+      expect(RepeatDate.new(date: Date.new(2014, 2, 1)).date)
+        .to eq Date.new(2014, 2, 1)
+    end
+  end
 end
