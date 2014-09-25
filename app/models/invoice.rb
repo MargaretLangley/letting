@@ -50,7 +50,7 @@ class Invoice < ActiveRecord::Base
       Product.new charge_type: debit.charge_type,
                   date_due: debit.on_date,
                   amount: debit.amount
-      # TODO: range
+      # TODO:     bill_period: debit.bill_period
     end
   end
 

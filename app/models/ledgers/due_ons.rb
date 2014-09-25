@@ -40,9 +40,8 @@ module DueOns
   included do
     has_many :due_ons, -> { order(:created_at) }, dependent: :destroy do
 
-      def due_between? date_range
-        ordered_by_occurrence.select { |due_on| due_on.between? date_range }
-                              .map(&:make_date)
+      def due_between? billing_period
+        ordered_by_occurrence.select { |due_on| due_on.between? billing_period }
       end
 
       def prepare(type:)

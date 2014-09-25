@@ -49,19 +49,19 @@ class Account < ActiveRecord::Base
 
   # For each charge it finds the next time it can be charged, if any,
   # and creates a debit.
-  # date_range - dates which we prepare debits over
+  # billing_period - dates which we prepare debits over
   #
-  def make_debits date_range
+  def make_debits billing_period
     charges.map do |charge|
-      charge.next_chargeable(date_range).map do |chargeable|
+      charge.next_chargeable(billing_period).map do |chargeable|
         Debit.new(chargeable.to_hash)
       end
     end.flatten
   end
 
-  def make_debits? date_range
+  def make_debits? billing_period
     charges.map do |charge|
-      charge.next_chargeable(date_range).map do
+      charge.next_chargeable(billing_period).map do
         return true
       end
     end

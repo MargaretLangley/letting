@@ -36,8 +36,8 @@ class ChargeCycle < ActiveRecord::Base
     due_ons.prepare type: period_type
   end
 
-  def due_between? date_range
-    due_ons.due_between?(date_range).to_a
+  def due_between? billing_period
+    due_ons.due_between?(billing_period).map(&:make_date).to_a
   end
 
   def <=> other
@@ -52,6 +52,7 @@ class ChargeCycle < ActiveRecord::Base
     @range ||= RepeatRange.new \
                  dates: due_ons.due_between?(Time.now.beginning_of_year..\
                                             Time.now.end_of_year)
+                               .map(&:make_date)
     found_date = @range.find date
     found_date ? found_date.date : :missing_due_on
   end

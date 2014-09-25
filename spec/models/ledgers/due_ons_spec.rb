@@ -34,7 +34,7 @@ describe DueOns, :ledgers, type: :model do
         cycle = charge_cycle_new due_ons: [DueOn.new(day: 4, month: 4),
                                            DueOn.new(day: 3, month: 5)]
         expect(cycle.due_ons.due_between? date_range_covering_due_on)
-          .to eq [Date.new(2013, 4, 4), Date.new(2013, 5, 3)]
+          .to eq [DueOn.new(day: 4, month: 4), DueOn.new(day: 3, month: 5)]
       end
 
       it 'returns nils when range outside due date' do

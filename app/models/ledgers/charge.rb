@@ -38,13 +38,13 @@ class Charge < ActiveRecord::Base
 
   delegate :monthly?, to: :charge_cycle
 
-  # date_range - the date range that we can generate charges for.
-  # returns - array of objects with enough information to charge the
-  #           associated account. Empty array if nothing charged.
-  def next_chargeable date_range
+  # billing_period - the date range that we generate charges for.
+  # returns        - chargable_info array with data required to bill the
+  #                  associated account. Empty array if nothing billed.
+  def next_chargeable billing_period
     return [] if dormant
-    allowed_due_dates(date_range).map do |my_date|
-      chargeable_info(my_date) unless debits.created_on? my_date
+    allowed_due_dates(billing_period).map do |billed_on|
+      make_chargeable_info(billed_on) unless debits.created_on? billed_on
     end.compact
   end
 
@@ -62,19 +62,23 @@ class Charge < ActiveRecord::Base
     !empty?
   end
 
-  def allowed_due_dates date_range
-    charge_cycle.due_between?(date_range) & (start_date..end_date).to_a
+  def allowed_due_dates billing_period
+    charge_cycle.due_between?(billing_period) & charge_active_epoch.to_a
+  end
+
+  # The years, dates, a charge is active
+  def charge_active_epoch
+    (start_date..end_date)
   end
 
   # Converts a Charge object into a ChargeableInfo object.
-  # date - the date we are are creating the charge on. Should match
-  #        a date a charge becomes due.
-  # returns The information to create a charge for the associated account_id
+  # billed_on - the date the charge becomes due and is billed.
+  # returns   - The information to bill, debit, the associated account.
   #
-  def chargeable_info date
+  def make_chargeable_info billed_on
     ChargeableInfo
       .from_charge charge_id:  id,
-                   on_date:    date,
+                   on_date:    billed_on,
                    amount:     amount,
                    account_id: account_id
   end

@@ -3,11 +3,14 @@
 # RepeatRange
 #
 # RepeatingDate - is Day, Month pairings that occur every year.
-# RepeatingRange takes a list of repeating dates and turns them
-# into ranges. Invoicing choice (advance, arrears, or mid-term)
-# affect the range dates.
 #
+# RepeatingRange takes a list of repeating dates and turns them into ranges.
+# Invoicing choice (advance, arrears, or mid-term) affect the range dates.
+#
+# A useless assignment which increases human reader's comprehension.
+# rubocop: disable  Lint/UselessAssignment
 ####
+#
 #
 class RepeatRange
   include Comparable
@@ -29,8 +32,7 @@ class RepeatRange
   # into advance ranges.
   #
   def advance_ranges
-    advance_start = @dates_in_year
-    advance_start.zip(advance_end)
+    (advance_start = @dates_in_year).zip(advance_end)
   end
 
   # Arrears range pairs
@@ -38,8 +40,7 @@ class RepeatRange
   # into arrears ranges.
   #
   def arrears_ranges
-    arrears_end = @dates_in_year
-    arrears_start.zip(arrears_end)
+    arrears_start.zip(arrears_end = @dates_in_year)
   end
 
   def find identify
