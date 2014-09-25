@@ -35,11 +35,11 @@ class RepeatDate
     @date.year
   end
 
-  def to_yesterday
+  def yesterday
     RepeatDate.new(date: @date - 1.day)
   end
 
-  def to_tomorrow
+  def tomorrow
     RepeatDate.new(date: @date + 1.day)
   end
 

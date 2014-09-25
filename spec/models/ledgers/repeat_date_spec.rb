@@ -42,8 +42,23 @@ describe RepeatDate, :ledgers, :range do
     end
   end
 
-  describe 'next' do
-    it 'returns next year' do
+  describe 'method modifiers' do
+    it '#yesterday - subtracts 1 day' do
+      day_month = RepeatDate.new day: 2, month: 2
+      expect(day_month.yesterday.day).to eq 1
+    end
+
+    it '#tomorrow - adds 1 day' do
+      day_month = RepeatDate.new day: 1, month: 2
+      expect(day_month.tomorrow.day).to eq 2
+    end
+
+    it '#last_year - subtracts 1 year' do
+      day_month = RepeatDate.new day: 1, month: 2
+      expect(day_month.last_year.year).to eq 2013
+    end
+
+    it '#next_year - adds 1 year' do
       day_month = RepeatDate.new day: 1, month: 2
       expect(day_month.next_year.year).to eq 2015
     end

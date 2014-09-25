@@ -59,7 +59,7 @@ class RepeatRange
   # Begin With:  E       F       G       H
   # End   With:  H +1D   E +1D   F +1D   G +1D -1Y
   def arrears_start
-    arrears = @dates_in_year.rotate(-1).map(&:to_tomorrow)
+    arrears = @dates_in_year.rotate(-1).map(&:tomorrow)
     arrears[0] = arrears[0].last_year
     arrears
   end
@@ -70,7 +70,7 @@ class RepeatRange
   # Begin With:  E       F       G       H
   # End   With:  F -1D   G -1D   H -1D   E -1D +1Y
   def advance_end
-    advance = @dates_in_year.rotate(1).map(&:to_yesterday)
+    advance = @dates_in_year.rotate(1).map(&:yesterday)
     advance[-1] = advance[-1].next_year
     advance
   end
