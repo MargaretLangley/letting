@@ -2,21 +2,20 @@
 #
 # RepeatRange
 #
+# Factory to make billing period objects
+#
 ####
 #
 #
-class RepeatRange
-  attr_reader :billed_on, :item, :dates_in_year
-
-  def initialize name:, billed_on:, dates: nil, repeat_dates: nil
-    @billed_on = billed_on
-    @dates_in_year = []
-    @dates_in_year = dates.map { |date| RepeatDate.new date: date } if dates
-    @dates_in_year = repeat_dates if repeat_dates
-    @item = klass_for(name).new(repeat_dates: dates_in_year)
+module RepeatRange
+  def self.for name:, dates: nil, repeat_dates: nil
+    dates_in_year = []
+    dates_in_year = dates.map { |date| RepeatDate.new date: date } if dates
+    dates_in_year = repeat_dates if repeat_dates
+    klass_for(name).new(repeat_dates: dates_in_year)
   end
 
-  def klass_for name
+  def self.klass_for name
     case name
     when 'Advance'
       Advance
@@ -27,9 +26,5 @@ class RepeatRange
     else
       fail 'Unknown charged_in type'
     end
-  end
-
-  def billing_period
-    item.billing_period  billed_date: billed_on
   end
 end

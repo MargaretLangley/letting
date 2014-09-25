@@ -10,20 +10,18 @@ describe RepeatRange, :ledgers, :range do
     # end
 
     it 'can use dates' do
-      repeat = RepeatRange.new name: 'Advance',
-                               billed_on: '2014-06-06',
+      repeat = RepeatRange.for name: 'Advance',
                                dates: [Date.new(2014, 6, 5)]
-      expect(repeat.dates_in_year.length).to eq 1
-      expect(repeat.dates_in_year.first.month).to eq 6
+      expect(repeat.periods.length).to eq 1
+      expect(repeat.periods.first.first.month).to eq 6
     end
 
     it 'can use repeat dates' do
-      repeat = RepeatRange.new \
+      repeat = RepeatRange.for \
                  name: 'Advance',
-                 billed_on: '2014-06-05',
                  repeat_dates: [RepeatDate.new(year: 2014, month: 6, day: 5)]
-      expect(repeat.dates_in_year.length).to eq 1
-      expect(repeat.dates_in_year.first.month).to eq 6
+      expect(repeat.periods.length).to eq 1
+      expect(repeat.periods.first.first.month).to eq 6
     end
   end
 
@@ -33,26 +31,24 @@ describe RepeatRange, :ledgers, :range do
     # currently returning the 'on_date' which initialized
     # the Repeat range - but will eventually be the range
     it 'finds advanced range' do
-      repeat = RepeatRange.new name: 'Advance',
-                               billed_on: Date.new(2014, 6, 6),
+      repeat = RepeatRange.for name: 'Advance',
                                dates: [Date.new(2014, 6, 6)]
-      expect(repeat.billing_period)
+      expect(repeat.billing_period billed_date: Date.new(2014, 6, 6))
         .to eq Date.new(2014, 6, 6)..Date.new(2015, 6, 5)
     end
 
     it 'finds arrears range' do
-      repeat = RepeatRange.new name: 'Arrears',
-                               billed_on: Date.new(2014, 6, 6),
+      repeat = RepeatRange.for name: 'Arrears',
                                dates: [Date.new(2014, 6, 6)]
-      expect(repeat.billing_period)
+      expect(repeat.billing_period billed_date: Date.new(2014, 6, 6))
         .to eq Date.new(2013, 6, 7)..Date.new(2014, 6, 6)
     end
 
     it 'errors when due on not found' do
-      repeat = RepeatRange.new name: 'Advance',
-                               billed_on: Date.new(2014, 12, 12),
+      repeat = RepeatRange.for name: 'Advance',
                                dates: [Date.new(2014, 6, 6)]
-      expect(repeat.billing_period).to eq :missing_due_on
+      expect(repeat.billing_period billed_date:  Date.new(2014, 12, 12))
+        .to eq :missing_due_on
     end
   end
 end
