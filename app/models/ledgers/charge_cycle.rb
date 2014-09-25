@@ -46,7 +46,7 @@ class ChargeCycle < ActiveRecord::Base
   end
 
   def billing_period(charged_in:, billed_on:)
-    RepeatRange.new(charged_in: charged_in,
+    RepeatRange.new(name: charged_in,
                     dates: due_ons.map(&:make_date),
                     billed_on: billed_on).billing_period
   end

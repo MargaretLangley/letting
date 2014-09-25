@@ -10,7 +10,7 @@ describe RepeatRange, :ledgers, :range do
     # end
 
     it 'can use dates' do
-      repeat = RepeatRange.new charged_in: 'Advance',
+      repeat = RepeatRange.new name: 'Advance',
                                billed_on: '2014-06-06',
                                dates: [Date.new(2014, 6, 5)]
       expect(repeat.dates_in_year.length).to eq 1
@@ -19,7 +19,7 @@ describe RepeatRange, :ledgers, :range do
 
     it 'can use repeat dates' do
       repeat = RepeatRange.new \
-                 charged_in: 'Advance',
+                 name: 'Advance',
                  billed_on: '2014-06-05',
                  repeat_dates: [RepeatDate.new(year: 2014, month: 6, day: 5)]
       expect(repeat.dates_in_year.length).to eq 1
@@ -33,7 +33,7 @@ describe RepeatRange, :ledgers, :range do
     # currently returning the 'on_date' which initialized
     # the Repeat range - but will eventually be the range
     it 'finds advanced range' do
-      repeat = RepeatRange.new charged_in: 'Advance',
+      repeat = RepeatRange.new name: 'Advance',
                                billed_on: Date.new(2014, 6, 6),
                                dates: [Date.new(2014, 6, 6)]
       expect(repeat.billing_period)
@@ -41,7 +41,7 @@ describe RepeatRange, :ledgers, :range do
     end
 
     it 'finds arrears range' do
-      repeat = RepeatRange.new charged_in: 'Arrears',
+      repeat = RepeatRange.new name: 'Arrears',
                                billed_on: Date.new(2014, 6, 6),
                                dates: [Date.new(2014, 6, 6)]
       expect(repeat.billing_period)
@@ -49,7 +49,7 @@ describe RepeatRange, :ledgers, :range do
     end
 
     it 'errors when due on not found' do
-      repeat = RepeatRange.new charged_in: 'Advance',
+      repeat = RepeatRange.new name: 'Advance',
                                billed_on: Date.new(2014, 12, 12),
                                dates: [Date.new(2014, 6, 6)]
       expect(repeat.billing_period).to eq :missing_due_on
