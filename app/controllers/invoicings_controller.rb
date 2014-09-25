@@ -7,6 +7,11 @@
 ####
 #
 class InvoicingsController < ApplicationController
+
+  def index
+    @invoicings = Invoicing.page(params[:page]).load
+  end
+
   def new
     @invoicing = Invoicing.new property_range: params[:search_terms],
                                start_date: params[:start_date],
