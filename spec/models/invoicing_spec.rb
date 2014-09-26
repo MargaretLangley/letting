@@ -11,6 +11,39 @@ RSpec.describe Invoicing, type: :model do
     it('invoices') { expect(invoicing_new invoices: nil).to_not be_valid }
   end
 
+  describe '#invoiceable?' do
+    it 'returns true when invoiceable' do
+      expect(Invoicing.new.invoiceable? accounts: [account_new])
+        .to be true
+    end
+
+    it 'returns true when invoiceable using full stack' do
+      Timecop.travel Date.new(2014, 6, 1)
+      cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
+      account = account_create charge: charge_new(charge_cycle: cycle),
+                               property: property_new(human_ref: 100)
+      invoicing = invoicing_new property_range: '100',
+                                start_date: '2014-06-22', end_date: '2014-06-30'
+      expect(invoicing.invoiceable?).to be true
+      Timecop.return
+    end
+
+    it 'returns false when not invoiceable' do
+      expect(Invoicing.new.invoiceable? accounts: []).to be false
+    end
+
+    it 'returns false when not invoiceable using full stack' do
+      Timecop.travel Date.new(2014, 6, 1)
+      cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
+      account = account_create charge: charge_new(charge_cycle: cycle),
+                               property: property_new(human_ref: 100)
+      invoicing = invoicing_new property_range: '100',
+                                start_date: '2014-06-22', end_date: '2014-06-24'
+      expect(invoicing.invoiceable?).to be false
+      Timecop.return
+    end
+  end
+
   describe '#invoiceable_accounts' do
     before { Timecop.travel Date.new(2014, 6, 1) }
     after { Timecop.return }
@@ -29,17 +62,6 @@ RSpec.describe Invoicing, type: :model do
       invoicing = invoicing_new start_date: '2014-06-22', end_date: '2014-06-24'
 
       expect(invoicing.invoiceable_accounts accounts: [account]).to eq []
-    end
-  end
-
-  describe '#invoiceable?' do
-    it 'returns true when invoiceable' do
-      expect(Invoicing.new.invoiceable? invoiceable_accounts: [account_new])
-        .to be true
-    end
-
-    it 'returns false when not invoiceable' do
-      expect(Invoicing.new.invoiceable? invoiceable_accounts: []).to be false
     end
   end
 

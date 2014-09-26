@@ -21,16 +21,12 @@ class Invoicing < ActiveRecord::Base
     make_invoices accounts: accounts
   end
 
-  def invoiceable? invoiceable_accounts: invoiceable_accounts
-    invoiceable_accounts.present?
+  def invoiceable? accounts: invoiceable_accounts
+    accounts.present?
   end
 
-  def invoiceable_accounts accounts: accounts_from_property_range
+  def invoiceable_accounts accounts: Account.between?(property_range)
     accounts.select { |account| account.make_debits?(start_date..end_date) }
-  end
-
-  def accounts_from_property_range
-    Account.between? property_range
   end
 
   def make_properties_range accounts

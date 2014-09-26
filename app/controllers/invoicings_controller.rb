@@ -11,13 +11,12 @@ class InvoicingsController < ApplicationController
     @invoicing = Invoicing.new property_range: params[:search_terms],
                                start_date: params[:start_date],
                                end_date: params[:end_date]
-
     @invoicing.generate if @invoicing.invoiceable?
   end
 
   def create
     @invoicing = Invoicing.new invoicing_params
-    @invoicing.generate
+    @invoicing.generate if @invoicing.invoiceable?
     if @invoicing.save
       redirect_to new_invoicing_path, notice: 'Invoicing successfully created!'
     else
