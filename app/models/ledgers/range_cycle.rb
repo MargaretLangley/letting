@@ -1,13 +1,13 @@
 ####
 #
-# RepeatRange
+# RangeCycle
 #
 # Factory to make billing period objects
 #
 ####
 #
 #
-module RepeatRange
+module RangeCycle
   DEFAULT_CLASS = Advance
   SPECIALIZED_CLASSES = {
     'Advance' => Advance,
