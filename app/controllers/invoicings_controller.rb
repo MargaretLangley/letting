@@ -7,9 +7,12 @@
 ####
 #
 class InvoicingsController < ApplicationController
-
   def index
-    @invoicings = Invoicing.page(params[:page]).load
+    @invoicings = Invoicing.page(params[:page]).load.order(start_date: :desc)
+  end
+
+  def show
+    @invoicing = Invoicing.find params[:id]
   end
 
   def new

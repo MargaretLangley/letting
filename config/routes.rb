@@ -17,7 +17,7 @@ Letting::Application.routes.draw do
   # TODO: do we need debit_generators?
   resources :debit_generators, only: [:new, :create, :index]
   resources :payments
-  resources :invoicings, only: [:new, :create, :index]
+  resources :invoicings, only: [:new, :create, :index, :show]
 
   # Admin
   resources :charge_cycles
