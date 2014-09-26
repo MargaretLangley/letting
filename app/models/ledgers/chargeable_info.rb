@@ -15,14 +15,15 @@
 ####
 #
 class ChargeableInfo
-  include Equalizer.new(:account_id, :amount, :charge_id, :on_date)
-  attr_reader :account_id, :charge_id, :on_date, :amount
+  include Equalizer.new(:account_id, :charge_id, :on_date, :amount)
+  attr_reader :account_id, :charge_id, :on_date, :period, :amount
 
-  def self.from_charge(charge_id:, on_date:, amount:, account_id:)
-    new charge_id:  charge_id,
+  def self.from_charge(account_id:, charge_id:, on_date:, period:, amount:)
+    new account_id: account_id,
+        charge_id:  charge_id,
         on_date:    on_date,
-        amount:     amount,
-        account_id: account_id
+        period:     period,
+        amount:     amount
   end
 
   # instance_values is a rails object that returns instances
@@ -34,10 +35,11 @@ class ChargeableInfo
 
   private
 
-  def initialize(charge_id:, on_date:, amount:, account_id:)
+  def initialize(account_id:, charge_id:, on_date:, period:, amount:)
+    @account_id = account_id
     @charge_id  = charge_id
     @on_date    = on_date
+    @period     = period
     @amount     = amount
-    @account_id = account_id
   end
 end

@@ -15,12 +15,15 @@ require_relative '../../../lib/import/import_debit'
 module DB
   describe ImportDebit, :import do
     let!(:property) do
-      property_create human_ref: 122, account: account_new(charge: charge_new)
+      cycle = charge_cycle_new(due_ons: [DueOn.new(day: 6, month: 6)])
+      property_create \
+        human_ref: 122,
+        account: account_new(charge: charge_new(charge_cycle: cycle))
     end
 
     context 'one debit' do
       def one_debit_csv
-        %q(122, GR, 2011-12-25 12:00:00, Ground Rent..., 37.5,    0, 37.5)
+        %q(122, GR, 2011-6-6 12:00:00, Ground Rent..., 37.5,    0, 37.5)
       end
 
       it 'parsed' do
@@ -31,8 +34,8 @@ module DB
 
     context 'two debits' do
       def two_debit_csv
-        %q(122, GR, 2011-12-25 12:00:00, Ground Rent..., 37.5,    0, 37.5
-           122, GR, 2012-12-25 12:00:00, Ground Rent..., 37.5,    0, 37.5)
+        %q(122, GR, 2011-6-6 12:00:00, Ground Rent..., 37.5,    0, 37.5
+           122, GR, 2012-6-6 12:00:00, Ground Rent..., 37.5,    0, 37.5)
       end
 
       it 'parsed' do

@@ -7,8 +7,12 @@ describe 'Debit Factory' do
       it 'is requires charge to be valid' do
         expect(debit_new charge: charge_new).to be_valid
       end
-      it('has amount') { expect(debit_new.amount).to eq(88.08) }
       it('has date') { expect(debit_new.on_date.to_s).to eq '2013-03-25' }
+      it 'has period' do
+        expect(debit_new.period)
+          .to eq Date.new(2013, 3, 25)..Date.new(2013, 6, 30)
+      end
+      it('has amount') { expect(debit_new.amount).to eq(88.08) }
     end
     describe 'overrides' do
       it 'alters amount' do
@@ -17,6 +21,11 @@ describe 'Debit Factory' do
       it('nils date') { expect(debit_new on_date: nil).to_not be_valid }
       it 'alters date' do
         expect(debit_new(on_date: '10/6/2014').on_date.to_s).to eq '2014-06-10'
+      end
+      it 'alters period' do
+        period = Date.new(2014, 3, 25)..Date.new(2014, 6, 30)
+        expect(debit_new(period: period).period.to_s)
+          .to eq '2014-03-25..2014-06-30'
       end
     end
   end

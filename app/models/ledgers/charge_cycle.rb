@@ -44,10 +44,4 @@ class ChargeCycle < ActiveRecord::Base
     return nil unless other.is_a?(self.class)
     [due_ons.sort] <=> [other.due_ons.sort]
   end
-
-  def billing_period(charged_in:, billed_on:)
-    RangeCycle.for(name: charged_in,
-                   dates: due_ons.map(&:make_date))
-               .billing_period billed_date: billed_on
-  end
 end

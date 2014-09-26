@@ -51,12 +51,10 @@ describe Charge, :ledgers, :range, type: :model do
         charge = charge_create charge_cycle: \
                    charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
 
-        chargeable = ChargeableInfo.from_charge(chargeable_attributes \
-          charge_id: charge.id,
-          on_date: Date.new(2013, 3, 25))
         expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
                                       Date.new(2013, 3, 25)))
-          .to eq [chargeable]
+          .to eq [chargeable_info_new(charge_id: charge.id,
+                                      on_date: Date.new(2013, 3, 25))]
       end
 
       it 'does not bill if no charge is in date range' do
@@ -71,12 +69,10 @@ describe Charge, :ledgers, :range, type: :model do
       it 'bills all due_ons within multi-year range - ONCE' do
         charge = charge_create charge_cycle: \
                    charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
-        chargeable = ChargeableInfo.from_charge(chargeable_attributes \
-          charge_id: charge.id,
-          on_date: Date.new(2013, 3, 25))
         expect(charge.next_chargeable(Date.new(2013, 3, 25)..\
                                       Date.new(2016, 3, 25)))
-          .to eq [chargeable]
+          .to eq [chargeable_info_new(charge_id: charge.id,
+                                      on_date: Date.new(2013, 3, 25))]
       end
 
       it 'does not bill dormant charges'  do

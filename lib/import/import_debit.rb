@@ -13,7 +13,7 @@ module DB
   #
   # Importing Accounts (which this is part of) begins with ImportAccount,
   # which contains both opening balances, credits and debits, and this
-  # filters the row into their bookkeeping taxonamy and feeds it to the
+  # filters the row into their bookkeeping taxonomy and feeds it to the
   # appropriate objects. ImportDebit is responsible for debits and creates a
   # debit for each debit in acc_items.
   #
