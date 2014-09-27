@@ -43,9 +43,9 @@ module DB
     end
 
     def period
-      charge account: account(human_ref: human_ref),
-             charge_type: charge_type
-        .period billed_on: on_date
+      charge(account: account(human_ref: human_ref),
+             charge_type: charge_type)
+        .period(billed_on: on_date)
     end
 
     # debits increase an account balance.
