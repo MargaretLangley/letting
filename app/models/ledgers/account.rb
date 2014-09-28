@@ -53,7 +53,7 @@ class Account < ActiveRecord::Base
   #
   def make_debits billing_period
     charges.map do |charge|
-      charge.next_chargeable(billing_period).map do |chargeable|
+      charge.coming(billing_period).map do |chargeable|
         Debit.new(chargeable.to_hash)
       end
     end.flatten
@@ -61,7 +61,7 @@ class Account < ActiveRecord::Base
 
   def make_debits? billing_period
     charges.map do |charge|
-      charge.next_chargeable(billing_period).map do
+      charge.coming(billing_period).map do
         return true
       end
     end

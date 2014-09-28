@@ -41,7 +41,7 @@ class Charge < ActiveRecord::Base
   # billing_period - the date range that we generate charges for.
   # returns        - chargable_info array with data required to bill the
   #                  associated account. Empty array if nothing billed.
-  def next_chargeable billing_period
+  def coming billing_period
     return [] if dormant
     allowed_due_dates(billing_period).map do |billed_on|
       make_chargeable_info(billed_on) unless debits.created_on? billed_on
