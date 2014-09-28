@@ -1,12 +1,12 @@
 ####
 #
-# ChargeableInfo
+# Chargeable
 #
 #  Holds information to turn a charge into a debit
 #
 #  The debit generator needs to generate debits from charges.
 #  It calls on account for due charges and in turn charge
-#  generates a ChargeableInfo describing a charge that is due
+#  generates a Chargeable describing a charge that is due
 #  in the queried date range.
 #
 #  Hashes use symbols as hash keys - faster and saves memory.
@@ -14,7 +14,7 @@
 #
 ####
 #
-class ChargeableInfo
+class Chargeable
   include Equalizer.new(:account_id, :charge_id, :on_date, :amount)
   attr_reader :account_id, :charge_id, :on_date, :period, :amount
 

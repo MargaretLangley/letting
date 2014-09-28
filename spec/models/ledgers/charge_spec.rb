@@ -52,8 +52,8 @@ describe Charge, :ledgers, :range, type: :model do
                    charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
 
         expect(charge.coming Date.new(2013, 3, 25)..Date.new(2013, 3, 25))
-          .to eq [chargeable_info_new(charge_id: charge.id,
-                                      on_date: Date.new(2013, 3, 25))]
+          .to eq [chargeable_new(charge_id: charge.id,
+                                 on_date: Date.new(2013, 3, 25))]
       end
 
       it 'no charge if billing period excludes all due_on' do
@@ -68,8 +68,8 @@ describe Charge, :ledgers, :range, type: :model do
         charge = charge_create charge_cycle: \
                    charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
         expect(charge.coming Date.new(2013, 3, 25)..Date.new(2016, 3, 25))
-          .to eq [chargeable_info_new(charge_id: charge.id,
-                                      on_date: Date.new(2013, 3, 25))]
+          .to eq [chargeable_new(charge_id: charge.id,
+                                 on_date: Date.new(2013, 3, 25))]
       end
 
       it 'excludes dormant charges from billing'  do

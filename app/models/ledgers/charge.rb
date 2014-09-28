@@ -44,7 +44,7 @@ class Charge < ActiveRecord::Base
   def coming billing_period
     return [] if dormant
     allowed_due_dates(billing_period).map do |billed_on|
-      make_chargeable_info(billed_on) unless debits.created_on? billed_on
+      make_chargeable(billed_on) unless debits.created_on? billed_on
     end.compact
   end
 
@@ -77,16 +77,16 @@ class Charge < ActiveRecord::Base
     (start_date..end_date)
   end
 
-  # Converts a Charge object into a ChargeableInfo object.
+  # Converts a Charge object into a Chargeable object.
   # billed_on - the date the charge becomes due and is billed.
   # returns   - The information to bill, debit, the associated account.
   #
-  def make_chargeable_info billed_on
-    ChargeableInfo.from_charge charge_id:  id,
-                               on_date:    billed_on,
-                               amount:     amount,
-                               account_id: account_id,
-                               period: period(billed_on: billed_on)
+  def make_chargeable billed_on
+    Chargeable.from_charge charge_id:  id,
+                           on_date:    billed_on,
+                           amount:     amount,
+                           account_id: account_id,
+                           period: period(billed_on: billed_on)
   end
 
   def empty?
