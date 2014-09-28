@@ -4,7 +4,7 @@ describe ChargeCycle, :ledgers, type: :feature do
 
   before(:each) do
     log_in admin_attributes
-    charge_cycle_create id: 1, name: 'Jan/July', order: 6, period_type: 'term'
+    charge_cycle_create id: 1, name: 'Jan/July', order: 6, cycle_type: 'term'
   end
   context '#index' do
 

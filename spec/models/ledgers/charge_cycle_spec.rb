@@ -6,31 +6,31 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
     it('returns valid') { expect(charge_cycle_new).to be_valid }
     it('requires a name') { expect(charge_cycle_new name: '').to_not be_valid }
     it('requires an order') { expect(charge_cycle_new order: '').to_not be_valid }
-    it 'requires a period_type' do
-      (charge_cycle = charge_cycle_new).period_type = ''
+    it 'requires a cycle_type' do
+      (charge_cycle = charge_cycle_new).cycle_type = ''
       expect(charge_cycle).to_not be_valid
     end
-    it 'includes period_type of term' do
-      (charge_cycle = charge_cycle_new).period_type = 'term'
+    it 'includes cycle_type of term' do
+      (charge_cycle = charge_cycle_new).cycle_type = 'term'
       expect(charge_cycle).to be_valid
     end
-    it 'includes period_type of monthly' do
-      (charge_cycle = charge_cycle_new).period_type = 'monthly'
+    it 'includes cycle_type of monthly' do
+      (charge_cycle = charge_cycle_new).cycle_type = 'monthly'
       expect(charge_cycle).to be_valid
     end
-    it 'no other period_type accepted' do
-      (charge_cycle = charge_cycle_new).period_type = 'anything'
+    it 'no other cycle_type accepted' do
+      (charge_cycle = charge_cycle_new).cycle_type = 'anything'
       expect(charge_cycle).to_not be_valid
     end
   end
 
   describe '#monthly?' do
     it 'is monthly when initialized monthly' do
-      expect(charge_cycle_new(period_type: 'monthly')).to be_monthly
+      expect(charge_cycle_new(cycle_type: 'monthly')).to be_monthly
     end
 
     it 'is not monthly when initialized term' do
-      expect(charge_cycle_new(period_type: 'term')).to_not be_monthly
+      expect(charge_cycle_new(cycle_type: 'term')).to_not be_monthly
     end
   end
 
@@ -89,14 +89,14 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
   describe 'form preparation' do
     context 'term' do
       it '#prepare creates children' do
-        cycle = charge_cycle_new period_type: 'term', due_ons: nil
+        cycle = charge_cycle_new cycle_type: 'term', due_ons: nil
         expect(cycle.due_ons.size).to eq(0)
         cycle.prepare
         expect(cycle.due_ons.size).to eq(4)
       end
 
       it '#clear_up_form destroys children' do
-        cycle = charge_cycle_new period_type: 'term',
+        cycle = charge_cycle_new cycle_type: 'term',
                                  due_ons: [DueOn.new(day: 25, month: 3)]
         cycle.prepare
         cycle.valid?
@@ -108,14 +108,14 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
 
     context 'monthly' do
       it '#prepare creates children' do
-        cycle = charge_cycle_new period_type: 'monthly', due_ons: nil
+        cycle = charge_cycle_new cycle_type: 'monthly', due_ons: nil
         expect(cycle.due_ons.size).to eq(0)
         cycle.prepare
         expect(cycle.due_ons.size).to eq(12)
       end
 
       it '#clear_up_form keeps children if day set' do
-        cycle = charge_cycle_new period_type: 'monthly', due_ons: nil
+        cycle = charge_cycle_new cycle_type: 'monthly', due_ons: nil
         cycle.prepare
         cycle.valid?
         expect(cycle.due_ons
@@ -124,7 +124,7 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
       end
 
       it '#clear_up_form destroys children if empty' do
-        cycle = charge_cycle_new period_type: 'monthly',
+        cycle = charge_cycle_new cycle_type: 'monthly',
                                  due_ons: [DueOn.new(day: 25, month: 3)]
         cycle.prepare
         cycle.valid?

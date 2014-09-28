@@ -1,5 +1,5 @@
 <% @title='Edit Charge Cycles' %>
-<% if @charge_cycle.period_type == 'monthly' %>
+<% if @charge_cycle.cycle_type == 'monthly' %>
   <%= render 'form_monthly', charge_cycle: @charge_cycle %>
 <% else %>
   <%= render 'form', charge_cycle: @charge_cycle %>

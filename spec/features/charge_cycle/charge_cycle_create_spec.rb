@@ -5,7 +5,7 @@ describe ChargeCycle, :ledgers, type: :feature do
   before(:each) { log_in admin_attributes }
 
   it 'creates a charge cycle' do
-    visit '/charge_cycles/new?period=term'
+    visit '/charge_cycles/new?cycle_type=term'
     expect(page.title).to eq 'Letting - New Charge Cycles'
     fill_in 'Name', with: 'April/Nov'
     fill_in 'Order', with: '44'
@@ -22,7 +22,7 @@ describe ChargeCycle, :ledgers, type: :feature do
   end
 
   it 'displays form errors' do
-    visit '/charge_cycles/new?period=term'
+    visit '/charge_cycles/new?cycle_type=term'
     click_on 'Create Charge Cycle'
     expect(page).to have_css '[data-role="errors"]'
   end

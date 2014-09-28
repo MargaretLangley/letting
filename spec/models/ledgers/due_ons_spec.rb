@@ -6,7 +6,7 @@ describe DueOns, :ledgers, type: :model do
     ChargeCycle.new id: 1,
                     name: 'Anything',
                     order: 1,
-                    period_type: 'term'
+                    cycle_type: 'term'
   end
   let(:due_ons) { cycle.due_ons }
 
@@ -104,7 +104,7 @@ describe DueOns, :ledgers, type: :model do
 
       context 'monthly' do
         it 'new monthly' do
-          (cycle = charge_cycle_new period_type: 'monthly', due_ons: nil)
+          (cycle = charge_cycle_new cycle_type: 'monthly', due_ons: nil)
             .prepare
           cycle.due_ons[0].update day: 5
           cycle.save!

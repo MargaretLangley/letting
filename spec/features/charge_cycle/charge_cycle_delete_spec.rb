@@ -7,7 +7,7 @@ describe ChargeCycle, :ledgers, type: :feature do
     charge_cycle_create id: 3,
                         name: 'Jan/July',
                         order: 6,
-                        period_type: 'term'
+                        cycle_type: 'term'
     visit '/charge_cycles/'
   end
 

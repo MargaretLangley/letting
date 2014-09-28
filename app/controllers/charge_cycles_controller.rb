@@ -23,7 +23,7 @@ class ChargeCyclesController < ApplicationController
   end
 
   def new
-    @charge_cycle = ChargeCycle.new period_type: params[:period]
+    @charge_cycle = ChargeCycle.new cycle_type: params[:cycle_type]
     @charge_cycle.prepare
   end
 
@@ -65,7 +65,7 @@ class ChargeCyclesController < ApplicationController
   def charge_cycles_params
     params
     .require(:charge_cycle)
-    .permit :name, :order, :period_type,
+    .permit :name, :order, :cycle_type,
             due_ons_attributes: [:id, :charge_cycle_id, :day,
                                  :month, :year]
   end

@@ -17,7 +17,7 @@ module DB
       cycle = ChargeCycle.new(id: 100,
                               name: 'Anything',
                               order: 5,
-                              period_type: 'term')
+                              cycle_type: 'term')
       cycle.due_ons.build day: 25, month: 3
       cycle.due_ons.build day: 29, month: 9
       cycle.save!
@@ -29,7 +29,7 @@ module DB
       cycle = ChargeCycle.new(id: 100,
                               name: 'Anything',
                               order: 5,
-                              period_type: 'term')
+                              cycle_type: 'term')
       cycle.due_ons.build day: 19, month: 3
       cycle.save!
       day_months = [[25, 3]]

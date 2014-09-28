@@ -49,7 +49,7 @@ module DueOns
         (size...find_max_size(type)).each { build }
       end
 
-      def find_max_size _period_type
+      def find_max_size _cycle_type
         monthly? ?  MAX_DUE_ONS  :  MAX_DISPLAYED_DUE_ONS
       end
 

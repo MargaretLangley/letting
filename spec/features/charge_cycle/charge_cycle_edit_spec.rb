@@ -7,7 +7,7 @@ describe ChargeCycle, :ledgers, type: :feature do
     charge_cycle_create id: 3,
                         name: 'Jan/July',
                         order: 11,
-                        period_type: 'term',
+                        cycle_type: 'term',
                         due_ons: [DueOn.new(day: 6, month: 10)]
   end
 
@@ -40,7 +40,7 @@ describe ChargeCycle, :ledgers, type: :feature do
       charge_cycle_create id: 2,
                           name: 'Regular',
                           order: 22,
-                          period_type: 'monthly',
+                          cycle_type: 'monthly',
                           due_ons: [DueOn.new(day: 8, month: 1)]
 
       visit '/charge_cycles/2/edit'

@@ -3,8 +3,8 @@
     <ul class='shell'>
       <h4>&nbsp;Admin</h4>
       <li class="<%= main_menu_active? "charge_cycles" %>"><%= link_to 'Charge Cycles', charge_cycles_path %></li>
-      <li class="active-subnav <%= sub_menu_folded? 'charge_cycles' %>"><%= link_to 'New Charge Cycle', new_charge_cycle_path(period: 'term') %></li>
-      <li class="active-subnav <%= sub_menu_folded? 'charge_cycles' %>"><%= link_to 'New Monthly Charge Cycle', new_charge_cycle_path(period: 'monthly') %></li>
+      <li class="active-subnav <%= sub_menu_folded? 'charge_cycles' %>"><%= link_to 'New Charge Cycle', new_charge_cycle_path(cycle_type: 'term') %></li>
+      <li class="active-subnav <%= sub_menu_folded? 'charge_cycles' %>"><%= link_to 'New Monthly Charge Cycle', new_charge_cycle_path(cycle_type: 'monthly') %></li>
 
       <li class="<%= main_menu_active? 'users' %>"><%= link_to 'Users', users_path %></li>
       <li class="active-subnav <%= sub_menu_folded? 'users' %>"><%= link_to 'New User', new_user_path %></li>

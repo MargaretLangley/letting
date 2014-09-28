@@ -15,8 +15,8 @@ class ChargeCycle < ActiveRecord::Base
   include Comparable
   validates :name, presence: true
   validates :order, presence: true
-  validates :period_type, inclusion: { in: %w(term monthly) }
-  validates :period_type, presence: true
+  validates :cycle_type, inclusion: { in: %w(term monthly) }
+  validates :cycle_type, presence: true
   validates :due_ons, presence: true
   has_many :charges, inverse_of: :charge_cycle
 
@@ -29,11 +29,11 @@ class ChargeCycle < ActiveRecord::Base
   delegate :clear_up_form, to: :due_ons
 
   def monthly?
-    period_type == 'monthly'
+    cycle_type == 'monthly'
   end
 
   def prepare
-    due_ons.prepare type: period_type
+    due_ons.prepare type: cycle_type
   end
 
   def due_between? billing_period

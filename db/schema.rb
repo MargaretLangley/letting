@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20140920193251) do
   create_table "charge_cycles", force: true do |t|
     t.string   "name",        null: false
     t.integer  "order",       null: false
-    t.string   "period_type", null: false
+    t.string   "cycle_type", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
