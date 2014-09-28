@@ -181,15 +181,13 @@ ActiveRecord::Schema.define(version: 20140920193251) do
   end
 
   create_table "notices", force: true do |t|
-    t.integer  "sheet_id"
+    t.integer  "template_id"
     t.string   "instruction", null: false
     t.string   "fill_in",     null: false
     t.string   "sample",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "notices", ["sheet_id"], name: "index_notices_on_sheet_id", using: :btree
 
   create_table "payments", force: true do |t|
     t.integer  "account_id",                         null: false
@@ -240,7 +238,7 @@ ActiveRecord::Schema.define(version: 20140920193251) do
   add_index "settlements", ["credit_id"], name: "index_settlements_on_credit_id", using: :btree
   add_index "settlements", ["debit_id"], name: "index_settlements_on_debit_id", using: :btree
 
-  create_table "sheets", force: true do |t|
+  create_table "templates", force: true do |t|
     t.string   "description",  null: false
     t.string   "invoice_name", null: false
     t.string   "phone",        null: false

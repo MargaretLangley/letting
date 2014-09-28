@@ -69,7 +69,7 @@ en:
       payment:
         create: "Pay Total"
         update: "Update"
-      sheet:
+      template:
         update: "Update Invoice Text"
 
   number:

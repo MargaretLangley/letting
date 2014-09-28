@@ -3,7 +3,7 @@
 # Notice
 #
 # Notice deals with the instructions given on
-# an invoice page. Part of sheet and property
+# an invoice page. Part of template and property
 # information. Used when editing instructions
 #
 ####
@@ -11,7 +11,7 @@
 class Notice < ActiveRecord::Base
   MAX_CHAR = 100
   MAX_PROX = 25
-  belongs_to :sheet
+  belongs_to :template
   validates :instruction, presence: true,
                           length: { maximum: MAX_CHAR },
                           allow_blank: true

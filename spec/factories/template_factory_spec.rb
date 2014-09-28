@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-describe 'Sheet Factory' do
+describe 'Template Factory' do
   describe 'new' do
     # We create the object and test it has expected value
     describe 'default' do
       it 'has description' do
-        expect(sheet_new.description).to eq 'Page 1 Invoice'
+        expect(template_new.description).to eq 'Page 1 Invoice'
       end
       describe 'makes' do
         it 'has address' do
-          expect(sheet_new.address).to_not be_nil
+          expect(template_new.address).to_not be_nil
         end
       end
     end
@@ -18,11 +18,11 @@ describe 'Sheet Factory' do
     end
     describe 'overrides' do
       it 'changes description' do
-        expect(sheet_new(description: 'new').description).to eq 'new'
+        expect(template_new(description: 'new').description).to eq 'new'
       end
 
       it 'changes address' do
-        expect(sheet_new(address: address_new(road: 'new')).address.road)
+        expect(template_new(address: address_new(road: 'new')).address.road)
           .to eq 'new'
       end
     end
@@ -31,11 +31,11 @@ describe 'Sheet Factory' do
   describe 'create' do
     describe 'default' do
       it 'is valid' do
-        expect { sheet_create }.to change(Sheet, :count).by(1)
+        expect { template_create }.to change(Template, :count).by(1)
       end
       describe 'makes' do
         it 'builds address' do
-          expect(sheet_create.address).to_not be_nil
+          expect(template_create.address).to_not be_nil
         end
       end
     end

@@ -1,0 +1,33 @@
+<% @title='Invoice Texts' %>
+
+<div class='grid shell'>
+  <div class='col-1-4 vertical-spacer grid-header r-align'>
+    Page number
+  </div>
+  <div class='col-1-4 grid-header'>
+    Contains
+  </div>
+  <div class='col-1-4 grid-header'>
+    Actions
+  </div>
+
+  <% if @templates.present? %>
+
+    <% @templates.each do |template| %>
+
+    <div class='table-row' data-link='<%= template_path(template) %>'>
+
+      <div class='col-1-4 vertical-spacer inherit-row grid-row r-align'>
+        <%= template.id %>
+      </div>
+      <div class='col-1-4 vertical-spacer inherit-row'>
+       <%= template.description %>
+      </div>
+      <div>
+        <nav class='col-1-4 vertical-spacer'>
+          <%= link_to fa_icon('edit lg'), edit_template_path(template), title: 'Edit', class: 'r-pad icon-large' %>
+          <%= link_to fa_icon('file lg'), template_path(template), title: 'View', class: 'r-pad icon-large' %>
+        </nav>
+    <% end %>
+  <% end %>
+</div>

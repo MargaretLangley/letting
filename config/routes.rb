@@ -22,5 +22,5 @@ Letting::Application.routes.draw do
   # Admin
   resources :charge_cycles
   resources :users
-  resources :sheets, only: [:index, :show, :edit, :update]
+  resources :templates, only: [:index, :show, :edit, :update]
 end

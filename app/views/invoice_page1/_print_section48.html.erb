@@ -1,20 +1,20 @@
 <% dotted_line = "-------------" %>
 <div class='inv-advice grid-row'>
  <br>
-  We <%= sheet.invoice_name.upcase %> ON BEHALF OF YOUR LANDLORD
+  We <%= template.invoice_name.upcase %> ON BEHALF OF YOUR LANDLORD
   <br>
   <%= client.entities.full_name %>
 
   <%= render 'addresses/view_on_one_line', addressee: client %>
   <br>
-  <%= sheet.advice1 %>
-  <%= sheet.address.road_no %>
-  <%= sheet.address.road %>
-  <%= sheet.address.town %>
-  <%= sheet.address.county %>
-  <%= sheet.address.postcode %>
+  <%= template.advice1 %>
+  <%= template.address.road_no %>
+  <%= template.address.road %>
+  <%= template.address.town %>
+  <%= template.address.county %>
+  <%= template.address.postcode %>
   <p>
-    <%= sheet.advice2 %>
+    <%= template.advice2 %>
   </p>
 </div>
   <span class='sissors'>&#9985;<%= "#{dotted_line}#{dotted_line}#{dotted_line}#{dotted_line}" %></span>

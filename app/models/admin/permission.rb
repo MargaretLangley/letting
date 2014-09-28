@@ -50,7 +50,7 @@ class Permission < Struct.new(:user)
   def admin_controllers
     %w(users
        charge_cycles
-       sheets
+       templates
        notices)
   end
 end

@@ -1,26 +1,26 @@
 require 'rails_helper'
 
-describe Sheet, type: :feature do
+describe Template, type: :feature do
 
   before(:each) do
     log_in admin_attributes
-    sheet_create id: 1,
-                 address: address_new(road: 'High')
+    template_create id: 1,
+                    address: address_new(road: 'High')
   end
 
   context '#view' do
     it 'finds view page 1' do
-      visit '/sheets/1'
+      visit '/templates/1'
       expect(page.title). to eq 'Letting - View Invoice Texts'
     end
 
     it 'finds address' do
-      visit '/sheets/1'
+      visit '/templates/1'
       expect(page).to have_text 'High'
     end
 
     it 'has edit link' do
-      visit '/sheets/1'
+      visit '/templates/1'
       expect(page.title). to eq 'Letting - View Invoice Texts'
       click_on('Edit')
       expect(page.title). to eq 'Letting - Edit Invoice Text'
