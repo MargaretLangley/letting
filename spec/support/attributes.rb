@@ -80,7 +80,7 @@ def admin_attributes **overrides
   }.merge overrides
 end
 
-def sheet_attributes **overrides
+def template_attributes **overrides
   {
     id: 1,
     description: 'Page 1',
@@ -94,7 +94,7 @@ def sheet_attributes **overrides
   }.merge overrides
 end
 
-def sheet_p2_attributes **overrides
+def template_p2_attributes **overrides
   {
     id: 2,
     description: 'Page 2',

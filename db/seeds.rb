@@ -27,7 +27,7 @@ def generate_seeding
   seed_properties
   seed_charges
   debits_and_credits
-  seed_sheets
+  seed_templates
   reset_pk_sequenece_on_each_table_used
 end
 
@@ -365,10 +365,10 @@ def create_date months_ago
   "#{on_date.year}/#{on_date.month }/01"
 end
 
-def seed_sheets
-  Rake::Task['db:import:sheet'].invoke
-  Rake::Task['db:import:sheet_address'].invoke
-  Rake::Task['db:import:sheet_notice'].invoke
+def seed_templates
+  Rake::Task['db:import:template'].invoke
+  Rake::Task['db:import:template_address'].invoke
+  Rake::Task['db:import:template_notice'].invoke
 end
 
 def reset_pk_sequenece_on_each_table_used

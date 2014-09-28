@@ -1,8 +1,8 @@
 ####
 #
-# Sheet
+# Template
 #
-# Sheet/Invoice Text holds the general information needed for an
+# Template/Invoice Text holds the general information needed for an
 # invoice printout, excluding individual account
 # and property information. Allows editing of
 # this information,
@@ -13,7 +13,7 @@
 #
 ####
 #
-class Sheet < ActiveRecord::Base
+class Template < ActiveRecord::Base
   validates :description, presence: true
   validates :invoice_name, presence: true
   validates :phone, presence: true

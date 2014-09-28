@@ -1,7 +1,7 @@
 <div class='print-only margwide'>
-  <% @sheet = Sheet.find(1) %>
+  <% @template = Template.find(1) %>
 
-  <%= render 'invoice_page1/print_invoice_heading',sheet: @sheet %>
+  <%= render 'invoice_page1/print_invoice_heading',template: @template %>
 
   <div class='print-only'>
     <%= render partial: 'invoice_page1/print_ref_date', locals: {property_object: property_object, date_object: date_object} %>
@@ -9,7 +9,7 @@
     <%= render 'invoice_page1/print_agent', object: property_object %>
     <%= render 'invoice_page1/print_property_address', object: property_object %>
     <%= render 'invoice_page1/print_accounts', items: AccountDecorator.new(property_object.account).abbrev_items %>
-    <%= render partial: 'invoice_page1/print_section48',locals: {client: property_object.client, sheet: @sheet }%>
+    <%= render partial: 'invoice_page1/print_section48',locals: {client: property_object.client, template: @template }%>
     <%= render 'invoice_page1/print_property_address', object: property_object %>
     <%= render partial: 'invoice_page1/print_ref_date_short', locals: {property_object: property_object, date_object: date_object} %>
     <%= render 'invoice_page1/print_from', object: property_object %>

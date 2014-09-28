@@ -1,7 +1,7 @@
-<%= render 'invoice_page2/print_p2_heading',sheet: Sheet.find(1) %>
-<% @sheet = Sheet.find(2) %>
+<%= render 'invoice_page2/print_p2_heading',template: Template.find(1) %>
+<% @template = Template.find(2) %>
 <div class='res-longlease'>
-  <%= @sheet.heading2 %> <%= object.human_ref %>
+  <%= @template.heading2 %> <%= object.human_ref %>
 </div>
 <p>
 </p>
@@ -43,7 +43,7 @@
 </div>
 <br>
 
-<%= render 'invoice_page2/print_payto_agent_address', sheet: Sheet.find(1) %>
+<%= render 'invoice_page2/print_payto_agent_address', template: Template.find(1) %>
 
 <div class='insert'>
   [insert name of landlord(s) and if not given above, address]
@@ -55,4 +55,4 @@
   <%= render 'addresses/view_on_one_line', addressee: object.client %>
 </div>
 
-<%= render 'invoice_page2/print_notices_notes',sheet: Sheet.find(2) %>
+<%= render 'invoice_page2/print_notices_notes',template: Template.find(2) %>
