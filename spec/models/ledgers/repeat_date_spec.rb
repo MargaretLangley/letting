@@ -104,7 +104,7 @@ describe RepeatDate, :ledgers, :range do
   end
 
   it 'returns object as string' do
-    expect(RepeatDate.new(date: Date.new(2014, 2,1)).to_s)
+    expect(RepeatDate.new(date: Date.new(2014, 2, 1)).to_s)
       .to eq '2014-02-01'
   end
 end
