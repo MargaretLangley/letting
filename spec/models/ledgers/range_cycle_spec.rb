@@ -25,7 +25,7 @@ describe RangeCycle, :ledgers, :range do
     end
   end
 
-  describe '#billing_period2' do
+  describe '#billing_period' do
     before { Timecop.travel Date.new(2014, 1, 31) }
     after  { Timecop.return }
     # currently returning the 'on_date' which initialized
