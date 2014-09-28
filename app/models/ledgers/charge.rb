@@ -89,7 +89,6 @@ class Charge < ActiveRecord::Base
                                period: period(billed_on: billed_on)
   end
 
-
   def empty?
     attributes.except(*ignored_attrs).values.all?(&:blank?) &&
     start_date == Date.parse(MIN_DATE) &&

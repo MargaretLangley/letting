@@ -21,7 +21,11 @@ class Arrears
       period.last == RepeatDate.new(date: billed_date)
     end
     return :missing_due_on unless found
-    found.first.date..found.last.date
+    billed_date - period_length(period: found)..billed_date
+  end
+
+  def period_length(period:)
+    period.last.date - period.first.date
   end
 
   private
@@ -39,7 +43,8 @@ class Arrears
   # Begin With:  E       F       G       H
   # End   With:  H +1D   E +1D   F +1D   G +1D -1Y
   def arrears_start
-    arrears = @billed_dates_in_year.rotate(-1).map(&:tomorrow)
+    arrears = Marshal.load(Marshal.dump(@billed_dates_in_year))
+                     .rotate(-1).map(&:tomorrow)
     arrears[0] = arrears[0].last_year
     arrears
   end
