@@ -90,7 +90,10 @@ describe Charge, :ledgers, :range, type: :model do
     end
   end
 
-  it 'charge displays range' do
-    skip 'FIX_CHARGE'
+  it 'charge displays billing period' do
+    charge = charge_create charge_cycle: \
+                   charge_cycle_create(due_ons: [DueOn.new(month: 3, day: 8)])
+    expect(charge.period billed_on: Date.new(2015 ,3 ,8))
+      .to eq Date.new(2015, 3, 8)..Date.new(2016, 3, 7)
   end
 end
