@@ -188,8 +188,8 @@ module DB
         account: account_new(charge: charge_new(charge_cycle: cycle))
     end
 
-    def new_charge_cycle(day:, month:)
-      charge_cycle_new due_ons: [DueOn.new(day: 25, month: 12)]
+    def new_charge_cycle(day: 25, month: 12)
+      charge_cycle_new due_ons: [DueOn.new(day: day, month: month)]
     end
 
     def import_account row, **args
