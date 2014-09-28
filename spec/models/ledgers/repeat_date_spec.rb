@@ -4,96 +4,91 @@ describe RepeatDate, :ledgers, :range do
   describe 'create' do
     describe 'with date' do
       it 'has expected day' do
-        day_month = RepeatDate.new date: Date.new(2014, 2, 1)
-        expect(day_month.day).to eq 1
+        repeat = RepeatDate.new date: Date.new(2014, 2, 1)
+        expect(repeat.day).to eq 1
       end
 
       it 'has expected month' do
-        day_month = RepeatDate.new date: Date.new(2014, 2, 1)
-        expect(day_month.month).to eq 2
+        repeat = RepeatDate.new date: Date.new(2014, 2, 1)
+        expect(repeat.month).to eq 2
       end
 
       it 'has expected year' do
-        day_month = RepeatDate.new date: Date.new(2014, 2, 1)
-        expect(day_month.year).to eq 2014
+        repeat = RepeatDate.new date: Date.new(2014, 2, 1)
+        expect(repeat.year).to eq 2014
       end
     end
 
     describe 'with day month' do
       it 'has expected day' do
-        day_month = RepeatDate.new year: 2014, month: 2, day: 1
-        expect(day_month.day).to eq 1
+        repeat = RepeatDate.new year: 2014, month: 2, day: 1
+        expect(repeat.day).to eq 1
       end
 
       it 'has expected month' do
-        day_month = RepeatDate.new year: 2014, month: 2, day: 1
-        expect(day_month.month).to eq 2
+        repeat = RepeatDate.new year: 2014, month: 2, day: 1
+        expect(repeat.month).to eq 2
       end
 
       it 'has expected year' do
-        day_month = RepeatDate.new year: 2014, month: 2, day: 1
-        expect(day_month.year).to eq 2014
+        repeat = RepeatDate.new year: 2014, month: 2, day: 1
+        expect(repeat.year).to eq 2014
       end
 
       describe 'defaults' do
         it 'has defaulted to today' do
-          day_month = RepeatDate.new
-          expect(day_month.date).to eq Date.current
+          repeat = RepeatDate.new
+          expect(repeat.date).to eq Date.current
         end
       end
     end
   end
 
   describe 'method modifiers' do
-    it '#yesterday - subtracts 1 day' do
-      day_month = RepeatDate.new day: 2, month: 2
-      expect(day_month.yesterday.day).to eq 1
+    it '#yesterday - 1 day' do
+      repeat = RepeatDate.new year: 2004, month: 2, day: 2
+      expect(repeat.yesterday.to_s).to eq '2004-02-01'
     end
 
-    it '#yesterday - subtracts 1 day and does not change' do
-      day_month = RepeatDate.new day: 2, month: 2
-      expect(day_month.yesterday.day).to eq 1
+    it '#tomorrow  + 1 day' do
+      repeat = RepeatDate.new year: 2004, month: 2, day: 2
+      expect(repeat.tomorrow.to_s).to eq '2004-02-03'
     end
 
-    it '#tomorrow - adds 1 day' do
-      day_month = RepeatDate.new day: 1, month: 2
-      expect(day_month.tomorrow.day).to eq 2
+    it '#last_year - 1 year' do
+      repeat = RepeatDate.new year: 2004, month: 2, day: 2
+      expect(repeat.last_year.to_s).to eq '2003-02-02'
     end
 
-    it '#last_year - subtracts 1 year' do
-      day_month = RepeatDate.new day: 1, month: 2
-      expect(day_month.last_year.year).to eq 2013
-    end
-
-    it '#next_year - adds 1 year' do
-      day_month = RepeatDate.new day: 1, month: 2
-      expect(day_month.next_year.year).to eq 2015
+    it '#next_year + 1 year' do
+      repeat = RepeatDate.new year: 2004, month: 2, day: 2
+      expect(repeat.next_year.to_s).to eq '2005-02-02'
     end
   end
 
   describe '#<=>' do
     it 'returns 0 when equal' do
-      a = RepeatDate.new month: 1, day: 1
-      b = RepeatDate.new month: 1, day: 1
-      expect(a <=> b).to eq(0)
+      lhs = RepeatDate.new month: 1, day: 1
+      rhs = RepeatDate.new month: 1, day: 1
+      expect(lhs <=> rhs).to eq(0)
     end
 
-    it 'returns 1 when a > b' do
-      a = RepeatDate.new month: 1, day: 2
-      b = RepeatDate.new month: 1, day: 1
-      expect(a <=> b).to eq(1)
+    it 'returns 1 when lhs > rhs' do
+      lhs = RepeatDate.new month: 1, day: 2
+      rhs = RepeatDate.new month: 1, day: 1
+      expect(lhs <=> rhs).to eq(1)
     end
 
-    it 'returns -1 when a < b' do
-      a = RepeatDate.new month: 1, day: 1
-      b = RepeatDate.new month: 1, day: 2
-      expect(a <=> b).to eq(-1)
+    it 'returns -1 when lhs < rhs' do
+      lhs = RepeatDate.new month: 1, day: 1
+      rhs = RepeatDate.new month: 1, day: 2
+      expect(lhs <=> rhs).to eq(-1)
     end
 
     it 'years do not affect comparison' do
-      a = RepeatDate.new month: 1, day: 1, year: 2000
-      b = RepeatDate.new month: 1, day: 1, year: 3000
-      expect(a <=> b).to eq(0)
+      lhs = RepeatDate.new year: 2000, month: 1, day: 1
+      rhs = RepeatDate.new year: 3000, month: 1, day: 1
+      expect(lhs <=> rhs).to eq(0)
     end
 
     it 'returns nil when not comparable' do
@@ -104,7 +99,12 @@ describe RepeatDate, :ledgers, :range do
   describe '#date' do
     it 'returns date' do
       expect(RepeatDate.new(date: Date.new(2014, 2, 1)).date)
-        .to eq Date.new(2014, 2, 1)
+        .to eq Date.new 2014, 2, 1
     end
+  end
+
+  it 'returns object as string' do
+    expect(RepeatDate.new(date: Date.new(2014, 2,1)).to_s)
+      .to eq '2014-02-01'
   end
 end
