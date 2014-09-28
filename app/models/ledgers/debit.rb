@@ -28,6 +28,15 @@ class Debit < ActiveRecord::Base
   has_many :settlements, dependent: :destroy
   belongs_to :charge, inverse_of: :debits
 
+  def period
+    (start..stop)
+  end
+
+  def period=(bill_range)
+    self.start = bill_range.first
+    self.stop  = bill_range.last
+  end
+
   validates :charge, :on_date, presence: true
   # custom validates - numericality did not think -99_000 > -100_000
   validates :amount, amount: true

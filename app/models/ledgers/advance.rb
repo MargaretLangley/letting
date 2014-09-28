@@ -4,6 +4,18 @@
 #
 # Returns a billing range given a billed_date
 #
+# RangeCycle is the factory for billing range objects such as Advance and
+# arrears.
+#
+# Initialize takes the repeated dates and calculates the range of a bill from
+# this - example 25th Mar and 30th Sep would result in two periods.
+# 1) 25th Mar - 29th Sep
+# 2) 30th Sep - 24th Mar of next year.
+#
+# Ranges match on the date the bill becomes due. With advance this
+# means the start, or first, date of a range - it then builds up the range and
+# returns this to the caller.
+#
 # A useless assignment which increases human reader's comprehension.
 # rubocop: disable  Lint/UselessAssignment
 ####
@@ -21,7 +33,15 @@ class Advance
       period.first == RepeatDate.new(date: billed_date)
     end
     return :missing_due_on unless found
-    found.first.date..found.last.date
+    billed_date..billed_date + period_length(period: found)
+  end
+
+  def period_length(period:)
+    period.last.date - period.first.date
+  end
+
+  def dates
+    @periods.map { |period| [period.first.date, period.last.date] }
   end
 
   private
@@ -39,7 +59,8 @@ class Advance
   # Begin With:  E       F       G       H
   # End   With:  F -1D   G -1D   H -1D   E -1D +1Y
   def advance_end
-    advance = @billed_dates_in_year.rotate(1).map(&:yesterday)
+    advance = Marshal.load(Marshal.dump(@billed_dates_in_year))
+                     .rotate(1).map(&:yesterday)
     advance[-1] = advance[-1].next_year
     advance
   end

@@ -20,8 +20,8 @@ RSpec.describe Invoicing, type: :model do
     it 'returns true when invoiceable using full stack' do
       Timecop.travel Date.new(2014, 6, 1)
       cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
-      account = account_create charge: charge_new(charge_cycle: cycle),
-                               property: property_new(human_ref: 100)
+      account_create charge: charge_new(charge_cycle: cycle),
+                     property: property_new(human_ref: 100)
       invoicing = invoicing_new property_range: '100',
                                 start_date: '2014-06-22', end_date: '2014-06-30'
       expect(invoicing.invoiceable?).to be true
@@ -35,8 +35,8 @@ RSpec.describe Invoicing, type: :model do
     it 'returns false when not invoiceable using full stack' do
       Timecop.travel Date.new(2014, 6, 1)
       cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
-      account = account_create charge: charge_new(charge_cycle: cycle),
-                               property: property_new(human_ref: 100)
+      account_create charge: charge_new(charge_cycle: cycle),
+                     property: property_new(human_ref: 100)
       invoicing = invoicing_new property_range: '100',
                                 start_date: '2014-06-22', end_date: '2014-06-24'
       expect(invoicing.invoiceable?).to be false

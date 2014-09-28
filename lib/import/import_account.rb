@@ -49,12 +49,11 @@ module DB
       end
     end
 
-    # charge_cycle_id is constant found in charge_cycle.csv
     def create_balance_charge
       Charge.create! \
         charge_type: 'Arrears',
-        charge_cycle_id: ChargeCycle.find_by(name: 'Yearly - Jan 1st').id,
-        charged_in_id: ChargedIn.find_by(name: 'Arrears').id,
+        charge_cycle: ChargeCycle.find_by(name: 'Yearly - Jan 1st'),
+        charged_in: ChargedIn.find_by(name: 'Arrears'),
         amount: row.amount,
         account_id: row.account_id,
         start_date: MIN_DATE,

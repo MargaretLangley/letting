@@ -42,6 +42,12 @@ module DB
       @source[:on_date]
     end
 
+    def period
+      charge(account: account(human_ref: human_ref),
+             charge_type: charge_type)
+        .period(billed_on: on_date.to_date)
+    end
+
     # debits increase an account balance.
     # debits amounts are positive (+)
     #
@@ -63,6 +69,7 @@ module DB
       {
         charge_id: charge_id,
         on_date: on_date,
+        period: period,
         amount: amount,
         debit_generator_id: -1,
       }

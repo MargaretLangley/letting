@@ -124,6 +124,8 @@ ActiveRecord::Schema.define(version: 20140920193251) do
     t.integer  "account_id",                                 null: false
     t.integer  "charge_id",                                  null: false
     t.date     "on_date",                                    null: false
+    t.date     "start",                                      null: false
+    t.date     "stop",                                       null: false
     t.decimal  "amount",             precision: 8, scale: 2, null: false
     t.integer  "debit_generator_id",                         null: false
     t.datetime "created_at"

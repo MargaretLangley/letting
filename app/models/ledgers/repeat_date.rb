@@ -5,17 +5,18 @@
 # Abstraction for repeating dates (day month combinations
 # that appear every year).
 #
-# TODO: Do we need this abstraction?
+# Wrapping a date up so that it can worry about the end of month and I just add
+# and remove days.
 #
 ####
 #
 class RepeatDate
   include Comparable
-  attr_reader :date
-  def initialize(day: Time.now.day,
+  attr_reader :day, :month, :year, :date
+  def initialize day:   Time.now.day,
                  month: Time.now.month,
-                 year: Time.now.year,
-                 date: nil)
+                 year:  Time.now.year,
+                 date:  nil
     if date
       @date = date
     else
@@ -36,23 +37,27 @@ class RepeatDate
   end
 
   def yesterday
-    RepeatDate.new(date: @date - 1.day)
+    @date -=  1.day
+    self
   end
 
   def tomorrow
-    RepeatDate.new(date: @date + 1.day)
+    @date += 1.day
+    self
   end
 
   def last_year
-    RepeatDate.new(date: @date - 1.year)
+    @date -= 1.year
+    self
   end
 
   def next_year
-    RepeatDate.new(date: @date + 1.year)
+    @date += 1.year
+    self
   end
 
   def <=> other
     return nil unless other.is_a?(self.class)
-    [date] <=> [other.date]
+    [month, day] <=> [other.month, other.day]
   end
 end

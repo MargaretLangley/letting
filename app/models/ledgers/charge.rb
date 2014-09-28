@@ -48,6 +48,12 @@ class Charge < ActiveRecord::Base
     end.compact
   end
 
+  def period(billed_on:)
+    RangeCycle.for(name: charged_in_name,
+                   dates: charge_cycle.due_ons.map(&:make_date))
+              .billing_period billed_date: billed_on
+  end
+
   def prepare
     # maybe should be calling prepare on charge structure
   end
@@ -76,11 +82,11 @@ class Charge < ActiveRecord::Base
   # returns   - The information to bill, debit, the associated account.
   #
   def make_chargeable_info billed_on
-    ChargeableInfo
-      .from_charge charge_id:  id,
-                   on_date:    billed_on,
-                   amount:     amount,
-                   account_id: account_id
+    ChargeableInfo.from_charge charge_id:  id,
+                               on_date:    billed_on,
+                               amount:     amount,
+                               account_id: account_id,
+                               period: period(billed_on: billed_on)
   end
 
   def empty?
