@@ -298,27 +298,9 @@ def create_account
 end
 
 def debits_and_credits
-  create_debit_generator
+  create_debits
   create_credits
   create_payment
-end
-
-def create_debit_generator
-  create_debits
-  DebitGenerator.create! [
-    {
-      id: 1,
-      search_string: '1001 - 2002',
-      start_date: create_date(18),
-      end_date: create_date(16),
-    },
-    {
-      id: 2,
-      search_string: '1001 - 2002',
-      start_date: create_date(6),
-      end_date: create_date(4),
-    },
-  ]
 end
 
 def create_debits
@@ -328,16 +310,14 @@ def create_debits
       charge_id: 1,
       on_date: create_date(17),
       period:create_date(17)..create_date(14),
-      amount: 88.08,
-      debit_generator_id: 1,
+      amount: 88.08
     },
     {
       id: 2, account_id: 1,
       charge_id: 1,
       on_date: create_date(5),
       period:create_date(5)..create_date(2),
-      amount: 88.08,
-      debit_generator_id: 2,
+      amount: 88.08
     },
   ]
 end

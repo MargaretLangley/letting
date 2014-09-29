@@ -14,8 +14,6 @@ Letting::Application.routes.draw do
   root 'properties#index'
   resources :properties
   resources :clients
-  # TODO: do we need debit_generators?
-  resources :debit_generators, only: [:new, :create, :index]
   resources :payments
   resources :invoicings, only: [:new, :create, :index, :show]
 

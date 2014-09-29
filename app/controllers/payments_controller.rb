@@ -5,14 +5,13 @@
 # Restful actions on the Payments resource
 #
 # Payments resource covers crediting the debits that the tenants are
-# charged by the debt generator / invoicing system.
+# charged by the debt, invoicing, system.
 #
 # Payments are operator generated resources. When a payment is received
 # (by standing order or cheque) - it is entered into the system through
 # this resource.
 #
-# Payments are associated with credits which offset the debt_generator's
-# debits.
+# Payments are associated with credits which offset the invoiced debits.
 #
 ####
 #

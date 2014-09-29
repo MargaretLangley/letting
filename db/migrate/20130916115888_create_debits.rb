@@ -7,7 +7,6 @@ class CreateDebits < ActiveRecord::Migration
       t.date     :period_first,      null: false
       t.date     :period_last,       null: false
       t.decimal  :amount, precision: 8, scale: 2, null: false
-      t.belongs_to  :debit_generator, null: false, index: true
       t.timestamps
     end
     add_index :debits, [:charge_id, :on_date], unique: true

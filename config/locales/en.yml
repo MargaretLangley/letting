@@ -39,27 +39,10 @@ en:
       user:
         password_digest: Password Conformation
 
-    errors:
-      models:
-        debit_generator:
-          attributes:
-            debits:
-              blank: 'must be found on at least one property in order to charge and invoice.'
-            search_string:
-              taken: 'and date range has already been used.'
-              blank: 'must be present to find properties. Flat names, roads and property ranges (100-800) can all be used.'
-            accounts:
-              blank: 'are not being found. The search string should match any property locations or ID ranges (100-800) for example. The associated property is then debited.'
-    models:
-      debit_generator: Invoicing
-
   helpers:
     submit:
       create: "Create %{model}"
       update: "Update %{model}"
-      debit_generator:
-        create: "Invoice Charges"
-        update: "Update invoice"
       charge_cycle:
         create: "Create Charge Cycle"
         update: "Update Charge Cycle"
@@ -92,8 +75,6 @@ en:
       human: "%d %b %Y %H:%M"
 
   instruction:
-    debit_generators:
-      property_charge:  "Search for the properties to charge in the above search box.\nCommon searches are roads, flats and property id ranges. With property ranges use a hyphen e.g. 100-200"
     invoicing: "To invoice properties, search by entering a property range, two property IDs with a hyphen '-' between them 109-123. %{property_id_range}."
     payments:
       property_payment: "To book a payment against a property, search for the property in the above box. This easiest way is by property identifier, %{property_id}, but %{owner} and %{amount} are also supported."

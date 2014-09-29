@@ -37,7 +37,6 @@ module DB
       expect(row.attributes[:charge_id]).to eq charge.id
       expect(row.attributes[:on_date]).to eq '2012-03-25 12:00:00'
       expect(row.attributes[:amount]).to eq 50.5
-      expect(row.attributes[:debit_generator_id]).to eq(-1)
     end
 
     def parse_line row_string

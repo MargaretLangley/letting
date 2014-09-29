@@ -6,7 +6,7 @@
 #
 # How does it fit into ledgers ?
 #
-# Payments create credits and the DebitGenerator, through charges, debits.
+# Payments create credits and the invoicing, through charges, debits.
 # However they only have an affect once a debit is paid off or a credit
 # is spent. This is the role of settlements which bridges credits and debits.
 #

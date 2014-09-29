@@ -38,7 +38,6 @@ class Permission < Struct.new(:user)
     %w(accounts
        clients
        debits
-       debit_generators
        errors
        invoicings
        properties

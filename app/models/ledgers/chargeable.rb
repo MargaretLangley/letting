@@ -4,7 +4,7 @@
 #
 #  Holds information to turn a charge into a debit
 #
-#  The debit generator needs to generate debits from charges.
+#  Invoicing needs to generate debits from charges.
 #  It calls on account for due charges and in turn charge
 #  generates a Chargeable describing a charge that is due
 #  in the queried date range.

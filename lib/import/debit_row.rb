@@ -71,7 +71,6 @@ module DB
         on_date: on_date,
         period: period,
         amount: amount,
-        debit_generator_id: -1,
       }
     end
 

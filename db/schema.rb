@@ -112,29 +112,19 @@ ActiveRecord::Schema.define(version: 20140920193251) do
   add_index "cycle_charged_ins", ["charge_cycle_id"], name: "index_cycle_charged_ins_on_charge_cycle_id", using: :btree
   add_index "cycle_charged_ins", ["charged_in_id"], name: "index_cycle_charged_ins_on_charged_in_id", using: :btree
 
-  create_table "debit_generators", force: true do |t|
-    t.string   "search_string", null: false
-    t.date     "start_date",    null: false
-    t.date     "end_date",      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "debits", force: true do |t|
-    t.integer  "account_id",                                 null: false
-    t.integer  "charge_id",                                  null: false
-    t.date     "on_date",                                    null: false
-    t.date     "period_first",                               null: false
-    t.date     "period_last",                                null: false
-    t.decimal  "amount",             precision: 8, scale: 2, null: false
-    t.integer  "debit_generator_id",                         null: false
+    t.integer  "account_id",                           null: false
+    t.integer  "charge_id",                            null: false
+    t.date     "on_date",                              null: false
+    t.date     "period_first",                         null: false
+    t.date     "period_last",                          null: false
+    t.decimal  "amount",       precision: 8, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "debits", ["account_id"], name: "index_debits_on_account_id", using: :btree
   add_index "debits", ["charge_id", "on_date"], name: "index_debits_on_charge_id_and_on_date", unique: true, using: :btree
-  add_index "debits", ["debit_generator_id"], name: "index_debits_on_debit_generator_id", using: :btree
 
   create_table "due_ons", force: true do |t|
     t.integer  "day",             null: false
