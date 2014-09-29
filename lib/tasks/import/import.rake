@@ -21,9 +21,9 @@ namespace :db do
     Rake::Task['db:import:due_ons'].invoke
     Rake::Task['db:import:charge_cycle'].invoke(options[:test])
     Rake::Task['db:import:charged_ins'].invoke(options[:test])
-    Rake::Task['db:import:sheet_address'].invoke
-    Rake::Task['db:import:sheet_notice'].invoke
-    Rake::Task['db:import:sheet'].invoke
+    Rake::Task['db:import:template_address'].invoke
+    Rake::Task['db:import:template_notice'].invoke
+    Rake::Task['db:import:template'].invoke
     Rake::Task['db:import:clients'].execute
     Rake::Task['db:import:properties'].invoke(human_ref_range)
     Rake::Task['db:import:agents'].invoke(human_ref_range)
