@@ -19,7 +19,7 @@ describe Arrears, :ledgers, :range do
       repeat = Arrears.new(
                  repeat_dates: [RepeatDate.new(year: 2014, month: 3, day: 25),
                                 RepeatDate.new(year: 2014, month: 9, day: 30)])
-      expect(repeat.billing_period(billed_date: Date.new(2014, 9, 30)))
+      expect(repeat.billing_period(billed_on: Date.new(2014, 9, 30)))
         .to eq Date.new(2014, 3, 26)..Date.new(2014, 9, 30)
     end
 
@@ -27,7 +27,7 @@ describe Arrears, :ledgers, :range do
       repeat = Arrears.new(
                  repeat_dates: [RepeatDate.new(year: 2014, month: 3, day: 25),
                                 RepeatDate.new(year: 2014, month: 9, day: 30)])
-      expect(repeat.billing_period billed_date: Date.new(2014, 9, 29))
+      expect(repeat.billing_period billed_on: Date.new(2014, 9, 29))
         .to be :missing_due_on
     end
   end

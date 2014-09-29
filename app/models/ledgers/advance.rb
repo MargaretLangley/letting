@@ -28,16 +28,22 @@ class Advance
     @periods = advance_periods unless @billed_dates_in_year.empty?
   end
 
-  def billing_period(billed_date:)
-    found = @periods.find do |period|
-      period.first == RepeatDate.new(date: billed_date)
+  def billing_period(billed_on:)
+    @found_period = @periods.find do |period|
+      period.first == RepeatDate.new(date: billed_on)
     end
-    return :missing_due_on unless found
-    billed_date..billed_date + period_length(period: found)
+    return :missing_due_on unless @found_period
+    range billed_on
   end
 
-  def period_length(period:)
-    period.last.date - period.first.date
+  def range billed_on,
+    range = billed_on..billed_on + period_length
+    range = range.first..range.last + 1.day if Cover.leap_day? range: range
+    range
+  end
+
+  def period_length period: @found_period
+    (period.last.date - period.first.date).to_i
   end
 
   def dates

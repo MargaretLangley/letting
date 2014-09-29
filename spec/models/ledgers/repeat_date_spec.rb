@@ -36,9 +36,11 @@ describe RepeatDate, :ledgers, :range do
       end
 
       describe 'defaults' do
-        it 'has defaulted to today' do
+        it "has defaulted to today's day and month for with the default year" do
           repeat = RepeatDate.new
-          expect(repeat.date).to eq Date.current
+          expect(repeat.date).to eq Date.new 2002,
+                                             Date.current.month,
+                                             Date.current.day
         end
       end
     end

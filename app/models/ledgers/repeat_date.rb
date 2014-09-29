@@ -12,10 +12,11 @@
 #
 class RepeatDate
   include Comparable
+  A_YEAR_AWAY_FROM_LEAP_DAY = 2002
   attr_reader :day, :month, :year, :date
   def initialize day:   Time.now.day,
                  month: Time.now.month,
-                 year:  Time.now.year,
+                 year:  A_YEAR_AWAY_FROM_LEAP_DAY,
                  date:  nil
     if date
       @date = date
