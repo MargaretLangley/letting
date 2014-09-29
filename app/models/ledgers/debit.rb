@@ -29,12 +29,12 @@ class Debit < ActiveRecord::Base
   belongs_to :charge, inverse_of: :debits
 
   def period
-    (start..stop)
+    (period_first..period_last)
   end
 
   def period=(bill_range)
-    self.start = bill_range.first
-    self.stop  = bill_range.last
+    self.period_first = bill_range.first
+    self.period_last  = bill_range.last
   end
 
   validates :charge, :on_date, presence: true

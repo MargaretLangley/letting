@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20140920193251) do
   add_index "agents", ["property_id"], name: "index_agents_on_property_id", using: :btree
 
   create_table "charge_cycles", force: true do |t|
-    t.string   "name",        null: false
-    t.integer  "order",       null: false
+    t.string   "name",       null: false
+    t.integer  "order",      null: false
     t.string   "cycle_type", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -124,8 +124,8 @@ ActiveRecord::Schema.define(version: 20140920193251) do
     t.integer  "account_id",                                 null: false
     t.integer  "charge_id",                                  null: false
     t.date     "on_date",                                    null: false
-    t.date     "start",                                      null: false
-    t.date     "stop",                                       null: false
+    t.date     "period_first",                               null: false
+    t.date     "period_last",                                null: false
     t.decimal  "amount",             precision: 8, scale: 2, null: false
     t.integer  "debit_generator_id",                         null: false
     t.datetime "created_at"
@@ -202,11 +202,12 @@ ActiveRecord::Schema.define(version: 20140920193251) do
   add_index "payments", ["account_id"], name: "index_payments_on_account_id", using: :btree
 
   create_table "products", force: true do |t|
-    t.integer  "invoice_id",  null: false
+    t.integer  "invoice_id",   null: false
     t.string   "charge_type"
     t.date     "date_due"
     t.decimal  "amount"
-    t.string   "range"
+    t.date     "period_first", null: false
+    t.date     "period_last",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

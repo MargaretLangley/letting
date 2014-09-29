@@ -4,8 +4,8 @@ class CreateDebits < ActiveRecord::Migration
       t.belongs_to  :account, null: false, index: true
       t.integer  :charge_id,  null: false, index: true
       t.date     :on_date,    null: false
-      t.date     :start,      null: false
-      t.date     :stop,       null: false
+      t.date     :period_first,      null: false
+      t.date     :period_last,       null: false
       t.decimal  :amount, precision: 8, scale: 2, null: false
       t.belongs_to  :debit_generator, null: false, index: true
       t.timestamps

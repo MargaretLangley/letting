@@ -49,8 +49,8 @@ class Invoice < ActiveRecord::Base
     self.products = debits.map do |debit|
       Product.new charge_type: debit.charge_type,
                   date_due: debit.on_date,
+                  period: debit.period,
                   amount: debit.amount
-      # TODO:     bill_period: debit.bill_period
     end
   end
 

@@ -58,13 +58,15 @@ RSpec.describe Invoice, type: :model do
     describe '#prepare_products' do
       it 'adds a debit' do
         debit = debit_new(charge: charge_new(charge_type: 'Rent'),
-                          on_date: '2014-03-25',
+                          on_date: '2014-03-5',
+                          period: Date.new(2014, 3, 5)..Date.new(2014, 6, 4),
                           amount: 20.15)
 
         expect(Invoice.new.prepare_products debits: [debit])
-          .to eq [Product.new(charge_type: 'Rent',
-                              date_due: '2014-03-25',
-                              amount: 20.15)]
+        .to eq [Product.new(charge_type: 'Rent',
+                            date_due: '2014-03-5',
+                            period: Date.new(2014, 3, 5)..Date.new(2014, 6, 4),
+                            amount: 20.15)]
       end
     end
     it 'outputs #to_s' do
