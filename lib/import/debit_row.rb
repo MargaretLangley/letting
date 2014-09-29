@@ -8,7 +8,7 @@ module DB
   #
   # DebitRow
   #
-  # Wrapps around an imported row of data.
+  # Wraps around an imported row of data.
   #
   # Called during the Importing of accounts information.
   # Debits are passed to ImportDebit and during the imported
@@ -43,9 +43,11 @@ module DB
     end
 
     def period
-      charge(account: account(human_ref: human_ref),
-             charge_type: charge_type)
-        .period(billed_on: on_date.to_date)
+      period = charge(account: account(human_ref: human_ref),
+                      charge_type: charge_type)
+                 .period(billed_on: on_date.to_date)
+      fail PeriodUnknown, message, caller unless period != :missing_due_on
+      period
     end
 
     # debits increase an account balance.
@@ -72,6 +74,10 @@ module DB
         period: period,
         amount: amount,
       }
+    end
+
+    def message
+      "Property #{human_ref} charge_code: #{charge_code}"
     end
 
     private
