@@ -4,7 +4,8 @@ describe Invoicing, type: :feature do
 
   before(:each) do
     log_in admin_attributes
-    invoicing_create property_range: '1-100',
+    invoicing_create id: 1,
+                     property_range: '1-100',
                      start_date: '2014/06/30',
                      end_date: '2014/08/30'
   end
