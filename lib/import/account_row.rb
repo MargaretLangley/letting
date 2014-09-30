@@ -38,7 +38,7 @@ module DB
     end
 
     def balance?
-      charge_code == 'Bal'
+      charge_code == 'Bal' || @source[:description] == 'Balance'
     end
 
     def credit?
