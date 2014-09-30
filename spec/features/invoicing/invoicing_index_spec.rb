@@ -17,14 +17,14 @@ describe Invoicing, type: :feature do
       expect(page).to have_text '30/06/2014'
     end
 
-    it '2nd invoicings' do
+    it 'Invoicings latest start dates first' do
       invoicing_create property_range: '101-200',
                        start_date: '2014/07/10',
                        end_date: '2014/08/30'
       visit '/invoicings/'
       expect(page.title).to eq 'Letting - Invoicing'
-      expect(page).to have_text '1-100'
-      expect(page).to have_text '10/07/2014'
+      first(:link, 'View').click
+      expect(page).to have_text '101-200'
     end
   end
 end
