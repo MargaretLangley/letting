@@ -3,7 +3,7 @@ class CreateDebits < ActiveRecord::Migration
     create_table :debits do |t|
       t.belongs_to  :account, null: false, index: true
       t.integer  :charge_id,  null: false, index: true
-      t.date     :on_date,    null: false
+      t.datetime :on_date,    null: false
       t.date     :period_first,      null: false
       t.date     :period_last,       null: false
       t.decimal  :amount, precision: 8, scale: 2, null: false

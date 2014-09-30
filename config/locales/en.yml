@@ -73,6 +73,7 @@ en:
   time:
     formats:
       human: "%d %b %Y %H:%M"
+      short: "%d/%b/%y"
 
   instruction:
     invoicing: "To invoice properties, search by entering a property range, two property IDs with a hyphen '-' between them 109-123. %{property_id_range}."

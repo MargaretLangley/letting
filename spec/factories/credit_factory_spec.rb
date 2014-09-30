@@ -8,14 +8,17 @@ describe 'Credit Factory' do
         expect(credit_new charge: charge_new).to be_valid
       end
       it('has amount') { expect(credit_new.amount).to eq(-88.08) }
-      it('has date') { expect(credit_new.on_date.to_s).to eq '2013-04-30' }
+      it 'has date' do
+        expect(credit_new.on_date.to_s).to eq '2013-04-30 00:00:00 UTC'
+      end
     end
     describe 'overrides' do
       it 'alters amount' do
         expect(credit_new(amount: -35.50).amount).to eq(-35.50)
       end
       it 'alters date' do
-        expect(credit_new(on_date: '10/6/2014').on_date.to_s).to eq '2014-06-10'
+        expect(credit_new(on_date: '10/6/2014').on_date.to_s)
+          .to eq '2014-06-10 00:00:00 UTC'
       end
     end
   end
@@ -30,7 +33,8 @@ describe 'Credit Factory' do
         expect(credit_create(charge: charge).amount).to eq(-88.08)
       end
       it 'has date' do
-        expect(credit_create(charge: charge).on_date.to_s).to eq '2013-04-30'
+        expect(credit_create(charge: charge).on_date.to_s)
+          .to eq '2013-04-30 00:00:00 UTC'
       end
     end
     describe 'override' do
@@ -40,7 +44,7 @@ describe 'Credit Factory' do
       end
       it 'alters date' do
         expect(credit_create(charge: charge, on_date: '10/6/2014').on_date.to_s)
-          .to eq '2014-06-10'
+          .to eq '2014-06-10 00:00:00 UTC'
       end
     end
   end

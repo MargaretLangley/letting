@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 20140920193251) do
     t.integer  "account_id",                         null: false
     t.integer  "charge_id",                          null: false
     t.integer  "payment_id",                         null: false
-    t.date     "on_date",                            null: false
+    t.datetime "on_date",                            null: false
     t.decimal  "amount",     precision: 8, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 20140920193251) do
   create_table "debits", force: true do |t|
     t.integer  "account_id",                           null: false
     t.integer  "charge_id",                            null: false
-    t.date     "on_date",                              null: false
+    t.datetime "on_date",                              null: false
     t.date     "period_first",                         null: false
     t.date     "period_last",                          null: false
     t.decimal  "amount",       precision: 8, scale: 2, null: false

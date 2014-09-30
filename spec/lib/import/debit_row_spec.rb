@@ -13,9 +13,21 @@ require_relative '../../../lib/import/debit_row'
 #
 module DB
   describe DebitRow, :import do
+    def row human_ref: 9,
+            charge_code: 'GR',
+            date: '2012-03-25 12:00:00',
+            amount: 50.5
+      DebitRow.new parse_line \
+      %(#{human_ref}, #{charge_code}, #{date}, Insurance, #{amount}, 0, 0)
+    end
+
     it('human_ref') { expect(row(human_ref: 9).human_ref).to eq '9' }
-    it('amount') { expect(row(amount: 5.5).amount).to eq(5.5) }
     it('charge_code') { expect(row(charge_code: 'GR').charge_code).to eq 'GR' }
+    it 'on_date' do
+      expect(row(date: '2012-03-20 12:00:00').on_date)
+        .to eq '2012-03-20 12:00:00'
+    end
+    it('amount') { expect(row(amount: 5.5).amount).to eq(5.5) }
 
     context 'negative credit' do
       def debit_negative_credit amount: -1.5
@@ -61,14 +73,5 @@ module DB
                      converters: -> (field) { field ? field.strip : nil }
                     )
     end
-
-    def row human_ref: 9,
-            charge_code: 'GR',
-            date: '2012-03-25 12:00:00',
-            amount: 50.5
-      DebitRow.new parse_line \
-      %(#{human_ref}, #{charge_code}, #{date}, Insurance, #{amount}, 0, 0)
-    end
-
   end
 end
