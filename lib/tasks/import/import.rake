@@ -15,7 +15,7 @@ namespace :db do
 
     human_ref_range = Rangify.from_str(options[:range]).to_s
 
-    # Stripped out for now but when in parellel with live system. nope
+    # Stripped out for now but when in parallel with live system. nope
     Rake::Task['db:truncate_all'].execute
     Rake::Task['db:import:users'].invoke(options[:test])
     Rake::Task['db:import:due_ons'].invoke

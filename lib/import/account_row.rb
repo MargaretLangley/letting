@@ -8,7 +8,7 @@ module DB
   #
   # AccountRow
   #
-  # Wrapps around an imported row of data acc_items.
+  # Wraps around an imported row of data acc_items.
   #
   # Called during the Importing of accounts information.
   # ImportAccount assigns a row to AccountRow
@@ -17,7 +17,7 @@ module DB
   #
   # AccountRow knows the type responsible for importing the file row
   # - balance row, credit row or debit row and instantiates it.
-  # The instantiated row is then responsbile for the remaining import.
+  # The instantiated row is then responsible for the remaining import.
   #
   ####
   #

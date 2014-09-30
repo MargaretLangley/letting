@@ -8,7 +8,7 @@ module DB
   #
   # CreditRow
   #
-  # Wrapps around an imported row of data acc_items.
+  # Wraps around an imported row of data acc_items.
   #
   # Called during the Importing of accounts information.
   # Credit rows are selected and passed to ImportCredit by the
@@ -16,7 +16,7 @@ module DB
   # During the importing the row is wrapped with this CreditRow. Credit object
   # needs to relate to other database objects, charges in this case, and some
   # data fields needs to be converted into different types;
-  # this class is responsible for data conversion of the csv fiels and leaves
+  # this class is responsible for data conversion of the csv field and leaves
   # ImportCredit to create/assign database objects (Credits) and their related
   # fields.
   #
