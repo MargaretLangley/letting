@@ -43,6 +43,32 @@ module DB
     end
 
     describe 'methods' do
+      describe 'charge_type' do
+        context 'balance with description' do
+          it 'returns charge_type' do
+            spec_row = row charge_code: 'Bal',
+                           description: 'Balance Service Charge'
+            expect(spec_row.charge_type).to eq 'Service Charge'
+          end
+        end
+        context 'balance with charge code' do
+          it 'returns charge_type' do
+            spec_row = row(charge_code: 'GR')
+            expect(spec_row.charge_type).to eq 'Ground Rent'
+          end
+        end
+      end
+      describe '#description_to_charge' do
+        it 'returns ' do
+          spec_row = row(description: 'Balance Service Charge')
+          expect(spec_row.description_to_charge).to eq 'Service Charge'
+        end
+        it 'returns ' do
+          spec_row = row(description: 'Service Charge 2012/13')
+          expect(spec_row.description_to_charge).to eq 'Service Charge'
+        end
+      end
+
       describe '#next_on_date' do
         it 'finds next on_date' do
           cycle = charge_cycle_new(due_ons: [DueOn.new(month: 4, day: 1)])

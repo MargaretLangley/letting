@@ -45,11 +45,12 @@ module DB
     end
 
     def period
-      period = charge(account: account(human_ref: human_ref),
-                      charge_type: charge_type)
-                 .period(billed_on: on_date.to_date)
-      fail PeriodUnknown, message, caller unless period != :missing_due_on
-      period
+      MIN_DATE..MAX_DATE
+      # period = charge(account: account(human_ref: human_ref),
+      #                 charge_type: charge_type)
+      #            .period(billed_on: on_date.to_date)
+      # fail PeriodUnknown, message, caller unless period != :missing_due_on
+      # period
     end
 
     # debits increase an account balance.

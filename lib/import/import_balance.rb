@@ -6,7 +6,7 @@ module DB
   #
   # ImportBalance
   #
-  # Creates debits from row file data.
+  # Creates balance debits from row file data.
   #
   ####
   #
@@ -30,6 +30,11 @@ module DB
 
     def model_assignment
       @model_to_assign.attributes = row.attributes
+    end
+
+    def filtered?
+      return true if row.amount == 0
+      false
     end
   end
 end

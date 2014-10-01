@@ -37,7 +37,8 @@ module DB
     end
 
     def import_row specialized_row = row
-      SPECIALIZED_CLASSES[specialized_row.type].import [specialized_row]
+      SPECIALIZED_CLASSES[specialized_row.type]
+        .import [specialized_row], range: @range
     end
 
     def filtered?

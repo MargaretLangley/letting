@@ -22,14 +22,15 @@ module DB
       Charge.find_by!(account_id: account.id, charge_type: charge_type)
       rescue ActiveRecord::RecordNotFound
         raise DB::ChargeUnknown,
-              "Charge with account: #{account.id} charge_type: #{charge_type}",
+              "Property: #{account.property.human_ref} "\
+              "charge_type: #{charge_type}",
               caller
     end
 
     def charge_code_to_s charge_code: charge_code, human_ref: human_ref
       charge = ChargeCode.to_string charge_code
       fail DB::ChargeCodeUnknown,
-           "Property #{human_ref}: Charge code #{charge_code} not convertable",
+           "Property #{human_ref}: Charge code #{charge_code} not convertible",
            caller  \
            unless charge
       charge

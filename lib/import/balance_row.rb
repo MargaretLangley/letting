@@ -32,6 +32,12 @@ module DB
       @source[:on_date].to_datetime
     end
 
+    def description_to_charge
+      return 'Service Charge' if @source[:description].include?('Service') ||
+                                 @source[:description].include?('SC')
+      return 'Garage Ground Rent' if @source[:description].include? 'Garage'
+    end
+
     # debits increase an account balance.
     # debits amounts are positive (+)
     #
@@ -50,8 +56,14 @@ module DB
     end
 
     def charge_type
-      charge_code_to_s(charge_code: charge_code,
-                       human_ref: human_ref)
+      if charge_code == 'Bal'
+        charge_type = description_to_charge
+        charge_type = account(human_ref: human_ref).charges.first.charge_type \
+          if charge_type.blank?
+        charge_type
+      else
+        charge_code_to_s charge_code: charge_code, human_ref: human_ref
+      end
     end
 
     def period
