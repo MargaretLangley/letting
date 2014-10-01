@@ -13,7 +13,7 @@ module DB
   #
   # Account process begins with ImportAccount, which contains both
   # opening balances, credits and debits, and this filters the row
-  # into their bookkeeping taxonamy and feeds it to the appropriate
+  # into their bookkeeping taxonomy and feeds it to the appropriate
   # objects. ImportPayment is responsible for credits and will
   # create a payment and a credit from a row of file data.
   #
@@ -51,7 +51,7 @@ module DB
     private
 
     def import_not_idempotent_msg
-      "#{row.human_ref}: Import Process for #{self.class} is not idempodent." \
+      "#{row.human_ref}: Import Process for #{self.class} is not idempotent." \
       ' You need to delete Payment and credits before running this task again.'
     end
   end

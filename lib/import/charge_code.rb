@@ -3,7 +3,7 @@ module DB
   #
   # ChargeCode
   #
-  # One place for mappyings of charge code into other values
+  # One place for mappings of charge code into other values
   #
   # Used in importing charges and account rows.
   #

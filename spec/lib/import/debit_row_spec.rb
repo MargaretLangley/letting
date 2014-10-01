@@ -15,7 +15,7 @@ module DB
   describe DebitRow, :import do
     def row human_ref: 9,
             charge_code: 'GR',
-            date: '2012-03-25 12:00:00',
+            date: '2012-03-25 00:00:00',
             amount: 50.5
       DebitRow.new parse_line \
       %(#{human_ref}, #{charge_code}, #{date}, Insurance, #{amount}, 0, 0)
@@ -24,14 +24,14 @@ module DB
     it('human_ref') { expect(row(human_ref: 9).human_ref).to eq '9' }
     it('charge_code') { expect(row(charge_code: 'GR').charge_code).to eq 'GR' }
     it 'on_date' do
-      expect(row(date: '2012-03-20 12:00:00').on_date)
-        .to eq '2012-03-20 12:00:00'
+      expect(row(date: '2012-03-20 00:00:00').on_date)
+        .to eq '2012-03-20 03:00:00'
     end
     it('amount') { expect(row(amount: 5.5).amount).to eq(5.5) }
 
     context 'negative credit' do
       def debit_negative_credit amount: -1.5
-        %(2002, GR, 2012-03-25 12:00:00, Ground Rent, 0, #{amount}, 0)
+        %(2002, GR, 2012-03-25 00:00:00, Ground Rent, 0, #{amount}, 0)
       end
       it 'calculates amount from negative credit' do
         row = DebitRow.new parse_line debit_negative_credit
@@ -44,7 +44,7 @@ module DB
       property_create human_ref: 9, account: account_new(charge: charge)
       row = row(charge_code: 'Ins', amount: 3.05)
       expect(row.attributes[:charge_id]).to eq charge.id
-      expect(row.attributes[:on_date]).to eq '2012-03-25 12:00:00'
+      expect(row.attributes[:on_date]).to eq '2012-03-25 03:00:00'
       expect(row.attributes[:amount]).to eq 3.05
     end
 

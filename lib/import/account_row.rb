@@ -13,11 +13,10 @@ module DB
   # Called during the Importing of accounts information.
   # ImportAccount assigns a row to AccountRow
   #
-  # ** Next bit is aspirational **
-  #
   # AccountRow knows the type responsible for importing the file row
-  # - balance row, credit row or debit row and instantiates it.
-  # The instantiated row is then responsible for the remaining import.
+  # - balance row, credit row or debit row. ImportAcccount is responsible
+  # for instantiating the appropriate row which is then responsible for the
+  # remaining import.
   #
   ####
   #
@@ -33,42 +32,29 @@ module DB
       @source[:human_ref].to_i
     end
 
-    def charge_code
-      @source[:charge_code]
-    end
-
-    def balance?
-      charge_code == 'Bal' || @source[:description] == 'Balance'
-    end
-
-    def credit?
-      credit  != 0
-    end
-
-    def debit?
-      debit != 0 || credit < 0
-    end
-
-    def on_date
-      Date.parse @source[:on_date]
-    end
-
-    def amount
-      debit? ? debit : credit
-    end
-
-    def account_id
-      account(human_ref: human_ref).id
+    def type
+      return 'balance' if balance?
+      return 'debit' if debit?
+      return 'credit' if credit?
+      fail AccountRowTypeUnknown, account_type_unknown_msg
     end
 
     private
 
-    def credit
-      @source[:credit].to_f
+    def balance?
+      @source[:charge_code] == 'Bal' || @source[:description] == 'Balance'
     end
 
-    def debit
-      @source[:debit].to_f
+    def credit?
+      @source[:credit].to_f != 0
+    end
+
+    def debit?
+      @source[:debit].to_f != 0 || @source[:credit].to_f < 0
+    end
+
+    def account_type_unknown_msg
+      "Unknown Row Property:#{human_ref}, charge_code: #{@source[:charge_code]}"
     end
   end
 end

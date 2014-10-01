@@ -39,7 +39,9 @@ module DB
     end
 
     def on_date
-      @source[:on_date]
+      # HACK: All legacy data comes in at midnight.
+      #       by pushing forward the 'time' balance occurs before any debits.
+      @source[:on_date].to_datetime + 3.hours
     end
 
     def period
