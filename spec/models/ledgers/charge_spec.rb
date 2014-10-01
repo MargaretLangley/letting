@@ -63,15 +63,6 @@ describe Charge, :ledgers, :range, type: :model do
           .to eq []
       end
 
-      # Would like to move this lower down within charging system
-      it 'charges for a due_on ONCE in a multi-year billing period' do
-        charge = charge_create charge_cycle: \
-                   charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
-        expect(charge.coming Date.new(2013, 3, 25)..Date.new(2016, 3, 25))
-          .to eq [chargeable_new(charge_id: charge.id,
-                                 on_date: Date.new(2013, 3, 25))]
-      end
-
       it 'excludes dormant charges from billing'  do
         charge = charge_create charge_cycle: \
                    charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
@@ -84,7 +75,7 @@ describe Charge, :ledgers, :range, type: :model do
         charge = charge_create charge_cycle: \
                    charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
         charge.debits << debit_new(on_date: '2013-3-25')
-        expect(charge.coming Date.new(2013, 3, 25)..Date.new(2016, 3, 25))
+        expect(charge.coming Date.new(2013, 3, 25)..Date.new(2013, 5, 25))
           .to eq []
       end
     end

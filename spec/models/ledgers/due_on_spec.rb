@@ -33,18 +33,24 @@ describe DueOn, :ledgers, type: :model do
   end
 
   describe 'methods' do
-    describe '#between?' do
-      before { Timecop.travel Date.new 2013, 1, 31 }
-      after { Timecop.return }
-
-      it 'is true when the range covers due_on' do
-        expect(due_on_new(day: 25, month: 3)
-          .between? Time.new(2013, 3, 25)..Date.new(2013, 3, 25)).to be true
+    describe '#between' do
+      it 'returns the repeated dates that are present in the range' do
+        expect(due_on_new(month: 3, day: 25)
+          .between Date.new(2013, 3, 25)..Date.new(2013, 3, 25))
+            .to eq [Date.new(2013, 3, 25)]
       end
 
-      it 'is false when range misses due_on' do
-        expect(due_on_new(day: 1, month: 1)
-          .between? Time.new(2013, 3, 25)..Date.new(2013, 3, 25)).to be false
+      it 'handles multi-year' do
+        expect(due_on_new(month: 3, day: 5)
+          .between Date.new(2010, 3, 1)..Date.new(2012, 3, 6))
+            .to eq [Date.new(2010, 3, 5),
+                    Date.new(2011, 3, 5),
+                    Date.new(2012, 3, 5)]
+      end
+
+      it 'empty return when not matching' do
+        expect(due_on_new(month: 1, day: 1)
+          .between Date.new(2013, 3, 25)..Date.new(2013, 3, 25)).to eq []
       end
     end
 
@@ -65,22 +71,9 @@ describe DueOn, :ledgers, type: :model do
     end
 
     describe '#makedate' do
-      before { Timecop.travel Date.new 2014, 3, 25 }
-      after { Timecop.return }
-
-      it 'before the date it creates a date with this year' do
-        expect(due_on_new(day: 25, month: 3).make_date)
-          .to eq Date.new(2014, 3, 25)
-      end
-
-      it 'after the date it creates a date with next year' do
-        expect(due_on_new(day: 23, month: 3).make_date)
-          .to eq Date.new(2015, 3, 23)
-      end
-
-      it 'uses any set year' do
-        expect(due_on_new(day: 23, month: 3, year: 2020).make_date)
-        .to eq Date.new(2020, 3, 23)
+      it 'creates the date with passed in year' do
+        expect(due_on_new(day: 25, month: 3).make_date year: 2008)
+          .to eq Date.new(2008, 3, 25)
       end
     end
 

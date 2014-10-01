@@ -34,13 +34,10 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
     end
   end
 
-  describe '#due_between?' do
-    before(:each) { Timecop.travel Date.new(2013, 1, 31) }
-    after(:each)  { Timecop.return }
-
+  describe '#between_range' do
     it 'creates a charging date when in range'  do
       cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 3)]
-      expect(cycle.due_between?(Date.new(2013, 3, 25)..Date.new(2013, 3, 25)))
+      expect(cycle.between(Date.new(2013, 3, 25)..Date.new(2013, 3, 25)))
         .to eq [Date.new(2013, 3, 25)]
     end
   end

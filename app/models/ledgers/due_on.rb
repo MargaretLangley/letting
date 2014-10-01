@@ -33,12 +33,16 @@ class DueOn < ActiveRecord::Base
                                    greater_than: 1990,
                                    less_than: 2030 },
                    allow_nil: true
-  def between? date_range
-    date_range.cover? make_date
+
+  def between date_range
+    date_range.to_a
+              .map(&:year)
+              .uniq.map { |year| make_date year: year }
+              .sort & date_range.to_a
   end
 
-  def make_date
-    Date.new charge_year, month, day
+  def make_date(year:)
+    Date.new year, month, day
   end
 
   def clear_up_form
@@ -73,19 +77,5 @@ class DueOn < ActiveRecord::Base
 
   def ignored_attrs
     %w(id charge_cycle_id created_at updated_at)
-  end
-
-  def charge_year
-    return year if one_off_charge?
-
-    date_gone? ? Date.current.year + 1 : Date.current.year
-  end
-
-  def one_off_charge?
-    year.present?
-  end
-
-  def date_gone?
-    Date.current > Date.new(Date.current.year, month, day)
   end
 end

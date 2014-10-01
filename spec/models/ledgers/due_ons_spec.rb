@@ -1,5 +1,8 @@
 require 'rails_helper'
 
+# Required for splitting over two lines.
+# rubocop: disable Style/SpaceInsideRangeLiteral
+
 describe DueOns, :ledgers, type: :model do
 
   let(:cycle) do
@@ -24,31 +27,20 @@ describe DueOns, :ledgers, type: :model do
     end
   end
 
-  context 'methods' do
-
-    context '#due_between?' do
-      before { Timecop.travel Date.new 2013, 4, 1 }
-      after { Timecop.return }
-
+  describe 'methods' do
+    describe '#between' do
       it 'returns date when range in due date' do
         cycle = charge_cycle_new due_ons: [DueOn.new(day: 4, month: 4),
                                            DueOn.new(day: 3, month: 5)]
-        expect(cycle.due_ons.due_between? date_range_covering_due_on)
-          .to eq [DueOn.new(day: 4, month: 4), DueOn.new(day: 3, month: 5)]
+        expect(cycle.due_ons.between Date.new(2015, 4, 4)..Date.new(2016, 5, 5))
+          .to eq [Date.new(2015, 4, 4), Date.new(2015, 5, 3),
+                  Date.new(2016, 4, 4), Date.new(2016, 5, 3)]
       end
 
       it 'returns nils when range outside due date' do
         due_ons.build day: 1, month: 2
-        expect(due_ons.due_between? date_range_missing_due_on)
+        expect(due_ons.between Date.new(2013, 4, 4)..Date.new(2013, 5, 2))
           .to be_empty
-      end
-
-      def date_range_covering_due_on
-        Date.new(2013, 4, 4)..Date.new(2013, 5, 5)
-      end
-
-      def date_range_missing_due_on
-        Date.new(2013, 4, 4)..Date.new(2013, 5, 2)
       end
     end
 
@@ -111,7 +103,7 @@ describe DueOns, :ledgers, type: :model do
           expect(ChargeCycle.first.due_ons.size).to eq(12)
         end
 
-        it 'chages to different monthly' do
+        it 'changes to different monthly' do
           cycle = charge_cycle_monthly_create day: 2, prepare: true
           cycle.due_ons[0].update day: 3
           cycle.save!

@@ -43,7 +43,7 @@ class Charge < ActiveRecord::Base
   #                  associated account. Empty array if nothing billed.
   def coming billing_period
     return [] if dormant
-    allowed_due_dates(billing_period).map do |billed_on|
+    allowed_dates(billing_period).map do |billed_on|
       make_chargeable(billed_on) unless debits.created_on? billed_on
     end.compact
   end
@@ -70,8 +70,8 @@ class Charge < ActiveRecord::Base
     !empty?
   end
 
-  def allowed_due_dates billing_period
-    charge_cycle.due_between?(billing_period) & charge_active_epoch.to_a
+  def allowed_dates billing_period
+    charge_cycle.between(billing_period) & charge_active_epoch.to_a
   end
 
   # The years, dates, a charge is active
