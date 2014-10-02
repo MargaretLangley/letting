@@ -81,9 +81,9 @@ module DB
     describe 'errors' do
       context 'no property' do
         it 'fails if property does not exist' do
-          expect { import_charge row }
-          .to raise_error ActiveRecord::RecordNotFound,
-                          'Property human_ref: 2002 - Not found'
+          expect($stdout).to receive(:puts)
+            .with /Property human_ref: 2002 - Not found/
+          import_charge row
         end
       end
     end

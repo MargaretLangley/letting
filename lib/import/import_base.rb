@@ -44,7 +44,7 @@ module DB
           import_row if allowed?
           show_running index
         rescue => e
-          p "Exception: #{e.message}"
+          puts "Exception: #{e.message}"
           next
         end
       end

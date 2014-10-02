@@ -33,10 +33,10 @@ module DB
     describe 'errors' do
       it 'double import raises error' do
         property_create human_ref: 89, account: account_new(charge: charge_new)
-
+        expect($stdout).to receive(:puts)
+                 .with /Import Process for DB::ImportPayment is not idempotent./
         ImportPayment.import parse credit_row human_ref: 89
-        expect { ImportPayment.import parse credit_row(human_ref: 89) }
-          .to raise_error NotIdempotent
+        ImportPayment.import parse credit_row(human_ref: 89)
       end
     end
 
