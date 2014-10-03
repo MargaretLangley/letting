@@ -59,6 +59,7 @@ module DB
     # that the charge are invoiced - allowing a charge_cycle matching.
     def day_months
       return create_monthly_dates day(1) if monthly?
+      return mid_term_day_months if charged_in_id == 3
       day_months = []
       1.upto(maximum_dates) do |index|
         break if empty_due_on? day(index), month(index)
@@ -87,6 +88,14 @@ module DB
 
     def create_monthly_dates day_of_the_month
       (1..12).each.map { |month| [day_of_the_month, month] }
+    end
+
+    # Legacy data defined charged_in Mid-Term to override the meaning of
+    # due-dates. The due dates then became the billing period range.
+    # This returns the meaning of the due_dates to be the same for mid-term
+    # as any other charge. (DueDate is the date which a charge becomes due)
+    def mid_term_day_months
+      [[25, 3], [29, 9]]
     end
 
     def maximum_dates

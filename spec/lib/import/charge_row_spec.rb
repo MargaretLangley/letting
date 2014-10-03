@@ -40,7 +40,8 @@ module DB
 
       describe '#charged_in_id' do
         it 'returns valid id' do
-          expect(ChargeRow.new(parse_line charge_row(charged_in: 0)).charged_in_id)
+          row = charge_row(charged_in: 0)
+          expect(ChargeRow.new(parse_line row).charged_in_id)
             .to eq 1
         end
 
@@ -48,6 +49,12 @@ module DB
         it 'overrides when charge must be in advance' do
           row = ChargeRow.new parse_line charge_row(code: 'Ins', charged_in: 0)
           expect(row.charged_in_id).to eq 2
+        end
+
+        it 'overrides due_on when charged_in is Mid-term' do
+          row = charge_row charged_in: 'M'
+          expect(ChargeRow.new(parse_line row).day_months)
+            .to eq [[25, 3], [29, 9]]
         end
 
         it 'errors on invalid' do

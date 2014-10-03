@@ -33,7 +33,6 @@ module DB
     #
     def self.import(contents, range: 1..100_000, patch: nil)
       new(contents, range, patch).import_loop
-      puts ''
     end
 
     # Imports, builds or assigns application objects
