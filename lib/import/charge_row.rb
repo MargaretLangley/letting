@@ -26,6 +26,10 @@ module DB
       @source = row
     end
 
+    def human_ref
+      @source[:human_ref].to_i
+    end
+
     def charge_type
       charge = ChargeCode.to_string charge_code
       fail ChargeCodeUnknown, charge_code_message, caller unless charge
@@ -83,10 +87,6 @@ module DB
 
     def create_monthly_dates day_of_the_month
       (1..12).each.map { |month| [day_of_the_month, month] }
-    end
-
-    def human_ref
-      @source[:human_ref]
     end
 
     def maximum_dates

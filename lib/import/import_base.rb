@@ -31,7 +31,7 @@ module DB
     # range    - the rows to be imported, default nil
     # patch    - a collection of corrections to the contents, default nil
     #
-    def self.import(contents, range: nil, patch: nil)
+    def self.import(contents, range: 1..100_000, patch: nil)
       new(contents, range, patch).import_loop
     end
 
@@ -58,7 +58,6 @@ module DB
     end
 
     def allowed?
-      return true if @range.nil?
       !filtered?
     end
 

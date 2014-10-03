@@ -44,14 +44,20 @@ module DB
     end
 
     def find_model model_class
-      model_class.where human_ref: row[:human_ref]
+      model_class.where human_ref: row.human_ref
     end
 
     # true filters
     # false allows
     #
     def filtered?
-      @range.exclude? row[:human_ref].to_i
+      return true if @range.exclude? row.human_ref
+      if row.amount == 0
+        warn "Filtering charge with amount 0 for Property: #{row.human_ref} "\
+             "charge_type: #{row.charge_type}"
+        return true
+      end
+      false
     end
 
     def model_assignment
