@@ -32,7 +32,7 @@ module DB
     end
 
     def human_ref
-      @source[:human_ref]
+      @source[:human_ref].to_i
     end
 
     def charge_code
@@ -48,7 +48,7 @@ module DB
     # credit amounts are imported (from acc_items) without a sign
     #
     def amount
-      @source[:credit]
+      @source[:credit].to_f
     end
 
     def account_id

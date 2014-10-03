@@ -31,7 +31,7 @@ module DB
     end
 
     def human_ref
-      @source[:human_ref]
+      @source[:human_ref].to_i
     end
 
     def charge_code

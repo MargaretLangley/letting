@@ -21,7 +21,7 @@ module DB
       %(#{human_ref}, #{charge_code}, #{date}, Insurance, #{amount}, 0, 0)
     end
 
-    it('human_ref') { expect(row(human_ref: 9).human_ref).to eq '9' }
+    it('human_ref') { expect(row(human_ref: 9).human_ref).to eq 9 }
     it('charge_code') { expect(row(charge_code: 'GR').charge_code).to eq 'GR' }
     it 'on_date' do
       expect(row(date: '2012-03-20 00:00:00').on_date)
