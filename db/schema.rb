@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140920193251) do
+ActiveRecord::Schema.define(version: 20140930053829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -171,6 +171,16 @@ ActiveRecord::Schema.define(version: 20140920193251) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "letters", force: true do |t|
+    t.integer  "invoice_id", null: false
+    t.integer  "letter_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "letters", ["invoice_id"], name: "index_letters_on_invoice_id", using: :btree
+  add_index "letters", ["letter_id"], name: "index_letters_on_letter_id", using: :btree
 
   create_table "notices", force: true do |t|
     t.integer  "template_id"
