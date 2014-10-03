@@ -8,7 +8,7 @@ require_relative '../../lib/import/errors'
 # Identifies a collection of due_ons as a specific ChargeCycle.
 #
 # During the import of the legacy acc_info file the import_charge code presents
-# ChargeRow with a number of reoccuring dates (day and month that occur every
+# ChargeRow with a number of reoccurring dates (day and month that occur every
 # year) - these dates are converted into an id that matches a charge cycle. This
 # is the class responsible for the conversion.
 #
@@ -23,7 +23,7 @@ class ChargeCycleMatcher
   end
 
   def id
-    return puts 'ChargeCycle table has no records' unless ChargeCycle.any?
+    return warn 'ChargeCycle table has no records' unless ChargeCycle.any?
     found_structure = find
     fail DB::ChargeCycleUnknown unless found_structure
     found_structure.id

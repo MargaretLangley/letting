@@ -8,7 +8,7 @@ module DB
   # The charge import process takes rows of acc_info.csv and creates database
   # rows in the charges table. This objects takes fields from charge_row and
   # converts them into the ChargedInIds. There are a number of rules
-  # used by the legacy app to decide this and this objects wrapps them up.
+  # used by the legacy application to decide this and this objects wraps them up.
   #
   #####
   #
