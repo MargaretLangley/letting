@@ -76,8 +76,8 @@ module DB
 
     describe 'errors with no property' do
       it 'fails if property does not exist' do
-        expect($stdout).to receive(:puts)
-          .with /Property human_ref: 2002 - Not found/
+        expect { warn 'Property human_ref: 2002 - Not found' }
+          .to output.to_stderr
         import_charge row human_ref: 2002
       end
     end

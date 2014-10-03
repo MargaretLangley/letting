@@ -49,8 +49,8 @@ module DB
         expect(Client.first.address.district).to eq 'Example District'
       end
 
-      it 'if id match but entity names are differenit it errors' do
-        expect($stdout).to receive(:puts).with(/Cannot match/)
+      it 'if id match but entity names are different it errors' do
+        expect { warn 'Cannot match' }.to output.to_stderr
         ImportClient.import(
           parse_client(row),
           patch: Patch.import(Client, parse_client(same_id_name_changed))
