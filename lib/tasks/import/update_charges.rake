@@ -1,4 +1,4 @@
-require_relative '../../import/update_charge'
+require_relative '../../import/charges/update_charge'
 
 STDOUT.sync = true
 

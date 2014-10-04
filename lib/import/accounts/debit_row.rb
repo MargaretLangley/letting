@@ -1,6 +1,6 @@
-require_relative '../modules/method_missing'
-require_relative 'charge_code'
-require_relative 'errors'
+require_relative '../../modules/method_missing'
+require_relative '../charge_code'
+require_relative '../errors'
 require_relative 'accounting_row'
 
 module DB

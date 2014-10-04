@@ -1,4 +1,4 @@
-require_relative 'charge_code'
+require_relative '../charge_code'
 
 module DB
   ####

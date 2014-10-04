@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative '../../../lib/import/charge_values'
+require_relative '../../../lib/import/charges/charge_values'
 # rubocop: disable Style/Documentation
 
 module DB

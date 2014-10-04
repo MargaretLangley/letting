@@ -1,4 +1,4 @@
-require_relative 'import_base'
+require_relative '../import_base'
 require_relative 'charge_values'
 require_relative 'day_month'
 require_relative 'charge_row'

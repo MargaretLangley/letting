@@ -1,4 +1,4 @@
-require_relative 'import_base'
+require_relative '../import_base'
 require_relative 'debit_row'
 
 module DB

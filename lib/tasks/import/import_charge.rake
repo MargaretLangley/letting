@@ -1,7 +1,7 @@
 require 'csv'
 require_relative '../../import/file_import'
 require_relative '../../import/file_header'
-require_relative '../../import/import_charge'
+require_relative '../../import/charges/import_charge'
 
 STDOUT.sync = true
 

@@ -1,7 +1,7 @@
 require 'csv'
 require 'rails_helper'
 require_relative '../../../lib/import/file_header'
-require_relative '../../../lib/import/account_row'
+require_relative '../../../lib/import/accounts/account_row'
 
 ####
 # AccountRow Spec

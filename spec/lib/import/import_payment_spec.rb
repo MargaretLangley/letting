@@ -1,7 +1,7 @@
 require 'csv'
 require 'rails_helper'
 require_relative '../../../lib/import/file_header'
-require_relative '../../../lib/import/import_payment'
+require_relative '../../../lib/import/accounts/import_payment'
 # rubocop: disable Style/Documentation
 
 module DB

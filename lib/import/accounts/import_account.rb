@@ -1,4 +1,4 @@
-require_relative 'import_base'
+require_relative '../import_base'
 require_relative 'account_row'
 require_relative 'import_balance'
 require_relative 'import_debit'

@@ -1,5 +1,3 @@
-require_relative 'charge_code'
-
 module DB
   # AccountingRow
   # Provides a file row with database related information.

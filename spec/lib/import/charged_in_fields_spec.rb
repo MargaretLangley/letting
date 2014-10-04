@@ -1,6 +1,6 @@
 require 'csv'
 require 'rails_helper'
-require_relative '../../../lib/import/charged_in_fields'
+require_relative '../../../lib/import/charges/charged_in_fields'
 
 ####
 #

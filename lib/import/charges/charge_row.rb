@@ -1,7 +1,7 @@
-require_relative 'charge_code'
-require_relative 'errors'
+require_relative '../../modules/method_missing'
+require_relative '../charge_code'
+require_relative '../errors'
 require_relative 'charged_in_fields'
-require_relative '../modules/method_missing'
 # rubocop: disable Rails/Output
 # rubocop: disable Style/MethodCallParentheses
 

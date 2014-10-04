@@ -1,5 +1,5 @@
+require_relative '../import_base'
 require_relative 'credit_row'
-require_relative 'import_base'
 
 module DB
   ####
