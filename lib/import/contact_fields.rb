@@ -7,7 +7,7 @@ module DB
   ####
   #
   # ContactFields
-  # Wrapps around an imported row of data
+  # Wraps around an imported row of data
   #
   # Called during the importing of any entity - property, agent
   # and client.

@@ -53,7 +53,7 @@ module DB
     # If I need an end date for a charge ending within a year
     #
     # def update_recently_stopped_charges
-    #   # It's a hack while only a few recently stoped charges
+    #   # It's a hack while only a few recently stopped charges
     #   # need an end date added to them.
     #   property = Property.find_by(human_ref: 6531)
     #   return unless property

@@ -12,7 +12,7 @@ module DB
   # CSV rows are presented as arrays indexed by symbols - example 'client_ref'
   # PropertyRow wraps up one CSV row and provides an interface to
   # ImportProperty. ImportProperty is then only concerned with building and
-  # assigning Propertie classes and not how to get this information.
+  # assigning Property classes and not how to get this information.
   #
   ####
   #

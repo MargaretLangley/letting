@@ -6,7 +6,7 @@ module DB
   #
   # ImportAgent
   #
-  # Imports agents (shipping addreses for properties)
+  # Imports agents (shipping address for properties)
   #
   # Uses ImportBase and is called during the import process and at no
   # other time. ImportAgent reads in Address2.csv information. It expect that

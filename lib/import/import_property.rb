@@ -12,7 +12,7 @@ module DB
   #
   # Imported data is read by FileImport and presented to ImportProperty as
   # array of arrays. The base classj, ImportBase, handles the data source
-  # and iterrates through the array in a loop. ImportProperty overrides
+  # and iterates through the array in a loop. ImportProperty overrides
   # the assignment but otherwise the base gets a model, assigns attributes
   # and saves the model to the database for all rows.
   #

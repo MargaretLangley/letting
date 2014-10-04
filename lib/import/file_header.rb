@@ -11,7 +11,7 @@ module DB
   # mapped to the headers supplied to FileImport by calls to this class.
   #
   # import_XXX files such as import_client - reads in a row of data at a time.
-  # The client then assigns it's attributes by deferencing the array with a
+  # The client then assigns it's attributes by dereferencing the array with a
   # symbol the same name as the attributes.
   #
   ####
