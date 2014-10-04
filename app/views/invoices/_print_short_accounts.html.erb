@@ -1,0 +1,52 @@
+<% dotted_line = "----------" %>
+<% total = 0 %>
+<div class='col-12-12 grid-row'>
+  &nbsp;
+</div>
+
+<% if arrears != 0 %>
+  <div class='col-3-12 grid-row'>
+    &nbsp;
+  </div>
+  <div class='col-4-12'>
+    Arrears
+  </div>
+  <div class='col-2-12 r-align'>
+    <%= number_with_precision(arrears,precision: 2) %>
+    <% total = arrears %>
+  </div>
+<% end %>
+
+<% items.each do |item| %>
+
+  <div class='col-3-12 grid-row'>
+  &nbsp;
+  </div>
+  <div class='col-4-12'>
+     <%= item.charge_type %>
+     <%= l item.period_first %>
+     to
+     <%= l item.period_last %>
+  </div>
+  <div class='col-2-12 r-align'>
+    <% total = total + item.amount %>
+   <%= number_with_precision(item.amount,precision: 2) %>
+  </div>
+<% end %>
+
+<div class='col-7-12 grid-row'>
+  &nbsp;
+</div>
+<div class='col-2-12 r-align'>
+   <%= dotted_line %>
+</div>
+
+<div class='col-3-12 grid-row'>
+  &nbsp;
+</div>
+<div class='col-4-12'>
+  Total now Owing
+</div>
+<div class='col-2-12 r-align'>
+  <%= number_with_precision(total,precision: 2) %>
+</div>

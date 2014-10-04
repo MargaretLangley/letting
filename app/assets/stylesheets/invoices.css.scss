@@ -8,24 +8,35 @@ screen requirements hidden from print*/
 
   .inv-advice{
     font-weight: normal;
-    font-size: 12px;
+    font-size: 12pt;
   }
 
   .inv-advice-bold{
     font-weight: bold;
-    font-size: 12px;
+    font-size: 12pt;
   }
 }
 
+  @mixin inv-heading{
+    text-align:center;
+    font-weight: bold;
+  }
+
+  .h1print{
+    @include inv-heading;
+    font-size: 20pt;
+  }
+
+ .res-longlease{
+    @include inv-heading;
+    font-size: 16pt;
+  }
+
 @media screen{
 
-  .h1print,
   .hgh,
   .inv-add,
-  .inv-bold,
   .print-only,
-  .res-longleas
-  .sissors,
   .vi{
     display: none;
   }
@@ -34,7 +45,6 @@ screen requirements hidden from print*/
     margin-left: 60px;
     font-size: 18px;
   }
-
 }
 
 @media print{
@@ -78,13 +88,11 @@ screen requirements hidden from print*/
     page-break-after: always;
   }
 
-
   /* This calls new page for printer */
 
   h2{
     break-before: always;
   }
-
 
   /* Invoice Heading fonts - centralized */
 
@@ -96,15 +104,7 @@ screen requirements hidden from print*/
   .h1print{
     @include inv-heading;
     font-size: 20px;
-    }
-
-   /* Residential .. longlease used for heading 'Notice to longleaseholders ....' */
-
-  .res-longlease{
-    @include inv-heading;
-    font-size: 16pt;
    }
-
 
 /* Invoice Fonts - not centralized */
 
@@ -117,7 +117,6 @@ screen requirements hidden from print*/
     font-weight: bold;
     font-size: 14px;
   }
-
 
   /* used for sissors line above return slip */
 
@@ -170,5 +169,4 @@ screen requirements hidden from print*/
     margin-left: 2cm;
     font-size: 14pt;
   }
-
 }
