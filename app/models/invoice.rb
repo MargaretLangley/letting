@@ -23,6 +23,8 @@
 #
 class Invoice < ActiveRecord::Base
   belongs_to :invoicing
+  has_many :letters
+  has_many :templates, through: :letters
   has_many :products
   validates :products,
             :invoice_date,

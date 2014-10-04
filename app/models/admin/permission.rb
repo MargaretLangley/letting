@@ -40,6 +40,7 @@ class Permission < Struct.new(:user)
        debits
        errors
        invoicings
+       invoices
        properties
        payments
        search
