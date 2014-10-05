@@ -43,6 +43,7 @@ module DB
           import_row if allowed?
           show_running index
         rescue => e
+          puts
           warn "Exception: #{e.message}"
           next
         end

@@ -81,7 +81,8 @@ module DB
     end
 
     def period_message
-      "Period Unknown: Property #{human_ref} charge_code: #{charge_code}"
+      "Period Unknown: Property #{human_ref} charge_code: #{charge_code} "\
+      "on_date: #{on_date}"
     end
 
     private

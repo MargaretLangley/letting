@@ -6,7 +6,7 @@ task :patch_clients do |_task, _args|
   logger.info 'patch'
   if File.exist?('import_data/patch/clients_patch.csv')
 
-    FileUtils.mkdir_p 'import_data/patched_legacy/'
+    FileUtils.mkdir_p 'import_data/staging/'
     patched = clients_file.map! do |client|
       matched = patch_clients.find do |patch_client|
         client[:human_ref] == patch_client[:human_ref]
@@ -18,7 +18,7 @@ task :patch_clients do |_task, _args|
       end
     end
 
-    CSV.open 'import_data/patched_legacy/patched_clients.csv',
+    CSV.open 'import_data/staging/staging_clients.csv',
              'w',
              write_headers: true,
              headers: DB::FileHeader.client do |csv_object|

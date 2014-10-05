@@ -14,9 +14,9 @@ namespace :db do
     end
 
     def patched_clients
-      DB::FileImport.to_a 'patched_clients',
+      DB::FileImport.to_a 'staging_clients',
                           headers: DB::FileHeader.client,
-                          location: 'import_data/patched_legacy'
+                          location: 'import_data/staging'
     end
   end
 end

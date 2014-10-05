@@ -19,6 +19,8 @@ namespace :db do
     # Stripped out for now but when in parallel with live system. nope
     logger.info 'db:truncate_all'
     Rake::Task['db:truncate_all'].execute
+    logger.info 'Patch legacy code for staging'
+    Rake::Task['patch'].invoke(options[:test])
     logger.info 'db:import basic system files'
     Rake::Task['db:import:users'].invoke(options[:test])
     Rake::Task['db:import:due_ons'].invoke
@@ -41,6 +43,7 @@ namespace :db do
     puts
     logger.info 'db:import::accounts'
     Rake::Task['db:import:accounts'].invoke(human_ref_range)
+    puts
     logger.info 'db:import::update_charges'
     Rake::Task['db:import:update_charges'].invoke
     exit 0

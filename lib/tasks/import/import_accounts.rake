@@ -10,14 +10,14 @@ namespace :db do
 
     desc 'Import accounting information from CSV file'
     task :accounts, [:range] => :environment do |_task, args|
-      DB::ImportAccount.import accounts_file,
+      DB::ImportAccount.import staging_accounts,
                                range: Rangify.from_str(args.range).to_i
     end
 
-    def accounts_file
-      DB::FileImport.to_a 'acc_items',
+    def staging_accounts
+      DB::FileImport.to_a 'staging_acc_items',
                           headers: DB::FileHeader.account,
-                          location: 'import_data/legacy'
+                          location: 'import_data/staging'
     end
   end
 end

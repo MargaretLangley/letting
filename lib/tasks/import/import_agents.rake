@@ -11,14 +11,14 @@ namespace :db do
 
     desc 'Import agent addresses data from CSV file'
     task :agents, [:range] => :environment do |_task, args|
-      DB::ImportAgent.import patched_agent_file,
+      DB::ImportAgent.import staging_agents,
                              range: Rangify.from_str(args.range).to_i
     end
 
-    def patched_agent_file
-      DB::FileImport.to_a 'patched_address2',
+    def staging_agents
+      DB::FileImport.to_a 'staging_address2',
                           headers: DB::FileHeader.agent,
-                          location: 'import_data/patched_legacy'
+                          location: 'import_data/staging'
     end
   end
 end

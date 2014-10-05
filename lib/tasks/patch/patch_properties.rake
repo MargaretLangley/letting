@@ -6,7 +6,7 @@ task :patch_properties do |_task, _args|
   logger.info 'patch'
   if File.exist?('import_data/patch/properties_patch.csv')
 
-    FileUtils.mkdir_p 'import_data/patched_legacy/'
+    FileUtils.mkdir_p 'import_data/staging/'
     patched = properties_file.map! do |property|
       matched = patch_properties.find do |patch_property|
         property[:human_ref] == patch_property[:human_ref]
@@ -18,7 +18,7 @@ task :patch_properties do |_task, _args|
       end
     end
 
-    CSV.open 'import_data/patched_legacy/patched_properties.csv',
+    CSV.open 'import_data/staging/staging_properties.csv',
              'w',
              write_headers: true,
              headers: DB::FileHeader.property do |csv_object|

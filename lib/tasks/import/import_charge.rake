@@ -11,17 +11,17 @@ namespace :db do
     desc 'Import clients data from CSV file'
     task :charges, [:range] => :environment do |_task, args|
       range = Rangify.from_str(args.range).to_i
-      DB::ImportCharge.import charges_file('acc_info'), range: range
-      DB::ImportCharge.import patch_charges('acc_info_deleted'), range: range
+      DB::ImportCharge.import staging_charges, range: range
+      DB::ImportCharge.import patch_charges, range: range
     end
 
-    def charges_file file_name
-      DB::FileImport.to_a file_name,
+    def staging_charges
+      DB::FileImport.to_a 'staging_acc_info',
                           headers: DB::FileHeader.charge,
-                          location: 'import_data/legacy'
+                          location: 'import_data/staging'
     end
 
-    def patch_charges _file_name
+    def patch_charges
       DB::FileImport.to_a 'acc_info_deleted',
                           headers: DB::FileHeader.charge,
                           location: 'import_data/patch'

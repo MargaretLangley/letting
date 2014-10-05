@@ -21,7 +21,7 @@ namespace :db do
     desc 'Import properties data from CSV file'
     task :properties, [:range] => :environment do |_task, args|
       DB::ImportProperty.import \
-        patched_properties,
+        staging_properties,
         range: Rangify.from_str(args.range).to_i
     end
 
@@ -29,10 +29,10 @@ namespace :db do
     # Elements of the array are indexed by symbols taken
     # from the row header.
     #
-    def patched_properties
-      DB::FileImport.to_a 'patched_properties',
+    def staging_properties
+      DB::FileImport.to_a 'staging_properties',
                           headers: DB::FileHeader.property,
-                          location: 'import_data/patched_legacy'
+                          location: 'import_data/staging'
     end
   end
 end
