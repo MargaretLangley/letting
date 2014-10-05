@@ -39,14 +39,14 @@ module DB
     #
     def import_loop
       @contents.each_with_index do |file_row, index|
-        begin
+        # begin
           self.row = file_row
           import_row if allowed?
           show_running index
-        rescue => e
-          warn "Exception: #{e.message}"
-          next
-        end
+        # rescue => e
+          # warn "Exception: #{e.message}"
+          # next
+        # end
       end
     end
 
