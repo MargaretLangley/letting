@@ -18,7 +18,7 @@ module DB
   # symbols matching the attributes of the models - allowing mass assignment
   # where appropriate.
   #
-  # The symbols are set in the headers intiailizer
+  # The symbols are set in the headers initializer
   #
   # In short the remaining import system has a class for each model and uses
   # the shared import_base for much of the work.
