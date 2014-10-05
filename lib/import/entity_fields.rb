@@ -16,8 +16,8 @@ module DB
   #
   class EntityFields
     def initialize title, initials, name
-      @title = top_punctuation(title).strip
-      @initials = initials.strip
+      @title = top_punctuation(title.to_s).strip
+      @initials = initials.to_s.strip
       @name = name ? tail_punctuation(name).strip : ''
     end
 
@@ -51,12 +51,12 @@ module DB
       }
     end
 
-    def top_punctuation s
-      s.sub(/^[,&]?/, '')
+    def top_punctuation sanitize
+      sanitize.sub(/^[,&]?/, '')
     end
 
-    def tail_punctuation s
-      s.sub(/[,&]?$/, '')
+    def tail_punctuation sanitize
+      sanitize.sub(/[,&]?$/, '')
     end
   end
 end
