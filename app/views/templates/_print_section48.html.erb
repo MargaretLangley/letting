@@ -1,11 +1,14 @@
 <% dotted_line = "-------------" %>
-<div class='inv-advice grid-row'>
- <br>
+<p>
+  &nbsp;
+</p>
+<div class='col-1-12 grid-row'>
+  &nbsp;
+</div>
+<div class='inv-advice col-11-12'>
   We <%= template.invoice_name.upcase %> ON BEHALF OF YOUR LANDLORD
   <br>
-  <%= client.entities.full_name %>
-
-  <%= render 'addresses/view_on_one_line', addressee: client %>
+  <%= client %>
   <br>
   <%= template.advice1 %>
   <%= template.address.road_no %>
@@ -16,6 +19,6 @@
   <p>
     <%= template.advice2 %>
   </p>
-</div>
   <span class='sissors'>&#9985;<%= "#{dotted_line}#{dotted_line}#{dotted_line}#{dotted_line}" %></span>
   <br>
+</div>

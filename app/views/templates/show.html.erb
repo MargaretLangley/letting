@@ -7,7 +7,7 @@
   <%= link_to fa_icon('edit'), edit_template_path(@template), class: 'simple-button float-right', title: 'Edit' %>
 </div>
 
-Sheet Number <%= @template.id %>
+Template Number <%= @template.id %>
 
 <% if @template.id == 1 %>
   <%= render '/templates/page1', template: @template %>
