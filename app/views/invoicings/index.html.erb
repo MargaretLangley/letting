@@ -12,7 +12,7 @@
     End Date
   </div>
   <div class='col-1-6 grid-header no-print r-align'>
-    Print
+    Action
   </div>
 
 <% @invoicings.each do |invoicing| %>
@@ -28,9 +28,8 @@
       </div>
       <nav class='col-1-6 no-print r-align'>
         <%= link_to fa_icon('file lg'), invoicing_path(invoicing), title: 'View', class: 'r-pad icon-large' %>
-        <%= link_to fa_icon('print lg'), '#', class: 'js-print-window simple-button'%>
-      </nav>
+
+        </nav>
     </div>
   <% end %>
 </div>
-Test Print

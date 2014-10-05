@@ -3,6 +3,8 @@
 <div class='grid shell'>
 
   <div class='col-1-3 vertical-spacer no-print grid-header r-align'>
+    <%= link_to 'Users', users_path %>
+
     Property Range
   </div>
   <div class='col-1-6 grid-header no-print'>
@@ -12,26 +14,47 @@
     End Date
   </div>
   <div class='col-1-6 grid-header no-print r-align'>
-    Print
+    Action
   </div>
 
   <div class='table-row'%>
     <div class='col-1-3 vertical-spacer no-print inherit-row  r-align grid-row'>
-     <%= @invoicing.property_range %>
+      <%= @invoicing.property_range %>
     </div>
-      <div class='col-1-6 no-print inherit-row'>
-     <%= l @invoicing.start_date %>
+    <div class='col-1-6 no-print inherit-row'>
+      <%= l @invoicing.start_date %>
     </div>
     <div class='col-1-6 no-print inherit-row r-align'>
       <%= l @invoicing.end_date %>
     </div>
-    <nav class='col-1-6 no-print r-align'>
-      <%= link_to fa_icon('print lg'), '#', class: 'js-print-window simple-button'%>
-    </nav>
-  </div>
-  <hr class='faded'>
-  <%= render partial: 'invoices_heading' %>
+      <nav class='col-1-6 no-print r-align'>
+        <%= link_to fa_icon('print lg'), '#', class: 'js-print-window simple-button'%>
+      </nav>
+    </div>
 
-  <%= render @invoicing.invoices %>
+    <hr class='faded'>
+    <%= render partial: 'invoices/invoices_heading' %>
+    <% @invoicing.invoices.each do |invoice| %>
+      <div>
+        <% invoice_decorator = InvoiceDecorator.new(invoice) %>
+      <div class='grid-row col-3-24 vertical-spacer r-align'>
+        <%= invoice_decorator.property_ref %>
+      </div>
+      <div class='col-5-24 vertical-spacer'>
+        <%= invoice_decorator.billing_agent %>
+      </div>
+      <div class='col-5-24 vertical-spacer'>
+        <%= invoice_decorator.billing_first_address_line %>
+      </div>
+      <div class='col-8-24 vertical-spacer'>
+        <%= invoice_decorator.products_display %>
+      </div>
+      <div class='col-3-24 vertical-spacer'>
+             <%= link_to fa_icon('print lg'), invoice_path(invoice), title: 'Print', class: 'simple_button' %>
+
+      </div>
+    <% end %>
+  </div>
 </div>
+
 
