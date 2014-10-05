@@ -18,8 +18,8 @@ module DB
   ####
   #
   class ImportUser < ImportBase
-    def initialize contents, range, patch
-      super User, contents, range, patch
+    def initialize contents, range
+      super User, contents, range
     end
 
     def find_model model_class

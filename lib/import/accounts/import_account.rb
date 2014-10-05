@@ -22,8 +22,8 @@ module DB
   ####
   #
   class ImportAccount < ImportBase
-    def initialize  contents, range, patch
-      super Property, contents, range, patch
+    def initialize  contents, range
+      super Property, contents, range
     end
 
     SPECIALIZED_CLASSES = {

@@ -26,8 +26,8 @@ module DB
   class ImportCharge < ImportBase
     MONTHS_IN_YEAR = 12
 
-    def initialize contents, range, patch
-      super Charge, contents, range, patch
+    def initialize contents, range
+      super Charge, contents, range
     end
 
     def row= row

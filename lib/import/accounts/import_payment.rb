@@ -20,8 +20,8 @@ module DB
   ####
   #
   class ImportPayment < ImportBase
-    def initialize contents, range, patch
-      super Payment, contents, range, patch
+    def initialize contents, range
+      super Payment, contents, range
     end
 
     def row= row

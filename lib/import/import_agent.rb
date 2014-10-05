@@ -16,8 +16,8 @@ module DB
   ####
   #
   class ImportAgent < ImportBase
-    def initialize  contents, range, patch
-      super Agent, contents, range, patch
+    def initialize  contents, range
+      super Agent, contents, range
     end
 
     def model_prepared

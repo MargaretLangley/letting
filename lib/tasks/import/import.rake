@@ -32,10 +32,13 @@ namespace :db do
     Rake::Task['db:import:clients'].execute
     logger.info 'db:import::properties'
     Rake::Task['db:import:properties'].invoke(human_ref_range)
+    puts
     logger.info 'db:import::agents'
     Rake::Task['db:import:agents'].invoke(human_ref_range)
+    puts
     logger.info 'db:import::charges'
     Rake::Task['db:import:charges'].invoke(human_ref_range)
+    puts
     logger.info 'db:import::accounts'
     Rake::Task['db:import:accounts'].invoke(human_ref_range)
     logger.info 'db:import::update_charges'

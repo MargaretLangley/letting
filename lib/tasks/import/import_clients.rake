@@ -1,7 +1,6 @@
 require 'csv'
 require_relative '../../import/file_import'
 require_relative '../../import/file_header'
-require_relative '../../../lib/import/patch'
 require_relative '../../import/import_client'
 
 STDOUT.sync = true

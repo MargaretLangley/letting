@@ -11,8 +11,8 @@ module DB
   ####
   #
   class ImportClient < ImportBase
-    def initialize  contents, range, patch
-      super Client, contents, range, patch
+    def initialize  contents, range
+      super Client, contents, range
     end
 
     def model_prepared

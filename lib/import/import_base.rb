@@ -29,31 +29,29 @@ module DB
     # contents - data to be imported - array of arrays indexed
     #            by row no and header symbols.
     # range    - the rows to be imported, default nil
-    # patch    - a collection of corrections to the contents, default nil
     #
-    def self.import(contents, range: 1..100_000, patch: nil)
-      new(contents, range, patch).import_loop
+    def self.import(contents, range: 1..100_000)
+      new(contents, range).import_loop
     end
 
     # Imports, builds or assigns application objects
     #
     def import_loop
       @contents.each_with_index do |file_row, index|
-        # begin
+        begin
           self.row = file_row
           import_row if allowed?
           show_running index
-        # rescue => e
-          # warn "Exception: #{e.message}"
-          # next
-        # end
+        rescue => e
+          warn "Exception: #{e.message}"
+          next
+        end
       end
     end
 
     def import_row
       model_prepared
       model_assignment
-      model_patched if @patch
       model_to_save.save || show_error
     end
 
@@ -67,19 +65,14 @@ module DB
 
     protected
 
-    def initialize klass, contents, range, patch
+    def initialize klass, contents, range
       @klass = klass
       @contents = contents
       @range = range
-      @patch = patch
     end
 
     def model_prepared
       @model_to_assign = find_model(@klass).first_or_initialize
-    end
-
-    def model_patched
-      @patch.patch_model @model_to_assign
     end
 
     private
