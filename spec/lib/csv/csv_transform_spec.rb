@@ -2,37 +2,36 @@ require_relative '../../../lib/csv/csv_transform'
 # rubocop: disable Style/Documentation
 
 module DB
-  describe CSVTransform, :import do
+  describe CSVTransform, :import, :stage do
 
-    context 'to_a' do
+    describe 'to_a' do
       it 'errors if file unknown' do
-        expect { CSVTransform.to_a 'client' }.to raise_error Errno::ENOENT
+        expect { warn 'Warning: client is missing.' }
+          .to output.to_stderr
+        CSVTransform.new file_name: 'client'
       end
 
       it 'opens valid file' do
-        output = CSVTransform.to_a 'open_test',
-                                   location: file_location
+        output = CSVTransform.new(file_name: file_name).to_a
         expect(output.length).to eq 1
       end
     end
 
-    context 'arguments' do
-      it 'sets the file location' do
-        expect(CSVTransform.new(file_location, 0, true).location)
-          .to eq 'spec/fixtures/import_data'
+    describe 'arguments' do
+      it 'sets the file_name' do
+        expect(CSVTransform.new(file_name: file_name).file_name)
+          .to eq 'spec/fixtures/import_data/open_test.csv'
       end
 
       it 'drops rows' do
-        output = CSVTransform.to_a 'open_test',
-                                   location: file_location,
-                                   drop_rows: 1
+        output = CSVTransform.new(file_name: file_name,
+                                  drop_rows: 1).to_a
         expect(output.length).to eq 1
       end
 
       it 'overwrites headers' do
-        output = CSVTransform.to_a 'open_test',
-                                   headers: %w(one line),
-                                   location: file_location
+        output = CSVTransform.new(headers: %w(one line),
+                                  file_name: file_name).to_a
         output.each.first do |row|
           expect(row[:one]).to eq 'two'
           expect(row[:line]).to eq 'lines'
@@ -41,8 +40,8 @@ module DB
 
     end
 
-    def file_location
-      'spec/fixtures/import_data'
+    def file_name
+      'spec/fixtures/import_data/open_test.csv'
     end
   end
 end

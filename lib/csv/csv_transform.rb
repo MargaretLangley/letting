@@ -27,23 +27,23 @@ module DB
   #
   ####
   class CSVTransform
-    attr_reader :location
+    attr_reader :file_name, :headers
 
-    def initialize location, drop_rows, headers
-      @location = location
+    def initialize file_name:,
+                   drop_rows: 1,
+                   headers: true
+      @file_name = file_name
       @drop_rows = drop_rows
       @headers = headers
+      missing_csv_message unless exist?
     end
 
-    def self.to_a filename,
-                  location: 'import_data',
-                  drop_rows: 1,
-                  headers: true
-      new(location, drop_rows, headers).csv_to_arrays filename
+    def exist?
+      File.exist? file_name
     end
 
-    def csv_to_arrays filename
-      CSV.open(get_file(filename),
+    def to_a
+      CSV.open(file_name,
                encoding: 'windows-1251:utf-8',
                headers: @headers,
                header_converters: :symbol,
@@ -51,10 +51,8 @@ module DB
          .read.drop(@drop_rows)
     end
 
-    private
-
-    def get_file filename
-      "#{@location}/#{filename}.csv"
+    def missing_csv_message
+      warn "Warning: CSVTransform message #{file_name} is missing."
     end
   end
 end

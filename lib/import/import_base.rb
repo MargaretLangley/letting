@@ -20,6 +20,7 @@ module DB
   #
   # Errors do not go to logger
   # rubocop: disable Rails/Output
+  # rubocop: disable Metrics/MethodLength
   #
   ####
   #
@@ -113,7 +114,7 @@ module DB
     end
 
     def output_error model
-      puts "human_ref: #{row[:human_ref]} -  #{model.errors.full_messages}"
+      warn "human_ref: #{row[:human_ref]} -  #{model.errors.full_messages}"
     end
   end
 end
