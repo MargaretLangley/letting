@@ -19,8 +19,8 @@ namespace :db do
     # Stripped out for now but when in parallel with live system. nope
     logger.info 'db:truncate_all'
     Rake::Task['db:truncate_all'].execute
-    logger.info 'Patch legacy code for staging'
-    Rake::Task['patch'].invoke(options[:test])
+    logger.info 'Cleanse legacy code for staging'
+    Rake::Task['db:stage'].invoke(options[:test])
     logger.info 'db:import basic system files'
     Rake::Task['db:import:users'].invoke(options[:test])
     Rake::Task['db:import:due_ons'].invoke
