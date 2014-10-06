@@ -1,5 +1,5 @@
 
-class PatchClient
+class StageClient
   attr_reader :input, :patch
   def initialize(input:, patch:)
     @input = input
