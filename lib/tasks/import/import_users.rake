@@ -1,6 +1,6 @@
 # rubocop: disable Metrics/MethodLength
 require 'csv'
-require_relative '../../import/file_import'
+require_relative '../../csv/csv_transform'
 require_relative '../../import/file_header'
 require_relative '../../import/import_user'
 
@@ -23,9 +23,9 @@ namespace :db do
     private
 
     def users_file
-      DB::FileImport.to_a 'users',
-                          headers: DB::FileHeader.user,
-                          location: 'import_data/new'
+      DB::CSVTransform.to_a 'users',
+                            headers: DB::FileHeader.user,
+                            location: 'import_data/new'
     end
 
     def load_test_users

@@ -1,5 +1,5 @@
 require 'csv'
-require_relative '../../import/file_import'
+require_relative '../../csv/csv_transform'
 require_relative '../../import/file_header'
 require_relative '../../import/charges/import_charge'
 
@@ -16,15 +16,15 @@ namespace :db do
     end
 
     def staging_charges
-      DB::FileImport.to_a 'staging_acc_info',
-                          headers: DB::FileHeader.charge,
-                          location: 'import_data/staging'
+      DB::CSVTransform.to_a 'staging_acc_info',
+                            headers: DB::FileHeader.charge,
+                            location: 'import_data/staging'
     end
 
     def patch_charges
-      DB::FileImport.to_a 'acc_info_deleted',
-                          headers: DB::FileHeader.charge,
-                          location: 'import_data/patch'
+      DB::CSVTransform.to_a 'acc_info_deleted',
+                            headers: DB::FileHeader.charge,
+                            location: 'import_data/patch'
     end
   end
 end

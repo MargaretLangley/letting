@@ -33,15 +33,15 @@ task :patch_address2 do |_task, _args|
 end
 
 def address2_file
-  DB::FileImport.to_a 'address2',
-                      headers: DB::FileHeader.agent,
-                      location: 'import_data/legacy'
+  DB::CSVTransform.to_a 'address2',
+                        headers: DB::FileHeader.agent,
+                        location: 'import_data/legacy'
 end
 
 def patch_file
-  DB::FileImport.to_a 'address2_patch',
-                      headers: DB::FileHeader.agent_patch,
-                      location: 'import_data/patch'
+  DB::CSVTransform.to_a 'address2_patch',
+                        headers: DB::FileHeader.agent_patch,
+                        location: 'import_data/patch'
 end
 
 def missing_address2_csv_message

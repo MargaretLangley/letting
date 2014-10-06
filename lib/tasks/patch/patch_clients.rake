@@ -27,15 +27,15 @@ task :patch_clients do |_task, _args|
 end
 
 def clients_file
-  DB::FileImport.to_a 'clients',
-                      headers: DB::FileHeader.client,
-                      location: 'import_data/legacy'
+  DB::CSVTransform.to_a 'clients',
+                        headers: DB::FileHeader.client,
+                        location: 'import_data/legacy'
 end
 
 def patch_clients
-  DB::FileImport.to_a 'clients_patch',
-                      headers: DB::FileHeader.client,
-                      location: 'import_data/patch'
+  DB::CSVTransform.to_a 'clients_patch',
+                        headers: DB::FileHeader.client,
+                        location: 'import_data/patch'
 end
 
 def missing_clients_csv_message

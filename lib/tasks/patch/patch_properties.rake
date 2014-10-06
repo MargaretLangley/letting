@@ -33,18 +33,18 @@ task :patch_properties do |_task, _args|
 end
 
 def properties_file
-  DB::FileImport.to_a 'properties',
-                      headers: DB::FileHeader.property,
-                      location: 'import_data/legacy',
-                      drop_rows: 34
+  DB::CSVTransform.to_a 'properties',
+                        headers: DB::FileHeader.property,
+                        location: 'import_data/legacy',
+                        drop_rows: 34
 end
 
 # Takes a csv file which corrects mistakes in the properties CSV.
 #
 def patch_properties
-  DB::FileImport.to_a 'properties_patch',
-                      headers: DB::FileHeader.property,
-                      location: 'import_data/patch'
+  DB::CSVTransform.to_a 'properties_patch',
+                        headers: DB::FileHeader.property,
+                        location: 'import_data/patch'
 end
 
 def missing_properties_csv_message

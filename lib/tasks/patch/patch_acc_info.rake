@@ -34,15 +34,15 @@ task :patch_acc_info do |_task, _args|
 end
 
 def acc_info_file
-  DB::FileImport.to_a 'acc_info',
-                      headers: DB::FileHeader.charge,
-                      location: 'import_data/legacy'
+  DB::CSVTransform.to_a 'acc_info',
+                        headers: DB::FileHeader.charge,
+                        location: 'import_data/legacy'
 end
 
 def patch_filey
-  DB::FileImport.to_a 'acc_info_patch',
-                      headers: DB::FileHeader.charge,
-                      location: 'import_data/patch'
+  DB::CSVTransform.to_a 'acc_info_patch',
+                        headers: DB::FileHeader.charge,
+                        location: 'import_data/patch'
 end
 
 def missing_acc_info_csv_message

@@ -1,5 +1,5 @@
 require 'csv'
-require_relative '../../import/file_import'
+require_relative '../../csv/csv_transform'
 require_relative '../../import/file_header'
 require_relative '../../import/import_agent'
 
@@ -16,9 +16,9 @@ namespace :db do
     end
 
     def staging_agents
-      DB::FileImport.to_a 'staging_address2',
-                          headers: DB::FileHeader.agent,
-                          location: 'import_data/staging'
+      DB::CSVTransform.to_a 'staging_address2',
+                            headers: DB::FileHeader.agent,
+                            location: 'import_data/staging'
     end
   end
 end

@@ -10,8 +10,8 @@ module DB
   #
   # How does this fit into the larger system?
   #
-  # Imported data is read by FileImport and presented to ImportProperty as
-  # array of arrays. The base classj, ImportBase, handles the data source
+  # Imported data is read by DB::CSVTransform and presented to ImportProperty as
+  # array of arrays. The base class, ImportBase, handles the data source
   # and iterates through the array in a loop. ImportProperty overrides
   # the assignment but otherwise the base gets a model, assigns attributes
   # and saves the model to the database for all rows.

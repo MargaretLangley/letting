@@ -6,9 +6,9 @@ module DB
   # The headings for each column of the appropriate data file mapped to
   # the model's attributes.
   #
-  # The import process begins with FileImport which opens files and
+  # The import process begins with DB::CSVTransform which opens files and
   # converts them into arrays. When opening the file the columns are
-  # mapped to the headers supplied to FileImport by calls to this class.
+  # mapped to the headers supplied to DB::CSVTransform by calls to this class.
   #
   # import_XXX files such as import_client - reads in a row of data at a time.
   # The client then assigns it's attributes by dereferencing the array with a

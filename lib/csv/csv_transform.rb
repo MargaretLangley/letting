@@ -3,7 +3,7 @@ require 'csv'
 module DB
   ####
   #
-  # FileImport
+  # CSVTransform
   #
   # Opens a CSV file and reads it into an array of arrays.
   #
@@ -26,7 +26,7 @@ module DB
   # occurs.
   #
   ####
-  class FileImport
+  class CSVTransform
     attr_reader :location
 
     def initialize location, drop_rows, headers
