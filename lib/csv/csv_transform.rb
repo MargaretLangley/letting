@@ -35,10 +35,10 @@ module DB
       @headers = headers
     end
 
-    def self.to_a(filename,
+    def self.to_a filename,
                   location: 'import_data',
                   drop_rows: 1,
-                  headers: true)
+                  headers: true
       new(location, drop_rows, headers).csv_to_arrays filename
     end
 

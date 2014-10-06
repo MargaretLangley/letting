@@ -10,8 +10,8 @@ module DB
       end
 
       it 'opens valid file' do
-        output = CSVTransform.to_a('open_test',
-                                   location: file_location)
+        output = CSVTransform.to_a 'open_test',
+                                   location: file_location
         expect(output.length).to eq 1
       end
     end
@@ -23,19 +23,19 @@ module DB
       end
 
       it 'drops rows' do
-        output = CSVTransform.to_a('open_test',
+        output = CSVTransform.to_a 'open_test',
                                    location: file_location,
-                                   drop_rows: 1)
+                                   drop_rows: 1
         expect(output.length).to eq 1
       end
 
       it 'overwrites headers' do
-        output = CSVTransform.to_a('open_test',
+        output = CSVTransform.to_a 'open_test',
                                    headers: %w(one line),
-                                   location: file_location)
-        output.each do |row|
-          expect(row[:one]).to be_present
-          expect(row[:line]).to be_present
+                                   location: file_location
+        output.each.first do |row|
+          expect(row[:one]).to eq 'two'
+          expect(row[:line]).to eq 'lines'
         end
       end
 
