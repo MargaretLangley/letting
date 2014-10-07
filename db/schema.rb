@@ -173,14 +173,14 @@ ActiveRecord::Schema.define(version: 20140930053829) do
   end
 
   create_table "letters", force: true do |t|
-    t.integer  "invoice_id", null: false
-    t.integer  "letter_id",  null: false
+    t.integer  "invoice_id",  null: false
+    t.integer  "template_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "letters", ["invoice_id"], name: "index_letters_on_invoice_id", using: :btree
-  add_index "letters", ["letter_id"], name: "index_letters_on_letter_id", using: :btree
+  add_index "letters", ["template_id"], name: "index_letters_on_template_id", using: :btree
 
   create_table "notices", force: true do |t|
     t.integer  "template_id"

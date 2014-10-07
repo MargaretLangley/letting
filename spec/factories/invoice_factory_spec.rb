@@ -3,6 +3,12 @@ require 'rails_helper'
 describe 'Invoice Factory' do
   describe 'default' do
     it('is valid') { expect(invoice_new).to be_valid }
+
+    context 'makes' do
+      it 'makes a template' do
+        expect { invoice_new }.to change(Template, :count).by(1)
+      end
+    end
   end
 
   describe 'initializes from account' do
@@ -31,6 +37,20 @@ describe 'Invoice Factory' do
                  address: address_new(road: 'New', town: 'Brum', county: 'West')
       expect(invoice_new(client: client.to_s).client)
         .to eq "Bell\nNew\nBrum\nWest"
+    end
+  end
+
+  describe 'create' do
+    context 'default' do
+      it 'is created' do
+        expect { invoice_create }.to change(Invoice, :count).by(1)
+      end
+
+      context 'makes' do
+        it 'makes a template' do
+          expect { invoice_create }.to change(Template, :count).by(1)
+        end
+      end
     end
   end
 end
