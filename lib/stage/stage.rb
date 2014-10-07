@@ -12,10 +12,10 @@ require_relative 'patch_client'
 # than a rake file.
 #
 class Stage
-  attr_reader :file_name, :input, :patch, :headers
-  def initialize(file_name:, input:, patch:, headers: nil)
+  attr_reader :file_name, :input, :instructions, :headers
+  def initialize(file_name:, input:, instructions:, headers: nil)
     @input = input
-    @patch = patch
+    @instructions = instructions
     @file_name = file_name
     @headers = headers || input.headers
   end
@@ -28,7 +28,8 @@ class Stage
   private
 
   def cleanse
-    patch.cleanse originals: input.to_a
+    instructions.each { |instruct| instruct.cleanse originals: input.to_a }
+    input.to_a
   end
 
   def make_stage
