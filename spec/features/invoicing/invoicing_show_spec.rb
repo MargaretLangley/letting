@@ -8,6 +8,8 @@ describe Invoicing, type: :feature do
                      property_range: '1-100',
                      start_date: '2014/06/30',
                      end_date: '2014/08/30'
+    template = template_create id: 1
+    letter = letter_create id: 1
   end
 
   describe '#index' do

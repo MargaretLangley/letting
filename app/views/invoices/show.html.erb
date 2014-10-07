@@ -3,6 +3,8 @@
 
 <div class='grid shell'>
 
+  <% @template = @invoice.templates.first %>
+
   <% invoice_decorator = InvoiceDecorator.new(@invoice) %>
   <%= render 'templates/heading_page1', template: @template %>
 
@@ -64,4 +66,5 @@
   </div>
 
   <%= render partial:'invoices/print_short_accounts',locals: { arrears: @invoice.arrears, items: @invoice.products} %>
+
 </div>

@@ -13,7 +13,6 @@ class InvoicesController < ApplicationController
 
   def show
     @invoice = Invoice.find params[:id]
-    @template = Template.find(1)
   end
 
   def invoice_params

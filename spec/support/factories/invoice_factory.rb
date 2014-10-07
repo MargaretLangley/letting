@@ -7,7 +7,8 @@ def invoice_new invoice_date: '2014/06/30',
                 property_ref: 108,
                 client: "Lord Harris\nNew Road\nEdge\nBrum",
                 arrears: 20.20,
-                products: [product_new]
+                products: [product_new],
+                templates: [template_create(id: 1)]
 
   account.property.human_ref = property_ref
   account.property.address = property_address
@@ -18,10 +19,13 @@ def invoice_new invoice_date: '2014/06/30',
   invoice.client = client
   invoice.arrears = arrears
   invoice.products = products if products
+  invoice.templates = templates
+
   invoice
 end
 
-def invoice_create invoice_date: '2014/06/30',
+def invoice_create id: nil,
+                   invoice_date: '2014/06/30',
                    account: account_new(property: property_new),
                    property_address: address_new,
                    property_ref: 108,
@@ -29,7 +33,7 @@ def invoice_create invoice_date: '2014/06/30',
   account.property.human_ref = property_ref
   account.property.address = property_address
 
-  invoice = Invoice.create
+  invoice = Invoice.create id: id
   invoice.prepare invoice_date: invoice_date,
                   account: account
   invoice.products = products if products

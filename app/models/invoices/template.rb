@@ -22,6 +22,23 @@ class Template < ActiveRecord::Base
   has_one :address, class_name: 'Address',
                     dependent: :destroy,
                     as: :addressable
+   has_many :invoices, through: :letters
+   has_many :letters, dependent: :destroy
+
+  # Template Association
+  # has_many :invoices, through: :letters
+  # has_many :letters, dependent: :destroy
+  #
+  # Invoice Association
+  # has_many :templates, through: :letters
+  # has_many :letters, dependent: :destroy
+  #
+  #
+  # letter
+  # belongs_to templates
+  # belongs_to invoices
+  #
+
   accepts_nested_attributes_for :address, allow_destroy: true
   has_many :notices, -> { order(:created_at) }, dependent: :destroy
   accepts_nested_attributes_for :notices, allow_destroy: true

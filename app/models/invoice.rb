@@ -23,8 +23,6 @@
 #
 class Invoice < ActiveRecord::Base
   belongs_to :invoicing
-  has_many :letters
-  has_many :templates, through: :letters
   has_many :products
   validates :products,
             :invoice_date,
@@ -32,6 +30,8 @@ class Invoice < ActiveRecord::Base
             :property_address,
             :arrears,
             presence: true
+  has_many :templates, through: :letters
+  has_many :letters, dependent: :destroy
 
   def prepare(invoice_date: Date.current, account:)
     self.billing_address = account.property.bill_to_s
@@ -39,11 +39,11 @@ class Invoice < ActiveRecord::Base
     self.invoice_date = invoice_date
 
     self.property_address = account.property.to_address
-
     self.arrears = account.balance
     # TODO: REMOVE FAKE TOTAL - Required to bypass database requirement
     self.total_arrears = 11.00
     self.client = account.property.client.to_s
+    self.letters.build template: Template.find(1)
     self
   end
 

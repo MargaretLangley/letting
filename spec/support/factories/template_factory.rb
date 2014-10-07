@@ -17,7 +17,7 @@ def template_new id: nil,
                address: address
 end
 
-def template_create(id: nil,
+def template_create(id: 1,
                     description: 'Page 1 Invoice',
                     invoice_name: 'Bell',
                     phone: '01710008',
