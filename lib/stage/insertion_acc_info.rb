@@ -10,7 +10,6 @@ require_relative 'insertion'
 #
 ####
 #
-# extraction
 class InsertionAccInfo < Insertion
   def sort originals
     originals.sort_by! { |item| [item[:human_ref].to_i, item[:charge_type]] }
