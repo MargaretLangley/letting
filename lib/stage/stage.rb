@@ -25,9 +25,12 @@ class Stage
 
   private
 
+  # specs worked without using temporary variable. In practice with larger data
+  # sets - extraction only worked using the temp cleansing.
   def cleanse
-    instructions.each { |instruct| instruct.cleanse originals: input.to_a }
-    input.to_a
+    cleansing = input.to_a
+    instructions.each { |instruct| instruct.cleanse originals: cleansing }
+    cleansing
   end
 
   def make_stage
