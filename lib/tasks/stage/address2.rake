@@ -8,7 +8,7 @@ namespace :db do
     task :address2 do
       Stage.new(file_name: 'import_data/staging/staging_address2.csv',
                 input: address2,
-                patch: PatchRef.new(patch: patch_address2.to_a)).stage
+                instructions: [PatchRef.new(patch: patch_address2)]).stage
     end
 
     def address2
@@ -17,8 +17,8 @@ namespace :db do
     end
 
     def patch_address2
-      DB::CSVTransform.new file_name: 'import_data/patch/address2_patch.csv',
-                           headers: DB::FileHeader.agent_patch
+      DB::CSVTransform.new(file_name: 'import_data/patch/address2_patch.csv',
+                           headers: DB::FileHeader.agent_patch).to_a
     end
   end
 end

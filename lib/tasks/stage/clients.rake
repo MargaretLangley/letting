@@ -8,7 +8,7 @@ namespace :db do
     task :clients do
       Stage.new(file_name: 'import_data/staging/staging_clients.csv',
                 input: clients,
-                patch: PatchRef.new(patch: patch_clients.to_a)).stage
+                instructions: [ PatchRef.new(patch: patch_clients)]).stage
     end
 
     def clients
@@ -17,8 +17,8 @@ namespace :db do
     end
 
     def patch_clients
-      DB::CSVTransform.new file_name: 'import_data/patch/clients_patch.csv',
-                           headers: DB::FileHeader.client
+      DB::CSVTransform.new(file_name: 'import_data/patch/clients_patch.csv',
+                           headers: DB::FileHeader.client).to_a
     end
   end
 end

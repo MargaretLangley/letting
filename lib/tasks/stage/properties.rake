@@ -8,7 +8,7 @@ namespace :db do
     task :properties do
       Stage.new(file_name: 'import_data/staging/staging_properties.csv',
                 input: properties,
-                patch: PatchRef.new(patch: patch_properties.to_a)).stage
+                instructions: [PatchRef.new(patch: patch_properties)]).stage
     end
 
     def properties
@@ -17,12 +17,9 @@ namespace :db do
                            drop_rows: 34
     end
 
-    # Takes a csv file which corrects mistakes in the properties CSV.
-    #
     def patch_properties
-      DB::CSVTransform.new file_name: 'import_data/patch/properties_patch.csv',
-                           headers: DB::FileHeader.property
+      DB::CSVTransform.new(file_name: 'import_data/patch/properties_patch.csv',
+                           headers: DB::FileHeader.property).to_a
     end
-
   end
 end
