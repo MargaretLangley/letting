@@ -12,9 +12,10 @@ require_relative 'insertion'
 #
 class InsertionAccItems < Insertion
   def sort originals
-    originals.sort_by! do |item| [item[:human_ref].to_i,
-                                  item[:charge_type],
-                                  item[:on_date]]
+    originals.sort_by! do |item|
+      [item[:human_ref].to_i,
+       item[:charge_type],
+       item[:on_date]]
     end
   end
 end

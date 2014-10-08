@@ -10,9 +10,9 @@ namespace :db do
                 input: acc_items,
                 instructions: [PatchAccItems.new(patch: patch_acc_items),
                                ExtractionAccItems.new(extracts: extract_acc_items),
-                               ]
+                              ]
                 ).stage
-      #InsertionAccItems.new(insert: insert_acc_items)
+      # InsertionAccItems.new(insert: insert_acc_items)
     end
 
     def acc_items
