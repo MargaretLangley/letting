@@ -2,6 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
+
   it('is valid') { expect(invoice_new).to be_valid }
   describe 'validates presence' do
     it('property_ref') { expect(invoice_new property_ref: nil).to_not be_valid }
@@ -17,6 +18,7 @@ RSpec.describe Invoice, type: :model do
   describe 'methods' do
     describe '#prepare' do
       it 'sets billing_address' do
+        template_create id: 1
         invoice = Invoice.new
         agent = agent_new(entities: [Entity.new(name: 'Lock')])
         property = property_new agent: agent, account: account_new
@@ -25,18 +27,21 @@ RSpec.describe Invoice, type: :model do
           .to eq "Lock\nEdgbaston Road\nBirmingham\nWest Midlands"
       end
       it 'sets property_ref' do
+        template_create id: 1
         invoice = Invoice.new
         property = property_new human_ref: 55, account: account_new
         invoice.prepare account: property.account
         expect(invoice.property_ref).to eq 55
       end
       it 'sets invoice_date' do
+        template_create id: 1
         invoice = Invoice.new
         property = property_new account: account_new
         invoice.prepare invoice_date: '2014-06-30', account: property.account
         expect(invoice.invoice_date.to_s).to eq '2014-06-30'
       end
       it 'sets property_address' do
+        template_create id: 1
         invoice = Invoice.new
         property = property_new address: address_new(road: 'New', town: 'Brum'),
                                 account: account_new
@@ -44,11 +49,13 @@ RSpec.describe Invoice, type: :model do
         expect(invoice.property_address).to eq "New\nBrum\nWest Midlands"
       end
       it 'sets balance' do
+        template_create id: 1
         account = account_new credit: credit_new(amount: 7)
         property = property_new account: account
         expect(Invoice.new.prepare(account: property.account).arrears).to eq(7)
       end
       it 'sets client' do
+        template_create id: 1
         client_create entities: [Entity.new(name: 'Bell')],
                       property: property_new(account: account_new)
         expect(Invoice.new.prepare(account: Account.first).client)

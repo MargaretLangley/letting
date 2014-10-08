@@ -13,7 +13,6 @@ namespace :db do
       if File.exist?(filename)
         CSV.foreach(filename, headers: true) do |row|
           begin
-            # byebug
             Template.create!(row.to_hash)
           rescue
             p 'Template Create failed (see hash below):', row.to_hash
