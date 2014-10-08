@@ -20,7 +20,7 @@ describe Template, type: :feature do
       visit '/templates/1/edit'
       expect(page.title). to eq 'Letting - Edit Invoice Text'
       click_on('View')
-      expect(page.title). to eq 'Letting - View Invoice Texts'
+      expect(page.title). to eq 'Letting - View Invoice Text'
     end
   end
 

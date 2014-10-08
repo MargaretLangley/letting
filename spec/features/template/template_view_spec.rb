@@ -11,7 +11,7 @@ describe Template, type: :feature do
   context '#view' do
     it 'finds view page 1' do
       visit '/templates/1'
-      expect(page.title). to eq 'Letting - View Invoice Texts'
+      expect(page.title). to eq 'Letting - View Invoice Text'
     end
 
     it 'finds address' do
@@ -21,7 +21,7 @@ describe Template, type: :feature do
 
     it 'has edit link' do
       visit '/templates/1'
-      expect(page.title). to eq 'Letting - View Invoice Texts'
+      expect(page.title). to eq 'Letting - View Invoice Text'
       click_on('Edit')
       expect(page.title). to eq 'Letting - Edit Invoice Text'
     end
