@@ -1,6 +1,6 @@
-require_relative '../../../lib/stage/insertion_acc_items'
+require_relative '../../../lib/stage/insert_acc_items'
 
-describe InsertionAccItems, :stage do
+describe InsertAccItems, :stage do
   def row human_ref: 10,
           charge_type: 'Rent',
           on_date: Date.new(2014, 3, 8),
@@ -15,7 +15,7 @@ describe InsertionAccItems, :stage do
     input = [row(human_ref: 5,
                  charge_type: 'Rent',
                  on_date: Date.new(2014, 3, 8))]
-    insert = InsertionAccItems.new \
+    insert = InsertAccItems.new \
               insert: [row(human_ref: 10,
                            charge_type: 'Rent',
                            on_date: Date.new(2014, 3, 9))]

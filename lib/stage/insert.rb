@@ -1,16 +1,15 @@
 ####
 #
-# Insertion
+# Insert
 #
 # adding data which are missing. It applies them into the correct position.
 #
-# Insertion is part of the staging process - specifically it is called by
+# Insert is part of the staging process - specifically it is called by
 # all of the stage/*.rake tasks.
 #
 ####
 #
-# extraction
-class Insertion
+class Insert
   attr_reader :insert
   def initialize(insert:)
     @insert = insert

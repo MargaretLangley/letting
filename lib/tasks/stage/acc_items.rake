@@ -9,10 +9,10 @@ namespace :db do
       Stage.new(file_name: 'import_data/staging/staging_acc_items.csv',
                 input: acc_items,
                 instructions: [PatchAccItems.new(patch: patch_acc_items),
-                               ExtractionAccItems.new(extracts: extract_acc_items),
+                               ExtractAccItems.new(extracts: extract_acc_items),
                               ]
                 ).stage
-      # InsertionAccItems.new(insert: insert_acc_items)
+      # InsertAccItems.new(insert: insert_acc_items)
     end
 
     def acc_items

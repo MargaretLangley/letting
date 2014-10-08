@@ -9,7 +9,7 @@ namespace :db do
       Stage.new(file_name: 'import_data/staging/staging_acc_info.csv',
                 input: acc_infos,
                 instructions: [PatchAccInfo.new(patch: patch_acc_info),
-                               InsertionAccInfo.new(insert: insert_acc_info)]
+                               InsertAccInfo.new(insert: insert_acc_info)]
                ).stage
     end
 

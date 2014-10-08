@@ -1,15 +1,15 @@
 ####
 #
-# Extraction
+# Extract
 #
 # adding data which are missing. It applies them into the correct position.
 #
-# Extraction is part of the staging process - specifically it is called by
+# Extract is part of the staging process - specifically it is called by
 # all of the stage/*.rake tasks.
 #
 ####
 #
-class Extraction
+class Extract
   attr_reader :extracts
   def initialize(extracts:)
     @extracts = extracts

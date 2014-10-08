@@ -1,4 +1,6 @@
 require_relative '../../../lib/stage/stage'
+require_relative '../../../lib/stage/patch_ref'
+require_relative '../../../lib/stage/extract_ref'
 require_relative '../../../lib/csv/csv_transform'
 # rubocop: disable Metrics/LineLength
 
@@ -39,8 +41,10 @@ describe Stage, :stage do
 
   it 'completes full test multiple instruction' do
     client = Stage.new file_name: 'blah.csv',
-                       input: [{ human_ref: 1, other: 'world' }],
-                       instructions: [PatchRef.new(patch: [{ human_ref: 1, other: 'word' }])],
+                       input: [{ human_ref: 1, other: 'world' },
+                               { human_ref: 2, other: 'world' }],
+                       instructions: [PatchRef.new(patch: [{ human_ref: 1, other: 'word' }]),
+                                      ExtractRef.new(extracts: [{ human_ref: 2 }])],
                        headers: ['hello']
     expect(client).to receive(:stage_array)
                         .with rows: [{ human_ref: 1, other: 'word' }]

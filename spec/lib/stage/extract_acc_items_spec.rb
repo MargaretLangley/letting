@@ -1,6 +1,6 @@
-require_relative '../../../lib/stage/extraction_acc_items'
+require_relative '../../../lib/stage/extract_acc_items'
 
-describe ExtractionAccItems, :stage do
+describe ExtractAccItems, :stage do
   def row human_ref: 10,
           charge_code: 'GR',
           on_date: Date.new(2014, 3, 8),
@@ -16,7 +16,7 @@ describe ExtractionAccItems, :stage do
                  charge_code: 'GR',
                  on_date: Date.new(2014, 3, 8),
                  value: 4)]
-    extract = ExtractionAccItems.new \
+    extract = ExtractAccItems.new \
               extracts: [row(human_ref: 20,
                              charge_code: 'GR',
                              on_date: Date.new(2014, 3, 8),
@@ -33,7 +33,7 @@ describe ExtractionAccItems, :stage do
                  charge_code: 'GR',
                  on_date: Date.new(2014, 3, 8),
                  value: 4)]
-    extract = ExtractionAccItems.new \
+    extract = ExtractAccItems.new \
               extracts: [row(human_ref: 10,
                              charge_code: 'GR',
                              on_date: Date.new(2014, 3, 8),
