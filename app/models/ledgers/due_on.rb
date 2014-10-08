@@ -34,7 +34,8 @@ class DueOn < ActiveRecord::Base
                                    less_than: 2030 },
                    allow_nil: true
 
-  def between date_range
+  def between datetime_range
+    date_range = datetime_range.first.to_date..datetime_range.last.to_date
     date_range.to_a
               .map(&:year)
               .uniq.map { |year| make_date year: year }

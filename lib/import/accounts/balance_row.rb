@@ -50,7 +50,7 @@ module DB
     end
 
     def next_on_date
-      row_charge.coming(on_date..on_date + 1.year)
+      row_charge.coming(on_date..on_date + 1.year - 1.day)
         .first
         .on_date
     end

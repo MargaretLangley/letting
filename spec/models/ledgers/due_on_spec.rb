@@ -1,7 +1,8 @@
 require 'rails_helper'
 
-# rubocop: disable Style/TrivialAccessors
 # rubocop: disable Style/Documentation
+# rubocop: disable Style/SpaceInsideRangeLiteral
+# rubocop: disable Style/TrivialAccessors
 # rubocop: disable Lint/UselessComparison
 
 describe DueOn, :ledgers, type: :model do
@@ -38,6 +39,13 @@ describe DueOn, :ledgers, type: :model do
         expect(due_on_new(month: 3, day: 25)
           .between Date.new(2013, 3, 25)..Date.new(2013, 3, 25))
             .to eq [Date.new(2013, 3, 25)]
+      end
+
+      it 'handles date time' do
+        expect(due_on_new(month: 3, day: 25)
+          .between DateTime.new(2007, 8, 17, 11, 56, 00)..
+                   DateTime.new(2008, 8, 16, 11, 56, 00))
+            .to eq [Date.new(2008, 3, 25)]
       end
 
       it 'handles multi-year' do
