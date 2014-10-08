@@ -33,37 +33,37 @@ describe Stage, :stage do
   end
 
   describe 'full tests'
-    it 'patches' do
-      patch = PatchRef.new patch: [{ human_ref: 1, other: 'word' }]
-      ref = Stage.new file_name: 'blah.csv',
-                      input: [{ human_ref: 1, other: 'world' }],
-                      instructions: [patch],
-                      headers: ['hello']
-      expect(ref).to receive(:stage_array)
-                       .with rows: [{ human_ref: 1, other: 'word' }]
-      ref.stage
-    end
+  it 'patches' do
+    patch = PatchRef.new patch: [{ human_ref: 1, other: 'word' }]
+    ref = Stage.new file_name: 'blah.csv',
+                    input: [{ human_ref: 1, other: 'world' }],
+                    instructions: [patch],
+                    headers: ['hello']
+    expect(ref).to receive(:stage_array)
+                     .with rows: [{ human_ref: 1, other: 'word' }]
+    ref.stage
+  end
 
-    it 'extracts' do
-      extract = ExtractRef.new extracts: [{ human_ref: 1,}]
-      ref = Stage.new file_name: 'blah.csv',
-                      input: [{ human_ref: 1, other: 'world' }],
-                      instructions: [extract],
-                      headers: ['hello']
-      expect(ref).to receive(:stage_array).with rows: []
-      ref.stage
-    end
+  it 'extracts' do
+    extract = ExtractRef.new extracts: [{ human_ref: 1,  }]
+    ref = Stage.new file_name: 'blah.csv',
+                    input: [{ human_ref: 1, other: 'world' }],
+                    instructions: [extract],
+                    headers: ['hello']
+    expect(ref).to receive(:stage_array).with rows: []
+    ref.stage
+  end
 
-    it 'completes full test multiple instruction' do
-      patch = PatchRef.new patch: [{ human_ref: 1, other: 'word' }]
-      extract = ExtractRef.new extracts: [{ human_ref: 2 }]
-      ref = Stage.new file_name: 'blah.csv',
-                      input: [{ human_ref: 1, other: 'world' },
-                              { human_ref: 2, other: 'world' }],
-                      instructions: [patch , extract],
-                      headers: ['hello']
-      expect(ref).to receive(:stage_array)
-                       .with rows: [{ human_ref: 1, other: 'word' }]
-      ref.stage
-    end
+  it 'completes full test multiple instruction' do
+    patch = PatchRef.new patch: [{ human_ref: 1, other: 'word' }]
+    extract = ExtractRef.new extracts: [{ human_ref: 2 }]
+    ref = Stage.new file_name: 'blah.csv',
+                    input: [{ human_ref: 1, other: 'world' },
+                            { human_ref: 2, other: 'world' }],
+                    instructions: [patch, extract],
+                    headers: ['hello']
+    expect(ref).to receive(:stage_array)
+                     .with rows: [{ human_ref: 1, other: 'word' }]
+    ref.stage
+  end
 end

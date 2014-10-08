@@ -8,7 +8,7 @@ namespace :db do
     task :clients do
       Stage.new(file_name: 'import_data/staging/staging_clients.csv',
                 input: clients,
-                instructions: [ PatchRef.new(patch: patch_clients)]).stage
+                instructions: [PatchRef.new(patch: patch_clients)]).stage
     end
 
     def clients
