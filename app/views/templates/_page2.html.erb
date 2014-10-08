@@ -1,9 +1,5 @@
-<div class='c-align'>
-   <%= @template.heading1 %>
-  <br>
-   <%= @template.heading2 %>
-</div>
-<br>
+<%= render 'heading_page2', template: @template %>
+
 <% @template.notices.order(:id).each do  |note| %>
     <%= render '/templates/instructions', count:note %>
 <% end %>

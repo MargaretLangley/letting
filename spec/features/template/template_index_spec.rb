@@ -24,6 +24,13 @@ describe Template, type: :feature do
       expect(page.title).to eq 'Letting - Edit Invoice Text'
     end
 
+    it 'has view link on icon' do
+      template_create
+      visit '/templates/'
+      click_on 'View'
+      expect(page.title).to eq 'Letting - View Invoice Text'
+    end
+
     it 'has ordered list' do
       template_create id: 1, invoice_name: 'Morgan'
       visit '/templates/'
