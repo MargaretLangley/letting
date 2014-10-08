@@ -23,9 +23,8 @@ namespace :db do
     private
 
     def users_file
-      DB::CSVTransform.to_a 'users',
-                            headers: DB::FileHeader.user,
-                            location: 'import_data/new'
+      DB::CSVTransform.new(file_name: 'import_data/new/users.csv',
+                           headers: DB::FileHeader.user).to_a
     end
 
     def load_test_users

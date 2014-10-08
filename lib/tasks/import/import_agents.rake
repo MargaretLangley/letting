@@ -3,7 +3,6 @@ require_relative '../../csv/csv_transform'
 require_relative '../../import/file_header'
 require_relative '../../import/import_agent'
 
-# Without this you won't see standard output until finished running
 STDOUT.sync = true
 
 namespace :db do
@@ -16,9 +15,9 @@ namespace :db do
     end
 
     def staging_agents
-      DB::CSVTransform.to_a 'staging_address2',
-                            headers: DB::FileHeader.agent,
-                            location: 'import_data/staging'
+      DB::CSVTransform.new(
+         file_name: 'import_data/staging/staging_address2.csv',
+         headers: DB::FileHeader.agent).to_a
     end
   end
 end

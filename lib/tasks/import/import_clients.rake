@@ -14,9 +14,9 @@ namespace :db do
     end
 
     def patched_clients
-      DB::CSVTransform.to_a 'staging_clients',
-                            headers: DB::FileHeader.client,
-                            location: 'import_data/staging'
+      DB::CSVTransform.new(
+         file_name: 'import_data/staging/staging_clients.csv',
+         headers: DB::FileHeader.client).to_a
     end
   end
 end
