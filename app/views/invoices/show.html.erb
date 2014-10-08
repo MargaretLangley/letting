@@ -1,18 +1,16 @@
-<% @title='Invoicing' %>
+<% @title='Invoice Print' %>
 <% dotted_line = "-------------" %>
 
 <div class='grid shell'>
 
-  <% @template = @invoice.templates.first %>
-
   <% invoice_decorator = InvoiceDecorator.new(@invoice) %>
-  <%= render 'templates/heading_page1', template: @template %>
+  <%= render 'templates/heading_page1', template: @invoice.templates.first %>
 
   <div class='grid-row col-1-12'>
      &nbsp;
   </div>
   <div class='col-4-12 inv-advice-bold vertical-spacer'>
-    <%= @template.heading2 %>
+    <%= @invoice.templates.first.heading2 %>
   </div>
   <div class='col-4-12 inv-advice-bold vertical-spacer'>
     Property Ref:
@@ -42,7 +40,7 @@
   <p>
      &nbsp;
   </p>
-  <%= render partial: 'templates/print_section48',locals: {client: @invoice.client, template: @template }%>
+  <%= render partial: 'templates/print_section48',locals: {client: @invoice.client, template: @invoice.templates.first }%>
 
   <div>
     <div class='grid-row col-1-12'>

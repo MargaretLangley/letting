@@ -30,12 +30,6 @@ describe ChargeCycle, :ledgers, type: :feature do
       fill_in "#{id_stem}_year", with: year
     end
 
-    it 'goes to index on Cancel' do
-      visit '/charge_cycles/3/edit'
-      click_on('Cancel')
-      expect(page.title). to eq 'Letting - Charge Cycles'
-    end
-
     it 'uses monthly edit' do
       charge_cycle_create id: 2,
                           name: 'Regular',
@@ -50,6 +44,19 @@ describe ChargeCycle, :ledgers, type: :feature do
       due_on(day: 12, month: 0)
       click_on 'Update Charge Cycle'
       expect(page). to have_text /successfully updated!/i
+    end
+
+    it 'goes to index on Cancel' do
+      visit '/charge_cycles/3/edit'
+      click_on('Cancel')
+      expect(page.title). to eq 'Letting - Charge Cycles'
+    end
+
+    it 'errors on update' do
+      visit '/charge_cycles/3/edit'
+      fill_in 'Name', with: ''
+      click_on 'Update Charge Cycle'
+      expect(page).to have_css '[data-role="errors"]'
     end
 
   end
