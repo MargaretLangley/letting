@@ -27,10 +27,20 @@ describe Stage, :stage do
     end
   end
 
-  it 'completes full test' do
+  it 'completes full test one instruction' do
     client = Stage.new file_name: 'blah.csv',
                        input: [{ human_ref: 1, other: 'world' }],
-                       instructions: [PatchClient.new(patch: [{ human_ref: 1, other: 'word' }])],
+                       instructions: [PatchRef.new(patch: [{ human_ref: 1, other: 'word' }])],
+                       headers: ['hello']
+    expect(client).to receive(:stage_array)
+                        .with rows: [{ human_ref: 1, other: 'word' }]
+    client.stage
+  end
+
+  it 'completes full test multiple instruction' do
+    client = Stage.new file_name: 'blah.csv',
+                       input: [{ human_ref: 1, other: 'world' }],
+                       instructions: [PatchRef.new(patch: [{ human_ref: 1, other: 'word' }])],
                        headers: ['hello']
     expect(client).to receive(:stage_array)
                         .with rows: [{ human_ref: 1, other: 'word' }]

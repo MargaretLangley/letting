@@ -8,7 +8,7 @@ namespace :db do
     task :properties do
       Stage.new(file_name: 'import_data/staging/staging_properties.csv',
                 input: properties,
-                patch: PatchProperty.new(patch: patch_properties.to_a)).stage
+                patch: PatchRef.new(patch: patch_properties.to_a)).stage
     end
 
     def properties

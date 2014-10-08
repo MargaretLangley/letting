@@ -1,6 +1,4 @@
 require 'csv'
-require_relative 'patch_client'
-
 ###
 #
 # StageClient

@@ -8,7 +8,7 @@ namespace :db do
     task :address2 do
       Stage.new(file_name: 'import_data/staging/staging_address2.csv',
                 input: address2,
-                patch: PatchAddress2.new(patch: patch_address2.to_a)).stage
+                patch: PatchRef.new(patch: patch_address2.to_a)).stage
     end
 
     def address2
