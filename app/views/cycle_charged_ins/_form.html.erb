@@ -1,16 +1,17 @@
-<div class='grid-row col-2-8'>
+<% disabler = false if local_assigns[:disabler].nil? %>
+<div class='grid-row col-6-24'>
   &nbsp;
 </div>
-<div class='col-1-8 faded'>
+<div class='col-3-24 faded'>
   Associations
 </div>
-<div class='col-3-8 vertical-spacer'>
+<div class='col-9-24 vertical-spacer'>
   <!-- http://railscasts.com/episodes/17-habtm-checkboxes-revised?view=asciicast -->
   <% ChargedIn.all.each do |charged_in| %>
-    <%= check_box_tag "charge_cycle[charged_in_ids][]", charged_in.id, charge_cycle.charged_in_ids.include?(charged_in.id), id: dom_id(charged_in) %>
+    <%= check_box_tag "charge_cycle[charged_in_ids][]", charged_in.id, charge_cycle.charged_in_ids.include?(charged_in.id), id: dom_id(charged_in), disabled: disabler %>
     <%= label_tag dom_id(charged_in), charged_in.name %><br/>
   <% end %>
 </div>
-<div class='col-2-8 vertical-spacer'>
+<div class='col-6-24 vertical-spacer'>
   &nbsp;
 </div>

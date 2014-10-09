@@ -1,31 +1,40 @@
 <div class='grid'>
-  <div class='col-1-2 vertical-spacer'>
+  <div class='col-12-24 vertical-spacer'>
     <h2>Charge Cycle View</h2>
   </div>
-  <div class='col-1-2 no-r-pad'>
+  <div class='col-12-24 no-r-pad'>
     <%= link_to fa_icon('edit'), edit_charge_cycle_path(@charge_cycle), title: 'Edit', class: 'simple-button float-right' %>
   </div>
 </div>
 
 <div class='grid'>
-  <div class='col-1-4 vertical-spacer grid-row'>
+  <div class='grid-row col-6-24 vertical-spacer'>
     &nbsp;
   </div>
-  <div class='col-1-6 faded'>
+  <div class='col-3-24 vertical-spacer faded'>
     Name
   </div>
-  <div class='col-1-6'>
+  <div class='col-4-24  vertical-spacer'>
    <%= @charge_cycle.name %>
   </div>
-  <div class='col-1-4 vertical-spacer grid-row'>
+  <div class='col-11-24  vertical-spacer'>
     &nbsp;
   </div>
-  <div class='col-1-6 faded'>
+
+  <div class='grid-row col-6-24 vertical-spacer'>
+    &nbsp;
+  </div>
+  <div class='col-3-24 vertical-spacer faded'>
     Order
   </div>
-  <div class='col-1-6'>
+  <div class='col-1-24 vertical-spacer r-align'>
     <%= @charge_cycle.order %>
   </div>
-
-  <hr class = 'faded'>
+  <div class='col-14-24  vertical-spacer'>
+    &nbsp;
+  </div>
+  <div class='grid-row col-24-24'>
+    &nbsp;
+  </div>
 </div>
+
