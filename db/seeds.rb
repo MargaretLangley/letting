@@ -253,7 +253,7 @@ end
 def create_charges
   Rake::Task['db:import:charged_ins'].invoke
   create_charge_cycle
-  create_cycle_charged_ins
+  Rake::Task['db:import:cycle_charged_ins'].invoke
 
   Charge.create! [
     { id: 1,             charge_type: 'Ground Rent',    charge_cycle_id: 1,  charged_in_id: 1,
