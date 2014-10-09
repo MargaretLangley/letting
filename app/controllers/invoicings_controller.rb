@@ -33,9 +33,8 @@ class InvoicingsController < ApplicationController
   end
 
   def invoicing_params
-    params.require(:invoicing)
-      .permit :property_range,
-              :start_date,
-              :end_date
+    params.require(:invoicing).permit :property_range,
+                                      :start_date,
+                                      :end_date
   end
 end

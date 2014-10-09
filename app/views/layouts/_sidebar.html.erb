@@ -22,7 +22,7 @@
     <li class="active-subnav <%= sub_menu_folded? 'clients' %>"><%= link_to 'New Client', new_client_path %></li>
 
     <li class="<%= main_menu_active? 'invoicings' %>"><%= link_to 'New Invoicing', new_invoicing_path %></li>
-    <li class="active-subnav <%= sub_menu_folded? 'invoicings' %>"><%= link_to 'Invoicings', invoicings_path %></li>
+    <li class="active-subnav <%= main_menu_active? 'invoicings' %>"><%= link_to 'Invoicings', invoicings_path %></li>
 
     <li class="<%= main_menu_active? "payments" %>"><%= link_to 'New Payment', new_payment_path %></li>
     <li class="active-subnav <%= sub_menu_folded? 'payments' %>"><%= link_to 'Payments', payments_path %></li>

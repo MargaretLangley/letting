@@ -16,7 +16,7 @@ Letting::Application.routes.draw do
   resources :clients
   resources :payments
   resources :invoicings, only: [:new, :create, :index, :show]
-  resources :invoices, only: [:index, :show]
+  resources :invoices, only: [:show]
 
   # Admin
   resources :charge_cycles
