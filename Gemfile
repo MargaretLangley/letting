@@ -63,7 +63,7 @@ group :development do
   gem 'better_errors', '~> 2.0.0'
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'brakeman', '~>2.6.0', require: false
-  gem 'bullet', '~>4.13.0'
+  gem 'bullet', '~>4.14.0'
   gem 'rails_best_practices', '~>1.15.1'
   gem 'rubocop', '~> 0.26.0', require: false
   gem 'rubycritic', require: false
@@ -95,7 +95,7 @@ group :development, :test do
   gem 'pry-rails', '~>0.3.2'
   gem 'rb-readline'
   gem 'pry-stack_explorer', '~>0.4.9.0'
-  gem 'byebug', '~> 3.4.0'
+  gem 'byebug', '~> 3.5.0'
   gem 'rack-mini-profiler', '~>0.9.0'
   gem 'rspec-rails', '~> 3.1.0'
 end
