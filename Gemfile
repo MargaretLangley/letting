@@ -69,6 +69,7 @@ group :development do
   gem 'rubycritic', require: false
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'traceroute'
 end
 
 # Use Capistrano for deployment
