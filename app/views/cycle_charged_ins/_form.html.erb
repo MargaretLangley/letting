@@ -1,0 +1,16 @@
+<div class='grid-row col-2-8'>
+  &nbsp;
+</div>
+<div class='col-1-8 faded'>
+  Associations
+</div>
+<div class='col-3-8 vertical-spacer'>
+  <!-- http://railscasts.com/episodes/17-habtm-checkboxes-revised?view=asciicast -->
+  <% ChargedIn.all.each do |charged_in| %>
+    <%= check_box_tag "charge_cycle[charged_in_ids][]", charged_in.id, charge_cycle.charged_in_ids.include?(charged_in.id), id: dom_id(charged_in) %>
+    <%= label_tag dom_id(charged_in), charged_in.name %><br/>
+  <% end %>
+</div>
+<div class='col-2-8 vertical-spacer'>
+  &nbsp;
+</div>

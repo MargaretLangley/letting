@@ -1,70 +1,69 @@
 <%= form_for charge_cycle do |f| %>
   <%= render 'shared/errors', object: charge_cycle %>
 
-  <% charge_cycle.cycle_type = 'monthly' %>
-
   <fieldset id='charge_cycle' class='shell'>
 
     <div class="grid">
-      <div class='col-1-2 vertical-spacer'>
+      <div class='col-4-8 vertical-spacer'>
         <h2>Monthly Charge Cycle</h2>
       </div>
-      <div class='col-1-2 vertical-spacer'>
+      <div class='col-4-8 vertical-spacer'>
         <%= view_link(charge_cycle) %>
-
       </div>
-
     </div>
 
     <div class='grid' >
-      <div class='col-1-4 vertical-spacer'>
+      <div class='col-2-8  vertical-spacer'>
         &nbsp;
       </div>
-      <div class='col-1-8 faded'>
+      <div class='col-1-8  vertical-spacer  faded'>
        <%= f.label :name %>
       </div>
-      <div class='col-1-8'>
+      <div class='col-2-8 vertical-spacer '>
         <%= f.text_field :name %>
+        <%= f.hidden_field :cycle_type, cycle_type: 'monthly' %>
       </div>
-
-      <div class='col-1-4 vertical-spacer grid-row'>
+      <div class='col-3-8 vertical-spacer'>
         &nbsp;
       </div>
 
-      <div class='col-1-8 faded'>
+      <div class='grid-row col-2-8 vertical-spacer'>
+        &nbsp;
+      </div>
+      <div class='col-1-8 vertical-spacer faded'>
         <%= f.label :order %>
       </div>
-      <div class='col-1-8'>
+      <div class='col-1-8 vertical-spacer '>
         <%= f.text_field :order, class: 'r-align'%>
       </div>
-
-      <%= f.hidden_field :cycle_type, cycle_type: 'monthly' %>
-
-      <hr class = 'faded'>
-
-      <div class='col-2-8 grid-row'>
+      <div class='col-4-8 vertical-spacer'>
         &nbsp;
       </div>
 
-      <div class='col-1-8 faded'>
-        Due Ons Day
+      <div class='grid-row col-2-8  vertical-spacer'>
+        &nbsp;
       </div>
-
-      <%= f.fields_for :due_ons do |builder| %>
-
-        <div class='col-1-8'>
+      <div class='col-1-8 vertical-spacer faded'>
+        Due On Day
+      </div>
+      <%= f.fields_for :due_ons, charge_cycle.due_ons.first  do |builder| %>
+        <div class='col-1-8 vertical-spacer'>
           <%= builder.text_field :day, class: 'r-align' %>
         </div>
       <% end %>
+      <div class='col-4-8 vertical-spacer'>
+        &nbsp;
+      </div>
 
-    </div>
+      <hr class = 'faded'>
+      <%= render 'cycle_charged_ins/form', charge_cycle: @charge_cycle %>
 
-    <hr>
-    <div class='col-1-4 no-print'>
-      &nbsp;
-    </div>
-    <div class='col-3-4 no-r-pad no-print'>
-      <%= f.button submit: '', class: "primary submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Charge Cycle..."} %> or <%= link_to 'Cancel', charge_cycles_path, class: 'warn' %>
+      <div class='grid-row col-2-8  vertical-spacer no-print'>
+        &nbsp;
+      </div>
+      <div class='col-6-8 no-r-pad  vertical-spacer no-print'>
+        <%= f.button submit: '', class: 'primary submit-button', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Charge Cycle..."} %> or <%= link_to 'Cancel', charge_cycles_path, class: 'warn' %>
+      </div>
     </div>
   </fieldset>
 <% end %>
