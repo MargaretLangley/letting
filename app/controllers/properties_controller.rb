@@ -16,7 +16,10 @@
 #
 class PropertiesController < ApplicationController
   def index
-    @records = Property.includes(:account, :address, :client, :entities).page(params[:page]).load
+    @records = Property.includes(:account,
+                                 :address,
+                                 :client,
+                                 :entities).page(params[:page]).load
   end
 
   def show
@@ -67,7 +70,7 @@ class PropertiesController < ApplicationController
               :client_id,
               address_attributes:         address_params,
               entities_attributes:        entities_params,
-              agent_attributes: agent_params,
+              agent_attributes:           agent_params,
               account_attributes:         account_params
   end
 

@@ -28,6 +28,7 @@ def generate_seeding
   seed_charges
   debits_and_credits
   seed_templates
+  seed_invoicings
   reset_pk_sequenece_on_each_table_used
 end
 
@@ -99,6 +100,18 @@ def seed_clients
       town:     'Manchester',
       county:   'Greater Manchester',
       postcode: 'M16 0PX'
+    },
+    {
+      addressable_id: 4,
+      addressable_type: 'Template',
+      flat_no:  '',
+      house_name: '',
+      road_no:  '77',
+      road:     'Henley Road',
+      district: 'Edgbaston',
+      town:     'Birmingham',
+      county:   'West Midlands',
+      postcode: 'B32 7NR'
     }
   ]
 
@@ -330,7 +343,7 @@ def create_credits
       account_id: 1,
       on_date: create_date(15),
       amount: -88.08,
-    }
+    },
   ]
 end
 
@@ -348,10 +361,165 @@ def create_date months_ago
 end
 
 def seed_templates
-  Rake::Task['db:import:template'].invoke
-  Rake::Task['db:import:template_address'].invoke
-  Rake::Task['db:import:template_notice'].invoke
+  create_templates
+  create_notices
 end
+
+def create_templates
+  Template.create! [
+    { id: 1,
+      description: "Page 1 Invoice",
+      invoice_name: "F & L Adams",
+      phone: "1215030992",
+      vat: "277 9904 95",
+      heading1: "Lettings",
+      heading2: "Invoice",
+      advice1: "Hearby notice ",
+      advice2: "Remittance Advice",
+    },
+    { id: 2,
+      description:"Page 2",
+      invoice_name: "F & L Adams",
+      phone: "1215030992",
+      vat: "277 9904 95",
+      heading1: "Common Leasehold",
+      heading2: "Notice to ",
+      advice1: "NOTICE LEASES",
+      advice2: "NOTES LANDLORDS",
+    },
+  ]
+
+  Address.create! [
+    {
+      addressable_id: 1,
+      addressable_type: 'Template',
+      flat_no:  '',
+      house_name: '',
+      road_no:  '77',
+      road:     'Henley Road',
+      district: 'Edgbaston',
+      town:     'Birmingham',
+      county:   'West Midlands',
+      postcode: 'B32 7NR'
+    }
+  ]
+
+end
+
+def create_notices
+  Notice.create! [
+    { id: 1,
+      template_id: 2,
+      instruction: "[Insert leaseholder]",
+      fill_in: "To",
+      sample: "Mr & Mrs Sample",
+    },
+    { id: 2,
+      template_id: 2,
+      instruction: "[address of premises]",
+      fill_in: "This notice is ",
+      sample: "11 Tamworth Road",
+    },
+    { id: 3,
+      template_id: 2,
+      instruction: "[Insert date]",
+      fill_in: "Requires rent",
+      sample: "60.00",
+    },
+    { id: 4,
+      template_id: 2,
+      instruction: "[State Period]",
+      fill_in: "Payable for period",
+      sample: "20March-29th Sep",
+    },
+    { id: 5,
+      template_id: 2,
+      instruction: "[Insert Landlord name]",
+      fill_in: "Pay to",
+      sample: "Mr Collector",
+    },
+    { id: 6,
+      template_id: 2,
+      instruction: "[Insert address]",
+      fill_in: "at",
+      sample: "11 High Street",
+    },
+    { id: 7,
+      template_id: 2,
+      instruction: "[Insert Landlord name]",
+      fill_in: "To",
+      sample: "CLIENT NAME",
+    },
+   ]
+end
+
+def seed_invoicings
+  create_products
+  create_invoices
+  create_letters
+  create_invoicings
+end
+
+def create_invoices
+  Invoice.create! [
+    { id: 1,
+      invoicing_id: 1,
+      billing_address: "Mr J. C. Laker\nFlat 33 The Oval\n207b Vauxhall Street\nKennington\nLondon\nSE11 5SS",
+      property_ref: 1001,
+      invoice_date: "2014-01-09",
+      property_address: "Flat 28 Lords\n2 St Johns Wood Road \nLondon\Greater London\nNW8 8QN",
+      arrears: 20.00,
+      total_arrears: 88.08,
+      client: "Mr K.S. Ranjitsinhji\nFlat 96 Old Trafford\nDean\nSeaford\nSuss\nBN6 7QP"
+    },
+  ]
+end
+
+def create_products
+  Product.create! [
+    { id: 1,
+      invoice_id: 1,
+      charge_type: "Service Charge",
+      date_due: "2014-09-29",
+      amount: 125,
+      period_first: "2014-09-29",
+      period_last: "2014-09-29"
+    },
+    { id: 2,
+      invoice_id: 1,
+      charge_type: "Ground Rent",
+      date_due: "2014-09-29",
+      amount: 88.08,
+      period_first: "2014-09-29",
+      period_last: "2014-09-29"
+    },
+  ]
+end
+
+def create_invoicings
+  Invoicing.create! [
+    { id: 1,
+      property_range: "1001 - 1001",
+      start_date: "2014-09-20",
+      end_date: "2014-12-04",
+    },
+  ]
+end
+
+def create_letters
+  Letter.create! [
+    { id: 1,
+      invoice_id: 1,
+      template_id: 1,
+    },
+  ]
+end
+
+# def seed_templates
+#   Rake::Task['db:import:template'].invoke
+#   Rake::Task['db:import:template_address'].invoke
+#   Rake::Task['db:import:template_notice'].invoke
+# end
 
 def reset_pk_sequenece_on_each_table_used
   Rake::Task['db:reset_pk'].invoke
