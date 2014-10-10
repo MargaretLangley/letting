@@ -44,43 +44,55 @@
         &nbsp;
       </div>
 
-      <div class='grid-row col-6-24 vertical-spacer '>
-        &nbsp;
-      </div>
-      <div class='col-3-24 vertical-spacer  faded'>
-        Due On
-      </div>
-      <div class='col-2-24 vertical-spacer r-align'>
-        <div class='faded'> Day</div>
-      </div>
-      <div class='col-2-24 vertical-spacer r-align'>
-        <div class='faded'> Month </div>
-      </div>
-      <div class='col-2-24 vertical-spacer r-align'>
-        <div class='faded'> Year </div>
-      </div>
-      <div class='col-9-24 vertical-spacer'>
-        &nbsp;
-      </div>
-
-      <%= f.fields_for :due_ons do |builder| %>
-        <div class='grid-row col-9-24'>
+      <div class='js-group-toggle'>
+        <div class='grid-row col-6-24 vertical-spacer '>
           &nbsp;
         </div>
-        <div class='col-2-24'>
-          <%= builder.text_field :day, class: 'r-align width-1-1' %>
+        <div class='col-3-24 vertical-spacer  faded'>
+          Due On
         </div>
-        <div class='col-2-24'>
-          <%= builder.text_field :month, class: 'r-align width-1-1' %>
+        <div class='col-2-24 vertical-spacer r-align'>
+          <div class='faded'> Day</div>
         </div>
-        <div class='col-2-24 vertical-spacer'>
-          <%= builder.text_field :year, class: 'r-align width-1-1' %>
+        <div class='col-2-24 vertical-spacer r-align'>
+          <div class='faded'> Month </div>
         </div>
-        <div class='col-9-24'>
+        <div class='col-2-24 vertical-spacer r-align'>
+          <div class='faded'> Year </div>
+        </div>
+        <div class='col-9-24 vertical-spacer'>
           &nbsp;
         </div>
-      <% end %>
-
+        <%= f.fields_for :due_ons do |builder| %>
+          <div class='grid js-enclosed-toggle <%= "#{hide_extra_new_records record: builder.object, index: builder.index } " %>'>
+            <div class='grid-row col-9-24'>
+              &nbsp;
+            </div>
+            <div class='col-2-24'>
+              <%= builder.text_field :day, class: 'r-align width-1-1 js-clear' %>
+            </div>
+            <div class='col-2-24'>
+              <%= builder.text_field :month, class: 'r-align width-1-1 js-clear' %>
+            </div>
+            <div class='col-2-24 vertical-spacer'>
+              <%= builder.text_field :year, class: 'r-align width-1-1 js-clear' %>
+            </div>
+            <div class='col-2-24 vertical-spacer'>
+              <%= builder.hidden_field :_destroy %>
+              <%= link_to_if(!first_record?(index: builder.index), fa_icon('trash-o'), '#', class:"delete-button #{hide_or_destroy record: builder.object}", title: 'Delete Due Date') %>
+            </div>
+            <div class='col-7-24'>
+              &nbsp;
+            </div>
+          </div>  <!-- js-enclosed-toggle -->
+        <% end %>
+        <div class='grid-row col-9-24 vertical-spacer'>
+          &nbsp;
+        </div>
+        <div class='col-15-24 vertical-spacer'>
+          <%= link_to fa_icon('plus lg'), '#', class: 'js-reveal-link', title: 'Add Due Date' %>
+        </div>
+      </div>  <!-- js-group-toggle -->
       <hr class = 'faded'>
       <%= render 'cycle_charged_ins/form', charge_cycle: @charge_cycle %>
       <div class='grid-row col-24-24'>

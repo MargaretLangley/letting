@@ -1,12 +1,18 @@
 
-
 $( document ).ready(function() {
 
   $('.js-reveal-link').click(function(event) {
     event.preventDefault();
-    $(this).closest('.js-toggle-selection')
+    $(this).closest('.js-group-toggle')
            .children('.js-revealable:hidden:first')
            .slideToggle('fast');
+
+    if ($(this).closest('.js-group-toggle')
+           .children('.js-revealable:hidden')
+           .length < 1) {
+      $(this).addClass('grey');
+      $(this).prop('Enabled', "False");
+    }
   });
 
   // Hiding a link
@@ -14,8 +20,15 @@ $( document ).ready(function() {
 
   $('.js-hide-link').click(function(event) {
     event.preventDefault();
-    $(this).closest('.js-toggle-selection').slideToggle('fast');
-    $(this).closest('.js-toggle-selection').find('.js-clear').val('');
+    $(this).closest('.js-enclosed-toggle').slideToggle('fast');
+    $(this).closest('.js-enclosed-toggle').find('.js-clear').val('');
+    $(this).closest('.js-group-toggle')
+           .find('.js-reveal-link')
+           .prop('Enabled', "True");
+
+    $(this).closest('.js-group-toggle')
+           .find('.js-reveal-link')
+           .removeClass('grey');
   });
 
   // Destroying a link - we set the _destroy field to true and
@@ -26,7 +39,7 @@ $( document ).ready(function() {
     // previous hidden should be a _destroy field
     $(this).prev('input[type=hidden]').val('1')
     // visual effects
-    $(this).closest('.js-toggle-selection').slideToggle('fast');
-    $(this).closest('.js-toggle-selection').find('.js-clear').prop('disabled', true)
+    $(this).closest('.js-enclosed-toggle').slideToggle('fast');
+    $(this).closest('.js-enclosed-toggle').find('.js-clear').prop('disabled', true)
   });
 });
