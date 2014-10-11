@@ -17,28 +17,30 @@
   <div class='col-7-24 vertical-spacer grid-header'>
     Dormant
   </div>
-    <%= builder.fields_for :charges do |f| %>
-      <div class='js-enclosed-toggle <%= hide_extra_new_records record: f.object, index: f.index %>'  >
-        <div class='grid js-dynamic-group'>
-          <div class='col-6-24 vertical-spacer  no-r-pad spec-charge-count'>
-            <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
-          </div>
-          <div class='col-5-24 vertical-spacer'>
-            <%= f.select :charge_cycle_id, options_for_select( ChargeCycleDecorator.all, f.object.charge_cycle_id ), { prompt: 'Please select'},{ class: 'js-dynamic-filter' } %>
-          </div>
-          <div class='col-3-24 vertical-spacer'>
-            <%= f.grouped_collection_select :charged_in_id, ChargeCycle.all, :charged_ins, :name, :id, :name, { include_blank: true }, { class: 'js-dynamic-result' } %>
-          </div>
-          <div class='col-3-24 vertical-spacer r-align'>
-            <%= f.text_field :amount, class: 'r-align' %>
-            <%= f.hidden_field :start_date %>
-            <%= f.hidden_field :end_date %>
-          </div>
-          <div class='col-7-24 vertical-spacer'>
-            <%= f.check_box :dormant, class: 'js-check-box-toggle' %>
-          </div>
-        </div>
-      </div> <!-- js-enclosed-toggle -->
-    <% end %>
+  <%= builder.fields_for :charges do |f| %>
+    <div class='grid js-dynamic-group js-enclosed-toggle <%= hide_extra_new_records record: f.object, index: f.index %>'  >
+      <div class='col-6-24 vertical-spacer  no-r-pad spec-charge-count'>
+        <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
+      </div>
+      <div class='col-5-24 vertical-spacer'>
+        <%= f.select :charge_cycle_id, options_for_select( ChargeCycleDecorator.all, f.object.charge_cycle_id ), { prompt: 'Please select'},{ class: 'js-dynamic-filter' } %>
+      </div>
+      <div class='col-3-24 vertical-spacer'>
+        <%= f.grouped_collection_select :charged_in_id, ChargeCycle.all, :charged_ins, :name, :id, :name, { include_blank: true }, { class: 'js-dynamic-result' } %>
+      </div>
+      <div class='col-3-24 vertical-spacer r-align'>
+        <%= f.text_field :amount, class: 'r-align' %>
+        <%= f.hidden_field :start_date %>
+        <%= f.hidden_field :end_date %>
+      </div>
+      <div class='col-2-24 vertical-spacer'>
+        <%= f.check_box :dormant, class: 'js-check-box-toggle' %>
+      </div>
+      <div class='col-5-24 vertical-spacer'>
+        <%= builder.hidden_field :_destroy %>
+        <%= link_to(fa_icon('trash-o'), '#', class:"delete-button #{hide_or_destroy record: f.object}", title: 'Delete Charge') %>
+      </div>
+    </div> <!-- js-dynamic-group js-enclosed-toggle -->
+  <% end %>
   <%= link_to fa_icon('plus lg'), '#', class: 'js-reveal-link', title: 'Add Charge' %>
 </div>   <!-- js-group-toggle -->
