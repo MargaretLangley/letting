@@ -44,7 +44,7 @@ class Account < ActiveRecord::Base
       each(&:clear_up_form)
     end
   end
-  MAX_CHARGES = 4
+  MAX_CHARGES = 6
   accepts_nested_attributes_for :charges, allow_destroy: true
 
   # For each charge it finds the next time it can be charged, if any,
