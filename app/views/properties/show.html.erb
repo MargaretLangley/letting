@@ -41,8 +41,8 @@
       <div class='col-1-4 vertical-spacer no-r-pad'>
         <%= link_to fa_icon('chevron-circle-down'), '#', class: 'js-toggle  simple-button float-right', title: 'Full Accounts' %>
       </div>
-      <%= render 'properties/show/account_header' %>
-      <%= render partial: 'properties/show/account_item', collection: AccountDecorator.new(@property.account).abbrev_items %>
+      <%= render 'accounts/account_header' %>
+      <%= render partial: 'accounts/account_item', collection: AccountDecorator.new(@property.account).abbrev_items %>
     </div>
   </div>
   <div class='js-togglable js-revealable'>
@@ -54,8 +54,8 @@
       <div class='col-1-4 vertical-spacer no-r-pad'>
         <%= link_to fa_icon('chevron-circle-up'), '#', class: 'js-toggle  simple-button float-right', title: 'Partial Accounts' %>
       </div>
-      <%= render 'properties/show/account_header' %>
-      <%= render partial: 'properties/show/account_item', collection: AccountDecorator.new(@property.account).items %>
+      <%= render 'accounts/account_header' %>
+      <%= render partial: 'accounts/account_item', collection: AccountDecorator.new(@property.account).items %>
     </div>
   </div>
 </div>

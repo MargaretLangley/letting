@@ -11,7 +11,7 @@
           <br>
           <br>
           <% if payment.account_exists? %>
-            <%= render 'payments/form/address', property: payment.property_decorator %>
+            <%= render 'addresses/abbreviated', property: payment.property_decorator %>
           <% end %>
         </div>
         <div class='col-3-12 shell'>
@@ -32,7 +32,7 @@
     <% if payment.account_exists? %>
       <%= render 'payments/form/payment_received', payment: payment, payment_form: payment_form  %>
       <div class="grid js-totalizer">
-        <%= render 'payments/form/credits', payment: payment, payment_form: payment_form  %>
+        <%= render 'credits/form', payment: payment, payment_form: payment_form  %>
         <%= render 'payments/form/total', payment: payment, payment_form: payment_form %>
       </div>
     <% else %>

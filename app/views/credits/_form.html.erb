@@ -1,0 +1,60 @@
+<div data-role='receivables'>
+  <div class="col-15-24">
+    <h3>Unpaid Debits</h3>
+  </div>
+  <div class="col-1-24 pick-out">
+    <h3>&nbsp;</h3>
+  </div>
+  <div class="col-8-24 pick-out">
+    <h3>Credits</h3>
+  </div>
+
+  <div class="col-6-24 grid-header">
+    Charge
+  </div>
+  <div class="col-3-24 grid-header">
+    &nbsp;
+  </div>
+  <div class="col-3-24 grid-header r-align">
+    Amount
+  </div>
+  <div class="col-3-24 grid-header r-align">
+    Owing
+  </div>
+  <div class="col-8-24 grid-header r-align pick-out">
+    Payment
+  </div>
+  <div class="col-1-24 grid-header r-align pick-out">
+    &nbsp;
+  </div>
+  <% @payment.credits_decorated.each do |credit| %>
+    <%= payment_form.fields_for :credits, credit.source do |credit_form| %>
+      <div>
+        <div class="col-6-24 cell">
+          <%= credit_form.label credit.charge_type %>
+        </div>
+        <div class="col-3-24 cell">
+          &nbsp;
+        </div>
+        <div class="col-3-24 cell r-align amount">
+          <%= number_to_currency credit.amount %>
+        </div>
+        <div class="col-3-24 cell r-align amount">
+          <%= number_to_currency credit.owing %>
+        </div>
+        <div class="col-1-24 cell pick-out">
+          &nbsp;
+        </div>
+        <div class="col-7-24 cell r-align pick-out">
+          <%= credit_form.hidden_field :account_id %>
+          <%= credit_form.hidden_field :charge_id %>
+          <%= credit_form.hidden_field :on_date %>
+          <%= credit_form.text_field :amount , value: credit.amount, class: 'js-amount r-align width-1-1' %>
+        </div>
+        <div class="col-1-24 cell pick-out">
+          &nbsp;
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
