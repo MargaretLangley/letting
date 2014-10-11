@@ -5,14 +5,15 @@ describe RevealHelper, type: :helper do
     it 'display if new and first' do
       object = double
       allow(object).to receive('new_record?').and_return true
-      expect(hide_extra_new_records record: object, index: 0 )
+      expect(hide_extra_new_records record: object, index: 0)
         .to be_blank
     end
 
     it 'hide if new and not first' do
       object = double
       allow(object).to receive('new_record?').and_return true
-      expect(hide_extra_new_records(record: object, index: 1)).to eq 'js-revealable'
+      expect(hide_extra_new_records(record: object, index: 1))
+        .to eq 'js-revealable'
     end
 
     it 'displays if valid' do
