@@ -33,8 +33,4 @@ class AccountDebitDecorator
   def payment
     ''
   end
-
-  def amount
-    @source.amount
-  end
 end

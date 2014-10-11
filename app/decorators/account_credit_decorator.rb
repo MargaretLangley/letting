@@ -33,8 +33,4 @@ class AccountCreditDecorator
   def payment
     number_with_precision(-@source.amount, precision: 2)
   end
-
-  def amount
-    @source.amount
-  end
 end
