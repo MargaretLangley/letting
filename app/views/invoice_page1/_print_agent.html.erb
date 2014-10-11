@@ -1,9 +1,0 @@
-<div class='inv-add'>
-   <% if object.entities.any? %>
-     <% object.entities.each do |entity| %>
-	     <%= render 'entities/view', object: entity %>
-	  <% end %>
-	  <br>
-     <%= simple_format(object.bill_to.address.text, {}, wrapper_tag: 'div') %>
-   <% end %>
-</div>

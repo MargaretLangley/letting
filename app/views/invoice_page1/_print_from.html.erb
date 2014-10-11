@@ -1,9 +1,0 @@
-<div class='medfont grid-row'>
-   From:
-   <% if object.entities.any? %>
-     <% object.entities.each do |entity| %>
-	   <%= render 'entities/view', object: entity %>
-	 <% end %>
-     <%= render 'addresses/view_on_one_line', addressee: object.bill_to %>
-   <% end %>
-</div>
