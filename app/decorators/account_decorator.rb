@@ -45,8 +45,7 @@ class AccountDecorator
   def running_balance items
     running_balance = 0
     items.map do |item|
-      running_balance += item.amount
-      item.running_balance = running_balance
+      item.running_balance = running_balance += item.amount
       item
     end
   end

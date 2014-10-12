@@ -33,15 +33,14 @@ class Invoice < ActiveRecord::Base
   has_many :templates, through: :letters
   has_many :letters, dependent: :destroy
 
-  def prepare(invoice_date: Date.current, account:)
+  def prepare(invoice_date: Date.current, account:, debits:)
     self.billing_address = account.property.bill_to_s
     self.property_ref = account.property.human_ref
     self.invoice_date = invoice_date
 
     self.property_address = account.property.to_address join: ', '
     self.arrears = account.balance
-    # TODO: REMOVE FAKE TOTAL - Required to bypass database requirement
-    self.total_arrears = 11.00
+    self.total_arrears = account.balance + debits.map(&:amount).inject(0, :+)
     self.client = account.property.client.to_s
     letters.build template: Template.find(1)
     self
