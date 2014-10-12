@@ -1,4 +1,3 @@
-<% dotted_line = "----------" %>
 <% total = 0 %>
 <div class='col-12-12 grid-row'>
   &nbsp;
@@ -18,9 +17,8 @@
 <% end %>
 
 <% items.each do |item| %>
-
   <div class='col-3-12 grid-row'>
-  &nbsp;
+    &nbsp;
   </div>
   <div class='col-4-12'>
      <%= item.charge_type %>
@@ -30,7 +28,7 @@
   </div>
   <div class='col-2-12 r-align'>
     <% total = total + item.amount %>
-   <%= number_with_precision(item.amount,precision: 2) %>
+    <%= number_with_precision(item.amount,precision: 2) %>
   </div>
 <% end %>
 
@@ -38,7 +36,8 @@
   &nbsp;
 </div>
 <div class='col-2-12 r-align'>
-   <%= dotted_line %>
+  <% dotted_line = "----------" %>
+  <%= dotted_line %>
 </div>
 
 <div class='col-3-12 grid-row'>
