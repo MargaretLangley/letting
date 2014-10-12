@@ -89,7 +89,7 @@ class PropertiesController < ApplicationController
 
   def identity
     property = PropertyDecorator.new @property
-    "Property 'ID #{property.human_ref}, #{property.abbreviated_address}'"
+    "Property 'ID #{property.human_ref}, #{property.abridged_text}'"
   end
 
   def property_created_message

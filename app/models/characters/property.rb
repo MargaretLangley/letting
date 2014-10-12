@@ -24,7 +24,7 @@ class Property < ActiveRecord::Base
   before_validation :clear_up_form
 
   delegate :text, to: :address, prefix: true
-  delegate :abbreviated_address, to: :address
+  delegate :abridged_text, to: :address
 
   def occupier
     entities.full_name
@@ -51,9 +51,9 @@ class Property < ActiveRecord::Base
     occupier + "\n" + address.text
   end
 
-  def to_address
+  def to_address join: "\n"
     return unless address
-    address.text
+    address.text join: join
   end
 
   delegate :bill_to, to: :agent

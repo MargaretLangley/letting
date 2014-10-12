@@ -467,7 +467,7 @@ def create_invoices
       billing_address: "Mr J. C. Laker\nFlat 33 The Oval\n207b Vauxhall Street\nKennington\nLondon\nSE11 5SS",
       property_ref: 1001,
       invoice_date: "2014-01-09",
-      property_address: "Flat 28 Lords\n2 St Johns Wood Road \nLondon\Greater London\nNW8 8QN",
+      property_address: "Flat 28 Lords, 2 St Johns Wood Road, London, Greater London, NW8 8QN",
       arrears: 20.00,
       total_arrears: 88.08,
       client: "Mr K.S. Ranjitsinhji\nFlat 96 Old Trafford\nDean\nSeaford\nSuss\nBN6 7QP"

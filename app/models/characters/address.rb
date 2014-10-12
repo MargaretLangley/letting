@@ -34,13 +34,13 @@ class Address < ActiveRecord::Base
             length: { minimum: MIN_POSTCODE, maximum: MAX_POSTCODE },
             allow_blank: true
 
-  def abbreviated_address
+  def abridged_text join: "\n"
     [flat_house_line.blank? ? road_line : flat_line,
-     town.blank? ? county : town]
+     town.blank? ? county : town].join "#{join}"
   end
 
-  def text
-    address_lines.delete_if(&:empty?).join "\n"
+  def text join: "\n"
+    address_lines.delete_if(&:empty?).join "#{join}"
   end
 
   def empty?

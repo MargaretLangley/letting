@@ -10,7 +10,7 @@
         <%= link_to fa_icon('chevron-circle-down'), '#', class: 'js-toggle  simple-button float-right', title: 'Full Property' %>
         <%= link_to fa_icon('edit'), edit_property_path(@property.id), class: 'simple-button float-right', title: 'Edit' %>
       </div>
-      <%= render 'properties/show/property_abbreviated', property: @property %>
+      <%= render 'properties/property_abridged', property: @property %>
     </div>
   </div>
   <div class='js-togglable  js-revealable'>
@@ -22,7 +22,7 @@
         <%= link_to fa_icon('chevron-circle-up'), '#', class: 'js-toggle  simple-button float-right', title: 'Partial Property' %>
         <%= link_to fa_icon('edit'), edit_property_path(@property.id), class: 'simple-button float-right', title: 'Edit' %>
       </div>
-      <%= render 'properties/show/property', property: @property %>
+      <%= render 'properties/property', property: @property %>
     </div>
   </div>
 </div>

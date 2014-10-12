@@ -55,22 +55,22 @@ describe Address, type: :model do
   end
 
   describe 'methods' do
-    describe 'abbreviated_address' do
+    describe 'abridged_text' do
       it 'adds flat when present' do
         address = Address.new flat_no: '47', house_name: 'Hill', town: 'Brum'
-        expect(address.abbreviated_address).to eq ['Flat 47 Hill', 'Brum']
+        expect(address.abridged_text).to eq "Flat 47 Hill\nBrum"
       end
       it 'adds road when flat missing' do
         house = Address.new flat_no: '', road: 'Edge Road', town: 'Brum'
-        expect(house.abbreviated_address).to eq ['Edge Road', 'Brum']
+        expect(house.abridged_text).to eq "Edge Road\nBrum"
       end
       it 'adds town when present' do
         house = Address.new road: 'Edge', town: 'Brum', county: 'West'
-        expect(house.abbreviated_address).to eq %w(Edge Brum)
+        expect(house.abridged_text).to eq "Edge\nBrum"
       end
       it 'adds county when town missing' do
         house = Address.new road: 'Edge', town: '', county: 'West'
-        expect(house.abbreviated_address).to eq %w(Edge West)
+        expect(house.abridged_text).to eq "Edge\nWest"
       end
     end
 

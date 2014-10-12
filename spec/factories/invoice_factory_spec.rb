@@ -28,7 +28,7 @@ describe 'Invoice Factory' do
     it 'sets property address' do
       address = address_new(road: 'New Road')
       expect(invoice_new(property_address: address).property_address)
-        .to eq "New Road\nBirmingham\nWest Midlands"
+        .to eq 'New Road, Birmingham, West Midlands'
     end
 
     it 'sets client' do

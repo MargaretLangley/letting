@@ -38,7 +38,7 @@ class Invoice < ActiveRecord::Base
     self.property_ref = account.property.human_ref
     self.invoice_date = invoice_date
 
-    self.property_address = account.property.to_address
+    self.property_address = account.property.to_address join: ', '
     self.arrears = account.balance
     # TODO: REMOVE FAKE TOTAL - Required to bypass database requirement
     self.total_arrears = 11.00

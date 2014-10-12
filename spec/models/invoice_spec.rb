@@ -46,7 +46,7 @@ RSpec.describe Invoice, type: :model do
         property = property_new address: address_new(road: 'New', town: 'Brum'),
                                 account: account_new
         invoice.prepare account: property.account
-        expect(invoice.property_address).to eq "New\nBrum\nWest Midlands"
+        expect(invoice.property_address).to eq 'New, Brum, West Midlands'
       end
       it 'sets balance' do
         template_create id: 1
