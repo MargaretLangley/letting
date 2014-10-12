@@ -41,7 +41,7 @@ class Invoicing < ActiveRecord::Base
   end
 
   def make_invoice(invoice: invoices.build, account:, debits:)
-    invoice.prepare account: account
+    invoice.prepare account: account, debits: debits
     invoice.prepare_products debits: debits
   end
 end

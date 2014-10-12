@@ -78,10 +78,12 @@ RSpec.describe Invoicing, type: :model do
     it 'calls invoice_prepare' do
       invoice = Invoice.new
       account = account_new
-      expect(invoice).to receive(:prepare).with account: account
+      debit = debit_new(charge: charge_new)
+      expect(invoice).to receive(:prepare).with account: account,
+                                                debits: [debit]
       invoicing_new.make_invoice invoice: invoice,
                                  account: account,
-                                 debits: [debit_new(charge: charge_new)]
+                                 debits: [debit]
     end
 
     it 'calls prepare_products' do

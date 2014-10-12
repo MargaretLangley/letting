@@ -11,7 +11,7 @@ RSpec.describe Invoice, type: :model do
       (invoice = Invoice.new).property_address = nil
       expect(invoice).to_not be_valid
     end
-    it('products') { expect(invoice_new products: nil).to_not be_valid }
+    it('debits') { expect(invoice_new debits: nil).to_not be_valid }
     it('arrears') { expect(invoice_new arrears: nil).to_not be_valid }
   end
 
@@ -22,7 +22,7 @@ RSpec.describe Invoice, type: :model do
         invoice = Invoice.new
         agent = agent_new(entities: [Entity.new(name: 'Lock')])
         property = property_new agent: agent, account: account_new
-        invoice.prepare account: property.account
+        invoice.prepare account: property.account, debits: [debit_new]
         expect(invoice.billing_address)
           .to eq "Lock\nEdgbaston Road\nBirmingham\nWest Midlands"
       end
@@ -30,14 +30,16 @@ RSpec.describe Invoice, type: :model do
         template_create id: 1
         invoice = Invoice.new
         property = property_new human_ref: 55, account: account_new
-        invoice.prepare account: property.account
+        invoice.prepare account: property.account, debits: [debit_new]
         expect(invoice.property_ref).to eq 55
       end
       it 'sets invoice_date' do
         template_create id: 1
         invoice = Invoice.new
         property = property_new account: account_new
-        invoice.prepare invoice_date: '2014-06-30', account: property.account
+        invoice.prepare invoice_date: '2014-06-30',
+                        account: property.account,
+                        debits: [debit_new]
         expect(invoice.invoice_date.to_s).to eq '2014-06-30'
       end
       it 'sets property_address' do
@@ -45,20 +47,20 @@ RSpec.describe Invoice, type: :model do
         invoice = Invoice.new
         property = property_new address: address_new(road: 'New', town: 'Brum'),
                                 account: account_new
-        invoice.prepare account: property.account
+        invoice.prepare account: property.account, debits: [debit_new]
         expect(invoice.property_address).to eq 'New, Brum, West Midlands'
       end
       it 'sets balance' do
         template_create id: 1
         account = account_new credit: credit_new(amount: 7)
         property = property_new account: account
-        expect(Invoice.new.prepare(account: property.account).arrears).to eq(7)
+        expect(Invoice.new.prepare(account: property.account, debits: [debit_new]).arrears).to eq(7)
       end
       it 'sets client' do
         template_create id: 1
         client_create entities: [Entity.new(name: 'Bell')],
                       property: property_new(account: account_new)
-        expect(Invoice.new.prepare(account: Account.first).client)
+        expect(Invoice.new.prepare(account: Account.first, debits: [debit_new]).client)
           .to eq "Bell\nEdgbaston Road\nBirmingham\nWest Midlands"
       end
     end
