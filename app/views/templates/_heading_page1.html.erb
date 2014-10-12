@@ -12,10 +12,6 @@
 <div class='col-8-12 inv-advice-bold'>
   VAT Reg No <%= template.vat %>
 </div><div class=' inv-advice-bold col-3-12'>
-  <%= template.address.road_no %>
-  <%= template.address.road %><br>
-  <%= template.address.town %><br>
-  <%= template.address.county %><br>
-  <%= template.address.postcode %><br>
+  <%= simple_format(template.address.text, {}, wrapper_tag: 'div') %>
   Tel: <%= template.phone %><br>
 </div>
