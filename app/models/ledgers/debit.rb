@@ -59,6 +59,15 @@ class Debit < ActiveRecord::Base
       [other.charge_id, other.on_date, other.amount]
   end
 
+  def to_debitable
+    {
+      charge_type: charge_type,
+      date_due: on_date,
+      period: period,
+      amount: amount,
+    }
+  end
+
   # charge_id - the charge's being queried for unpaid debits.
   # returns unpaid debits for the charge_id
   #

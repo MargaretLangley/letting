@@ -89,6 +89,16 @@ describe Debit, :ledgers, type: :model do
       end
     end
 
+    describe 'to_debitable' do
+      it 'makes hash' do
+        expect(debit_new(charge: charge_new).to_debitable)
+          .to eq charge_type: 'Ground Rent',
+                 date_due: Date.new(2013, 3, 25),
+                 period: Date.new(2013, 3, 25)..Date.new(2013, 6, 30),
+                 amount: 88.08
+      end
+    end
+
     describe '#<=>' do
       it 'returns 0 when equal' do
         lhs = debit_new charge_id: 1, on_date: '2014-01-02', amount: 5.00

@@ -32,6 +32,12 @@ describe 'Debit Factory' do
           .to eq '2014-03-25..2014-06-30'
       end
     end
+    describe 'adds' do
+      it 'assigns charge' do
+        charge = charge_new charge_type: 'Rent'
+        expect(debit_new(charge: charge).charge_type).to eq 'Rent'
+      end
+    end
   end
 
   describe 'create' do
