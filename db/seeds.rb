@@ -470,7 +470,7 @@ def create_invoices
       property_address: "Flat 28 Lords, 2 St Johns Wood Road, London, Greater London, NW8 8QN",
       arrears: 20.00,
       total_arrears: 88.08,
-      client: "Mr K.S. Ranjitsinhji\nFlat 96 Old Trafford\nDean\nSeaford\nSuss\nBN6 7QP"
+      client_address: "Mr K.S. Ranjitsinhji\nFlat 96 Old Trafford\nDean\nSeaford\nSuss\nBN6 7QP"
     },
   ]
 end
@@ -500,8 +500,8 @@ def create_invoicings
   Invoicing.create! [
     { id: 1,
       property_range: "1001 - 1001",
-      start_date: "2014-09-20",
-      end_date: "2014-12-04",
+      period_first: "2014-09-20",
+      period_last: "2014-12-04",
     },
   ]
 end

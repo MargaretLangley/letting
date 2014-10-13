@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(version: 20140930053829) do
     t.text     "property_address",                         null: false
     t.decimal  "arrears",          precision: 8, scale: 2, null: false
     t.decimal  "total_arrears",    precision: 8, scale: 2, null: false
-    t.text     "client",                                   null: false
+    t.text     "client_address",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -166,8 +166,8 @@ ActiveRecord::Schema.define(version: 20140930053829) do
 
   create_table "invoicings", force: true do |t|
     t.string   "property_range", null: false
-    t.date     "start_date",     null: false
-    t.date     "end_date",       null: false
+    t.date     "period_first",   null: false
+    t.date     "period_last",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

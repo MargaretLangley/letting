@@ -28,9 +28,9 @@
         Invoice Between
       </div>
       <div class='col-5-8 vertical-spacer'>
-        <%= noticable_date_range start_date: @invoicing.start_date, end_date: @invoicing.end_date %>
-          <%= f.hidden_field :start_date %>
-          <%= f.hidden_field :end_date %>
+        <%= noticable_date_range start_date: @invoicing.period_first, end_date: @invoicing.period_last %>
+          <%= f.hidden_field :period_first %>
+          <%= f.hidden_field :period_last %>
       </div>
       <div class='col-2-8 vertical-spacer'>
         &nbsp;

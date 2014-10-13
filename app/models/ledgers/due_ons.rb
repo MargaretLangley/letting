@@ -63,7 +63,7 @@ module DueOns
       end
 
       def to_s
-        'due_ons: ' + map { |due_on| due_on.to_s }.join(", ")
+        'due_ons: ' + map(&:to_s).join(', ')
       end
 
       private

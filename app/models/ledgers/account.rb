@@ -47,25 +47,19 @@ class Account < ActiveRecord::Base
   MAX_CHARGES = 6
   accepts_nested_attributes_for :charges, allow_destroy: true
 
-  # For each charge it finds the next time it can be charged, if any,
-  # and creates a debit.
-  # billing_period - dates which we prepare debits over
-  #
-  def make_debits billing_period
-    charges.map do |charge|
-      charge.coming(billing_period).map do |chargeable|
-        Debit.new(chargeable.to_hash)
-      end
-    end.flatten
+  def invoice(billing_period:)
+    balance_before_billing = balance to_date: billing_period.first - 1.day
+    {
+      arrears: balance_before_billing,
+      total_arrears: balance_before_billing + make_debits(billing_period)
+                                               .map(&:amount)
+                                               .inject(0, :+),
+      debits: make_debits(billing_period),
+    }
   end
 
-  def make_debits? billing_period
-    charges.map do |charge|
-      charge.coming(billing_period).map do
-        return true
-      end
-    end
-    false
+  def invoice?(billing_period:)
+    make_debits? billing_period
   end
 
   def make_credits
@@ -106,5 +100,26 @@ class Account < ActiveRecord::Base
 
   def create_credit charge
     credits.build charge: charge, on_date: Date.current, amount: -charge.amount
+  end
+
+  # For each charge it finds the next time it can be charged, if any,
+  # and creates a debit.
+  # billing_period - dates which we prepare debits over
+  #
+  def make_debits billing_period
+    charges.map do |charge|
+      charge.coming(billing_period).map do |chargeable|
+        Debit.new(chargeable.to_hash)
+      end
+    end.flatten
+  end
+
+  def make_debits? billing_period
+    charges.map do |charge|
+      charge.coming(billing_period).map do
+        return true
+      end
+    end
+    false
   end
 end

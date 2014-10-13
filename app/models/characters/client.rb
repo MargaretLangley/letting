@@ -7,6 +7,7 @@
 # Clients have a number of properties. Clients have an address
 # and contact information (address and entity).
 #
+# rubocop: disable Lint/UnusedMethodArgument
 ####
 #
 class Client < ActiveRecord::Base
@@ -22,6 +23,10 @@ class Client < ActiveRecord::Base
 
   def prepare_for_form
     prepare_contact
+  end
+
+  def invoice billing_period: nil
+    { client: to_s }
   end
 
   def to_s

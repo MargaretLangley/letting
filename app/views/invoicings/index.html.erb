@@ -21,10 +21,10 @@
        <%= invoicing.property_range %>
       </div>
          <div class='col-1-6 no-print inherit-row'>
-       <%= l invoicing.start_date %>
+       <%= l invoicing.period_first %>
       </div>
       <div class='col-1-6 no-print inherit-row r-align'>
-        <%= l invoicing.end_date %>
+        <%= l invoicing.period_last %>
       </div>
       <nav class='col-1-6 no-print r-align'>
         <%= link_to fa_icon('file lg'), invoicing_path(invoicing), title: 'View', class: 'r-pad icon-large' %>

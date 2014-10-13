@@ -7,8 +7,8 @@ describe Invoicing, type: :feature do
       log_in admin_attributes
       invoicing_create id: 1,
                        property_range: '1-100',
-                       start_date: '2014/06/30',
-                       end_date: '2014/08/30'
+                       period_first: '2014/06/30',
+                       period_last: '2014/08/30'
 
       visit '/prints/1'
       expect(page.title).to eq 'Letting - Print'

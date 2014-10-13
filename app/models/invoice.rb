@@ -36,24 +36,26 @@ class Invoice < ActiveRecord::Base
   has_many :templates, through: :letters
   has_many :letters, dependent: :destroy
 
-  def prepare(invoice_date: Date.current, account:, debits:)
-    self.billing_address = account.property.bill_to_s
-    self.property_ref = account.property.human_ref
+  def prepare(invoice_date: Date.current)
     self.invoice_date = invoice_date
-
-    self.property_address = account.property.to_address join: ', '
-    self.arrears = account.balance
-    # TODO: REMOVE FAKE TOTAL - Required to bypass database requirement
-    debit_offset = 0
-    debit_offset = debits.map(&:amount).inject(0, :+) if debits
-    self.total_arrears = account.balance + debit_offset
-    self.client = account.property.client.to_s
     letters.build template: Template.find(1)
     self
   end
 
-  def prepare_products(debits:)
+  def property(property_ref:, property_address:, billing_address:)
+    self.property_ref = property_ref
+    self.property_address = property_address
+    self.billing_address = billing_address
+  end
+
+  def account(arrears:, total_arrears:, debits:)
+    self.arrears = arrears
+    self.total_arrears = total_arrears
     self.products = debits.map { |debit| Product.new debit.to_debitable }
+  end
+
+  def client(client:)
+    self.client_address = client
   end
 
   def to_s
@@ -62,6 +64,6 @@ class Invoice < ActiveRecord::Base
     "Invoice Date: #{invoice_date.inspect}\n"\
     "Property Address: #{property_address.inspect}\n"\
     "Arrears: #{arrears.inspect}\n"\
-    "client: #{client.inspect}\n"
+    "client: #{client_address.inspect}\n"
   end
 end

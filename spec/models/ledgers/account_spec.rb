@@ -1,4 +1,5 @@
 require 'rails_helper'
+# rubocop: disable Style/SpaceInsideRangeLiteral
 
 describe Account, :ledgers, type: :model do
   it('is valid') { expect(account_new).to be_valid }
@@ -7,34 +8,75 @@ describe Account, :ledgers, type: :model do
     before { Timecop.travel Date.new(2013, 1, 31) }
     after { Timecop.return }
 
-    describe '#make_debits' do
+    describe '#invoice' do
+
+      it 'debits before billing period added to arrears' do
+        debit = debit_new(amount: 30, on_date: Date.new(2013, 3, 4))
+        account = account_new debits: [debit]
+        invoice = account.invoice billing_period: Date.new(2013, 3, 5)..
+                                                  Date.new(2013, 5, 5)
+        expect(invoice[:arrears]).to eq(30)
+      end
+
+      describe 'total_arrears' do
+        it 'adds debits before billing period' do
+          debit = debit_new(amount: 30, on_date: Date.new(2013, 3, 4))
+          account = account_new debits: [debit]
+          invoice = account.invoice billing_period: Date.new(2013, 3, 5)..
+                                                    Date.new(2013, 5, 5)
+          expect(invoice[:total_arrears]).to eq(30)
+        end
+
+        it 'adds debits during the billing period' do
+          account = account_new charge: charge_new(amount: 43, charge_cycle: \
+            charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
+          invoice = account.invoice billing_period: Date.new(2013, 3, 5)..
+                                                    Date.new(2013, 3, 5)
+          expect(invoice[:total_arrears]).to eq(43)
+        end
+
+        it 'totals debits before and during billing period' do
+          account = account_new \
+            debits: [debit_new(amount: 30, on_date: Date.new(2013, 3, 4))],
+            charge: charge_new(amount: 43, charge_cycle: \
+              charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
+          invoice = account.invoice billing_period: Date.new(2013, 3, 5)..
+                                                    Date.new(2013, 3, 5)
+          expect(invoice[:total_arrears]).to eq(73)
+        end
+      end
+
       it 'produces debits if charge is due' do
         account = account_new charge: charge_new(charge_cycle: \
           charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
-        debits = account.make_debits Date.new(2013, 3, 5)..Date.new(2013, 3, 5)
-        expect(debits.size).to eq(1)
+        invoice = account.invoice billing_period: Date.new(2013, 3, 5)..
+                                                  Date.new(2013, 3, 5)
+        expect(invoice[:debits].size).to eq(1)
       end
 
       it 'no debits when charge is not due' do
         account = account_new charge: charge_new(charge_cycle: \
           charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
-        debits = account.make_debits Date.new(2013, 3, 6)..Date.new(2013, 3, 6)
-        expect(debits.size).to eq(0)
+        invoice = account.invoice billing_period: Date.new(2013, 3, 6)..
+                                                  Date.new(2013, 3, 6)
+        expect(invoice[:debits].size).to eq(0)
       end
     end
 
-    describe '#make_debits?' do
+    describe '#invoice?' do
       it 'returns true if debits would be made' do
         account = account_new charge: charge_new(charge_cycle: \
           charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
-        expect(account.make_debits? Date.new(2013, 3, 5)..Date.new(2013, 3, 5))
+        expect(account.invoice? billing_period: Date.new(2013, 3, 5)..
+                                                Date.new(2013, 3, 5))
           .to be true
       end
 
       it 'returns false if debits would not be made' do
         account = account_new charge: charge_new(charge_cycle: \
           charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
-        expect(account.make_debits? Date.new(2013, 3, 6)..Date.new(2013, 3, 6))
+        expect(account.invoice? billing_period: Date.new(2013, 3, 6)..
+                                                Date.new(2013, 3, 6))
           .to be false
       end
     end

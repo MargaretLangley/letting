@@ -8,6 +8,7 @@
 #
 # The code is part of the representation of a property.
 #
+# rubocop: disable Lint/UnusedMethodArgument
 ####
 #
 class Property < ActiveRecord::Base
@@ -43,8 +44,12 @@ class Property < ActiveRecord::Base
     account.clear_up_form if account.present?
   end
 
-  def bill_to_s
-    agent.bill_to.to_billing
+  def invoice billing_period: nil
+    {
+      property_ref: human_ref,
+      property_address: to_address(join: ', '),
+      billing_address: bill_to_s,
+    }
   end
 
   def to_billing
@@ -67,5 +72,11 @@ class Property < ActiveRecord::Base
         address: {},
         agent: { methods: [:to_address], only: [:to_address] }
       })
+  end
+
+  private
+
+  def bill_to_s
+    agent.bill_to.to_billing
   end
 end

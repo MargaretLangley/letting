@@ -7,8 +7,12 @@ describe 'Invoicing Factory' do
       it 'property_range' do
         expect(invoicing_new property_range: nil).to_not be_valid
       end
-      it('start_date') { expect(invoicing_new start_date: nil).to_not be_valid }
-      it('end_date') { expect(invoicing_new end_date: nil).to_not be_valid }
+      it 'period_first' do
+        expect(invoicing_new period_first: nil).to_not be_valid
+      end
+      it 'period_last' do
+        expect(invoicing_new period_last: nil).to_not be_valid
+      end
       it('invoices') { expect(invoicing_new invoices: nil).to_not be_valid }
     end
   end

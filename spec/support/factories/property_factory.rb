@@ -6,10 +6,12 @@ def property_new \
   occupiers: [Entity.new(title: 'Mr', initials: 'W G', name: 'Grace')],
   address: address_new,
   account: nil,
+  client: nil,
   agent: nil,
   prepare: false
 
   property = Property.new human_ref: human_ref
+  property.client = client if client
   property.prepare_for_form if prepare
   property.address = address
   property.entities = occupiers if occupiers
@@ -25,6 +27,7 @@ def property_create \
   occupiers: [Entity.new(title: 'Mr', initials: 'W G', name: 'Grace')],
   address: address_new,
   account: nil,
+  client: nil,
   agent: nil,
   prepare: false
 
@@ -32,6 +35,7 @@ def property_create \
                           occupiers: occupiers,
                           address: address,
                           account: account,
+                          client: client,
                           agent: agent,
                           prepare: prepare
   property.id = id if id
