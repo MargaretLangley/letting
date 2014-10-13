@@ -41,4 +41,8 @@ class ChargeCycle < ActiveRecord::Base
     return nil unless other.is_a?(self.class)
     [due_ons.sort] <=> [other.due_ons.sort]
   end
+
+  def to_s
+    "cycle: #{name}, type: #{cycle_type}, " + due_ons.to_s
+  end
 end

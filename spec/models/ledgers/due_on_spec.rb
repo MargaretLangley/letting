@@ -95,11 +95,6 @@ describe DueOn, :ledgers, type: :model do
       end
     end
 
-    it 'outputs #to_s' do
-      expect(due_on_new.to_s)
-        .to eq 'id: nil, day: 25, month: 3, year: nil, Destroy?: false'
-    end
-
     describe '#<=>' do
       it 'returns 0 when equal' do
         expect(due_on_new(day: 2, month: 2) <=>
@@ -118,6 +113,21 @@ describe DueOn, :ledgers, type: :model do
 
       it 'returns nil when not comparable' do
         expect(due_on_new(day: 2, month: 2) <=> 37).to be_nil
+      end
+    end
+
+    describe '#to_s' do
+      it 'outputs day and month without year' do
+        expect(due_on_new.to_s).to eq '[Mar 25]'
+      end
+
+      it 'outputs year, month, day with year' do
+        expect(due_on_new(year: 2002).to_s).to eq '[2002 Mar 25]'
+      end
+
+      it 'displays if marked for destruction' do
+        (due_on = due_on_new).mark_for_destruction
+        expect(due_on.to_s).to eq '[Mar 25 MFD]'
       end
     end
   end

@@ -111,5 +111,12 @@ describe DueOns, :ledgers, type: :model do
         end
       end
     end
+    describe '#to_s' do
+      it 'outputs the due_ons array' do
+        cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 3),
+                                           DueOn.new(day: 30, month: 9)]
+        expect(cycle.due_ons.to_s).to eq 'due_ons: [Mar 25], [Sep 30]'
+      end
+    end
   end
 end

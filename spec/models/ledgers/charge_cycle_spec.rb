@@ -131,4 +131,10 @@ RSpec.describe ChargeCycle, :ledgers, :range, type: :model do
       end
     end
   end
+  describe '#to_s' do
+    it 'displays' do
+      expect(charge_cycle_new.to_s)
+        .to eq 'cycle: Mar/Sep, type: term, due_ons: [Mar 25]'
+    end
+  end
 end

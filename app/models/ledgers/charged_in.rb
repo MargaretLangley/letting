@@ -14,4 +14,8 @@ class ChargedIn < ActiveRecord::Base
   has_many :cycle_charged_ins, dependent: :destroy
   validates :name, presence: true
   validates :name, inclusion: { in: %w(Advance Arrears Mid-Term) }
+
+  def to_s
+    "charged_in: #{name[0..2]}"
+  end
 end

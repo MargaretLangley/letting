@@ -62,6 +62,10 @@ module DueOns
         self.all?(&:empty?)
       end
 
+      def to_s
+        'due_ons: ' + map { |due_on| due_on.to_s }.join(", ")
+      end
+
       private
 
       def monthly?

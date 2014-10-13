@@ -64,6 +64,10 @@ class Charge < ActiveRecord::Base
     mark_for_destruction unless edited?
   end
 
+  def to_s
+    "charge: #{charge_type}, #{charged_in}, #{charge_cycle}"
+  end
+
   private
 
   def edited?

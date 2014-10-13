@@ -67,11 +67,13 @@ class DueOn < ActiveRecord::Base
   end
 
   def to_s
-    "id: #{id.inspect}, " \
-    "day: #{day.inspect}, " \
-    "month: #{month.inspect}, " \
-    "year: #{year.inspect}, " \
-    "Destroy?: #{marked_for_destruction?}"
+    if year
+      "[#{Date.new(year, month, day).strftime('%Y %b %e')}"\
+        "#{' MFD' if marked_for_destruction?}]"
+    else
+      "[#{Date.new(2002, month, day).strftime('%b %e')}"\
+        "#{' MFD' if marked_for_destruction?}]"
+    end
   end
 
   private

@@ -26,4 +26,8 @@ RSpec.describe ChargedIn, :ledgers, type: :model do
       expect(ChargedIn.new name: 'Anything').to_not be_valid
     end
   end
+
+  it 'outputs #to_s' do
+    expect(ChargedIn.new(name: 'Advance').to_s).to eq 'charged_in: Adv'
+  end
 end
