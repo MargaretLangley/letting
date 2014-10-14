@@ -29,6 +29,13 @@ class InvoicingMaker
 
   def generateable_accounts range: property_range
     Account.between?(range)
+           .includes([property: [:entities,
+                                 :address,
+                                 client: [:address, :entities],
+                                 agent:  [:address, :entities]]],
+                     :credits,
+                     :charges,
+                     :debits)
            .select { |account| account.invoice? billing_period: period }
   end
 

@@ -8,7 +8,7 @@
 #
 class PrintsController < ApplicationController
   def show
-    @invoicing = Invoicing.find params[:id]
+    @invoicing = Invoicing.includes(invoices: [:products]).find params[:id]
   end
 
   private
