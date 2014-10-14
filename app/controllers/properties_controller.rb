@@ -23,7 +23,11 @@ class PropertiesController < ApplicationController
   end
 
   def show
-    @property = PropertyDecorator.new Property.find params[:id]
+    @property = PropertyDecorator.new \
+      Property.includes(account: [charges: [:charged_in, :charge_cycle],
+                                  credits: [:charge],
+                                  debits:  [:charge]])
+              .find params[:id]
   end
 
   def new
