@@ -15,21 +15,21 @@
     Action
   </div>
 
-<% @invoicings.each do |invoicing| %>
-    <div class='table-row'%>
+  <% @invoicings.each do |invoicing| %>
+    <div class='table-row' data-link='<%= invoicing_path(invoicing) %>'>
       <div class='col-1-3 vertical-spacer no-print inherit-row grid-row'>
-       <%= invoicing.property_range %>
+        <%= invoicing.property_range %>
       </div>
-         <div class='col-1-6 no-print inherit-row'>
-       <%= l invoicing.period_first %>
+      <div class='col-1-6 no-print inherit-row'>
+        <%= l invoicing.period_first %>
       </div>
       <div class='col-1-6 no-print inherit-row r-align'>
         <%= l invoicing.period_last %>
       </div>
-      <nav class='col-1-6 no-print r-align'>
-        <%= link_to fa_icon('file lg'), invoicing_path(invoicing), title: 'View', class: 'r-pad icon-large' %>
-
-        </nav>
+      <div class='col-1-6 no-print r-align'>
+        <%= link_to fa_icon('file lg'), invoicing_path(invoicing), title: 'View', class: 'r-pad' %>
+        <%= link_to fa_icon('print lg'), print_path(invoicing), title: 'Print', class: 'simple_button' %>
+      </div>
     </div>
   <% end %>
 </div>

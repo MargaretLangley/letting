@@ -1,37 +1,42 @@
 <% @title='Invoicing' %>
 
 <div class='grid shell'>
-
-  <div class='col-1-3 vertical-spacer grid-header r-align'>
+  <div class='col-3-24'>
+    &nbsp;
+  </div>
+  <div class='col-5-24 vertical-spacer grid-header'>
     Property Range
   </div>
-  <div class='col-1-6 grid-header'>
+  <div class='col-5-24 grid-header'>
     Start Date
   </div>
-  <div class='col-1-6 grid-header r-align'>
+  <div class='col-7-24 grid-header'>
     End Date
   </div>
-  <div class='col-1-6 grid-header no-print r-align'>
+  <div class='col-3-24 grid-header no-print'>
     Action
   </div>
 
-  <div class='table-row'%>
-    <div class='col-1-3 vertical-spacer inherit-row  r-align grid-row'>
+  <div class='table-row' data-link='<%= print_path(@invoicing) %>'>
+    <div class='grid-row col-3-24'>
+      &nbsp;
+    </div>
+    <div class='col-5-24 vertical-spacer inherit-row'>
       <%= @invoicing.property_range %>
     </div>
-    <div class='col-1-6 inherit-row'>
+    <div class='col-5-24 inherit-row'>
       <%= l @invoicing.period_first %>
     </div>
-    <div class='col-1-6 inherit-row r-align'>
+    <div class='col-7-24 inherit-row'>
       <%= l @invoicing.period_last %>
     </div>
-    <nav class='col-1-6 no-print r-align'>
+    <div class='col-1-24 no-print r-align'>
       <%= link_to fa_icon('print lg'), print_path(@invoicing), title: 'Print', class: 'simple_button' %>
-    </nav>
+    </div>
   </div>
 
   <hr class='faded'>
-  <div class='col-3-24 vertical-spacer grid-header r-align grid-row'>
+  <div class='grid-row col-3-24 vertical-spacer grid-header r-align'>
     Property ID
   </div>
   <div class='col-5-24 vertical-spacer grid-header'>
@@ -48,22 +53,23 @@
   </div>
 
   <% @invoicing.invoices.each do |invoice| %>
-    <div>
-      <% invoice_decorator = InvoiceDecorator.new(invoice) %>
-    <div class='grid-row col-3-24 vertical-spacer r-align'>
-      <%= invoice_decorator.property_ref %>
-    </div>
-    <div class='col-5-24 vertical-spacer'>
-      <%= invoice_decorator.billing_agent %>
-    </div>
-    <div class='col-5-24 vertical-spacer'>
-      <%= invoice_decorator.billing_first_address_line %>
-    </div>
-    <div class='col-7-24 vertical-spacer'>
-      <%= invoice_decorator.products_display %>
-    </div>
-    <div class='col-1-24 vertical-spacer no-print r-align'>
-      <%= link_to fa_icon('print lg'), invoice_path(invoice), title: 'Print', class: 'simple_button' %>
+    <% invoice_decorator = InvoiceDecorator.new(invoice) %>
+    <div class='table-row' data-link='<%= invoice_path(invoice) %>'>
+      <div class='grid-row col-3-24 inherit-row vertical-spacer r-align'>
+        <%= invoice_decorator.property_ref %>
+      </div>
+      <div class='col-5-24 inherit-row vertical-spacer'>
+        <%= invoice_decorator.billing_agent %>
+      </div>
+      <div class='col-5-24 inherit-row vertical-spacer'>
+        <%= invoice_decorator.billing_first_address_line %>
+      </div>
+      <div class='col-7-24 inherit-row vertical-spacer'>
+        <%= invoice_decorator.products_display %>
+      </div>
+      <div class='col-1-24 inherit-row vertical-spacer no-print r-align'>
+        <%= link_to fa_icon('print lg'), invoice_path(invoice), title: 'Print', class: 'simple_button' %>
+      </div>
     </div>
   <% end %>
 </div>
