@@ -1,5 +1,6 @@
 <% @title='Print' %>
 <% @invoicing.invoices.each do |invoice| %>
- <%= render 'invoices/invoice_page1', invoice: invoice %>
+  <div class='page' >
+   <%= render 'invoices/invoice_page1', invoice: invoice %>
+  </div>
 <% end %>
-

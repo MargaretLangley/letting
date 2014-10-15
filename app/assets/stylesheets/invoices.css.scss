@@ -88,12 +88,6 @@ screen requirements hidden from print*/
     page-break-after: always;
   }
 
-  /* This calls new page for printer */
-
-  h2{
-    break-before: always;
-  }
-
   /* Invoice Heading fonts - centralized */
 
   @mixin inv-heading{
