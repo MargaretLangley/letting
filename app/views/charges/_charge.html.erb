@@ -1,22 +1,22 @@
-<% charge = ChargeDecorator.new model_charge %>
-<div class='<%= charge.style_emphasis %>'>
-  <div class='col-3-12 vertical-spacer grid-row'>
-    <%= charge.charge_type %>
+<% charge_dec = ChargeDecorator.new charge %>
+<div class='<%= charge_dec.style_emphasis %>'>
+  <div class='col-6-24 vertical-spacer grid-row'>
+    <%= charge_dec.charge_type %>
   </div>
-  <div class='col-2-12 vertical-spacer'>
-    <%= charge.charged_in.name %>
+  <div class='col-3-24 vertical-spacer'>
+    <%= charge_dec.charged_in.name %>
   </div>
-  <div class='col-2-12 vertical-spacer'>
-    <%= number_to_currency charge.amount %>
+  <div class='col-3-24 vertical-spacer r-align'>
+    <%= number_to_currency charge_dec.amount %>
   </div>
-  <div class='col-4-12 vertical-spacer'>
-    <% if charge.monthly? %>
-     <%= "- due #{charge.charge_cycle.due_ons.first.day.ordinalize} of the month" %>
+  <div class='col-10-24 vertical-spacer'>
+    <% if charge_dec.monthly? %>
+      <%= render partial: 'due_ons/due_on_monthly', object: charge_dec.charge_cycle.due_ons.first %>
     <% elsif %>
-       <%= render partial: 'due_ons/due_on', collection: charge.charge_cycle.due_ons %>
+      <%= render partial: 'due_ons/due_on_term', collection: charge_dec.charge_cycle.due_ons %>
     <% end %>
   </div>
-  <div class='col-1-12 vertical-spacer c-align'>
-    <%= charge.dormant %>
+  <div class='col-2-24 vertical-spacer c-align'>
+    <%= charge_dec.dormant %>
   </div>
 </div>
