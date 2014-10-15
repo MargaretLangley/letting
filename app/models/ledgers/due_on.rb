@@ -20,7 +20,7 @@
 #
 class DueOn < ActiveRecord::Base
   include Comparable
-  belongs_to :charge_cycle
+  belongs_to :charge_cycle, inverse_of: :due_ons
   validates :day, :month, presence: true
   validates :day,   numericality: { only_integer: true,
                                     greater_than: 0,
