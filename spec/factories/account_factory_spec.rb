@@ -30,7 +30,7 @@ describe 'Account Factory' do
           .to eq 17
       end
       it 'can add credit' do
-        expect(account_new(credit: credit_new(amount: 17)).credits[0].amount)
+        expect(account_new(credits: [credit_new(amount: 17)]).credits[0].amount)
           .to eq 17
       end
       it 'can add payment' do
