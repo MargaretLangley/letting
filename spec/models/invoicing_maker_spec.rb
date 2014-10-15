@@ -14,9 +14,47 @@ RSpec.describe InvoicingMaker, type: :model do
 
       invoicing = InvoicingMaker.new(property_range: '20-20',
                                      period: Date.new(2010, 3, 1)..
-                                                     Date.new(2010, 5, 1))
+                                             Date.new(2010, 5, 1))
       invoicing.generate
       expect(invoicing.invoices.size).to eq 1
+    end
+
+    describe 'product arrears' do
+      it 'no outstanding debts, no arrears' do
+        template_create id: 1
+        property = property_new human_ref: 20, client: client_new
+        charge = charge_new
+        account_create property: property,
+                       charge: charge
+
+        invoicing = InvoicingMaker.new(property_range: '20-20',
+                                       period: Date.new(2010, 3, 1)..
+                                                       Date.new(2010, 5, 1))
+        invoicing.generate
+        expect(invoicing.invoices.first.products.size).to eq 1
+        expect(invoicing.invoices.first.products.first.charge_type)
+          .to_not eq 'Arrears'
+      end
+
+      it 'debts make arrears' do
+        template_create id: 1
+        property = property_new human_ref: 20, client: client_new
+        charge = charge_new
+        account_create property: property,
+                       charge: charge,
+                       debits: [debit_new(amount: 50.00,
+                                          on_date: Date.new(2009, 3, 1),
+                                          charge: charge)]
+
+        invoicing = InvoicingMaker.new(property_range: '20-20',
+                                       period: Date.new(2010, 3, 1)..
+                                                       Date.new(2010, 5, 1))
+        invoicing.generate
+        expect(invoicing.invoices.first.products.size).to eq 2
+        expect(invoicing.invoices.first.products.first.charge_type)
+          .to eq 'Arrears'
+        expect(invoicing.invoices.first.products.first.amount).to eq 50.00
+      end
     end
 
     describe 'does not invoice account when' do

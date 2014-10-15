@@ -13,7 +13,6 @@ def invoice_new id: id,
                 property_address: address_new,
                 property_ref: 108,
                 client: "Lord Harris\nNew Road\nEdge\nBrum",
-                arrears: 20.20,
                 debits: [debit_new(charge: charge_new)],
                 templates: [template_create(id: 1)]
 
@@ -23,14 +22,11 @@ def invoice_new id: id,
   invoice = Invoice.new id: id
   invoice.prepare invoice_date: invoice_date
   invoice.property account.property.invoice
-  invoice.account arrears: arrears,
-                  total_arrears: (arrears.to_i + 30),
-                  debits: debits
-  invoice.client client: client
-  invoice.arrears = arrears
   if debits
     invoice.products = debits.map { |debit| Product.new debit.to_debitable }
   end
+  invoice.total_arrears = 30
+  invoice.client client: client
   invoice
 end
 
@@ -40,7 +36,6 @@ def invoice_create id: nil,
                    property_address: address_new,
                    property_ref: 108,
                    client: "Lord Harris\nNew Road\nEdge\nBrum",
-                   arrears: 20.20,
                    debits: [debit_new(charge: charge_new)],
                    templates: [template_create(id: 1)]
   invoice = invoice_new id: id,
@@ -49,7 +44,6 @@ def invoice_create id: nil,
                         property_address: property_address,
                         property_ref: property_ref,
                         client: client,
-                        arrears: arrears,
                         debits: debits,
                         templates: templates
   invoice.save!

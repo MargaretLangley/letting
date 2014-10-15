@@ -31,7 +31,6 @@ class Invoice < ActiveRecord::Base
             :invoice_date,
             :property_ref,
             :property_address,
-            :arrears,
             presence: true
   has_many :templates, through: :letters
   has_many :letters, dependent: :destroy
@@ -48,12 +47,6 @@ class Invoice < ActiveRecord::Base
     self.billing_address = billing_address
   end
 
-  def account(arrears:, total_arrears:, debits:)
-    self.arrears = arrears
-    self.total_arrears = total_arrears
-    self.products = debits.map { |debit| Product.new debit.to_debitable }
-  end
-
   def client(client:)
     self.client_address = client
   end
@@ -63,7 +56,6 @@ class Invoice < ActiveRecord::Base
     "Property Ref: #{property_ref.inspect}\n"\
     "Invoice Date: #{invoice_date.inspect}\n"\
     "Property Address: #{property_address.inspect}\n"\
-    "Arrears: #{arrears.inspect}\n"\
     "client: #{client_address.inspect}\n"
   end
 end

@@ -155,7 +155,6 @@ ActiveRecord::Schema.define(version: 20140930053829) do
     t.integer  "property_ref",                             null: false
     t.date     "invoice_date",                             null: false
     t.text     "property_address",                         null: false
-    t.decimal  "arrears",          precision: 8, scale: 2, null: false
     t.decimal  "total_arrears",    precision: 8, scale: 2, null: false
     t.text     "client_address",                           null: false
     t.datetime "created_at"
@@ -206,8 +205,8 @@ ActiveRecord::Schema.define(version: 20140930053829) do
     t.string   "charge_type",  null: false
     t.date     "date_due",     null: false
     t.decimal  "amount",       null: false
-    t.date     "period_first", null: false
-    t.date     "period_last",  null: false
+    t.date     "period_first"
+    t.date     "period_last"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

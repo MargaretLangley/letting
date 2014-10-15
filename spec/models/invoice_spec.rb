@@ -11,7 +11,6 @@ RSpec.describe Invoice, type: :model do
       (invoice = Invoice.new).property_address = nil
       expect(invoice).to_not be_valid
     end
-    it('arrears') { expect(invoice_new arrears: nil).to_not be_valid }
   end
 
   describe 'methods' do
@@ -42,9 +41,9 @@ RSpec.describe Invoice, type: :model do
         invoice.property property.invoice
         expect(invoice.property_address).to eq 'New, Brum, West Midlands'
       end
-      it 'sets balance' do
-        (invoice = Invoice.new).account(arrears: 7, total_arrears: 20, debits: [])
-        expect(invoice.arrears).to eq(7)
+      it 'sets total_arrears' do
+        (invoice = Invoice.new).total_arrears = 20
+        expect(invoice.total_arrears).to eq(20)
       end
       it 'sets client' do
         client = client_create entities: [Entity.new(name: 'Bell')],
@@ -52,22 +51,6 @@ RSpec.describe Invoice, type: :model do
         (invoice = Invoice.new).client client.invoice
         expect(invoice.client_address)
           .to eq "Bell\nEdgbaston Road\nBirmingham\nWest Midlands"
-      end
-    end
-    describe '#prepare_products' do
-      it 'adds a debit' do
-        debit = debit_new(charge: charge_new(charge_type: 'Rent'),
-                          on_date: '2014-03-5',
-                          period: Date.new(2014, 3, 5)..Date.new(2014, 6, 4),
-                          amount: 20.15)
-        (invoice = Invoice.new).account arrears: 0,
-                                        total_arrears: 0,
-                                        debits: [debit]
-        expect(invoice.products)
-        .to eq [Product.new(charge_type: 'Rent',
-                            date_due: '2014-03-5',
-                            period: Date.new(2014, 3, 5)..Date.new(2014, 6, 4),
-                            amount: 20.15)]
       end
     end
     it 'outputs #to_s' do

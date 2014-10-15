@@ -5,8 +5,8 @@ class CreateProducts < ActiveRecord::Migration
       t.string :charge_type, null: false
       t.date :date_due, null: false
       t.decimal :amount, null: false
-      t.date     :period_first,      null: false
-      t.date     :period_last,       null: false
+      t.date     :period_first
+      t.date     :period_last
       t.timestamps
     end
   end
