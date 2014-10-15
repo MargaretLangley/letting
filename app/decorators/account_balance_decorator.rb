@@ -30,6 +30,10 @@ class AccountBalanceDecorator
     'Balance carried forward'
   end
 
+  def description
+    ''
+  end
+
   def date
     I18n.l @on_date, format: :short
   end

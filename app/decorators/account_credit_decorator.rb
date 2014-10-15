@@ -26,6 +26,10 @@ class AccountCreditDecorator
     I18n.l @source.on_date, format: :short
   end
 
+  def description
+    'Payment'
+  end
+
   def due
     ''
   end
