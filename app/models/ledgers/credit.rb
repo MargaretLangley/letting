@@ -38,7 +38,7 @@ class Credit < ActiveRecord::Base
   # outstanding is the amount left unpaid
   # (credit) amount is normally negative
   # settled starts at 0 and becomes larger until settled - amount == 0
-  # Outstanding will be initally negative trending to 0
+  # Outstanding will be initially negative trending to 0
   def outstanding
     -amount - settled
   end

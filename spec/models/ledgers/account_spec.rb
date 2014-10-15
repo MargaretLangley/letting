@@ -10,17 +10,39 @@ describe Account, :ledgers, type: :model do
 
     describe '#invoice' do
 
-      it 'debits before billing period added to arrears' do
-        debit = debit_new(amount: 30, on_date: Date.new(2013, 3, 4))
-        account = account_new debits: [debit]
-        invoice = account.invoice billing_period: Date.new(2013, 3, 5)..
-                                                  Date.new(2013, 5, 5)
-        expect(invoice[:arrears]).to eq(30)
+      describe 'arrears' do
+        it 'adds debits before billing period' do
+          debit = debit_new amount: 30, on_date: Date.new(2013, 3, 4)
+          account = account_new debits: [debit]
+          invoice = account.invoice billing_period: Date.new(2013, 3, 5)..
+                                                    Date.new(2013, 5, 5)
+          expect(invoice[:arrears]).to eq(30)
+        end
+
+        it 'subtracts credits before billing period' do
+          credit = credit_new amount: -30, on_date: Date.new(2013, 3, 4)
+          account = account_new credits: [credit]
+          invoice = account.invoice billing_period: Date.new(2013, 3, 5)..
+                                                    Date.new(2013, 5, 5)
+          expect(invoice[:arrears]).to eq(-30)
+        end
+
+        it 'smoke test' do
+          debit_1 = debit_new amount: 10, on_date: Date.new(2012, 3, 4)
+          debit_2 = debit_new amount: 10, on_date: Date.new(2013, 3, 4)
+          credit_1 = credit_new amount: -30, on_date: Date.new(2012, 3, 4)
+          credit_2 = credit_new amount: -30, on_date: Date.new(2013, 3, 4)
+          account = account_new credits: [credit_1, credit_2],
+                                debits: [debit_1, debit_2]
+          invoice = account.invoice billing_period: Date.new(2013, 3, 5)..
+                                                    Date.new(2013, 5, 5)
+          expect(invoice[:arrears]).to eq(-40)
+        end
       end
 
       describe 'total_arrears' do
         it 'adds debits before billing period' do
-          debit = debit_new(amount: 30, on_date: Date.new(2013, 3, 4))
+          debit = debit_new amount: 30, on_date: Date.new(2013, 3, 4)
           account = account_new debits: [debit]
           invoice = account.invoice billing_period: Date.new(2013, 3, 5)..
                                                     Date.new(2013, 5, 5)
