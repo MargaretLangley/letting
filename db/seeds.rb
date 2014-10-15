@@ -514,12 +514,6 @@ def create_letters
   ]
 end
 
-# def seed_templates
-#   Rake::Task['db:import:template'].invoke
-#   Rake::Task['db:import:template_address'].invoke
-#   Rake::Task['db:import:template_notice'].invoke
-# end
-
 def reset_pk_sequenece_on_each_table_used
   Rake::Task['db:reset_pk'].invoke
 end
