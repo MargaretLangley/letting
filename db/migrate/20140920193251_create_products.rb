@@ -2,9 +2,9 @@ class CreateProducts < ActiveRecord::Migration
   def change
     create_table :products do |t|
       t.belongs_to :invoice, null: false, index: true
-      t.string :charge_type
-      t.date :date_due
-      t.decimal :amount
+      t.string :charge_type, null: false
+      t.date :date_due, null: false
+      t.decimal :amount, null: false
       t.date     :period_first,      null: false
       t.date     :period_last,       null: false
       t.timestamps

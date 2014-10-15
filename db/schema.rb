@@ -203,9 +203,9 @@ ActiveRecord::Schema.define(version: 20140930053829) do
 
   create_table "products", force: true do |t|
     t.integer  "invoice_id",   null: false
-    t.string   "charge_type"
-    t.date     "date_due"
-    t.decimal  "amount"
+    t.string   "charge_type",  null: false
+    t.date     "date_due",     null: false
+    t.decimal  "amount",       null: false
     t.date     "period_first", null: false
     t.date     "period_last",  null: false
     t.datetime "created_at"
