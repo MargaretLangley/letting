@@ -13,8 +13,9 @@ describe Property, type: :feature do
 
   it '#create', js: true   do
     client_create human_ref: 8008
+    charge = charge_create charge_cycle: charge_cycle_new(id: 1),
+                           charged_in: charged_in_create(id: 1, name: 'Arrears')
     cycle_charged_in_create id: 1, charge_cycle_id: 1, charged_in_id: 1
-    charge = charge_create charged_in: charged_in_create(id: 1, name: 'Arrears')
 
     account.new
     fill_in_account property_ref: 278, client_ref: 8008, charge: charge
@@ -26,8 +27,9 @@ describe Property, type: :feature do
 
   it '#creates a account without agent', js: true do
     client_create human_ref: 8008
+    charge = charge_create charge_cycle: charge_cycle_new(id: 1),
+                           charged_in: charged_in_create(id: 2, name: 'Advance')
     cycle_charged_in_create id: 1, charge_cycle_id: 1, charged_in_id: 2
-    charge = charge_create charged_in: charged_in_create(id: 2, name: 'Advance')
 
     account.new
     fill_in_account property_ref: 278, client_ref: '8008', charge: charge

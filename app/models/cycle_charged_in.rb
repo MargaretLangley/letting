@@ -7,4 +7,6 @@
 class CycleChargedIn < ActiveRecord::Base
   belongs_to :charge_cycle
   belongs_to :charged_in
+
+  validates :charge_cycle, :charged_in, presence: true
 end
