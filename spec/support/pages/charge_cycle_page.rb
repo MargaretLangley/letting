@@ -48,6 +48,12 @@ class ChargeCyclePage
     self
   end
 
+  def association arrears: false, advance: false, mid_term: false
+    check 'Arrears' if arrears
+    check 'Advance' if advance
+    check 'Mid-Term' if mid_term
+  end
+
   def errored?
     has_css? '[data-role="errors"]'
   end

@@ -7,12 +7,14 @@ describe ChargeCycle, :ledgers, type: :feature do
 
   context 'Term' do
     it 'creates a charge cycle' do
+      charged_in_create id: 2, name: 'Advance'
       cycle_page = ChargeCyclePage.new type: :term, action: :create
       cycle_page.enter
       expect(page.title).to eq 'Letting - New Charge Cycles'
       cycle_page.name = 'April/Nov'
       cycle_page.order = '44'
-      cycle_page.due_on(day: 10, month: 2)
+      cycle_page.due_on day: 10, month: 2
+      cycle_page.association advance: true
       cycle_page.do 'Create Charge Cycle'
       expect(cycle_page).to be_success
     end
@@ -27,12 +29,14 @@ describe ChargeCycle, :ledgers, type: :feature do
 
   context 'Monthly' do
     it 'creates a charge cycle' do
+      charged_in_create id: 1, name: 'Arrears'
       cycle_page = ChargeCyclePage.new type: :monthly, action: :create
       cycle_page.enter
       expect(page.title).to eq 'Letting - New Charge Cycles'
       cycle_page.name = 'Monthly'
       cycle_page.order = '44'
-      cycle_page.due_on(day: 10, month: 0)
+      cycle_page.due_on day: 10, month: 0
+      cycle_page.association arrears: true
       cycle_page.do 'Create Charge Cycle'
       expect(cycle_page).to be_success
     end
