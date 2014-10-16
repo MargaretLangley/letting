@@ -1,12 +1,14 @@
 # rubocop: disable Metrics/MethodLength
 # rubocop: disable Metrics/ParameterLists
 
-def charge_cycle_new name: 'Mar/Sep',
+def charge_cycle_new id: nil,
+                     name: 'Mar/Sep',
                      order: 1,
                      cycle_type: 'term',
                      due_ons: [DueOn.new(day: 25, month: 3)],
                      prepare: false
-  cycle = ChargeCycle.new name: name,
+  cycle = ChargeCycle.new id: id,
+                          name: name,
                           order: order,
                           cycle_type: cycle_type
   cycle.due_ons = due_ons if due_ons
@@ -20,12 +22,12 @@ def charge_cycle_create id: 1,
                         cycle_type: 'term',
                         due_ons: [DueOn.new(day: 25, month: 3)],
                         prepare: false
-  cycle = ChargeCycle.new id: id,
-                          name: name,
-                          order: order,
-                          cycle_type: cycle_type
-  cycle.due_ons = due_ons if due_ons
-  cycle.prepare if prepare
+  cycle = charge_cycle_new id: id,
+                           name: name,
+                           order: order,
+                           cycle_type: cycle_type,
+                           due_ons: due_ons,
+                           prepare: prepare
   cycle.save!
   cycle
 end
