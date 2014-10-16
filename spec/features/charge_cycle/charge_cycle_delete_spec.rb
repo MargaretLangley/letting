@@ -12,11 +12,11 @@ describe ChargeCycle, :ledgers, type: :feature do
   end
 
   it '#destroys' do
-    expect(page.title). to eq 'Letting - Charge Cycles'
-    expect(page). to have_text 'Jan/July'
+    expect(page.title).to eq 'Letting - Charge Cycles'
+    expect(page).to have_text 'Jan/July'
     expect { click_on 'Delete' }.to change(ChargeCycle, :count).by(-1)
-    expect(page). to have_text 'Jan/July'
-    expect(page). to have_text 'successfully deleted'
-    expect(page.title). to eq 'Letting - Charge Cycles'
+    expect(page).to have_text 'Jan/July'
+    expect(page).to have_text 'successfully deleted'
+    expect(page.title).to eq 'Letting - Charge Cycles'
   end
 end

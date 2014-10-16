@@ -13,7 +13,7 @@ describe ChargeCycle, :ledgers, type: :feature do
 
   it 'has basic details' do
     visit '/charge_cycles/3'
-    expect(page.title). to eq 'Letting - View Charge Cycle'
+    expect(page.title).to eq 'Letting - View Charge Cycle'
     expect(page).to have_text 'Jan/July'
     expect(page).to have_text '11'
     expect(page).to have_text '6'

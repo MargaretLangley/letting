@@ -1,63 +1,64 @@
 require 'rails_helper'
 
-describe ChargeCycle, :ledgers, type: :feature do
+require_relative '../../support/pages/charge_cycle_page'
 
-  before(:each) do
-    log_in admin_attributes
-    charge_cycle_create id: 3,
-                        name: 'Jan/July',
-                        order: 11,
-                        cycle_type: 'term',
-                        due_ons: [DueOn.new(day: 6, month: 10)]
+describe 'ChargeCycle Edit', :ledgers, type: :feature do
+  before { log_in admin_attributes }
+
+  context 'Term' do
+    it 'edits term' do
+      charge_cycle_create id: 1,
+                          name: 'Jan/July',
+                          order: 11,
+                          cycle_type: 'term',
+                          due_ons: [DueOn.new(day: 6, month: 10)]
+      cycle_page = ChargeCyclePage.new type: :term, action: :edit
+
+      cycle_page.enter
+      expect(page.title).to eq 'Letting - Edit Charge Cycles'
+      cycle_page.name = 'April/Nov'
+      cycle_page.order = '44'
+      cycle_page.due_on(day: 10, month: 2)
+      cycle_page.do 'Update Charge Cycle'
+      expect(cycle_page).to be_success
+    end
   end
 
-  context '#Edit' do
-    it 'basic' do
-      visit '/charge_cycles/3/edit'
-      expect(page.title). to eq 'Letting - Edit Charge Cycles'
-      fill_in 'Name', with: 'April/Nov'
-      fill_in 'Order', with: '44'
-      due_on(day: 10, month: 2)
-      click_on 'Update Charge Cycle'
-      expect(page). to have_text /successfully updated!/i
-    end
-
-    def due_on(order: 0, day:, month:, year:nil)
-      visit '/charge_cycles/3/edit'
-      id_stem = "charge_cycle_due_ons_attributes_#{order}"
-      fill_in "#{id_stem}_day", with: day
-      fill_in "#{id_stem}_month", with: month
-      fill_in "#{id_stem}_year", with: year
-    end
-
-    it 'uses monthly edit' do
-      charge_cycle_create id: 2,
+  context 'Monthly' do
+    it 'edits monthly' do
+      charge_cycle_create id: 1,
                           name: 'Regular',
                           order: 22,
                           cycle_type: 'monthly',
                           due_ons: [DueOn.new(day: 8, month: 1)]
+      cycle_page = ChargeCyclePage.new type: :monthly, action: :edit
 
-      visit '/charge_cycles/2/edit'
+      cycle_page.enter
       expect(page).to have_text 'Monthly'
-      fill_in 'Name', with: 'New Monthly'
-      fill_in 'Order', with: '21'
-      due_on(day: 12, month: 0)
-      click_on 'Update Charge Cycle'
-      expect(page). to have_text /successfully updated!/i
+      cycle_page.name = 'New Monthly'
+      cycle_page.order = '21'
+      cycle_page.due_on day: 12, month: 0
+      cycle_page.do 'Update Charge Cycle'
+      expect(cycle_page).to be_success
     end
+  end
 
-    it 'goes to index on Cancel' do
-      visit '/charge_cycles/3/edit'
-      click_on('Cancel')
-      expect(page.title). to eq 'Letting - Charge Cycles'
-    end
+  it 'aborts on Cancel' do
+    charge_cycle_create id: 1
+    cycle_page = ChargeCyclePage.new action: :edit
 
-    it 'errors on update' do
-      visit '/charge_cycles/3/edit'
-      fill_in 'Name', with: ''
-      click_on 'Update Charge Cycle'
-      expect(page).to have_css '[data-role="errors"]'
-    end
+    cycle_page.enter
+    cycle_page.do 'Cancel'
+    expect(page.title).to eq 'Letting - Charge Cycles'
+  end
 
+  it 'can error' do
+    charge_cycle_create id: 1, name: 'Jan/July'
+
+    cycle_page = ChargeCyclePage.new action: :edit
+    cycle_page.enter
+    cycle_page.name = ''
+    cycle_page.do 'Update Charge Cycle'
+    expect(cycle_page).to be_errored
   end
 end

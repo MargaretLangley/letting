@@ -1,29 +1,47 @@
 require 'rails_helper'
 
-describe ChargeCycle, :ledgers, type: :feature do
+require_relative '../../support/pages/charge_cycle_page'
 
+describe ChargeCycle, :ledgers, type: :feature do
   before(:each) { log_in admin_attributes }
 
-  it 'creates a charge cycle' do
-    visit '/charge_cycles/new?cycle_type=term'
-    expect(page.title).to eq 'Letting - New Charge Cycles'
-    fill_in 'Name', with: 'April/Nov'
-    fill_in 'Order', with: '44'
-    due_on(day: 10, month: 2)
-    click_on 'Create Charge Cycle'
-    expect(page).to have_text /successfully created!/i
+  context 'Term' do
+    it 'creates a charge cycle' do
+      cycle_page = ChargeCyclePage.new type: :term, action: :create
+      cycle_page.enter
+      expect(page.title).to eq 'Letting - New Charge Cycles'
+      cycle_page.name = 'April/Nov'
+      cycle_page.order = '44'
+      cycle_page.due_on(day: 10, month: 2)
+      cycle_page.do 'Create Charge Cycle'
+      expect(cycle_page).to be_success
+    end
+
+    it 'displays form errors' do
+      cycle_page = ChargeCyclePage.new type: :term, action: :create
+      cycle_page.enter
+      cycle_page.do 'Create Charge Cycle'
+      expect(cycle_page).to be_errored
+    end
   end
 
-  def due_on(order: 0, day:, month:, year: nil)
-    id_stem = "charge_cycle_due_ons_attributes_#{order}"
-    fill_in "#{id_stem}_day", with: day
-    fill_in "#{id_stem}_month", with: month
-    fill_in "#{id_stem}_year", with: year
-  end
+  context 'Monthly' do
+    it 'creates a charge cycle' do
+      cycle_page = ChargeCyclePage.new type: :monthly, action: :create
+      cycle_page.enter
+      expect(page.title).to eq 'Letting - New Charge Cycles'
+      cycle_page.name = 'Monthly'
+      cycle_page.order = '44'
+      cycle_page.due_on(day: 10, month: 0)
+      cycle_page.do 'Create Charge Cycle'
+      expect(cycle_page).to be_success
+    end
 
-  it 'displays form errors' do
-    visit '/charge_cycles/new?cycle_type=term'
-    click_on 'Create Charge Cycle'
-    expect(page).to have_css '[data-role="errors"]'
+    it 'displays form errors' do
+      cycle_page = ChargeCyclePage.new type: :monthly, action: :create
+      cycle_page.enter
+      cycle_page.do 'Create Charge Cycle'
+      expect(cycle_page).to be_errored
+    end
   end
 end
