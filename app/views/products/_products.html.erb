@@ -1,61 +1,78 @@
 <% total = 0 %>
 <br>
-<div class='col-1-12 grid-row'>
+<div class='col-2-24 grid-row'>
   &nbsp;
 </div>
-<div class='col-2-12'>
+<div class='col-3-24'>
   Due Date
 </div>
-<div class='col-5-12'>
-  Description
+<div class='col-5-24'>
+  Charge
 </div>
-<div class='col-2-12 r-align'>
-  Amount Due
+<div class='col-5-24'>
+  Period
 </div>
-<div class='col-2-12 r-align'>
-  Balance Owing
+<div class='col-4-24 r-align'>
+  Due
 </div>
-<div class='col-12-12 grid-row'>
+<div class='col-4-24 r-align'>
+  Balance
+</div>
+<div class='col-1-24'>
+  &nbsp;
+</div>
+<div class='col-24-24 grid-row'>
   &nbsp;
 </div>
 
 <% products.each do |product| %>
-  <div class='col-1-12 grid-row'>
+  <% product_dec = ProductDecorator.new product %>
+  <div class='col-2-24 grid-row'>
     &nbsp;
   </div>
-  <div class='col-2-12'>
-    <%= product.date_due %>
+  <div class='col-3-24'>
+    <%= product_dec.date_due %>
   </div>
-  <div class='col-5-12'>
-    <%= product.charge_type %>  <%= l product.period_first %>
-    to  <%= l product.period_last %>
+  <div class='col-5-24'>
+    <%= product.charge_type %>
   </div>
-  <div class='col-2-12 r-align'>
-    <%= number_with_precision(product.amount,precision: 2) %>
+  <div class='col-5-24'>
+    <%= product_dec.period %>
   </div>
-  <div class='col-2-12 r-align'>
+  <div class='col-4-24 r-align'>
+    <%= number_with_precision(product.amount, precision: 2) %>
+  </div>
+  <div class='col-4-24 r-align'>
     <% total = total + product.amount %>
-    <%= number_with_precision(total,precision: 2) %>
+    <%= number_with_precision(total, precision: 2) %>
+  </div>
+  <div class='col-1-24'>
+    &nbsp;
   </div>
 <% end %>
 
-<div class='col-10-12 grid-row'>
+<div class='col-19-24 grid-row'>
   &nbsp;
 </div>
-<div class='col-2-12 r-align'>
-  <% dotted_line = "----------" %>
-  <%= dotted_line %>
+<div class='col-4-24 r-align'>
+  <%= dotted_line = "----------" %>
+</div>
+<div class='col-1-24'>
+  &nbsp;
 </div>
 
-<div class='col-3-12 grid-row'>
+<div class='col-5-24 grid-row'>
   &nbsp;
 </div>
-<div class='col-5-12'>
+<div class='col-11-24'>
   Total now Owing
 </div>
-<div class='col-2-12'>
+<div class='col-3-24'>
   &nbsp;
 </div>
-<div class='col-2-12 r-align'>
+<div class='col-4-24 r-align'>
   <%= number_with_precision(total,precision: 2) %>
+</div>
+<div class='col-1-24'>
+  &nbsp;
 </div>

@@ -1,38 +1,38 @@
 <% total = 0 %>
-<div class='col-12-12 grid-row'>
+<div class='col-24-24 grid-row'>
   &nbsp;
 </div>
 
 <% products.each do |product| %>
-  <div class='col-3-12 grid-row'>
+<% product_dec = ProductDecorator.new product %>
+  <div class='col-5-24 grid-row'>
     &nbsp;
   </div>
-  <div class='col-4-12'>
-     <%= product.charge_type %>
-     <%= l product.period_first %>
-     to
-     <%= l product.period_last %>
+  <div class='col-4-24'>
+     <%= product_dec.charge_type %>
   </div>
-  <div class='col-2-12 r-align'>
+  <div class='col-5-24'>
+    <%= product_dec.period %>
+  </div>
+  <div class='col-4-24 r-align'>
     <% total = total + product.amount %>
-    <%= number_with_precision(product.amount,precision: 2) %>
+    <%= number_with_precision(product.amount, precision: 2) %>
   </div>
 <% end %>
 
-<div class='col-7-12 grid-row'>
+<div class='col-14-24 grid-row'>
   &nbsp;
 </div>
-<div class='col-2-12 r-align'>
-  <% dotted_line = "----------" %>
-  <%= dotted_line %>
+<div class='col-4-24 r-align'>
+  <%= dotted_line = "----------" %>
 </div>
 
-<div class='col-3-12 grid-row'>
+<div class='col-5-24 grid-row'>
   &nbsp;
 </div>
-<div class='col-4-12'>
+<div class='col-9-24'>
   Total now Owing
 </div>
-<div class='col-2-12 r-align'>
+<div class='col-4-24 r-align'>
   <%= number_with_precision(total,precision: 2) %>
 </div>
