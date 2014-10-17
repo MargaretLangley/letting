@@ -1,4 +1,5 @@
 require 'rails_helper'
+# rubocop: disable Style/SpaceInsideRangeLiteral
 
 describe ProductDecorator, :invoice do
   describe 'methods' do
@@ -8,8 +9,9 @@ describe ProductDecorator, :invoice do
     end
 
     it 'returns #period formatted' do
-      product_dec = ProductDecorator.new product_new period: Date.new(2010, 9, 30)..
-                                                             Date.new(2011, 3, 25)
+      product_dec =
+        ProductDecorator.new product_new period: Date.new(2010, 9, 30)..
+                                                 Date.new(2011, 3, 25)
       expect(product_dec.period).to eq '30/Sep/10 to 25/Mar/11'
     end
 
