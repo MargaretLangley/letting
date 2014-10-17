@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(version: 20140930053829) do
     t.string   "charge_type",  null: false
     t.date     "date_due",     null: false
     t.decimal  "amount",       null: false
+    t.decimal  "balance",      null: false
     t.date     "period_first"
     t.date     "period_last"
     t.datetime "created_at"

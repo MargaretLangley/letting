@@ -27,19 +27,17 @@
   Property Address: <%= invoice.property_address %>
 </div>
 
-<%= render partial:'products/products',locals: { products: invoice.products } %>
-<p>
-  &nbsp;
-</p>
-<%= render partial: 'templates/print_section48',locals: {client: invoice.client_address, template: invoice.templates.first }%>
+<%= render partial:'products/products',locals: { invoice: invoice } %>
 
-<div>
-  <div class='grid-row col-1-12'>
-    &nbsp;
-  </div>
-  <div class='inv-advice-bold'>
-    Property Address: <%= invoice.property_address %>
-   </div>
+<div class='grid-row col-24-24'>
+  &nbsp;
+</div>
+<%= render partial: 'templates/print_section48',locals: {client: invoice.client_address, template: invoice.templates.first }%>
+<div class='grid-row col-1-12'>
+  &nbsp;
+</div>
+<div class='inv-advice-bold'>
+  Property Address: <%= invoice.property_address %>
 </div>
 <div class='grid-row col-1-12'>
   &nbsp;
@@ -51,6 +49,4 @@
   Due Date <%= l invoice.invoice_date %>
 </div>
 
-<%= render partial:'products/products_narrow',locals: { products: invoice.products } %>
-
-
+<%= render partial:'products/products_narrow',locals: { invoice: invoice } %>

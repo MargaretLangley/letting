@@ -26,7 +26,7 @@
 #
 class Invoice < ActiveRecord::Base
   belongs_to :invoicing
-  has_many :products
+  has_many :products, -> { order(:created_at) }, dependent: :destroy
   validates :products,
             :invoice_date,
             :property_ref,

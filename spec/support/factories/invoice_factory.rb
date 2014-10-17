@@ -24,6 +24,11 @@ def invoice_new id: id,
   invoice.property account.property.invoice
   if debits
     invoice.products = debits.map { |debit| Product.new debit.to_debitable }
+    # TODO: Hack to give none nil balance.
+    invoice.products = invoice.products.map do |product|
+      product.balance = 0
+      product
+    end
   end
   invoice.total_arrears = 30
   invoice.client client: client

@@ -57,18 +57,26 @@ class InvoicingMaker
   end
 
   def products_maker(arrears:, debits:)
-    product_arrears_maker(arrears: arrears) +
-      debits.map { |debit| Product.new debit.to_debitable }
+    products = product_arrears_maker(arrears: arrears) +
+                 debits.map { |debit| Product.new debit.to_debitable }
+    products_balanced products
   end
 
   def product_arrears_maker(arrears:)
     product_arrears = []
     if arrears.nonzero?
-      product_arrears = \
-        [Product.new(charge_type: 'Arrears',
-                     date_due: invoice_date,
-                     amount: arrears)]
+      product_arrears = [Product.new(charge_type: 'Arrears',
+                                     date_due: invoice_date,
+                                     amount: arrears)]
     end
     product_arrears
+  end
+
+  def products_balanced products
+    total = 0
+    products.map do |product|
+      product.balance = total += product.amount
+      product
+    end
   end
 end

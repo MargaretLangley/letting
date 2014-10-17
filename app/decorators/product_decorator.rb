@@ -8,6 +8,7 @@
 #
 class ProductDecorator
   include MethodMissing
+  include ActionView::Helpers::NumberHelper
 
   def product
     @source
@@ -22,8 +23,8 @@ class ProductDecorator
   end
 
   def period
-    return '' unless product.period.first && product.period.last
-    "#{I18n.l product.period.first, format: :short} to "\
+    return '&nbsp;'.html_safe unless product.period.first && product.period.last
+    "#{I18n.l product.period.first, format: :short} - "\
     "#{I18n.l product.period.last, format: :short}"
   end
 
@@ -31,7 +32,7 @@ class ProductDecorator
     number_with_precision(product.amount, precision: 2)
   end
 
-  def total
-    number_with_precision(total, precision: 2)
+  def balance
+    number_with_precision(product.balance, precision: 2)
   end
 end

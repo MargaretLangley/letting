@@ -35,8 +35,7 @@ RSpec.describe InvoicingMaker, type: :model do
         template_create id: 1
         account_create property: property_new(human_ref: 8, client: client_new),
                        charge: charge_find_or_create(id: 1),
-                       debits: [debit_new(amount: 50.00,
-                                          on_date: Date.new(2009, 3, 1),
+                       debits: [debit_new(on_date: Date.new(2009, 3, 1),
                                           charge: charge_find_or_create(id: 1))]
 
         invoicing =
@@ -44,7 +43,24 @@ RSpec.describe InvoicingMaker, type: :model do
                              period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
         invoicing.generate
         expect(invoicing.invoices[0].products.first.charge_type).to eq 'Arrears'
-        expect(invoicing.invoices[0].products.first.amount).to eq 50.00
+      end
+    end
+
+    describe 'balancing' do
+      it 'outstanding debts, make arrears' do
+        template_create id: 1
+        account_create property: property_new(human_ref: 8, client: client_new),
+                       charge: charge_find_or_create(id: 1, amount: 10),
+                       debits: [debit_new(amount: 30.00,
+                                          on_date: Date.new(2009, 3, 1),
+                                          charge: charge_find_or_create(id: 1))]
+
+        invoicing =
+          InvoicingMaker.new property_range: '8-8',
+                             period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
+        invoicing.generate
+        expect(invoicing.invoices[0].products[0].balance).to eq 30.00
+        expect(invoicing.invoices[0].products[1].balance).to eq 40.00
       end
     end
 

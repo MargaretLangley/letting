@@ -481,6 +481,7 @@ def create_products
       charge_type: "Service Charge",
       date_due: "2014-09-29",
       amount: 125,
+      balance: 125,
       period_first: "2014-09-29",
       period_last: "2014-09-29"
     },
@@ -488,7 +489,8 @@ def create_products
       invoice_id: 1,
       charge_type: "Ground Rent",
       date_due: "2014-09-29",
-      amount: 88.08,
+      amount: 30.00,
+      balance: 155.00,
       period_first: "2014-09-29",
       period_last: "2014-09-29"
     },

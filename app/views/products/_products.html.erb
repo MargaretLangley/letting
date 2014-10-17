@@ -1,31 +1,15 @@
-<% total = 0 %>
 <br>
-<div class='col-2-24 grid-row'>
-  &nbsp;
-</div>
-<div class='col-3-24'>
-  Due Date
-</div>
-<div class='col-5-24'>
-  Charge
-</div>
-<div class='col-5-24'>
-  Period
-</div>
-<div class='col-4-24 r-align'>
-  Due
-</div>
-<div class='col-4-24 r-align'>
-  Balance
-</div>
-<div class='col-1-24'>
-  &nbsp;
-</div>
-<div class='col-24-24 grid-row'>
-  &nbsp;
-</div>
+<div class='col-2-24 grid-row'>&nbsp;</div>
+<div class='col-3-24'>         Due Date</div>
+<div class='col-5-24'>         Charge</div>
+<div class='col-5-24'>         Period</div>
+<div class='col-4-24 r-align'> Due</div>
+<div class='col-4-24 r-align'> Balance</div>
+<div class='col-1-24'>         &nbsp;</div>
 
-<% products.each do |product| %>
+<div class='col-24-24 grid-row'>&nbsp;</div>
+
+<% invoice.products.each do |product| %>
   <% product_dec = ProductDecorator.new product %>
   <div class='col-2-24 grid-row'>
     &nbsp;
@@ -40,39 +24,24 @@
     <%= product_dec.period %>
   </div>
   <div class='col-4-24 r-align'>
-    <%= number_with_precision(product.amount, precision: 2) %>
+    <%= product_dec.amount %>
   </div>
   <div class='col-4-24 r-align'>
-    <% total = total + product.amount %>
-    <%= number_with_precision(total, precision: 2) %>
+    <%= product_dec.balance %>
   </div>
   <div class='col-1-24'>
     &nbsp;
   </div>
 <% end %>
 
-<div class='col-19-24 grid-row'>
-  &nbsp;
-</div>
-<div class='col-4-24 r-align'>
-  <%= dotted_line = "----------" %>
-</div>
-<div class='col-1-24'>
-  &nbsp;
-</div>
+<div class='col-19-24 grid-row'>&nbsp;</div>
+<div class='col-4-24 r-align'><%= dotted_line = "----------" %></div>
+<div class='col-1-24'>&nbsp;</div>
 
-<div class='col-5-24 grid-row'>
-  &nbsp;
-</div>
-<div class='col-11-24'>
-  Total now Owing
-</div>
-<div class='col-3-24'>
-  &nbsp;
-</div>
+<div class='col-5-24 grid-row'>&nbsp;</div>
+<div class='col-11-24'>Total now Owing</div>
+<div class='col-3-24'>&nbsp;</div>
 <div class='col-4-24 r-align'>
-  <%= number_with_precision(total,precision: 2) %>
+  <%= number_with_precision(invoice.total_arrears, precision: 2) %>
 </div>
-<div class='col-1-24'>
-  &nbsp;
-</div>
+<div class='col-1-24'>&nbsp;</div>
