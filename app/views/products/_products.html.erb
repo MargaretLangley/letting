@@ -19,22 +19,22 @@
   &nbsp;
 </div>
 
-<% items.each do |item| %>
+<% products.each do |product| %>
   <div class='col-1-12 grid-row'>
     &nbsp;
   </div>
   <div class='col-2-12'>
-    <%= item.date_due %>
+    <%= product.date_due %>
   </div>
   <div class='col-5-12'>
-    <%= item.charge_type %>  <%= l item.period_first %>
-    to  <%= l item.period_last %>
+    <%= product.charge_type %>  <%= l product.period_first %>
+    to  <%= l product.period_last %>
   </div>
   <div class='col-2-12 r-align'>
-    <%= number_with_precision(item.amount,precision: 2) %>
+    <%= number_with_precision(product.amount,precision: 2) %>
   </div>
   <div class='col-2-12 r-align'>
-    <% total = total + item.amount %>
+    <% total = total + product.amount %>
     <%= number_with_precision(total,precision: 2) %>
   </div>
 <% end %>
