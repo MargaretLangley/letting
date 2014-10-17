@@ -24,7 +24,7 @@ class PropertiesController < ApplicationController
 
   def show
     @property = PropertyDecorator.new \
-      Property.includes(account: [charges: [:charged_in, :charge_cycle],
+      Property.includes(account: [charges: [:charged_in, :cycle],
                                   credits: [:charge],
                                   debits:  [:charge]])
               .find params[:id]
@@ -88,7 +88,7 @@ class PropertiesController < ApplicationController
   end
 
   def charges_params
-    %i(id charge_type charge_cycle_id charged_in_id amount dormant)
+    %i(id charge_type cycle_id charged_in_id amount dormant)
   end
 
   def identity

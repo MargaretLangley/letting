@@ -1,14 +1,14 @@
-<%= form_for charge_cycle do |f| %>
-  <%= render 'shared/errors', object: charge_cycle %>
+<%= form_for cycle do |f| %>
+  <%= render 'shared/errors', object: cycle %>
 
-  <fieldset id='charge_cycle' class='shell'>
+  <fieldset id='cycle' class='shell'>
 
     <div class="grid">
       <div class='grid-row col-12-24 vertical-spacer'>
         <h2>Monthly Charge Cycle</h2>
       </div>
       <div class='col-12-24 vertical-spacer'>
-        <%= view_link(charge_cycle) %>
+        <%= view_link(cycle) %>
       </div>
     </div>
 
@@ -46,7 +46,7 @@
       <div class='col-3-24 vertical-spacer  faded'>
         Due On Day
       </div>
-      <%= f.fields_for :due_ons, charge_cycle.due_ons.first  do |builder| %>
+      <%= f.fields_for :due_ons, cycle.due_ons.first  do |builder| %>
         <div class='col-2-24 vertical-spacer'>
           <%= builder.text_field :day, class: 'r-align' %>
         </div>
@@ -56,7 +56,7 @@
       </div>
 
       <hr class = 'faded'>
-      <%= render 'cycle_charged_ins/form', charge_cycle: @charge_cycle %>
+      <%= render 'cycle_charged_ins/form', cycle: @cycle %>
       <div class='grid-row col-24-24'>
         &nbsp;
       </div>
@@ -65,7 +65,7 @@
         &nbsp;
       </div>
       <div class='col-18-24 no-r-pad  vertical-spacer no-print'>
-        <%= f.button submit: '', class: 'primary submit-button', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Charge Cycle..."} %> or <%= link_to 'Cancel', charge_cycles_path, class: 'warn' %>
+        <%= f.button submit: '', class: 'primary submit-button', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Charge Cycle..."} %> or <%= link_to 'Cancel', cycles_path, class: 'warn' %>
       </div>
     </div>
   </fieldset>

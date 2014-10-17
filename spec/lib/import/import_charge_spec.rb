@@ -24,7 +24,7 @@ module DB
     end
 
     context 'charge with on_date cycle' do
-      before { charge_cycle_create due_ons: [DueOn.new(day: 25, month: 3)] }
+      before { cycle_create due_ons: [DueOn.new(day: 25, month: 3)] }
 
       it 'imports a single row' do
         expect { import_charge row }.to change(Charge, :count).by 1
@@ -65,7 +65,7 @@ module DB
     end
 
     context 'charge with monthly cycle' do
-      before { charge_cycle_create due_ons: [DueOn.new(day: 8, month: 0)] }
+      before { cycle_create due_ons: [DueOn.new(day: 8, month: 0)] }
 
       it 'imports a monthly row' do
         expect { import_charge row day: 8, month: 0 }

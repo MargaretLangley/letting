@@ -1,6 +1,0 @@
-<% @title='New Charge Cycles' %>
-<% if @charge_cycle.cycle_type == 'monthly' %>
-  <%= render 'form_monthly', charge_cycle: @charge_cycle %>
-<% else %>
-  <%= render 'form_term', charge_cycle: @charge_cycle %>
-<% end %>

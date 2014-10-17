@@ -7,8 +7,8 @@ describe Charge, :ledgers, :range, type: :model do
     describe 'presence' do
       it('charge type') { expect(charge_new charge_type: nil).to_not be_valid }
       it('amount') { expect(charge_new amount: nil).to_not be_valid }
-      it('charge_cycle') do
-        expect(charge_new charge_cycle: nil).to_not be_valid
+      it('cycle') do
+        expect(charge_new cycle: nil).to_not be_valid
       end
       it('charged_in') { expect(charge_new charged_in: nil).to_not be_valid }
     end
@@ -48,8 +48,8 @@ describe Charge, :ledgers, :range, type: :model do
       after(:each)  { Timecop.return }
 
       it 'charges if billing period includes a due_on'  do
-        charge = charge_create charge_cycle: \
-                   charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
+        charge = charge_create cycle: \
+                   cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
 
         expect(charge.coming Date.new(2013, 3, 25)..Date.new(2013, 3, 25))
           .to eq [chargeable_new(charge_id: charge.id,
@@ -57,23 +57,23 @@ describe Charge, :ledgers, :range, type: :model do
       end
 
       it 'no charge if billing period excludes all due_on' do
-        charge = charge_create charge_cycle: \
-                   charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
+        charge = charge_create cycle: \
+                   cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
         expect(charge.coming Date.new(2013, 2, 1)..Date.new(2013, 3, 24))
           .to eq []
       end
 
       it 'excludes dormant charges from billing'  do
-        charge = charge_create charge_cycle: \
-                   charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
+        charge = charge_create cycle: \
+                   cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
         charge.dormant = true
         expect(charge.coming Date.new(2013, 3, 25)..Date.new(2013, 3, 25))
           .to eq []
       end
 
       it 'excludes charges that have already been debited on that date.'  do
-        charge = charge_create charge_cycle: \
-                   charge_cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
+        charge = charge_create cycle: \
+                   cycle_create(due_ons: [DueOn.new(day: 25, month: 3)])
         charge.debits << debit_new(on_date: '2013-3-25')
         expect(charge.coming Date.new(2013, 3, 25)..Date.new(2013, 5, 25))
           .to eq []
@@ -90,8 +90,8 @@ describe Charge, :ledgers, :range, type: :model do
   end
 
   it 'charge displays billing period' do
-    charge = charge_create charge_cycle: \
-                   charge_cycle_create(due_ons: [DueOn.new(month: 3, day: 8)])
+    charge = charge_create cycle: \
+                   cycle_create(due_ons: [DueOn.new(month: 3, day: 8)])
     expect(charge.period billed_on: Date.new(2015, 3, 8))
       .to eq Date.new(2015, 3, 8)..Date.new(2016, 3, 7)
   end

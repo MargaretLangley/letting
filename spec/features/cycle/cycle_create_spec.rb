@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-require_relative '../../support/pages/charge_cycle_page'
+require_relative '../../support/pages/cycle_page'
 
-describe ChargeCycle, :ledgers, type: :feature do
+describe Cycle, :ledgers, type: :feature do
   before(:each) { log_in admin_attributes }
 
   context 'Term' do
     it 'creates a charge cycle' do
       charged_in_create id: 2, name: 'Advance'
-      cycle_page = ChargeCyclePage.new type: :term, action: :create
+      cycle_page = CyclePage.new type: :term, action: :create
       cycle_page.enter
       expect(page.title).to eq 'Letting - New Charge Cycles'
       cycle_page.name = 'April/Nov'
@@ -20,7 +20,7 @@ describe ChargeCycle, :ledgers, type: :feature do
     end
 
     it 'displays form errors' do
-      cycle_page = ChargeCyclePage.new type: :term, action: :create
+      cycle_page = CyclePage.new type: :term, action: :create
       cycle_page.enter
       cycle_page.do 'Create Charge Cycle'
       expect(cycle_page).to be_errored
@@ -30,7 +30,7 @@ describe ChargeCycle, :ledgers, type: :feature do
   context 'Monthly' do
     it 'creates a charge cycle' do
       charged_in_create id: 1, name: 'Arrears'
-      cycle_page = ChargeCyclePage.new type: :monthly, action: :create
+      cycle_page = CyclePage.new type: :monthly, action: :create
       cycle_page.enter
       expect(page.title).to eq 'Letting - New Charge Cycles'
       cycle_page.name = 'Monthly'
@@ -42,7 +42,7 @@ describe ChargeCycle, :ledgers, type: :feature do
     end
 
     it 'displays form errors' do
-      cycle_page = ChargeCyclePage.new type: :monthly, action: :create
+      cycle_page = CyclePage.new type: :monthly, action: :create
       cycle_page.enter
       cycle_page.do 'Create Charge Cycle'
       expect(cycle_page).to be_errored

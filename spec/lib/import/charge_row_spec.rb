@@ -63,25 +63,25 @@ module DB
         end
       end
 
-      describe '#charge_cycle_id' do
+      describe '#cycle_id' do
         it 'returns valid id' do
-          charge_cycle_create id: 3, due_ons: [DueOn.new(month: 3, day: 25)]
+          cycle_create id: 3, due_ons: [DueOn.new(month: 3, day: 25)]
           row = ChargeRow.new parse_line charge_row month: 3, day: 25
-          expect(row.charge_cycle_id).to eq 3
+          expect(row.cycle_id).to eq 3
         end
 
         it 'messages when no charge cycles' do
           row = ChargeRow.new parse_line charge_row month: 3, day: 25
-          expect { warn 'ChargeCycle table has no records' }.to output.to_stderr
-          row.charge_cycle_id
+          expect { warn 'Cycle table has no records' }.to output.to_stderr
+          row.cycle_id
         end
 
         it 'messages on unknown cycle' do
-          charge_cycle_create id: 3, due_ons: [DueOn.new(month: 10, day: 10)]
+          cycle_create id: 3, due_ons: [DueOn.new(month: 10, day: 10)]
           row = ChargeRow.new parse_line charge_row(month: 3, day: 25)
           expect { warn 'charge row does not match a charge cycle' }
             .to output.to_stderr
-          row.charge_cycle_id
+          row.cycle_id
         end
       end
 

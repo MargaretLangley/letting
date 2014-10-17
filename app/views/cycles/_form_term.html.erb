@@ -1,14 +1,14 @@
-<%= form_for charge_cycle do |f| %>
-  <%= render 'shared/errors', object: charge_cycle %>
+<%= form_for cycle do |f| %>
+  <%= render 'shared/errors', object: cycle %>
 
-  <fieldset id='charge_cycle' class='shell'>
+  <fieldset id='cycle' class='shell'>
 
     <div class="grid">
       <div class='grid-row col-12-24 vertical-spacer'>
         <h2>Charge Cycle</h2>
       </div>
       <div class='col-12-24 vertical-spacer'>
-        <%= view_link(charge_cycle) %>
+        <%= view_link(cycle) %>
       </div>
     </div>
 
@@ -94,7 +94,7 @@
         </div>
       </div>  <!-- js-group-toggle -->
       <hr class = 'faded'>
-      <%= render 'cycle_charged_ins/form', charge_cycle: @charge_cycle %>
+      <%= render 'cycle_charged_ins/form', cycle: @cycle %>
       <div class='grid-row col-24-24'>
         &nbsp;
       </div>
@@ -103,7 +103,7 @@
         &nbsp;
       </div>
       <div class='col-18-24 no-r-pad  vertical-spacer no-print'>
-        <%= f.button submit: '', class: 'primary submit-button', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Charge Cycle..."} %> or <%= link_to 'Cancel', charge_cycles_path, class: 'warn' %>
+        <%= f.button submit: '', class: 'primary submit-button', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Charge Cycle..."} %> or <%= link_to 'Cancel', cycles_path, class: 'warn' %>
      </div>
     </div>
   </fieldset>

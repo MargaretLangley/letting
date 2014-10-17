@@ -3,11 +3,11 @@ require 'csv'
 # CSV Columns
 #
 # Column 1 - id
-# Column 2 - Ref ChargeCycle (1-12 currently)
+# Column 2 - Ref Cycle (1-12 currently)
 # Charge Cycle structure
 # id, name, order
 # 1, 'Mar 25th/Sep 29th', 3
-# See ChargeCycle CSV for more examples.
+# See Cycle CSV for more examples.
 # Column 3 - Year (nil or 2014-2015)
 # Column 4 - Month (1-12)
 # Column 5 - Day (1 - 31)

@@ -3,11 +3,11 @@ require 'csv'
 ###
 # Import Charged Ins
 #
-# Table that links the used combinations of charge_cycles and charged_in
+# Table that links the used combinations of cycles and charged_in
 #
 # Generated file from Postgres with he command:
-# \copy (select distinct charge_cycle_id, charged_in_id from charges order by
-# charge_cycle_id, charged_in_id) TO '~/cycle_charged_ins.csv'
+# \copy (select distinct cycle_id, charged_in_id from charges order by
+# cycle_id, charged_in_id) TO '~/cycle_charged_ins.csv'
 # DELIMITER ',' CSV HEADER;
 #
 ####
@@ -32,9 +32,9 @@ namespace :db do
 
     def seed_cycle_charged_ins
       CycleChargedIn.create! [
-        { id: 1, charge_cycle_id: 1, charged_in_id: 1 },
-        { id: 2, charge_cycle_id: 1, charged_in_id: 2 },
-        { id: 3, charge_cycle_id: 2, charged_in_id: 1 },
+        { id: 1, cycle_id: 1, charged_in_id: 1 },
+        { id: 2, cycle_id: 1, charged_in_id: 2 },
+        { id: 3, cycle_id: 2, charged_in_id: 1 },
       ]
     end
   end

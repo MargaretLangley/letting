@@ -10,7 +10,7 @@
 class ChargedIn < ActiveRecord::Base
   has_many :charges, inverse_of: :charged_in
 
-  has_many :charge_cycles, through: :cycle_charged_ins
+  has_many :cycles, through: :cycle_charged_ins
   has_many :cycle_charged_ins, inverse_of: :charged_in, dependent: :destroy
   validates :name, presence: true
   validates :name, inclusion: { in: %w(Advance Arrears Mid-Term) }

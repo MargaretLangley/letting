@@ -20,7 +20,7 @@ Letting::Application.routes.draw do
   resources :prints, only: [:show]
 
   # Admin
-  resources :charge_cycles
+  resources :cycles
   resources :users
   resources :templates, only: [:index, :show, :edit, :update]
 end

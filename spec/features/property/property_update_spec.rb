@@ -60,9 +60,9 @@ describe 'Account Update', type: :feature do
 
     it 'adds date charge' do
       charge = \
-        charge_create charge_cycle: charge_cycle_new(id: 1),
+        charge_create cycle: cycle_new(id: 1),
                       charged_in: charged_in_create(id: 2, name: 'Advance')
-      cycle_charged_in_create id: 1, charge_cycle_id: 1, charged_in_id: 2
+      cycle_charged_in_create id: 1, cycle_id: 1, charged_in_id: 2
       account.edit
       account.charge charge: charge
       account.button('Update').successful?(self).edit
@@ -85,10 +85,10 @@ describe 'Account Update', type: :feature do
     end
 
     it 'can be set to dormant', js: true do
-      charge_cycle = charge_cycle_create(id: 1, name: 'Mar/Sep')
+      cycle = cycle_create(id: 1, name: 'Mar/Sep')
       charged_in = charged_in_create(id: 2, name: 'Advance')
-      cycle_charged_in_create id: 1, charge_cycle_id: 1, charged_in_id: 2
-      charge = charge_new(charged_in: charged_in, charge_cycle: charge_cycle)
+      cycle_charged_in_create id: 1, cycle_id: 1, charged_in_id: 2
+      charge = charge_new(charged_in: charged_in, cycle: cycle)
       property_create human_ref: 8000, account: account_new(charge: charge)
       account.edit
       expect(page).to have_css('.spec-charge-count', count: 1)

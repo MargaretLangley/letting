@@ -1,32 +1,32 @@
 require 'csv'
 
 ####
-# Import ChargeCycle
+# Import Cycle
 #
-# Key value table: id, ChargeCycle Name
+# Key value table: id, Cycle Name
 #
 # 1 Mar/Sep
 # 2 Jun/Dec
 # 3 Mar/Jun/Sep/Dec
 # 4 Apr/July/Oct/Jan
-# see definitive values in table charge_cycles / file charge_cycle.csv
+# see definitive values in table cycles / file cycle.csv
 #
 ####
 namespace :db do
   namespace :import do
 
-    filename = 'import_data/new/charge_cycle.csv'
+    filename = 'import_data/new/cycle.csv'
 
     desc 'Import charge cycles from CSV file'
-    task :charge_cycle do
+    task :cycle do
       puts "Charge cycle import: missing #{filename}" \
         unless File.exist?(filename)
 
       CSV.foreach(filename, headers: true) do |row|
         begin
-          ChargeCycle.create!(row.to_hash) unless comment(row)
+          Cycle.create!(row.to_hash) unless comment(row)
         rescue
-          p 'ChargeCycle Create failed (see hash below):', row.to_hash
+          p 'Cycle Create failed (see hash below):', row.to_hash
         end
       end
     end

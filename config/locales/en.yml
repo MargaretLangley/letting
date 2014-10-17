@@ -43,7 +43,7 @@ en:
     submit:
       create: "Create %{model}"
       update: "Update %{model}"
-      charge_cycle:
+      cycle:
         create: "Create Charge Cycle"
         update: "Update Charge Cycle"
       property:

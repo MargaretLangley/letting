@@ -21,10 +21,10 @@ module DB
 
       describe 'balance from description' do
         it 'balance with one charge as arrears for that charge' do
-          cycle = charge_cycle_new(due_ons: [DueOn.new(month: 3, day: 25)])
+          cycle = cycle_new(due_ons: [DueOn.new(month: 3, day: 25)])
           property_create \
             human_ref: 8,
-            account: account_new(charge: charge_new(charge_cycle: cycle))
+            account: account_new(charge: charge_new(cycle: cycle))
 
           expect { ImportBalance.import parse row_code }
             .to change(Debit, :count).by 1
@@ -38,7 +38,7 @@ module DB
       describe 'balance with subject' do
         it 'matches a charge code using the description' do
           charge = charge_new charge_type: 'Service Charge',
-                              charge_cycle: charge_cycle_new
+                              cycle: cycle_new
           property_create human_ref: 8, account: account_new(charge: charge)
           expect { ImportBalance.import parse row_desc }
             .to change(Debit, :count).by 1

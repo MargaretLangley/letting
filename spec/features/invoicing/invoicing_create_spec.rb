@@ -53,13 +53,13 @@ describe Invoicing, type: :feature do
   after  { Timecop.return }
 
   it 'invoices an account that matches the search' do
-    cycle = charge_cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
+    cycle = cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
     client = client_new
     account_create property: property_new(human_ref: 87, client: client),
-                   charge: charge_new(charge_cycle: cycle)
+                   charge: charge_new(cycle: cycle)
 
     account_create property: property_new(human_ref: 88, client: client),
-                   charge: charge_new(charge_cycle: cycle)
+                   charge: charge_new(cycle: cycle)
     template_create id: 1
 
     invoicing_page.enter

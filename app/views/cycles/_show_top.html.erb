@@ -3,7 +3,7 @@
     <h2>Charge Cycle View</h2>
   </div>
   <div class='col-12-24 no-r-pad'>
-    <%= link_to fa_icon('edit'), edit_charge_cycle_path(@charge_cycle), title: 'Edit', class: 'simple-button float-right' %>
+    <%= link_to fa_icon('edit'), edit_cycle_path(@cycle), title: 'Edit', class: 'simple-button float-right' %>
   </div>
 </div>
 
@@ -15,7 +15,7 @@
     Name
   </div>
   <div class='col-4-24  vertical-spacer'>
-   <%= @charge_cycle.name %>
+   <%= @cycle.name %>
   </div>
   <div class='col-11-24  vertical-spacer'>
     &nbsp;
@@ -28,7 +28,7 @@
     Order
   </div>
   <div class='col-1-24 vertical-spacer r-align'>
-    <%= @charge_cycle.order %>
+    <%= @cycle.order %>
   </div>
   <div class='col-14-24  vertical-spacer'>
     &nbsp;

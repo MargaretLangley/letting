@@ -23,10 +23,10 @@
         <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
       </div>
       <div class='col-5-24 vertical-spacer'>
-        <%= f.select :charge_cycle_id, options_for_select( ChargeCycleDecorator.all, f.object.charge_cycle_id ), { prompt: 'Please select'},{ class: 'js-dynamic-filter' } %>
+        <%= f.select :cycle_id, options_for_select( CycleDecorator.all, f.object.cycle_id ), { prompt: 'Please select'},{ class: 'js-dynamic-filter' } %>
       </div>
       <div class='col-3-24 vertical-spacer'>
-        <%= f.grouped_collection_select :charged_in_id, ChargeCycle.includes(:charged_ins).all, :charged_ins, :name, :id, :name, { include_blank: true }, { class: 'js-dynamic-result' } %>
+        <%= f.grouped_collection_select :charged_in_id, Cycle.includes(:charged_ins).all, :charged_ins, :name, :id, :name, { include_blank: true }, { class: 'js-dynamic-result' } %>
       </div>
       <div class='col-3-24 vertical-spacer r-align'>
         <%= f.text_field :amount, class: 'r-align' %>

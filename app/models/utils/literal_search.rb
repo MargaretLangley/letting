@@ -31,11 +31,11 @@ class LiteralSearch
 
   def type_query
     case @type
-    when 'ChargeCycle'
+    when 'Cycle'
       {
-        controller: 'charge_cycles',
+        controller: 'cycles',
         action: 'show',
-        record_id: id_or_nil(ChargeCycle.find_by name: @query)
+        record_id: id_or_nil(Cycle.find_by name: @query)
       }
     when 'Client'
       {
@@ -85,7 +85,7 @@ class LiteralSearch
     record = Property.find_by(human_ref: @query) ||
       Client.find_by(human_ref: @query) ||
       User.find_by(nickname: @query) ||
-      ChargeCycle.find_by(name: @query)
+      Cycle.find_by(name: @query)
     { record_id: record }
   end
 end

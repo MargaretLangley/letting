@@ -51,14 +51,6 @@ ActiveRecord::Schema.define(version: 20140930053829) do
 
   add_index "agents", ["property_id"], name: "index_agents_on_property_id", using: :btree
 
-  create_table "charge_cycles", force: true do |t|
-    t.string   "name",       null: false
-    t.integer  "order",      null: false
-    t.string   "cycle_type", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "charged_ins", force: true do |t|
     t.string   "name",       null: false
     t.datetime "created_at"
@@ -66,21 +58,21 @@ ActiveRecord::Schema.define(version: 20140930053829) do
   end
 
   create_table "charges", force: true do |t|
-    t.string   "charge_type",                                             null: false
-    t.integer  "charge_cycle_id",                                         null: false
-    t.integer  "charged_in_id",                                           null: false
-    t.boolean  "dormant",                                 default: false, null: false
-    t.decimal  "amount",          precision: 8, scale: 2,                 null: false
-    t.date     "start_date",                                              null: false
-    t.date     "end_date",                                                null: false
-    t.integer  "account_id",                                              null: false
+    t.string   "charge_type",                                           null: false
+    t.integer  "cycle_id",                                              null: false
+    t.integer  "charged_in_id",                                         null: false
+    t.boolean  "dormant",                               default: false, null: false
+    t.decimal  "amount",        precision: 8, scale: 2,                 null: false
+    t.date     "start_date",                                            null: false
+    t.date     "end_date",                                              null: false
+    t.integer  "account_id",                                            null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "charges", ["account_id"], name: "index_charges_on_account_id", using: :btree
-  add_index "charges", ["charge_cycle_id"], name: "index_charges_on_charge_cycle_id", using: :btree
   add_index "charges", ["charged_in_id"], name: "index_charges_on_charged_in_id", using: :btree
+  add_index "charges", ["cycle_id"], name: "index_charges_on_cycle_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.integer  "human_ref",  null: false
@@ -103,14 +95,22 @@ ActiveRecord::Schema.define(version: 20140930053829) do
   add_index "credits", ["payment_id"], name: "index_credits_on_payment_id", using: :btree
 
   create_table "cycle_charged_ins", force: true do |t|
-    t.integer  "charge_cycle_id", null: false
-    t.integer  "charged_in_id",   null: false
+    t.integer  "cycle_id",      null: false
+    t.integer  "charged_in_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "cycle_charged_ins", ["charge_cycle_id"], name: "index_cycle_charged_ins_on_charge_cycle_id", using: :btree
   add_index "cycle_charged_ins", ["charged_in_id"], name: "index_cycle_charged_ins_on_charged_in_id", using: :btree
+  add_index "cycle_charged_ins", ["cycle_id"], name: "index_cycle_charged_ins_on_cycle_id", using: :btree
+
+  create_table "cycles", force: true do |t|
+    t.string   "name",       null: false
+    t.integer  "order",      null: false
+    t.string   "cycle_type", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "debits", force: true do |t|
     t.integer  "account_id",                           null: false
@@ -127,15 +127,15 @@ ActiveRecord::Schema.define(version: 20140930053829) do
   add_index "debits", ["charge_id", "on_date"], name: "index_debits_on_charge_id_and_on_date", unique: true, using: :btree
 
   create_table "due_ons", force: true do |t|
-    t.integer  "day",             null: false
-    t.integer  "month",           null: false
+    t.integer  "day",        null: false
+    t.integer  "month",      null: false
     t.integer  "year"
-    t.integer  "charge_cycle_id"
+    t.integer  "cycle_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "due_ons", ["charge_cycle_id"], name: "index_due_ons_on_charge_cycle_id", using: :btree
+  add_index "due_ons", ["cycle_id"], name: "index_due_ons_on_cycle_id", using: :btree
 
   create_table "entities", force: true do |t|
     t.integer  "entitieable_id",   null: false

@@ -10,8 +10,8 @@ describe LiteralSearch, type: :model do
     end
 
     it 'returns an exact charge cycle' do
-      cycle = charge_cycle_create name: 'Mar/Sep'
-      expect(LiteralSearch.search(type: 'ChargeCycle', query: 'Mar/Sep')
+      cycle = cycle_create name: 'Mar/Sep'
+      expect(LiteralSearch.search(type: 'Cycle', query: 'Mar/Sep')
                           .go[:record_id])
         .to eq cycle.id
     end

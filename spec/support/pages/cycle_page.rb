@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 ################################
-# ChargeCyclePage
+# CyclePage
 #
-# Encapsulates the ChargeCycle Page (new and edit)
+# Encapsulates the Cycle Page (new and edit)
 #
 # The layer hides the Capybara calls to make the functional rspec tests that
 # use this class simpler.
 #
-class ChargeCyclePage
+class CyclePage
   include Capybara::DSL
   attr_reader :action, :type
 
@@ -18,8 +18,8 @@ class ChargeCyclePage
   end
 
   def enter
-    visit "/charge_cycles/new?cycle_type=#{type}" if action == :create
-    visit '/charge_cycles/1/edit' if action == :edit
+    visit "/cycles/new?cycle_type=#{type}" if action == :create
+    visit '/cycles/1/edit' if action == :edit
     self
   end
 
@@ -39,7 +39,7 @@ class ChargeCyclePage
   end
 
   def due_on order: 0, day:, month:, year: nil
-    id_stem = "charge_cycle_due_ons_attributes_#{order}"
+    id_stem = "cycle_due_ons_attributes_#{order}"
     fill_in "#{id_stem}_day", with: day
     if type == :term
       fill_in "#{id_stem}_month", with: month

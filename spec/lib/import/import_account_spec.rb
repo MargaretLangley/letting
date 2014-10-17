@@ -14,7 +14,7 @@ module DB
 
       it 'imports debits' do
         create_charged_property human_ref: 8,
-                                cycle: new_charge_cycle(month: 12, day: 25)
+                                cycle: new_cycle(month: 12, day: 25)
         expect { import_account debit }.to change(Debit, :count).by 1
       end
 
@@ -24,7 +24,7 @@ module DB
 
       it 'imports payment' do
         create_charged_property human_ref: 8,
-                                cycle: new_charge_cycle(month: 12, day: 25)
+                                cycle: new_cycle(month: 12, day: 25)
         expect { ImportAccount.import parse payment }
           .to change(Payment, :count).by 1
       end
@@ -35,7 +35,7 @@ module DB
 
       it 'imports balance' do
         create_charged_property human_ref: 8,
-                                cycle: new_charge_cycle(month: 12, day: 25)
+                                cycle: new_cycle(month: 12, day: 25)
         expect { ImportAccount.import parse balance }
           .to change(Debit, :count).by 1
       end
@@ -49,27 +49,27 @@ module DB
 
       it 'allows within range' do
         create_charged_property human_ref: 8,
-                                cycle: new_charge_cycle(month: 12, day: 25)
+                                cycle: new_cycle(month: 12, day: 25)
         expect { import_account single_row, range: 8..8 }
           .to change(Debit, :count).by 1
       end
 
       it 'filters if out of range' do
         create_charged_property human_ref: 8,
-                                cycle: new_charge_cycle(month: 12, day: 25)
+                                cycle: new_cycle(month: 12, day: 25)
         expect { import_account single_row, range: 2..7 }
           .to change(Debit, :count).by 0
       end
     end
 
-    def create_charged_property human_ref: 8, cycle: new_charge_cycle
+    def create_charged_property human_ref: 8, cycle: new_cycle
       property_create \
         human_ref: human_ref,
-        account: account_new(charge: charge_new(charge_cycle: cycle))
+        account: account_new(charge: charge_new(cycle: cycle))
     end
 
-    def new_charge_cycle(day: 25, month: 12)
-      charge_cycle_new due_ons: [DueOn.new(day: day, month: month)]
+    def new_cycle(day: 25, month: 12)
+      cycle_new due_ons: [DueOn.new(day: day, month: month)]
     end
 
     def import_account row, **args

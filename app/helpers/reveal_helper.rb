@@ -3,7 +3,7 @@
 #
 # Helper to wrap logic for adding and removing collection elements through
 # JQuery - reveal collection elements that are hidden on the form.
-# Interacts with reveal.js and forms (charges, entities, charge_cycle)
+# Interacts with reveal.js and forms (charges, entities, cycle)
 #
 # Introduction
 # js-group-toggle - the js acts within the box.

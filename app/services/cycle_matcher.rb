@@ -3,9 +3,9 @@ require_relative '../../lib/import/errors'
 
 ####
 #
-# ChargeCycleMatcher
+# CycleMatcher
 #
-# Identifies a collection of due_ons as a specific ChargeCycle.
+# Identifies a collection of due_ons as a specific Cycle.
 #
 # During the import of the legacy acc_info file the import_charge code presents
 # ChargeRow with a number of reoccurring dates (day and month that occur every
@@ -14,26 +14,26 @@ require_relative '../../lib/import/errors'
 #
 ####
 #
-class ChargeCycleMatcher
+class CycleMatcher
   def initialize(day_months:)
-    @unidentified_charge_cycle = ChargeCycle.new(name: 'unknown')
+    @unidentified_cycle = Cycle.new(name: 'unknown')
     day_months.each do |day, month|
-      @unidentified_charge_cycle.due_ons.build(day: day, month: month)
+      @unidentified_cycle.due_ons.build(day: day, month: month)
     end
   end
 
   def id
-    return warn 'ChargeCycle table has no records' unless ChargeCycle.any?
+    return warn 'Cycle table has no records' unless Cycle.any?
     found_structure = find
-    fail DB::ChargeCycleUnknown unless found_structure
+    fail DB::CycleUnknown unless found_structure
     found_structure.id
   end
 
   private
 
   def find
-    ChargeCycle.all.find do |structure|
-      structure.due_ons.sort == @unidentified_charge_cycle.due_ons.sort
+    Cycle.all.find do |structure|
+      structure.due_ons.sort == @unidentified_cycle.due_ons.sort
     end
   end
 end

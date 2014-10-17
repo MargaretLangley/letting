@@ -39,7 +39,7 @@ module DueOns
   extend ActiveSupport::Concern
   included do
     has_many :due_ons, -> { order(:created_at) },
-             inverse_of: :charge_cycle,
+             inverse_of: :cycle,
              dependent: :destroy do
 
       def between billing_period

@@ -11,9 +11,9 @@
   </div>
   <div class='col-10-24 vertical-spacer'>
     <% if charge_dec.monthly? %>
-      <%= render partial: 'due_ons/due_on_monthly', object: charge_dec.charge_cycle.due_ons.first %>
+      <%= render partial: 'due_ons/due_on_monthly', object: charge_dec.cycle.due_ons.first %>
     <% elsif %>
-      <%= render partial: 'due_ons/due_on_term', collection: charge_dec.charge_cycle.due_ons %>
+      <%= render partial: 'due_ons/due_on_term', collection: charge_dec.cycle.due_ons %>
     <% end %>
   </div>
   <div class='col-2-24 vertical-spacer c-align'>

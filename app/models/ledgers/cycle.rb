@@ -1,27 +1,27 @@
 ####
-# ChargeCycle
+# Cycle
 #
 # Represents the repeated dates a charge becomes due in the year
 #
 # Charges have one of a few number of patterns of repeated due_dates.
 # A charge cycle has a name identifier and a number of the repeated dates.
-# A charge belongs to a ChargeCycle and a ChargeCycle has many charges.
+# A charge belongs to a Cycle and a Cycle has many charges.
 #
-# ChargeCycle has many due_ons (the dates when a charge happens, becomes due)
+# Cycle has many due_ons (the dates when a charge happens, becomes due)
 #
 ####
 #
-class ChargeCycle < ActiveRecord::Base
+class Cycle < ActiveRecord::Base
   include Comparable
   validates :name, presence: true
   validates :order, presence: true
   validates :cycle_type, inclusion: { in: %w(term monthly) }
   validates :cycle_type, presence: true
   validates :due_ons, presence: true
-  has_many :charges, inverse_of: :charge_cycle
+  has_many :charges, inverse_of: :cycle
 
   has_many :charged_ins, through: :cycle_charged_ins
-  has_many :cycle_charged_ins, inverse_of: :charge_cycle, dependent: :destroy
+  has_many :cycle_charged_ins, inverse_of: :cycle, dependent: :destroy
   include DueOns
   accepts_nested_attributes_for :due_ons, allow_destroy: true
   before_validation :clear_up_form

@@ -21,23 +21,23 @@
     &nbsp;
   </div>
 
-  <% @charge_cycles.each do |charge_cycle| %>
-    <div class='table-row' data-link='<%= charge_cycle_path(charge_cycle) %>'>
+  <% @cycles.each do |cycle| %>
+    <div class='table-row' data-link='<%= cycle_path(cycle) %>'>
       <div class='grid-row col-1-6  vertical-spacer inherit-row'>
         &nbsp;
       </div>
       <div class='col-1-6  vertical-spacer inherit-row'>
-       <%= charge_cycle.name %>
+       <%= cycle.name %>
       </div>
       <div class='col-1-6  vertical-spacer inherit-row'>
-       <%= charge_cycle.order %>
+       <%= cycle.order %>
       </div>
       <div class='col-1-6  vertical-spacer inherit-row'>
-        <%= charge_cycle.cycle_type %>
+        <%= cycle.cycle_type %>
       </div>
       <nav class='col-1-6  vertical-spacer no-print r-align'>
-        <%= link_to fa_icon('edit lg'), edit_charge_cycle_path(charge_cycle), title: 'Edit', class: 'r-pad' %>
-        <%= link_to fa_icon('trash-o lg'), charge_cycle, method: :delete, data: { confirm: 'Are you sure?' }, title: 'Delete', class: 'l-pad' %>
+        <%= link_to fa_icon('edit lg'), edit_cycle_path(cycle), title: 'Edit', class: 'r-pad' %>
+        <%= link_to fa_icon('trash-o lg'), cycle, method: :delete, data: { confirm: 'Are you sure?' }, title: 'Delete', class: 'l-pad' %>
       </nav>
       <div class='col-1-6  vertical-spacer no-print'>
         &nbsp;

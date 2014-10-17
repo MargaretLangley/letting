@@ -14,10 +14,10 @@ require_relative '../../../lib/import/accounts/import_debit'
 module DB
   describe ImportDebit, :import do
     let!(:property) do
-      cycle = charge_cycle_new(due_ons: [DueOn.new(day: 6, month: 6)])
+      cycle = cycle_new(due_ons: [DueOn.new(day: 6, month: 6)])
       property_create \
         human_ref: 122,
-        account: account_new(charge: charge_new(charge_cycle: cycle))
+        account: account_new(charge: charge_new(cycle: cycle))
     end
 
     context 'one debit' do

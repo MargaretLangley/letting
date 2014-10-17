@@ -50,8 +50,8 @@ describe Account, :ledgers, type: :model do
         end
 
         it 'adds debits during the billing period' do
-          account = account_new charge: charge_new(amount: 43, charge_cycle: \
-            charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
+          account = account_new charge: charge_new(amount: 43, cycle: \
+            cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
           invoice = account.invoice billing_period: Date.new(2013, 3, 5)..
                                                     Date.new(2013, 3, 5)
           expect(invoice[:total_arrears]).to eq(43)
@@ -60,8 +60,8 @@ describe Account, :ledgers, type: :model do
         it 'totals debits before and during billing period' do
           account = account_new \
             debits: [debit_new(amount: 30, on_date: Date.new(2013, 3, 4))],
-            charge: charge_new(amount: 43, charge_cycle: \
-              charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
+            charge: charge_new(amount: 43, cycle: \
+              cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
           invoice = account.invoice billing_period: Date.new(2013, 3, 5)..
                                                     Date.new(2013, 3, 5)
           expect(invoice[:total_arrears]).to eq(73)
@@ -69,16 +69,16 @@ describe Account, :ledgers, type: :model do
       end
 
       it 'produces debits if charge is due' do
-        account = account_new charge: charge_new(charge_cycle: \
-          charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
+        account = account_new charge: charge_new(cycle: \
+          cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
         invoice = account.invoice billing_period: Date.new(2013, 3, 5)..
                                                   Date.new(2013, 3, 5)
         expect(invoice[:debits].size).to eq(1)
       end
 
       it 'no debits when charge is not due' do
-        account = account_new charge: charge_new(charge_cycle: \
-          charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
+        account = account_new charge: charge_new(cycle: \
+          cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
         invoice = account.invoice billing_period: Date.new(2013, 3, 6)..
                                                   Date.new(2013, 3, 6)
         expect(invoice[:debits].size).to eq(0)
@@ -87,16 +87,16 @@ describe Account, :ledgers, type: :model do
 
     describe '#invoice?' do
       it 'returns true if debits would be made' do
-        account = account_new charge: charge_new(charge_cycle: \
-          charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
+        account = account_new charge: charge_new(cycle: \
+          cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
         expect(account.invoice? billing_period: Date.new(2013, 3, 5)..
                                                 Date.new(2013, 3, 5))
           .to be true
       end
 
       it 'returns false if debits would not be made' do
-        account = account_new charge: charge_new(charge_cycle: \
-          charge_cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
+        account = account_new charge: charge_new(cycle: \
+          cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
         expect(account.invoice? billing_period: Date.new(2013, 3, 6)..
                                                 Date.new(2013, 3, 6))
           .to be false

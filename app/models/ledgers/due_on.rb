@@ -20,7 +20,7 @@
 #
 class DueOn < ActiveRecord::Base
   include Comparable
-  belongs_to :charge_cycle, inverse_of: :due_ons
+  belongs_to :cycle, inverse_of: :due_ons
   validates :day, :month, presence: true
   validates :day,   numericality: { only_integer: true,
                                     greater_than: 0,
@@ -63,7 +63,7 @@ class DueOn < ActiveRecord::Base
   end
 
   def range
-    charge_cycle.range_on make_date
+    cycle.range_on make_date
   end
 
   def to_s
@@ -79,6 +79,6 @@ class DueOn < ActiveRecord::Base
   private
 
   def ignored_attrs
-    %w(id charge_cycle_id created_at updated_at)
+    %w(id cycle_id created_at updated_at)
   end
 end

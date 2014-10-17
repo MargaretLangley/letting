@@ -71,18 +71,18 @@ module DB
 
       describe '#next_on_date' do
         it 'finds next on_date' do
-          cycle = charge_cycle_new(due_ons: [DueOn.new(month: 4, day: 1)])
+          cycle = cycle_new(due_ons: [DueOn.new(month: 4, day: 1)])
           charge = charge_new charge_type: 'Ground Rent',
-                              charge_cycle: cycle
+                              cycle: cycle
           property_create human_ref: 9, account: account_new(charge: charge)
 
           expect(row.next_on_date).to eq Date.new(2012, 4, 1)
         end
 
         it 'finds next on_date even if same as due_date' do
-          cycle = charge_cycle_new(due_ons: [DueOn.new(month: 3, day: 24)])
+          cycle = cycle_new(due_ons: [DueOn.new(month: 3, day: 24)])
           charge = charge_new charge_type: 'Ground Rent',
-                              charge_cycle: cycle
+                              cycle: cycle
           property_create human_ref: 9, account: account_new(charge: charge)
 
           expect(row.next_on_date).to eq Date.new(2012, 3, 24)

@@ -44,9 +44,9 @@ module DB
         raise ChargedInCodeUnknown, charged_in_code_message, caller
     end
 
-    def charge_cycle_id
-      ChargeCycleMatcher.new(day_months: day_months).id
-      rescue ChargeCycleUnknown
+    def cycle_id
+      CycleMatcher.new(day_months: day_months).id
+      rescue CycleUnknown
         warn "Property #{human_ref} charge row does not match a charge cycle" \
           " (For legacy charge_type: '#{charge_code}') "
     end
@@ -55,8 +55,8 @@ module DB
       @source[:amount].to_f
     end
 
-    # Provides a way of charge_cycle_matcher to access all the dates
-    # that the charge are invoiced - allowing a charge_cycle matching.
+    # Provides a way of cycle_matcher to access all the dates
+    # that the charge are invoiced - allowing a cycle matching.
     def day_months
       return create_monthly_dates day(1) if monthly?
       return mid_term_day_months if charged_in_id == 3
@@ -72,7 +72,7 @@ module DB
       {
         charge_type: charge_type,
         charged_in_id: charged_in_id,
-        charge_cycle_id: charge_cycle_id,
+        cycle_id: cycle_id,
         amount: amount,
         start_date: start_date,
         end_date: end_date,
@@ -81,7 +81,7 @@ module DB
 
     private
 
-    # charge_cycle_matcher requires charge_code as 'M' (momth) is a speical case
+    # cycle_matcher requires charge_code as 'M' (momth) is a speical case
     def monthly?
       charge_code == 'M'
     end

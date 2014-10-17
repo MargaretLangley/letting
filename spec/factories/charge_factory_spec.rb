@@ -5,30 +5,30 @@ describe 'ChargeFactory' do
     describe 'default' do
       it('is valid') { expect(charge_new).to be_valid }
       it('has account_id') { expect(charge_new.account_id).to eq 2 }
-      it('has charge_cycle_id') { expect(charge_new.charge_cycle_id).to be_nil }
+      it('has cycle_id') { expect(charge_new.cycle_id).to be_nil }
       it('has charged_in_id') { expect(charge_new.charged_in_id).to eq 2 }
       it('has type') { expect(charge_new.charge_type).to eq 'Ground Rent' }
-      it('has cycle') { expect(charge_new.charge_cycle.name).to eq 'Mar/Sep' }
+      it('has cycle') { expect(charge_new.cycle.name).to eq 'Mar/Sep' }
       it 'has due_ons' do
-        expect(charge_new.charge_cycle.due_ons.size).to eq 1
+        expect(charge_new.cycle.due_ons.size).to eq 1
       end
       it 'has due ons' do
-        expect(charge_new.charge_cycle.due_ons[0])
+        expect(charge_new.cycle.due_ons[0])
           .to eq DueOn.new(day: 25, month: 3)
       end
       describe 'makes' do
         it 'creates charged_in' do
           expect(charge_new.charged_in.name).to eq 'Advance'
         end
-        it 'creates charge_cycle' do
-          expect(charge_new.charge_cycle.name).to eq 'Mar/Sep'
+        it 'creates cycle' do
+          expect(charge_new.cycle.name).to eq 'Mar/Sep'
         end
       end
 
       describe 'adds' do
-        it 'can add charge_cycle' do
-          cycle = charge_cycle_new name: 'Mar'
-          expect(charge_new(charge_cycle: cycle).charge_cycle.name).to eq 'Mar'
+        it 'can add cycle' do
+          cycle = cycle_new name: 'Mar'
+          expect(charge_new(cycle: cycle).cycle.name).to eq 'Mar'
         end
 
         it 'shovels debit' do
@@ -42,6 +42,16 @@ describe 'ChargeFactory' do
           expect(debit.charge_type).to eq 'Rent'
         end
       end
+    end
+  end
+
+  describe 'charge_find_or_new' do
+    it 'instantiates object if missing' do
+      expect(charge_find_or_create(id: 1).amount).to eq 88.08
+    end
+    it 'can be called many times' do
+      charge_find_or_create id: 1
+      expect { charge_find_or_create id: 1 }.not_to raise_error
     end
   end
 
@@ -65,8 +75,8 @@ describe 'ChargeFactory' do
         it 'creates charged_in' do
           expect { charge_create }.to change(ChargedIn, :count).by(1)
         end
-        it 'creates charge_cycle' do
-          expect { charge_create }.to change(ChargeCycle, :count).by(1)
+        it 'creates cycle' do
+          expect { charge_create }.to change(Cycle, :count).by(1)
         end
       end
     end
@@ -86,11 +96,11 @@ describe 'ChargeFactory' do
     end
 
     describe 'adds' do
-      it 'can add charge_cycle' do
+      it 'can add cycle' do
         expect do
-          charge_create charge_cycle: charge_cycle_create(id: 5)
-        end.to change(ChargeCycle, :count).by(1)
-        expect(ChargeCycle.first.id).to eq(5)
+          charge_create cycle: cycle_create(id: 5)
+        end.to change(Cycle, :count).by(1)
+        expect(Cycle.first.id).to eq(5)
       end
     end
   end

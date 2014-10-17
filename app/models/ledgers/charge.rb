@@ -17,9 +17,9 @@ class Charge < ActiveRecord::Base
   belongs_to :account
   # charged_in_name
   belongs_to :charged_in, inverse_of: :charges
-  belongs_to :charge_cycle, inverse_of: :charges
+  belongs_to :cycle, inverse_of: :charges
   delegate :name, to: :charged_in, prefix: true
-  validates :charge_type, :charge_cycle, :charged_in, presence: true
+  validates :charge_type, :cycle, :charged_in, presence: true
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
   has_many :credits, dependent: :destroy, inverse_of: :charge
@@ -36,7 +36,7 @@ class Charge < ActiveRecord::Base
     self.end_date = Date.parse MAX_DATE if end_date.blank?
   end
 
-  delegate :monthly?, to: :charge_cycle
+  delegate :monthly?, to: :cycle
 
   # billing_period - the date range that we generate charges for.
   # returns        - chargable_info array with data required to bill the
@@ -50,7 +50,7 @@ class Charge < ActiveRecord::Base
 
   def period(billed_on:)
     RangeCycle.for(name: charged_in_name,
-                   repeat_dates: charge_cycle.due_ons.map do |due_on|
+                   repeat_dates: cycle.due_ons.map do |due_on|
                      RepeatDate.new day: due_on.day, month: due_on.month
                    end)
               .billing_period(billed_on: billed_on)
@@ -65,7 +65,7 @@ class Charge < ActiveRecord::Base
   end
 
   def to_s
-    "charge: #{charge_type}, #{charged_in}, #{charge_cycle}"
+    "charge: #{charge_type}, #{charged_in}, #{cycle}"
   end
 
   private
@@ -75,7 +75,7 @@ class Charge < ActiveRecord::Base
   end
 
   def allowed_dates billing_period
-    charge_cycle.between(billing_period) & charge_active_epoch.to_a
+    cycle.between(billing_period) & charge_active_epoch.to_a
   end
 
   # The years, dates, a charge is active
