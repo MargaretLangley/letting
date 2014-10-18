@@ -10,7 +10,7 @@ describe Template, type: :feature do
     it 'finds data on 1st page' do
       template_create id: 1, vat: '89', address: address_new(road: 'High')
       visit '/templates/1/edit'
-      expect(page.title). to eq 'Letting - Edit Invoice Text'
+      expect(page.title).to eq 'Letting - Edit Invoice Text'
       expect(find_field('VAT').value).to have_text '89'
       expect(find_field('Road').value).to have_text 'High'
     end
@@ -18,9 +18,9 @@ describe Template, type: :feature do
     it 'has views link' do
       template_create id: 1
       visit '/templates/1/edit'
-      expect(page.title). to eq 'Letting - Edit Invoice Text'
+      expect(page.title).to eq 'Letting - Edit Invoice Text'
       click_on('View')
-      expect(page.title). to eq 'Letting - View Invoice Text'
+      expect(page.title).to eq 'Letting - View Invoice Text'
     end
   end
 
@@ -32,7 +32,7 @@ describe Template, type: :feature do
       expect(page.title). to eq 'Letting - Edit Invoice Text'
       fill_in '2nd Heading', with: 'Bowled Out!'
       click_on 'Update Invoice Text'
-      expect(page). to have_text /successfully updated!/i
+      expect(page).to have_text /successfully updated!/i
     end
   end
 
@@ -40,7 +40,7 @@ describe Template, type: :feature do
     template_create id: 2
     notice_create instruction: 'ins2'
     visit '/templates/2/edit'
-    expect(page.title). to eq 'Letting - Edit Invoice Text'
+    expect(page.title).to eq 'Letting - Edit Invoice Text'
     fill_in '1st Heading', with: ''
     click_on 'Update Invoice Text'
     expect(page).to have_css '[data-role="errors"]'

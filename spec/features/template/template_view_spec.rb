@@ -14,6 +14,11 @@ describe Template, type: :feature do
       expect(page.title). to eq 'Letting - View Invoice Text'
     end
 
+    it 'finds vat' do
+      visit '/templates/1'
+      expect(page).to have_text '89'
+    end
+
     it 'finds address' do
       visit '/templates/1'
       expect(page).to have_text 'High'
@@ -21,9 +26,9 @@ describe Template, type: :feature do
 
     it 'has edit link' do
       visit '/templates/1'
-      expect(page.title). to eq 'Letting - View Invoice Text'
+      expect(page.title).to eq 'Letting - View Invoice Text'
       click_on('Edit')
-      expect(page.title). to eq 'Letting - Edit Invoice Text'
+      expect(page.title).to eq 'Letting - Edit Invoice Text'
     end
   end
 end
