@@ -25,7 +25,7 @@ describe RangeCycle, :ledgers, :range do
     end
   end
 
-  describe '#billing_period' do
+  describe '#duration' do
     before { Timecop.travel Date.new(2014, 1, 31) }
     after  { Timecop.return }
     # currently returning the 'on_date' which initialized
@@ -33,21 +33,21 @@ describe RangeCycle, :ledgers, :range do
     it 'finds advanced range' do
       repeat = RangeCycle.for name: 'Advance',
                               dates: [Date.new(2014, 6, 6)]
-      expect(repeat.billing_period billed_on: Date.new(2014, 6, 6))
+      expect(repeat.duration within: Date.new(2014, 6, 6))
         .to eq Date.new(2014, 6, 6)..Date.new(2015, 6, 5)
     end
 
     it 'finds arrears range' do
       repeat = RangeCycle.for name: 'Arrears',
                               dates: [Date.new(2014, 6, 6)]
-      expect(repeat.billing_period billed_on: Date.new(2014, 6, 6))
+      expect(repeat.duration within: Date.new(2014, 6, 6))
         .to eq Date.new(2013, 6, 7)..Date.new(2014, 6, 6)
     end
 
     it 'errors when due on not found' do
       repeat = RangeCycle.for name: 'Advance',
                               dates: [Date.new(2014, 6, 6)]
-      expect(repeat.billing_period billed_on:  Date.new(2014, 12, 12))
+      expect(repeat.duration within:  Date.new(2014, 12, 12))
         .to eq :missing_due_on
     end
   end

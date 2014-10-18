@@ -53,7 +53,7 @@ class Charge < ActiveRecord::Base
                    repeat_dates: cycle.due_ons.map do |due_on|
                      RepeatDate.new day: due_on.day, month: due_on.month
                    end)
-              .billing_period(billed_on: billed_on)
+              .duration(within: billed_on)
   end
 
   def prepare
