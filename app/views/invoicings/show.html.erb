@@ -25,10 +25,10 @@
       <%= @invoicing.property_range %>
     </div>
     <div class='col-5-24 inherit-row'>
-      <%= l @invoicing.period_first %>
+      <%= I18n.l @invoicing.period_first, format: :short %>
     </div>
     <div class='col-7-24 inherit-row'>
-      <%= l @invoicing.period_last %>
+      <%= I18n.l @invoicing.period_last, format: :short %>
     </div>
     <div class='col-1-24 no-print r-align'>
       <%= link_to fa_icon('print lg'), print_path(@invoicing), title: 'Print', class: 'simple_button' %>
