@@ -46,7 +46,7 @@
   Ref: <%= invoice.property_ref %>
  </div>
 <div class='col-5-12 inv-advice-bold'>
-  Due Date <%= l invoice.invoice_date %>
+  Due Date <%= I18n.l invoice.invoice_date, format: :short %>
 </div>
 
 <%= render partial:'products/products_narrow',locals: { invoice: invoice } %>
