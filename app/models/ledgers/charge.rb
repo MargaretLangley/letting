@@ -49,11 +49,11 @@ class Charge < ActiveRecord::Base
   end
 
   def period(billed_on:)
-    RangeCycle.for(name: charged_in_name,
-                   repeat_dates: cycle.due_ons.map do |due_on|
-                     RepeatDate.new day: due_on.day, month: due_on.month
-                   end)
-              .duration(within: billed_on)
+    repeated_dates = cycle.due_ons.map do |due_on|
+      Date.new billed_on.year, due_on.month, due_on.day
+    end
+    RangeCycle.for(name: charged_in_name, dates: repeated_dates)
+              .duration within: billed_on
   end
 
   def prepare

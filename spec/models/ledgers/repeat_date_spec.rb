@@ -87,12 +87,6 @@ describe RepeatDate, :ledgers, :range do
       expect(lhs <=> rhs).to eq(-1)
     end
 
-    it 'years do not affect comparison' do
-      lhs = RepeatDate.new year: 2000, month: 1, day: 1
-      rhs = RepeatDate.new year: 3000, month: 1, day: 1
-      expect(lhs <=> rhs).to eq(0)
-    end
-
     it 'returns nil when not comparable' do
       expect(RepeatDate.new <=> 37).to be_nil
     end

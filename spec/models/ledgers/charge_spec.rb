@@ -89,10 +89,12 @@ describe Charge, :ledgers, :range, type: :model do
     end
   end
 
-  it 'charge displays billing period' do
-    charge = charge_create cycle: \
-                   cycle_create(due_ons: [DueOn.new(month: 3, day: 8)])
-    expect(charge.period billed_on: Date.new(2015, 3, 8))
-      .to eq Date.new(2015, 3, 8)..Date.new(2016, 3, 7)
+  it 'charge period anchored on billed date' do
+    Timecop.travel Date.new(2030, 12, 31)
+    chg = charge_create cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 8)])
+
+    expect(chg.period billed_on: Date.new(2032, 3, 8))
+      .to eq Date.new(2032, 3, 8)..Date.new(2033, 3, 7)
+    Timecop.return
   end
 end

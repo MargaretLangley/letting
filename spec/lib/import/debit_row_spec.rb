@@ -56,14 +56,6 @@ module DB
         expect(row(date: Date.new(2012, 3, 20)).period)
           .to eq Date.new(2012, 3, 20)..Date.new(2013, 3, 19)
       end
-
-      it 'returns invalid when period unmatched.' do
-        cycle = cycle_new due_ons: [DueOn.new(day: 20, month: 3)]
-        charge = charge_new cycle: cycle
-        property_create human_ref: 9, account: account_new(charge: charge)
-        expect { row(date: Date.new(2012, 12, 12)).period }
-          .to raise_error PeriodUnknown
-      end
     end
 
     def parse_line row_string

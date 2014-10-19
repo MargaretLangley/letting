@@ -15,11 +15,8 @@ module RangeCycle
     'Mid-Term' => nil
   }
 
-  def self.for name:, dates: nil, repeat_dates: nil
-    dates_in_year = []
-    dates_in_year = dates.map { |date| RepeatDate.new date: date } if dates
-    dates_in_year = repeat_dates if repeat_dates
+  def self.for(name:, dates:)
     (SPECIALIZED_CLASSES[name] || DEFAULT_CLASS)
-      .new(repeat_dates: dates_in_year)
+      .new repeat_dates: dates.map { |date| RepeatDate.new date: date }
   end
 end

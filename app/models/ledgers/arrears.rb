@@ -11,48 +11,41 @@
 ####
 #
 class Arrears
-  attr_reader :periods, :dates_in_year
+  attr_reader :periods
 
   def initialize(repeat_dates:)
-    @dates_in_year = repeat_dates
-    periods unless dates_in_year.empty?
+    self.periods = repeat_dates unless repeat_dates.empty?
   end
 
+  # duration - returns the period covered by the within date.
+  # within:  - the date we want to know the period for
+  #
   def duration(within:)
     found_period = periods.find do |period|
-      period.last == RepeatDate.new(date: within)
+      (period.first..period.last).cover? RepeatDate.new(date: within)
     end
     return :missing_due_on unless found_period
-    make_duration finish: within, length: period_length(period: found_period)
+    found_period.first.date..found_period.last.date
   end
 
-  # range pairs pairs dates to make periods
+  # makes period's boundary date-pairs
+  # repeat_dates - the end date of the period
   #
-  def periods(arrears_end: dates_in_year)
-    @periods = arrears_start.zip arrears_end
+  def periods=(repeat_dates)
+    period_ends = repeat_dates
+    @periods = period_starts(repeat_dates).zip period_ends
   end
 
   private
 
-  def make_duration(finish:, length:)
-    range = finish - length..finish
-    range = range.first..range.last + 1.day if Cover.leap_day? range: range
-    range
-  end
-
-  def period_length(period:)
-    (period.last.date - period.first.date).to_i
-  end
-
   # Creating the start pairs for arrears date periods.
-  # @dates_in_year: [E, F, G, H]
+  # @repeat_dates: [E, F, G, H]
   #
   # Begin With:  E       F       G       H
   # End   With:  H +1D   E +1D   F +1D   G +1D -1Y
-  def arrears_start
-    arrears = Marshal.load(Marshal.dump(dates_in_year))
-                     .rotate(-1).map(&:tomorrow)
-    arrears[0] = arrears[0].last_year
-    arrears
+  def period_starts repeat_dates
+    starts = Marshal.load(Marshal.dump(repeat_dates)).rotate(-1).map(&:tomorrow)
+    starts[0] = starts[0].last_year
+    starts
   end
 end
