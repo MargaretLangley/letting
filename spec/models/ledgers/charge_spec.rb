@@ -73,6 +73,15 @@ describe Charge, :ledgers, :range, type: :model do
         expect(chrg.coming Date.new(2013, 3, 25)..Date.new(2013, 5, 25))
           .to eq []
       end
+
+      it 'anchors charges around billing period'  do
+        charge = charge_new \
+                   cycle: cycle_new(due_ons: [DueOn.new(day: 25, month: 3)])
+
+        expect(charge.coming Date.new(2032, 3, 25)..Date.new(2032, 3, 25))
+          .to eq [chargeable_new(charge_id: charge.id,
+                                 on_date: Date.new(2032, 3, 25))]
+      end
     end
 
     it '#to_s displays' do
@@ -80,16 +89,6 @@ describe Charge, :ledgers, :range, type: :model do
                                  'cycle: Mar/Sep, type: term, due_ons: [Mar 25]'
     end
 
-    describe '#period' do
-      it 'is anchored on billed date' do
-        Timecop.travel Date.new 2030, 12, 31
-        charge = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 8)])
-
-        expect(charge.period billed_on: Date.new(2032, 3, 8))
-          .to eq Date.new(2032, 3, 8)..Date.new(2033, 3, 7)
-        Timecop.return
-      end
-    end
   end
 
 end

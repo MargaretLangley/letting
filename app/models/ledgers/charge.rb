@@ -47,10 +47,14 @@ class Charge < ActiveRecord::Base
     end.compact
   end
 
-  def period(billed_on:)
+  def bill_period(billed_on:)
     repeated_dates = cycle.due_ons.map do |due_on|
       Date.new billed_on.year, due_on.month, due_on.day
     end
+    # Anything except mid-term take the charge cycle's due_ons and
+    # apply either advance or arrears.
+    # For mid-term I need to load other charge_cycle due_ons
+    # I need completely different due_ons for the mid-term
     RangeCycle.for(name: charged_in_name, dates: repeated_dates)
               .duration within: billed_on
   end
@@ -91,7 +95,7 @@ class Charge < ActiveRecord::Base
                            on_date:    billed_on,
                            amount:     amount,
                            account_id: account_id,
-                           period: period(billed_on: billed_on)
+                           period: bill_period(billed_on: billed_on)
   end
 
   def empty?
