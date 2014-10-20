@@ -54,6 +54,13 @@ describe Advance, :ledgers, :range do
                                     [RepeatDate.new(year: 2024, month: 6, day: 8), RepeatDate.new(year: 2025, month: 2, day: 3)]]
     end
 
+    it 'calculates periods for "advance" mid-term dates' do
+      repeat = Advance.new repeat_dates: [RepeatDate.new(year: 2024, month: 3, day: 26),
+                                          RepeatDate.new(year: 2024, month: 9, day: 30)]
+      expect(repeat.periods).to eq [[RepeatDate.new(year: 2024, month: 3, day: 26), RepeatDate.new(year: 2024, month: 9, day: 29)],
+                                    [RepeatDate.new(year: 2024, month: 9, day: 30), RepeatDate.new(year: 2025, month: 3, day: 25)]]
+    end
+
     it 'returns periods based initialized dates' do
       Timecop.travel Date.new(2031, 12, 31)
       repeat = Advance.new repeat_dates: [RepeatDate.new(year: 2020, month: 3, day: 8)]

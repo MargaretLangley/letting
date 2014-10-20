@@ -33,6 +33,13 @@ describe Arrears, :ledgers, :range do
       expect(repeat.periods).to eq [[RepeatDate.new(year: 2020, month: 3, day: 9), RepeatDate.new(year: 2021, month: 3, day: 8)]]
     end
 
+    it 'calculates periods for "arrears" mid-term dates' do
+      repeat = Arrears.new repeat_dates: [RepeatDate.new(year: 2024, month: 6, day: 24),
+                                          RepeatDate.new(year: 2024, month: 12, day: 25)]
+      expect(repeat.periods).to eq [[RepeatDate.new(year: 2023, month: 12, day: 26), RepeatDate.new(year: 2024, month: 6, day: 24)],
+                                    [RepeatDate.new(year: 2024, month: 6, day: 25), RepeatDate.new(year: 2024, month: 12, day: 25)]]
+    end
+
     it 'calculates periods for two repeated date' do
       repeat = Arrears.new repeat_dates: [RepeatDate.new(year: 2025, month: 3, day: 25),
                                           RepeatDate.new(year: 2025, month: 9, day: 29)]
