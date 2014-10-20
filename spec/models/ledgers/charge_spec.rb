@@ -66,14 +66,6 @@ describe Charge, :ledgers, :range, type: :model do
           .to eq []
       end
 
-      it 'excludes charges that have already been debited on that date.'  do
-        chrg = charge_new \
-                 cycle: cycle_new(due_ons: [DueOn.new(day: 25, month: 3)]),
-                 debits: [debit_new(on_date: '2013-3-25')]
-        expect(chrg.coming Date.new(2013, 3, 25)..Date.new(2013, 5, 25))
-          .to eq []
-      end
-
       it 'anchors charges around billing period'  do
         charge = charge_new \
                    cycle: cycle_new(due_ons: [DueOn.new(day: 25, month: 3)])
@@ -88,7 +80,5 @@ describe Charge, :ledgers, :range, type: :model do
       expect(charge_new.to_s).to eq 'charge: Ground Rent, charged_in: Adv, '\
                                  'cycle: Mar/Sep, type: term, due_ons: [Mar 25]'
     end
-
   end
-
 end

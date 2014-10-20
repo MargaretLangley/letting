@@ -22,7 +22,7 @@
 #
 class Debit < ActiveRecord::Base
   include Comparable
-  belongs_to :account
+  belongs_to :account, inverse_of: :debits
   has_many :credits, through: :settlements
   has_many :settlements, dependent: :destroy
   belongs_to :charge, inverse_of: :debits

@@ -118,6 +118,21 @@ describe Account, :ledgers, type: :model do
         expect(account.make_credits.first.amount).to be < 0
       end
     end
+
+    describe '#exclusive' do
+      it 'allows unique charges'  do
+        debit = debit_new(on_date: '2013-3-25', charge: charge_new)
+        account = account_new
+
+        expect(account.exclusive query_debits: [debit]).to eq [debit]
+      end
+      it 'rejects duplicate charges'  do
+        debit = debit_new(on_date: '2013-3-25', charge: charge_new)
+        account = account_new debits: [debit]
+
+        expect(account.exclusive query_debits: [debit]).to eq []
+      end
+    end
   end
 
   describe '#balance' do

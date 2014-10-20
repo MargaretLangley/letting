@@ -29,7 +29,15 @@ class Account < ActiveRecord::Base
   def address
     property.address.text
   end
-  has_many :debits, dependent: :destroy
+  has_many :debits, dependent: :destroy, inverse_of: :account do
+    def exclusive? query_debit
+      self.any? do |debit|
+        debit.charge_id == query_debit.charge_id &&
+        debit.on_date == query_debit.on_date
+      end
+    end
+  end
+
   accepts_nested_attributes_for :debits, allow_destroy: true
   has_many :credits, dependent: :destroy
   accepts_nested_attributes_for :credits, allow_destroy: true
@@ -49,21 +57,24 @@ class Account < ActiveRecord::Base
 
   def invoice(billing_period:)
     balance_before_billing = balance to_date: billing_period.first - 1.day
+    debit_maker = DebitMaker.new(account: self, debit_period: billing_period)
     {
       arrears: balance_before_billing,
-      total_arrears: balance_before_billing + make_debits(billing_period)
-                                               .map(&:amount)
-                                               .inject(0, :+),
-      debits: make_debits(billing_period),
+      total_arrears: balance_before_billing + debit_maker.sum,
+      debits: debit_maker.do,
     }
   end
 
   def invoice?(billing_period:)
-    make_debits? billing_period
+    DebitMaker.new(account: self, debit_period: billing_period).make_debits?
   end
 
   def make_credits
     charges.map { |charge| create_credit charge }
+  end
+
+  def exclusive(query_debits:)
+    query_debits.reject { |query_debit| debits.exclusive? query_debit }
   end
 
   def prepare_for_form
@@ -100,26 +111,5 @@ class Account < ActiveRecord::Base
 
   def create_credit charge
     credits.build charge: charge, on_date: Date.current, amount: -charge.amount
-  end
-
-  # For each charge it finds the next time it can be charged, if any,
-  # and creates a debit.
-  # billing_period - dates which we prepare debits over
-  #
-  def make_debits billing_period
-    charges.map do |charge|
-      charge.coming(billing_period).map do |chargeable|
-        Debit.new(chargeable.to_hash)
-      end
-    end.flatten
-  end
-
-  def make_debits? billing_period
-    charges.map do |charge|
-      charge.coming(billing_period).map do
-        return true
-      end
-    end
-    false
   end
 end
