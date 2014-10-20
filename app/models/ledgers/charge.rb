@@ -15,10 +15,11 @@
 #
 class Charge < ActiveRecord::Base
   belongs_to :account
-  # charged_in_name
   belongs_to :charged_in, inverse_of: :charges
   belongs_to :cycle, inverse_of: :charges
+  # charged_in_name
   delegate :name, to: :charged_in, prefix: true
+  delegate :monthly?, to: :cycle
   validates :charge_type, :cycle, :charged_in, presence: true
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
@@ -35,8 +36,6 @@ class Charge < ActiveRecord::Base
     self.start_date = Date.parse MIN_DATE if start_date.blank?
     self.end_date = Date.parse MAX_DATE if end_date.blank?
   end
-
-  delegate :monthly?, to: :cycle
 
   # billing_period - the date range that we generate charges for.
   # returns        - chargable_info array with data required to bill the

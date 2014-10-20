@@ -59,10 +59,8 @@ RSpec.describe Cycle, :ledgers, :range, type: :model do
     end
 
     it 'ignores cycle name in matching' do
-      cycle = cycle_new name: 'Mar/Sep',
-                        due_ons: [DueOn.new(day: 1, month: 1)]
-      other = cycle_new name: 'Jan/Dec',
-                        due_ons: [DueOn.new(day: 1, month: 1)]
+      cycle = cycle_new name: 'Mar/Sep', due_ons: [DueOn.new(day: 1, month: 1)]
+      other = cycle_new name: 'Jan/Dec', due_ons: [DueOn.new(day: 1, month: 1)]
       expect(cycle <=> other).to eq 0
     end
 
@@ -97,9 +95,7 @@ RSpec.describe Cycle, :ledgers, :range, type: :model do
                           due_ons: [DueOn.new(day: 25, month: 3)]
         cycle.prepare
         cycle.valid?
-        expect(cycle.due_ons
-                    .reject(&:marked_for_destruction?).size)
-          .to eq(1)
+        expect(cycle.due_ons.reject(&:marked_for_destruction?).size).to eq(1)
       end
     end
 
@@ -115,9 +111,7 @@ RSpec.describe Cycle, :ledgers, :range, type: :model do
         cycle = cycle_new cycle_type: 'monthly', due_ons: nil
         cycle.prepare
         cycle.valid?
-        expect(cycle.due_ons
-                    .reject(&:marked_for_destruction?).size)
-          .to eq(0)
+        expect(cycle.due_ons.reject(&:marked_for_destruction?).size).to eq(0)
       end
 
       it '#clear_up_form destroys children if empty' do
@@ -125,9 +119,7 @@ RSpec.describe Cycle, :ledgers, :range, type: :model do
                           due_ons: [DueOn.new(day: 25, month: 3)]
         cycle.prepare
         cycle.valid?
-        expect(cycle.due_ons
-                    .reject(&:marked_for_destruction?).size)
-          .to eq(12)
+        expect(cycle.due_ons.reject(&:marked_for_destruction?).size).to eq(12)
       end
     end
   end
