@@ -24,13 +24,7 @@ class Charge < ActiveRecord::Base
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
   has_many :credits, dependent: :destroy, inverse_of: :charge
-  has_many :debits, dependent: :destroy, inverse_of: :charge do
-    def created_on? on_date
-      self.any? do |debit|
-        debit.on_date == on_date
-      end
-    end
-  end
+  has_many :debits, dependent: :destroy, inverse_of: :charge
 
   after_initialize do
     self.start_date = Date.parse MIN_DATE if start_date.blank?
