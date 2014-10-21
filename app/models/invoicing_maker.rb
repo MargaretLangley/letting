@@ -30,13 +30,7 @@ class InvoicingMaker
 
   def generateable_accounts range: property_range
     Account.between?(range)
-           .includes([property: [:entities,
-                                 :address,
-                                 client: [:address, :entities],
-                                 agent:  [:address, :entities]]],
-                     :credits,
-                     :charges,
-                     :debits)
+           .includes([property: property_includes], :credits, :charges, :debits)
            .select do |account|
              DebitMaker.new(account: account, debit_period: period)
                .make_debits?
@@ -82,5 +76,11 @@ class InvoicingMaker
       product.balance = total += product.amount
       product
     end
+  end
+
+  def property_includes
+    [:entities, :address,
+     client: [:address, :entities],
+     agent:  [:address, :entities]]
   end
 end

@@ -25,7 +25,7 @@ class DebitMaker
     make_debits.map(&:amount).inject(0, :+)
   end
 
-  def invoice(billing_period: nil)
+  def invoice(*)
     balance_before_billing = account.balance to_date: debit_period.first - 1.day
     {
       arrears: balance_before_billing,
