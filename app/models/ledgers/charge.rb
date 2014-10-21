@@ -15,6 +15,8 @@
 #
 class Charge < ActiveRecord::Base
   belongs_to :account
+  has_many :credits, dependent: :destroy, inverse_of: :charge
+  has_many :debits, dependent: :destroy, inverse_of: :charge
   belongs_to :charged_in, inverse_of: :charges
   belongs_to :cycle, inverse_of: :charges
   # charged_in_name
@@ -23,8 +25,6 @@ class Charge < ActiveRecord::Base
   validates :charge_type, :cycle, :charged_in, presence: true
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
-  has_many :credits, dependent: :destroy, inverse_of: :charge
-  has_many :debits, dependent: :destroy, inverse_of: :charge
 
   after_initialize do
     self.start_date = Date.parse MIN_DATE if start_date.blank?
@@ -42,14 +42,12 @@ class Charge < ActiveRecord::Base
   end
 
   def bill_period(billed_on:)
-    repeated_dates = cycle.due_ons.map do |due_on|
-      Date.new billed_on.year, due_on.month, due_on.day
-    end
     # Anything except mid-term take the charge cycle's due_ons and
     # apply either advance or arrears.
     # For mid-term I need to load other charge_cycle due_ons
     # I need completely different due_ons for the mid-term
-    RangeCycle.for(name: charged_in_name, dates: repeated_dates)
+    RangeCycle.for(name: charged_in_name,
+                   dates: cycle.repeated_dates(year: billed_on.year))
               .duration within: billed_on
   end
 

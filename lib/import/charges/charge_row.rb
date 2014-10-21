@@ -81,7 +81,7 @@ module DB
 
     private
 
-    # cycle_matcher requires charge_code as 'M' (momth) is a speical case
+    # cycle_matcher requires charge_code as 'M' (month) is a special case
     def monthly?
       charge_code == 'M'
     end

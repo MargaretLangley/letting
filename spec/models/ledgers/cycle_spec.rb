@@ -34,6 +34,15 @@ RSpec.describe Cycle, :ledgers, :range, type: :model do
     end
   end
 
+  describe '#repeated_dates' do
+    it 'calculates dates' do
+      cycle = cycle_new due_ons: [DueOn.new(day: 1, month: 1),
+                                  DueOn.new(day: 6, month: 6)]
+      expect(cycle.repeated_dates(year: 1980))
+       .to eq [Date.new(1980, 1, 1), Date.new(1980, 6, 6)]
+    end
+  end
+
   describe '#between_range' do
     it 'creates a charging date when in range'  do
       cycle = cycle_new due_ons: [DueOn.new(day: 25, month: 3)]

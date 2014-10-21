@@ -37,6 +37,10 @@ class Cycle < ActiveRecord::Base
     due_ons.prepare type: cycle_type
   end
 
+  def repeated_dates(year:)
+    due_ons.map { |due_on| Date.new year, due_on.month, due_on.day }
+  end
+
   def <=> other
     return nil unless other.is_a?(self.class)
     [due_ons.sort] <=> [other.due_ons.sort]
