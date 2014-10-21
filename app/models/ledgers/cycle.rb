@@ -18,7 +18,9 @@ class Cycle < ActiveRecord::Base
   validates :cycle_type, inclusion: { in: %w(term monthly) }
   validates :cycle_type, presence: true
   validates :due_ons, presence: true
-  has_many :charges, inverse_of: :cycle
+  has_many :charges, class_name: 'Charge',
+                     foreign_key: 'cycle_id',
+                     inverse_of: :cycle
 
   has_many :charged_ins, through: :cycle_charged_ins
   has_many :cycle_charged_ins, inverse_of: :cycle, dependent: :destroy

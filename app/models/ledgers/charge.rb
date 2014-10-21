@@ -18,7 +18,10 @@ class Charge < ActiveRecord::Base
   has_many :credits, dependent: :destroy, inverse_of: :charge
   has_many :debits, dependent: :destroy, inverse_of: :charge
   belongs_to :charged_in, inverse_of: :charges
-  belongs_to :cycle, inverse_of: :charges
+  belongs_to :cycle, class_name: 'Cycle',
+                     foreign_key: 'cycle_id',
+                     inverse_of: :charges
+
   # charged_in_name
   delegate :name, to: :charged_in, prefix: true
   delegate :monthly?, to: :cycle
