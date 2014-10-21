@@ -55,20 +55,6 @@ class Account < ActiveRecord::Base
   MAX_CHARGES = 6
   accepts_nested_attributes_for :charges, allow_destroy: true
 
-  def invoice(billing_period:)
-    balance_before_billing = balance to_date: billing_period.first - 1.day
-    debit_maker = DebitMaker.new(account: self, debit_period: billing_period)
-    {
-      arrears: balance_before_billing,
-      total_arrears: balance_before_billing + debit_maker.sum,
-      debits: debit_maker.do,
-    }
-  end
-
-  def invoice?(billing_period:)
-    DebitMaker.new(account: self, debit_period: billing_period).make_debits?
-  end
-
   def make_credits
     charges.map { |charge| create_credit charge }
   end

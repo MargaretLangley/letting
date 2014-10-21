@@ -37,7 +37,10 @@ class InvoicingMaker
                      :credits,
                      :charges,
                      :debits)
-           .select { |account| account.invoice? billing_period: period }
+           .select do |account|
+             DebitMaker.new(account: account, debit_period: period)
+               .make_debits?
+           end
   end
 
   def make_invoices(accounts:)
@@ -48,10 +51,11 @@ class InvoicingMaker
     invoice = Invoice.new
     invoice.prepare invoice_date: invoice_date
     invoice.property account.property.invoice billing_period: period
-    invoice.products = products_maker account.invoice(billing_period: period)
-                                             .except(:total_arrears)
-    invoice.total_arrears = \
-      account.invoice(billing_period: period)[:total_arrears]
+
+    debit_maker = DebitMaker.new(account: account, debit_period: period)
+    invoice.products = products_maker debit_maker.invoice.except(:total_arrears)
+    invoice.total_arrears = debit_maker.invoice[:total_arrears]
+
     invoice.client account.property.client.invoice billing_period: period
     invoice
   end
