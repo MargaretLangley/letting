@@ -12,7 +12,6 @@ module RangeCycle
   SPECIALIZED_CLASSES = {
     'Advance' => Advance,
     'Arrears' => Arrears,
-    'Mid-Term' => nil
   }
 
   def self.for(name:, dates:)

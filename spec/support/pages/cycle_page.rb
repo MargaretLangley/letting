@@ -48,10 +48,9 @@ class CyclePage
     self
   end
 
-  def association arrears: false, advance: false, mid_term: false
+  def association arrears: false, advance: false
     check 'Arrears' if arrears
     check 'Advance' if advance
-    check 'Mid-Term' if mid_term
   end
 
   def errored?
