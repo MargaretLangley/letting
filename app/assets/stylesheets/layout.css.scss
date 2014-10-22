@@ -118,8 +118,8 @@
 
   $pad: 1em;
 
-  @import "compass/utilities/general/clearfix";
-
+/*  @import "compass/utilities/general/clearfix";
+*/
   /* applies clearfix in an :after psudo element. Google: pie-clearfix
      clearfix affects the next floated element and not the
      element you have applied the clearfix to.              */

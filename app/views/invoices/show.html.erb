@@ -1,4 +1,8 @@
 <% @title='Invoice Print' %>
-<div class='grid shell'>
-  <%= render 'invoice_page1', invoice: @invoice %>
+  <div class='page' >
+    <%= render 'invoice_page1', invoice: @invoice  %>
+  </div>
+  <div class='page' >
+    <%= render 'invoice_page2', invoice: @invoice %>
+  </div>
 </div>

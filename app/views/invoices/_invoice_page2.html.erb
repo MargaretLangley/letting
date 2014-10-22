@@ -1,0 +1,16 @@
+<br class="grid-row"
+><%= render 'invoice_page2_heading', template: invoice.templates.first %>
+
+<div class= 'grid-row'>
+  <%= invoice.property_ref %>
+
+  <div class='widemargin'>
+    <%= simple_format(invoice.property_address) %>
+  </div>
+  <div class='widemargin'>
+    <%= I18n.l invoice.invoice_date, format: :short %>
+  </div>
+  <div class='widemargin'>
+    <%= invoice.client_address %>
+  </div>
+</div>
