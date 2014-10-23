@@ -48,16 +48,12 @@ module DueOns
 
       def prepare(type:)
         @type = type
-        (size...find_max_size(type)).each { build }
-      end
-
-      def find_max_size _cycle_type
-        monthly? ?  MAX_DUE_ONS  :  MAX_DISPLAYED_DUE_ONS
+        (size...find_max_size).each { build }
       end
 
       def clear_up_form
         to_monthly if monthly? && self[0].day
-        clear_up_all
+        each(&:clear_up_form)
       end
 
       def empty?
@@ -74,16 +70,8 @@ module DueOns
         @type == 'monthly'
       end
 
-      def clear_up_all
-        each(&:clear_up_form)
-      end
-
-      def destruction_if matcher
-        select(&matcher).each(&:mark_for_destruction)
-      end
-
-      def max_due_ons
-        reject(&:empty?).size == MAX_DUE_ONS
+      def find_max_size
+        monthly? ?  MAX_DUE_ONS  :  MAX_DISPLAYED_DUE_ONS
       end
 
       def to_monthly

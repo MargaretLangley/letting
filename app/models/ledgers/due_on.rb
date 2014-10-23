@@ -42,10 +42,6 @@ class DueOn < ActiveRecord::Base
               .sort & date_range.to_a
   end
 
-  def make_date(year:)
-    Date.new year, month, day
-  end
-
   def clear_up_form
     mark_for_destruction if empty?
   end
@@ -62,10 +58,6 @@ class DueOn < ActiveRecord::Base
     [month, day] <=> [other.month, other.day]
   end
 
-  def range
-    cycle.range_on make_date
-  end
-
   def to_s
     if year
       "[#{Date.new(year, month, day).strftime('%Y %b %e')}"\
@@ -77,6 +69,10 @@ class DueOn < ActiveRecord::Base
   end
 
   private
+
+  def make_date(year:)
+    Date.new year, month, day
+  end
 
   def ignored_attrs
     %w(id cycle_id created_at updated_at)

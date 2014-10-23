@@ -7,9 +7,7 @@ describe Charge, :ledgers, :range, type: :model do
     describe 'presence' do
       it('charge type') { expect(charge_new charge_type: nil).to_not be_valid }
       it('amount') { expect(charge_new amount: nil).to_not be_valid }
-      it('cycle') do
-        expect(charge_new cycle: nil).to_not be_valid
-      end
+      it('cycle') { expect(charge_new cycle: nil).to_not be_valid }
       it('charged_in') { expect(charge_new charged_in: nil).to_not be_valid }
     end
     describe 'amount' do
@@ -42,37 +40,32 @@ describe Charge, :ledgers, :range, type: :model do
       before(:each) { Timecop.travel Date.new(2013, 1, 31) }
       after(:each)  { Timecop.return }
 
-      it 'charges if billing period includes a due_on'  do
-        charge = charge_new \
-                   cycle: cycle_new(due_ons: [DueOn.new(day: 25, month: 3)])
+      it 'charges if billing period crosses a due_on'  do
+        ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
 
-        expect(charge.coming Date.new(2013, 3, 25)..Date.new(2013, 3, 25))
-          .to eq [chargeable_new(charge_id: charge.id,
-                                 on_date: Date.new(2013, 3, 25))]
+        expect(ch.coming Date.new(2013, 3, 5)..Date.new(2013, 3, 5))
+          .to eq [chargeable_new(charge_id: ch.id,
+                                 on_date: Date.new(2013, 3, 5))]
       end
 
-      it 'no charge if billing period excludes all due_on' do
-        charge = charge_new \
-                   cycle: cycle_new(due_ons: [DueOn.new(day: 25, month: 3)])
-        expect(charge.coming Date.new(2013, 2, 1)..Date.new(2013, 3, 24))
-          .to eq []
+      it 'no charge if billing period misses all due_on' do
+        ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
+
+        expect(ch.coming Date.new(2013, 2, 1)..Date.new(2013, 3, 4)).to eq []
       end
 
       it 'excludes dormant charges from billing'  do
-        charge = charge_new \
-                   cycle: cycle_new(due_ons: [DueOn.new(day: 25, month: 3)])
-        charge.dormant = true
-        expect(charge.coming Date.new(2013, 3, 25)..Date.new(2013, 3, 25))
-          .to eq []
+        ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
+        ch.dormant = true
+        expect(ch.coming Date.new(2013, 3, 5)..Date.new(2013, 3, 5)).to eq []
       end
 
       it 'anchors charges around billing period'  do
-        charge = charge_new \
-                   cycle: cycle_new(due_ons: [DueOn.new(day: 25, month: 3)])
+        ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
 
-        expect(charge.coming Date.new(2032, 3, 25)..Date.new(2032, 3, 25))
-          .to eq [chargeable_new(charge_id: charge.id,
-                                 on_date: Date.new(2032, 3, 25))]
+        expect(ch.coming Date.new(2032, 3, 5)..Date.new(2032, 3, 5))
+          .to eq [chargeable_new(charge_id: ch.id,
+                                 on_date: Date.new(2032, 3, 5))]
       end
     end
 

@@ -40,7 +40,7 @@ describe DueOns, :ledgers, type: :model do
       it 'returns nils when range outside due date' do
         due_ons.build day: 1, month: 2
         expect(due_ons.between Date.new(2013, 4, 4)..Date.new(2013, 5, 2))
-          .to be_empty
+          .to eq []
       end
     end
 
