@@ -18,7 +18,7 @@ describe 'Account Factory' do
       end
       it 'can add cycle' do
         expect(account_new(charge: charge_new).charges[0].cycle.name)
-          .to eq 'Mar/Sep'
+          .to eq 'Mar'
       end
       it 'can add due_on' do
         expect(account_new(charge: charge_new)

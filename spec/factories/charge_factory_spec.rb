@@ -8,7 +8,7 @@ describe 'ChargeFactory' do
       it('has cycle_id') { expect(charge_new.cycle_id).to be_nil }
       it('has charged_in_id') { expect(charge_new.charged_in_id).to eq 2 }
       it('has type') { expect(charge_new.charge_type).to eq 'Ground Rent' }
-      it('has cycle') { expect(charge_new.cycle.name).to eq 'Mar/Sep' }
+      it('has cycle') { expect(charge_new.cycle.name).to eq 'Mar' }
       it 'has due_ons' do
         expect(charge_new.cycle.due_ons.size).to eq 1
       end
@@ -21,7 +21,7 @@ describe 'ChargeFactory' do
           expect(charge_new.charged_in.name).to eq 'Advance'
         end
         it 'creates cycle' do
-          expect(charge_new.cycle.name).to eq 'Mar/Sep'
+          expect(charge_new.cycle.name).to eq 'Mar'
         end
       end
 

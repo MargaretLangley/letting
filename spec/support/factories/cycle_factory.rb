@@ -2,11 +2,11 @@
 # rubocop: disable Metrics/ParameterLists
 
 def cycle_new id: nil,
-                     name: 'Mar/Sep',
-                     order: 1,
-                     cycle_type: 'term',
-                     due_ons: [DueOn.new(day: 25, month: 3)],
-                     prepare: false
+                  name: 'Mar',
+                  order: 1,
+                  cycle_type: 'term',
+                  due_ons: [DueOn.new(day: 25, month: 3)],
+                  prepare: false
   cycle = Cycle.new id: id,
                     name: name,
                     order: order,
@@ -17,11 +17,11 @@ def cycle_new id: nil,
 end
 
 def cycle_create id: 1,
-                        name: 'Mar/Sep',
-                        order: 1,
-                        cycle_type: 'term',
-                        due_ons: [DueOn.new(day: 25, month: 3)],
-                        prepare: false
+                     name: 'Mar',
+                     order: 1,
+                     cycle_type: 'term',
+                     due_ons: [DueOn.new(day: 25, month: 3)],
+                     prepare: false
   cycle = cycle_new id: id,
                     name: name,
                     order: order,
@@ -33,11 +33,11 @@ def cycle_create id: 1,
 end
 
 def cycle_monthly_create id: 1,
-                        name: 'First',
-                        order: 1,
-                        cycle_type: 'monthly',
-                        day: 1,
-                        prepare: false
+                         name: 'First',
+                         order: 1,
+                         cycle_type: 'monthly',
+                         day: 1,
+                         prepare: false
   cycle = Cycle.new id: id,
                     name: name,
                     order: order,
@@ -46,8 +46,4 @@ def cycle_monthly_create id: 1,
   cycle.prepare if prepare
   cycle.save!
   cycle
-end
-
-def cycle_name(id:)
-  Cycle.find(id).name
 end

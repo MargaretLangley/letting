@@ -71,7 +71,7 @@ describe Charge, :ledgers, :range, type: :model do
 
     it '#to_s displays' do
       expect(charge_new.to_s).to eq 'charge: Ground Rent, charged_in: Adv, '\
-                                 'cycle: Mar/Sep, type: term, due_ons: [Mar 25]'
+                                 'cycle: Mar, type: term, due_ons: [Mar 25]'
     end
   end
 end

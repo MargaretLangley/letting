@@ -6,7 +6,7 @@ describe 'Cycle Factory', :ledgers do
 
   describe 'new' do
     context 'default' do
-      it('has name') { expect(cycle_new.name).to eq 'Mar/Sep' }
+      it('has name') { expect(cycle_new.name).to eq 'Mar' }
       it('has term cycle_type') { expect(cycle_new.cycle_type).to eq 'term' }
       it 'has due_on' do
         expect(cycle_new.due_ons.size).to eq 1

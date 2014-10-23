@@ -135,7 +135,7 @@ RSpec.describe Cycle, :ledgers, :range, type: :model do
   describe '#to_s' do
     it 'displays' do
       expect(cycle_new.to_s)
-        .to eq 'cycle: Mar/Sep, type: term, due_ons: [Mar 25]'
+        .to eq 'cycle: Mar, type: term, due_ons: [Mar 25]'
     end
   end
 end
