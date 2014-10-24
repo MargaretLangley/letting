@@ -67,7 +67,6 @@ class CyclesController < ApplicationController
           .permit :name,
                   :order,
                   :cycle_type,
-                  charged_in_ids: [],
                   due_ons_attributes: [:id,
                                        :cycle_id,
                                        :day,

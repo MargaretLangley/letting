@@ -22,8 +22,6 @@ class Cycle < ActiveRecord::Base
                      foreign_key: 'cycle_id',
                      inverse_of: :cycle
 
-  has_many :charged_ins, through: :cycle_charged_ins
-  has_many :cycle_charged_ins, inverse_of: :cycle, dependent: :destroy
   include DueOns
   accepts_nested_attributes_for :due_ons, allow_destroy: true
   before_validation :clear_up_form
