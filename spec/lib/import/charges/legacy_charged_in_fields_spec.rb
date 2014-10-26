@@ -1,0 +1,47 @@
+require 'csv'
+require 'rails_helper'
+require_relative '../../../../lib/import/charges/legacy_charged_in_fields'
+
+####
+#
+# legacy_charged_in_fields_spec.rb
+#
+# unit testing for charged_in_fields
+#
+# LegacyChargedInFields wraps up fields from acc_info.csv rows
+# - used by ImportCharge - fed into ChargeRow which initializes
+# LegacyChargedInFields
+#
+####
+module DB
+  describe LegacyChargedInFields, :import do
+    describe '#id' do
+      context 'valid legacy code' do
+        it 'returns charged_in code' do
+          charged = LegacyChargedInFields.new charged_in_code: '0',
+                                              charge_type: 'unknown'
+          expect(charged.modern_id).to eq 1
+        end
+
+        it 'returns charge_type code over charged_in_code' do
+          charged = LegacyChargedInFields.new charged_in_code: '0',
+                                              charge_type: 'Insurance'
+          expect(charged.modern_id).to eq 2
+        end
+      end
+      context 'invalid legacy code' do
+        it 'errors when invalid code and unknown charge_type' do
+          bad_charged = LegacyChargedInFields.new charged_in_code: 'U',
+                                                  charge_type: 'unknown'
+          expect { bad_charged.modern_id }.to raise_error KeyError
+        end
+
+        it 'returns charge_type code over charged_in_code' do
+          charged = LegacyChargedInFields.new charged_in_code: 'U',
+                                              charge_type: 'Insurance'
+          expect(charged.modern_id).to eq 2
+        end
+      end
+    end
+  end
+end

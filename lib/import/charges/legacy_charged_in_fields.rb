@@ -1,7 +1,7 @@
 module DB
   #####
   #
-  # ChargedInFields
+  # LegacyChargedInFields
   #
   # Provides the chargedIn value from supplied charge fields.
   #
@@ -11,9 +11,18 @@ module DB
   # used by the legacy application to decide this and this objects wraps them
   # up.
   #
+  #    Charged in column/attributes throughout program
+  #
+  #    Where           AccInfo  file_header/import  Cycle
+  #    Legacy/modern   Legacy   Legacy              Modern
+  #    field/attribute AdvArr   charged_in          charged_in
+  #
+  #    Legacy "0" =>  Modern 1
+  #    Legacy "1" =>  Modern 2
+  #    Legacy "M" =>  Modern 3
   #####
   #
-  class ChargedInFields
+  class LegacyChargedInFields
     # Mapping of imported values to application values
     # Definitive values charged_in.csv/charged_ins table;
     LEGACY_CODE_TO_CHARGED_IN  = { '0'  => 1,     # Arrears
@@ -24,7 +33,7 @@ module DB
       @charge_type = charge_type
     end
 
-    def id
+    def modern_id
       return 2 if advanced_charge_type
       LEGACY_CODE_TO_CHARGED_IN.fetch(@charged_in_code)
     end

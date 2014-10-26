@@ -1,7 +1,7 @@
 require_relative '../../modules/method_missing'
 require_relative '../charge_code'
 require_relative '../errors'
-require_relative 'charged_in_fields'
+require_relative 'legacy_charged_in_fields'
 # rubocop: disable Rails/Output
 # rubocop: disable Style/MethodCallParentheses
 
@@ -37,9 +37,9 @@ module DB
     end
 
     def charged_in_id
-      ChargedInFields.new(charged_in_code: charged_in_code,
-                          charge_type: charge_type)
-                     .id
+      LegacyChargedInFields.new(charged_in_code: charged_in_code,
+                                charge_type: charge_type)
+                     .modern_id
       rescue KeyError
         raise ChargedInCodeUnknown, charged_in_code_message, caller
     end

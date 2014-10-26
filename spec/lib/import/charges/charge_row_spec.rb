@@ -1,7 +1,7 @@
 require 'csv'
 require 'rails_helper'
-require_relative '../../../lib/import/file_header'
-require_relative '../../../lib/import/charges/charge_row'
+require_relative '../../../../lib/import/file_header'
+require_relative '../../../../lib/import/charges/charge_row'
 
 ####
 #
