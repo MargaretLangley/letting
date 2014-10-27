@@ -17,15 +17,12 @@ class Charge < ActiveRecord::Base
   belongs_to :account
   has_many :credits, dependent: :destroy, inverse_of: :charge
   has_many :debits, dependent: :destroy, inverse_of: :charge
-  belongs_to :charged_in, inverse_of: :charges
   belongs_to :cycle, class_name: 'Cycle',
                      foreign_key: 'cycle_id',
                      inverse_of: :charges
 
-  # charged_in_name
-  delegate :name, to: :charged_in, prefix: true
   delegate :monthly?, to: :cycle
-  validates :charge_type, :cycle, :charged_in, presence: true
+  validates :charge_type, :cycle, presence: true
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
 
@@ -53,7 +50,7 @@ class Charge < ActiveRecord::Base
   end
 
   def to_s
-    "charge: #{charge_type}, #{charged_in}, #{cycle}"
+    "charge: #{charge_type}, #{cycle}"
   end
 
   private

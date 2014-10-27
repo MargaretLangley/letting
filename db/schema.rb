@@ -58,20 +58,18 @@ ActiveRecord::Schema.define(version: 20140930053829) do
   end
 
   create_table "charges", force: true do |t|
-    t.string   "charge_type",                                           null: false
-    t.integer  "cycle_id",                                              null: false
-    t.integer  "charged_in_id",                                         null: false
-    t.boolean  "dormant",                               default: false, null: false
-    t.decimal  "amount",        precision: 8, scale: 2,                 null: false
-    t.date     "start_date",                                            null: false
-    t.date     "end_date",                                              null: false
-    t.integer  "account_id",                                            null: false
+    t.string   "charge_type",                                         null: false
+    t.integer  "cycle_id",                                            null: false
+    t.boolean  "dormant",                             default: false, null: false
+    t.decimal  "amount",      precision: 8, scale: 2,                 null: false
+    t.date     "start_date",                                          null: false
+    t.date     "end_date",                                            null: false
+    t.integer  "account_id",                                          null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "charges", ["account_id"], name: "index_charges_on_account_id", using: :btree
-  add_index "charges", ["charged_in_id"], name: "index_charges_on_charged_in_id", using: :btree
   add_index "charges", ["cycle_id"], name: "index_charges_on_cycle_id", using: :btree
 
   create_table "clients", force: true do |t|

@@ -71,7 +71,6 @@ module DB
     def attributes
       {
         charge_type: charge_type,
-        charged_in_id: charged_in_id,
         cycle_id: cycle_id,
         amount: amount,
         start_date: start_date,

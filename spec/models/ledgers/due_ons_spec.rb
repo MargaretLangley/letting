@@ -4,23 +4,16 @@ require 'rails_helper'
 # rubocop: disable Style/SpaceInsideRangeLiteral
 
 describe DueOns, :ledgers, :cycle, type: :model do
-
-  let(:cycle) do
-    Cycle.new id: 1,
-              name: 'Anything',
-              order: 1,
-              cycle_type: 'term'
-  end
-  let(:due_ons) { cycle.due_ons }
-
-  context 'validates' do
-    context 'due_ons_size' do
+  describe 'validates' do
+    describe 'due_ons_size' do
       it 'invalid above max' do
+        cycle = cycle_new due_ons: []
         (1..13).each { cycle.due_ons.build day: 25, month: 3 }
         expect(cycle).to_not be_valid
       end
       it 'valid if marked for destruction' do
-        (1..13).each { cycle.due_ons.build day: 25, month: 3 }
+        cycle = cycle_new due_ons: []
+        (1..12).each { cycle.due_ons.build day: 25, month: 3 }
         cycle.due_ons.first.mark_for_destruction
         expect(cycle).to be_valid
       end
@@ -46,8 +39,8 @@ describe DueOns, :ledgers, :cycle, type: :model do
       end
 
       it 'returns nils when range outside due date' do
-        due_ons.build day: 1, month: 2
-        expect(due_ons.between Date.new(2013, 4, 4)..Date.new(2013, 5, 2))
+        cycle = cycle_new due_ons: [DueOn.new(month: 2, day: 1)]
+        expect(cycle.due_ons.between Date.new(2013, 4, 4)..Date.new(2013, 5, 2))
           .to eq []
       end
     end

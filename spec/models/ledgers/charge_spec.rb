@@ -8,7 +8,6 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
       it('charge type') { expect(charge_new charge_type: nil).to_not be_valid }
       it('amount') { expect(charge_new amount: nil).to_not be_valid }
       it('cycle') { expect(charge_new cycle: nil).to_not be_valid }
-      it('charged_in') { expect(charge_new charged_in: nil).to_not be_valid }
     end
     describe 'amount' do
       it('is a number') { expect(charge_new amount: 'nn').to_not be_valid }
@@ -30,7 +29,7 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
       end
 
       it 'keeps new charges if edited' do
-        (charge = Charge.new).charged_in_id = 1
+        (charge = Charge.new).charge_type = 'Rent'
         charge.clear_up_form
         expect(charge).to_not be_marked_for_destruction
       end
@@ -70,8 +69,9 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
     end
 
     it '#to_s displays' do
-      expect(charge_new.to_s).to eq 'charge: Ground Rent, charged_in: Adv, '\
-                                 'cycle: Mar, type: term, due_ons: [Mar 25]'
+      expect(charge_new.to_s)
+        .to eq 'charge: Ground Rent, '\
+               'cycle: Mar, type: term, charged_in: 2, due_ons: [Mar 25]'
     end
   end
 end

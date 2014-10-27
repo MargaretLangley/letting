@@ -5,7 +5,7 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
   describe 'validates' do
     it('returns valid') { expect(cycle_new).to be_valid }
     it('requires a name') { expect(cycle_new name: '').to_not be_valid }
-    it('charged_in') { expect(charge_new charged_in: nil).to_not be_valid }
+    it('charged_in') { expect(cycle_new charged_in: nil).to_not be_valid }
     it('requires an order') { expect(cycle_new order: '').to_not be_valid }
     it 'requires a cycle_type' do
       (cycle = cycle_new).cycle_type = ''
@@ -181,7 +181,7 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
   describe '#to_s' do
     it 'displays' do
       expect(cycle_new.to_s)
-        .to eq 'cycle: Mar, type: term, due_ons: [Mar 25]'
+        .to eq 'cycle: Mar, type: term, charged_in: 2, due_ons: [Mar 25]'
     end
   end
 end

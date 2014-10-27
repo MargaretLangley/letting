@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Property, type: :feature do
+describe Property, type: :feature, broken: true   do
 
   before(:each) { log_in }
 

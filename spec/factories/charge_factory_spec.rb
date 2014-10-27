@@ -6,7 +6,6 @@ describe 'ChargeFactory' do
       it('is valid') { expect(charge_new).to be_valid }
       it('has account_id') { expect(charge_new.account_id).to eq 2 }
       it('has cycle_id') { expect(charge_new.cycle_id).to be_nil }
-      it('has charged_in_id') { expect(charge_new.charged_in_id).to eq 2 }
       it('has type') { expect(charge_new.charge_type).to eq 'Ground Rent' }
       it('has cycle') { expect(charge_new.cycle.name).to eq 'Mar' }
       it 'has due_ons' do
@@ -17,9 +16,6 @@ describe 'ChargeFactory' do
           .to eq DueOn.new(day: 25, month: 3)
       end
       describe 'makes' do
-        it 'creates charged_in' do
-          expect(charge_new.charged_in.name).to eq 'Advance'
-        end
         it 'creates cycle' do
           expect(charge_new.cycle.name).to eq 'Mar'
         end
@@ -88,11 +84,6 @@ describe 'ChargeFactory' do
       end
 
       it('flips dormant') { expect(charge_create dormant: true).to be_dormant }
-
-      it 'alters charged_in' do
-        charge_create charged_in: charged_in_create(id: 1, name: 'Mid-Term')
-        expect(ChargedIn.first.name).to eq 'Mid-Term'
-      end
     end
 
     describe 'adds' do

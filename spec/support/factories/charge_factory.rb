@@ -9,7 +9,6 @@ def charge_new id: nil,
                start_date: '2002-03-25',
                end_date: MAX_DATE,  # app_constants
                cycle: cycle_new,
-               charged_in: charged_in_create,
                credits: nil,
                debits: nil
 
@@ -20,10 +19,8 @@ def charge_new id: nil,
                       dormant: dormant,
                       start_date: start_date,
                       end_date: end_date,
-                      cycle: cycle,
-                      charged_in: charged_in
+                      cycle: cycle
   charge.cycle = cycle if cycle
-  charge.charged_in = charged_in if charged_in
   charge.credits = credits if credits
   charge.debits = debits if debits
   charge
@@ -37,7 +34,6 @@ def charge_find_or_create id: nil,
                           start_date: '2002-03-25',
                           end_date: MAX_DATE,  # app_constants
                           cycle: cycle_new,
-                          charged_in: charged_in_create,
                           credits: nil,
                           debits: nil
   Charge.find_by(id: id) || charge_create(id: id,
@@ -48,7 +44,6 @@ def charge_find_or_create id: nil,
                                           start_date: start_date,
                                           end_date: end_date,
                                           cycle: cycle,
-                                          charged_in: charged_in,
                                           credits: credits,
                                           debits: debits)
 end
@@ -61,7 +56,6 @@ def charge_create id: id,
                   start_date: '2002-03-25',
                   end_date: MAX_DATE,  # app_constants
                   cycle: cycle_create,
-                  charged_in: charged_in_create,
                   credits: nil,
                   debits: nil
 
@@ -73,7 +67,6 @@ def charge_create id: id,
                       start_date: start_date,
                       end_date: end_date,
                       cycle: cycle,
-                      charged_in: charged_in,
                       credits: credits,
                       debits: debits
   charge.save!

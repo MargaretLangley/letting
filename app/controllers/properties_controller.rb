@@ -24,7 +24,7 @@ class PropertiesController < ApplicationController
 
   def show
     @property = PropertyDecorator.new \
-      Property.includes(account: [charges: [:charged_in, :cycle],
+      Property.includes(account: [charges: [:cycle],
                                   credits: [:charge],
                                   debits:  [:charge]])
               .find params[:id]
