@@ -23,6 +23,7 @@ module DB
   #####
   #
   class LegacyChargedInFields
+    attr_reader :charged_in_code, :charge_type
     # Mapping of imported values to application values
     # Definitive values charged_in.csv/charged_ins table;
     LEGACY_CODE_TO_CHARGED_IN  = { '0'  => 1,     # Arrears
@@ -37,15 +38,16 @@ module DB
     # so: "0" => 1, "1" => 2, "M" => 3
     #
     def modern_id
+      return 1 if charged_in_code == 'M' # Only mid-term is an arrears
       return 2 if advanced_charge_type
-      LEGACY_CODE_TO_CHARGED_IN.fetch(@charged_in_code)
+      LEGACY_CODE_TO_CHARGED_IN.fetch(charged_in_code)
     end
 
     # charged_in_code is not set properly when the charge_type is
     # always advanced. insurance is advanced but the data left as
     # default - arrears. This hack fixes the legacy data.
     def advanced_charge_type
-      @charge_type == 'Insurance' || @charge_type == 'Garage Insurance'
+      charge_type == 'Insurance' || charge_type == 'Garage Insurance'
     end
   end
 end

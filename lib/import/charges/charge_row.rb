@@ -59,7 +59,7 @@ module DB
     # that the charge are invoiced - allowing a cycle matching.
     def day_months
       return create_monthly_dates day(1) if monthly?
-      return mid_term_day_months if charged_in_id == 3
+      return mid_term_day_months if charged_in_code == 'M'
       day_months = []
       1.upto(maximum_dates) do |index|
         break if empty_due_on? day(index), month(index)

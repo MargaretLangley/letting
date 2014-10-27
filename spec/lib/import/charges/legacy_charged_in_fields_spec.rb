@@ -23,6 +23,12 @@ module DB
           expect(charged.modern_id).to eq 1
         end
 
+        it 'returns arrears when charged_in_code mid-term' do
+          charged = LegacyChargedInFields.new charged_in_code: 'M',
+                                              charge_type: 'unknown'
+          expect(charged.modern_id).to eq 1
+        end
+
         it 'returns charge_type code over charged_in_code' do
           charged = LegacyChargedInFields.new charged_in_code: '0',
                                               charge_type: 'Insurance'

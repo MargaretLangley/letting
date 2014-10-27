@@ -21,9 +21,13 @@ namespace :db do
     task :due_ons, [:test] => :environment  do
       puts "DueOns import: missing #{filename}" \
         unless File.exist?(filename)
-
       CSV.foreach(filename, headers: true) do |row|
-        DueOn.create!(row.to_hash) unless comment(row)
+        begin
+          DueOn.create!(row.to_hash) unless comment(row)
+        rescue StandardError => e
+          p 'DueOn failed (see hash below):', row.to_hash
+          raise e
+        end
       end
     end
 
