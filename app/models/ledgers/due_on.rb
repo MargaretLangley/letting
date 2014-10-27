@@ -35,11 +35,28 @@ class DueOn < ActiveRecord::Base
                    allow_nil: true
 
   def between datetime_range
-    date_range = datetime_range.first.to_date..datetime_range.last.to_date
-    date_range.to_a
+    date_range = to_date_range datetime_range
+    matched = date_range.to_a
               .map(&:year)
               .uniq.map { |year| make_date year: year }
               .sort & date_range.to_a
+    matched.map { |date| MatchedDueOn.new date, show_date(year: date.year) }
+  end
+
+  def make_date(year:)
+    Date.new year, month, day
+  end
+
+  def show_date(year:)
+    if show_month.nil? && show_day.nil?
+      make_date year: year
+    else
+      Date.new year, show_month, show_day
+    end
+  end
+
+  def between? datetime_range
+    between(datetime_range).present?
   end
 
   def clear_up_form
@@ -70,8 +87,8 @@ class DueOn < ActiveRecord::Base
 
   private
 
-  def make_date(year:)
-    Date.new year, month, day
+  def to_date_range datetime_range
+    (datetime_range.first.to_date..datetime_range.last.to_date)
   end
 
   def ignored_attrs

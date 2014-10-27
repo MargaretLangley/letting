@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'Cycle Factory', :ledgers do
+describe 'Cycle Factory', :cycle, :ledgers do
 
   describe 'new' do
     context 'default' do

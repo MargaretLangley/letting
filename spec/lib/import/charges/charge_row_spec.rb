@@ -65,8 +65,13 @@ module DB
 
       describe '#cycle_id' do
         it 'returns valid id' do
-          cycle_create id: 3, due_ons: [DueOn.new(month: 3, day: 25)]
-          row = ChargeRow.new parse_line charge_row month: 3, day: 25
+          cycle_create id: 3,
+                       charged_in: charged_in_create(id: MODERN_CHARGED_IN = 1),
+                       due_ons: [DueOn.new(month: 3, day: 25)]
+          row = ChargeRow.new parse_line \
+                                charge_row charged_in: LEGACY_CHARGED_IN = 0,
+                                           month: 3,
+                                           day: 25
           expect(row.cycle_id).to eq 3
         end
 
@@ -76,12 +81,28 @@ module DB
           row.cycle_id
         end
 
-        it 'messages on unknown cycle' do
-          cycle_create id: 3, due_ons: [DueOn.new(month: 10, day: 10)]
-          row = ChargeRow.new parse_line charge_row(month: 3, day: 25)
+        it 'messages on unknown cycle dates' do
+          cycle_create id: 3,
+                       charged_in: charged_in_create(id: MODERN_CHARGED_IN = 1),
+                       due_ons: [DueOn.new(month: 10, day: 10)]
+          row = ChargeRow.new parse_line charge_row \
+                                           charged_in: LEGACY_CHARGED_IN = 0,
+                                           month: 3,
+                                           day: 25
           expect { warn 'charge row does not match a charge cycle' }
             .to output.to_stderr
           row.cycle_id
+        end
+
+        it 'messages on unknown charged_in' do
+          cycle_create id: 3,
+                       charged_in: charged_in_create(id: MODERN_CHARGED_IN = 1),
+                       due_ons: [DueOn.new(month: 3, day: 25)]
+          row = ChargeRow.new parse_line charge_row \
+                                           charged_in: LEGACY_CHARGED_IN = 4,
+                                           month: 3,
+                                           day: 25
+          expect { row.cycle_id }.to raise_error DB::ChargedInCodeUnknown
         end
       end
 

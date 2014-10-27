@@ -22,6 +22,7 @@ class Cycle < ActiveRecord::Base
                      foreign_key: 'cycle_id',
                      inverse_of: :cycle
 
+  belongs_to :charged_in, inverse_of: :charges
   include DueOns
   accepts_nested_attributes_for :due_ons, allow_destroy: true
   before_validation :clear_up_form
@@ -37,16 +38,35 @@ class Cycle < ActiveRecord::Base
     due_ons.prepare type: cycle_type
   end
 
-  def repeated_dates(year:)
-    due_ons.map { |due_on| Date.new year, due_on.month, due_on.day }
+  def between billing_period
+    due_ons.between(billing_period).map do |match|
+      MatchedCycle.new(match.spot, bill_period(billed_on: match.show))
+    end
+  end
+
+  # required to be public for importing accounts information
+  def bill_period(billed_on:)
+    RangeCycle.for(name: charged_in.name,
+                   dates: show_dates(year: billed_on.year))
+              .duration within: billed_on
   end
 
   def <=> other
     return nil unless other.is_a?(self.class)
-    [due_ons.sort] <=> [other.due_ons.sort]
+    [charged_in_id, due_ons.sort] <=> [other.charged_in_id, other.due_ons.sort]
   end
 
   def to_s
     "cycle: #{name}, type: #{cycle_type}, " + due_ons.to_s
+  end
+
+  private
+
+  def repeated_dates(year:)
+    due_ons.map { |due_on| due_on.make_date year: year }
+  end
+
+  def show_dates(year:)
+    due_ons.map { |due_on| due_on.show_date year: year }
   end
 end

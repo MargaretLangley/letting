@@ -12,29 +12,36 @@ require_relative '../../lib/import/charges/charge_row'
 ####
 #
 module DB
-  describe CycleMatcher do
+  describe CycleMatcher, :cycle do
     it 'matches on due_ons' do
+      charged_in = charged_in_create(id: 1, name: 'Arrears')
       cycle = Cycle.new(id: 100,
                         name: 'Anything',
+                        charged_in_id: charged_in.id,
                         order: 5,
                         cycle_type: 'term')
       cycle.due_ons.build day: 25, month: 3
       cycle.due_ons.build day: 29, month: 9
       cycle.save!
       day_months = [[25, 3], [29, 9]]
-      expect(CycleMatcher.new(day_months: day_months).id).to eq 100
+      cm = CycleMatcher.new charged_in_id: charged_in.id, day_months: day_months
+      expect(cm.id).to eq 100
     end
 
     it 'distinct when due_ons different' do
+      charged_in = charged_in_create(id: 1, name: 'Arrears')
       cycle = Cycle.new(id: 100,
                         name: 'Anything',
+                        charged_in_id: charged_in.id,
                         order: 5,
                         cycle_type: 'term')
       cycle.due_ons.build day: 19, month: 3
       cycle.save!
       day_months = [[25, 3]]
-      expect { CycleMatcher.new(day_months: day_months).id }.to \
-        raise_error CycleUnknown
+      expect do
+        CycleMatcher.new(charged_in_id: charged_in.id,
+                         day_months: day_months).id
+      end.to raise_error CycleUnknown
     end
   end
 end

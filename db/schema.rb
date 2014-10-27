@@ -105,12 +105,15 @@ ActiveRecord::Schema.define(version: 20140930053829) do
   add_index "cycle_charged_ins", ["cycle_id"], name: "index_cycle_charged_ins_on_cycle_id", using: :btree
 
   create_table "cycles", force: true do |t|
-    t.string   "name",       null: false
-    t.integer  "order",      null: false
-    t.string   "cycle_type", null: false
+    t.string   "name",          null: false
+    t.integer  "charged_in_id", null: false
+    t.integer  "order",         null: false
+    t.string   "cycle_type",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "cycles", ["charged_in_id"], name: "index_cycles_on_charged_in_id", using: :btree
 
   create_table "debits", force: true do |t|
     t.integer  "account_id",                           null: false
@@ -127,9 +130,11 @@ ActiveRecord::Schema.define(version: 20140930053829) do
   add_index "debits", ["charge_id", "on_date"], name: "index_debits_on_charge_id_and_on_date", unique: true, using: :btree
 
   create_table "due_ons", force: true do |t|
-    t.integer  "day",        null: false
-    t.integer  "month",      null: false
     t.integer  "year"
+    t.integer  "month",      null: false
+    t.integer  "day",        null: false
+    t.integer  "show_month"
+    t.integer  "show_day"
     t.integer  "cycle_id"
     t.datetime "created_at"
     t.datetime "updated_at"

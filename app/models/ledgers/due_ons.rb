@@ -46,6 +46,10 @@ module DueOns
         map { |due_on| due_on.between billing_period }.flatten.sort
       end
 
+      def between? billing_period
+        select { |due_on| due_on.between? billing_period }
+      end
+
       def prepare(type:)
         @type = type
         (size...find_max_size).each { build }

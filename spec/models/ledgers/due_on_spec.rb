@@ -4,8 +4,9 @@ require 'rails_helper'
 # rubocop: disable Style/SpaceInsideRangeLiteral
 # rubocop: disable Style/TrivialAccessors
 # rubocop: disable Lint/UselessComparison
+# rubocop: disable Metrics/LineLength
 
-describe DueOn, :ledgers, type: :model do
+describe DueOn, :ledgers, :cycle, type: :model do
   it('is valid') { expect(due_on_new).to be_valid }
 
   describe 'Attribute' do
@@ -35,30 +36,63 @@ describe DueOn, :ledgers, type: :model do
 
   describe 'methods' do
     describe '#between' do
-      it 'returns the repeated dates that are present in the range' do
+      it 'returns the date of the matching spot and display dates' do
         expect(due_on_new(month: 3, day: 25)
           .between Date.new(2013, 3, 25)..Date.new(2013, 3, 25))
-            .to eq [Date.new(2013, 3, 25)]
+            .to eq [MatchedDueOn.new(Date.new(2013, 3, 25), Date.new(2013, 3, 25))]
       end
 
       it 'handles date time' do
         expect(due_on_new(month: 3, day: 25)
           .between DateTime.new(2007, 8, 17, 11, 56, 00)..
                    DateTime.new(2008, 8, 16, 11, 56, 00))
-            .to eq [Date.new(2008, 3, 25)]
+            .to eq [MatchedDueOn.new(Date.new(2008, 3, 25), Date.new(2008, 3, 25))]
       end
 
       it 'handles multi-year' do
         expect(due_on_new(month: 3, day: 5)
           .between Date.new(2010, 3, 1)..Date.new(2012, 3, 6))
-            .to eq [Date.new(2010, 3, 5),
-                    Date.new(2011, 3, 5),
-                    Date.new(2012, 3, 5)]
+            .to eq [MatchedDueOn.new(Date.new(2010, 3, 5), Date.new(2010, 3, 5)),
+                    MatchedDueOn.new(Date.new(2011, 3, 5), Date.new(2011, 3, 5)),
+                    MatchedDueOn.new(Date.new(2012, 3, 5), Date.new(2012, 3, 5))]
       end
 
-      it 'empty return when not matching' do
+      it 'returns nothing on mismatching spot_date' do
         expect(due_on_new(month: 1, day: 1)
           .between Date.new(2013, 3, 25)..Date.new(2013, 3, 25)).to eq []
+      end
+    end
+
+    describe '#between?' do
+      it 'returns true when matched' do
+        expect(due_on_new(month: 3, day: 25)
+          .between? DateTime.new(2007, 8, 17, 11, 56, 00)..
+                   DateTime.new(2008, 8, 16, 11, 56, 00))
+            .to eq true
+      end
+
+      it 'returns false when no match' do
+        expect(due_on_new(month: 1, day: 1)
+          .between? Date.new(2013, 3, 25)..Date.new(2013, 3, 25)).to eq false
+      end
+    end
+
+    describe '#make_date' do
+      it 'displays date' do
+        expect(due_on_new(month: 3, day: 25).make_date(year: 1980))
+          .to eq Date.new 1980, 3, 25
+      end
+    end
+
+    describe '#show_date' do
+      it 'displays show_date if present' do
+        expect(due_on_new(show_month: 9, show_day: 1).show_date(year: 1980))
+          .to eq Date.new 1980, 9, 1
+      end
+
+      it 'displays on_date if no display date' do
+        expect(due_on_new(month: 3, day: 25).show_date(year: 1980))
+          .to eq Date.new 1980, 3, 25
       end
     end
 

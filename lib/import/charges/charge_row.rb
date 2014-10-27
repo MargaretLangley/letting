@@ -45,7 +45,7 @@ module DB
     end
 
     def cycle_id
-      CycleMatcher.new(day_months: day_months).id
+      CycleMatcher.new(charged_in_id: charged_in_id, day_months: day_months).id
       rescue CycleUnknown
         warn "Property #{human_ref} charge row does not match a charge cycle" \
           " (For legacy charge_type: '#{charge_code}') "

@@ -47,6 +47,7 @@ module DB
     def period
       period = charge(account: account(human_ref: human_ref),
                       charge_type: charge_type)
+                 .cycle
                  .bill_period(billed_on: on_date.to_date)
       fail PeriodUnknown,
            period_message,

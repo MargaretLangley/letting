@@ -1,16 +1,35 @@
-def due_on_new id: nil, day: 25, month: 3, year: '', cycle_id: nil
+# rubocop: disable Metrics/MethodLength
+# rubocop: disable Metrics/ParameterLists
+
+def due_on_new id: nil,
+               year: '',
+               month: 3,
+               day: 25,
+               show_month: nil,
+               show_day: nil,
+               cycle_id: nil
   DueOn.new id: id,
-            day: day,
-            month: month,
             year: year,
+            month: month,
+            day: day,
+            show_month: show_month,
+            show_day: show_day,
             cycle_id: cycle_id
 end
 
-def due_on_create id: nil, day: 25, month: 3, year: '', cycle_id: nil
+def due_on_create id: nil,
+                  year: '',
+                  month: 3,
+                  day: 25,
+                  show_month: nil,
+                  show_day: nil,
+                  cycle_id: nil
   due_on = due_on_new(id: id,
-                      day: day,
-                      month: month,
                       year: year,
+                      month: month,
+                      day: day,
+                      show_month: show_month,
+                      show_day: show_day,
                       cycle_id: cycle_id)
   due_on.save!
   due_on

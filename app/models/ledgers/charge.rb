@@ -39,19 +39,9 @@ class Charge < ActiveRecord::Base
   #                  associated account. Empty array if nothing billed.
   def coming billing_period
     return [] if dormant
-    allowed_dates(billing_period).map do |billed_on|
-      make_chargeable(billed_on)
+    cycle.between(billing_period).map do |matched_cycle|
+      make_chargeable(matched_cycle)
     end.compact
-  end
-
-  def bill_period(billed_on:)
-    # Anything except mid-term take the charge cycle's due_ons and
-    # apply either advance or arrears.
-    # For mid-term I need to load other charge_cycle due_ons
-    # I need completely different due_ons for the mid-term
-    RangeCycle.for(name: charged_in_name,
-                   dates: cycle.repeated_dates(year: billed_on.year))
-              .duration within: billed_on
   end
 
   def prepare
@@ -72,25 +62,17 @@ class Charge < ActiveRecord::Base
     !empty?
   end
 
-  def allowed_dates billing_period
-    cycle.between(billing_period) & charge_active_epoch.to_a
-  end
-
-  # The years, dates, a charge is active
-  def charge_active_epoch
-    (start_date..end_date)
-  end
-
   # Converts a Charge object into a Chargeable object.
-  # billed_on - the date the charge becomes due and is billed.
+  # matched_cycle - struct of date the charge becomes due, spot, and
+  #                 the period it is billed for, period.
   # returns   - The information to bill, debit, the associated account.
   #
-  def make_chargeable billed_on
+  def make_chargeable matched_cycle
     Chargeable.from_charge charge_id:  id,
-                           on_date:    billed_on,
+                           on_date:    matched_cycle.spot,
                            amount:     amount,
                            account_id: account_id,
-                           period: bill_period(billed_on: billed_on)
+                           period:     matched_cycle.period
   end
 
   def empty?

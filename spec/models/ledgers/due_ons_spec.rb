@@ -3,7 +3,7 @@ require 'rails_helper'
 # Required for splitting over two lines.
 # rubocop: disable Style/SpaceInsideRangeLiteral
 
-describe DueOns, :ledgers, type: :model do
+describe DueOns, :ledgers, :cycle, type: :model do
 
   let(:cycle) do
     Cycle.new id: 1,
@@ -30,11 +30,19 @@ describe DueOns, :ledgers, type: :model do
   describe 'methods' do
     describe '#between' do
       it 'returns date when range in due date' do
-        cycle = cycle_new due_ons: [DueOn.new(day: 4, month: 4),
-                                    DueOn.new(day: 3, month: 5)]
-        expect(cycle.due_ons.between Date.new(2015, 4, 4)..Date.new(2016, 5, 5))
-          .to eq [Date.new(2015, 4, 4), Date.new(2015, 5, 3),
-                  Date.new(2016, 4, 4), Date.new(2016, 5, 3)]
+        cycle = cycle_new due_ons: [DueOn.new(day: 4, month: 4)]
+        expect(cycle.due_ons.between Date.new(2015, 4, 4)..Date.new(2015, 4, 4))
+          .to eq [MatchedDueOn.new(Date.new(2015, 4, 4), Date.new(2015, 4, 4))]
+      end
+
+      it 'returns the MatchedDueon of all the covered spot dates' do
+        cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 4),
+                                    DueOn.new(month: 9, day: 5),]
+
+        expect(cycle.due_ons.between Date.new(2010, 3, 1)..
+                                     Date.new(2011, 2, 28))
+         .to eq [MatchedDueOn.new(Date.new(2010, 3, 4), Date.new(2010, 3, 4)),
+                 MatchedDueOn.new(Date.new(2010, 9, 5), Date.new(2010, 9, 5))]
       end
 
       it 'returns nils when range outside due date' do

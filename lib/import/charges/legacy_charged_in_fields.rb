@@ -33,6 +33,9 @@ module DB
       @charge_type = charge_type
     end
 
+    # returns the modern application's id
+    # so: "0" => 1, "1" => 2, "M" => 3
+    #
     def modern_id
       return 2 if advanced_charge_type
       LEGACY_CODE_TO_CHARGED_IN.fetch(@charged_in_code)

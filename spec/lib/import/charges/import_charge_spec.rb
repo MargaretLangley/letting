@@ -13,18 +13,17 @@ require_relative '../../../../lib/import/charges/import_charge'
 #
 module DB
   describe ImportCharge, :import do
-    before :each do
-      charged_in_create id: 1, name: 'Arrears'
-      property_create human_ref: 2000, account: account_new
-    end
-
     def row human_ref: 2000, charged_in: 0, month: 3, day: 25, amount: 5
       %(#{human_ref}, 2006-12-30 17:17:00, GR, #{charged_in}, #{amount},  S,) +
       %(#{day}, #{month}, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
     end
 
     context 'charge with on_date cycle' do
-      before { cycle_create due_ons: [DueOn.new(day: 25, month: 3)] }
+      before do
+        property_create human_ref: 2000, account: account_new
+        cycle_create charged_in: charged_in_create(id: 1, name: 'Arrears'),
+                     due_ons: [DueOn.new(day: 25, month: 3)]
+      end
 
       it 'imports a single row' do
         expect { import_charge row }.to change(Charge, :count).by 1
@@ -65,9 +64,11 @@ module DB
     end
 
     context 'charge with monthly cycle' do
-      before { cycle_create due_ons: [DueOn.new(day: 8, month: 0)] }
-
       it 'imports a monthly row' do
+        property_create human_ref: 2000, account: account_new
+        cycle_create charged_in: charged_in_create(id: 1, name: 'Arrears'),
+                     due_ons: [DueOn.new(day: 8, month: 0)]
+
         expect { import_charge row day: 8, month: 0 }
           .to change(Charge, :count).by 1
       end
