@@ -6,7 +6,7 @@ describe Template, type: :feature do
     log_in admin_attributes
   end
 
-  describe '#edit page 2' do
+  describe '#update page 2' do
     it 'finds data on 2nd page and succeeds' do
       template_create id: 2
       notice_create instruction: 'ins1'
