@@ -2,44 +2,44 @@
 
 <div class='grid shell'>
 
-  <div class='grid-row col-1-6 vertical-spacer grid-header'>
+  <div class='grid-row col-2-24 vertical-spacer grid-header'>
     &nbsp;
   </div>
-  <div class='col-1-6 vertical-spacer grid-header'>
+  <div class='col-8-24 vertical-spacer grid-header'>
     Name
   </div>
-  <div class='col-1-6 vertical-spacer grid-header'>
+  <div class='col-3-24 vertical-spacer grid-header r-align'>
     Order
   </div>
-  <div class='col-1-6 vertical-spacer grid-header no-print'>
+  <div class='col-4-24 vertical-spacer grid-header no-print'>
     Type
   </div>
-  <div class='col-1-6 vertical-spacer grid-header no-print r-align'>
+  <div class='col-4-24 vertical-spacer grid-header no-print r-align'>
     Actions
   </div>
-  <div class='col-1-6 vertical-spacer grid-header no-print r-align'>
+  <div class='col-3-24 vertical-spacer grid-header no-print r-align'>
     &nbsp;
   </div>
 
   <% @cycles.each do |cycle| %>
     <div class='table-row' data-link='<%= cycle_path(cycle) %>'>
-      <div class='grid-row col-1-6  vertical-spacer inherit-row'>
+      <div class='grid-row col-2-24  vertical-spacer inherit-row'>
         &nbsp;
       </div>
-      <div class='col-1-6  vertical-spacer inherit-row'>
+      <div class='col-8-24  vertical-spacer inherit-row'>
        <%= cycle.name %>
       </div>
-      <div class='col-1-6  vertical-spacer inherit-row'>
+      <div class='col-3-24  vertical-spacer inherit-row r-align'>
        <%= cycle.order %>
       </div>
-      <div class='col-1-6  vertical-spacer inherit-row'>
+      <div class='col-4-24  vertical-spacer inherit-row'>
         <%= cycle.cycle_type %>
       </div>
-      <nav class='col-1-6  vertical-spacer no-print r-align'>
+      <nav class='col-4-24  vertical-spacer no-print r-align'>
         <%= link_to fa_icon('edit lg'), edit_cycle_path(cycle), title: 'Edit', class: 'r-pad' %>
         <%= link_to fa_icon('trash-o lg'), cycle, method: :delete, data: { confirm: 'Are you sure?' }, title: 'Delete', class: 'l-pad' %>
       </nav>
-      <div class='col-1-6  vertical-spacer no-print'>
+      <div class='col-3-24  vertical-spacer no-print'>
         &nbsp;
       </div>
     </div>

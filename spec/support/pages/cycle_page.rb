@@ -28,6 +28,10 @@ class CyclePage
     self
   end
 
+  def charged_in charged_in
+    choose charged_in
+  end
+
   def order= value
     fill_in 'Order', with: value
     self
