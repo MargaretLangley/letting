@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Property, type: :feature, broken: true do
+describe Property, type: :feature do
 
   let(:account) { AccountPage.new }
   before(:each) { log_in }

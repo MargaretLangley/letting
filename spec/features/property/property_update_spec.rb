@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Account Update', type: :feature, broken: true  do
+describe 'Account Update', type: :feature  do
 
   let(:account) { AccountPage.new }
 
