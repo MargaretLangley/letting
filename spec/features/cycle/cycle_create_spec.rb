@@ -14,7 +14,7 @@ describe Cycle, :cycle, :ledgers, type: :feature do
       cycle_page.name = 'April/Nov'
       cycle_page.choose 'Advance'
       cycle_page.order = '44'
-      cycle_page.due_on day: 10, month: 2
+      cycle_page.due_on month: 2, day: 10, show_month: 3, day: 11
       cycle_page.do 'Create Charge Cycle'
       expect(cycle_page).to be_success
     end

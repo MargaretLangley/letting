@@ -68,11 +68,11 @@ class CyclesController < ApplicationController
                   :charged_in_id,
                   :order,
                   :cycle_type,
-                  due_ons_attributes: [:id,
-                                       :cycle_id,
-                                       :day,
-                                       :month,
-                                       :year]
+                  due_ons_attributes: due_ons_attributes
+  end
+
+  def due_ons_attributes
+    [:id, :cycle_id, :month, :day, :show_month, :show_day, :year]
   end
 
   def identity
