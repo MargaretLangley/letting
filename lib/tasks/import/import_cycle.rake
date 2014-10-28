@@ -29,6 +29,7 @@ namespace :db do
           p 'Cycle Create failed (see hash below):', row.to_hash
         end
       end
+      Cycle.all.each { |cycle| Cycle.reset_counters(cycle.id, :due_ons) }
     end
 
     def comment row

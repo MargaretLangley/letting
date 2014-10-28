@@ -103,10 +103,11 @@ ActiveRecord::Schema.define(version: 20140930053829) do
   add_index "cycle_charged_ins", ["cycle_id"], name: "index_cycle_charged_ins_on_cycle_id", using: :btree
 
   create_table "cycles", force: true do |t|
-    t.string   "name",          null: false
-    t.integer  "charged_in_id", null: false
-    t.integer  "order",         null: false
-    t.string   "cycle_type",    null: false
+    t.string   "name",                      null: false
+    t.integer  "charged_in_id",             null: false
+    t.integer  "order",                     null: false
+    t.string   "cycle_type",                null: false
+    t.integer  "due_ons_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

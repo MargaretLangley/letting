@@ -59,11 +59,8 @@ describe 'Account Update', type: :feature, broken: true  do
     end
 
     it 'adds date charge' do
-      skip 'TODO: cycle charged_ins'
-      charge = \
-        charge_create cycle: cycle_new(id: 1),
-                      charged_in: charged_in_create(id: 2, name: 'Advance')
-      cycle_charged_in_create id: 1, cycle_id: 1, charged_in_id: 2
+      charged_in = charged_in_create id: 2, name: 'Advance'
+      charge = charge_create cycle: cycle_new(id: 1, charged_in: charged_in)
       account.edit
       account.charge charge: charge
       account.button('Update').successful?(self).edit
@@ -86,11 +83,8 @@ describe 'Account Update', type: :feature, broken: true  do
     end
 
     it 'can be set to dormant', js: true do
-      skip 'TODO: cycle charged_ins'
-      cycle = cycle_create(id: 1, name: 'Mar/Sep')
       charged_in = charged_in_create(id: 2, name: 'Advance')
-      cycle_charged_in_create id: 1, cycle_id: 1, charged_in_id: 2
-      charge = charge_new(charged_in: charged_in, cycle: cycle)
+      charge = charge_new cycle: cycle_new(id: 1, charged_in: charged_in)
       property_create human_ref: 8000, account: account_new(charge: charge)
       account.edit
       expect(page).to have_css('.spec-charge-count', count: 1)

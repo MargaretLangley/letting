@@ -96,7 +96,6 @@ class AccountPage
     id_stem = "property_account_attributes_charges_attributes_#{order}"
     fill_in "#{id_stem}_charge_type", with: charge.charge_type
     select charge.cycle.name, from: "#{id_stem}_cycle_id"
-    select charge.charged_in.name, from: "#{id_stem}_charged_in_id"
     fill_in "#{id_stem}_amount", with: charge.amount
     # fill_in "#{id_stem}_start_date", with: start_date if start_date.present?
     # fill_in "#{id_stem}_end_date", with: start_date if end_date.present?
@@ -108,8 +107,6 @@ class AccountPage
       .to spec.have_text charge.charge_type
     spec.expect(find_field("#{id_stem}_cycle_id"))
       .to spec.have_text charge.cycle.name
-    spec.expect(find_field("#{id_stem}_charged_in_id"))
-      .to spec.have_text charge.charged_in.name
     spec.expect(find_field("#{id_stem}_amount").value)
       .to spec.have_text charge.amount
   end

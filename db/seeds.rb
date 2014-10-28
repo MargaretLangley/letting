@@ -286,6 +286,7 @@ def create_cycle
     { id: 1,  name: 'Mar/Sep', charged_in_id: 1, order: 1, cycle_type: 'term' },
     { id: 2,  name: 'Jun/Dec', charged_in_id: 1, order: 2, cycle_type: 'term' },
   ]
+  Cycle.all.each { |cycle| Cycle.reset_counters(cycle.id, :due_ons) }
 end
 
 def create_account
