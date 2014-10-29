@@ -21,8 +21,6 @@
 # Client
 #   - Compound Name and address
 #
-# TODO: remove this disable!
-# rubocop: disable Metrics/MethodLength
 #
 class Invoice < ActiveRecord::Base
   belongs_to :invoicing
