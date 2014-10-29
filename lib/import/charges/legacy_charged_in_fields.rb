@@ -1,3 +1,5 @@
+require_relative '../../../lib/modules/charged_in_defaults'
+
 module DB
   #####
   #
