@@ -13,6 +13,7 @@ require_relative '../../../../lib/import/charges/charge_row'
 #
 ####
 module DB
+  include ChargedInDefaults
   describe ChargeRow, :import do
     def charge_row code: 'GR', charged_in: 0, month: 3, day: 25
       %(89, 2006-12-30, #{code}, #{charged_in}, 50.5, S,) +
@@ -52,7 +53,7 @@ module DB
         end
 
         it 'overrides due_on when charged_in is Mid-term' do
-          row = charge_row charged_in: 'M'
+          row = charge_row charged_in: LEGACY_MID_TERM
           expect(ChargeRow.new(parse_line row).day_months)
             .to eq [[25, 3], [29, 9]]
         end
@@ -66,10 +67,10 @@ module DB
       describe '#cycle_id' do
         it 'returns valid id' do
           cycle_create id: 3,
-                       charged_in: charged_in_create(id: MODERN_CHARGED_IN = 1),
+                       charged_in: charged_in_create(id: MODERN_ARREARS),
                        due_ons: [DueOn.new(month: 3, day: 25)]
           row = ChargeRow.new parse_line \
-                                charge_row charged_in: LEGACY_CHARGED_IN = 0,
+                                charge_row charged_in: LEGACY_ARREARS,
                                            month: 3,
                                            day: 25
           expect(row.cycle_id).to eq 3
@@ -83,10 +84,10 @@ module DB
 
         it 'messages on unknown cycle dates' do
           cycle_create id: 3,
-                       charged_in: charged_in_create(id: MODERN_CHARGED_IN = 1),
+                       charged_in: charged_in_create(id: MODERN_ADVANCE),
                        due_ons: [DueOn.new(month: 10, day: 10)]
           row = ChargeRow.new parse_line charge_row \
-                                           charged_in: LEGACY_CHARGED_IN = 0,
+                                           charged_in: LEGACY_ARREARS,
                                            month: 3,
                                            day: 25
           expect { warn 'charge row does not match a charge cycle' }
@@ -96,10 +97,10 @@ module DB
 
         it 'messages on unknown charged_in' do
           cycle_create id: 3,
-                       charged_in: charged_in_create(id: MODERN_CHARGED_IN = 1),
+                       charged_in: charged_in_create(id: MODERN_ARREARS),
                        due_ons: [DueOn.new(month: 3, day: 25)]
           row = ChargeRow.new parse_line charge_row \
-                                           charged_in: LEGACY_CHARGED_IN = 4,
+                                           charged_in: 'UNKNOWN',
                                            month: 3,
                                            day: 25
           expect { row.cycle_id }.to raise_error DB::ChargedInCodeUnknown

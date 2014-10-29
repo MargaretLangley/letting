@@ -14,23 +14,24 @@ require_relative '../../../../lib/import/charges/legacy_charged_in_fields'
 #
 ####
 module DB
+  include ChargedInDefaults
   describe LegacyChargedInFields, :import do
     describe '#id' do
       context 'valid legacy code' do
         it 'returns charged_in code' do
-          charged = LegacyChargedInFields.new charged_in_code: '0',
+          charged = LegacyChargedInFields.new charged_in_code: LEGACY_ARREARS,
                                               charge_type: 'unknown'
           expect(charged.modern_id).to eq 1
         end
 
         it 'returns arrears when charged_in_code mid-term' do
-          charged = LegacyChargedInFields.new charged_in_code: 'M',
+          charged = LegacyChargedInFields.new charged_in_code: LEGACY_MID_TERM,
                                               charge_type: 'unknown'
           expect(charged.modern_id).to eq 1
         end
 
         it 'returns charge_type code over charged_in_code' do
-          charged = LegacyChargedInFields.new charged_in_code: '0',
+          charged = LegacyChargedInFields.new charged_in_code: LEGACY_ARREARS,
                                               charge_type: 'Insurance'
           expect(charged.modern_id).to eq 2
         end

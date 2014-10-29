@@ -21,6 +21,7 @@ module DB
   #
   class ChargeRow
     include MethodMissing
+    include ChargedInDefaults
 
     def initialize row
       @source = row
@@ -59,7 +60,7 @@ module DB
     # that the charge are invoiced - allowing a cycle matching.
     def day_months
       return create_monthly_dates day(1) if monthly?
-      return mid_term_day_months if charged_in_code == 'M'
+      return mid_term_day_months if charged_in_code == LEGACY_MID_TERM
       day_months = []
       1.upto(maximum_dates) do |index|
         break if empty_due_on? day(index), month(index)
@@ -82,7 +83,7 @@ module DB
 
     # cycle_matcher requires charge_code as 'M' (month) is a special case
     def monthly?
-      charge_code == 'M'
+      charge_code == LEGACY_MID_TERM
     end
 
     def create_monthly_dates day_of_the_month

@@ -35,10 +35,10 @@
         <%= f.hidden_field :cycle_type, cycle_type: 'term' %>
       </div>
       <div class='col-4-24 vertical-spacer '>
-        <%= f.label :charged_in_id, 'Advance', :value => '2' %>
+        <%= f.label :charged_in_id, 'Advance', :value => ChargedInDefaults::MODERN_ADVANCE.to_s %>
       </div>
       <div class='col-4-24 vertical-spacer '>
-        <%= f.label :charged_in_id, 'Arrears', :value => '1' %>
+        <%= f.label :charged_in_id, 'Arrears', :value => ChargedInDefaults::MODERN_ARREARS.to_s %>
       </div>
       <div class='col-9-24 vertical-spacer '>
         &nbsp;
@@ -51,14 +51,15 @@
         &nbsp;
       </div>
       <div class='col-2-24 vertical-spacer '>
-        <%= f.radio_button :charged_in_id, '2' %>
+        <%= f.radio_button :charged_in_id, ChargedInDefaults::MODERN_ADVANCE.to_s %>
       </div>
       <div class='col-2-24  vertical-spacer faded'>
         &nbsp;
       </div>
       <div class='col-2-24 vertical-spacer '>
-        <%= f.radio_button :charged_in_id, '1' %>
+        <%= f.radio_button :charged_in_id, ChargedInDefaults::MODERN_ARREARS.to_s %>
       </div>
+
       <div class='col-11-24 vertical-spacer '>
         &nbsp;
       </div>

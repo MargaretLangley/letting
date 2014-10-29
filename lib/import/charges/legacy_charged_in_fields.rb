@@ -23,12 +23,12 @@ module DB
   #####
   #
   class LegacyChargedInFields
+    include ChargedInDefaults
     attr_reader :charged_in_code, :charge_type
     # Mapping of imported values to application values
     # Definitive values charged_in.csv/charged_ins table;
-    LEGACY_CODE_TO_CHARGED_IN  = { '0'  => 1,     # Arrears
-                                   '1' =>  2,     # Advance
-                                   'M' =>  3 }    # Mid_term
+    LEGACY_CODE_TO_CHARGED_IN  = { LEGACY_ARREARS  => MODERN_ARREARS,
+                                   LEGACY_ADVANCE  =>  MODERN_ADVANCE }
     def initialize(charged_in_code:, charge_type:)
       @charged_in_code = charged_in_code
       @charge_type = charge_type
@@ -38,8 +38,9 @@ module DB
     # so: "0" => 1, "1" => 2, "M" => 3
     #
     def modern_id
-      return 1 if charged_in_code == 'M' # Only mid-term is an arrears
-      return 2 if advanced_charge_type
+      # The Only mid-term charge is in arrears
+      return MODERN_ARREARS if charged_in_code == LEGACY_MID_TERM
+      return MODERN_ADVANCE if advanced_charge_type
       LEGACY_CODE_TO_CHARGED_IN.fetch(charged_in_code)
     end
 
