@@ -8,7 +8,7 @@ Letting::Application.routes.draw do
   get '/500', to: 'errors#server_error'
 
   get 'search' => 'search#index', as: :search
-  # TODO: name change to autocomplete?
+
   resources :search_suggestions, only: [:index]
 
   root 'properties#index'
