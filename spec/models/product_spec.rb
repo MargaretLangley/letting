@@ -54,10 +54,10 @@ RSpec.describe Product, type: :model do
       end
 
       it 'compares charge_type before period' do
-        lhs = Product.new charge_type: 'Ins', date_due: '2014-01-01', amount: 7,
+        lhs = Product.new charge_type: 'ZZZ', date_due: '2014-01-01', amount: 7,
                           period: Date.new(1999, 1, 1)..Date.new(1999, 3, 1)
 
-        rhs = Product.new charge_type: 'ZZZ', date_due: '2014-01-01', amount: 7,
+        rhs = Product.new charge_type: 'AAA', date_due: '2014-01-01', amount: 7,
                           period: Date.new(2010, 1, 1)..Date.new(2010, 3, 1)
 
         expect(lhs <=> rhs).to eq(1)
