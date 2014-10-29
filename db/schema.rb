@@ -92,16 +92,6 @@ ActiveRecord::Schema.define(version: 20140930053829) do
   add_index "credits", ["charge_id"], name: "index_credits_on_charge_id", using: :btree
   add_index "credits", ["payment_id"], name: "index_credits_on_payment_id", using: :btree
 
-  create_table "cycle_charged_ins", force: true do |t|
-    t.integer  "cycle_id",      null: false
-    t.integer  "charged_in_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "cycle_charged_ins", ["charged_in_id"], name: "index_cycle_charged_ins_on_charged_in_id", using: :btree
-  add_index "cycle_charged_ins", ["cycle_id"], name: "index_cycle_charged_ins_on_cycle_id", using: :btree
-
   create_table "cycles", force: true do |t|
     t.string   "name",                      null: false
     t.integer  "charged_in_id",             null: false
