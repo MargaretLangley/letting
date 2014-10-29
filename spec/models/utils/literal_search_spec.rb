@@ -3,52 +3,89 @@ require 'rails_helper'
 describe LiteralSearch, type: :model do
 
   describe '#go' do
-    it 'return nil when no match' do
-      expect(LiteralSearch.search(type: 'Property', query: '100')
-                          .go[:record_id])
-        .to eq nil
+    describe 'client query' do
+      it 'returns an exact client' do
+        client = client_create human_ref: '8'
+        expect(LiteralSearch.search(type: 'Client', query: '8').go[:record_id])
+          .to eq client.id
+      end
+
+      it 'returns nil when no match' do
+        expect(LiteralSearch.search(type: 'Client', query: '8').go[:record_id])
+          .to be_nil
+      end
     end
 
-    it 'returns an exact charge cycle' do
-      cycle = cycle_create name: 'Mar/Sep'
-      expect(LiteralSearch.search(type: 'Cycle', query: 'Mar/Sep')
-                          .go[:record_id])
-        .to eq cycle.id
+    describe 'cycle query' do
+      it 'returns an exact cycle' do
+        cycle = cycle_create name: 'Mar'
+        expect(LiteralSearch.search(type: 'Cycle', query: 'Mar').go[:record_id])
+          .to eq cycle.id
+      end
+
+      it 'return nil when no match' do
+        expect(LiteralSearch.search(type: 'Cycle', query: 'Mar').go[:record_id])
+          .to be_nil
+      end
     end
 
-    it 'returns an exact client ref' do
-      client = client_create human_ref: '101'
-      expect(LiteralSearch.search(type: 'Client', query: '101').go[:record_id])
-        .to eq client.id
+    describe 'invoicing query' do
+      it 'returns matching accounts' do
+        ac_1 = account_create(property: property_new(human_ref: '100')).id
+        ac_2 = account_create(property: property_new(human_ref: '200')).id
+        expect(LiteralSearch.search(type: 'Invoicing', query: '100-200')
+                            .go[:record_id])
+          .to eq [ac_1, ac_2]
+      end
+
+      it 'returns empty when no match' do
+        expect(LiteralSearch.search(type: 'Invoicing', query: '100-200')
+                            .go[:record_id])
+          .to eq []
+      end
     end
 
-    it 'returns an exact invoicing' do
-      ac_1 = account_create(property: property_new(human_ref: '100')).id
-      ac_2 = account_create(property: property_new(human_ref: '200')).id
-      expect(LiteralSearch.search(type: 'Invoicing', query: '100-200')
-                          .go[:record_id])
-        .to eq [ac_1, ac_2]
+    describe 'payment query' do
+      it 'returns an exact account' do
+        account = account_create property: property_new(human_ref: '100')
+        expect(LiteralSearch.search(type: 'Payment', query: '100')
+                            .go[:record_id])
+          .to eq account.id
+      end
+
+      it 'returns nil when no match' do
+        expect(LiteralSearch.search(type: 'Payment', query: '100')
+                            .go[:record_id])
+          .to be_nil
+      end
     end
 
-    # TODO: why is it talking about payment_ref when it expects an account id?
-    it 'returns an exact payment ref' do
-      account = account_create property: property_new(human_ref: '100')
-      expect(LiteralSearch.search(type: 'Payment', query: '100')
-                          .go[:record_id])
-        .to eq account.id
+    describe 'property query' do
+      it 'returns an exact property' do
+        property = property_create human_ref: '100'
+        expect(LiteralSearch.search(type: 'Property', query: '100')
+                            .go[:record_id])
+          .to eq property.id
+      end
+
+      it 'return nil when no match' do
+        expect(LiteralSearch.search(type: 'Property', query: '100')
+                            .go[:record_id])
+          .to be_nil
+      end
     end
 
-    it 'returns an exact property ref' do
-      property = property_create human_ref: '100'
-      expect(LiteralSearch.search(type: 'Property', query: '100')
-                          .go[:record_id])
-        .to eq property.id
-    end
+    describe 'user query' do
+      it 'returns an exact user' do
+        user = user_create nickname: 'sam'
+        expect(LiteralSearch.search(type: 'User', query: 'sam').go[:record_id])
+          .to eq user.id
+      end
 
-    it 'returns an exact user' do
-      user = user_create nickname: 'george'
-      expect(LiteralSearch.search(type: 'User', query: 'george').go[:record_id])
-        .to eq user.id
+      it 'return nil when no match' do
+        expect(LiteralSearch.search(type: 'User', query: 'sam').go[:record_id])
+          .to be_nil
+      end
     end
 
     it 'errors on unknown type' do
