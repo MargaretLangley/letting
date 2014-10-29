@@ -44,3 +44,6 @@ brakeman.html
 
 # Ignore application configuration
 /config/application.yml
+
+# sequence png files
+/sequence/*.png
