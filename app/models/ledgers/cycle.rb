@@ -4,7 +4,7 @@
 # Represents the repeated dates a charge becomes due in the year
 #
 # Charges have one of a few number of patterns of repeated due_dates.
-# A charge cycle has a name identifier and a number of the repeated dates.
+# A cycle has a name identifier and a number of the repeated dates.
 # A charge belongs to a Cycle and a Cycle has many charges.
 #
 # Cycle has many due_ons (the dates when a charge happens, becomes due)

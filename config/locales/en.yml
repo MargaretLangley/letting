@@ -44,8 +44,8 @@ en:
       create: "Create %{model}"
       update: "Update %{model}"
       cycle:
-        create: "Create Charge Cycle"
-        update: "Update Charge Cycle"
+        create: "Create Cycle"
+        update: "Update Cycle"
       property:
         create: "Create Account"
         update: "Update Account"

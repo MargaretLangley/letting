@@ -9,7 +9,7 @@ require_relative '../../lib/import/errors'
 #
 # During the import of the legacy acc_info file the import_charge code presents
 # ChargeRow with a number of reoccurring dates (day and month that occur every
-# year) - these dates are converted into an id that matches a charge cycle. This
+# year) - these dates are converted into an id that matches a cycle. This
 # is the class responsible for the conversion.
 #
 ####

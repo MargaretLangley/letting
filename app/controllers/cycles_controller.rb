@@ -8,8 +8,7 @@
 #
 # How does this fit into the larger system?
 #
-# Charge cycles are used in the ledger accounts to determine
-# when a charge becomes due
+# Cycles are used in the ledger accounts to determine when a charge becomes due
 #
 ####
 #
@@ -76,7 +75,7 @@ class CyclesController < ApplicationController
   end
 
   def identity
-    "Charge Cycle '#{@cycle.name} #{@cycle.order}'"
+    "Cycle '#{@cycle.name} #{@cycle.order}'"
   end
 
   def cycle_created_message

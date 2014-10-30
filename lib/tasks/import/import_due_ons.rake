@@ -4,7 +4,7 @@ require 'csv'
 #
 # Column 1 - id
 # Column 2 - Ref Cycle (1-12 currently)
-# Charge Cycle structure
+# Cycle structure
 # id, name, order
 # 1, 'Mar 25th/Sep 29th', 3
 # See Cycle CSV for more examples.

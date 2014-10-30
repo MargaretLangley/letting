@@ -5,7 +5,7 @@
 # Collection of Dates on which a charge becomes due, billable.
 #
 # Charges, are queried to see if they are billable within a range of dates. The
-# query is passed through charge cycle onto the DueOns which answer the query
+# query is passed through cycle onto the DueOns which answer the query
 # by quizzing the individual due ons.
 #
 # The DueOns hold a collection of DueOn - each one has a date that a charge

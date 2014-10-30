@@ -11,7 +11,7 @@ describe Cycle, :ledgers, type: :feature do
     it 'basic' do
       visit '/cycles/'
       expect(current_path).to eq '/cycles/'
-      expect(page.title).to eq 'Letting - Charge Cycles'
+      expect(page.title).to eq 'Letting - Cycles'
       expect(page).to have_text 'Jan/July'
       expect(page).to have_text '6'
     end
@@ -19,7 +19,7 @@ describe Cycle, :ledgers, type: :feature do
     it 'has edit link' do
       visit '/cycles/'
       first(:link, 'Edit').click
-      expect(page.title).to eq 'Letting - Edit Charge Cycles'
+      expect(page.title).to eq 'Letting - Edit Cycle'
     end
 
     it 'has delete link' do

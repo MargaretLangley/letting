@@ -49,7 +49,7 @@ module DB
       CycleMatcher.new(charged_in_id: charged_in_id,
                        due_on_importables: day_months).id
       rescue CycleUnknown
-        warn "Property #{human_ref} charge row does not match a charge cycle" \
+        warn "Property #{human_ref} charge row does not match a cycle" \
           " (For legacy charge_type: '#{charge_code}') "
     end
 

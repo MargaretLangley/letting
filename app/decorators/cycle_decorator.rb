@@ -1,7 +1,7 @@
 ###
 # CycleDecorator
 #
-# Adds display logic to the charge cycle business object.
+# Adds display logic to the cycle business object.
 #
 # rubocop: disable Metrics/MethodLength
 ##

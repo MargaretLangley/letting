@@ -13,7 +13,7 @@ describe Cycle, :ledgers, type: :feature do
 
   it 'has basic details' do
     visit '/cycles/3'
-    expect(page.title).to eq 'Letting - View Charge Cycle'
+    expect(page.title).to eq 'Letting - View Cycle'
     expect(page).to have_text 'Jan/July'
     expect(page).to have_text '11'
     expect(page).to have_text '6'
@@ -23,7 +23,7 @@ describe Cycle, :ledgers, type: :feature do
   it 'has edit link' do
     visit '/cycles/3'
     click_on('Edit')
-    expect(page.title).to eq 'Letting - Edit Charge Cycles'
+    expect(page.title).to eq 'Letting - Edit Cycle'
   end
 
   it 'has monthly details' do

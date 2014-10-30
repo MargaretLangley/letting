@@ -16,12 +16,12 @@ describe 'Cycle Update', :ledgers, type: :feature do
       cycle_page = CyclePage.new type: :term, action: :edit
 
       cycle_page.enter
-      expect(page.title).to eq 'Letting - Edit Charge Cycles'
+      expect(page.title).to eq 'Letting - Edit Cycle'
       cycle_page.name = 'April/Nov'
       cycle_page.choose 'Arrears'
       cycle_page.order = '44'
       cycle_page.due_on(day: 10, month: 2)
-      cycle_page.do 'Update Charge Cycle'
+      cycle_page.do 'Update Cycle'
       expect(cycle_page).to be_success
     end
   end
@@ -42,7 +42,7 @@ describe 'Cycle Update', :ledgers, type: :feature do
       cycle_page.choose 'Arrears'
       cycle_page.order = '21'
       cycle_page.due_on day: 12, month: 0
-      cycle_page.do 'Update Charge Cycle'
+      cycle_page.do 'Update Cycle'
       expect(cycle_page).to be_success
     end
   end
@@ -53,7 +53,7 @@ describe 'Cycle Update', :ledgers, type: :feature do
 
     cycle_page.enter
     cycle_page.do 'Cancel'
-    expect(page.title).to eq 'Letting - Charge Cycles'
+    expect(page.title).to eq 'Letting - Cycles'
   end
 
   it 'can error' do
@@ -62,7 +62,7 @@ describe 'Cycle Update', :ledgers, type: :feature do
     cycle_page = CyclePage.new action: :edit
     cycle_page.enter
     cycle_page.name = ''
-    cycle_page.do 'Update Charge Cycle'
+    cycle_page.do 'Update Cycle'
     expect(cycle_page).to be_errored
   end
 end

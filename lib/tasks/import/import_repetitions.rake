@@ -9,7 +9,7 @@ namespace :db do
 
     filename = 'import_data/new/repetitions.csv'
 
-    desc 'Import charge cycles from CSV file'
+    desc 'Import cycles from CSV file'
     task :repetitions do
       puts "repetitions import: missing #{filename}" \
         unless File.exist?(filename)

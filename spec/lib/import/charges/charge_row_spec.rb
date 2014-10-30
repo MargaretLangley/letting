@@ -95,7 +95,7 @@ module DB
           expect(row.cycle_id).to eq 3
         end
 
-        it 'messages when no charge cycles' do
+        it 'messages when no cycles' do
           row = ChargeRow.new parse_line charge_row month_1: 3, day_1: 25
           expect { warn 'Cycle table has no records' }.to output.to_stderr
           row.cycle_id
@@ -109,7 +109,7 @@ module DB
                                            charged_in: LEGACY_ARREARS,
                                            month_1: 3,
                                            day_1: 25
-          expect { warn 'charge row does not match a charge cycle' }
+          expect { warn 'charge row does not match a cycle' }
             .to output.to_stderr
           row.cycle_id
         end

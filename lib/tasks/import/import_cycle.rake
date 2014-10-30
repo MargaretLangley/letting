@@ -17,9 +17,9 @@ namespace :db do
 
     filename = 'import_data/new/cycle.csv'
 
-    desc 'Import charge cycles from CSV file'
+    desc 'Import cycles from CSV file'
     task :cycle do
-      puts "Charge cycle import: missing #{filename}" \
+      puts "Cycle import: missing #{filename}" \
         unless File.exist?(filename)
 
       CSV.foreach(filename, headers: true) do |row|

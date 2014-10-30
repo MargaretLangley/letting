@@ -1,12 +1,12 @@
 <div class='shell'>
 
   <% if @cycle.cycle_type == 'monthly' %>
-    <% @title='View Monthly Charge Cycle' %>
+    <% @title='View Monthly Cycle' %>
     <%= render 'show_top', cycle: @cycle %>
     <%= render 'due_ons/monthly', cycle: @cycle %>
     <%= render 'cycle_charged_ins/form', cycle: @cycle, disabler: true %>
   <% else %>
-    <% @title='View Charge Cycle' %>
+    <% @title='View Cycle' %>
     <%= render 'show_top', cycle: @cycle %>
     <%= render 'due_ons/view', cycle: @cycle %>
     <%= render 'cycle_charged_ins/form', cycle: @cycle, disabler: true %>
