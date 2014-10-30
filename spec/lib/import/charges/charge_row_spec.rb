@@ -2,6 +2,7 @@ require 'csv'
 require 'rails_helper'
 require_relative '../../../../lib/import/file_header'
 require_relative '../../../../lib/import/charges/charge_row'
+require_relative '../../../../lib/import/charges/due_on_importable'
 
 ####
 #
@@ -11,13 +12,15 @@ require_relative '../../../../lib/import/charges/charge_row'
 #
 # ChargeRow wraps up acc_info.csv rows - used by ImportCharge
 #
+# rubocop: disable Metrics/ParameterLists, Metrics/LineLength
+#
 ####
 module DB
   include ChargedInDefaults
   describe ChargeRow, :import do
-    def charge_row code: 'GR', charged_in: 0, month: 3, day: 25
+    def charge_row code: 'GR', charged_in: 0, month_1: 3, day_1: 25, month_2: 0, day_2: 0
       %(89, 2006-12-30, #{code}, #{charged_in}, 50.5, S,) +
-      %(#{day}, #{month}, 0, 0, 0, 0, 0, 0,) +
+      %(#{day_1}, #{month_1}, #{day_2}, #{month_2}, 0, 0, 0, 0,) +
       %(1901-01-01, 0)
     end
     describe 'attribute' do
@@ -55,7 +58,8 @@ module DB
         it 'overrides due_on when charged_in is Mid-term' do
           row = charge_row charged_in: LEGACY_MID_TERM
           expect(ChargeRow.new(parse_line row).day_months)
-            .to eq [[25, 3], [29, 9]]
+            .to eq [DueOnImportable.new(3, 25, 6, 24),
+                    DueOnImportable.new(9, 29, 12, 25)]
         end
 
         it 'errors on invalid' do
@@ -71,13 +75,28 @@ module DB
                        due_ons: [DueOn.new(month: 3, day: 25)]
           row = ChargeRow.new parse_line \
                                 charge_row charged_in: LEGACY_ARREARS,
-                                           month: 3,
-                                           day: 25
+                                           month_1: 3,
+                                           day_1: 25
+          expect(row.cycle_id).to eq 3
+        end
+
+        it 'returns valid mid_term id' do
+          cycle_create \
+            id: 3,
+            charged_in: charged_in_create(id: MODERN_ARREARS),
+            due_ons: [DueOn.new(month: 3, day: 25, show_month: 6, show_day: 24),
+                      DueOn.new(month: 9, day: 29, show_month: 12, show_day: 12)]
+          row = ChargeRow.new parse_line \
+                                charge_row charged_in: LEGACY_MID_TERM,
+                                           # Legacy data uses wrong dates
+                                           # we continue this practice
+                                           month_1: 6,  day_1: 24,
+                                           month_2: 12, day_2: 25
           expect(row.cycle_id).to eq 3
         end
 
         it 'messages when no charge cycles' do
-          row = ChargeRow.new parse_line charge_row month: 3, day: 25
+          row = ChargeRow.new parse_line charge_row month_1: 3, day_1: 25
           expect { warn 'Cycle table has no records' }.to output.to_stderr
           row.cycle_id
         end
@@ -88,8 +107,8 @@ module DB
                        due_ons: [DueOn.new(month: 10, day: 10)]
           row = ChargeRow.new parse_line charge_row \
                                            charged_in: LEGACY_ARREARS,
-                                           month: 3,
-                                           day: 25
+                                           month_1: 3,
+                                           day_1: 25
           expect { warn 'charge row does not match a charge cycle' }
             .to output.to_stderr
           row.cycle_id
@@ -101,16 +120,16 @@ module DB
                        due_ons: [DueOn.new(month: 3, day: 25)]
           row = ChargeRow.new parse_line charge_row \
                                            charged_in: 'UNKNOWN',
-                                           month: 3,
-                                           day: 25
+                                           month_1: 3,
+                                           day_1: 25
           expect { row.cycle_id }.to raise_error DB::ChargedInCodeUnknown
         end
       end
 
       describe '#day_months' do
         it 'creates day and months' do
-          row = ChargeRow.new parse_line charge_row month: 3, day: 25
-          expect(row.day_months).to eq [[25, 3]]
+          row = ChargeRow.new parse_line charge_row month_1: 3, day_1: 25
+          expect(row.day_months).to eq [DueOnImportable.new(3, 25)]
         end
 
         describe 'produces day month pairs' do
@@ -145,7 +164,8 @@ module DB
           monthly = %q(9,, M, 0, 5.5, S, 24, 0, 0, 0, 0, 0, 0, 0,, 0)
           row = ChargeRow.new parse_line monthly
           expect(row.day_months.count).to eq 12
-          expect(row.day_months[0..1]).to eq [[24, 1], [24, 2]]
+          expect(row.day_months[0..1]).to eq [DueOnImportable.new(1, 24),
+                                              DueOnImportable.new(2, 24)]
         end
       end
 

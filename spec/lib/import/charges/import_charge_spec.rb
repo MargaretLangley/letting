@@ -65,7 +65,6 @@ module DB
       end
     end
 
-
     context 'on_date cycle' do
       it 'imports a single row' do
         property_create human_ref: 80, account: account_new

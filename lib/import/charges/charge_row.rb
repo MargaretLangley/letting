@@ -46,7 +46,8 @@ module DB
     end
 
     def cycle_id
-      CycleMatcher.new(charged_in_id: charged_in_id, day_months: day_months).id
+      CycleMatcher.new(charged_in_id: charged_in_id,
+                       due_on_importables: day_months).id
       rescue CycleUnknown
         warn "Property #{human_ref} charge row does not match a charge cycle" \
           " (For legacy charge_type: '#{charge_code}') "
@@ -63,8 +64,8 @@ module DB
       return mid_term_day_months if charged_in_code == LEGACY_MID_TERM
       day_months = []
       1.upto(maximum_dates) do |index|
-        break if empty_due_on? day(index), month(index)
-        day_months << [day(index), month(index)]
+        break if empty_due_on? month: month(index), day: day(index)
+        day_months << DueOnImportable.new(month(index), day(index))
       end
       day_months
     end
@@ -87,7 +88,7 @@ module DB
     end
 
     def create_monthly_dates day_of_the_month
-      (1..12).each.map { |month| [day_of_the_month, month] }
+      (1..12).each.map { |month| DueOnImportable.new(month, day_of_the_month) }
     end
 
     # Legacy data defined charged_in Mid-Term to override the meaning of
@@ -95,7 +96,7 @@ module DB
     # This returns the meaning of the due_dates to be the same for mid-term
     # as any other charge. (DueDate is the date which a charge becomes due)
     def mid_term_day_months
-      [[25, 3], [29, 9]]
+      [DueOnImportable.new(3, 25, 6, 24), DueOnImportable.new(9, 29, 12, 25)]
     end
 
     def maximum_dates
@@ -118,7 +119,7 @@ module DB
 
     # most due_ons use empty day month pairing of (0,0)
     # a few, e.g. 7022, use (0,-1)
-    def empty_due_on? day, month
+    def empty_due_on?(month:, day:)
       day.zero? && month.zero? || day.zero? && month == -1
     end
 

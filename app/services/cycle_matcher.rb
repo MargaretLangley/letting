@@ -15,12 +15,15 @@ require_relative '../../lib/import/errors'
 ####
 #
 class CycleMatcher
-  attr_reader :unidentified_cycle
-  def initialize(charged_in_id:, day_months:)
-    @unidentified_cycle = Cycle.new name: 'unknown',
-                                    charged_in_id: charged_in_id
-    day_months.each do |day, month|
-      @unidentified_cycle.due_ons.build(day: day, month: month)
+  attr_reader :unidentified
+  def initialize(charged_in_id:, due_on_importables:)
+    @unidentified = Cycle.new name: 'unknown',
+                              charged_in_id: charged_in_id
+    due_on_importables.each do |due_on_importable|
+      @unidentified.due_ons.build day: due_on_importable.day,
+                                  month: due_on_importable.month,
+                                  show_month: due_on_importable.show_month,
+                                  show_day: due_on_importable.show_day
     end
   end
 
@@ -35,7 +38,7 @@ class CycleMatcher
 
   def find
     Cycle.all.find do |cycle|
-      cycle == unidentified_cycle
+      cycle == unidentified
     end
   end
 end
