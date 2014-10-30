@@ -123,13 +123,28 @@ describe DueOn, :ledgers, :cycle, type: :model do
     end
 
     describe '#<=>' do
-      it 'returns 0 when equal' do
-        expect(due_on_new(month: 2, day: 2) <=>
-          due_on_new(month: 2, day: 2)).to eq(0)
+      it 'returns 0 when equal and no display date' do
+        expect(due_on_new(month: 2, day: 2, show_month: nil, show_day: nil) <=>
+          due_on_new(month: 2, day: 2, show_month: nil, show_day: nil)).to eq(0)
       end
 
-      it 'returns 1 when lhs > rhs' do
+      it 'returns 0 when equal and display dates' do
+        expect(due_on_new(month: 2, day: 2, show_month: 4, show_day: 5) <=>
+          due_on_new(month: 2, day: 2, show_month: 4, show_day: 5)).to eq(0)
+      end
+
+      it 'differs when due_dates equal and display dates different' do
+        expect(due_on_new(month: 2, day: 2, show_month: nil, show_day: nil) <=>
+          due_on_new(month: 2, day: 2, show_month: 4, show_day: 5)).to_not eq(0)
+      end
+
+      it 'returns 1 when lhs > rhs and no display date' do
         expect(due_on_new(month: 2, day: 2) <=>
+          due_on_new(month: 1, day: 2)).to eq(1)
+      end
+
+      it 'returns 1 when lhs > rhs and display date' do
+        expect(due_on_new(month: 2, day: 2, show_month: 4, show_day: 2) <=>
           due_on_new(month: 1, day: 2)).to eq(1)
       end
 

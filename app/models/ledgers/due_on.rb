@@ -72,7 +72,8 @@ class DueOn < ActiveRecord::Base
   #
   def <=> other
     return nil unless other.is_a?(self.class)
-    [month, day] <=> [other.month, other.day]
+    [month, day, show_month] <=>
+      [other.month, other.day, other.show_month]
   end
 
   def to_s
