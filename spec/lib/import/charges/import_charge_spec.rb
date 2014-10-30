@@ -8,35 +8,49 @@ require_relative '../../../../lib/import/charges/import_charge'
 # import_charge_spec.rb
 #
 # unit testing for charge_row
+# rubocop: disable Metrics/LineLength
 #
 ####
 #
 module DB
+  include ChargedInDefaults
   describe ImportCharge, :import do
-    def row human_ref: 2000, charged_in: 0, month: 3, day: 25, amount: 5
+    def row human_ref: 80, charged_in: LEGACY_ARREARS, month: 3, day: 5, amount: 5
       %(#{human_ref}, 2006-12-30 17:17:00, GR, #{charged_in}, #{amount},  S,) +
       %(#{day}, #{month}, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
     end
 
-    context 'charge with on_date cycle' do
+    describe 'import characteristics' do
       before do
-        property_create human_ref: 2000, account: account_new
-        cycle_create charged_in: charged_in_create(id: 1, name: 'Arrears'),
-                     due_ons: [DueOn.new(day: 25, month: 3)]
+        property_create human_ref: 80, account: account_new
+        cycle_create charged_in: charged_in_create(id: MODERN_ARREARS),
+                     due_ons: [DueOn.new(month: 3, day: 5)]
       end
 
-      it 'imports a single row' do
-        expect { import_charge row }.to change(Charge, :count).by 1
+      it 'does not double import' do
+        import_charge row human_ref: 80
+        expect { import_charge row human_ref: 80 }.to_not change(Charge, :count)
+      end
+
+      it 'can update charge' do
+        import_charge row(amount: 25.00)
+        import_charge row(amount: 30.05)
+        expect(Charge.first.amount).to eq 30.05
+      end
+
+      it 'errors if property does not exist' do
+        expect { warn 'Property human_ref: 82 - Not found' }.to output.to_stderr
+        import_charge row human_ref: 82
       end
 
       describe 'property filter' do
         it 'allows within given range' do
-          expect { import_charge row(human_ref: 2000), range: 2000..2000 }
+          expect { import_charge row(human_ref: 80), range: 80..80 }
             .to change(Charge, :count).by 1
         end
 
         it 'filters when outside range' do
-          expect { import_charge row(human_ref: 2000), range: 1990..1999 }
+          expect { import_charge row(human_ref: 80), range: 10..79 }
             .to change(Charge, :count).by 0
         end
 
@@ -46,39 +60,33 @@ module DB
 
         it 'warns about filtering a charge with 0 amount.' do
           expect { warn 'Filtering charge with amount 0' }.to output.to_stderr
-          import_charge row human_ref: 2000, amount: 0
+          import_charge row human_ref: 80, amount: 0
         end
       end
+    end
 
-      it 'does not double import' do
-        import_charge row human_ref: 2000
-        expect { import_charge row human_ref: 2000 }
-          .to_not change(Charge, :count)
-      end
 
-      it 'can update charge' do
-        import_charge row(amount: 25.00)
-        import_charge row(amount: 30.05)
-        expect(Charge.first.amount).to eq 30.05
+    context 'on_date cycle' do
+      it 'imports a single row' do
+        property_create human_ref: 80, account: account_new
+        cycle_create charged_in: charged_in_create(id: MODERN_ARREARS),
+                     due_ons: [DueOn.new(month: 3, day: 5)]
+        expect { import_charge row }.to change(Charge, :count).by 1
       end
     end
 
-    context 'charge with monthly cycle' do
-      it 'imports a monthly row' do
-        property_create human_ref: 2000, account: account_new
-        cycle_create charged_in: charged_in_create(id: 1, name: 'Arrears'),
-                     due_ons: [DueOn.new(day: 8, month: 0)]
+    context 'monthly cycle' do
+      it 'imports a single row' do
+        property_create human_ref: 80, account: account_new
+        cycle_create charged_in: charged_in_create(id: MODERN_ARREARS),
+                     due_ons: [DueOn.new(day: 7, month: 0)]
 
-        expect { import_charge row day: 8, month: 0 }
-          .to change(Charge, :count).by 1
-      end
-    end
-
-    describe 'errors with no property' do
-      it 'fails if property does not exist' do
-        expect { warn 'Property human_ref: 2002 - Not found' }
-          .to output.to_stderr
-        import_charge row human_ref: 2002
+        expect do
+          import_charge row human_ref: 80,
+                            charged_in: LEGACY_ARREARS,
+                            day: 7,
+                            month: 0
+        end.to change(Charge, :count).by 1
       end
     end
 
