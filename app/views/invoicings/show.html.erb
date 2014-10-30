@@ -7,11 +7,14 @@
   <div class='col-5-24 vertical-spacer grid-header'>
     Property Range
   </div>
-  <div class='col-5-24 grid-header'>
-    Start Date
+  <div class='col-4-24 grid-header'>
+    Created On
   </div>
-  <div class='col-7-24 grid-header'>
-    End Date
+  <div class='col-4-24 grid-header'>
+    Bill From
+  </div>
+  <div class='col-4-24 grid-header'>
+    Bill To
   </div>
   <div class='col-3-24 grid-header no-print'>
     Action
@@ -24,14 +27,20 @@
     <div class='col-5-24 vertical-spacer inherit-row'>
       <%= @invoicing.property_range %>
     </div>
-    <div class='col-5-24 inherit-row'>
+    <div class='col-4-24 no-print inherit-row'>
+      <%= I18n.l @invoicing.created_at, format: :human %>
+    </div>
+    <div class='col-4-24 inherit-row'>
       <%= I18n.l @invoicing.period_first, format: :short %>
     </div>
-    <div class='col-7-24 inherit-row'>
+    <div class='col-4-24 inherit-row'>
       <%= I18n.l @invoicing.period_last, format: :short %>
     </div>
     <div class='col-1-24 no-print r-align'>
       <%= link_to fa_icon('print lg'), print_path(@invoicing), title: 'Print', class: 'simple_button' %>
+    </div>
+    <div class='col-3-24'>
+      &nbsp;
     </div>
   </div>
 
