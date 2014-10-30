@@ -19,16 +19,13 @@ RSpec.describe Invoicing, type: :model do
   describe '#generate' do
     it 'invoice when an account is within property and date range' do
       template_create id: 1
-      property = property_new human_ref: 20, client: client_new
-      cycle = cycle_new due_ons: [DueOn.new(day: 25, month: 3)]
-      charge = charge_new cycle: cycle
-      account_create property: property,
-                     charge: charge,
-                     debits: [debit_new(charge: charge)]
+      cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
+      account_create property: property_new(human_ref: 20, client: client_new),
+                     charge: charge_new(cycle: cycle)
 
-      invoicing = Invoicing.new(property_range: '20-20',
+      invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
-                                        Date.new(2010, 5, 1))
+                                        Date.new(2010, 5, 1)
       invoicing.generate
       expect(invoicing.invoices.size).to eq 1
     end
@@ -36,16 +33,13 @@ RSpec.describe Invoicing, type: :model do
     describe 'does not invoice account when' do
       it 'outside property_range' do
         template_create id: 1
-        property = property_new human_ref: 10
-        cycle = cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
-        charge = charge_new cycle: cycle
-        account_create property: property,
-                       charge: charge,
-                       debits: [debit_new(charge: charge)]
+        cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
+        account_create property: property_new(human_ref: 6, client: client_new),
+                       charge: charge_new(cycle: cycle)
 
-        invoicing = Invoicing.new(property_range: '20-20',
+        invoicing = Invoicing.new property_range: '20',
                                   period: Date.new(2010, 3, 1)..
-                                          Date.new(2010, 5, 1))
+                                          Date.new(2010, 5, 1)
         invoicing.generate
         expect(invoicing.invoices.size).to eq 0
       end
