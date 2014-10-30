@@ -73,10 +73,27 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
     end
   end
 
-  it '#billed_period creates range' do
-    cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 5)]
-    expect(cycle.bill_period billed_on: Date.new(2000, 3, 5))
-      .to eq Date.new(2000, 3, 5)..Date.new(2001, 3, 4)
+  describe '#billed_period' do
+    it 'displays due_date range by default' do
+      due_on = DueOn.new month: 3, day: 5
+      cycle = cycle_new due_ons: [due_on]
+      expect(cycle.bill_period billed_on: Date.new(2000, 3, 5))
+        .to eq Date.new(2000, 3, 5)..Date.new(2001, 3, 4)
+    end
+
+    it 'displays show range when present' do
+      due_on = DueOn.new month: 3, day: 5, show_month: 4, show_day: 10
+      cycle = cycle_new due_ons: [due_on]
+      expect(cycle.bill_period billed_on: Date.new(2000, 4, 10))
+        .to eq Date.new(2000, 4, 10)..Date.new(2001, 4, 9)
+    end
+
+    it 'errors when show range present and billed_date past due_date ' do
+      due_on = DueOn.new month: 3, day: 5, show_month: 4, show_day: 10
+      cycle = cycle_new due_ons: [due_on]
+      expect(cycle.bill_period billed_on: Date.new(2000, 3, 5))
+        .to eq :missing_due_on
+    end
   end
 
   describe '#<=>' do
