@@ -48,5 +48,8 @@
 <div class='col-5-12 inv-advice-bold'>
   Due Date <%= I18n.l invoice.invoice_date, format: :short %>
 </div>
-
 <%= render partial:'products/products_narrow',locals: { invoice: invoice } %>
+<div class='no-print grid-row'>
+  &nbsp;
+</div>
+
