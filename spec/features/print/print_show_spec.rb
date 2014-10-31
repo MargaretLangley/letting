@@ -6,7 +6,7 @@ describe Invoicing, type: :feature do
     it 'basic' do
       log_in admin_attributes
       invoicing_create id: 1,
-                       property_range: '1-100',
+                       property_range: '1-200',
                        period_first: '2014/06/30',
                        period_last: '2014/08/30'
 
@@ -14,6 +14,7 @@ describe Invoicing, type: :feature do
       expect(page.title).to eq 'Letting - Print'
       expect(page).to have_text 'VAT'
       expect(page).to have_text '108'
+      expect(page).to_not have_text '1-200'
     end
   end
 end
