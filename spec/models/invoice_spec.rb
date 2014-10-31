@@ -29,28 +29,26 @@ RSpec.describe Invoice, type: :model do
         invoice.property property.invoice
         expect(invoice.property_ref).to eq 55
       end
-      it 'sets invoice_date' do
+      it 'prepares invoice' do
         template_create id: 1
-        (invoice = Invoice.new).prepare invoice_date: '2014-06-30'
-        expect(invoice.invoice_date.to_s).to eq '2014-06-30'
-      end
-      it 'sets property_address' do
-        invoice = Invoice.new
         property = property_new address: address_new(road: 'New', town: 'Brum'),
                                 account: account_new
-        invoice.property property.invoice
-        expect(invoice.property_address).to eq 'New, Brum, West Midlands'
+        client = client_create entities: [Entity.new(name: 'Bell')],
+                               property: property_new(account: account_new)
+        maker = ProductsMaker.new invoice_date: '2014-06-30',
+                                  arrears: 0,
+                                  debits: [debit_new(charge: charge_new)]
+
+        (invoice = Invoice.new).prepare invoice_date: '2014-06-30',
+                                        property: property.invoice,
+                                        client: client.invoice,
+                                        products: maker.invoice
+        expect(invoice.invoice_date.to_s).to eq '2014-06-30'
       end
+
       it 'sets total_arrears' do
         (invoice = Invoice.new).total_arrears = 20
         expect(invoice.total_arrears).to eq(20)
-      end
-      it 'sets client' do
-        client = client_create entities: [Entity.new(name: 'Bell')],
-                               property: property_new(account: account_new)
-        (invoice = Invoice.new).client client.invoice
-        expect(invoice.client_address)
-          .to eq "Bell\nEdgbaston Road\nBirmingham\nWest Midlands"
       end
     end
     it 'outputs #to_s' do

@@ -1,5 +1,4 @@
-# rubocop: disable Metrics/ParameterLists
-# rubocop: disable Metrics/MethodLength
+# rubocop: disable Metrics/ParameterLists, Metrics/MethodLength, Metrics/LineLength
 # rubocop: disable Lint/UnusedMethodArgument
 
 # invoice_new and invoice_create require that a template with id 1 has been
@@ -12,7 +11,7 @@ def invoice_new id: id,
                 account: account_new(property: property_new),
                 property_address: address_new,
                 property_ref: 108,
-                client: "Lord Harris\nNew Road\nEdge\nBrum",
+                client_invoice: { client: "Lord Harris\nNew Road\nEdge\nBrum" },
                 debits: [debit_new(charge: charge_new)],
                 templates: [template_create(id: 1)]
 
@@ -20,35 +19,30 @@ def invoice_new id: id,
   account.property.address = property_address
 
   invoice = Invoice.new id: id
-  invoice.prepare invoice_date: invoice_date
-  invoice.property account.property.invoice
-  if debits
-    invoice.products = debits.map { |debit| Product.new debit.to_debitable }
-    # TODO: Hack to give none nil balance.
-    invoice.products = invoice.products.map do |product|
-      product.balance = 0
-      product
-    end
-  end
-  invoice.total_arrears = 30
-  invoice.client client: client
+  invoice.prepare invoice_date: invoice_date,
+                  property: account.property.invoice,
+                  client: client_invoice,
+                  products: ProductsMaker.new(invoice_date: invoice_date,
+                                              arrears: 0,
+                                              debits: debits).invoice
   invoice
 end
 
-def invoice_create id: nil,
-                   invoice_date: '2014/06/30',
-                   account: account_new(property: property_new),
-                   property_address: address_new,
-                   property_ref: 108,
-                   client: "Lord Harris\nNew Road\nEdge\nBrum",
-                   debits: [debit_new(charge: charge_new)],
-                   templates: [template_create(id: 1)]
+def invoice_create \
+  id: nil,
+  invoice_date: '2014/06/30',
+  account: account_new(property: property_new),
+  property_address: address_new,
+  property_ref: 108,
+  client_invoice: { client: "Lord Harris\nNew Road\nEdge\nBrum" },
+  debits: [debit_new(charge: charge_new)],
+  templates: [template_create(id: 1)]
   invoice = invoice_new id: id,
                         invoice_date: invoice_date,
                         account: account,
                         property_address: property_address,
                         property_ref: property_ref,
-                        client: client,
+                        client_invoice: client_invoice,
                         debits: debits,
                         templates: templates
   invoice.save!

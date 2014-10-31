@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Invoicing, type: :feature do
-
   describe '#index' do
     it 'basic' do
       log_in admin_attributes

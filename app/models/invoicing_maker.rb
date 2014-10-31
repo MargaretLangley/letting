@@ -42,40 +42,15 @@ class InvoicingMaker
   end
 
   def make_invoice(account:)
-    invoice = Invoice.new
-    invoice.prepare invoice_date: invoice_date
-    invoice.property account.property.invoice billing_period: period
-
-    debit_maker = DebitMaker.new(account: account, debit_period: period)
-    invoice.products = products_maker debit_maker.invoice.except(:total_arrears)
-    invoice.total_arrears = debit_maker.invoice[:total_arrears]
-
-    invoice.client account.property.client.invoice billing_period: period
+    (invoice = Invoice.new).prepare \
+      invoice_date: invoice_date,
+      property: account.property.invoice(billing_period: period),
+      client: account.property.client.invoice(billing_period: period),
+      products: ProductsMaker.new(invoice_date: invoice_date,
+                                  **DebitMaker.new(account: account,
+                                                   debit_period: period)
+                                              .invoice).invoice
     invoice
-  end
-
-  def products_maker(arrears:, debits:)
-    products = product_arrears_maker(arrears: arrears) +
-                 debits.map { |debit| Product.new debit.to_debitable }
-    products_balanced products
-  end
-
-  def product_arrears_maker(arrears:)
-    product_arrears = []
-    if arrears.nonzero?
-      product_arrears = [Product.new(charge_type: 'Arrears',
-                                     date_due: invoice_date,
-                                     amount: arrears)]
-    end
-    product_arrears
-  end
-
-  def products_balanced products
-    total = 0
-    products.map do |product|
-      product.balance = total += product.amount
-      product
-    end
   end
 
   def property_includes

@@ -33,9 +33,13 @@ class Invoice < ActiveRecord::Base
   has_many :templates, through: :letters
   has_many :letters, dependent: :destroy
 
-  def prepare(invoice_date: Date.current)
+  def prepare(invoice_date: Date.current, property:, client:, products:)
     self.invoice_date = invoice_date
     letters.build template: Template.find(1)
+    property property
+    self.client_address = client[:client]
+    self.products = products[:products]
+    self.total_arrears = products[:products].last.balance
     self
   end
 
@@ -43,10 +47,6 @@ class Invoice < ActiveRecord::Base
     self.property_ref = property_ref
     self.property_address = property_address
     self.billing_address = billing_address
-  end
-
-  def client(client:)
-    self.client_address = client
   end
 
   def to_s

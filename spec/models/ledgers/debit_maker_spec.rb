@@ -53,20 +53,6 @@ RSpec.describe InvoicingMaker, type: :model do
     end
   end
 
-  describe '#sum' do
-    it 'produces debits if charge is due' do
-      chg = charge_create(amount: 20.00,
-                          cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5),
-                                                     DueOn.new(month: 3, day: 6)]))
-      accnt = account_new charge: chg,
-                          debits: []
-
-      make = DebitMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
-                                                          Date.new(2013, 3, 6))
-      expect(make.sum).to eq 40.00
-    end
-  end
-
   describe '#invoice' do
     describe 'arrears' do
       it 'adds debits before billing period' do
@@ -99,37 +85,6 @@ RSpec.describe InvoicingMaker, type: :model do
                                      debit_period: Date.new(2013, 3, 5)..
                                                    Date.new(2013, 5, 5)
         expect(debit_maker.invoice[:arrears]).to eq(-40)
-      end
-    end
-
-    describe 'total_arrears' do
-      it 'adds debits before billing period' do
-        debit = debit_new amount: 30, on_date: Date.new(2013, 3, 4)
-        account = account_new debits: [debit]
-        debit_maker = DebitMaker.new account: account,
-                                     debit_period: Date.new(2013, 3, 5)..
-                                                   Date.new(2013, 5, 5)
-        expect(debit_maker.invoice[:total_arrears]).to eq(30)
-      end
-
-      it 'adds debits during the billing period' do
-        account = account_new charge: charge_new(amount: 43, cycle: \
-          cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
-        debit_maker = DebitMaker.new account: account,
-                                     debit_period: Date.new(2013, 3, 5)..
-                                                   Date.new(2013, 5, 5)
-        expect(debit_maker.invoice[:total_arrears]).to eq(43)
-      end
-
-      it 'totals debits before and during billing period' do
-        account = account_new \
-          debits: [debit_new(amount: 30, on_date: Date.new(2013, 3, 4))],
-          charge: charge_new(amount: 43, cycle: \
-            cycle_create(due_ons: [DueOn.new(day: 5, month: 3)]))
-        debit_maker = DebitMaker.new account: account,
-                                     debit_period: Date.new(2013, 3, 5)..
-                                                   Date.new(2013, 5, 5)
-        expect(debit_maker.invoice[:total_arrears]).to eq(73)
       end
     end
 

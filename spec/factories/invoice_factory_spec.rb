@@ -35,7 +35,7 @@ describe 'Invoice Factory' do
       client = \
       client_new entities: [Entity.new(name: 'Bell')],
                  address: address_new(road: 'New', town: 'Brum', county: 'West')
-      (invoice = invoice_new).client client.invoice
+      invoice = invoice_new(client_invoice: client.invoice)
       expect(invoice.client_address).to eq "Bell\nNew\nBrum\nWest"
     end
   end

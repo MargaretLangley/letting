@@ -21,15 +21,10 @@ class DebitMaker
     mold.size.nonzero? ? true : false
   end
 
-  def sum
-    make_debits.map(&:amount).inject(0, :+)
-  end
-
   def invoice(*)
     balance_before_billing = account.balance to_date: debit_period.first - 1.day
     {
       arrears: balance_before_billing,
-      total_arrears: balance_before_billing + sum,
       debits: mold,
     }
   end
