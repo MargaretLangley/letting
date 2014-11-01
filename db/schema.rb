@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140930053829) do
+ActiveRecord::Schema.define(version: 20141031192953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,18 +105,20 @@ ActiveRecord::Schema.define(version: 20140930053829) do
   add_index "cycles", ["charged_in_id"], name: "index_cycles_on_charged_in_id", using: :btree
 
   create_table "debits", force: true do |t|
-    t.integer  "account_id",                           null: false
-    t.integer  "charge_id",                            null: false
-    t.datetime "on_date",                              null: false
-    t.date     "period_first",                         null: false
-    t.date     "period_last",                          null: false
-    t.decimal  "amount",       precision: 8, scale: 2, null: false
+    t.integer  "account_id",                                 null: false
+    t.integer  "invoice_account_id"
+    t.integer  "charge_id",                                  null: false
+    t.datetime "on_date",                                    null: false
+    t.date     "period_first",                               null: false
+    t.date     "period_last",                                null: false
+    t.decimal  "amount",             precision: 8, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "debits", ["account_id"], name: "index_debits_on_account_id", using: :btree
   add_index "debits", ["charge_id", "on_date"], name: "index_debits_on_charge_id_and_on_date", unique: true, using: :btree
+  add_index "debits", ["invoice_account_id"], name: "index_debits_on_invoice_account_id", using: :btree
 
   create_table "due_ons", force: true do |t|
     t.integer  "year"
@@ -143,18 +145,25 @@ ActiveRecord::Schema.define(version: 20140930053829) do
 
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
 
-  create_table "invoices", force: true do |t|
-    t.integer  "invoicing_id"
-    t.text     "billing_address",                          null: false
-    t.integer  "property_ref",                             null: false
-    t.date     "invoice_date",                             null: false
-    t.text     "property_address",                         null: false
-    t.decimal  "total_arrears",    precision: 8, scale: 2, null: false
-    t.text     "client_address",                           null: false
+  create_table "invoice_accounts", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  create_table "invoices", force: true do |t|
+    t.integer  "invoicing_id"
+    t.integer  "invoice_account_id",                         null: false
+    t.text     "billing_address",                            null: false
+    t.integer  "property_ref",                               null: false
+    t.date     "invoice_date",                               null: false
+    t.text     "property_address",                           null: false
+    t.decimal  "total_arrears",      precision: 8, scale: 2, null: false
+    t.text     "client_address",                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "invoices", ["invoice_account_id"], name: "index_invoices_on_invoice_account_id", using: :btree
   add_index "invoices", ["invoicing_id"], name: "index_invoices_on_invoicing_id", using: :btree
 
   create_table "invoicings", force: true do |t|

@@ -2,6 +2,7 @@ class CreateInvoices < ActiveRecord::Migration
   def change
     create_table :invoices do |t|
       t.belongs_to :invoicing, index: true
+      t.belongs_to :invoice_account, null: false, index: true
       t.text     "billing_address", null: false
       t.integer  "property_ref",    null: false
       t.date     "invoice_date", null: false

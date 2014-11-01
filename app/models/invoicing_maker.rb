@@ -45,10 +45,8 @@ class InvoicingMaker
     (invoice = Invoice.new).prepare \
       invoice_date: invoice_date,
       property: account.property.invoice(billing_period: period),
-      products: ProductsMaker.new(invoice_date: invoice_date,
-                                  **DebitMaker.new(account: account,
-                                                   debit_period: period)
-                                              .invoice).invoice
+      billing: DebitMaker.new(account: account, debit_period: period)
+                             .invoice
     invoice
   end
 

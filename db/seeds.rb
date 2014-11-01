@@ -26,7 +26,7 @@ def generate_seeding
   seed_clients
   seed_properties
   seed_charges
-  debits_and_credits
+  seed_credits
   seed_templates
   seed_invoicings
   reset_pk_sequenece_on_each_table_used
@@ -298,29 +298,9 @@ def create_account
   ]
 end
 
-def debits_and_credits
-  create_debits
+def seed_credits
   create_credits
   create_payment
-end
-
-def create_debits
-  Debit.create! [
-    {
-      id: 1, account_id: 1,
-      charge_id: 1,
-      on_date: create_date(17),
-      period:create_date(17)..create_date(14),
-      amount: 88.08
-    },
-    {
-      id: 2, account_id: 1,
-      charge_id: 1,
-      on_date: create_date(5),
-      period:create_date(5)..create_date(2),
-      amount: 88.08
-    },
-  ]
 end
 
 def create_credits
@@ -330,7 +310,7 @@ def create_credits
       charge_id: 1,
       account_id: 1,
       on_date: create_date(15),
-      amount: -88.08,
+      amount: 88.08,
     },
   ]
 end
@@ -442,45 +422,79 @@ def create_notices
 end
 
 def seed_invoicings
+  create_debits
   create_products
   create_invoices
   create_letters
   create_invoicings
 end
 
-def create_invoices
-  Invoice.create! [
+def create_debits
+  Debit.create! [
+    {
+      id: 1,
+      account_id: 1,
+      invoice_account_id: 1,
+      charge_id: 1,
+      on_date: create_date(17),
+      period:create_date(17)..create_date(14),
+      amount: Charge.find(1).amount
+    },
+    {
+      id: 2,
+      account_id: 1,
+      invoice_account_id: 1,
+      charge_id: 2,
+      on_date: create_date(5),
+      period:create_date(5)..create_date(2),
+      amount: Charge.find(2).amount
+    },
+  ]
+
+  invoice_account = InvoiceAccount.new
+  {
+    id: 1
+  }
+  invoice_account.debited debits: Debit.all
+  invoice_account.save!
+end
+
+def create_products
+  charge_1 = Charge.find(1)
+  charge_2 = Charge.find(2)
+  Product.create! [
     { id: 1,
-      invoicing_id: 1,
-      billing_address: "Mr J. C. Laker\nFlat 33 The Oval\n207b Vauxhall Street\nKennington\nLondon\nSE11 5SS",
-      property_ref: 1001,
-      invoice_date: "2014-01-09",
-      property_address: "Flat 28 Lords, 2 St Johns Wood Road, London, Greater London, NW8 8QN",
-      total_arrears: 88.08,
-      client_address: "Mr K.S. Ranjitsinhji\nFlat 96 Old Trafford\nDean\nSeaford\nSuss\nBN6 7QP"
+      invoice_id: 1,
+      charge_type: charge_1.charge_type,
+      date_due: create_date(5),
+      amount: charge_1.amount,
+      balance: charge_1.amount,
+      period_first: create_date(5),
+      period_last: create_date(2)
+    },
+    { id: 2,
+      invoice_id: 1,
+      charge_type: charge_2.charge_type,
+      date_due: create_date(5),
+      amount: charge_2.amount,
+      balance: charge_1.amount + charge_2.amount,
+      period_first: create_date(5),
+      period_last: create_date(2)
     },
   ]
 end
 
-def create_products
-  Product.create! [
+def create_invoices
+  Invoice.create! [
     { id: 1,
-      invoice_id: 1,
-      charge_type: "Service Charge",
-      date_due: "2014-09-29",
-      amount: 125,
-      balance: 125,
-      period_first: "2014-09-29",
-      period_last: "2014-09-29"
-    },
-    { id: 2,
-      invoice_id: 1,
-      charge_type: "Ground Rent",
-      date_due: "2014-09-29",
-      amount: 30.00,
-      balance: 155.00,
-      period_first: "2014-09-29",
-      period_last: "2014-09-29"
+      invoicing_id: 1,
+      invoice_account_id: 1,
+      billing_address: "Mr E. P. Hendren\nFlat 28 Lords\n2 St Johns Wood Road\nLondon\nGreater London\nNW8 8QN",
+      property_ref: 1001,
+      invoice_date: create_date(5),
+      property_address: "Flat 28 Lords, 2 St Johns Wood Road, London, Greater London, NW8 8QN",
+      total_arrears: Charge.find(1).amount * 2,
+      client_address: "Mr K.S. Ranjitsinhji\nFlat 96 Old Trafford\nDean\nSeaford\nSuss\nBN6 7QP"
     },
   ]
 end
@@ -489,8 +503,8 @@ def create_invoicings
   Invoicing.create! [
     { id: 1,
       property_range: "1001 - 1001",
-      period_first: "2014-09-20",
-      period_last: "2014-12-04",
+      period_first: create_date(5),
+      period_last: create_date(2),
     },
   ]
 end

@@ -29,25 +29,48 @@ RSpec.describe Invoice, type: :model do
         invoice.property property.invoice
         expect(invoice.property_ref).to eq 55
       end
-      it 'prepares invoice' do
-        template_create id: 1
-        property = property_new address: address_new(road: 'New', town: 'Brum'),
-                                account: account_new
-        client_create entities: [Entity.new(name: 'Bell')],
-                      property: property_new(account: account_new)
-        maker = ProductsMaker.new invoice_date: '2014-06-30',
-                                  arrears: 0,
-                                  debits: [debit_new(charge: charge_new)]
 
-        (invoice = Invoice.new).prepare invoice_date: '2014-06-30',
-                                        property: property.invoice,
-                                        products: maker.invoice
+      it 'prepares invoice_date' do
+        template_create id: 1
+        property = property_new account: account_new, client: client_create
+        (transaction = InvoiceAccount.new)
+          .debited(debits: [debit_new(charge: charge_new)])
+
+        (invoice = Invoice.new)
+          .prepare invoice_date: '2014-06-30',
+                   property: property.invoice,
+                   billing: { arrears: 0, transaction:  transaction }
         expect(invoice.invoice_date.to_s).to eq '2014-06-30'
       end
 
-      it 'sets total_arrears' do
-        (invoice = Invoice.new).total_arrears = 20
-        expect(invoice.total_arrears).to eq(20)
+      it 'prepares invoice products' do
+        template_create id: 1
+        property = property_new account: account_new, client: client_create
+        (transaction = InvoiceAccount.new)
+          .debited(debits: [debit_new(charge: charge_new)])
+
+        (invoice = Invoice.new)
+          .prepare invoice_date: '2014-06-30',
+                   property: property.invoice,
+                   billing: { arrears: 0, transaction:  transaction }
+        expect(invoice.products.first.to_s)
+          .to eq 'charge_type: Ground Rent date_due: 2013-03-25 amount: 88.08 '\
+                 'period: 2013-03-25..2013-06-30'
+      end
+
+      it 'prepares invoice total_arreras' do
+        template_create id: 1
+        property = property_new account: account_new, client: client_create
+        (transaction = InvoiceAccount.new)
+          .debited(debits: [debit_new(amount: 10, charge: charge_new),
+                            debit_new(amount: 20, charge: charge_new)])
+
+        (invoice = Invoice.new)
+          .prepare invoice_date: '2014-06-30',
+                   property: property.invoice,
+                   billing: { arrears: 40, transaction:  transaction }
+        expect(invoice.total_arrears).to eq 70
+        invoice.save!
       end
     end
     it 'outputs #to_s' do

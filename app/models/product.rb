@@ -30,4 +30,9 @@ class Product < ActiveRecord::Base
        other.period_first,
        other.period_last]
   end
+
+  def to_s
+    "charge_type: #{charge_type} date_due: #{date_due} amount: #{amount} "\
+    "period: #{period_first}..#{period_last}"
+  end
 end

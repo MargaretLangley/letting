@@ -1,5 +1,5 @@
 # Each time a row is added to the database the PK is incremented
-# However, with the seed/import this is not happending.
+# However, with the seed/import this is not happening.
 # At the end of the seed I go through all the tables and make sure the PK
 # points to the next empty row!
 #

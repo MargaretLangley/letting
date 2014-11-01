@@ -94,7 +94,7 @@ RSpec.describe InvoicingMaker, type: :model do
       debit_maker = DebitMaker.new account: account,
                                    debit_period: Date.new(2013, 3, 5)..
                                                  Date.new(2013, 5, 5)
-      expect(debit_maker.invoice[:debits].size).to eq(1)
+      expect(debit_maker.invoice[:transaction].debits.size).to eq(1)
     end
 
     it 'no debits when charge is not due' do
@@ -103,7 +103,7 @@ RSpec.describe InvoicingMaker, type: :model do
       debit_maker = DebitMaker.new account: account,
                                    debit_period: Date.new(2013, 3, 6)..
                                                  Date.new(2013, 5, 6)
-      expect(debit_maker.invoice[:debits].size).to eq(0)
+      expect(debit_maker.invoice[:transaction].debits.size).to eq(0)
     end
   end
 end

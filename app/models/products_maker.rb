@@ -4,13 +4,13 @@
 # Assembles products from arrears for the invoicing.
 #
 ###
-#
+# t
 class ProductsMaker
   attr_reader :invoice_date, :products
-  def initialize(invoice_date:, arrears:, debits:)
+  def initialize(invoice_date:, arrears:, transaction:)
     @invoice_date = invoice_date
     @products = product_arrears_maker(arrears: arrears) +
-                 debits.map { |debit| Product.new debit.to_debitable }
+                transaction.debits.map { |debit| Product.new debit.to_debitable } # rubocop: disable Metrics/LineLength
     products_balanced products
   end
 

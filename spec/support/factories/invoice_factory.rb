@@ -17,12 +17,11 @@ def invoice_new id: id,
   account.property.human_ref = property_ref
   account.property.address = property_address
 
+  (invoice_account = InvoiceAccount.new).debited debits: debits
   invoice = Invoice.new id: id
   invoice.prepare invoice_date: invoice_date,
                   property: account.property.invoice,
-                  products: ProductsMaker.new(invoice_date: invoice_date,
-                                              arrears: 0,
-                                              debits: debits).invoice
+                  billing: { arrears: 0, transaction: invoice_account }
   invoice
 end
 

@@ -23,10 +23,8 @@ class DebitMaker
 
   def invoice(*)
     balance_before_billing = account.balance to_date: debit_period.first - 1.day
-    {
-      arrears: balance_before_billing,
-      debits: mold,
-    }
+    (invoice_account = InvoiceAccount.new).debited(debits: mold)
+    { arrears: balance_before_billing, transaction: invoice_account, }
   end
 
   private

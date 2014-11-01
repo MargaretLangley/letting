@@ -24,6 +24,7 @@
 #
 class Invoice < ActiveRecord::Base
   belongs_to :invoicing
+  belongs_to :invoice_account, autosave: true, inverse_of: :invoices
   has_many :products, -> { order(:created_at) }, dependent: :destroy
   validates :products,
             :invoice_date,
@@ -33,13 +34,19 @@ class Invoice < ActiveRecord::Base
   has_many :templates, through: :letters
   has_many :letters, dependent: :destroy
 
-  def prepare(invoice_date: Date.current, property:, products:)
+  def prepare(invoice_date: Date.current, property:, billing:)
     self.invoice_date = invoice_date
     letters.build template: Template.find(1)
     property property
-    self.products = products[:products]
-    self.total_arrears = products[:products].last.balance
+    self.invoice_account =  billing[:transaction]
+    self.products = generate_products(billing)[:products]
+    self.total_arrears = generate_products(billing)[:products].last.balance
     self
+  end
+
+  def generate_products(billing)
+    @generate_products ||= ProductsMaker.new(invoice_date: invoice_date,
+                                             **billing).invoice
   end
 
   def property(property_ref:, property_address:, billing_address:, client_address:) # rubocop: disable Metrics/LineLength
