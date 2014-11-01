@@ -21,10 +21,6 @@ describe Client, type: :model do
   end
 
   describe 'method' do
-    it 'returns invoice' do
-      expect(client_new.invoice[:client])
-        .to eq "Mr M. Prior\nEdgbaston Road\nBirmingham\nWest Midlands"
-    end
     it 'returns client as text' do
       expect(client_new.to_s)
         .to eq "Mr M. Prior\nEdgbaston Road\nBirmingham\nWest Midlands"

@@ -25,10 +25,6 @@ class Client < ActiveRecord::Base
     prepare_contact
   end
 
-  def invoice billing_period: nil
-    { client: to_s }
-  end
-
   def to_s
     full_name + "\n" + address.text
   end

@@ -33,20 +33,20 @@ class Invoice < ActiveRecord::Base
   has_many :templates, through: :letters
   has_many :letters, dependent: :destroy
 
-  def prepare(invoice_date: Date.current, property:, client:, products:)
+  def prepare(invoice_date: Date.current, property:, products:)
     self.invoice_date = invoice_date
     letters.build template: Template.find(1)
     property property
-    self.client_address = client[:client]
     self.products = products[:products]
     self.total_arrears = products[:products].last.balance
     self
   end
 
-  def property(property_ref:, property_address:, billing_address:)
+  def property(property_ref:, property_address:, billing_address:, client_address:) # rubocop: disable Metrics/LineLength
     self.property_ref = property_ref
     self.property_address = property_address
     self.billing_address = billing_address
+    self.client_address = client_address
   end
 
   def to_s

@@ -33,15 +33,14 @@ RSpec.describe Invoice, type: :model do
         template_create id: 1
         property = property_new address: address_new(road: 'New', town: 'Brum'),
                                 account: account_new
-        client = client_create entities: [Entity.new(name: 'Bell')],
-                               property: property_new(account: account_new)
+        client_create entities: [Entity.new(name: 'Bell')],
+                      property: property_new(account: account_new)
         maker = ProductsMaker.new invoice_date: '2014-06-30',
                                   arrears: 0,
                                   debits: [debit_new(charge: charge_new)]
 
         (invoice = Invoice.new).prepare invoice_date: '2014-06-30',
                                         property: property.invoice,
-                                        client: client.invoice,
                                         products: maker.invoice
         expect(invoice.invoice_date.to_s).to eq '2014-06-30'
       end
