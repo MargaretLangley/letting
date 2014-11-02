@@ -7,27 +7,32 @@
 # Used by Account class to wrap (see: debit_maker.gliffy)
 #
 class DebitMaker
-  attr_reader :account, :debit_period
-  def initialize(account:, debit_period:)
+  attr_reader :account, :debit_period, :invoice_account
+  def initialize(account:, debit_period:, invoice_account: InvoiceAccount.new)
     @account = account
     @debit_period = debit_period
+    @invoice_account = invoice_account
   end
 
   def mold
-    account.exclusive(query_debits: make_debits)
+    invoice_account.debited debits: account.exclusive(query_debits: make_debits)
+    self
   end
 
-  def make_debits?
-    mold.size.nonzero? ? true : false
+  def make? to_date: Date.current
+    balance_on(to_date: to_date) + invoice_account.sum > 0
   end
 
   def invoice(*)
-    balance_before_billing = account.balance to_date: debit_period.first - 1.day
-    (invoice_account = InvoiceAccount.new).debited(debits: mold)
-    { arrears: balance_before_billing, transaction: invoice_account, }
+    { arrears: balance_on(to_date: Date.current),
+      transaction: invoice_account, }
   end
 
   private
+
+  def balance_on(to_date:)
+    account.balance to_date: to_date
+  end
 
   def make_debits
     account.charges.map do |charge|

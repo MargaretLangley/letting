@@ -29,4 +29,11 @@ RSpec.describe InvoiceAccount, type: :model do
     expect(Invoice.count).to eq 0
     expect(InvoiceAccount.count).to eq 1
   end
+
+  it 'can sum' do
+    invoice_account = InvoiceAccount.new
+    invoice_account.debited debits: [debit_new(amount: 10, charge: charge_new),
+                                     debit_new(amount: 20, charge: charge_new)]
+    expect(invoice_account.sum).to eq 30
+  end
 end

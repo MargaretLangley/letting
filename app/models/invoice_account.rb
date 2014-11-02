@@ -19,6 +19,10 @@ class InvoiceAccount < ActiveRecord::Base
     self.debits = debits
   end
 
+  def sum
+    debits.map(&:amount).inject(0, :+)
+  end
+
   # Want to be able to destroy an invoice and not destroy
   # invoice_account if it has another invoice already
   # Not got the association to work and may just delete

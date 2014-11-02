@@ -2,8 +2,8 @@ require 'rails_helper'
 # rubocop: disable Style/SpaceInsideRangeLiteral
 
 RSpec.describe InvoicingMaker, type: :model do
-  describe '#generate' do
-    it 'invoice when an account is within property and date range' do
+  describe '#compose' do
+    it 'invoice accounts within property and due date range' do
       template_create id: 1
       charge = charge_create cycle: cycle_new(due_ons: [due_on_new(month: 3)])
       account_create property: property_new(human_ref: 8, client: client_new),
@@ -12,26 +12,12 @@ RSpec.describe InvoicingMaker, type: :model do
       invoicing =
         InvoicingMaker.new property_range: '8-8',
                            period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
-      invoicing.generate
+      invoicing.compose
       expect(invoicing.invoices.size).to eq 1
     end
 
     describe 'product arrears' do
-      it 'no outstanding debts, no arrears' do
-        template_create id: 1
-        account_create property: property_new(human_ref: 8, client: client_new),
-                       charge: charge_new
-
-        invoicing =
-          InvoicingMaker.new property_range: '8-8',
-                             period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
-        invoicing.generate
-        expect(invoicing.invoices.first.products.size).to eq 1
-        expect(invoicing.invoices.first.products.first.charge_type)
-          .to_not eq 'Arrears'
-      end
-
-      it 'outstanding debts, make arrears' do
+      it 'makes arrears from debts' do
         template_create id: 1
         account_create property: property_new(human_ref: 8, client: client_new),
                        charge: charge_find_or_create(id: 1),
@@ -41,8 +27,22 @@ RSpec.describe InvoicingMaker, type: :model do
         invoicing =
           InvoicingMaker.new property_range: '8-8',
                              period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
-        invoicing.generate
+        invoicing.compose
         expect(invoicing.invoices[0].products.first.charge_type).to eq 'Arrears'
+      end
+
+      it 'No arrears unless outstanding debt' do
+        template_create id: 1
+        cycle = cycle_create due_ons: [DueOn.new(month: 3, day: 5)]
+        account_create property: property_new(human_ref: 8, client: client_new),
+                       charge: charge_create(cycle: cycle)
+        invoicing =
+          InvoicingMaker.new property_range: '8-8',
+                             period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
+        invoicing.compose
+        expect(invoicing.invoices.first.products.size).to eq 1
+        expect(invoicing.invoices.first.products.first.charge_type)
+          .to_not eq 'Arrears'
       end
     end
 
@@ -58,7 +58,7 @@ RSpec.describe InvoicingMaker, type: :model do
         invoicing =
           InvoicingMaker.new property_range: '8-8',
                              period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
-        invoicing.generate
+        invoicing.compose
         expect(invoicing.invoices[0].products[0].balance).to eq 30.00
         expect(invoicing.invoices[0].products[1].balance).to eq 40.00
       end
@@ -73,7 +73,7 @@ RSpec.describe InvoicingMaker, type: :model do
         invoicing =
           InvoicingMaker.new(property_range: '8-8',
                              period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1))
-        invoicing.generate
+        invoicing.compose
         expect(invoicing.invoices.size).to eq 0
       end
 
@@ -85,13 +85,13 @@ RSpec.describe InvoicingMaker, type: :model do
         invoicing =
           InvoicingMaker.new property_range: '8-8',
                              period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
-        invoicing.generate
+        invoicing.compose
         expect(invoicing.invoices.size).to eq 0
       end
     end
   end
 
-  describe '#generateable?' do
+  describe '#composeable?' do
     it 'returns true when invoicing possible' do
       template_create id: 1
       charge = charge_new cycle: cycle_new(due_ons: [due_on_new(month: 3)])
@@ -101,7 +101,7 @@ RSpec.describe InvoicingMaker, type: :model do
         InvoicingMaker.new property_range: '8-8',
                            period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
 
-      expect(invoicing.generateable?).to eq true
+      expect(invoicing.composeable?).to eq true
     end
 
     it 'returns false when invoicing not possible' do
@@ -112,7 +112,7 @@ RSpec.describe InvoicingMaker, type: :model do
         InvoicingMaker.new property_range: '8-8',
                            period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
 
-      expect(invoicing.generateable?).to eq false
+      expect(invoicing.composeable?).to eq false
     end
   end
 end

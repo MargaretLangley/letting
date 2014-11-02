@@ -16,25 +16,21 @@ class InvoicingMaker
     @invoice_date = Date.current
   end
 
-  def generate
-    @invoices = \
-      make_invoices accounts: generateable_accounts(range: property_range)
+  def compose
+    @invoices = make_invoices accounts: composeable(accounts: property_range)
     self
   end
 
-  def generateable?
-    generateable_accounts.present?
+  def composeable?
+    composeable(accounts: property_range).present?
   end
 
   private
 
-  def generateable_accounts range: property_range
-    Account.between?(range)
-           .includes([property: property_includes], :credits, :charges, :debits)
-           .select do |account|
-             DebitMaker.new(account: account, debit_period: period)
-               .make_debits?
-           end
+  def composeable accounts: property_range
+    Account.between?(accounts).includes(account_includes).select do |account|
+      DebitMaker.new(account: account, debit_period: period).mold.make?
+    end
   end
 
   def make_invoices(accounts:)
@@ -46,8 +42,12 @@ class InvoicingMaker
       invoice_date: invoice_date,
       property: account.property.invoice(billing_period: period),
       billing: DebitMaker.new(account: account, debit_period: period)
-                             .invoice
+                         .mold.invoice
     invoice
+  end
+
+  def account_includes
+    [[property: property_includes], :credits, :charges, :debits]
   end
 
   def property_includes

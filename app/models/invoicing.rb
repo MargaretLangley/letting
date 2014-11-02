@@ -28,7 +28,7 @@ class Invoicing < ActiveRecord::Base
   def generate
     self.invoices = InvoicingMaker.new(property_range: property_range,
                                        period: period)
-                                      .generate
+                                      .compose
                                       .invoices
   end
 end
