@@ -47,7 +47,7 @@ RSpec.describe DebitMaker, type: :model do
       expect(make.make?).to eq true
     end
 
-    it 'reject is someone has paid (regardless of when paid)' do
+    it 'not made is someone settled all debts (regardless of when paid)' do
       chg = charge_create amount: 40,
                           cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
       accnt = account_new charge: chg,
