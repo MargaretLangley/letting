@@ -19,8 +19,8 @@ describe Invoicing, type: :feature do
 
     it 'has view link' do
       invoicing_create property_range: '1-200',
-                 period_first: '2014/06/30',
-                 period_last: '2014/08/30'
+                       period_first: '2014/06/30',
+                       period_last: '2014/08/30'
       visit '/invoicings/'
 
       first(:link, 'View').click
