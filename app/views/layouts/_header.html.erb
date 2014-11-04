@@ -18,12 +18,13 @@
                 <div class='js-toggle-selection'>
                   <div class='js-togglable'>
                     <h4>Search for new charges within the next 8 weeks
-                      <a href='#' class='js-toggle '> or choose dates</a>
+                      <%= link_to 'or choose dates', '#',title: 'Choose Dates with calendar', class: 'js-toggle inverted-link' %>
+                      <%= link_to fa_icon('calendar lg'), '#',title: 'Choose Dates with calendar', class: 'js-toggle inverted-link l-pad' %>
                     </h4>
                   </div>
                   <div class='js-togglable js-revealable'>
                     <h4>Search for new charges within chosen dates
-                      <a href='#' class='js-toggle '> or default to the next 8 weeks</a>
+                      <%= link_to ' or default to the next 8 weeks', '#',title: 'default dates', class: 'js-toggle inverted-link' %>
                     </h4>
                     <div class="col-1-2">
                       <%= label_tag :start_date %>
