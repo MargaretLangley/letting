@@ -348,6 +348,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    seedbank (0.3.0)
     selenium-webdriver (2.43.0)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
@@ -468,6 +469,7 @@ DEPENDENCIES
   rubycritic
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  seedbank
   selenium-webdriver (~> 2.43.0)
   spring
   spring-commands-rspec

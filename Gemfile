@@ -59,6 +59,8 @@ gem 'unicorn', '~> 4.8.0'
 # corner banner on staging environment
 gem 'rack-dev-mark', '~> 0.7.0'
 
+gem 'seedbank'
+
 group :development do
   gem 'better_errors', '~> 2.0.0'
   gem 'binding_of_caller', '~> 0.7.2'
