@@ -62,7 +62,7 @@ describe 'Account Update', type: :feature  do
       charged_in = charged_in_create id: 2, name: 'Advance'
       charge = charge_create cycle: cycle_new(id: 1, charged_in: charged_in)
       account.edit
-      account.charge charge: charge
+      account.charge charge: charge, payment_type: 'Payment'
       account.button('Update').successful?(self).edit
       account.expect_charge self, charge: charge
     end

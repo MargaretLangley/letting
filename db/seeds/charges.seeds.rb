@@ -17,10 +17,10 @@ class << self
     create_cycle
 
     Charge.create! [
-      { id: 1, charge_type: 'Ground Rent',    cycle_id: 1, amount: '88.08',  account_id: 1 },
-      { id: 2, charge_type: 'Service Charge', cycle_id: 1, amount: '125.08', account_id: 1 },
-      { id: 3, charge_type: 'Ground Rent',    cycle_id: 1, amount: '70.00',  account_id: 2 },
-      { id: 4, charge_type: 'Service Charge', cycle_id: 1, amount: '70.00',  account_id: 3 },
+      { id: 1, charge_type: 'Ground Rent',    cycle_id: 1, payment_type: 'payment', amount: '88.08',  account_id: 1 },
+      { id: 2, charge_type: 'Service Charge', cycle_id: 1, payment_type: 'standing_order', amount: '125.08', account_id: 1 },
+      { id: 3, charge_type: 'Ground Rent',    cycle_id: 1, payment_type: 'payment', amount: '70.00',  account_id: 2 },
+      { id: 4, charge_type: 'Service Charge', cycle_id: 1, payment_type: 'standing_order', amount: '70.00',  account_id: 3 },
     ]
   end
 

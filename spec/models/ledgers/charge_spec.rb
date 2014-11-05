@@ -9,6 +9,21 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
       it('amount') { expect(charge_new amount: nil).to_not be_valid }
       it('cycle') { expect(charge_new cycle: nil).to_not be_valid }
     end
+    describe 'payment type' do
+      it 'accepts string' do
+        expect(charge_new payment_type: 'payment').to be_valid
+      end
+      it 'accepts const' do
+        expect(charge_new payment_type: Charge::PAYMENT).to be_valid
+      end
+      it('rejects nil') { expect(charge_new payment_type: nil).to_not be_valid }
+      it 'rejects unknown' do
+        expect(charge_new payment_type: 'unknown').to_not be_valid
+      end
+      it 'rejects humanized' do
+        expect(charge_new payment_type: 'Payment').to_not be_valid
+      end
+    end
     describe 'amount' do
       it('is a number') { expect(charge_new amount: 'nn').to_not be_valid }
       it('has a max') { expect(charge_new amount: 100_000).to_not be_valid }

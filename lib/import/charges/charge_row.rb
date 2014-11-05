@@ -1,5 +1,6 @@
 require_relative '../../modules/method_missing'
 require_relative '../charge_code'
+require_relative '../payment_type'
 require_relative '../errors'
 require_relative 'legacy_charged_in_fields'
 # rubocop: disable Rails/Output
@@ -75,12 +76,17 @@ module DB
         charge_type: charge_type,
         cycle_id: cycle_id,
         amount: amount,
+        payment_type: payment_type,
         start_date: start_date,
         end_date: end_date,
       }
     end
 
     private
+
+    def payment_type
+      PaymentType.to_symbol @source[:payment_type].to_sym
+    end
 
     # cycle_matcher requires charge_code as 'M' (month) is a special case
     def monthly?

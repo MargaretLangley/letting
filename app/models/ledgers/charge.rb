@@ -21,8 +21,10 @@ class Charge < ActiveRecord::Base
                      foreign_key: 'cycle_id',
                      inverse_of: :charges
 
+  PAYMENT_TYPE = [STANDING_ORDER = 'standing_order', PAYMENT = 'payment']
   delegate :monthly?, to: :cycle
   validates :charge_type, :cycle, presence: true
+  validates :payment_type, inclusion: { in: PAYMENT_TYPE }
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
 
