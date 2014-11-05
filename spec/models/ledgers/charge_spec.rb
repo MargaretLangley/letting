@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+# rubocop: disable Metrics/LineLength
+
 describe Charge, :ledgers, :range, :cycle, type: :model do
 
   describe 'validations' do
@@ -60,6 +62,17 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
         expect(ch.coming Date.new(2013, 3, 5)..Date.new(2013, 3, 5))
           .to eq [chargeable_new(charge_id: ch.id,
                                  on_date: Date.new(2013, 3, 5))]
+      end
+
+      it 'returns charges in date order - regardless of crossing year'  do
+        ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month:  3, day:  5),
+                                                   DueOn.new(month: 12, day: 30)])
+
+        expect(ch.coming Date.new(2010, 9, 5)..Date.new(2011, 9, 4))
+          .to eq [chargeable_new(charge_id: ch.id,
+                                 on_date: Date.new(2010, 12, 30)),
+                  chargeable_new(charge_id: ch.id,
+                                 on_date: Date.new(2011, 3, 5))]
       end
 
       it 'no charge if billing period misses all due_on' do
