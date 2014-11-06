@@ -6,9 +6,9 @@ describe 'Search index', type: :feature do
   describe 'index', :search do
     it 'visits literal matches' do
       property_create human_ref: 111,
-                      account: account_new(charge: charge_new)
+                      account: account_new(charges: [charge_new])
       property_create human_ref: 222,
-                      account: account_new(charge: charge_new)
+                      account: account_new(charges: [charge_new])
       visit '/properties'
       fill_in 'search_terms', with: '222'
       click_on 'search'
@@ -73,7 +73,7 @@ describe 'Search index', type: :feature do
     describe 'search terms' do
       it 'remembered for literal search' do
         property_create human_ref: 111,
-                        account: account_new(charge: charge_new)
+                        account: account_new(charges: [charge_new])
         visit '/properties'
         fill_in 'search_terms', with: '111'
         click_on 'search'

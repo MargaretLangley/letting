@@ -7,7 +7,7 @@ RSpec.describe DebitMaker, type: :model do
   describe '#mold' do
     it 'produces debits for due charges' do
       chg = charge_create(cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)]))
-      accnt = account_new charge: chg,
+      accnt = account_new charges: [chg],
                           debits: []
 
       make = DebitMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
@@ -24,7 +24,7 @@ RSpec.describe DebitMaker, type: :model do
 
     it 'reject duplicate charges' do
       chg = charge_create cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
-      accnt = account_new charge: chg,
+      accnt = account_new charges: [chg],
                           debits: [debit_new(on_date: '2013-3-5', charge: chg)]
 
       make = DebitMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
@@ -37,7 +37,7 @@ RSpec.describe DebitMaker, type: :model do
   describe '#make?' do
     it 'made if charge is due' do
       chg = charge_create cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
-      accnt = account_new charge: chg,
+      accnt = account_new charges: [chg],
                           debits: []
 
       make = DebitMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
@@ -50,7 +50,7 @@ RSpec.describe DebitMaker, type: :model do
     it 'not made is someone settled all debts (regardless of when paid)' do
       chg = charge_create amount: 40,
                           cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
-      accnt = account_new charge: chg,
+      accnt = account_new charges: [chg],
                           credits: [credit_new(amount: -40,
                                                charge: chg,
                                                on_date: Date.new(2013, 4, 6))]
@@ -98,8 +98,8 @@ RSpec.describe DebitMaker, type: :model do
     end
 
     it 'returns the transaction' do
-      account = account_new charge: charge_new(cycle: \
-        cycle_create(due_ons: [DueOn.new(month: 3, day: 5)]))
+      cycle = cycle_create(due_ons: [DueOn.new(month: 3, day: 5)])
+      account = account_new charges: [charge_new(cycle: cycle)]
       debit_maker = DebitMaker.new account: account,
                                    debit_period: Date.new(2013, 3, 5)..
                                                  Date.new(2013, 5, 5)

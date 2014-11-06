@@ -10,7 +10,7 @@ module DB
     describe 'updating charge start and end dates' do
       it 'nothing changes if charge has no debits' do
         charge = charge_new(start_date: MIN_DATE, end_date: MAX_DATE)
-        account_new(charge: charge).save!
+        account_new(charges: [charge]).save!
 
         UpdateCharge.do
         expect(Charge.first.start_date).to eq Date.new 2000, 1, 1
@@ -22,7 +22,7 @@ module DB
                             end_date: MAX_DATE,
                             debits: [debit_new(on_date: '2013-3-25'),
                                      debit_new(on_date: '2012-3-25')]
-        account_new(charge: charge).save!
+        account_new(charges: [charge]).save!
 
         UpdateCharge.do
         expect(Charge.first.start_date).to eq Date.new 2012, 3, 25
@@ -34,7 +34,7 @@ module DB
                             end_date: MAX_DATE,
                             debits: [debit_new(on_date: '2012-3-25'),
                                      debit_new(on_date: '2011-3-25')]
-        (account_new charge: charge).save!
+        (account_new charges: [charge]).save!
 
         UpdateCharge.do
         expect(Charge.first.start_date).to eq Date.new 2011, 3, 25

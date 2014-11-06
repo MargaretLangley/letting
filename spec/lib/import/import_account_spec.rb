@@ -63,9 +63,8 @@ module DB
     end
 
     def create_charged_property human_ref: 8, cycle: new_cycle
-      property_create \
-        human_ref: human_ref,
-        account: account_new(charge: charge_new(cycle: cycle))
+      property_create human_ref: human_ref,
+                      account: account_new(charges: [charge_new(cycle: cycle)])
     end
 
     def new_cycle(day: 25, month: 12)

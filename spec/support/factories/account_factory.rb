@@ -3,13 +3,13 @@
 
 def account_new id: nil,
                 property: nil,
-                charge: nil,
+                charges: nil,
                 credits: nil,
                 debits: nil,
                 payment: nil
   account = Account.new id: id
   account.property = property if property
-  account.charges << charge if charge
+  account.charges << charges if charges
   account.credits << credits if credits
   account.debits = debits if debits
   account.payments << payment if payment
@@ -18,13 +18,13 @@ end
 
 def account_create id: nil,
                    property: nil,
-                   charge: nil,
+                   charges: nil,
                    credits: nil,
                    debits: nil,
                    payment: nil
   account = account_new id: id,
                         property: property,
-                        charge: charge,
+                        charges: charges,
                         credits: credits,
                         debits: debits,
                         payment: payment

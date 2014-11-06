@@ -7,7 +7,8 @@ require_relative '../../../lib/import/accounts/import_payment'
 module DB
   describe ImportPayment, :import do
     it 'single credit' do
-      property_create human_ref: 89, account: account_new(charge: charge_create)
+      property_create human_ref: 89,
+                      account: account_new(charges: [charge_create])
 
       expect { ImportPayment.import parse credit_row }
         .to change(Credit, :count).by 1
@@ -16,14 +17,14 @@ module DB
     describe 'negates' do
       it 'changes sign on payments' do
         property_create human_ref: 89,
-                        account: account_new(charge: charge_create)
+                        account: account_new(charges: [charge_create])
 
         ImportPayment.import parse credit_row human_ref: 89, amount: 50.5
         expect(Payment.first.amount).to eq(-50.5)
       end
       it 'changes sign on credits' do
         property_create human_ref: 89,
-                        account: account_new(charge: charge_create)
+                        account: account_new(charges: [charge_create])
 
         ImportPayment.import parse credit_row human_ref: 89, amount: 50.5
         expect(Credit.first.amount).to eq(-50.5)
@@ -32,7 +33,8 @@ module DB
 
     describe 'errors' do
       it 'double import raises error' do
-        property_create human_ref: 89, account: account_new(charge: charge_new)
+        property_create human_ref: 89,
+                        account: account_new(charges: [charge_new])
         expect { warn 'DB::ImportPayment is not idempotent.' }
           .to output.to_stderr
         ImportPayment.import parse credit_row human_ref: 89

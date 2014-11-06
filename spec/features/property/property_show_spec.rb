@@ -31,14 +31,14 @@ describe Property, type: :feature   do
 
   it 'shows when charged' do
     charge = charge_create(charge_type: 'Rent')
-    property_create id: 1, account: account_new(charge: charge)
+    property_create id: 1, account: account_new(charges: [charge])
     visit '/properties/1'
     expect(page).to have_text 'Rent'
   end
 
   it 'shows charges as dormant' do
     property_create id: 1,
-                    account: account_new(charge: charge_new(dormant: true))
+                    account: account_new(charges: [charge_new(dormant: true)])
     visit '/properties/1'
     expect(page).to have_css '.dormant'
   end

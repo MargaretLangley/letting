@@ -35,7 +35,7 @@ module DB
 
     it 'rows attributes are returned' do
       charge = charge_new charge_type: 'Insurance'
-      property_create human_ref: 9, account: account_new(charge: charge)
+      property_create human_ref: 9, account: account_new(charges: [charge])
       row = row(charge_code: 'Ins', amount: 3.05)
       expect(row.attributes[:charge_id]).to eq charge.id
       expect(row.attributes[:on_date]).to eq Time.parse '2012-03-25 00:00:00'
@@ -74,7 +74,7 @@ module DB
           cycle = cycle_new(due_ons: [DueOn.new(month: 4, day: 1)])
           charge = charge_new charge_type: 'Ground Rent',
                               cycle: cycle
-          property_create human_ref: 9, account: account_new(charge: charge)
+          property_create human_ref: 9, account: account_new(charges: [charge])
 
           expect(row.next_on_date).to eq Date.new(2012, 4, 1)
         end
@@ -83,7 +83,7 @@ module DB
           cycle = cycle_new(due_ons: [DueOn.new(month: 3, day: 24)])
           charge = charge_new charge_type: 'Ground Rent',
                               cycle: cycle
-          property_create human_ref: 9, account: account_new(charge: charge)
+          property_create human_ref: 9, account: account_new(charges: [charge])
 
           expect(row.next_on_date).to eq Date.new(2012, 3, 24)
         end

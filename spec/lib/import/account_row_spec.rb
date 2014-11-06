@@ -47,7 +47,7 @@ module DB
 
         it 'error if row type unknown' do
           property_create(human_ref: 9,
-                          account: account_new(charge: charge_new))
+                          account: account_new(charges: [charge_new]))
           expect { row(charge_code: 'XX', credit_amount: 0, debit_amount: 0).type }
             .to raise_error AccountRowTypeUnknown, \
                             'Unknown Row Property:9, charge_code: XX'

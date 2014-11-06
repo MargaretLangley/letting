@@ -7,7 +7,7 @@ RSpec.describe InvoicingMaker, type: :model do
       template_create id: 1
       charge = charge_create cycle: cycle_new(due_ons: [due_on_new(month: 3)])
       account_create property: property_new(human_ref: 8, client: client_new),
-                     charge: charge
+                     charges: [charge]
 
       invoicing =
         InvoicingMaker.new property_range: '8-8',
@@ -20,7 +20,7 @@ RSpec.describe InvoicingMaker, type: :model do
       it 'makes arrears from debts' do
         template_create id: 1
         account_create property: property_new(human_ref: 8, client: client_new),
-                       charge: charge_find_or_create(id: 1),
+                       charges: [charge_find_or_create(id: 1)],
                        debits: [debit_new(on_date: Date.new(2009, 3, 1),
                                           charge: charge_find_or_create(id: 1))]
 
@@ -35,7 +35,7 @@ RSpec.describe InvoicingMaker, type: :model do
         template_create id: 1
         cycle = cycle_create due_ons: [DueOn.new(month: 3, day: 5)]
         account_create property: property_new(human_ref: 8, client: client_new),
-                       charge: charge_create(cycle: cycle)
+                       charges: [charge_create(cycle: cycle)]
         invoicing =
           InvoicingMaker.new property_range: '8-8',
                              period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
@@ -50,7 +50,7 @@ RSpec.describe InvoicingMaker, type: :model do
       it 'outstanding debts, make arrears' do
         template_create id: 1
         account_create property: property_new(human_ref: 8, client: client_new),
-                       charge: charge_find_or_create(id: 1, amount: 10),
+                       charges: [charge_find_or_create(id: 1, amount: 10)],
                        debits: [debit_new(amount: 30.00,
                                           on_date: Date.new(2009, 3, 1),
                                           charge: charge_find_or_create(id: 1))]
@@ -68,7 +68,7 @@ RSpec.describe InvoicingMaker, type: :model do
       it 'outside property_range' do
         template_create id: 1
         charge = charge_create cycle: cycle_new(due_ons: [due_on_new(month: 3)])
-        account_create property: property_new(human_ref: 6000), charge: charge
+        account_create property: property_new(human_ref: 600), charges: [charge]
 
         invoicing =
           InvoicingMaker.new(property_range: '8-8',
@@ -80,7 +80,7 @@ RSpec.describe InvoicingMaker, type: :model do
       it 'charges outside start_date and end_date' do
         template_create id: 1
         charge = charge_new cycle: cycle_new(due_ons: [due_on_new(month: 6)])
-        account_create property: property_new(human_ref: 8), charge: charge
+        account_create property: property_new(human_ref: 8), charges: [charge]
 
         invoicing =
           InvoicingMaker.new property_range: '8-8',
@@ -95,7 +95,7 @@ RSpec.describe InvoicingMaker, type: :model do
     it 'returns true when invoicing possible' do
       template_create id: 1
       charge = charge_new cycle: cycle_new(due_ons: [due_on_new(month: 3)])
-      account_create property: property_new(human_ref: 8), charge: charge
+      account_create property: property_new(human_ref: 8), charges: [charge]
 
       invoicing =
         InvoicingMaker.new property_range: '8-8',
@@ -106,7 +106,7 @@ RSpec.describe InvoicingMaker, type: :model do
 
     it 'returns false when invoicing not possible' do
       template_create id: 1
-      account_create property: property_new(human_ref: 6000), charge: charge_new
+      account_create property: property_new(human_ref: 6), charges: [charge_new]
 
       invoicing =
         InvoicingMaker.new property_range: '8-8',

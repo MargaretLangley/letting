@@ -13,15 +13,15 @@ describe 'Account Factory' do
         expect(account_new(property: property).property.human_ref).to eq 5
       end
       it 'can add charge' do
-        expect(account_new(charge: charge_new).charges[0].charge_type)
+        expect(account_new(charges: [charge_new]).charges[0].charge_type)
           .to eq 'Ground Rent'
       end
       it 'can add cycle' do
-        expect(account_new(charge: charge_new).charges[0].cycle.name)
+        expect(account_new(charges: [charge_new]).charges[0].cycle.name)
           .to eq 'Mar'
       end
       it 'can add due_on' do
-        expect(account_new(charge: charge_new)
+        expect(account_new(charges: [charge_new])
           .charges[0].cycle.due_ons[0])
             .to eq DueOn.new(day: 25, month: 3)
       end

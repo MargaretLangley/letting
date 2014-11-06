@@ -85,7 +85,7 @@ describe 'Account Update', type: :feature  do
     it 'can be set to dormant', js: true do
       charged_in = charged_in_create(id: 2, name: 'Advance')
       charge = charge_new cycle: cycle_new(id: 1, charged_in: charged_in)
-      property_create human_ref: 8000, account: account_new(charge: charge)
+      property_create human_ref: 8000, account: account_new(charges: [charge])
       account.edit
       expect(page).to have_css('.spec-charge-count', count: 1)
       dormant_checkbox =

@@ -24,7 +24,7 @@ module DB
           cycle = cycle_new(due_ons: [DueOn.new(month: 3, day: 25)])
           property_create \
             human_ref: 8,
-            account: account_new(charge: charge_new(cycle: cycle))
+            account: account_new(charges: [charge_new(cycle: cycle)])
 
           expect { ImportBalance.import parse row_code }
             .to change(Debit, :count).by 1
@@ -39,7 +39,7 @@ module DB
         it 'matches a charge code using the description' do
           charge = charge_new charge_type: 'Service Charge',
                               cycle: cycle_new
-          property_create human_ref: 8, account: account_new(charge: charge)
+          property_create human_ref: 8, account: account_new(charges: [charge])
           expect { ImportBalance.import parse row_desc }
             .to change(Debit, :count).by 1
         end

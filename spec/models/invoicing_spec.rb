@@ -21,7 +21,7 @@ RSpec.describe Invoicing, type: :model do
       template_create id: 1
       cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
       account_create property: property_new(human_ref: 20, client: client_new),
-                     charge: charge_new(cycle: cycle)
+                     charges: [charge_new(cycle: cycle)]
 
       invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
@@ -35,7 +35,7 @@ RSpec.describe Invoicing, type: :model do
         template_create id: 1
         cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
         account_create property: property_new(human_ref: 6, client: client_new),
-                       charge: charge_new(cycle: cycle)
+                       charges: [charge_new(cycle: cycle)]
 
         invoicing = Invoicing.new property_range: '20',
                                   period: Date.new(2010, 3, 1)..

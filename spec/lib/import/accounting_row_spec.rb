@@ -29,7 +29,7 @@ module DB
     describe '#charge_id' do
       it 'returns valid charge_id' do
         charge = charge_new charge_type: 'Rent'
-        account = account_create charge: charge, property: property_new
+        account = account_create charges: [charge], property: property_new
         expect(accounting.charge(account: account, charge_type: 'Rent'))
           .to eq account.charges.first
       end
@@ -50,8 +50,7 @@ module DB
       it 'errors invalid code' do
         property_create human_ref: 89
         expect do
-          accounting.charge_code_to_s(charge_code: 'UkwDDn',
-                                      human_ref: 89)
+          accounting.charge_code_to_s(charge_code: 'UkwDDn', human_ref: 89)
         end.to raise_error ChargeCodeUnknown
       end
     end
