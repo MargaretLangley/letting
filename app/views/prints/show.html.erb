@@ -1,8 +1,11 @@
-<% @title='Print' %>
+<%= link_to fa_icon('print 2x'), '#',title: 'Print', class: 'js-print-window no-print simple_button printoff' %>
+
 <% @invoicing.invoices.each do |invoice| %>
+<div class='shell-for-print-screen'>
   <div class='page'>
     <%= render 'invoices/invoice_page1', invoice: invoice %>
   </div>
-  <div class='page'>
-  </div>
+</div>
+<div class='page'>
+</div>
 <% end %>
