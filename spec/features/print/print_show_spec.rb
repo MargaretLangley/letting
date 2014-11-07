@@ -11,7 +11,6 @@ describe Invoicing, type: :feature do
                        period_last: '2014/08/30'
 
       visit '/prints/1'
-      expect(page.title).to eq 'Letting - Print'
       expect(page).to have_text 'VAT'
       expect(page).to have_text '108'
       expect(page).to_not have_text '1-200'
