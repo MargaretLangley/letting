@@ -35,10 +35,6 @@ class DebitMaker
   end
 
   def make_debits
-    account.charges.map do |charge|
-      charge.coming(debit_period).map do |chargeable|
-        Debit.new(chargeable.to_hash)
-      end
-    end.flatten
+    account.debits_coming(debit_period)
   end
 end

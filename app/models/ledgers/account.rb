@@ -55,6 +55,19 @@ class Account < ActiveRecord::Base
   MAX_CHARGES = 6
   accepts_nested_attributes_for :charges, allow_destroy: true
 
+  # accounting_period - the date range that we generate debits for.
+  # returns        - debits array with data required to bill the
+  #                  associated account.
+  def debits_coming accounting_period
+    debits = []
+    charges.each do |charge|
+      charge.coming(accounting_period).map do |chargeable|
+        debits << Debit.new(chargeable.to_hash)
+      end
+    end
+    debits
+  end
+
   def make_credits
     charges.map { |charge| create_credit charge }
   end

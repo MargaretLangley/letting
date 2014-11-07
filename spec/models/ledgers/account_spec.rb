@@ -8,6 +8,24 @@ describe Account, :ledgers, type: :model do
     before { Timecop.travel Date.new(2013, 1, 31) }
     after { Timecop.return }
 
+    describe '#debits_coming' do
+      it 'debits if accounting_period crosses a due date'  do
+        ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
+        account = account_new charges: [ch]
+
+        expect(account.debits_coming Date.new(2013, 3, 5)..Date.new(2013, 3, 5))
+          .to eq [Debit.new(on_date: Date.new(2013, 3, 5), amount: 88.08)]
+      end
+
+      it 'no debit if accounting_period misses due date'  do
+        ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
+        account = account_new charges: [ch]
+
+        expect(account.debits_coming Date.new(2013, 4, 6)..Date.new(2013, 4, 6))
+          .to eq []
+      end
+    end
+
     describe '#make_credits' do
       it 'empty charges, empty credits ' do
         expect(account_new.make_credits.size).to eq(0)
