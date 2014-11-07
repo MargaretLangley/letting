@@ -203,13 +203,31 @@ li.active-subnav a{
 
 @media screen{
 
-  .shell{
-    margin: 0 0 2% 0;
-    padding: 1%;
+  @mixin inside-shell{
     border: 1px solid lighten($fieldset, 20%);
     border-radius: 12px;
     background-color: $fieldset;
     box-shadow: $shadow 0 0 8px;
+  }
+
+  .shell{
+    margin: 0 0 2% 0;
+    padding: 1%;
+    @include inside-shell;
+    @include pie-clearfix;
+  }
+
+  .shell-for-print-screen{
+    margin: 10px 0 0 0;
+    padding: 10px 0 0 0;
+    @include inside-shell;
+    @include pie-clearfix;
+  }
+
+  .shell-for-small-menu{
+    margin: 0 0 0 0;
+    padding: 0 10px 0 10px;
+    @include inside-shell;
     @include pie-clearfix;
   }
 }

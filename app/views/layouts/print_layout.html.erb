@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Letting - <%= @title%></title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body onLoad="window.print()">
+
+    <%= render 'layouts/header' %>
+    <div class='page-wrapper'>
+      <div class="grid">
+        <article class="col-22-24">
+          <% if content_for?(:heading) %>
+            <%= yield :heading %>
+          <% else %>
+            <h2><%= @title %></h2>
+          <% end %>
+          <%= render 'layouts/return' %>
+          <%= yield %>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>
