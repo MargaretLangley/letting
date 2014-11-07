@@ -26,14 +26,16 @@ class << self
 
   def create_cycle
     DueOn.create! [
-      { id: 1,  day: 25,  month: 3, cycle_id: 1 },
-      { id: 2,  day: 29,  month: 9, cycle_id: 1 },
-      { id: 3,  day: 25,  month: 6, cycle_id: 2 },
-      { id: 4,  day: 29,  month: 12, cycle_id: 2 },
+      { id: 1, month: 3,  day: 25, cycle_id: 1 },
+      { id: 2, month: 9,  day: 29, cycle_id: 1 },
+      { id: 3, month: 6,  day: 25, cycle_id: 2 },
+      { id: 4, month: 12, day: 29, cycle_id: 2 },
+      { id: 5, month: 4,  day: 1,  cycle_id: 3 },
     ]
     Cycle.create! [
       { id: 1,  name: 'Mar/Sep', charged_in_id: 1, order: 1, cycle_type: 'term' },
       { id: 2,  name: 'Jun/Dec', charged_in_id: 1, order: 2, cycle_type: 'term' },
+      { id: 3,  name: 'Apr',     charged_in_id: 1, order: 3, cycle_type: 'term' },
     ]
     Cycle.all.each { |cycle| Cycle.reset_counters(cycle.id, :due_ons) }
   end
