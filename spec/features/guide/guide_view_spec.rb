@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-describe Notice, type: :feature do
+describe Guide, type: :feature do
 
   context '#view' do
-    it 'finds notice data' do
+    it 'finds guide data' do
 
       log_in admin_attributes
       template_create id: 2
-      notice_create id: 1
+      guide_create id: 1
 
       visit '/templates/2'
       expect(page.title). to eq 'Letting - View Invoice Text'

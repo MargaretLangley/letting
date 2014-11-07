@@ -1,8 +1,7 @@
 <%= render 'heading_page2', template: @template %>
 
-<% @template.notices.order(:id).each do  |note| %>
-    <%= render '/templates/instructions', count:note %>
-<% end %>
+<%= render '/templates/guides', template: @template %>
+
 <div class='widemargin'>
   CLIENT'S ADDRESS
   <br>
