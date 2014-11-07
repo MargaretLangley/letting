@@ -18,9 +18,10 @@ Letting::Application.routes.draw do
   resources :invoicings, only: [:new, :create, :index, :show]
   resources :invoices, only: [:show]
   resources :prints, only: [:show]
+  resources :templates, only: [:index, :show, :edit, :update]
+  resources :guides, only: [:index, :show, :edit, :update]
 
   # Admin
   resources :cycles
   resources :users
-  resources :templates, only: [:index, :show, :edit, :update]
 end

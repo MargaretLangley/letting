@@ -102,7 +102,20 @@ class << self
       },
      ]
   end
+
+  def create_guides
+    Guide.create! [
+      { id: 1,
+        template_id: 2,
+        instruction: ["Insert leaseholder", "Insert address", "Insert date"],
+        fillin: ["To", "This address", "requires"],
+        sample: ["Ms Guide", "2 Ripoff", "60.00"],
+      },
+    ]
+  end
+
 end
 
 create_templates
 create_notices
+create_guides
