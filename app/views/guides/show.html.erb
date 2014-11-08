@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Instruction:</strong>
+  <%= @guide.instruction %>
+</p>
+
+<p>
+  <strong>Fillin:</strong>
+  <%= @guide.fillin %>
+</p>
+
+<p>
+  <strong>Sample:</strong>
+  <%= @guide.sample %>
+</p>
+
+<%= link_to 'Edit', edit_guide_path(@guide) %> |
+<%= link_to 'Back', guides_path %>
