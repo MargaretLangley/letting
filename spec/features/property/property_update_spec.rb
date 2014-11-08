@@ -7,15 +7,14 @@ describe 'Account Update', type: :feature  do
   context 'Agentless' do
     before(:each) do
       log_in
-      client_create human_ref: 8008,
-                    property:  property_new(human_ref: 8000,
-                                            account: account_new)
+      client_create human_ref: 90,
+                    property:  property_new(human_ref: 80, account: account_new)
     end
 
     it 'opens valid page', js: true  do
       account.edit
       expect(page.title).to eq 'Letting - Edit Account'
-      account.expect_property self, property_id: '8000', client_id: '8008'
+      account.expect_property self, property_id: '80', client_id: '90'
       account.expect_address self,
                              type: '#property_address',
                              address: address_new
@@ -25,11 +24,11 @@ describe 'Account Update', type: :feature  do
 
     it 'updates account', js: true do
       account.edit
-      account.property self, property_id: '8001', client_id: '8008'
+      account.property self, property_id: '81', client_id: '90'
       account.address selector: '#property_address', address: address_new
       account.entity type: 'property', **company_attributes
       account.button('Update').successful?(self).edit
-      account.expect_property self, property_id: '8001', client_id: '8008'
+      account.expect_property self, property_id: '81', client_id: '90'
       account.expect_address self,
                              type: '#property_address',
                              address: address_new
@@ -60,9 +59,20 @@ describe 'Account Update', type: :feature  do
 
     it 'adds date charge' do
       charged_in = charged_in_create id: 2, name: 'Advance'
-      charge = charge_create cycle: cycle_new(id: 1, charged_in: charged_in)
+      charge = charge_create cycle: cycle_new(id: 1, charged_in: charged_in),
+                             payment_type: 'payment'
       account.edit
-      account.charge charge: charge, payment_type: 'Payment'
+      account.charge charge: charge
+      account.button('Update').successful?(self).edit
+      account.expect_charge self, charge: charge
+    end
+
+    it 'deletes charge' do
+      charged_in = charged_in_create id: 2, name: 'Advance'
+      charge = charge_create cycle: cycle_new(id: 1, charged_in: charged_in)
+      Account.first.charges << charge
+      account.edit
+      account.charge charge: charge
       account.button('Update').successful?(self).edit
       account.expect_charge self, charge: charge
     end
@@ -85,7 +95,7 @@ describe 'Account Update', type: :feature  do
     it 'can be set to dormant', js: true do
       charged_in = charged_in_create(id: 2, name: 'Advance')
       charge = charge_new cycle: cycle_new(id: 1, charged_in: charged_in)
-      property_create human_ref: 8000, account: account_new(charges: [charge])
+      property_create human_ref: 80, account: account_new(charges: [charge])
       account.edit
       expect(page).to have_css('.spec-charge-count', count: 1)
       dormant_checkbox =

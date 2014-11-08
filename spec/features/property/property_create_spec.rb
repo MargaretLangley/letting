@@ -62,7 +62,7 @@ describe Property, type: :feature do
     account.property self, property_id: property_ref, client_id: client_ref
     account.address selector: '#property_address', address: address_new
     account.entity(type: 'property', **person_attributes)
-    account.charge charge: charge, payment_type: 'Payment'
+    account.charge charge: charge
   end
 
   def fill_in_agent(address:)

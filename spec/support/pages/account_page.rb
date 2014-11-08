@@ -92,14 +92,12 @@ class AccountPage
     end
   end
 
-  def charge(order: 0, charge:, payment_type:)
+  def charge(order: 0, charge: nil)
     id_stem = "property_account_attributes_charges_attributes_#{order}"
     fill_in "#{id_stem}_charge_type", with: charge.charge_type
     select charge.cycle.name, from: "#{id_stem}_cycle_id"
-    select payment_type, from: "#{id_stem}_payment_type"
+    select charge.payment_type.humanize, from: "#{id_stem}_payment_type"
     fill_in "#{id_stem}_amount", with: charge.amount
-    # fill_in "#{id_stem}_start_date", with: start_date if start_date.present?
-    # fill_in "#{id_stem}_end_date", with: start_date if end_date.present?
   end
 
   def expect_charge spec, order: 0, charge: charge
