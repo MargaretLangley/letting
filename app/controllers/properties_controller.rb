@@ -88,7 +88,7 @@ class PropertiesController < ApplicationController
   end
 
   def charges_params
-    %i(id charge_type cycle_id charged_in_id payment_type amount dormant)
+    %i(id charge_type cycle_id charged_in_id payment_type amount dormant _destroy)  # rubocop: disable  Metrics/LineLength
   end
 
   def identity

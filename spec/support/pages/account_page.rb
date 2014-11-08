@@ -92,12 +92,16 @@ class AccountPage
     end
   end
 
-  def charge(order: 0, charge: nil)
+  def charge(order: 0, charge: nil, delete: false)
     id_stem = "property_account_attributes_charges_attributes_#{order}"
-    fill_in "#{id_stem}_charge_type", with: charge.charge_type
-    select charge.cycle.name, from: "#{id_stem}_cycle_id"
-    select charge.payment_type.humanize, from: "#{id_stem}_payment_type"
-    fill_in "#{id_stem}_amount", with: charge.amount
+    if charge
+      fill_in "#{id_stem}_charge_type", with: charge.charge_type
+      select charge.cycle.name, from: "#{id_stem}_cycle_id"
+      select charge.payment_type.humanize, from: "#{id_stem}_payment_type"
+      fill_in "#{id_stem}_amount", with: charge.amount
+    end
+
+    find(:xpath, "//*[@id='#{id_stem}__destroy']").click  if delete
   end
 
   def expect_charge spec, order: 0, charge: charge
