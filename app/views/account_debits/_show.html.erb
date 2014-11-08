@@ -1,0 +1,40 @@
+<% account_debits = AccountsDebits.new(property_range: params[:search_terms], debit_period: params[:start_date]..(params[:start_date].to_date + 1.year).to_s ).make_list.list %>
+
+
+<div class="grid-row col-24-24">
+  &nbsp;
+</div>
+<div class="grid-row col-1-24">
+  &nbsp;
+</div>
+<div class="col-16-24">
+  <h3>Upcoming Charges</h3>
+</div>
+<div class="grid-row col-1-24">
+  &nbsp;
+</div>
+<div class="col-22-24">
+  <div class='grid-row col-8-24 vertical-spacer grid-header'>
+    Date
+  </div>
+  <div class='col-8-24 vertical-spacer grid-header'>
+    Property Range
+  </div>
+  <div class='col-8-24 vertical-spacer grid-header'>
+    Charge
+  </div>
+  <% account_debits.values.each do |account_debit| %>
+    <div class='grid-row col-8-24 vertical-spacer grid-header'>
+      <%= I18n.l account_debit.date_due, format: :short %>
+    </div>
+    <div class='col-8-24 vertical-spacer grid-header'>
+      <%= account_debit.property_refs_to_s %>
+    </div>
+    <div class='col-8-24 vertical-spacer grid-header'>
+      <%= account_debit.charge_type %>
+    </div>
+  <% end %>
+</div>
+<div class="grid-row col-1-24">
+  &nbsp;
+</div>

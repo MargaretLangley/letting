@@ -5,9 +5,10 @@
 # Ideally this should be an SQL statement. However, the due dates are held as
 # month, day combinations which makes doing SQL queries tricky.
 #
+# rubocop: disable Style/TrivialAccessors
 #
 class AccountsDebits
-  attr_reader :property_range, :debit_period, :list
+  attr_reader :property_range, :debit_period
   def initialize(property_range:, debit_period:)
     @property_range = property_range
     @debit_period = debit_period
@@ -19,9 +20,7 @@ class AccountsDebits
   end
 
   def list
-    @account_debits.group_by do |account_debit|
-      [account_debit.date_due, account_debit.charge_type]
-    end
+    @account_debits
   end
 
   private
@@ -31,11 +30,16 @@ class AccountsDebits
   end
 
   def make
-    @account_debits = []
+    @account_debits = Hash.new { [] }
     accounts.each do |account|
-      @account_debits << make_account_debits(account)
+      make_account_debits(account).each do |account_debits|
+        if @account_debits.key? account_debits.key
+          @account_debits[account_debits.key].merge account_debits
+        else
+          @account_debits[account_debits.key] = account_debits
+        end
+      end
     end
-    @account_debits.flatten!
   end
 
   def make_account_debits account

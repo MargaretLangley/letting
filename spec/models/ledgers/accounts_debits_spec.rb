@@ -18,10 +18,10 @@ RSpec.describe AccountsDebits, type: :model do
                                                 Date.new(2013, 3, 5))
       debits.make_list
       expect(debits.list).to eq [Date.new(2013, 3, 5), 'Ground Rent'] =>
-                                  [AccountDebit.new(date_due: Date.new(2013, 3, 5),
-                                                    charge_type: 'Ground Rent',
-                                                    property_ref: 2,
-                                                    amount: nil)]
+                                  AccountDebit.new(date_due: Date.new(2013, 3, 5),
+                                                   charge_type: 'Ground Rent',
+                                                   property_ref: 2,
+                                                   amount: nil)
     end
 
     it 'produces ordered account debits' do
@@ -38,20 +38,20 @@ RSpec.describe AccountsDebits, type: :model do
                                                 Date.new(2014, 1, 1))
       debits.make_list
       expect(debits.list).to eq [Date.new(2013, 2, 5), 'Service Charge'] =>
-                                  [AccountDebit.new(date_due: Date.new(2013, 2, 5),
-                                                    charge_type: 'Service Charge',
-                                                    property_ref: 2,
-                                                    amount: nil)],
+                                  AccountDebit.new(date_due: Date.new(2013, 2, 5),
+                                                   charge_type: 'Service Charge',
+                                                   property_ref: 2,
+                                                   amount: nil),
                                 [Date.new(2013, 3, 5), 'Ground Rent'] =>
-                                  [AccountDebit.new(date_due: Date.new(2013, 3, 5),
-                                                    charge_type: 'Ground Rent',
-                                                    property_ref: 2,
-                                                    amount: nil)],
+                                  AccountDebit.new(date_due: Date.new(2013, 3, 5),
+                                                   charge_type: 'Ground Rent',
+                                                   property_ref: 2,
+                                                   amount: nil),
                                 [Date.new(2013, 8, 5), 'Insurance'] =>
-                                  [AccountDebit.new(date_due: Date.new(2013, 8, 5),
-                                                    charge_type: 'Insurance',
-                                                    property_ref: 2,
-                                                    amount: nil)]
+                                  AccountDebit.new(date_due: Date.new(2013, 8, 5),
+                                                   charge_type: 'Insurance',
+                                                   property_ref: 2,
+                                                   amount: nil)
     end
   end
 end

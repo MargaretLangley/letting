@@ -41,31 +41,34 @@
       <%= f.button submit: '', class: "primary submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Invoicing..."} %> or <%= link_to 'Cancel', new_invoicing_path, class: 'warn' %>
     </div>
   </div>
-  <div class="grid-row col-1-24">
-    &nbsp;
-  </div>
-  <div class="col-22-24">
-    <div class='col-3-24 vertical-spacer grid-header r-align'>
-      Property ID
-    </div>
-    <div class='col-5-24 vertical-spacer grid-header'>
-      Billing Agent
-    </div>
-    <div class='col-5-24 vertical-spacer grid-header'>
-      Billing Address
-    </div>
-    <div class='col-11-24 vertical-spacer grid-header'>
-      Charge
-    </div>
-    <% if @invoicing.invoices.size.zero? %>
-      <%= render partial: 'invoicings/unknown_invoice' %>
-    <% else %>
-      <%= render @invoicing.invoices %>
+  <% if @invoicing.invoices.size.zero? %>
+    <%= render partial: 'invoicings/unknown_invoice' %>
+    <% if params[:search_terms] %>
+      <%= render partial: 'account_debits/show' %>
     <% end %>
-  </div>
-  <div class="grid-row col-1-24">
-    &nbsp;
-  </div>
+  <% else %>
+    <div class="grid-row col-1-24">
+      &nbsp;
+    </div>
+    <div class="col-22-24">
+      <div class='col-3-24 vertical-spacer grid-header r-align'>
+        Property ID
+      </div>
+      <div class='col-5-24 vertical-spacer grid-header'>
+        Billing Agent
+      </div>
+      <div class='col-5-24 vertical-spacer grid-header'>
+        Billing Address
+      </div>
+      <div class='col-11-24 vertical-spacer grid-header'>
+        Charge
+      </div>
+        <%= render @invoicing.invoices %>
+    </div>
+    <div class="grid-row col-1-24">
+      &nbsp;
+    </div>
   <% end %>
+<% end %>
 </div>
 
