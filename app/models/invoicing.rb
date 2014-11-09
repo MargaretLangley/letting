@@ -25,6 +25,13 @@ class Invoicing < ActiveRecord::Base
     self.period_last  = billing.last
   end
 
+  # actionable?
+  # is this invoicing in use, in action, at all?
+  #
+  def actionable?
+    invoices.size > 0
+  end
+
   def generate
     self.invoices = InvoicingMaker.new(property_range: property_range,
                                        period: period)

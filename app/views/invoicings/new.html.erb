@@ -38,10 +38,10 @@
     </div>
     <div class="col-11-24">
       </br></br></br>
-      <%= f.button submit: '', class: "primary submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Invoicing..."}, disabled: @invoicing.invoices.size.zero? %> or <%= link_to_if @invoicing.invoices.size.nonzero?, 'Cancel', new_invoicing_path, class: 'warn' %>
+      <%= f.button submit: '', class: "primary submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Invoicing..."}, disabled: !@invoicing.actionable? %> or <%= link_to_if @invoicing.actionable?, 'Cancel', new_invoicing_path, class: 'warn' %>
     </div>
   </div>
-  <% if @invoicing.invoices.size.nonzero? %>
+  <% if @invoicing.actionable? %>
     <div class="grid-row col-1-24">
       &nbsp;
     </div>

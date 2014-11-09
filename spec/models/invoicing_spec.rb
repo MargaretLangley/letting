@@ -16,6 +16,19 @@ RSpec.describe Invoicing, type: :model do
     it('invoices') { expect(invoicing_new invoices: nil).to_not be_valid }
   end
 
+  describe '#actionable?' do
+    it 'can be actionable' do
+      invoicing = Invoicing.new
+      invoicing.invoices.build
+      expect(invoicing.actionable?).to be true
+    end
+
+    it 'can be actionable' do
+      invoicing = Invoicing.new
+      expect(invoicing.actionable?).to be false
+    end
+  end
+
   describe '#generate' do
     it 'invoice when an account is within property and date range' do
       template_create id: 1
