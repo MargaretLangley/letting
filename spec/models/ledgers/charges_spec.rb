@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe 'Charges', :ledgers, type: :model do
+
   before { Timecop.travel Date.new(2013, 1, 31) }
   after { Timecop.return }
 
@@ -9,7 +10,7 @@ describe 'Charges', :ledgers, type: :model do
   it '#prepare_for_form' do
     expect(charges.size).to eq(0)
     charges.prepare
-    expect(charges.size).to eq(6)
+    expect(charges.size).to eq(ChargesDefaults::MAX_CHARGES)
   end
 
   it '#cleans up form' do
