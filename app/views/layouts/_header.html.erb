@@ -1,29 +1,29 @@
 <header>
   <div class="grid grid-pad">
-    <div class="col-2-8">
+    <div class="col-5-24">
       <h2><%= link_to 'Adams Lettings', root_path, class: 'hover-link inverted-link' %></h2>
     </div>
 
-    <div class="col-4-8">
+    <div class="col-14-24">
       <div class="no-print">
         <div class="col-1-1">
           &nbsp;
         </div>
         <div class="col-1-1">
           <div class='form-wrapper'>
-            <%= form_tag search_path, method: 'get' do %>
+              <%= form_tag search_path, method: 'get' do %>
               <%= text_field_tag :search_terms, params[:search_terms], placeholder: 'Search here...', title: 'Search', data: {autocomplete_source: search_path}, autofocus:true, class: 'max-3-4' %>
               <button type="submit" class='max-1-4' id = 'search' title = 'Search' ><i class= 'fa fa-search fa-lg'></i></button>
               <% if controller.controller_name == 'invoicings' && controller.action_name == 'new' %>
-                <div class='js-toggle-selection'>
-                  <div class='js-togglable'>
+                <div class='js-toggle-selection invoicings-padded'>
+                  <div class='js-togglable c-align'>
                     <h4>Search for new charges within the next 8 weeks
                       <%= link_to 'or choose dates', '#',title: 'Choose Dates with calendar', class: 'js-toggle inverted-link' %>
                       <%= link_to fa_icon('calendar lg'), '#',title: 'Choose Dates with calendar', class: 'js-toggle inverted-link l-pad' %>
                     </h4>
                   </div>
                   <div class='js-togglable js-revealable'>
-                    <h4>Search for new charges within chosen dates
+                    <h4 class='c-align'>Search for new charges within chosen dates
                       <%= link_to ' or default to the next 8 weeks', '#',title: 'default dates', class: 'js-toggle inverted-link' %>
                     </h4>
                     <div class="col-1-2">
@@ -42,19 +42,16 @@
         </div>
       </div>
     </div>
-    <div class="col-2-8">
+    <div class="col-5-24">
       <nav>
         <% if current_user %>
           <i class="fa fa-user fa-lg", title = 'User' ></i>&nbsp;
           <%= current_user.nickname %>
-          <%= link_to fa_icon('sign-out lg'), logout_path, title: 'Log Out', class: 'inverted-link ll-pad' %>
-          <%= link_to 'Log Out', logout_path, id: 'logout', class: 'inverted-link r-pad hide' %>
+          <%= link_to fa_icon('sign-out lg'), logout_path, id: 'logout', title: 'Log Out', class: 'inverted-link ll-pad' %>
         <% else %>
           <%= link_to fa_icon('sign-in lg'), logout_path, title: 'Log In', class: 'inverted-link ll-pad' %>
-          <%= link_to 'Log In', login_path, class: 'inverted-link hide' %>
         <% end %>
-        <%= link_to fa_icon('print lg'), '#',title: 'Print', class: 'js-print-window inverted-link l-pad' %>&nbsp;
-        <%= link_to 'Print', '#', class: 'js-print-window inverted-link hide'%>
+        <%= link_to fa_icon('print lg'), '#',title: 'Print', class: 'js-print-window inverted-link l-pad' %>
       </nav>
     </div>
   </div>

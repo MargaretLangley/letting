@@ -36,11 +36,11 @@ describe 'Session', type: :feature do
   def logs_out
     click_on('logout')
     expect(page).to have_text /Logged out!/i
-    expect(page).to have_text /Log In/i
+    expect(page).to have_title 'Letting - Login'
   end
 
   def expect_failure
-    expect(current_path).to eq '/sessions'
+    expect(page).to have_title 'Letting - Login'
     expect(page).to have_text 'Email or password is invalid'
   end
 end
