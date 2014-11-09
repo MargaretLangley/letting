@@ -406,7 +406,7 @@ $search-height: 35px;
   }
 
   .submit-button[disabled]{
-    background-color: $primary-button;
+    background-color: $disabled-background;
     color: white;
     text-decoration: none;
     &:hover,

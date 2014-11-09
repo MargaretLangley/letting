@@ -38,15 +38,10 @@
     </div>
     <div class="col-11-24">
       </br></br></br>
-      <%= f.button submit: '', class: "primary submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Invoicing..."} %> or <%= link_to 'Cancel', new_invoicing_path, class: 'warn' %>
+      <%= f.button submit: '', class: "primary submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Invoicing..."}, disabled: @invoicing.invoices.size.zero? %> or <%= link_to_if @invoicing.invoices.size.nonzero?, 'Cancel', new_invoicing_path, class: 'warn' %>
     </div>
   </div>
-  <% if @invoicing.invoices.size.zero? %>
-    <%= render partial: 'invoicings/unknown_invoice' %>
-    <% if params[:search_terms] %>
-      <%= render partial: 'account_debits/show' %>
-    <% end %>
-  <% else %>
+  <% if @invoicing.invoices.size.nonzero? %>
     <div class="grid-row col-1-24">
       &nbsp;
     </div>
@@ -68,6 +63,11 @@
     <div class="grid-row col-1-24">
       &nbsp;
     </div>
+  <% else %>
+    <%= render partial: 'invoicings/unknown_invoice' %>
+    <% if params[:search_terms] %>
+      <%= render partial: 'account_debits/show' %>
+    <% end %>
   <% end %>
 <% end %>
 </div>
