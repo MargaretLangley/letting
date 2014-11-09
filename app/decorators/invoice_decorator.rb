@@ -19,6 +19,10 @@ class InvoiceDecorator
     @source = invoice
   end
 
+  def invoice_date
+    I18n.l @source.invoice_date, format: :short
+  end
+
   def billing_agent
     @source.billing_address.lines.first
   end

@@ -1,14 +1,14 @@
-<% invoice_decorator = InvoiceDecorator.new(invoice) %>
-<%= render 'templates/heading_page1', template: invoice.templates.first %>
+<% invoice_dec = InvoiceDecorator.new(invoice) %>
+<%= render 'templates/heading_page1', template: invoice_dec.templates.first %>
 
 <div class='grid-row col-1-12'>
   &nbsp;
 </div>
 <div class='col-4-12 inv-advice-bold vertical-spacer'>
-  <%= invoice.templates.first.heading2 %>
+  <%= invoice_dec.templates.first.heading2 %>
 </div>
 <div class='col-4-12 inv-advice-bold vertical-spacer'>
-  Property Ref: <%= invoice.property_ref %>
+  Property Ref: <%= invoice_dec.property_ref %>
 </div>
 <div class='col-3-12 inv-advice-bold vertical-spacer'>
   Date <%= l invoice.invoice_date %>
@@ -18,13 +18,13 @@
   &nbsp;
 </div>
 <div class='col-21-24 vertical-spacer'>
-  <%= simple_format(invoice.billing_address) %>
+  <%= simple_format(invoice_dec.billing_address) %>
 </div>
 <div class='grid-row col-1-12'>
   &nbsp;
 </div>
 <div class='inv-advice-bold'>
-  Property Address: <%= invoice.property_address %>
+  Property Address: <%= invoice_dec.property_address %>
 </div>
 
 <%= render partial:'products/products',locals: { invoice: invoice } %>
@@ -32,21 +32,39 @@
 <div class='grid-row col-24-24'>
   &nbsp;
 </div>
-<%= render partial: 'templates/print_section48',locals: {client: invoice.client_address, template: invoice.templates.first }%>
+<p>
+  &nbsp;
+</p>
+<div class='col-1-12 grid-row'>
+  &nbsp;
+</div>
+<div class='inv-advice col-11-12'>
+  We <%= invoice_dec.templates.first.invoice_name.upcase %> ON BEHALF OF YOUR LANDLORD
+  <br>
+  <%= invoice_dec.client_address %>
+  <br>
+  <%= invoice_dec.templates.first.advice1 %>
+  <%= invoice_dec.templates.first.address.text %>
+  <p>
+    <%= invoice_dec.templates.first.advice2 %>
+  </p>
+  <span class='sissors'>&#9985;<%= "-" * 60 %></span>
+  <br>
+</div>
 <div class='grid-row col-1-12'>
   &nbsp;
 </div>
 <div class='inv-advice-bold'>
-  Property Address: <%= invoice.property_address %>
+  Property Address: <%= invoice_dec.property_address %>
 </div>
 <div class='grid-row col-1-12'>
   &nbsp;
 </div>
 <div class='inv-advice-bold col-1-2'>
-  Ref: <%= invoice.property_ref %>
+  Ref: <%= invoice_dec.property_ref %>
  </div>
 <div class='col-5-12 inv-advice-bold'>
-  Due Date <%= I18n.l invoice.invoice_date, format: :short %>
+  Due Date <%= invoice_dec.invoice_date %>
 </div>
 <%= render partial:'products/products_narrow',locals: { invoice: invoice } %>
 <div class='no-print grid-row'>
