@@ -14,6 +14,7 @@
 ####
 #
 module Entities
+  include EntitiesDefaults
   extend ActiveSupport::Concern
   included do
     has_many :entities, -> { order(:created_at) }, dependent: :destroy,
@@ -37,5 +38,4 @@ module Entities
       end
     end
   end
-  MAX_ENTITIES = 2
 end

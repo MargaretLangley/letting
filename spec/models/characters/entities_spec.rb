@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 shared_examples_for Entities do
 
@@ -22,7 +22,7 @@ shared_examples_for Entities do
       entityable = described_class.new
       expect(entityable.entities.size).to eq(0)
       entityable.prepare_for_form
-      expect(entityable.entities.size).to eq(2)
+      expect(entityable.entities.size).to eq(EntitiesDefaults::MAX_ENTITIES)
     end
 
     it 'prepares empty entities' do
@@ -35,7 +35,7 @@ shared_examples_for Entities do
       entityable = described_class.new
       entityable.prepare_for_form
       entityable.prepare_for_form
-      expect(entityable.entities.size).to eq(2)
+      expect(entityable.entities.size).to eq(EntitiesDefaults::MAX_ENTITIES)
     end
 
     it '#clear_up_form destroys unused models' do
