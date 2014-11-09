@@ -7,11 +7,11 @@
 </p>
 
 <div class='insert'>
-  [insert name(s) of leaseholder(s)] (note 1)
+  <%= template.guide.instruction[0] %>
 </div>
 <div class='widemargin'>
-  To
-  <% if object.entities.any? %>
+  <%= template.guide.fillin[0] %>
+    <% if object.entities.any? %>
     <% object.entities.each do |entity| %>
       <%= render 'entities/view', object: entity %>
     <% end %>
@@ -19,38 +19,49 @@
 </div>
 
 <div class='insert'>
-  [address of premises to which the long lease relates]
+  <%= template.guide.instruction[1] %>
 </div>
 <div class='widemargin'>
-  This notice is given in respect of
-  <br>
-   <%= simple_format(object.address.text, {}, wrapper_tag: 'div') %>
+  <%= template.guide.fillin[1] %>
+  <%= simple_format(object.address.text, {}, wrapper_tag: 'div') %>
 </div>
 
 <div class='insert'>
-  [insert date {note 2)}]
+  <%= template.guide.instruction[2] %>
 </div>
 <div class='widemargin'>
-  It requires you to pay rent of <%= due_object %> on <%= date_object %>
+  <%= template.guide.fillin[2] %>
+  <%= due_object %> on <%= date_object %>
 </div>
-<br>
 
 <div class='insert'>
-  [state period]
+  <%= template.guide.instruction[3] %>
 </div>
 <div class='widemargin'>
-  The rent is payable in respect of the period
+  <%= template.guide.fillin[3] %>
 </div>
-<br>
-
-<%= render 'invoice_page2/print_payto_agent_address', template: Template.find(1) %>
 
 <div class='insert'>
-  [insert name of landlord(s) and if not given above, address]
+  <%= template.guide.instruction[4] %>
+</div>
+<div class='widemargin'>
+  <%= template.guide.fillin[4] %>
 </div>
 
+<div class='insert'>
+  <%= template.guide.instruction[5] %>
+</div>
 <div class='widemargin'>
-  This notice is given by <%= object.client.entities.full_name %>
+  <%= template.guide.fillin[5] %>
+  <%= render 'invoice_page2/print_payto_agent_address', template: Template.find(1) %>
+</div>
+
+<div class='insert'>
+  <%= template.guide.instruction[6] %>
+</div>
+<div class='widemargin'>
+  <%= template.guide.fillin[6] %>
+  <%= object.client.entities.full_name %>
   <br>
   <%= render 'addresses/view_on_one_line', addressee: object.client %>
 </div>
