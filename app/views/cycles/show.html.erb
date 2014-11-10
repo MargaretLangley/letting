@@ -1,15 +1,39 @@
-<div class='shell'>
+<% @title='View Cycle' %>
 
-  <% if @cycle.cycle_type == 'monthly' %>
-    <% @title='View Monthly Cycle' %>
-    <%= render 'show_top', cycle: @cycle %>
-    <%= render 'due_ons/monthly', cycle: @cycle %>
-    <%= render 'cycle_charged_ins/form', cycle: @cycle, disabler: true %>
-  <% else %>
-    <% @title='View Cycle' %>
-    <%= render 'show_top', cycle: @cycle %>
-    <%= render 'due_ons/view', cycle: @cycle %>
-    <%= render 'cycle_charged_ins/form', cycle: @cycle, disabler: true %>
-  <% end %>
+<div class='grid shell'>
+  <div class='col-18-24 vertical-spacer'>
+    <div class='grid-row col-8-24 vertical-spacer'>
+      &nbsp;
+    </div>
+    <div class='col-3-24 vertical-spacer faded'>
+      Name
+    </div>
+    <div class='col-13-24  vertical-spacer'>
+      <%= @cycle.name %>
+    </div>
 
-</div>
+    <div class='grid-row col-8-24 vertical-spacer'>
+      &nbsp;
+    </div>
+    <div class='col-3-24 vertical-spacer faded'>
+      Order
+    </div>
+    <div class='col-1-24 vertical-spacer r-align'>
+      <%= @cycle.order %>
+    </div>
+    <div class='col-12-24  vertical-spacer'>
+      &nbsp;
+    </div>
+    <div class='grid-row col-24-24'>
+      &nbsp;
+    </div>
+    <% if @cycle.cycle_type == 'monthly' %>
+      <%= render 'due_ons/monthly', cycle: @cycle %>
+    <% else %>
+      <%= render 'due_ons/term', cycle: @cycle %>
+    <% end %>
+  </div>
+  <div class='col-6-24 no-r-pad'>
+    <%= link_to fa_icon('edit 3x'), edit_cycle_path(@cycle), title: 'Edit', class: 'simple-button float-right' %>
+  </div>
+</div> <!-- grid shell -->
