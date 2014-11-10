@@ -52,7 +52,6 @@ class Permission < Struct.new(:user)
     %w(users
        cycles
        templates
-       notices
        guides)
   end
 end
