@@ -1,39 +1,34 @@
- and invoices<% @title='View Client' %>
+<% @title='View Client' %>
 
 <div class='grid shell'>
-
-  <div class='col-1-2 vertical-spacer'>
-    <h2>Client View</h2>
+  <div class='col-14-24 vertical-spacer'>
+    <div class='grid-row col-1-4 vertical-spacer faded'>
+      Client ID
+    </div>
+    <div class='col-3-4 vertical-spacer'>
+     <%= @client.human_ref %>
+    </div>
+    <div class='grid-row col-1-4 vertical-spacer faded'>
+      Name
+    </div>
+    <div class='col-3-4 vertical-spacer'>
+      <%= @client.entities.full_name %>
+    </div>
+    <div class='grid-row col-1-4 vertical-spacer faded'>
+      Address
+    </div>
+    <div class='col-3-4 vertical-spacer'>
+      <%= simple_format(@client.address.text, {}, wrapper_tag: 'div') %>
+    </div>
   </div>
-  <div class='col-1-2 vertical-spacer'>
+  <div class='col-10-24 vertical-spacer'>
     <%= link_to fa_icon('edit'), edit_client_path(@client), class: 'simple-button float-right', title: 'Edit' %>
   </div>
-
-  <div class='col-1-4 vertical-spacer grid-row faded'>
-    Client ID
-  </div>
-  <div class='col-3-4 vertical-spacer'>
-   <%= @client.human_ref %>
-  </div>
-
-  <div class='col-1-4 vertical-spacer faded'>
-    Name
-  </div>
-  <div class='col-3-4 vertical-spacer'>
-    <%= @client.entities.full_name %>
-  </div>
-<br>
-
-  <div class='col-1-4 vertical-spacer faded'>
-    Address
-  </div>
-  <div class='col-3-4 vertical-spacer'>
-    <%= simple_format(@client.address.text, {}, wrapper_tag: 'div') %>
-  </div>
-  <div class='col-1-1 vertical-spacer faded'>
+  <br>
+  <div class='grid-row col-1-1 faded'>
     Properties Owned
   </div>
-  <div class='col-1-8 vertical-spacer grid-header'>
+  <div class='grid-row col-1-8 vertical-spacer grid-header'>
     ID
   </div>
   <div class='col-7-8 vertical-spacer grid-header'>
@@ -41,11 +36,11 @@
   </div>
 
   <% @client.properties.each do |property| %>
-    <div class='col-1-8 vertical-spacer grid-row'>
+    <div class='grid-row col-1-8 vertical-spacer'>
        <%= property.human_ref %>
     </div>
     <div class='col-7-8 vertical-spacer no-r-pad'>
-     <%= render 'addresses/view_on_one_line', addressee: property %>
+     <%= property.address.text %>
     </div>
   <% end %>
 </div>

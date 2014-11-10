@@ -16,7 +16,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @client = Client.find params[:id]
+    @client = Client.includes(properties: [:address]).find params[:id]
   end
 
   def new
