@@ -43,14 +43,15 @@ class TemplatesController < ApplicationController
              :heading1, :heading2,
              :advice1, :advice2,
              address_attributes: address_params,
-             notices_attributes: notices_params
+             notices_attributes: notices_params,
+             guides_attributes: guides_params
   end
 
   def notices_params
     %i(id instruction fill_in sample)
   end
 
-  def notices_params
-    %i(id instruction[] fillin[] sample[])
+  def guides_params
+    %i(id instruction fillin sample)
   end
 end

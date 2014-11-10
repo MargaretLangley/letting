@@ -2,9 +2,9 @@ class CreateGuides < ActiveRecord::Migration
   def change
     create_table :guides do |t|
       t.belongs_to :template, null: false, index: true
-      t.string :instruction, array: true, default: ['']
-      t.string :fillin, array: true, default: ['']
-      t.string :sample, array: true, default: ['']
+      t.text :instruction
+      t.text :fillin
+      t.text :sample
       t.timestamps
     end
   end
