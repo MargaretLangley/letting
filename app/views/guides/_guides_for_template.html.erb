@@ -1,11 +1,9 @@
-<% for val in 0..6 %>
-  <div class='insert'>
-    <%= template.guide.instruction[val] %>
- </div>
+<div class='insert'>
+  <%= template.guides[0].instruction %>
+</div>
 
- <div class='widemargin'>
-    <%= template.guide.fillin[val] %>
-    <%= template.guide.sample[val] %>
-  </div>
-<% end %>
+<div class='widemargin'>
+  <%= template.guides[0].fillin %>
+  <%= template.guides[0].sample %>
+</div>
 

@@ -147,10 +147,10 @@ ActiveRecord::Schema.define(version: 20141031192953) do
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
 
   create_table "guides", force: true do |t|
-    t.integer  "template_id",                null: false
-    t.string   "instruction", default: [""],              array: true
-    t.string   "fillin",      default: [""],              array: true
-    t.string   "sample",      default: [""],              array: true
+    t.integer  "template_id", null: false
+    t.text     "instruction"
+    t.text     "fillin"
+    t.text     "sample"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

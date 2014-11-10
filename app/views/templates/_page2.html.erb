@@ -1,6 +1,8 @@
 <%= render 'heading_page2', template: @template %>
 
-<%= render '/guides/guides_for_template', template: @template %>
+ <!-- render '/guides/guides_for_template', template: @template  -->
+
+<%= render @template.guides %>
 
 <div class='widemargin'>
   CLIENT'S ADDRESS

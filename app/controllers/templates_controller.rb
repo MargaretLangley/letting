@@ -50,4 +50,8 @@ class TemplatesController < ApplicationController
   def notices_params
     %i(id instruction fill_in sample)
   end
+
+  def guides_params
+    %i(id instruction fillin sample)
+  end
 end

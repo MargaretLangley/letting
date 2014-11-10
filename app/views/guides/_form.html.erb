@@ -1,29 +1,20 @@
-<%= form_for(@guide) do |f| %>
-  <% if @guide.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@guide.errors.count, "error") %> prohibited this guide from being saved:</h2>
-
-      <ul>
-      <% @guide.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= f.fields_for :guides do |f| %>
   <div class="grid">
     <hr>
-    <div class="field col-3-4 vertical-spacer">
-      <%= f.label :instruction %><br>
+    <div class='col-1-6 vertical-spacer grid-row'>
+        <%= f.label :instruction %>
+    </div>
+    <div class='col-3-4 vertical-spacer'>
       <%= f.text_field :instruction %>
     </div>
-    <div class="field col-1-4 vertical-spacer">
-      <%= f.label :fillin %><br>
+    <div class='col-1-4 vertical-spacer'>
+      <%= f.label :fillin, "Fill In and Example" %>
+    </div>
+    <div class='col-1-4 vertical-spacer'>
       <%= f.text_field :fillin %>
     </div>
-    <div class="field col-1-4 vertical-spacer">
-      <%= f.label :sample %><br>
+    <div class='col-1-4 vertical-spacer'>
       <%= f.text_field :sample %>
     </div>
-   </div>
+  </div>
 <% end %>
