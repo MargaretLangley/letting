@@ -1,48 +1,52 @@
 <% @title='View User' %>
 
-<div class='shell'>
-
-  <div class="grid">
-    <div class='col-1-2 vertical-spacer'>
-      <h2>User View</h2>
+<div class='grid shell'>
+  <div class='col-18-24 vertical-spacer'>
+    <div class='grid-row col-1-6'>
+      &nbsp;
     </div>
-    <div class='col-1-2 vertical-spacer  no-r-pad'>
-      <%= link_to fa_icon('edit'), edit_user_path(@user), class: 'simple-button float-right' %>
-    </div>
-  </div>
-
-  <div class='grid'>
-
     <div class='col-1-6 vertical-spacer faded'>
-     User ID
+      User ID
     </div>
-    <div class='col-5-6 vertical-spacer'>
-     <%= @user.id %>
-    </div>
-
-    <div class='col-1-6 vertical-spacer faded'>
-     Nickname
-    </div>
-    <div class='col-5-6 vertical-spacer'>
-     <%= @user.nickname %>
+    <div class='col-4-6 vertical-spacer'>
+      <%= @user.id %>
     </div>
 
-    <div class='col-1-6 vertical-spacer faded'>
-     email
+    <div class='grid-row col-1-6'>
+      &nbsp;
     </div>
-    <div class='col-5-6 vertical-spacer'>
-     <%= @user.email %>
+    <div class='col-1-6 vertical-spacer faded'>
+      Nickname
+    </div>
+    <div class='col-4-6 vertical-spacer'>
+      <%= @user.nickname %>
     </div>
 
-    <div class='col-1-6 vertical-spacer faded'>
-     Admin
+    <div class='grid-row col-1-6'>
+      &nbsp;
     </div>
-    <div class='col-5-6 vertical-spacer no-r-pad'>
-        <% if @user.admin %>
-      Yes
+    <div class='col-1-6 vertical-spacer faded'>
+      email
+    </div>
+    <div class='col-4-6 vertical-spacer'>
+      <%= @user.email %>
+    </div>
+
+    <div class='grid-row col-1-6'>
+      &nbsp;
+    </div>
+    <div class='col-1-6 vertical-spacer faded'>
+      Admin
+    </div>
+    <div class='col-4-6 vertical-spacer no-r-pad'>
+      <% if @user.admin %>
+        Yes
       <% else %>
-      No
+        No
       <% end %>
     </div>
   </div>
-</div>
+  <div class='col-6-24 vertical-spacer  no-r-pad'>
+    <%= link_to fa_icon('edit 2x'), edit_user_path(@user), class: 'simple-button float-right' %>
+  </div>
+</div> <!-- grid shell -->
