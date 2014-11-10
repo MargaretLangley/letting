@@ -8,7 +8,7 @@
 #
 class InvoicingsController < ApplicationController
   def index
-    @invoicings = Invoicing.page(params[:page]).load.order(period_first: :desc)
+    @invoicings = Invoicing.page(params[:page]).default.load
   end
 
   def show

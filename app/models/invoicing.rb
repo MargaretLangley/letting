@@ -16,6 +16,8 @@ class Invoicing < ActiveRecord::Base
   has_many :invoices
   validates :property_range, :period_first, :period_last, :invoices,
             presence: true
+  scope :default, -> { order(period_first: :desc) }
+
   def period
     (period_first..period_last)
   end

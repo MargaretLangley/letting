@@ -11,6 +11,8 @@
 ####
 #
 class User < ActiveRecord::Base
+  scope :default, -> { order(:nickname) }
+
   has_secure_password
   validates :nickname, presence: true
   validates :email, presence: true,
