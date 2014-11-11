@@ -1,16 +1,17 @@
 <% @title='View Invoice Text' %>
+<div id='template' class='shell template-padding'>
+  <div class='col-1-2 vertical-spacer'>
+    &nbsp;
+  </div>
+  <div class='col-1-2 vertical-spacer'>
+    <%= link_to fa_icon('edit'), edit_template_path(@template), class: 'simple-button float-right', title: 'Edit' %>
+  </div>
 
-<div class='col-1-2 vertical-spacer'>
-  &nbsp;
+  Template Number <%= @template.id %>
+
+  <% if @template.id == 1 %>
+    <%= render 'page1', template: @template %>
+  <% else %>
+    <%= render 'page2', template: @template %>
+  <% end %>
 </div>
-<div class='col-1-2 vertical-spacer'>
-  <%= link_to fa_icon('edit'), edit_template_path(@template), class: 'simple-button float-right', title: 'Edit' %>
-</div>
-
-Template Number <%= @template.id %>
-
-<% if @template.id == 1 %>
-  <%= render '/templates/page1', template: @template %>
-<% else %>
-  <%= render '/templates/page2', template: @template %>
-<% end %>
