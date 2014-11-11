@@ -196,15 +196,6 @@ ActiveRecord::Schema.define(version: 20141031192953) do
   add_index "letters", ["invoice_id"], name: "index_letters_on_invoice_id", using: :btree
   add_index "letters", ["template_id"], name: "index_letters_on_template_id", using: :btree
 
-  create_table "notices", force: true do |t|
-    t.integer  "template_id"
-    t.string   "instruction", null: false
-    t.string   "fill_in",     null: false
-    t.string   "sample",      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "payments", force: true do |t|
     t.integer  "account_id",                         null: false
     t.datetime "booked_on",                          null: false

@@ -14,7 +14,7 @@ describe 'Template Factory' do
       end
     end
     describe 'adds' do
-      # adds notice..
+      # adds guides..
     end
     describe 'overrides' do
       it 'changes description' do

@@ -56,53 +56,6 @@ class << self
 
   end
 
-  def create_notices
-    Notice.create! [
-      { id: 1,
-        template_id: 2,
-        instruction: "[Insert leaseholder]",
-        fill_in: "To",
-        sample: "Mr & Mrs Sample",
-      },
-      { id: 2,
-        template_id: 2,
-        instruction: "[address of premises]",
-        fill_in: "This notice is ",
-        sample: "11 Tamworth Road",
-      },
-      { id: 3,
-        template_id: 2,
-        instruction: "[Insert date]",
-        fill_in: "Requires rent",
-        sample: "60.00",
-      },
-      { id: 4,
-        template_id: 2,
-        instruction: "[State Period]",
-        fill_in: "Payable for period",
-        sample: "20March-29th Sep",
-      },
-      { id: 5,
-        template_id: 2,
-        instruction: "[Insert Landlord name]",
-        fill_in: "Pay to",
-        sample: "Mr Collector",
-      },
-      { id: 6,
-        template_id: 2,
-        instruction: "[Insert address]",
-        fill_in: "at",
-        sample: "11 High Street",
-      },
-      { id: 7,
-        template_id: 2,
-        instruction: "[Insert Landlord name]",
-        fill_in: "To",
-        sample: "CLIENT NAME",
-      },
-     ]
-  end
-
   def create_guides
     Guide.create! [
       { id: 1,
@@ -154,5 +107,4 @@ class << self
 end
 
 create_templates
-create_notices
 create_guides

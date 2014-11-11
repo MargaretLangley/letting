@@ -25,8 +25,6 @@ class Template < ActiveRecord::Base
   accepts_nested_attributes_for :address, allow_destroy: true
   has_many :guides, dependent: :destroy
   accepts_nested_attributes_for :guides, allow_destroy: true
-  has_many :notices, -> { order(:created_at) }, dependent: :destroy
-  accepts_nested_attributes_for :notices, allow_destroy: true
   has_many :invoices, through: :letters
   has_many :letters, dependent: :destroy
 end

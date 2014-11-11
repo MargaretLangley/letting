@@ -27,8 +27,8 @@ namespace :db do
     Rake::Task['db:import:charged_ins'].invoke
     Rake::Task['db:import:cycle'].invoke
     Rake::Task['db:import:template_address'].invoke
-    Rake::Task['db:import:template_notice'].invoke
     Rake::Task['db:import:template'].invoke
+    Rake::Task['db:import:template_guide'].invoke
 
     logger.info 'db:import::clients'
     Rake::Task['db:import:clients'].execute
