@@ -1,0 +1,23 @@
+# <% invoice_dec = InvoiceDecorator.new(invoice) %>
+
+# <div class='grid-row'>
+#   page 2
+# </div>
+
+# <%= render 'invoice_page2/print_p2_heading',template: ::Template.find(1) %>
+
+# <% @template = ::Template.find(2) %>
+# <div class='res-longlease'>
+#   <%= @template.heading2 %> <%= invoice_dec.property_ref %>
+# </div>
+
+# <%= render @template.guides %>
+
+# <div class='widemargin'>
+#   CLIENT'S ADDRESS
+#   <br>
+#   <%= simple_format(@template.advice1) %>
+#   <p>
+#   <%= simple_format(@template.advice2) %>
+#   </p>
+# </div>

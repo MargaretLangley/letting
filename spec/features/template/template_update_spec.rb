@@ -27,7 +27,7 @@ describe Template, type: :feature do
   describe '#update page 2' do
     it 'finds data on 2nd page and succeeds' do
       template_create id: 2
-      # guide_create id:1
+      guide_create id: 1
       visit '/templates/2/edit'
       expect(page.title). to eq 'Letting - Edit Invoice Text'
       fill_in '2nd Heading', with: 'Bowled Out!'
