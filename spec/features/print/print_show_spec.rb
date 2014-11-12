@@ -9,7 +9,7 @@ describe Invoicing, type: :feature do
                        property_range: '1-200',
                        period_first: '2014/06/30',
                        period_last: '2014/08/30'
-
+      template_create id: 2
       visit '/prints/1'
       expect(page).to have_text 'VAT'
       expect(page).to have_text '108'
