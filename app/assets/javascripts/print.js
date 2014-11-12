@@ -1,6 +1,7 @@
 $( document ).ready(function() {
  // js print window
-  $('.js-print-window').click(function(event) {
+  $('.js-printoff').click(function() {
     window.print();
+    return false;
   });
 });

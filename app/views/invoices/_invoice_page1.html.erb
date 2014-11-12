@@ -1,73 +1,74 @@
 <% invoice_dec = InvoiceDecorator.new(invoice) %>
-<%= render 'templates/heading_page1', template: invoice_dec.templates.first %>
+<div class='printbody'>
+  <%= render 'templates/heading_page1', template: invoice_dec.templates.first %>
 
-<div class='grid-row col-1-12'>
-  &nbsp;
-</div>
-<div class='col-4-12 inv-advice-bold vertical-spacer'>
-  <%= invoice_dec.templates.first.heading2 %>
-</div>
-<div class='col-4-12 inv-advice-bold vertical-spacer'>
-  Property Ref: <%= invoice_dec.property_ref %>
-</div>
-<div class='col-3-12 inv-advice-bold vertical-spacer'>
-  Date <%= l invoice.invoice_date %>
-</div>
+  <div class='grid-row col-1-12'>
+    &nbsp;
+  </div>
+  <div class='col-4-12 inv-advice-bold vertical-spacer'>
+    <%= invoice_dec.templates.first.heading2 %>
+  </div>
+  <div class='col-4-12 inv-advice-bold vertical-spacer'>
+    Property Ref: <%= invoice_dec.property_ref %>
+  </div>
+  <div class='col-3-12 inv-advice-bold vertical-spacer'>
+    Date <%= l invoice.invoice_date %>
+  </div>
 
-<div class='grid-row col-3-24'>
-  &nbsp;
-</div>
-<div class='col-21-24 vertical-spacer'>
-  <%= simple_format(invoice_dec.billing_address) %>
-</div>
-<div class='grid-row col-1-12'>
-  &nbsp;
-</div>
-<div class='inv-advice-bold'>
-  Property Address: <%= invoice_dec.property_address %>
-</div>
+  <div class='grid-row col-3-24'>
+    &nbsp;
+  </div>
+  <div class='col-21-24 vertical-spacer'>
+    <%= simple_format(invoice_dec.billing_address) %>
+  </div>
+  <div class='grid-row col-1-12'>
+    &nbsp;
+  </div>
+  <div class='inv-advice-bold col-11-12'>
+    Property Address: <%= invoice_dec.property_address %>
+  </div>
 
-<%= render partial:'products/products',locals: { invoice: invoice } %>
+  <%= render partial:'products/products',locals: { invoice: invoice } %>
 
-<div class='grid-row col-24-24'>
-  &nbsp;
-</div>
-<p>
-  &nbsp;
-</p>
-<div class='col-1-12 grid-row'>
-  &nbsp;
-</div>
-<div class='inv-advice col-11-12'>
-  We <%= invoice_dec.templates.first.invoice_name.upcase %> ON BEHALF OF YOUR LANDLORD
-  <br>
-  <%= invoice_dec.client_address %>
-  <br>
-  <%= invoice_dec.templates.first.advice1 %>
-  <%= invoice_dec.templates.first.address.text %>
+  <div class='grid-row col-24-24'>
+    &nbsp;
+  </div>
   <p>
-    <%= invoice_dec.templates.first.advice2 %>
+    &nbsp;
   </p>
-  <span class='sissors'>&#9985;<%= "-" * 60 %></span>
-  <br>
+  <div class='col-1-12 grid-row'>
+    &nbsp;
+  </div>
+  <div class='inv-advice col-11-12'>
+    We <%= invoice_dec.templates.first.invoice_name.upcase %> ON BEHALF OF YOUR LANDLORD
+    <br>
+    <%= invoice_dec.client_address %>
+    <br>
+    <%= invoice_dec.templates.first.advice1 %>
+    <%= invoice_dec.templates.first.address.text %>
+    <p>
+      <%= invoice_dec.templates.first.advice2 %>
+    </p>
+    <span class='sissors'>&#9985;<%= "-" * 68 %></span>
+    <br>
+  </div>
+  <div class='grid-row col-1-12'>
+    &nbsp;
+  </div>
+  <div class='col-11-12 inv-advice-bold'>
+    Property Address: <%= invoice_dec.property_address %>
+  </div>
+  <div class='grid-row col-1-12'>
+    &nbsp;
+  </div>
+  <div class='inv-advice-bold col-1-2'>
+    Ref: <%= invoice_dec.property_ref %>
+   </div>
+  <div class='col-5-12 inv-advice-bold'>
+    Due Date <%= invoice_dec.invoice_date %>
+  </div>
+  <%= render partial:'products/products_narrow',locals: { invoice: invoice } %>
+  <div class='no-print grid-row'>
+    &nbsp;
+  </div>
 </div>
-<div class='grid-row col-1-12'>
-  &nbsp;
-</div>
-<div class='inv-advice-bold'>
-  Property Address: <%= invoice_dec.property_address %>
-</div>
-<div class='grid-row col-1-12'>
-  &nbsp;
-</div>
-<div class='inv-advice-bold col-1-2'>
-  Ref: <%= invoice_dec.property_ref %>
- </div>
-<div class='col-5-12 inv-advice-bold'>
-  Due Date <%= invoice_dec.invoice_date %>
-</div>
-<%= render partial:'products/products_narrow',locals: { invoice: invoice } %>
-<div class='no-print grid-row'>
-  &nbsp;
-</div>
-

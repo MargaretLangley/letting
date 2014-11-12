@@ -7,20 +7,22 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body onLoad="window.print()">
+  <body onLoad='window.print()'>
 
     <%= render 'layouts/header' %>
     <div class='page-wrapper'>
       <div class="grid">
-        <article class="col-22-24">
+        <article class="col-21-24">
           <% if content_for?(:heading) %>
             <%= yield :heading %>
           <% else %>
             <h2><%= @title %></h2>
           <% end %>
-          <%= render 'layouts/return' %>
           <%= yield %>
         </article>
+        <aside class="col-3-24 no-r-pad">
+          <%= render 'layouts/sidebar' %>
+        </aside>
       </div>
     </div>
   </body>
