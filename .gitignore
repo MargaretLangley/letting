@@ -47,3 +47,6 @@ brakeman.html
 
 # sequence png files
 /sequence/*.png
+
+# Mac hidden file - of no relevance
+.DS_Store
