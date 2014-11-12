@@ -81,6 +81,15 @@ screen requirements hidden from print*/
     background-color: $neutral-print;
    }
 
+/*This sets printed page to A4 width*/
+  .printbody{
+    margin-top: 0cm;
+    margin-right: 0.20cm;
+    margin-left: 0.20cm;
+    width: 22cm;
+    background-color: $neutral-print;
+   }
+
   .margwide{
     margin-left: 0.80cm;
   }

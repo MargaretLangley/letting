@@ -2,39 +2,52 @@
 
 <div class='grid shell'>
 
-  <div class='col-8-24 vertical-spacer no-print grid-header'>
+  <div class='grid-row col-2-24 no-print'>
+    &nbsp;
+  </div>
+  <div class='col-5-24 vertical-spacer no-print grid-header'>
    Property Range
   </div>
-  <div class='col-7-24 grid-header no-print'>
+  <div class='col-5-24 grid-header no-print'>
     Created On
   </div>
-  <div class='col-3-24 grid-header no-print'>
+  <div class='col-4-24 grid-header no-print'>
     Bill From
   </div>
-  <div class='col-3-24 grid-header no-print'>
+  <div class='col-4-24 grid-header no-print'>
     Bill To
   </div>
-  <div class='col-3-24 grid-header no-print r-align'>
-    Action
+  <div class='col-3-24 grid-header no-print'>
+    Actions
   </div>
+  <div class='col-1-24 no-print'>
+    &nbsp;
+  </div>
+
 
   <% @invoicings.each do |invoicing| %>
     <div class='table-row' data-link='<%= invoicing_path(invoicing) %>'>
-      <div class='col-8-24 vertical-spacer no-print inherit-row grid-row'>
+      <div class='col-2-24 no-print grid-row'>
+        &nbsp;
+      </div>
+      <div class='col-5-24 vertical-spacer no-print inherit-row'>
         <%= invoicing.property_range %>
       </div>
-      <div class='col-7-24 no-print inherit-row'>
+      <div class='col-5-24 no-print inherit-row'>
         <%= I18n.l invoicing.created_at, format: :human %>
       </div>
-      <div class='col-3-24 no-print inherit-row'>
+      <div class='col-4-24 no-print inherit-row'>
         <%= I18n.l invoicing.period_first, format: :short %>
       </div>
-      <div class='col-3-24 no-print inherit-row'>
+      <div class='col-4-24 no-print inherit-row'>
         <%= I18n.l invoicing.period_last, format: :short %>
       </div>
-      <div class='col-3-24 no-print r-align'>
-        <%= link_to fa_icon('file lg'), invoicing_path(invoicing), title: 'View', class: 'r-pad' %>
-        <%= link_to fa_icon('print lg'), print_path(invoicing), title: 'Print', class: 'simple_button' %>
+      <div class='col-3-24 no-print'>
+        <%= link_to fa_icon('file lg'), invoicing_path(invoicing), title: 'View', class:'r-pad' %>
+        <%= link_to fa_icon('print lg'), print_path(invoicing), title: 'Print' %>
+      </div>
+      <div class='col-1-24 no-print'>
+        &nbsp;
       </div>
     </div>
   <% end %>

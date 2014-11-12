@@ -37,7 +37,7 @@
       <%= I18n.l @invoicing.period_last, format: :short %>
     </div>
     <div class='col-1-24 no-print r-align'>
-      <%= link_to fa_icon('print lg'), print_path(@invoicing), title: 'Print', class: 'simple_button' %>
+      <%= link_to fa_icon('print lg'), print_path(@invoicing), title: 'Print' %>
     </div>
     <div class='col-3-24'>
       &nbsp;
@@ -58,7 +58,7 @@
     Charge
   </div>
   <div class='col-3-24 vertical-spacer no-print grid-header'>
-    Action
+    Actions
   </div>
 
   <% @invoicing.invoices.each do |invoice| %>
@@ -76,8 +76,11 @@
       <div class='col-7-24 inherit-row vertical-spacer'>
         <%= invoice_decorator.products_display %>
       </div>
-      <div class='col-1-24 inherit-row vertical-spacer no-print r-align'>
-        <%= link_to fa_icon('print lg'), invoice_path(invoice), title: 'Print', class: 'simple_button' %>
+      <div class='col-1-24 vertical-spacer no-print l-align'>
+        <%= link_to fa_icon('file lg'), invoice_path(invoice), title: 'View' %>
+      </div>
+      <div class='col-1-24 vertical-spacer no-print r-align'>
+        <%= link_to fa_icon('print lg'), invoice_path(invoice), title: 'Print' %>
       </div>
     </div>
   <% end %>
