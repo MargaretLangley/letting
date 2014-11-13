@@ -13,7 +13,7 @@ describe 'Invoicing Factory' do
       it 'period_last' do
         expect(invoicing_new period_last: nil).to_not be_valid
       end
-      it('invoices') { expect(invoicing_new invoices: nil).to_not be_valid }
+      it('runs') { expect(invoicing_new runs: nil).to_not be_valid }
     end
   end
 end

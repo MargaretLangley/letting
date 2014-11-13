@@ -64,10 +64,20 @@ after :templates do
       ]
     end
 
+
+    def create_runs
+      Run.create! [
+        { id: 1,
+          invoicing_id: 1,
+        },
+      ]
+    end
+
+
     def create_invoices
       Invoice.create! [
         { id: 1,
-          invoicing_id: 1,
+          run_id: 1,
           invoice_account_id: 1,
           billing_address: "Mr E. P. Hendren\nFlat 28 Lords\n2 St Johns Wood Road\nLondon\nGreater London\nNW8 8QN",
           property_ref: 1001,
@@ -102,6 +112,7 @@ after :templates do
   create_debits
   create_products
   create_invoices
+  create_runs
   create_letters
   create_invoicings
 end

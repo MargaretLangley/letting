@@ -7,18 +7,18 @@
 # With the method argument: templates: [template_create(id: 1)]
 
 def invoice_new id: id,
+                run_id: 5,
                 invoice_date: '2014/06/30',
                 account: account_new(property: property_new),
                 property_address: address_new,
                 property_ref: 108,
-                debits: [debit_new(charge: charge_new)],
-                templates: [template_create(id: 1)]
+                invoice_account: invoice_account_new
 
+  template_create(id: 1) unless Template.find_by id: 1
   account.property.human_ref = property_ref
   account.property.address = property_address
 
-  (invoice_account = InvoiceAccount.new).debited debits: debits
-  invoice = Invoice.new id: id
+  invoice = Invoice.new id: id, run_id: run_id
   invoice.prepare invoice_date: invoice_date,
                   property: account.property.invoice,
                   billing: { arrears: 0, transaction: invoice_account }
@@ -27,19 +27,20 @@ end
 
 def invoice_create \
   id: nil,
+  run_id: 6,
   invoice_date: '2014/06/30',
   account: account_new(property: property_new),
   property_address: address_new,
   property_ref: 108,
-  debits: [debit_new(charge: charge_new)],
-  templates: [template_create(id: 1)]
+  invoice_account: invoice_account_new
+
   invoice = invoice_new id: id,
+                        run_id: run_id,
                         invoice_date: invoice_date,
                         account: account,
                         property_address: property_address,
                         property_ref: property_ref,
-                        debits: debits,
-                        templates: templates
+                        invoice_account: invoice_account
   invoice.save!
   invoice
 end

@@ -17,14 +17,7 @@ RSpec.describe InvoiceAccount, type: :model do
     (transaction = InvoiceAccount.new)
       .debited(debits: [debit_new(charge: charge_new)])
 
-    (invoice = Invoice.new)
-      .prepare invoice_date: '2014-06-30',
-               property: { property_ref: 20,
-                           property_address: 'Road',
-                           billing_address: 'Road',
-                           client_address: 'Road' },
-               billing: { arrears: 0, transaction:  transaction }
-    invoice.save!
+    invoice = invoice_create invoice_account: transaction
     invoice.destroy
     expect(Invoice.count).to eq 0
     expect(InvoiceAccount.count).to eq 1

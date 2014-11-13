@@ -61,7 +61,7 @@
     Actions
   </div>
 
-  <% @invoicing.invoices.each do |invoice| %>
+  <% @invoicing.runs.last.invoices.each do |invoice| %>
     <% invoice_decorator = InvoiceDecorator.new(invoice) %>
     <div class='table-row' data-link='<%= invoice_path(invoice) %>'>
       <div class='grid-row col-3-24 inherit-row vertical-spacer r-align'>

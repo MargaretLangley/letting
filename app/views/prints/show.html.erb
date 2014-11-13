@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<% @invoicing.invoices.each do |invoice| %>
+<% @invoicing.runs.last.invoices.each do |invoice| %>
   <div class='shell-for-print-screen'>
     <div class='page'>
       <%= render 'invoices/invoice_page1', invoice: invoice %>

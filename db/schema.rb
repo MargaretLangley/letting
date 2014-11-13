@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141031192953) do
+ActiveRecord::Schema.define(version: 20141110181915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(version: 20141031192953) do
   end
 
   create_table "invoices", force: true do |t|
-    t.integer  "invoicing_id"
+    t.integer  "run_id",                                     null: false
     t.integer  "invoice_account_id",                         null: false
     t.text     "billing_address",                            null: false
     t.integer  "property_ref",                               null: false
@@ -176,7 +176,7 @@ ActiveRecord::Schema.define(version: 20141031192953) do
   end
 
   add_index "invoices", ["invoice_account_id"], name: "index_invoices_on_invoice_account_id", using: :btree
-  add_index "invoices", ["invoicing_id"], name: "index_invoices_on_invoicing_id", using: :btree
+  add_index "invoices", ["run_id"], name: "index_invoices_on_run_id", using: :btree
 
   create_table "invoicings", force: true do |t|
     t.string   "property_range", null: false
@@ -228,6 +228,14 @@ ActiveRecord::Schema.define(version: 20141031192953) do
   end
 
   add_index "properties", ["client_id"], name: "index_properties_on_client_id", using: :btree
+
+  create_table "runs", force: true do |t|
+    t.integer  "invoicing_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "runs", ["invoicing_id"], name: "index_runs_on_invoicing_id", using: :btree
 
   create_table "search_suggestions", force: true do |t|
     t.string   "term",       null: false

@@ -13,9 +13,8 @@
 # during the time period of the invoice.
 #
 class Invoicing < ActiveRecord::Base
-  has_many :invoices
-  validates :property_range, :period_first, :period_last, :invoices,
-            presence: true
+  has_many :runs, dependent: :destroy
+  validates :property_range, :period_first, :period_last, :runs, presence: true
   scope :default, -> { order(period_first: :desc) }
 
   def period
@@ -31,13 +30,10 @@ class Invoicing < ActiveRecord::Base
   # is this invoicing in use, in action, at all?
   #
   def actionable?
-    invoices.size > 0
+    runs.first.actionable?
   end
 
   def generate
-    self.invoices = InvoicingMaker.new(property_range: property_range,
-                                       period: period)
-                                      .compose
-                                      .invoices
+    runs.build.prepare
   end
 end

@@ -13,18 +13,17 @@ RSpec.describe Invoicing, type: :model do
     it 'period_last' do
       expect(invoicing_new period_last: nil).to_not be_valid
     end
-    it('invoices') { expect(invoicing_new invoices: nil).to_not be_valid }
+    it('runs') { expect(invoicing_new runs: nil).to_not be_valid }
   end
 
   describe '#actionable?' do
     it 'can be actionable' do
-      invoicing = Invoicing.new
-      invoicing.invoices.build
+      (invoicing = Invoicing.new).runs.build.invoices.build
       expect(invoicing.actionable?).to be true
     end
 
     it 'can be actionable' do
-      invoicing = Invoicing.new
+      (invoicing = Invoicing.new).runs.build.invoices
       expect(invoicing.actionable?).to be false
     end
   end
@@ -40,7 +39,7 @@ RSpec.describe Invoicing, type: :model do
                                 period: Date.new(2010, 3, 1)..
                                         Date.new(2010, 5, 1)
       invoicing.generate
-      expect(invoicing.invoices.size).to eq 1
+      expect(invoicing.actionable?).to be true
     end
 
     describe 'does not invoice account when' do
@@ -54,7 +53,7 @@ RSpec.describe Invoicing, type: :model do
                                   period: Date.new(2010, 3, 1)..
                                           Date.new(2010, 5, 1)
         invoicing.generate
-        expect(invoicing.invoices.size).to eq 0
+        expect(invoicing.actionable?).to be false
       end
     end
   end

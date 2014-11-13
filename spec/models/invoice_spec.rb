@@ -70,6 +70,7 @@ RSpec.describe Invoice, type: :model do
                    property: property.invoice,
                    billing: { arrears: 40, transaction:  transaction }
         expect(invoice.total_arrears).to eq 70
+        invoice.run_id = 5
         invoice.save!
       end
     end
