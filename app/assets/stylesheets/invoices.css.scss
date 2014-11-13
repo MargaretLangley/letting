@@ -6,6 +6,9 @@ screen requirements hidden from print*/
 
 @media all{
 
+  .page-break { display: none;
+  }
+
   .template-padding{
     padding-left: 5%;
   }
@@ -53,6 +56,11 @@ screen requirements hidden from print*/
 
 @media print{
 
+  /*Use the last item on the page to put this div on */
+
+ .page-break { display: block; page-break-after: always;
+  }
+
 /* Buttons and main heading need to be invisible in printouts. Fonts are in pt. */
 
   .button,
@@ -92,13 +100,6 @@ screen requirements hidden from print*/
 
   .margwide{
     margin-left: 0.80cm;
-  }
-
-  /* This calls new page for printer */
-
-  div.page{
-    page-break-inside: avoid;
-    page-break-after: always;
   }
 
   /* Invoice Heading fonts - centralized */
@@ -166,7 +167,7 @@ screen requirements hidden from print*/
   /* notice used for notices smallish font 'NOTICE FOR LEASEHOLDERS' */
 
  .notice_inv{
-    margin-left: 80px;
+    margin-left: 2cm;
     font-size: 10pt;
   }
 

@@ -23,7 +23,6 @@
 </div>
 <div class='widemargin'>
   <%= template.guide.fillin[1] %>
-  <%= simple_format(object.address.text, {}, wrapper_tag: 'div') %>
 </div>
 
 <div class='insert'>
@@ -53,17 +52,24 @@
 </div>
 <div class='widemargin'>
   <%= template.guide.fillin[5] %>
-  <%= render 'invoice_page2/print_payto_agent_address', template: Template.find(1) %>
+  <%= Template.find(1).invoice_name %>
 </div>
 
 <div class='insert'>
   <%= template.guide.instruction[6] %>
 </div>
 <div class='widemargin'>
-  <%= template.guide.fillin[6] %>
+</div>
+
+<div class='insert'>
+  <%= template.guide.instruction[6] %>
+</div>
+<div class='widemargin'>
+  <%= template.guide.fillin[7] %>
   <%= object.client.entities.full_name %>
   <br>
   <%= render 'addresses/view_on_one_line', addressee: object.client %>
 </div>
 
 <%= render 'invoice_page2/print_notices_notes',template: Template.find(2) %>
+<div class='page-break grid-row'>&nbsp;</div>
