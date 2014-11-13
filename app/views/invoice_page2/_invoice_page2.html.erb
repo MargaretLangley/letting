@@ -1,23 +1,70 @@
-# <% invoice_dec = InvoiceDecorator.new(invoice) %>
+<% invoice_dec = InvoiceDecorator.new(invoice) %>
+<div class='printbody'>
+  <%= render 'invoice_page2/print_p2_heading',template: ::Template.find(1) %>
 
-# <div class='grid-row'>
-#   page 2
-# </div>
+  <% @template = ::Template.find(2) %>
+  <div class='res-longlease'>
+    <%= @template.heading2 %> <%= invoice_dec.property_ref %>
+  </div>
+  <br>
+  <div class='insert'>
+    <%= Guide.find(1).instruction %>
+  </div>
+  <div class='widemargin'>
+    <%= Guide.find(1).fillin %>
+    TODO: Entities will come here leave until then.
+  </div>
+  <div class='insert'>
+    <%= Guide.find(2).instruction %>
+  </div>
+  <div class='widemargin'>
+    <%= Guide.find(2).fillin %>
+      <!-- TODO: property should be multiline -->
+     <%= simple_format(invoice_dec.property_address, {}, wrapper_tag: 'div') %>
+  </div>
+  <div class='insert'>
+    <%= Guide.find(3).instruction %>
+  </div>
+  <div class='widemargin'>
+    <%= Guide.find(3).fillin %>
+  </div>
+  <div class='insert'>
+    <%= Guide.find(4).instruction %>
+  </div>
+  <div class='widemargin'>
+    <%= Guide.find(4).fillin %>
+  </div>
+  <div class='insert'>
+    <%= Guide.find(5).instruction %>
+  </div>
+  <div class='widemargin'>
+    <%= Guide.find(5).fillin %>
+    <%= ::Template.find(1).invoice_name %>
+  </div>
+  <div class='insert'>
+    <%= Guide.find(6).instruction %>
+  </div>
+  <div class='widemargin'>
+    <%= Guide.find(6).fillin %>
+     <%= ::Template.find(1).address.text %>
+  </div>
+  <div class='insert'>
+    <%= Guide.find(7).instruction %>
+  </div>
+  <div class='widemargin'>
+    <%= Guide.find(7).fillin %>
+    <%= invoice_dec.client_address %>
+  </div>
 
-# <%= render 'invoice_page2/print_p2_heading',template: ::Template.find(1) %>
+  <br>
+  <div class='notice_inv'>
+    <%= simple_format(@template.advice1) %>
+    <p>
+    <%= simple_format(@template.advice2) %>
+    </p>
+  </div>
 
-# <% @template = ::Template.find(2) %>
-# <div class='res-longlease'>
-#   <%= @template.heading2 %> <%= invoice_dec.property_ref %>
-# </div>
-
-# <%= render @template.guides %>
-
-# <div class='widemargin'>
-#   CLIENT'S ADDRESS
-#   <br>
-#   <%= simple_format(@template.advice1) %>
-#   <p>
-#   <%= simple_format(@template.advice2) %>
-#   </p>
-# </div>
+  <div class='page-break grid-row'>
+    &nbsp;
+  </div>
+</div>

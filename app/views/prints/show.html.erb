@@ -1,4 +1,4 @@
-<div class="grid">
+<div class='grid''>
   <div class='col-10-24'>
   <% @title='Invoicing' %>
   </div>
@@ -8,11 +8,10 @@
 </div>
 
 <% @invoicing.runs.last.invoices.each do |invoice| %>
-  <div class='shell-for-print-screen'>
-    <div class='page'>
-      <%= render 'invoices/invoice_page1', invoice: invoice %>
-    </div>
-    <div class='page'>
-    </div>
+
+  <%= render 'invoices/invoice_page1', invoice: invoice %>
+  <div class='page-break'>
+    &nbsp;
   </div>
+  <%= render 'invoice_page2/invoice_page2', invoice: invoice %>
 <% end %>
