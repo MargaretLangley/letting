@@ -47,6 +47,7 @@ class Property < ActiveRecord::Base
   def invoice billing_period: nil
     {
       property_ref: human_ref,
+      occupiers: occupier,
       property_address: to_address(join: ', '),
       billing_address: bill_to_s,
       client_address: client.to_s,

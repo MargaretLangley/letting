@@ -165,12 +165,13 @@ ActiveRecord::Schema.define(version: 20141110181915) do
   create_table "invoices", force: true do |t|
     t.integer  "run_id",                                     null: false
     t.integer  "invoice_account_id",                         null: false
-    t.text     "billing_address",                            null: false
-    t.integer  "property_ref",                               null: false
     t.date     "invoice_date",                               null: false
+    t.integer  "property_ref",                               null: false
+    t.text     "occupiers",                                  null: false
     t.text     "property_address",                           null: false
-    t.decimal  "total_arrears",      precision: 8, scale: 2, null: false
+    t.text     "billing_address",                            null: false
     t.text     "client_address",                             null: false
+    t.decimal  "total_arrears",      precision: 8, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

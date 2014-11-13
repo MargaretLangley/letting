@@ -49,8 +49,9 @@ class Invoice < ActiveRecord::Base
                                              **billing).invoice
   end
 
-  def property(property_ref:, property_address:, billing_address:, client_address:) # rubocop: disable Metrics/LineLength
+  def property(property_ref:, occupiers:, property_address:, billing_address:, client_address:) # rubocop: disable Metrics/LineLength
     self.property_ref = property_ref
+    self.occupiers = occupiers
     self.property_address = property_address
     self.billing_address = billing_address
     self.client_address = client_address
