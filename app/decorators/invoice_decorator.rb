@@ -35,4 +35,8 @@ class InvoiceDecorator
     "#{@source.products.first.charge_type} "\
     "£#{number_with_precision(@source.products.first.amount, precision: 2)}"
   end
+
+  def earliest_date_due
+    I18n.l @source.earliest_date_due, format: :short
+  end
 end

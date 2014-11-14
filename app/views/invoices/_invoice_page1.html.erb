@@ -65,7 +65,7 @@
     Ref: <%= invoice_dec.property_ref %>
    </div>
   <div class='col-5-12 inv-advice-bold'>
-    Due Date <%= invoice_dec.invoice_date %>
+    Due Date <%= invoice_dec.earliest_date_due %>
   </div>
   <%= render partial:'products/products_narrow',locals: { invoice: invoice } %>
   </div>
