@@ -16,8 +16,9 @@ class InvoicingsController < ApplicationController
   end
 
   def new
-    @invoicing = Invoicing.new property_range: params[:search_terms],
-                               period: params[:start_date]..params[:end_date]
+    @invoicing = Invoicing.new \
+                   property_range: SpaceOut.process(params[:search_terms]),
+                   period: params[:start_date]..params[:end_date]
     @invoicing.generate
   end
 
