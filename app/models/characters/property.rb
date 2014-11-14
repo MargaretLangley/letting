@@ -55,12 +55,7 @@ class Property < ActiveRecord::Base
   end
 
   def to_billing
-    occupier + "\n" + address.text
-  end
-
-  def to_address join: "\n"
-    return unless address
-    address.text join: join
+    address.name_and_address name: occupier
   end
 
   delegate :bill_to, to: :agent
@@ -77,6 +72,11 @@ class Property < ActiveRecord::Base
   end
 
   private
+
+  def to_address join: "\n"
+    return unless address
+    address.text join: join
+  end
 
   def bill_to_s
     agent.bill_to.to_billing

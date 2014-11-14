@@ -34,6 +34,10 @@ class Address < ActiveRecord::Base
             length: { minimum: MIN_POSTCODE, maximum: MAX_POSTCODE },
             allow_blank: true
 
+  def name_and_address name:, join: "\n"
+    name + join + text(join: join)
+  end
+
   def abridged_text join: "\n"
     [flat_house_line.blank? ? road_line : flat_line,
      town.blank? ? county : town].join "#{join}"

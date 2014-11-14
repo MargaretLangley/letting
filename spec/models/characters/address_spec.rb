@@ -55,6 +55,22 @@ describe Address, type: :model do
   end
 
   describe 'methods' do
+    describe 'name_and_address' do
+      it 'presents full name and address' do
+        address = Address.new flat_no: '47',
+                              house_name: 'Hill Court',
+                              town: 'Brum'
+        expect(address.name_and_address name: 'Bob')
+          .to eq "Bob\nFlat 47 Hill Court\nBrum"
+      end
+      it 'can override the join' do
+        address = Address.new flat_no: '47',
+                              house_name: 'Hill Court',
+                              town: 'Brum'
+        expect(address.name_and_address name: 'Bob', join: ', ')
+          .to eq 'Bob, Flat 47 Hill Court, Brum'
+      end
+    end
     describe 'abridged_text' do
       it 'adds flat when present' do
         address = Address.new flat_no: '47', house_name: 'Hill', town: 'Brum'

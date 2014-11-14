@@ -26,7 +26,7 @@ class Client < ActiveRecord::Base
   end
 
   def to_s
-    full_name + "\n" + address.text
+    address.name_and_address name: full_name
   end
 
   delegate :clear_up_form, to: :entities

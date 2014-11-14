@@ -24,7 +24,7 @@ class Agent < ActiveRecord::Base
 
   def to_billing
     return unless authorized
-    full_name + "\n" + address_text
+    address.name_and_address name: full_name
   end
 
   def prepare_for_form
