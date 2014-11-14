@@ -40,7 +40,8 @@ class Invoice < ActiveRecord::Base
     property property
     self.invoice_account =  billing[:transaction]
     self.products = generate_products(billing)[:products]
-    self.total_arrears = generate_products(billing)[:products].last.balance
+    self.total_arrears = generate_products(billing)[:total_arrears]
+    self.earliest_date_due = generate_products(billing)[:earliest_date_due]
     self
   end
 

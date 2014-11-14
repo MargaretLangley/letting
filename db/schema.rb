@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 20141110181915) do
     t.text     "billing_address",                            null: false
     t.text     "client_address",                             null: false
     t.decimal  "total_arrears",      precision: 8, scale: 2, null: false
+    t.date     "earliest_date_due",                          null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
