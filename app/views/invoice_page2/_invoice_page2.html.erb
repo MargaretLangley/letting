@@ -1,58 +1,58 @@
 <% invoice_dec = InvoiceDecorator.new(invoice) %>
 <div class='printbody'>
-  <%= render 'invoice_page2/print_p2_heading',template: ::Template.find(1) %>
+  <%=template = ::Template.find(1) %>
+  <%= render 'invoice_page2/print_p2_heading', template: template %>
 
-  <% @template = ::Template.find(2) %>
+  <%= @template = ::Template.find(2) %>
   <div class='res-longlease'>
     <%= @template.heading2 %> <%= invoice_dec.property_ref %>
   </div>
   <br>
   <div class='insert'>
-    <%= Guide.find(1).instruction %>
+    <%= @template.guides[0].instruction %>
   </div>
   <div class='widemargin'>
-    <%= Guide.find(1).fillin %>
-    TODO: Entities will come here leave until then.
+    <%= @template.guides[0].fillin %>
+    <%= invoice_dec.occupiers %>
   </div>
   <div class='insert'>
-    <%= Guide.find(2).instruction %>
+    <%= @template.guides[1].instruction %>
   </div>
   <div class='widemargin'>
-    <%= Guide.find(2).fillin %>
-      <!-- TODO: property should be multiline -->
+    <%= @template.guides[1].fillin %>
      <%= simple_format(invoice_dec.property_address, {}, wrapper_tag: 'div') %>
   </div>
   <div class='insert'>
-    <%= Guide.find(3).instruction %>
+    <%= @template.guides[2].instruction %>
   </div>
   <div class='widemargin'>
-    <%= Guide.find(3).fillin %>
+    <%= @template.guides[2].fillin %>
   </div>
   <div class='insert'>
-    <%= Guide.find(4).instruction %>
+    <%= @template.guides[3].instruction %>
   </div>
   <div class='widemargin'>
-    <%= Guide.find(4).fillin %>
+    <%= @template.guides[3].fillin %>
   </div>
   <div class='insert'>
-    <%= Guide.find(5).instruction %>
+    <%= @template.guides[4].instruction %>
   </div>
   <div class='widemargin'>
-    <%= Guide.find(5).fillin %>
-    <%= ::Template.find(1).invoice_name %>
+    <%= @template.guides[4].fillin %>
+    <%= template.invoice_name %>
   </div>
   <div class='insert'>
-    <%= Guide.find(6).instruction %>
+    <%= @template.guides[5].instruction %>
   </div>
   <div class='widemargin'>
-    <%= Guide.find(6).fillin %>
-     <%= ::Template.find(1).address.text %>
+    <%= @template.guides[5].fillin %>
+     <%= template.address.text %>
   </div>
   <div class='insert'>
-    <%= Guide.find(7).instruction %>
+    <%= @template.guides[6].instruction %>
   </div>
   <div class='widemargin'>
-    <%= Guide.find(7).fillin %>
+    <%= @template.guides[6].fillin %>
     <%= invoice_dec.client_address %>
   </div>
 

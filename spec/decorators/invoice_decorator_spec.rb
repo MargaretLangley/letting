@@ -8,6 +8,12 @@ describe InvoiceDecorator do
     expect(invoice_dec.invoice_date).to eq '25/Mar/10'
   end
 
+  it '#property_address' do
+    invoice_dec = InvoiceDecorator.new invoice_new
+    expect(invoice_dec.property_address)
+      .to eq "Edgbaston Road\nBirmingham\nWest Midlands"
+  end
+
   it '#property_address_one_line' do
     invoice_dec = InvoiceDecorator.new invoice_new
     expect(invoice_dec.property_address_one_line)
