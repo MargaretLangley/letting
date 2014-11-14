@@ -82,7 +82,7 @@ after :templates do
           invoice_date: create_date(5),
           property_ref: 1001,
           occupiers: "Mr E. P. Hendren",
-          property_address: "Flat 28 Lords, 2 St Johns Wood Road, London, Greater London, NW8 8QN",
+          property_address: "Flat 28 Lords\n2 St Johns Wood Road\nLondon\nGreater London\nNW8 8QN",
           billing_address: "Mr E. P. Hendren\nFlat 28 Lords\n2 St Johns Wood Road\nLondon\nGreater London\nNW8 8QN",
           client_address: "Mr K.S. Ranjitsinhji\nFlat 96 Old Trafford\nDean\nSeaford\nSuss\nBN6 7QP",
           total_arrears: Charge.find(1).amount * 2,

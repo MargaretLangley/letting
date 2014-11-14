@@ -48,7 +48,7 @@ class Property < ActiveRecord::Base
     {
       property_ref: human_ref,
       occupiers: occupier,
-      property_address: to_address(join: ', '),
+      property_address: to_address,
       billing_address: bill_to_s,
       client_address: client.to_s,
     }
