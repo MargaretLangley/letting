@@ -9,7 +9,7 @@
 def invoice_new id: id,
                 run_id: 5,
                 invoice_date: '2014/06/30',
-                account: account_new(property: property_new),
+                account: account_create(property: property_new),
                 property_address: address_new,
                 property_ref: 108,
                 invoice_account: invoice_account_new
@@ -19,7 +19,8 @@ def invoice_new id: id,
   account.property.address = property_address
 
   invoice = Invoice.new id: id, run_id: run_id
-  invoice.prepare invoice_date: invoice_date,
+  invoice.prepare account: account,
+                  invoice_date: invoice_date,
                   property: account.property.invoice,
                   billing: { arrears: 0, transaction: invoice_account }
   invoice

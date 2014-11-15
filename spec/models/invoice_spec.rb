@@ -19,11 +19,12 @@ RSpec.describe Invoice, type: :model do
         template_create id: 1
         invoice = Invoice.new
         agent = agent_new(entities: [Entity.new(name: 'Lock')])
-        property = property_new agent: agent, account: account_new
+        property = property_create agent: agent, account: account_new
         (transaction = InvoiceAccount.new)
           .debited(debits: [debit_new(charge: charge_new)])
 
-        invoice.prepare property: property.invoice,
+        invoice.prepare account: property.account,
+                        property: property.invoice,
                         billing: { arrears: 0, transaction:  transaction }
         expect(invoice.billing_address)
           .to eq "Lock\nEdgbaston Road\nBirmingham\nWest Midlands"
@@ -31,23 +32,25 @@ RSpec.describe Invoice, type: :model do
       it 'sets property_ref' do
         template_create id: 1
         invoice = Invoice.new
-        property = property_new human_ref: 55, account: account_new
+        property = property_create human_ref: 55, account: account_new
         (transaction = InvoiceAccount.new)
           .debited(debits: [debit_new(charge: charge_new)])
 
-        invoice.prepare property: property.invoice,
+        invoice.prepare account: property.account,
+                        property: property.invoice,
                         billing: { arrears: 0, transaction:  transaction }
         expect(invoice.property_ref).to eq 55
       end
 
       it 'prepares invoice_date' do
         template_create id: 1
-        property = property_new account: account_new, client: client_create
+        property = property_create account: account_new, client: client_create
         (transaction = InvoiceAccount.new)
           .debited(debits: [debit_new(charge: charge_new)])
 
         (invoice = Invoice.new)
           .prepare invoice_date: '2014-06-30',
+                   account: property.account,
                    property: property.invoice,
                    billing: { arrears: 0, transaction:  transaction }
         expect(invoice.invoice_date.to_s).to eq '2014-06-30'
@@ -55,12 +58,13 @@ RSpec.describe Invoice, type: :model do
 
       it 'prepares invoice products' do
         template_create id: 1
-        property = property_new account: account_new, client: client_create
+        property = property_create account: account_new, client: client_create
         (transaction = InvoiceAccount.new)
           .debited(debits: [debit_new(charge: charge_new)])
 
         (invoice = Invoice.new)
           .prepare invoice_date: '2014-06-30',
+                   account: property.account,
                    property: property.invoice,
                    billing: { arrears: 0, transaction:  transaction }
         expect(invoice.products.first.to_s)
@@ -70,13 +74,14 @@ RSpec.describe Invoice, type: :model do
 
       it 'prepares invoice total_arreras' do
         template_create id: 1
-        property = property_new account: account_new, client: client_create
+        property = property_create account: account_new, client: client_create
         (transaction = InvoiceAccount.new)
           .debited(debits: [debit_new(amount: 10, charge: charge_new),
                             debit_new(amount: 20, charge: charge_new)])
 
         (invoice = Invoice.new)
-          .prepare invoice_date: '2014-06-30',
+          .prepare account: property.account,
+                   invoice_date: '2014-06-30',
                    property: property.invoice,
                    billing: { arrears: 40, transaction:  transaction }
         expect(invoice.total_arrears).to eq 70

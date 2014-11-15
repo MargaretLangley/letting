@@ -39,6 +39,7 @@ class InvoicesMaker
 
   def make_invoice(account:)
     (invoice = Invoice.new).prepare \
+      account: account,
       invoice_date: invoice_date,
       property: account.property.invoice(billing_period: period),
       billing: DebitMaker.new(account: account, debit_period: period)

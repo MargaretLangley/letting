@@ -21,8 +21,11 @@
 # Client
 #   - Compound Name and address
 #
+# TODO: remove methodlength error
+# rubocop: disable Metrics/MethodLength
 #
 class Invoice < ActiveRecord::Base
+  belongs_to :account
   belongs_to :run
   belongs_to :invoice_account, autosave: true, inverse_of: :invoices
   has_many :products, -> { order(:created_at) }, dependent: :destroy
@@ -34,27 +37,32 @@ class Invoice < ActiveRecord::Base
   has_many :templates, through: :letters
   has_many :letters, dependent: :destroy
 
-  def prepare(invoice_date: Date.current, property:, billing:)
+  def prepare(account:, invoice_date: Date.current, property:, billing:)
+    self.account = account
     self.invoice_date = invoice_date
     letters.build template: Template.find(1)
     self.property = property
     self.invoice_account =  billing[:transaction]
 
-    self.products = generate_products(billing)[:products]
-    self.total_arrears = generate_products(billing)[:total_arrears]
-    self.earliest_date_due = generate_products(billing)[:earliest_date_due]
+    products = generate_products(billing)
+    self.products = products[:products]
+    self.total_arrears = products [:total_arrears]
+    self.earliest_date_due = products [:earliest_date_due]
     self
   end
 
-  def remake
-    invoice = Invoice.new
+  def remake invoice: Invoice.new
+    invoice.account = account
     invoice.invoice_date = Date.current
     invoice.letters.build template: Template.find(1)
     invoice.property = property
     invoice.invoice_account = invoice_account
-    invoice.total_arrears = 0 # TODO: add arrears
-    invoice.products = products # TODO: recalculate products
-    invoice.earliest_date_due = earliest_date_due
+
+    products = generate_products(arrears: account.balance(to_date: invoice_date), # rubocop: disable Metrics/LineLength
+                                 transaction: invoice_account)
+    invoice.products = products[:products]
+    invoice.total_arrears = products [:total_arrears]
+    invoice.earliest_date_due = products [:earliest_date_due]
     invoice
   end
 
