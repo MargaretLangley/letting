@@ -37,8 +37,9 @@ class Invoice < ActiveRecord::Base
   def prepare(invoice_date: Date.current, property:, billing:)
     self.invoice_date = invoice_date
     letters.build template: Template.find(1)
-    property property
+    self.property = property
     self.invoice_account =  billing[:transaction]
+
     self.products = generate_products(billing)[:products]
     self.total_arrears = generate_products(billing)[:total_arrears]
     self.earliest_date_due = generate_products(billing)[:earliest_date_due]
@@ -46,8 +47,23 @@ class Invoice < ActiveRecord::Base
   end
 
   def remake
-    # TODO: copy over invoice
-    self
+    invoice = Invoice.new
+    invoice.invoice_date = Date.current
+    invoice.letters.build template: Template.find(1)
+    invoice.property = property
+    invoice.invoice_account = invoice_account
+    invoice.total_arrears = 0 # TODO: add arrears
+    invoice.products = products # TODO: recalculate products
+    invoice.earliest_date_due = earliest_date_due
+    invoice
+  end
+
+  def property=(property_ref:, occupiers:, property_address:, billing_address:, client_address:) # rubocop: disable Metrics/LineLength
+    self.property_ref = property_ref
+    self.occupiers = occupiers
+    self.property_address = property_address
+    self.billing_address = billing_address
+    self.client_address = client_address
   end
 
   def to_s
@@ -60,16 +76,19 @@ class Invoice < ActiveRecord::Base
 
   private
 
-  def property(property_ref:, occupiers:, property_address:, billing_address:, client_address:) # rubocop: disable Metrics/LineLength
-    self.property_ref = property_ref
-    self.occupiers = occupiers
-    self.property_address = property_address
-    self.billing_address = billing_address
-    self.client_address = client_address
+  def property
+    {
+      property_ref: property_ref,
+      occupiers: occupiers,
+      property_address: property_address,
+      billing_address: billing_address,
+      client_address: client_address,
+    }
   end
 
-  def generate_products(billing)
+  def generate_products(arrears:, transaction:)
     @generate_products ||= ProductsMaker.new(invoice_date: invoice_date,
-                                             **billing).invoice
+                                             arrears: arrears,
+                                             transaction: transaction).invoice
   end
 end

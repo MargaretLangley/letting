@@ -22,7 +22,7 @@ class Run < ActiveRecord::Base
   end
 
   def update run
-    # TODO: update invoice
+    self.invoices  = run.invoices.map(&:remake)
   end
 
   def actionable?
