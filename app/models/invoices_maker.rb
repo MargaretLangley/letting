@@ -1,6 +1,6 @@
 ####
 #
-# InvoicingMaker
+# InvoicesMaker
 #
 # Class responsible for making invoices within a property and invoicing period.
 #
@@ -8,12 +8,12 @@
 # period. This is passed to invoice maker, this class, which creates the
 # invoices.
 #
-class InvoicingMaker
+class InvoicesMaker
   attr_reader :property_range, :period, :invoices, :invoice_date
-  def initialize(property_range:, period:)
+  def initialize(property_range:, period:, invoice_date: Date.current)
     @property_range = property_range
     @period = period
-    @invoice_date = Date.current
+    @invoice_date = invoice_date
   end
 
   def compose

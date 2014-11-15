@@ -15,10 +15,14 @@ class Run < ActiveRecord::Base
 
   validates :invoices, presence: true
   def prepare
-    self.invoices = InvoicingMaker.new(property_range: invoicing.property_range,
-                                       period: invoicing.period)
+    self.invoices = InvoicesMaker.new(property_range: invoicing.property_range,
+                                      period: invoicing.period)
                                       .compose
                                       .invoices
+  end
+
+  def update run
+    # TODO: update invoice
   end
 
   def actionable?

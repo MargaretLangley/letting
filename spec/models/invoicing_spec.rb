@@ -42,6 +42,20 @@ RSpec.describe Invoicing, type: :model do
       expect(invoicing.actionable?).to be true
     end
 
+    it 'creates more than one run' do
+      template_create id: 1
+      cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
+      account_create property: property_new(human_ref: 20, client: client_new),
+                     charges: [charge_new(cycle: cycle)]
+
+      invoicing = Invoicing.new property_range: '20',
+                                period: Date.new(2010, 3, 1)..
+                                        Date.new(2010, 5, 1)
+      invoicing.generate
+      invoicing.generate
+      expect(invoicing.runs.size).to eq 2
+    end
+
     describe 'does not invoice account when' do
       it 'outside property_range' do
         template_create id: 1

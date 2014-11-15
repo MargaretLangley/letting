@@ -5,7 +5,7 @@
 # A batch of invoices to bill customers.
 #
 # The user searches for property-ids within a date range that will be billed.
-# InvoicingMaker returns invoices that are to be debited during the invoicing
+# InvoicesMaker returns invoices that are to be debited during the invoicing
 # period.
 #
 # An invoice is the information required to print an invoice. Made up of
@@ -34,6 +34,10 @@ class Invoicing < ActiveRecord::Base
   end
 
   def generate
-    runs.build.prepare
+    if runs.empty?
+      runs.build.prepare
+    else
+      runs.build.update runs.first
+    end
   end
 end
