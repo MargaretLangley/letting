@@ -16,17 +16,27 @@ RSpec.describe Invoice, type: :model do
   describe 'methods' do
     describe '#prepare' do
       it 'sets billing_address' do
+        template_create id: 1
         invoice = Invoice.new
         agent = agent_new(entities: [Entity.new(name: 'Lock')])
         property = property_new agent: agent, account: account_new
-        invoice.property property.invoice
+        (transaction = InvoiceAccount.new)
+          .debited(debits: [debit_new(charge: charge_new)])
+
+        invoice.prepare property: property.invoice,
+                        billing: { arrears: 0, transaction:  transaction }
         expect(invoice.billing_address)
           .to eq "Lock\nEdgbaston Road\nBirmingham\nWest Midlands"
       end
       it 'sets property_ref' do
+        template_create id: 1
         invoice = Invoice.new
         property = property_new human_ref: 55, account: account_new
-        invoice.property property.invoice
+        (transaction = InvoiceAccount.new)
+          .debited(debits: [debit_new(charge: charge_new)])
+
+        invoice.prepare property: property.invoice,
+                        billing: { arrears: 0, transaction:  transaction }
         expect(invoice.property_ref).to eq 55
       end
 

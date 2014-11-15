@@ -45,10 +45,20 @@ class Invoice < ActiveRecord::Base
     self
   end
 
-  def generate_products(billing)
-    @generate_products ||= ProductsMaker.new(invoice_date: invoice_date,
-                                             **billing).invoice
+  def remake
+    # TODO: copy over invoice
+    self
   end
+
+  def to_s
+    "Billing Address: #{billing_address.inspect}\n"\
+    "Property Ref: #{property_ref.inspect}\n"\
+    "Invoice Date: #{invoice_date.inspect}\n"\
+    "Property Address: #{property_address.inspect}\n"\
+    "client: #{client_address.inspect}\n"
+  end
+
+  private
 
   def property(property_ref:, occupiers:, property_address:, billing_address:, client_address:) # rubocop: disable Metrics/LineLength
     self.property_ref = property_ref
@@ -58,11 +68,8 @@ class Invoice < ActiveRecord::Base
     self.client_address = client_address
   end
 
-  def to_s
-    "Billing Address: #{billing_address.inspect}\n"\
-    "Property Ref: #{property_ref.inspect}\n"\
-    "Invoice Date: #{invoice_date.inspect}\n"\
-    "Property Address: #{property_address.inspect}\n"\
-    "client: #{client_address.inspect}\n"
+  def generate_products(billing)
+    @generate_products ||= ProductsMaker.new(invoice_date: invoice_date,
+                                             **billing).invoice
   end
 end
