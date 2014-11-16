@@ -14,8 +14,8 @@ describe Invoicing, type: :feature do
         guide_create id: guide_id
       end
       visit '/prints/1'
+      expect(page.title).to eq 'Letting - Invoicing'
       expect(page).to have_text 'VAT'
-      expect(page).to have_text '108'
       expect(page).to_not have_text '1-200'
     end
   end

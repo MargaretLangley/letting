@@ -22,12 +22,13 @@ describe 'Invoice Factory' do
     end
 
     it 'sets property_ref' do
-      expect(invoice_new(property_ref: 87).property_ref).to eq(87)
+      expect(invoice_new(property: property_new(human_ref: 87)).property_ref)
+        .to eq(87)
     end
 
     it 'sets property address' do
-      address = address_new(road: 'New Road')
-      expect(invoice_new(property_address: address).property_address)
+      property = property_new address: address_new(road: 'New Road')
+      expect(invoice_new(property: property).property_address)
         .to eq "New Road\nBirmingham\nWest Midlands"
     end
   end

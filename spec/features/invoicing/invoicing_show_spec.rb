@@ -13,7 +13,6 @@ describe Invoicing, type: :feature do
       visit '/invoicings/1'
       expect(page.title).to eq 'Letting - Invoicing'
       expect(page).to have_text '1-100'
-      expect(page).to have_text '108'
     end
   end
 end

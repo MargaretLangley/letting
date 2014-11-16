@@ -9,15 +9,12 @@
 def invoice_new id: id,
                 run_id: 5,
                 invoice_date: '2014/06/30',
-                account: account_create(property: property_new),
-                property_address: address_new,
-                property_ref: 108,
+                account: account_create,
+                property: property_new,
                 invoice_account: invoice_account_new
 
   template_create(id: 1) unless Template.find_by id: 1
-  account.property.human_ref = property_ref
-  account.property.address = property_address
-
+  account.property = property
   invoice = Invoice.new id: id, run_id: run_id
   invoice.prepare account: account,
                   invoice_date: invoice_date,
@@ -31,16 +28,14 @@ def invoice_create \
   run_id: 6,
   invoice_date: '2014/06/30',
   account: account_new(property: property_new),
-  property_address: address_new,
-  property_ref: 108,
+  property: property_new,
   invoice_account: invoice_account_new
 
   invoice = invoice_new id: id,
                         run_id: run_id,
                         invoice_date: invoice_date,
                         account: account,
-                        property_address: property_address,
-                        property_ref: property_ref,
+                        property: property,
                         invoice_account: invoice_account
   invoice.save!
   invoice
