@@ -27,7 +27,7 @@ class Property < ActiveRecord::Base
   delegate :text, to: :address, prefix: true
   delegate :abridged_text, to: :address
 
-  def occupier
+  def occupiers
     entities.full_name
   end
 
@@ -47,7 +47,7 @@ class Property < ActiveRecord::Base
   def invoice billing_period: nil
     {
       property_ref: human_ref,
-      occupiers: occupier,
+      occupiers: occupiers,
       property_address: to_address,
       billing_address: bill_to_s,
       client_address: client.to_s,
@@ -55,7 +55,7 @@ class Property < ActiveRecord::Base
   end
 
   def to_billing
-    address.name_and_address name: occupier
+    address.name_and_address name: occupiers
   end
 
   delegate :bill_to, to: :agent
@@ -64,7 +64,7 @@ class Property < ActiveRecord::Base
   # Elasticsearch uses generates JSON document for property index
   def as_indexed_json(_options = {})
     as_json(
-      methods: :occupier,
+      methods: :occupiers,
       include: {
         address: {},
         agent: { methods: [:to_address], only: [:to_address] }

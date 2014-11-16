@@ -24,7 +24,7 @@ class Account < ActiveRecord::Base
   include ChargesDefaults
   belongs_to :property, inverse_of: :account
   def holder
-    property.occupier
+    property.occupiers
   end
 
   def address

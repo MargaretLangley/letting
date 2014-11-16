@@ -80,4 +80,4 @@ en:
     payments:
       property_payment: "To book a payment against a property, search for the property in the above box. This easiest way is by property identifier, %{property_id}, but %{owner} and %{amount} are also supported."
     properties:
-      agent:          "Billing is currently to the occupier address. If the bill should go to an agent click the 'Agent' checkbox and fill in the agent's details."
+      agent:          "Billing is currently to the occupiers address. If the bill should go to an agent click the 'Agent' checkbox and fill in the agent's details."

@@ -30,7 +30,7 @@ module DB
     #
     it 'Property has two entities' do
       import_property row
-      expect(Property.first.occupier).to \
+      expect(Property.first.occupiers).to \
           eq 'Mr A. N. Example & Mrs A. N. Other'
     end
 

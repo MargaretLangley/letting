@@ -23,7 +23,7 @@ describe PropertyDecorator do
   end
 
   it 'writes flat name' do
-    expect(property.occupier).to eq 'Mr W. G. Grace'
+    expect(property.occupiers).to eq 'Mr W. G. Grace'
   end
 
   describe 'Agent' do

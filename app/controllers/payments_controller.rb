@@ -86,7 +86,7 @@ class PaymentsController < ApplicationController
 
   def identity
     "Ref: '#{@payment.account.property.human_ref}' " \
-    "Name: '#{@payment.account.property.occupier}' " \
+    "Name: '#{@payment.account.property.occupiers}' " \
     "Amount: '£#{@payment.amount}'"
   end
 
