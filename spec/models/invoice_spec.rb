@@ -105,13 +105,24 @@ RSpec.describe Invoice, type: :model do
       end
 
       it 'copies occupiers' do
-        invoice = invoice_create property: property_new(human_ref: 8)
-        expect(invoice.remake.property_ref).to eq 8
+        property = property_new(occupiers: [Entity.new(name: 'Prior')])
+        invoice = invoice_create property: property
+        expect(invoice.remake.occupiers).to eq 'Prior'
       end
 
-      #
-      # Testing other attributes are copied TODO:
-      #
+      it 'sets property address' do
+        property = property_new address: address_new(road: 'New Road')
+        invoice = invoice_create property: property
+        expect(invoice.remake.property_address)
+          .to eq "New Road\nBirmingham\nWest Midlands"
+      end
+
+      it 'sets billing address' do
+        property = property_new address: address_new(road: 'New Road')
+        invoice = invoice_create property: property
+        expect(invoice.remake.property_address)
+          .to eq "New Road\nBirmingham\nWest Midlands"
+      end
     end
     it 'outputs #to_s' do
       expect(invoice_new.to_s.lines.first)
