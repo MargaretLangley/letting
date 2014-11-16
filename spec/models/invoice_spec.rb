@@ -142,12 +142,23 @@ RSpec.describe Invoice, type: :model do
           .to eq "New Road\nBirmingham\nWest Midlands"
       end
 
-      it 'sets arrears' do
-        account = account_new
+      it 'sets credits affects total_arrears' do
         invoice_account = invoice_account_new debits: [debit_new(amount: 10, charge: charge_new)]
-        invoice = invoice_create account: account, invoice_account: invoice_account
-        expect(invoice.total_arrears).to eq 10
+        invoice = invoice_create account: account_new,
+                                 invoice_account: invoice_account
+        invoice.account.credits = [credit_new(amount: -2, charge: charge_new)]
+        expect(invoice.remake.total_arrears).to eq 8
       end
+
+      it 'sets credits affects product arrears' do
+        invoice_account = invoice_account_new debits: [debit_new(amount: 10, charge: charge_new)]
+        invoice = invoice_create account: account_new,
+                                 invoice_account: invoice_account
+        invoice.account.credits = [credit_new(amount: -2, charge: charge_new)]
+        expect(invoice.remake.products.first.charge_type).to eq 'Arrears'
+        expect(invoice.remake.products.first.amount).to eq(-2)
+      end
+
     end
     it 'outputs #to_s' do
       expect(invoice_new.to_s.lines.first)
