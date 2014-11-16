@@ -53,18 +53,10 @@ class Invoice < ActiveRecord::Base
   end
 
   def remake invoice: Invoice.new
-    invoice.account = account
-    invoice.invoice_date = Date.current
-    invoice.letters.build template: Template.find(1)
-    invoice.property = property
-    invoice.invoice_account = invoice_account
-
-    products = generate_products(arrears: account.balance(to_date: invoice_date), # rubocop: disable Metrics/LineLength
-                                 transaction: invoice_account)
-    invoice.products = products[:products]
-    invoice.total_arrears = products [:total_arrears]
-    invoice.earliest_date_due = products [:earliest_date_due]
-    invoice
+    invoice.prepare account: account,
+                    invoice_date: Date.current,
+                    property: property,
+                    billing: { transaction: invoice_account }
   end
 
   def property=(property_ref:, occupiers:, property_address:, billing_address:, client_address:) # rubocop: disable Metrics/LineLength
