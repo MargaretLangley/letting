@@ -78,6 +78,7 @@ after :templates do
       Invoice.create! [
         { id: 1,
           run_id: 1,
+          account_id: Account.first.id,
           invoice_account_id: 1,
           invoice_date: create_date(5),
           property_ref: 1001,
