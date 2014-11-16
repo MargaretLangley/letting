@@ -6,12 +6,11 @@
   <%= template.heading1 %>
 </div>
 
-<div class='grid-row col-1-12'>
- &nbsp;
-</div>
-<div class='col-8-12 inv-advice-bold'>
+<div class='col-2-24 grid-row'>&nbsp;</div>
+<div class='col-15-24 inv-advice-bold'>
   VAT Reg No <%= template.vat %>
-</div><div class=' inv-advice-bold col-3-12'>
+</div>
+<div class='col-3-12 inv-advice-bold'>
   <%= simple_format(template.address.text, {}, wrapper_tag: 'div') %>
-  Tel: <%= template.phone %><br>
+  Tel: <%= template.phone %>
 </div>

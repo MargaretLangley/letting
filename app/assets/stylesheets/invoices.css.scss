@@ -22,7 +22,6 @@ screen requirements hidden from print*/
     font-weight: bold;
     font-size: 12pt;
   }
-}
 
   @mixin inv-heading{
     text-align:center;
@@ -38,10 +37,12 @@ screen requirements hidden from print*/
     @include inv-heading;
     font-size: 16pt;
   }
+}
+
+/*These are screen values*/
 
 @media screen{
 
-  .hgh,
   .inv-add,
   .print-only,
   .vi{
@@ -52,7 +53,14 @@ screen requirements hidden from print*/
     margin-left: 60px;
     font-size: 18px;
   }
+
+  .printbody{
+    margin-left: 20px;
+    width: 500px;
+   }
 }
+
+/*These are print values. Widths in cms. */
 
 @media print{
 
@@ -126,14 +134,10 @@ screen requirements hidden from print*/
     font-size: 14px;
   }
 
-  /* used for sissors line above return slip */
+  /* used for sissors line, page 1, above return slip */
 
   .sissors{
     font-size: 30px;
-  }
-
- .medfont{
-    font-size: 12pt;
   }
 
   /* invoice page 2*/
@@ -150,17 +154,10 @@ screen requirements hidden from print*/
     font-size: 14pt;
   }
 
-/* small margin comments */
+  /* insert used for notes in brackets in lefthand margin , small font */
 
  .insert{
     margin-left: .2cm;
-    font-size: 10pt;
-  }
-
-  /* insert used for notes in brackets in lefthand margin , small font */
-
-  .insert{
-    margin-left: 5px;
     font-size: 10pt;
   }
 
