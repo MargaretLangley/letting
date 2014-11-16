@@ -1,13 +1,13 @@
 <% @title='Invoice Texts' %>
 
 <div class='grid shell'>
-  <div class='col-4-12 vertical-spacer grid-header r-align'>
+  <div class='col-8-24 vertical-spacer grid-header r-align'>
     Page number
   </div>
-  <div class='col-5-12 grid-header'>
+  <div class='col-10-24 grid-header'>
     Contains
   </div>
-  <div class='col-3-12 grid-header'>
+  <div class='col-6-24 grid-header'>
     Actions
   </div>
 
@@ -16,19 +16,16 @@
     <% @templates.each do |template| %>
 
       <div class='table-row' data-link='<%= template_path(template) %>'>
-        <div class=' grid-row col-4-12 vertical-spacer inherit-row r-align'>
+        <div class='col-8-24 grid-row vertical-spacer inherit-row r-align'>
           <%= template.id %>
         </div>
-        <div class='col-5-12 vertical-spacer inherit-row'>
+        <div class='col-10-24 vertical-spacer inherit-row'>
          <%= template.description %>
         </div>
-        <div>
-          <nav class='col-3-12 vertical-spacer'>
-            <%= link_to fa_icon('edit lg'), edit_template_path(template), title: 'Edit', class: 'r-pad' %>
-            <%= link_to fa_icon('file lg'), template_path(template), title: 'View', class: 'r-pad' %>
-          </nav>
-        </div>
-
+        <nav class='col-6-24 vertical-spacer'>
+          <%= link_to fa_icon('edit lg'), edit_template_path(template), title: 'Edit', class: 'r-pad' %>
+          <%= link_to fa_icon('file lg'), template_path(template), title: 'View', class: 'r-pad' %>
+        </nav>
       </div>
     <% end %>
   <% end %>
