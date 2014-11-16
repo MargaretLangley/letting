@@ -1,27 +1,31 @@
-<div class='c-align'>
-  <%= render 'heading_page1', template: @template %>
-</div>
+<%= render 'heading_page1', template: @template %>
 
-<p>
-  <div class='col-1-3 grid-row'>
-    <%= @template.heading2 %>
-  </div>
-  <div class='col-1-3'>
-   Property Ref:
-  </div>
-  <div class='col-1-3'>
-    Date:
+<div class='col-2-24 grid-row'>&nbsp;</div>
+<div class='col-7-24 inv-advice-bold'>
+  <%= @template.heading2 %>
 </div>
-</p>
+<div class='col-8-24 inv-advice-bold'>
+  Property Ref:
+</div>
+<div class='col-5-24 inv-advice-bold'>
+  Date:
+</div>
+<div class='col-2-24'>&nbsp;</div>
 
-<div class='grid-row'>
+<div class='col-24-24 grid-row'>&nbsp;</div>
+<div class='col-24-24 grid-row'>&nbsp;</div>
+
+<div class='col-2-24 grid-row'>&nbsp;</div>
+<div class='col-20-24 inv-advice'>
+  We <%= @template.invoice_name %> ON BEHALF OF YOUR LANDLORDS
+  <br>
+  CLIENT NAME CLIENT ADDRESS
+  <br>
+  <%= simple_format(@template.advice1) %>
   <p>
-    We <%= @template.invoice_name %> ON BEHALF OF YOUR LANDLORDS
-    <br>
-    CLIENT NAME CLIENT ADDRESS
-    <%= @template.advice1 %>
+  <%= simple_format(@template.advice2) %>
   </p>
-  <p>
-    <%= simple_format(@template.advice2) %>
-  </p>
+  <span class='sissors'>&#9985;<%= "-" * 65 %></span>
+  <br>
 </div>
+<div class='col-2-24'>&nbsp;</div>

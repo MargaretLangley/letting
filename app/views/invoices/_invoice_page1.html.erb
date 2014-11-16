@@ -2,44 +2,36 @@
 <div class='printbody'>
   <%= render 'templates/heading_page1', template: invoice_dec.templates.first %>
 
-  <div class='grid-row col-1-12'>
-    &nbsp;
-  </div>
-  <div class='col-4-12 inv-advice-bold vertical-spacer'>
+  <div class='col-2-24 grid-row'>&nbsp;</div>
+  <div class='col-7-24 inv-advice-bold'>
     <%= invoice_dec.templates.first.heading2 %>
   </div>
-  <div class='col-4-12 inv-advice-bold vertical-spacer'>
+  <div class='col-8-24 inv-advice-bold'>
     Property Ref: <%= invoice_dec.property_ref %>
   </div>
-  <div class='col-3-12 inv-advice-bold vertical-spacer'>
-    Date <%= l invoice.invoice_date %>
+  <div class='col-5-24 inv-advice-bold'>
+    Date: <%= l invoice.invoice_date %>
   </div>
+  <div class='col-2-24'>&nbsp;</div>
 
-  <div class='grid-row col-3-24'>
-    &nbsp;
-  </div>
+  <div class='col-3-24 grid-row'>&nbsp;</div>
   <div class='col-21-24 vertical-spacer'>
     <%= simple_format(invoice_dec.billing_address) %>
   </div>
-  <div class='grid-row col-1-12'>
-    &nbsp;
-  </div>
-  <div class='inv-advice-bold col-11-12'>
+
+  <div class='col-2-24 grid-row'>&nbsp;</div>
+  <div class='col-22-24 inv-advice-bold'>
     Property Address: <%= invoice_dec.property_address %>
   </div>
 
+  <div class='col-24-24 grid-row'>&nbsp;</div>
+
   <%= render partial:'products/products',locals: { invoice: invoice } %>
 
-  <div class='grid-row col-24-24'>
-    &nbsp;
-  </div>
-  <p>
-    &nbsp;
-  </p>
-  <div class='col-1-12 grid-row'>
-    &nbsp;
-  </div>
-  <div class='inv-advice col-11-12'>
+  <div class='col-24-24 grid-row'>&nbsp;</div>
+
+  <div class='col-2-24 grid-row'>&nbsp;</div>
+  <div class='col-20-24 inv-advice'>
     We <%= invoice_dec.templates.first.invoice_name.upcase %> ON BEHALF OF YOUR LANDLORD
     <br>
     <%= invoice_dec.client_address %>
@@ -49,25 +41,30 @@
     <p>
       <%= invoice_dec.templates.first.advice2 %>
     </p>
-    <span class='sissors'>&#9985;<%= "-" * 68 %></span>
+    <span class='sissors'>&#9985;<%= "-" * 65 %></span>
     <br>
   </div>
-  <div class='grid-row col-1-12'>
-    &nbsp;
-  </div>
-  <div class='col-11-12 inv-advice-bold'>
+  <div class='col-2-24'>&nbsp;</div>
+
+  <div class='col-2-24 grid-row'>&nbsp;</div>
+  <div class='col-20-24 inv-advice-bold'>
     Property Address: <%= invoice_dec.property_address %>
   </div>
-  <div class='grid-row col-1-12'>
-    &nbsp;
-  </div>
-  <div class='inv-advice-bold col-1-2'>
+  <div class='col-2-24'>&nbsp;</div>
+
+  <div class='col-24-24 grid-row'>&nbsp;</div>
+
+  <div class='col-2-24 grid-row'>&nbsp;</div>
+  <div class='col-10-24 inv-advice-bold'>
     Ref: <%= invoice_dec.property_ref %>
-   </div>
-  <div class='col-5-12 inv-advice-bold'>
+  </div>
+  <div class='col-10-24 inv-advice-bold'>
     Due Date <%= invoice_dec.earliest_date_due %>
   </div>
+  <div class='col-2-24'>&nbsp;</div>
+
   <%= render partial:'products/products_narrow',locals: { invoice: invoice } %>
   </div>
+
 </div>
-<div class='page-break grid-row'>&nbsp;</div>
+<div class='page-break grid-row col-24-24'>&nbsp;</div>
