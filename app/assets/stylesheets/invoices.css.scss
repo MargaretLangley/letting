@@ -6,7 +6,8 @@ screen requirements hidden from print*/
 
 @media all{
 
-  .page-break { display: none;
+  .page-break {
+    display: none;
   }
 
   .template-padding{
@@ -36,6 +37,7 @@ screen requirements hidden from print*/
  .res-longlease{
     @include inv-heading;
     font-size: 16pt;
+    padding-top :10px;
   }
 }
 
@@ -49,7 +51,7 @@ screen requirements hidden from print*/
     display: none;
   }
 
-   .widemargin{
+ .widemargin{
     margin-left: 60px;
     font-size: 18px;
   }
@@ -57,7 +59,24 @@ screen requirements hidden from print*/
   .printbody{
     margin-left: 20px;
     width: 500px;
-   }
+  }
+
+  .bold-12-font{
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+ .insert-margin{
+    margin-left: 10px;
+  }
+
+ .insert-font{
+    font-size: 10px;
+  }
+
+ .font-14{
+    font-size: 14pt;
+  }
 }
 
 /*These are print values. Widths in cms. */
@@ -66,7 +85,8 @@ screen requirements hidden from print*/
 
   /*Use the last item on the page to put this div on */
 
- .page-break { display: block; page-break-after: always;
+ .page-break{
+   display: block; page-break-after: always;
   }
 
 /* Buttons and main heading need to be invisible in printouts. Fonts are in pt. */
@@ -95,30 +115,22 @@ screen requirements hidden from print*/
     margin-left: 0.20cm;
     width: 22cm;
     background-color: $neutral-print;
-   }
+  }
 
 /*This sets printed page to A4 width*/
+
   .printbody{
     margin-top: 0cm;
     margin-right: 0.20cm;
     margin-left: 0.20cm;
     width: 22cm;
     background-color: $neutral-print;
-   }
-
-  .margwide{
-    margin-left: 0.80cm;
   }
 
-  /* Invoice Heading fonts - centralized */
-
-  @mixin inv-heading{
-    text-align:center;
-    font-weight: bold;
-  }
+  /* Invoice Heading fonts */
 
   .h1print{
-    @include inv-heading;
+    font-weight: bold;
     font-size: 20px;
    }
 
@@ -142,36 +154,34 @@ screen requirements hidden from print*/
 
   /* invoice page 2*/
 
-  .p2head{
-    @include inv-heading;
+  .bold-12-font{
+    font-weight: bold;
     font-size: 12pt;
-   }
-
-/* Commonhold and Leasehold ..Act */
-
-  .actref{
-    text-align:center;
-    font-size: 14pt;
   }
 
   /* insert used for notes in brackets in lefthand margin , small font */
 
- .insert{
+ .insert-margin{
     margin-left: .2cm;
+  }
+
+ .insert-font{
     font-size: 10pt;
   }
 
   /* notice used for notices smallish font 'NOTICE FOR LEASEHOLDERS' */
 
- .notice_inv{
-    margin-left: 2cm;
-    font-size: 10pt;
+ .notice-font{
+    font-size: 12pt;
+  }
+
+ .font-14{
+    font-size: 14pt;
   }
 
   /* widemargin on 2nd inv page */
 
   .widemargin{
     margin-left: 2cm;
-    font-size: 14pt;
   }
 }
