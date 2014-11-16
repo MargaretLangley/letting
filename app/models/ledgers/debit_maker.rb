@@ -24,8 +24,7 @@ class DebitMaker
   end
 
   def invoice(*)
-    { arrears: balance_on(to_date: Date.current),
-      transaction: invoice_account, }
+    { transaction: invoice_account, }
   end
 
   private

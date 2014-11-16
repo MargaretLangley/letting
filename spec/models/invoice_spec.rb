@@ -76,9 +76,10 @@ RSpec.describe Invoice, type: :model do
                  'period: 2013-03-25..2013-06-30'
       end
 
-      it 'prepares invoice total_arreras' do
+      it 'prepares invoice total_arrears' do
         template_create id: 1
-        property = property_create account: account_new, client: client_create
+        account = account_new(debits: [debit_new(amount: 40, charge: charge_new)])
+        property = property_create account: account, client: client_create
         (transaction = InvoiceAccount.new)
           .debited(debits: [debit_new(amount: 10, charge: charge_new),
                             debit_new(amount: 20, charge: charge_new)])
@@ -87,10 +88,27 @@ RSpec.describe Invoice, type: :model do
           .prepare account: property.account,
                    invoice_date: '2014-06-30',
                    property: property.invoice,
-                   billing: { arrears: 40, transaction:  transaction }
+                   billing: { transaction:  transaction }
         expect(invoice.total_arrears).to eq 70
         invoice.run_id = 5
         invoice.save!
+      end
+
+      describe 'arrears' do
+        it 'debits increase total arrears' do
+          account = account_new
+          invoice_account = invoice_account_new debits: [debit_new(amount: 10, charge: charge_new)]
+          invoice = invoice_create account: account, invoice_account: invoice_account
+          expect(invoice.total_arrears).to eq 10
+        end
+
+        it 'credits decrease total arrears' do
+          charge = charge_new
+          account = account_new credits: [credit_new(amount: -30, charge: charge)]
+          invoice_account = invoice_account_new debits: [debit_new(amount: 10, charge: charge)]
+          invoice = invoice_create account: account, invoice_account: invoice_account
+          expect(invoice.total_arrears).to eq(-20)
+        end
       end
     end
     describe 'remake' do
@@ -122,6 +140,13 @@ RSpec.describe Invoice, type: :model do
         invoice = invoice_create property: property
         expect(invoice.remake.property_address)
           .to eq "New Road\nBirmingham\nWest Midlands"
+      end
+
+      it 'sets arrears' do
+        account = account_new
+        invoice_account = invoice_account_new debits: [debit_new(amount: 10, charge: charge_new)]
+        invoice = invoice_create account: account, invoice_account: invoice_account
+        expect(invoice.total_arrears).to eq 10
       end
     end
     it 'outputs #to_s' do

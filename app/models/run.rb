@@ -21,7 +21,11 @@ class Run < ActiveRecord::Base
                                       .invoices
   end
 
-  def update run
+  #
+  # rerun
+  # update the invoice - allowing for any payments and date changes
+  #
+  def rerun run
     self.invoices  = run.invoices.map(&:remake)
   end
 

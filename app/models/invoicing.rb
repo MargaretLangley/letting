@@ -37,7 +37,7 @@ class Invoicing < ActiveRecord::Base
     if runs.empty?
       runs.build.prepare
     else
-      runs.build.update runs.first
+      runs.build.rerun runs.first
     end
   end
 end

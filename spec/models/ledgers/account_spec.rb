@@ -72,6 +72,17 @@ describe Account, :ledgers, type: :model do
       account.credits.push credit_new on_date: '25/4/2012', amount: -5.50
       expect(account.balance to_date: Date.new(2012, 4, 24)).to eq 10.00
     end
+
+    it 'smoke test' do
+      debit_1 = debit_new amount: 10, on_date: Date.new(2012, 3, 4)
+      debit_2 = debit_new amount: 10, on_date: Date.new(2013, 3, 4)
+      credit_1 = credit_new amount: -30, on_date: Date.new(2012, 3, 4)
+      credit_2 = credit_new amount: -30, on_date: Date.new(2013, 3, 4)
+      account = account_new credits: [credit_1, credit_2],
+                            debits: [debit_1, debit_2]
+
+      expect(account.balance to_date: Date.new(2013, 4, 1)).to eq(-40.00)
+    end
   end
 
   describe 'search' do

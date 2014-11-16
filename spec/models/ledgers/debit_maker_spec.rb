@@ -63,40 +63,6 @@ RSpec.describe DebitMaker, type: :model do
   end
 
   describe '#invoice' do
-    describe 'arrears' do
-      it 'adds debits before billing period' do
-        debit = debit_new amount: 30, on_date: Date.new(2013, 3, 4)
-        account = account_new debits: [debit]
-        debit_maker = DebitMaker.new account: account,
-                                     debit_period: Date.new(2013, 3, 5)..
-                                                   Date.new(2013, 5, 5)
-        expect(debit_maker.invoice[:arrears]).to eq(30)
-      end
-
-      it 'subtracts credits regardless of when paid' do
-        credit = credit_new amount: -30, on_date: Date.new(2013, 9, 9)
-        account = account_new credits: [credit]
-        debit_maker = DebitMaker.new account: account,
-                                     debit_period: Date.new(2013, 3, 5)..
-                                                   Date.new(2013, 5, 5)
-        expect(debit_maker.invoice[:arrears]).to eq(-30)
-      end
-
-      it 'smoke test' do
-        debit_1 = debit_new amount: 10, on_date: Date.new(2012, 3, 4)
-        debit_2 = debit_new amount: 10, on_date: Date.new(2013, 3, 4)
-        credit_1 = credit_new amount: -30, on_date: Date.new(2012, 3, 4)
-        credit_2 = credit_new amount: -30, on_date: Date.new(2013, 3, 4)
-        account = account_new credits: [credit_1, credit_2],
-                              debits: [debit_1, debit_2]
-
-        debit_maker = DebitMaker.new account: account,
-                                     debit_period: Date.new(2013, 3, 5)..
-                                                   Date.new(2013, 5, 5)
-        expect(debit_maker.invoice[:arrears]).to eq(-40)
-      end
-    end
-
     it 'returns the transaction' do
       cycle = cycle_create(due_ons: [DueOn.new(month: 3, day: 5)])
       account = account_new charges: [charge_new(cycle: cycle)]

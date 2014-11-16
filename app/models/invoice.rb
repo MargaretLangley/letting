@@ -44,7 +44,8 @@ class Invoice < ActiveRecord::Base
     self.property = property
     self.invoice_account =  billing[:transaction]
 
-    products = generate_products(billing)
+    products = generate_products(arrears: account.balance(to_date: invoice_date), # rubocop: disable Metrics/LineLength
+                                 transaction: invoice_account)
     self.products = products[:products]
     self.total_arrears = products [:total_arrears]
     self.earliest_date_due = products [:earliest_date_due]

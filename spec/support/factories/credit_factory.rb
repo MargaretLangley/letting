@@ -1,6 +1,11 @@
 # rubocop: disable Metrics/ParameterLists
 # rubocop: disable Metrics/MethodLength
 
+#
+# Most credit amounts will be negative
+# Negative amount results in a negative in the database
+#
+
 def credit_new payment_id: 1,
                account_id: 1,
                charge_id: nil,

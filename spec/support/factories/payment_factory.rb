@@ -1,7 +1,7 @@
 # rubocop: disable Metrics/ParameterLists
 # rubocop: disable Metrics/MethodLength
 
-def payment_new id: id,
+def payment_new id: nil,
                 account_id: nil,
                 account: nil,
                 booked_on: '30/4/2013',
