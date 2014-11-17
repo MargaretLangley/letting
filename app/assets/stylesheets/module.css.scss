@@ -380,27 +380,54 @@ $search-height: 35px;
     padding: 2%;
     border: 1px solid darken($secondary-button, 15%);
     border-radius: 5px;
-    background-color: darken($secondary-button, 0%);
     box-shadow: $shadow 0 0 4px;
-    color: black;
     font-size: 1.2em;
     &:hover,
     &:active{
-      background-color: $secondary-background;
+      background: $secondary-background;
       color: white;
     }
   }
 
   .plain-button{
     @include base-button;
+    color: black;
+    background: white;
+
+    /* Required to override base.css a:link's color and background-color;*/
+    &:link,
+    &:visited{
+      background: white;
+      color: black;
+    }
   }
 
   .plain-button[disabled]{
-    background-color: $disabled-background;
+    @include base-button;
+    background: $disabled-background;
     color: white;
     text-decoration: none;
+
+    /* Required to override base.css a:link's color and background-color;*/
+    &:link,
+    &:visited{
+      background: $disabled-background;
+      color: white;
+    }
     &:hover,
     &:active{
+    }
+  }
+
+  .warn-button{
+    @include base-button;
+    color: $warn;
+    background: white;
+    /* Required to override base.css a:link's color and background-color;*/
+    &:link,
+    &:visited{
+      background: white;
+      color: $warn;
     }
   }
 

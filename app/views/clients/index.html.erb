@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class='col-1-12 bottom-spacer no-print'>
-      <%= link_to fa_icon('edit lg'), edit_client_path(client.id), title: 'Edit' %>
+      <%= link_to fa_icon('edit lg'), edit_client_path(client.id), title: 'Edit', class: 'plain-button' %>
     </div>
     <div class='col-1-12 bottom-spacer no-print'>
       <%= link_to fa_icon('trash-o lg'), client, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete' %>

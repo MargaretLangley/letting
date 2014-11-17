@@ -30,12 +30,12 @@ module ApplicationHelper
 
   def view_link model
     if model.new_record?
-      link_to fa_icon('file'),
+      link_to fa_icon('file-o lg'),
               '#',
               class: 'plain-button float-right',
               disabled: true, title: 'View file (disabled)'
     else
-      link_to fa_icon('file'),
+      link_to fa_icon('file-o lg'),
               model,
               class: 'plain-button float-right',
               title: 'View file'

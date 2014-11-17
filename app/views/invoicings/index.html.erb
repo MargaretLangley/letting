@@ -42,11 +42,11 @@
       <div class='col-4-24 no-print inherit-row'>
         <%= I18n.l invoicing.period_last, format: :short %>
       </div>
-      <div class='col-3-24 no-print'>
-        <%= link_to fa_icon('print lg'), print_path(invoicing), title: 'Print' %>
+      <div class='col-2-24 no-print'>
+        <%= link_to fa_icon('print lg'), print_path(invoicing), title: 'Print',  class: 'plain-button' %>
       </div>
-      <div class='col-1-24 no-print'>
-        &nbsp;
+      <div class='col-2-24 no-print'>
+        <%= link_to fa_icon('print lg'), print_path(invoicing), title: 'Red Invoice', class: 'warn-button' %>
       </div>
     </div>
   <% end %>
