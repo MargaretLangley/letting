@@ -56,12 +56,12 @@ screen requirements hidden from print*/
     font-size: 18px;
   }
 
-  .printbody{
+/*  .printbody{
     margin-left: 20px;
     width: 500px;
   }
 
-  .bold-12-font{
+*/  .bold-12-font{
     font-weight: bold;
     font-size: 12px;
   }
@@ -84,6 +84,11 @@ screen requirements hidden from print*/
 @media print{
 
   /*Use the last item on the page to put this div on */
+
+  .nexter{
+     page-break-after: always;
+  }
+
 
  .page-break{
    display: block; page-break-after: always;

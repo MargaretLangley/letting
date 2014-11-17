@@ -45,7 +45,8 @@ class Permission < Struct.new(:user)
        properties
        prints
        search
-       search_suggestions)
+       search_suggestions
+       single_prints)
   end
 
   def admin_controllers
