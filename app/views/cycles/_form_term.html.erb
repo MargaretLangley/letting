@@ -159,7 +159,7 @@
           &nbsp;
         </div>
         <div class='col-4-24 vertical-spacer'>
-          <%= link_to fa_icon('plus-circle lg'), '#', class: 'js-reveal-link simple-button', title: 'Add Due Date' %>
+          <%= link_to fa_icon('plus-circle lg'), '#', class: 'js-reveal-link plain-button', title: 'Add Due Date' %>
         </div> <!-- end-row -->
       </div>  <!-- js-group-toggle -->
       <hr class = 'faded'>
@@ -168,7 +168,7 @@
         &nbsp;
       </div>
       <div class='col-18-24 no-r-pad  bottom-spacer no-print'>
-        <%= f.button submit: '', class: 'primary submit-button', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Cycle..."} %> or <%= link_to 'Cancel', cycles_path, class: 'warn' %>
+        <%= f.button submit: '', class: 'primary plain-button', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Cycle..."} %> or <%= link_to 'Cancel', cycles_path, class: 'warn' %>
      </div>
     </div>
   </fieldset>

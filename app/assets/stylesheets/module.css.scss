@@ -391,25 +391,11 @@ $search-height: 35px;
     }
   }
 
-  .simple-button{
+  .plain-button{
     @include base-button;
   }
 
-  .simple-button[disabled]{
-    background-color: $disabled-background;
-    color: white;
-    text-decoration: none;
-    &:hover,
-    &:active{
-    }
-  }
-
-  .submit-button{
-    @include base-button;
-    width: 40%;
-  }
-
-  .submit-button[disabled]{
+  .plain-button[disabled]{
     background-color: $disabled-background;
     color: white;
     text-decoration: none;

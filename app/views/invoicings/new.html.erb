@@ -34,7 +34,7 @@
     </div>
     <div class="col-11-24">
       </br></br></br>
-      <%= f.button submit: '', class: "primary submit-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Invoicing..."}, disabled: !@invoicing.actionable? %> or <%= link_to_if @invoicing.actionable?, 'Cancel', new_invoicing_path, class: 'warn' %>
+      <%= f.button submit: '', class: "primary plain-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Invoicing..."}, disabled: !@invoicing.actionable? %> or <%= link_to_if @invoicing.actionable?, 'Cancel', new_invoicing_path, class: 'warn' %>
     </div>
   </div>
   <% if @invoicing.actionable? %>

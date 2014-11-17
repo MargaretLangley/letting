@@ -13,8 +13,8 @@
           <%= render 'addresses/abridged', property: payment.property_decorator %>
       </div>
       <div class='col-3-12'>
-        <%= link_to fa_icon('edit 2x'), edit_payment_path(@payment.id), class: 'simple-button float-right', title: 'Edit' %>
-        <%= link_to fa_icon('gbp 2x'), new_payment_path(id: payment.account.id), title: 'Add New Payment', class: 'simple-button float-right r-pad' %>
+        <%= link_to fa_icon('edit 2x'), edit_payment_path(@payment.id), class: 'plain-button float-right', title: 'Edit' %>
+        <%= link_to fa_icon('gbp 2x'), new_payment_path(id: payment.account.id), title: 'Add New Payment', class: 'plain-button float-right r-pad' %>
       </div>
     </div>
     <%= render 'payments/show/payment_received', payment: payment  %>

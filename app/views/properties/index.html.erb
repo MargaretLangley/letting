@@ -64,7 +64,7 @@
       <%= link_to fa_icon('gbp lg'), new_payment_path(id: property.account.id), title: 'Add New Payment' %>
     </div>
     <div class='col-1-24 bottom-spacer no-print'>
-      <%= link_to fa_icon('edit lg'), edit_property_path(property.id), title: 'Edit', class: 'simple-button' %>
+      <%= link_to fa_icon('edit lg'), edit_property_path(property.id), title: 'Edit', class: 'plain-button' %>
     </div>
     <div class='col-1-24 bottom-spacer no-print'>
       <%= link_to fa_icon('trash-o lg'), property, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete' %>
