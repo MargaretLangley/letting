@@ -10,9 +10,7 @@ describe Invoicing, type: :feature do
                        period_first: '2014/06/30',
                        period_last: '2014/08/30'
       template_create id: 2
-      (1..7).each do |guide_id|
-        guide_create id: guide_id
-      end
+      (1..7).each { |guide_id| guide_create id: guide_id }
       visit '/prints/1'
       expect(page.title).to eq 'Letting - Invoicing'
       expect(page).to have_text 'VAT'

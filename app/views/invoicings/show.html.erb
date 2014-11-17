@@ -58,7 +58,7 @@
     Charge
   </div>
   <div class='col-3-24 bottom-spacer no-print grid-header'>
-    Actions
+    Action
   </div>
 
   <% @invoicing.runs.last.invoices.each do |invoice| %>
@@ -77,7 +77,7 @@
         <%= invoice_decorator.products_display %>
       </div>
       <div class='col-3-24 bottom-spacer no-print'>
-        <%= link_to fa_icon('print lg'), invoice_path(invoice), title: 'Print' %>
+        <%= link_to fa_icon('print lg'), single_print_path(invoice), title: 'Print' %>
       </div>
     </div>
   <% end %>

@@ -12,18 +12,25 @@
     <%= render 'layouts/header' %>
     <div class='page-wrapper'>
       <div class="grid">
-        <article class="col-21-24">
+        <div class="col-21-24">
           <% if content_for?(:heading) %>
             <%= yield :heading %>
           <% else %>
             <h2><%= @title %></h2>
           <% end %>
-          <%= yield %>
-        </article>
-        <aside class="col-3-24 no-r-pad">
-          <%= render 'layouts/sidebar' %>
-        </aside>
+        </div>
       </div>
+      <div class="col-16-24">
+         &nbsp;
+      </div>
+      <div class="col-6-24">
+        <%= render 'layouts/sidebar' %>
+      </div>
+      <div class="col-2-24">
+         &nbsp;
+      </div>
+
+      <%= yield %>
     </div>
   </body>
 </html>
