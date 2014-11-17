@@ -8,7 +8,7 @@
       </div>
       <div class='col-1-2 bottom-spacer no-r-pad'>
         <%= link_to fa_icon('chevron-circle-down'), '#', class: 'js-toggle  plain-button float-right', title: 'Full Property' %>
-        <%= link_to fa_icon('edit'), edit_property_path(@property.id), class: 'plain-button float-right', title: 'Edit' %>
+        <%= edit_link(@property) %>
       </div>
       <%= render 'properties/property_abridged', property: @property %>
     </div>
@@ -20,7 +20,7 @@
       </div>
       <div class='col-1-2 bottom-spacer no-r-pad'>
         <%= link_to fa_icon('chevron-circle-up'), '#', class: 'js-toggle  plain-button float-right', title: 'Partial Property' %>
-        <%= link_to fa_icon('edit'), edit_property_path(@property.id), class: 'plain-button float-right', title: 'Edit' %>
+        <%= edit_link(@property) %>
       </div>
       <%= render 'properties/property', property: @property %>
     </div>

@@ -36,7 +36,7 @@
         <%= cycle.cycle_type %>
       </div>
       <nav class='col-2-24  bottom-spacer no-print'>
-        <%= link_to fa_icon('edit lg'), edit_cycle_path(cycle), title: 'Edit', class: 'plain-button' %>
+        <%= edit_link(cycle) %>
       </nav>
       <nav class='col-2-24  bottom-spacer no-print'>
         <%= link_to fa_icon('trash-o lg'), cycle, method: :delete, data: { confirm: 'Are you sure?' }, title: 'Delete' %>

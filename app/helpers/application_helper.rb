@@ -41,4 +41,11 @@ module ApplicationHelper
               title: 'View file'
     end
   end
+
+  def edit_link model
+    link_to fa_icon('edit lg'),
+            [:edit, model],
+            class: 'plain-button float-right',
+            title: 'Edit file'
+  end
 end

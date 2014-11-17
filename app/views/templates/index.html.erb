@@ -23,7 +23,7 @@
          <%= template.description %>
         </div>
         <nav class='col-3-24 bottom-spacer'>
-          <%= link_to fa_icon('edit lg'), edit_template_path(template), title: 'Edit', class: 'plain-button' %>
+          <%= edit_link(template) %>
         </nav>
         <nav class='col-3-24 bottom-spacer'>
           <%= link_to fa_icon('file-o lg'), template_path(template), title: 'View', class: 'plain-button' %>
