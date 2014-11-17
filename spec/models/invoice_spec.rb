@@ -142,7 +142,7 @@ RSpec.describe Invoice, type: :model do
           .to eq "New Road\nBirmingham\nWest Midlands"
       end
 
-      it 'sets credits affects total_arrears' do
+      it 'resets total_arrears if any payment is made' do
         invoice_account = invoice_account_new debits: [debit_new(amount: 10, charge: charge_new)]
         invoice = invoice_create account: account_new,
                                  invoice_account: invoice_account
@@ -150,7 +150,7 @@ RSpec.describe Invoice, type: :model do
         expect(invoice.remake.total_arrears).to eq 8
       end
 
-      it 'sets credits affects product arrears' do
+      it 'resets product arrears if any payment is made' do
         invoice_account = invoice_account_new debits: [debit_new(amount: 10, charge: charge_new)]
         invoice = invoice_create account: account_new,
                                  invoice_account: invoice_account
