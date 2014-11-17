@@ -67,7 +67,7 @@
       <%= edit_link(property) %>
     </div>
     <div class='col-1-24 bottom-spacer no-print'>
-      <%= link_to fa_icon('trash-o lg'), property, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete' %>
+      <%= delete_link property %>
     </div>
   <% end %>
 </div>

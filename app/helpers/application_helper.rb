@@ -28,6 +28,22 @@ module ApplicationHelper
     "#{I18n.l date, format: format}"
   end
 
+  def edit_link model
+    link_to fa_icon('edit lg'),
+            [:edit, model],
+            class: 'plain-button float-right',
+            title: 'Edit file'
+  end
+
+  def delete_link model
+    link_to fa_icon('trash-o lg'),
+            model,
+            method: :delete,
+            class: 'plain-button float-right',
+            data: { confirm: 'Are you sure you want to delete?' },
+            title: 'Delete file'
+  end
+
   def view_link model
     if model.new_record?
       link_to fa_icon('file-o lg'),
@@ -40,12 +56,5 @@ module ApplicationHelper
               class: 'plain-button float-right',
               title: 'View file'
     end
-  end
-
-  def edit_link model
-    link_to fa_icon('edit lg'),
-            [:edit, model],
-            class: 'plain-button float-right',
-            title: 'Edit file'
   end
 end

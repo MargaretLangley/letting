@@ -48,7 +48,7 @@
       <%= edit_link(client) %>
     </div>
     <div class='col-1-12 bottom-spacer no-print'>
-      <%= link_to fa_icon('trash-o lg'), client, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete' %>
+      <%= delete_link client %>
     </div>
   <% end %>
 </div>
