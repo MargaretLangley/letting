@@ -2,31 +2,31 @@
 <% properties = @records %>
 
 <div class='grid shell'>
-  <div class='col-2-24 vertical-spacer grid-header r-align'>
+  <div class='col-2-24 bottom-spacer grid-header r-align'>
     ID
   </div>
-  <div class='col-1-24 vertical-spacer grid-header r-align'>
+  <div class='col-1-24 bottom-spacer grid-header r-align'>
      Cl
   </div>
-  <div class='col-5-24 vertical-spacer grid-header'>
+  <div class='col-5-24 bottom-spacer grid-header'>
     Name
   </div>
-  <div class='col-2-24 vertical-spacer grid-header r-align'>
+  <div class='col-2-24 bottom-spacer grid-header r-align'>
     No
   </div>
-  <div class='col-2-24 vertical-spacer grid-header'>
+  <div class='col-2-24 bottom-spacer grid-header'>
    House
   </div>
-  <div class='col-2-24 vertical-spacer grid-header r-align'>
+  <div class='col-2-24 bottom-spacer grid-header r-align'>
     No
   </div>
-  <div class='col-4-24 vertical-spacer grid-header'>
+  <div class='col-4-24 bottom-spacer grid-header'>
    Road
   </div>
-  <div class='col-3-24 vertical-spacer grid-header'>
+  <div class='col-3-24 bottom-spacer grid-header'>
   Town
   </div>
-  <div class='col-3-24 vertical-spacer grid-header no-print no-r-pad'>
+  <div class='col-3-24 bottom-spacer grid-header no-print no-r-pad'>
     Actions
   </div>
 
@@ -34,39 +34,39 @@
       property = PropertyDecorator.new prop %>
 
     <div title='View' class='table-row' data-link='<%= property_path(property.id) %>'>
-      <div class='col-2-24 grid-row vertical-spacer r-align inherit-row'>
+      <div class='col-2-24 grid-row bottom-spacer r-align inherit-row'>
         <%= property.human_ref %>
       </div>
-      <div class='col-1-24 vertical-spacer r-align inherit-row'>
+      <div class='col-1-24 bottom-spacer r-align inherit-row'>
          <%=property.client_ref %>
       </div>
-      <div class='col-5-24 vertical-spacer inherit-row'>
+      <div class='col-5-24 bottom-spacer inherit-row'>
         <%= format_empty_string_as_dash property.occupiers %>
       </div>
-      <div class='col-2-24 vertical-spacer r-align inherit-row'>
+      <div class='col-2-24 bottom-spacer r-align inherit-row'>
        <%= format_empty_string_as_dash property.address.flat_no %>
       </div>
-      <div class='col-2-24 vertical-spacer inherit-row'>
+      <div class='col-2-24 bottom-spacer inherit-row'>
        <%= format_empty_string_as_dash property.address.house_name %>
        <%= link_to '.', property_path(property.id), class: 'view-testing-link' %>
       </div>
-      <div class='col-2-24 vertical-spacer r-align inherit-row'>
+      <div class='col-2-24 bottom-spacer r-align inherit-row'>
         <%= property.address.road_no %>
       </div>
-      <div class='col-4-24 vertical-spacer inherit-row'>
+      <div class='col-4-24 bottom-spacer inherit-row'>
        <%= property.address.road %>
       </div>
-      <div class='col-3-24 vertical-spacer tablerow inherit-row nowrap'>
+      <div class='col-3-24 bottom-spacer tablerow inherit-row nowrap'>
       <%= property.address.town %>
       </div>
     </div>
-    <div class='col-1-24 vertical-spacer no-print'>
+    <div class='col-1-24 bottom-spacer no-print'>
       <%= link_to fa_icon('gbp lg'), new_payment_path(id: property.account.id), title: 'Add New Payment' %>
     </div>
-    <div class='col-1-24 vertical-spacer no-print'>
+    <div class='col-1-24 bottom-spacer no-print'>
       <%= link_to fa_icon('edit lg'), edit_property_path(property.id), title: 'Edit', class: 'simple-button' %>
     </div>
-    <div class='col-1-24 vertical-spacer no-print'>
+    <div class='col-1-24 bottom-spacer no-print'>
       <%= link_to fa_icon('trash-o lg'), property, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete' %>
     </div>
   <% end %>

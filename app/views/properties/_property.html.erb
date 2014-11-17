@@ -1,44 +1,44 @@
-<div class='col-1-4 vertical-spacer grid-row faded'>
+<div class='col-1-4 bottom-spacer grid-row faded'>
   Property Id
 </div>
 
-<div class='col-3-4 vertical-spacer'>
+<div class='col-3-4 bottom-spacer'>
   <%= property.human_ref %>
 </div>
-<div class='col-1-4 vertical-spacer faded'>
+<div class='col-1-4 bottom-spacer faded'>
   Client Id
 </div>
-<div class='col-3-4 vertical-spacer'>
+<div class='col-3-4 bottom-spacer'>
   <%= property.client_ref %>
 </div>
 <div class='col-1-1'>
   &nbsp;
 </div>
-<div class='col-1-4 vertical-spacer grid-header'>
+<div class='col-1-4 bottom-spacer grid-header'>
   Association
 </div>
-<div class='col-3-8 vertical-spacer grid-header'>
+<div class='col-3-8 bottom-spacer grid-header'>
   Occupier
 </div>
-<div class='col-3-8 vertical-spacer grid-header'>
+<div class='col-3-8 bottom-spacer grid-header'>
   Agent
 </div>
 
-<div class='col-1-4 vertical-spacer faded'>
+<div class='col-1-4 bottom-spacer faded'>
  Name
 </div>
-<div class='col-3-8 vertical-spacer'>
+<div class='col-3-8 bottom-spacer'>
   <%= property.occupiers %>
 </div>
-<div class='col-3-8 vertical-spacer'>
+<div class='col-3-8 bottom-spacer'>
   <%= property.agent_name %>
 </div>
-<div class='col-1-4 vertical-spacer faded'>
+<div class='col-1-4 bottom-spacer faded'>
   Address
 </div>
-<div class='col-3-8 vertical-spacer'>
+<div class='col-3-8 bottom-spacer'>
   <%= simple_format(property.address.text, {}, wrapper_tag: 'div') %>
 </div>
-<div class='col-3-8 vertical-spacer'>
+<div class='col-3-8 bottom-spacer'>
   <%= simple_format(property.agent_address_lines, {}, wrapper_tag: 'div') %>
 </div>

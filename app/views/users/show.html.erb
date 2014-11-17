@@ -1,44 +1,44 @@
 <% @title='View User' %>
 
 <div class='grid shell'>
-  <div class='col-18-24 vertical-spacer'>
+  <div class='col-18-24 bottom-spacer'>
     <div class='grid-row col-1-6'>
       &nbsp;
     </div>
-    <div class='col-1-6 vertical-spacer faded'>
+    <div class='col-1-6 bottom-spacer faded'>
       User ID
     </div>
-    <div class='col-4-6 vertical-spacer'>
+    <div class='col-4-6 bottom-spacer'>
       <%= @user.id %>
     </div>
 
     <div class='grid-row col-1-6'>
       &nbsp;
     </div>
-    <div class='col-1-6 vertical-spacer faded'>
+    <div class='col-1-6 bottom-spacer faded'>
       Nickname
     </div>
-    <div class='col-4-6 vertical-spacer'>
+    <div class='col-4-6 bottom-spacer'>
       <%= @user.nickname %>
     </div>
 
     <div class='grid-row col-1-6'>
       &nbsp;
     </div>
-    <div class='col-1-6 vertical-spacer faded'>
+    <div class='col-1-6 bottom-spacer faded'>
       email
     </div>
-    <div class='col-4-6 vertical-spacer'>
+    <div class='col-4-6 bottom-spacer'>
       <%= @user.email %>
     </div>
 
     <div class='grid-row col-1-6'>
       &nbsp;
     </div>
-    <div class='col-1-6 vertical-spacer faded'>
+    <div class='col-1-6 bottom-spacer faded'>
       Admin
     </div>
-    <div class='col-4-6 vertical-spacer no-r-pad'>
+    <div class='col-4-6 bottom-spacer no-r-pad'>
       <% if @user.admin %>
         Yes
       <% else %>
@@ -46,7 +46,7 @@
       <% end %>
     </div>
   </div>
-  <div class='col-6-24 vertical-spacer  no-r-pad'>
+  <div class='col-6-24 bottom-spacer  no-r-pad'>
     <%= link_to fa_icon('edit 2x'), edit_user_path(@user), class: 'simple-button float-right' %>
   </div>
 </div> <!-- grid shell -->

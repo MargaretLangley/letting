@@ -1,18 +1,18 @@
-<div class='col-1-8 vertical-spacer no-warp grid-row'>
+<div class='col-1-8 bottom-spacer no-warp grid-row'>
   <%= account_item.date %>
 </div>
-<div class='col-1-4 vertical-spacer'>
+<div class='col-1-4 bottom-spacer'>
   <%= account_item.charge_type %>
 </div>
-<div class='col-1-4 vertical-spacer'>
+<div class='col-1-4 bottom-spacer'>
   <%= account_item.description %>
 </div>
-<div class='col-1-8 vertical-spacer r-align'>
+<div class='col-1-8 bottom-spacer r-align'>
   <%= account_item.due %>
 </div>
-<div class='col-1-8 vertical-spacer r-align'>
+<div class='col-1-8 bottom-spacer r-align'>
   <%= account_item.payment %>
 </div>
-<div class='col-1-8 vertical-spacer r-align no-r-pad'>
+<div class='col-1-8 bottom-spacer r-align no-r-pad'>
   <%= number_with_precision(account_item.running_balance,precision: 2) %>
 </div>

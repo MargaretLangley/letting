@@ -14,23 +14,23 @@
   &nbsp;
 </div>
 <div class="col-22-24">
-  <div class='grid-row col-8-24 vertical-spacer grid-header'>
+  <div class='grid-row col-8-24 bottom-spacer grid-header'>
     Date
   </div>
-  <div class='col-8-24 vertical-spacer grid-header'>
+  <div class='col-8-24 bottom-spacer grid-header'>
     Property Range
   </div>
-  <div class='col-8-24 vertical-spacer grid-header'>
+  <div class='col-8-24 bottom-spacer grid-header'>
     Charge
   </div>
   <% account_debits.values.each do |account_debit| %>
-    <div class='grid-row col-8-24 vertical-spacer grid-header'>
+    <div class='grid-row col-8-24 bottom-spacer grid-header'>
       <%= I18n.l account_debit.date_due, format: :short %>
     </div>
-    <div class='col-8-24 vertical-spacer grid-header'>
+    <div class='col-8-24 bottom-spacer grid-header'>
       <%= account_debit.property_refs_to_s %>
     </div>
-    <div class='col-8-24 vertical-spacer grid-header'>
+    <div class='col-8-24 bottom-spacer grid-header'>
       <%= account_debit.charge_type %>
     </div>
   <% end %>

@@ -1,23 +1,23 @@
 <% @title='Login' %>
 <div class='grid'>
-  <div class='col-1-6 vertical-spacer'>
+  <div class='col-1-6 bottom-spacer'>
     &nbsp;
   </div>
-  <div class='col-4-6 vertical-spacer'>
+  <div class='col-4-6 bottom-spacer'>
   <fieldset id='login' class='shell  dialog-box'>
     <%= form_tag sessions_path do %>
       <p>
       <div class='grid'>
-        <div class='col-1-4 vertical-spacer'>
+        <div class='col-1-4 bottom-spacer'>
           <%= label_tag :email %>
         </div>
-        <div class='col-3-4 vertical-spacer no-r-pad'>
+        <div class='col-3-4 bottom-spacer no-r-pad'>
           <%= text_field_tag :email, params[:email], autofocus: true %>
         </div>
-        <div class='col-1-4 vertical-spacer'>
+        <div class='col-1-4 bottom-spacer'>
           <%= label_tag :password %>
         </div>
-        <div class='col-3-4 vertical-spacer no-r-pad'>
+        <div class='col-3-4 bottom-spacer no-r-pad'>
           <%= password_field_tag :password %>
         </div>
         <div class='col-1-4'>
@@ -31,7 +31,7 @@
   <% end %>
   </fieldset>
   </div>
-<div class='col-1-6 vertical-spacer'>
+<div class='col-1-6 bottom-spacer'>
   &nbsp;
 </div>
 

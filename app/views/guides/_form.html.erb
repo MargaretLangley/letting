@@ -1,19 +1,19 @@
 <%= f.fields_for :guides do |f| %>
   <div class="grid">
     <hr>
-    <div class='col-1-6 vertical-spacer grid-row'>
+    <div class='col-1-6 bottom-spacer grid-row'>
         <%= f.label :instruction %>
     </div>
-    <div class='col-3-4 vertical-spacer'>
+    <div class='col-3-4 bottom-spacer'>
       <%= f.text_field :instruction %>
     </div>
-    <div class='col-1-4 vertical-spacer'>
+    <div class='col-1-4 bottom-spacer'>
       <%= f.label :fillin, "Fill In and Example" %>
     </div>
-    <div class='col-1-4 vertical-spacer'>
+    <div class='col-1-4 bottom-spacer'>
       <%= f.text_field :fillin %>
     </div>
-    <div class='col-1-4 vertical-spacer'>
+    <div class='col-1-4 bottom-spacer'>
       <%= f.text_field :sample %>
     </div>
   </div>

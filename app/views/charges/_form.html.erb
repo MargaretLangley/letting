@@ -2,48 +2,48 @@
   <div class='col-1-1 faded'>
     <h3>Charges</h3>
   </div>
-  <div class='col-5-24 vertical-spacer grid-header'>
+  <div class='col-5-24 bottom-spacer grid-header'>
     Charge
   </div>
-  <div class='col-7-24 vertical-spacer grid-header'>
+  <div class='col-7-24 bottom-spacer grid-header'>
     Dates Due
   </div>
-  <div class='col-4-24 vertical-spacer grid-header'>
+  <div class='col-4-24 bottom-spacer grid-header'>
     Payment
   </div>
-  <div class='col-3-24 vertical-spacer grid-header r-align'>
+  <div class='col-3-24 bottom-spacer grid-header r-align'>
     Amount
   </div>
-  <div class='col-2-24 vertical-spacer grid-header'>
+  <div class='col-2-24 bottom-spacer grid-header'>
     Dormant
   </div>
   <%= builder.fields_for :charges do |f| %>
     <div class='grid js-dynamic-group js-enclosed-toggle <%= hide_extra_new_records record: f.object, index: f.index %>'  >
-      <div class='col-5-24 vertical-spacer  no-r-pad spec-charge-count'>
+      <div class='col-5-24 bottom-spacer  no-r-pad spec-charge-count'>
         <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
       </div>
-      <div class='col-7-24 vertical-spacer'>
+      <div class='col-7-24 bottom-spacer'>
         <%= f.select :cycle_id, grouped_options_for_select(CycleDecorator.for_select), { prompt: 'Please select'}  %>
       </div>
-      <div class='col-4-24 vertical-spacer'>
+      <div class='col-4-24 bottom-spacer'>
         <%= f.select :payment_type, Charge::PAYMENT_TYPE.map{|type| [type.humanize, type] }, { prompt: 'Please select'}  %>
 
       </div>
-      <div class='col-3-24 vertical-spacer r-align'>
+      <div class='col-3-24 bottom-spacer r-align'>
         <%= f.text_field :amount, class: 'r-align' %>
         <%= f.hidden_field :start_date %>
         <%= f.hidden_field :end_date %>
       </div>
-      <div class='col-2-24 vertical-spacer'>
+      <div class='col-2-24 bottom-spacer'>
         <%= f.check_box :dormant, class: 'js-check-box-toggle' %>
       </div>
-      <div class='col-3-24 vertical-spacer'>
+      <div class='col-3-24 bottom-spacer'>
         <%= f.hidden_field :_destroy %>
         <%= link_to(fa_icon('trash-o'), '#', class:"delete-button #{hide_or_destroy record: f.object}", title: 'Delete Charge') %>
       </div>
     </div> <!-- js-dynamic-group js-enclosed-toggle -->
   <% end %>
-  <div class='col-3-24 vertical-spacer'>
+  <div class='col-3-24 bottom-spacer'>
     <%= link_to fa_icon('plus-circle lg'), '#', class: 'js-reveal-link  simple-button', title: 'Add Charge' %>
   </div> <!-- end-row -->
 </div>   <!-- js-group-toggle -->

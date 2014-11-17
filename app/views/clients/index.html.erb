@@ -2,31 +2,31 @@
 
 <div class='grid shell'>
 
-  <div class='col-1-12 vertical-spacer grid-header r-align'>
+  <div class='col-1-12 bottom-spacer grid-header r-align'>
     ID
   </div>
-  <div class='col-1-12 vertical-spacer grid-header'>
+  <div class='col-1-12 bottom-spacer grid-header'>
     Initials
   </div>
-  <div class='col-3-12 vertical-spacer grid-header'>
+  <div class='col-3-12 bottom-spacer grid-header'>
     Name
   </div>
-  <div class='col-1-12 vertical-spacer grid-header r-align'>
+  <div class='col-1-12 bottom-spacer grid-header r-align'>
     No
   </div>
-  <div class='col-4-12 vertical-spacer grid-header'>
+  <div class='col-4-12 bottom-spacer grid-header'>
    Road
   </div>
-  <div class='col-2-12 vertical-spacer grid-header no-print'>
+  <div class='col-2-12 bottom-spacer grid-header no-print'>
     Actions
   </div>
 
   <% @records.each do |client| %>
     <div title='View' class='table-row' data-link='<%= client_path(client.id) %>'>
-      <div class='col-1-12 grid-row vertical-spacer r-align inherit-row'>
+      <div class='col-1-12 grid-row bottom-spacer r-align inherit-row'>
         <%= client.human_ref %>
       </div>
-      <div class='col-1-12 vertical-spacer inherit-row'>
+      <div class='col-1-12 bottom-spacer inherit-row'>
         <%= format_empty_string_as_dash client.entities.first.initials %>
       </div>
       <div class='col-3-12 inherit-row'>
@@ -39,15 +39,15 @@
           &nbsp;
         <% end %>
       </div>
-      <div class='col-4-12 vertical-spacer inherit-row'>
+      <div class='col-4-12 bottom-spacer inherit-row'>
         <%= client.address.road %>
         <%= link_to '.', client_path(client.id), class: 'view-testing-link' %>
       </div>
     </div>
-    <div class='col-1-12 vertical-spacer no-print'>
+    <div class='col-1-12 bottom-spacer no-print'>
       <%= link_to fa_icon('edit lg'), edit_client_path(client.id), title: 'Edit' %>
     </div>
-    <div class='col-1-12 vertical-spacer no-print'>
+    <div class='col-1-12 bottom-spacer no-print'>
       <%= link_to fa_icon('trash-o lg'), client, method: :delete, data: { confirm: "Are you sure you want to delete?" }, title: 'Delete' %>
     </div>
   <% end %>

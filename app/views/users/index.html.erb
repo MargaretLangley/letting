@@ -2,37 +2,37 @@
 
 <div class='grid shell'>
 
-  <div class='col-2-24 vertical-spacer grid-header'>
+  <div class='col-2-24 bottom-spacer grid-header'>
     &nbsp;
   </div>
-  <div class='col-4-24 vertical-spacer grid-header '>
+  <div class='col-4-24 bottom-spacer grid-header '>
     Nickname
   </div>
-  <div class='col-10-24 vertical-spacer grid-header'>
+  <div class='col-10-24 bottom-spacer grid-header'>
    email
   </div>
-  <div class='col-2-24 vertical-spacer grid-header r-align'>
+  <div class='col-2-24 bottom-spacer grid-header r-align'>
    Admin
   </div>
-  <div class='col-4-24 vertical-spacer grid-header no-print'>
+  <div class='col-4-24 bottom-spacer grid-header no-print'>
     Actions
   </div>
-  <div class='col-2-24 vertical-spacer grid-header'>
+  <div class='col-2-24 bottom-spacer grid-header'>
     &nbsp;
   </div>
 
   <% @users.each do |user| %>
     <div title='View' class='table-row' data-link='<%= user_path(user) %>'>
-      <div class='col-2-24 grid-row vertical-spacer inherit-row'>
+      <div class='col-2-24 grid-row bottom-spacer inherit-row'>
         &nbsp;
       </div>
-      <div class='col-4-24 vertical-spacer inherit-row'>
+      <div class='col-4-24 bottom-spacer inherit-row'>
        <%= user.nickname %>
       </div>
-      <div class='col-10-24 vertical-spacer inherit-row'>
+      <div class='col-10-24 bottom-spacer inherit-row'>
        <%= user.email %>
       </div>
-      <div class='col-2-24 vertical-spacer r-align inherit-row'>
+      <div class='col-2-24 bottom-spacer r-align inherit-row'>
         <% if user.admin %>
           Yes
         <% else %>
@@ -41,13 +41,13 @@
         <%= link_to '.', user_path(user), class: 'view-testing-link' %>
       </div>
     </div>
-    <div class='col-2-24 vertical-spacer no-print'>
+    <div class='col-2-24 bottom-spacer no-print'>
       <%= link_to fa_icon('edit lg'), edit_user_path(user), title: 'Edit' %>
     </div>
-    <div class='col-2-24 vertical-spacer no-print'>
+    <div class='col-2-24 bottom-spacer no-print'>
       <%= link_to fa_icon('trash-o lg'), user, method: :delete, data: { confirm: 'Are you sure?' }, title: 'Delete' %>
     </div>
-    <div class='col-2-24 vertical-spacer inherit-row'>
+    <div class='col-2-24 bottom-spacer inherit-row'>
        &nbsp;
     </div>
   <% end %>

@@ -1,45 +1,45 @@
 <% @title='View Client' %>
 
 <div class='grid shell'>
-  <div class='col-14-24 vertical-spacer'>
-    <div class='grid-row col-1-4 vertical-spacer faded'>
+  <div class='col-14-24 bottom-spacer'>
+    <div class='grid-row col-1-4 bottom-spacer faded'>
       Client ID
     </div>
-    <div class='col-3-4 vertical-spacer'>
+    <div class='col-3-4 bottom-spacer'>
      <%= @client.human_ref %>
     </div>
-    <div class='grid-row col-1-4 vertical-spacer faded'>
+    <div class='grid-row col-1-4 bottom-spacer faded'>
       Name
     </div>
-    <div class='col-3-4 vertical-spacer'>
+    <div class='col-3-4 bottom-spacer'>
       <%= @client.entities.full_name %>
     </div>
-    <div class='grid-row col-1-4 vertical-spacer faded'>
+    <div class='grid-row col-1-4 bottom-spacer faded'>
       Address
     </div>
-    <div class='col-3-4 vertical-spacer'>
+    <div class='col-3-4 bottom-spacer'>
       <%= simple_format(@client.address.text, {}, wrapper_tag: 'div') %>
     </div>
   </div>
-  <div class='col-10-24 vertical-spacer'>
+  <div class='col-10-24 bottom-spacer'>
     <%= link_to fa_icon('edit'), edit_client_path(@client), class: 'simple-button float-right', title: 'Edit' %>
   </div>
   <br>
   <div class='grid-row col-1-1 faded'>
     Properties Owned
   </div>
-  <div class='grid-row col-1-8 vertical-spacer grid-header'>
+  <div class='grid-row col-1-8 bottom-spacer grid-header'>
     ID
   </div>
-  <div class='col-7-8 vertical-spacer grid-header'>
+  <div class='col-7-8 bottom-spacer grid-header'>
    Addresses
   </div>
 
   <% @client.properties.each do |property| %>
-    <div class='grid-row col-1-8 vertical-spacer'>
+    <div class='grid-row col-1-8 bottom-spacer'>
        <%= property.human_ref %>
     </div>
-    <div class='col-7-8 vertical-spacer no-r-pad'>
+    <div class='col-7-8 bottom-spacer no-r-pad'>
      <%= property.address.text %>
     </div>
   <% end %>

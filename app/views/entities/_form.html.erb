@@ -1,35 +1,35 @@
 <div class='js-group-toggle'>
-  <div class='col-6-24 vertical-spacer grid-header faded no-r-pad'>
+  <div class='col-6-24 bottom-spacer grid-header faded no-r-pad'>
     Title
   </div>
-  <div class='col-5-24 vertical-spacer grid-header faded no-r-pad'>
+  <div class='col-5-24 bottom-spacer grid-header faded no-r-pad'>
     Initials
   </div>
-  <div class='col-11-24 vertical-spacer grid-header faded no-r-pad'>
+  <div class='col-11-24 bottom-spacer grid-header faded no-r-pad'>
     Name
   </div>
-  <div class='col-2-24 vertical-spacer grid-header faded no-r-pad'>
+  <div class='col-2-24 bottom-spacer grid-header faded no-r-pad'>
     Do
   </div>
   <%= f.fields_for :entities do |builder| %>
     <div id='<%= entity_field_id(entitieable, builder.index) %>' class='grid js-enclosed-toggle <%= "#{hide_extra_new_records record: builder.object, index: builder.index} " %>' >
-      <div class='col-6-24 vertical-spacer no-r-pad spec-entity-count'>
+      <div class='col-6-24 bottom-spacer no-r-pad spec-entity-count'>
         <%= builder.text_field :title, class: 'js-clear' %>
       </div>
 
-      <div class='col-5-24 vertical-spacer no-r-pad'>
+      <div class='col-5-24 bottom-spacer no-r-pad'>
         <%= builder.text_field :initials, class: 'js-clear' %>
       </div>
-      <div class='col-11-24 vertical-spacer no-r-pad'>
+      <div class='col-11-24 bottom-spacer no-r-pad'>
         <%= builder.text_field :name, class: 'js-clear' %>
       </div>
-      <div class='col-2-24 vertical-spacer'>
+      <div class='col-2-24 bottom-spacer'>
         <%= builder.hidden_field :_destroy %>
         <%= link_to_if(!first_record?(index: builder.index), fa_icon('trash-o'), '#', class:"delete-button #{hide_or_destroy record: builder.object}", title: 'Delete Person') %>
       </div>
     </div> <!-- js-enclosed-toggle -->
   <% end %>
-  <div class='col-1-24 vertical-spacer'>
+  <div class='col-1-24 bottom-spacer'>
     <%= link_to fa_icon('plus-circle lg'), '#', class: 'js-reveal-link simple-button', title: 'Add Person' %>
   </div>
 </div> <!-- js-group-toggle -->

@@ -6,7 +6,7 @@
       <div class='col-1-2'>
         <h3>Property &hellip;</h3>
       </div>
-      <div class='col-1-2 vertical-spacer no-r-pad'>
+      <div class='col-1-2 bottom-spacer no-r-pad'>
         <%= link_to fa_icon('chevron-circle-down'), '#', class: 'js-toggle  simple-button float-right', title: 'Full Property' %>
         <%= link_to fa_icon('edit'), edit_property_path(@property.id), class: 'simple-button float-right', title: 'Edit' %>
       </div>
@@ -18,7 +18,7 @@
       <div class='col-1-2'>
         <h3>Property</h3>
       </div>
-      <div class='col-1-2 vertical-spacer no-r-pad'>
+      <div class='col-1-2 bottom-spacer no-r-pad'>
         <%= link_to fa_icon('chevron-circle-up'), '#', class: 'js-toggle  simple-button float-right', title: 'Partial Property' %>
         <%= link_to fa_icon('edit'), edit_property_path(@property.id), class: 'simple-button float-right', title: 'Edit' %>
       </div>
@@ -38,7 +38,7 @@
       <div class='col-3-4'>
         <h3>Accounts &hellip;</h3>
       </div>
-      <div class='col-1-4 vertical-spacer no-r-pad'>
+      <div class='col-1-4 bottom-spacer no-r-pad'>
         <%= link_to fa_icon('chevron-circle-down'), '#', class: 'js-toggle  simple-button float-right', title: 'Full Accounts' %>
       </div>
       <%= render 'accounts/account_header' %>
@@ -51,7 +51,7 @@
       <div class='col-3-4'>
         <h3>Accounts</h3>
       </div>
-      <div class='col-1-4 vertical-spacer no-r-pad'>
+      <div class='col-1-4 bottom-spacer no-r-pad'>
         <%= link_to fa_icon('chevron-circle-up'), '#', class: 'js-toggle  simple-button float-right', title: 'Partial Accounts' %>
       </div>
       <%= render 'accounts/account_header' %>
