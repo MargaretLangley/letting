@@ -15,16 +15,18 @@
 
     <% @templates.each do |template| %>
 
-      <div class='table-row' data-link='<%= template_path(template) %>'>
+      <div title='View' class='table-row' data-link='<%= template_path(template) %>'>
         <div class='col-8-24 grid-row vertical-spacer inherit-row r-align'>
           <%= template.id %>
         </div>
         <div class='col-10-24 vertical-spacer inherit-row'>
          <%= template.description %>
         </div>
-        <nav class='col-6-24 vertical-spacer'>
-          <%= link_to fa_icon('edit lg'), edit_template_path(template), title: 'Edit', class: 'r-pad' %>
-          <%= link_to fa_icon('file lg'), template_path(template), title: 'View', class: 'r-pad' %>
+        <nav class='col-3-24 vertical-spacer'>
+          <%= link_to fa_icon('edit lg'), edit_template_path(template), title: 'Edit' %>
+        </nav>
+        <nav class='col-3-24 vertical-spacer'>
+          <%= link_to fa_icon('file lg'), template_path(template), title: 'View' %>
         </nav>
       </div>
     <% end %>
