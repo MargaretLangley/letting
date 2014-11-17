@@ -87,6 +87,10 @@ a.grey{
   margin: 0 0 0.8% 0;
 }
 
+.top-bottom-spacer{
+  margin: 0.8% 0 0.8% 0;
+}
+
 /* To change heading color for printing change
    $secondary-print-text in _colors.scss.
    faded holds the switch. grid-header uses faded
@@ -372,7 +376,7 @@ $search-height: 35px;
 @media screen{
 
   @mixin base-button {
-    margin: 0 1% 2% 1%;
+    margin: 2% 1% 2% 1%;
     padding: 2%;
     border: 1px solid darken($secondary-button, 15%);
     border-radius: 5px;

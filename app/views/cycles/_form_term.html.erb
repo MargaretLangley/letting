@@ -155,18 +155,14 @@
             </div>
           </div>  <!-- js-enclosed-toggle -->
         <% end %>
-        <div class='grid-row col-7-24 vertical-spacer'>
+        <div class='grid-row col-7-24 top-bottom-spacer'>
           &nbsp;
         </div>
-        <div class='col-17-24 vertical-spacer'>
-          <%= link_to fa_icon('plus lg'), '#', class: 'js-reveal-link', title: 'Add Due Date' %>
-        </div>
+        <div class='col-4-24 top-bottom-spacer'>
+          <%= link_to fa_icon('plus-circle lg'), '#', class: 'js-reveal-link simple-button', title: 'Add Due Date' %>
+        </div> <!-- end-row -->
       </div>  <!-- js-group-toggle -->
       <hr class = 'faded'>
-      <%= render 'cycle_charged_ins/form', cycle: @cycle %>
-      <div class='grid-row col-24-24'>
-        &nbsp;
-      </div>
 
       <div class='grid-row col-6-24  vertical-spacer no-print'>
         &nbsp;
