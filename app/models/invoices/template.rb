@@ -14,11 +14,8 @@
 ####
 #
 class Template < ActiveRecord::Base
-  validates :description, presence: true
-  validates :invoice_name, presence: true
-  validates :phone, presence: true
-  validates :vat, presence: true
-  validates :heading1, presence: true
+  validates :invoice_name, :description, :heading1, :phone, :vat,
+            presence: true
   has_one :address, class_name: 'Address',
                     dependent: :destroy,
                     as: :addressable

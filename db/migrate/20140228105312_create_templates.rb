@@ -6,9 +6,9 @@ class CreateTemplates < ActiveRecord::Migration
       t.string :phone,  null: false
       t.string :vat,  null: false
       t.string :heading1,  null: false
-      t.string :heading2
-      t.text :advice1
-      t.text :advice2
+      t.string :heading2,  null: false
+      t.text :advice1,  null: false
+      t.text :advice2,  null: false
       t.timestamps
     end
   end
