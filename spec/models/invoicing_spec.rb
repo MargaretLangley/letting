@@ -18,13 +18,42 @@ RSpec.describe Invoicing, type: :model do
 
   describe '#actionable?' do
     it 'can be actionable' do
-      (invoicing = Invoicing.new).runs.build.invoices.build
+      template_create id: 1
+      cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
+      account_create property: property_new(human_ref: 20, client: client_new),
+                     charges: [charge_new(cycle: cycle)]
+
+      invoicing = Invoicing.new property_range: '20',
+                                period: Date.new(2010, 3, 1)..
+                                        Date.new(2010, 5, 1)
+      invoicing.generate
       expect(invoicing.actionable?).to be true
     end
 
-    it 'can be actionable' do
-      (invoicing = Invoicing.new).runs.build.invoices
+    it 'can not be actionable' do
+      template_create id: 1
+      cycle = cycle_new due_ons: [DueOn.new(month: 5, day: 2)]
+      account_create property: property_new(human_ref: 20, client: client_new),
+                     charges: [charge_new(cycle: cycle)]
+
+      invoicing = Invoicing.new property_range: '20',
+                                period: Date.new(2010, 3, 1)..
+                                        Date.new(2010, 5, 1)
+      invoicing.generate
       expect(invoicing.actionable?).to be false
+    end
+  end
+
+  describe '#generate?' do
+    it 'can be true' do
+      expect(invoicing_new).to be_generate
+    end
+    it 'can be false if range false' do
+      expect(invoicing_new property_range: nil).to_not be_generate
+    end
+    it 'can be false if period false' do
+      expect(invoicing_new period_first: nil, period_last: nil)
+        .to_not be_generate
     end
   end
 
@@ -39,7 +68,8 @@ RSpec.describe Invoicing, type: :model do
                                 period: Date.new(2010, 3, 1)..
                                         Date.new(2010, 5, 1)
       invoicing.generate
-      expect(invoicing.actionable?).to be true
+      expect(invoicing.runs.size).to eq 1
+      expect(invoicing.runs.first.invoices.size).to eq 1
     end
 
     it 'creates more than one run' do
@@ -67,7 +97,7 @@ RSpec.describe Invoicing, type: :model do
                                   period: Date.new(2010, 3, 1)..
                                           Date.new(2010, 5, 1)
         invoicing.generate
-        expect(invoicing.actionable?).to be false
+        expect(invoicing.runs.first.invoices).to eq []
       end
     end
   end

@@ -26,7 +26,7 @@
 #
 class Invoice < ActiveRecord::Base
   belongs_to :account
-  belongs_to :run
+  belongs_to :run, inverse_of: :invoices
   belongs_to :invoice_account, autosave: true, inverse_of: :invoices
   has_many :products, -> { order(:created_at) }, dependent: :destroy
   validates :products,

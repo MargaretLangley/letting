@@ -69,6 +69,7 @@ after :templates do
       Run.create! [
         { id: 1,
           invoicing_id: 1,
+          invoice_date: create_date(5),
         },
       ]
     end

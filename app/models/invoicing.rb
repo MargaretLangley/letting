@@ -13,7 +13,7 @@
 # during the time period of the invoice.
 #
 class Invoicing < ActiveRecord::Base
-  has_many :runs, dependent: :destroy
+  has_many :runs, dependent: :destroy, inverse_of: :invoicing
   validates :property_range, :period_first, :period_last, :runs, presence: true
   scope :default, -> { order(period_first: :desc) }
 
@@ -26,18 +26,22 @@ class Invoicing < ActiveRecord::Base
     self.period_last  = billing.last
   end
 
-  # actionable?
-  # is this invoicing in use, in action, at all?
+  # generate?
+  # Does this invoicing have enough arguments to call generate on?
+  # Nil values for property_range and period are nil cause problems.
   #
-  def actionable?
-    runs.first.actionable?
+  def generate?
+    property_range && period.first && period.last
   end
 
-  def generate
-    if runs.empty?
-      runs.build.prepare
-    else
-      runs.build.rerun runs.first
-    end
+  # actionable?
+  # Would this invoicing create an invoice at all?
+  #
+  def actionable?
+    runs.present? && runs.first.actionable?
+  end
+
+  def generate invoice_date: Date.current
+    runs.build.prepare invoice_date: invoice_date
   end
 end

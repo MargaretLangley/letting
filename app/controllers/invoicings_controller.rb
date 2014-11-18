@@ -24,7 +24,7 @@ class InvoicingsController < ApplicationController
 
   def create
     @invoicing = Invoicing.new invoicing_params
-    @invoicing.generate
+    @invoicing.generate invoice_date: params[:invoice_date]
     if @invoicing.save
       redirect_to new_invoicing_path, notice: 'Invoicing successfully created!'
     else
@@ -42,8 +42,10 @@ class InvoicingsController < ApplicationController
   private
 
   def invoicing_params
-    params.require(:invoicing).permit :property_range,
-                                      :period_first,
-                                      :period_last
+    params.require(:invoicing).permit invoicing_attributes
+  end
+
+  def invoicing_attributes
+    %i(property_range period_first period_last)
   end
 end

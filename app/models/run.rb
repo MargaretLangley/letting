@@ -10,16 +10,26 @@
 ####
 #
 class Run < ActiveRecord::Base
-  belongs_to :invoicing
-  has_many :invoices
+  belongs_to :invoicing, inverse_of: :runs
+  has_many :invoices, dependent: :destroy, inverse_of: :run
+  accepts_nested_attributes_for :invoices, allow_destroy: true
 
   validates :invoices, presence: true
-  def prepare
-    # TODO: set invoice_date:
-    self.invoices = InvoicesMaker.new(property_range: invoicing.property_range,
-                                      period: invoicing.period)
-                                      .compose
-                                      .invoices
+  after_initialize :init
+
+  def prepare(invoice_date:)
+    return unless invoicing.generate?
+    self.invoice_date = invoice_date
+
+    if self == invoicing.runs.first
+      self.invoices = make_invoices
+    else
+      rerun invoicing.runs.first
+    end
+  end
+
+  def init
+    self.invoice_date = Date.current if invoice_date.blank?
   end
 
   #
@@ -31,6 +41,16 @@ class Run < ActiveRecord::Base
   end
 
   def actionable?
-    invoices.size > 0
+    make_invoices.size > 0
+  end
+
+  private
+
+  def make_invoices
+    InvoicesMaker.new(property_range: invoicing.property_range,
+                      period: invoicing.period,
+                      invoice_date: invoice_date)
+                      .compose
+                      .invoices
   end
 end

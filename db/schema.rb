@@ -235,6 +235,7 @@ ActiveRecord::Schema.define(version: 20141110181915) do
 
   create_table "runs", force: true do |t|
     t.integer  "invoicing_id"
+    t.date     "invoice_date", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

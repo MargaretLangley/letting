@@ -6,7 +6,7 @@
 <div id='invoicing' class='shell' style='position: relative;'>
   <div class='grid overlay-parent'>
     <div class="grid-row col-1-24">&nbsp;</div>
-    <div class="col-12-24">
+    <div class='col-12-24'>
 
       <div class='grid-row col-3-8 bottom-spacer'>
         Search Terms
@@ -30,9 +30,14 @@
           <%= f.hidden_field :period_first %>
           <%= f.hidden_field :period_last %>
       </div>
-      <div class='col-2-8 bottom-spacer'>&nbsp;</div>
+      <div class='grid-row col-3-8 bottom-spacer faded'>
+        Invoice Date
+      </div>
+      <div class='col-5-8 bottom-spacer'>
+        <%= date_field_tag :invoice_date, params[:invoice_date] || Date.today  %>
+      </div>
     </div>
-    <div class="col-11-24">
+    <div class='col-11-24'>
       </br></br></br>
       <%= f.button submit: '', class: "primary plain-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Invoicing..."}, disabled: !@invoicing.actionable? %> or <%= link_to_if @invoicing.actionable?, 'Cancel', new_invoicing_path, class: 'warn' %>
     </div>
