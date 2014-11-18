@@ -43,42 +43,99 @@
       &nbsp;
     </div>
   </div>
-
   <hr class='faded'>
-  <div class='grid-row col-3-24 bottom-spacer grid-header r-align'>
-    Property ID
-  </div>
-  <div class='col-5-24 bottom-spacer grid-header'>
-    Billing Agent
-  </div>
-  <div class='col-5-24 bottom-spacer grid-header'>
-    Billing Address
-  </div>
-  <div class='col-7-24 bottom-spacer grid-header'>
-    Charge
-  </div>
-  <div class='col-3-24 bottom-spacer no-print grid-header'>
-    Action
+
+  <div class="tabs">
+    <ul class="tab-links">
+      <li class="active"><a href="#tab1">Blue Invoice</a></li>
+      <li><a href="#tab2">Red Invoice</a></li>
+   </ul>
+
+    <div class="tab-content">
+      <div id="tab1" class="tab active">
+        <div class='grid shell'>
+
+          <div class='grid-row col-3-24 bottom-spacer grid-header r-align'>
+            Property ID
+          </div>
+          <div class='col-5-24 bottom-spacer grid-header'>
+            Billing Agent
+          </div>
+          <div class='col-5-24 bottom-spacer grid-header'>
+            Billing Address
+          </div>
+          <div class='col-7-24 bottom-spacer grid-header'>
+            Charge
+          </div>
+          <div class='col-3-24 bottom-spacer no-print grid-header'>
+            Action
+          </div>
+
+          <% @invoicing.runs.last.invoices.each do |invoice| %>
+            <% invoice_decorator = InvoiceDecorator.new(invoice) %>
+            <div title='View' class='table-row' data-link='<%= invoice_path(invoice) %>'>
+              <div class='col-3-24  grid-row  inherit-row bottom-spacer r-align'>
+                <%= invoice_decorator.property_ref %>
+              </div>
+              <div class='col-5-24 inherit-row bottom-spacer'>
+                <%= invoice_decorator.billing_agent %>
+              </div>
+              <div class='col-5-24 inherit-row bottom-spacer'>
+                <%= invoice_decorator.billing_first_address_line %>
+              </div>
+              <div class='col-7-24 inherit-row bottom-spacer'>
+                <%= invoice_decorator.products_display %>
+              </div>
+              <div class='col-3-24 bottom-spacer no-print'>
+                <%= link_to fa_icon('print lg'), single_print_path(invoice), title: 'Print' %>
+              </div>
+            </div>
+          <% end %>
+        </div> <!-- close grid -->
+      </div>  <!-- close tab -->
+
+      <div id="tab2" class="tab">
+        <div class='grid shell'>
+
+          <div class='grid-row col-3-24 bottom-spacer grid-header r-align'>
+            Property ID
+          </div>
+          <div class='col-5-24 bottom-spacer grid-header'>
+            Billing Agent
+          </div>
+          <div class='col-5-24 bottom-spacer grid-header'>
+            Billing Address
+          </div>
+          <div class='col-7-24 bottom-spacer grid-header'>
+            Charge
+          </div>
+          <div class='col-3-24 bottom-spacer no-print grid-header'>
+            Action
+          </div>
+
+          <% @invoicing.runs.last.invoices.each do |invoice| %>
+            <% invoice_decorator = InvoiceDecorator.new(invoice) %>
+            <div title='View' class='table-row' data-link='<%= invoice_path(invoice) %>'>
+              <div class='col-3-24  grid-row  inherit-row bottom-spacer r-align'>
+                <%= invoice_decorator.property_ref %>
+              </div>
+              <div class='col-5-24 inherit-row bottom-spacer'>
+                <%= invoice_decorator.billing_agent %>
+              </div>
+              <div class='col-5-24 inherit-row bottom-spacer'>
+                <%= invoice_decorator.billing_first_address_line %>
+              </div>
+              <div class='col-7-24 inherit-row bottom-spacer'>
+                <%= invoice_decorator.products_display %>
+              </div>
+              <div class='col-3-24 bottom-spacer no-print'>
+                <%= link_to fa_icon('print lg'), single_print_path(invoice), title: 'Print' %>
+              </div>
+            </div>
+          <% end %>
+        </div> <!-- close grid -->
+      </div> <!-- close tab -->
+    </div>
   </div>
 
-  <% @invoicing.runs.last.invoices.each do |invoice| %>
-    <% invoice_decorator = InvoiceDecorator.new(invoice) %>
-    <div title='View' class='table-row' data-link='<%= invoice_path(invoice) %>'>
-      <div class='col-3-24  grid-row  inherit-row bottom-spacer r-align'>
-        <%= invoice_decorator.property_ref %>
-      </div>
-      <div class='col-5-24 inherit-row bottom-spacer'>
-        <%= invoice_decorator.billing_agent %>
-      </div>
-      <div class='col-5-24 inherit-row bottom-spacer'>
-        <%= invoice_decorator.billing_first_address_line %>
-      </div>
-      <div class='col-7-24 inherit-row bottom-spacer'>
-        <%= invoice_decorator.products_display %>
-      </div>
-      <div class='col-3-24 bottom-spacer no-print'>
-        <%= link_to fa_icon('print lg'), single_print_path(invoice), title: 'Print' %>
-      </div>
-    </div>
-  <% end %>
-</div>
+</div> <!-- close grid -->
