@@ -15,6 +15,7 @@ class Run < ActiveRecord::Base
 
   validates :invoices, presence: true
   def prepare
+    # TODO: set invoice_date:
     self.invoices = InvoicesMaker.new(property_range: invoicing.property_range,
                                       period: invoicing.period)
                                       .compose

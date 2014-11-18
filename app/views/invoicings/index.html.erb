@@ -46,7 +46,7 @@
         <%= link_to fa_icon('print lg'), print_path(invoicing), title: 'Print',  class: 'plain-button' %>
       </div>
       <div class='col-2-24 no-print'>
-        <%= link_to fa_icon('print lg'), print_path(invoicing), title: 'Red Invoice', class: 'warn-button' %>
+        <%= link_to fa_icon('print lg'), invoicing, method: :put, title: 'Red Invoice', class: 'warn-button' %>
       </div>
     </div>
   <% end %>

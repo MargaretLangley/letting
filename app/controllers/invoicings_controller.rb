@@ -32,6 +32,13 @@ class InvoicingsController < ApplicationController
     end
   end
 
+  def update
+    @invoicing = Invoicing.find params[:id]
+    @invoicing.generate
+    @invoicing.save
+    redirect_to print_path @invoicing
+  end
+
   private
 
   def invoicing_params
