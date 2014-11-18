@@ -21,6 +21,10 @@ describe 'Template Factory' do
         expect(template_new(description: 'new').description).to eq 'new'
       end
 
+      it 'changes heading1' do
+        expect(template_new(heading1: 'new').heading1).to eq 'new'
+      end
+
       it 'changes address' do
         expect(template_new(address: address_new(road: 'new')).address.road)
           .to eq 'new'

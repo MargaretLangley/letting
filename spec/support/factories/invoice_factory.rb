@@ -26,8 +26,8 @@ def invoice_create \
   id: nil,
   run_id: 6,
   invoice_date: '2014/06/30',
-  account: account_new(property: property_new),
-  property: property_new,
+  account: account_create,
+  property: property_create,
   invoice_account: invoice_account_new
 
   invoice = invoice_new id: id,

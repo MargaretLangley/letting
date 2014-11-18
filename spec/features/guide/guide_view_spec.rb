@@ -10,13 +10,13 @@ describe Guide, type: :feature do
       template_create id: 2
       guide_create id: 1,
                    instruction: 'ins1',
-                   fillin: 'This is useful',
+                   fillin: 'Useful stuff',
                    sample: 'Filled'
 
       visit '/templates/2'
       expect(page.title). to eq 'Letting - View Invoice Text'
       expect(page).to have_text 'ins1'
-      expect(page).to have_text 'This is useful'
+      expect(page).to have_text 'Useful stuff'
       expect(page).to have_text 'Filled'
     end
   end

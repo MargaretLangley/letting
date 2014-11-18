@@ -148,9 +148,9 @@ ActiveRecord::Schema.define(version: 20141110181915) do
 
   create_table "guides", force: true do |t|
     t.integer  "template_id", null: false
-    t.text     "instruction"
-    t.text     "fillin"
-    t.text     "sample"
+    t.text     "instruction", null: false
+    t.text     "fillin",      null: false
+    t.text     "sample",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -265,9 +265,9 @@ ActiveRecord::Schema.define(version: 20141110181915) do
     t.string   "phone",        null: false
     t.string   "vat",          null: false
     t.string   "heading1",     null: false
-    t.string   "heading2"
-    t.text     "advice1"
-    t.text     "advice2"
+    t.string   "heading2",     null: false
+    t.text     "advice1",      null: false
+    t.text     "advice2",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
