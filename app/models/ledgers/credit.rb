@@ -23,9 +23,10 @@ class Credit < ActiveRecord::Base
   validates :charge, :on_date, presence: true
   # custom validates - numericality did not think -99_000 > -100_000
   validates :amount, amount: true
+  after_initialize :init
   before_save :reconcile
 
-  after_initialize do
+  def init
     self.on_date = Date.current if on_date.blank?
   end
 

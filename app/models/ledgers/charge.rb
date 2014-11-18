@@ -28,7 +28,9 @@ class Charge < ActiveRecord::Base
   validates :amount, amount: true
   validates :amount, numericality: { less_than: 100_000 }
 
-  after_initialize do
+  after_initialize :init
+
+  def init
     self.start_date = Date.parse MIN_DATE if start_date.blank?
     self.end_date = Date.parse MAX_DATE if end_date.blank?
   end

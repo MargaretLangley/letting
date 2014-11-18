@@ -20,13 +20,14 @@ class Payment < ActiveRecord::Base
       each(&:negate)
     end
   end
+  after_initialize :init
   before_validation :clear_up
 
   accepts_nested_attributes_for :credits, allow_destroy: true
   validates :account, :booked_on, presence: true
   validates :amount, amount: true
 
-  after_initialize do
+  def init
     self.amount = 0 if amount.blank?
     self.booked_on = DateTime.current if booked_on.blank?
   end
