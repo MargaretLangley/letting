@@ -31,7 +31,7 @@ module ApplicationHelper
   def edit_link model
     link_to fa_icon('edit lg'),
             [:edit, model],
-            class: 'plain-button float-right',
+            class: 'plain-button',
             title: 'Edit file'
   end
 
@@ -39,7 +39,7 @@ module ApplicationHelper
     link_to fa_icon('trash-o lg'),
             model,
             method: :delete,
-            class: 'plain-button float-right',
+            class: 'plain-button',
             data: { confirm: 'Are you sure you want to delete?' },
             title: 'Delete file'
   end
@@ -48,13 +48,20 @@ module ApplicationHelper
     if model.new_record?
       link_to fa_icon('file-o lg'),
               '#',
-              class: 'plain-button float-right',
+              class: 'plain-button',
               disabled: true, title: 'View file (disabled)'
     else
       link_to fa_icon('file-o lg'),
               model,
-              class: 'plain-button float-right',
+              class: 'plain-button',
               title: 'View file'
     end
+  end
+
+  def print_link(model, title: 'Print', css: 'plain-button')
+    link_to fa_icon('print lg'),
+            print_path(model),
+            title: title,
+            class: css
   end
 end
