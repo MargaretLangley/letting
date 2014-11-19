@@ -11,42 +11,42 @@
   <div class='col-5-24 grid-header no-print'>
     Created On
   </div>
-  <div class='col-4-24 grid-header no-print'>
+  <div class='col-3-24 grid-header no-print'>
     Bill From
   </div>
-  <div class='col-4-24 grid-header no-print'>
+  <div class='col-3-24 grid-header no-print'>
     Bill To
   </div>
-  <div class='col-3-24 grid-header no-print'>
+  <div class='col-6-24 grid-header no-print'>
     Action
   </div>
-  <div class='col-1-24 no-print'>
-    &nbsp;
-  </div>
-
 
   <% @invoicings.each do |invoicing| %>
+    <% invoicing_dec = InvoicingIndexDecorator.new invoicing %>
     <div title='View' class='table-row' data-link='<%= invoicing_path(invoicing) %>'>
-      <div class='col-2-24 grid-row no-print'>
+      <div class='col-2-24 grid-row bottom-spacer no-print'>
         &nbsp;
       </div>
-      <div class='col-5-24 bottom-spacer no-print inherit-row'>
-        <%= invoicing.property_range %>
+      <div class='col-5-24 no-print inherit-row'>
+        <%= invoicing_dec.property_range %>
       </div>
       <div class='col-5-24 no-print inherit-row'>
-        <%= I18n.l invoicing.created_at, format: :human %>
+        <%= invoicing_dec.created_at %>
       </div>
-      <div class='col-4-24 no-print inherit-row'>
-        <%= I18n.l invoicing.period_first, format: :short %>
+      <div class='col-3-24 no-print inherit-row'>
+        <%= invoicing_dec.period_first %>
       </div>
-      <div class='col-4-24 no-print inherit-row'>
-        <%= I18n.l invoicing.period_last, format: :short %>
+      <div class='col-3-24 no-print inherit-row'>
+        <%= invoicing_dec.period_last %>
       </div>
       <div class='col-2-24 no-print'>
-        <%= link_to fa_icon('print lg'), print_path(invoicing), title: 'Print',  class: 'plain-button' %>
+        <%= print_link invoicing %>
       </div>
       <div class='col-2-24 no-print'>
         <%= link_to fa_icon('print lg'), invoicing, method: :put, title: 'Red Invoice', class: 'warn-button' %>
+      </div>
+      <div class='col-2-24 no-print'>
+        &nbsp;
       </div>
     </div>
   <% end %>
