@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe InvoicingIndexDecorator do
   it '#created_at' do
-    Timecop.freeze(Time.local(2008, 9, 1, 10, 5, 35))
+    Timecop.travel(Time.local(2008, 9, 1, 10, 5, 1))
     invoicing_dec = InvoicingIndexDecorator.new invoicing_create
-    expect(invoicing_dec.created_at).to eq '01 Sep 2008 09:05'
+    expect(invoicing_dec.created_at).to eq '01 Sep 2008 10:05'
     Timecop.return
   end
 
