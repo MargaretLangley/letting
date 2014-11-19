@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @user = User.find params[:id]
     alert_message = user_deleted_message
     @user.destroy
     redirect_to users_path, alert: alert_message

@@ -60,7 +60,7 @@ class PropertiesController < ApplicationController
   end
 
   def destroy
-    @property = Property.find(params[:id])
+    @property = Property.find params[:id]
     alert_message = property_deleted_message
     @property.destroy
     redirect_to properties_path, alert: alert_message

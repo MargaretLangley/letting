@@ -54,7 +54,7 @@ class CyclesController < ApplicationController
   end
 
   def destroy
-    @cycle = Cycle.find(params[:id])
+    @cycle = Cycle.find params[:id]
     @cycle.destroy
     redirect_to cycles_path, alert: cycle_deleted_message
   end

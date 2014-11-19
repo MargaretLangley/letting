@@ -64,7 +64,7 @@ class PaymentsController < ApplicationController
   end
 
   def destroy
-    @payment = Payment.find(params[:id])
+    @payment = Payment.find params[:id]
     cached_message = deleted_message
     @payment.destroy
     redirect_to payments_path, alert: cached_message

@@ -49,7 +49,7 @@ class ClientsController < ApplicationController
   end
 
   def destroy
-    @client = Client.find(params[:id])
+    @client = Client.find params[:id]
     alert_message = client_deleted_message
     @client.destroy
     redirect_to clients_path, alert: alert_message
