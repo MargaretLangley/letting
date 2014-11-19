@@ -7,13 +7,12 @@ describe 'PrintShow', type: :feature do
 
     before(:each) do
       setup
-      visit '/prints/1'
+      visit '/single_prints/1'
     end
 
     it 'basic' do
-      expect(page.title).to eq 'Letting - Invoicing'
-      expect(page).to have_text '30/06/2014'
-      expect(page).to_not have_text '1-200'
+      expect(page.title).to eq 'Letting - Invoicing Single Print'
+      expect(page).to have_text '30/06/2015'
     end
 
     it 'finds first page invoice details' do
@@ -34,7 +33,6 @@ describe 'PrintShow', type: :feature do
     end
 
     it 'finds second template details' do
-      expect(template_new(heading1: 'Act 2002').heading1).to eq 'Act 2002'
     end
 
     it 'finds 2nd page guide details' do
@@ -50,13 +48,9 @@ describe 'PrintShow', type: :feature do
 
       property = property_new(human_ref: 2002,
                               occupiers: [Entity.new(name: 'Smiths')])
-      invoice = invoice_create invoice_date: '2014/06/30', property: property
-
-      invoicing_create id: 1,
-                       property_range: '1-200',
-                       period_first: '2014/06/30',
-                       period_last: '2014/08/30',
-                       runs: [run_new(invoices: [invoice])]
+      invoice_create id: 1,
+                     invoice_date: '2015/06/30',
+                     property: property
 
       (1..7).each { |guide_id| guide_create id: guide_id, instruction: 'inst' }
     end
