@@ -8,13 +8,11 @@ describe Template, type: :feature do
 
   context '#index' do
 
-    it 'checks data' do
+    it 'basic' do
       template_create id: 2, description: 'Page 2'
       visit '/templates/'
       expect(page).to have_title 'Letting - Invoice Texts'
       expect(page).to have_text 'Page 2'
-      expect(page).to have_link 'Edit'
-      expect(page).to have_link 'View'
     end
 
     it 'has edit link' do
@@ -27,7 +25,7 @@ describe Template, type: :feature do
     it 'has view link on icon' do
       template_create
       visit '/templates/'
-      click_on 'View'
+      first('.view-testing-link', visible: false).click
       expect(page.title).to eq 'Letting - View Invoice Text'
     end
 
