@@ -12,6 +12,7 @@ require_relative '../../lib/modules/method_missing'
 #
 class InvoicingIndexDecorator
   include ActionView::Helpers::NumberHelper
+  include SalientDate
   include MethodMissing
   attr_reader :source
 
@@ -23,11 +24,8 @@ class InvoicingIndexDecorator
     I18n.l @source.created_at, format: :human
   end
 
-  def period_first
-    I18n.l @source.period_first, format: :short
-  end
-
-  def period_last
-    I18n.l @source.period_last, format: :short
+  def period_between
+    salient_date_range start_date: @source.period_first,
+                       end_date: @source.period_last
   end
 end
