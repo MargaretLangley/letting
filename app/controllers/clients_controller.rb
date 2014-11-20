@@ -27,7 +27,7 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new clients_params
     if @client.save
-      redirect_to clients_path, notice: client_created_message
+      redirect_to clients_path, notice: created_message
     else
       @client.prepare_for_form
       render :new
@@ -42,7 +42,7 @@ class ClientsController < ApplicationController
   def update
     @client = Client.find params[:id]
     if @client.update clients_params
-      redirect_to clients_path, notice: client_updated_message
+      redirect_to clients_path, notice: updated_message
     else
       render :edit
     end
@@ -50,7 +50,7 @@ class ClientsController < ApplicationController
 
   def destroy
     @client = Client.find params[:id]
-    alert_message = client_deleted_message
+    alert_message = deleted_message
     @client.destroy
     redirect_to clients_path, alert: alert_message
   end
@@ -65,20 +65,20 @@ class ClientsController < ApplicationController
               entities_attributes: entities_params
   end
 
-  def identity
-    "Client '#{@client.entities.full_name} (id #{@client
-      .human_ref})'"
-  end
-
-  def client_created_message
+  def created_message
     "#{identity} successfully created!"
   end
 
-  def client_updated_message
+  def updated_message
     "#{identity} successfully updated!"
   end
 
-  def client_deleted_message
+  def deleted_message
     "#{identity} successfully deleted!"
+  end
+
+  def identity
+    "Client '#{@client.entities.full_name} (id #{@client
+      .human_ref})'"
   end
 end

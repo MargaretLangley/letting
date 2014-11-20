@@ -38,7 +38,7 @@ class PropertiesController < ApplicationController
   def create
     @property = Property.new property_params
     if @property.save
-      redirect_to properties_path, notice: property_created_message
+      redirect_to properties_path, notice: created_message
     else
       @property.prepare_for_form
       render :new
@@ -53,7 +53,7 @@ class PropertiesController < ApplicationController
   def update
     @property = Property.find params[:id]
     if @property.update property_params
-      redirect_to properties_path, notice: property_updated_message
+      redirect_to properties_path, notice: updated_message
     else
       render :edit
     end
@@ -61,7 +61,7 @@ class PropertiesController < ApplicationController
 
   def destroy
     @property = Property.find params[:id]
-    alert_message = property_deleted_message
+    alert_message = deleted_message
     @property.destroy
     redirect_to properties_path, alert: alert_message
   end
@@ -91,20 +91,20 @@ class PropertiesController < ApplicationController
     %i(id charge_type cycle_id charged_in_id payment_type amount dormant _destroy)  # rubocop: disable  Metrics/LineLength
   end
 
-  def identity
-    property = PropertyDecorator.new @property
-    "Property 'ID #{property.human_ref}, #{property.abridged_text}'"
-  end
-
-  def property_created_message
+  def created_message
     "#{identity} successfully created!"
   end
 
-  def property_updated_message
+  def updated_message
     "#{identity} successfully updated!"
   end
 
-  def property_deleted_message
+  def deleted_message
     "#{identity} successfully deleted!"
+  end
+
+  def identity
+    property = PropertyDecorator.new @property
+    "Property 'ID #{property.human_ref}, #{property.abridged_text}'"
   end
 end

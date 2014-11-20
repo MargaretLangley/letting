@@ -19,7 +19,7 @@ class PaymentsController < ApplicationController
   def index
     params[:payment_search] ||= Payments.last_booked_on
     @records = Payments.on(date: params[:payment_search])
-                        .page(params[:page])
+                       .page(params[:page])
   end
 
   def show
@@ -72,6 +72,19 @@ class PaymentsController < ApplicationController
 
   private
 
+  def payment_params
+    params.require(:payment)
+          .permit payment_attributes, credits_attributes: credit_attributes
+  end
+
+  def payment_attributes
+    %i(id account_id booked_on amount human_ref)
+  end
+
+  def credit_attributes
+    %i(id account_id charge_id debit_id on_date amount)
+  end
+
   def created_message
     "Payment #{identity} successfully created"
   end
@@ -81,26 +94,12 @@ class PaymentsController < ApplicationController
   end
 
   def deleted_message
-    'payment successfully deleted!'
+    "payment #{identity} successfully deleted!"
   end
 
   def identity
     "Ref: '#{@payment.account.property.human_ref}' " \
     "Name: '#{@payment.account.property.occupiers}' " \
     "Amount: '£#{@payment.amount}'"
-  end
-
-  def payment_params
-    params.require(:payment)
-     .permit :id,
-             :account_id,
-             :booked_on,
-             :amount,
-             :human_ref,
-             credits_attributes: credit_attributes
-  end
-
-  def credit_attributes
-    %i(id account_id charge_id debit_id on_date amount)
   end
 end

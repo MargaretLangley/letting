@@ -49,24 +49,26 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find params[:id]
-    alert_message = user_deleted_message
+    alert_message = deleted_message
     @user.destroy
     redirect_to users_path, alert: alert_message
   end
 
   private
 
+  def users_params
+    params.require(:user).permit user_attributes
+  end
+
+  def user_attributes
+    %i(nickname email password password_confirmation admin)
+  end
+
   def identity
     "#{@user.email} ( id #{@user.id})"
   end
 
-  def user_deleted_message
+  def deleted_message
     "#{identity} successfully deleted!"
-  end
-
-  def users_params
-    params
-    .require(:user)
-    .permit(:nickname, :email, :password, :password_confirmation, :admin)
   end
 end

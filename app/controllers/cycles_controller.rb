@@ -30,8 +30,7 @@ class CyclesController < ApplicationController
     @cycle = Cycle.new cycles_params
     @cycle.prepare
     if @cycle.save
-      redirect_to cycles_path,
-                  flash: { save: cycle_created_message }
+      redirect_to cycles_path, flash: { save: created_message }
     else
       render :new
     end
@@ -46,8 +45,7 @@ class CyclesController < ApplicationController
     @cycle = Cycle.find params[:id]
     @cycle.assign_attributes cycles_params
     if @cycle.save
-      redirect_to cycles_path,
-                  flash: { save: cycle_updated_message }
+      redirect_to cycles_path, flash: { save: updated_message }
     else
       render :edit
     end
@@ -56,37 +54,37 @@ class CyclesController < ApplicationController
   def destroy
     @cycle = Cycle.find params[:id]
     @cycle.destroy
-    redirect_to cycles_path, alert: cycle_deleted_message
+    redirect_to cycles_path, alert: deleted_message
   end
 
   private
 
   def cycles_params
     params.require(:cycle)
-          .permit :name,
-                  :charged_in_id,
-                  :order,
-                  :cycle_type,
-                  due_ons_attributes: due_ons_attributes
+          .permit cycle_attributes, due_ons_attributes: due_ons_attributes
+  end
+
+  def cycle_attributes
+    %i(name charged_in_id order cycle_type)
   end
 
   def due_ons_attributes
     [:id, :cycle_id, :month, :day, :show_month, :show_day, :year]
   end
 
-  def identity
-    "Cycle '#{@cycle.name} #{@cycle.order}'"
-  end
-
-  def cycle_created_message
+  def created_message
     "#{identity} successfully created!"
   end
 
-  def cycle_updated_message
+  def updated_message
     "#{identity} successfully updated!"
   end
 
-  def cycle_deleted_message
+  def deleted_message
     "#{identity} successfully deleted!"
+  end
+
+  def identity
+    "Cycle '#{@cycle.name} #{@cycle.order}'"
   end
 end

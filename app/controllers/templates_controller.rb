@@ -27,8 +27,7 @@ class TemplatesController < ApplicationController
   def update
     @template = Template.find params[:id]
     if @template.update templates_params
-      redirect_to template_path, notice: 'Invoice Texts successfully ' \
-                                       'updated!'
+      redirect_to template_path, notice: updated_message
     else
       render :edit
     end
@@ -37,16 +36,20 @@ class TemplatesController < ApplicationController
   private
 
   def templates_params
-    params.require(:template)
-    .permit  :description,
-             :invoice_name, :phone, :vat,
-             :heading1, :heading2,
-             :advice1, :advice2,
-             address_attributes: address_params,
-             guides_attributes: guides_params
+    params.require(:template).permit template_attributes,
+                                     address_attributes: address_params,
+                                     guides_attributes: guides_params
+  end
+
+  def template_attributes
+    %i(description invoice_name phone vat heading1 heading2 advice1 advice2)
   end
 
   def guides_params
     %i(id instruction fillin sample)
+  end
+
+  def updated_message
+    'Invoice Texts successfully updated!'
   end
 end
