@@ -5,39 +5,48 @@ describe 'PrintShow', type: :feature do
 
   describe '#show' do
 
-    before(:each) do
+    it 'basic' do
       setup
       visit '/prints/1'
-    end
-
-    it 'basic' do
       expect(page.title).to eq 'Letting - Invoicing'
       expect(page).to have_text '30/06/2014'
       expect(page).to_not have_text '1-200'
     end
 
     it 'finds first page invoice details' do
+      setup
+      visit '/prints/1'
       expect(page).to have_text 'Property Ref: 2002'
     end
 
     it 'finds first template details' do
+      setup
+      visit '/prints/1'
       expect(page).to have_text 'Harry'
       expect(page).to have_text 'Tel: 01710008'
     end
 
     it 'finds template  address details' do
+      setup
+      visit '/prints/1'
       expect(page).to have_text 'High'
     end
 
     it 'finds 2nd page invoice details' do
+      setup
+      visit '/prints/1'
       expect(page).to have_text 'Smiths'
     end
 
     it 'finds second template details' do
+      setup
+      visit '/prints/1'
       expect(template_new(heading1: 'Act 2002').heading1).to eq 'Act 2002'
     end
 
     it 'finds 2nd page guide details' do
+      setup
+      visit '/prints/1'
       expect(page).to have_text 'inst'
     end
 
