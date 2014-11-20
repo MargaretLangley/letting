@@ -39,6 +39,13 @@ class InvoicingsController < ApplicationController
     redirect_to print_path @invoicing
   end
 
+  def destroy
+    @invoicing = Invoicing.find params[:id]
+    alert_message = deleted_message
+    @invoicing.destroy
+    redirect_to invoicings_path, alert: alert_message
+  end
+
   private
 
   def invoicing_params
@@ -47,5 +54,14 @@ class InvoicingsController < ApplicationController
 
   def invoicing_attributes
     %i(property_range period_first period_last)
+  end
+
+  def identity
+    invoicing = InvoicingIndexDecorator.new @invoicing
+    "Range #{invoicing.property_range}, period: #{invoicing.period_between}"
+  end
+
+  def deleted_message
+    "#{identity} successfully deleted!"
   end
 end

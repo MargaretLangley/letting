@@ -15,7 +15,7 @@ Letting::Application.routes.draw do
   resources :properties
   resources :clients
   resources :payments
-  resources :invoicings, only: [:new, :create, :update, :index, :show]
+  resources :invoicings, only: [:new, :create, :update, :index, :show, :destroy]
   resources :invoices, only: [:show]
   resources :prints, only: [:show]
   resources :single_prints, only: [:show]

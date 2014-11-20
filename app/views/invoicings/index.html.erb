@@ -32,7 +32,10 @@
       <div class='col-2-24 no-print'>
         <%= link_to fa_icon('print lg'), invoicing, method: :put, title: 'Red Invoice', class: 'warn-button' %>
       </div>
-      <div class='col-4-24'>
+      <div class='col-2-24'>
+        <%= delete_link invoicing %>
+      </div>
+      <div class='col-2-24'>
         &nbsp;
       </div>
     </div>
