@@ -1,5 +1,4 @@
-require_relative '../../../lib/modules/salient_date'
-require 'timecop'
+require 'rails_helper'
 
 describe SalientDate do
   before :each do

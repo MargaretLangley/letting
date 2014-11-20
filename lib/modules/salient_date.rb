@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 #
 # SalientDate
 # Return the amount of the date that we need to distinguish

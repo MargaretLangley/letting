@@ -1,3 +1,5 @@
+require_relative '../../lib/modules/salient_date'
+
 ####
 #
 # ApplicationHelper
@@ -9,23 +11,9 @@
 ####
 #
 module ApplicationHelper
+  include SalientDate
   def format_empty_string_as_dash a_string
     a_string.blank? ? '-'  : a_string
-  end
-
-  def noticable_date_range(start_date:, end_date:)
-    if (start_date && start_date.year) == (end_date && end_date.year)
-      "#{safe_date(date: start_date, format: :month_date)} - "\
-      "#{safe_date(date: end_date, format: :month_date)}"
-    else
-      "#{safe_date(date: start_date, format: :short)} - "\
-      "#{safe_date(date: end_date, format: :short)}"
-    end
-  end
-
-  def safe_date(date:, format:)
-    return '' unless date
-    "#{I18n.l date, format: format}"
   end
 
   def edit_link model
