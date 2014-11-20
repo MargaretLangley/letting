@@ -38,7 +38,7 @@ module DB
       property_create human_ref: 9, account: account_new(charges: [charge])
       row = row(charge_code: 'Ins', amount: 3.05)
       expect(row.attributes[:charge_id]).to eq charge.id
-      expect(row.attributes[:on_date]).to eq Time.parse '2012-03-25 00:00:00'
+      expect(row.attributes[:on_date]).to eq Time.zone.parse '2012-03-25 00:00:00'
       expect(row.attributes[:amount]).to eq 3.05
     end
 

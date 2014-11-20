@@ -7,7 +7,7 @@ after :templates do
 
   class << self
     def create_date months_ago
-        on_date = Date.current - months_ago.months
+        on_date = Time.zone.today - months_ago.months
         "#{on_date.year}/#{on_date.month }/01"
     end
 

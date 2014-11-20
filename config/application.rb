@@ -24,7 +24,7 @@ module Letting
     # auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names.
     # Default is UTC.
-    # config.time_zone = 'Central Time (US & Canada)'
+    config.time_zone = 'London'
 
     config.i18n.enforce_available_locales = true
 

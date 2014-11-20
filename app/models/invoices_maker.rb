@@ -10,7 +10,7 @@
 #
 class InvoicesMaker
   attr_reader :property_range, :period, :invoices, :invoice_date
-  def initialize(property_range:, period:, invoice_date: Date.current)
+  def initialize(property_range:, period:, invoice_date: Time.zone.today)
     @property_range = property_range
     @period = period
     @invoice_date = invoice_date

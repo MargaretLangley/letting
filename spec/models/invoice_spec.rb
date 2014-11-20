@@ -114,7 +114,7 @@ RSpec.describe Invoice, type: :model do
     describe 'remake' do
       it 'invoice_date set to today' do
         invoice = invoice_create
-        expect(invoice.remake.invoice_date).to eq Date.current
+        expect(invoice.remake.invoice_date).to eq Time.zone.today
       end
 
       it 'copies property ref' do

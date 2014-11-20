@@ -27,7 +27,7 @@ class Credit < ActiveRecord::Base
   before_save :reconcile
 
   def init
-    self.on_date = Date.current if on_date.blank?
+    self.on_date = Time.zone.today if on_date.blank?
   end
 
   delegate :charge_type, to: :charge

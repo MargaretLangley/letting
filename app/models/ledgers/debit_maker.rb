@@ -19,7 +19,7 @@ class DebitMaker
     self
   end
 
-  def make? to_date: Date.current
+  def make? to_date: Time.zone.today
     balance_on(to_date: to_date) + invoice_account.sum > 0
   end
 

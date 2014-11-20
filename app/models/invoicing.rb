@@ -41,7 +41,7 @@ class Invoicing < ActiveRecord::Base
     runs.present? && runs.first.actionable?
   end
 
-  def generate invoice_date: Date.current
+  def generate invoice_date: Time.zone.today
     runs.build.prepare invoice_date: invoice_date
   end
 end

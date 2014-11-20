@@ -31,18 +31,18 @@ describe AccountDecorator do
 
     it 'orders items by date' do
       expect(account.items.map(&:on_date)).to contain_exactly \
-        Date.new(2013, 3, 25),
-        Date.new(2013, 4, 30),
-        Date.new(2013, 9, 25)
+        Time.zone.local(2013, 3, 25, 0, 0, 0, '+0').to_s,
+        Time.zone.local(2013, 4, 30, 0, 0, 0, '+1').to_s,
+        Time.zone.local(2013, 9, 25, 0, 0, 0, '+1').to_s
     end
 
     it 'orders abbrev-items by date' do
       expect(account.abbrev_items.map(&:on_date)).to \
         contain_exactly \
-        Date.new(2013, 1, 1),
-        Date.new(2013, 3, 25),
-        Date.new(2013, 4, 30),
-        Date.new(2013, 9, 25)
+        Time.zone.local(2013, 1, 1,  0, 0, 0, '+0').to_s,
+        Time.zone.local(2013, 3, 25, 0, 0, 0, '+0').to_s,
+        Time.zone.local(2013, 4, 30, 0, 0, 0, '+1').to_s,
+        Time.zone.local(2013, 9, 25, 0, 0, 0, '+1').to_s
     end
   end
 

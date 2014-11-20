@@ -83,7 +83,7 @@ class Account < ActiveRecord::Base
 
   delegate :clear_up_form, to: :charges
 
-  def balance to_date: Date.current
+  def balance to_date: Time.zone.today
     (credits + debits).select { |transaction| transaction.on_date <= to_date }
                       .map(&:amount).inject(0, :+)
   end
@@ -110,6 +110,8 @@ class Account < ActiveRecord::Base
   private
 
   def create_credit charge
-    credits.build charge: charge, on_date: Date.current, amount: -charge.amount
+    credits.build charge: charge,
+                  on_date: Time.zone.today,
+                  amount: -charge.amount
   end
 end

@@ -60,7 +60,7 @@ class Debtors
   end
 
   def date_range
-    before_first_db_date..(last_account_credit || Date.current.end_of_year)
+    before_first_db_date..(last_account_credit || Time.zone.today.end_of_year)
   end
 
   def last_account_credit

@@ -25,14 +25,14 @@ class Payments
     @payments.map(&:amount).inject(0, &:+)
   end
 
-  def self.on date: Date.current.to_s
+  def self.on date: Time.zone.today.to_s
     return Payment.none unless SearchDate.new(date).valid_date?
     Payment.includes(account: [:property])
            .where(booked_on: SearchDate.new(date).day_range)
   end
 
   def self.last_booked_on
-    return Date.today.to_s if Payment.count.zero?
+    return Time.zone.today.to_s if Payment.count.zero?
     Payment.order('booked_on DESC').first.booked_on.to_date.to_s
   end
 

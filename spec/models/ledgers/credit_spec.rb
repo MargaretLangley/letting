@@ -42,7 +42,8 @@ describe Credit, :ledgers, type: :model do
     after { Timecop.return }
 
     it 'has on_date' do
-      expect(credit_new(on_date: nil).on_date).to eq Date.new 2013, 9, 30
+      expect(credit_new(on_date: nil).on_date.to_s)
+        .to eq Time.zone.local(2013, 9, 30, 0, 0, 0, '+1').to_s
     end
   end
 

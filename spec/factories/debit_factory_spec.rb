@@ -9,7 +9,7 @@ describe 'Debit Factory' do
       end
       it 'has date' do
         expect(debit_new.on_date.to_s)
-          .to eq '2013-03-25 00:00:00 UTC'
+          .to eq '2013-03-25 00:00:00 +0000'
       end
       it 'has period' do
         expect(debit_new.period)
@@ -24,7 +24,7 @@ describe 'Debit Factory' do
       it('nils date') { expect(debit_new on_date: nil).to_not be_valid }
       it 'alters date' do
         expect(debit_new(on_date: '10/6/2014').on_date.to_s)
-          .to eq '2014-06-10 00:00:00 UTC'
+          .to eq '2014-06-10 00:00:00 +0100'
       end
       it 'alters period' do
         period = Date.new(2014, 3, 25)..Date.new(2014, 6, 30)
@@ -51,7 +51,7 @@ describe 'Debit Factory' do
       end
       it 'has date' do
         expect(debit_create(charge: charge).on_date.to_s)
-          .to eq '2013-03-25 00:00:00 UTC'
+          .to eq '2013-03-25 00:00:00 +0000'
       end
     end
     describe 'override' do
@@ -60,7 +60,7 @@ describe 'Debit Factory' do
       end
       it 'alters date' do
         expect(debit_create(charge: charge, on_date: '10/6/2014').on_date.to_s)
-          .to eq '2014-06-10 00:00:00 UTC'
+          .to eq '2014-06-10 00:00:00 +0100'
       end
     end
   end

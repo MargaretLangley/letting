@@ -47,7 +47,7 @@ module DB
     end
 
     def within_a_year
-      Date.current - 1.years
+      Time.zone.today - 1.years
     end
 
     # If I need an end date for a charge ending within a year

@@ -28,11 +28,11 @@
                     </h4>
                     <div class="col-1-2">
                       <%= label_tag :start_date %>
-                      <%= date_field_tag :start_date, params[:start_date] || Date.today  %>
+                      <%= date_field_tag :start_date, params[:start_date] || Time.zone.today  %>
                     </div>
                     <div class="col-1-2">
                       <%= label_tag :end_date %>
-                      <%= date_field_tag :end_date, params[:end_date] || Date.today + 8.weeks %>
+                      <%= date_field_tag :end_date, params[:end_date] || Time.zone.today + 8.weeks %>
                     </div>
                   </div>
                 </div>

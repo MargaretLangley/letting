@@ -37,7 +37,7 @@ class Invoice < ActiveRecord::Base
   has_many :templates, through: :letters
   has_many :letters, dependent: :destroy
 
-  def prepare(account:, invoice_date: Date.current, property:, billing:)
+  def prepare(account:, invoice_date: Time.zone.today, property:, billing:)
     self.account = account
     self.invoice_date = invoice_date
     letters.build template: Template.find(1)
@@ -54,7 +54,7 @@ class Invoice < ActiveRecord::Base
 
   def remake invoice: Invoice.new
     invoice.prepare account: account,
-                    invoice_date: Date.current,
+                    invoice_date: Time.zone.today,
                     property: property,
                     billing: { transaction: invoice_account }
   end

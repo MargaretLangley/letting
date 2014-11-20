@@ -3,8 +3,7 @@
 after 'charges' do
   class << self
     def create_date months_ago
-      on_date = Date.current - months_ago.months
-      "#{on_date.year}/#{on_date.month }/01"
+      DateTime.current - months_ago.months
     end
 
     def create_payment

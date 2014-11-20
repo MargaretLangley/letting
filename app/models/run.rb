@@ -29,7 +29,7 @@ class Run < ActiveRecord::Base
   end
 
   def init
-    self.invoice_date = Date.current if invoice_date.blank?
+    self.invoice_date = Time.zone.today if invoice_date.blank?
   end
 
   #

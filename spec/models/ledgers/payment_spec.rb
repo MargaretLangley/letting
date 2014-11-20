@@ -35,7 +35,7 @@ describe Payment, :payment, :ledgers, type: :model do
     describe 'booked_on' do
       it 'sets nil booked_on to today' do
         expect(payment_new(booked_on: nil).booked_on)
-          .to be_within(1.second).of DateTime.now
+          .to be_within(1.second).of Time.zone.now
       end
       it 'leaves defined booked_on intact' do
         payment = payment_create account: account_new,

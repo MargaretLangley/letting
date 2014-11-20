@@ -4,7 +4,7 @@
 def payment_new id: nil,
                 account_id: nil,
                 account: nil,
-                booked_on: '30/4/2013',
+                booked_on: '30/4/2013 01:00:00 +0100',
                 amount: 88.08,
                 credit: credit
   payment = Payment.new id: id,
@@ -20,7 +20,7 @@ end
 def payment_create id: nil,
                    account_id: nil,
                    account: nil,
-                   booked_on: '30/4/2013',
+                   booked_on: '30/4/2013 01:00:00 +0100',
                    amount: 88.08,
                    credit: credit
   payment = payment_new id: id,
