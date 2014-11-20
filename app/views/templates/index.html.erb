@@ -8,7 +8,7 @@
     Contains
   </div>
   <div class='col-6-24 grid-header'>
-    Actions
+    Action
   </div>
 
   <% if @templates.present? %>
@@ -21,12 +21,10 @@
         </div>
         <div class='col-10-24 bottom-spacer inherit-row'>
          <%= template.description %>
+         <%= link_to '', template_path(template), class: 'view-testing-link' %>
         </div>
         <nav class='col-3-24 bottom-spacer'>
           <%= edit_link(template) %>
-        </nav>
-        <nav class='col-3-24 bottom-spacer'>
-          <%= view_link template %>
         </nav>
       </div>
     <% end %>
