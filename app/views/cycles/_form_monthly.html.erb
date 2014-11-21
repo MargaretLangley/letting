@@ -110,7 +110,7 @@
         &nbsp;
       </div>
       <div class='col-18-24 no-r-pad  bottom-spacer no-print'>
-        <%= f.button submit: '', class: 'primary plain-button', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Cycle..."} %> or <%= link_to 'Cancel', cycles_path, class: 'warn' %>
+        <%= render 'buttons/submit', f: f %> or <%= cancel_link path: cycles_path %>
       </div>
     </div>
   </fieldset>

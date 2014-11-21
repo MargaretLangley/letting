@@ -23,6 +23,10 @@ module ApplicationHelper
             title: 'Edit file'
   end
 
+  def cancel_link(path:)
+    link_to 'Cancel', path, class: 'warn'
+  end
+
   def delete_link model
     link_to fa_icon('trash-o lg'),
             model,

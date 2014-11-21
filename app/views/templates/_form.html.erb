@@ -1,27 +1,24 @@
 <%= form_for template do |f| %>
-
   <div id='template' class='shell'>
     <%= render 'shared/errors', object: template %>
-  <div class='col-12-24'>
-    <h2><%= template.description %></h2>
-  </div>
-  <div class='col-12-24 no-r-pad'>
-    <%= view_link(template) %>
-  </div>
+    <div class='col-12-24 grid-row'>
+      <h2><%= template.description %></h2>
+    </div>
+    <div class='col-12-24 no-r-pad'>
+      <%= view_link(template) %>
+    </div>
 
-  <% if template.id == 1 %>
-    <%= render 'name_phone', f: f, parent: 'template', template: template %>
-    <%= render 'text_fields', f: f, parent: 'template', template: template %>
- `  <%= render 'addresses/form', f: f, parent: 'template', address: AddressDecorator.new(template.address) %>
-  <% else %>
-    <%= render 'text_fields', f: f, template: template %>
-    <%= render 'guides/form', f: f %>
-  <% end %>
-  <div class='col-6-24 no-print'>
-    &nbsp;
-  </div>
+    <% if template.id == 1 %>
+      <%= render 'name_phone', f: f, parent: 'template', template: template %>
+      <%= render 'text_fields', f: f, parent: 'template', template: template %>
+   `  <%= render 'addresses/form', f: f, parent: 'template', address: AddressDecorator.new(template.address) %>
+    <% else %>
+      <%= render 'text_fields', f: f, template: template %>
+      <%= render 'guides/form', f: f %>
+    <% end %>
+    <div class='col-6-24 no-print'>&nbsp;</div>
     <div class='col-18-24 no-r-pad no-print'>
-      <%= f.button submit: '', class: 'primary plain-button', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Invoice Text..."} %> or <%= link_to 'Cancel', templates_path, class: 'warn' %>
+      <%= render 'buttons/submit', f: f %> or <%= cancel_link path: templates_path %>
     </div>
   </div>
 <% end %>

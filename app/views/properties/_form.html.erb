@@ -41,7 +41,7 @@
     <div class='no-print'>
       <div class='col-2-24 grid-row'>&nbsp;</div>
       <div class='col-20-24 c-align'>
-        <%= f.button submit: '', class: "primary plain-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating Account..."} %> or <%= link_to 'Cancel', properties_path, class: 'warn' %>
+        <%= render 'buttons/submit', f: f %> or <%= cancel_link path: properties_path %>
       </div>
       <div class='col-2-24'>&nbsp;</div>
     </div>
