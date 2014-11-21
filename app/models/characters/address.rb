@@ -38,6 +38,10 @@ class Address < ActiveRecord::Base
     name + join + text(join: join)
   end
 
+  def first_line
+    flat_line || road_line
+  end
+
   def abridged_text join: "\n"
     [flat_house_line.blank? ? road_line : flat_line,
      town.blank? ? county : town].join "#{join}"

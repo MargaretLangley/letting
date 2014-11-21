@@ -55,7 +55,7 @@ describe Address, type: :model do
   end
 
   describe 'methods' do
-    describe 'name_and_address' do
+    describe '#name_and_address' do
       it 'presents full name and address' do
         address = Address.new flat_no: '47',
                               house_name: 'Hill Court',
@@ -71,7 +71,17 @@ describe Address, type: :model do
           .to eq 'Bob, Flat 47 Hill Court, Brum'
       end
     end
-    describe 'abridged_text' do
+    describe '#first_line' do
+      it 'shows flat when present' do
+        address = Address.new flat_no: '47', house_name: 'Hill', road: 'Edge Road'
+        expect(address.first_line).to eq "Flat 47 Hill"
+      end
+      it 'shows road when flat missing' do
+        address = Address.new flat_no: nil, house_name: nil, road: 'Edge Road'
+        expect(address.first_line).to eq "Edge Road"
+      end
+    end
+    describe '#abridged_text' do
       it 'adds flat when present' do
         address = Address.new flat_no: '47', house_name: 'Hill', town: 'Brum'
         expect(address.abridged_text).to eq "Flat 47 Hill\nBrum"
