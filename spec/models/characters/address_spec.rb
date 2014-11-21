@@ -73,12 +73,12 @@ describe Address, type: :model do
     end
     describe '#first_line' do
       it 'shows flat when present' do
-        address = Address.new flat_no: '47', house_name: 'Hill', road: 'Edge Road'
-        expect(address.first_line).to eq "Flat 47 Hill"
+        address = Address.new flat_no: '47', house_name: 'Hill', road: 'Edge Rd'
+        expect(address.first_line).to eq 'Flat 47 Hill'
       end
       it 'shows road when flat missing' do
-        address = Address.new flat_no: nil, house_name: nil, road: 'Edge Road'
-        expect(address.first_line).to eq "Edge Road"
+        address = Address.new flat_no: nil, house_name: nil, road: 'Edge Rd'
+        expect(address.first_line).to eq 'Edge Rd'
       end
     end
     describe '#abridged_text' do

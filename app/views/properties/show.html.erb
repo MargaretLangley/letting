@@ -1,29 +1,25 @@
 <% @title='View Account' %>
 
-<div class='js-toggle-selection'>
+<div class='grid shell js-toggle-selection'>
   <div class='js-togglable'>
-    <div class='grid shell'>
-      <div class='col-1-2'>
-        <h3>Property &hellip;</h3>
-      </div>
-      <div class='col-1-2 bottom-spacer no-r-pad'>
-        <%= link_to fa_icon('chevron-circle-down'), '#', class: 'js-toggle  plain-button float-right', title: 'Full Property' %>
-        <%= edit_link(@property) %>
-      </div>
-      <%= render 'properties/property_abridged', property: @property %>
+    <div class='col-3-4 grid-row'>
+      <h3>Property &hellip;</h3>
     </div>
+    <div class='col-1-4 bottom-spacer'>
+      <%= chevron_link direction: :down %>
+      <%= edit_link(@property) %>
+    </div>
+    <%= render 'properties/property_abridged', property: @property %>
   </div>
   <div class='js-togglable  js-revealable'>
-    <div class='grid shell'>
-      <div class='col-1-2'>
-        <h3>Property</h3>
-      </div>
-      <div class='col-1-2 bottom-spacer no-r-pad'>
-        <%= link_to fa_icon('chevron-circle-up'), '#', class: 'js-toggle  plain-button float-right', title: 'Partial Property' %>
-        <%= edit_link(@property) %>
-      </div>
-      <%= render 'properties/property', property: @property %>
+    <div class='col-3-4 grid-row'>
+      <h3>Property</h3>
     </div>
+    <div class='col-1-4 bottom-spacer'>
+      <%= chevron_link direction: :up %>
+      <%= edit_link(@property) %>
+    </div>
+    <%= render 'properties/property', property: @property %>
   </div>
 </div>
 
@@ -39,7 +35,7 @@
         <h3>Accounts &hellip;</h3>
       </div>
       <div class='col-1-4 bottom-spacer no-r-pad'>
-        <%= link_to fa_icon('chevron-circle-down'), '#', class: 'js-toggle  plain-button float-right', title: 'Full Accounts' %>
+        <%= chevron_link direction: :down %>
       </div>
       <%= render 'accounts/account_header' %>
       <%= render partial: 'accounts/account_item', collection: AccountDecorator.new(@property.account).abbrev_items %>
@@ -52,7 +48,7 @@
         <h3>Accounts</h3>
       </div>
       <div class='col-1-4 bottom-spacer no-r-pad'>
-        <%= link_to fa_icon('chevron-circle-up'), '#', class: 'js-toggle  plain-button float-right', title: 'Partial Accounts' %>
+        <%= chevron_link direction: :up %>
       </div>
       <%= render 'accounts/account_header' %>
       <%= render partial: 'accounts/account_item', collection: AccountDecorator.new(@property.account).items %>
