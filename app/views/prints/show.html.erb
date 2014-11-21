@@ -5,14 +5,19 @@
   </div>
 </div>
 
-<% @invoicing.runs.last.invoices.each do |invoice| %>
-  <%= render 'invoices/invoice_page1', invoice: invoice %>
-  <div class='page-break'>&nbsp;</div> <!-- End of page 1 -->
-   INTENTIONALLY BLANK
-  <div class='page-break'>&nbsp;</div> <!-- End of page 2 -->
-  <%= render 'invoice_page2/invoice_page2', invoice: invoice %>
-  <div class='page-break'>&nbsp;</div> <!-- End of page 2 -->
+<div class='wrap-print flt-left'>
+  <% @invoicing.runs.last.invoices.each do |invoice| %>
 
-<% end %>
+    <%= render 'invoices/invoice_page1', invoice: invoice %>
+    <div class='page-break'>&nbsp;</div> <!-- End of page 1 -->
+     INTENTIONALLY BLANK
+    <div class='page-break'>&nbsp;</div> <!-- End of page 2 -->
+    <%= render 'invoice_page2/invoice_page2', invoice: invoice %>
+    <div class='page-break'>&nbsp;</div> <!-- End of page 2 -->
 
+  <% end %>
+</div>
 
+<div class = 'side-wrap flt-right'>
+  <%= render 'layouts/sidebar' %>
+</div>
