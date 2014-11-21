@@ -11,6 +11,7 @@
     </div>
     <%= render 'properties/property_abridged', property: @property %>
   </div>
+
   <div class='js-togglable  js-revealable'>
     <div class='col-3-4 grid-row'>
       <h3>Property</h3>
@@ -31,7 +32,7 @@
   <div class='js-togglable'>
 
     <div class='grid shell'>
-      <div class='col-3-4'>
+      <div class='col-3-4 grid-row'>
         <h3>Accounts &hellip;</h3>
       </div>
       <div class='col-1-4 bottom-spacer no-r-pad'>
@@ -41,10 +42,11 @@
       <%= render partial: 'accounts/account_item', collection: AccountDecorator.new(@property.account).abbrev_items %>
     </div>
   </div>
+
   <div class='js-togglable js-revealable'>
 
     <div class='grid shell'>
-      <div class='col-3-4'>
+      <div class='col-3-4 grid-row'>
         <h3>Accounts</h3>
       </div>
       <div class='col-1-4 bottom-spacer no-r-pad'>
