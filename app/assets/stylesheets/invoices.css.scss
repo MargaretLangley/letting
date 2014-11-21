@@ -51,22 +51,33 @@ screen requirements hidden from print*/
     display: none;
   }
 
+  .side-wrap{
+    width: 100pt;
+  }
+  .wrap-print{
+    width: 500pt;
+  }
+
+  .flt-right{
+    float: right;
+  }
+
+  .flt-left
+  {
+    float: left;
+  }
+
  .widemargin{
     margin-left: 60px;
     font-size: 18px;
   }
 
-/*  .printbody{
-    margin-left: 20px;
-    width: 500px;
-  }
-
-*/  .bold-12-font{
+ .bold-12-font{
     font-weight: bold;
     font-size: 12px;
   }
 
- .insert-margin{
+  .insert-margin{
     margin-left: 10px;
   }
 
@@ -83,14 +94,7 @@ screen requirements hidden from print*/
 
 @media print{
 
-  /*Use the last item on the page to put this div on */
-
-  .nexter{
-     page-break-after: always;
-  }
-
-
- .page-break{
+  .page-break{
    display: block; page-break-after: always;
   }
 
@@ -137,7 +141,7 @@ screen requirements hidden from print*/
   .h1print{
     font-weight: bold;
     font-size: 20px;
-   }
+  }
 
 /* Invoice Fonts - not centralized */
 
