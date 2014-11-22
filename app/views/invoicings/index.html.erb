@@ -16,7 +16,7 @@
 
   <% @invoicings.each do |invoicing| %>
     <% invoicing_dec = InvoicingIndexDecorator.new invoicing %>
-    <div title='View' class='table-row' data-link='<%= invoicing_path(invoicing) %>'>
+    <div title='View Items within this print run' class='table-row' data-link='<%= invoicing_path(invoicing) %>'>
       <div class='col-5-24 grid-row inherit-row'>
         <%= invoicing_dec.property_range %>
       </div>
