@@ -24,7 +24,7 @@ describe Property, type: :feature do
     expect_agent
   end
 
-  it '#creates a account without agent', js: true do
+  it '#creates an account without agent', js: true do
     client_create human_ref: 8008
     charged_in = charged_in_create(id: 2, name: 'Advance')
     charge = charge_create cycle: cycle_new(id: 1, charged_in: charged_in)

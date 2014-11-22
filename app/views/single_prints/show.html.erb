@@ -1,9 +1,4 @@
 <% @title='Invoicing Single Print' %>
-<div class='grid'>
-  <div class='col-18-24 r-align'>
-  <%= link_to fa_icon('print 2x'), '#',title: 'Print', class: 'no-print js-printoff' %>
-  </div>
-</div>
 
 <div class='wrap-print flt-left'>
    <%= render 'invoices/invoice_page1', invoice: @invoice %>
