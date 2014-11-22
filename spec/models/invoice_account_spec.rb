@@ -12,17 +12,6 @@ RSpec.describe InvoiceAccount, type: :model do
     expect(invoice_account).to be_valid
   end
 
-  it 'Not destroyed when associated invoice destroyed' do
-    template_create id: 1
-    (transaction = InvoiceAccount.new)
-      .debited(debits: [debit_new(charge: charge_new)])
-
-    invoice = invoice_create invoice_account: transaction
-    invoice.destroy
-    expect(Invoice.count).to eq 0
-    expect(InvoiceAccount.count).to eq 1
-  end
-
   it 'can sum' do
     invoice_account = InvoiceAccount.new
     invoice_account.debited debits: [debit_new(amount: 10, charge: charge_new),

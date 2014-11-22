@@ -15,14 +15,15 @@ RSpec.describe Invoice, type: :model do
     end
   end
 
-  describe 'destroy' do
-    it 'destroy invoice_account if it is orphaned of invoices' do
+  describe 'when child invoices destroyed' do
+    it 'destroys associated invoice_account if it has no surviving child invoices' do
       invoice_account, property = invoice_account_new, property_create
       invoice = invoice_create invoice_account: invoice_account,
                                property: property
       expect { invoice.destroy }.to change(InvoiceAccount, :count).by(-1)
     end
-    it 'does not destroy invoice_account if more than one invoice' do
+    it 'preserves associated invoice_account while account still has other'\
+       'surviving child invoices' do
       invoice_account, property = invoice_account_new, property_create
       invoice_create invoice_account: invoice_account, property: property
       invoice = invoice_create invoice_account: invoice_account,
