@@ -26,17 +26,25 @@ class InvoicingsController < ApplicationController
     @invoicing = Invoicing.new invoicing_params
     @invoicing.generate invoice_date: params[:invoice_date]
     if @invoicing.save
-      redirect_to new_invoicing_path, notice: 'Invoicing successfully created!'
+      redirect_to new_invoicing_path, notice: created_message
     else
       render :new
     end
   end
 
+  def edit
+    @invoicing = Invoicing.find params[:id]
+    @invoicing.generate
+  end
+
   def update
     @invoicing = Invoicing.find params[:id]
     @invoicing.generate
-    @invoicing.save
-    redirect_to print_path @invoicing
+    if @invoicing.save
+      redirect_to invoicings_path, notice: updated_message
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -59,6 +67,14 @@ class InvoicingsController < ApplicationController
   def identity
     invoicing = InvoicingIndexDecorator.new @invoicing
     "Range #{invoicing.property_range}, period: #{invoicing.period_between}"
+  end
+
+  def created_message
+    "#{identity} successfully created!"
+  end
+
+  def updated_message
+    "#{identity} successfully updated!"
   end
 
   def deleted_message
