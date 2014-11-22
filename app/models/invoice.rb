@@ -70,9 +70,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def destroy_orphaned_invoice_account
-    if invoice_account.invoices.empty?
-      invoice_account.destroy
-    end
+    invoice_account.invoices.empty? && invoice_account.destroy
   end
 
   def to_s
