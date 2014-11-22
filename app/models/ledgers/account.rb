@@ -89,7 +89,7 @@ class Account < ActiveRecord::Base
   end
 
   # Finds and returns a matching Account
-  # human_ref - a account reference number, '2002'
+  # human_ref - account reference number, '2002'
   #
   def self.find_by_human_ref human_ref
     Account.between?(human_ref).first
