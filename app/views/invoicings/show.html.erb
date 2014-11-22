@@ -9,7 +9,7 @@
   <div class="tabs">
     <ul class="tab-links">
      <% @invoicing.runs.each_with_index do |run, index|  %>
-       <li class="<%= run == @invoicing.runs.last ? ' active' : '' %>"><a href="#tab<%= index + 1 %>">Invoice #<%= index + 1 %></a></li>
+       <li class="<%= run == @invoicing.runs.last ? ' active' : '' %>"><a href="#tab<%= index + 1 %>">Invoice <%= I18n.l run.invoice_date, format: :short %></a></li>
      <% end %>
    </ul>
 

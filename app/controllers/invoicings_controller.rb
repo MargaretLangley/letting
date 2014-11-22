@@ -40,7 +40,7 @@ class InvoicingsController < ApplicationController
 
   def update
     @invoicing = Invoicing.find params[:id]
-    @invoicing.generate
+    @invoicing.generate invoice_date: params[:invoice_date]
     if @invoicing.save
       redirect_to invoicings_path, notice: updated_message
     else
