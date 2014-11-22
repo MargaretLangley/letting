@@ -11,7 +11,7 @@ describe Invoicing, type: :feature do
                        period_last: '2014/08/30'
 
       visit '/invoicings/1'
-      expect(page.title).to eq 'Letting - Invoicing'
+      expect(page.title).to eq 'Letting - View Invoicing'
       expect(page).to have_text '1-100'
     end
   end
