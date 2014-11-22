@@ -15,6 +15,22 @@ RSpec.describe Invoice, type: :model do
     end
   end
 
+  describe 'destroy' do
+    it 'destroy invoice_account if it is orphaned of invoices' do
+      invoice_account, property = invoice_account_new, property_create
+      invoice = invoice_create invoice_account: invoice_account,
+                               property: property
+      expect { invoice.destroy }.to change(InvoiceAccount, :count).by(-1)
+    end
+    it 'does not destroy invoice_account if more than one invoice' do
+      invoice_account, property = invoice_account_new, property_create
+      invoice_create invoice_account: invoice_account, property: property
+      invoice = invoice_create invoice_account: invoice_account,
+                               property: property
+      expect { invoice.destroy }.to change(InvoiceAccount, :count).by(0)
+    end
+  end
+
   describe 'methods' do
 
     describe '#prepare' do

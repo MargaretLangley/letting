@@ -15,6 +15,7 @@ def invoice_new id: nil,
   template_create(id: 1) unless Template.find_by id: 1
   account.property = property
   invoice = Invoice.new id: id, run_id: run_id
+  invoice.invoice_account = invoice_account
   invoice.prepare account: account,
                   invoice_date: invoice_date,
                   property: account.property.invoice,

@@ -37,6 +37,8 @@ class Invoice < ActiveRecord::Base
   has_many :templates, through: :letters
   has_many :letters, dependent: :destroy
 
+  after_destroy :destroy_orphaned_invoice_account
+
   def prepare(account:, invoice_date: Time.zone.today, property:, billing:)
     self.account = account
     self.invoice_date = invoice_date
@@ -65,6 +67,12 @@ class Invoice < ActiveRecord::Base
     self.property_address = property_address
     self.billing_address = billing_address
     self.client_address = client_address
+  end
+
+  def destroy_orphaned_invoice_account
+    if invoice_account.invoices.empty?
+      invoice_account.destroy
+    end
   end
 
   def to_s
