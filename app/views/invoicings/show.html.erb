@@ -1,48 +1,9 @@
-<% @title='Invoicing' %>
+<% @title='View Invoicing' %>
 
 <div class='grid shell'>
-  <div class='col-3-24'>
-    &nbsp;
-  </div>
-  <div class='col-5-24 bottom-spacer grid-header'>
-    Property Range
-  </div>
-  <div class='col-4-24 grid-header'>
-    Created On
-  </div>
-  <div class='col-4-24 grid-header'>
-    Bill From
-  </div>
-  <div class='col-4-24 grid-header'>
-    Bill To
-  </div>
-  <div class='col-3-24 grid-header no-print'>
-    Action
-  </div>
+  <%= render 'invoicings/invoicing_header' %>
+  <%= render @invoicing %>
 
-  <div class='table-row' data-link='<%= print_path(@invoicing) %>'>
-    <div class='grid-row col-3-24'>
-      &nbsp;
-    </div>
-    <div class='col-5-24 bottom-spacer inherit-row'>
-      <%= @invoicing.property_range %>
-    </div>
-    <div class='col-4-24 no-print inherit-row'>
-      <%= I18n.l @invoicing.created_at, format: :human %>
-    </div>
-    <div class='col-4-24 inherit-row'>
-      <%= I18n.l @invoicing.period_first, format: :short %>
-    </div>
-    <div class='col-4-24 inherit-row'>
-      <%= I18n.l @invoicing.period_last, format: :short %>
-    </div>
-    <div class='col-1-24 no-print r-align'>
-      <%= link_to fa_icon('print lg'), print_path(@invoicing), title: 'Print' %>
-    </div>
-    <div class='col-3-24'>
-      &nbsp;
-    </div>
-  </div>
   <hr class='faded'>
 
   <div class="tabs">

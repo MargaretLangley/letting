@@ -1,0 +1,24 @@
+<% invoicing_dec = InvoicingIndexDecorator.new invoicing %>
+<div title='View' class='table-row' data-link='<%= invoicing_path(invoicing) %>'>
+  <div class='col-5-24 grid-row inherit-row'>
+    <%= invoicing_dec.property_range %>
+  </div>
+  <div class='col-5-24 inherit-row'>
+    <%= invoicing_dec.created_at %>
+  </div>
+  <div class='col-6-24 inherit-row'>
+    <%= invoicing_dec.period_between %>
+  </div>
+  <div class='col-2-24'>
+    <%= print_link invoicing %>
+  </div>
+  <div class='col-2-24 no-print'>
+    <%= link_to fa_icon('print lg'), invoicing, method: :put, title: 'Red Invoice', class: 'warn-button' %>
+  </div>
+  <div class='col-2-24'>
+    <%= delete_link invoicing %>
+  </div>
+  <div class='col-2-24'>
+    &nbsp;
+  </div>
+</div>
