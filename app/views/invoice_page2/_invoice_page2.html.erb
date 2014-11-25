@@ -62,23 +62,11 @@
   <div class='grid-row insert-margin insert-font'>
     <%= @template.guides[6].instruction %>
   </div>
-
   <div class='grid-row widemargin instruct-font'>
     <%= @template.guides[6].fillin %>
     <%= invoice_dec.client_address %>
   </div>
 
-  <div class='col-22-24 grid-row widemargin inv-advice'>
-    <%= simple_format(@template.advice1) %>
-  </div>
-  <div class='col-2-24'>
-    &nbsp;
-  </div>
+   <%= render 'templates/notices', template: @template %>
 
-  <div class='col-22-24 grid-row widemargin inv-advice'>
-    <%= simple_format(@template.advice2) %>
-  </div>
-  <div class='col-2-24'>
-    &nbsp;
-  </div>
-</div>
+ </div>

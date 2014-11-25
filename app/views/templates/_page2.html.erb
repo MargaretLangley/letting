@@ -10,10 +10,4 @@
   CLIENT'S ADDRESS
 </div>
 
-<div class='widemargin inv-advice'>
-  <br>
-  <%= simple_format(@template.advice1) %>
-  <p>
-  <%= simple_format(@template.advice2) %>
-  </p>
-</div>
+<%= render 'notices', template: @template %>
