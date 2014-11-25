@@ -32,7 +32,7 @@ $( document ).ready(function() {
   function doToggle(toggle) {
     toggle.closest('.js-toggle-selection')
           .children('.js-togglable')
-          .fadeToggle();
+          .slideToggle();
     // bubbles up the DOM until it finds a toggleEventHandler
     toggle.trigger('toggleEventHandler');
   }
