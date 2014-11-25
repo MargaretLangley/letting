@@ -36,8 +36,10 @@ class InvoiceDecorator
   end
 
   def products_display
-    "#{@source.products.first.charge_type} "\
-    "£#{number_with_precision(@source.products.first.amount, precision: 2)}"
+    @source.products.first(2).map do |product|
+      "#{product.charge_type} "\
+        "£#{number_with_precision(product.amount, precision: 2)}"
+    end.join ', '
   end
 
   def earliest_date_due

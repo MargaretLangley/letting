@@ -34,7 +34,9 @@ class InvoicingsController < ApplicationController
   end
 
   def edit
-    @invoicing = Invoicing.find params[:id]
+    @invoicing =
+      Invoicing.includes(runs: [invoices: [account: [debits: [:charge]]]])
+               .find params[:id]
     @invoicing.generate
   end
 
