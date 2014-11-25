@@ -1,17 +1,17 @@
-<div class=' grid-row h1print'>
+<div class=' grid-row c-align h1print'>
   <%= template.invoice_name %>
 </div>
 
-<div class='grid-row c-align res-longlease '>
+<div class='grid-row c-align inv-bold-headings'>
   <br>
   <%= template.heading1 %>
 </div>
 
 <div class='col-2-24 grid-row'>&nbsp;</div>
-<div class='col-15-24 inv-advice-bold'>
+<div class='col-15-24 inv-bold-headings'>
   VAT Reg No <%= template.vat %>
 </div>
-<div class='col-3-12 inv-advice-bold'>
+<div class='col-3-12 inv-bold-headings'>
   <%= simple_format(template.address.text, {}, wrapper_tag: 'div') %>
   Tel: <%= template.phone %>
 </div>

@@ -1,9 +1,11 @@
 <% template = ::Template.find(1) %>
 
-<div class='grid-row c-align bold-12-font'>
+<div class='grid-row c-align h1print'>
 	<%= template.invoice_name %>
-	<br>
-  <%= simple_format(template.address.text, {}, wrapper_tag: 'div') %>
+</div>
+<div class='grid-row c-align inv-bold-headings'>
+  <%= template.address.text %>
+  <br>
 	Telephone: <%= template.phone %>
 	<br>
 	VAT Reg No: <%= template.vat %>
