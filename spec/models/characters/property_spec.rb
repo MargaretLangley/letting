@@ -13,6 +13,15 @@ describe Property, type: :model do
           .to raise_error ActiveRecord::RecordInvalid
       end
     end
+    describe 'presence' do
+      it 'agent' do
+        (property = property_new).agent = nil
+        expect(property).to_not be_valid
+      end
+      it 'entities' do
+        expect(property_new occupiers: []).to_not be_valid
+      end
+    end
   end
 
   describe 'Methods' do

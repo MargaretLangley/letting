@@ -21,7 +21,7 @@ class Property < ActiveRecord::Base
 
   validates :human_ref, numericality: true
   validates :human_ref, uniqueness: true
-  validates :entities, presence: true
+  validates :agent, :entities, presence: true
   before_validation :clear_up_form
 
   delegate :text, to: :address, prefix: true
