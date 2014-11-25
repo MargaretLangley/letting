@@ -6,18 +6,17 @@
 
   <% @template = ::Template.find(2) %>
 
-  <div class='grid-row c-align'>
-     <%= template.heading1 %>
+  <div class='grid-row c-align bottom-spacer'>
+     <%= @template.heading1 %>
   </div>
-  <div class='grid-row c-align res-longlease'>
+  <div class='grid-row c-align h1print bottom-spacer'>
     <%= @template.heading2 %> <%= invoice_dec.property_ref %>
   </div>
-  <br>
 
   <div class='grid-row insert-margin insert-font'>
     <%= @template.guides[0].instruction %>
   </div>
-  <div class='grid-row widemargin font-14'>
+  <div class='grid-row widemargin instruct-font'>
     <%= @template.guides[0].fillin %>
     <%= invoice_dec.occupiers %>
   </div>
@@ -25,7 +24,7 @@
   <div class='grid-row insert-margin insert-font'>
     <%= @template.guides[1].instruction %>
   </div>
-  <div class='grid-row widemargin font-14'>
+  <div class='grid-row widemargin instruct-font'>
     <%= @template.guides[1].fillin %>
      <%= simple_format(invoice_dec.property_address, {}, wrapper_tag: 'div') %>
   </div>
@@ -33,21 +32,21 @@
   <div class='grid-row insert-margin insert-font'>
     <%= @template.guides[2].instruction %>
   </div>
-  <div class='grid-row widemargin font-14'>
+  <div class='grid-row widemargin instruct-font'>
     <%= @template.guides[2].fillin %>
   </div>
 
   <div class='grid-row insert-margin insert-font'>
     <%= @template.guides[3].instruction %>
   </div>
-  <div class='grid-row widemargin font-14'>
+  <div class='grid-row widemargin instruct-font'>
     <%= @template.guides[3].fillin %>
   </div>
 
   <div class='grid-row insert-margin insert-font'>
     <%= @template.guides[4].instruction %>
   </div>
-  <div class='grid-row widemargin font-14'>
+  <div class='grid-row widemargin instruct-font'>
     <%= @template.guides[4].fillin %>
     <%= template.invoice_name %>
   </div>
@@ -55,7 +54,7 @@
   <div class='grid-row insert-margin insert-font'>
     <%= @template.guides[5].instruction %>
   </div>
-  <div class='grid-row widemargin font-14'>
+  <div class='grid-row widemargin instruct-font'>
     <%= @template.guides[5].fillin %>
      <%= template.address.text %>
   </div>
@@ -63,22 +62,20 @@
   <div class='grid-row insert-margin insert-font'>
     <%= @template.guides[6].instruction %>
   </div>
-  <div class='col-22-24 grid-row widemargin font-14'>
+
+  <div class='grid-row widemargin instruct-font'>
     <%= @template.guides[6].fillin %>
     <%= invoice_dec.client_address %>
   </div>
-  <div class='col-2-24'>
-    &nbsp;
-  </div>
 
-  <div class='col-22-24 grid-row widemargin notice-font'>
+  <div class='col-22-24 grid-row widemargin inv-advice'>
     <%= simple_format(@template.advice1) %>
   </div>
   <div class='col-2-24'>
     &nbsp;
   </div>
 
-  <div class='col-22-24 grid-row widemargin notice-font'>
+  <div class='col-22-24 grid-row widemargin inv-advice'>
     <%= simple_format(@template.advice2) %>
   </div>
   <div class='col-2-24'>
