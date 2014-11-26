@@ -2,13 +2,7 @@
 
 <div class='wrap-print  float-left'>
   <div class='grid shell'>
-     <%= render 'invoices/invoice_page1', invoice: @invoice %>
-   </div>
-
-  <div class='page-break'>&nbsp;</div> <!-- End of page 1 -->
-
-  <div class='grid shell'>
-    <%= render 'invoice_page2/invoice_page2', invoice: @invoice %>
+     <%= render 'publish_invoices/publish_invoice', invoice: @invoice %>
   </div>
 </div>
 

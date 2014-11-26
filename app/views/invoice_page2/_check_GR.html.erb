@@ -1,9 +1,0 @@
-<% items.each do |item| %>
-
-  <% if item.charge_type == 'Ground Rent' || item.charge_type == 'Garage Ground Rent' %>
-        <%= render 'invoice_page2/print_invoice_page2', object: property_object, date_object: item.date, due_object: item.due %>
-       <% break %>
-  <% end %>
-
-<% end %>
-<br>
