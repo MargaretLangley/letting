@@ -1,12 +1,12 @@
 <% @title='Invoicing Single Print' %>
 
-<div class='wrap-print flt-left'>
+<div class='wrap-print float-left'>
    <%= render 'invoices/invoice_page1', invoice: @invoice %>
   <div class='page-break'>&nbsp;</div> <!-- End of page 1 -->
   <%= render 'invoice_page2/invoice_page2', invoice: @invoice %>
 </div>
 
-<div class = 'side-wrap flt-right'>
+<div class = 'side-wrap float-right'>
   <%= render 'layouts/sidebar' %>
 </div>
 

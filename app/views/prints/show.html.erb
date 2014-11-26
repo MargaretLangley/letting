@@ -1,6 +1,6 @@
 <% @title='Invoicing' %>
 
-<div class='wrap-print flt-left'>
+<div class='wrap-print float-left'>
   <% @invoicing.runs.last.invoices.each do |invoice| %>
 
     <%= render 'invoices/invoice_page1', invoice: invoice %>
@@ -13,6 +13,6 @@
   <% end %>
 </div>
 
-<div class = 'side-wrap flt-right'>
+<div class = 'side-wrap float-right'>
   <%= render 'layouts/sidebar' %>
 </div>
