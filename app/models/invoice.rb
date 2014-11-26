@@ -39,6 +39,15 @@ class Invoice < ActiveRecord::Base
 
   after_destroy :destroy_orphaned_invoice_account
 
+  # prepare
+  # Assigns the attributes required in an invoice
+  # Args:
+  # account      - account invoice is being prepared for
+  # invoice_date - the date which this invoice is being said to have been sent.
+  # property     - property that the invoice is being prepared for
+  # billing      - a transaction made up of the debits that will be added to the
+  #                invoice
+  #
   def prepare(account:, invoice_date: Time.zone.today, property:, billing:)
     self.account = account
     self.invoice_date = invoice_date
@@ -54,12 +63,27 @@ class Invoice < ActiveRecord::Base
     self
   end
 
+  # remake
+  # Re-generates the invoice as if it happened on another date
+  # The new invoice will take into account invoice_date and changes in account
+  # balance
+  #
   def remake invoice: Invoice.new
     invoice.prepare account: account,
                     invoice_date: Time.zone.today,
                     property: property,
                     billing: { transaction: invoice_account }
   end
+
+  def to_s
+    "Billing Address: #{billing_address.inspect}\n"\
+    "Property Ref: #{property_ref.inspect}\n"\
+    "Invoice Date: #{invoice_date.inspect}\n"\
+    "Property Address: #{property_address.inspect}\n"\
+    "client: #{client_address.inspect}\n"
+  end
+
+  private
 
   def property=(property_ref:, occupiers:, property_address:, billing_address:, client_address:) # rubocop: disable Metrics/LineLength
     self.property_ref = property_ref
@@ -72,16 +96,6 @@ class Invoice < ActiveRecord::Base
   def destroy_orphaned_invoice_account
     invoice_account.invoices.empty? && invoice_account.destroy
   end
-
-  def to_s
-    "Billing Address: #{billing_address.inspect}\n"\
-    "Property Ref: #{property_ref.inspect}\n"\
-    "Invoice Date: #{invoice_date.inspect}\n"\
-    "Property Address: #{property_address.inspect}\n"\
-    "client: #{client_address.inspect}\n"
-  end
-
-  private
 
   def property
     {
