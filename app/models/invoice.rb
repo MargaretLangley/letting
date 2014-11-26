@@ -75,6 +75,10 @@ class Invoice < ActiveRecord::Base
                     billing: { transaction: invoice_account }
   end
 
+  def back_page?
+    products.any?(&:back_page?)
+  end
+
   def to_s
     "Billing Address: #{billing_address.inspect}\n"\
     "Property Ref: #{property_ref.inspect}\n"\

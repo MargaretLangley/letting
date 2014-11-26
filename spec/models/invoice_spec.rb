@@ -128,7 +128,7 @@ RSpec.describe Invoice, type: :model do
         end
       end
     end
-    describe 'remake' do
+    describe '#remake' do
       it 'invoice_date set to today' do
         invoice = invoice_create
         expect(invoice.remake.invoice_date).to eq Time.zone.today
@@ -177,6 +177,21 @@ RSpec.describe Invoice, type: :model do
       end
 
     end
+
+    describe '#back_page?' do
+      it 'returns false if products have no ground rent' do
+        debits = [debit_new(charge: charge_new(charge_type: 'Insurance'))]
+        invoice = invoice_new invoice_account: invoice_account_new(debits: debits)
+        expect(invoice.back_page?).to eq false
+      end
+
+      it 'returns true if products includes ground rent' do
+        debits = [debit_new(charge: charge_new(charge_type: 'Ground Rent'))]
+        invoice = invoice_new invoice_account: invoice_account_new(debits: debits)
+        expect(invoice.back_page?).to eq true
+      end
+    end
+
     it 'outputs #to_s' do
       expect(invoice_new.to_s.lines.first)
       .to start_with %q(Billing Address: "Mr W. G. Grace\nEdgbaston Road\nBirmingham\nWest Midlands")

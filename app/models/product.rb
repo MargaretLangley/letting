@@ -21,6 +21,13 @@ class Product < ActiveRecord::Base
     self.period_last  = bill_range.last
   end
 
+  # Does the product require additional explanation typically
+  # on the back page of the invoice.
+  #
+  def back_page?
+    charge_type == 'Ground Rent' || charge_type == 'Garage Ground Rent'
+  end
+
   def <=> other
     return nil unless other.is_a?(self.class)
     [charge_type, date_due, amount, period_first, period_last] <=>

@@ -1,6 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
+
+  describe '#back_page?' do
+    it 'returns false if products have no ground rent' do
+      product = Product.new charge_type: 'Insurance'
+      expect(product.back_page?).to eq false
+    end
+
+    it 'returns true if products includes ground rent' do
+      product = Product.new charge_type: 'Ground Rent'
+      expect(product.back_page?).to eq true
+    end
+
+    it 'returns true if products includes garage ground rent' do
+      product = Product.new charge_type: 'Garage Ground Rent'
+      expect(product.back_page?).to eq true
+    end
+  end
+
   describe '#<=>' do
     it 'returns 0 when equal' do
       lhs = Product.new charge_type: 'Rent', date_due: '2014-01-01', amount: 6,
