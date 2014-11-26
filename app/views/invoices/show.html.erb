@@ -1,12 +1,17 @@
 <% @title='Invoice View' %>
-<div class='grid-row col-20-24'>
-  &nbsp;
+
+<div class='wrap-print  float-left'>
+  <div class='grid shell'>
+     <%= render 'invoices/invoice_page1', invoice: @invoice %>
+   </div>
+
+  <div class='page-break'>&nbsp;</div> <!-- End of page 1 -->
+
+  <div class='grid shell'>
+    <%= render 'invoice_page2/invoice_page2', invoice: @invoice %>
+  </div>
 </div>
 
-<div class='grid shell'>
-    <%= render 'invoice_page1', invoice: @invoice %>
-</div>
-<div class='page-break'>&nbsp;</div> <!-- End of page 1 -->
-<div class='grid shell'>
-  <%= render 'invoice_page2/invoice_page2', invoice: @invoice %>
+<div class = 'side-wrap  float-right'>
+  <%= render 'layouts/sidebar' %>
 </div>
