@@ -7,6 +7,8 @@
 ####
 #
 class InvoicesController < ApplicationController
+  layout 'view_layout'
+
   def show
     @invoice = Invoice.find params[:id]
   end
