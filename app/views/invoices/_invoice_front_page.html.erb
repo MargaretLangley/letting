@@ -1,33 +1,33 @@
 <% invoice_dec = InvoiceDecorator.new(invoice) %>
 <div class='printbody'>
-  <%= render 'templates/heading_page1', template: invoice_dec.templates.first %>
+  <%= render 'templates/heading_front_page', template: invoice_dec.templates.first %>
 
-  <div class='col-2-24 grid-row'>&nbsp;</div>
-  <div class='col-7-24 inv-bold-headings'>
+  <div class='col-2-24  grid-row'>&nbsp;</div>
+  <div class='col-7-24  inv-bold-headings'>
     <%= invoice_dec.templates.first.heading2 %>
   </div>
-  <div class='col-8-24 inv-bold-headings'>
+  <div class='col-8-24  inv-bold-headings'>
     Property Ref: <%= invoice_dec.property_ref %>
   </div>
-  <div class='col-5-24 inv-bold-headings'>
+  <div class='col-5-24  inv-bold-headings'>
     Date: <%= l invoice.invoice_date %>
   </div>
   <div class='col-2-24'>&nbsp;</div>
 
-  <div class='col-3-24 grid-row'>&nbsp;</div>
-  <div class='col-21-24 bottom-spacer'>
+  <div class='col-3-24  grid-row'>&nbsp;</div>
+  <div class='col-21-24  bottom-spacer'>
     <%= simple_format(invoice_dec.billing_address) %>
   </div>
 
-  <div class='col-2-24 grid-row bottom-spacer'>&nbsp;</div>
-  <div class='col-22-24 inv-bold-headings'>
+  <div class='col-2-24  grid-row  bottom-spacer'>&nbsp;</div>
+  <div class='col-22-24  inv-bold-headings'>
     Property Address: <%= invoice_dec.property_address %>
   </div>
 
   <%= render partial:'products/products',locals: { invoice: invoice } %>
 
-  <div class='col-2-24 grid-row'>&nbsp;</div>
-  <div class='col-20-24 inv-advice'>
+  <div class='col-2-24  grid-row'>&nbsp;</div>
+  <div class='col-20-24  inv-advice'>
     We <%= invoice_dec.templates.first.invoice_name.upcase %> ON BEHALF OF YOUR LANDLORD
     <br>
     <%= invoice_dec.client_address %>
@@ -35,7 +35,7 @@
     <%= invoice_dec.templates.first.advice1 %>
     <%= invoice_dec.templates.first.address.text %>
     <p>
-    <div class = 'grid-row inv-advice-bold'>
+    <div class = 'grid-row  inv-advice-bold'>
       Remittance Advice
     </div>
       <%= invoice_dec.templates.first.advice2 %>
@@ -44,26 +44,26 @@
   </div>
   <div class='col-2-24'>&nbsp;</div>
 
-  <div class='col-2-24 grid-row  bottom-spacer'>&nbsp;</div>
-  <div class='col-20-24 inv-bold-headings'>
+  <div class='col-2-24  grid-row  bottom-spacer'>&nbsp;</div>
+  <div class='col-20-24  inv-bold-headings'>
     Property Address: <%= invoice_dec.property_address %>
   </div>
   <div class='col-2-24'>&nbsp;</div>
 
-  <div class='col-2-24 grid-row  bottom-spacer'>&nbsp;</div>
-  <div class='col-10-24 inv-bold-headings'>
+  <div class='col-2-24  grid-row  bottom-spacer'>&nbsp;</div>
+  <div class='col-10-24  inv-bold-headings'>
     Ref: <%= invoice_dec.property_ref %>
   </div>
-  <div class='col-10-24 inv-bold-headings'>
+  <div class='col-10-24  inv-bold-headings'>
     Due Date <%= invoice_dec.earliest_date_due %>
   </div>
   <div class='col-2-24'>&nbsp;</div>
 
-  <div class='col-2-24 grid-row'>&nbsp;</div>
+  <div class='col-2-24  grid-row'>&nbsp;</div>
   <div class='col-22-24'>
     From: <%= invoice_dec.billing_address %>
   </div>
-  <div class='col-2-24 grid-row'>&nbsp;</div>
+  <div class='col-2-24  grid-row'>&nbsp;</div>
 
   <%= render partial:'products/products_narrow',locals: { invoice: invoice } %>
 </div>

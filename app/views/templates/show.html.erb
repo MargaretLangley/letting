@@ -1,16 +1,16 @@
 <% @title='View Invoice Text' %>
-<div id='template' class='shell template-padding'>
-  <div class='col-12-24 bottom-spacer'>
+<div id='template' class='shell  template-padding'>
+  <div class='col-12-24  bottom-spacer'>
     &nbsp;
   </div>
-  <div class='col-12-24 bottom-spacer'>
+  <div class='col-12-24  bottom-spacer'>
     <%= edit_link(@template) %>
   </div>
 
   Template Number <%= @template.id %>
 
   <% if @template.id == 1 %>
-    <%= render 'page1', template: @template %>
+    <%= render 'front_page', template: @template %>
   <% else %>
     <%= render 'page2', template: @template %>
   <% end %>

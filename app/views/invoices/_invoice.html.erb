@@ -1,13 +1,13 @@
 <% invoice_decorator = InvoiceDecorator.new(invoice) %>
-<div class='col-2-24 grid-row bottom-spacer r-align'>
+<div class='col-2-24  grid-row  bottom-spacer  r-align'>
   <%= invoice_decorator.property_ref %>
 </div>
-<div class='col-5-24 bottom-spacer'>
+<div class='col-5-24  bottom-spacer'>
   <%= invoice_decorator.billing_agent %>
 </div>
-<div class='col-5-24 bottom-spacer'>
+<div class='col-5-24  bottom-spacer'>
   <%= invoice_decorator.billing_first_address_line %>
 </div>
-<div class='col-12-24 bottom-spacer'>
+<div class='col-12-24  bottom-spacer'>
   <%= invoice_decorator.products_display %>
 </div>

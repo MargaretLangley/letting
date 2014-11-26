@@ -9,7 +9,7 @@ describe Template, type: :feature do
   end
 
   context '#view' do
-    it 'finds view page 1' do
+    it 'finds view front page' do
       visit '/templates/1'
       expect(page.title). to eq 'Letting - View Invoice Text'
     end
