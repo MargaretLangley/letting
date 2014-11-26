@@ -18,6 +18,7 @@ Letting::Application.routes.draw do
   resources :invoicings
   resources :invoices, only: [:show]
   resources :prints, only: [:show]
+  resources :prints_views, only: [:show]
   resources :single_prints, only: [:show]
   resources :templates, only: [:index, :show, :edit, :update]
   resources :guides, only: [:index, :show, :edit, :update]

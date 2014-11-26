@@ -2,15 +2,19 @@
 #
 # Invoicing Controller
 #
-# Invoicing for printing batches of invoices.
+# Invoicing for batches of invoices.
 #
 ####
 #
 class InvoicingsController < ApplicationController
+  # Print button on index allows printing of complete run
+  #
   def index
     @invoicings = Invoicing.page(params[:page]).default.load
   end
 
+  # show lists out each invoice from an invoice run
+  #
   def show
     @invoicing = Invoicing.includes(runs: [:invoices])
                           .find params[:id]
@@ -23,6 +27,15 @@ class InvoicingsController < ApplicationController
     @invoicing.generate
   end
 
+  # create
+  # invoicing_params:
+  #   - property_range - property ids to be invoiced
+  #   - period:        - the dates over which the invoicing occurs
+  # params: invoice_date - the date on the invoice
+  #
+  # generate - takes the params and makes the associated run. The run comprises
+  #            of a number of invoices.
+  #
   def create
     @invoicing = Invoicing.new invoicing_params
     @invoicing.generate invoice_date: params[:invoice_date]
