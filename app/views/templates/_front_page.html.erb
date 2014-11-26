@@ -1,21 +1,21 @@
-<%= render 'heading_page1', template: @template %>
+<%= render 'heading_front_page', template: @template %>
 
-<div class='col-2-24 grid-row'>&nbsp;</div>
-<div class='col-7-24 inv-bold-headings'>
+<div class='col-2-24  grid-row'>&nbsp;</div>
+<div class='col-7-24  inv-bold-headings'>
   <%= @template.heading2 %>
 </div>
-<div class='col-8-24 inv-bold-headings'>
+<div class='col-8-24  inv-bold-headings'>
   Property Ref:
 </div>
-<div class='col-5-24 inv-bold-headings'>
+<div class='col-5-24  inv-bold-headings'>
   Date:
 </div>
 <div class='col-2-24'>&nbsp;</div>
 
-<div class='col-24-24 grid-row'>&nbsp;</div>
+<div class='col-24-24  grid-row'>&nbsp;</div>
 
-<div class='col-2-24 grid-row'>&nbsp;</div>
-<div class='col-20-24 inv-advice'>
+<div class='col-2-24  grid-row'>&nbsp;</div>
+<div class='col-20-24  inv-advice'>
   We <%= @template.invoice_name %> ON BEHALF OF YOUR LANDLORDS
   <br>
   CLIENT NAME CLIENT ADDRESS
@@ -23,7 +23,7 @@
   <%= simple_format(@template.advice1) %>
   <%= @template.address.text %>
   <p>
-  <div class = 'grid-row inv-advice-bold'>
+  <div class = 'grid-row  inv-advice-bold'>
     Remittance Advice
   </div>
   <%= simple_format(@template.advice2) %>
