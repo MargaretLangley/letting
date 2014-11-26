@@ -10,7 +10,6 @@ class PrintsViewsController < ApplicationController
   layout 'view_layout'
 
   def show
-    @invoicing = Invoicing.includes(runs: [invoices: [:products]])
-                          .find params[:id]
+    @run = Run.includes(invoices: [:products]).find params[:id]
   end
 end

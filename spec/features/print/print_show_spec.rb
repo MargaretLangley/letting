@@ -65,7 +65,7 @@ describe 'PrintShow', type: :feature do
                        property_range: '1-200',
                        period_first: '2014/06/30',
                        period_last: '2014/08/30',
-                       runs: [run_new(invoices: [invoice])]
+                       runs: [run_new(id: 1, invoices: [invoice])]
 
       (1..7).each { |guide_id| guide_create id: guide_id, instruction: 'inst' }
     end
