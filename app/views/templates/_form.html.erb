@@ -1,10 +1,10 @@
 <%= form_for template do |f| %>
   <div id='template' class='shell'>
     <%= render 'shared/errors', object: template %>
-    <div class='col-12-24 grid-row'>
+    <div class='col-12-24  grid-row'>
       <h2><%= template.description %></h2>
     </div>
-    <div class='col-12-24 no-r-pad'>
+    <div class='col-12-24  no-r-pad'>
       <%= view_link(template) %>
     </div>
 
@@ -16,8 +16,8 @@
       <%= render 'text_fields', f: f, template: template %>
       <%= render 'guides/form', f: f %>
     <% end %>
-    <div class='col-6-24 no-print'>&nbsp;</div>
-    <div class='col-18-24 no-r-pad no-print'>
+    <div class='col-6-24  no-print'>&nbsp;</div>
+    <div class='col-18-24  no-r-pad  no-print'>
       <%= render 'buttons/submit', f: f %> or <%= cancel_link path: templates_path %>
     </div>
   </div>
