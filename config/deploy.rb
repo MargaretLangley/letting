@@ -11,7 +11,7 @@ set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:full_app_name)}"
 
 # SCM
 set :scm, :git
-set :repo_url, 'git@bitbucket.org:bcsltd/letting.git'
+set :repo_url, 'git@github.com:BCS-io/letting.git'
 set :branch, ENV['REVISION'] || ENV['BRANCH_NAME']
 
 # rbenv
