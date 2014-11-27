@@ -13,60 +13,20 @@
     <%= @template.heading2 %> <%= invoice_dec.property_ref %>
   </div>
 
-  <div class='grid-row insert-margin insert-font'>
-    <%= @template.guides[0].instruction %>
-  </div>
-  <div class='grid-row widemargin instruct-font'>
-    <%= @template.guides[0].fillin %>
-    <%= invoice_dec.occupiers %>
-  </div>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 0, info: invoice_dec.occupiers } %>
 
-  <div class='grid-row insert-margin insert-font'>
-    <%= @template.guides[1].instruction %>
-  </div>
-  <div class='grid-row widemargin instruct-font'>
-    <%= @template.guides[1].fillin %>
-     <%= simple_format(invoice_dec.property_address, {}, wrapper_tag: 'div') %>
-  </div>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 1, info: simple_format(invoice_dec.property_address, {}, wrapper_tag: 'div') } %>
 
-  <div class='grid-row insert-margin insert-font'>
-    <%= @template.guides[2].instruction %>
-  </div>
-  <div class='grid-row widemargin instruct-font'>
-    <%= @template.guides[2].fillin %>
-  </div>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 2, info: 'TO BE FILLED' } %>
 
-  <div class='grid-row insert-margin insert-font'>
-    <%= @template.guides[3].instruction %>
-  </div>
-  <div class='grid-row widemargin instruct-font'>
-    <%= @template.guides[3].fillin %>
-  </div>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 3, info: 'TO BE FILLED' } %>
 
-  <div class='grid-row insert-margin insert-font'>
-    <%= @template.guides[4].instruction %>
-  </div>
-  <div class='grid-row widemargin instruct-font'>
-    <%= @template.guides[4].fillin %>
-    <%= template.invoice_name %>
-  </div>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 4, info: template.invoice_name } %>
 
-  <div class='grid-row insert-margin insert-font'>
-    <%= @template.guides[5].instruction %>
-  </div>
-  <div class='grid-row widemargin instruct-font'>
-    <%= @template.guides[5].fillin %>
-     <%= template.address.text %>
-  </div>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 5, info: template.address.text } %>
 
-  <div class='grid-row insert-margin insert-font'>
-    <%= @template.guides[6].instruction %>
-  </div>
-  <div class='grid-row widemargin instruct-font'>
-    <%= @template.guides[6].fillin %>
-    <%= invoice_dec.client_address %>
-  </div>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 6, info: invoice_dec.client_address } %>
 
-   <%= render 'templates/notices', template: @template %>
+  <%= render 'templates/notices', template: @template %>
 
- </div>
+</div>
