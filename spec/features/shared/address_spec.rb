@@ -10,7 +10,7 @@ describe Address, type: :feature do
     it 'Add district line', js: true do
       client_create address: address_new(district: '')
       navigate_to_edit_page
-      expect(address).to_not be_district_visible
+      expect(address).to be_district_invisible
       address.add_district
       expect(address).to be_district_visible
     end
@@ -22,13 +22,13 @@ describe Address, type: :feature do
       navigate_to_edit_page
       expect(address).to be_district_visible
       address.delete_district
-      expect(address).to_not be_district_visible
+      expect(address).to be_district_invisible
     end
 
     it 'Add nation line', js: true do
       client_create address: address_new(nation: '')
       navigate_to_edit_page
-      expect(address).to_not be_nation_visible
+      expect(address).to be_nation_invisible
       address.add_nation
       expect(address).to be_nation_visible
     end
@@ -40,7 +40,7 @@ describe Address, type: :feature do
       navigate_to_edit_page
       expect(address).to be_nation_visible
       address.delete_nation
-      expect(address).to_not be_nation_visible
+      expect(address).to be_nation_invisible
     end
 
     def navigate_to_edit_page

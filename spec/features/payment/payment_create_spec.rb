@@ -11,7 +11,7 @@ describe Payment, :ledgers, :payment, type: :feature do
                            charges: [charge_new(debits: [debit_new])])
     payment_page.visit_new
     payment_page.human_ref('2002').search
-    expect(payment_page).to_not be_empty_search
+    expect(payment_page).to be_populated_search
     property_receivables?
     expect(payment_page.payment).to eq('88.08')
     payment_page.payment = 88.08

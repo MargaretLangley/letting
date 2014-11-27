@@ -20,6 +20,10 @@ class PaymentIndexPage
     self
   end
 
+  def without_payment?
+    has_no_content? /Mr W. G. Grace/i
+  end
+
   def having_payment?
     has_content? /Mr W. G. Grace/i
   end
@@ -54,7 +58,7 @@ describe 'Payment index', :ledgers, type: :feature do
       property_create account: account_new(payment: payment)
       payment_index.enter
       payment_index.search '2000/01/01'
-      expect(payment_index).to_not be_having_payment
+      expect(payment_index).to be_without_payment
     end
   end
 

@@ -45,6 +45,15 @@ class PaymentPage
     self
   end
 
+  # has_search?
+  # faster to test data-role is missing than negating empty_search?
+  # has_no_css - does not wait for timeout to decide
+  #              that the role is missing.
+  #
+  def populated_search?
+    has_no_css? '[data-role="unknown-property"]'
+  end
+
   def empty_search?
     has_css? '[data-role="unknown-property"]'
   end
