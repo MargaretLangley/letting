@@ -21,10 +21,10 @@ class Run < ActiveRecord::Base
     return unless invoicing.generate?
     self.invoice_date = invoice_date
 
-    if self == invoicing.runs.first
+    if first_run
       self.invoices = make_invoices
     else
-      rerun invoicing.runs.first
+      self.invoices = rerun invoicing.runs.first
     end
   end
 
@@ -37,7 +37,7 @@ class Run < ActiveRecord::Base
   # update the invoice - allowing for any payments and date changes
   #
   def rerun run
-    self.invoices  = run.invoices.map(&:remake)
+    run.invoices.map(&:remake)
   end
 
   def actionable?
@@ -45,6 +45,10 @@ class Run < ActiveRecord::Base
   end
 
   private
+
+  def first_run
+    self == invoicing.runs.first
+  end
 
   def make_invoices
     InvoicesMaker.new(property_range: invoicing.property_range,
