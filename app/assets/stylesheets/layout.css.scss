@@ -199,5 +199,8 @@
 
   .col-action{ width: 16%; }
 
+  /* When you want a column for structure but don't want it to take up any space(padding)  */
+  .spacer-column { padding: 0; }
+
 }
 
