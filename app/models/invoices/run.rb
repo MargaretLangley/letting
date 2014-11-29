@@ -12,11 +12,16 @@
 class Run < ActiveRecord::Base
   belongs_to :invoicing, inverse_of: :runs
   has_many :invoices, dependent: :destroy, inverse_of: :run
-  accepts_nested_attributes_for :invoices, allow_destroy: true
 
-  validates :invoices, presence: true
+  validates :invoice_date, :invoices, presence: true
   after_initialize :init
 
+  #
+  # prepare
+  # assigns required attributes and create the invoices required for invoice
+  #
+  # invoice_date - date to appear on the invoice
+  #
   def prepare(invoice_date:)
     return unless invoicing.generate?
     self.invoice_date = invoice_date
@@ -28,10 +33,6 @@ class Run < ActiveRecord::Base
     end
   end
 
-  def init
-    self.invoice_date = Time.zone.today if invoice_date.blank?
-  end
-
   #
   # rerun
   # update the invoice - allowing for any payments and date changes
@@ -40,11 +41,19 @@ class Run < ActiveRecord::Base
     run.invoices.map(&:remake)
   end
 
+  #
+  # actionable?
+  # Are the accounts invoiceable?
+  #
   def actionable?
     make_invoices.size > 0
   end
 
   private
+
+  def init
+    self.invoice_date = Time.zone.today if invoice_date.blank?
+  end
 
   def first_run
     self == invoicing.runs.first
