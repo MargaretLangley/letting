@@ -28,6 +28,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :account
   belongs_to :run, inverse_of: :invoices
   belongs_to :invoice_account, autosave: true, inverse_of: :invoices
+  has_many :comments, dependent: :destroy
   has_many :products, -> { order(:created_at) }, dependent: :destroy
   validates :products,
             :invoice_date,
@@ -48,11 +49,16 @@ class Invoice < ActiveRecord::Base
   # billing      - a transaction made up of the debits that will be added to the
   #                invoice
   #
-  def prepare(account:, invoice_date: Time.zone.today, property:, billing:)
+  def prepare(account:,
+              invoice_date: Time.zone.today,
+              property:,
+              billing:,
+              comments: [])
     self.account = account
     self.invoice_date = invoice_date
     letters.build template: Template.find(1)
     self.property = property
+    self.comments = generate_comments comments: comments
     self.invoice_account =  billing[:transaction]
 
     products = generate_products(arrears: account.balance(to_date: invoice_date), # rubocop: disable Metrics/LineLength
@@ -68,11 +74,12 @@ class Invoice < ActiveRecord::Base
   # The new invoice will take into account invoice_date and changes in account
   # balance
   #
-  def remake invoice: Invoice.new
+  def remake(invoice: Invoice.new, comments: [])
     invoice.prepare account: account,
                     invoice_date: Time.zone.today,
                     property: property,
-                    billing: { transaction: invoice_account }
+                    billing: { transaction: invoice_account },
+                    comments: comments
   end
 
   def back_page?
@@ -109,6 +116,11 @@ class Invoice < ActiveRecord::Base
       billing_address: billing_address,
       client_address: client_address,
     }
+  end
+
+  def generate_comments(comments:)
+    comments.reject(&:blank?)
+            .map { |comment| Comment.new clarify: comment }
   end
 
   def generate_products(arrears:, transaction:)

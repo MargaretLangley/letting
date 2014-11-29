@@ -9,18 +9,29 @@
 # invoices.
 #
 class InvoicesMaker
-  attr_reader :property_range, :period, :invoices, :invoice_date
-  def initialize(property_range:, period:, invoice_date: Time.zone.today)
+  attr_reader :comments, :property_range, :period, :invoices, :invoice_date
+  def initialize(property_range:,
+                 period:,
+                 invoice_date: Time.zone.today,
+                 comments:)
     @property_range = property_range
     @period = period
     @invoice_date = invoice_date
+    @comments = comments
   end
 
+  #
+  # compose
+  # Make invoices
+  #
   def compose
     @invoices = make_invoices accounts: composeable(accounts: property_range)
     self
   end
 
+  # composeable?
+  # If the accounts has something worth invoicing or not.
+  #
   def composeable?
     composeable(accounts: property_range).present?
   end
@@ -43,7 +54,8 @@ class InvoicesMaker
       invoice_date: invoice_date,
       property: account.property.invoice(billing_period: period),
       billing: DebitMaker.new(account: account, debit_period: period)
-                         .mold.invoice
+                         .mold.invoice,
+      comments: comments
     invoice
   end
 

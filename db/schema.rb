@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110181915) do
+ActiveRecord::Schema.define(version: 20141129154746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(version: 20141110181915) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "comments", force: true do |t|
+    t.integer  "invoice_id"
+    t.string   "clarify",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["invoice_id"], name: "index_comments_on_invoice_id", using: :btree
 
   create_table "credits", force: true do |t|
     t.integer  "account_id",                         null: false

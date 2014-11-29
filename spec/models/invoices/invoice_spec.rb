@@ -127,6 +127,50 @@ RSpec.describe Invoice, type: :model do
           expect(invoice.total_arrears).to eq(-20)
         end
       end
+
+      describe 'comments' do
+        it 'prepares without comments' do
+          template_create id: 1
+          property = property_create account: account_new, client: client_create
+          (transaction = InvoiceAccount.new)
+            .debited(debits: [debit_new(charge: charge_new)])
+
+          (invoice = Invoice.new)
+            .prepare account: property.account,
+                     property: property.invoice,
+                     billing: { arrears: 0, transaction:  transaction }
+          expect(invoice.comments.size).to eq 0
+        end
+
+        it 'prepares with comments' do
+          template_create id: 1
+          property = property_create account: account_new, client: client_create
+          (transaction = InvoiceAccount.new)
+            .debited(debits: [debit_new(charge: charge_new)])
+
+          (invoice = Invoice.new)
+            .prepare account: property.account,
+                     property: property.invoice,
+                     billing: { arrears: 0, transaction:  transaction },
+                     comments: ['comment']
+          expect(invoice.comments.size).to eq 1
+          expect(invoice.comments.first.clarify).to eq 'comment'
+        end
+
+        it 'ignores empty comments' do
+          template_create id: 1
+          property = property_create account: account_new, client: client_create
+          (transaction = InvoiceAccount.new)
+            .debited(debits: [debit_new(charge: charge_new)])
+
+          (invoice = Invoice.new)
+            .prepare account: property.account,
+                     property: property.invoice,
+                     billing: { arrears: 0, transaction:  transaction },
+                     comments: ['comment', '']
+          expect(invoice.comments.size).to eq 1
+        end
+      end
     end
     describe '#remake' do
       it 'invoice_date set to today' do

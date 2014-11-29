@@ -11,7 +11,8 @@ RSpec.describe InvoicesMaker, type: :model do
 
       invoicing =
         InvoicesMaker.new property_range: '8-8',
-                          period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
+                          period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1),
+                          comments: []
       invoicing.compose
       expect(invoicing.invoices.size).to eq 1
     end
@@ -26,7 +27,8 @@ RSpec.describe InvoicesMaker, type: :model do
 
         invoicing =
           InvoicesMaker.new property_range: '8-8',
-                            period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
+                            period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1),
+                            comments: []
         invoicing.compose
         expect(invoicing.invoices[0].products.first.charge_type).to eq 'Arrears'
       end
@@ -38,7 +40,8 @@ RSpec.describe InvoicesMaker, type: :model do
                        charges: [charge_create(cycle: cycle)]
         invoicing =
           InvoicesMaker.new property_range: '8-8',
-                            period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
+                            period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1),
+                            comments: []
         invoicing.compose
         expect(invoicing.invoices.first.products.size).to eq 1
         expect(invoicing.invoices.first.products.first.charge_type)
@@ -57,7 +60,8 @@ RSpec.describe InvoicesMaker, type: :model do
 
         invoicing =
           InvoicesMaker.new property_range: '8-8',
-                            period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
+                            period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1),
+                            comments: []
         invoicing.compose
         expect(invoicing.invoices[0].products[0].balance).to eq 30.00
         expect(invoicing.invoices[0].products[1].balance).to eq 40.00
@@ -71,8 +75,9 @@ RSpec.describe InvoicesMaker, type: :model do
         account_create property: property_new(human_ref: 600), charges: [charge]
 
         invoicing =
-          InvoicesMaker.new(property_range: '8-8',
-                            period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1))
+          InvoicesMaker.new property_range: '8-8',
+                            period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1),
+                            comments: []
         invoicing.compose
         expect(invoicing.invoices.size).to eq 0
       end
@@ -84,7 +89,8 @@ RSpec.describe InvoicesMaker, type: :model do
 
         invoicing =
           InvoicesMaker.new property_range: '8-8',
-                            period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
+                            period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1),
+                            comments: []
         invoicing.compose
         expect(invoicing.invoices.size).to eq 0
       end
@@ -99,7 +105,8 @@ RSpec.describe InvoicesMaker, type: :model do
 
       invoicing =
         InvoicesMaker.new property_range: '8-8',
-                          period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
+                          period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1),
+                          comments: []
 
       expect(invoicing.composeable?).to eq true
     end
@@ -110,7 +117,8 @@ RSpec.describe InvoicesMaker, type: :model do
 
       invoicing =
         InvoicesMaker.new property_range: '8-8',
-                          period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1)
+                          period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1),
+                          comments: []
 
       expect(invoicing.composeable?).to eq false
     end

@@ -22,23 +22,14 @@ class Run < ActiveRecord::Base
   #
   # invoice_date - date to appear on the invoice
   #
-  def prepare(invoice_date:)
-    return unless invoicing.generate?
+  def prepare(invoice_date:, comments:)
     self.invoice_date = invoice_date
 
     if first_run
-      self.invoices = make_invoices
+      self.invoices = make_invoices comments: comments
     else
-      self.invoices = rerun invoicing.runs.first
+      self.invoices = rerun invoicing.runs.first, comments: comments
     end
-  end
-
-  #
-  # rerun
-  # update the invoice - allowing for any payments and date changes
-  #
-  def rerun run
-    run.invoices.map(&:remake)
   end
 
   #
@@ -59,10 +50,19 @@ class Run < ActiveRecord::Base
     self == invoicing.runs.first
   end
 
-  def make_invoices
+  #
+  # rerun
+  # update the invoice - allowing for any payments and date changes
+  #
+  def rerun run, comments: []
+    run.invoices.map { |invoice| invoice.remake comments: comments }
+  end
+
+  def make_invoices(comments: [])
     InvoicesMaker.new(property_range: invoicing.property_range,
                       period: invoicing.period,
-                      invoice_date: invoice_date)
+                      invoice_date: invoice_date,
+                      comments: comments)
                       .compose
                       .invoices
   end

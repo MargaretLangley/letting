@@ -26,7 +26,7 @@ RSpec.describe Invoicing, type: :model do
       invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
                                         Date.new(2010, 5, 1)
-      invoicing.generate
+      invoicing.generate comments: ['', '']
       expect(invoicing.actionable?).to be true
     end
 
@@ -39,7 +39,7 @@ RSpec.describe Invoicing, type: :model do
       invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
                                         Date.new(2010, 5, 1)
-      invoicing.generate
+      invoicing.generate comments: ['', '']
       expect(invoicing.actionable?).to be false
     end
   end
@@ -67,7 +67,7 @@ RSpec.describe Invoicing, type: :model do
       invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
                                         Date.new(2010, 5, 1)
-      invoicing.generate
+      invoicing.generate comments: ['', '']
       expect(invoicing.runs.size).to eq 1
       expect(invoicing.runs.first.invoices.size).to eq 1
     end
@@ -81,9 +81,24 @@ RSpec.describe Invoicing, type: :model do
       invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
                                         Date.new(2010, 5, 1)
-      invoicing.generate
-      invoicing.generate
+      invoicing.generate comments: ['', '']
+      invoicing.generate comments: ['', '']
       expect(invoicing.runs.size).to eq 2
+    end
+
+    it 'uses comments given to it to make invoices' do
+      template_create id: 1
+      cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
+      account_create property: property_new(human_ref: 20, client: client_new),
+                     charges: [charge_new(cycle: cycle)]
+
+      invoicing = Invoicing.new property_range: '20',
+                                period: Date.new(2010, 3, 1)..
+                                        Date.new(2010, 5, 1)
+      invoicing.generate comments: ['', '']
+      invoicing.generate comments: ['a comment']
+      expect(invoicing.runs.last.invoices.first.comments.first.clarify)
+        .to eq 'a comment'
     end
 
     describe 'does not invoice account when' do
@@ -96,7 +111,7 @@ RSpec.describe Invoicing, type: :model do
         invoicing = Invoicing.new property_range: '20',
                                   period: Date.new(2010, 3, 1)..
                                           Date.new(2010, 5, 1)
-        invoicing.generate
+        invoicing.generate comments: ['', '']
         expect(invoicing.runs.first.invoices).to eq []
       end
     end

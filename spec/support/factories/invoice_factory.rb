@@ -11,6 +11,7 @@ def invoice_new id: nil,
                 invoice_date: '2014/06/30',
                 account: account_create,
                 property: property_new,
+                comments: [],
                 invoice_account: invoice_account_new
   template_create(id: 1) unless Template.find_by id: 1
   account.property = property
@@ -19,7 +20,8 @@ def invoice_new id: nil,
   invoice.prepare account: account,
                   invoice_date: invoice_date,
                   property: account.property.invoice,
-                  billing: { arrears: account.balance, transaction: invoice_account }
+                  billing: { arrears: account.balance, transaction: invoice_account },
+                  comments: comments
   invoice
 end
 
@@ -29,6 +31,7 @@ def invoice_create \
   invoice_date: '2014/06/30',
   account: account_create,
   property: property_create,
+  comments: [],
   invoice_account: invoice_account_new
 
   invoice = invoice_new id: id,
@@ -36,6 +39,7 @@ def invoice_create \
                         invoice_date: invoice_date,
                         account: account,
                         property: property,
+                        comments: comments,
                         invoice_account: invoice_account
   invoice.save!
   invoice
