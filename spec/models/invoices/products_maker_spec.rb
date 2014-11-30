@@ -21,18 +21,6 @@ RSpec.describe ProductsMaker, type: :model do
     expect(maker.invoice[:products].first.amount).to eq 20
   end
 
-  it 'finds the earliest due_date' do
-    (transaction = DebitsTransaction.new).debited debits:
-      [debit_new(on_date: Date.new(2001, 1, 1), charge: charge_new),
-       debit_new(on_date: Date.new(2000, 1, 1), charge: charge_new)]
-
-    maker = ProductsMaker.new invoice_date: Date.new(1999, 1, 2),
-                              arrears: 0,
-                              transaction: transaction
-
-    expect(maker.invoice[:earliest_date_due]).to eq Date.new(2000, 1, 1)
-  end
-
   describe 'total_arrears' do
     it 'calculates the balance' do
 

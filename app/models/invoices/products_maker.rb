@@ -14,21 +14,19 @@
 ###
 #
 class ProductsMaker
-  attr_reader :arrears, :earliest_date_due, :invoice_date, :products, :transaction  # rubocop: disable Metrics/LineLength
+  attr_reader :arrears, :invoice_date, :products, :transaction
   def initialize(invoice_date:, arrears:, transaction:)
     @invoice_date = invoice_date
     @arrears = arrears
     @transaction = transaction
 
     @products = make_products
-    @earliest_date_due = earliest_transaction_date
   end
 
   def invoice(*)
     {
       products: products,
       total_arrears: total_arrears,
-      earliest_date_due: earliest_date_due,
     }
   end
 
@@ -61,9 +59,5 @@ class ProductsMaker
 
   def total_arrears
     products.last.balance
-  end
-
-  def earliest_transaction_date
-    transaction.debits.map(&:on_date).min
   end
 end

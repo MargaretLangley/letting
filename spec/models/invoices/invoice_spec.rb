@@ -93,6 +93,21 @@ RSpec.describe Invoice, type: :model do
                  'period: 2013-03-25..2013-06-30'
       end
 
+      it 'finds the earliest due_date' do
+        template_create id: 1
+        property = property_create account: account_new, client: client_create
+        (transaction = DebitsTransaction.new).debited debits:
+          [debit_new(on_date: Date.new(2001, 1, 1), charge: charge_new),
+           debit_new(on_date: Date.new(2000, 1, 1), charge: charge_new)]
+
+        (invoice = Invoice.new)
+          .prepare invoice_date: '2014-06-30',
+                   account: property.account,
+                   property: property.invoice,
+                   debits_transaction: transaction
+        expect(invoice.earliest_date_due).to eq Date.new(2000, 1, 1)
+      end
+
       it 'prepares invoice total_arrears' do
         template_create id: 1
         account = account_new(debits: [debit_new(amount: 40, charge: charge_new)])

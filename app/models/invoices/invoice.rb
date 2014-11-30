@@ -29,7 +29,11 @@ class Invoice < ActiveRecord::Base
   belongs_to :run, inverse_of: :invoices
   belongs_to :debits_transaction, autosave: true, inverse_of: :invoices
   has_many :comments, dependent: :destroy
-  has_many :products, -> { order(:created_at) }, dependent: :destroy
+  has_many :products, -> { order(:created_at) }, dependent: :destroy do
+    def earliest_date_due
+      map(&:date_due).min
+    end
+  end
   validates :products,
             :invoice_date,
             :property_ref,
@@ -39,6 +43,8 @@ class Invoice < ActiveRecord::Base
   has_many :letters, dependent: :destroy
 
   after_destroy :destroy_orphaned_debits_transaction
+
+  delegate :earliest_date_due, to: :products
 
   # prepare
   # Assigns the attributes required in an invoice
@@ -66,7 +72,6 @@ class Invoice < ActiveRecord::Base
                               transaction: debits_transaction
     self.products = products[:products]
     self.total_arrears = products [:total_arrears]
-    self.earliest_date_due = products [:earliest_date_due]
     self
   end
 

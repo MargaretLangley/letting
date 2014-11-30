@@ -11,7 +11,6 @@ class CreateInvoices < ActiveRecord::Migration
       t.text     "billing_address", null: false
       t.text     "client_address", null: false
       t.decimal  "total_arrears",     precision: 8, scale: 2, null: false
-      t.date     "earliest_date_due", null: false
       t.timestamps
     end
   end
