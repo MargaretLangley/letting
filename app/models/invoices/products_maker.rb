@@ -24,9 +24,7 @@ class ProductsMaker
   end
 
   def invoice(*)
-    {
-      products: products,
-    }
+    products
   end
 
   private

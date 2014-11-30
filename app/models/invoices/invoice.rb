@@ -60,6 +60,7 @@ class Invoice < ActiveRecord::Base
   # property           - property that the invoice is being prepared for
   # debits_transaction - a transaction made up of the debits that will be added
   #                      to the invoice
+  # comments           - array of strings to appear on invoice for special info.
   #
   def prepare account:,
               invoice_date: Time.zone.today,
@@ -73,9 +74,9 @@ class Invoice < ActiveRecord::Base
     self.comments = generate_comments comments: comments
     self.debits_transaction = debits_transaction
 
-    products = products_maker arrears: account.balance(to_date: invoice_date),
-                              transaction: debits_transaction
-    self.products = products[:products]
+    self.products =
+      products_maker arrears: account.balance(to_date: invoice_date),
+                     transaction: debits_transaction
     self
   end
 

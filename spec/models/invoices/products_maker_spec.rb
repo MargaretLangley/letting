@@ -7,7 +7,7 @@ RSpec.describe ProductsMaker, type: :model do
     maker = ProductsMaker.new invoice_date: Date.new(1999, 1, 2),
                               arrears: 0,
                               transaction: transaction
-    expect(maker.invoice[:products].size).to eq 1
+    expect(maker.invoice.size).to eq 1
   end
 
   it 'calculates the amount' do
@@ -18,7 +18,7 @@ RSpec.describe ProductsMaker, type: :model do
                               arrears: 0,
                               transaction: transaction
 
-    expect(maker.invoice[:products].first.amount).to eq 20
+    expect(maker.invoice.first.amount).to eq 20
   end
 
   describe 'products balance' do
@@ -30,7 +30,7 @@ RSpec.describe ProductsMaker, type: :model do
                                 arrears: 0,
                                 transaction: transaction
 
-      expect(maker.invoice[:products].last.balance).to eq 20
+      expect(maker.invoice.last.balance).to eq 20
     end
 
     it 'sums the balance' do
@@ -42,7 +42,7 @@ RSpec.describe ProductsMaker, type: :model do
                                 arrears: 0,
                                 transaction: transaction
 
-      expect(maker.invoice[:products].last.balance).to eq 50
+      expect(maker.invoice.last.balance).to eq 50
     end
 
     it 'balance includes any current arrears' do
@@ -54,7 +54,7 @@ RSpec.describe ProductsMaker, type: :model do
                           arrears: 30,
                           transaction: transaction
 
-      expect(maker.invoice[:products].last.balance).to eq 50
+      expect(maker.invoice.last.balance).to eq 50
     end
   end
 end
