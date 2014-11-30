@@ -16,12 +16,20 @@ RSpec.describe Invoicing, type: :model do
     it('runs') { expect(invoicing_new runs: nil).to_not be_valid }
   end
 
+  #
+  # account_setup
+  # creates database objects required for the tests
+  #
+  def account_setup(property_ref:, charge_month:, charge_day:)
+    template_create id: 1
+    cycle = cycle_new due_ons: [DueOn.new(month: charge_month, day: charge_day)]
+    account_create property: property_new(human_ref: property_ref),
+                   charges: [charge_new(cycle: cycle)]
+  end
+
   describe '#actionable?' do
     it 'can be actionable' do
-      template_create id: 1
-      cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
-      account_create property: property_new(human_ref: 20, client: client_new),
-                     charges: [charge_new(cycle: cycle)]
+      account_setup property_ref: 20, charge_month: 3, charge_day: 25
 
       invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
@@ -31,10 +39,7 @@ RSpec.describe Invoicing, type: :model do
     end
 
     it 'can not be actionable' do
-      template_create id: 1
-      cycle = cycle_new due_ons: [DueOn.new(month: 5, day: 2)]
-      account_create property: property_new(human_ref: 20, client: client_new),
-                     charges: [charge_new(cycle: cycle)]
+      account_setup property_ref: 20, charge_month: 5, charge_day: 2
 
       invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
@@ -59,10 +64,7 @@ RSpec.describe Invoicing, type: :model do
 
   describe '#generate' do
     it 'invoice when an account is within property and date range' do
-      template_create id: 1
-      cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
-      account_create property: property_new(human_ref: 20, client: client_new),
-                     charges: [charge_new(cycle: cycle)]
+      account_setup property_ref: 20, charge_month: 3, charge_day: 25
 
       invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
@@ -73,10 +75,7 @@ RSpec.describe Invoicing, type: :model do
     end
 
     it 'creates more than one run' do
-      template_create id: 1
-      cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
-      account_create property: property_new(human_ref: 20, client: client_new),
-                     charges: [charge_new(cycle: cycle)]
+      account_setup property_ref: 20, charge_month: 3, charge_day: 25
 
       invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
@@ -87,10 +86,7 @@ RSpec.describe Invoicing, type: :model do
     end
 
     it 'uses comments given to it to make invoices' do
-      template_create id: 1
-      cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
-      account_create property: property_new(human_ref: 20, client: client_new),
-                     charges: [charge_new(cycle: cycle)]
+      account_setup property_ref: 20, charge_month: 3, charge_day: 25
 
       invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
@@ -103,10 +99,7 @@ RSpec.describe Invoicing, type: :model do
 
     describe 'does not invoice account when' do
       it 'outside property_range' do
-        template_create id: 1
-        cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
-        account_create property: property_new(human_ref: 6, client: client_new),
-                       charges: [charge_new(cycle: cycle)]
+        account_setup property_ref: 6, charge_month: 3, charge_day: 25
 
         invoicing = Invoicing.new property_range: '20',
                                   period: Date.new(2010, 3, 1)..
