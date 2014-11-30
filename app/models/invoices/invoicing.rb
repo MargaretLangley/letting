@@ -38,7 +38,7 @@ class Invoicing < ActiveRecord::Base
   # Would this invoicing create an invoice at all?
   #
   def actionable?
-    runs.present? && runs.first.actionable?
+    runs.present? && runs.last.actionable?
   end
 
   # generate
