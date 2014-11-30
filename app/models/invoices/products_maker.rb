@@ -26,7 +26,6 @@ class ProductsMaker
   def invoice(*)
     {
       products: products,
-      total_arrears: total_arrears,
     }
   end
 
@@ -55,9 +54,5 @@ class ProductsMaker
       product.balance = total += product.amount
       product
     end
-  end
-
-  def total_arrears
-    products.last.balance
   end
 end

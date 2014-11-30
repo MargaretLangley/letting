@@ -33,6 +33,10 @@ class Invoice < ActiveRecord::Base
     def earliest_date_due
       map(&:date_due).min
     end
+
+    def total_arrears
+      last.balance
+    end
   end
   validates :products,
             :invoice_date,
@@ -45,6 +49,7 @@ class Invoice < ActiveRecord::Base
   after_destroy :destroy_orphaned_debits_transaction
 
   delegate :earliest_date_due, to: :products
+  delegate :total_arrears, to: :products
 
   # prepare
   # Assigns the attributes required in an invoice
@@ -71,7 +76,6 @@ class Invoice < ActiveRecord::Base
     products = products_maker arrears: account.balance(to_date: invoice_date),
                               transaction: debits_transaction
     self.products = products[:products]
-    self.total_arrears = products [:total_arrears]
     self
   end
 
