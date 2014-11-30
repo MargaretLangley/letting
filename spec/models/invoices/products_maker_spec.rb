@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ProductsMaker, type: :model do
   it 'calculates invoice' do
-    (transaction = InvoiceAccount.new)
+    (transaction = DebitsTransaction.new)
       .debited debits: [debit_new(amount: 20, charge: charge_new)]
     maker = ProductsMaker.new invoice_date: Date.new(1999, 1, 2),
                               arrears: 0,
@@ -11,7 +11,7 @@ RSpec.describe ProductsMaker, type: :model do
   end
 
   it 'calculates the amount' do
-    (transaction = InvoiceAccount.new)
+    (transaction = DebitsTransaction.new)
       .debited debits: [debit_new(amount: 20, charge: charge_new)]
 
     maker = ProductsMaker.new invoice_date: Date.new(1999, 1, 2),
@@ -22,7 +22,7 @@ RSpec.describe ProductsMaker, type: :model do
   end
 
   it 'finds the earliest due_date' do
-    (transaction = InvoiceAccount.new).debited debits:
+    (transaction = DebitsTransaction.new).debited debits:
       [debit_new(on_date: Date.new(2001, 1, 1), charge: charge_new),
        debit_new(on_date: Date.new(2000, 1, 1), charge: charge_new)]
 
@@ -36,7 +36,7 @@ RSpec.describe ProductsMaker, type: :model do
   describe 'total_arrears' do
     it 'calculates the balance' do
 
-      (transaction = InvoiceAccount.new)
+      (transaction = DebitsTransaction.new)
         .debited debits: [debit_new(amount: 20, charge: charge_new)]
 
       maker = ProductsMaker.new invoice_date: Date.new(1999, 1, 2),
@@ -47,7 +47,7 @@ RSpec.describe ProductsMaker, type: :model do
     end
 
     it 'sums the balance' do
-      (transaction = InvoiceAccount.new)
+      (transaction = DebitsTransaction.new)
         .debited debits: [debit_new(amount: 20, charge: charge_new),
                           debit_new(amount: 30, charge: charge_new)]
 
@@ -59,7 +59,7 @@ RSpec.describe ProductsMaker, type: :model do
     end
 
     it 'balance includes any current arrears' do
-      (transaction = InvoiceAccount.new)
+      (transaction = DebitsTransaction.new)
         .debited debits: [debit_new(amount: 20, charge: charge_new)]
 
       maker =

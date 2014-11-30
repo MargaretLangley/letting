@@ -1,7 +1,7 @@
-def invoice_account_new id: nil,
+def debits_transaction_new id: nil,
                         debits: [debit_new(charge: charge_new)]
 
-  invoice_account = InvoiceAccount.new id: id
-  invoice_account.debited debits: debits if debits
-  invoice_account
+  debits_transaction = DebitsTransaction.new id: id
+  debits_transaction.debited debits: debits if debits
+  debits_transaction
 end

@@ -13,7 +13,7 @@ RSpec.describe DebitMaker, type: :model do
       make = DebitMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
                                                           Date.new(2013, 3, 5))
       make.mold
-      expect(make.invoice_account.debits)
+      expect(make.debits_transaction.debits)
         .to eq [Debit.new(account_id: 2,
                           charge_id: chg.id,
                           on_date: Date.new(2013, 3, 5),
@@ -30,7 +30,7 @@ RSpec.describe DebitMaker, type: :model do
       make = DebitMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
                                                           Date.new(2013, 3, 5))
       make.mold
-      expect(make.invoice_account.debits).to eq []
+      expect(make.debits_transaction.debits).to eq []
     end
   end
 

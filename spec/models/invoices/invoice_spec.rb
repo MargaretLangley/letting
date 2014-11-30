@@ -16,19 +16,19 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'when child invoices destroyed' do
-    it 'destroys associated invoice_account if it has no surviving child invoices' do
-      invoice_account, property = invoice_account_new, property_create
-      invoice = invoice_create invoice_account: invoice_account,
+    it 'destroys associated debits_transaction if it has no surviving child invoices' do
+      debits_transaction, property = debits_transaction_new, property_create
+      invoice = invoice_create debits_transaction: debits_transaction,
                                property: property
-      expect { invoice.destroy }.to change(InvoiceAccount, :count).by(-1)
+      expect { invoice.destroy }.to change(DebitsTransaction, :count).by(-1)
     end
-    it 'preserves associated invoice_account while account still has other'\
+    it 'preserves associated debits_transaction while account still has other'\
        'surviving child invoices' do
-      invoice_account, property = invoice_account_new, property_create
-      invoice_create invoice_account: invoice_account, property: property
-      invoice = invoice_create invoice_account: invoice_account,
+      debits_transaction, property = debits_transaction_new, property_create
+      invoice_create debits_transaction: debits_transaction, property: property
+      invoice = invoice_create debits_transaction: debits_transaction,
                                property: property
-      expect { invoice.destroy }.to change(InvoiceAccount, :count).by(0)
+      expect { invoice.destroy }.to change(DebitsTransaction, :count).by(0)
     end
   end
 
@@ -38,7 +38,7 @@ RSpec.describe Invoice, type: :model do
       it 'prepares invoice_date' do
         template_create id: 1
         property = property_create account: account_new, client: client_create
-        (transaction = InvoiceAccount.new)
+        (transaction = DebitsTransaction.new)
           .debited(debits: [debit_new(charge: charge_new)])
 
         (invoice = Invoice.new)
@@ -53,7 +53,7 @@ RSpec.describe Invoice, type: :model do
         template_create id: 1
         invoice = Invoice.new
         property = property_create human_ref: 55, account: account_new
-        (transaction = InvoiceAccount.new)
+        (transaction = DebitsTransaction.new)
           .debited(debits: [debit_new(charge: charge_new)])
 
         invoice.prepare account: property.account,
@@ -67,7 +67,7 @@ RSpec.describe Invoice, type: :model do
         invoice = Invoice.new
         agent = agent_new(entities: [Entity.new(name: 'Lock')])
         property = property_create agent: agent, account: account_new
-        (transaction = InvoiceAccount.new)
+        (transaction = DebitsTransaction.new)
           .debited(debits: [debit_new(charge: charge_new)])
 
         invoice.prepare account: property.account,
@@ -80,7 +80,7 @@ RSpec.describe Invoice, type: :model do
       it 'prepares invoice products' do
         template_create id: 1
         property = property_create account: account_new, client: client_create
-        (transaction = InvoiceAccount.new)
+        (transaction = DebitsTransaction.new)
           .debited(debits: [debit_new(charge: charge_new)])
 
         (invoice = Invoice.new)
@@ -97,7 +97,7 @@ RSpec.describe Invoice, type: :model do
         template_create id: 1
         account = account_new(debits: [debit_new(amount: 40, charge: charge_new)])
         property = property_create account: account, client: client_create
-        (transaction = InvoiceAccount.new)
+        (transaction = DebitsTransaction.new)
           .debited(debits: [debit_new(amount: 10, charge: charge_new),
                             debit_new(amount: 20, charge: charge_new)])
 
@@ -114,16 +114,16 @@ RSpec.describe Invoice, type: :model do
       describe 'arrears' do
         it 'debits increase total arrears' do
           account = account_new
-          invoice_account = invoice_account_new debits: [debit_new(amount: 10, charge: charge_new)]
-          invoice = invoice_create account: account, invoice_account: invoice_account
+          debits_transaction = debits_transaction_new debits: [debit_new(amount: 10, charge: charge_new)]
+          invoice = invoice_create account: account, debits_transaction: debits_transaction
           expect(invoice.total_arrears).to eq 10
         end
 
         it 'credits decrease total arrears' do
           charge = charge_new
           account = account_new credits: [credit_new(amount: -30, charge: charge)]
-          invoice_account = invoice_account_new debits: [debit_new(amount: 10, charge: charge)]
-          invoice = invoice_create account: account, invoice_account: invoice_account
+          debits_transaction = debits_transaction_new debits: [debit_new(amount: 10, charge: charge)]
+          invoice = invoice_create account: account, debits_transaction: debits_transaction
           expect(invoice.total_arrears).to eq(-20)
         end
       end
@@ -132,7 +132,7 @@ RSpec.describe Invoice, type: :model do
         it 'prepares without comments' do
           template_create id: 1
           property = property_create account: account_new, client: client_create
-          (transaction = InvoiceAccount.new)
+          (transaction = DebitsTransaction.new)
             .debited(debits: [debit_new(charge: charge_new)])
 
           (invoice = Invoice.new)
@@ -145,7 +145,7 @@ RSpec.describe Invoice, type: :model do
         it 'prepares with comments' do
           template_create id: 1
           property = property_create account: account_new, client: client_create
-          (transaction = InvoiceAccount.new)
+          (transaction = DebitsTransaction.new)
             .debited(debits: [debit_new(charge: charge_new)])
 
           (invoice = Invoice.new)
@@ -160,7 +160,7 @@ RSpec.describe Invoice, type: :model do
         it 'ignores empty comments' do
           template_create id: 1
           property = property_create account: account_new, client: client_create
-          (transaction = InvoiceAccount.new)
+          (transaction = DebitsTransaction.new)
             .debited(debits: [debit_new(charge: charge_new)])
 
           (invoice = Invoice.new)
@@ -204,17 +204,17 @@ RSpec.describe Invoice, type: :model do
       end
 
       it 'resets total_arrears if any payment is made' do
-        invoice_account = invoice_account_new debits: [debit_new(amount: 10, charge: charge_new)]
+        debits_transaction = debits_transaction_new debits: [debit_new(amount: 10, charge: charge_new)]
         invoice = invoice_create account: account_new,
-                                 invoice_account: invoice_account
+                                 debits_transaction: debits_transaction
         invoice.account.credits = [credit_new(amount: -2, charge: charge_new)]
         expect(invoice.remake.total_arrears).to eq 8
       end
 
       it 'resets product arrears if any payment is made' do
-        invoice_account = invoice_account_new debits: [debit_new(amount: 10, charge: charge_new)]
+        debits_transaction = debits_transaction_new debits: [debit_new(amount: 10, charge: charge_new)]
         invoice = invoice_create account: account_new,
-                                 invoice_account: invoice_account
+                                 debits_transaction: debits_transaction
         invoice.account.credits = [credit_new(amount: -2, charge: charge_new)]
         expect(invoice.remake.products.first.charge_type).to eq 'Arrears'
         expect(invoice.remake.products.first.amount).to eq(-2)
@@ -225,13 +225,13 @@ RSpec.describe Invoice, type: :model do
     describe '#back_page?' do
       it 'returns false if products have no ground rent' do
         debits = [debit_new(charge: charge_new(charge_type: 'Insurance'))]
-        invoice = invoice_new invoice_account: invoice_account_new(debits: debits)
+        invoice = invoice_new debits_transaction: debits_transaction_new(debits: debits)
         expect(invoice.back_page?).to eq false
       end
 
       it 'returns true if products includes ground rent' do
         debits = [debit_new(charge: charge_new(charge_type: 'Ground Rent'))]
-        invoice = invoice_new invoice_account: invoice_account_new(debits: debits)
+        invoice = invoice_new debits_transaction: debits_transaction_new(debits: debits)
         expect(invoice.back_page?).to eq true
       end
     end

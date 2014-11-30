@@ -27,7 +27,7 @@
 class Invoice < ActiveRecord::Base
   belongs_to :account
   belongs_to :run, inverse_of: :invoices
-  belongs_to :invoice_account, autosave: true, inverse_of: :invoices
+  belongs_to :debits_transaction, autosave: true, inverse_of: :invoices
   has_many :comments, dependent: :destroy
   has_many :products, -> { order(:created_at) }, dependent: :destroy
   validates :products,
@@ -38,31 +38,32 @@ class Invoice < ActiveRecord::Base
   has_many :templates, through: :letters
   has_many :letters, dependent: :destroy
 
-  after_destroy :destroy_orphaned_invoice_account
+  after_destroy :destroy_orphaned_debits_transaction
 
   # prepare
   # Assigns the attributes required in an invoice
   # Args:
-  # account      - account invoice is being prepared for
-  # invoice_date - the date which this invoice is being said to have been sent.
-  # property     - property that the invoice is being prepared for
-  # billing      - a transaction made up of the debits that will be added to the
-  #                invoice
+  # account            - account invoice is being prepared for
+  # invoice_date       - the date which this invoice is being said to have been
+  #                      sent.
+  # property           - property that the invoice is being prepared for
+  # debits_transaction - a transaction made up of the debits that will be added
+  #                      to the invoice
   #
-  def prepare(account:,
+  def prepare account:,
               invoice_date: Time.zone.today,
               property:,
               debits_transaction:,
-              comments: [])
+              comments: []
     self.account = account
     self.invoice_date = invoice_date
     letters.build template: Template.find(1)
     self.property = property
     self.comments = generate_comments comments: comments
-    self.invoice_account = debits_transaction
+    self.debits_transaction = debits_transaction
 
-    products = generate_products(arrears: account.balance(to_date: invoice_date), # rubocop: disable Metrics/LineLength
-                                 transaction: debits_transaction)
+    products = products_maker arrears: account.balance(to_date: invoice_date),
+                              transaction: debits_transaction
     self.products = products[:products]
     self.total_arrears = products [:total_arrears]
     self.earliest_date_due = products [:earliest_date_due]
@@ -74,11 +75,11 @@ class Invoice < ActiveRecord::Base
   # The new invoice will take into account invoice_date and changes in account
   # balance
   #
-  def remake(invoice: Invoice.new, comments: [])
+  def remake invoice: Invoice.new, comments: []
     invoice.prepare account: account,
                     invoice_date: Time.zone.today,
                     property: property,
-                    debits_transaction: invoice_account,
+                    debits_transaction: debits_transaction,
                     comments: comments
   end
 
@@ -104,8 +105,8 @@ class Invoice < ActiveRecord::Base
     self.client_address = client_address
   end
 
-  def destroy_orphaned_invoice_account
-    invoice_account.invoices.empty? && invoice_account.destroy
+  def destroy_orphaned_debits_transaction
+    debits_transaction.invoices.empty? && debits_transaction.destroy
   end
 
   def property
@@ -119,13 +120,12 @@ class Invoice < ActiveRecord::Base
   end
 
   def generate_comments(comments:)
-    comments.reject(&:blank?)
-            .map { |comment| Comment.new clarify: comment }
+    comments.reject(&:blank?).map { |comment| Comment.new clarify: comment }
   end
 
-  def generate_products(arrears:, transaction:)
-    @generate_products ||= ProductsMaker.new(invoice_date: invoice_date,
-                                             arrears: arrears,
-                                             transaction: transaction).invoice
+  def products_maker(arrears:, transaction:)
+    @products_maker ||= ProductsMaker.new(invoice_date: invoice_date,
+                                          arrears: arrears,
+                                          transaction: transaction).invoice
   end
 end

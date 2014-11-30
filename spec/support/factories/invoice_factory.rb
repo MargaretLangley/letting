@@ -12,15 +12,15 @@ def invoice_new id: nil,
                 account: account_create,
                 property: property_new,
                 comments: [],
-                invoice_account: invoice_account_new
+                debits_transaction: debits_transaction_new
   template_create(id: 1) unless Template.find_by id: 1
   account.property = property
   invoice = Invoice.new id: id, run_id: run_id
-  invoice.invoice_account = invoice_account
+  invoice.debits_transaction = debits_transaction
   invoice.prepare account: account,
                   invoice_date: invoice_date,
                   property: account.property.invoice,
-                  debits_transaction: invoice_account,
+                  debits_transaction: debits_transaction,
                   comments: comments
   invoice
 end
@@ -32,7 +32,7 @@ def invoice_create \
   account: account_create,
   property: property_create,
   comments: [],
-  invoice_account: invoice_account_new
+  debits_transaction: debits_transaction_new
 
   invoice = invoice_new id: id,
                         run_id: run_id,
@@ -40,7 +40,7 @@ def invoice_create \
                         account: account,
                         property: property,
                         comments: comments,
-                        invoice_account: invoice_account
+                        debits_transaction: debits_transaction
   invoice.save!
   invoice
 end

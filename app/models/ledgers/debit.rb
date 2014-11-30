@@ -26,7 +26,7 @@ class Debit < ActiveRecord::Base
   has_many :credits, through: :settlements
   has_many :settlements, dependent: :destroy
   belongs_to :charge, inverse_of: :debits
-  belongs_to :invoice_account, inverse_of: :debits
+  belongs_to :debits_transaction, inverse_of: :debits
 
   def period
     (period_first..period_last)

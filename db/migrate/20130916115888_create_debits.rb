@@ -2,7 +2,7 @@ class CreateDebits < ActiveRecord::Migration
   def change
     create_table :debits do |t|
       t.belongs_to  :account, null: false, index: true
-      t.belongs_to  :invoice_account, index: true
+      t.belongs_to  :debits_transaction, index: true
       t.integer  :charge_id,  null: false, index: true
       t.datetime :on_date,    null: false
       t.date     :period_first,      null: false

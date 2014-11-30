@@ -17,7 +17,7 @@ after :templates do
         {
           id: 1,
           account_id: 1,
-          invoice_account_id: 1,
+          debits_transaction_id: 1,
           charge_id: 1,
           on_date: create_date(17),
           period:create_date(17)..create_date(14),
@@ -26,7 +26,7 @@ after :templates do
         {
           id: 2,
           account_id: 1,
-          invoice_account_id: 1,
+          debits_transaction_id: 1,
           charge_id: 2,
           on_date: create_date(5),
           period:create_date(5)..create_date(2),
@@ -34,9 +34,9 @@ after :templates do
         },
       ]
 
-      invoice_account = InvoiceAccount.new id: 1
-      invoice_account.debited debits: Debit.all
-      invoice_account.save!
+      debits_transaction = DebitsTransaction.new id: 1
+      debits_transaction.debited debits: Debit.all
+      debits_transaction.save!
     end
 
     def create_products
@@ -80,7 +80,7 @@ after :templates do
         { id: 1,
           run_id: 1,
           account_id: Account.first.id,
-          invoice_account_id: 1,
+          debits_transaction_id: 1,
           invoice_date: create_date(5),
           property_ref: 1001,
           occupiers: "Mr E. P. Hendren",
