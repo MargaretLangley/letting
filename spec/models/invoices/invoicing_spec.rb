@@ -49,16 +49,16 @@ RSpec.describe Invoicing, type: :model do
     end
   end
 
-  describe '#generate?' do
+  describe '#valid_arguments?' do
     it 'can be true' do
-      expect(invoicing_new).to be_generate
+      expect(invoicing_new).to be_valid_arguments
     end
     it 'can be false if range false' do
-      expect(invoicing_new property_range: nil).to_not be_generate
+      expect(invoicing_new property_range: nil).to_not be_valid_arguments
     end
     it 'can be false if period false' do
       expect(invoicing_new period_first: nil, period_last: nil)
-        .to_not be_generate
+        .to_not be_valid_arguments
     end
   end
 

@@ -26,11 +26,11 @@ class Invoicing < ActiveRecord::Base
     self.period_last  = billing.last
   end
 
-  # generate?
+  # valid_arguments?
   # Does this invoicing have enough arguments to call generate on?
   # Nil values for property_range and period are nil cause problems.
   #
-  def generate?
+  def valid_arguments?
     property_range && period.first && period.last
   end
 
@@ -41,8 +41,10 @@ class Invoicing < ActiveRecord::Base
     runs.present? && runs.first.actionable?
   end
 
+  # generate
+  # make a run to add to the invoicing
+  #
   def generate(invoice_date: Time.zone.today, comments:)
-    return unless generate?
     runs.build.prepare invoice_date: invoice_date, comments: comments
   end
 end

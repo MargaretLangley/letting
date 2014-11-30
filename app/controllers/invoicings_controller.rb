@@ -24,7 +24,7 @@ class InvoicingsController < ApplicationController
     @invoicing = Invoicing.new \
                    property_range: SpaceOut.process(params[:search_terms]),
                    period: params[:start_date]..params[:end_date]
-    @invoicing.generate comments: ['', '']
+    @invoicing.generate comments: ['', ''] if @invoicing.valid_arguments?
   end
 
   # create
@@ -38,8 +38,10 @@ class InvoicingsController < ApplicationController
   #
   def create
     @invoicing = Invoicing.new invoicing_params
-    @invoicing.generate invoice_date: params[:invoice_date],
-                        comments: params[:comment]
+    if @invoicing.valid_arguments?
+      @invoicing.generate invoice_date: params[:invoice_date],
+                          comments: params[:comment]
+    end
     if @invoicing.save
       redirect_to new_invoicing_path, notice: created_message
     else
@@ -51,13 +53,15 @@ class InvoicingsController < ApplicationController
     @invoicing =
       Invoicing.includes(runs: [invoices: [account: [debits: [:charge]]]])
                .find params[:id]
-    @invoicing.generate comments: ['', '']
+    @invoicing.generate comments: ['', ''] if @invoicing.valid_arguments?
   end
 
   def update
     @invoicing = Invoicing.find params[:id]
-    @invoicing.generate invoice_date: params[:invoice_date],
-                        comments: params[:comment]
+    if @invoicing.valid_arguments?
+      @invoicing.generate invoice_date: params[:invoice_date],
+                          comments: params[:comment]
+    end
     if @invoicing.save
       redirect_to invoicings_path, notice: updated_message
     else
