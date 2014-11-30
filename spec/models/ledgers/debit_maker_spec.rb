@@ -70,7 +70,7 @@ RSpec.describe DebitMaker, type: :model do
                                    debit_period: Date.new(2013, 3, 5)..
                                                  Date.new(2013, 5, 5)
       debit_maker.mold
-      expect(debit_maker.invoice[:transaction].debits.size).to eq(1)
+      expect(debit_maker.invoice.debits.size).to eq(1)
     end
   end
 end

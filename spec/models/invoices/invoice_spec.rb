@@ -45,7 +45,7 @@ RSpec.describe Invoice, type: :model do
           .prepare invoice_date: '2014-06-30',
                    account: property.account,
                    property: property.invoice,
-                   billing: { arrears: 0, transaction:  transaction }
+                   debits_transaction: transaction
         expect(invoice.invoice_date.to_s).to eq '2014-06-30'
       end
 
@@ -58,7 +58,7 @@ RSpec.describe Invoice, type: :model do
 
         invoice.prepare account: property.account,
                         property: property.invoice,
-                        billing: { arrears: 0, transaction:  transaction }
+                        debits_transaction: transaction
         expect(invoice.property_ref).to eq 55
       end
 
@@ -72,7 +72,7 @@ RSpec.describe Invoice, type: :model do
 
         invoice.prepare account: property.account,
                         property: property.invoice,
-                        billing: { arrears: 0, transaction:  transaction }
+                        debits_transaction: transaction
         expect(invoice.billing_address)
           .to eq "Lock\nEdgbaston Road\nBirmingham\nWest Midlands"
       end
@@ -87,7 +87,7 @@ RSpec.describe Invoice, type: :model do
           .prepare invoice_date: '2014-06-30',
                    account: property.account,
                    property: property.invoice,
-                   billing: { arrears: 0, transaction:  transaction }
+                   debits_transaction: transaction
         expect(invoice.products.first.to_s)
           .to eq 'charge_type: Ground Rent date_due: 2013-03-25 amount: 88.08 '\
                  'period: 2013-03-25..2013-06-30'
@@ -105,7 +105,7 @@ RSpec.describe Invoice, type: :model do
           .prepare account: property.account,
                    invoice_date: '2014-06-30',
                    property: property.invoice,
-                   billing: { transaction:  transaction }
+                   debits_transaction: transaction
         expect(invoice.total_arrears).to eq 70
         invoice.run_id = 5
         invoice.save!
@@ -138,7 +138,7 @@ RSpec.describe Invoice, type: :model do
           (invoice = Invoice.new)
             .prepare account: property.account,
                      property: property.invoice,
-                     billing: { arrears: 0, transaction:  transaction }
+                     debits_transaction: transaction
           expect(invoice.comments.size).to eq 0
         end
 
@@ -151,7 +151,7 @@ RSpec.describe Invoice, type: :model do
           (invoice = Invoice.new)
             .prepare account: property.account,
                      property: property.invoice,
-                     billing: { arrears: 0, transaction:  transaction },
+                     debits_transaction: transaction,
                      comments: ['comment']
           expect(invoice.comments.size).to eq 1
           expect(invoice.comments.first.clarify).to eq 'comment'
@@ -166,7 +166,7 @@ RSpec.describe Invoice, type: :model do
           (invoice = Invoice.new)
             .prepare account: property.account,
                      property: property.invoice,
-                     billing: { arrears: 0, transaction:  transaction },
+                     debits_transaction: transaction,
                      comments: ['comment', '']
           expect(invoice.comments.size).to eq 1
         end

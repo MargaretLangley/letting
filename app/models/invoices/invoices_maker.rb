@@ -29,13 +29,6 @@ class InvoicesMaker
     self
   end
 
-  # composeable?
-  # If the accounts has something worth invoicing or not.
-  #
-  def composeable?
-    composeable(accounts: property_range).present?
-  end
-
   private
 
   def composeable accounts: property_range
@@ -53,8 +46,8 @@ class InvoicesMaker
       account: account,
       invoice_date: invoice_date,
       property: account.property.invoice(billing_period: period),
-      billing: DebitMaker.new(account: account, debit_period: period)
-                         .mold.invoice,
+      debits_transaction: DebitMaker.new(account: account, debit_period: period)
+                                    .mold.invoice,
       comments: comments
     invoice
   end

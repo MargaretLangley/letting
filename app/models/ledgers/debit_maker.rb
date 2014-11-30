@@ -24,7 +24,7 @@ class DebitMaker
   end
 
   def invoice(*)
-    { transaction: invoice_account, }
+    invoice_account
   end
 
   private

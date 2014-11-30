@@ -26,7 +26,7 @@ class Run < ActiveRecord::Base
     self.invoice_date = invoice_date
 
     if first_run
-      self.invoices = make_invoices comments: comments
+      self.invoices = invoices_maker comments: comments
     else
       self.invoices = rerun invoicing.runs.first, comments: comments
     end
@@ -37,7 +37,7 @@ class Run < ActiveRecord::Base
   # Are the accounts invoiceable?
   #
   def actionable?
-    make_invoices.size > 0
+    invoices_maker.size > 0
   end
 
   private
@@ -58,7 +58,7 @@ class Run < ActiveRecord::Base
     run.invoices.map { |invoice| invoice.remake comments: comments }
   end
 
-  def make_invoices(comments: [])
+  def invoices_maker comments: []
     InvoicesMaker.new(property_range: invoicing.property_range,
                       period: invoicing.period,
                       invoice_date: invoice_date,

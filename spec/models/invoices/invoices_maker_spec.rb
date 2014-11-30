@@ -96,31 +96,4 @@ RSpec.describe InvoicesMaker, type: :model do
       end
     end
   end
-
-  describe '#composeable?' do
-    it 'returns true when invoicing possible' do
-      template_create id: 1
-      charge = charge_new cycle: cycle_new(due_ons: [due_on_new(month: 3)])
-      account_create property: property_new(human_ref: 8), charges: [charge]
-
-      invoicing =
-        InvoicesMaker.new property_range: '8-8',
-                          period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1),
-                          comments: []
-
-      expect(invoicing.composeable?).to eq true
-    end
-
-    it 'returns false when invoicing not possible' do
-      template_create id: 1
-      account_create property: property_new(human_ref: 6), charges: [charge_new]
-
-      invoicing =
-        InvoicesMaker.new property_range: '8-8',
-                          period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1),
-                          comments: []
-
-      expect(invoicing.composeable?).to eq false
-    end
-  end
 end

@@ -20,7 +20,7 @@ def invoice_new id: nil,
   invoice.prepare account: account,
                   invoice_date: invoice_date,
                   property: account.property.invoice,
-                  billing: { arrears: account.balance, transaction: invoice_account },
+                  debits_transaction: invoice_account,
                   comments: comments
   invoice
 end

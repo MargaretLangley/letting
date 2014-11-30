@@ -52,17 +52,17 @@ class Invoice < ActiveRecord::Base
   def prepare(account:,
               invoice_date: Time.zone.today,
               property:,
-              billing:,
+              debits_transaction:,
               comments: [])
     self.account = account
     self.invoice_date = invoice_date
     letters.build template: Template.find(1)
     self.property = property
     self.comments = generate_comments comments: comments
-    self.invoice_account =  billing[:transaction]
+    self.invoice_account = debits_transaction
 
     products = generate_products(arrears: account.balance(to_date: invoice_date), # rubocop: disable Metrics/LineLength
-                                 transaction: invoice_account)
+                                 transaction: debits_transaction)
     self.products = products[:products]
     self.total_arrears = products [:total_arrears]
     self.earliest_date_due = products [:earliest_date_due]
@@ -78,7 +78,7 @@ class Invoice < ActiveRecord::Base
     invoice.prepare account: account,
                     invoice_date: Time.zone.today,
                     property: property,
-                    billing: { transaction: invoice_account },
+                    debits_transaction: invoice_account,
                     comments: comments
   end
 
