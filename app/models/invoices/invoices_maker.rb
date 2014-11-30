@@ -31,7 +31,7 @@ class InvoicesMaker
 
   private
 
-  def composeable accounts: property_range
+  def composeable(accounts:)
     Account.between?(accounts).includes(account_includes).select do |account|
       DebitMaker.new(account: account, debit_period: period).mold.make?
     end
