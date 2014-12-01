@@ -53,6 +53,10 @@ class Charge < ActiveRecord::Base
     mark_for_destruction unless edited?
   end
 
+  def automatic_payment?
+    payment_type == STANDING_ORDER
+  end
+
   def to_s
     "charge: #{charge_type}, #{cycle}"
   end

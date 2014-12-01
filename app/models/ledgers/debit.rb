@@ -42,6 +42,7 @@ class Debit < ActiveRecord::Base
   validates :amount, amount: true
   before_save :reconcile
 
+  delegate :automatic_payment?, to: :charge
   delegate :charge_type, to: :charge
 
   def outstanding
@@ -63,6 +64,7 @@ class Debit < ActiveRecord::Base
   def to_debitable
     {
       charge_type: charge_type,
+      automatic_payment: automatic_payment?,
       date_due: on_date,
       period: period,
       amount: amount,

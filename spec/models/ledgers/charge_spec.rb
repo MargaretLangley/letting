@@ -96,6 +96,18 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
       end
     end
 
+    describe '#automatic_payment?' do
+      it 'returns automatic payment when standing order' do
+        charge = charge_new payment_type: Charge::STANDING_ORDER
+        expect(charge).to be_automatic_payment
+      end
+
+      it 'returns automatic payment when standing order' do
+        charge = charge_new payment_type: Charge::PAYMENT
+        expect(charge).to_not be_automatic_payment
+      end
+    end
+
     it '#to_s displays' do
       expect(charge_new.to_s)
         .to eq 'charge: Ground Rent, '\
