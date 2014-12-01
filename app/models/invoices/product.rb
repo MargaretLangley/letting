@@ -11,7 +11,7 @@
 #
 class Product < ActiveRecord::Base
   include Comparable
-  belongs_to :invoice
+  belongs_to :invoice, inverse_of: :products
 
   def period
     (period_first..period_last)
@@ -21,6 +21,13 @@ class Product < ActiveRecord::Base
     self.period_first = bill_range.first
     self.period_last  = bill_range.last
   end
+
+  def balance
+    invoice.products.balanced if invoice
+    @balance
+  end
+
+  attr_writer :balance
 
   # Does the product require additional explanation typically
   # on the back page of the invoice.
@@ -41,6 +48,6 @@ class Product < ActiveRecord::Base
 
   def to_s
     "charge_type: #{charge_type} date_due: #{date_due} amount: #{amount} "\
-    "period: #{period_first}..#{period_last}"
+    "period: #{period_first}..#{period_last}, balance: #{balance}"
   end
 end

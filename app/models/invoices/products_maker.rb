@@ -30,10 +30,9 @@ class ProductsMaker
   private
 
   def make_products
-    products_balanced(product_arrears_maker +
-                      transaction.debits.map do |debit|
-                        Product.new debit.to_debitable
-                      end)
+    product_arrears_maker + transaction.debits.map do |debit|
+      Product.new debit.to_debitable
+    end
   end
 
   def product_arrears_maker
@@ -44,13 +43,5 @@ class ProductsMaker
                                      amount: arrears)]
     end
     product_arrears
-  end
-
-  def products_balanced products
-    total = 0
-    products.map do |product|
-      product.balance = total += product.amount
-      product
-    end
   end
 end

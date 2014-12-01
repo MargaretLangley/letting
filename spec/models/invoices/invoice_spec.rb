@@ -90,7 +90,7 @@ RSpec.describe Invoice, type: :model do
                    debits_transaction: transaction
         expect(invoice.products.first.to_s)
           .to eq 'charge_type: Ground Rent date_due: 2013-03-25 amount: 88.08 '\
-                 'period: 2013-03-25..2013-06-30'
+                 'period: 2013-03-25..2013-06-30, balance: 88.08'
       end
 
       it 'finds the earliest due_date' do
@@ -109,38 +109,9 @@ RSpec.describe Invoice, type: :model do
       end
 
       it 'prepares invoice total_arrears' do
-        template_create id: 1
-        account = account_new(debits: [debit_new(amount: 40, charge: charge_new)])
-        property = property_create account: account, client: client_create
-        (transaction = DebitsTransaction.new)
-          .debited(debits: [debit_new(amount: 10, charge: charge_new),
-                            debit_new(amount: 20, charge: charge_new)])
-
-        (invoice = Invoice.new)
-          .prepare account: property.account,
-                   invoice_date: '2014-06-30',
-                   property: property.invoice,
-                   debits_transaction: transaction
-        expect(invoice.total_arrears).to eq 70
-        invoice.run_id = 5
-        invoice.save!
-      end
-
-      describe 'arrears' do
-        it 'debits increase total arrears' do
-          account = account_new
-          debits_transaction = debits_transaction_new debits: [debit_new(amount: 10, charge: charge_new)]
-          invoice = invoice_create account: account, debits_transaction: debits_transaction
-          expect(invoice.total_arrears).to eq 10
-        end
-
-        it 'credits decrease total arrears' do
-          charge = charge_new
-          account = account_new credits: [credit_new(amount: -30, charge: charge)]
-          debits_transaction = debits_transaction_new debits: [debit_new(amount: 10, charge: charge)]
-          invoice = invoice_create account: account, debits_transaction: debits_transaction
-          expect(invoice.total_arrears).to eq(-20)
-        end
+        invoice = Invoice.new
+        invoice.products = [product_new(amount: 10)]
+        expect(invoice.total_arrears).to eq 10
       end
 
       describe 'comments' do
@@ -258,8 +229,7 @@ RSpec.describe Invoice, type: :model do
       end
 
       it 'returns false if not in debt' do
-        invoice = Invoice.new products: [product_new(amount: 30)]
-        invoice.pre_invoice_arrears = -30
+        invoice = Invoice.new products: [product_new(amount: 0)]
         expect(invoice).to_not be_actionable
       end
     end

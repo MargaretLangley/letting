@@ -18,19 +18,13 @@ RSpec.describe 'Products', type: :model do
       invoice.products.balanced
       expect(invoice.total_arrears).to eq 70
     end
-
-    it 'balance includes any current arrears' do
-      invoice = Invoice.new products: [product_new(amount: 30)]
-      invoice.products.balanced total: 10
-      expect(invoice.total_arrears).to eq 40
-    end
   end
 
   describe '#total_arrears' do
     it 'returns arrears' do
       invoice = Invoice.new products: [product_new(amount: 30)]
-      invoice.products.balanced total: 10
-      expect(invoice.total_arrears).to eq 40
+      invoice.products.balanced
+      expect(invoice.total_arrears).to eq 30
     end
   end
 end

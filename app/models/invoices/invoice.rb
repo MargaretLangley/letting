@@ -29,12 +29,13 @@ class Invoice < ActiveRecord::Base
   belongs_to :run, inverse_of: :invoices
   belongs_to :debits_transaction, autosave: true, inverse_of: :invoices
   has_many :comments, dependent: :destroy
-  has_many :products, -> { order(:created_at) }, dependent: :destroy do
+  has_many :products, -> { order(:created_at) }, dependent: :destroy, inverse_of: :invoice do # rubocop: disable Metrics/LineLength
     def earliest_date_due
       map(&:date_due).min
     end
 
-    def balanced total: 0
+    def balanced
+      total = 0 # if product != 0 then the first product is the balance.
       each_with_index do |product, _index|
         product.balance = total += product.amount
         product
@@ -56,12 +57,16 @@ class Invoice < ActiveRecord::Base
   after_destroy :destroy_orphaned_debits_transaction
 
   delegate :earliest_date_due, to: :products
-  delegate :total_arrears, to: :products
 
   after_initialize :init
 
   def init
     self.pre_invoice_arrears = 0 if pre_invoice_arrears.blank?
+  end
+
+  def total_arrears
+    products.balanced
+    products.total_arrears
   end
 
   # prepare
@@ -114,7 +119,7 @@ class Invoice < ActiveRecord::Base
   # products have to be created before this method returns expected values
   #
   def actionable?
-    products.balanced(total: pre_invoice_arrears)
+    products.balanced
     products.total_arrears > 0
   end
 
