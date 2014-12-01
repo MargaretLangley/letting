@@ -29,22 +29,16 @@ RSpec.describe Invoicing, type: :model do
 
   describe '#actionable?' do
     it 'can be actionable' do
-      account_setup property_ref: 20, charge_month: 3, charge_day: 25
+      invoice = Invoice.new products: [Product.new(amount: 40)]
+      (invoicing = Invoicing.new).runs = [Run.new(invoices: [invoice])]
 
-      invoicing = Invoicing.new property_range: '20',
-                                period: Date.new(2010, 3, 1)..
-                                        Date.new(2010, 5, 1)
-      invoicing.generate comments: ['', '']
       expect(invoicing.actionable?).to be true
     end
 
     it 'can not be actionable' do
-      account_setup property_ref: 20, charge_month: 5, charge_day: 2
+      invoice = Invoice.new products: [Product.new(amount: 0)]
+      (invoicing = Invoicing.new).runs = [Run.new(invoices: [invoice])]
 
-      invoicing = Invoicing.new property_range: '20',
-                                period: Date.new(2010, 3, 1)..
-                                        Date.new(2010, 5, 1)
-      invoicing.generate comments: ['', '']
       expect(invoicing.actionable?).to be false
     end
   end

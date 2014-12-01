@@ -58,6 +58,12 @@ class Invoice < ActiveRecord::Base
   delegate :earliest_date_due, to: :products
   delegate :total_arrears, to: :products
 
+  after_initialize :init
+
+  def init
+    self.pre_invoice_arrears = 0 if pre_invoice_arrears.blank?
+  end
+
   # prepare
   # Assigns the attributes required in an invoice
   # Args:
@@ -101,6 +107,15 @@ class Invoice < ActiveRecord::Base
 
   def back_page?
     products.any?(&:back_page?)
+  end
+
+  # actionable?
+  # Is it worth printing out an invoice for this record?
+  # products have to be created before this method returns expected values
+  #
+  def actionable?
+    products.balanced(total: pre_invoice_arrears)
+    products.total_arrears > 0
   end
 
   def to_s

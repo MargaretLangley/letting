@@ -35,9 +35,10 @@ class Run < ActiveRecord::Base
   #
   # actionable?
   # Are the accounts invoiceable?
+  # prepare must be called before actionable will return correct result
   #
   def actionable?
-    invoices_maker.size > 0
+    invoices.select(&:actionable?).present?
   end
 
   private

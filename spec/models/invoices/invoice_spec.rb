@@ -251,6 +251,19 @@ RSpec.describe Invoice, type: :model do
       end
     end
 
+    describe '#actionable?' do
+      it 'returns true if in debt' do
+        invoice = Invoice.new products: [product_new(amount: 30)]
+        expect(invoice).to be_actionable
+      end
+
+      it 'returns false if not in debt' do
+        invoice = Invoice.new products: [product_new(amount: 30)]
+        invoice.pre_invoice_arrears = -30
+        expect(invoice).to_not be_actionable
+      end
+    end
+
     it 'outputs #to_s' do
       expect(invoice_new.to_s.lines.first)
       .to start_with %q(Billing Address: "Mr W. G. Grace\nEdgbaston Road\nBirmingham\nWest Midlands")
