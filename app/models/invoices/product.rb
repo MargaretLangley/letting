@@ -11,6 +11,7 @@
 #
 class Product < ActiveRecord::Base
   include Comparable
+  belongs_to :invoice
 
   def period
     (period_first..period_last)

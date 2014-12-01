@@ -34,6 +34,13 @@ class Invoice < ActiveRecord::Base
       map(&:date_due).min
     end
 
+    def balanced total: 0
+      each_with_index do |product, _index|
+        product.balance = total += product.amount
+        product
+      end
+    end
+
     def total_arrears
       last.balance
     end
@@ -73,10 +80,9 @@ class Invoice < ActiveRecord::Base
     self.property = property
     self.comments = generate_comments comments: comments
     self.debits_transaction = debits_transaction
+    self.pre_invoice_arrears = account.balance(to_date: invoice_date)
 
-    self.products =
-      products_maker arrears: account.balance(to_date: invoice_date),
-                     transaction: debits_transaction
+    self.products = products_maker transaction: debits_transaction
     self
   end
 
@@ -133,9 +139,9 @@ class Invoice < ActiveRecord::Base
     comments.reject(&:blank?).map { |comment| Comment.new clarify: comment }
   end
 
-  def products_maker(arrears:, transaction:)
+  def products_maker(transaction:)
     @products_maker ||= ProductsMaker.new(invoice_date: invoice_date,
-                                          arrears: arrears,
+                                          arrears: pre_invoice_arrears,
                                           transaction: transaction).invoice
   end
 end
