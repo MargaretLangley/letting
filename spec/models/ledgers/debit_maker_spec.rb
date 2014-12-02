@@ -34,34 +34,6 @@ RSpec.describe DebitMaker, type: :model do
     end
   end
 
-  describe '#make?' do
-    it 'made if charge is due' do
-      chg = charge_create cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
-      accnt = account_new charges: [chg],
-                          debits: []
-
-      make = DebitMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
-                                                          Date.new(2013, 3, 5))
-
-      make.mold
-      expect(make.make?).to eq true
-    end
-
-    it 'not made is someone settled all debts (regardless of when paid)' do
-      chg = charge_create amount: 40,
-                          cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
-      accnt = account_new charges: [chg],
-                          credits: [credit_new(amount: -40,
-                                               charge: chg,
-                                               on_date: Date.new(2013, 4, 6))]
-
-      make = DebitMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
-                                                          Date.new(2013, 3, 5))
-      make.mold
-      expect(make.make?).to eq false
-    end
-  end
-
   describe '#invoice' do
     it 'returns the transaction' do
       cycle = cycle_create(due_ons: [DueOn.new(month: 3, day: 5)])

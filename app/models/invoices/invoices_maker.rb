@@ -25,16 +25,15 @@ class InvoicesMaker
   # Make invoices
   #
   def compose
-    @invoices = make_invoices accounts: composeable(accounts: property_range)
+    @invoices = make_invoices(accounts: composeable(accounts: property_range))
+                  .compact
     self
   end
 
   private
 
   def composeable(accounts:)
-    Account.between?(accounts).includes(account_includes).select do |account|
-      DebitMaker.new(account: account, debit_period: period).mold.make?
-    end
+    Account.between?(accounts).includes(account_includes)
   end
 
   def make_invoices(accounts:)
@@ -44,6 +43,8 @@ class InvoicesMaker
   def make_invoice(account:)
     debits_transaction = DebitMaker.new(account: account, debit_period: period)
                             .mold.invoice
+    return unless debits_transaction.debits?
+
     (invoice = Invoice.new).prepare \
       account: account,
       invoice_date: invoice_date,

@@ -19,4 +19,18 @@ RSpec.describe DebitsTransaction, type: :model do
                         debit_new(amount: 20, charge: charge_new)]
     expect(debits_transaction.sum).to eq 30
   end
+
+  describe '#debits?' do
+    it 'knows if it has debits' do
+      transaction = DebitsTransaction.new
+      transaction.debited debits: [debit_new(amount: 10, charge: charge_new)]
+      expect(transaction).to be_debits
+    end
+
+    it 'knows when it has no debits' do
+      transaction = DebitsTransaction.new
+      transaction.debited debits: []
+      expect(transaction).to_not be_debits
+    end
+  end
 end

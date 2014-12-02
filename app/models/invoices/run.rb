@@ -26,7 +26,7 @@ class Run < ActiveRecord::Base
     self.invoice_date = invoice_date
 
     if first_run
-      self.invoices = invoices_maker comments: comments
+      self.invoices = invoices_maker(comments: comments)
     else
       self.invoices = rerun invoicing.runs.first, comments: comments
     end

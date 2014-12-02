@@ -23,6 +23,10 @@ class DebitsTransaction < ActiveRecord::Base
     debits.map(&:amount).inject(0, :+)
   end
 
+  def debits?
+    debits.any?
+  end
+
   # Want to be able to destroy an invoice and not destroy
   # debits_transaction if it has another invoice already
   # Not got the association to work and may just delete

@@ -22,8 +22,8 @@ class DebitMaker
     self
   end
 
-  def make? to_date: Time.zone.today
-    balance_on(to_date: to_date) + debits_transaction.sum > 0
+  def debits?
+    @debits_transaction.debits?
   end
 
   def invoice(*)
@@ -31,10 +31,6 @@ class DebitMaker
   end
 
   private
-
-  def balance_on(to_date:)
-    account.balance to_date: to_date
-  end
 
   def make_debits
     account.debits_coming(debit_period)
