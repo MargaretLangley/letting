@@ -28,7 +28,7 @@ class Run < ActiveRecord::Base
     if first_run
       self.invoices = invoices_maker(comments: comments)
     else
-      self.invoices = rerun invoicing.runs.first, comments: comments
+      self.invoices = rerun invoicing.runs.first.invoices, comments: comments
     end
   end
 
@@ -55,8 +55,12 @@ class Run < ActiveRecord::Base
   # rerun
   # update the invoice - allowing for any payments and date changes
   #
-  def rerun run, comments: []
-    run.invoices.map { |invoice| invoice.remake comments: comments }
+  def rerun(invoices, comments:)
+    invoices.map do |invoice|
+      invoice_remaker(invoice,
+                      comments: comments,
+                      products: remaker_products(invoice))
+    end
   end
 
   def invoices_maker comments: []
@@ -66,5 +70,17 @@ class Run < ActiveRecord::Base
                       comments: comments)
                       .compose
                       .invoices
+  end
+
+  def invoice_remaker(invoice, comments:, products:)
+    InvoiceRemaker.new(template_invoice: invoice,
+                       comments: comments,
+                       products: products).compose
+  end
+
+  def remaker_products invoice
+    ProductsMaker.new(invoice_date: invoice_date,
+                      arrears: invoice.account.balance(to_date: invoice_date),
+                      transaction: invoice.debits_transaction).invoice
   end
 end

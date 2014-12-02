@@ -120,12 +120,22 @@ class Invoice < ActiveRecord::Base
     products.total_arrears > 0
   end
 
+  def property
+    {
+      property_ref: property_ref,
+      occupiers: occupiers,
+      property_address: property_address,
+      billing_address: billing_address,
+      client_address: client_address,
+    }
+  end
+
   def to_s
     "Billing Address: #{billing_address.inspect}\n"\
     "Property Ref: #{property_ref.inspect}\n"\
     "Invoice Date: #{invoice_date.inspect}\n"\
     "Property Address: #{property_address.inspect}\n"\
-    "client: #{client_address.inspect}\n"
+    "client: #{client_address.inspect}"
   end
 
   private
@@ -140,16 +150,6 @@ class Invoice < ActiveRecord::Base
 
   def destroy_orphaned_debits_transaction
     debits_transaction.invoices.empty? && debits_transaction.destroy
-  end
-
-  def property
-    {
-      property_ref: property_ref,
-      occupiers: occupiers,
-      property_address: property_address,
-      billing_address: billing_address,
-      client_address: client_address,
-    }
   end
 
   def generate_comments(comments:)

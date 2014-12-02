@@ -25,19 +25,20 @@ class InvoicesMaker
   # Make invoices
   #
   def compose
-    @invoices = make_invoices(accounts: composeable(accounts: property_range))
-                  .compact
+    @invoices =
+      make_invoices(accounts: accounts_between(accounts: property_range))
+        .compact
     self
   end
 
   private
 
-  def composeable(accounts:)
-    Account.between?(accounts).includes(account_includes)
-  end
-
   def make_invoices(accounts:)
     accounts.map { |account| make_invoice account: account }
+  end
+
+  def accounts_between(accounts:)
+    Account.between?(accounts).includes(account_includes)
   end
 
   def make_invoice(account:)
@@ -57,6 +58,9 @@ class InvoicesMaker
     invoice
   end
 
+  #
+  # To avoid n+1 problems when loading Account from the database
+  #
   def account_includes
     [[property: property_includes], :credits, :charges, :debits]
   end
