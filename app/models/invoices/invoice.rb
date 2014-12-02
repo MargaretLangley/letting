@@ -58,12 +58,6 @@ class Invoice < ActiveRecord::Base
 
   delegate :earliest_date_due, to: :products
 
-  after_initialize :init
-
-  def init
-    self.pre_invoice_arrears = 0 if pre_invoice_arrears.blank?
-  end
-
   def total_arrears
     products.balanced
     products.total_arrears
@@ -92,7 +86,6 @@ class Invoice < ActiveRecord::Base
     self.property = property
     self.comments = generate_comments comments: comments
     self.debits_transaction = debits_transaction
-    self.pre_invoice_arrears = account.balance(to_date: invoice_date)
 
     self.products = products
     self
