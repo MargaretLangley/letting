@@ -1,30 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Letting - <%= @title%></title>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-  </head>
-
+  <%= render 'layouts/head' %>
   <body>
-
-    <%= render 'layouts/header' %>
-    <div class='page-wrapper'>
-
-      <div class="grid">
-        <div class="col-21-24">
-          <% if content_for?(:heading) %>
-            <%= yield :heading %>
-          <% else %>
-            <h2><%= @title %></h2>
-          <% end %>
-        </div>
-      </div>
-      <%= yield %>
-      <div class = 'side-wrap  float-right'>
-        <%= render 'layouts/sidebar' %>
-      </div>
-    </div>
+    <%= render 'layouts/trunk' %>
   </body>
 </html>
