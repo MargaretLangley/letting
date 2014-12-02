@@ -16,21 +16,23 @@ class DebitMaker
     @debits_transaction = debits_transaction
   end
 
+  def debits?
+    mold
+    @debits_transaction.debits?
+  end
+
+  def invoice(*)
+    mold
+    debits_transaction
+  end
+
+  private
+
   def mold
     debits_transaction
       .debited debits: account.exclusive(query_debits: make_debits)
     self
   end
-
-  def debits?
-    @debits_transaction.debits?
-  end
-
-  def invoice(*)
-    debits_transaction
-  end
-
-  private
 
   def make_debits
     account.debits_coming(debit_period)

@@ -148,55 +148,6 @@ RSpec.describe Invoice, type: :model do
         end
       end
     end
-    describe '#remake' do
-      it 'invoice_date set to today' do
-        invoice = invoice_create
-        expect(invoice.remake.invoice_date).to eq Time.zone.today
-      end
-
-      it 'copies property ref' do
-        invoice = invoice_create property: property_new(human_ref: 8)
-        expect(invoice.remake.property_ref).to eq 8
-      end
-
-      it 'copies occupiers' do
-        property = property_new(occupiers: [Entity.new(name: 'Prior')])
-        invoice = invoice_create property: property
-        expect(invoice.remake.occupiers).to eq 'Prior'
-      end
-
-      it 'sets property address' do
-        property = property_new address: address_new(road: 'New Road')
-        invoice = invoice_create property: property
-        expect(invoice.remake.property_address)
-          .to eq "New Road\nBirmingham\nWest Midlands"
-      end
-
-      it 'sets billing address' do
-        property = property_new address: address_new(road: 'New Road')
-        invoice = invoice_create property: property
-        expect(invoice.remake.property_address)
-          .to eq "New Road\nBirmingham\nWest Midlands"
-      end
-
-      it 'resets total_arrears if any payment is made' do
-        debits_transaction = debits_transaction_new debits: [debit_new(amount: 10, charge: charge_new)]
-        invoice = invoice_create account: account_new,
-                                 debits_transaction: debits_transaction
-        invoice.account.credits = [credit_new(amount: -2, charge: charge_new)]
-        expect(invoice.remake.total_arrears).to eq 8
-      end
-
-      it 'resets product arrears if any payment is made' do
-        debits_transaction = debits_transaction_new debits: [debit_new(amount: 10, charge: charge_new)]
-        invoice = invoice_create account: account_new,
-                                 debits_transaction: debits_transaction
-        invoice.account.credits = [credit_new(amount: -2, charge: charge_new)]
-        expect(invoice.remake.products.first.charge_type).to eq 'Arrears'
-        expect(invoice.remake.products.first.amount).to eq(-2)
-      end
-
-    end
 
     describe '#back_page?' do
       it 'returns false if products have no ground rent' do

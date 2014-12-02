@@ -64,12 +64,21 @@ class Run < ActiveRecord::Base
   end
 
   def invoices_maker comments: []
-    InvoicesMaker.new(property_range: invoicing.property_range,
-                      period: invoicing.period,
-                      invoice_date: invoice_date,
-                      comments: comments)
-                      .compose
-                      .invoices
+    invoiceable_accounts.map do |account|
+      transaction = DebitMaker.new(account: account, debit_period: invoicing.period).invoice
+      next unless transaction.debits?
+
+      InvoiceMaker.new(account: account,
+                       period: invoicing.period,
+                       invoice_date: invoice_date,
+                       comments: comments,
+                       transaction: transaction)
+                       .compose
+    end.compact
+  end
+
+  def invoiceable_accounts
+    AccountFinder.new(property_range: invoicing.property_range).matching
   end
 
   def invoice_remaker(invoice, comments:, products:)

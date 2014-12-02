@@ -21,8 +21,8 @@
 # Client
 #   - Compound Name and address
 #
-# TODO: remove methodlength error
-# rubocop: disable Metrics/MethodLength
+# TODO: remove methodlength and ParameterLists errors
+# rubocop: disable Metrics/MethodLength, Metrics/ParameterLists
 #
 class Invoice < ActiveRecord::Base
   belongs_to :account
@@ -89,22 +89,6 @@ class Invoice < ActiveRecord::Base
 
     self.products = products
     self
-  end
-
-  # remake
-  # Re-generates the invoice as if it happened on another date
-  # The new invoice will take into account invoice_date and changes in account
-  # balance
-  #
-  def remake invoice: Invoice.new, comments: []
-    invoice.prepare account: account,
-                    invoice_date: Time.zone.today,
-                    property: property,
-                    debits_transaction: debits_transaction,
-                    comments: comments,
-                    products: ProductsMaker.new(invoice_date: invoice_date,
-                                                arrears: account.balance(to_date: invoice_date),
-                                                transaction: debits_transaction).invoice
   end
 
   def back_page?

@@ -17,5 +17,52 @@ RSpec.describe InvoiceRemaker, type: :model do
       # %q - act as single quote  \n => \\n
       # %Q - act as double quote  \n =  \n
     end
+
+    it 'invoice_date set to today' do
+      remaker = InvoiceRemaker.new template_invoice: invoice_new,
+                                   invoice_date: Date.new(2001, 1, 1),
+                                   products: []
+      expect(remaker.compose.invoice_date).to eq Date.new(2001, 1, 1)
+    end
+
+    it 'copies property ref' do
+      invoice = invoice_new property: property_new(human_ref: 8)
+      remaker = InvoiceRemaker.new template_invoice: invoice,
+                                   products: []
+      expect(remaker.compose.property_ref).to eq 8
+    end
+
+    it 'copies occupiers' do
+      property = property_new(occupiers: [Entity.new(name: 'Prior')])
+      invoice = invoice_new account: account_new, property: property
+
+      remaker = InvoiceRemaker.new template_invoice: invoice,
+                                   products: []
+
+      expect(remaker.compose.occupiers).to eq 'Prior'
+    end
+
+    it 'sets property address' do
+      property = property_new address: address_new(road: 'New Road')
+      invoice = invoice_new property: property
+
+      remaker = InvoiceRemaker.new template_invoice: invoice,
+                                   products: []
+
+      expect(remaker.compose.property_address)
+        .to eq "New Road\nBirmingham\nWest Midlands"
+    end
+
+    it 'sets billing_address' do
+      property =
+        property_create agent: agent_new(entities: [Entity.new(name: 'Lock')])
+      invoice = invoice_new account: account_new, property: property
+
+      remaker = InvoiceRemaker.new template_invoice: invoice,
+                                   products: []
+
+      expect(remaker.compose.billing_address)
+        .to eq "Lock\nEdgbaston Road\nBirmingham\nWest Midlands"
+    end
   end
 end

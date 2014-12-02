@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe DebitMaker, type: :model do
 
-  describe '#mold' do
+  describe '#debits' do
     it 'produces debits for due charges' do
       chg = charge_create(cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)]))
       accnt = account_new charges: [chg],
@@ -12,7 +12,7 @@ RSpec.describe DebitMaker, type: :model do
 
       make = DebitMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
                                                           Date.new(2013, 3, 5))
-      make.mold
+      expect(make).to be_debits
       expect(make.debits_transaction.debits)
         .to eq [Debit.new(account_id: 2,
                           charge_id: chg.id,
@@ -29,8 +29,7 @@ RSpec.describe DebitMaker, type: :model do
 
       make = DebitMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
                                                           Date.new(2013, 3, 5))
-      make.mold
-      expect(make.debits_transaction.debits).to eq []
+      expect(make).to_not be_debits
     end
   end
 
@@ -38,11 +37,10 @@ RSpec.describe DebitMaker, type: :model do
     it 'returns the transaction' do
       cycle = cycle_create(due_ons: [DueOn.new(month: 3, day: 5)])
       account = account_new charges: [charge_new(cycle: cycle)]
-      debit_maker = DebitMaker.new account: account,
-                                   debit_period: Date.new(2013, 3, 5)..
-                                                 Date.new(2013, 5, 5)
-      debit_maker.mold
-      expect(debit_maker.invoice.debits.size).to eq(1)
+      make = DebitMaker.new account: account,
+                            debit_period: Date.new(2013, 3, 5)..
+                                          Date.new(2013, 5, 5)
+      expect(make.invoice.debits.size).to eq(1)
     end
   end
 end
