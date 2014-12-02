@@ -42,13 +42,17 @@ class InvoicesMaker
   end
 
   def make_invoice(account:)
+    debits_transaction = DebitMaker.new(account: account, debit_period: period)
+                            .mold.invoice
     (invoice = Invoice.new).prepare \
       account: account,
       invoice_date: invoice_date,
       property: account.property.invoice(billing_period: period),
-      debits_transaction: DebitMaker.new(account: account, debit_period: period)
-                                    .mold.invoice,
-      comments: comments
+      debits_transaction: debits_transaction,
+      comments: comments,
+      products: ProductsMaker.new(invoice_date: invoice_date,
+                                  arrears: account.balance(to_date: invoice_date),
+                                  transaction: debits_transaction).invoice
     invoice
   end
 

@@ -38,14 +38,13 @@ RSpec.describe Invoice, type: :model do
       it 'prepares invoice_date' do
         template_create id: 1
         property = property_create account: account_new, client: client_create
-        (transaction = DebitsTransaction.new)
-          .debited(debits: [debit_new(charge: charge_new)])
 
         (invoice = Invoice.new)
           .prepare invoice_date: '2014-06-30',
                    account: property.account,
                    property: property.invoice,
-                   debits_transaction: transaction
+                   debits_transaction: DebitsTransaction.new,
+                   products: []
         expect(invoice.invoice_date.to_s).to eq '2014-06-30'
       end
 
@@ -53,12 +52,11 @@ RSpec.describe Invoice, type: :model do
         template_create id: 1
         invoice = Invoice.new
         property = property_create human_ref: 55, account: account_new
-        (transaction = DebitsTransaction.new)
-          .debited(debits: [debit_new(charge: charge_new)])
 
         invoice.prepare account: property.account,
                         property: property.invoice,
-                        debits_transaction: transaction
+                        debits_transaction: DebitsTransaction.new,
+                        products: []
         expect(invoice.property_ref).to eq 55
       end
 
@@ -67,44 +65,39 @@ RSpec.describe Invoice, type: :model do
         invoice = Invoice.new
         agent = agent_new(entities: [Entity.new(name: 'Lock')])
         property = property_create agent: agent, account: account_new
-        (transaction = DebitsTransaction.new)
-          .debited(debits: [debit_new(charge: charge_new)])
 
         invoice.prepare account: property.account,
                         property: property.invoice,
-                        debits_transaction: transaction
+                        debits_transaction: DebitsTransaction.new,
+                        products: []
         expect(invoice.billing_address)
           .to eq "Lock\nEdgbaston Road\nBirmingham\nWest Midlands"
       end
 
       it 'prepares invoice products' do
         template_create id: 1
-        property = property_create account: account_new, client: client_create
-        (transaction = DebitsTransaction.new)
-          .debited(debits: [debit_new(charge: charge_new)])
+        property = property_create account: account_new
 
         (invoice = Invoice.new)
-          .prepare invoice_date: '2014-06-30',
-                   account: property.account,
+          .prepare account: property.account,
                    property: property.invoice,
-                   debits_transaction: transaction
+                   debits_transaction: DebitsTransaction.new,
+                   products: [product_new(charge_type: 'Ground Rent')]
         expect(invoice.products.first.to_s)
-          .to eq 'charge_type: Ground Rent date_due: 2013-03-25 amount: 88.08 '\
-                 'period: 2013-03-25..2013-06-30, balance: 88.08'
+          .to eq 'charge_type: Ground Rent date_due: 2014-06-07 amount: 30.05 '\
+                 'period: 2010-09-30..2011-03-25, balance: 30.05'
       end
 
       it 'finds the earliest due_date' do
         template_create id: 1
-        property = property_create account: account_new, client: client_create
-        (transaction = DebitsTransaction.new).debited debits:
-          [debit_new(on_date: Date.new(2001, 1, 1), charge: charge_new),
-           debit_new(on_date: Date.new(2000, 1, 1), charge: charge_new)]
+        property = property_create account: account_new
 
         (invoice = Invoice.new)
           .prepare invoice_date: '2014-06-30',
                    account: property.account,
                    property: property.invoice,
-                   debits_transaction: transaction
+                   debits_transaction: DebitsTransaction.new,
+                   products: [product_new(date_due: Date.new(2000, 1, 1))]
         expect(invoice.earliest_date_due).to eq Date.new(2000, 1, 1)
       end
 
@@ -117,43 +110,40 @@ RSpec.describe Invoice, type: :model do
       describe 'comments' do
         it 'prepares without comments' do
           template_create id: 1
-          property = property_create account: account_new, client: client_create
-          (transaction = DebitsTransaction.new)
-            .debited(debits: [debit_new(charge: charge_new)])
+          property = property_create account: account_new
 
           (invoice = Invoice.new)
             .prepare account: property.account,
                      property: property.invoice,
-                     debits_transaction: transaction
+                     debits_transaction: DebitsTransaction.new,
+                     products: []
           expect(invoice.comments.size).to eq 0
         end
 
         it 'prepares with comments' do
           template_create id: 1
-          property = property_create account: account_new, client: client_create
-          (transaction = DebitsTransaction.new)
-            .debited(debits: [debit_new(charge: charge_new)])
+          property = property_create account: account_new
 
           (invoice = Invoice.new)
             .prepare account: property.account,
                      property: property.invoice,
-                     debits_transaction: transaction,
-                     comments: ['comment']
+                     debits_transaction: DebitsTransaction.new,
+                     comments: ['comment'],
+                     products: []
           expect(invoice.comments.size).to eq 1
           expect(invoice.comments.first.clarify).to eq 'comment'
         end
 
         it 'ignores empty comments' do
           template_create id: 1
-          property = property_create account: account_new, client: client_create
-          (transaction = DebitsTransaction.new)
-            .debited(debits: [debit_new(charge: charge_new)])
+          property = property_create account: account_new
 
           (invoice = Invoice.new)
             .prepare account: property.account,
                      property: property.invoice,
-                     debits_transaction: transaction,
-                     comments: ['comment', '']
+                     debits_transaction: DebitsTransaction.new,
+                     comments: ['comment', ''],
+                     products: []
           expect(invoice.comments.size).to eq 1
         end
       end
@@ -210,14 +200,12 @@ RSpec.describe Invoice, type: :model do
 
     describe '#back_page?' do
       it 'returns false if products have no ground rent' do
-        debits = [debit_new(charge: charge_new(charge_type: 'Insurance'))]
-        invoice = invoice_new debits_transaction: debits_transaction_new(debits: debits)
+        invoice = invoice_new products: [product_new(charge_type: 'Insurance')]
         expect(invoice.back_page?).to eq false
       end
 
       it 'returns true if products includes ground rent' do
-        debits = [debit_new(charge: charge_new(charge_type: 'Ground Rent'))]
-        invoice = invoice_new debits_transaction: debits_transaction_new(debits: debits)
+        invoice = invoice_new products: [product_new(charge_type: 'Ground Rent')]
         expect(invoice.back_page?).to eq true
       end
     end

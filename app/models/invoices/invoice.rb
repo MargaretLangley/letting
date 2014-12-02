@@ -80,11 +80,12 @@ class Invoice < ActiveRecord::Base
   #                      to the invoice
   # comments           - array of strings to appear on invoice for special info.
   #
-  def prepare account:,
+  def prepare(account:,
               invoice_date: Time.zone.today,
               property:,
               debits_transaction:,
-              comments: []
+              comments: [],
+              products:)
     self.account = account
     self.invoice_date = invoice_date
     letters.build template: Template.find(1)
@@ -93,7 +94,7 @@ class Invoice < ActiveRecord::Base
     self.debits_transaction = debits_transaction
     self.pre_invoice_arrears = account.balance(to_date: invoice_date)
 
-    self.products = products_maker transaction: debits_transaction
+    self.products = products
     self
   end
 
@@ -107,7 +108,10 @@ class Invoice < ActiveRecord::Base
                     invoice_date: Time.zone.today,
                     property: property,
                     debits_transaction: debits_transaction,
-                    comments: comments
+                    comments: comments,
+                    products: ProductsMaker.new(invoice_date: invoice_date,
+                                                arrears: account.balance(to_date: invoice_date),
+                                                transaction: debits_transaction).invoice
   end
 
   def back_page?
@@ -157,11 +161,5 @@ class Invoice < ActiveRecord::Base
 
   def generate_comments(comments:)
     comments.reject(&:blank?).map { |comment| Comment.new clarify: comment }
-  end
-
-  def products_maker(transaction:)
-    @products_maker ||= ProductsMaker.new(invoice_date: invoice_date,
-                                          arrears: pre_invoice_arrears,
-                                          transaction: transaction).invoice
   end
 end
