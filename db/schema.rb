@@ -219,11 +219,11 @@ ActiveRecord::Schema.define(version: 20141129154746) do
   add_index "payments", ["account_id"], name: "index_payments_on_account_id", using: :btree
 
   create_table "products", force: true do |t|
-    t.integer  "invoice_id",                        null: false
-    t.string   "charge_type",                       null: false
-    t.date     "date_due",                          null: false
-    t.decimal  "amount",                            null: false
-    t.boolean  "automatic_payment", default: false, null: false
+    t.integer  "invoice_id",        null: false
+    t.string   "charge_type",       null: false
+    t.date     "date_due",          null: false
+    t.boolean  "automatic_payment", null: false
+    t.decimal  "amount",            null: false
     t.date     "period_first"
     t.date     "period_last"
     t.datetime "created_at"
