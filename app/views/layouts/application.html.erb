@@ -11,7 +11,7 @@
           <% if content_for?(:heading) %>
             <%= yield :heading %>
           <% else %>
-            <h2><%= @title %></h2>
+            <h2><%= @title %> <span class = 'print-only'><%= "#{safe_date(date: Time.zone.today, format: :short)}"%></span> </h2>
           <% end %>
           <%= yield %>
         </article>
