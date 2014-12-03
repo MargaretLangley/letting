@@ -5,7 +5,7 @@
       <% if content_for?(:heading) %>
         <%= yield :heading %>
       <% else %>
-        <h2><%= @title %></h2>
+        <h2 class = 'no-print'><%= @title %></h2>
       <% end %>
     </div>
   </div>
