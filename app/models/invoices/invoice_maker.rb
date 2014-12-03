@@ -9,7 +9,7 @@
 # invoices.
 #
 class InvoiceMaker
-  attr_reader :comments, :account, :period, :invoice_date, :transaction
+  attr_reader :comments, :account, :period, :invoice_date, :transaction, :products
   def initialize(account:,
                  period:,
                  invoice_date: Time.zone.today,
@@ -20,6 +20,7 @@ class InvoiceMaker
     @invoice_date = invoice_date
     @comments = comments
     @transaction = transaction
+    @products = products_maker(transaction)
   end
 
   #
@@ -39,11 +40,11 @@ class InvoiceMaker
                property: account.property.invoice(billing_period: period),
                debits_transaction: transaction,
                comments: comments,
-               products: products(transaction)
+               products: products
     invoice
   end
 
-  def products debits_transaction
+  def products_maker debits_transaction
     ProductsMaker.new(invoice_date: invoice_date,
                       arrears: account.balance(to_date: invoice_date),
                       transaction: debits_transaction).invoice

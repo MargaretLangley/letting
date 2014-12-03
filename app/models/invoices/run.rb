@@ -51,18 +51,6 @@ class Run < ActiveRecord::Base
     self == invoicing.runs.first
   end
 
-  #
-  # rerun
-  # update the invoice - allowing for any payments and date changes
-  #
-  def rerun(invoices, comments:)
-    invoices.map do |invoice|
-      invoice_remaker(invoice,
-                      comments: comments,
-                      products: remaker_products(invoice))
-    end
-  end
-
   def invoices_maker comments: []
     invoiceable_accounts.map do |account|
       next unless debit_transaction_maker(account).debits?
@@ -85,15 +73,22 @@ class Run < ActiveRecord::Base
     AccountFinder.new(property_range: invoicing.property_range).matching
   end
 
-  def invoice_remaker(invoice, comments:, products:)
+  #
+  # rerun
+  # update the invoice - allowing for any payments and date changes
+  #
+  def rerun(invoices, comments:)
+    invoices.map { |invoice| invoice_remaker(invoice, comments: comments) }
+  end
+
+  def invoice_remaker(invoice, comments:)
+    products =
+      ProductsMaker.new(invoice_date: invoice_date,
+                        arrears: invoice.account.balance(to_date: invoice_date),
+                        transaction: invoice.debits_transaction).invoice
+
     InvoiceRemaker.new(template_invoice: invoice,
                        comments: comments,
                        products: products).compose
-  end
-
-  def remaker_products invoice
-    ProductsMaker.new(invoice_date: invoice_date,
-                      arrears: invoice.account.balance(to_date: invoice_date),
-                      transaction: invoice.debits_transaction).invoice
   end
 end
