@@ -15,6 +15,17 @@ RSpec.describe ProductsMaker, type: :model do
              'balance: '
   end
 
+  it 'allows products with automatic payments' do
+    charge = charge_new payment_type: Charge::STANDING_ORDER
+    (transaction = DebitsTransaction.new)
+      .debited debits: [debit_new(charge: charge)]
+
+    maker = ProductsMaker.new invoice_date: Date.new(1999, 1, 2),
+                              arrears: 0,
+                              transaction: transaction
+    expect(maker.invoice.size).to eq 1
+  end
+
   describe 'arrears creation' do
     it 'makes arrears from debts' do
       (transaction = DebitsTransaction.new)
