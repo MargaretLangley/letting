@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ProductsMaker, type: :model do
-  it 'calculates invoice' do
+  it 'makes products' do
     (transaction = DebitsTransaction.new)
       .debited debits: [debit_new(amount: 20, charge: charge_new)]
     maker = ProductsMaker.new invoice_date: Date.new(1999, 1, 2),
@@ -10,7 +10,7 @@ RSpec.describe ProductsMaker, type: :model do
     expect(maker.invoice.size).to eq 1
   end
 
-  it 'calculates the amount' do
+  it 'correctly set the product amount' do
     (transaction = DebitsTransaction.new)
       .debited debits: [debit_new(amount: 20, charge: charge_new)]
 

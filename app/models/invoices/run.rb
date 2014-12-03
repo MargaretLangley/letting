@@ -59,9 +59,17 @@ class Run < ActiveRecord::Base
                        period: invoicing.period,
                        invoice_date: invoice_date,
                        comments: comments,
-                       transaction: debit_transaction_maker(account))
+                       transaction: debit_transaction_maker(account),
+                       products: products_maker(account))
                        .compose
     end.compact
+  end
+
+  def products_maker account
+    ProductsMaker.new(invoice_date: invoice_date,
+                      arrears: account.balance(to_date: invoice_date),
+                      transaction: debit_transaction_maker(account))
+                 .invoice
   end
 
   def debit_transaction_maker(account)

@@ -19,7 +19,6 @@ class ProductsMaker
     @invoice_date = invoice_date
     @arrears = arrears
     @transaction = transaction
-
     @products = make_products
   end
 

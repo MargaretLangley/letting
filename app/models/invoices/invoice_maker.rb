@@ -14,13 +14,14 @@ class InvoiceMaker
                  period:,
                  invoice_date: Time.zone.today,
                  comments:,
-                 transaction:)
+                 transaction:,
+                 products:)
     @account = account
     @period = period
     @invoice_date = invoice_date
     @comments = comments
     @transaction = transaction
-    @products = products_maker(transaction)
+    @products = products
   end
 
   #
@@ -42,11 +43,5 @@ class InvoiceMaker
                comments: comments,
                products: products
     invoice
-  end
-
-  def products_maker debits_transaction
-    ProductsMaker.new(invoice_date: invoice_date,
-                      arrears: account.balance(to_date: invoice_date),
-                      transaction: debits_transaction).invoice
   end
 end
