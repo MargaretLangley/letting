@@ -2,7 +2,7 @@ require 'rails_helper'
 # rubocop: disable Metrics/LineLength
 # rubocop: disable Style/SpaceInsideRangeLiteral
 
-RSpec.describe DebitMaker, type: :model do
+RSpec.describe DebitTransactionMaker, type: :model do
 
   describe '#debits' do
     it 'produces debits for due charges' do
@@ -10,7 +10,7 @@ RSpec.describe DebitMaker, type: :model do
       accnt = account_new charges: [chg],
                           debits: []
 
-      make = DebitMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
+      make = DebitTransactionMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
                                                           Date.new(2013, 3, 5))
       expect(make).to be_debits
       expect(make.debits_transaction.debits)
@@ -27,7 +27,7 @@ RSpec.describe DebitMaker, type: :model do
       accnt = account_new charges: [chg],
                           debits: [debit_new(on_date: '2013-3-5', charge: chg)]
 
-      make = DebitMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
+      make = DebitTransactionMaker.new(account: accnt, debit_period: Date.new(2013, 3, 5)..
                                                           Date.new(2013, 3, 5))
       expect(make).to_not be_debits
     end
@@ -37,8 +37,8 @@ RSpec.describe DebitMaker, type: :model do
     it 'returns the transaction' do
       cycle = cycle_create(due_ons: [DueOn.new(month: 3, day: 5)])
       account = account_new charges: [charge_new(cycle: cycle)]
-      make = DebitMaker.new account: account,
-                            debit_period: Date.new(2013, 3, 5)..
+      make = DebitTransactionMaker.new account: account,
+                                       debit_period: Date.new(2013, 3, 5)..
                                           Date.new(2013, 5, 5)
       expect(make.invoice.debits.size).to eq(1)
     end

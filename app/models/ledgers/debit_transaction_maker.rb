@@ -1,12 +1,12 @@
 ###################
 #
-# DebitMaker
+# DebitTransactionMaker
 #
 # Makes debits for an account given a period to charge over.
 #
 # Used by Account class to wrap (see: debit_maker.gliffy)
 #
-class DebitMaker
+class DebitTransactionMaker
   attr_reader :account, :debit_period, :debits_transaction
   def initialize account:,
                  debit_period:,

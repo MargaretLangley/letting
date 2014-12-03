@@ -65,16 +65,20 @@ class Run < ActiveRecord::Base
 
   def invoices_maker comments: []
     invoiceable_accounts.map do |account|
-      transaction = DebitMaker.new(account: account, debit_period: invoicing.period).invoice
-      next unless transaction.debits?
+      next unless debit_transaction_maker(account).debits?
 
       InvoiceMaker.new(account: account,
                        period: invoicing.period,
                        invoice_date: invoice_date,
                        comments: comments,
-                       transaction: transaction)
+                       transaction: debit_transaction_maker(account))
                        .compose
     end.compact
+  end
+
+  def debit_transaction_maker(account)
+    DebitTransactionMaker.new(account: account, debit_period: invoicing.period)
+     .invoice
   end
 
   def invoiceable_accounts
