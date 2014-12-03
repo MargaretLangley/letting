@@ -92,7 +92,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def back_page?
-    products.any?(&:back_page?)
+    blue_invoice? && products.any?(&:back_page?)
   end
 
   # actionable?
@@ -134,6 +134,10 @@ class Invoice < ActiveRecord::Base
 
   def destroy_orphaned_debits_transaction
     debits_transaction.invoices.empty? && debits_transaction.destroy
+  end
+
+  def blue_invoice?
+    debits_transaction.only_one_invoice?
   end
 
   def generate_comments(comments:)

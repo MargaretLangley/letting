@@ -159,6 +159,13 @@ RSpec.describe Invoice, type: :model do
         invoice = invoice_new products: [product_new(charge_type: 'Ground Rent')]
         expect(invoice.back_page?).to eq true
       end
+
+      it 'returns false if on a red invoice' do
+        transaction = DebitsTransaction.new invoices: [invoice_new, invoice_new]
+        invoice = invoice_new debits_transaction: transaction,
+                              products: [product_new(charge_type: 'Ground Rent')]
+        expect(invoice.back_page?).to eq false
+      end
     end
 
     describe '#actionable?' do

@@ -27,6 +27,10 @@ class DebitsTransaction < ActiveRecord::Base
     debits.any?
   end
 
+  def only_one_invoice?
+    invoices.size <= 1
+  end
+
   # Want to be able to destroy an invoice and not destroy
   # debits_transaction if it has another invoice already
   # Not got the association to work and may just delete

@@ -33,4 +33,24 @@ RSpec.describe DebitsTransaction, type: :model do
       expect(transaction).to_not be_debits
     end
   end
+
+  describe '#already_invoiced?' do
+    it 'is not invoiced if empty' do
+      transaction = DebitsTransaction.new
+      transaction.invoices = []
+      expect(transaction).to be_only_one_invoice
+    end
+
+    it 'is not invoiced if one invoice' do
+      transaction = DebitsTransaction.new
+      transaction.invoices = [invoice_new]
+      expect(transaction).to be_only_one_invoice
+    end
+
+    it 'has been invoiced if more than one invoice' do
+      transaction = DebitsTransaction.new
+      transaction.invoices = [invoice_new, invoice_new]
+      expect(transaction).to_not be_only_one_invoice
+    end
+  end
 end
