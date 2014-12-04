@@ -34,7 +34,7 @@
           </div>
           <% run.invoices.each do |invoice| %>
             <% invoice_decorator = InvoiceDecorator.new(invoice) %>
-            <div title='View' class='table-row' data-link='<%= invoice_path(invoice) %>'>
+            <div title='View single invoice' class='table-row' data-link='<%= invoice_path(invoice) %>'>
               <div class='col-3-24  grid-row  inherit-row bottom-spacer r-align'>
                 <%= invoice_decorator.property_ref %>
               </div>
