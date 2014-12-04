@@ -47,7 +47,8 @@
     <div class="col-5-24">
       <nav>
         <% if current_user %>
-          <i class="fa fa-user fa-lg", title = 'User' ></i>&nbsp;
+          <%= fa_icon 'user lg', title: 'User' %>
+          &nbsp;
           <%= current_user.nickname %>
           <%= link_to fa_icon('sign-out lg'), logout_path, id: 'logout', title: 'Log Out', class: 'inverted-link ll-pad' %>
         <% else %>
