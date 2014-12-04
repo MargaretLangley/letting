@@ -27,7 +27,7 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new clients_params
     if @client.save
-      redirect_to clients_path, notice: created_message
+      redirect_to clients_path, flash: { save: created_message }
     else
       @client.prepare_for_form
       render :new
@@ -42,7 +42,7 @@ class ClientsController < ApplicationController
   def update
     @client = Client.find params[:id]
     if @client.update clients_params
-      redirect_to clients_path, notice: updated_message
+      redirect_to clients_path, flash: { save: updated_message }
     else
       render :edit
     end
@@ -50,9 +50,9 @@ class ClientsController < ApplicationController
 
   def destroy
     @client = Client.find params[:id]
-    alert_message = deleted_message
+    cached_message = deleted_message
     @client.destroy
-    redirect_to clients_path, alert: alert_message
+    redirect_to clients_path, flash: { delete: cached_message }
   end
 
   private

@@ -53,8 +53,9 @@ class CyclesController < ApplicationController
 
   def destroy
     @cycle = Cycle.find params[:id]
+    cached_message = deleted_message
     @cycle.destroy
-    redirect_to cycles_path, alert: deleted_message
+    redirect_to cycles_path, flash: { delete: cached_message }
   end
 
   private

@@ -40,7 +40,7 @@ class PaymentsController < ApplicationController
                  .new(Payment.new(payment_params.except(:human_ref)))
     if @payment.save
       @payment.negate
-      redirect_to new_payment_path, notice: created_message
+      redirect_to new_payment_path, flash: { save: created_message }
     else
       @payment.negate
       render :new
@@ -57,7 +57,7 @@ class PaymentsController < ApplicationController
     @payment.assign_attributes payment_params
     if @payment.save
       @payment.negate
-      redirect_to new_payment_path, notice: updated_message
+      redirect_to new_payment_path, flash: { save: updated_message }
     else
       render :edit
     end
@@ -67,7 +67,7 @@ class PaymentsController < ApplicationController
     @payment = Payment.find params[:id]
     cached_message = deleted_message
     @payment.destroy
-    redirect_to payments_path, alert: cached_message
+    redirect_to payments_path, flash: { delete: cached_message }
   end
 
   private

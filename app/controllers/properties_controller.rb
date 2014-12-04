@@ -38,7 +38,7 @@ class PropertiesController < ApplicationController
   def create
     @property = Property.new property_params
     if @property.save
-      redirect_to properties_path, notice: created_message
+      redirect_to properties_path, flash: { save: created_message }
     else
       @property.prepare_for_form
       render :new
@@ -53,7 +53,7 @@ class PropertiesController < ApplicationController
   def update
     @property = Property.find params[:id]
     if @property.update property_params
-      redirect_to properties_path, notice: updated_message
+      redirect_to properties_path, flash: { save: updated_message }
     else
       render :edit
     end
@@ -61,9 +61,9 @@ class PropertiesController < ApplicationController
 
   def destroy
     @property = Property.find params[:id]
-    alert_message = deleted_message
+    cached_message = deleted_message
     @property.destroy
-    redirect_to properties_path, alert: alert_message
+    redirect_to properties_path, flash: { delete: cached_message }
   end
 
   private

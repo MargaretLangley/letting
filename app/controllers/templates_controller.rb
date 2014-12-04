@@ -27,7 +27,7 @@ class TemplatesController < ApplicationController
   def update
     @template = Template.find params[:id]
     if @template.update templates_params
-      redirect_to template_path, notice: updated_message
+      redirect_to template_path, flash: { save: updated_message }
     else
       render :edit
     end

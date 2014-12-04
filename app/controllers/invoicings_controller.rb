@@ -43,7 +43,7 @@ class InvoicingsController < ApplicationController
                           comments: params[:comment]
     end
     if @invoicing.save
-      redirect_to new_invoicing_path, notice: created_message
+      redirect_to new_invoicing_path, flash: { save: created_message }
     else
       render :new
     end
@@ -63,7 +63,7 @@ class InvoicingsController < ApplicationController
                           comments: params[:comment]
     end
     if @invoicing.save
-      redirect_to invoicings_path, notice: updated_message
+      redirect_to invoicings_path, flash: { save: updated_message }
     else
       render :edit
     end
@@ -71,9 +71,9 @@ class InvoicingsController < ApplicationController
 
   def destroy
     @invoicing = Invoicing.find params[:id]
-    alert_message = deleted_message
+    cached_message = deleted_message
     @invoicing.destroy
-    redirect_to invoicings_path, alert: alert_message
+    redirect_to invoicings_path, flash: { delete: cached_message }
   end
 
   private

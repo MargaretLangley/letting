@@ -1,15 +1,15 @@
 <% flash.each do |key, value| %>
   <div class="js-slow-time flash <%= key %>">
-
-    <% case key %>
-    <% when 'save' %>
-      <i class="fa fa-save fa-lg" > </i>
-    <% when 'delete' %>
-      <i class="fa fa-eraser fa-lg" > </i>
+    <% case key.to_sym %>
+    <% when :save %>
+      <%= fa_icon 'save lg', title: 'save' %>
+    <% when :delete %>
+      <%= fa_icon 'trash lg', title: 'delete' %>
+    <% when :info %>
+      <%= fa_icon 'info lg', title: 'Information' %>
     <% else  %>
-      <i class="fa fa-info fa-lg" > </i>
-    <% end  %>&nbsp;
-    <%= content_tag(:message, value) %>
-
+      <%= fa_icon 'question lg', title: 'Unknown' %>
+    <% end  %>
+    &nbsp;<%= content_tag(:message, value) %>
   </div>
 <% end %>
