@@ -12,8 +12,10 @@
         <div class="col-1-1">
           <div class='form-wrapper'>
               <%= form_tag search_path, method: 'get' do %>
-              <%= text_field_tag :search_terms, params[:search_terms], placeholder: 'Search here...', title: 'Search', data: {autocomplete_source: search_path}, autofocus:true, class: 'max-3-4' %>
-              <button type="submit" class='max-1-4' id = 'search' title = 'Search' ><i class= 'fa fa-search fa-lg'></i></button>
+              <%= text_field_tag :search_terms, params[:search_terms], placeholder: 'Search here...', title: 'Search', data: {autocomplete_source: search_path}, autofocus:true %>
+              <button type='submit' id='search' title='Search'>
+                <%= fa_icon('search lg') %>
+              </button>
               <% if controller.controller_name == 'invoicings' && controller.action_name == 'new' %>
                 <div class='js-toggle-selection invoicings-padded'>
                   <div class='js-togglable c-align'>

@@ -7,7 +7,9 @@
       </div>
       <div class='col-5-12 bottom-spacer'>
         <%= date_field_tag :payment_search, params[:payment_search], autofocus: true, class: 'width-3-4' %>
-        <button type="submit" class='width-1-6' id = 'payment-search' title = 'Payment Search' ><i class= 'fa fa-search fa-lg'></i></button>
+        <button type='submit' class='width-1-6' id='payment-search' title='Payment Search'>
+          <%= fa_icon('search lg') %>
+        </button>
       </div>
       <div class='col-4-12 bottom-spacer'>
         &nbsp;
