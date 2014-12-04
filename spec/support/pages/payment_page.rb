@@ -3,7 +3,7 @@
 #
 # Encapsulates the PaymentPage
 #
-# The layer hides the capybara calls to make the functional rspec tests use
+# The layer hides the Capybara calls to make the functional rspec tests use
 # a higher level of abstraction.
 # http://robots.thoughtbot.com/acceptance-tests-at-a-single-level-of-abstraction
 #

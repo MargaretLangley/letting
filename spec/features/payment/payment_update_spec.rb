@@ -6,17 +6,18 @@ describe Payment, :ledgers, :payment, type: :feature do
   let(:payment_page) { PaymentPage.new }
   before(:each) { log_in }
 
-  it 'payment for debit - no double payments', js: true do
-    charge = charge_create debits: [debit_new]
-    payment = payment_new credit: credit_new(amount: -88, charge_id: charge.id)
+  it 'editing original payment - no double payments', js: true do
+    charge = charge_create amount: 30, debits: [debit_new(amount: 30)]
+    payment = payment_new credit: credit_new(amount: -30, charge_id: charge.id)
     property_create account: account_new(payment: payment, charges: [charge])
 
+    # editing the above original payment
     payment_page.visit_edit payment.id
-    payment_page.payment = 44.00
+    payment_page.payment = 20.00
     payment_page.pay
     expect(payment_page).to be_successful
     payment_page.visit_edit payment.id
-    expect(payment_page.payment).to eq('44.00')
+    expect(payment_page.payment).to eq('20.00')
   end
 
   context 'error' do

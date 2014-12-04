@@ -27,20 +27,20 @@
   <div class="col-1-24 grid-header r-align pick-out">
     &nbsp;
   </div>
-  <% @payment.credits_decorated.each do |credit| %>
-    <%= payment_form.fields_for :credits, credit.source do |credit_form| %>
+  <% @payment.credits_decorated.each do |credit_dec| %>
+    <%= payment_form.fields_for :credits, credit_dec.credit do |credit_form| %>
       <div>
         <div class="col-6-24 cell">
-          <%= credit_form.label credit.charge_type %>
+          <%= credit_form.label credit_dec.charge_type %>
         </div>
         <div class="col-3-24 cell">
           &nbsp;
         </div>
         <div class="col-3-24 cell r-align amount">
-          <%= number_to_currency credit.amount %>
+          <%= number_to_currency credit_dec.amount %>
         </div>
         <div class="col-3-24 cell r-align amount">
-          <%= number_to_currency credit.owing %>
+          <%= number_to_currency credit_dec.owing %>
         </div>
         <div class="col-1-24 cell pick-out">
           &nbsp;
@@ -49,7 +49,7 @@
           <%= credit_form.hidden_field :account_id %>
           <%= credit_form.hidden_field :charge_id %>
           <%= credit_form.hidden_field :on_date %>
-          <%= credit_form.text_field :amount , value: credit.amount, class: 'js-amount r-align width-1-1' %>
+          <%= credit_form.text_field :amount, value: credit_dec.payment, class: 'js-payment r-align width-1-1' %>
         </div>
         <div class="col-1-24 cell pick-out">
           &nbsp;
