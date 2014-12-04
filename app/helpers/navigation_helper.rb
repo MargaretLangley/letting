@@ -24,7 +24,7 @@ module NavigationHelper
     end
   end
 
-  def sub_menu_folded? controller
+  def sub_menu_state controller
     if controller_name == controller
       'flatten'
     else

@@ -15,11 +15,11 @@ describe NavigationHelper, type: :helper do
   describe '#menu_hidden?' do
     it 'returns "flatten" when "selection" is on named controller' do
       allow(controller).to receive(:controller_name).and_return('accounts')
-      expect(sub_menu_folded? 'accounts').to include 'flatten'
+      expect(sub_menu_state 'accounts').to include 'flatten'
     end
     it 'returns "folded" when "selection" is on different controller' do
       allow(controller).to receive(:controller_name).and_return('mismatch')
-      expect(sub_menu_folded? 'accounts').to include 'folded'
+      expect(sub_menu_state 'accounts').to include 'folded'
     end
   end
 end
