@@ -1,6 +1,13 @@
- <%= render 'invoices/invoice_front_page', invoice: invoice %>
+<div class='grid shell'>
+  <%= render 'invoices/invoice_front_page', invoice: invoice %>
+</div>
 <div class='page-break'>&nbsp;</div> <!-- End of page 1 -->
-<div class='col-24-24  grid-row'>INTENTIONALLY BLANK</div>
-<div class='page-break'>&nbsp;</div> <!-- End of page 2 -->
-<%= render 'invoice_page2/invoice_page2', invoice: invoice %>
+
+<% if invoice.back_page? %>
+  <div class='grid shell'>
+    <%= render 'invoice_page2/invoice_page2', invoice: invoice %>
+  </div>
+<% else %>
+  <div class='col-24-24  grid-row'>INTENTIONALLY BLANK</div>
+<% end %>
 <div class='page-break'>&nbsp;</div> <!-- End of page 2 -->
