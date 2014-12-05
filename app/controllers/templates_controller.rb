@@ -49,7 +49,7 @@ class TemplatesController < ApplicationController
     %i(id instruction fillin sample)
   end
 
-  def updated_message
-    'Invoice Texts successfully updated!'
+  def identity
+    'Invoice Texts'
   end
 end

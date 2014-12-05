@@ -73,18 +73,6 @@ class CyclesController < ApplicationController
     [:id, :cycle_id, :month, :day, :show_month, :show_day, :year]
   end
 
-  def created_message
-    "#{identity} successfully created!"
-  end
-
-  def updated_message
-    "#{identity} successfully updated!"
-  end
-
-  def deleted_message
-    "#{identity} successfully deleted!"
-  end
-
   def identity
     "Cycle #{@cycle.name} #{@cycle.order}, "
   end

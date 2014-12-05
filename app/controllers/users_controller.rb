@@ -67,16 +67,4 @@ class UsersController < ApplicationController
   def identity
     "User #{@user.email}"
   end
-
-  def created_message
-    "#{identity} successfully created!"
-  end
-
-  def updated_message
-    "#{identity} successfully updated!"
-  end
-
-  def deleted_message
-    "#{identity} successfully deleted!"
-  end
 end

@@ -91,18 +91,6 @@ class PropertiesController < ApplicationController
     %i(id charge_type cycle_id charged_in_id payment_type amount dormant _destroy)  # rubocop: disable  Metrics/LineLength
   end
 
-  def created_message
-    "#{identity} successfully created!"
-  end
-
-  def updated_message
-    "#{identity} successfully updated!"
-  end
-
-  def deleted_message
-    "#{identity} successfully deleted!"
-  end
-
   def identity
     property = PropertyDecorator.new @property
     "Property #{property.human_ref}, #{property.abridged_text}"

@@ -32,6 +32,21 @@ class ApplicationController < ActionController::Base
     %i(entity_type _destroy id title initials name)
   end
 
+  #
+  # Messages used in controllers to mark success.
+  #
+  def created_message
+    "#{identity} created!"
+  end
+
+  def updated_message
+    "#{identity} updated!"
+  end
+
+  def deleted_message
+    "#{identity} deleted!"
+  end
+
   private
 
   def current_user

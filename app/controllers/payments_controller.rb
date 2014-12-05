@@ -85,18 +85,6 @@ class PaymentsController < ApplicationController
     %i(id account_id charge_id debit_id on_date amount)
   end
 
-  def created_message
-    "Payment #{identity} successfully created"
-  end
-
-  def updated_message
-    "#{identity} successfully updated!"
-  end
-
-  def deleted_message
-    "payment #{identity} successfully deleted!"
-  end
-
   def identity
     "Payment from #{@payment.account.property.occupiers}, " \
     "Property #{@payment.account.property.human_ref}, " \

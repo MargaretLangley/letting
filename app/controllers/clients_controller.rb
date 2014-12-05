@@ -65,18 +65,6 @@ class ClientsController < ApplicationController
               entities_attributes: entities_params
   end
 
-  def created_message
-    "#{identity} successfully created!"
-  end
-
-  def updated_message
-    "#{identity} successfully updated!"
-  end
-
-  def deleted_message
-    "#{identity} successfully deleted!"
-  end
-
   def identity
     "Client #{@client.human_ref}, #{@client.entities.full_name}"
   end
