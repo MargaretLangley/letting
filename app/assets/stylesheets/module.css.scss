@@ -496,11 +496,6 @@ $search-height: 35px;
       color: $warn;
     }
   }
-
-  .delete-button{
-    @include base-button;
-    text-decoration: none;
-  }
 }
 
 

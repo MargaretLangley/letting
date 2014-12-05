@@ -148,7 +148,7 @@
             </div>
             <div class='col-2-24 bottom-spacer'>
               <%= builder.hidden_field :_destroy %>
-              <%= link_to_if(!first_record?(index: builder.index), fa_icon('trash-o'), '#', class:"delete-button #{hide_or_destroy record: builder.object}", title: 'Delete Due Date') %>
+              <%= link_to_if(!first_record?(index: builder.index), fa_icon('trash-o'), '#', class:"plain-button #{hide_or_destroy record: builder.object}", title: 'Delete Due Date') %>
             </div>
             <div class='col-4-24'>
               &nbsp;

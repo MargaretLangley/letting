@@ -36,6 +36,14 @@ module ApplicationHelper
             title: 'Delete file'
   end
 
+  def delete_charge(record:)
+    link_to \
+      fa_icon('trash-o lg'),
+      '#',
+      class: "plain-button  float-right  #{hide_or_destroy record: record}",
+      title: 'Delete charge'
+  end
+
   def view_link model
     if model.new_record?
       link_to fa_icon('file-o lg'),

@@ -14,8 +14,11 @@
   <div class='col-3-24 bottom-spacer grid-header r-align'>
     Amount
   </div>
-  <div class='col-2-24 bottom-spacer grid-header'>
+  <div class='col-3-24 bottom-spacer grid-header'>
     Dormant
+  </div>
+  <div class='col-2-24 bottom-spacer grid-header'>
+    Action
   </div>
   <%= builder.fields_for :charges do |f| %>
     <div class='grid js-dynamic-group js-enclosed-toggle <%= hide_extra_new_records record: f.object, index: f.index %>'  >
@@ -34,12 +37,12 @@
         <%= f.hidden_field :start_date %>
         <%= f.hidden_field :end_date %>
       </div>
-      <div class='col-2-24 bottom-spacer'>
+      <div class='col-3-24 bottom-spacer'>
         <%= f.check_box :dormant, class: 'js-check-box-toggle' %>
       </div>
-      <div class='col-3-24 bottom-spacer'>
+      <div class='col-2-24 bottom-spacer'>
         <%= f.hidden_field :_destroy %>
-        <%= link_to(fa_icon('trash-o'), '#', class:"delete-button #{hide_or_destroy record: f.object}", title: 'Delete Charge') %>
+        <%= delete_charge record: f.object %>
       </div>
     </div> <!-- js-dynamic-group js-enclosed-toggle -->
   <% end %>
