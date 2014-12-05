@@ -61,7 +61,7 @@
       </div>
     </div>
     <div class='col-1-24 bottom-spacer no-print'>
-      <%= link_to fa_icon('gbp lg'), new_payment_path(id: property.account.id), title: 'Add New Payment' %>
+      <%= payment_link path: new_payment_path(id: property.account.id) %>
     </div>
     <div class='col-1-24 bottom-spacer no-print'>
       <%= edit_link(property) %>

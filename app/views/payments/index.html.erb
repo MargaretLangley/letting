@@ -61,18 +61,14 @@
       <%= payment_dec.balance %>
     </div>
   </div>
-  <div class='col-1-24 bottom-spacer'>
-    &nbsp;
-  </div>
-  <div class='col-1-24 bottom-spacer no-print'>
-    <%= link_to fa_icon('gbp lg'), new_payment_path(id: payment.account.id), title: 'Add New Payment' %>
-  </div>
-  <div class='col-1-24 bottom-spacer'>
+  <div class='col-1-24 bottom-spacer'>&nbsp;</div>
+  <div class='col-1-24 bottom-spacer  no-print'>
     <%= edit_link(payment) %>
   </div>
-  <div class='col-1-24 bottom-spacer'>
+  <div class='col-1-24 bottom-spacer  no-print'>
     <%= delete_link payment %>
   </div>
+  <div class='col-1-24 bottom-spacer'>&nbsp;</div>
 <% end %>
 
   <div class='col-2-24 grid-row bottom-spacer r-align'>
