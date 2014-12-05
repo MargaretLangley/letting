@@ -31,4 +31,12 @@ class UserEditPage
       fill_in 'Password confirmation', with: confirmation
     end
   end
+
+  def successful?
+    has_content? /created|updated/i
+  end
+
+  def errored?
+    has_css? '[data-role="errors"]'
+  end
 end

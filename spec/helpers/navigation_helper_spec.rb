@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe NavigationHelper, type: :helper do
   describe '#main_menu_active?' do

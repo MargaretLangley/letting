@@ -1,7 +1,7 @@
-require 'spec_helper'
+require 'rails_helper'
 
 shared_examples_for Contact do
-  context '#prepares_for_form' do
+  describe '#prepares_for_form' do
     it 'prepares address' do
       contactable = described_class.new
       expect(contactable.address).to be_nil

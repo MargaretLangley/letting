@@ -38,6 +38,12 @@ describe User, type: :model do
         user.password_confirmation = 'orother'
         expect(user).to_not be_valid
       end
+
+      it 'errors with blank confirmation' do
+        user.password = 'something'
+        user.password_confirmation = ''
+        expect(user).to_not be_valid
+      end
     end
   end
 end

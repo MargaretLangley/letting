@@ -15,7 +15,7 @@ describe Client, type: :feature do
     { title: 'Mr', initials: 'A', name: 'Cook' }.merge overrides
   end
 
-  context 'creating client' do
+  describe 'creating client' do
     it 'opens valid page', js: true  do
       expect(current_path).to eq '/clients/new'
       expect(page).to have_css('.spec-entity-count', count: 1)

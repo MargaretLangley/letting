@@ -1,13 +1,13 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe StringDate, type: :model do
-  context 'method' do
-    context 'to_date' do
+  describe 'method' do
+    describe 'to_date' do
       it 'for date' do
         expect(StringDate.new('2000-1-1').to_date).to eq Date.new 2000, 1, 1
       end
 
-      it 'handles emtpy' do
+      it 'handles empty' do
         expect(StringDate.new('').to_date).to be_nil
       end
 
@@ -16,7 +16,7 @@ describe StringDate, type: :model do
       end
     end
 
-    context 'valid?' do
+    describe 'valid?' do
       it 'normal valid' do
         expect(StringDate.new('2012-1-1')).to be_valid
       end

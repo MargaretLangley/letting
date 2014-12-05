@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe SearchDate, type: :model do
   context 'valid' do
@@ -6,7 +6,7 @@ describe SearchDate, type: :model do
       expect(SearchDate.new('2000-1-1')).to be_valid_date
     end
 
-    it 'handles emtpy' do
+    it 'handles empty' do
       expect(SearchDate.new('')).to_not be_valid_date
     end
 

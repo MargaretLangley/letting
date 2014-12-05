@@ -32,7 +32,7 @@ describe Client, type: :feature do
     end
 
     # Note ** combines keywords (order + amend_person) - splatted into call
-    it 'ammends', js: true do
+    it 'amends', js: true do
       client_page.click 'Add district'
       client_page.fill_in_client_id(278)
       client_page.fill_in_entity(order: 0, **amend_person(name: 'Smit'))

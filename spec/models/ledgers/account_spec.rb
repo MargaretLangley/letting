@@ -4,7 +4,7 @@ require 'rails_helper'
 describe Account, :ledgers, type: :model do
   it('is valid') { expect(account_new).to be_valid }
 
-  context 'methods' do
+  describe 'methods' do
     before { Timecop.travel Date.new(2013, 1, 31) }
     after { Timecop.return }
 

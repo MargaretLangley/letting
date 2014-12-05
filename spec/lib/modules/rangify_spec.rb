@@ -6,8 +6,8 @@ describe Rangify do
     expect { Rangify.from_str('') }.to_not raise_error
   end
 
-  context 'methods' do
-    context '#to_i' do
+  describe 'methods' do
+    describe '#to_i' do
       it 'handles single number' do
         expect(Rangify.from_str('103').to_i).to eq 103..103
       end
@@ -17,7 +17,7 @@ describe Rangify do
       end
     end
 
-    context '#to_s' do
+    describe '#to_s' do
       it 'handles single number' do
         expect(Rangify.from_str('103').to_s).to eq '103-103'
       end

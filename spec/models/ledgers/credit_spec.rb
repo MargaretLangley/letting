@@ -59,9 +59,9 @@ describe Credit, :ledgers, type: :model do
     end
   end
 
-  context 'methods' do
+  describe 'methods' do
 
-    context '#charge_type' do
+    describe '#charge_type' do
       it 'returned when charge present' do
         (credit = credit_new).charge = charge_new charge_type: 'Rent'
         expect(credit.charge_type).to eq 'Rent'
@@ -72,7 +72,7 @@ describe Credit, :ledgers, type: :model do
       end
     end
 
-    context '#outstanding' do
+    describe '#outstanding' do
       it 'returns amount if nothing paid' do
         expect(credit_new.outstanding).to eq(88.08)
       end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Guide, type: :feature do
 
-  context '#view' do
+  describe '#view' do
     it 'finds guide data' do
 
       log_in admin_attributes

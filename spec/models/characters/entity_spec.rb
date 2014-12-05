@@ -1,12 +1,12 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Entity, type: :model do
 
   let(:entity) { Entity.new person_entity_attributes entitieable_id: 1 }
   it('is valid') { expect(entity).to be_valid }
 
-  context 'validations' do
-    context 'name' do
+  describe 'validations' do
+    describe 'name' do
 
       it 'presence' do
         entity.name = nil
@@ -35,7 +35,7 @@ describe Entity, type: :model do
     end
   end
 
-  context 'methods' do
+  describe 'methods' do
     context 'new entity' do
       let(:entity) { Entity.new }
 
@@ -54,7 +54,7 @@ describe Entity, type: :model do
       end
     end
 
-    context '#full_name' do
+    describe '#full_name' do
       it 'with initials' do
         expect(entity.full_name).to eq 'Mr W. G. Grace'
       end

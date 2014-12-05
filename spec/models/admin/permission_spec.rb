@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../../app/models/admin/permission'
 # rubocop: disable Metrics/LineLength
 
@@ -11,7 +11,6 @@ end
 describe Permission, type: :model do
 
   context 'as guest' do
-
     subject { Permission.new(nil) }
 
     it('session#new') { is_expected.to allow?('sessions', 'new') }
@@ -41,11 +40,9 @@ describe Permission, type: :model do
     it('users#edit') { is_expected.not_to allow?('users', 'edit') }
     it('users#update') { is_expected.not_to allow?('users', 'update') }
     it('users#destroy') { is_expected.not_to allow?('users', 'destroy') }
-
   end
 
   context 'as user' do
-
     subject { Permission.new(User.create! user_attributes) }
 
     it('session#new')      { is_expected.to allow?('sessions', 'new') }
@@ -69,7 +66,6 @@ describe Permission, type: :model do
     it('cycles#edit') { is_expected.not_to allow?('cycles', 'edit') }
     it('cycles#update') { is_expected.not_to allow?('cycles', 'update') }
     it('cycles#destroy') { is_expected.not_to allow?('cycles', 'destroy') }
-
   end
 
   context 'admin' do
@@ -80,7 +76,6 @@ describe Permission, type: :model do
     it('users#edit') { is_expected.not_to allow?('users', 'edit') }
     it('users#update') { is_expected.not_to allow?('users', 'update') }
     it('users#destroy') { is_expected.not_to allow?('users', 'destroy') }
-
   end
 
   context 'admin' do
@@ -95,6 +90,5 @@ describe Permission, type: :model do
     it('users#edit') { is_expected.to allow?('users', 'edit') }
     it('users#update') { is_expected.to allow?('users', 'update') }
     it('users#destroy') { is_expected.to allow?('users', 'destroy') }
-
   end
 end
