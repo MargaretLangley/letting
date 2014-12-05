@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   end
 
   def identity
-    "#{@user.email} ( id #{@user.id})"
+    "User #{@user.email}"
   end
 
   def created_message

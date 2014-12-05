@@ -86,6 +86,6 @@ class CyclesController < ApplicationController
   end
 
   def identity
-    "Cycle '#{@cycle.name} #{@cycle.order}'"
+    "Cycle #{@cycle.name} #{@cycle.order}, "
   end
 end

@@ -88,7 +88,8 @@ class InvoicingsController < ApplicationController
 
   def identity
     invoicing = InvoicingIndexDecorator.new @invoicing
-    "Range #{invoicing.property_range}, period: #{invoicing.period_between}"
+    "Invoicing Range #{invoicing.property_range}, " \
+    "Period #{invoicing.period_between}, "
   end
 
   def created_message
