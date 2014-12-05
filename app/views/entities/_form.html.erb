@@ -25,7 +25,11 @@
       </div>
       <div class='col-2-24 bottom-spacer'>
         <%= builder.hidden_field :_destroy %>
-        <%= link_to_if(!first_record?(index: builder.index), fa_icon('trash-o'), '#', class:"plain-button #{hide_or_destroy record: builder.object}", title: 'Delete Person') %>
+        <% if first_record? index: builder.index %>
+          <%= link_to fa_icon('trash-o'), '#', class:"plain-button  float-right", title: 'Delete Person (disabled)', disabled: true %>
+        <% else %>
+          <%= link_to fa_icon('trash-o'), '#', class:"plain-button #{hide_or_destroy record: builder.object}  float-right", title: 'Delete Person' %>
+        <% end %>
       </div>
     </div> <!-- js-enclosed-toggle -->
   <% end %>
