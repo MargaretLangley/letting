@@ -2,6 +2,7 @@
 # rubocop: disable Metrics/ParameterLists
 
 def property_new \
+  id: nil,
   human_ref: 2002,
   occupiers: [Entity.new(title: 'Mr', initials: 'W G', name: 'Grace')],
   address: address_new,
@@ -10,7 +11,7 @@ def property_new \
   agent: nil,
   prepare: false
 
-  property = Property.new human_ref: human_ref
+  property = Property.new id: id, human_ref: human_ref
   property.client = client if client
   property.prepare_for_form if prepare
   property.address = address
@@ -31,14 +32,14 @@ def property_create \
   agent: nil,
   prepare: false
 
-  property = property_new human_ref: human_ref,
+  property = property_new id: id,
+                          human_ref: human_ref,
                           occupiers: occupiers,
                           address: address,
                           account: account,
                           client: client,
                           agent: agent,
                           prepare: prepare
-  property.id = id if id
   property.save!
   property
 end

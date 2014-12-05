@@ -52,7 +52,7 @@ def charge_find_or_create id: nil,
                                           debits: debits)
 end
 
-def charge_create id: id,
+def charge_create id: nil,
                   account_id: 2,
                   charge_type: 'Ground Rent',
                   payment_type: 'payment',
