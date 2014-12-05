@@ -15,7 +15,7 @@ describe Template, type: :feature do
       visit '/templates/1/edit'
       expect(page.title). to eq 'Letting - Edit Invoice Text'
       click_on 'Update Invoice Text'
-      expect(page).to have_text /successfully updated!/i
+      expect(page).to have_text /updated!/i
     end
   end
 end

@@ -32,6 +32,6 @@ class UserCreatePage
   end
 
   def successful?
-    has_content? /successfully created/i
+    has_content? /created|updated/i
   end
 end

@@ -29,7 +29,7 @@ class PaymentIndexPage
   end
 
   def deleted?
-    has_content? /successfully deleted!/i
+    has_content? /deleted!/i
   end
 end
 

@@ -26,7 +26,7 @@ describe Invoicing, type: :feature do
       expect { click_on 'Delete' }.to change(Invoicing, :count)
       expect(page.title).to eq 'Letting - Invoicing'
       expect(page).to \
-        have_text 'Range 1-200, period: 30/Jun - 30/Aug successfully deleted!'
+        have_text 'Range 1-200, period: 30/Jun - 30/Aug deleted!'
     end
   end
 

@@ -33,7 +33,7 @@ describe Template, type: :feature do
       expect(page.title). to eq 'Letting - Edit Invoice Text'
       fill_in '2nd Heading', with: 'Bowled Out!'
       click_on 'Update Invoice Text'
-      expect(page).to have_text /successfully updated!/i
+      expect(page).to have_text /created|updated/i
     end
   end
 

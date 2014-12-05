@@ -78,6 +78,6 @@ class ClientPage
   end
 
   def successful?
-    has_content? /successfully/i
+    has_content? /created|updated/i
   end
 end

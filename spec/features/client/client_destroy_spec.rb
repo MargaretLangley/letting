@@ -12,7 +12,7 @@ describe Client, type: :feature do
     expect(page).to have_text '354'
     expect { click_on 'Delete' }.to change(Client, :count).by(-1)
     expect(page).to have_text '354'
-    expect(page).to have_text 'successfully deleted!'
+    expect(page).to have_text 'deleted!'
     expect(current_path).to eq '/clients'
   end
 end

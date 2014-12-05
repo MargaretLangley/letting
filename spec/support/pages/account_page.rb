@@ -116,7 +116,7 @@ class AccountPage
 
   def successful? spec
     spec.expect(page.title).to spec.eq 'Letting - Accounts'
-    spec.expect(page).to spec.have_text 'successfully'
+    spec.expect(page).to spec.have_text /created|updated/i
     self
   end
 end

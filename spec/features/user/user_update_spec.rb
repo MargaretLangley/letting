@@ -9,7 +9,7 @@ describe User, type: :feature do
       go_to_edit_page
       user_edit_page.fill_form('nother', 'nother@example.com', 'pass', 'pass')
       user_edit_page.click_update_user
-      expect(page).to have_text /successfully updated!/i
+      expect(page).to have_text /created|updated/i
     end
 
     it 'errors with incorrect email' do

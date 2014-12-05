@@ -66,6 +66,6 @@ class CyclePage
   end
 
   def success?
-    has_content? /successfully/i
+    has_content? /created|updated/i
   end
 end
