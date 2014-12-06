@@ -3,12 +3,12 @@
 //
 
 $(document).ready(function() {
-  calculateTotal($(this).find('.js-amount'));
+  calculateTotal($(this).find('.js-credit-payment'));
 });
 
 // updates the total when amount edited.
 $(function () {
-  $('.js-payment').keyup(function(){
+  $('.js-credit-payment').keyup(function(){
     calculateTotal(this);
   });
 });
@@ -17,11 +17,11 @@ $(function () {
 function calculateTotal( src ) {
   var sum = 0,
   tbl = $(src).closest('.js-totalizer');
-  tbl.find('.js-payment').each(function( index, elem ) {
+  tbl.find('.js-credit-payment').each(function( index, elem ) {
     var val = parseFloat($(elem).val());
     if( !isNaN( val ) ) {
       sum += val;
     }
   });
-  tbl.find('.js-payment-total').val(sum.toFixed(2));
+  tbl.find('.js-total-payment').val(sum.toFixed(2));
 }
