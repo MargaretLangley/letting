@@ -92,7 +92,7 @@ group :development, :test do
   gem 'capybara-webkit', '~>1.3.0'
   gem 'capybara-screenshot'
   gem 'capybara-slow_finder_errors'
-  gem 'selenium-webdriver', '~>2.43.0'
+  gem 'selenium-webdriver', '~>2.44.0'
   gem 'guard'
   gem 'guard-livereload'
   gem 'launchy', '~> 2.4.2'
