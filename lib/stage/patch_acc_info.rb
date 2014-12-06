@@ -15,6 +15,6 @@ require_relative 'patch'
 class PatchAccInfo < Patch
   def match original, patch
     original[:human_ref] == patch[:human_ref] &&
-    original[:charge_type] == patch[:charge_type]
+      original[:charge_type] == patch[:charge_type]
   end
 end

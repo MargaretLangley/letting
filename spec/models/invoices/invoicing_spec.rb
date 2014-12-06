@@ -1,5 +1,4 @@
 require 'rails_helper'
-# rubocop: disable Style/SpaceInsideRangeLiteral
 
 RSpec.describe Invoicing, type: :model do
   it('is valid') { expect(invoicing_new).to be_valid }

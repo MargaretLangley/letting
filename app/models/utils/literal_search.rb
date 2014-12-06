@@ -84,9 +84,9 @@ class LiteralSearch
 
   def default_ordered_query
     record = Property.find_by(human_ref: query) ||
-      Client.find_by(human_ref: query) ||
-      User.find_by(nickname: query) ||
-      Cycle.find_by(name: query)
+             Client.find_by(human_ref: query) ||
+             User.find_by(nickname: query) ||
+             Cycle.find_by(name: query)
     { record_id: record }
   end
 end

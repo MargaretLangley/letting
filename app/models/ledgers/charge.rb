@@ -82,8 +82,8 @@ class Charge < ActiveRecord::Base
 
   def empty?
     attributes.except(*ignored_attrs).values.all?(&:blank?) &&
-    start_date == Date.parse(MIN_DATE) &&
-    end_date == Date.parse(MAX_DATE)
+      start_date == Date.parse(MIN_DATE) &&
+      end_date == Date.parse(MAX_DATE)
   end
 
   def ignored_attrs

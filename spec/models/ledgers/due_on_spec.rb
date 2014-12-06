@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 # rubocop: disable Style/Documentation
-# rubocop: disable Style/SpaceInsideRangeLiteral
 # rubocop: disable Style/TrivialAccessors
 # rubocop: disable Lint/UselessComparison
 # rubocop: disable Metrics/LineLength
@@ -39,22 +38,22 @@ describe DueOn, :ledgers, :cycle, type: :model do
       it 'returns the date of the matching spot and display dates' do
         expect(due_on_new(month: 3, day: 25)
           .between Date.new(2013, 3, 25)..Date.new(2013, 3, 25))
-            .to eq [MatchedDueOn.new(Date.new(2013, 3, 25), Date.new(2013, 3, 25))]
+          .to eq [MatchedDueOn.new(Date.new(2013, 3, 25), Date.new(2013, 3, 25))]
       end
 
       it 'handles date time' do
         expect(due_on_new(month: 3, day: 25)
           .between Time.zone.local(2007, 8, 17, 11, 56, 00)..
                    Time.zone.local(2008, 8, 16, 11, 56, 00))
-            .to eq [MatchedDueOn.new(Date.new(2008, 3, 25), Date.new(2008, 3, 25))]
+          .to eq [MatchedDueOn.new(Date.new(2008, 3, 25), Date.new(2008, 3, 25))]
       end
 
       it 'handles multi-year' do
         expect(due_on_new(month: 3, day: 5)
           .between Date.new(2010, 3, 1)..Date.new(2012, 3, 6))
-            .to eq [MatchedDueOn.new(Date.new(2010, 3, 5), Date.new(2010, 3, 5)),
-                    MatchedDueOn.new(Date.new(2011, 3, 5), Date.new(2011, 3, 5)),
-                    MatchedDueOn.new(Date.new(2012, 3, 5), Date.new(2012, 3, 5))]
+          .to eq [MatchedDueOn.new(Date.new(2010, 3, 5), Date.new(2010, 3, 5)),
+                  MatchedDueOn.new(Date.new(2011, 3, 5), Date.new(2011, 3, 5)),
+                  MatchedDueOn.new(Date.new(2012, 3, 5), Date.new(2012, 3, 5))]
       end
 
       it 'returns nothing on mismatching spot_date' do
@@ -68,7 +67,7 @@ describe DueOn, :ledgers, :cycle, type: :model do
         expect(due_on_new(month: 3, day: 25)
           .between? Time.zone.local(2007, 8, 17, 11, 56, 00)..
                    Time.zone.local(2008, 8, 16, 11, 56, 00))
-            .to eq true
+          .to eq true
       end
 
       it 'returns false when no match' do

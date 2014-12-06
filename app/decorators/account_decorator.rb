@@ -27,7 +27,7 @@ class AccountDecorator
   def abbrev_items
     date_of = Time.zone.today.at_beginning_of_year.to_time
     running_balance [balance_bought_forward(date_of)] +
-                    ordered_items.select { |item| item.on_date >= date_of }
+      ordered_items.select { |item| item.on_date >= date_of }
   end
 
   private
@@ -39,7 +39,7 @@ class AccountDecorator
   def ordered_items
     [*@source.debits.map { |debit| AccountDebitDecorator.new debit },
      *@source.credits.map { |credit| AccountCreditDecorator.new credit }]
-    .sort_by(&:on_date)
+      .sort_by(&:on_date)
   end
 
   def running_balance items

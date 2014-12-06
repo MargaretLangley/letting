@@ -8,8 +8,8 @@ module DB
 
     def row
       %q(11,  Mr,  D, Example, Mrs, A N, Other, 14a, ExampleHouse,  2, ) +
-      %q(Example Street, Example District ,Example Town,  Example County,) +
-      %q(E10 7EX)
+        %q(Example Street, Example District ,Example Town,  Example County,) +
+        %q(E10 7EX)
     end
 
     it 'Flat No Imported' do

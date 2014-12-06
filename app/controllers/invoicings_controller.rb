@@ -17,7 +17,7 @@ class InvoicingsController < ApplicationController
   #
   def show
     @invoicing = Invoicing.includes(runs: [:invoices])
-                          .find params[:id]
+                 .find params[:id]
   end
 
   def new
@@ -52,7 +52,7 @@ class InvoicingsController < ApplicationController
   def edit
     @invoicing =
       Invoicing.includes(runs: [invoices: [account: [debits: [:charge]]]])
-               .find params[:id]
+      .find params[:id]
     @invoicing.generate comments: ['', ''] if @invoicing.valid_arguments?
   end
 

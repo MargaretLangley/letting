@@ -67,7 +67,7 @@ group :development do
   gem 'brakeman', '~>2.6.0', require: false
   gem 'bullet', '~>4.14.0'
   gem 'rails_best_practices', '~>1.15.1'
-  gem 'rubocop', '~> 0.26.0', require: false
+  gem 'rubocop', '~> 0.27.0', require: false
   gem 'rubycritic', require: false
   gem 'spring'
   gem 'spring-commands-rspec'

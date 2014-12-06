@@ -1,5 +1,4 @@
 require 'rails_helper'
-# rubocop: disable Style/SpaceInsideRangeLiteral
 
 describe ProductDecorator, :invoice do
   describe 'methods' do

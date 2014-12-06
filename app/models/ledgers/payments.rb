@@ -28,7 +28,7 @@ class Payments
   def self.on date: Time.zone.today.to_s
     return Payment.none unless SearchDate.new(date).valid_date?
     Payment.includes(account: [:property])
-           .where(booked_on: SearchDate.new(date).day_range)
+      .where(booked_on: SearchDate.new(date).day_range)
   end
 
   def self.last_booked_on

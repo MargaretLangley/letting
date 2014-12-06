@@ -20,8 +20,8 @@ module DB
   describe ChargeRow, :import do
     def charge_row code: 'GR', charged_in: 0, month_1: 3, day_1: 25, month_2: 0, day_2: 0
       %(89, 2006-12-30, #{code}, #{charged_in}, 50.5, S,) +
-      %(#{day_1}, #{month_1}, #{day_2}, #{month_2}, 0, 0, 0, 0,) +
-      %(1901-01-01, 0)
+        %(#{day_1}, #{month_1}, #{day_2}, #{month_2}, 0, 0, 0, 0,) +
+        %(1901-01-01, 0)
     end
     describe 'attribute' do
       it('amount') do

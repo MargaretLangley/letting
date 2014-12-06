@@ -40,7 +40,7 @@ describe Stage, :stage do
                     instructions: [patch],
                     headers: ['hello']
     expect(ref).to receive(:stage_array)
-                     .with rows: [{ human_ref: 1, other: 'word' }]
+      .with rows: [{ human_ref: 1, other: 'word' }]
     ref.stage
   end
 
@@ -63,7 +63,7 @@ describe Stage, :stage do
                     instructions: [patch, extract],
                     headers: ['hello']
     expect(ref).to receive(:stage_array)
-                     .with rows: [{ human_ref: 1, other: 'word' }]
+      .with rows: [{ human_ref: 1, other: 'word' }]
     ref.stage
   end
 end

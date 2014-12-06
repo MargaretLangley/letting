@@ -41,7 +41,7 @@ module DB
     def charged_in_id
       LegacyChargedInFields.new(charged_in_code: charged_in_code,
                                 charge_type: charge_type)
-                     .modern_id
+        .modern_id
       rescue KeyError
         raise ChargedInCodeUnknown, charged_in_code_message, caller
     end

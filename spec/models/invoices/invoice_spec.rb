@@ -182,7 +182,7 @@ RSpec.describe Invoice, type: :model do
 
     it 'outputs #to_s' do
       expect(invoice_new.to_s.lines.first)
-      .to start_with %q(Billing Address: "Mr W. G. Grace\nEdgbaston Road\nBirmingham\nWest Midlands")
+        .to start_with %q(Billing Address: "Mr W. G. Grace\nEdgbaston Road\nBirmingham\nWest Midlands")
     end
   end
 end

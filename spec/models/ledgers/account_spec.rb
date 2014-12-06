@@ -1,5 +1,4 @@
 require 'rails_helper'
-# rubocop: disable Style/SpaceInsideRangeLiteral
 
 describe Account, :ledgers, type: :model do
   it('is valid') { expect(account_new).to be_valid }

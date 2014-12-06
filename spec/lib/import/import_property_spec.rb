@@ -13,8 +13,8 @@ module DB
 
     def row
       %q(122, 2013-02-26 12:35:00, Mr, A N, Example, Mrs, A N, Other,) +
-      %q(1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, ) +
-      %q(11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0)
+        %q(1, ExampleHouse, 2, Ex Street, ,Ex Town, Ex County, E10 7EX, ) +
+        %q(11,  N, GR,  H, 0, Ins, 0, 0, 0, 0, 0)
     end
 
     it 'One row' do
@@ -42,12 +42,12 @@ module DB
     context 'filter' do
       it 'allows within range' do
         expect { import_property row, range: 122..122 }
-        .to change(Property, :count).by 1
+          .to change(Property, :count).by 1
       end
 
       it 'filters if out of range' do
         expect { import_property row, range: 120..121 }
-        .to change(Property, :count).by 0
+          .to change(Property, :count).by 0
       end
     end
 

@@ -34,7 +34,7 @@ describe 'ChargeFactory' do
 
         it 'displays charge type through debit' do
           debit = charge_new(charge_type: 'Rent', debits: [debit_new])
-                    .debits.first
+                  .debits.first
           expect(debit.charge_type).to eq 'Rent'
         end
       end

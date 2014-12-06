@@ -39,8 +39,8 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
     it 'returns the date of the matching due_on' do
       cycle = cycle_new due_ons: [DueOn.new(day: 1, month: 1)]
       expect(cycle.between(Date.new(1980, 1, 1)..Date.new(1980, 1, 2)))
-       .to eq [MatchedCycle.new(Date.new(1980, 1, 1),
-                                Date.new(1980, 1, 1)..Date.new(1980, 12, 31))]
+        .to eq [MatchedCycle.new(Date.new(1980, 1, 1),
+                                 Date.new(1980, 1, 1)..Date.new(1980, 12, 31))]
     end
 
     it 'returns nothing on mismatching due_on' do
@@ -54,22 +54,22 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
                                   DueOn.new(month: 9, day: 5),]
 
       expect(cycle.between Date.new(2010, 3, 1)..Date.new(2011, 2, 28))
-       .to eq [MatchedCycle.new(Date.new(2010, 3, 4),
-                                Date.new(2010, 3, 4)..Date.new(2010, 9, 4)),
-               MatchedCycle.new(Date.new(2010, 9, 5),
-                                Date.new(2010, 9, 5)..Date.new(2011, 3, 3))]
+        .to eq [MatchedCycle.new(Date.new(2010, 3, 4),
+                                 Date.new(2010, 3, 4)..Date.new(2010, 9, 4)),
+                MatchedCycle.new(Date.new(2010, 9, 5),
+                                 Date.new(2010, 9, 5)..Date.new(2011, 3, 3))]
     end
 
     it 'returns a due_on date for each matching year' do
       cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 5)]
 
       expect(cycle.between Date.new(2010, 3, 1)..Date.new(2012, 3, 6))
-       .to eq [MatchedCycle.new(Date.new(2010, 3, 5),
-                                Date.new(2010, 3, 5)..Date.new(2011, 3, 4)),
-               MatchedCycle.new(Date.new(2011, 3, 5),
-                                Date.new(2011, 3, 5)..Date.new(2012, 3, 4)),
-               MatchedCycle.new(Date.new(2012, 3, 5),
-                                Date.new(2012, 3, 5)..Date.new(2013, 3, 4))]
+        .to eq [MatchedCycle.new(Date.new(2010, 3, 5),
+                                 Date.new(2010, 3, 5)..Date.new(2011, 3, 4)),
+                MatchedCycle.new(Date.new(2011, 3, 5),
+                                 Date.new(2011, 3, 5)..Date.new(2012, 3, 4)),
+                MatchedCycle.new(Date.new(2012, 3, 5),
+                                 Date.new(2012, 3, 5)..Date.new(2013, 3, 4))]
     end
   end
 

@@ -1,6 +1,5 @@
 require 'rails_helper'
 # rubocop: disable Metrics/LineLength
-# rubocop: disable Style/SpaceInsideRangeLiteral
 
 RSpec.describe AccountsDebits, type: :model do
 

@@ -35,7 +35,7 @@ class Account < ActiveRecord::Base
     def exclusive? query_debit
       self.any? do |debit|
         debit.charge_id == query_debit.charge_id &&
-        debit.on_date == query_debit.on_date
+          debit.on_date == query_debit.on_date
       end
     end
   end
@@ -85,7 +85,7 @@ class Account < ActiveRecord::Base
 
   def balance to_date: Time.zone.today
     (credits + debits).select { |transaction| transaction.on_date <= to_date }
-                      .map(&:amount).inject(0, :+)
+      .map(&:amount).inject(0, :+)
   end
 
   # Finds and returns a matching Account
@@ -103,8 +103,8 @@ class Account < ActiveRecord::Base
     human_refs = human_ref_range.split('-')
     human_refs << human_refs.first if human_refs.size == 1
     Account.includes(:property)
-           .where(properties: { human_ref: human_refs[0]..human_refs[1] })
-           .order('properties.human_ref')
+      .where(properties: { human_ref: human_refs[0]..human_refs[1] })
+      .order('properties.human_ref')
   end
 
   private

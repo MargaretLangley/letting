@@ -19,7 +19,7 @@ class PaymentsController < ApplicationController
   def index
     params[:payment_search] ||= Payments.last_booked_on
     @records = Payments.on(date: params[:payment_search])
-                       .page(params[:page])
+               .page(params[:page])
   end
 
   def show
@@ -37,7 +37,7 @@ class PaymentsController < ApplicationController
 
   def create
     @payment = PaymentDecorator
-                 .new(Payment.new(payment_params.except(:human_ref)))
+               .new(Payment.new(payment_params.except(:human_ref)))
     if @payment.save
       @payment.negate
       redirect_to new_payment_path, flash: { save: created_message }
@@ -74,7 +74,7 @@ class PaymentsController < ApplicationController
 
   def payment_params
     params.require(:payment)
-          .permit payment_attributes, credits_attributes: credit_attributes
+      .permit payment_attributes, credits_attributes: credit_attributes
   end
 
   def payment_attributes

@@ -62,7 +62,7 @@ class CyclesController < ApplicationController
 
   def cycles_params
     params.require(:cycle)
-          .permit cycle_attributes, due_ons_attributes: due_ons_attributes
+      .permit cycle_attributes, due_ons_attributes: due_ons_attributes
   end
 
   def cycle_attributes

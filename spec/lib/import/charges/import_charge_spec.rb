@@ -17,7 +17,7 @@ module DB
   describe ImportCharge, :import do
     def row human_ref: 80, charged_in: LEGACY_ARREARS, month: 3, day: 5, amount: 5
       %(#{human_ref}, 2006-12-30 17:17:00, GR, #{charged_in}, #{amount},  S,) +
-      %(#{day}, #{month}, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
+        %(#{day}, #{month}, 0, 0,  0,  0,  0,  0, 1900-01-01 00:00:00, 0 )
     end
 
     describe 'import characteristics' do

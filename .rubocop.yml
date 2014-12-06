@@ -1,7 +1,7 @@
 #
 # Rubocop Configuration
 #
-# Configuration ditctates which files are parsed and which rules are used.
+# Configuration dictates which files are parsed and which rules are used.
 #
 # The configuration template is generated with: `rubocop --auto-gen-config`
 # RuboCop version 0.24.1.
@@ -28,4 +28,10 @@ Metrics/MethodLength:
 Style/TrailingComma:
   Enabled: false
 Style/UnneededPercentQ:
+  Enabled: false
+
+#
+# Ignored
+# We want this to be removed
+Metrics/AbcSize:
   Enabled: false

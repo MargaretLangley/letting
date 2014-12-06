@@ -9,8 +9,8 @@ module DB
 
     def contact_fields
       %q(11,  Mr,  D, Example, Mrs, A N, Other&, 1, ExampleHouse,  2, ) +
-      %q(Example Street, District ,Example Town,  Example County,) +
-      %q(E10 7EX, SPAIN)
+        %q(Example Street, District ,Example Town,  Example County,) +
+        %q(E10 7EX, SPAIN)
     end
 
     context 'entity' do

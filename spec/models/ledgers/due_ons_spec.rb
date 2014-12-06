@@ -1,8 +1,5 @@
 require 'rails_helper'
 
-# Required for splitting over two lines.
-# rubocop: disable Style/SpaceInsideRangeLiteral
-
 describe DueOns, :ledgers, :cycle, type: :model do
   describe 'validates' do
     describe 'due_ons_size' do
@@ -34,8 +31,8 @@ describe DueOns, :ledgers, :cycle, type: :model do
 
         expect(cycle.due_ons.between Date.new(2010, 3, 1)..
                                      Date.new(2011, 2, 28))
-         .to eq [MatchedDueOn.new(Date.new(2010, 3, 4), Date.new(2010, 3, 4)),
-                 MatchedDueOn.new(Date.new(2010, 9, 5), Date.new(2010, 9, 5))]
+          .to eq [MatchedDueOn.new(Date.new(2010, 3, 4), Date.new(2010, 3, 4)),
+                  MatchedDueOn.new(Date.new(2010, 9, 5), Date.new(2010, 9, 5))]
       end
 
       it 'returns nils when range outside due date' do

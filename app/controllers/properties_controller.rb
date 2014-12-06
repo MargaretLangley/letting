@@ -27,7 +27,7 @@ class PropertiesController < ApplicationController
       Property.includes(account: [charges: [:cycle],
                                   credits: [:charge],
                                   debits:  [:charge]])
-              .find params[:id]
+                .find params[:id]
   end
 
   def new
@@ -80,7 +80,7 @@ class PropertiesController < ApplicationController
 
   def agent_params
     %i(id property_id authorized) + [address_attributes: address_params] +
-    [entities_attributes: entities_params]
+      [entities_attributes: entities_params]
   end
 
   def account_params

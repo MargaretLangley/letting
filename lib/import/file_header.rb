@@ -39,8 +39,8 @@ module DB
 
     def self.charge
       %w(human_ref updated charge_type charged_in amount payment_type) +
-      %w(day_1 month_1 day_2 month_2 day_3 month_3 day_4 month_4) +
-      %w(escalation_date escaltion_new_rent)
+        %w(day_1 month_1 day_2 month_2 day_3 month_3 day_4 month_4) +
+        %w(escalation_date escaltion_new_rent)
     end
 
     def self.user

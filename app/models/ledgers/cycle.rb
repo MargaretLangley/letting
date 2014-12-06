@@ -48,7 +48,7 @@ class Cycle < ActiveRecord::Base
   def bill_period(billed_on:)
     RangeCycle.for(name: charged_in.name,
                    dates: show_dates(year: billed_on.year))
-              .duration within: billed_on
+      .duration within: billed_on
   end
 
   def <=> other
