@@ -5,6 +5,8 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
+Capybara::Screenshot.prune_strategy = :keep_last_run
 Capybara.javascript_driver = :webkit
 
 require 'elasticsearch/extensions/test/cluster/tasks'

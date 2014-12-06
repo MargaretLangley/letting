@@ -90,6 +90,7 @@ end
 group :development, :test do
   gem 'capybara', '~> 2.4.0'
   gem 'capybara-webkit', '~>1.3.0'
+  gem 'capybara-screenshot'
   gem 'capybara-slow_finder_errors'
   gem 'selenium-webdriver', '~>2.43.0'
   gem 'guard'

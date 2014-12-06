@@ -27,7 +27,7 @@ class ClientPage
   end
 
   def click(choice)
-    click_on choice
+    click_on choice, exact: true
   end
 
   def fill_in_client_id(client_id)
