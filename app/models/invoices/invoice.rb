@@ -43,6 +43,8 @@ class Invoice < ActiveRecord::Base
     end
 
     def total_arrears
+      return 0 if last.nil?
+
       last.balance
     end
   end

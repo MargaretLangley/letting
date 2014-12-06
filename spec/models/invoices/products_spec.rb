@@ -21,7 +21,13 @@ RSpec.describe 'Products', type: :model do
   end
 
   describe '#total_arrears' do
-    it 'returns arrears' do
+    it 'returns zero when no products' do
+      invoice = Invoice.new products: []
+      invoice.products.balanced
+      expect(invoice.total_arrears).to eq 0
+    end
+
+    it 'returns sum of product arrears' do
       invoice = Invoice.new products: [product_new(amount: 30)]
       invoice.products.balanced
       expect(invoice.total_arrears).to eq 30
