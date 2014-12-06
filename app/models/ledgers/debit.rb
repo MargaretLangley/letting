@@ -78,6 +78,21 @@ class Debit < ActiveRecord::Base
     where(charge_id: charge_id).order(:on_date).reject(&:paid?)
   end
 
+  def to_s
+    byebug
+    as_string  = "id: #{id || 'nil'}, " \
+                 "charge_id: #{charge_id || 'nil'}, " \
+                 "on_date: #{on_date.to_date}+t, " \
+                 "period: #{period}, " \
+                 "amount: #{amount}, "
+    as_string + if charge
+      "charge_type: #{charge_type || 'nil' } " \
+      "auto: #{automatic_payment? || 'nil' } "
+    else
+      'charge: nil'
+    end
+  end
+
   private
 
   def settled

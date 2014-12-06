@@ -123,5 +123,22 @@ describe Debit, :ledgers, type: :model do
         expect(debit_new <=> 37).to be_nil
       end
     end
+
+    describe '#to_s' do
+      it 'without charge' do
+        expect(debit_new.to_s)
+          .to eq 'id: nil, ' \
+                 'charge_id: nil, ' \
+                 'on_date: 2013-03-25+t, ' \
+                 'period: 2013-03-25..2013-06-30, ' \
+                 'amount: 88.08, ' \
+                 'charge: nil'
+      end
+
+      it 'with charge' do
+        expect(debit_new(charge: charge_new).to_s)
+          .to end_with 'charge_type: Ground Rent auto: nil '
+      end
+    end
   end
 end
