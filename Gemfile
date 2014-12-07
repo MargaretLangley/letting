@@ -14,7 +14,7 @@ gem 'pg', '~>0.17.0'
 gem 'equalizer'
 
 # Use SCSS for style-sheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 4.0.5'
 gem 'sprockets', '~>2.11.0' # bug-fix 3376e59
 gem 'autoprefixer-rails'
 gem 'compass-rails'
@@ -23,7 +23,7 @@ gem 'compass-rails'
 gem 'uglifier', '~> 2.4.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 3.1.0'
@@ -41,7 +41,7 @@ gem 'kaminari', '~> 0.16.1'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.9'
 
 # font icon
 gem 'font-awesome-rails'

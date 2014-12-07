@@ -48,7 +48,7 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    bcrypt (3.1.7)
+    bcrypt (3.1.9)
     better_errors (2.0.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -114,27 +114,27 @@ GEM
       timers (~> 4.0.0)
     childprocess (0.5.5)
       ffi (~> 1.0, >= 1.0.11)
-    chunky_png (1.3.0)
+    chunky_png (1.3.3)
     code_analyzer (0.4.5)
       sexp_processor
     coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
-    coffee-rails (4.0.1)
+    coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
-    coffee-script (2.2.0)
+    coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.7.0)
+    coffee-script-source (1.8.0)
     colored (1.2)
     colorize (0.7.3)
     columnize (0.8.9)
-    compass (0.12.2)
+    compass (0.12.7)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
-      sass (~> 3.1)
-    compass-rails (1.1.3)
+      sass (~> 3.2.19)
+    compass-rails (2.0.0)
       compass (>= 0.12.2)
     coveralls (0.7.1)
       multi_json (~> 1.3)
@@ -176,7 +176,7 @@ GEM
     equalizer (0.0.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
-    execjs (2.0.2)
+    execjs (2.2.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
@@ -348,10 +348,10 @@ GEM
       virtus (~> 1.0)
     rubyzip (1.1.6)
     sass (3.2.19)
-    sass-rails (4.0.3)
+    sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
-      sass (~> 3.2.0)
-      sprockets (~> 2.8, <= 2.11.0)
+      sass (~> 3.2.2)
+      sprockets (~> 2.8, < 3.0)
       sprockets-rails (~> 2.0)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
@@ -408,7 +408,7 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (4.8.2)
+    unicorn (4.8.3)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -427,7 +427,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
-  bcrypt (~> 3.1.7)
+  bcrypt (~> 3.1.9)
   better_errors (~> 2.0.0)
   binding_of_caller (~> 0.7.2)
   brakeman (~> 2.6.0)
@@ -445,7 +445,7 @@ DEPENDENCIES
   capybara-screenshot
   capybara-slow_finder_errors
   capybara-webkit (~> 1.3.0)
-  coffee-rails (~> 4.0.0)
+  coffee-rails (~> 4.1.0)
   compass-rails
   coveralls (~> 0.7.0)
   database_cleaner (~> 1.3.0)
@@ -477,7 +477,7 @@ DEPENDENCIES
   rspec-rails (~> 3.1.0)
   rubocop (~> 0.27.0)
   rubycritic
-  sass-rails (~> 4.0.3)
+  sass-rails (~> 4.0.5)
   sdoc (~> 0.4.0)
   seedbank
   selenium-webdriver (~> 2.44.0)
