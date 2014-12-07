@@ -3,7 +3,7 @@
     <ul class='shell'>
       <h4>&nbsp;Admin</h4>
       <li class="<%= main_menu_active? "cycles" %>"><%= link_to 'Cycles', cycles_path %></li>
-      <li class="active-subnav <%= sub_menu_state 'cycles' %>"><%= link_to 'New Cycle', new_cycle_path(cycle_type: 'term') %></li>
+      <li class="active-subnav <%= sub_menu_state 'cycles' %>"><%= link_to 'New Term Cycle', new_cycle_path(cycle_type: 'term') %></li>
       <li class="active-subnav <%= sub_menu_state 'cycles' %>"><%= link_to 'New Monthly Cycle', new_cycle_path(cycle_type: 'monthly') %></li>
 
       <li class="<%= main_menu_active? 'users' %>"><%= link_to 'Users', users_path %></li>

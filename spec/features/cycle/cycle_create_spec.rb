@@ -10,7 +10,7 @@ describe Cycle, :cycle, :ledgers, type: :feature do
       charged_in_create id: 2, name: 'Advance'
       cycle_page = CyclePage.new type: :term, action: :create
       cycle_page.enter
-      expect(page.title).to eq 'Letting - New Cycle'
+      expect(page.title).to eq 'Letting - New Term Cycle'
       cycle_page.name = 'April/Nov'
       cycle_page.choose 'Advance'
       cycle_page.order = '44'
@@ -32,7 +32,7 @@ describe Cycle, :cycle, :ledgers, type: :feature do
       charged_in_create id: 1, name: 'Arrears'
       cycle_page = CyclePage.new type: :monthly, action: :create
       cycle_page.enter
-      expect(page.title).to eq 'Letting - New Cycle'
+      expect(page.title).to eq 'Letting - New Monthly Cycle'
       cycle_page.name = 'Monthly'
       cycle_page.choose 'Arrears'
       cycle_page.order = '44'

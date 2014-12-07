@@ -1,6 +1,7 @@
-<% @title='New Cycle' %>
 <% if @cycle.cycle_type == 'monthly' %>
+  <% @title='New Monthly Cycle' %>
   <%= render 'form_monthly', cycle: @cycle %>
 <% else %>
+  <% @title='New Term Cycle' %>
   <%= render 'form_term', cycle: @cycle %>
 <% end %>

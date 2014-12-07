@@ -1,11 +1,9 @@
 <%= form_for invoicing do |f| %>
   <%= render 'shared/errors', object: invoicing %>
 
-<div id='invoicing' class='shell' style='position: relative;'>
-  <div class='grid  overlay-parent'>
-
-    <div class='col-12-24 spacer-column'>
-      <div class='col-2-24   grid-row'>&nbsp;</div>
+  <div id='invoicing' class='grid  shell  overlay-parent'>
+    <div class='col-12-24  spacer-column'>
+      <div class='col-2-24   grid-row  bottom-spacer'>&nbsp;</div>
       <div class='col-10-24  bottom-spacer'><h3>Search Terms</h3></div>
       <div class='col-12-24  bottom-spacer'>&nbsp;</div>
 
@@ -17,7 +15,7 @@
         <%= f.text_field :property_range, readonly: true %>
       </div>
 
-      <div class='col-2-24   grid-row'>&nbsp;</div>
+      <div class='col-2-24   grid-row  bottom-spacer'>&nbsp;</div>
       <div class='col-10-24  bottom-spacer  faded'>
         Invoice Between
       </div>
@@ -36,8 +34,8 @@
       </div>
     </div>
 
-    <div class='col-12-24 spacer-column'>
-      <div class='col-4-24  bottom-spacer'>&nbsp;</div>
+    <div class='col-12-24  spacer-column'>
+      <div class='col-4-24  grid-row  bottom-spacer'>&nbsp;</div>
       <div class='col-16-24  bottom-spacer'>
         </br></br>
         <%= render 'buttons/submit', f: f, disabled: !invoicing.actionable? %> or <%= link_to_if invoicing.actionable?, 'Cancel', new_invoicing_path, class: 'warn' %>
@@ -46,39 +44,27 @@
     </div>
 
     <div class='col-1-24  grid-row  bottom-spacer'>&nbsp;</div>
-    <div class='col-5-24  bottom-spacer faded'>
-      Comments
-    </div>
-    <div class='col-17-24 bottom-spacer faded'>
+    <div class='col-5-24  bottom-spacer  faded'>Comments</div>
+    <div class='col-17-24 bottom-spacer  faded'>
       <%= text_field_tag 'comment[]' %>
       <%= text_field_tag 'comment[]' %>
     </div>
     <div class='col-1-24  bottom-spacer'>&nbsp;</div>
-  </div>
+
   <% if invoicing.actionable? %>
     <div class='grid-row col-1-24'>&nbsp;</div>
     <div class='col-22-24'>
-      <div class='col-2-24 bottom-spacer grid-header r-align'>
-        Property
-      </div>
-      <div class='col-5-24 bottom-spacer grid-header'>
-        Billing Agent
-      </div>
-      <div class='col-5-24 bottom-spacer grid-header'>
-        Billing Address
-      </div>
-      <div class='col-11-24 bottom-spacer grid-header'>
-        Charge
-      </div>
+      <div class='col-2-24 bottom-spacer  grid-header  r-align'>Property</div>
+      <div class='col-5-24 bottom-spacer  grid-header'>Billing Agent</div>
+      <div class='col-5-24 bottom-spacer  grid-header'>Billing Address</div>
+      <div class='col-11-24 bottom-spacer grid-header'>Charge</div>
       <%= render invoicing.runs %>
     </div>
     <div class='col-1-24'>&nbsp;</div>
   <% else %>
     <%= render partial: 'teachings/invoicing' %>
-    <% if params[:search_terms] %>
-      <%= render partial: 'account_debits/show' %>
-    <% end %>
+    <%= render partial: 'account_debits/show' if params[:search_terms] %>
   <% end %>
-<% end %>
-</div>
+  </div> <!-- grid  shell -->
+<% end %> <!-- form -->
 

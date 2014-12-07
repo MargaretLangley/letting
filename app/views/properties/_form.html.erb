@@ -1,49 +1,49 @@
 <%= form_for property do |f| %>
   <%= render 'shared/errors', object: property %>
 
-  <div id='property' class='grid shell'>
-    <div class='col-22-24 grid-row faded bottom-spacer'>
+  <div id='property' class='grid  shell'>
+    <div class='col-22-24  grid-row  bottom-spacer  faded'>
       <h3>Property</h3>
-      <div class='col-1-4 grid-row bottom-spacer faded'>
+
+      <div class='col-1-4  grid-row  bottom-spacer  faded'>
         <%= f.label :human_ref,'Property ID', class: 'required' %>
       </div>
-      <div class='col-3-4 bottom-spacer no-r-pad'>
+      <div class='col-3-4  bottom-spacer  no-r-pad'>
         <%= f.text_field :human_ref, autofocus: true %>
       </div>
-      <div class='col-1-4 grid-row faded'>
+
+      <div class='col-1-4  grid-row  faded'>
         <%= f.label :client_ref, 'Client ID', class: 'required' %>
       </div>
-      <div class='col-3-4 no-r-pad'>
+      <div class='col-3-4  no-r-pad'>
         <%= text_field_tag nil, "#{property.client.try(:human_ref)} #{property.client.try(:entities).try(:full_name)}", :id => 'property_client_ref', data: { autocomplete_source: client_list } %>
         <%= f.hidden_field :client_id, id: 'client_id' %>
       </div>
     </div>
-    <div class='col-2-24 faded bottom-spacer no-rpad'>
+    <div class='col-2-24  bottom-spacer  faded  no-rpad'>
       <%= view_link(property) %>
     </div>
     <hr>
 
-    <div class='col-12-24 grid-row'>
+    <div class='col-12-24  grid-row'>
       <h3>Occupier</h3>
       <%= render 'entities/form', f: f, entitieable: property %>
       <%= render 'addresses/form', f: f, parent: 'property', address: AddressDecorator.new(property.address) %>
     </div>
-    <div class='col-12-24 no-r-pad'>
+    <div class='col-12-24  no-r-pad'>
       <%= render 'agents/form', f: f, agent: property.agent %>
     </div>
     <hr>
-    <div class='col-1-1 grid-row'>
+    <div class='col-1-1  grid-row'>
       <%= f.fields_for :account do |account_fields| %>
         <%= render 'charges/form', builder: account_fields, charges: property.account.charges %>
       <% end %>
     </div>
     <hr>
-    <div class='no-print'>
-      <div class='col-2-24 grid-row'>&nbsp;</div>
-      <div class='col-20-24 c-align'>
-        <%= render 'buttons/submit', f: f %> or <%= cancel_link path: properties_path %>
-      </div>
-      <div class='col-2-24'>&nbsp;</div>
+    <div class='col-2-24  grid-row  no-print'>&nbsp;</div>
+    <div class='col-20-24 c-align  no-print'>
+      <%= render 'buttons/submit', f: f %> or <%= cancel_link path: properties_path %>
     </div>
+    <div class='col-2-24  no-print'>&nbsp;</div>
   </div> <!-- grid shell -->
 <% end %> <!-- form for_property -->

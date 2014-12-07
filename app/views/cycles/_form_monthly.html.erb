@@ -1,117 +1,76 @@
 <%= form_for cycle do |f| %>
   <%= render 'shared/errors', object: cycle %>
 
-  <fieldset id='cycle' class='shell'>
+  <fieldset id='cycle' class='grid  shell'>
+    <%= f.hidden_field :cycle_type, cycle_type: 'monthly' %>
 
-    <div class="grid">
-      <div class='grid-row col-12-24 bottom-spacer'>
-        <h2>Monthly Cycle</h2>
-      </div>
-      <div class='col-12-24 bottom-spacer'>
-        <%= view_link(cycle) %>
-      </div>
+    <div class='col-12-24  grid-row'>&nbsp;</div>
+    <div class='col-12-24'><%= view_link cycle %></div>
+
+    <div class='col-4-24  grid-row  bottom-spacer'>&nbsp;</div>
+    <div class='col-3-24  bottom-spacer faded'><%= f.label :name %></div>
+    <div class='col-8-24  bottom-spacer'><%= f.text_field :name %></div>
+    <div class='col-9-24  bottom-spacer'>&nbsp;</div>
+
+
+    <div class='col-4-24  grid-row  bottom-spacer'>&nbsp;</div>
+    <div class='col-3-24  bottom-spacer  faded'>
+      <%= f.label :charged_in %>
+      <%= f.hidden_field :cycle_type, cycle_type: 'term' %>
     </div>
+    <div class='col-4-24  bottom-spacer'>
+      <%= f.label :charged_in_id, 'Advance', value: ChargedInDefaults::MODERN_ADVANCE.to_s %>
+    </div>
+    <div class='col-4-24  bottom-spacer'>
+      <%= f.label :charged_in_id, 'Arrears', value: ChargedInDefaults::MODERN_ARREARS.to_s %>
+    </div>
+    <div class='col-9-24  bottom-spacer'>&nbsp;</div>
 
-    <div class='grid' >
-      <div class='grid-row col-4-24 bottom-spacer'>
-        &nbsp;
-      </div>
-      <div class='col-3-24  bottom-spacer faded'>
-       <%= f.label :name %>
-      </div>
-      <div class='col-8-24 bottom-spacer '>
-        <%= f.text_field :name %>
-        <%= f.hidden_field :cycle_type, cycle_type: 'monthly' %>
-      </div>
-      <div class='col-9-24 bottom-spacer '>
-        &nbsp;
-      </div>
 
-      <div class='grid-row col-4-24 bottom-spacer'>
-        &nbsp;
-      </div>
-      <div class='col-3-24  bottom-spacer faded'>
-        <%= f.label :charged_in %>
-        <%= f.hidden_field :cycle_type, cycle_type: 'term' %>
-      </div>
-      <div class='col-4-24 bottom-spacer '>
-        <%= f.label :charged_in_id, 'Advance', :value => ChargedInDefaults::MODERN_ADVANCE.to_s %>
-      </div>
-      <div class='col-4-24 bottom-spacer '>
-        <%= f.label :charged_in_id, 'Arrears', :value => ChargedInDefaults::MODERN_ARREARS.to_s %>
-      </div>
-      <div class='col-9-24 bottom-spacer '>
-        &nbsp;
-      </div>
+    <div class='col-4-24  grid-row  bottom-spacer'>&nbsp;</div>
+    <div class='col-3-24  bottom-spacer faded'>&nbsp;</div>
+    <div class='col-2-24  bottom-spacer '>
+      <%= f.radio_button :charged_in_id, ChargedInDefaults::MODERN_ADVANCE.to_s %>
+    </div>
+    <div class='col-2-24  bottom-spacer faded'>&nbsp;</div>
+    <div class='col-2-24  bottom-spacer '>
+      <%= f.radio_button :charged_in_id, ChargedInDefaults::MODERN_ARREARS.to_s %>
+    </div>
+    <div class='col-11-24 bottom-spacer '>&nbsp;</div>
 
-      <div class='grid-row col-4-24 bottom-spacer'>
-        &nbsp;
-      </div>
-      <div class='col-3-24  bottom-spacer faded'>
-        &nbsp;
-      </div>
-      <div class='col-2-24 bottom-spacer '>
-        <%= f.radio_button :charged_in_id, ChargedInDefaults::MODERN_ADVANCE.to_s %>
-      </div>
-      <div class='col-2-24  bottom-spacer faded'>
-        &nbsp;
-      </div>
-      <div class='col-2-24 bottom-spacer '>
-        <%= f.radio_button :charged_in_id, ChargedInDefaults::MODERN_ARREARS.to_s %>
-      </div>
-      <div class='col-11-24 bottom-spacer '>
-        &nbsp;
-      </div>
 
-      <div class='grid-row col-4-24 bottom-spacer'>
-        &nbsp;
-      </div>
-      <div class='col-3-24  bottom-spacer faded'>
-        <%= f.label :order %>
-      </div>
-      <div class='col-2-24 bottom-spacer '>
-        <%= f.text_field :order, class: 'r-align'%>
-      </div>
-      <div class='col-15-24 bottom-spacer '>
-        &nbsp;
-      </div>
+    <div class='col-4-24  grid-row  bottom-spacer'>&nbsp;</div>
+    <div class='col-3-24  bottom-spacer  faded'><%= f.label :order %></div>
+    <div class='col-2-24  bottom-spacer '>
+      <%= f.text_field :order, class: 'r-align'%>
+    </div>
+    <div class='col-15-24  bottom-spacer'>&nbsp;</div>
 
-      <div class='grid-row col-4-24 bottom-spacer '>
-        &nbsp;
-      </div>
-      <%= f.fields_for :due_ons, cycle.due_ons.first  do |builder| %>
-        <div class='col-3-24 bottom-spacer  faded'>
-          Due On Day
-        </div>
-        <div class='col-2-24 bottom-spacer'>
-          <%= builder.text_field :day, class: 'r-align' %>
-        </div>
-        <div class='col-1-24 bottom-spacer'>
-          &nbsp;
-        </div>
-        <div class='col-4-24 bottom-spacer  faded'>
-          Shown On Day
-        </div>
-        <div class='col-2-24 bottom-spacer'>
-          <%= builder.text_field :show_day, class: 'r-align' %>
-        </div>
-      <% end %>
-      <div class='col-8-24 bottom-spacer'>
-        &nbsp;
-      </div>
 
-      <hr class = 'faded'>
-      <%= render 'cycle_charged_ins/form', cycle: @cycle %>
-      <div class='grid-row col-24-24'>
-        &nbsp;
+    <div class='col-4-24  grid-row  bottom-spacer '>&nbsp;</div>
+    <%= f.fields_for :due_ons, cycle.due_ons.first  do |builder| %>
+      <div class='col-3-24  bottom-spacer  faded'>Due On Day</div>
+      <div class='col-2-24  bottom-spacer'>
+        <%= builder.text_field :day, class: 'r-align' %>
       </div>
+      <div class='col-1-24  bottom-spacer'>&nbsp;</div>
+      <div class='col-4-24  bottom-spacer  faded'>Shown On Day</div>
+      <div class='col-2-24  bottom-spacer'>
+        <%= builder.text_field :show_day, class: 'r-align' %>
+      </div>
+    <% end %>
+    <div class='col-8-24  bottom-spacer'>&nbsp;</div>
 
-      <div class='grid-row col-6-24  bottom-spacer no-print'>
-        &nbsp;
-      </div>
-      <div class='col-18-24 no-r-pad  bottom-spacer no-print'>
-        <%= render 'buttons/submit', f: f %> or <%= cancel_link path: cycles_path %>
-      </div>
+    <hr class = 'faded'>
+    <%= render 'cycle_charged_ins/form', cycle: @cycle %>
+
+
+    <div class='col-24-24  grid-row'>&nbsp;</div>
+
+
+    <div class='col-6-24   grid-row  bottom-spacer no-print'>&nbsp;</div>
+    <div class='col-18-24  bottom-spacer no-r-pad  no-print'>
+      <%= render 'buttons/submit', f: f %> or <%= cancel_link path: cycles_path %>
     </div>
   </fieldset>
 <% end %>
