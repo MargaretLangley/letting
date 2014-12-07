@@ -2,6 +2,28 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
 
+  describe 'validations' do
+    it('is valid') { expect(product_new).to be_valid }
+
+    describe 'presence' do
+      it 'requires amount' do
+        expect(product_new(amount: nil)).to_not be_valid
+      end
+
+      it 'requires amount' do
+        expect(product_new(charge_type: nil)).to_not be_valid
+      end
+
+      it 'requires amount' do
+        expect(product_new(date_due: nil)).to_not be_valid
+      end
+
+      it 'requires automatic_payment' do
+        expect(product_new(automatic_payment: nil)).to_not be_valid
+      end
+    end
+  end
+
   describe '#back_page?' do
     it 'returns false if products have no ground rent' do
       product = Product.new charge_type: 'Insurance'

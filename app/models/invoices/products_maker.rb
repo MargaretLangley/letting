@@ -39,6 +39,7 @@ class ProductsMaker
     if arrears.nonzero?
       product_arrears = [Product.new(charge_type: 'Arrears',
                                      date_due: invoice_date,
+                                     automatic_payment: false,
                                      amount: arrears)]
     end
     product_arrears

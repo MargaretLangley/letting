@@ -1,5 +1,5 @@
 ###
-# ProductsMaker
+# BlueProductsMaker
 #
 # Assembles products from arrears and from the invoiceable debits.
 # Calculates products, total_arrears and earliest date for a product.
@@ -41,6 +41,7 @@ class BlueProductsMaker
     if arrears.nonzero?
       product_arrears = [Product.new(charge_type: 'Arrears',
                                      date_due: invoice_date,
+                                     automatic_payment: false,
                                      amount: arrears)]
     end
     product_arrears

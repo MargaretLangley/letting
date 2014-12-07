@@ -79,18 +79,12 @@ class Debit < ActiveRecord::Base
   end
 
   def to_s
-    byebug
-    as_string  = "id: #{id || 'nil'}, " \
-                 "charge_id: #{charge_id || 'nil'}, " \
-                 "on_date: #{on_date.to_date}+t, " \
-                 "period: #{period}, " \
-                 "amount: #{amount}, "
-    as_string + if charge
-      "charge_type: #{charge_type || 'nil' } " \
-      "auto: #{automatic_payment? || 'nil' } "
-    else
-      'charge: nil'
-    end
+    "id: #{id || 'nil'}, " \
+    "charge_id: #{charge_id || 'nil'}, " \
+    "on_date: #{on_date.to_date}+t, " \
+    "period: #{period}, " \
+    "amount: #{amount}, " +
+      charge_to_s
   end
 
   private
@@ -103,6 +97,15 @@ class Debit < ActiveRecord::Base
     Settlement.resolve(outstanding,
                        Credit.available(charge_id)) do |offset, pay|
       settlements.build(credit: offset, amount: pay)
+    end
+  end
+
+  def charge_to_s
+    if charge
+      "charge_type: #{charge_type || 'nil' } " \
+      "auto: #{automatic_payment? || 'nil' } "
+    else
+      'charge: nil'
     end
   end
 end

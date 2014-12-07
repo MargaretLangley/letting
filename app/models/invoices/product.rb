@@ -13,6 +13,8 @@ class Product < ActiveRecord::Base
   include Comparable
   belongs_to :invoice, inverse_of: :products
 
+  validates :amount, :charge_type, :date_due, presence: true
+  validates :automatic_payment, inclusion: [true, false]
   def period
     (period_first..period_last)
   end

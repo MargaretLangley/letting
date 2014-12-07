@@ -27,6 +27,16 @@ RSpec.describe ProductsMaker, type: :model do
   end
 
   describe 'arrears creation' do
+    it 'makes arrears valid' do
+      (transaction = DebitsTransaction.new)
+
+      maker = ProductsMaker.new invoice_date: Date.new(1999, 1, 2),
+                                arrears: 10,
+                                transaction: transaction
+
+      expect(maker.invoice.first).to be_valid
+    end
+
     it 'makes arrears from debts' do
       (transaction = DebitsTransaction.new)
 
@@ -34,6 +44,7 @@ RSpec.describe ProductsMaker, type: :model do
                                 arrears: 10,
                                 transaction: transaction
 
+      expect(maker.invoice.first).to be_valid
       expect(maker.invoice.first.charge_type).to eq 'Arrears'
       expect(maker.invoice.first.to_s)
         .to eq 'charge_type: Arrears date_due: 1999-01-02 amount: 10.0 '\
