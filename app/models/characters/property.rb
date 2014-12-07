@@ -73,9 +73,9 @@ class Property < ActiveRecord::Base
 
   private
 
-  def to_address join: "\n"
+  def to_address
     return unless address
-    address.text join: join
+    address.text
   end
 
   def bill_to_s
