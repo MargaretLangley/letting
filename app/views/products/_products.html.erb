@@ -45,3 +45,9 @@
   <%= number_with_precision(invoice.total_arrears, precision: 2) %>
 </div>
 <div class='col-2-24'>&nbsp;</div>
+
+<% invoice.comments.order(:id).each do |comment| %>
+  <div class='col-5-24 grid-row bottom-spacer'>&nbsp;</div>
+  <div class='col-17-24'><%= comment.clarify %></div>
+  <div class='col-2-24'>&nbsp;</div>
+<% end %>
