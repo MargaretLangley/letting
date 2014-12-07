@@ -14,11 +14,7 @@
 ####
 #
 class Address < ActiveRecord::Base
-  MIN_STRING = 2
-  MAX_STRING = 64
-  MAX_NUMBER = 10
-  MIN_POSTCODE = 6
-  MAX_POSTCODE = 20
+  include AddressDefaults
   belongs_to :addressable, polymorphic: true
   validates :county, :road, presence: true
   validates :flat_no, :road_no,
