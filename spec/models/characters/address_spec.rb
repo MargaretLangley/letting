@@ -133,17 +133,5 @@ describe Address, type: :model do
       house = Address.new flat_no: '17', road: 'Edge Road', town: 'Brum'
       expect(house.text).to eq "Flat 17\nEdge Road\nBrum"
     end
-
-    context '#empty?' do
-      it('starts empty') { expect(Address.new).to be_empty }
-
-      it 'regards setting noted attributes as filling the object.' do
-        expect(address_new town: 'Bath').to_not be_empty
-      end
-
-      it 'regards setting ignored attributes as the object remaining empty' do
-        expect(Address.new id: 8).to be_empty
-      end
-    end
   end
 end

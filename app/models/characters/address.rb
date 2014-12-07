@@ -30,25 +30,31 @@ class Address < ActiveRecord::Base
             length: { minimum: MIN_POSTCODE, maximum: MAX_POSTCODE },
             allow_blank: true
 
+  # Appending the name to the address and only setting join char once.
+  # join - the character between  each line
+  #
   def name_and_address name:, join: "\n"
     name + join + text(join: join)
   end
 
-  def first_line
-    flat_line || road_line
-  end
-
-  def abridged_text join: "\n"
-    [flat_house_line.blank? ? road_line : flat_line,
-     town.blank? ? county : town].join "#{join}"
-  end
-
+  # All the address text without any empty lines of the address
+  # join - the character between each line
+  #
   def text join: "\n"
-    address_lines.delete_if(&:empty?).join "#{join}"
+    address_lines.join "#{join}"
   end
 
-  def empty?
-    attributes.except(*ignored_attrs).values.all?(&:blank?)
+  # The most meaningful lines of the address
+  # join - the character between each line
+  #
+  def abridged_text join: "\n"
+    [first_line, town.present? ? town : county].join "#{join}"
+  end
+
+  # The first line filled in - houses don't require the flat information
+  #
+  def first_line
+    address_lines.first
   end
 
   def clear_up_form
@@ -61,12 +67,12 @@ class Address < ActiveRecord::Base
     flat_house_line.present? ? "Flat #{flat_house_line}" : nil
   end
 
-  def road_line
-    "#{road_no} #{road}".strip
-  end
-
   def flat_house_line
     "#{flat_no} #{house_name}".strip
+  end
+
+  def road_line
+    "#{road_no} #{road}".strip
   end
 
   def address_lines
@@ -78,10 +84,6 @@ class Address < ActiveRecord::Base
       county,
       postcode,
       nation
-    ].compact
-  end
-
-  def ignored_attrs
-    %w(id addressable_id addressable_type created_at updated_at)
+    ].compact.delete_if(&:empty?)
   end
 end
