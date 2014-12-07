@@ -72,7 +72,11 @@ class Address < ActiveRecord::Base
   private
 
   def flat_line
-    flat_house_line.present? ? "Flat #{flat_house_line}" : nil
+    flat_house_line.present? ? "#{house_prefix}#{flat_house_line}" : nil
+  end
+
+  def house_prefix
+    flat_no.present? ? 'Flat ' : ''
   end
 
   def flat_house_line
