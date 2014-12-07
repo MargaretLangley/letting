@@ -57,6 +57,14 @@ class Address < ActiveRecord::Base
     address_lines.first
   end
 
+  def first_no
+    flat_house_line.present? ? flat_no : road_no
+  end
+
+  def first_text
+    flat_house_line.present? ? house_name : road
+  end
+
   def clear_up_form
     mark_for_destruction
   end

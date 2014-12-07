@@ -100,16 +100,12 @@ describe Address, type: :model do
           .to eq 'Bob, Flat 47 Hill Court, Brum'
       end
     end
-    describe '#first_line' do
-      it 'shows flat when present' do
-        address = Address.new flat_no: '47', house_name: 'Hill', road: 'Edge Rd'
-        expect(address.first_line).to eq 'Flat 47 Hill'
-      end
-      it 'shows road when flat missing' do
-        address = Address.new flat_no: nil, house_name: nil, road: 'Edge Rd'
-        expect(address.first_line).to eq 'Edge Rd'
-      end
+
+    it 'outputs #text' do
+      house = Address.new flat_no: '17', road: 'Edge Road', town: 'Brum'
+      expect(house.text).to eq "Flat 17\nEdge Road\nBrum"
     end
+
     describe '#abridged_text' do
       it 'adds flat when present' do
         address = Address.new flat_no: '47', house_name: 'Hill', town: 'Brum'
@@ -129,9 +125,43 @@ describe Address, type: :model do
       end
     end
 
-    it 'outputs #text' do
-      house = Address.new flat_no: '17', road: 'Edge Road', town: 'Brum'
-      expect(house.text).to eq "Flat 17\nEdge Road\nBrum"
+    describe '#first_line' do
+      it 'shows flat when present' do
+        address = Address.new flat_no: '47', house_name: 'Hill', road: 'Edge Rd'
+        expect(address.first_line).to eq 'Flat 47 Hill'
+      end
+      it 'shows road when flat missing' do
+        address = Address.new flat_no: nil, house_name: nil, road: 'Edge Rd'
+        expect(address.first_line).to eq 'Edge Rd'
+      end
+    end
+
+    describe '#first_no' do
+      it 'shows flat no when present' do
+        address = Address.new flat_no: '47', house_name: 'Hill', road: 'Edge Rd'
+        expect(address.first_no).to eq '47'
+      end
+      it 'shows road no when flat missing' do
+        address = Address.new flat_no: nil,
+                              house_name: nil,
+                              road_no: '8',
+                              road: 'Edge Rd'
+        expect(address.first_no).to eq '8'
+      end
+    end
+
+    describe '#first_text' do
+      it 'shows flat house when present' do
+        address = Address.new flat_no: '47', house_name: 'Hill', road: 'Edge Rd'
+        expect(address.first_text).to eq 'Hill'
+      end
+      it 'shows road when flat missing' do
+        address = Address.new flat_no: nil,
+                              house_name: nil,
+                              road_no: '8',
+                              road: 'Edge Rd'
+        expect(address.first_text).to eq 'Edge Rd'
+      end
     end
   end
 end
