@@ -47,9 +47,9 @@ gem 'bcrypt', '~> 3.1.9'
 gem 'font-awesome-rails'
 
 # Search Gems
-gem 'elasticsearch', '~> 1.0.5'
-gem 'elasticsearch-model', '~> 0.1.5'
-gem 'elasticsearch-rails', '~> 0.1.5'
+gem 'elasticsearch', '~> 1.0.6'
+gem 'elasticsearch-model', '~> 0.1.6'
+gem 'elasticsearch-rails', '~> 0.1.6'
 # Create es test node
 gem 'elasticsearch-extensions', group: :test
 
@@ -95,7 +95,6 @@ group :development, :test do
   gem 'selenium-webdriver', '~>2.44.0'
   gem 'guard'
   gem 'guard-livereload'
-  gem 'launchy', '~> 2.4.2'
   gem 'pry-rails', '~>0.3.2'
   gem 'rb-readline'
   gem 'pry-stack_explorer', '~>0.4.9.0'
