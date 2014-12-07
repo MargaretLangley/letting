@@ -30,7 +30,7 @@
       </div>
       <div class='col-5-24  bottom-spacer  inherit-row'>
         <%= format_empty_string_as_dash property.address.first_text %>
-        <%= link_to '.', property_path(property.id), class: 'view-testing-link' %>
+        <%= testing_link path: property_path(property) %>
       </div>
       <div class='col-4-24  bottom-spacer  inherit-row  nowrap'>
         <%= property.address.town %>

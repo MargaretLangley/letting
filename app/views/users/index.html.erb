@@ -21,7 +21,7 @@
         <% else %>
           No
         <% end %>
-        <%= link_to '.', user_path(user), class: 'view-testing-link' %>
+        <%= testing_link path: user_path(user) %>
       </div>
     </div>
     <div class='col-2-24  bottom-spacer  no-print'><%= edit_link user %></div>

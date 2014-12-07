@@ -81,4 +81,11 @@ module ApplicationHelper
             class: 'js-toggle  plain-button  float-right',
             title: 'Full Property'
   end
+
+  # Used when there is no physical link to click on
+  # In the case of index - grid row has no view button.
+  #
+  def testing_link(path:)
+    link_to '', path, class: 'view-testing-link'
+  end
 end
