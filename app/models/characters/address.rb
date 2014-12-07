@@ -55,10 +55,6 @@ class Address < ActiveRecord::Base
     attributes.except(*ignored_attrs).values.all?(&:blank?)
   end
 
-  def copy_approved_attributes
-    attributes.except(*ignored_attrs)
-  end
-
   def clear_up_form
     mark_for_destruction
   end

@@ -116,12 +116,5 @@ describe Address, type: :model do
         expect(Address.new id: 8).to be_empty
       end
     end
-
-    it 'Limits attributes copied' do
-      replica_address = Address.new
-      replica_address.attributes = client_new.address.copy_approved_attributes
-      expect(replica_address.addressable_id).to be_nil
-      expect(replica_address.road).to be_present
-    end
   end
 end
