@@ -16,8 +16,8 @@ module ApplicationHelper
     a_string.blank? ? '-'  : a_string
   end
 
-  def edit_link model
-    link_to fa_icon('edit lg'),
+  def edit_link model, size: 'lg'
+    link_to fa_icon("edit #{size}"),
             [:edit, model],
             class: 'plain-button  float-right',
             title: 'Edit file'
@@ -46,12 +46,12 @@ module ApplicationHelper
 
   def view_link model
     if model.new_record?
-      link_to fa_icon('file-o lg'),
+      link_to fa_icon('file-o 2x'),
               '#',
               class: 'plain-button  float-right',
               disabled: true, title: 'View file (disabled)'
     else
-      link_to fa_icon('file-o lg'),
+      link_to fa_icon('file-o 2x'),
               model,
               class: 'plain-button  float-right',
               title: 'View file'

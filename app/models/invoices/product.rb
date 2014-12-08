@@ -33,8 +33,8 @@ class Product < ActiveRecord::Base
   # These are displayed on the backpage.
   #
   def self.back_page
-    where(charge_type: [ 'Ground Rent', 'Garage Ground Rent'])
-    .order(charge_type: :desc).first
+    where(charge_type: ['Ground Rent', 'Garage Ground Rent'])
+      .order(charge_type: :desc).first
   end
 
   attr_writer :balance
