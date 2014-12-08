@@ -22,7 +22,7 @@ describe ProductDecorator, :invoice do
     it 'returns the amount_on_time' do
       product = product_new amount: 20.05, date_due: Date.new(2010, 9, 30)
       expect(ProductDecorator.new(product).amount_on_time)
-          .to eq '£20.05 on 30/Sep/10'
+        .to eq '£20.05 on 30/Sep/10'
     end
   end
 end
