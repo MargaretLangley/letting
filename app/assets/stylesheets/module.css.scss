@@ -139,7 +139,7 @@ a.grey{
   faded. The css 'faded' class is already used on the page for headings.
 */
 
-.dormant{
+.deemphasized{
   @extend .faded;
 }
 

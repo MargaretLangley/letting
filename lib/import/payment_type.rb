@@ -10,11 +10,11 @@ module DB
   ####
   #
   class PaymentType
-    def self.to_symbol(code)
+    def self.to_symbol code
       case code
-      when :S      then 'standing_order'
-      when :P, :L  then 'payment'
-      else         'unknown_payment_type'
+      when :S      then Charge::STANDING_ORDER
+      when :P, :L  then Charge::PAYMENT
+      else         Charge::UNKNOWN_PAYMENT_TYPE
       end
     end
   end
