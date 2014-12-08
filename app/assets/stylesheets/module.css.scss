@@ -110,6 +110,10 @@ a.grey{
 
 \*--------------------------------------------------*/
 
+.small-bottom{
+  margin-bottom: 0.2em;
+}
+
 
 .r-align{
   text-align: right;
@@ -442,7 +446,7 @@ $search-height: 35px;
 @media screen{
 
   @mixin base-button {
-    margin: 2% 1% 2% 1%;
+    margin: 1% 1% 1% 1%;
     padding: 2%;
     border: 1px solid darken($secondary-button, 15%);
     border-radius: 5px;
