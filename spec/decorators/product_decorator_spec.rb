@@ -18,5 +18,11 @@ describe ProductDecorator, :invoice do
       product_dec = ProductDecorator.new product_new period: nil..nil
       expect(product_dec.period).to eq '&nbsp;'
     end
+
+    it 'returns the amount_on_time' do
+      product = product_new amount: 20.05, date_due: Date.new(2010, 9, 30)
+      expect(ProductDecorator.new(product).amount_on_time)
+          .to eq '£20.05 on 30/Sep/10'
+    end
   end
 end
