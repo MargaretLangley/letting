@@ -29,6 +29,14 @@ class Product < ActiveRecord::Base
     @balance
   end
 
+  # Scope to return products that trigger the back page of the invoice
+  # These are displayed on the backpage.
+  #
+  def self.back_page
+    where(charge_type: [ 'Ground Rent', 'Garage Ground Rent'])
+    .order(charge_type: :desc).first
+  end
+
   attr_writer :balance
 
   # Does the product require additional explanation typically

@@ -24,6 +24,24 @@ RSpec.describe Product, type: :model do
     end
   end
 
+  describe '.show_on_back_page' do
+    it 'returns back page products' do
+      invoice_create products: [product_new(charge_type: 'Ground Rent')]
+      expect(Product.back_page.charge_type).to eq 'Ground Rent'
+    end
+
+    it 'orders Ground Rent before Garage ground rent' do
+      invoice_create products: [product_new(charge_type: 'Garage Ground Rent'),
+                                product_new(charge_type: 'Ground Rent')]
+      expect(Product.back_page.charge_type).to eq 'Ground Rent'
+    end
+
+    it 'does not return front page only products' do
+      invoice_create products: [product_new(charge_type: 'Insurance')]
+      expect(Product.back_page).to be_nil
+    end
+  end
+
   describe '#back_page?' do
     it 'returns false if products have no ground rent' do
       product = Product.new charge_type: 'Insurance'
