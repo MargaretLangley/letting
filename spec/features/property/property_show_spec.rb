@@ -9,7 +9,8 @@ describe Property, type: :feature   do
                     human_ref: 1000,
                     agent: agent_new(entities: [Entity.new(name: 'Bell')],
                                      address: address_new(road: 'Wiggiton')),
-                    account: account_new
+                    account: account_new,
+                    client: client_new
     visit '/properties/1'
     expect(page.title).to eq 'Letting - View Account'
     expect_property entity: 'Mr W. G. Grace'
@@ -31,27 +32,30 @@ describe Property, type: :feature   do
 
   it 'shows when charged' do
     charge = charge_create(charge_type: 'Rent')
-    property_create id: 1, account: account_new(charges: [charge])
+    property_create id: 1,
+                    account: account_new(charges: [charge]),
+                    client: client_new
     visit '/properties/1'
     expect(page).to have_text 'Rent'
   end
 
   it 'shows charges as dormant' do
     property_create id: 1,
-                    account: account_new(charges: [charge_new(dormant: true)])
+                    account: account_new(charges: [charge_new(dormant: true)]),
+                    client: client_new
     visit '/properties/1'
     expect(page).to have_css '.dormant'
   end
 
   it 'navigates to index page' do
-    property_create id: 1, account: account_new
+    property_create id: 1, account: account_new, client: client_new
     visit '/properties/1'
     click_on 'Accounts'
     expect(page.title).to eq 'Letting - Accounts'
   end
 
   it 'navigates to edit page' do
-    property_create id: 1, account: account_new
+    property_create id: 1, account: account_new, client: client_new
     visit '/properties/1'
     first(:link, 'Edit').click
     expect(page.title).to eq 'Letting - Edit Account'
