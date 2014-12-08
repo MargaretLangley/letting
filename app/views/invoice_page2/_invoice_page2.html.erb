@@ -17,9 +17,11 @@
 
   <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 1, info: simple_format(invoice_dec.property_address, {}, wrapper_tag: 'div') } %>
 
-  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 2, info: 'TO BE FILLED' } %>
+  <% product_dec = ProductDecorator.new(invoice.products.back_page) %>
 
-  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 3, info: 'TO BE FILLED' } %>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 2, info: product_dec.amount_on_time } %>
+
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 3, info: product_dec.period } %>
 
   <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 4, info: template.invoice_name } %>
 

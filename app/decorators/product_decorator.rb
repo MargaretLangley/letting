@@ -32,6 +32,10 @@ class ProductDecorator
     number_with_precision(product.amount, precision: 2)
   end
 
+  def amount_on_time
+    "£#{amount} on #{date_due}"
+  end
+
   def balance
     number_with_precision(product.balance, precision: 2)
   end
