@@ -1,48 +1,46 @@
 <%= f.fields_for :address do |b| %>
 
 <div id='<%= parent %>_address'>
-  <div class='col-1-1  no-r-pad faded'>
+  <div class='col-1-1  faded  no-r-pad'>
     <h4>Address</h4>
   </div>
-  <div class='col-1-4 bottom-spacer faded'>
+  <div class='col-1-4  bottom-spacer  faded'>
     <%= b.label :flat_no %>
   </div>
-  <div class='col-3-4 bottom-spacer no-r-pad'>
+  <div class='col-3-4  bottom-spacer  no-r-pad'>
     <%= b.text_field :flat_no %>
   </div>
-  <div class='col-1-4 bottom-spacer faded'>
+  <div class='col-1-4  bottom-spacer  faded'>
     <%= b.label :house_name %>
   </div>
-  <div class='col-3-4 bottom-spacer  no-r-pad'>
+  <div class='col-3-4  bottom-spacer  no-r-pad'>
     <%= b.text_field :house_name, data: { autocomplete_source: Address.uniq.pluck(:house_name).reject(&:blank?).sort }  %>
   </div>
-  <div class='col-1-4 bottom-spacer faded'>
+  <div class='col-1-4  bottom-spacer  faded'>
     <%= b.label :road_no %>
   </div>
-  <div class='col-3-4 bottom-spacer  no-r-pad'>
+  <div class='col-3-4  bottom-spacer  no-r-pad'>
     <%= b.text_field :road_no %>
   </div>
-  <div class='col-1-4 bottom-spacer faded'>
+  <div class='col-1-4  bottom-spacer  faded'>
     <%= b.label :road, class: 'required' %>
   </div>
-  <div class='col-3-4 bottom-spacer  no-r-pad'>
+  <div class='col-3-4  bottom-spacer  no-r-pad'>
     <%= b.text_field :road, data: { autocomplete_source: Address.uniq.pluck(:road).reject(&:blank?).sort } %>
   </div>
-  <div class='col-1-4 bottom-spacer faded'>
+  <div class='col-1-4  bottom-spacer  faded'>
     <%= b.label :district %>
   </div>
-  <div class='col-3-4 bottom-spacer  no-r-pad'>
-    <div class='js-toggle-selection js-clear'>
-      <div class='js-togglable <%= address.add_district_visiblity %> col-1-24'>
-        <%= link_to fa_icon('plus-circle'), '#', class: 'js-toggle plain-button', title: 'Add district' %>
+  <div class='col-3-4  bottom-spacer  no-r-pad  js-toggle-selection'>
+    <div class='col-4-24  js-togglable   js-clear  <%= address.add_district_visiblity %> '>
+      <%= link_to fa_icon('plus-circle'), '#', class: 'js-toggle  plain-button  float-left', title: 'Add district' %>
+    </div>
+    <div class='js-togglable  js-clear  <%= address.district_visiblity %>'>
+      <div class='col-20-24 bottom-spacer  no-r-pad'>
+        <%= b.text_field :district, class: 'v_district' %>
       </div>
-      <div class='js-togglable <%= address.district_visiblity %>'>
-        <div class='col-20-24 bottom-spacer  no-r-pad'>
-          <%= b.text_field :district, class: 'v_district' %>
-        </div>
-        <div class='col-4-24'>
-          <%= link_to fa_icon('trash-o'), '#', class: 'js-toggle plain-button', title: 'Delete Line' %>
-        </div>
+      <div class='col-4-24'>
+        <%= link_to fa_icon('trash-o'), '#', class: 'js-toggle  plain-button  float-right', title: 'Delete Line' %>
       </div>
     </div>
   </div>
@@ -55,30 +53,28 @@
   <div class='col-1-4 bottom-spacer faded'>
     <%= b.label :county, class: 'required' %>
   </div>
-  <div class='col-3-4 bottom-spacer  no-r-pad'>
+  <div class='col-3-4  bottom-spacer  no-r-pad'>
     <%= b.text_field :county, data: { autocomplete_source: Address.uniq.pluck(:county).reject(&:blank?).sort }  %>
   </div>
-  <div class='col-1-4 bottom-spacer faded'>
+  <div class='col-1-4  bottom-spacer  faded'>
     <%= b.label :postcode %>
   </div>
-  <div class='col-3-4 bottom-spacer  no-r-pad'>
+  <div class='col-3-4  bottom-spacer  no-r-pad'>
     <%= b.text_field :postcode %>
   </div>
-  <div class='col-1-4 bottom-spacer faded'>
+  <div class='col-1-4  bottom-spacer  faded'>
     <%= b.label :nation %>
   </div>
-  <div class='col-3-4 bottom-spacer  no-r-pad'>
-    <div class='js-toggle-selection'>
-      <div class=' js-togglable js-clear <%= address.add_nation_visiblity %> col-1-24'>
-        <%= link_to fa_icon('plus-circle'), '#', class: 'js-toggle plain-button', title: 'Add a nation line to the address' %>
+  <div class='col-3-4  bottom-spacer  no-r-pad  js-toggle-selection'>
+    <div class='js-togglable  js-clear <%= address.add_nation_visiblity %> col-4-24'>
+      <%= link_to fa_icon('plus-circle'), '#', class: 'js-toggle  plain-button  float-left', title: 'Add a nation line to the address' %>
+    </div>
+    <div class='js-togglable  js-clear <%= address.nation_visiblity %>'>
+      <div class='col-20-24  bottom-spacer  no-r-pad'>
+        <%= b.text_field :nation, class: 'v_nation' %>
       </div>
-      <div class=' js-togglable js-clear <%= address.nation_visiblity %>'>
-        <div class='col-20-24 bottom-spacer  no-r-pad'>
-          <%= b.text_field :nation, class: 'v_nation' %>
-        </div>
-        <div class='col-4-24'>
-          <%= link_to fa_icon('trash-o'), '#', class: 'js-toggle plain-button', title: 'Delete Line' %>
-        </div>
+      <div class='col-4-24'>
+        <%= link_to fa_icon('trash-o'), '#', class: 'js-toggle  plain-button  float-right', title: 'Delete Line' %>
       </div>
     </div>
   </div>
