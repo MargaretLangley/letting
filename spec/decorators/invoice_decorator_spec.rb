@@ -29,4 +29,19 @@ describe InvoiceDecorator do
     invoice_dec = InvoiceDecorator.new invoice_new
     expect(invoice_dec.billing_first_address_line).to eq "Edgbaston Road\n"
   end
+
+  describe '#earliest_date_due' do
+    it 'set to product due_date if available' do
+      product = product_new date_due: Date.new(2010, 3, 25)
+      invoice_dec = InvoiceDecorator.new invoice_new invoice_date: '2000/1/1',
+                                                     products: [product]
+      expect(invoice_dec.earliest_date_due).to eq '25/Mar/10'
+    end
+
+    it 'sets it to invoice_date if no products available' do
+      invoice_dec = InvoiceDecorator.new invoice_new invoice_date: '2000/1/1',
+                                                     products: []
+      expect(invoice_dec.earliest_date_due).to eq '01/Jan/00'
+    end
+  end
 end
