@@ -15,7 +15,7 @@ gem 'equalizer'
 
 # Use SCSS for style-sheets
 gem 'sass-rails', '~> 4.0.5'
-gem 'sprockets', '~>2.12.0'
+gem 'sprockets', '~>2.12.3'
 gem 'autoprefixer-rails'
 gem 'compass-rails'
 
