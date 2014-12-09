@@ -48,8 +48,7 @@ class Invoice < ActiveRecord::Base
       last.balance
     end
   end
-  validates :products,
-            :invoice_date,
+  validates :invoice_date,
             :property_ref,
             :property_address,
             presence: true

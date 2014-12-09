@@ -13,7 +13,8 @@ def invoice_new id: nil,
                 property: property_new,
                 comments: [],
                 debits_transaction: debits_transaction_new,
-                products: [product_new]
+                products: [product_new],
+                mail: true
   template_create(id: 1) unless Template.find_by id: 1
   account.property = property
   invoice = Invoice.new id: id, run_id: run_id
@@ -24,6 +25,7 @@ def invoice_new id: nil,
                   debits_transaction: debits_transaction,
                   comments: comments,
                   products: products
+  invoice.mail = mail
   invoice
 end
 
@@ -35,7 +37,8 @@ def invoice_create \
   property: property_create,
   comments: [],
   debits_transaction: debits_transaction_new,
-  products: [product_new]
+  products: [product_new],
+  mail: true
 
   invoice = invoice_new id: id,
                         run_id: run_id,
@@ -44,7 +47,8 @@ def invoice_create \
                         property: property,
                         comments: comments,
                         debits_transaction: debits_transaction,
-                        products: products
+                        products: products,
+                        mail: mail
   invoice.save!
   invoice
 end

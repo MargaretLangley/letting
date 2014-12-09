@@ -83,6 +83,7 @@ after :templates do
           run_id: 1,
           account_id: Account.first.id,
           debits_transaction_id: 1,
+          mail: true,
           invoice_date: create_date(5),
           property_ref: 1001,
           occupiers: "Mr E. P. Hendren",

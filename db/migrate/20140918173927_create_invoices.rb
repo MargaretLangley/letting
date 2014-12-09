@@ -4,6 +4,7 @@ class CreateInvoices < ActiveRecord::Migration
       t.belongs_to :account, null: false, index: true
       t.belongs_to :run, null: false, index: true
       t.belongs_to :debits_transaction, null: false, index: true
+      t.boolean  "mail", null: false
       t.date     "invoice_date", null: false
       t.integer  "property_ref",    null: false
       t.text     "occupiers", null: false

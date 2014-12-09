@@ -42,7 +42,8 @@ class InvoiceMaker
                property: account.property.invoice(billing_period: period),
                debits_transaction: transaction,
                comments: comments,
-               products: products
+               products: products.invoice
+    invoice.mail = products.debits?
     invoice
   end
 end
