@@ -1,0 +1,18 @@
+<% invoice_decorator = InvoiceDecorator.new(invoice) %>
+<div title='View single invoice' class='table-row' data-link='<%= invoice_path(invoice) %>'>
+  <div class='col-3-24  grid-row  inherit-row bottom-spacer r-align'>
+    <%= invoice_decorator.property_ref %>
+  </div>
+  <div class='col-5-24 inherit-row bottom-spacer'>
+    <%= invoice_decorator.billing_agent %>
+  </div>
+  <div class='col-5-24 inherit-row bottom-spacer'>
+    <%= invoice_decorator.billing_first_address_line %>
+  </div>
+  <div class='col-9-24 inherit-row bottom-spacer'>
+    <%= invoice_decorator.products_display %>
+  </div>
+  <div class='col-2-24 bottom-spacer no-print'>
+    <%= link_to fa_icon('print lg'), single_print_path(invoice), title: 'Print' %>
+  </div>
+</div>

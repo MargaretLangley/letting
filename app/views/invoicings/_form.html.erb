@@ -54,10 +54,7 @@
   <% if invoicing.actionable? %>
     <div class='grid-row col-1-24'>&nbsp;</div>
     <div class='col-22-24'>
-      <div class='col-2-24 bottom-spacer  grid-header  r-align'>Property</div>
-      <div class='col-5-24 bottom-spacer  grid-header'>Billing Agent</div>
-      <div class='col-5-24 bottom-spacer  grid-header'>Billing Address</div>
-      <div class='col-11-24 bottom-spacer grid-header'>Charge</div>
+      <%= render 'invoices/invoice_header' %>
       <%= render invoicing.runs %>
     </div>
     <div class='col-1-24'>&nbsp;</div>

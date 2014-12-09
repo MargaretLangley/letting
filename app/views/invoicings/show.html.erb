@@ -17,40 +17,19 @@
     <% @invoicing.runs.each_with_index do |run, index|  %>
       <div id="tab<%= index + 1 %>" class="tab <%= run == @invoicing.runs.last ? ' active' : '' %> ">
         <div class='grid shell'>
-          <div class='grid-row col-3-24 bottom-spacer grid-header r-align'>
-            Property ID
+          <div class='grid-row'>
+            <h3>Created</h3>
           </div>
-          <div class='col-5-24 bottom-spacer grid-header'>
-            Billing Agent
+          <%= render 'invoices/invoice_action_header' %>
+          <% run.invoices.mail(true).each do |invoice| %>
+            <%= render 'invoices/invoice_action', invoice: invoice %>
+          <% end %>
+          <div class='col-1-1  grid-row  top-line-spacer'>
+            <h3>Skipped</h3>
           </div>
-          <div class='col-5-24 bottom-spacer grid-header'>
-            Billing Address
-          </div>
-          <div class='col-7-24 bottom-spacer grid-header'>
-            Charge
-          </div>
-          <div class='col-3-24 bottom-spacer no-print grid-header'>
-            Action
-          </div>
-          <% run.invoices.each do |invoice| %>
-            <% invoice_decorator = InvoiceDecorator.new(invoice) %>
-            <div title='View single invoice' class='table-row' data-link='<%= invoice_path(invoice) %>'>
-              <div class='col-3-24  grid-row  inherit-row bottom-spacer r-align'>
-                <%= invoice_decorator.property_ref %>
-              </div>
-              <div class='col-5-24 inherit-row bottom-spacer'>
-                <%= invoice_decorator.billing_agent %>
-              </div>
-              <div class='col-5-24 inherit-row bottom-spacer'>
-                <%= invoice_decorator.billing_first_address_line %>
-              </div>
-              <div class='col-7-24 inherit-row bottom-spacer'>
-                <%= invoice_decorator.products_display %>
-              </div>
-              <div class='col-3-24 bottom-spacer no-print'>
-                <%= link_to fa_icon('print lg'), single_print_path(invoice), title: 'Print' %>
-              </div>
-            </div>
+         <%= render 'invoices/invoice_header' %>
+         <% run.invoices.mail(false).each do |invoice| %>
+            <%= render 'invoices/invoice', invoice: invoice %>
           <% end %>
         </div> <!-- close grid shell-->
 

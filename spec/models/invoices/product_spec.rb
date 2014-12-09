@@ -24,7 +24,7 @@ RSpec.describe Product, type: :model do
     end
   end
 
-  describe '.show_on_back_page' do
+  describe '.back_page' do
     it 'returns back page products' do
       invoice_create products: [product_new(charge_type: 'Ground Rent')]
       expect(Product.back_page.charge_type).to eq 'Ground Rent'

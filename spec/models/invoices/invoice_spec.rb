@@ -185,4 +185,16 @@ RSpec.describe Invoice, type: :model do
         .to start_with %q(Billing Address: "Mr W. G. Grace\nEdgbaston Road\nBirmingham\nWest Midlands")
     end
   end
+
+  describe '.mailable' do
+    it 'can return mailable ' do
+      invoice_create mail: true
+      expect(Invoice.mail(true).size).to eq 1
+    end
+
+    it 'can return unmailable ' do
+      invoice_create mail: false
+      expect(Invoice.mail(true).size).to eq 0
+    end
+  end
 end
