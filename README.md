@@ -17,7 +17,8 @@ This document covers the following sections
   1. rake db:import
 3. Troubleshooting
   1. Reset the database
-
+  2. Running rails console in production
+  3. Cheatsheet
 
 
 ===
@@ -120,19 +121,24 @@ My Reference: Webserver alias: `ssh arran`
 ===
 
 ####3. TROUBLESHOOTING
+
 ####3.1. Reset the database
 Sometimes when you are changing a project the database will not allow you to delete it due to open connections to it. If you cannot close the connections you will have to reset the database. If this is the case follow this:
 
 1. Remove any backend connections
   1. local dev: `rake db:terminate RAILS_ENV=test`
   2. Production: *need a cap version*
-2. `cap postgresql:drop_db`
-3. `cap postgresql:drop_role`
-  1. role depends on db
-4. Follow instructions for: Project Setup
+2. `cap production rails:rake:db:drop`
+3. Follow instructions for: Project Setup
 
-####3.2 Running rails console in prouction
+####3.2 Running rails console in production
 `bundle exec rails c production`
+
+####3.3 Cheatsheet
+1. change to Postgres user and open psql prompt `sudo -u postgres psql postgres`
+2. Listing Users (roles) and attributes: `\du`
+3. Listing all databases: `\list`
+4. Connect to a database: `\c db_name`
 ===
 
 
