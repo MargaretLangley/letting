@@ -53,14 +53,13 @@ class Run < ActiveRecord::Base
 
   def invoices_maker comments: []
     invoiceable_accounts.map do |account|
-      next unless debit_transaction_maker(account).debits?
-
+      next unless products_maker(account).debits?
       InvoiceMaker.new(account: account,
                        period: invoicing.period,
                        invoice_date: invoice_date,
                        comments: comments,
                        transaction: debit_transaction_maker(account),
-                       products: products_maker(account))
+                       products: products_maker(account).invoice)
         .compose
     end.compact
   end
@@ -69,7 +68,6 @@ class Run < ActiveRecord::Base
     BlueProductsMaker.new(invoice_date: invoice_date,
                           arrears: account.balance(to_date: invoice_date),
                           transaction: debit_transaction_maker(account))
-      .invoice
   end
 
   def debit_transaction_maker(account)

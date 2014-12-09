@@ -27,10 +27,18 @@ class BlueProductsMaker
     products
   end
 
+  def debits?
+    product_debits.present?
+  end
+
   private
 
   def make_products
-    product_arrears_maker + transaction.debits.map do |debit|
+    product_arrears_maker + product_debits
+  end
+
+  def product_debits
+    transaction.debits.map do |debit|
       next if debit.automatic_payment?
       Product.new debit.to_debitable
     end.compact
