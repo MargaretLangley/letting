@@ -10,8 +10,8 @@
   Template Number <%= @template.id %>
 
   <% if @template.id == 1 %>
-    <%= render 'front_page', template: @template %>
+    <%= render 'front_page', template_front: @template %>
   <% else %>
-    <%= render 'page2', template: @template %>
+    <%= render 'page2', template_back: @template %>
   <% end %>
 </div>

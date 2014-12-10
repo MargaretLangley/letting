@@ -1,13 +1,13 @@
-<% template = ::Template.find(1) %>
+<% template_front = ::Template.find(1) %>
 
 <div class='grid-row  c-align  h1print'>
-	<%= template.invoice_name %>
+	<%= template_front.invoice_name %>
 </div>
 <div class='grid-row  c-align  inv-bold-headings'>
-  <%= template.address.text %>
+  <%= template_front.address.text %>
   <br>
-	Telephone: <%= template.phone %>
+	Telephone: <%= template_front.phone %>
 	<br>
-	VAT Reg No: <%= template.vat %>
+	VAT Reg No: <%= template_front.vat %>
 </div>
 <br>

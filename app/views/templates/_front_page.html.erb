@@ -1,8 +1,8 @@
-<%= render 'heading_front_page', template: @template %>
+<%= render 'heading_front_page', template_front: template_front %>
 
 <div class='col-2-24  grid-row'>&nbsp;</div>
 <div class='col-7-24  inv-bold-headings'>
-  <%= @template.heading2 %>
+  <%= template_front.heading2 %>
 </div>
 <div class='col-8-24  inv-bold-headings'>
   Property Ref:
@@ -16,17 +16,17 @@
 
 <div class='col-2-24  grid-row'>&nbsp;</div>
 <div class='col-20-24  inv-advice'>
-  We <%= @template.invoice_name %> ON BEHALF OF YOUR LANDLORDS
+  We <%= template_front.invoice_name %> ON BEHALF OF YOUR LANDLORDS
   <br>
   CLIENT NAME CLIENT ADDRESS
   <br>
-  <%= simple_format(@template.advice1) %>
-  <%= @template.address.text %>
+  <%= simple_format(template_front.advice1) %>
+  <%= template_front.address.text %>
   <p>
   <div class = 'grid-row  inv-advice-bold'>
     Remittance Advice
   </div>
-  <%= simple_format(@template.advice2) %>
+  <%= simple_format(template_front.advice2) %>
   </p>
   <span class='sissors'>&#9985;<%= "-" * 60 %></span>
   <br>
