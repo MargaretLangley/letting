@@ -1,13 +1,9 @@
-<%= render 'heading_p2_address', template: @template %>
+<% template_front = ::Template.find(1) %>
+<%= render 'heading_p2_address', template: template_front %>
+<%= render 'heading_page2', template: template_front %>
 
-<%= render 'heading_page2', template: @template %>
-
- <!-- render '/guides/guides_for_template', template: @template  -->
-
-<%= render @template.guides %>
-
+<%= render template_back.guides %>
 <div class='widemargin  instruct-font'>
   CLIENT'S ADDRESS
 </div>
-
-<%= render 'notices', template: @template %>
+<%= render 'notices', template: template_back %>

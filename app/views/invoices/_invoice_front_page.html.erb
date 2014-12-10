@@ -1,6 +1,6 @@
 <% invoice_dec = InvoiceDecorator.new(invoice) %>
 <div class='printbody'>
-  <%= render 'templates/heading_front_page', template: invoice_dec.templates.first %>
+  <%= render 'templates/heading_front_page', template_front: invoice_dec.templates.first %>
 
   <div class='col-2-24  grid-row'>&nbsp;</div>
   <div class='col-7-24  inv-bold-headings'>
