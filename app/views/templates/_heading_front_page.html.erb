@@ -1,16 +1,16 @@
 <div class=' grid-row  c-align  h1print'>
-  <%= template.invoice_name %>
+  <%= template_front.invoice_name %>
 </div>
 
 <div class='grid-row  c-align  h1print  bottom-spacer'>
-  <%= template.heading1 %>
+  <%= template_front.heading1 %>
 </div>
 
 <div class='col-2-24  grid-row'>&nbsp;</div>
 <div class='col-15-24  inv-bold-headings'>
-  VAT Reg No <%= template.vat %>
+  VAT Reg No <%= template_front.vat %>
 </div>
 <div class='col-3-12  inv-bold-headings'>
-  <%= simple_format(template.address.text, {}, wrapper_tag: 'div') %>
-  Tel: <%= template.phone %>
+  <%= simple_format(template_front.address.text, {}, wrapper_tag: 'div') %>
+  Tel: <%= template_front.phone %>
 </div>
