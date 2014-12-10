@@ -83,9 +83,27 @@ class Account < ActiveRecord::Base
 
   delegate :clear_up_form, to: :charges
 
+  # Maybe way to get balance from database
+  # Credit.group(:account_id).sum(:amount)
+  # Debit.group(:account_id).sum(:amount)
   def balance to_date: Time.zone.today
     (credits + debits).select { |transaction| transaction.on_date <= to_date }
       .map(&:amount).inject(0, :+)
+  end
+
+  # balance using database
+  # filtering by date would take more time and introduce complication
+  # (if I tried it would be with sub-query).
+  #
+  def self.balance_all greater_than: 0
+    Account
+      .joins('LEFT JOIN credits ON credits.account_id = accounts.id',
+             'LEFT JOIN debits ON debits.account_id = accounts.id')
+      .select('accounts.*, sum(coalesce(debits.amount, 0) ' \
+                            '+ coalesce(credits.amount, 0)) as balance')
+      .group('accounts.id, credits.on_date, debits.on_date')
+      .having('sum(coalesce(debits.amount, 0) + coalesce(credits.amount, 0) )' \
+              ' > ?', greater_than)
   end
 
   # Finds and returns a matching Account

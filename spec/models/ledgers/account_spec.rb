@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+# rubocop: disable Metrics/LineLength
+
 describe Account, :ledgers, type: :model do
   it('is valid') { expect(account_new).to be_valid }
 
@@ -81,6 +83,63 @@ describe Account, :ledgers, type: :model do
                             debits: [debit_1, debit_2]
 
       expect(account.balance to_date: Date.new(2013, 4, 1)).to eq(-40.00)
+    end
+  end
+
+  describe '.balance_all' do
+    it 'calculates simple balance' do
+      charge = charge_create
+      account = account_new id: 3, property: property_new(id: 4)
+      account.debits.push debit_new on_date: '25/3/2011',
+                                    amount: 11.00,
+                                    charge: charge
+      account.credits.push credit_new on_date: '25/4/2012',
+                                      amount: -10.00,
+                                      charge: charge
+      account.save!
+      expect(Account.balance_all.first.balance).to eq(1.00)
+    end
+
+    it 'calculates balance when only credits' do
+      charge = charge_create
+      account = account_new id: 3, property: property_new(id: 4)
+      account.credits.push credit_new on_date: '25/4/2012',
+                                      amount: 11.00, # normally negative
+                                      charge: charge
+      account.save!
+      expect(Account.balance_all.first.balance).to eq(11.00)
+    end
+
+    it 'calculates balance when only debits' do
+      charge = charge_create
+      account = account_new id: 3, property: property_new(id: 4)
+      account.debits.push debit_new on_date: '25/3/2011',
+                                    amount: 10.00,
+                                    charge: charge
+      account.save!
+      expect(Account.balance_all.first.balance).to eq(10.00)
+    end
+
+    it 'calculates simple balance' do
+      charge = charge_create
+      account = account_new id: 3, property: property_new(id: 4)
+      account.debits.push debit_new on_date: '25/3/2011',
+                                    amount: 10.00,
+                                    charge: charge
+      account.save!
+      expect(Account.balance_all(greater_than: 11).first).to be_nil
+    end
+
+    it 'smoke test' do
+      charge = charge_create
+      debit_1 = debit_new amount: 3, on_date: Date.new(2012, 3, 4), charge: charge
+      debit_2 = debit_new amount: 3, on_date: Date.new(2013, 3, 4), charge: charge
+      credit_1 = credit_new amount: -1, on_date: Date.new(2012, 3, 4), charge: charge
+      credit_2 = credit_new amount: -1, on_date: Date.new(2013, 3, 4), charge: charge
+      account_create credits: [credit_1, credit_2],
+                     debits: [debit_1, debit_2]
+
+      expect(Account.balance_all.first.balance).to eq(4.00)
     end
   end
 
