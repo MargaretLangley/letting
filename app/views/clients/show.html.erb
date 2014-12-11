@@ -4,7 +4,9 @@
   <div class='col-1-24  grid-row  vertical-spacer'>
     &nbsp;
   </div>
-  <div class='col-14-24  vertical-spacer'>
+
+
+  <div class='col-20-24  vertical-spacer'>
     <div class='col-6-24  grid-row  bottom-spacer faded'>
       Client ID
     </div>
@@ -24,7 +26,7 @@
       <%= simple_format(@client.address.text, {}, wrapper_tag: 'div') %>
     </div>
     <div class='col-1-1  grid-row  vertical-spacer  faded'>
-      Properties Owned
+      Ground Rents Owned
     </div>
 
     <div class='col-3-24  grid-row  bottom-spacer  grid-header r-align'>
@@ -33,11 +35,14 @@
     <div class='col-3-24  grid-header  bottom-spacer  r-align'>
        No
     </div>
-    <div class='col-7-24  grid-header  bottom-spacer'>
+    <div class='col-8-24  grid-header  bottom-spacer'>
       Address
     </div>
-    <div class='col-5-24  grid-header  bottom-spacer'>
+    <div class='col-7-24  grid-header  bottom-spacer'>
       Town
+    </div>
+    <div class='col-3-24  grid-header  bottom-spacer   r-align'>
+      Amount
     </div>
 
 
@@ -50,14 +55,17 @@
         <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
           <%= format_empty_string_as_dash property.address.first_no %>
         </div>
-        <div class='col-7-24  bottom-spacer  inherit-row'>
+        <div class='col-8-24  bottom-spacer  inherit-row'>
           <%= format_empty_string_as_dash property.address.first_text %>
         </div>
-        <div class='col-6-24  bottom-spacer  inherit-row  nowrap'>
+        <div class='col-7-24  bottom-spacer  inherit-row  nowrap'>
           <%= property.address.town %>
         </div>
          </div>
-        <div class='col-5-24  bottom-spacer  no-print'>&nbsp;</div>
+        <div class='col-3-24  bottom-spacer  r-align'>
+           <!-- property.account.credits.credited(range: Date.new(2014, 1, 1)..Date.new(2015, 1,1) ).income  -->
+           &nbsp;
+        </div>
       <% end %>
     <% else %>
       <div class='col-1-1  grid-row  vertical-spacer'>
@@ -65,7 +73,7 @@
       </div>
     <% end %>
   </div>
-  <div class='col-9-24  vertical-spacer'>
+  <div class='col-3-24  vertical-spacer'>
     <%= edit_link @client, size: '2x' %>
   </div>
 </div>
