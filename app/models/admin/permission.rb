@@ -36,6 +36,7 @@ class Permission < Struct.new(:user)
 
   def user_controllers
     %w(accounts
+       arrears
        clients
        debits
        errors

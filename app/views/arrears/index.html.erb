@@ -1,0 +1,60 @@
+<% @title='Arrears' %>
+
+<% accounts = @records %>
+
+<div class='grid shell'>
+  <div class='no-print'>
+    <%= form_tag arrears_path, method: 'get' do %>
+      <div class='col-3-12  bottom-spacer'>Accounts with arrears in excess of:</div>
+      <div class='col-5-12  bottom-spacer'>
+        <%= text_field_tag :arrears_search, params[:arrears_search], autofocus: true, class: 'width-3-4' %>
+        <button type='submit' class='width-1-6' id='payment-search' title='Arrears Search'>
+          <%= fa_icon('search lg') %>
+        </button>
+      </div>
+      <div class='col-4-12  bottom-spacer'>&nbsp;</div>
+    <% end %>
+  </div>
+
+  <div class='col-2-24  grid-row  bottom-spacer  grid-header r-align'>
+    Property
+  </div>
+  <div class='col-1-24  bottom-spacer  grid-header  r-align'>Cl</div>
+  <div class='col-5-24  bottom-spacer  grid-header'>Name</div>
+  <div class='col-1-24  bottom-spacer  grid-header  r-align'>No</div>
+  <div class='col-5-24  bottom-spacer  grid-header'>Address</div>
+  <div class='col-4-24  bottom-spacer  grid-header'>Town</div>
+  <div class='col-6-24  bottom-spacer  grid-header  no-print  no-r-pad'>
+    Arrears
+  </div>
+
+ <% accounts.each do |account|
+      property = PropertyDecorator.new account.property %>
+
+    <div title='View' class='table-row' data-link='<%= property_path(property.id) %>'>
+      <div class='col-2-24  grid-row  bottom-spacer  inherit-row  r-align'>
+        <%= property.human_ref %>
+      </div>
+      <div class='col-1-24  bottom-spacer  inherit-row  r-align'>
+        <%= property.client_ref %>
+      </div>
+      <div class='col-5-24  bottom-spacer  inherit-row'>
+        <%= format_empty_string_as_dash property.occupiers %>
+      </div>
+      <div class='col-1-24  bottom-spacer  inherit-row  r-align'>
+        <%= format_empty_string_as_dash property.address.first_no %>
+      </div>
+      <div class='col-5-24  bottom-spacer  inherit-row'>
+        <%= format_empty_string_as_dash property.address.first_text %>
+        <%= testing_link path: property_path(property) %>
+      </div>
+      <div class='col-4-24  bottom-spacer  inherit-row  nowrap'>
+        <%= property.address.town %>
+      </div>
+      <div class='col-3-24  bottom-spacer  inherit-row  no-print'>
+        <%= account.amount %>
+      </div>
+    </div>
+    <div class='col-3-24  bottom-spacer  no-print'>&nbsp;</div>
+  <% end %>
+</div>

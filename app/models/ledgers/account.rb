@@ -91,19 +91,29 @@ class Account < ActiveRecord::Base
       .map(&:amount).inject(0, :+)
   end
 
-  # balance using database
-  # filtering by date would take more time and introduce complication
-  # (if I tried it would be with sub-query).
+  # Query to return significant balances for all accounts
+  #
+  # greater_than - level above which we return accounts.
   #
   def self.balance_all greater_than: 0
-    Account
-      .joins('LEFT JOIN credits ON credits.account_id = accounts.id',
-             'LEFT JOIN debits ON debits.account_id = accounts.id')
-      .select('accounts.*, sum(coalesce(debits.amount, 0) ' \
-                            '+ coalesce(credits.amount, 0)) as balance')
-      .group('accounts.id, credits.on_date, debits.on_date')
-      .having('sum(coalesce(debits.amount, 0) + coalesce(credits.amount, 0) )' \
-              ' > ?', greater_than)
+    # Coalesce require if you want to see accounts with 0 balances
+    #
+    #
+    query = <<-SQL
+      SELECT id, property_id, sum(amount) as amount FROM (
+        SELECT accounts.id, property_id, coalesce(credits.amount, 0) as amount
+        FROM "accounts"
+        LEFT JOIN credits ON credits.account_id = accounts.id
+        UNION
+        SELECT accounts.id, property_id, coalesce(debits.amount, 0) as amount
+        FROM "accounts"
+        LEFT JOIN debits ON debits.account_id = accounts.id
+      ) t
+      GROUP BY id, property_id
+      HAVING sum(amount) > ?
+      ORDER BY id
+    SQL
+    find_by_sql [query, greater_than]
   end
 
   # Finds and returns a matching Account

@@ -18,6 +18,7 @@
     <h4>&nbsp;Menu</h4>
     <li class="<%= main_menu_active? 'properties' %>"><%= link_to 'Accounts', properties_path %></li>
     <li class="active-subnav <%= sub_menu_state 'properties' %>"><%= link_to 'New Account', new_property_path %></li>
+    <li class="active-subnav <%= sub_menu_state 'properties' %>"><%= link_to 'Arrears List', arrears_path %></li>
     <li class="<%= main_menu_active? "clients" %>"><%= link_to 'Clients', clients_path %></li>
     <li class="active-subnav <%= sub_menu_state 'clients' %>"><%= link_to 'New Client', new_client_path %></li>
 

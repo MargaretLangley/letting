@@ -1,5 +1,7 @@
 Letting::Application.routes.draw do
 
+  get 'arrears/index'
+
   resources :sessions, only: [:create, :destroy]
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
@@ -13,6 +15,7 @@ Letting::Application.routes.draw do
 
   root 'properties#index'
   resources :properties
+  resources :arrears, only: [:index]
   resources :clients
   resources :payments
   resources :invoicings
