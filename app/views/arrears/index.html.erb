@@ -24,8 +24,11 @@
   <div class='col-1-24  bottom-spacer  grid-header  r-align'>No</div>
   <div class='col-5-24  bottom-spacer  grid-header'>Address</div>
   <div class='col-4-24  bottom-spacer  grid-header'>Town</div>
-  <div class='col-6-24  bottom-spacer  grid-header  no-print  no-r-pad'>
-    Arrears
+  <div class='col-3-24  bottom-spacer  grid-header  no-print  r-align'>
+    Arrears (£)
+  </div>
+  <div class='col-3-24  bottom-spacer  grid-header  no-print  no-r-pad'>
+    &nbsp;
   </div>
 
  <% accounts.each do |account|
@@ -51,10 +54,12 @@
       <div class='col-4-24  bottom-spacer  inherit-row  nowrap'>
         <%= property.address.town %>
       </div>
-      <div class='col-3-24  bottom-spacer  inherit-row  no-print'>
-        <%= account.amount %>
+      <div class='col-3-24  bottom-spacer  inherit-row  r-align  no-print'>
+        <%= number_with_precision(account.amount, precision: 2, delimiter: ',') %>
+      </div>
+      <div class='col-3-24  bottom-spacer  r-align  no-print  no-r-pad'>
+        &nbsp;
       </div>
     </div>
-    <div class='col-3-24  bottom-spacer  no-print'>&nbsp;</div>
   <% end %>
 </div>
