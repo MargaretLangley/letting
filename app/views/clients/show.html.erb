@@ -4,42 +4,67 @@
   <div class='col-1-24  grid-row  vertical-spacer'>
     &nbsp;
   </div>
-  <div class='col-14-24  vertical-spacer'>
-    <div class='col-1-4  grid-row  bottom-spacer faded'>
+
+
+  <div class='col-20-24  vertical-spacer'>
+    <div class='col-6-24  grid-row  bottom-spacer faded'>
       Client ID
     </div>
-    <div class='col-3-4  bottom-spacer'>
+    <div class='col-18-24  bottom-spacer'>
       <%= @client.human_ref %>
     </div>
-    <div class='col-1-4  grid-row  bottom-spacer  faded'>
+    <div class='col-6-24  grid-row  bottom-spacer  faded'>
       Name
     </div>
-    <div class='col-3-4  bottom-spacer'>
+    <div class='col-18-24  bottom-spacer'>
       <%= @client.entities.full_name %>
     </div>
-    <div class='col-1-4  grid-row  bottom-spacer  faded'>
+    <div class='col-6-24  grid-row  bottom-spacer  faded'>
       Address
     </div>
-    <div class='col-3-4  bottom-spacer'>
+    <div class='col-18-24  bottom-spacer'>
       <%= simple_format(@client.address.text, {}, wrapper_tag: 'div') %>
     </div>
     <div class='col-1-1  grid-row  vertical-spacer  faded'>
-      Properties Owned
+      Ground Rents Owned
     </div>
-    <div class='col-1-8  grid-row  bottom-spacer  grid-header'>
+
+    <div class='col-3-24  grid-row  bottom-spacer  grid-header r-align'>
       ID
     </div>
-    <div class='col-7-8  grid-header  bottom-spacer'>
-      Addresses
+    <div class='col-3-24  grid-header  bottom-spacer  r-align'>
+       No
     </div>
+    <div class='col-8-24  grid-header  bottom-spacer'>
+      Address
+    </div>
+    <div class='col-7-24  grid-header  bottom-spacer'>
+      Town
+    </div>
+    <div class='col-3-24  grid-header  bottom-spacer   r-align'>
+      Amount
+    </div>
+
 
     <% if @client.properties.any? %>
       <% @client.properties.each do |property| %>
-        <div class='col-1-8  grid-row  bottom-spacer'>
+       <div title='View' class='table-row' data-link='<%= property_path(property) %>'>
+        <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
            <%= property.human_ref %>
         </div>
-        <div class='col-7-8  bottom-spacer  no-r-pad'>
-          <%= property.address.text %>
+        <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
+          <%= format_empty_string_as_dash property.address.first_no %>
+        </div>
+        <div class='col-8-24  bottom-spacer  inherit-row'>
+          <%= format_empty_string_as_dash property.address.first_text %>
+        </div>
+        <div class='col-7-24  bottom-spacer  inherit-row  nowrap'>
+          <%= property.address.town %>
+        </div>
+         </div>
+        <div class='col-3-24  bottom-spacer  r-align'>
+           <!-- property.account.credits.credited(range: Date.new(2014, 1, 1)..Date.new(2015, 1,1) ).income  -->
+           &nbsp;
         </div>
       <% end %>
     <% else %>
@@ -48,7 +73,7 @@
       </div>
     <% end %>
   </div>
-  <div class='col-9-24  vertical-spacer'>
+  <div class='col-3-24  vertical-spacer'>
     <%= edit_link @client, size: '2x' %>
   </div>
 </div>
