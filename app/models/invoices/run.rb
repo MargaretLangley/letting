@@ -58,7 +58,7 @@ class Run < ActiveRecord::Base
                        invoice_date: invoice_date,
                        comments: comments,
                        transaction: debit_transaction_maker(account),
-                       products: products_maker(account))
+                       products_maker: products_maker(account))
         .compose
     end.compact
   end
