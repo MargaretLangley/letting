@@ -13,29 +13,26 @@
      <% end %>
    </ul>
 
-    <div class="tab-content">
+    <div class="grid  shell  tab-content">
     <% @invoicing.runs.each_with_index do |run, index|  %>
       <div id="tab<%= index + 1 %>" class="tab <%= run == @invoicing.runs.last ? ' active' : '' %> ">
-        <div class='grid shell'>
-          <div class='grid-row'>
-            <h3>Created</h3>
-          </div>
-          <%= render 'invoices/invoice_action_header' %>
-          <% run.invoices.mail(true).each do |invoice| %>
-            <%= render 'invoices/invoice_action', invoice: invoice %>
-          <% end %>
-          <div class='col-1-1  grid-row  top-line-spacer'>
-            <h3>Skipped</h3>
-          </div>
-         <%= render 'invoices/invoice_header' %>
-         <% run.invoices.mail(false).each do |invoice| %>
-            <%= render 'invoices/invoice', invoice: invoice %>
-          <% end %>
-        </div> <!-- close grid shell-->
-
+        <div class='grid-row'>
+          <h3>Created</h3>
+        </div>
+        <%= render 'invoices/invoice_header', action: true %>
+        <% run.invoices.mail(true).each do |invoice| %>
+          <%= render 'invoices/invoice', invoice: invoice, action: true %>
+        <% end %>
+        <div class='col-1-1  grid-row  top-line-spacer'>
+          <h3>Skipped</h3>
+        </div>
+        <%= render 'invoices/invoice_header', action: false %>
+        <% run.invoices.mail(false).each do |invoice| %>
+          <%= render 'invoices/invoice', invoice: invoice, action: false %>
+        <% end %>
       </div>  <!-- close tab -->
     <% end %>
-    </div> <!-- close tab-content -->
+    </div> <!-- close grid  shell  tab-content -->
   </div> <!-- close tabs -->
 
 </div> <!-- close grid -->
