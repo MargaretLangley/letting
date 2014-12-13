@@ -17,18 +17,18 @@
 #
 module NavigationHelper
   def main_menu_active? controller
-    if controller_name == controller
-      'active-nav'
+    if controller.include? controller_name
+      'active-nav'     # darker colour
     else
-      'inactive-nav'
+      'inactive-nav'   # lighter colour
     end
   end
 
   def sub_menu_state controller
-    if controller_name == controller
-      'flatten'
+    if controller.include? controller_name
+      'flatten'   # no css
     else
-      'folded'
+      'folded'    # hidden
     end
   end
 end
