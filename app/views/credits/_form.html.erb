@@ -10,7 +10,7 @@
   <div class='col-8-24  grid-header  r-align  pick-out'>Payment</div>
   <div class='col-1-24  grid-header  r-align  pick-out'>&nbsp;</div>
 
-  <% @payment.credits_decorated.each do |credit_dec| %>
+  <% payment.credits_decorated.each do |credit_dec| %>
     <%= payment_form.fields_for :credits, credit_dec.credit do |credit_form| %>
       <div>
         <div class='col-6-24  grid-row  cell'>

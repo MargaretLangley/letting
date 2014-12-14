@@ -27,7 +27,7 @@
   <div class="col-1-24 grid-header r-align pick-out">
     &nbsp;
   </div>
-  <% @payment.credits_decorated.each do |credit| %>
+  <% payment.credits_decorated.each do |credit| %>
       <%= render 'credits/credit', credit: credit %>
   <% end %>
 </div>
