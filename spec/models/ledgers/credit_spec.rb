@@ -1,3 +1,4 @@
+# rubocop: disable Metrics/LineLength
 require 'rails_helper'
 
 describe Credit, :ledgers, type: :model do
@@ -34,6 +35,35 @@ describe Credit, :ledgers, type: :model do
       it 'fails zero amount' do
         expect(credit_new charge: charge_new, amount: 0).to_not be_valid
       end
+    end
+  end
+
+  describe '.credited' do
+    it 'finds credit in given range' do
+      credit_create on_date: '2014-3-1', charge: charge_create
+
+      expect(Credit.credited(range: Date.new(2014, 2, 1)..Date.new(2014, 4, 1)).size)
+        .to eq 1
+    end
+    it 'finds credit out of range' do
+      credit_create on_date: '2014-5-1', charge: charge_create
+
+      expect(Credit.credited(range: Date.new(2014, 2, 1)..Date.new(2014, 4, 1)).size)
+        .to eq 0
+    end
+  end
+
+  describe '.income' do
+    it 'finds income as negative amount' do
+      credit_create charge: charge_create, amount: -30
+      expect(Credit.income).to eq(-30.0)
+    end
+
+    it 'finds income with multiple numbers' do
+      charge = charge_create
+      credit_create charge: charge, amount: -20
+      credit_create charge: charge, amount: -10
+      expect(Credit.income).to eq(-30.00)
     end
   end
 

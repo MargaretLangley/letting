@@ -5,11 +5,11 @@ describe Client, type: :feature do
   before(:each) { log_in }
 
   it '#show' do
-    client_create(
-      id: 1,
-      human_ref: 8008,
-      entities: [Entity.new(title: 'Mr', initials: 'W G', name: 'Grace')])
-      .properties << property_new(human_ref: 2008)
+    credit = credit_new on_date: '2014-3-1', charge: charge_create
+    client_create(id: 1, human_ref: 87, entities: [Entity.new(name: 'Grace')])
+      .properties << property_new(human_ref: 2008,
+                                  account: account_new(credits: [credit]))
+
     visit '/clients/1'
     expect_client_entity
     expect_client_address
@@ -17,11 +17,11 @@ describe Client, type: :feature do
   end
 
   def expect_client_address
-    expect(page).to have_text '8008'
+    expect(page).to have_text '87'
   end
 
   def expect_client_entity
-    expect(page).to have_text 'Mr W. G. Grace'
+    expect(page).to have_text 'Grace'
   end
 
   def expect_property

@@ -6,7 +6,7 @@ class CreateDueOns < ActiveRecord::Migration
       t.integer :day, null: false
       t.integer :show_month
       t.integer :show_day
-      t.belongs_to :cycle, index: true
+      t.belongs_to :cycle, index: true, null: false
       t.timestamps
     end
   end

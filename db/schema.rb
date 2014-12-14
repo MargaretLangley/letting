@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20141129154746) do
   end
 
   create_table "comments", force: true do |t|
-    t.integer  "invoice_id"
+    t.integer  "invoice_id", null: false
     t.string   "clarify",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 20141129154746) do
     t.integer  "day",        null: false
     t.integer  "show_month"
     t.integer  "show_day"
-    t.integer  "cycle_id"
+    t.integer  "cycle_id",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

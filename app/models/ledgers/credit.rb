@@ -52,6 +52,14 @@ class Credit < ActiveRecord::Base
     self.amount *= -1
   end
 
+  def self.credited range: Date.new(2014, 1, 1)..Date.new(2015, 1, 1)
+    where(on_date: range)
+  end
+
+  def self.income
+    sum(:amount)
+  end
+
   # charge_id - the charge you are querying for unspent credits.
   # returns - the unspent credits for the charge_id
   #
