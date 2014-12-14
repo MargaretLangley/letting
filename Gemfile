@@ -101,6 +101,7 @@ group :development, :test do
   gem 'byebug', '~> 3.5.0'
   gem 'rack-mini-profiler', '~>0.9.0'
   gem 'rspec-rails', '~> 3.1.0'
+  gem 'table_print'
 end
 
 group :test do
