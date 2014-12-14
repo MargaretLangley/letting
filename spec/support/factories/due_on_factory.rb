@@ -7,7 +7,7 @@ def due_on_new id: nil,
                day: 25,
                show_month: nil,
                show_day: nil,
-               cycle_id: nil
+               cycle_id: 3
   DueOn.new id: id,
             year: year,
             month: month,
@@ -23,7 +23,7 @@ def due_on_create id: nil,
                   day: 25,
                   show_month: nil,
                   show_day: nil,
-                  cycle_id: nil
+                  cycle_id: 3
   due_on = due_on_new(id: id,
                       year: year,
                       month: month,

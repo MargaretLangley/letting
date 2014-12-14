@@ -47,7 +47,6 @@
       Amount
     </div>
 
-
     <% if @client.properties.any? %>
       <% @client.properties.each do |property| %>
        <div title='View' class='table-row' data-link='<%= property_path(property) %>'>
@@ -65,8 +64,7 @@
         </div>
          </div>
         <div class='col-3-24  bottom-spacer  r-align'>
-          <% property.account.credits.credited(range: Date.new(2014, 1, 1)..Date.new(2015, 1,1) ).income %>
-           &nbsp;
+          <%= property.account.credits.credited(range: Date.new(2014, 1, 1)..Date.new(2015, 1,1) ).income %>
         </div>
       <% end %>
     <% else %>
