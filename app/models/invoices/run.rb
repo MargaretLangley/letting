@@ -25,8 +25,8 @@ class Run < ActiveRecord::Base
   def prepare(invoice_date:, comments:)
     self.invoice_date = invoice_date
 
-    if first_run
-      self.invoices = invoices_maker(comments: comments)
+    if first_run?
+      self.invoices = first_run comments: comments
     else
       self.invoices = rerun invoicing.runs.first.invoices, comments: comments
     end
@@ -47,26 +47,24 @@ class Run < ActiveRecord::Base
     self.invoice_date = Time.zone.today if invoice_date.blank?
   end
 
-  def first_run
+  def first_run?
     self == invoicing.runs.first
   end
 
-  def invoices_maker comments: []
-    invoiceable_accounts.map do |account|
-      InvoiceMaker.new(account: account,
-                       period: invoicing.period,
-                       invoice_date: invoice_date,
-                       comments: comments,
-                       transaction: debit_transaction_maker(account),
-                       products_maker: products_maker(account))
-        .compose
-    end.compact
+  def first_run(comments:)
+    invoicing
+      .accounts
+      .map { |account| invoice_maker(account: account, comments: comments) }
   end
 
-  def products_maker account
-    BlueProductsMaker.new(invoice_date: invoice_date,
-                          arrears: account.balance(to_date: invoice_date),
-                          transaction: debit_transaction_maker(account))
+  def invoice_maker account: account, comments: []
+    InvoiceMaker.new(account: account,
+                     period: invoicing.period,
+                     invoice_date: invoice_date,
+                     comments: comments,
+                     transaction: debit_transaction_maker(account),
+                     products_maker: products_maker(account))
+      .compose
   end
 
   def debit_transaction_maker(account)
@@ -74,8 +72,10 @@ class Run < ActiveRecord::Base
       .invoice
   end
 
-  def invoiceable_accounts
-    AccountFinder.new(property_range: invoicing.property_range).matching
+  def products_maker account
+    BlueProductsMaker.new(invoice_date: invoice_date,
+                          arrears: account.balance(to_date: invoice_date),
+                          transaction: debit_transaction_maker(account))
   end
 
   #
@@ -87,13 +87,15 @@ class Run < ActiveRecord::Base
   end
 
   def invoice_remaker(invoice, comments:)
-    products =
-      ProductsMaker.new(invoice_date: invoice_date,
-                        arrears: invoice.account.balance(to_date: invoice_date),
-                        transaction: invoice.debits_transaction).invoice
-
     InvoiceRemaker.new(template_invoice: invoice,
                        comments: comments,
-                       products: products).compose
+                       products: products_remaker(invoice)).compose
+  end
+
+  def products_remaker invoice
+    ProductsMaker.new(invoice_date: invoice_date,
+                      arrears: invoice.account.balance(to_date: invoice_date),
+                      transaction: invoice.debits_transaction)
+      .invoice
   end
 end

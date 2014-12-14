@@ -26,6 +26,10 @@ class Invoicing < ActiveRecord::Base
     self.period_last  = billing.last
   end
 
+  def accounts
+    AccountFinder.new(property_range: property_range).matching
+  end
+
   # valid_arguments?
   # Does this invoicing have enough arguments to call generate on?
   # Nil values for property_range and period are nil cause problems.
