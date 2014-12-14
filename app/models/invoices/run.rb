@@ -25,10 +25,10 @@ class Run < ActiveRecord::Base
   def prepare(invoice_date:, comments:)
     self.invoice_date = invoice_date
 
-    if first_run?
+    if invoicing.first_run?
       self.invoices = first_run comments: comments
     else
-      self.invoices = rerun invoicing.runs.first.invoices, comments: comments
+      self.invoices = rerun invoicing.mold.invoices, comments: comments
     end
   end
 
@@ -41,14 +41,14 @@ class Run < ActiveRecord::Base
     invoices.select(&:actionable?).present?
   end
 
+  def finished?
+    invoices.present?
+  end
+
   private
 
   def init
     self.invoice_date = Time.zone.today if invoice_date.blank?
-  end
-
-  def first_run?
-    self == invoicing.runs.first
   end
 
   def first_run(comments:)

@@ -21,7 +21,7 @@
 # Client
 #   - Compound Name and address
 #
-# TODO: remove methodlength and ParameterLists errors
+# TODO: remove MethodLength and ParameterLists errors
 # rubocop: disable Metrics/MethodLength, Metrics/ParameterLists
 #
 class Invoice < ActiveRecord::Base
@@ -49,10 +49,7 @@ class Invoice < ActiveRecord::Base
     end
   end
   scope :mail, ->(mail) { where(mail: mail) }
-  validates :invoice_date,
-            :property_ref,
-            :property_address,
-            presence: true
+  validates :invoice_date, :property_ref, :property_address, presence: true
   has_many :templates, through: :letters
   has_many :letters, dependent: :destroy
 

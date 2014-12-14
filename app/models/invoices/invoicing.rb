@@ -30,6 +30,14 @@ class Invoicing < ActiveRecord::Base
     AccountFinder.new(property_range: property_range).matching
   end
 
+  def first_run?
+    runs.select(&:finished?).size.zero?
+  end
+
+  def mold
+    runs.first
+  end
+
   # valid_arguments?
   # Does this invoicing have enough arguments to call generate on?
   # Nil values for property_range and period are nil cause problems.
