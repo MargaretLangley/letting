@@ -2,6 +2,15 @@ require_relative '../../stage/stage'
 
 STDOUT.sync = true
 
+#
+# AccItems
+#
+# Creates the acc_items staging file in the staging/ directory.
+#
+# stage task - stage tasks take legacy data and overwrite, when necessary,
+#              any changes by the patch files and puts the resultant data
+#              into the stage directory.
+#
 namespace :db do
   namespace :stage do
     desc 'Improves legacy accounts/charge data quality by patching mistakes.'

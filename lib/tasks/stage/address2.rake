@@ -2,6 +2,16 @@ require_relative '../../stage/stage'
 
 STDOUT.sync = true
 
+#
+# Address2
+#
+# Creates the address2, holding agent data, staging file in the staging/
+# directory.
+#
+# stage task - stage tasks take legacy data and overwrite, when necessary,
+#              any changes by the patch files and puts the resultant data
+#              into the stage directory.
+#
 namespace :db do
   namespace :stage do
     desc 'Improves legacy client data quality by patching inaccuracies.'
