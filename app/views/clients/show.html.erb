@@ -5,8 +5,22 @@
     &nbsp;
   </div>
 
-
-
+  <div class='no-print'>
+    <div class='col-1-24  grid-row  vertical-spacer'>
+     &nbsp;
+    </div>
+    <%= form_tag client_path(@client), method: 'get' do %>
+  <div class='col-5-24  bottom-spacer'>Payments made between:</div>
+    <div class='col-15-24  bottom-spacer'>
+      <%= date_field_tag :start_date, params[:start_date], autofocus: true, class: 'width-7-24' %> and
+      <%= date_field_tag :end_date, params[:end_date], autofocus: true, class: 'width-7-24' %>
+      <button type='submit' class='width-6-24' id='credit_search' title='Credit Search'>
+        <%= fa_icon('search lg') %>
+      </button>
+     </div>
+    <% end %>
+  </div>
+  <p>&nbsp;</p>
 
   <div class='col-20-24  vertical-spacer'>
     <div class='col-6-24  grid-row  bottom-spacer faded'>
@@ -64,7 +78,7 @@
         </div>
          </div>
         <div class='col-3-24  bottom-spacer  r-align'>
-          <%= property.account.credits.credited(range: Date.new(2014, 1, 1)..Date.new(2015, 1,1) ).income %>
+          <%= property.account.credits.credited(range: params[:start_date]..params[:end_date] ).income %>
         </div>
       <% end %>
     <% else %>
