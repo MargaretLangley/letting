@@ -61,8 +61,8 @@ module ApplicationHelper
   # payment should be nested in accounts but is not
   # we have to force the path rather than pass in parent object
   #
-  def payment_link(path:)
-    link_to fa_icon('gbp lg'),
+  def payment_link(path:, size: 'lg')
+    link_to fa_icon("gbp #{size}"),
             path,
             class: 'plain-button  float-right',
             title: 'Add New Payment'
