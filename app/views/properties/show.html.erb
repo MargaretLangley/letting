@@ -6,8 +6,8 @@
       <h3 class='small-bottom'>Property &hellip;</h3>
     </div>
     <div class='col-1-4'>
-      <%= chevron_link direction: :down %>
-      <%= edit_link(@property) %>
+      <%= toggle_link direction: :down %>
+      <%= edit_link @property %>
     </div>
     <%= render 'properties/property_abridged', property: @property %>
   </div>
@@ -17,8 +17,8 @@
       <h3 class='small-bottom'>Property</h3>
     </div>
     <div class='col-1-4  bottom-spacer'>
-      <%= chevron_link direction: :up %>
-      <%= edit_link(@property) %>
+      <%= toggle_link direction: :up %>
+      <%= edit_link @property %>
     </div>
     <%= render 'properties/property', property: @property %>
   </div>
@@ -34,7 +34,7 @@
       <h3 class='small-bottom'>Accounts &hellip;</h3>
     </div>
     <div class='col-1-4  no-r-pad'>
-      <%= chevron_link direction: :down %>
+      <%= toggle_link direction: :down %>
     </div>
     <%= render 'account_items/header' %>
     <%= render partial: 'account_items/account_item', collection: AccountDecorator.new(@property.account).abbrev_items %>
@@ -45,7 +45,7 @@
       <h3 class='small-bottom'>Accounts</h3>
     </div>
     <div class='col-1-4  no-r-pad'>
-      <%= chevron_link direction: :up %>
+      <%= toggle_link direction: :up %>
     </div>
     <%= render 'account_items/header' %>
     <%= render partial: 'account_items/account_item', collection: AccountDecorator.new(@property.account).items %>
