@@ -15,16 +15,16 @@
     </div>
     <div class='col-9-24  shell'>
       <h4>Payment Summary</h4>
-      <div class='col-6-12  grid-row  bottom-spacer'>
-        Last Property&nbsp;(<%= payment.last_human_ref %>)
+      <div class='col-7-12  grid-row  bottom-spacer'>
+        Last Property ID&nbsp;(<%= payment.last_human_ref %>)
       </div>
-      <div class='col-6-12  r-align  bottom-spacer'>
+      <div class='col-5-12  r-align  bottom-spacer'>
         <%= link_to payment.last_amount, edit_payment_path(Payments.last), class: 'hover-link'%>
       </div>
-      <div class='col-6-12  grid-row'>
+      <div class='col-7-12  grid-row'>
         Day's Total
       </div>
-      <div class='col-6-12  r-align'>
+      <div class='col-5-12  r-align'>
         <%= link_to payment.todays_takings, payments_path, class: 'hover-link' %>
       </div>
     </div>
