@@ -13,8 +13,9 @@ describe Payment, :ledgers, :payment, type: :feature do
     payment_page.human_ref('2002').search
     expect(payment_page).to be_populated_search
     property_receivables?
-    expect(payment_page.payment).to eq('88.08')
+    expect(payment_page.payment).to eq 88.08
     payment_page.payment = 88.08
+    expect(payment_page.total).to eq 88.08
     payment_page.pay
     payment_is_created
   end

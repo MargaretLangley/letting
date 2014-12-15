@@ -17,7 +17,7 @@ describe Payment, :ledgers, :payment, type: :feature do
     payment_page.pay
     expect(payment_page).to be_successful
     payment_page.visit_edit payment.id
-    expect(payment_page.payment).to eq('20.00')
+    expect(payment_page.payment).to eq 20.00
   end
 
   context 'error' do

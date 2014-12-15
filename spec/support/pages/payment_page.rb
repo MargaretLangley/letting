@@ -32,7 +32,11 @@ class PaymentPage
   end
 
   def payment
-    find_field('payment_credits_attributes_0_amount').value
+    find_field('payment_credits_attributes_0_amount').value.to_d
+  end
+
+  def total
+    find_field('payment_amount').value.to_d
   end
 
   def search
