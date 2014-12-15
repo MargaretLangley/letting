@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20141129154746) do
   enable_extension "plpgsql"
 
   create_table "accounts", force: true do |t|
-    t.integer  "property_id"
+    t.integer  "property_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

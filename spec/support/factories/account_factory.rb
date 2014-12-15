@@ -3,12 +3,17 @@
 
 def account_new id: nil,
                 property: nil,
+                property_id: 18_305,
                 charges: nil,
                 credits: nil,
                 debits: nil,
                 payment: nil
   account = Account.new id: id
-  account.property = property if property
+  if property
+    account.property = property
+  else
+    account.property_id = property_id
+  end
   account.charges << charges if charges
   account.credits << credits if credits
   account.debits = debits if debits
@@ -18,12 +23,14 @@ end
 
 def account_create id: nil,
                    property: nil,
+                   property_id: 18_306,
                    charges: nil,
                    credits: nil,
                    debits: nil,
                    payment: nil
   account = account_new id: id,
                         property: property,
+                        property_id: property_id,
                         charges: charges,
                         credits: credits,
                         debits: debits,
