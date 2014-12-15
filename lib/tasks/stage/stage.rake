@@ -6,7 +6,7 @@ STDOUT.sync = true
 # The result is put into the staging/ directory
 #
 namespace :db do
-  desc "Legacy data overwritten by patch data and saved in staging."
+  desc 'Legacy data overwritten by patch data and saved in staging.'
   task stage: :environment do |_task, _args|
     include Logging
     logger.info 'db:stage:clients'
