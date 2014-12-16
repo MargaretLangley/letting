@@ -17,6 +17,8 @@ require_relative '../../lib/modules/method_missing'
 # credits_decorated  - negative to positive.
 # initializer        - positive to negative.
 #
+# rubocop: disable Style/TrivialAccessors
+#
 ####
 #
 class PaymentDecorator
@@ -25,29 +27,46 @@ class PaymentDecorator
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
   include ActionView::Helpers::NumberHelper
-  attr_reader :source
+
+  def payment
+    @source
+  end
 
   def initialize payment
     @source = payment
   end
 
   def human_ref
-    return '-' unless @source.account
-    @source.account.property.human_ref
+    return '-' unless payment.account
+    payment.account.property.human_ref
   end
 
   def prepare_for_form
-    @source.prepare
+    payment.prepare
+  end
+
+  # booked_on_dec
+  # decorates booked on with date
+  #
+  # booked_on => booked_on dec as booked_on used by form to get raw date data.
+  #
+  def booked_on_dec
+    return nil unless payment.booked_on
+    I18n.l payment.booked_on, format: :human
+  end
+
+  def amount
+    number_with_precision(payment.amount, precision: 2)
   end
 
   def credits_decorated
-    @source.credits.map do |credit|
+    payment.credits.map do |credit|
       CreditDecorator.new credit
     end.sort_by(&:charge_type)
   end
 
   def property_decorator
-    PropertyDecorator.new @source.account.property
+    PropertyDecorator.new payment.account.property
   end
 
   def last_amount

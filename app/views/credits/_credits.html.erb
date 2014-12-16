@@ -1,33 +1,25 @@
 <div data-role='receivables'>
-  <div class="col-15-24">
-    <h3>Unpaid Debits</h3>
-  </div>
-  <div class="col-1-24 pick-out">
-    <h3>&nbsp;</h3>
-  </div>
-  <div class="col-8-24 pick-out">
-    <h3>Credits</h3>
-  </div>
 
-  <div class="col-6-24 grid-header">
-    Charge
-  </div>
-  <div class="col-3-24 grid-header">
-    &nbsp;
-  </div>
-  <div class="col-3-24 grid-header r-align">
-    Amount
-  </div>
-  <div class="col-3-24 grid-header r-align">
-    Owing
-  </div>
-  <div class="col-8-24 grid-header r-align pick-out">
-    Payment
-  </div>
-  <div class="col-1-24 grid-header r-align pick-out">
-    &nbsp;
-  </div>
-  <% payment.credits_decorated.each do |credit| %>
-      <%= render 'credits/credit', credit: credit %>
+  <div class='col-15-24 grid-row'><h3>Unpaid Debits</h3></div>
+  <div class='col-1-24  pick-out'><h3>&nbsp;</h3></div>
+  <div class='col-8-24  pick-out'><h3>Credits</h3></div>
+
+  <div class='col-6-24  grid-row  grid-header'>Charge</div>
+  <div class='col-3-24  grid-header'>&nbsp;</div>
+  <div class='col-3-24  grid-header r-align'>Amount (£)</div>
+  <div class='col-3-24  grid-header r-align'>Owing (£)</div>
+  <div class='col-8-24  grid-header r-align pick-out'>Payment (£)</div>
+  <div class='col-1-24  grid-header r-align pick-out'>&nbsp;</div>
+
+  <% credits_dec.each do |credit_dec| %>
+    <div class='col-6-24  grid-row  cell'><%= credit_dec.charge_type %></div>
+    <div class='col-3-24  cell'>&nbsp;</div>
+    <div class='col-3-24  cell  r-align'><%= credit_dec.amount %></div>
+    <div class='col-3-24  cell  r-align'><%= credit_dec.owing %></div>
+    <div class='col-1-24  cell  pick-out'>&nbsp;</div>
+    <div class='col-7-24  cell  pick-out  r-align'>
+      <%= text_field_tag '', credit_dec.amount, disabled: true, class: 'r-align' %>
+    </div>
+    <div class='col-1-24  cell  pick-out'>&nbsp;</div>
   <% end %>
 </div>
