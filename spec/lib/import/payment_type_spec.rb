@@ -1,6 +1,6 @@
 require 'rails_helper'
 require_relative '../../../lib/import/payment_type'
-include ChargeDefaults
+include PaymentTypeDefaults
 # rubocop: disable Style/Documentation
 
 module DB

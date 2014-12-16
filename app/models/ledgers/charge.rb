@@ -14,7 +14,7 @@
 ####
 #
 class Charge < ActiveRecord::Base
-  include ChargeDefaults
+  include PaymentTypeDefaults
   belongs_to :account
   has_many :credits, dependent: :destroy, inverse_of: :charge
   has_many :debits, dependent: :destroy, inverse_of: :charge
