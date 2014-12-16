@@ -7,34 +7,35 @@ describe Payment, :ledgers, :payment, type: :feature do
   before(:each) { log_in }
 
   it 'editing original payment - no double payments', js: true do
-    charge = charge_create amount: 30, debits: [debit_new(amount: 30)]
+    charge = charge_create debits: [debit_new(amount: 30)]
     payment = payment_new credit: credit_new(amount: -30, charge_id: charge.id)
-    property_create account: account_new(payment: payment, charges: [charge])
+    account_create payment: payment,
+                   charges: [charge],
+                   property: property_create(human_ref: 2003)
 
     # editing the above original payment
     payment_page.visit_edit payment.id
-    payment_page.payment = 20.00
+    payment_page.credit = 20.00
     payment_page.pay
     expect(payment_page).to be_successful
-    payment_page.visit_edit payment.id
-    expect(payment_page.payment).to eq 20.00
+    expect(Credit.first.amount).to eq(-20.00)
   end
 
-  context 'error' do
-    it 'displays form errors' do
-      charge = charge_new(debits: [debit_new])
-      payment = payment_new credit: credit_new(charge: charge, amount: -88)
-      property_create account: account_new(payment: payment, charges: [charge])
+  it 'displays form errors' do
+    charge = charge_create debits: [debit_new(amount: 30)]
+    payment = payment_new credit: credit_new(amount: -30, charge_id: charge.id)
+    account_create payment: payment,
+                   charges: [charge],
+                   property: property_create(human_ref: 2003)
 
-      payment_page.visit_edit payment.id
-      payment_page.payment = -100_000_000
-      payment_page.pay
-      expect(payment_page).to be_errored
-      payment_has_been_negated?
-    end
+    payment_page.visit_edit payment.id
+    payment_page.credit = -100_000_000
+    payment_page.pay
+    expect(payment_page).to be_errored
+    credit_negated?
+  end
 
-    def payment_has_been_negated?
-      expect(payment_page.payment.to_i).to be > 0
-    end
+  def credit_negated?
+    expect(payment_page.credit.to_i).to be > 0
   end
 end

@@ -27,15 +27,15 @@ class PaymentPage
     self
   end
 
-  def payment= amount
+  def credit= amount
     fill_in 'payment_credits_attributes_0_amount', with: amount
   end
 
-  def payment
+  def credit
     find_field('payment_credits_attributes_0_amount').value.to_d
   end
 
-  def total
+  def payment
     find_field('payment_amount').value.to_d
   end
 
