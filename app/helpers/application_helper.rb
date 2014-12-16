@@ -16,6 +16,10 @@ module ApplicationHelper
     a_string.blank? ? '-'  : a_string
   end
 
+  def payment_types
+    Charge::PAYMENT_TYPE.map { |type| [type.humanize, type] }
+  end
+
   def view_link model, size: '2x'
     if model.new_record?
       app_link icon: 'file-o', size: size, disabled: true, title: 'View file'
