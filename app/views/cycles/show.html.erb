@@ -1,39 +1,25 @@
 <% @title='View Cycle' %>
 
 <div class='grid shell'>
-  <div class='col-18-24 bottom-spacer'>
-    <div class='grid-row col-8-24 bottom-spacer'>
-      &nbsp;
-    </div>
-    <div class='col-3-24 bottom-spacer faded'>
-      Name
-    </div>
-    <div class='col-13-24  bottom-spacer'>
-      <%= @cycle.name %>
-    </div>
+  <div class='col-18-24  grid-row  bottom-spacer'>    <!-- 1st column -->
 
-    <div class='grid-row col-8-24 bottom-spacer'>
-      &nbsp;
-    </div>
-    <div class='col-3-24 bottom-spacer faded'>
-      Order
-    </div>
-    <div class='col-1-24 bottom-spacer r-align'>
-      <%= @cycle.order %>
-    </div>
-    <div class='col-12-24  bottom-spacer'>
-      &nbsp;
-    </div>
-    <div class='grid-row col-24-24'>
-      &nbsp;
-    </div>
-    <% if @cycle.cycle_type == 'monthly' %>
+    <div class='col-8-24  grid-row  bottom-spacer'>&nbsp;</div>
+    <div class='col-3-24  bottom-spacer  faded'>Name</div>
+    <div class='col-13-24 bottom-spacer'><%= @cycle.name %></div>
+
+    <div class='col-8-24  grid-row  bottom-line-spacer'>&nbsp;</div>
+    <div class='col-3-24  bottom-line-spacer  faded'>Order</div>
+    <div class='col-1-24  bottom-line-spacer  r-align'><%= @cycle.order %></div>
+    <div class='col-12-24 bottom-line-spacer'>&nbsp;</div>
+
+    <% if @cycle.monthly? %>
       <%= render 'due_ons/monthly', cycle: @cycle %>
     <% else %>
       <%= render 'due_ons/term', cycle: @cycle %>
     <% end %>
   </div>
-  <div class='col-6-24 no-r-pad'>
+
+  <div class='col-6-24  no-r-pad'>  <!-- 2nd column -->
     <%= edit_link @cycle %>
   </div>
 </div> <!-- grid shell -->
