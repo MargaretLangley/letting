@@ -1,0 +1,17 @@
+<% @title='View Invoice Text' %>
+<div id='invoice_text' class='shell  invoice_text-padding'>
+  <div class='col-12-24  bottom-spacer'>
+    &nbsp;
+  </div>
+  <div class='col-12-24  bottom-spacer'>
+    <%= edit_link @invoice_text %>
+  </div>
+
+  InvoiceText Number <%= @invoice_text.id %>
+
+  <% if @invoice_text.id == 1 %>
+    <%= render 'front_page', invoice_text_front: @invoice_text %>
+  <% else %>
+    <%= render 'page2', invoice_text_back: @invoice_text %>
+  <% end %>
+</div>

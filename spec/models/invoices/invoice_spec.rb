@@ -36,7 +36,7 @@ RSpec.describe Invoice, type: :model do
 
     describe '#prepare' do
       it 'prepares invoice_date' do
-        template_create id: 1
+        invoice_text_create id: 1
         property = property_create account: account_new, client: client_create
 
         (invoice = Invoice.new)
@@ -49,7 +49,7 @@ RSpec.describe Invoice, type: :model do
       end
 
       it 'sets property_ref' do
-        template_create id: 1
+        invoice_text_create id: 1
         invoice = Invoice.new
         property = property_create human_ref: 55, account: account_new
 
@@ -61,7 +61,7 @@ RSpec.describe Invoice, type: :model do
       end
 
       it 'sets billing_address' do
-        template_create id: 1
+        invoice_text_create id: 1
         invoice = Invoice.new
         agent = agent_new(entities: [Entity.new(name: 'Lock')])
         property = property_create agent: agent, account: account_new
@@ -75,7 +75,7 @@ RSpec.describe Invoice, type: :model do
       end
 
       it 'prepares invoice products' do
-        template_create id: 1
+        invoice_text_create id: 1
         property = property_create account: account_new
 
         (invoice = Invoice.new)
@@ -89,7 +89,7 @@ RSpec.describe Invoice, type: :model do
       end
 
       it 'finds the earliest due_date' do
-        template_create id: 1
+        invoice_text_create id: 1
         property = property_create account: account_new
 
         (invoice = Invoice.new)
@@ -109,7 +109,7 @@ RSpec.describe Invoice, type: :model do
 
       describe 'comments' do
         it 'prepares without comments' do
-          template_create id: 1
+          invoice_text_create id: 1
           property = property_create account: account_new
 
           (invoice = Invoice.new)
@@ -121,7 +121,7 @@ RSpec.describe Invoice, type: :model do
         end
 
         it 'prepares with comments' do
-          template_create id: 1
+          invoice_text_create id: 1
           property = property_create account: account_new
 
           (invoice = Invoice.new)
@@ -135,7 +135,7 @@ RSpec.describe Invoice, type: :model do
         end
 
         it 'ignores empty comments' do
-          template_create id: 1
+          invoice_text_create id: 1
           property = property_create account: account_new
 
           (invoice = Invoice.new)

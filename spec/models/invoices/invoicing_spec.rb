@@ -20,7 +20,7 @@ RSpec.describe Invoicing, type: :model do
   # creates database objects required for the tests
   #
   def account_setup(property_ref:, charge_month:, charge_day:)
-    template_create id: 1
+    invoice_text_create id: 1
     cycle = cycle_new due_ons: [DueOn.new(month: charge_month, day: charge_day)]
     account_create property: property_new(human_ref: property_ref),
                    charges: [charge_new(cycle: cycle)]

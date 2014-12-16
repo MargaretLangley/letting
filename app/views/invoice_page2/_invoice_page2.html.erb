@@ -1,34 +1,34 @@
 <% invoice_dec = InvoiceDecorator.new(invoice) %>
 <div class='printbody'>
 
-  <% template_front = ::Template.find(1) %>
-  <%= render 'templates/heading_p2_address' %>
+  <% invoice_text_front = InvoiceText.find(1) %>
+  <%= render 'invoice_texts/heading_p2_address' %>
 
-  <% template_back = ::Template.find(2) %>
+  <% invoice_text_back = InvoiceText.find(2) %>
 
   <div class='grid-row c-align bottom-spacer'>
-     <%= template_back.heading1 %>
+     <%= invoice_text_back.heading1 %>
   </div>
   <div class='grid-row c-align h1print bottom-spacer'>
-    <%= template_back.heading2 %> <%= invoice_dec.property_ref %>
+    <%= invoice_text_back.heading2 %> <%= invoice_dec.property_ref %>
   </div>
 
-  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 0, info: invoice_dec.occupiers, template_back: template_back } %>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 0, info: invoice_dec.occupiers, invoice_text_back: invoice_text_back } %>
 
-  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 1, info: simple_format(invoice_dec.property_address, {}, wrapper_tag: 'div'), template_back: template_back } %>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 1, info: simple_format(invoice_dec.property_address, {}, wrapper_tag: 'div'), invoice_text_back: invoice_text_back } %>
 
   <% product_dec = ProductDecorator.new(invoice.products.back_page) %>
 
-  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 2, info: product_dec.amount_on_time, template_back: template_back } %>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 2, info: product_dec.amount_on_time, invoice_text_back: invoice_text_back } %>
 
-  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 3, info: product_dec.period, template_back: template_back } %>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 3, info: product_dec.period, invoice_text_back: invoice_text_back } %>
 
-  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 4, info: template_front.invoice_name, template_back: template_back } %>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 4, info: invoice_text_front.invoice_name, invoice_text_back: invoice_text_back } %>
 
-  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 5, info: template_front.address.text, template_back: template_back } %>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 5, info: invoice_text_front.address.text, invoice_text_back: invoice_text_back } %>
 
-  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 6, info: invoice_dec.client_address, template_back: template_back } %>
+  <%= render partial:'invoices/instructions_bk_pg',locals: { guideno: 6, info: invoice_dec.client_address, invoice_text_back: invoice_text_back } %>
 
-  <%= render 'templates/notices', template: template_back %>
+  <%= render 'invoice_texts/notices', invoice_text: invoice_text_back %>
 
 </div>

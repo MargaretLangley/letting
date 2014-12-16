@@ -2,12 +2,12 @@
 #
 # Letter
 #
-# Letter is the association between Invoice and Template
+# Letter is the association between Invoice and InvoiceText
 #
 ####
 #
 class Letter < ActiveRecord::Base
   belongs_to :invoice
-  belongs_to :template
-  validates :invoice, :template, presence: true
+  belongs_to :invoice_text
+  validates :invoice, :invoice_text, presence: true
 end

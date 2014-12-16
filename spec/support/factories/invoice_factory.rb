@@ -1,10 +1,10 @@
 # rubocop: disable Metrics/ParameterLists, Metrics/MethodLength, Metrics/LineLength
 # rubocop: disable Lint/UnusedMethodArgument
 
-# invoice_new and invoice_create require that a template with id 1 has been
+# invoice_new and invoice_create require that a invoice_text with id 1 has been
 # created BEFORE invoice.prepare is called.
-# By default the factory creates the template
-# With the method argument: templates: [template_create(id: 1)]
+# By default the factory creates the invoice_text
+# With the method argument: invoice_texts: [invoice_text_create(id: 1)]
 
 def invoice_new id: nil,
                 run_id: 5,
@@ -15,7 +15,7 @@ def invoice_new id: nil,
                 debits_transaction: debits_transaction_new,
                 products: [product_new],
                 mail: true
-  template_create(id: 1) unless Template.find_by id: 1
+  invoice_text_create(id: 1) unless InvoiceText.find_by id: 1
   account.property = property
   invoice = Invoice.new id: id, run_id: run_id
   invoice.debits_transaction = debits_transaction

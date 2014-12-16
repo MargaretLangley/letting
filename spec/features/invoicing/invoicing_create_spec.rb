@@ -60,7 +60,7 @@ describe Invoicing, type: :feature do
 
     account_create property: property_new(human_ref: 88, client: client),
                    charges: [charge_new(cycle: cycle)]
-    template_create id: 1
+    invoice_text_create id: 1
 
     invoicing_page.enter
     invoicing_page.search_term('87-88').search
@@ -77,7 +77,7 @@ describe Invoicing, type: :feature do
 
     account_create property: property_new(human_ref: 88, client: client),
                    charges: [charge_new(cycle: cycle)]
-    template_create id: 1
+    invoice_text_create id: 1
 
     invoicing_page.enter
     invoicing_page.search_term('87-88').search

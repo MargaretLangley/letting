@@ -1,0 +1,24 @@
+<%= form_for invoice_text do |f| %>
+  <div id='invoice_text' class='shell'>
+    <%= render 'shared/errors', object: invoice_text %>
+    <div class='col-12-24  grid-row'>
+      <h2><%= invoice_text.description %></h2>
+    </div>
+    <div class='col-12-24  no-r-pad'>
+      <%= view_link(invoice_text) %>
+    </div>
+
+    <% if invoice_text.id == 1 %>
+      <%= render 'name_phone', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
+      <%= render 'text_fields', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
+   `  <%= render 'addresses/form', f: f, parent: 'invoice_text', address: AddressDecorator.new(invoice_text.address) %>
+    <% else %>
+      <%= render 'text_fields', f: f, invoice_text: invoice_text %>
+      <%= render 'guides/form', f: f %>
+    <% end %>
+    <div class='col-6-24  no-print'>&nbsp;</div>
+    <div class='col-18-24  no-r-pad  no-print'>
+      <%= render 'buttons/submit', f: f %> or <%= cancel_link path: invoice_texts_path %>
+    </div>
+  </div>
+<% end %>

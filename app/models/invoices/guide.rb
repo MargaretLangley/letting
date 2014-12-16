@@ -3,7 +3,7 @@
 # Guide
 #
 # Guide deals with the instructions given on
-# an invoice page. Part of template and property
+# an invoice page. Part of invoice_text and property
 # information. Used when editing instructions
 #
 ####
@@ -11,7 +11,7 @@
 class Guide < ActiveRecord::Base
   MAX_CHAR = 100
   MAX_PROX = 25
-  belongs_to :template
+  belongs_to :invoice_text
   validates :instruction, presence: true,
                           length: { maximum: MAX_CHAR }
   validates :fillin, presence: true,

@@ -52,7 +52,7 @@ en:
       payment:
         create: "Pay Total"
         update: "Update"
-      template:
+      invoice_text:
         update: "Update Invoice Text"
 
   number:

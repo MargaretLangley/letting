@@ -1,9 +1,9 @@
 #
-# Template
+# InvoiceText
 #
-# Text for the invoice Template id: 1 is page 1, and id: 2 is page 2.
+# Text for the invoice InvoiceText id: 1 is page 1, and id: 2 is page 2.
 #
-# Template                          Notice (join)
+# InvoiceText                          Notice (join)
 # id Description    invoice_name    id  instruction            Fill In
 # 1  Page 1 Invoice F & L Adams     nil
 # 2  Page 2         F & L Adams     1  [Insert leaseholder]    To
@@ -15,8 +15,8 @@
 
 class << self
 
-  def create_templates
-    Template.create! [
+  def create_invoice_texts
+    InvoiceText.create! [
       { id: 1,
         description: "Page 1 Invoice",
         invoice_name: "F & L Adams",
@@ -42,7 +42,7 @@ class << self
     Address.create! [
       {
         addressable_id: 1,
-        addressable_type: 'Template',
+        addressable_type: 'InvoiceText',
         flat_no:  '',
         house_name: '',
         road_no:  '77',
@@ -59,43 +59,43 @@ class << self
   def create_guides
     Guide.create! [
       { id: 1,
-        template_id: 2,
+        invoice_text_id: 2,
         instruction: "Insert leaseholder",
         fillin: "To",
         sample: "Ms Sample"
       },
       { id: 2,
-        template_id: 2,
+        invoice_text_id: 2,
         instruction: "Address of premises",
         fillin: "This notice",
         sample: "27 High St"
       },
       { id: 3,
-        template_id: 2,
+        invoice_text_id: 2,
         instruction: "Insert date",
         fillin: "It requires",
         sample: "21st June"
       },
       { id: 4,
-        template_id: 2,
+        invoice_text_id: 2,
         instruction: "[State Period]",
         fillin: "Payable for period",
         sample: "20March-29th Sep",
       },
       { id: 5,
-        template_id: 2,
+        invoice_text_id: 2,
         instruction: "[Insert Landlord name]",
         fillin: "Pay to",
         sample: "Mr Collector",
       },
       { id: 6,
-        template_id: 2,
+        invoice_text_id: 2,
         instruction: "[Insert address]",
         fillin: "at",
         sample: "11 High Street",
       },
       { id: 7,
-        template_id: 2,
+        invoice_text_id: 2,
         instruction: "[Insert Landlord name]",
         fillin: "To",
         sample: "CLIENT NAME",
@@ -106,5 +106,5 @@ class << self
 
 end
 
-create_templates
+create_invoice_texts
 create_guides

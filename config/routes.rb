@@ -23,7 +23,7 @@ Letting::Application.routes.draw do
   resources :prints, only: [:show]
   resources :prints_screens, only: [:show]
   resources :single_prints, only: [:show]
-  resources :templates, only: [:index, :show, :edit, :update]
+  resources :invoice_texts, only: [:index, :show, :edit, :update]
   resources :guides, only: [:index, :show, :edit, :update]
 
   # Admin

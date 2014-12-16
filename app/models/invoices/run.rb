@@ -87,7 +87,7 @@ class Run < ActiveRecord::Base
   end
 
   def invoice_remaker(invoice, comments:)
-    InvoiceRemaker.new(template_invoice: invoice,
+    InvoiceRemaker.new(invoice_text: invoice,
                        comments: comments,
                        products: products_remaker(invoice)).compose
   end

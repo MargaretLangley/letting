@@ -80,7 +80,7 @@ def admin_attributes **overrides
   }.merge overrides
 end
 
-def template_attributes **overrides
+def invoice_text_attributes **overrides
   {
     id: 1,
     description: 'Page 1',
@@ -94,7 +94,7 @@ def template_attributes **overrides
   }.merge overrides
 end
 
-def template_p2_attributes **overrides
+def invoice_text_p2_attributes **overrides
   {
     id: 2,
     description: 'Page 2',

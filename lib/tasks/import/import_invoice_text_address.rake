@@ -1,6 +1,6 @@
 require 'csv'
 ####
-# Import Template Address
+# Import InvoiceText Address
 #
 # addressable_id: 1
 #
@@ -10,20 +10,20 @@ require 'csv'
 namespace :db do
   namespace :import do
 
-    filename = 'import_data/new/template_address.csv'
+    filename = 'import_data/new/invoice_text_address.csv'
 
     desc "Import invoice text F&L Adam's address from CSV file"
-    task :template_address do
+    task :invoice_text_address do
       if File.exist?(filename)
         CSV.foreach(filename, headers: true) do |row|
           begin
             Address.create!(row.to_hash)
           rescue
-            p 'Template Address Create failed (see hash below):', row.to_hash
+            p 'InvoiceText Address Create failed (see hash below):', row.to_hash
           end
         end
       else
-        puts "Template Address not found: #{filename}"
+        puts "InvoiceText Address not found: #{filename}"
       end
     end
   end

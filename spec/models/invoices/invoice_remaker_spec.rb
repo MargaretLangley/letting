@@ -4,7 +4,7 @@ require 'rails_helper'
 RSpec.describe InvoiceRemaker, type: :model do
   describe '#compose' do
     it 'makes a new invoice' do
-      remaker = InvoiceRemaker.new template_invoice: invoice_new,
+      remaker = InvoiceRemaker.new invoice_text: invoice_new,
                                    invoice_date: Date.new(2001, 1, 1),
                                    products: []
       expect(remaker.compose.to_s)
@@ -19,7 +19,7 @@ RSpec.describe InvoiceRemaker, type: :model do
     end
 
     it 'invoice_date set to today' do
-      remaker = InvoiceRemaker.new template_invoice: invoice_new,
+      remaker = InvoiceRemaker.new invoice_text: invoice_new,
                                    invoice_date: Date.new(2001, 1, 1),
                                    products: []
       expect(remaker.compose.invoice_date).to eq Date.new(2001, 1, 1)
@@ -27,7 +27,7 @@ RSpec.describe InvoiceRemaker, type: :model do
 
     it 'copies property ref' do
       invoice = invoice_new property: property_new(human_ref: 8)
-      remaker = InvoiceRemaker.new template_invoice: invoice,
+      remaker = InvoiceRemaker.new invoice_text: invoice,
                                    products: []
       expect(remaker.compose.property_ref).to eq 8
     end
@@ -36,7 +36,7 @@ RSpec.describe InvoiceRemaker, type: :model do
       property = property_new(occupiers: [Entity.new(name: 'Prior')])
       invoice = invoice_new account: account_new, property: property
 
-      remaker = InvoiceRemaker.new template_invoice: invoice,
+      remaker = InvoiceRemaker.new invoice_text: invoice,
                                    products: []
 
       expect(remaker.compose.occupiers).to eq 'Prior'
@@ -46,7 +46,7 @@ RSpec.describe InvoiceRemaker, type: :model do
       property = property_new address: address_new(road: 'New Road')
       invoice = invoice_new property: property
 
-      remaker = InvoiceRemaker.new template_invoice: invoice,
+      remaker = InvoiceRemaker.new invoice_text: invoice,
                                    products: []
 
       expect(remaker.compose.property_address)
@@ -58,7 +58,7 @@ RSpec.describe InvoiceRemaker, type: :model do
         property_create agent: agent_new(entities: [Entity.new(name: 'Lock')])
       invoice = invoice_new account: account_new, property: property
 
-      remaker = InvoiceRemaker.new template_invoice: invoice,
+      remaker = InvoiceRemaker.new invoice_text: invoice,
                                    products: []
 
       expect(remaker.compose.billing_address)

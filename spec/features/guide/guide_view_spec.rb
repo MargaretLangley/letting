@@ -6,14 +6,14 @@ describe Guide, type: :feature do
     it 'finds guide data' do
 
       log_in admin_attributes
-      template_create id: 1
-      template_create id: 2
+      invoice_text_create id: 1
+      invoice_text_create id: 2
       guide_create id: 1,
                    instruction: 'ins1',
                    fillin: 'Useful stuff',
                    sample: 'Filled'
 
-      visit '/templates/2'
+      visit '/invoice_texts/2'
       expect(page.title). to eq 'Letting - View Invoice Text'
       expect(page).to have_text 'ins1'
       expect(page).to have_text 'Useful stuff'

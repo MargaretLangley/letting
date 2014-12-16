@@ -1,6 +1,6 @@
-class CreateTemplates < ActiveRecord::Migration
+class CreateInvoiceTexts < ActiveRecord::Migration
   def change
-    create_table :templates do |t|
+    create_table :invoice_texts do |t|
       t.string :description,  null: false
       t.string :invoice_name,  null: false
       t.string :phone,  null: false

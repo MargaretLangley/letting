@@ -1,0 +1,9 @@
+<% invoice_text_front = InvoiceText.find(1) %>
+<%= render 'heading_p2_address', invoice_text: invoice_text_front %>
+<%= render 'heading_page2', invoice_text: invoice_text_front %>
+
+<%= render invoice_text_back.guides %>
+<div class='widemargin  instruct-font'>
+  CLIENT'S ADDRESS
+</div>
+<%= render 'notices', invoice_text: invoice_text_back %>

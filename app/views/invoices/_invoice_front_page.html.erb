@@ -1,10 +1,10 @@
 <% invoice_dec = InvoiceDecorator.new(invoice) %>
 <div class='printbody'>
-  <%= render 'templates/heading_front_page', template_front: invoice_dec.templates.first %>
+  <%= render 'invoice_texts/heading_front_page', invoice_text_front: invoice_dec.invoice_texts.first %>
 
   <div class='col-2-24  grid-row'>&nbsp;</div>
   <div class='col-7-24  inv-bold-headings'>
-    <%= invoice_dec.templates.first.heading2 %>
+    <%= invoice_dec.invoice_texts.first.heading2 %>
   </div>
   <div class='col-8-24  inv-bold-headings'>
     Property Ref: <%= invoice_dec.property_ref %>
@@ -28,17 +28,17 @@
 
   <div class='col-2-24  grid-row'>&nbsp;</div>
   <div class='col-20-24  inv-advice'>
-    We <%= invoice_dec.templates.first.invoice_name.upcase %> ON BEHALF OF YOUR LANDLORD
+    We <%= invoice_dec.invoice_texts.first.invoice_name.upcase %> ON BEHALF OF YOUR LANDLORD
     <br>
     <%= invoice_dec.client_address %>
     <br>
-    <%= invoice_dec.templates.first.advice1 %>
-    <%= invoice_dec.templates.first.address.text %>
+    <%= invoice_dec.invoice_texts.first.advice1 %>
+    <%= invoice_dec.invoice_texts.first.address.text %>
     <p>
     <div class = 'grid-row  inv-advice-bold'>
       Remittance Advice
     </div>
-      <%= invoice_dec.templates.first.advice2 %>
+      <%= invoice_dec.invoice_texts.first.advice2 %>
     </p>
     <span class='sissors'>&#9985;<%= "-" * 73 %></span>
   </div>

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Template, type: :feature do
+describe 'InvoiceText Update', type: :feature do
 
   before(:each) do
     log_in admin_attributes
@@ -8,16 +8,16 @@ describe Template, type: :feature do
 
   describe '#update page 1' do
     it 'finds data on 1st page' do
-      template_create id: 1, vat: '89', address: address_new(road: 'High')
-      visit '/templates/1/edit'
+      invoice_text_create id: 1, vat: '89', address: address_new(road: 'High')
+      visit '/invoice_texts/1/edit'
       expect(page.title).to eq 'Letting - Edit Invoice Text'
       expect(find_field('VAT').value).to have_text '89'
       expect(find_field('Road').value).to have_text 'High'
     end
 
     it 'has views link' do
-      template_create id: 1
-      visit '/templates/1/edit'
+      invoice_text_create id: 1
+      visit '/invoice_texts/1/edit'
       expect(page.title).to eq 'Letting - Edit Invoice Text'
       click_on('View')
       expect(page.title).to eq 'Letting - View Invoice Text'
@@ -26,10 +26,10 @@ describe Template, type: :feature do
 
   describe '#update page 2' do
     it 'finds data on 2nd page and succeeds' do
-      template_create id: 1
-      template_create id: 2
+      invoice_text_create id: 1
+      invoice_text_create id: 2
       guide_create id: 1
-      visit '/templates/2/edit'
+      visit '/invoice_texts/2/edit'
       expect(page.title). to eq 'Letting - Edit Invoice Text'
       fill_in '2nd Heading', with: 'Bowled Out!'
       click_on 'Update Invoice Text'
@@ -38,9 +38,9 @@ describe Template, type: :feature do
   end
 
   it 'finds data on 2nd page and errors' do
-    template_create id: 2
+    invoice_text_create id: 2
     guide_create instruction: 'ins2'
-    visit '/templates/2/edit'
+    visit '/invoice_texts/2/edit'
     expect(page.title).to eq 'Letting - Edit Invoice Text'
     fill_in '1st Heading', with: ''
     click_on 'Update Invoice Text'
