@@ -46,6 +46,6 @@ describe Client, type: :feature do
     client_create
     visit '/clients/'
     find('.view-testing-link', visible: false).click
-    expect(page).to have_text 'The Client has no tenants.'
+    expect(page).to have_text 'The Client has no properties.'
   end
 end
