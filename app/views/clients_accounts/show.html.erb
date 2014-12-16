@@ -1,15 +1,13 @@
-<% @title='View Client' %>
+<% @title='Client Accounts' %>
 
 <div class='grid  shell'>
   <div class='col-1-24  grid-row  vertical-spacer'>&nbsp;</div>  <!-- 1st column -->
 
   <div class='col-20-24  vertical-spacer'>  <!-- 2nd column -->
 
-    <div class='col-1-4  grid-row  bottom-spacer faded'>Client ID</div>
-    <div class='col-3-4  bottom-spacer'><%= @client.human_ref %></div>
-
-    <div class='col-1-4  grid-row  bottom-spacer  faded'>Name</div>
-    <div class='col-3-4  bottom-spacer'>
+    <div class='col-1-4  grid-row  bottom-spacer faded'>Client ID and Name</div>
+    <div class='col-1-4  bottom-spacer'><%= @client.human_ref %></div>
+    <div class='col-2-4  bottom-spacer'>
       <%= @client.entities.full_name %>
     </div>
 
@@ -18,16 +16,28 @@
       <%= simple_format(@client.address.text, {}, wrapper_tag: 'div') %>
     </div>
 
+    <%= form_tag client_path(@client), class: 'no-print', method: 'get' do %>
+      <div class='col-5-24  bottom-line-spacer'>Payments made between:</div>
+      <div class='col-19-24  bottom-line-spacer'>
+        <%= date_field_tag :start_date, params[:start_date], autofocus: true, class: 'width-9-24' %> and
+        <%= date_field_tag :end_date, params[:end_date], autofocus: true, class: 'width-9-24' %>
+        <button type='submit' class='width-4-24' id='credit_search' title='Credit Search'>
+          <%= fa_icon('search lg') %>
+        </button>
+      </div>
+    <% end %>
+
     <div class='col-1-1  grid-row  vertical-spacer  faded'>
-      List of all properties associated with this client
+      Ground Rents Owned
     </div>
 
     <div class='col-3-24  grid-row  bottom-spacer  grid-header  r-align'>
       ID
     </div>
     <div class='col-3-24  grid-header  bottom-spacer  r-align'>No</div>
-    <div class='col-9-24  grid-header  bottom-spacer'>Address</div>
-    <div class='col-9-24  grid-header  bottom-spacer'>Town</div>
+    <div class='col-8-24  grid-header  bottom-spacer'>Address</div>
+    <div class='col-7-24  grid-header  bottom-spacer'>Town</div>
+    <div class='col-3-24  grid-header  bottom-spacer  r-align'>Amount</div>
 
     <% if @client.properties.any? %>
       <% @client.properties.each do |property| %>
@@ -38,11 +48,14 @@
           <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
             <%= format_empty_string_as_dash property.address.first_no %>
           </div>
-          <div class='col-9-24  bottom-spacer  inherit-row'>
+          <div class='col-8-24  bottom-spacer  inherit-row'>
             <%= format_empty_string_as_dash property.address.first_text %>
           </div>
-          <div class='col-9-24  bottom-spacer  inherit-row  nowrap'>
+          <div class='col-7-24  bottom-spacer  inherit-row  nowrap'>
             <%= property.address.town %>
+          </div>
+          <div class='col-3-24  bottom-spacer  r-align'>
+            <%= property.account.credits.credited(range: params[:start_date]..params[:end_date] ).income %>
           </div>
         </div>
       <% end %>
@@ -53,7 +66,4 @@
     <% end %>
   </div>
 
-  <div class='col-3-24  vertical-spacer'>     <!-- 3rd column -->
-    <%= edit_link @client, size: '2x' %>
-  </div>
-</div>
+ </div>
