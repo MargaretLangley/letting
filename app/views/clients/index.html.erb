@@ -30,12 +30,17 @@
         <%= testing_link path: client_path(client) %>
       </div>
     </div>
+
+    <div class='col-1-24  bottom-spacer  no-print'>
+      <%= todo_link path: clients_account_path(id: client.id) %>
+    </div>
+    <div class='col-1-24  bottom-spacer no-print'>&nbsp;</div>
+
     <div class='col-1-24  bottom-spacer no-print'><%= edit_link client %></div>
     <div class='col-1-24  bottom-spacer no-print'>&nbsp;</div>
     <div class='col-1-24  bottom-spacer no-print'>
       <%= delete_link path: client %>
     </div>
-    <div class='col-2-24  bottom-spacer no-print'>&nbsp;</div>
   <% end %>
 </div>
 
