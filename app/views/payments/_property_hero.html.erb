@@ -1,0 +1,10 @@
+<div class='col-1-24  top-line-spacer'>&nbsp;</div>
+<div class='col-6-24  top-line-spacer'>  <!-- 1st column -->
+  <h2>Property</h2>
+  <h1>ID: <%= payment_dec.human_ref %></h1>
+</div>
+<div class='col-8-24  top-double-line-spacer'>  <!-- 2nd column -->
+  <% if payment_dec.account_exists? %>
+    <%= render 'addresses/abridged', property: payment_dec.property_decorator %>
+    <% end %>
+</div>

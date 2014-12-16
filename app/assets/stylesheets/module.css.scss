@@ -60,8 +60,8 @@ a.grey{
 
 /*http://stackoverflow.com/questions/4785871/css-vertical-align*/
 @mixin vertical-align-hack {
-  height: 5em;
-  line-height: 5em;
+  height: 3em;
+  line-height: 3em;
 }
 
 .grid-row{
@@ -111,6 +111,15 @@ a.grey{
   margin: 1em 0 1em 0;
 }
 
+.top-line-padder{
+  padding: 1em 0 0 0;
+}
+
+.bottom-line-padder{
+  padding: 0 0 1em 0;
+}
+
+
 /* To change heading color for printing change
    $secondary-print-text in _colors.scss.
    faded holds the switch. grid-header uses faded
@@ -123,6 +132,14 @@ a.grey{
   overflow: hidden;
   white-space: nowrap;
 }
+
+.grid-pick-header{
+  padding-top: 1%; /* added for new_payment */
+  border-bottom: 1px solid darken($muted-border, 2%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 
 /*--------------------------------------------------*\
 
@@ -310,16 +327,9 @@ li.active a, li.active a:hover {
     @include pie-clearfix;
   }
 
-  .shell-for-print-screen{
-    margin: 10px 0 0 0;
-    padding: 10px 0 0 0;
-    @include inside-shell;
-    @include pie-clearfix;
-  }
-
-  .shell-for-small-menu{
-    margin: 0 0 0 0;
-    padding: 0 10px 0 10px;
+  .shell-thin{
+    margin: 0 0 2% 0;
+    padding: 0;
     @include inside-shell;
     @include pie-clearfix;
   }

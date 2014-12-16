@@ -1,31 +1,20 @@
 <% @title='View Payment' %>
 <% payment_dec = @payment %>
 
-<fieldset id='payment' class='grid  shell  overlay-parent'>
-  <div class='col-3-12  grid-row'>
-    <h2>Property</h2>
-    <h1>ID: <%= payment_dec.human_ref %></h1>
-  </div>
-  <div class='col-6-12'>
-    <div class='col-1-1  grid-row  vertical-line-spacer'></div>
-    <%= render 'addresses/abridged', property: payment_dec.property_decorator %>
-  </div>
-  <div class='col-1-12'>&nbsp;</div>
-  <div class='col-1-12'><%= edit_link @payment, size: '2x' %></div>
-  <div class='col-1-12'>
+<fieldset id='payment' class='grid  shell-thin  overlay-parent'>
+
+  <%= render 'payments/property_hero', payment_dec: payment_dec %>
+  <div class='col-6-24  top-spacer'>&nbsp;</div>
+  <div class='col-2-24  top-spacer'><%= edit_link @payment, size: '2x' %></div>
+  <div class='col-1-24  top-spacer'>
     <%= payment_link path: new_payment_path(id: payment_dec.account.id), size: '2x' %>
   </div>
 
-  <div class='col-1-1  grid-row'><hr/><h2>Payment Received</h2></div>
+  <%= render 'payments/received_header' %>
 
-  <div class='col-6-24  grid-row  grid-header'>Type</div>
-  <div class='col-9-24  grid-header'>Booked On</div>
-  <div class='col-1-24  grid-header  pick-out'>&nbsp;</div>
-  <div class='col-8-24  grid-header  pick-out'>Payment Amount</div>
-
-  <div class='col-6-24  grid-row  cell'>Cheque</div>
-  <div class='col-9-24  cell'><%= payment_dec.booked_on_dec %></div>
-  <div class='col-1-24  cell  pick-out'>&nbsp;</div>
+  <div class='col-1-24  grid-row  cell  pick-out'>&nbsp;</div>
+  <div class='col-12-24  cell  pick-out'><%= payment_dec.booked_on_dec %></div>
+  <div class='col-3-24  cell  pick-out'>&nbsp;</div>
   <div class='col-8-24  cell  pick-out'>
     <h1><%= fa_icon('certificate') %>&nbsp;Paid</h1>
     &nbsp; <%= text_field_tag 'Paid','Paid' %>
@@ -37,9 +26,12 @@
     <div class='col-12-24 grid-row'>&nbsp;</div>
     <div class='col-3-24  cell  r-align'><h3>Total</h3></div>
     <div class='col-1-24  cell  pick-out'>&nbsp;</div>
-    <div class='col-7-24  cell  r-align pick-out'>
+    <div class='col-7-24  cell  r-align  pick-out'>
       <%= text_field_tag '', payment_dec.amount, disabled: true, class: 'r-align' %>
     </div>
     <div class='col-1-24  cell  pick-out'>&nbsp;</div>
+    <!-- acts as padding on the bottom of the form -->
+    <div class='col-15-24 grid-row'>&nbsp;</div>
+    <div class='col-9-24  pick-out'>&nbsp;</div>
   </div>  <!-- js-totalizer -->
 </fieldset>

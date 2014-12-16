@@ -1,17 +1,9 @@
 <%= form_for payment_dec do |payment_form| %>
   <%= render 'shared/errors', object: payment_dec.payment %>
 
-  <fieldset id='payment' class='grid  shell  overlay-parent'>
+  <fieldset id='payment' class='grid  shell-thin  overlay-parent'>
 
-    <div class='col-6-24  grid-row'>  <!-- 1st column -->
-      <h2>Property</h2>
-      <h1>ID: <%= payment_dec.human_ref %></h1>
-    </div>
-    <div class='col-9-24  top-double-line-spacer'>  <!-- 2nd column -->
-      <% if payment_dec.account_exists? %>
-        <%= render 'addresses/abridged', property: payment_dec.property_decorator %>
-      <% end %>
-    </div>
+    <%= render 'payments/property_hero', payment_dec: payment_dec %>
     <div class='col-9-24  shell'>  <!-- 3rd column -->
       <h4>Payment Summary</h4>
 
@@ -21,30 +13,28 @@
       <div class='col-5-12  r-align  bottom-spacer'>
         <%= link_to payment_dec.last_amount, edit_payment_path(Payments.last), class: 'hover-link'%>
       </div>
-      <div class='col-7-12  grid-row'>Day's Total</div>
-      <div class='col-5-12  r-align'>
+      <div class='col-7-12  bottom-line-spacer  grid-row'>Day's Total</div>
+      <div class='col-5-12  bottom-line-spacer r-align'>
         <%= link_to payment_dec.todays_takings, payments_path, class: 'hover-link' %>
       </div>
     </div>
 
     <% if payment_dec.account_exists? %>
-      <hr>
-      <h2>Payment Received</h2>
 
-      <div class='col-6-24  grid-row  grid-header'>Type</div>
-      <div class='col-9-24  grid-header'>Booked On</div>
-      <div class='col-1-24  grid-header  pick-out'>&nbsp;</div>
-      <div class='col-8-24  grid-header  pick-out'>Payment Amount</div>
+      <%= render 'payments/received_header' %>
 
-      <div class='col-6-24  grid-row cell'><%= payment_form.label 'Cheque' %></div>
-      <div class='col-9-24  cell'><%= payment_form.date_field :booked_on %></div>
-      <div class='col-1-24  cell  pick-out'>&nbsp;</div>
+      <div class='col-1-24  grid-row  cell  pick-out'>&nbsp;</div>
+
+      <div class='col-12-24 cell  pick-out'>
+        <%= payment_form.date_field :booked_on %>
+      </div>
+      <div class='col-3-24  cell  pick-out'>&nbsp;</div>
       <div class='col-8-24  cell  pick-out'>
         <%= payment_form.hidden_field :account_id %>
         <%= payment_form.submit name: 'submit', id: 'submit', autofocus:true , class: 'plain-button' %>
       </div>
       <div class='js-totalizer'>
-        <%= render 'credits/form', payment: payment_dec, payment_form: payment_form %>
+        <%= render 'credits/form', credits_dec: payment_dec.credits_decorated, payment_form: payment_form %>
         <div class='col-12-24 grid-row'>&nbsp;</div>
         <div class='col-3-24  cell  r-align'><h3>Total</h3></div>
         <div class='col-1-24  cell  pick-out'>&nbsp;</div>
@@ -52,6 +42,9 @@
           <%= payment_form.text_field :amount, value: number_with_precision(payment_form.object.amount, precision: 2), readonly: true, class: 'js-total-payment  r-align  width-1-1' %>
         </div>
         <div class='col-1-24  cell  pick-out'>&nbsp;</div>
+        <!-- acts as padding on the bottom of the form -->
+        <div class='col-15-24 grid-row'>&nbsp;</div>
+        <div class='col-9-24  pick-out'>&nbsp;</div>
       </div>
     <% else %>
       <%= render 'teachings/payment' %>
