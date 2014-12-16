@@ -3,7 +3,7 @@
 #
 #
 
-after :templates do
+after :invoice_texts do
 
   class << self
     def create_date months_ago
@@ -108,7 +108,7 @@ after :templates do
       Letter.create! [
         { id: 1,
           invoice_id: 1,
-          template_id: 1,
+          invoice_text_id: 1,
         },
       ]
     end

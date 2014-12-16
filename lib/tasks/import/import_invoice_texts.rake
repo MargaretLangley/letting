@@ -1,25 +1,25 @@
 require 'csv'
 ####
-# Import Template
+# Import InvoiceText
 #
 # These are the texts used in the invoices
 #
 ####
 namespace :db do
   namespace :import do
-    filename = 'import_data/new/template.csv'
+    filename = 'import_data/new/invoice_texts.csv'
     desc 'Import invoice text from CSV file'
-    task :template do
+    task :invoice_texts do
       if File.exist?(filename)
         CSV.foreach(filename, headers: true) do |row|
           begin
-            Template.create!(row.to_hash)
+            InvoiceText.create!(row.to_hash)
           rescue
-            p 'Template Create failed (see hash below):', row.to_hash
+            p 'InvoiceText Create failed (see hash below):', row.to_hash
           end
         end
       else
-        puts "Template not found: #{filename}"
+        puts "InvoiceText not found: #{filename}"
       end
     end
   end

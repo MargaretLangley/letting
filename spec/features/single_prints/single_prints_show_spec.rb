@@ -31,10 +31,10 @@ describe 'PrintShow', type: :feature do
 
     def setup(*)
       log_in admin_attributes
-      template_create id: 1,
-                      invoice_name: 'Harry',
-                      address: address_new(road: 'High')
-      template_create id: 2, heading1: 'Act 2002'
+      invoice_text_create id: 1,
+                          invoice_name: 'Harry',
+                          address: address_new(road: 'High')
+      invoice_text_create id: 2, heading1: 'Act 2002'
 
       property = property_new(human_ref: 2002,
                               occupiers: [Entity.new(name: 'Smiths')])

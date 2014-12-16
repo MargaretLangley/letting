@@ -1,34 +1,34 @@
 require 'rails_helper'
 
-describe 'Template index', type: :feature do
+describe 'InvoiceText Index', type: :feature do
   before(:each) do
     log_in admin_attributes
   end
 
   it 'basic' do
-    template_create id: 2, description: 'Page 2'
-    visit '/templates/'
+    invoice_text_create id: 2, description: 'Page 2'
+    visit '/invoice_texts/'
     expect(page).to have_title 'Letting - Invoice Texts'
     expect(page).to have_text 'Page 2'
   end
 
   it 'has edit link' do
-    template_create
-    visit '/templates/'
+    invoice_text_create
+    visit '/invoice_texts/'
     click_on 'Edit'
     expect(page.title).to eq 'Letting - Edit Invoice Text'
   end
 
   it 'has view link on icon' do
-    template_create
-    visit '/templates/'
+    invoice_text_create
+    visit '/invoice_texts/'
     first('.view-testing-link', visible: false).click
     expect(page.title).to eq 'Letting - View Invoice Text'
   end
 
   it 'has ordered list' do
-    template_create id: 1, invoice_name: 'Morgan'
-    visit '/templates/'
+    invoice_text_create id: 1, invoice_name: 'Morgan'
+    visit '/invoice_texts/'
     first(:link, 'Edit').click
     expect(page).to have_text 'Page 1'
     expect(find_field('Invoice Name').value).to have_text 'Morgan'

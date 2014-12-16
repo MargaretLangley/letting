@@ -5,8 +5,8 @@ describe 'Invoice Factory' do
     it('is valid') { expect(invoice_new).to be_valid }
 
     context 'makes' do
-      it 'makes a template' do
-        expect { invoice_new }.to change(Template, :count).by(1)
+      it 'makes a invoice_text' do
+        expect { invoice_new }.to change(InvoiceText, :count).by(1)
       end
     end
   end
@@ -48,8 +48,8 @@ describe 'Invoice Factory' do
       end
 
       context 'makes' do
-        it 'makes a template' do
-          expect { invoice_create }.to change(Template, :count).by(1)
+        it 'makes a invoice_text' do
+          expect { invoice_create }.to change(InvoiceText, :count).by(1)
         end
       end
     end

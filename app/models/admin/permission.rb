@@ -54,7 +54,7 @@ class Permission < Struct.new(:user)
   def admin_controllers
     %w(users
        cycles
-       templates
+       invoice_texts
        guides)
   end
 end

@@ -1,19 +1,19 @@
 ####
 #
-# Template
+# InvoiceText
 #
-# Template/Invoice Text holds the general information needed for an
+# Invoice Text holds the general information needed for an
 # invoice printout, excluding individual account
 # and property information. Allows editing of
 # this information,
-# 1st page includes the agent F&L Adams details,
-# and text needed on invoice
-# 2nd page holds details of 'Notice of Rent Due,'
+# Front page includes the agent F&L Adams details,
+# and text needed on 1st page of invoice
+# Back page holds details of 'Notice of Rent Due,'
 # only used for Ground Rent.
 #
 ####
 #
-class Template < ActiveRecord::Base
+class InvoiceText < ActiveRecord::Base
   validates :invoice_name, :description, :heading1, :phone, :vat,
             presence: true
   has_one :address, class_name: 'Address',

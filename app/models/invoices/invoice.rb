@@ -50,7 +50,7 @@ class Invoice < ActiveRecord::Base
   end
   scope :mail, ->(mail) { where(mail: mail) }
   validates :invoice_date, :property_ref, :property_address, presence: true
-  has_many :templates, through: :letters
+  has_many :invoice_texts, through: :letters
   has_many :letters, dependent: :destroy
 
   after_destroy :destroy_orphaned_debits_transaction
@@ -81,7 +81,7 @@ class Invoice < ActiveRecord::Base
               products:)
     self.account = account
     self.invoice_date = invoice_date
-    letters.build template: Template.find(1)
+    letters.build invoice_text: InvoiceText.find(1)
     self.property = property
     self.comments = generate_comments comments: comments
     self.debits_transaction = debits_transaction

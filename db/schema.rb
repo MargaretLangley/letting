@@ -161,15 +161,28 @@ ActiveRecord::Schema.define(version: 20141129154746) do
   add_index "entities", ["entitieable_id", "entitieable_type"], name: "index_entities_on_entitieable_id_and_entitieable_type", using: :btree
 
   create_table "guides", force: true do |t|
-    t.integer  "template_id", null: false
-    t.text     "instruction", null: false
-    t.text     "fillin",      null: false
-    t.text     "sample",      null: false
+    t.integer  "invoice_text_id", null: false
+    t.text     "instruction",     null: false
+    t.text     "fillin",          null: false
+    t.text     "sample",          null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "guides", ["template_id"], name: "index_guides_on_template_id", using: :btree
+  add_index "guides", ["invoice_text_id"], name: "index_guides_on_invoice_text_id", using: :btree
+
+  create_table "invoice_texts", force: true do |t|
+    t.string   "description",  null: false
+    t.string   "invoice_name", null: false
+    t.string   "phone",        null: false
+    t.string   "vat",          null: false
+    t.string   "heading1",     null: false
+    t.string   "heading2",     null: false
+    t.text     "advice1",      null: false
+    t.text     "advice2",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "invoices", force: true do |t|
     t.integer  "account_id",            null: false
@@ -199,14 +212,14 @@ ActiveRecord::Schema.define(version: 20141129154746) do
   end
 
   create_table "letters", force: true do |t|
-    t.integer  "invoice_id",  null: false
-    t.integer  "template_id", null: false
+    t.integer  "invoice_id",      null: false
+    t.integer  "invoice_text_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "letters", ["invoice_id"], name: "index_letters_on_invoice_id", using: :btree
-  add_index "letters", ["template_id"], name: "index_letters_on_template_id", using: :btree
+  add_index "letters", ["invoice_text_id"], name: "index_letters_on_invoice_text_id", using: :btree
 
   create_table "payments", force: true do |t|
     t.integer  "account_id",                         null: false
@@ -267,19 +280,6 @@ ActiveRecord::Schema.define(version: 20141129154746) do
 
   add_index "settlements", ["credit_id"], name: "index_settlements_on_credit_id", using: :btree
   add_index "settlements", ["debit_id"], name: "index_settlements_on_debit_id", using: :btree
-
-  create_table "templates", force: true do |t|
-    t.string   "description",  null: false
-    t.string   "invoice_name", null: false
-    t.string   "phone",        null: false
-    t.string   "vat",          null: false
-    t.string   "heading1",     null: false
-    t.string   "heading2",     null: false
-    t.text     "advice1",      null: false
-    t.text     "advice2",      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "users", force: true do |t|
     t.string   "nickname",        null: false

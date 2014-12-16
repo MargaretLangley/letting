@@ -4,7 +4,7 @@ require 'rails_helper'
 RSpec.describe InvoiceMaker, type: :model do
   describe '#compose' do
     it 'invoice accounts within property and due date range' do
-      template_create id: 1
+      invoice_text_create id: 1
       charge = charge_create cycle: cycle_new(due_ons: [due_on_new(month: 3)])
       account = account_create property: property_new, charges: [charge]
 
