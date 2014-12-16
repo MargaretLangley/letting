@@ -2,35 +2,35 @@
   <%= render 'shared/errors', object: payment_dec.payment %>
 
   <fieldset id='payment' class='grid  shell  overlay-parent'>
-    <div class='col-6-24  grid-row'>
+
+    <div class='col-6-24  grid-row'>  <!-- 1st column -->
       <h2>Property</h2>
       <h1>ID: <%= payment_dec.human_ref %></h1>
     </div>
-    <div class='col-9-24'>
-      <br>
-      <br>
+    <div class='col-9-24  top-double-line-spacer'>  <!-- 2nd column -->
       <% if payment_dec.account_exists? %>
         <%= render 'addresses/abridged', property: payment_dec.property_decorator %>
       <% end %>
     </div>
-    <div class='col-9-24  shell'>
+    <div class='col-9-24  shell'>  <!-- 3rd column -->
       <h4>Payment Summary</h4>
+
       <div class='col-7-12  grid-row  bottom-spacer'>
         Last Property ID&nbsp;(<%= payment_dec.last_human_ref %>)
       </div>
       <div class='col-5-12  r-align  bottom-spacer'>
         <%= link_to payment_dec.last_amount, edit_payment_path(Payments.last), class: 'hover-link'%>
       </div>
-      <div class='col-7-12  grid-row'>
-        Day's Total
-      </div>
+      <div class='col-7-12  grid-row'>Day's Total</div>
       <div class='col-5-12  r-align'>
         <%= link_to payment_dec.todays_takings, payments_path, class: 'hover-link' %>
       </div>
     </div>
+
     <% if payment_dec.account_exists? %>
       <hr>
       <h2>Payment Received</h2>
+
       <div class='col-6-24  grid-row  grid-header'>Type</div>
       <div class='col-9-24  grid-header'>Booked On</div>
       <div class='col-1-24  grid-header  pick-out'>&nbsp;</div>
@@ -45,7 +45,7 @@
       </div>
       <div class='js-totalizer'>
         <%= render 'credits/form', payment: payment_dec, payment_form: payment_form %>
-        <div class='col-12-24  grid-row'>&nbsp;</div>
+        <div class='col-12-24 grid-row'>&nbsp;</div>
         <div class='col-3-24  cell  r-align'><h3>Total</h3></div>
         <div class='col-1-24  cell  pick-out'>&nbsp;</div>
         <div class='col-7-24  cell  pick-out  r-align'>
