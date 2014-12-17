@@ -2,7 +2,8 @@
 #
 # Extract
 #
-# adding data which are missing. It applies them into the correct position.
+# Removing data - matching rows are deleted and removed from the staging
+# process.
 #
 # Extract is part of the staging process - specifically it is called by
 # all of the stage/*.rake tasks.

@@ -16,11 +16,11 @@ namespace :db do
     desc 'Improves legacy property data quality by patching inaccuracies.'
     task :properties do
       Stage.new(file_name: 'import_data/staging/staging_properties.csv',
-                input: properties,
+                input: properties_legacy,
                 instructions: [PatchRef.new(patch: patch_properties)]).stage
     end
 
-    def properties
+    def properties_legacy
       DB::CSVTransform.new file_name: 'import_data/legacy/properties.csv',
                            headers: DB::FileHeader.property,
                            drop_rows: 34

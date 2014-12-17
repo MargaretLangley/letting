@@ -16,7 +16,7 @@ namespace :db do
     desc 'Improves legacy accounts/charge data quality by patching mistakes.'
     task :acc_items do
       Stage.new(file_name: 'import_data/staging/staging_acc_items.csv',
-                input: acc_items,
+                input: acc_items_legacy,
                 instructions: [PatchAccItems.new(patch: patch_acc_items),
                                ExtractAccItems.new(extracts: extract_acc_items),
                                InsertAccItems.new(insert: insert_acc_items)]
@@ -24,7 +24,7 @@ namespace :db do
 
     end
 
-    def acc_items
+    def acc_items_legacy
       DB::CSVTransform.new file_name: 'import_data/legacy/acc_items.csv',
                            headers: DB::FileHeader.account
     end

@@ -16,13 +16,13 @@ namespace :db do
     desc 'Improves legacy accounts/charge data quality by patching mistakes.'
     task :acc_info do
       Stage.new(file_name: 'import_data/staging/staging_acc_info.csv',
-                input: acc_infos,
+                input: acc_infos_legacy,
                 instructions: [PatchAccInfo.new(patch: patch_acc_info),
                                InsertAccInfo.new(insert: insert_acc_info)]
                ).stage
     end
 
-    def acc_infos
+    def acc_infos_legacy
       DB::CSVTransform.new file_name: 'import_data/legacy/acc_info.csv',
                            headers: DB::FileHeader.charge
     end
@@ -33,7 +33,7 @@ namespace :db do
     end
 
     def insert_acc_info
-      DB::CSVTransform.new(file_name: 'import_data/patch/acc_info_deleted.csv',
+      DB::CSVTransform.new(file_name: 'import_data/patch/acc_info_restore.csv',
                            headers: DB::FileHeader.charge).to_a
     end
   end

@@ -17,11 +17,11 @@ namespace :db do
     desc 'Improves legacy client data quality by patching inaccuracies.'
     task :address2 do
       Stage.new(file_name: 'import_data/staging/staging_address2.csv',
-                input: address2,
+                input: address2_legacy,
                 instructions: [PatchRef.new(patch: patch_address2)]).stage
     end
 
-    def address2
+    def address2_legacy
       DB::CSVTransform.new file_name: 'import_data/legacy/address2.csv',
                            headers: DB::FileHeader.agent
     end
