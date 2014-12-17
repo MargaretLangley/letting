@@ -10,32 +10,38 @@ module DB
   #
   # Wraps around an imported row of data.
   #
+  # rubocop: disable Style/TrivialAccessors
+  #
   ####
   #
   class BalanceRow
     include MethodMissing
     include AccountingRow
 
+    def row
+      @source
+    end
+
     def initialize row
       @source = row
     end
 
     def human_ref
-      @source[:human_ref].to_i
+      row[:human_ref].to_i
     end
 
     def charge_code
-      @source[:charge_code]
+      row[:charge_code]
     end
 
     def on_date
-      @source[:on_date].to_datetime
+      row[:on_date].to_datetime
     end
 
     def description_to_charge
-      return 'Service Charge' if @source[:description].include?('Service') ||
-                                 @source[:description].include?('SC')
-      return 'Garage Ground Rent' if @source[:description].include? 'Garage'
+      return 'Service Charge' if row[:description].include?('Service') ||
+                                 row[:description].include?('SC')
+      return 'Garage Ground Rent' if row[:description].include? 'Garage'
     end
 
     # debits increase an account balance.
@@ -91,7 +97,7 @@ module DB
     end
 
     def debit
-      @source[:debit].to_f
+      row[:debit].to_f
     end
   end
 end

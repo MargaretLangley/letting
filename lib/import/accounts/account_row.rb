@@ -18,18 +18,24 @@ module DB
   # for instantiating the appropriate row which is then responsible for the
   # remaining import.
   #
+  # rubocop: disable Style/TrivialAccessors
+  #
   ####
   #
   class AccountRow
     include MethodMissing
     include AccountingRow
 
+    def row
+      @source
+    end
+
     def initialize row
       @source = row
     end
 
     def human_ref
-      @source[:human_ref].to_i
+      row[:human_ref].to_i
     end
 
     def type
@@ -42,19 +48,19 @@ module DB
     private
 
     def balance?
-      @source[:charge_code] == 'Bal' || @source[:description] == 'Balance'
+      row[:charge_code] == 'Bal' || row[:description] == 'Balance'
     end
 
     def credit?
-      @source[:credit].to_f != 0
+      row[:credit].to_f != 0
     end
 
     def debit?
-      @source[:debit].to_f != 0 || @source[:credit].to_f < 0
+      row[:debit].to_f != 0 || row[:credit].to_f < 0
     end
 
     def account_type_unknown_msg
-      "Unknown Row Property:#{human_ref}, charge_code: #{@source[:charge_code]}"
+      "Unknown Row Property:#{human_ref}, charge_code: #{row[:charge_code]}"
     end
   end
 end

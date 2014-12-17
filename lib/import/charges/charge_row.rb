@@ -18,18 +18,24 @@ module DB
   # for charge data from it. This object is providing a smoother interface
   # for the process - a layer of indirection between CSV and ImportCharge.
   #
+  # rubocop: disable Style/TrivialAccessors, Metrics/ClassLength
+  #
   #####
   #
   class ChargeRow
     include MethodMissing
     include ChargedInDefaults
 
+    def row
+      @source
+    end
+
     def initialize row
       @source = row
     end
 
     def human_ref
-      @source[:human_ref].to_i
+      row[:human_ref].to_i
     end
 
     def charge_type
@@ -40,8 +46,7 @@ module DB
 
     def charged_in_id
       LegacyChargedInFields.new(charged_in_code: charged_in_code,
-                                charge_type: charge_type)
-        .modern_id
+                                charge_type: charge_type).modern_id
       rescue KeyError
         raise ChargedInCodeUnknown, charged_in_code_message, caller
     end
@@ -55,7 +60,7 @@ module DB
     end
 
     def amount
-      @source[:amount].to_f
+      row[:amount].to_f
     end
 
     # Provides a way of cycle_matcher to access all the dates
@@ -85,7 +90,7 @@ module DB
     private
 
     def payment_type
-      PaymentType.to_symbol @source[:payment_type].to_sym
+      PaymentType.to_symbol row[:payment_type].to_sym
     end
 
     # cycle_matcher requires charge_code as 'M' (month) is a special case
@@ -112,15 +117,15 @@ module DB
     end
 
     def charge_code
-      @source[:charge_type]
+      row[:charge_type]
     end
 
     def day number
-      @source[:"day_#{number}"].to_i
+      row[:"day_#{number}"].to_i
     end
 
     def month number
-      @source[:"month_#{number}"].to_i
+      row[:"month_#{number}"].to_i
     end
 
     # most due_ons use empty day month pairing of (0,0)
@@ -130,7 +135,7 @@ module DB
     end
 
     def charged_in_code
-      @source[:charged_in]
+      row[:charged_in]
     end
 
     def start_date

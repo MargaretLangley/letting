@@ -20,26 +20,32 @@ module DB
   # ImportCredit to create/assign database objects (Credits) and their related
   # fields.
   #
+  # rubocop: disable Style/TrivialAccessors
+  #
   ####
   #
   class CreditRow
     include MethodMissing
     include AccountingRow
 
+    def row
+      @source
+    end
+
     def initialize row
       @source = row
     end
 
     def human_ref
-      @source[:human_ref].to_i
+      row[:human_ref].to_i
     end
 
     def charge_code
-      @source[:charge_code]
+      row[:charge_code]
     end
 
     def on_date
-      @source[:on_date]
+      row[:on_date]
     end
 
     # credits decrease an account balance.
@@ -47,7 +53,7 @@ module DB
     # credit amounts are imported (from acc_items) without a sign
     #
     def amount
-      @source[:credit].to_f
+      row[:credit].to_f
     end
 
     def account_id

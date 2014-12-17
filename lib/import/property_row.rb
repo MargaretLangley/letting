@@ -14,17 +14,23 @@ module DB
   # ImportProperty. ImportProperty is then only concerned with building and
   # assigning Property classes and not how to get this information.
   #
+  # rubocop: disable Style/TrivialAccessors
+  #
   ####
   #
   class PropertyRow
     include MethodMissing
+
+    def row
+      @source
+    end
 
     def initialize file_row
       @source = file_row
     end
 
     def human_ref
-      @source[:human_ref].to_i
+      row[:human_ref].to_i
     end
 
     def client_id
@@ -34,7 +40,7 @@ module DB
     private
 
     def client_ref
-      @source[:client_ref]
+      row[:client_ref]
     end
 
     def client_ref_to_id

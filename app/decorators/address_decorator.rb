@@ -30,28 +30,33 @@ require_relative '../../lib/modules/method_missing'
 # css - js-toggle, js-togglable, js-revealable
 # js - toggle.js
 #
+# rubocop: disable Style/TrivialAccessors
 #####
 #
 class AddressDecorator
   include MethodMissing
 
+  def address
+    @source
+  end
+
   def initialize address
-    @address = address
+    @source = address
   end
 
   def district_visiblity
-    @address.district? ? '' : 'js-revealable'
+    address.district? ? '' : 'js-revealable'
   end
 
   def add_district_visiblity
-    @address.district? ? 'js-revealable' : ''
+    address.district? ? 'js-revealable' : ''
   end
 
   def nation_visiblity
-    @address.nation? ? '' : 'js-revealable'
+    address.nation? ? '' : 'js-revealable'
   end
 
   def add_nation_visiblity
-    @address.nation? ? 'js-revealable' : ''
+    address.nation? ? 'js-revealable' : ''
   end
 end

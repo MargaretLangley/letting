@@ -7,10 +7,15 @@ require_relative '../../lib/modules/method_missing'
 # AccountDecorator prepares credits and debits and allows them
 # to be viewed
 #
+# rubocop: disable Style/TrivialAccessors
 ####
 #
 class AccountDecorator
   include MethodMissing
+
+  def account
+    @source
+  end
 
   def initialize account
     @source = account
@@ -33,12 +38,12 @@ class AccountDecorator
   private
 
   def balance_bought_forward date_of
-    AccountBalanceDecorator.new(@source.balance(to_date: date_of), date_of)
+    AccountBalanceDecorator.new(account.balance(to_date: date_of), date_of)
   end
 
   def ordered_items
-    [*@source.debits.map { |debit| AccountDebitDecorator.new debit },
-     *@source.credits.map { |credit| AccountCreditDecorator.new credit }]
+    [*account.debits.map { |debit| AccountDebitDecorator.new debit },
+     *account.credits.map { |credit| AccountCreditDecorator.new credit }]
       .sort_by(&:on_date)
   end
 

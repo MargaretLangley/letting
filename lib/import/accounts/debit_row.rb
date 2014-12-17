@@ -20,28 +20,34 @@ module DB
   # Errors do not go to logger
   # rubocop: disable Rails/Output
   #
+  # rubocop: disable Style/TrivialAccessors
+  #
   ####
   #
   class DebitRow
     include MethodMissing
     include AccountingRow
 
+    def row
+      @source
+    end
+
     def initialize row
       @source = row
     end
 
     def human_ref
-      @source[:human_ref].to_i
+      row[:human_ref].to_i
     end
 
     def charge_code
-      @source[:charge_code]
+      row[:charge_code]
     end
 
     def on_date
       # HACK: All legacy data comes in at midnight.
       #       by pushing forward the 'time' balance occurs before any debits.
-      @source[:on_date].to_datetime + 3.hours
+      row[:on_date].to_datetime + 3.hours
     end
 
     def period
@@ -89,7 +95,7 @@ module DB
     private
 
     def debit
-      debit = @source[:debit].to_f
+      debit = row[:debit].to_f
       if negative_credit?
         puts "Property #{human_ref}: converting negative credit to debit"
         debit = credit * -1
@@ -102,7 +108,7 @@ module DB
     end
 
     def credit
-      @source[:credit].to_f
+      row[:credit].to_f
     end
   end
 end

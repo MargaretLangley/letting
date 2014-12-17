@@ -6,6 +6,7 @@ require_relative '../../lib/modules/method_missing'
 #
 # Adds display logic to the credit business object.
 #
+# rubocop: disable Style/TrivialAccessors
 ##
 #
 class AccountCreditDecorator
@@ -14,16 +15,18 @@ class AccountCreditDecorator
 
   attr_accessor :running_balance
 
+  def credit
+    @source
+  end
+
   def initialize credit
     @source = credit
   end
 
-  def charge_type
-    @source.charge_type
-  end
+  delegate :charge_type, to: :credit
 
   def date
-    I18n.l @source.on_date, format: :short
+    I18n.l credit.on_date, format: :short
   end
 
   def description
@@ -35,6 +38,6 @@ class AccountCreditDecorator
   end
 
   def payment
-    number_with_precision(-@source.amount, precision: 2)
+    number_with_precision(-credit.amount, precision: 2)
   end
 end
