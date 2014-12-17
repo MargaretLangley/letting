@@ -81,7 +81,7 @@ class Invoice < ActiveRecord::Base
               products:)
     self.account = account
     self.invoice_date = invoice_date
-    letters.build invoice_text: InvoiceText.find(1)
+    letters.build invoice_text: InvoiceText.find(TEXT_PAGE_1)
     self.property = property
     self.comments = generate_comments comments: comments
     self.debits_transaction = debits_transaction
@@ -90,8 +90,8 @@ class Invoice < ActiveRecord::Base
     self
   end
 
-  def back_page?
-    blue_invoice? && products.any?(&:back_page?)
+  def page2?
+    blue_invoice? && products.any?(&:page2?)
   end
 
   # actionable?

@@ -1,0 +1,13 @@
+<% invoice_text_page1 = InvoiceText.find(TEXT_PAGE_1) %>
+
+<div class='grid-row  c-align  h1print'>
+	<%= invoice_text_page1.invoice_name %>
+</div>
+<div class='grid-row  c-align  inv-bold-headings'>
+  <%= invoice_text_page1.address.text %>
+  <br>
+	Telephone: <%= invoice_text_page1.phone %>
+	<br>
+	VAT Reg No: <%= invoice_text_page1.vat %>
+</div>
+<br>

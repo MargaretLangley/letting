@@ -8,7 +8,7 @@
       <%= view_link(invoice_text) %>
     </div>
 
-    <% if invoice_text.id == 1 %>
+    <% if invoice_text.id == TEXT_PAGE_1 %>
       <%= render 'name_phone', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
       <%= render 'text_fields', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
    `  <%= render 'addresses/form', f: f, parent: 'invoice_text', address: AddressDecorator.new(invoice_text.address) %>
