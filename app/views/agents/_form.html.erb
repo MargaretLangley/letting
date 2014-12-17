@@ -10,17 +10,20 @@
         </div>
       </div>
 
-    <div class='js-togglable js-check-hidden'>
-      <div class='shell low-overlay'>
-        <%= t('teachings.properties.agent') %>
+      <div class='js-togglable  js-check-hidden'>
+        <div class='shell  low-overlay'>
+          <%= t('teachings.properties.agent') %>
+        </div>
+        <div class='disable'>
+          <!-- no agent -->
+          <%= render 'entities/header' %>
+        </div>
       </div>
-      <%= render 'agents/no_agent' %>
-    </div>
 
-    <div class='js-togglable js-check-visible js-revealable'>
-      <%= render 'entities/form', f: b, entitieable: agent %>
-      <%= render 'addresses/form', f: b, parent: 'property_agent', address: AddressDecorator.new(agent.address) %>
-    </div>
-  </div>
-</div>
+      <div class='js-togglable  js-check-visible  js-revealable'>
+        <%= render 'entities/form', f: b, entitieable: agent %>
+        <%= render 'addresses/form', f: b, parent: 'property_agent', address: AddressDecorator.new(agent.address) %>
+      </div>
+    </div>  <!-- agent -->
+  </div>  <!-- overlay-parent -->
 <% end %>
