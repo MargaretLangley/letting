@@ -11,7 +11,7 @@ describe Property, type: :feature do
       property_create human_ref: 222, account: account_new
       property_create human_ref: 333, account: account_new
 
-      visit '/properties/'
+      visit '/accounts/'
       # shows more than one row
       expect(page).to have_text '111'
       expect(page).to have_text '222'

@@ -14,7 +14,7 @@ Letting::Application.routes.draw do
   resources :search_suggestions, only: [:index]
 
   root 'properties#index'
-  resources :properties
+  resources :properties, path: 'accounts'
   resources :arrears, only: [:index]
   resources :clients
   resources :clients_accounts, only: [:show]

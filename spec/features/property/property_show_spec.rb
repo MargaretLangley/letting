@@ -11,7 +11,7 @@ describe Property, type: :feature   do
                                      address: address_new(road: 'Wiggiton')),
                     account: account_new,
                     client: client_new
-    visit '/properties/1'
+    visit '/accounts/1'
     expect(page.title).to eq 'Letting - View Account'
     expect_property entity: 'Mr W. G. Grace'
     expect_agent_info entity: 'Bell', road: 'Wiggiton'
@@ -35,7 +35,7 @@ describe Property, type: :feature   do
     property_create id: 1,
                     account: account_new(charges: [charge]),
                     client: client_new
-    visit '/properties/1'
+    visit '/accounts/1'
     expect(page).to have_text 'Rent'
   end
 
@@ -43,20 +43,20 @@ describe Property, type: :feature   do
     property_create id: 1,
                     account: account_new(charges: [charge_new(dormant: true)]),
                     client: client_new
-    visit '/properties/1'
+    visit '/accounts/1'
     expect(page).to have_css '.dormant'
   end
 
   it 'navigates to index page' do
     property_create id: 1, account: account_new, client: client_new
-    visit '/properties/1'
+    visit '/accounts/1'
     click_on 'Accounts'
     expect(page.title).to eq 'Letting - Accounts'
   end
 
   it 'navigates to edit page' do
     property_create id: 1, account: account_new, client: client_new
-    visit '/properties/1'
+    visit '/accounts/1'
     first(:link, 'Edit').click
     expect(page.title).to eq 'Letting - Edit Account'
   end

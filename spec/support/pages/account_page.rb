@@ -17,12 +17,12 @@ class AccountPage
   include Capybara::DSL
 
   def new
-    visit '/properties/new'
+    visit '/accounts/new'
     self
   end
 
   def edit
-    visit '/properties/'
+    visit '/accounts/'
     click_on 'Edit'
     self
   end

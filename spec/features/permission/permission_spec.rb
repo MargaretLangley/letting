@@ -7,7 +7,7 @@ describe 'Permission Testing', type: :feature do
   end
 
   it "does not allow a guest to use an application's controller" do
-    visit '/properties'
+    visit '/accounts'
     expect(page.title).to eq 'Letting - Login'
   end
 
