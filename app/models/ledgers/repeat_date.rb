@@ -25,17 +25,9 @@ class RepeatDate
     end
   end
 
-  def day
-    @date.day
-  end
-
-  def month
-    @date.month
-  end
-
-  def year
-    @date.year
-  end
+  delegate :day, to: :date
+  delegate :month, to: :date
+  delegate :year, to: :date
 
   def yesterday
     @date -=  1.day

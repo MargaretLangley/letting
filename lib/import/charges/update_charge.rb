@@ -27,23 +27,22 @@ module DB
 
     def assign_range_dates
       Charge.all.each do |charge|
-        @charge = charge
-        @charge.start_date = first_debit.on_date if first_debit
-        @charge.end_date = last_debit.on_date if stopped_debiting?
-        @charge.save!
+        charge.start_date = first_debit(charge).on_date if first_debit charge
+        charge.end_date = last_debit(charge).on_date if stopped_debiting? charge
+        charge.save!
       end
     end
 
-    def first_debit
-      @charge.debits.order('on_date ASC').first
+    def first_debit charge
+      charge.debits.order('on_date ASC').first
     end
 
-    def last_debit
-      @charge.debits.order('on_date ASC').last
+    def last_debit charge
+      charge.debits.order('on_date ASC').last
     end
 
-    def stopped_debiting?
-      last_debit && last_debit.on_date < within_a_year
+    def stopped_debiting? charge
+      last_debit(charge) && last_debit(charge).on_date < within_a_year
     end
 
     def within_a_year
