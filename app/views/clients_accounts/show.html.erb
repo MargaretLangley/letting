@@ -39,31 +39,28 @@
     <div class='col-7-24  grid-header  bottom-spacer'>Town</div>
     <div class='col-3-24  grid-header  bottom-spacer  r-align'>Amount</div>
 
-    <% if @client.properties.any? %>
-      <% @client.properties.each do |property| %>
-        <div title='View' class='table-row' data-link='<%= property_path(property) %>'>
-          <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
-             <%= property.human_ref %>
-          </div>
-          <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
-            <%= format_empty_string_as_dash property.address.first_no %>
-          </div>
-          <div class='col-8-24  bottom-spacer  inherit-row'>
-            <%= format_empty_string_as_dash property.address.first_text %>
-          </div>
-          <div class='col-7-24  bottom-spacer  inherit-row  nowrap'>
-            <%= property.address.town %>
-          </div>
-          <div class='col-3-24  bottom-spacer  r-align'>
-            <%= property.account.credits.credited(range: params[:start_date]..params[:end_date] ).income %>
-          </div>
+    <% @client.properties.each do |property| %>
+      <div title='View' class='table-row' data-link='<%= property_path(property) %>'>
+        <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
+           <%= property.human_ref %>
         </div>
-      <% end %>
-    <% else %>
-      <div class='col-1-1  grid-row  vertical-spacer'>
-        The Client has no properties.
+        <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
+          <%= format_empty_string_as_dash property.address.first_no %>
+        </div>
+        <div class='col-8-24  bottom-spacer  inherit-row'>
+          <%= format_empty_string_as_dash property.address.first_text %>
+        </div>
+        <div class='col-7-24  bottom-spacer  inherit-row  nowrap'>
+          <%= property.address.town %>
+        </div>
+        <div class='col-3-24  bottom-spacer  r-align'>
+          <%= property.account.credits.credited(range: params[:start_date]..params[:end_date] ).income %>
+        </div>
       </div>
     <% end %>
-  </div>
 
+    <% if @client.properties.empty? %>
+      <%= render 'information/grid', information: 'The Client has no properties.' %>
+    <% end %>
+  </div>
  </div>

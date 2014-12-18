@@ -42,10 +42,19 @@ describe Client, type: :feature do
     expect(page.title).to eq 'Letting - Edit Client'
   end
 
-  it 'displays message when no properties under client' do
-    client_create
-    visit '/clients/'
-    find('.view-testing-link', visible: false).click
-    expect(page).to have_text 'The Client has no properties.'
+  describe 'no properties message' do
+    it 'displays message when client has no properties' do
+      client_create
+      visit '/clients/'
+      find('.view-testing-link', visible: false).click
+      expect(page).to have_text 'The Client has no properties.'
+    end
+
+    it 'hides message when client has properties' do
+      client_create property: property_new
+      visit '/clients/'
+      find('.view-testing-link', visible: false).click
+      expect(page).to_not have_text 'The Client has no properties.'
+    end
   end
 end
