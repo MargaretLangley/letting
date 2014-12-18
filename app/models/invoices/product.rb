@@ -32,7 +32,7 @@ class Product < ActiveRecord::Base
   # Scope to return products that trigger the back page of the invoice
   # These are displayed on the backpage.
   #
-  def self.back_page
+  def self.page2
     where(charge_type: ['Ground Rent', 'Garage Ground Rent'])
       .order(charge_type: :desc).first
   end
@@ -42,7 +42,7 @@ class Product < ActiveRecord::Base
   # Does the product require additional explanation typically
   # on the back page of the invoice.
   #
-  def back_page?
+  def page2?
     charge_type == 'Ground Rent' || charge_type == 'Garage Ground Rent'
   end
 
