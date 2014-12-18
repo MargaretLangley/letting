@@ -149,22 +149,22 @@ RSpec.describe Invoice, type: :model do
       end
     end
 
-    describe '#back_page?' do
+    describe '#page2?' do
       it 'returns false if products have no ground rent' do
         invoice = invoice_new products: [product_new(charge_type: 'Insurance')]
-        expect(invoice.back_page?).to eq false
+        expect(invoice.page2?).to eq false
       end
 
       it 'returns true if products includes ground rent' do
         invoice = invoice_new products: [product_new(charge_type: 'Ground Rent')]
-        expect(invoice.back_page?).to eq true
+        expect(invoice.page2?).to eq true
       end
 
       it 'returns false if on a red invoice' do
         transaction = DebitsTransaction.new invoices: [invoice_new, invoice_new]
         invoice = invoice_new debits_transaction: transaction,
                               products: [product_new(charge_type: 'Ground Rent')]
-        expect(invoice.back_page?).to eq false
+        expect(invoice.page2?).to eq false
       end
     end
 

@@ -24,38 +24,38 @@ RSpec.describe Product, type: :model do
     end
   end
 
-  describe '.back_page' do
+  describe '.page2' do
     it 'returns back page products' do
       invoice_create products: [product_new(charge_type: 'Ground Rent')]
-      expect(Product.back_page.charge_type).to eq 'Ground Rent'
+      expect(Product.page2.charge_type).to eq 'Ground Rent'
     end
 
     it 'orders Ground Rent before Garage ground rent' do
       invoice_create products: [product_new(charge_type: 'Garage Ground Rent'),
                                 product_new(charge_type: 'Ground Rent')]
-      expect(Product.back_page.charge_type).to eq 'Ground Rent'
+      expect(Product.page2.charge_type).to eq 'Ground Rent'
     end
 
-    it 'does not return front page only products' do
+    it 'does not return 1st page only products' do
       invoice_create products: [product_new(charge_type: 'Insurance')]
-      expect(Product.back_page).to be_nil
+      expect(Product.page2).to be_nil
     end
   end
 
-  describe '#back_page?' do
+  describe '#page2?' do
     it 'returns false if products have no ground rent' do
       product = Product.new charge_type: 'Insurance'
-      expect(product.back_page?).to eq false
+      expect(product.page2?).to eq false
     end
 
     it 'returns true if products includes ground rent' do
       product = Product.new charge_type: 'Ground Rent'
-      expect(product.back_page?).to eq true
+      expect(product.page2?).to eq true
     end
 
     it 'returns true if products includes garage ground rent' do
       product = Product.new charge_type: 'Garage Ground Rent'
-      expect(product.back_page?).to eq true
+      expect(product.page2?).to eq true
     end
   end
 

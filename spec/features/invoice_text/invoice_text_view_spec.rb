@@ -9,7 +9,7 @@ describe 'InvoiceText View', type: :feature do
   end
 
   context '#view' do
-    it 'finds view front page' do
+    it 'finds view 1st page' do
       visit '/invoice_texts/1'
       expect(page.title). to eq 'Letting - View Invoice Text'
     end

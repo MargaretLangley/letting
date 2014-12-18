@@ -1,6 +1,6 @@
-<% invoice_text_front = InvoiceText.find(1) %>
-<%= render 'heading_p2_address', invoice_text: invoice_text_front %>
-<%= render 'heading_page2', invoice_text: invoice_text_front %>
+<% invoice_text_page1 = InvoiceText.find(TEXT_PAGE_1) %>
+<%= render 'heading_page2_address', invoice_text: invoice_text_page1 %>
+<%= render 'heading_page2', invoice_text: invoice_text_page1 %>
 
 <%= render invoice_text_back.guides %>
 <div class='widemargin  instruct-font'>

@@ -8,7 +8,8 @@
 # they hold data needed to produce heading,
 # F&L Adam's address, notes and items on invoice and
 # notice of rent due.
-#
+# Front page is page 1 used by all invoices
+# Ground Rents also have age 2, back page, for legal advice
 ####
 #
 class InvoiceTextsController < ApplicationController
