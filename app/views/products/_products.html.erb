@@ -2,9 +2,9 @@
 <div class='col-2-24  grid-row  bottom-line-space'>&nbsp;</div>
 <div class='col-3-24  bottom-line-space'>          Due Date</div>
 <div class='col-5-24  bottom-line-space'>          Charge</div>
-<div class='col-7-24  bottom-line-space'>          Period</div>
-<div class='col-2-24  r-align  bottom-line-space'> Due</div>
-<div class='col-3-24  r-align  bottom-line-space'> Balance</div>
+<div class='col-5-24  bottom-line-space'>          Period</div>
+<div class='col-3-24  r-align  bottom-line-space'> Due</div>
+<div class='col-4-24  r-align  bottom-line-space'> Balance</div>
 <div class='col-2-24  bottom-line-space'>          &nbsp;</div>
 
 <% invoice.products.each do |product| %>
@@ -18,13 +18,13 @@
   <div class='col-5-24'>
     <%= product.charge_type %>
   </div>
-  <div class='col-7-24'>
+  <div class='col-5-24'>
     <%= product_dec.period %>
   </div>
-  <div class='col-2-24  r-align'>
+  <div class='col-3-24  r-align'>
     <%= product_dec.amount %>
   </div>
-  <div class='col-3-24  r-align'>
+  <div class='col-4-24  r-align'>
     <%= product_dec.balance %>
   </div>
   <div class='col-2-24'>
@@ -32,14 +32,14 @@
   </div>
 <% end %>
 
-<div class='col-19-24  grid-row'>&nbsp;</div>
-<div class='col-3-24  r-align'><%= dotted_line = "----------" %></div>
+<div class='col-18-24  grid-row'>&nbsp;</div>
+<div class='col-4-24  r-align'><%= dotted_line = "----------" %></div>
 <div class='col-2-24'>&nbsp;</div>
 
 <div class='col-5-24  grid-row bottom-spacer'>&nbsp;</div>
 <div class='col-11-24'>Total now Owing</div>
-<div class='col-3-24'>&nbsp;</div>
-<div class='col-3-24  r-align'>
+<div class='col-2-24'>&nbsp;</div>
+<div class='col-4-24  r-align'>
   <%= number_with_precision(invoice.total_arrears, precision: 2) %>
 </div>
 <div class='col-2-24'>&nbsp;</div>
