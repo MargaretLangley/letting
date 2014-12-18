@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Client, type: :feature do
+describe 'Client Show', type: :feature do
 
   before(:each) { log_in }
 
@@ -44,17 +44,17 @@ describe Client, type: :feature do
 
   describe 'no properties message' do
     it 'displays message when client has no properties' do
-      client_create
-      visit '/clients/'
-      find('.view-testing-link', visible: false).click
-      expect(page).to have_text 'The Client has no properties.'
+      client_create id: 1
+      visit '/clients/1'
+
+      expect(page.text).to match(/The client has no properties./i)
     end
 
     it 'hides message when client has properties' do
-      client_create property: property_new
-      visit '/clients/'
-      find('.view-testing-link', visible: false).click
-      expect(page).to_not have_text 'The Client has no properties.'
+      client_create id: 1, property: property_new
+      visit '/clients/1'
+
+      expect(page.text).to_not match(/The client has no properties./i)
     end
   end
 end
