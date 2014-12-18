@@ -60,4 +60,24 @@ describe Property, type: :feature   do
     first(:link, 'Edit').click
     expect(page.title).to eq 'Letting - Edit Account'
   end
+
+  describe 'no charges message' do
+    it 'displays message when account has no charges' do
+      property_create id: 1,
+                      account: account_new(charges: []),
+                      client: client_new
+      visit '/accounts/1'
+
+      expect(page.text).to match /No charges levied against this property./i
+    end
+
+    it 'hides message when client has properties' do
+      property_create id: 1,
+                      account: account_new(charges: [charge_new]),
+                      client: client_new
+      visit '/accounts/1'
+
+      expect(page.text).to_not match /No charges levied against this property./i
+    end
+  end
 end

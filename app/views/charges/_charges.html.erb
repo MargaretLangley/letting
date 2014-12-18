@@ -6,8 +6,8 @@
 <div class='col-10-24 bottom-spacer  grid-header'>Due</div>
 <div class='col-2-24  bottom-spacer  grid-header'>Dormant</div>
 
-<% if charges.any? %>
-  <%= render charges %>
-<% else %>
-  No charges levied against this property.
+<%= render charges %>
+
+<% if charges.empty? %>
+  <%= render 'information/grid', information: 'No charges levied against this property.' %>
 <% end %>
