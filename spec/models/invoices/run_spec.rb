@@ -34,4 +34,29 @@ RSpec.describe Run, type: :model do
       end
     end
   end
+
+  describe '#deliver' do
+    it 'sends invoice that has mail attribute true' do
+      expect(run_new(invoices: [invoice_new(mail: true)]).deliver.size)
+        .to eq 1
+    end
+
+    it 'keeps invoice that has mail attribute false' do
+      expect(run_new(invoices: [invoice_new(mail: false)]).deliver.size)
+        .to eq 0
+    end
+  end
+
+  describe '#retain' do
+    it 'keeps invoice that has mail attribute false' do
+      expect(run_new(invoices: [invoice_new(mail: false)]).retain.size)
+        .to eq 1
+    end
+
+    it 'sends invoice that has mail attribute' do
+      expect(run_new(invoices: [invoice_new(mail: true)]).retain.size)
+        .to eq 0
+    end
+  end
+
 end

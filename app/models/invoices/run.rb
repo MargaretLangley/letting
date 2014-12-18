@@ -41,6 +41,15 @@ class Run < ActiveRecord::Base
     invoices.select(&:actionable?).present?
   end
 
+  def deliver
+    invoices.select(&:mail)
+  end
+
+  def retain
+    invoices.reject(&:mail)
+  end
+
+
   def finished?
     invoices.present?
   end
