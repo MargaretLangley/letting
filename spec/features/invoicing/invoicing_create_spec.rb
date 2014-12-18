@@ -47,6 +47,14 @@ class InvoicingPage
   def success?
     has_content? /created|updated/i
   end
+
+  def delivered?
+    has_content? /No invoices will be delivered./i
+  end
+
+  def retained?
+    has_content? /No invoices will be retained./i
+  end
 end
 
 describe Invoicing, type: :feature do
@@ -57,6 +65,10 @@ describe Invoicing, type: :feature do
   end
   after  { Timecop.return }
 
+  # Similar to Disabled are retain and deliver
+  # retain and deliver tested in invoicing_show_spec
+  # The code uses the same partial so I am not retesting.
+  #
   describe 'disabled' do
     it 'disables fieldset on first visit' do
       invoicing_page.enter

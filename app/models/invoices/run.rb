@@ -46,7 +46,7 @@ class Run < ActiveRecord::Base
   end
 
   def retain
-    invoices.reject(&:mail)
+    invoices.select { |invoice| invoice.mail == false }
   end
 
   def finished?

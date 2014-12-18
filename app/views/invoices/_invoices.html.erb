@@ -1,9 +1,12 @@
-<div class='col-1-1  grid-row'>
+ <div class='col-1-1  grid-row'>
   <h3>Deliver</h3>
 </div>
 <%= render 'invoices/invoice_header', action: action %>
 <% run.deliver.each do |invoice| %>
   <%= render 'invoices/invoice', invoice: invoice, action: action %>
+<% end %>
+<% if run.deliver.empty? %>
+  <%= render 'information/grid', information: 'No invoices will be delivered.' %>
 <% end %>
 <div class='col-1-1  grid-row  top-line-spacer'>
   <h3>Retain</h3>
@@ -11,4 +14,7 @@
 <%= render 'invoices/invoice_header', action: false %>
 <% run.retain.each do |invoice| %>
   <%= render 'invoices/invoice', invoice: invoice %>
+<% end %>
+<% if run.retain.empty? %>
+  <%= render 'information/grid', information: 'No invoices will be retained.' %>
 <% end %>
