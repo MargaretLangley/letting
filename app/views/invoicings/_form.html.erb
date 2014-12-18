@@ -1,7 +1,7 @@
 <%= form_for invoicing do |f| %>
   <%= render 'shared/errors', object: invoicing %>
 
-  <div id='invoicing' class='grid  shell-thick  overlay-parent'>
+  <fieldset id='invoicing' <%= invoicing.actionable? ? '' : disabled="disabled" %> class='grid  shell-thick  overlay-parent'>
     <div class='col-1-2  spacer-column'>
       <div class='col-12-24  grid-row  bottom-spacer'><h3>Search Terms</h3></div>
       <div class='col-12-24  bottom-spacer'>&nbsp;</div>
@@ -50,6 +50,6 @@
     <%= render partial: 'teachings/invoicing' %>
     <%= render partial: 'account_debits/show' if params[:search_terms] %>
   <% end %>
-  </div> <!-- grid  shell -->
+  </fieldset> <!-- grid  shell -->
 <% end %> <!-- form -->
 
