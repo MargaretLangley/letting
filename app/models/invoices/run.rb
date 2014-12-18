@@ -49,7 +49,6 @@ class Run < ActiveRecord::Base
     invoices.reject(&:mail)
   end
 
-
   def finished?
     invoices.present?
   end
