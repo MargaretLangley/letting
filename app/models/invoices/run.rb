@@ -26,7 +26,9 @@ class Run < ActiveRecord::Base
     self.invoice_date = invoice_date
 
     if invoicing.first_run?
-      self.invoices = first_run comments: comments
+      self.invoices = FirstRunMaker.new(invoicing: invoicing,
+                                        invoice_date: invoice_date,
+                                        comments: comments).run
     else
       self.invoices = rerun invoicing.mold.invoices, comments: comments
     end
@@ -57,33 +59,6 @@ class Run < ActiveRecord::Base
 
   def init
     self.invoice_date = Time.zone.today if invoice_date.blank?
-  end
-
-  def first_run(comments:)
-    invoicing
-      .accounts
-      .map { |account| invoice_maker(account: account, comments: comments) }
-  end
-
-  def invoice_maker account: account, comments: []
-    InvoiceMaker.new(account: account,
-                     period: invoicing.period,
-                     invoice_date: invoice_date,
-                     comments: comments,
-                     transaction: debit_transaction_maker(account),
-                     products_maker: products_maker(account))
-      .compose
-  end
-
-  def debit_transaction_maker(account)
-    DebitTransactionMaker.new(account: account, debit_period: invoicing.period)
-      .invoice
-  end
-
-  def products_maker account
-    BlueProductsMaker.new(invoice_date: invoice_date,
-                          arrears: account.balance(to_date: invoice_date),
-                          transaction: debit_transaction_maker(account))
   end
 
   #
