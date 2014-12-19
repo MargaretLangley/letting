@@ -22,18 +22,9 @@ class Run < ActiveRecord::Base
   #
   # invoice_date - date to appear on the invoice
   #
-  def prepare(invoice_date:, comments:)
+  def prepare(run_maker:)
     self.invoice_date = invoice_date
-
-    if invoicing.first_run?
-      self.invoices = FirstRunMaker.new(invoicing: invoicing,
-                                        invoice_date: invoice_date,
-                                        comments: comments).run
-    else
-      self.invoices = ReRunMaker.new(invoices: invoicing.mold.invoices,
-                                     invoice_date: invoice_date,
-                                     comments: comments).run
-    end
+    self.invoices = run_maker.run
   end
 
   #

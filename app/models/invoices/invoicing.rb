@@ -34,10 +34,6 @@ class Invoicing < ActiveRecord::Base
     runs.select(&:finished?).size.zero?
   end
 
-  def mold
-    runs.first
-  end
-
   # valid_arguments?
   # Does this invoicing have enough arguments to call generate on?
   # Nil values for property_range and period are nil cause problems.
@@ -57,6 +53,24 @@ class Invoicing < ActiveRecord::Base
   # make a run to add to the invoicing
   #
   def generate(invoice_date: Time.zone.today, comments:)
-    runs.build.prepare invoice_date: invoice_date, comments: comments
+    runs.build.prepare run_maker: maker(invoice_date, comments)
+  end
+
+  private
+
+  def maker invoice_date, comments
+    if first_run?
+      FirstRunMaker.new invoicing: self,
+                        invoice_date: invoice_date,
+                        comments: comments
+    else
+      ReRunMaker.new invoices: mold.invoices,
+                     invoice_date: invoice_date,
+                     comments: comments
+    end
+  end
+
+  def mold
+    runs.first
   end
 end
