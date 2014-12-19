@@ -29,6 +29,13 @@ class ProductsMaker
     product_debits.present?
   end
 
+  def self.arrears(date_due:, amount:)
+    Product.new charge_type: 'Arrears',
+                date_due: date_due,
+                automatic_payment: false,
+                amount: amount
+  end
+
   private
 
   def products
@@ -38,10 +45,8 @@ class ProductsMaker
   def product_arrears
     product_arrears = []
     if arrears.nonzero?
-      product_arrears = [Product.new(charge_type: 'Arrears',
-                                     date_due: invoice_date,
-                                     automatic_payment: false,
-                                     amount: arrears)]
+      product_arrears = [ProductsMaker.arrears(date_due: invoice_date,
+                                               amount: arrears)]
     end
     product_arrears
   end

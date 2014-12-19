@@ -15,6 +15,37 @@ RSpec.describe ReRunMaker, type: :model do
     end
   end
 
+  describe 'products' do
+    account, invoice = nil
+    before :each do
+      debit = debit_new on_date: '25/3/2011', amount: 35, charge: charge_new
+      account = account_new debits: [debit],
+                            property: property_new(address: address_new)
+      arrears = ProductsMaker.arrears date_due: '25/3/2012', amount: 35
+      invoice = invoice_new account: account,
+                            property: account.property,
+                            products: [arrears]
+    end
+
+    it 'displays same arrears if no payments' do
+      rerun = ReRunMaker.new invoices: [invoice]
+
+      expect(rerun.invoices.first.products.first.charge_type).to eq 'Arrears'
+      expect(rerun.invoices.first.products.first.amount).to eq 35
+    end
+
+    it 'changes arrears if payments' do
+      account.credits = [credit_new(on_date: '25/3/2013',
+                                    amount: -20,
+                                    charge: charge_new)]
+
+      rerun = ReRunMaker.new(invoices: [invoice], invoice_date: '30/12/2013')
+              .run
+      expect(rerun.first.products.first.charge_type).to eq 'Arrears'
+      expect(rerun.first.products.first.amount).to eq 15
+    end
+  end
+
   describe 'invoice_date' do
     it 'defaults to today' do
       invoices = [invoice_new(invoice_date: '2000/01/01')]
