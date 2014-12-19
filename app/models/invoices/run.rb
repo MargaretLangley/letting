@@ -30,7 +30,9 @@ class Run < ActiveRecord::Base
                                         invoice_date: invoice_date,
                                         comments: comments).run
     else
-      self.invoices = rerun invoicing.mold.invoices, comments: comments
+      self.invoices = ReRunMaker.new(invoices: invoicing.mold.invoices,
+                                     invoice_date: invoice_date,
+                                     comments: comments).run
     end
   end
 
@@ -59,26 +61,5 @@ class Run < ActiveRecord::Base
 
   def init
     self.invoice_date = Time.zone.today if invoice_date.blank?
-  end
-
-  #
-  # rerun
-  # update the invoice - allowing for any payments and date changes
-  #
-  def rerun(invoices, comments:)
-    invoices.map { |invoice| invoice_remaker(invoice, comments: comments) }
-  end
-
-  def invoice_remaker(invoice, comments:)
-    InvoiceRemaker.new(invoice_text: invoice,
-                       comments: comments,
-                       products: products_remaker(invoice)).compose
-  end
-
-  def products_remaker invoice
-    ProductsMaker.new(invoice_date: invoice_date,
-                      arrears: invoice.account.balance(to_date: invoice_date),
-                      transaction: invoice.debits_transaction)
-      .invoice
   end
 end

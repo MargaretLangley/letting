@@ -18,7 +18,7 @@ RSpec.describe Run, type: :model do
         account_create property: property_new(human_ref: 8)
         invoice_text_create id: TEXT_PAGE_1
         run = run_new invoices: [],
-                      invoicing: invoicing_new(property_range: '1-10')
+                      invoicing: invoicing_new(property_range: '1-10', runs: [])
         run.prepare invoice_date: Date.new(2001, 1, 1),
                     comments: ['a comment']
 
@@ -30,8 +30,6 @@ RSpec.describe Run, type: :model do
       it 'sets comments' do
         account_create property: property_new(human_ref: 8)
         run = run_new invoicing: invoicing_new(property_range: '1-10')
-        run.prepare invoice_date: Date.new(2001, 1, 1),
-                    comments: []
 
         run.prepare invoice_date: Date.new(2001, 1, 1),
                     comments: ['a comment']
