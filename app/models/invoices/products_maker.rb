@@ -19,7 +19,6 @@ class ProductsMaker
     @invoice_date = invoice_date
     @arrears = arrears
     @transaction = transaction
-    @products = make_products
   end
 
   def invoice(*)
@@ -32,17 +31,11 @@ class ProductsMaker
 
   private
 
-  def make_products
-    product_arrears_maker + product_debits
+  def products
+    @products ||= product_arrears + product_debits
   end
 
-  def product_debits
-    transaction.debits.map do |debit|
-      Product.new debit.to_debitable
-    end
-  end
-
-  def product_arrears_maker
+  def product_arrears
     product_arrears = []
     if arrears.nonzero?
       product_arrears = [Product.new(charge_type: 'Arrears',
@@ -51,5 +44,11 @@ class ProductsMaker
                                      amount: arrears)]
     end
     product_arrears
+  end
+
+  def product_debits
+    transaction.debits.map do |debit|
+      Product.new debit.to_debitable
+    end
   end
 end
