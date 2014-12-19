@@ -15,9 +15,9 @@
 <div class='col-24-24  grid-row'>&nbsp;</div>
 
 <div class='col-2-24  grid-row'>&nbsp;</div>
-<div class='col-20-24  inv-advice'>
+<div class='col-20-24  inv-advice  bottom-line-spacer'>
   We <%= invoice_text_page1.invoice_name %> ON BEHALF OF YOUR LANDLORDS
-  <br>
+
   CLIENT NAME CLIENT ADDRESS
   <br>
   <%= simple_format(invoice_text_page1.advice1) %>
@@ -28,7 +28,6 @@
   </div>
   <%= simple_format(invoice_text_page1.advice2) %>
   </p>
-  <span class='sissors'>&#9985;<%= "-" * 60 %></span>
-  <br>
+  <span class='sissors bottom-line-spacer'>&#9985;<%= "-" * 60 %></span>
 </div>
 <div class='col-2-24'>&nbsp;</div>
