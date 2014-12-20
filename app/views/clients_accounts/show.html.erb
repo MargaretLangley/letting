@@ -5,30 +5,27 @@
 
   <div class='col-20-24  vertical-spacer'>  <!-- 2nd column -->
 
-    <div class='col-1-4  grid-row  bottom-spacer faded'>Client ID and Name</div>
-    <div class='col-1-4  bottom-spacer'><%= @client.human_ref %></div>
-    <div class='col-2-4  bottom-spacer'>
+    <div class='col-1-4  grid-row  faded  bottom-line-spacer'>
+      Client ID and Name
+    </div>
+    <div class='col-1-4  bottom-line-spacer'><%= @client.human_ref %></div>
+    <div class='col-2-4  bottom-line-spacer'>
       <%= @client.entities.full_name %>
     </div>
 
-    <div class='col-1-4  grid-row  bottom-spacer  faded'>Address</div>
-    <div class='col-3-4  bottom-line-spacer'>
-      <%= simple_format(@client.address.text, {}, wrapper_tag: 'div') %>
-    </div>
-
-    <%= form_tag client_path(@client), class: 'no-print', method: 'get' do %>
+    <%= form_tag client_path(@client), class: 'grid-row', method: 'get' do %>
       <div class='col-5-24  bottom-line-spacer'>Payments made between:</div>
       <div class='col-19-24  bottom-line-spacer'>
         <%= date_field_tag :start_date, params[:start_date], autofocus: true, class: 'width-9-24' %> and
         <%= date_field_tag :end_date, params[:end_date], autofocus: true, class: 'width-9-24' %>
-        <button type='submit' class='width-4-24' id='credit_search' title='Credit Search'>
+        <button type='submit' class='width-4-24 no-print' id='credit_search' title='Credit Search'>
           <%= fa_icon('search lg') %>
         </button>
       </div>
     <% end %>
 
     <div class='col-1-1  grid-row  vertical-spacer  faded'>
-      Ground Rents Owned
+      Ground Rents Collected
     </div>
 
     <div class='col-3-24  grid-row  bottom-spacer  grid-header  r-align'>
