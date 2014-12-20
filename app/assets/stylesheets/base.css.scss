@@ -187,3 +187,18 @@ input[type='checkbox'] {
 :-ms-input-placeholder {
    text-align:center;
 }
+
+@media print{
+/*
+h2 is the title and is used in almost every page printout.
+Change to a realistic size for heading and date.
+*/
+
+ h2{
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+}
