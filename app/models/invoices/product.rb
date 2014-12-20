@@ -57,7 +57,9 @@ class Product < ActiveRecord::Base
   end
 
   def to_s
-    "charge_type: #{charge_type} date_due: #{date_due} amount: #{amount} "\
-    "period: #{period_first}..#{period_last}, balance: #{balance}"
+    "charge_type: #{charge_type} date_due: #{date_due} " \
+    "amount: #{amount.round(2)} " \
+    "period: #{period_first}..#{period_last}, " \
+    "balance: #{balance ? balance.round(2) : ''}"
   end
 end

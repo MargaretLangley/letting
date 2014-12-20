@@ -132,4 +132,11 @@ RSpec.describe Product, type: :model do
       expect(Product.new <=> 37).to be_nil
     end
   end
+
+  it '#to_s' do
+    product = product_new charge_type: 'Rent'
+    expect(product.to_s)
+      .to eq 'charge_type: Rent date_due: 2014-06-07 amount: 30.05 '\
+             'period: 2010-09-30..2011-03-25, balance: '
+  end
 end
