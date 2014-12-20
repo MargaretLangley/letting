@@ -24,16 +24,14 @@ describe Client, type: :feature do
       expect(page).to have_text '333'
 
       # displays multiple columns/
-      expect(page).to have_text 'W G'
-      expect(page).to have_text 'Grace'
+      expect(page).to have_text 'W. G. Grace'
       expect(page).to have_text 'Edgbaston Road'
     end
 
     it 'view' do
       first('.view-testing-link', visible: false).click
       expect(page).to have_text '111'
-      expect(page).to have_link 'Edit'
-      expect(page).to have_text 'Properties Owned'
+      expect(page.title).to eq 'Letting - View Client'
     end
   end
 end
