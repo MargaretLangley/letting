@@ -11,6 +11,14 @@
 # Back page holds details of 'Notice of Rent Due,'
 # only used for Ground Rent.
 #
+# Invoice Text Constants
+#
+# Constants relating to Invoice text files 1 & 2
+# These hold the texts used on both pages of the invoices
+# Page 1 is the front page which all invoices have.
+# Page 2 is the back page for Ground Rents only.
+# This back page contains legal advice for the occupier
+#
 ####
 #
 class InvoiceText < ActiveRecord::Base
@@ -24,4 +32,7 @@ class InvoiceText < ActiveRecord::Base
   accepts_nested_attributes_for :guides, allow_destroy: true
   has_many :invoices, through: :letters
   has_many :letters, dependent: :destroy
+
+  PAGE_1 = 1
+  PAGE_2 = 2
 end

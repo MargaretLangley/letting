@@ -9,7 +9,7 @@
 
   InvoiceText Number <%= @invoice_text.id %>
 
-  <% if @invoice_text.id == TEXT_PAGE_1 %>
+  <% if @invoice_text.id == InvoiceText::PAGE_1 %>
     <%= render 'page1', invoice_text_page1: @invoice_text %>
   <% else %>
     <%= render 'page2', invoice_text_back: @invoice_text %>
