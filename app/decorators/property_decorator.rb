@@ -34,7 +34,7 @@ class PropertyDecorator
     if source.agent.authorized?
       source.agent.address.text
     else
-      nil
+      '-'
     end
   end
 end

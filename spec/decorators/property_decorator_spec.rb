@@ -48,7 +48,7 @@ describe PropertyDecorator do
       end
 
       it 'address missing' do
-        expect(property.agent_address_lines).to eq ['-']
+        expect(property.agent_address_lines).to eq '-'
       end
     end
   end
