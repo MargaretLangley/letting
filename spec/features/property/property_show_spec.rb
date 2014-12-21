@@ -44,7 +44,9 @@ describe Property, type: :feature   do
                     account: account_new(charges: [charge_new(dormant: true)]),
                     client: client_new
     visit '/accounts/1'
-    expect(page).to have_css '.dormant'
+    within 'div#charge' do
+      expect(page).to have_text 'Yes'
+    end
   end
 
   it 'navigates to index page' do
