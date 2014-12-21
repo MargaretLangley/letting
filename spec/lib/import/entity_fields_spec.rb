@@ -7,40 +7,24 @@ require_relative '../../../lib/import/entity_fields'
 module DB
   describe EntityFields, :import do
 
-    it 'title' do
-      entity = EntityFields.new 'Mr', 'A', 'Man'
-      expect(entity.title).to eq 'Mr'
-    end
-
+    it('title') { expect(EntityFields.new('Mr', 'A', 'Man').title).to eq 'Mr' }
     it 'initials' do
-      entity = EntityFields.new 'Mr', 'A D', 'Man'
-      expect(entity.initials).to eq 'A D'
+      expect(EntityFields.new('', 'A', 'Man').initials).to eq 'A'
     end
+    it('name') { expect(EntityFields.new('Mr', 'A', 'Man').name).to eq 'Man' }
 
-    it 'name' do
-      entity = EntityFields.new 'Mr', 'A D', 'Man'
-      expect(entity.name).to eq 'Man'
-    end
-
-    context 'Person' do
-      it 'is recognized' do
-        entity = EntityFields.new 'Mr', 'A D', 'Man'
-        expect(entity).to be_person
-      end
-    end
-
-    context 'attributes' do
-      it 'structure returned' do
+    describe '#update_for' do
+      it 'returns the updated structure' do
         client = client_new
         entity = EntityFields.new 'Mr', 'A D', 'Man'
+
         entity.update_for client.entities.first
-        expect(client.entities.first.title).to eq 'Mr'
-        expect(client.entities.first.initials).to eq 'A D'
-        expect(client.entities.first.name).to eq 'Man'
+
+        expect(client.entities.full_name).to eq 'Mr A. D. Man'
       end
     end
 
-    context 'cleaning data' do
+    describe 'cleaning data' do
 
       it 'leaves ampersand in middle' do
         entity = EntityFields.new 'Mr', 'A D', 'Woman & Man,'

@@ -13,16 +13,48 @@ module DB
         %q(E10 7EX, SPAIN)
     end
 
-    context 'entity' do
+    describe 'entity' do
       it 'title' do
         row = ContactFields.new parse_line contact_fields
+
         expect(row.entities.length).to eq 2
       end
     end
 
     describe '#update_for' do
-      it 'updates address from row' do
-        client = client_new
+      def one_entity_field
+        %q(11,  Mr,  D, Example, , , , 1, House,  2, ) +
+          %q(Road, District, Town, County, E10 7EX, SPAIN)
+      end
+
+      it 'updates entity from row source' do
+        client = client_new entities: [Entity.new(name: 'Jones')]
+
+        ContactFields.new(parse_line one_entity_field).update_for client
+
+        expect(client.entities[0].full_name).to eq 'Mr D. Example'
+      end
+
+      def two_entity_field
+        %q(11,  Mr,, One, Mrs, , Two, 1, House,  2, ) +
+          %q(Road, District, Town, County, E10 7EX, SPAIN)
+      end
+
+      it 'updates both entities' do
+        client = client_new entities: [Entity.new(name: 'Uno'),
+                                       Entity.new(name: 'Dos')]
+        expect(client.entities[0].full_name).to eq 'Uno'
+        expect(client.entities[1].full_name).to eq 'Dos'
+
+        ContactFields.new(parse_line two_entity_field).update_for client
+
+        expect(client.entities[0].full_name).to eq 'Mr One'
+        expect(client.entities[1].full_name).to eq 'Mrs Two'
+      end
+
+      it 'updates address from row source' do
+        client = client_new address: address_new(road: 'end')
+
         ContactFields.new(parse_line contact_fields).update_for client
 
         expect(client.address.flat_no).to eq '1'
@@ -37,15 +69,14 @@ module DB
       end
 
       it 'titleizes town names' do
-
         lower_case_town_row = \
         %q(11,  Mr,  D, Example, Mrs, A N, Other&, 1, ExampleHouse,  2, ) +
         %q(Example Street, District ,example town,  Example County,  ) +
         %q(E10 7EX, SPAIN)
-
         client = client_new address: address_new(town: 'this town is changed')
 
         ContactFields.new(parse_line lower_case_town_row).update_for client
+
         expect(client.address.town).to eq 'Example Town'
       end
     end

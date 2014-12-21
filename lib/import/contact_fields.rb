@@ -25,6 +25,8 @@ module DB
       @entities << EntityFields.new(row[:title2], row[:initials2], row[:name2])
     end
 
+    # contact values are overridden by row values
+    #
     def update_for contact
       contact.entities.zip(entities).each do |entity, row|
         row.update_for entity

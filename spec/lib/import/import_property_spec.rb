@@ -26,7 +26,7 @@ module DB
       expect(Property.first.client_id).to eq client.id
     end
 
-    # contact entites test suite in import_contact_entity_spec
+    # contact entities test suite in import_contact_entity_spec
     #
     it 'Property has two entities' do
       import_property row
