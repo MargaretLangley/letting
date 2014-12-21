@@ -13,16 +13,18 @@
 #####
 #
 class Payments
+  attr_reader :payments
+
   def initialize payments
     @payments = payments.map(&:negate)
   end
 
   def to_a
-    @payments
+    payments
   end
 
   def sum
-    @payments.map(&:amount).inject(0, &:+)
+    payments.map(&:amount).inject(0, &:+)
   end
 
   def self.on date: Time.zone.today.to_s

@@ -13,21 +13,21 @@ require_relative '../../lib/import/errors'
 ####
 #
 class ChargesMatcher
+  attr_reader :charges
+
   def initialize charges
     @charges = charges
   end
 
   def first_or_initialize charge_type
-    find(charge_type) || @charges.build
+    find(charge_type) || charges.build
   end
 
-  def size
-    @charges.size
-  end
+  delegate :size, to: :charges
 
   private
 
   def find charge_type
-    @charges.find { |charge| charge.charge_type == charge_type }
+    charges.find { |charge| charge.charge_type == charge_type }
   end
 end
