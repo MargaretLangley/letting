@@ -1,4 +1,4 @@
-<% invoice_text_page1 = InvoiceText.find(InvoiceText::PAGE_1) %>
+<% invoice_text_page1 = InvoiceText.first %>
 <%= render 'heading_page2_address', invoice_text: invoice_text_page1 %>
 <%= render 'heading_page2', invoice_text: invoice_text_page1 %>
 

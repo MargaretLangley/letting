@@ -1,10 +1,10 @@
 <% invoice_dec = InvoiceDecorator.new(invoice) %>
 <div class='printbody'>
 
-  <% invoice_text_page1 = InvoiceText.find(InvoiceText::PAGE_1) %>
+  <% invoice_text_page1 = InvoiceText.first %>
   <%= render 'invoice_texts/heading_page2_address' %>
 
-  <% invoice_page2 = InvoiceText.find(InvoiceText::PAGE_2) %>
+  <% invoice_page2 = InvoiceText.second %>
 
   <div class='grid-row  c-align bottom-spacer'>
      <%= invoice_page2.heading1 %>

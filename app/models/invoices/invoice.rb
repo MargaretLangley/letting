@@ -80,7 +80,7 @@ class Invoice < ActiveRecord::Base
               products:)
     self.account = account
     self.invoice_date = invoice_date
-    letters.build invoice_text: InvoiceText.find(InvoiceText::PAGE_1)
+    letters.build invoice_text: InvoiceText.first
     self.property = property
     self.comments = generate_comments comments: comments
     self.debits_transaction = debits_transaction
