@@ -1,6 +1,6 @@
 
 
-after 'charges' do
+after 'charges', 'properties' do
   class << self
     def create_date months_ago
       DateTime.current - months_ago.months
