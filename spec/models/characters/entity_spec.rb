@@ -1,13 +1,11 @@
 require 'rails_helper'
 
 describe Entity, type: :model do
-
   let(:entity) { Entity.new person_entity_attributes entitieable_id: 1 }
   it('is valid') { expect(entity).to be_valid }
 
   describe 'validations' do
     describe 'name' do
-
       it 'presence' do
         entity.name = nil
         expect(entity).to_not be_valid
@@ -64,5 +62,4 @@ describe Entity, type: :model do
       end
     end
   end
-
 end

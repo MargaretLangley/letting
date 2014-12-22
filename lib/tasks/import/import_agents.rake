@@ -7,7 +7,6 @@ STDOUT.sync = true
 
 namespace :db do
   namespace :import do
-
     desc 'Import agent addresses data from CSV file'
     task :agents, [:range] => :environment do |_task, args|
       DB::ImportAgent.import staging_agents,

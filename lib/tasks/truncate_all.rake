@@ -5,7 +5,6 @@
 STDOUT.sync = true
 
 namespace :db do
-
   desc 'Truncates all the database tables'
   task truncate_all: :environment do
     ActiveRecord::Base.connection
@@ -16,5 +15,4 @@ namespace :db do
         .connection.execute("TRUNCATE TABLE #{table} RESTART IDENTITY;")
     end
   end
-
 end

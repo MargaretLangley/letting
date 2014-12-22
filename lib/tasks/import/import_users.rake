@@ -8,7 +8,6 @@ STDOUT.sync = true
 
 namespace :db do
   namespace :import do
-
     desc 'Import users data from CSV file'
     task :users, [:test] => :environment do |_task, args|
       if File.exist?('import_data/new/users.csv')

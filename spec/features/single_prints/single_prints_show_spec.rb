@@ -2,9 +2,7 @@
 require 'rails_helper'
 
 describe 'PrintShow', type: :feature do
-
   describe '#show' do
-
     it 'basic' do
       setup
       visit '/single_prints/1'
@@ -13,7 +11,6 @@ describe 'PrintShow', type: :feature do
     end
 
     describe 'display of back page' do
-
       it 'displays back page for ground rents and garage ground rent only' do
         skip 'Back page is missing and with it Act 2002'
         setup products: [product_new(charge_type: 'Ground Rent')]
@@ -27,7 +24,6 @@ describe 'PrintShow', type: :feature do
         visit '/single_prints/1'
         expect(page).to_not have_text 'Act 2002'
       end
-
     end
 
     def setup(*)

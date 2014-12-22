@@ -26,5 +26,4 @@ describe StringDate, type: :model do
       end
     end
   end
-
 end

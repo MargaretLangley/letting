@@ -23,7 +23,6 @@ RSpec.describe InvoiceMaker, type: :model do
                 %q(Invoice Date: Mon, 01 Feb 2010),
                 %q(Property Address: "Edgbaston Road\nBirmingham\nWest Midlands"),
                 %q(client: "")].join "\n"
-
     end
   end
 end

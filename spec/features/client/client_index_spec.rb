@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Client, type: :feature do
-
   before(:each) do
     log_in
     client_create human_ref: 111,
@@ -14,7 +13,6 @@ describe Client, type: :feature do
   end
 
   context '#index' do
-
     it 'basic' do
       expect(current_path).to eq '/clients/'
 

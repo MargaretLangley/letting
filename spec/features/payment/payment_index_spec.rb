@@ -34,7 +34,6 @@ class PaymentIndexPage
 end
 
 describe 'Payment index', :ledgers, type: :feature do
-
   let(:payment_index) { PaymentIndexPage.new }
   before(:each) { log_in }
 

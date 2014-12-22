@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Agent, type: :model do
-
   it('is valid') { expect(agent_new).to be_valid }
 
   context 'when authorized' do

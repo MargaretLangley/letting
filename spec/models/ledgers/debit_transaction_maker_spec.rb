@@ -2,7 +2,6 @@ require 'rails_helper'
 # rubocop: disable Metrics/LineLength
 
 RSpec.describe DebitTransactionMaker, type: :model do
-
   describe '#debits' do
     it 'produces debits for due charges' do
       chg = charge_create(cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)]))

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Run, type: :model do
-
   describe 'range' do
     it 'creates a run of invoices' do
       account_create property: property_new(human_ref: 8)

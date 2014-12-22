@@ -30,5 +30,4 @@ describe Invoicing, type: :feature do
         have_text 'Range 1-200, Period 30/Jun - 30/Aug, deleted!'
     end
   end
-
 end

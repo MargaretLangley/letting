@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Client, type: :feature do
-
   before(:each) do
     log_in
     client_create

@@ -3,7 +3,6 @@ require_relative '../../../lib/csv/csv_transform'
 
 module DB
   describe CSVTransform, :import, :stage do
-
     describe 'to_a' do
       it 'errors if file unknown' do
         expect { warn 'Warning: client is missing.' }
@@ -37,7 +36,6 @@ module DB
           expect(row[:line]).to eq 'lines'
         end
       end
-
     end
 
     def file_name

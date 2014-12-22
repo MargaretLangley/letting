@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 describe Invoicing, type: :feature do
-
   describe '#show' do
-
     it 'basic' do
       setup
       visit '/invoices/1'
@@ -12,7 +10,6 @@ describe Invoicing, type: :feature do
     end
 
     describe 'back page is used for Ground Rents & Garage Ground Rents only' do
-
       it 'displays back page with ground rent, uses invoice_text 2' do
         skip 'Back page is missing and with it Act 2002'
         setup products: [product_new(charge_type: 'Ground Rent')]

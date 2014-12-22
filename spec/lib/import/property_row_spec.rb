@@ -6,19 +6,15 @@ require_relative '../../../lib/import/property_row'
 
 module DB
   describe PropertyRow, :import do
-
     let(:row) { PropertyRow.new parse_line property_row }
 
     context 'readers' do
-
       it 'human_ref' do
         expect(row.human_ref).to eq 122
       end
-
     end
 
     context 'methods' do
-
       context '#client_id' do
         it 'found when present' do
           client = client_create human_ref: 11

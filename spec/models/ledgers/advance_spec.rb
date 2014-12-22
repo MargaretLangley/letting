@@ -3,7 +3,6 @@ require 'rails_helper'
 # rubocop: disable Metrics/LineLength
 
 describe Advance, :ledgers, :range do
-
   it 'initializes with repeat dates' do
     repeat = Advance.new repeat_dates: [RepeatDate.new(month: 5, day: 4)]
     expect(repeat.periods.length).to eq 1
@@ -31,7 +30,6 @@ describe Advance, :ledgers, :range do
         expect(repeat.duration(within: Date.new(2030, 9, 3)))
           .to eq Date.new(2030, 9, 3)..Date.new(2031, 3, 4)
       end
-
     end
 
     it 'errors if date not found in any period' do

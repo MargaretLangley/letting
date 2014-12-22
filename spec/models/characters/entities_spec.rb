@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 shared_examples_for Entities do
-
   describe '#full_name' do
     it 'creates one name' do
       entityable = described_class.new

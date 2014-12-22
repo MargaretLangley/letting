@@ -1,5 +1,4 @@
 Letting::Application.routes.draw do
-
   get 'arrears/index'
 
   resources :sessions, only: [:create, :destroy]

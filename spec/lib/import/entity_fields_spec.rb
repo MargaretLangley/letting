@@ -6,7 +6,6 @@ require_relative '../../../lib/import/entity_fields'
 
 module DB
   describe EntityFields, :import do
-
     it('title') { expect(EntityFields.new('Mr', 'A', 'Man').title).to eq 'Mr' }
     it 'initials' do
       expect(EntityFields.new('', 'A', 'Man').initials).to eq 'A'
@@ -25,7 +24,6 @@ module DB
     end
 
     describe 'cleaning data' do
-
       it 'leaves ampersand in middle' do
         entity = EntityFields.new 'Mr', 'A D', 'Woman & Man,'
         expect(entity.name).to eq 'Woman & Man'

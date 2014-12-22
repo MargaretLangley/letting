@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe AccountDebitDecorator do
-
   let(:debit_dec) { AccountDebitDecorator.new debit_new }
 
   context 'attributes has' do

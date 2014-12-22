@@ -52,7 +52,6 @@ module DB
     end
 
     context 'use profile' do
-
       it 'new record to false' do
         import_property row
         expect(Property.first.agent.authorized).to be false

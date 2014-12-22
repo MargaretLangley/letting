@@ -13,7 +13,6 @@ class Validatable
 end
 
 describe 'DateEqualOrAfter' do
-
   let(:validatable) do
     Validatable.new Date.new(2013, 1, 1), Date.new(2013, 1, 1)
   end

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'Account Update', type: :feature  do
-
   let(:account) { AccountPage.new }
 
   context 'Agentless' do

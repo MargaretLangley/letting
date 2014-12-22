@@ -9,7 +9,6 @@ RSpec::Matchers.define :allow? do |*args|
 end
 
 describe Permission, type: :model do
-
   context 'as guest' do
     subject { Permission.new(nil) }
 

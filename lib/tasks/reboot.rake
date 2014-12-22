@@ -5,7 +5,6 @@
 STDOUT.sync = true
 
 namespace :db do
-
   desc 'Raise an error unless development environment'
   task :dev_warning do
     fail 'You should only perform this task in development.' \
@@ -22,5 +21,4 @@ namespace :db do
     # db:import If after test prepare it seeds test database
     'db:test:prepare'
   ]
-
 end

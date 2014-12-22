@@ -14,7 +14,6 @@ require 'csv'
 
 namespace :db do
   namespace :import do
-
     filename = 'import_data/new/due_ons.csv'
 
     desc 'Import due_ons from CSV file'

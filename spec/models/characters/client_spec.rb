@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Client, type: :model do
-
   describe 'validations' do
     it('is valid') { expect(client_new).to be_valid }
 

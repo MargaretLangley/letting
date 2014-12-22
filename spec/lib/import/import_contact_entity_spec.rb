@@ -6,7 +6,6 @@ require_relative '../../../lib/import/import_client'
 
 module DB
   describe 'ImportContactEntity', :import do
-
     def row
       %q(11,  Mr,  D, Example, Mrs, A N, Other, 1, ExampleHouse,  2, ) +
         %q(Example Street, ,Example Town,  Example County,  E10 7EX)
@@ -43,7 +42,6 @@ module DB
     end
 
     context 'multiple imports' do
-
       it 'updated changed entities' do
         import_client row
         import_client updated_row

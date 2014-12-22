@@ -7,7 +7,6 @@ require 'csv'
 ####
 namespace :db do
   namespace :import do
-
     filename = 'import_data/new/invoice_text_guide.csv'
 
     desc "Import invoice text F&L Adam's guides from CSV file"

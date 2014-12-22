@@ -6,7 +6,6 @@ require_relative '../../../lib/import/import_client'
 
 module DB
   describe ImportClient, :import do
-
     def row
       %q(11, Mr, A, One, Mrs, B, Two, 1, House, 2, ) +
         %q(Street, ,Town, County, E10 7EX)

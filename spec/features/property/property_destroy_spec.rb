@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Property, type: :feature do
-
   before(:each) { log_in }
 
   it '#destroys a property' do

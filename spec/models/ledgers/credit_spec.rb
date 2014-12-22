@@ -2,7 +2,6 @@
 require 'rails_helper'
 
 describe Credit, :ledgers, type: :model do
-
   let(:credit) { credit_new amount: -88.08 }
 
   describe 'validates' do
@@ -90,7 +89,6 @@ describe Credit, :ledgers, type: :model do
   end
 
   describe 'methods' do
-
     describe '#charge_type' do
       it 'returned when charge present' do
         (credit = credit_new).charge = charge_new charge_type: 'Rent'

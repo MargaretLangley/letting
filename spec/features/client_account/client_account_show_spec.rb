@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'Client Account Show', type: :feature do
-
   before(:each) { log_in }
 
   it '#show' do

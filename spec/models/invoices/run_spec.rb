@@ -35,5 +35,4 @@ RSpec.describe Run, type: :model do
         .to eq 0
     end
   end
-
 end

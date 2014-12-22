@@ -5,7 +5,6 @@ require_relative '../../../lib/import/import_user'
 
 module DB
   describe ImportUser, :import do
-
     def row
       %q("Rich", richard.wigley@gmail.com,  password,  TRUE)
     end

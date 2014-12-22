@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'InvoiceText View', type: :feature do
-
   before(:each) do
     log_in admin_attributes
     invoice_text_create id: 1,

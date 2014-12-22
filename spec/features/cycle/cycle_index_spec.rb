@@ -1,13 +1,11 @@
 require 'rails_helper'
 
 describe Cycle, :ledgers, type: :feature do
-
   before(:each) do
     log_in admin_attributes
     cycle_create id: 1, name: 'Jan/July', order: 6, cycle_type: 'term'
   end
   context '#index' do
-
     it 'basic' do
       visit '/cycles/'
       expect(current_path).to eq '/cycles/'

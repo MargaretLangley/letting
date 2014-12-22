@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe InvoiceDecorator do
-
   it '#invoice_date - displays formatted date' do
     invoice_dec = InvoiceDecorator.new \
                     invoice_new invoice_date: Date.new(2010, 3, 25)

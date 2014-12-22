@@ -30,7 +30,6 @@ module DB
     end
 
     describe 'methods' do
-
       describe '#charge_type' do
         it 'returns' do
           expect(ChargeRow.new(parse_line charge_row).charge_type)

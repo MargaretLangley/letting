@@ -2,9 +2,7 @@
 require 'rails_helper'
 
 describe 'PrintScreenShow', type: :feature do
-
   describe '#show' do
-
     it 'basic' do
       setup
       visit '/prints_screens/1'
@@ -14,7 +12,6 @@ describe 'PrintScreenShow', type: :feature do
     end
 
     describe 'back page is used for Ground Rents & Garage Ground Rents only' do
-
       it 'displays back page with ground rent, uses invoice_text 2' do
         setup products: [product_new(charge_type: 'Ground Rent')]
         visit '/prints_screens/1'

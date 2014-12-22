@@ -21,7 +21,6 @@ namespace :db do
                                ExtractAccItems.new(extracts: extract_acc_items),
                                InsertAccItems.new(insert: insert_acc_items)]
                 ).stage
-
     end
 
     def acc_items_legacy

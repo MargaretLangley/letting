@@ -2,7 +2,6 @@ require 'rails_helper'
 # rubocop: disable Metrics/LineLength
 
 RSpec.describe AccountsDebits, type: :model do
-
   # order by charge, property_ref
   # display contiguous numbers with '-'
 

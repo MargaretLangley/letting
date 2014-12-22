@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-
   describe 'validations' do
     it('is valid') { expect(product_new).to be_valid }
 

@@ -1,11 +1,9 @@
 require 'rails_helper'
 
 describe Property, type: :feature do
-
   before(:each) { log_in }
 
   describe '#index' do
-
     it 'basic' do
       property_create human_ref: 111, account: account_new
       property_create human_ref: 222, account: account_new

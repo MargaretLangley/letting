@@ -2,7 +2,6 @@
 require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
-
   it('is valid') { expect(invoice_new).to be_valid }
   describe 'validates presence' do
     it('property_ref') do
@@ -33,7 +32,6 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'methods' do
-
     describe '#prepare' do
       it 'prepares invoice_date' do
         invoice_text_create id: 1

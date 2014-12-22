@@ -2,7 +2,6 @@ require 'rails_helper'
 # rubocop: disable Metrics/LineLength
 
 RSpec.describe AccountDebit, type: :model do
-
   it 'returns #key' do
     first = AccountDebit.new date_due: '2014-01-01', charge_type: 'Rent', property_ref: 4, amount: 6
     expect(first.key).to eq ['2014-01-01', 'Rent']

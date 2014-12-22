@@ -1,6 +1,5 @@
 require 'rails_helper'
 describe User, type: :feature do
-
   before(:each) { log_in admin_attributes }
 
   context '#view' do

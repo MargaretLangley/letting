@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe User, type: :feature do
-
   before(:each) { log_in admin_attributes }
   describe '#destroys' do
     it 'basic' do

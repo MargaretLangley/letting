@@ -6,7 +6,6 @@ require 'csv'
 ####
 namespace :db do
   namespace :import do
-
     filename = 'import_data/new/repetitions.csv'
 
     desc 'Import cycles from CSV file'

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe PaymentIndexDecorator do
-
   let(:source) { payment_new }
   let(:decorator) { PaymentIndexDecorator.new source }
 

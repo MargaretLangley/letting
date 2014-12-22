@@ -49,7 +49,6 @@ describe Debit, :ledgers, type: :model do
   end
 
   describe 'methods' do
-
     describe '#charge_type' do
       it 'returned when charge present' do
         (debit = debit_new).charge = charge_new charge_type: 'Rent'

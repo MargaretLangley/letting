@@ -7,7 +7,6 @@ STDOUT.sync = true
 
 namespace :db do
   namespace :import do
-
     desc 'Import clients data from CSV file'
     task clients: :environment do
       DB::ImportClient.import patched_clients

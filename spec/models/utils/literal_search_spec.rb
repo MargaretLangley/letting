@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe LiteralSearch, type: :model do
-
   describe '#go' do
     describe 'client query' do
       it 'returns an exact client' do
@@ -109,5 +108,4 @@ describe LiteralSearch, type: :model do
         .to eq property
     end
   end
-
 end

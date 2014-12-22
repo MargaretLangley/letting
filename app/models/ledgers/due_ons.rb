@@ -41,7 +41,6 @@ module DueOns
     has_many :due_ons, -> { order(:created_at) },
              inverse_of: :cycle,
              dependent: :destroy do
-
       def between billing_period
         map { |due_on| due_on.between billing_period }.flatten.sort
       end

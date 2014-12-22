@@ -6,7 +6,6 @@
 STDOUT.sync = true
 
 namespace :db do
-
   desc 'Fix for automatic pk sequence getting out of step with your data rows.'
   task reset_pk: :environment do
     ActiveRecord::Base.connection
@@ -16,5 +15,4 @@ namespace :db do
       ActiveRecord::Base.connection.reset_pk_sequence!(table)
     end
   end
-
 end

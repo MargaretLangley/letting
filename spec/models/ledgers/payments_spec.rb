@@ -54,5 +54,4 @@ describe Payments do
       end
     end
   end
-
 end

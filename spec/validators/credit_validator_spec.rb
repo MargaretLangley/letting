@@ -12,7 +12,6 @@ class CreditValidatable
 end
 
 describe 'Amount' do
-
   let(:validatable) { CreditValidatable.new 88.88 }
 
   it 'true' do

@@ -12,7 +12,6 @@ class AmountValidatable
 end
 
 describe 'Amount' do
-
   def validator_new amount
     AmountValidatable.new amount
   end

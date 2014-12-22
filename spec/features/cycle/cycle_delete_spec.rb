@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Cycle, :ledgers, type: :feature do
-
   before(:each) do
     log_in admin_attributes
     cycle_create id: 3,

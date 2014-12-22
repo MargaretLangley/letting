@@ -16,7 +16,6 @@ STDOUT.sync = true
 #
 namespace :db do
   namespace :import do
-
     desc 'Import properties data from CSV file'
     task :properties, [:range] => :environment do |_task, args|
       DB::ImportProperty.import staging_properties,

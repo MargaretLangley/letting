@@ -7,7 +7,6 @@ STDOUT.sync = true
 
 namespace :db do
   namespace :import do
-
     desc 'Import accounting information from CSV file'
     task :accounts, [:range] => :environment do |_task, args|
       DB::ImportAccount.import staging_accounts,
