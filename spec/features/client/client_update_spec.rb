@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Client, type: :feature do
+describe 'Client Update', type: :feature do
   before(:each) { log_in }
   let(:client_page) { ClientPage.new }
 
