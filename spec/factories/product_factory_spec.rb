@@ -12,4 +12,10 @@ describe 'Product Factory' do
         .to eq Date.new(2010, 9, 30)..Date.new(2011, 3, 25)
     end
   end
+
+  describe 'override' do
+    it 'overrides charge_type' do
+      expect(product_new(charge_type: 'Insurance').charge_type).to eq 'Insurance'
+    end
+  end
 end

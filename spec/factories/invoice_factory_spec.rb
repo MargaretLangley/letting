@@ -11,6 +11,14 @@ describe 'Invoice Factory' do
     end
   end
 
+  describe 'override' do
+    it 'override products' do
+      invoice = invoice_new products: [product_new(amount: 15.00)]
+
+      expect(invoice.products.first.amount).to eq 15.00
+    end
+  end
+
   describe 'initializes from account' do
     it 'is valid' do
       expect(invoice_new).to be_valid
@@ -51,6 +59,13 @@ describe 'Invoice Factory' do
         it 'makes a invoice_text' do
           expect { invoice_create }.to change(InvoiceText, :count).by(1)
         end
+      end
+    end
+
+    describe 'override' do
+      it 'override products' do
+        invoice = invoice_create products: [product_new(amount: 15.00)]
+        expect(invoice.products.first.amount).to eq 15.00
       end
     end
   end
