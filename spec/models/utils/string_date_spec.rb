@@ -15,15 +15,5 @@ describe StringDate, type: :model do
         expect(StringDate.new('2012-x').to_date).to be_nil
       end
     end
-
-    describe 'valid?' do
-      it 'normal valid' do
-        expect(StringDate.new('2012-1-1')).to be_valid
-      end
-
-      it 'malformed invalid' do
-        expect(StringDate.new('2012-x')).to_not be_valid
-      end
-    end
   end
 end
