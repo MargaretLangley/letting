@@ -14,22 +14,22 @@ describe 'Invoicing#show', type: :feature do
   end
 
   describe 'retained message' do
-    # Mail: false then: Retaining. Deliver Message, Invoice under Retain.
+    # Deliver: false then: Retaining. Mail Message, Invoice under Retain.
     #
     it 'inform, if no invoice retained' do
       log_in
-      invoice = invoice_new mail: false # Retaining mail
+      invoice = invoice_new deliver: false # Retaining mail
       invoicing_create id: 1, runs: [run_new(invoices: [invoice])]
 
       visit '/invoicings/1'
       expect(page.has_no_content? /No invoices will be retained./i).to be true
     end
 
-    # Mail: false then: Deliver. Retain Message, Invoice under Deliver.
+    # Deliver: false then: Deliver. Retain Message, Invoice under Deliver.
     #
     it 'do nothing, if any invoice retained' do
       log_in
-      invoice = invoice_new mail: true  # nothing retained
+      invoice = invoice_new deliver: true  # nothing retained
       invoicing_create id: 1, runs: [run_new(invoices: [invoice])]
 
       visit '/invoicings/1'
@@ -38,22 +38,22 @@ describe 'Invoicing#show', type: :feature do
   end
 
   describe 'deliver message' do
-    # Mail: false then: Not delivering. Deliver Message, Invoice under Retain.
+    # Deliver: false then: Not delivering. Mail Message, Invoice under Retain.
     #
     it 'inform, if no invoice delivered' do
       log_in
-      invoice = invoice_new mail: false # No Mail delivered
+      invoice = invoice_new deliver: false # No Mail delivered
       invoicing_create id: 1, runs: [run_new(invoices: [invoice])]
 
       visit '/invoicings/1'
       expect(page.has_content? /No invoices will be delivered./i).to be true
     end
 
-    # Mail: true then: Delivering. Invoice under Deliver, Retain message.
+    # Deliver: true then: Delivering. Invoice under Deliver, Retain message.
     #
     it 'do nothing, if any invoice delivered' do
       log_in
-      invoice = invoice_new mail: true # Deliver mail
+      invoice = invoice_new deliver: true # Deliver mail
       invoicing_create id: 1, runs: [run_new(invoices: [invoice])]
 
       visit '/invoicings/1'

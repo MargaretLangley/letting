@@ -188,7 +188,7 @@ ActiveRecord::Schema.define(version: 20141129154746) do
     t.integer  "account_id",            null: false
     t.integer  "run_id",                null: false
     t.integer  "debits_transaction_id", null: false
-    t.boolean  "mail",                  null: false
+    t.boolean  "deliver",               null: false
     t.date     "invoice_date",          null: false
     t.integer  "property_ref",          null: false
     t.text     "occupiers",             null: false

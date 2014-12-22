@@ -48,7 +48,6 @@ class Invoice < ActiveRecord::Base
       last.balance
     end
   end
-  scope :mail, ->(mail) { where(mail: mail) }
   validates :invoice_date, :property_ref, :property_address, presence: true
   has_many :invoice_texts, through: :letters
   has_many :letters, dependent: :destroy

@@ -43,7 +43,7 @@ class InvoiceMaker
                debits_transaction: transaction,
                comments: comments,
                products: products_maker.invoice
-    invoice.mail = products_maker.debits?
+    invoice.deliver = products_maker.debits?
     invoice
   end
 end

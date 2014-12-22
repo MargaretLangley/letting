@@ -14,7 +14,7 @@ def invoice_new id: nil,
                 comments: [],
                 debits_transaction: debits_transaction_new,
                 products: [product_new],
-                mail: true
+                deliver: true
   invoice_text_create(id: 1) unless InvoiceText.find_by id: 1
   account.property = property
   invoice = Invoice.new id: id, run_id: run_id
@@ -25,7 +25,7 @@ def invoice_new id: nil,
                   debits_transaction: debits_transaction,
                   comments: comments,
                   products: products
-  invoice.mail = mail
+  invoice.deliver = deliver
   invoice
 end
 
@@ -38,7 +38,7 @@ def invoice_create \
   comments: [],
   debits_transaction: debits_transaction_new,
   products: [product_new],
-  mail: true
+  deliver: true
 
   invoice = invoice_new id: id,
                         run_id: run_id,
@@ -48,7 +48,7 @@ def invoice_create \
                         comments: comments,
                         debits_transaction: debits_transaction,
                         products: products,
-                        mail: mail
+                        deliver: deliver
   invoice.save!
   invoice
 end
