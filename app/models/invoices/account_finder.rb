@@ -16,8 +16,6 @@ class AccountFinder
   end
 
   def property_includes
-    [:entities, :address,
-     client: [:address, :entities],
-     agent:  [:address, :entities]]
+    [:address, client: [:address], agent: [:address]]
   end
 end

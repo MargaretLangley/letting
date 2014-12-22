@@ -74,7 +74,7 @@ class PaymentsController < ApplicationController
   private
 
   def joined_tables
-    [:credits, account: [:credits, :debits, property: [:entities]]]
+    [:credits, account: [:credits, :debits, :property]]
   end
 
   def payment_params

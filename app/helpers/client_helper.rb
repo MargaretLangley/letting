@@ -10,7 +10,7 @@
 #
 module ClientHelper
   def client_list
-    Client.includes(:entities).order(:human_ref).map do |client|
+    Client.order(:human_ref).map do |client|
       {
         label: "#{client.human_ref} #{client.full_name}",
         value: client.id

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.0'
 
 # configuration - needs to be at the top!
 gem 'dotenv-rails', '~> 0.11.1'
@@ -14,7 +14,7 @@ gem 'pg', '~>0.17.0'
 gem 'equalizer'
 
 # Use SCSS for style-sheets
-gem 'sass-rails', '~> 4.0.5'
+gem 'sass-rails', '~> 5.0.0'
 gem 'sprockets', '~>2.12.3'
 gem 'autoprefixer-rails'
 gem 'compass-rails'
@@ -53,7 +53,7 @@ gem 'elasticsearch-rails', '~> 0.1.6'
 # Create es test node
 gem 'elasticsearch-extensions', group: :test
 
-# Use unicorn as the app server
+# Use Unicorn as the app server
 gem 'unicorn', '~> 4.8.0'
 
 # corner banner on staging environment
@@ -69,8 +69,6 @@ group :development do
   gem 'rails_best_practices', '~>1.15.1'
   gem 'rubocop', '~> 0.28.0', require: false
   gem 'rubycritic', require: false
-  gem 'spring'
-  gem 'spring-commands-rspec'
   gem 'traceroute'
 end
 
@@ -101,7 +99,13 @@ group :development, :test do
   gem 'byebug', '~> 3.5.0'
   gem 'rack-mini-profiler', '~>0.9.0'
   gem 'rspec-rails', '~> 3.1.0'
+  # Spring speeds up development by keeping your application running in the
+  # background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-commands-rspec'
   gem 'table_print'
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
 end
 
 group :test do
