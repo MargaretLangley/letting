@@ -5,14 +5,14 @@ shared_examples_for Entities do
     it 'creates one name' do
       entityable = described_class.new
       entityable.entities.build title: 'Mr', name: 'Stuart'
-      expect(entityable.entities.full_name).to eq 'Mr Stuart'
+      expect(entityable.full_name).to eq 'Mr Stuart'
     end
 
     it 'joins two names' do
       entityable = described_class.new
       entityable.entities.build title: 'Mr', name: 'Stuart'
       entityable.entities.build title: 'Mr', initials: 'W G', name: 'Grace'
-      expect(entityable.entities.full_name).to eq 'Mr Stuart & Mr W. G. Grace'
+      expect(entityable.full_name).to eq 'Mr Stuart & Mr W. G. Grace'
     end
   end
 

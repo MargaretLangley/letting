@@ -24,11 +24,13 @@ class Property < ActiveRecord::Base
   validates :agent, :entities, presence: true
   before_validation :clear_up_form
 
-  delegate :text, to: :address, prefix: true
   delegate :abridged_text, to: :address
+  delegate :bill_to, to: :agent
+  delegate :full_name, to: :entities
+  delegate :text, to: :address, prefix: true
 
   def occupiers
-    entities.full_name
+    full_name
   end
 
   def prepare_for_form
@@ -57,8 +59,6 @@ class Property < ActiveRecord::Base
   def to_billing
     address.name_and_address name: occupiers
   end
-
-  delegate :bill_to, to: :agent
 
   include Searchable
   # Elasticsearch uses generates JSON document for property index

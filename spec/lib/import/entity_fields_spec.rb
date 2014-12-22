@@ -19,7 +19,7 @@ module DB
 
         entity.update_for client.entities.first
 
-        expect(client.entities.full_name).to eq 'Mr A. D. Man'
+        expect(client.full_name).to eq 'Mr A. D. Man'
       end
     end
 

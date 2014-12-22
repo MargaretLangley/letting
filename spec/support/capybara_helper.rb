@@ -13,7 +13,7 @@
 #       :id => 'property_client_ref',
 #       data: { autocomplete_source: Client.order(:human_ref)
 #                  .map { |t| { :label => "#{t.human_ref}
-#                   #{t.entities.full_name}", :value => t.id } } } %>
+#                   #{t.full_name}", :value => t.id } } } %>
 # <%= f.hidden_field :client_id, id: 'client_id' %>
 #
 # SpecHelper

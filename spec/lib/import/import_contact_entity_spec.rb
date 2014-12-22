@@ -45,7 +45,7 @@ module DB
       it 'updated changed entities' do
         import_client row
         import_client updated_row
-        expect(Client.first.entities.full_name).to \
+        expect(Client.first.full_name).to \
           eq 'Mr E. Changed & Mrs A. N. Other'
       end
 

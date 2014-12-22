@@ -28,6 +28,6 @@ class ClientsAccountsController < ApplicationController
   end
 
   def identity
-    "Client #{@client.human_ref}, #{@client.entities.full_name}"
+    "Client #{@client.human_ref}, #{@client.full_name}"
   end
 end

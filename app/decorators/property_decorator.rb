@@ -24,7 +24,7 @@ class PropertyDecorator
 
   def agent_name
     if source.agent.authorized?
-      source.agent.entities.full_name
+      source.agent.full_name
     else
       'None'
     end
