@@ -63,10 +63,6 @@ class Cycle < ActiveRecord::Base
 
   private
 
-  def repeated_dates(year:)
-    due_ons.map { |due_on| due_on.make_date year: year }
-  end
-
   def show_dates(year:)
     due_ons.map { |due_on| due_on.show_date year: year }
   end
