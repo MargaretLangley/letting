@@ -32,7 +32,4 @@ class InvoiceText < ActiveRecord::Base
   accepts_nested_attributes_for :guides, allow_destroy: true
   has_many :invoices, through: :letters
   has_many :letters, dependent: :destroy
-
-  PAGE_1 = 1
-  PAGE_2 = 2
 end

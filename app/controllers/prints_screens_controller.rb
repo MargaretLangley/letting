@@ -10,6 +10,6 @@ class PrintsScreensController < ApplicationController
   layout 'view_layout'
 
   def show
-    @run = Run.includes(invoices: [:products]).find params[:id]
+    @run = Run.includes(invoices: [:products, :debits_transaction]).find params[:id]   # rubocop: disable  Metrics/LineLength
   end
 end

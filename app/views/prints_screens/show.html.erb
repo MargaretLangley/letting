@@ -1,7 +1,7 @@
 <% @title='Invoicing' %>
 
 <div class='wrap-print  float-left'>
-  <% @run.invoices.each do |invoice| %>
+  <% @run.deliver.each do |invoice| %>
     <%= render 'publish_invoices/publish_invoice', invoice: invoice %>
   <% end %>
 </div>
