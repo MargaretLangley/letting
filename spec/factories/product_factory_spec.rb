@@ -15,7 +15,7 @@ describe 'Product Factory' do
 
   describe 'override' do
     it 'overrides charge_type' do
-      expect(product_new(charge_type: 'Insurance').charge_type).to eq 'Insurance'
+      expect(product_new(charge_type: 'gas').charge_type).to eq 'gas'
     end
   end
 end
