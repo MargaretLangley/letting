@@ -11,8 +11,8 @@
 ####
 #
 class Client < ActiveRecord::Base
-  has_many :properties, dependent: :destroy
   include Contact
+  has_many :properties, dependent: :destroy
   before_validation :clear_up_form
 
   validates :human_ref, numericality: { only_integer: true, greater_than: 0 }
@@ -25,11 +25,11 @@ class Client < ActiveRecord::Base
     prepare_contact
   end
 
+  delegate :clear_up_form, to: :entities
+
   def to_s
     address.name_and_address name: full_name
   end
-
-  delegate :clear_up_form, to: :entities
 
   include Searchable
   def as_indexed_json(_options = {})
