@@ -57,12 +57,11 @@ class ClientPage
     page.expect(find_field('Client ID').value).to page.have_text client_id
   end
 
-  def expect_entity(page, order:, title:, initials:, name:)
+  def entity(order:)
     id_stem = "client_entities_attributes_#{order}"
-    page.expect(find_field("#{id_stem}_title").value).to page.have_text title
-    page.expect(find_field("#{id_stem}_initials").value).to \
-      page.have_text initials
-    page.expect(find_field("#{id_stem}_name").value).to page.have_text name
+    "#{find_field("#{id_stem}_title").value} " \
+    "#{find_field("#{id_stem}_initials").value} " \
+    "#{find_field("#{id_stem}_name").value}".strip
   end
 
   def expect_address(page, flat_no:, house_name:, road_no:, road:,
