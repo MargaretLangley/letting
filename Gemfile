@@ -17,7 +17,7 @@ gem 'equalizer'
 gem 'sass-rails', '~> 5.0.0'
 gem 'sprockets', '~>2.12.3'
 gem 'autoprefixer-rails'
-gem 'compass-rails'
+# gem 'compass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 2.5.0'
