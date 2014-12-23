@@ -1,6 +1,8 @@
 require 'csv'
 require 'rails_helper'
 require_relative '../../../../lib/import/charges/legacy_charged_in_fields'
+require_relative '../../../../lib/modules/charge_types'
+include ChargeTypes
 
 ####
 #
@@ -31,8 +33,9 @@ module DB
         end
 
         it 'returns charge_type code over charged_in_code' do
-          charged = LegacyChargedInFields.new charged_in_code: LEGACY_ARREARS,
-                                              charge_type: 'Insurance'
+          charged = LegacyChargedInFields
+                    .new charged_in_code: LEGACY_ARREARS,
+                         charge_type: INSURANCE
           expect(charged.modern_id).to eq 2
         end
       end
@@ -45,7 +48,7 @@ module DB
 
         it 'returns charge_type code over charged_in_code' do
           charged = LegacyChargedInFields.new charged_in_code: 'U',
-                                              charge_type: 'Insurance'
+                                              charge_type: INSURANCE
           expect(charged.modern_id).to eq 2
         end
       end

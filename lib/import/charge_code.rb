@@ -1,3 +1,5 @@
+require_relative '../modules/charge_types'
+
 module DB
   ####
   #
@@ -12,14 +14,15 @@ module DB
   ####
   #
   class ChargeCode
+    include ChargeTypes
     def self.to_string(code)
       case code
-      when 'Bal'         then 'Arrears'
-      when 'GGR'         then 'Garage Ground Rent'
-      when 'GIns'        then 'Garage Insurance'
-      when 'GR'          then 'Ground Rent'
-      when 'H', 'M', 'Q' then 'Service Charge'
-      when 'Ins'         then 'Insurance'
+      when 'Bal'         then ARREARS
+      when 'GGR'         then GARAGE_GROUND_RENT
+      when 'GIns'        then GARAGE_INSURANCE
+      when 'GR'          then GROUND_RENT
+      when 'H', 'M', 'Q' then SERVICE_CHARGE
+      when 'Ins'         then INSURANCE
       end
     end
 

@@ -30,7 +30,7 @@ class ProductsMaker
   end
 
   def self.arrears(date_due:, amount:)
-    Product.new charge_type: 'Arrears',
+    Product.new charge_type: ChargeTypes::ARREARS,
                 date_due: date_due,
                 automatic_payment: false,
                 amount: amount

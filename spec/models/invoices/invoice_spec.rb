@@ -1,5 +1,7 @@
 # rubocop: disable  Metrics/LineLength
 require 'rails_helper'
+require_relative '../../../lib/modules/charge_types'
+include ChargeTypes
 
 RSpec.describe Invoice, type: :model do
   it('is valid') { expect(invoice_new).to be_valid }
@@ -80,7 +82,7 @@ RSpec.describe Invoice, type: :model do
           .prepare account: property.account,
                    property: property.invoice,
                    debits_transaction: DebitsTransaction.new,
-                   products: [product_new(charge_type: 'Ground Rent')]
+                   products: [product_new(charge_type: GROUND_RENT)]
         expect(invoice.products.first.to_s)
           .to eq 'charge_type: Ground Rent date_due: 2014-06-07 amount: 30.05 '\
                  'period: 2010-09-30..2011-03-25, balance: 30.05'
@@ -149,19 +151,19 @@ RSpec.describe Invoice, type: :model do
 
     describe '#page2?' do
       it 'returns false if products have no ground rent' do
-        invoice = invoice_new products: [product_new(charge_type: 'Insurance')]
+        invoice = invoice_new products: [product_new(charge_type: INSURANCE)]
         expect(invoice.page2?).to eq false
       end
 
       it 'returns true if products includes ground rent' do
-        invoice = invoice_new products: [product_new(charge_type: 'Ground Rent')]
+        invoice = invoice_new products: [product_new(charge_type: GROUND_RENT)]
         expect(invoice.page2?).to eq true
       end
 
       it 'returns false if on a red invoice' do
         transaction = DebitsTransaction.new invoices: [invoice_new, invoice_new]
         invoice = invoice_new debits_transaction: transaction,
-                              products: [product_new(charge_type: 'Ground Rent')]
+                              products: [product_new(charge_type: GROUND_RENT)]
         expect(invoice.page2?).to eq false
       end
     end

@@ -57,7 +57,8 @@ module DB
     #   property = Property.find_by(human_ref: 6531)
     #   return unless property
 
-    #   charge = property.account.charges.find_by(charge_type: 'Insurance')
+    #   charge =
+    #   property.account.charges.find_by(charge_type: Chargetypes::INSURANCE)
     #   return unless charge.present?
 
     #   @charge = charge

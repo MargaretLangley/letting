@@ -47,7 +47,7 @@ class BlueProductsMaker
   def product_arrears_maker
     product_arrears = []
     if arrears.nonzero?
-      product_arrears = [Product.new(charge_type: 'Arrears',
+      product_arrears = [Product.new(charge_type: ChargeTypes::ARREARS,
                                      date_due: invoice_date,
                                      automatic_payment: false,
                                      amount: arrears)]

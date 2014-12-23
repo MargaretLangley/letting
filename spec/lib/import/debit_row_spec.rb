@@ -2,6 +2,8 @@ require 'csv'
 require 'rails_helper'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/accounts/debit_row'
+require_relative '../../../lib/modules/charge_types'
+include ChargeTypes
 
 ####
 #
@@ -40,9 +42,10 @@ module DB
     end
 
     it 'rows attributes are returned' do
-      charge = charge_new charge_type: 'Insurance'
+      charge = charge_new charge_type: INSURANCE
       property_create human_ref: 9, account: account_new(charges: [charge])
       row = row(charge_code: 'Ins', amount: 3.05)
+
       expect(row.attributes[:charge_id]).to eq charge.id
       expect(row.attributes[:on_date]).to eq '2012-03-25 03:00:00'
       expect(row.attributes[:amount]).to eq 3.05
@@ -53,6 +56,7 @@ module DB
         cycle = cycle_new due_ons: [DueOn.new(day: 20, month: 3)]
         charge = charge_new cycle: cycle
         property_create human_ref: 9, account: account_new(charges: [charge])
+
         expect(row(date: Date.new(2012, 3, 20)).period)
           .to eq Date.new(2012, 3, 20)..Date.new(2013, 3, 19)
       end

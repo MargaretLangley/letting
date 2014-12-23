@@ -39,9 +39,11 @@ module DB
     end
 
     def description_to_charge
-      return 'Service Charge' if row[:description].include?('Service') ||
-                                 row[:description].include?('SC')
-      return 'Garage Ground Rent' if row[:description].include? 'Garage'
+      return ChargeTypes::SERVICE_CHARGE \
+        if row[:description].include?('Service') ||
+           row[:description].include?('SC')
+      return ChargeTypes::GARAGE_GROUND_RENT \
+        if row[:description].include? 'Garage'
     end
 
     # debits increase an account balance.

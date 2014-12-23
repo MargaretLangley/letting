@@ -13,21 +13,25 @@ describe 'PrintScreenShow', type: :feature do
 
     describe 'back page is used for Ground Rents & Garage Ground Rents only' do
       it 'displays back page with ground rent, uses invoice_text 2' do
-        setup products: [product_new(charge_type: 'Ground Rent')]
+        setup products: [product_new(charge_type: ChargeTypes::GROUND_RENT)]
         visit '/prints_screens/1'
+
         # the second page information includes legal act (Act 2002)'
         expect(page).to have_text 'Act 2002'
       end
 
       it 'displays back page with garage ground rent, uses invoice_text 2' do
-        setup products: [product_new(charge_type: 'Garage Ground Rent')]
+        setup \
+          products: [product_new(charge_type: ChargeTypes::GARAGE_GROUND_RENT)]
         visit '/prints_screens/1'
+
         expect(page).to have_text 'Act 2002'
       end
 
       it 'is left blank without ground rent' do
-        setup products: [product_new(charge_type: 'Service Charge')]
+        setup products: [product_new(charge_type: ChargeTypes::SERVICE_CHARGE)]
         visit '/prints_screens/1'
+
         expect(page).to_not have_text 'Act 2002'
       end
     end

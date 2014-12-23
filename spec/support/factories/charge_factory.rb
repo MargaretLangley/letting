@@ -3,7 +3,7 @@
 
 def charge_new id: nil,
                account_id: 2,
-               charge_type: 'Ground Rent',
+               charge_type: ChargeTypes::GROUND_RENT,
                amount: 88.08,
                dormant: false,
                payment_type: 'payment',
@@ -30,7 +30,7 @@ end
 
 def charge_find_or_create id: nil,
                           account_id: 2,
-                          charge_type: 'Ground Rent',
+                          charge_type: ChargeTypes::GROUND_RENT,
                           payment_type: 'payment',
                           amount: 88.08,
                           dormant: false,
@@ -54,7 +54,7 @@ end
 
 def charge_create id: nil,
                   account_id: 2,
-                  charge_type: 'Ground Rent',
+                  charge_type: ChargeTypes::GROUND_RENT,
                   payment_type: 'payment',
                   amount: 88.08,
                   dormant: false,

@@ -20,7 +20,7 @@ describe 'PrintShow', type: :feature do
       end
 
       it 'is left blank without ground rent' do
-        setup products: [product_new(charge_type: 'Service Charge')]
+        setup products: [product_new(charge_type: ChargeTypes::SERVICE_CHARGE)]
         visit '/single_prints/1'
         expect(page).to_not have_text 'Act 2002'
       end

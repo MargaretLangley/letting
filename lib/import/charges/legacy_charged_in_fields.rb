@@ -1,5 +1,5 @@
 require_relative '../../../lib/modules/charged_in_defaults'
-
+require_relative '../../../lib/modules/charge_types'
 module DB
   #####
   #
@@ -25,6 +25,7 @@ module DB
   #####
   #
   class LegacyChargedInFields
+    include ChargeTypes
     include ChargedInDefaults
     attr_reader :charged_in_code, :charge_type
     # Mapping of imported values to application values
@@ -50,7 +51,7 @@ module DB
     # always advanced. insurance is advanced but the data left as
     # default - arrears. This hack fixes the legacy data.
     def advanced_charge_type
-      charge_type == 'Insurance' || charge_type == 'Garage Insurance'
+      charge_type == INSURANCE || charge_type == GARAGE_INSURANCE
     end
   end
 end

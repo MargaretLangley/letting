@@ -1,4 +1,6 @@
 require 'rails_helper'
+require_relative '../../../lib/modules/charge_types'
+include ChargeTypes
 
 RSpec.describe Product, type: :model do
   describe 'validations' do
@@ -25,35 +27,35 @@ RSpec.describe Product, type: :model do
 
   describe '.page2' do
     it 'returns back page products' do
-      invoice_create products: [product_new(charge_type: 'Ground Rent')]
+      invoice_create products: [product_new(charge_type: GROUND_RENT)]
       expect(Product.page2.charge_type).to eq 'Ground Rent'
     end
 
     it 'orders Ground Rent before Garage ground rent' do
-      invoice_create products: [product_new(charge_type: 'Garage Ground Rent'),
-                                product_new(charge_type: 'Ground Rent')]
+      invoice_create products: [product_new(charge_type: GARAGE_GROUND_RENT),
+                                product_new(charge_type: GROUND_RENT)]
       expect(Product.page2.charge_type).to eq 'Ground Rent'
     end
 
     it 'does not return 1st page only products' do
-      invoice_create products: [product_new(charge_type: 'Insurance')]
+      invoice_create products: [product_new(charge_type: INSURANCE)]
       expect(Product.page2).to be_nil
     end
   end
 
   describe '#page2?' do
     it 'returns false if products have no ground rent' do
-      product = Product.new charge_type: 'Insurance'
+      product = Product.new charge_type: INSURANCE
       expect(product.page2?).to eq false
     end
 
     it 'returns true if products includes ground rent' do
-      product = Product.new charge_type: 'Ground Rent'
+      product = Product.new charge_type: GROUND_RENT
       expect(product.page2?).to eq true
     end
 
     it 'returns true if products includes garage ground rent' do
-      product = Product.new charge_type: 'Garage Ground Rent'
+      product = Product.new charge_type: GARAGE_GROUND_RENT
       expect(product.page2?).to eq true
     end
   end

@@ -1,7 +1,9 @@
 require 'csv'
 require 'rails_helper'
 require_relative '../../../lib/import/file_header'
+require_relative '../../../lib/modules/charge_types'
 require_relative '../../../lib/import/accounts/balance_row'
+include ChargeTypes
 
 ####
 #
@@ -34,7 +36,7 @@ module DB
     it('amount') { expect(row(amount: 5.5).amount).to eq(5.5) }
 
     it 'rows attributes are returned' do
-      charge = charge_new charge_type: 'Insurance'
+      charge = charge_new charge_type: INSURANCE
       property_create human_ref: 9, account: account_new(charges: [charge])
       row = row(charge_code: 'Ins', amount: 3.05)
       expect(row.attributes[:charge_id]).to eq charge.id
@@ -72,7 +74,7 @@ module DB
       describe '#next_on_date' do
         it 'finds next on_date' do
           cycle = cycle_new(due_ons: [DueOn.new(month: 4, day: 1)])
-          charge = charge_new charge_type: 'Ground Rent',
+          charge = charge_new charge_type: GROUND_RENT,
                               cycle: cycle
           property_create human_ref: 9, account: account_new(charges: [charge])
 
@@ -81,7 +83,7 @@ module DB
 
         it 'finds next on_date even if same as due_date' do
           cycle = cycle_new(due_ons: [DueOn.new(month: 3, day: 24)])
-          charge = charge_new charge_type: 'Ground Rent',
+          charge = charge_new charge_type: GROUND_RENT,
                               cycle: cycle
           property_create human_ref: 9, account: account_new(charges: [charge])
 

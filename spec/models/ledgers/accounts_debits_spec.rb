@@ -1,5 +1,7 @@
 require 'rails_helper'
 # rubocop: disable Metrics/LineLength
+require_relative '../../../lib/modules/charge_types'
+include ChargeTypes
 
 RSpec.describe AccountsDebits, type: :model do
   # order by charge, property_ref
@@ -23,11 +25,11 @@ RSpec.describe AccountsDebits, type: :model do
     end
 
     it 'produces ordered account debits' do
-      chg_1 = charge_create(charge_type: 'Ground Rent',
+      chg_1 = charge_create(charge_type: GROUND_RENT,
                             cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)]))
-      chg_2 = charge_create(charge_type: 'Service Charge',
+      chg_2 = charge_create(charge_type: SERVICE_CHARGE,
                             cycle: cycle_new(due_ons: [DueOn.new(month: 2, day: 5)]))
-      chg_3 = charge_create(charge_type: 'Insurance',
+      chg_3 = charge_create(charge_type: INSURANCE,
                             cycle: cycle_new(due_ons: [DueOn.new(month: 8, day: 5)]))
       account_create property: property_new(human_ref: 2), charges: [chg_1, chg_2, chg_3]
 

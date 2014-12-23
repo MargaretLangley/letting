@@ -17,7 +17,7 @@ module DB
             charge_code: 'GR',
             date: '2012-03-25',
             credit_amount: 5.5,
-            description: 'Ground Rent',
+            description: ChargeTypes::GROUND_RENT,
             debit_amount: 0
       AccountRow.new parse_line \
       %(#{human_ref}, #{charge_code}, #{date}, #{description}, #{debit_amount}, #{credit_amount}, 0)

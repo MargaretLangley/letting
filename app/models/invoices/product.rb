@@ -33,7 +33,8 @@ class Product < ActiveRecord::Base
   # These are displayed on the backpage.
   #
   def self.page2
-    where(charge_type: ['Ground Rent', 'Garage Ground Rent'])
+    where(charge_type: [ChargeTypes::GROUND_RENT,
+                        ChargeTypes::GARAGE_GROUND_RENT])
       .order(charge_type: :desc).first
   end
 
@@ -43,7 +44,8 @@ class Product < ActiveRecord::Base
   # on the back page of the invoice.
   #
   def page2?
-    charge_type == 'Ground Rent' || charge_type == 'Garage Ground Rent'
+    charge_type == ChargeTypes::GROUND_RENT ||
+      charge_type == ChargeTypes::GARAGE_GROUND_RENT
   end
 
   def <=> other

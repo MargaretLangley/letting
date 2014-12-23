@@ -37,7 +37,7 @@ module DB
 
       describe 'balance with subject' do
         it 'matches a charge code using the description' do
-          charge = charge_new charge_type: 'Service Charge',
+          charge = charge_new charge_type: ChargeTypes::SERVICE_CHARGE,
                               cycle: cycle_new
           property_create human_ref: 8, account: account_new(charges: [charge])
           expect { ImportBalance.import parse row_desc }
