@@ -8,7 +8,7 @@ def charge_new id: nil,
                dormant: false,
                payment_type: 'payment',
                start_date: '2002-03-25',
-               end_date: MAX_DATE,  # app_constants
+               end_date: DateDefaults::MAX,
                cycle: cycle_new,
                credits: nil,
                debits: nil
@@ -35,7 +35,7 @@ def charge_find_or_create id: nil,
                           amount: 88.08,
                           dormant: false,
                           start_date: '2002-03-25',
-                          end_date: MAX_DATE,  # app_constants
+                          end_date: DateDefaults::MAX,  # app_constants
                           cycle: cycle_new,
                           credits: nil,
                           debits: nil
@@ -59,7 +59,7 @@ def charge_create id: nil,
                   amount: 88.08,
                   dormant: false,
                   start_date: '2002-03-25',
-                  end_date: MAX_DATE,  # app_constants
+                  end_date: DateDefaults::MAX,
                   cycle: cycle_create,
                   credits: nil,
                   debits: nil

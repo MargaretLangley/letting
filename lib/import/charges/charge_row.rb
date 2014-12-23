@@ -139,11 +139,11 @@ module DB
     end
 
     def start_date
-      Date.parse MIN_DATE  # initializers/app_constants
+      Date.parse DateDefaults::MIN
     end
 
     def end_date
-      Date.parse MAX_DATE # initializers/app_constants
+      Date.parse DateDefaults::MAX
     end
 
     def charge_code_message

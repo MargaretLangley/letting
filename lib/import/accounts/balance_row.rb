@@ -73,7 +73,7 @@ module DB
     end
 
     def period
-      MIN_DATE..on_date
+      DateDefaults::MIN..on_date
     end
 
     def attributes

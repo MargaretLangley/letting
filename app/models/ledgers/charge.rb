@@ -30,8 +30,8 @@ class Charge < ActiveRecord::Base
   after_initialize :init
 
   def init
-    self.start_date = Date.parse MIN_DATE if start_date.blank?
-    self.end_date = Date.parse MAX_DATE if end_date.blank?
+    self.start_date = Date.parse DateDefaults::MIN if start_date.blank?
+    self.end_date = Date.parse DateDefaults::MAX if end_date.blank?
   end
 
   # billing_period - the date range that we generate charges for.
@@ -81,8 +81,8 @@ class Charge < ActiveRecord::Base
 
   def empty?
     attributes.except(*ignored_attrs).values.all?(&:blank?) &&
-      start_date == Date.parse(MIN_DATE) &&
-      end_date == Date.parse(MAX_DATE)
+      start_date == Date.parse(DateDefaults::MIN) &&
+      end_date == Date.parse(DateDefaults::MAX)
   end
 
   def ignored_attrs

@@ -9,7 +9,8 @@ module DB
 
     describe 'updating charge start and end dates' do
       it 'nothing changes if charge has no debits' do
-        charge = charge_new(start_date: MIN_DATE, end_date: MAX_DATE)
+        charge = charge_new start_date: DateDefaults::MIN,
+                            end_date: DateDefaults::MAX
         account_new(charges: [charge]).save!
 
         UpdateCharge.do
@@ -18,8 +19,8 @@ module DB
       end
 
       it 'updates start date when charge debited' do
-        charge = charge_new start_date: MIN_DATE,
-                            end_date: MAX_DATE,
+        charge = charge_new start_date: DateDefaults::MIN,
+                            end_date: DateDefaults::MAX,
                             debits: [debit_new(on_date: '2013-3-25'),
                                      debit_new(on_date: '2012-3-25')]
         account_new(charges: [charge]).save!
@@ -30,8 +31,8 @@ module DB
       end
 
       it 'updates start and end of charge when charge has finished' do
-        charge = charge_new start_date: MIN_DATE,
-                            end_date: MAX_DATE,
+        charge = charge_new start_date: DateDefaults::MIN,
+                            end_date: DateDefaults::MAX,
                             debits: [debit_new(on_date: '2012-3-25'),
                                      debit_new(on_date: '2011-3-25')]
         (account_new charges: [charge]).save!
