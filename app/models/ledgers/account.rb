@@ -22,7 +22,6 @@
 ####
 #
 class Account < ActiveRecord::Base
-  include ChargesDefaults
   belongs_to :property, inverse_of: :account
   def holder
     property.occupiers
@@ -55,6 +54,7 @@ class Account < ActiveRecord::Base
       each(&:clear_up_form)
     end
   end
+  MAX_CHARGES = 6
   accepts_nested_attributes_for :charges, allow_destroy: true
 
   # accounting_period - the date range that we generate debits for.

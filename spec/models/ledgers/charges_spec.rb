@@ -9,7 +9,7 @@ describe 'Charges', :ledgers, type: :model do
   it '#prepare_for_form' do
     expect(charges.size).to eq(0)
     charges.prepare
-    expect(charges.size).to eq(ChargesDefaults::MAX_CHARGES)
+    expect(charges.size).to eq(Account::MAX_CHARGES)
   end
 
   it '#cleans up form' do
