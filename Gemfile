@@ -88,7 +88,9 @@ group :development, :test do
   gem 'capybara', '~> 2.4.0'
   gem 'capybara-webkit', '~>1.3.0'
   gem 'capybara-screenshot'
-  gem 'capybara-slow_finder_errors', '0.1.0'  # 0.1.1 seems to introduce errors
+  # 0.1.1 seems to introduce errors - Use this gem occasionally to weed out
+  # performance errors with tests
+  # gem 'capybara-slow_finder_errors', '0.1.0'
   gem 'selenium-webdriver', '~>2.44.0'
   gem 'guard'
   gem 'guard-livereload'
