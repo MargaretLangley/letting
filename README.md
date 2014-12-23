@@ -134,12 +134,20 @@ Sometimes when you are changing a project the database will not allow you to del
 ####3.2 Running rails console in production
 `bundle exec rails c production`
 
-####3.3 Cheatsheet
+####3.3 Disabling the Firewall
+
+If an operation is not completing and you suspect a firewall issue
+these commands completely remove it. (Rebooting the box, if applicable, restores the firewall)
+    sudo su
+    iptables -P INPUT ACCEPT
+    iptables -P OUTPUT ACCEPT
+    iptables -P FORWARD ACCEPT
+    iptables -F
+
+####3.4 Cheatsheet
 1. change to Postgres user and open psql prompt `sudo -u postgres psql postgres`
 2. Listing Users (roles) and attributes: `\du`
 3. Listing all databases: `\list`
 4. Connect to a database: `\c db_name`
+
 ===
-
-
-
