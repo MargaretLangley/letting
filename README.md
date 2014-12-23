@@ -125,11 +125,14 @@ My Reference: Webserver alias: `ssh arran`
 ####3.1. Reset the database
 Sometimes when you are changing a project the database will not allow you to delete it due to open connections to it. If you cannot close the connections you will have to reset the database. If this is the case follow this:
 
-1. Remove any backend connections
+1. `cap production rails:rake:db:drop`
+2. If database will not be dropped - Remove any backend connections
   1. local dev: `rake db:terminate RAILS_ENV=test`
   2. Production: *need a cap version*
-2. `cap production rails:rake:db:drop`
-3. Follow instructions for: Project Setup
+3. `cap <environment> deploy`
+  1. Should see the migrations being run.
+4. `cap <environment> db:push`
+  1. The data has been deleted by the drop this puts it back.
 
 ####3.2 Running rails console in production
 `bundle exec rails c production`
