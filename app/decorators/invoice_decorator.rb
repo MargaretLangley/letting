@@ -41,7 +41,7 @@ class InvoiceDecorator
   end
 
   def products_display
-    invoice.products.first(2).map do |product|
+    invoice.products.drop_arrears.first(2).map do |product|
       "#{product.charge_type} "\
         "£#{number_with_precision(product.amount, precision: 2)}"
     end.join ', '

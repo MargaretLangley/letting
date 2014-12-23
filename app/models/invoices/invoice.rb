@@ -42,6 +42,10 @@ class Invoice < ActiveRecord::Base
       end
     end
 
+    def drop_arrears
+      reject { |product| product.charge_type == 'Arrears' }
+    end
+
     def total_arrears
       return 0 if last.nil?
 

@@ -20,6 +20,26 @@ RSpec.describe 'Products', type: :model do
     end
   end
 
+  describe '#drop_arrears' do
+    it 'removes arrears from products' do
+      invoice =
+        Invoice.new products: [product_new(charge_type: ChargeTypes::ARREARS),
+                               product_new(charge_type: ChargeTypes::INSURANCE)]
+      products = invoice.products.drop_arrears
+
+      expect(products.first.charge_type).to_not eq 'Arrears'
+      expect(products.first.charge_type).to eq 'Insurance'
+    end
+
+    it 'leaves anything not to do with arrears' do
+      invoice =
+        Invoice.new products: [product_new(charge_type: ChargeTypes::INSURANCE)]
+      products = invoice.products.drop_arrears
+
+      expect(products.first.charge_type).to eq 'Insurance'
+    end
+  end
+
   describe '#total_arrears' do
     it 'returns zero when no products' do
       invoice = Invoice.new products: []
