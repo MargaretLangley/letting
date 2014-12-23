@@ -2,8 +2,9 @@
   <%= render 'shared/errors', object: payment_dec.payment %>
 
   <fieldset id='payment' class='grid  shell-thin  overlay-parent'>
-
-    <%= render 'payments/property_hero', payment_dec: payment_dec %>
+    <div class='col-15-24  grid-row'>
+        <%= render 'payments/property_hero', payment_dec: payment_dec %>
+    </div>
     <div class='col-9-24  shell'>  <!-- 3rd column -->
       <h4>Payment Summary</h4>
 
