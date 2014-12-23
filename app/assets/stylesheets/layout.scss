@@ -1,5 +1,20 @@
 @import "colors";
 
+/*
+  A clearfix is a way for an element to automatically clear its child elements,
+  so that you don't need to add additional markup. It's generally used in float
+  layouts where elements are floated to be stacked horizontally. The clearfix is
+  a way to combat the zero-height container problem for floated elements
+*/
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
 @media screen{
 
 
@@ -128,13 +143,11 @@
 
   $pad: 1em;
 
-  @import "compass/utilities/general/clearfix";
-
   /* applies clearfix in an :after psudo element. Google: pie-clearfix
      clearfix affects the next floated element and not the
      element you have applied the clearfix to.              */
   .grid {
-    @include pie-clearfix;
+    @include clearfix;
     margin: 0;
   }
 
