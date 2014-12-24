@@ -24,7 +24,7 @@ class Run < ActiveRecord::Base
   #
   def prepare(run_maker:)
     self.invoice_date = invoice_date
-    self.invoices = run_maker.run
+    self.invoices = run_maker.invoices
   end
 
   #

@@ -19,10 +19,10 @@ class FirstRunMaker
     @comments = comments
   end
 
-  def run
-    @run ||= invoicing
-             .accounts
-             .map { |account| invoice_maker(account: account) }
+  def invoices
+    @invoices ||= invoicing
+                  .accounts
+                  .map { |account| invoice_maker(account: account) }
   end
 
   def to_s

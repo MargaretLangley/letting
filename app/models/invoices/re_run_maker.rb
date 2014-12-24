@@ -7,17 +7,20 @@
 #
 #
 class ReRunMaker
-  attr_reader :comments, :invoice_date, :invoices
+  attr_reader :comments, :invoice_date, :originals
 
   def initialize invoices:, invoice_date: Time.zone.today, comments: []
-    @invoices = invoices
+    @originals = invoices
     @invoice_date = invoice_date
     @comments = comments
   end
 
-  def run
-    @run ||= invoices
-             .map { |invoice| invoice_remaker(invoice) }
+  # Invoices are repackaged for subsequent runs.
+  #
+  #
+  def invoices
+    @invoices ||= originals
+                  .map { |invoice| invoice_remaker(invoice) }
   end
 
   private

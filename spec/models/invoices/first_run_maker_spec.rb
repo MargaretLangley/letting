@@ -8,7 +8,7 @@ RSpec.describe Run, type: :model do
       invoice_text_create id: 1
 
       first = FirstRunMaker.new invoicing: invoicing
-      expect(first.run.size).to eq 1
+      expect(first.invoices.size).to eq 1
     end
 
     it 'does not create run if no accounts in range' do
@@ -17,7 +17,7 @@ RSpec.describe Run, type: :model do
       invoice_text_create id: 1
 
       first = FirstRunMaker.new invoicing: invoicing
-      expect(first.run.size).to eq 0
+      expect(first.invoices.size).to eq 0
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.describe Run, type: :model do
       invoice_text_create id: 1
 
       first = FirstRunMaker.new invoicing: invoicing
-      expect(first.run.first.invoice_date).to eq Time.zone.today
+      expect(first.invoices.first.invoice_date).to eq Time.zone.today
     end
 
     it 'can be set' do
@@ -37,7 +37,7 @@ RSpec.describe Run, type: :model do
       invoice_text_create id: 1
 
       first = FirstRunMaker.new invoicing: invoicing, invoice_date: '2000/01/01'
-      expect(first.run.first.invoice_date).to eq Date.new(2000, 1, 1)
+      expect(first.invoices.first.invoice_date).to eq Date.new(2000, 1, 1)
     end
   end
 
@@ -48,8 +48,8 @@ RSpec.describe Run, type: :model do
       invoice_text_create id: 1
 
       first = FirstRunMaker.new invoicing: invoicing, comments: ['a comment']
-      expect(first.run.first.comments.size).to eq 1
-      expect(first.run.first.comments.first.clarify).to eq 'a comment'
+      expect(first.invoices.first.comments.size).to eq 1
+      expect(first.invoices.first.comments.first.clarify).to eq 'a comment'
     end
 
     it 'if comments unset it leaves them blank' do
@@ -58,7 +58,7 @@ RSpec.describe Run, type: :model do
       invoice_text_create id: 1
 
       first = FirstRunMaker.new invoicing: invoicing
-      expect(first.run.first.comments.size).to eq 0
+      expect(first.invoices.first.comments.size).to eq 0
     end
   end
 end
