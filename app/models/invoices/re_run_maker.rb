@@ -9,7 +9,9 @@
 class ReRunMaker
   attr_reader :comments, :invoice_date, :originals
 
-  def initialize invoices:, invoice_date: Time.zone.today, comments: []
+  def initialize invoices:,
+                 invoice_date: Time.zone.today,
+                 comments: []
     @originals = invoices
     @invoice_date = invoice_date
     @comments = comments

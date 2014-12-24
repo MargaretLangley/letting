@@ -13,7 +13,9 @@
 class FirstRunMaker
   attr_reader :comments, :invoice_date, :invoicing
 
-  def initialize invoicing:, invoice_date: Time.zone.today, comments: []
+  def initialize invoicing:,
+                 invoice_date: Time.zone.today,
+                 comments: []
     @invoicing = invoicing
     @invoice_date = invoice_date
     @comments = comments

@@ -12,7 +12,8 @@
 #
 class InvoiceMaker
   attr_reader :comments, :account, :period, :invoice_date, :snapshot, :products_maker
-  def initialize(account:, period:,
+  def initialize(account:,
+                 period:,
                  invoice_date: Time.zone.today,
                  comments:,
                  snapshot:,
