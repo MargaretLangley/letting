@@ -35,7 +35,7 @@ class ReRunMaker
   def products_remaker invoice
     ProductsMaker.new(invoice_date: invoice_date,
                       arrears: invoice.account.balance(to_date: invoice_date),
-                      transaction: invoice.debits_transaction)
+                      snapshot: invoice.snapshot)
       .invoice
   end
 end

@@ -17,19 +17,19 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'when child invoices destroyed' do
-    it 'destroys associated debits_transaction if it has no surviving child invoices' do
-      debits_transaction, property = debits_transaction_new, property_create
-      invoice = invoice_create debits_transaction: debits_transaction,
+    it 'destroys associated snapshot if it has no surviving child invoices' do
+      snapshot, property = snapshot_new, property_create
+      invoice = invoice_create snapshot: snapshot,
                                property: property
-      expect { invoice.destroy }.to change(DebitsTransaction, :count).by(-1)
+      expect { invoice.destroy }.to change(Snapshot, :count).by(-1)
     end
-    it 'preserves associated debits_transaction while account still has other'\
+    it 'preserves associated snapshot while account still has other'\
        'surviving child invoices' do
-      debits_transaction, property = debits_transaction_new, property_create
-      invoice_create debits_transaction: debits_transaction, property: property
-      invoice = invoice_create debits_transaction: debits_transaction,
+      snapshot, property = snapshot_new, property_create
+      invoice_create snapshot: snapshot, property: property
+      invoice = invoice_create snapshot: snapshot,
                                property: property
-      expect { invoice.destroy }.to change(DebitsTransaction, :count).by(0)
+      expect { invoice.destroy }.to change(Snapshot, :count).by(0)
     end
   end
 
@@ -43,7 +43,7 @@ RSpec.describe Invoice, type: :model do
           .prepare invoice_date: '2014-06-30',
                    account: property.account,
                    property: property.invoice,
-                   debits_transaction: DebitsTransaction.new,
+                   snapshot: Snapshot.new,
                    products: []
         expect(invoice.invoice_date.to_s).to eq '2014-06-30'
       end
@@ -55,7 +55,7 @@ RSpec.describe Invoice, type: :model do
 
         invoice.prepare account: property.account,
                         property: property.invoice,
-                        debits_transaction: DebitsTransaction.new,
+                        snapshot: Snapshot.new,
                         products: []
         expect(invoice.property_ref).to eq 55
       end
@@ -68,7 +68,7 @@ RSpec.describe Invoice, type: :model do
 
         invoice.prepare account: property.account,
                         property: property.invoice,
-                        debits_transaction: DebitsTransaction.new,
+                        snapshot: Snapshot.new,
                         products: []
         expect(invoice.billing_address)
           .to eq "Lock\nEdgbaston Road\nBirmingham\nWest Midlands"
@@ -81,7 +81,7 @@ RSpec.describe Invoice, type: :model do
         (invoice = Invoice.new)
           .prepare account: property.account,
                    property: property.invoice,
-                   debits_transaction: DebitsTransaction.new,
+                   snapshot: Snapshot.new,
                    products: [product_new(charge_type: GROUND_RENT)]
         expect(invoice.products.first.to_s)
           .to eq 'charge_type: Ground Rent date_due: 2014-06-07 amount: 30.05 '\
@@ -96,7 +96,7 @@ RSpec.describe Invoice, type: :model do
           .prepare invoice_date: '2014-06-30',
                    account: property.account,
                    property: property.invoice,
-                   debits_transaction: DebitsTransaction.new,
+                   snapshot: Snapshot.new,
                    products: [product_new(date_due: Date.new(2000, 1, 1))]
         expect(invoice.earliest_date_due).to eq Date.new(2000, 1, 1)
       end
@@ -115,7 +115,7 @@ RSpec.describe Invoice, type: :model do
           (invoice = Invoice.new)
             .prepare account: property.account,
                      property: property.invoice,
-                     debits_transaction: DebitsTransaction.new,
+                     snapshot: Snapshot.new,
                      products: []
           expect(invoice.comments.size).to eq 0
         end
@@ -127,7 +127,7 @@ RSpec.describe Invoice, type: :model do
           (invoice = Invoice.new)
             .prepare account: property.account,
                      property: property.invoice,
-                     debits_transaction: DebitsTransaction.new,
+                     snapshot: Snapshot.new,
                      comments: ['comment'],
                      products: []
           expect(invoice.comments.size).to eq 1
@@ -141,7 +141,7 @@ RSpec.describe Invoice, type: :model do
           (invoice = Invoice.new)
             .prepare account: property.account,
                      property: property.invoice,
-                     debits_transaction: DebitsTransaction.new,
+                     snapshot: Snapshot.new,
                      comments: ['comment', ''],
                      products: []
           expect(invoice.comments.size).to eq 1
@@ -161,8 +161,8 @@ RSpec.describe Invoice, type: :model do
       end
 
       it 'returns false if on a red invoice' do
-        transaction = DebitsTransaction.new invoices: [invoice_new, invoice_new]
-        invoice = invoice_new debits_transaction: transaction,
+        snapshot = Snapshot.new invoices: [invoice_new, invoice_new]
+        invoice = invoice_new snapshot: snapshot,
                               products: [product_new(charge_type: GROUND_RENT)]
         expect(invoice.page2?).to eq false
       end

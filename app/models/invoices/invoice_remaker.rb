@@ -34,7 +34,7 @@ class InvoiceRemaker
     Invoice.new.prepare account: invoice.account,
                         invoice_date: invoice_date,
                         property: invoice.property,
-                        debits_transaction: invoice.debits_transaction,
+                        snapshot: invoice.snapshot,
                         comments: comments,
                         products: products
   end

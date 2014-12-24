@@ -6,7 +6,7 @@
 #
 # Products, basically, an account item for the invoice.
 #
-# @transaction - the debits created during the invoice period.
+# @snapshot - the debits created during the invoice period.
 #
 # @arrears - the amount the account is in arrears
 #
@@ -16,9 +16,9 @@
 ###
 #
 class ProductsMaker
-  attr_reader :arrears, :invoice_date, :transaction
-  def initialize(transaction:, arrears:, invoice_date:)
-    @transaction = transaction
+  attr_reader :arrears, :invoice_date, :snapshot
+  def initialize(snapshot:, arrears:, invoice_date:)
+    @snapshot = snapshot
     @invoice_date = invoice_date
     @arrears = arrears
   end
@@ -52,7 +52,7 @@ class ProductsMaker
   end
 
   def product_debits
-    transaction.debits.map do |debit|
+    snapshot.debits.map do |debit|
       Product.new debit.to_debitable
     end
   end

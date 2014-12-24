@@ -1,5 +1,5 @@
 ###
-# DebitsTransaction
+# Snapshot
 #
 # Link between the invoices, up to 2, and the debits which the
 # invoices are responsible. The idea is to only delete the
@@ -10,9 +10,9 @@
 #
 ###
 #
-class DebitsTransaction < ActiveRecord::Base
-  has_many :invoices, dependent: :destroy, inverse_of: :debits_transaction
-  has_many :debits, dependent: :destroy, inverse_of: :debits_transaction
+class Snapshot < ActiveRecord::Base
+  has_many :invoices, dependent: :destroy, inverse_of: :snapshot
+  has_many :debits, dependent: :destroy, inverse_of: :snapshot
   validates :debits, presence: true
 
   def debited(debits:)
@@ -28,7 +28,7 @@ class DebitsTransaction < ActiveRecord::Base
   end
 
   # Plan A - Want to be able to destroy an invoice and not destroy
-  #   debits_transaction if it has another invoice already. (doesn't work)
+  #   snapshot if it has another invoice already. (doesn't work)
   # Plan B - test if I should delete debits transaction when deleting invoice
   #   (Working)
   def only_one_invoice?

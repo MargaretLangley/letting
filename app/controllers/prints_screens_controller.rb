@@ -10,6 +10,6 @@ class PrintsScreensController < ApplicationController
   layout 'view_layout'
 
   def show
-    @run = Run.includes(invoices: [:debits_transaction]).find params[:id]
+    @run = Run.includes(invoices: [:snapshot]).find params[:id]
   end
 end

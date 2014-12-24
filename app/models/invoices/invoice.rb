@@ -27,7 +27,7 @@
 class Invoice < ActiveRecord::Base
   belongs_to :account
   belongs_to :run, inverse_of: :invoices
-  belongs_to :debits_transaction, autosave: true, inverse_of: :invoices
+  belongs_to :snapshot, autosave: true, inverse_of: :invoices
   has_many :comments, dependent: :destroy
   has_many :products, -> { order(:created_at) }, dependent: :destroy, inverse_of: :invoice do # rubocop: disable Metrics/LineLength
     def earliest_date_due
@@ -56,7 +56,7 @@ class Invoice < ActiveRecord::Base
   has_many :invoice_texts, through: :letters
   has_many :letters, dependent: :destroy
 
-  after_destroy :destroy_orphaned_debits_transaction
+  after_destroy :destroy_orphaned_snapshot
 
   delegate :earliest_date_due, to: :products
 
@@ -72,14 +72,14 @@ class Invoice < ActiveRecord::Base
   # invoice_date       - the date which this invoice is being said to have been
   #                      sent.
   # property           - property that the invoice is being prepared for
-  # debits_transaction - a transaction made up of the debits that will be added
+  # snapshot - a transaction made up of the debits that will be added
   #                      to the invoice
   # comments           - array of strings to appear on invoice for special info.
   #
   def prepare(account:,
               invoice_date: Time.zone.today,
               property:,
-              debits_transaction:,
+              snapshot:,
               comments: [],
               products:)
     self.account = account
@@ -87,7 +87,7 @@ class Invoice < ActiveRecord::Base
     letters.build invoice_text: InvoiceText.first
     self.property = property
     self.comments = generate_comments comments: comments
-    self.debits_transaction = debits_transaction
+    self.snapshot = snapshot
 
     self.products = products
     self
@@ -134,12 +134,12 @@ class Invoice < ActiveRecord::Base
     self.client_address = client_address
   end
 
-  def destroy_orphaned_debits_transaction
-    debits_transaction.invoices.empty? && debits_transaction.destroy
+  def destroy_orphaned_snapshot
+    snapshot.invoices.empty? && snapshot.destroy
   end
 
   def blue_invoice?
-    debits_transaction.only_one_invoice?
+    snapshot.only_one_invoice?
   end
 
   def generate_comments(comments:)

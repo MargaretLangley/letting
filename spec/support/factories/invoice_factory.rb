@@ -12,17 +12,17 @@ def invoice_new id: nil,
                 account: account_create,
                 property: property_new,
                 comments: [],
-                debits_transaction: debits_transaction_new,
+                snapshot: snapshot_new,
                 products: [product_new],
                 deliver: true
   invoice_text_create(id: 1) unless InvoiceText.find_by id: 1
   account.property = property
   invoice = Invoice.new id: id, run_id: run_id
-  invoice.debits_transaction = debits_transaction
+  invoice.snapshot = snapshot
   invoice.prepare account: account,
                   invoice_date: invoice_date,
                   property: account.property.invoice,
-                  debits_transaction: debits_transaction,
+                  snapshot: snapshot,
                   comments: comments,
                   products: products
   invoice.deliver = deliver
@@ -36,7 +36,7 @@ def invoice_create \
   account: account_create,
   property: property_create,
   comments: [],
-  debits_transaction: debits_transaction_new,
+  snapshot: snapshot_new,
   products: [product_new],
   deliver: true
 
@@ -46,7 +46,7 @@ def invoice_create \
                         account: account,
                         property: property,
                         comments: comments,
-                        debits_transaction: debits_transaction,
+                        snapshot: snapshot,
                         products: products,
                         deliver: deliver
   invoice.save!

@@ -36,19 +36,19 @@ class FirstRunMaker
                      period: invoicing.period,
                      invoice_date: invoice_date,
                      comments: comments,
-                     transaction: debit_transaction_maker(account),
+                     snapshot: snapshot_maker(account),
                      products_maker: products_maker(account))
       .compose
   end
 
-  def debit_transaction_maker(account)
-    DebitTransactionMaker.new(account: account, debit_period: invoicing.period)
+  def snapshot_maker(account)
+    SnapshotMaker.new(account: account, debit_period: invoicing.period)
       .invoice
   end
 
   def products_maker account
     ProductsMaker.new(invoice_date: invoice_date,
                       arrears: account.balance(to_date: invoice_date),
-                      transaction: debit_transaction_maker(account))
+                      snapshot: snapshot_maker(account))
   end
 end

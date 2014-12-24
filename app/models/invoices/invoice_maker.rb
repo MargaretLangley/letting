@@ -11,17 +11,17 @@
 # rubocop: disable  Metrics/MethodLength,  Metrics/LineLength, Metrics/ParameterLists
 #
 class InvoiceMaker
-  attr_reader :comments, :account, :period, :invoice_date, :transaction, :products_maker
+  attr_reader :comments, :account, :period, :invoice_date, :snapshot, :products_maker
   def initialize(account:, period:,
                  invoice_date: Time.zone.today,
                  comments:,
-                 transaction:,
+                 snapshot:,
                  products_maker:)
     @account = account
     @period = period
     @invoice_date = invoice_date
     @comments = comments
-    @transaction = transaction
+    @snapshot = snapshot
     @products_maker = products_maker
   end
 
@@ -40,7 +40,7 @@ class InvoiceMaker
       .prepare account: account,
                invoice_date: invoice_date,
                property: account.property.invoice(billing_period: period),
-               debits_transaction: transaction,
+               snapshot: snapshot,
                comments: comments,
                products: products_maker.invoice
     invoice.deliver = products_maker.debits?
