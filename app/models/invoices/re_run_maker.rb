@@ -23,7 +23,7 @@ class ReRunMaker
   private
 
   def invoice_remaker invoice
-    InvoiceRemaker.new(invoice_text: invoice,
+    InvoiceRemaker.new(invoice: invoice,
                        invoice_date: invoice_date,
                        comments: comments,
                        products: products_remaker(invoice)).compose

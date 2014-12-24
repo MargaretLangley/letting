@@ -9,12 +9,12 @@
 # invoices.
 #
 class InvoiceRemaker
-  attr_reader :invoice_text, :comments, :invoice_date, :products
-  def initialize(invoice_text:,
+  attr_reader :invoice, :comments, :invoice_date, :products
+  def initialize(invoice:,
                  invoice_date: Time.zone.today,
                  comments: [],
                  products:)
-    @invoice_text = invoice_text
+    @invoice = invoice
     @comments = comments
     @invoice_date = invoice_date
     @products = products
@@ -22,7 +22,7 @@ class InvoiceRemaker
 
   #
   # compose
-  # Make invoice from invoice_text invoice.
+  # Repackages existing invoice with run specific arguments.
   #
   def compose
     remake
@@ -32,10 +32,10 @@ class InvoiceRemaker
 
   def remake new_invoice: Invoice.new
     new_invoice
-      .prepare account: invoice_text.account,
+      .prepare account: invoice.account,
                invoice_date: invoice_date,
-               property: invoice_text.property,
-               debits_transaction: invoice_text.debits_transaction,
+               property: invoice.property,
+               debits_transaction: invoice.debits_transaction,
                comments: comments,
                products: products
   end
