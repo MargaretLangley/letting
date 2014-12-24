@@ -25,18 +25,17 @@ class InvoiceRemaker
   # Repackages existing invoice with run specific arguments.
   #
   def compose
-    remake
+    remake_invoice
   end
 
   private
 
-  def remake new_invoice: Invoice.new
-    new_invoice
-      .prepare account: invoice.account,
-               invoice_date: invoice_date,
-               property: invoice.property,
-               debits_transaction: invoice.debits_transaction,
-               comments: comments,
-               products: products
+  def remake_invoice
+    Invoice.new.prepare account: invoice.account,
+                        invoice_date: invoice_date,
+                        property: invoice.property,
+                        debits_transaction: invoice.debits_transaction,
+                        comments: comments,
+                        products: products
   end
 end
