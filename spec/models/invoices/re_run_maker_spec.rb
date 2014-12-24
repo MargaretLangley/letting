@@ -21,7 +21,7 @@ RSpec.describe ReRunMaker, type: :model do
       debit = debit_new on_date: '25/3/2011', amount: 35, charge: charge_new
       account = account_new debits: [debit],
                             property: property_new(address: address_new)
-      arrears = ProductsMaker.arrears date_due: '25/3/2012', amount: 35
+      arrears = Product.arrears date_due: '25/3/2012', amount: 35
       invoice = invoice_new account: account,
                             property: account.property,
                             products: [arrears]

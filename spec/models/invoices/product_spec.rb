@@ -25,6 +25,16 @@ RSpec.describe Product, type: :model do
     end
   end
 
+  describe '.arrears' do
+    it 'creates arrears given arguments' do
+      arrears = Product.arrears date_due: '2001/01/30', amount: 10
+      expect(arrears.to_s).to eq 'charge_type: Arrears ' \
+                                 'date_due: 2001-01-30 ' \
+                                 'amount: 10.0 ' \
+                                 'period: .., balance: '
+    end
+  end
+
   describe '.page2' do
     it 'returns back page products' do
       invoice_create products: [product_new(charge_type: GROUND_RENT)]

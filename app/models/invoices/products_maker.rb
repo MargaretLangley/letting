@@ -36,16 +36,6 @@ class ProductsMaker
     product_debits.present?
   end
 
-  # Wrapper for the arguments required for an Arrears product item.
-  # All the other product items are taken from the debit.
-  #
-  def self.arrears(date_due:, amount:)
-    Product.new charge_type: ChargeTypes::ARREARS,
-                date_due: date_due,
-                automatic_payment: false,
-                amount: amount
-  end
-
   private
 
   def products
@@ -55,8 +45,8 @@ class ProductsMaker
   def product_arrears
     product_arrears = []
     if arrears.nonzero?
-      product_arrears = [ProductsMaker.arrears(date_due: invoice_date,
-                                               amount: arrears)]
+      product_arrears = [Product.arrears(date_due: invoice_date,
+                                         amount: arrears)]
     end
     product_arrears
   end
