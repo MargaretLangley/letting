@@ -4,31 +4,41 @@
 # Assembles products from arrears and from the invoiceable debits.
 # Calculates products, total_arrears and earliest date for a product.
 #
-# @invoice_date - the date the invoice is dated with.
-#                 Used for the arrears date, if any
+# Products, basically, an account item for the invoice.
 #
-# @products     - generated products
+# @transaction - the debits created during the invoice period.
 #
-# @earliest_date_due - first product date
+# @arrears - the amount the account is in arrears
+#
+# @invoice_date - the date the invoice is dated with. Used by the arrears
+#                 product item.
 #
 ###
 #
 class ProductsMaker
-  attr_reader :arrears, :invoice_date, :products, :transaction
-  def initialize(invoice_date:, arrears:, transaction:)
+  attr_reader :arrears, :invoice_date, :transaction
+  def initialize(transaction:, arrears:, invoice_date:)
+    @transaction = transaction
     @invoice_date = invoice_date
     @arrears = arrears
-    @transaction = transaction
   end
 
+  # Returns the information required for an invoice
+  # products - are the account items of the invoice
+  #
   def invoice(*)
     products
   end
 
+  # If we any debits are due for this invoice.
+  #
   def debits?
     product_debits.present?
   end
 
+  # Wrapper for the arguments required for an Arrears product item.
+  # All the other product items are taken from the debit.
+  #
   def self.arrears(date_due:, amount:)
     Product.new charge_type: ChargeTypes::ARREARS,
                 date_due: date_due,

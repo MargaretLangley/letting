@@ -47,8 +47,8 @@ class FirstRunMaker
   end
 
   def products_maker account
-    BlueProductsMaker.new(invoice_date: invoice_date,
-                          arrears: account.balance(to_date: invoice_date),
-                          transaction: debit_transaction_maker(account))
+    ProductsMaker.new(invoice_date: invoice_date,
+                      arrears: account.balance(to_date: invoice_date),
+                      transaction: debit_transaction_maker(account))
   end
 end
