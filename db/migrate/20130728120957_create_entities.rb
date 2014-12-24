@@ -8,8 +8,7 @@ class CreateEntities < ActiveRecord::Migration
       t.string :title
       t.string :initials
       t.string :name, null: false
-
-      t.timestamps
+      t.timestamps null: true
     end
     add_index :entities, [:entitieable_id, :entitieable_type]
   end

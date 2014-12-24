@@ -8,7 +8,7 @@ class CreateProducts < ActiveRecord::Migration
       t.decimal :amount, null: false
       t.date     :period_first
       t.date     :period_last
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

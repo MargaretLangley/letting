@@ -6,7 +6,7 @@ class CreateCredits < ActiveRecord::Migration
       t.belongs_to  :payment, null: false, index: true
       t.datetime    :on_date,    null: false
       t.decimal  :amount, precision: 8, scale: 2, null: false
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

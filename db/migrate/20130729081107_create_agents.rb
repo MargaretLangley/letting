@@ -3,7 +3,7 @@ class CreateAgents < ActiveRecord::Migration
     create_table :agents do |t|
       t.boolean :authorized, null: false, default: false
       t.belongs_to :property, null: false, index: true
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

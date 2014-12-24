@@ -3,7 +3,7 @@ class CreateClients < ActiveRecord::Migration
     create_table :clients do |t|
       t.integer :human_ref, null: false
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

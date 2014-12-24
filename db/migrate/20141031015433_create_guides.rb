@@ -5,7 +5,7 @@ class CreateGuides < ActiveRecord::Migration
       t.text :instruction, null: false
       t.text :fillin, null: false
       t.text :sample, null: false
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

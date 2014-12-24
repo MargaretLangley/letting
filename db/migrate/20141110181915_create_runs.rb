@@ -3,7 +3,7 @@ class CreateRuns < ActiveRecord::Migration
     create_table :runs do |t|
       t.belongs_to :invoicing, index: true
       t.date :invoice_date, null: false
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end
