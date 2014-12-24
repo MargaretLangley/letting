@@ -5,16 +5,18 @@
       <h2><%= invoice_text.description %></h2>
     </div>
     <div class='col-12-24  no-r-pad'>
-      <%= view_link(invoice_text) %>
+      <%= view_link invoice_text, size: '2x' %>
     </div>
 
     <% if invoice_text.id == InvoiceText.first.id %>
       <%= render 'name_phone', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
+      <%= render 'text_fields_heading', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
       <%= render 'text_fields', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
    `  <%= render 'addresses/form', f: f, parent: 'invoice_text', address: AddressDecorator.new(invoice_text.address) %>
     <% else %>
-      <%= render 'text_fields', f: f, invoice_text: invoice_text %>
+      <%= render 'text_fields_heading', f: f, invoice_text: invoice_text %>
       <%= render 'guides/form', f: f %>
+      <%= render 'text_fields', f: f, invoice_text: invoice_text %>
     <% end %>
     <div class='col-6-24  no-print'>&nbsp;</div>
     <div class='col-18-24  no-r-pad  no-print'>

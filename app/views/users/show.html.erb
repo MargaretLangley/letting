@@ -4,11 +4,11 @@
   <div class='col-18-24  grid-row  bottom-spacer'>     <!-- 1st column -->
 
     <div class='col-1-6  grid-row'>&nbsp;</div>
-    <div class='col-1-6  bottom-spacer faded'>User ID</div>
+    <div class='col-1-6  bottom-spacer  faded'>User ID</div>
     <div class='col-4-6  bottom-spacer'><%= @user.id %></div>
 
     <div class='col-1-6  grid-row'>&nbsp;</div>
-    <div class='col-1-6  bottom-spacer faded'>Nickname</div>
+    <div class='col-1-6  bottom-spacer  faded'>Nickname</div>
     <div class='col-4-6  bottom-spacer'><%= @user.nickname %></div>
 
     <div class='col-1-6  grid-row'>&nbsp;</div>
@@ -16,8 +16,8 @@
     <div class='col-4-6  bottom-spacer'><%= @user.email %></div>
 
     <div class='col-1-6  grid-row'>&nbsp;</div>
-    <div class='col-1-6  bottom-spacer faded'>Admin</div>
-    <div class='col-4-6  bottom-spacer no-r-pad'>
+    <div class='col-1-6  bottom-spacer  faded'>Admin</div>
+    <div class='col-4-6  bottom-spacer  no-r-pad'>
       <% if @user.admin %>
         Yes
       <% else %>

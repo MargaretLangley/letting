@@ -1,10 +1,11 @@
 <% @title='View Invoice Text' %>
-<div id='invoice_text' class='shell  invoice_text-padding'>
+<div id='invoice_text'  class='shell  invoice_text-padding'>
   <div class='col-12-24  bottom-spacer'>
     &nbsp;
   </div>
   <div class='col-12-24  bottom-spacer'>
-    <%= edit_link @invoice_text %>
+    <%= edit_link @invoice_text, size: '2x' %>
+
   </div>
 
   <% if @invoice_text == InvoiceText.first %>
