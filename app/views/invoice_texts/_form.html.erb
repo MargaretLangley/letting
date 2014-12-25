@@ -8,11 +8,11 @@
       <%= view_link invoice_text, size: '2x' %>
     </div>
 
-    <% if invoice_text.id == InvoiceText.first.id %>
+    <% if invoice_text == InvoiceText.first %>
       <%= render 'name_phone', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
       <%= render 'text_fields_heading', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
       <%= render 'text_fields', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
-   `  <%= render 'addresses/form', f: f, parent: 'invoice_text', address: AddressDecorator.new(invoice_text.address) %>
+      <%= render 'addresses/form', f: f, parent: 'invoice_text', address: AddressDecorator.new(invoice_text.address) %>
     <% else %>
       <%= render 'text_fields_heading', f: f, invoice_text: invoice_text %>
       <%= render 'guides/form', f: f %>
