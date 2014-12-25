@@ -32,13 +32,11 @@
     <div class='vertical-spacer'><%= invoice_dec.client_address %></div>
     <%= invoice_dec.invoice_texts.first.advice1 %>
     <%= invoice_dec.invoice_texts.first.address.text %>
-    <p>
-    <div class = 'grid-row  inv-advice-bold'>
+    <div class = 'grid-row  inv-advice-bold  vertical-spacer'>
       Remittance Advice
     </div>
-      <%= invoice_dec.invoice_texts.first.advice2 %>
-    </p>
-    <span class='sissors'>&#9985;<%= "-" * 73 %></span>
+    <%= invoice_dec.invoice_texts.first.advice2 %>
+    <div class='sissors  vertical-spacer'>&#9985;<%= "-" * 73 %></div>
   </div>
   <div class='col-2-24'>&nbsp;</div>
 
@@ -57,11 +55,10 @@
   </div>
   <div class='col-2-24'>&nbsp;</div>
 
-  <div class='col-2-24  grid-row'>&nbsp;</div>
-  <div class='col-22-24'>
+  <div class='col-2-24  grid-row  bottom-line-spacer'>&nbsp;</div>
+  <div class='col-22-24  bottom-line-spacer'>
     From: <%= invoice_dec.billing_address %>
   </div>
-  <div class='col-2-24  grid-row'>&nbsp;</div>
 
   <%= render partial:'products/products_narrow',locals: { invoice: invoice } %>
 </div>
