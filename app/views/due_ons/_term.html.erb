@@ -1,27 +1,21 @@
-<div class='grid-row col-8-24 bottom-spacer'>
-  &nbsp;
-</div>
-<div class='col-3-24 faded'>
+<div class='col-4-24  grid-row  faded'>
   Due On
 </div>
-<div class='col-2-24 r-align'><div class='faded'>Day</div></div>
-<div class='col-2-24 r-align'><div class='faded'>Month </div></div>
-<div class='col-2-24 r-align'><div class='faded'>Year </div></div>
+<div class='col-3-24  r-align'><div class='faded'>Day</div></div>
+<div class='col-3-24  r-align'><div class='faded'>Month </div></div>
+<div class='col-3-24  r-align'><div class='faded'>Year </div></div>
 
 <% cycle.due_ons.each  do |due_on| %>
-  <div class='grid-row col-11-24 bottom-spacer'>
+  <div class='col-4-24  grid-row  bottom-spacer'>
     &nbsp;
   </div>
-  <div class='col-2-24 r-align'>
-    &nbsp; <%= due_on.day %>
+  <div class='col-3-24  bottom-spacer  r-align'>
+    <%= due_on.day %>
   </div>
-  <div class='col-2-24 r-align'>
-    &nbsp; &nbsp;<%= due_on.month %>
+  <div class='col-3-24  bottom-spacer  r-align'>
+    <%= due_on.month %>
   </div>
-  <div class='col-2-24 r-align'>
-    &nbsp; &nbsp;<%= due_on.year %>
-  </div>
-  <div class='col-7-24'>
-    &nbsp;
+  <div class='col-3-24   bottom-spacer  r-align'>
+    <%= due_on.year %>
   </div>
 <% end %>

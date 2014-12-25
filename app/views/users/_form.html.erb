@@ -1,11 +1,8 @@
 <%= form_for user do |f| %>
   <%= render 'shared/errors', object: user %>
 
-  <fieldset id='user' class='grid  shell'>
-    <div class='col-1-24   vertical-spacer spacer-column'>
-      &nbsp;
-    </div>
-    <div class='col-20-24  vertical-spacer spacer-column'>
+  <fieldset id='user' class='grid  shell-1-6'>
+    <div class='col-22-24  vertical-spacer spacer-column'>
 
       <div class='col-1-4  grid-row  bottom-spacer  faded'>
         <%= f.label :nickname %>
@@ -44,9 +41,6 @@
     </div>
     <div class='col-2-24  spacer-column'>
       <%= view_link user, size: '2x' %>
-    </div>
-    <div class='col-1-24   vertical-spacer spacer-column'>
-      &nbsp;
     </div>
   </fieldset>
 <% end %>

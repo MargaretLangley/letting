@@ -1,22 +1,18 @@
 <% @title='View User' %>
 
-<div class='grid shell'>
+<div class='grid shell-1-6'>
   <div class='col-18-24  grid-row  bottom-spacer'>     <!-- 1st column -->
 
-    <div class='col-1-6  grid-row'>&nbsp;</div>
-    <div class='col-1-6  bottom-spacer  faded'>User ID</div>
+    <div class='col-1-6  grid-row  bottom-spacer  faded'>User ID</div>
     <div class='col-4-6  bottom-spacer'><%= @user.id %></div>
 
-    <div class='col-1-6  grid-row'>&nbsp;</div>
-    <div class='col-1-6  bottom-spacer  faded'>Nickname</div>
+    <div class='col-1-6  grid-row  bottom-spacer  faded'>Nickname</div>
     <div class='col-4-6  bottom-spacer'><%= @user.nickname %></div>
 
-    <div class='col-1-6  grid-row'>&nbsp;</div>
-    <div class='col-1-6  bottom-spacer  faded'>email</div>
+    <div class='col-1-6  grid-row  bottom-spacer  faded'>email</div>
     <div class='col-4-6  bottom-spacer'><%= @user.email %></div>
 
-    <div class='col-1-6  grid-row'>&nbsp;</div>
-    <div class='col-1-6  bottom-spacer  faded'>Admin</div>
+    <div class='col-1-6  grid-row  bottom-spacer  faded'>Admin</div>
     <div class='col-4-6  bottom-spacer  no-r-pad'>
       <% if @user.admin %>
         Yes
@@ -26,7 +22,7 @@
     </div>
   </div>
 
-  <div class='col-5-24  bottom-spacer'>     <!-- 2nd column -->
+  <div class='col-6-24  bottom-spacer'>     <!-- 2nd column -->
     <%= edit_link @user, size: '2x' %>
   </div>
 </div> <!-- grid shell -->
