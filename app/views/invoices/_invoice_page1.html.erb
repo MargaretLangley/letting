@@ -29,9 +29,7 @@
   <div class='col-2-24  grid-row'>&nbsp;</div>
   <div class='col-20-24  inv-advice'>
     We <%= invoice_dec.invoice_texts.first.invoice_name.upcase %> ON BEHALF OF YOUR LANDLORD
-    <br>
-    <%= invoice_dec.client_address %>
-    <br>
+    <div class='vertical-spacer'><%= invoice_dec.client_address %></div>
     <%= invoice_dec.invoice_texts.first.advice1 %>
     <%= invoice_dec.invoice_texts.first.address.text %>
     <p>

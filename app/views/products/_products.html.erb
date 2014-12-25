@@ -1,11 +1,10 @@
-<br>
-<div class='col-2-24  grid-row  bottom-line-space'>&nbsp;</div>
-<div class='col-3-24  bottom-line-space'>          Due Date</div>
-<div class='col-5-24  bottom-line-space'>          Charge</div>
-<div class='col-5-24  bottom-line-space'>          Period</div>
-<div class='col-3-24  r-align  bottom-line-space'> Due</div>
-<div class='col-4-24  r-align  bottom-line-space'> Balance</div>
-<div class='col-2-24  bottom-line-space'>          &nbsp;</div>
+<div class='col-2-24  grid-row  vertical-line-spacer'>&nbsp;</div>
+<div class='col-3-24  vertical-line-spacer'>          Due Date</div>
+<div class='col-5-24  vertical-line-spacer'>          Charge</div>
+<div class='col-5-24  vertical-line-spacer'>          Period</div>
+<div class='col-3-24  r-align  vertical-line-spacer'> Due</div>
+<div class='col-4-24  r-align  vertical-line-spacer'> Balance</div>
+<div class='col-2-24  vertical-line-spacer'>          &nbsp;</div>
 
 <% invoice.products.each do |product| %>
   <% product_dec = ProductDecorator.new product %>
