@@ -4,7 +4,7 @@ class CreateSearchSuggestions < ActiveRecord::Migration
       t.string :term, null: false
       t.integer :popularity, null: false
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

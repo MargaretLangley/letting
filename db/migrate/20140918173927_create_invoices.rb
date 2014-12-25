@@ -11,7 +11,7 @@ class CreateInvoices < ActiveRecord::Migration
       t.text     :property_address, null: false
       t.text     :billing_address, null: false
       t.text     :client_address, null: false
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

@@ -9,7 +9,7 @@ class CreateInvoiceTexts < ActiveRecord::Migration
       t.string :heading2,  null: false
       t.text :advice1,  null: false
       t.text :advice2,  null: false
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

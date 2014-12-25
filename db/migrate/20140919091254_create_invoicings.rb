@@ -4,7 +4,7 @@ class CreateInvoicings < ActiveRecord::Migration
       t.string "property_range", null: false
       t.date   :period_first,      null: false
       t.date   :period_last,       null: false
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end
