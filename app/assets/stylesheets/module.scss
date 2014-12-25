@@ -339,6 +339,20 @@ li.active a, li.active a:hover {
     @include inside-shell;
     @include clearfix;
   }
+
+  .shell-extra-thick{
+    margin: 0 0 2% 0;
+    padding: 2% 6% 2% 6%;
+    @include inside-shell;
+    @include clearfix;
+  }
+
+  .shell-extra-extra-thick{
+    margin: 0 0 2% 0;
+    padding: 2% 15% 2% 15%;
+    @include inside-shell;
+    @include clearfix;
+  }
 }
 
 @media print{

@@ -1,18 +1,16 @@
 <%= form_for cycle do |f| %>
   <%= render 'shared/errors', object: cycle %>
 
-  <fieldset id='cycle' class='grid  shell'>
-    <div class='col-1-24   vertical-spacer spacer-column'>&nbsp;</div>
-    <div class='col-20-24  vertical-spacer spacer-column'>
+  <fieldset id='cycle' class='grid  shell-extra-extra-thick'>
+
+    <div class='col-22-24  grid-row  vertical-spacer spacer-column'>
 
       <%= f.hidden_field :cycle_type, cycle_type: 'term' %>
-      <div class='col-4-24  grid-row  bottom-spacer'>&nbsp;</div>
-      <div class='col-3-24  bottom-spacer  faded'><%= f.label :name %></div>
-      <div class='col-8-24  bottom-spacer '><%= f.text_field :name %></div>
-      <div class='col-9-24  bottom-spacer '>&nbsp;</div>
 
-      <div class='col-4-24  grid-row  vertical-line-spacer'>&nbsp;</div>
-      <div class='col-3-24  vertical-line-spacer faded'>
+      <div class='col-4-24  grid-row  bottom-spacer  faded'><%= f.label :name %></div>
+      <div class='col-8-24  bottom-spacer '><%= f.text_field :name %></div>
+
+      <div class='col-4-24  grid-row  vertical-line-spacer faded'>
         <%= f.label :charged_in %>
         <%= f.hidden_field :cycle_type, cycle_type: 'term' %>
       </div>
@@ -22,10 +20,8 @@
       <div class='col-4-24  vertical-line-spacer faded'>
         <%= f.label :charged_in_id, 'Arrears', value: ChargedInDefaults::MODERN_ARREARS.to_s %>
       </div>
-      <div class='col-9-24  bottom-spacer '>&nbsp;</div>
 
-      <div class='col-4-24  grid-row  bottom-spacer'>&nbsp;</div>
-      <div class='col-3-24  bottom-spacer  faded'>&nbsp;</div>
+      <div class='col-4-24  grid-row  bottom-spacer  faded'>&nbsp;</div>
       <div class='col-2-24  bottom-spacer '>
         <%= f.radio_button :charged_in_id, ChargedInDefaults::MODERN_ADVANCE.to_s %>
       </div>
@@ -33,36 +29,33 @@
       <div class='col-2-24  bottom-spacer '>
         <%= f.radio_button :charged_in_id, ChargedInDefaults::MODERN_ARREARS.to_s %>
       </div>
-      <div class='col-11-24  bottom-spacer '>&nbsp;</div>
 
-      <div class='col-4-24  grid-row  bottom-spacer'>&nbsp;</div>
-      <div class='col-3-24  bottom-spacer  faded'><%= f.label :order %></div>
+      <div class='col-4-24  grid-row  bottom-spacer  faded'><%= f.label :order %></div>
       <div class='col-2-24  bottom-spacer '>
         <%= f.text_field :order, class: 'r-align' %>
       </div>
-      <div class='col-15-24  bottom-spacer '>&nbsp;</div>
 
-      <div class='col-24-24  grid-row'>&nbsp;</div>
 
       <div class='js-group-toggle'>
-        <div class='col-4-24  grid-row  bottom-spacer '>&nbsp;</div>
-        <div class='col-3-24  vertical-spacer  faded'>Due On</div>
-        <div class='col-7-24  vertical-spacer  faded  c-align'>Due Dates</div>
-        <div class='col-5-24  vertical-spacer  faded  c-align'>Shown Dates</div>
+        <div class='col-4-24  grid-row  vertical-spacer  faded'>Due On</div>
+        <div class='col-6-24  vertical-spacer  faded  c-align'>Due Dates</div>
+        <div class='col-6-24  vertical-spacer  faded  c-align'>Shown Dates</div>
         <div class='col-5-24  bottom-spacer'>&nbsp;</div>
 
-        <div class='col-7-24  grid-row  vertical-spacer'>&nbsp;</div>
+        <div class='col-4-24  grid-row  vertical-spacer'>&nbsp;</div>
         <div class='col-2-24  vertical-spacer  faded  r-align'>Month</div>
         <div class='col-2-24  vertical-spacer  faded  r-align'>Day</div>
         <div class='col-2-24  vertical-spacer  faded  r-align'>Year</div>
         <div class='col-1-24  vertical-spacer  faded  r-align'>&nbsp;</div>
         <div class='col-2-24  vertical-spacer  faded  r-align'>Month</div>
         <div class='col-2-24  vertical-spacer  faded  r-align'>Day</div>
+        <div class='col-1-24  vertical-spacer'>&nbsp</div>
         <div class='col-6-24  vertical-spacer  faded'>Action</div>
 
         <%= f.fields_for :due_ons do |builder| %>
           <div class='grid js-enclosed-toggle <%= "#{hide_extra_new_records record: builder.object, index: builder.index }" %>'>
-            <div class='col-7-24  grid-row   bottom-spacer'>&nbsp;</div>
+
+            <div class='col-4-24  grid-row   bottom-spacer'>&nbsp;</div>
             <div class='col-2-24  bottom-spacer'>
               <%= builder.text_field :month, class: 'r-align  width-1-1  js-clear' %>
             </div>
@@ -79,6 +72,7 @@
             <div class='col-2-24  bottom-spacer'>
               <%= builder.text_field :show_day, class: 'r-align width-1-1 js-clear' %>
             </div>
+            <div class='col-1-24  vertical-spacer'>&nbsp</div>
             <div class='col-2-24  bottom-spacer'>
               <%= builder.hidden_field :_destroy %>
               <% if first_record? index: builder.index %>
@@ -91,20 +85,20 @@
           </div>  <!-- js-enclosed-toggle -->
         <% end %>
 
-        <div class='col-7-24  grid-row  vertical-spacer'>&nbsp;</div>
-        <div class='col-4-24  vertical-spacer'>
+        <div class='col-4-24  grid-row  bottom-line-spacer'>&nbsp;</div>
+        <div class='col-4-24  bottom-line-spacer'>
           <%= add_link css: 'js-reveal-link', title: 'Add Due Date' %>
         </div>
       </div>  <!-- js-group-toggle -->
+
+      <div class='col-4-24  grid-row  bottom-spacer  no-print'>&nbsp;</div>
+      <div class='col-18-24 bottom-spacer  no-print  no-r-pad'>
+        <%= render 'buttons/submit', f: f %> or <%= cancel_link path: cycles_path %>
+      </div>
     </div>
 
     <div class='col-2-24 spacer-column'>
       <%= view_link cycle, size: '2x' %>
-    </div>
-
-    <div class='col-6-24  grid-row  bottom-spacer  no-print'>&nbsp;</div>
-    <div class='col-18-24 bottom-spacer  no-print  no-r-pad'>
-      <%= render 'buttons/submit', f: f %> or <%= cancel_link path: cycles_path %>
     </div>
   </fieldset>
 <% end %>
