@@ -2,23 +2,30 @@
   <%= render 'shared/errors', object: payment_dec.payment %>
 
   <fieldset id='payment' class='grid  shell-thin  overlay-parent'>
-    <div class='col-15-24  grid-row'>
+    <div class='col-12-24  grid-row'>    <!-- 1st column -->
         <%= render 'payments/property_hero', payment_dec: payment_dec %>
     </div>
-    <div class='col-9-24  shell'>  <!-- 3rd column -->
+    <div class='col-2-24'>    <!-- 2nd column -->
+      &nbsp;
+    </div>
+    <div class='col-8-24  shell'>    <!-- 3rd column -->
       <h4>Payment Summary</h4>
 
-      <div class='col-7-12  grid-row  bottom-spacer'>
+      <div class='col-8-12  grid-row  bottom-spacer'>
         Last Property ID&nbsp;(<%= payment_dec.last_human_ref %>)
       </div>
-      <div class='col-5-12  r-align  bottom-spacer'>
+      <div class='col-4-12  bottom-spacer  r-align'>
         <%= link_to payment_dec.last_amount, edit_payment_path(Payments.last), class: 'hover-link'%>
       </div>
-      <div class='col-7-12  bottom-line-spacer  grid-row'>Day's Total</div>
-      <div class='col-5-12  bottom-line-spacer r-align'>
+      <div class='col-8-12  grid-row  bottom-line-spacer'>Day's Total</div>
+      <div class='col-4-12  bottom-line-spacer  r-align'>
         <%= link_to payment_dec.todays_takings, payments_path, class: 'hover-link' %>
       </div>
     </div>
+    <div class='col-2-24  r-align'>    <!-- 4th column -->
+      <%= view_link payment_dec.payment, size: '2x' %>
+    </div>
+
 
     <% if payment_dec.account_exists? %>
 
