@@ -1,7 +1,7 @@
 <%= form_for invoicing do |f| %>
   <%= render 'shared/errors', object: invoicing %>
 
-  <fieldset id='invoicing' <%= invoicing.actionable? ? '' : disabled="disabled" %> class='grid  shell-thick  overlay-parent'>
+  <fieldset id='invoicing' <%= invoicing.actionable? ? '' : disabled="disabled" %> class='grid  shell-1-25  overlay-parent'>
     <div class='col-1-2  spacer-column'>
       <div class='col-12-24  grid-row  bottom-spacer'><h3 class='faded'>Search Terms</h3></div>
       <div class='col-12-24  bottom-spacer'>&nbsp;</div>

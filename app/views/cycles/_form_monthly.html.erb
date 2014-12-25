@@ -1,7 +1,7 @@
 <%= form_for cycle do |f| %>
   <%= render 'shared/errors', object: cycle %>
 
-  <fieldset id='cycle' class='grid  shell-extra-extra-thick'>
+  <fieldset id='cycle' class='grid  shell-1-6'>
 
     <div class='col-22-24  grid-row  bottom-line-spacer  spacer-column'>
       <%= f.hidden_field :cycle_type, cycle_type: 'monthly' %>
@@ -46,7 +46,7 @@
         </div>
       <% end %>
 
-      <div class='col-5-24   grid-row  vertical-line-spacer no-print'>&nbsp;</div>
+      <div class='col-5-24   grid-row  vertical-line-spacerf no-print'>&nbsp;</div>
       <div class='col-18-24  vertical-line-spacer no-r-pad  no-print'>
         <%= render 'buttons/submit', f: f %> or <%= cancel_link path: cycles_path %>
       </div>
