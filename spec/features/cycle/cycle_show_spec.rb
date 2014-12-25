@@ -35,6 +35,5 @@ describe Cycle, :ledgers, type: :feature do
     expect(page).to have_text 'Every Month'
     expect(page).to have_text '20'
     expect(page).to have_text '4'
-    expect(page).to_not have_text '5'
   end
 end
