@@ -9,7 +9,7 @@ class CreateCycles < ActiveRecord::Migration
       t.integer :order, null: false
       t.string :cycle_type, null: false
       t.integer :due_ons_count, default: 0
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

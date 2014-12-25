@@ -14,7 +14,7 @@ class CreateAddresses < ActiveRecord::Migration
       t.string :county, null: false
       t.string :postcode
       t.string :nation
-      t.timestamps
+      t.timestamps null: true
     end
     add_index :addresses, [:addressable_id, :addressable_type]
   end

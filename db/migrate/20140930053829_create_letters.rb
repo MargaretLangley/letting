@@ -4,7 +4,7 @@ class CreateLetters < ActiveRecord::Migration
       t.belongs_to :invoice, null: false, index: true
       t.belongs_to :invoice_text, null: false, index: true
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

@@ -3,7 +3,7 @@ class CreateChargedIns < ActiveRecord::Migration
     create_table :charged_ins do |t|
       t.string :name, null: false
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

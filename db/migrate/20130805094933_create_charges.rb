@@ -9,7 +9,7 @@ class CreateCharges < ActiveRecord::Migration
       t.date :start_date, null: false
       t.date :end_date, null: false
       t.belongs_to :account, null: false, index: true
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

@@ -4,7 +4,7 @@ class CreateComments < ActiveRecord::Migration
       t.belongs_to :invoice, index: true, null: false
       t.string :clarify, null: false
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end
