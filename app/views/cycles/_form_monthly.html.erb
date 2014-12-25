@@ -16,10 +16,10 @@
         <%= f.label :charged_in %>
         <%= f.hidden_field :cycle_type, cycle_type: 'term' %>
       </div>
-      <div class='col-4-24  bottom-spacer'>
+      <div class='col-4-24  bottom-spacer  faded'>
         <%= f.label :charged_in_id, 'Advance', value: ChargedInDefaults::MODERN_ADVANCE.to_s %>
       </div>
-      <div class='col-4-24  bottom-spacer'>
+      <div class='col-4-24  bottom-spacer  faded'>
         <%= f.label :charged_in_id, 'Arrears', value: ChargedInDefaults::MODERN_ARREARS.to_s %>
       </div>
       <div class='col-9-24  bottom-spacer'>&nbsp;</div>
@@ -59,8 +59,6 @@
     <div class='col-2-24 spacer-column'>
       <%= view_link cycle, size: '2x' %>
     </div>
-
-    <%= render 'cycle_charged_ins/form', cycle: cycle %>
 
     <div class='col-24-24  grid-row'>&nbsp;</div>
 
