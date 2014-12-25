@@ -6,14 +6,14 @@
 
   <hr class='faded'>
 
-  <div class="tabs">
-    <ul class="tab-links">
+  <div class='tabs'>
+    <ul class='tab-links'>
      <% @invoicing.runs.each_with_index do |run, index|  %>
        <li class="<%= run == @invoicing.runs.last ? ' active' : '' %>"><a href="#tab<%= index + 1 %>">Invoice <%= I18n.l run.invoice_date, format: :short %></a></li>
      <% end %>
    </ul>
 
-    <div class="grid  shell  tab-content">
+    <div class='grid  shell  tab-content'>
     <% @invoicing.runs.each_with_index do |run, index|  %>
       <div id="tab<%= index + 1 %>" class="tab <%= run == @invoicing.runs.last ? ' active' : '' %> ">
         <%= render 'invoices/invoices', run: run, action: true %>

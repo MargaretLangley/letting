@@ -6,8 +6,8 @@
     <%= render 'layouts/header' %>
     <%= render 'layouts/flashes' %>
     <div class='page-wrapper'>
-      <div class="grid">
-        <article class="col-21-24">
+      <div class='grid'>
+        <article class='col-21-24'>
           <% if content_for?(:heading) %>
             <%= yield :heading %>
           <% else %>
@@ -15,7 +15,7 @@
           <% end %>
           <%= yield %>
         </article>
-        <aside class="col-3-24 no-r-pad">
+        <aside class='col-3-24  no-r-pad'>
           <%= render 'layouts/sidebar' %>
         </aside>
       </div>
