@@ -1,11 +1,11 @@
 <%= render 'layouts/header' %>
 <div class='page-wrapper'>
-  <div class="grid">
-    <div class="col-21-24">
+  <div class='grid'>
+    <div class='col-21-24'>
       <% if content_for?(:heading) %>
         <%= yield :heading %>
       <% else %>
-        <h2 class = 'no-print'><%= @title %></h2>
+        <h2 class ='no-print'><%= @title %></h2>
       <% end %>
     </div>
   </div>
