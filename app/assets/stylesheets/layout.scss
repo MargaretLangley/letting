@@ -60,17 +60,6 @@
   .float-right{
     float: right;
   }
-
-  .center-block{
-    margin: 0 auto;
-    width: 50%;
-  }
-
-  dialog-box{
-    @extend center-block;
-    min-width: 25em;
-  }
-
 }
 
 
