@@ -18,7 +18,7 @@ class << self
   def create_invoice_texts
     InvoiceText.create! [
       { id: 1,
-        description: "Page 1 Invoice",
+        description: "Invoices Page 1",
         invoice_name: "F & L Adams",
         phone: "1215030992",
         vat: "277 9904 95",
@@ -28,7 +28,7 @@ class << self
         advice2: "Remittance Advice",
       },
       { id: 2,
-        description:"Page 2",
+        description:"Ground Rents Only Page 2",
         invoice_name: "F & L Adams",
         phone: "1215030992",
         vat: "277 9904 95",

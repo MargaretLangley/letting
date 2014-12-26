@@ -1,27 +1,24 @@
 <%= form_for invoice_text do |f| %>
-  <div id='invoice_text' class='shell'>
+  <div id='invoice_text' class='shell-1-12'>
 
     <%= render 'shared/errors', object: invoice_text %>
 
-     <div class='l-wide-pad r-pad'>
-
-      <div class='col-12-24  grid-row  faded'>
-        <h2><%= invoice_text.description %></h2>
-      </div>
-      <div class='col-12-24  no-r-pad'>
-        <%= view_link invoice_text, size: '2x' %>
-      </div>
-
-      <% if invoice_text == InvoiceText.first %>
-        <%= render 'name_phone', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
-        <%= render 'addresses/form', f: f, parent: 'invoice_text', address: AddressDecorator.new(invoice_text.address) %>
-        <%= render 'text_fields', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
-      <% else %>
-        <%= render 'text_fields_heading', f: f, invoice_text: invoice_text %>
-        <%= render 'guides/form', f: f %>
-        <%= render 'text_fields', f: f, invoice_text: invoice_text %>
-      <% end %>
+    <div class='col-12-24  grid-row  faded'>
+      <h2><%= invoice_text.description %></h2>
     </div>
+    <div class='col-12-24  no-r-pad'>
+      <%= view_link invoice_text, size: '2x' %>
+    </div>
+
+    <% if invoice_text == InvoiceText.first %>
+      <%= render 'name_phone', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
+      <%= render 'addresses/form', f: f, parent: 'invoice_text', address: AddressDecorator.new(invoice_text.address) %>
+      <%= render 'text_fields', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
+    <% else %>
+      <%= render 'text_fields_heading', f: f, invoice_text: invoice_text %>
+      <%= render 'guides/form', f: f %>
+      <%= render 'text_fields', f: f, invoice_text: invoice_text %>
+    <% end %>
 
     <div class='col-6-24  no-print'>&nbsp;</div>
     <div class='col-18-24  no-r-pad  no-print'>

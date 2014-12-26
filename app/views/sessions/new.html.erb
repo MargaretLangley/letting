@@ -4,17 +4,17 @@
     &nbsp;
   </div>
   <div class='col-4-6  bottom-spacer'>
-  <fieldset id='login' class='shell  dialog-box'>
+  <fieldset id='login' class='shell-1-12'>
     <%= form_tag sessions_path do %>
       <div class='grid'>
-        <div class='col-1-4  vertical-line-spacer faded  l-wide-pad'>
+        <div class='col-1-4  vertical-line-spacer faded'>
           <%= label_tag :email %>
         </div>
         <div class='col-3-4  vertical-line-spacer  no-r-pad'>
           <%= text_field_tag :email, params[:email], autofocus: true %>
         </div>
 
-        <div class='col-1-4  bottom-spacer  faded  l-wide-pad'>
+        <div class='col-1-4  bottom-spacer  faded'>
           <%= label_tag :password %>
         </div>
         <div class='col-3-4  bottom-spacer  no-r-pad'>
