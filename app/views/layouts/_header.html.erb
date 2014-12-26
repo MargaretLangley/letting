@@ -20,8 +20,8 @@
                 <div class='js-toggle-selection  invoicings-padded'>
                   <div class='js-togglable  c-align'>
                     <h4>Search for new charges within the next 8 weeks
-                      <%= link_to 'or choose dates', '#',title: 'Choose Dates with calendar', class: 'js-toggle  inverted-link' %>
-                      <%= link_to fa_icon('calendar lg'), '#',title: 'Choose Dates with calendar', class: 'js-toggle  inverted-link  l-pad' %>
+                      <%= link_to 'or choose dates', '#',title: 'Choose Dates with calendar', class: 'js-toggle  inverted-link' %>&nbsp;
+                      <%= link_to fa_icon('calendar lg'), '#',title: 'Choose Dates with calendar', class: 'js-toggle  inverted-link' %>
                     </h4>
                   </div>
                   <div class='js-togglable  js-revealable'>
@@ -47,14 +47,15 @@
     <div class='col-5-24'>
       <nav>
         <% if current_user %>
-          <%= fa_icon 'user lg', title: 'User' %>
+          <%= fa_icon 'user lg', title: 'User', class: 'vertical-line-spacer' %>
           &nbsp;
           <%= current_user.nickname %>
-          <%= link_to fa_icon('sign-out  lg'), logout_path, id: 'logout', title: 'Log Out', class: 'inverted-link  l-wide-pad' %>
+          &nbsp;
+          <%= link_to fa_icon('sign-out  lg'), logout_path, id: 'logout', title: 'Log Out', class: 'inverted-link  vertical-line-spacer  r-pad' %>
         <% else %>
-          <%= link_to fa_icon('sign-in  lg'), logout_path, title: 'Log In', class: 'inverted-link  l-wide-pad' %>
+          <%= link_to fa_icon('sign-in  lg'), logout_path, title: 'Log In', class: 'inverted-link  vertical-line-spacer  r-pad' %>
         <% end %>
-        <%= link_to fa_icon('print  lg'), '#',title: 'Print', class: 'js-printoff  inverted-link  l-pad' %>
+        <%= link_to fa_icon('print  lg'), '#',title: 'Print', class: 'js-printoff  inverted-link  vertical-line-spacer  r-pad' %>
       </nav>
     </div>
   </div>
