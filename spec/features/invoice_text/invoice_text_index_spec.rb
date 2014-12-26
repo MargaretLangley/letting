@@ -31,6 +31,6 @@ describe 'InvoiceText Index', type: :feature do
     visit '/invoice_texts/'
     first(:link, 'Edit').click
     expect(page).to have_text 'Page 1'
-    expect(find_field('Invoice Name').value).to have_text 'Morgan'
+    expect(find_field('Company Name').value).to have_text 'Morgan'
   end
 end

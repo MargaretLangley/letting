@@ -1,23 +1,38 @@
 <div class='grid'>
 
-  <div class='col-6-24  grid-row  bottom-spacer  faded  ll-pad'>
-    <%= f.label :invoice_name, 'Invoice Name' %>
+  <div class='col-6-24  grid-row  bottom-spacer  faded'>
+    <%= f.label :invoice_name, 'Company Name' %>
   </div>
   <div class='col-18-24  bottom-spacer'>
     <%= f.text_field :invoice_name %>
   </div>
 
-  <div class='col-6-24  grid-row  bottom-spacer faded  ll-pad'>
+  <div class='col-6-24  grid-row  bottom-spacer  faded'>
+    <%= f.label :heading1, 'Main Heading' %>
+  </div>
+  <div class='col-18-24  bottom-spacer'>
+    <%= f.text_field :heading1 %>
+  </div>
+
+  <div class='col-6-24  grid-row  bottom-spacer faded'>
     <%= f.label :phone, 'Telephone' %>
   </div>
   <div class='col-18-24  bottom-spacer'>
     <%= f.text_field :phone %>
   </div>
 
-  <div class='col-6-24  grid-row  bottom-spacer  faded  ll-pad'>
+  <div class='col-6-24  grid-row  bottom-spacer  faded'>
     <%= f.label :vat, 'VAT' %>
   </div>
   <div class='col-18-24  bottom-spacer'>
     <%= f.text_field :vat %>
   </div>
+
+   <div class='col-6-24  grid-row  bottom-spacer  faded'>
+    <%= f.label :heading2, 'Subheading' %>
+  </div>
+  <div class='col-18-24  bottom-spacer'>
+    <%= f.text_field :heading2 %>
+  </div>
+
 </div>
