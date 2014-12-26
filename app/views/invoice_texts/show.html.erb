@@ -11,6 +11,6 @@
   <% if @invoice_text == InvoiceText.first %>
     <%= render 'page1', invoice_text_page1: @invoice_text %>
   <% else %>
-    <%= render 'page2', invoice_text_back: @invoice_text %>
+    <%= render 'page2', invoice_text_page2: @invoice_text %>
   <% end %>
 </div>

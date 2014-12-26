@@ -7,14 +7,14 @@
   <fieldset id='login' class='shell  dialog-box'>
     <%= form_tag sessions_path do %>
       <div class='grid'>
-        <div class='col-1-4  vertical-line-spacer faded  ll-pad'>
+        <div class='col-1-4  vertical-line-spacer faded  l-wide-pad'>
           <%= label_tag :email %>
         </div>
         <div class='col-3-4  vertical-line-spacer  no-r-pad'>
           <%= text_field_tag :email, params[:email], autofocus: true %>
         </div>
 
-        <div class='col-1-4  bottom-spacer  faded  ll-pad'>
+        <div class='col-1-4  bottom-spacer  faded  l-wide-pad'>
           <%= label_tag :password %>
         </div>
         <div class='col-3-4  bottom-spacer  no-r-pad'>

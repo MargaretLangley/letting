@@ -50,9 +50,9 @@
           <%= fa_icon 'user lg', title: 'User' %>
           &nbsp;
           <%= current_user.nickname %>
-          <%= link_to fa_icon('sign-out  lg'), logout_path, id: 'logout', title: 'Log Out', class: 'inverted-link  ll-pad' %>
+          <%= link_to fa_icon('sign-out  lg'), logout_path, id: 'logout', title: 'Log Out', class: 'inverted-link  l-wide-pad' %>
         <% else %>
-          <%= link_to fa_icon('sign-in  lg'), logout_path, title: 'Log In', class: 'inverted-link  ll-pad' %>
+          <%= link_to fa_icon('sign-in  lg'), logout_path, title: 'Log In', class: 'inverted-link  l-wide-pad' %>
         <% end %>
         <%= link_to fa_icon('print  lg'), '#',title: 'Print', class: 'js-printoff  inverted-link  l-pad' %>
       </nav>
