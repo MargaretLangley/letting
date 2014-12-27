@@ -1,23 +1,24 @@
 <% @title='Invoice Texts' %>
 
 <div class='grid shell-1-6'>
-  <div class='col-6-24  grid-row  bottom-spacer  grid-header  r-align'>
+  <div class='col-5-24  grid-row  bottom-spacer  grid-header  r-align'>
     Page number
   </div>
-  <div class='col-8-24  grid-header'>Contains</div>
-  <div class='col-10-24  grid-header  no-print'>Action</div>
+  <div class='col-11-24  grid-header'>Contains</div>
+  <div class='col-8-24  grid-header  no-print'>Action</div>
 
   <% if @invoice_texts.present? %>
     <% @invoice_texts.each do |invoice_text| %>
       <div title='View' class='table-row' data-link='<%= invoice_text_path(invoice_text) %>'>
-        <div class='col-6-24  grid-row  bottom-spacer  inherit-row  r-align'>
+        <div class='col-5-24  grid-row  bottom-spacer  inherit-row  r-align'>
           <%= invoice_text.id %>
         </div>
-        <div class='col-8-24  bottom-spacer  inherit-row'>
+
+        <div class='col-11-24  bottom-spacer  inherit-row'>
           <%= invoice_text.description %>
           <%= testing_link path: invoice_text_path(invoice_text) %>
         </div>
-        <div class='col-1-24  bottom-spacer l-align'><%= edit_link invoice_text %></div>
+        <div class='col-8-24  bottom-spacer'><%= edit_link invoice_text %></div>
       </div>
     <% end %>
   <% end %> <!-- @invoice_texts.present? -->
