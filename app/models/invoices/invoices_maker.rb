@@ -37,7 +37,6 @@ class InvoicesMaker
                snapshot: snapshot_maker(account),
                invoice_date: invoice_date,
                comments: comments
-    invoice.deliver = snapshot_maker(account).state
     invoice
   end
 

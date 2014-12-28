@@ -80,6 +80,7 @@ class Invoice < ActiveRecord::Base
     self.property = property
     self.snapshot = snapshot
     self.products = snapshot.products invoice_date: invoice_date
+    self.deliver = snapshot.state
     self.invoice_date = invoice_date
     self.comments = generate_comments comments: comments
     self
