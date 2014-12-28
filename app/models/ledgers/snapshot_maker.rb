@@ -13,11 +13,6 @@ class SnapshotMaker
     @snapshot = Snapshot.new account: account, period: debit_period
   end
 
-  def debits?
-    mold
-    snapshot.debits?
-  end
-
   def invoice(*)
     mold
     snapshot

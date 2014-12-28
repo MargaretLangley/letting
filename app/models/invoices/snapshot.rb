@@ -14,7 +14,6 @@ class Snapshot < ActiveRecord::Base
   belongs_to :account, inverse_of: :snapshots
   has_many :invoices, dependent: :destroy, inverse_of: :snapshot
   has_many :debits, dependent: :destroy, inverse_of: :snapshot
-  validates :debits, presence: true
 
   def period
     (period_first..period_last)
@@ -33,23 +32,34 @@ class Snapshot < ActiveRecord::Base
     debits.any?
   end
 
-  # Plan A - Want to be able to destroy an invoice and not destroy
-  #   snapshot if it has another invoice already. (doesn't work)
-  # Plan B - test if I should delete debits transaction when deleting invoice
-  #   (Working)
-  def only_one_invoice?
-    invoices.size <= 1
-  end
-
-  def self.match(account:, period:)
-    where account: account, period_first: period.first, period_last: period.last
+  def state
+    return :forget if debits.empty?
+    retain? ? :retain : :mail
   end
 
   def products(invoice_date:)
     @products ||= product_arrears(invoice_date: invoice_date) + product_debits
   end
 
+  def self.match(account:, period:)
+    where account: account, period_first: period.first, period_last: period.last
+  end
+
+  # invoice destruction query
+  #
+  # Plan A - Want to be able to destroy an invoice and not destroy
+  #   snapshot if it has another invoice already. (doesn't work)
+  # Plan B - test if I should delete snapshot when deleting invoice
+  #   (Working)
+  def only_one_invoice?
+    invoices.size <= 1
+  end
+
   private
+
+  def retain?
+    debits.to_a.count { |debit| !debit.automatic_payment? }.zero?
+  end
 
   def product_arrears(invoice_date:)
     product_arrears = Product.arrears(account: account, date_due: invoice_date)

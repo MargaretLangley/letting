@@ -47,6 +47,10 @@ class Run < ActiveRecord::Base
     invoices.select { |invoice| invoice.deliver == 'retain' }
   end
 
+  def forget
+    invoices.select { |invoice| invoice.deliver == 'forget' }
+  end
+
   def finished?
     invoices.present?
   end

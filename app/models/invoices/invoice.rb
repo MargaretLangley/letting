@@ -27,7 +27,7 @@
 # comments - one off information to be read by the bill's addressee.
 #
 class Invoice < ActiveRecord::Base
-  enum deliver: [:mail, :retain]
+  enum deliver: [:mail, :retain, :forget]
   belongs_to :run, inverse_of: :invoices
   belongs_to :snapshot, autosave: true, inverse_of: :invoices
   has_many :comments, dependent: :destroy

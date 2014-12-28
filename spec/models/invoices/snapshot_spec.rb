@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Snapshot, type: :model do
   it 'requires debits' do
     snapshot = Snapshot.new
-    expect(snapshot).not_to be_valid
+    expect(snapshot).to be_valid
   end
 
   it 'can be debited' do
@@ -26,7 +26,27 @@ RSpec.describe Snapshot, type: :model do
     end
   end
 
-  describe '#already_invoiced?' do
+  describe '#state' do
+    it 'forgets if no debits' do
+      snapshot = Snapshot.new
+      expect(snapshot.state).to eq :forget
+    end
+
+    it 'mails if it has debit' do
+      snapshot = Snapshot.new
+      snapshot.debited debits: [debit_new(amount: 10, charge: charge_new)]
+      expect(snapshot.state).to eq :mail
+    end
+
+    it 'retain if the only debits are automated' do
+      snapshot = Snapshot.new
+      charge = charge_new payment_type: Charge::STANDING_ORDER
+      snapshot.debited debits: [debit_new(charge: charge)]
+      expect(snapshot.state).to eq :retain
+    end
+  end
+
+  describe '#only_one_invoice?' do
     it 'is not invoiced if empty' do
       snapshot = Snapshot.new
       snapshot.invoices = []
