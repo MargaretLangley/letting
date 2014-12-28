@@ -85,6 +85,18 @@ class Invoice < ActiveRecord::Base
     self
   end
 
+  def mail?
+    deliver == 'mail'
+  end
+
+  def retain?
+    deliver == 'retain'
+  end
+
+  def forget?
+    deliver == 'forget'
+  end
+
   def page2?
     blue_invoice? && products.any?(&:page2?)
   end

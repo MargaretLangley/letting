@@ -40,15 +40,15 @@ class Run < ActiveRecord::Base
   end
 
   def deliver
-    invoices.select { |invoice| invoice.deliver == 'mail' }
+    invoices.select(&:mail?)
   end
 
   def retain
-    invoices.select { |invoice| invoice.deliver == 'retain' }
+    invoices.select(&:retain?)
   end
 
   def forget
-    invoices.select { |invoice| invoice.deliver == 'forget' }
+    invoices.select(&:forget?)
   end
 
   def finished?
