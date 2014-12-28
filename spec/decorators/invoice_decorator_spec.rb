@@ -29,6 +29,20 @@ describe InvoiceDecorator do
     expect(invoice_dec.billing_first_address_line).to eq "Edgbaston Road\n"
   end
 
+  describe '#products_display' do
+    it 'returns products if it has debits' do
+      debit = debit_new(amount: 8, charge: charge_new)
+      dec =
+        InvoiceDecorator.new invoice_new snapshot: snapshot_new(debits: [debit])
+      expect(dec.products_display).to eq 'Ground Rent £8.00'
+    end
+
+    it 'returns no charges if it has none' do
+      dec = InvoiceDecorator.new invoice_new snapshot: snapshot_new(debits: [])
+      expect(dec.products_display).to eq 'No charges'
+    end
+  end
+
   describe '#earliest_date_due' do
     it 'set to product due_date if available' do
       debit = debit_new on_date: '2010-03-25', charge: charge_new
