@@ -1,28 +1,30 @@
 # Invoice Requires
 #
-# Agent
-# - Compound Name and address
-# Property Ref
-# Invoice Date
-# Property Address
-# Arrears
-#  - balance on the account on that day
+# Invoice contains the dynamic data needed to make an invoice.
+# Invoice works with the static date (invoice_text) to create a viewable and
+# printable invoice.
 #
-# Invoice item
-#   - Charge Type
-#   - Date Due
-#   - Description
-#   - Amount
-#   - Balance
-#   - Time Period the charge covers
+# Invoices are created during a run by the invoices_maker.
 #
-# - Total Owing
+# An Invoice is made of:
 #
-# Client
-#   - Compound Name and address
+# property
+#  - property_ref (human_ref)
+#  - occupiers (name of tenant)
+#  - property_address (building's address)
+#  - billing_address (agent or building's address)
+#  - client_address
 #
-# TODO: remove MethodLength and ParameterLists errors
-# rubocop: disable Metrics/MethodLength, Metrics/ParameterLists
+# snapshot
+#   - Product (Invoice line item)
+#      - charge_type
+#      - date_due
+#      - automatic_payment
+#      - amount
+#      - period (period_first..period_last) - period the charge covers.
+#
+# invoice_date - date the invoice is made on.
+# comments - one off information to be read by the bill's addressee.
 #
 class Invoice < ActiveRecord::Base
   enum deliver: [:mail, :retain]
@@ -68,25 +70,18 @@ class Invoice < ActiveRecord::Base
   # prepare
   # Assigns the attributes required in an invoice
   # Args:
-  # account            - account invoice is being prepared for
-  # invoice_date       - the date which this invoice is being said to have been
-  #                      sent.
-  # property           - property that the invoice is being prepared for
-  # snapshot - a transaction made up of the debits that will be added
-  #                      to the invoice
-  # comments           - array of strings to appear on invoice for special info.
+  # property      - property that the invoice is being prepared for
+  # invoice_date  - the date which this invoice is being said to have been sent.
+  # snapshot      - debits generated for the invoicing period
+  # comments      - array of strings to appear on invoice for special info.
   #
-  def prepare(invoice_date: Time.zone.today,
-              property:,
-              snapshot:,
-              comments: [])
-    self.invoice_date = invoice_date
+  def prepare property:, snapshot:, invoice_date: Time.zone.today, comments: []
     letters.build invoice_text: InvoiceText.first
     self.property = property
-    self.comments = generate_comments comments: comments
     self.snapshot = snapshot
-
     self.products = snapshot.products invoice_date: invoice_date
+    self.invoice_date = invoice_date
+    self.comments = generate_comments comments: comments
     self
   end
 
@@ -131,10 +126,15 @@ class Invoice < ActiveRecord::Base
     self.client_address = client_address
   end
 
+  # If we destroy the invoice we destroy the associated snapshot if there is
+  # no other invoice reference to it.
+  #
   def destroy_orphaned_snapshot
     snapshot.invoices.empty? && snapshot.destroy
   end
 
+  # First Invoice for a set of debited charges (red invoice is the second)
+  #
   def blue_invoice?
     snapshot.only_one_invoice?
   end

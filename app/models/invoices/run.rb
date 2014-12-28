@@ -2,10 +2,13 @@
 #
 # Run
 #
-# Each Invoicing is normally printed twice.
-# Between runs the debits won't change but the payments will.
-# Each run updates the payments, credits, which in turn affects the outputted
-# invoice.
+# Represents the data created for for an invoicing printout.
+#
+# Runs create the invoice for each affected account given the invoicing data.
+#
+# Each Invoicing is normally printed twice. Between runs the debits, held by
+# the snapshot, won't change but the credits, payments, may - seen as product
+# arrears.
 #
 ####
 #
@@ -16,11 +19,11 @@ class Run < ActiveRecord::Base
   validates :invoice_date, :invoices, presence: true
   after_initialize :init
 
-  #
   # prepare
-  # assigns required attributes and create the invoices required for invoice
+  # assigns invoice_date and invoices created by the invoices_maker.
+  # inovices_maker's arguments are assigned by invoicing.
   #
-  # invoice_date - date to appear on the invoice
+  # invoice_maker - object creating the associated invoices.
   #
   def prepare(invoices_maker:)
     self.invoice_date = invoice_date

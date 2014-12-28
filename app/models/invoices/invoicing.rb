@@ -26,6 +26,8 @@ class Invoicing < ActiveRecord::Base
     self.period_last  = billing.last
   end
 
+  # converts property_range into account objects.
+  #
   def accounts
     AccountFinder.new(property_range: property_range).matching
   end
@@ -46,7 +48,7 @@ class Invoicing < ActiveRecord::Base
   end
 
   # generate
-  # make a run to add to the invoicing
+  # makes a run - assigning the invoices given the invoicing arguments.
   #
   def generate(invoice_date: Time.zone.today, comments:)
     runs.build.prepare invoices_maker: invoices_maker(invoice_date, comments)
