@@ -1,6 +1,6 @@
 <% @title='Invoicing' %>
 
-<div class='grid shell'>
+<div class='grid shell-1-25'>
  <%= render 'invoicings/invoicing_header' %>
 
  <% @invoicings.each do |invoicing| %>
@@ -9,10 +9,10 @@
      <div class='col-5-24  grid-row  bottom-spacer  inherit-row'>
        <%= invoicing_dec.property_range %>
      </div>
-     <div class='col-5-24  bottom-spacer  inherit-row'>
+     <div class='col-6-24  bottom-spacer  inherit-row'>
        <%= invoicing_dec.created_at %>
      </div>
-     <div class='col-6-24  bottom-spacer  inherit-row'>
+     <div class='col-8-24  bottom-spacer  inherit-row'>
        <%= invoicing_dec.period_between %>
      </div>
      <div class='col-1-24  bottom-spacer'><%= print_link invoicing %></div>
@@ -22,7 +22,6 @@
      </div>
      <div class='col-1-24  bottom-spacer'>&nbsp;</div>
      <div class='col-1-24  bottom-spacer'><%= delete_link path: invoicing %></div>
-     <div class='col-3-24  bottom-spacer'>&nbsp;</div>
    </div>
  <% end %>
 </div>
