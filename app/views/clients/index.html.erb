@@ -1,21 +1,16 @@
 <% @title='Clients' %>
 <% clients = @records %>
 
-<div class='grid shell'>
-  <div class='col-1-24  bottom-spacer  grid-header  no-print'>&nbsp;</div>
-  <div class='col-3-24  bottom-spacer  grid-header  r-align'>Client ID</div>
+<div class='grid shell-1-25'>
+  <div class='col-3-24  grid_row  bottom-spacer  grid-header  r-align'>Client ID</div>
   <div class='col-7-24  bottom-spacer  grid-header'>Name</div>
   <div class='col-2-24  bottom-spacer  grid-header  r-align'>No</div>
-  <div class='col-6-24  bottom-spacer  grid-header'>Road</div>
-  <div class='col-3-24  bottom-spacer  grid-header  no-print'>Actions</div>
-  <div class='col-2-24  bottom-spacer  grid-header  no-print'>&nbsp;</div>
+  <div class='col-7-24  bottom-spacer  grid-header'>Road</div>
+  <div class='col-5-24  bottom-spacer  grid-header  no-print'>Actions</div>
 
   <% clients.each do |client| %>
     <div title='View' class='table-row' data-link='<%= client_path(client.id) %>'>
-      <div class='col-1-24  grid-row  bottom-spacer  inherit-row'>
-        &nbsp;
-      </div>
-      <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
+      <div class='col-3-24  grid_row  bottom-spacer  inherit-row  r-align'>
         <%= client.human_ref %>
       </div>
       <div class='col-7-24  bottom-spacer  inherit-row'>
@@ -25,17 +20,15 @@
       <div class='col-2-24  bottom-spacer  inherit-row  r-align'>
         <%= format_empty_string_as_dash client.address.first_no %>
       </div>
-      <div class='col-6-24  bottom-spacer  inherit-row'>
+      <div class='col-7-24  bottom-spacer  inherit-row'>
         <%= format_empty_string_as_dash client.address.first_text %>
         <%= testing_link path: client_path(client) %>
       </div>
     </div>
-
     <div class='col-1-24  bottom-spacer  no-print'>
       <%= todo_link path: clients_account_path(id: client.id) %>
     </div>
     <div class='col-1-24  bottom-spacer no-print'>&nbsp;</div>
-
     <div class='col-1-24  bottom-spacer no-print'><%= edit_link client %></div>
     <div class='col-1-24  bottom-spacer no-print'>&nbsp;</div>
     <div class='col-1-24  bottom-spacer no-print'>

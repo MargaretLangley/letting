@@ -2,10 +2,10 @@
 
 <% accounts = @records %>
 
-<div class='grid shell'>
+<div class='grid shell-1-25'>
 
   <%= form_tag arrears_path, method: 'get' do %>
-    <div class='col-5-12  bottom-spacer'>Accounts with arrears in excess of:</div>
+    <div class='col-5-12  grid_row bottom-spacer'>Accounts with arrears in excess of:</div>
     <div class='col-5-12  bottom-spacer'>
       <%= text_field_tag :arrears_search, params[:arrears_search], autofocus: true, class: 'width-3-4' %>
       <button type='submit' class='width-1-6 no-print' id='payment-search' title='Arrears Search'>
@@ -21,13 +21,10 @@
   <div class='col-2-24  bottom-spacer  grid-header  r-align'>Client ID</div>
   <div class='col-5-24  bottom-spacer  grid-header'>Occupier</div>
   <div class='col-1-24  bottom-spacer  grid-header  r-align'>No</div>
-  <div class='col-5-24  bottom-spacer  grid-header'>Address</div>
+  <div class='col-6-24  bottom-spacer  grid-header'>Address</div>
   <div class='col-5-24  bottom-spacer  grid-header'>Town</div>
   <div class='col-3-24  bottom-spacer  grid-header  r-align'>
     Arrears (£)
-  </div>
-  <div class='col-1-24  bottom-spacer  grid-header  no-r-pad'>
-    &nbsp;
   </div>
 
  <% accounts.each do |account|
@@ -46,7 +43,7 @@
       <div class='col-1-24  bottom-spacer  inherit-row  r-align'>
         <%= format_empty_string_as_dash property.address.first_no %>
       </div>
-      <div class='col-5-24  bottom-spacer  inherit-row'>
+      <div class='col-6-24  bottom-spacer  inherit-row'>
         <%= format_empty_string_as_dash property.address.first_text %>
         <%= testing_link path: property_path(property) %>
       </div>
@@ -55,9 +52,6 @@
       </div>
       <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
         <%= number_with_precision(account.amount, precision: 2, delimiter: ',') %>
-      </div>
-      <div class='col-1-24  bottom-spacer  r-align  no-r-pad'>
-        &nbsp;
       </div>
     </div>
   <% end %>

@@ -1,12 +1,12 @@
 <div class='col-6-24  grid-row  bottom-spacer faded'>
   Property Id
 </div>
-
 <div class='col-1-24  bottom-spacer r-align'>  <%= property.human_ref %></div>
+
 <div class='col-6-24  grid-row  bottom-spacer faded'>Client Id</div>
 <div class='col-1-24  bottom-spacer r-align'>  <%= property.client_ref %></div>
 <div class='col-1-24  bottom-spacer'>          &nbsp;</div>
-<div class='col-10-24  bottom-spacer'>
+<div class='col-10-24 bottom-spacer'>
   <%= link_to property.client.full_name, property.client, title: property.client.full_name %>
 </div>
 
