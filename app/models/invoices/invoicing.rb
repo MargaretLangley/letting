@@ -50,7 +50,7 @@ class Invoicing < ActiveRecord::Base
   # generate
   # makes a run - assigning the invoices given the invoicing arguments.
   #
-  def generate(invoice_date: Time.zone.today, comments:)
+  def generate(invoice_date: Time.zone.today, comments: [])
     runs.build.prepare invoices_maker: invoices_maker(invoice_date, comments)
   end
 

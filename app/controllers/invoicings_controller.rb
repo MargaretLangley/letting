@@ -23,7 +23,7 @@ class InvoicingsController < ApplicationController
     @invoicing = Invoicing.new \
                    property_range: SpaceOut.process(params[:search_terms]),
                    period: params[:start_date]..params[:end_date]
-    @invoicing.generate comments: ['', ''] if @invoicing.valid_arguments?
+    @invoicing.generate if @invoicing.valid_arguments?
   end
 
   # create
@@ -52,7 +52,7 @@ class InvoicingsController < ApplicationController
     @invoicing =
       Invoicing.includes(runs: [invoices: [account: [debits: [:charge]]]])
       .find params[:id]
-    @invoicing.generate comments: ['', ''] if @invoicing.valid_arguments?
+    @invoicing.generate if @invoicing.valid_arguments?
   end
 
   def update

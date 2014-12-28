@@ -63,7 +63,7 @@ RSpec.describe Invoicing, type: :model do
                                 period: Date.new(2010, 3, 1)..
                                         Date.new(2010, 5, 1)
       expect(invoicing.runs.size).to eq 0
-      invoicing.generate comments: ['', '']
+      invoicing.generate
 
       expect(invoicing.runs.size).to eq 1
       expect(invoicing.runs.first.invoices.size).to eq 1
@@ -76,8 +76,8 @@ RSpec.describe Invoicing, type: :model do
       invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
                                         Date.new(2010, 5, 1)
-      invoicing.generate comments: ['', '']
-      invoicing.generate comments: ['', '']
+      invoicing.generate
+      invoicing.generate
 
       expect(invoicing.runs.size).to eq 2
     end
@@ -88,7 +88,7 @@ RSpec.describe Invoicing, type: :model do
       invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
                                         Date.new(2010, 5, 1)
-      invoicing.generate comments: ['', '']
+      invoicing.generate
       invoicing.generate comments: ['a comment']
       expect(invoicing.runs.last.invoices.first.comments.first.clarify)
         .to eq 'a comment'
@@ -101,7 +101,7 @@ RSpec.describe Invoicing, type: :model do
         invoicing = Invoicing.new property_range: '20',
                                   period: Date.new(2010, 3, 1)..
                                           Date.new(2010, 5, 1)
-        invoicing.generate comments: ['', '']
+        invoicing.generate
         expect(invoicing.runs.first.invoices).to eq []
       end
     end
