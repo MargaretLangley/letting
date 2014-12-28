@@ -82,9 +82,8 @@ after :invoice_texts do
       Invoice.create! [
         { id: 1,
           run_id: 1,
-          account_id: Account.first.id,
           snapshot_id: 1,
-          deliver: true,
+          deliver: 'mail',
           invoice_date: create_date(5),
           property_ref: 1001,
           occupiers: "Mr E. P. Hendren",
