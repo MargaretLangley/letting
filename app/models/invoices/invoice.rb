@@ -111,16 +111,6 @@ class Invoice < ActiveRecord::Base
     products.total_arrears > 0
   end
 
-  def property
-    {
-      property_ref: property_ref,
-      occupiers: occupiers,
-      property_address: property_address,
-      billing_address: billing_address,
-      client_address: client_address,
-    }
-  end
-
   def to_s
     "Billing Address: #{billing_address.inspect}\n"\
     "Property Ref: #{property_ref.inspect}\n"\
@@ -130,6 +120,16 @@ class Invoice < ActiveRecord::Base
   end
 
   private
+
+  def property
+    {
+      property_ref: property_ref,
+      occupiers: occupiers,
+      property_address: property_address,
+      billing_address: billing_address,
+      client_address: client_address,
+    }
+  end
 
   def property=(property_ref:, occupiers:, property_address:, billing_address:, client_address:) # rubocop: disable Metrics/LineLength
     self.property_ref = property_ref
