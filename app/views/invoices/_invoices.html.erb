@@ -1,23 +1,21 @@
- <div class='col-1-1  grid-row'>
+<div class='col-1-1  grid-row'>
   <h3 class='faded'>Deliver</h3>
 </div>
 <%= render 'invoices/header', action: action %>
 <% run.deliver.each do |invoice| %>
   <%= render 'invoices/invoice', invoice: invoice, action: action %>
 <% end %>
-<% if run.deliver.empty? %>
-  <%= render 'information/grid', information: 'No invoices will be delivered.' %>
-<% end %>
+<%= render 'information/lacking', objects: run.deliver, message: 'No invoices will be delivered.' %>
+
 <div class='col-1-1  grid-row  top-line-spacer'>
   <h3 class='faded'>Retain</h3>
 </div>
-<%= render 'invoices/header', action: false %>
+<%= render 'invoices/header', action: false, payment: :standing_order %>
 <% run.retain.each do |invoice| %>
   <%= render 'invoices/invoice', invoice: invoice %>
 <% end %>
-<% if run.retain.empty? %>
-  <%= render 'information/grid', information: 'No invoices will be retained.' %>
-<% end %>
+<%= render 'information/lacking', objects: run.retain, message: 'No invoices will be retained.' %>
+
 <div class='col-1-1  grid-row  top-line-spacer'>
   <h3 class='faded'>Ignore</h3>
 </div>
@@ -25,6 +23,4 @@
 <% run.forget.each do |invoice| %>
   <%= render 'invoices/invoice', invoice: invoice %>
 <% end %>
-<% if run.forget.empty? %>
-  <%= render 'information/grid', information: 'No invoices will be ignored.' %>
-<% end %>
+<%= render 'information/lacking', objects: run.forget, message: 'No invoices will be ignored.' %>

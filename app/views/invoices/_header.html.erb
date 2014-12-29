@@ -1,10 +1,17 @@
 <% action = false if local_assigns[:action].nil? %>
+<% payment = :payment if local_assigns[:payment].nil? %>
 <div class='col-2-24  grid-row  bottom-spacer  grid-header  r-align'>
   Property
 </div>
 <div class='col-5-24  bottom-spacer  grid-header'>Bill</div>
 <div class='col-6-24  bottom-spacer  grid-header'>Address</div>
-<div class='col-9-24  bottom-spacer  grid-header'>Charge</div>
+<% if payment == :payment %>
+  <div class='col-9-24  bottom-spacer  grid-header'>Charge</div>
+<% elsif payment == :standing_order %>
+  <div class='col-9-24  bottom-spacer  grid-header'>Standing Order</div>
+<% else payment == :standing_order %>
+  <div class='col-9-24  bottom-spacer  grid-header'>Unknown</div>
+<% end %>
 <div class='col-2-24  bottom-spacer  no-print  grid-header  no-r-pad'>
   <% if action %>
     Action
