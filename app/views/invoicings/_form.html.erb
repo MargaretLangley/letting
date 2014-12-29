@@ -3,8 +3,9 @@
 
   <fieldset id='invoicing' <%= invoicing.actionable? ? '' : disabled="disabled" %> class='grid  shell-1-25  overlay-parent'>
     <div class='col-1-2  spacer-column'>
-      <div class='col-12-24  grid-row  bottom-spacer'><h3 class='faded'>Search Terms</h3></div>
-      <div class='col-12-24  bottom-spacer'>&nbsp;</div>
+      <div class='col-12-24  grid-row  bottom-spacer'>
+        <h3 class='faded'>Search Terms</h3>
+      </div>
 
       <div class='col-12-24  grid-row  bottom-spacer  faded'>
         Invoice Properties
@@ -35,12 +36,15 @@
       <div class='col-16-24  top-double-line-spacer'>
         <%= render 'buttons/submit', f: f, disabled: !invoicing.actionable? %> or <%= link_to_if invoicing.actionable?, 'Cancel', new_invoicing_path, class: 'warn' %>
       </div>
-      <div class='col-4-24  bottom-spacer'>&nbsp;</div>
     </div>
 
     <div class='col-6-24  grid-row  bottom-spacer  faded'>Comments</div>
     <div class='col-17-24  bottom-spacer  faded'>
       <%= text_field_tag 'comment[]' %>
+    </div>
+
+    <div class='col-6-24  grid-row  bottom-spacer  faded'>&nbsp;</div>
+    <div class='col-17-24  bottom-spacer  faded'>
       <%= text_field_tag 'comment[]' %>
     </div>
 
@@ -48,7 +52,7 @@
     <%= render 'invoices/invoices', run: invoicing.runs.last, action: false %>
   <% else %>
     <%= render partial: 'teachings/invoicing' %>
-    <%= render partial: 'account_debits/show' if params[:search_terms] %>
+    <%= render 'account_debits/show', search_terms: params[:search_terms], start_date: params[:start_date] if params[:search_terms] %>
   <% end %>
   </fieldset> <!-- grid  shell -->
 <% end %> <!-- form -->

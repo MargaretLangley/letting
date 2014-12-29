@@ -100,14 +100,24 @@ describe Invoicing, type: :feature do
     expect(invoicing_page).to be_success
   end
 
-  it 'messages help when no invoicing found' do
-    cycle = cycle_new due_ons: [DueOn.new(day: 25, month: 5)]
-    account_create property: property_new(human_ref: 87, client: client_new),
-                   charges: [charge_new(cycle: cycle)]
-    invoice_text_create id: 1
+  describe 'warns when' do
 
-    invoicing_page.enter
-    invoicing_page.search_term('87').search
-    expect(invoicing_page.has_content? /Upcoming Charges/).to be true
+    it 'the range excludes all properties' do
+      invoicing_page.enter
+      invoicing_page.search_term('87').search
+
+      expect(invoicing_page.has_content? /No properties in the range/).to be true
+    end
+
+    it 'the range excludes any property that can be billed for the period' do
+      cycle = cycle_new due_ons: [DueOn.new(day: 25, month: 5)]
+      account_create property: property_new(human_ref: 87, client: client_new),
+                     charges: [charge_new(cycle: cycle)]
+      invoice_text_create id: 1
+
+      invoicing_page.enter
+      invoicing_page.search_term('87').search
+      expect(invoicing_page.has_content? /Upcoming Charges/).to be true
+    end
   end
 end

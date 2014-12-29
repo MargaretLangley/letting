@@ -13,10 +13,14 @@ Main success scenario
 5. The system validates, creates the invoices, and messages success.
 
 
-3.a. The range excludes any property.
+3.a. warns when the range excludes all properties.
 1. The system displays error message
 2. The use case continues at step 1.
 
-3.b. The range excludes any property that can be billed for the period.
+3.b. warns when the range excludes any property that can be billed for the period.
 1. The system displays error message detailing property's charges.
+2. The use case continues at step 1.
+
+5.a. Creating an invoice will fail if nothing is delivered or retained
+1. The system displays an error
 2. The use case continues at step 1.
