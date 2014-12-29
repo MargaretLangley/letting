@@ -1,50 +1,24 @@
 <header>
   <div class='grid  grid-pad'>
-    <div class='col-5-24'>
+    <div class='col-6-24  grid-row'>
       <h2><%= link_to 'Adams Lettings', root_path, class: 'hover-link inverted-link' %></h2>
     </div>
 
-    <div class='col-14-24'>
-      <div class='no-print'>
-        <div class='col-1-1'>
-          &nbsp;
-        </div>
-        <div class='col-1-1'>
-          <div class='form-wrapper'>
-              <%= form_tag search_path, method: 'get' do %>
-              <%= text_field_tag :search_terms, params[:search_terms], placeholder: 'Search here...', title: 'Search', data: {autocomplete_source: search_path}, autofocus:true %>
-              <button type='submit' id='search' title='Search'>
-                <%= fa_icon('search lg') %>
-              </button>
-              <% if controller.controller_name == 'invoicings' && controller.action_name == 'new' %>
-                <div class='js-toggle-selection  invoicings-padded'>
-                  <div class='js-togglable  c-align'>
-                    <h4>Search for new charges within the next 8 weeks
-                      <%= link_to 'or choose dates', '#',title: 'Choose Dates with calendar', class: 'js-toggle  inverted-link' %>&nbsp;
-                      <%= link_to fa_icon('calendar lg'), '#',title: 'Choose Dates with calendar', class: 'js-toggle  inverted-link' %>
-                    </h4>
-                  </div>
-                  <div class='js-togglable  js-revealable'>
-                    <h4 class='c-align'>Search for new charges within chosen dates
-                      <%= link_to ' or default to the next 8 weeks', '#',title: 'default dates', class: 'js-toggle  inverted-link' %>
-                    </h4>
-                    <div class='col-1-2'>
-                      <%= label_tag :start_date %>
-                      <%= date_field_tag :start_date, params[:start_date] || Time.zone.today  %>
-                    </div>
-                    <div class='col-1-2'>
-                      <%= label_tag :end_date %>
-                      <%= date_field_tag :end_date, params[:end_date] || Time.zone.today + 8.weeks %>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
+    <div class='col-12-24  top-line-spacer  no-print'>
+      <div class='form-wrapper  clearfix'>
+          <%= form_tag search_path, method: 'get' do %>
+          <%= text_field_tag :search_terms, params[:search_terms], placeholder: 'Search here...', title: 'Search', data: {autocomplete_source: search_path}, autofocus:true %>
+          <button type='submit' id='search' title='Search'>
+            <%= fa_icon('search lg') %>
+          </button>
+          <% if controller.controller_name == 'invoicings' && controller.action_name == 'new' %>
+            <%= render 'invoicings/search' %>
+          <% end %>
+        <% end %>
       </div>
     </div>
-    <div class='col-5-24'>
+
+    <div class='col-6-24'>
       <nav>
         <% if current_user %>
           <%= fa_icon 'user lg', title: 'User', class: 'vertical-line-spacer' %>

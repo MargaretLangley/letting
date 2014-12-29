@@ -207,5 +207,6 @@
   /* When you want a column for structure but don't want it to take up any space(padding)  */
   .spacer-column { padding: 0; }
 
+  .clearfix { @include clearfix; }
 }
 
