@@ -14,6 +14,6 @@ class ClientsAccountsController < ApplicationController
   def show
     @client = Client.includes(properties: [:address, :account]).find params[:id]
     params[:start_date] ||= Date.new(2014, 1, 1)
-    params[:end_date] ||= Date.new(2015, 2, 28)
+    params[:end_date] ||= Time.zone.today
   end
 end
