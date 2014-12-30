@@ -101,12 +101,12 @@ describe Invoicing, type: :feature do
   end
 
   describe 'warns when' do
-
     it 'the range excludes all properties' do
       invoicing_page.enter
       invoicing_page.search_term('87').search
 
-      expect(invoicing_page.has_content? /No properties in the range/).to be true
+      expect(invoicing_page.has_content? /No properties in the range/)
+        .to be true
     end
 
     it 'the range excludes any property that can be billed for the period' do
