@@ -1,4 +1,7 @@
 class ClientAccount
+  # -- psql -d letting_development -f show.sql
+  # TODO: remove HARDCODED mar/se months: d1.month = 3 and d2.month = 9
+  #
   def self.payments(client_id: 1, start_date: '2014-01-01', end_date: '2015-01-01')
     query = <<-SQL
       SELECT a.id, a.property_id as property_id, sum(py.amount) * -1 as amount

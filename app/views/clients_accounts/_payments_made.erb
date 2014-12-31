@@ -1,4 +1,5 @@
-<% client.properties.each do |property| %>
+<% accounts.each do |account| %>
+<% property = account.property %>
   <div title='View' class='table-row' data-link='<%= property_path(property) %>'>
     <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
        <%= property.human_ref %>
@@ -10,10 +11,10 @@
       <%= format_empty_string_as_dash property.address.first_text %>
     </div>
     <div class='col-7-24  bottom-spacer  inherit-row  nowrap'>
-      <%= property.account%>
+      <%= property.address.town %>
     </div>
     <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
-      <%= property.account.credits.credited(range: params[:start_date]..params[:end_date] ).income %>
+      <%= number_with_precision(account.amount, precision: 2) %>
     </div>
   </div>
 <% end %>
