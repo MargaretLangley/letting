@@ -36,19 +36,22 @@
         <div id="mar-sep" class="tab  active">
           <h3>March/September Ground Rents</h3>
           <%= render 'accounts_heading' %>
-          <%= render 'payments_made', accounts: @client_payment.payments %>
+          <%= render 'payments_made', accounts: @client_payment.mar_sep %>
+          <% if @client_payment.mar_sep.empty? %>
+            <%= render 'information/grid', information: 'The Client has no Mar/Sep properties.' %>
+          <% end %>
         </div> <!-- close #mar-sep -->
 
         <div id="jun-dec"  class="tab">
           <h3>June/December Ground Rents</h3>
           <%= render 'accounts_heading' %>
-          <%= render 'payments_made', accounts: @client_payment.payments %>
+          <%= render 'payments_made', accounts: @client_payment.jun_dec %>
+          <% if @client_payment.jun_dec.empty? %>
+            <%= render 'information/grid', information: 'The Client has no Jun/Dec properties.' %>
+          <% end %>
         </div> <!-- close #jun-dec -->
       </div> <!-- grid shell tab-content  -->
     </div> <!-- close tabs -->
 
-    <% if @client_payment.payments.empty? %>
-      <%= render 'information/grid', information: 'The Client has no properties.' %>
-    <% end %>
   </div> <!-- close grid-row  for tabs -->
 </div> <!-- close grid  shell-->

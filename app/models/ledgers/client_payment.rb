@@ -15,8 +15,6 @@ class ClientPayment
     @end_date = end_date
   end
 
-  # TODO: remove HARDCODED mar/se months: d1.month = 3 and d2.month = 9
-  #
   def self.query client_id: 1, start_date: '2014-01-01', end_date: '2015-01-01'
     new(client_id: client_id, start_date: start_date, end_date: end_date)
   end
@@ -25,9 +23,28 @@ class ClientPayment
     Client.find client_id
   end
 
-  def payments client_id: 1,
-                start_date: '2014-01-01',
-                end_date: '2015-01-01'
+  def mar_sep(start_date: '2014-01-01', end_date: '2015-01-01',
+              month_1: 3,
+              month_2: 9)
+    payments start_date: start_date,
+             end_date: end_date,
+             month_1: month_1,
+             month_2: month_2
+  end
+
+  def jun_dec(start_date: '2014-01-01',
+              end_date: '2015-01-01',
+              month_1: 6,
+              month_2: 12)
+    payments start_date: start_date,
+             end_date: end_date,
+             month_1: month_1,
+             month_2: month_2
+  end
+
+  private
+
+  def payments(start_date:, end_date:, month_1:, month_2:)
     query = <<-SQL
       SELECT ac.id, ac.property_id as property_id, sum(py.amount) * -1 as amount
       FROM properties      as pr
@@ -41,12 +58,12 @@ class ClientPayment
       INNER JOIN due_ons   as du2 ON cy.id = du1.cycle_Id
       WHERE pr.human_ref < 6000 AND
             DUE_ONS_COUNT = 2 AND
-            du1.month = 3 AND du2.month = 9 AND
+            du1.month = ? AND du2.month = ? AND
             pr.client_id = ? AND
             py.booked_on BETWEEN ? AND ?
       GROUP BY ac.id, pr.id, pr.human_ref
       ORDER BY pr.human_ref
     SQL
-    Account.find_by_sql [query, client_id, start_date, end_date]
+    Account.find_by_sql [query, month_1, month_2, client_id, start_date, end_date]
   end
 end
