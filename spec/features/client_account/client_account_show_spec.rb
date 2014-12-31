@@ -4,35 +4,34 @@ describe 'Client Account Show', type: :feature do
   before(:each) { log_in }
 
   it '#show' do
-    credit = credit_new on_date: '2014-3-1', charge: charge_create
+    charge =
+      charge_create cycle: cycle_new(due_ons: [DueOn.new(day: 25, month: 3),
+                                               DueOn.new(day: 30, month: 9)])
+    payment = payment_new booked_on: '2014-3-1', amount: 17
     client_create(id: 1, human_ref: 87, entities: [Entity.new(name: 'Grace')])
-      .properties << property_new(human_ref: 2008,
-                                  account: account_new(credits: [credit]))
+      .properties << property_new(human_ref: 63,
+                                  account: account_new(charges: [charge],
+                                                       payment: payment))
 
     visit '/clients_accounts/1'
-    expect_correct_title
-    expect_client_entity
-    expect_client_address
+    expect_title
+    expect_client_ref
     expect_property
   end
 
-  def expect_correct_title
+  def expect_title
     expect(page.title).to eq 'Letting - Client Accounts'
   end
 
-  def expect_client_address
+  def expect_client_ref
     expect(page).to have_text '87'
   end
 
-  def expect_client_entity
-    expect(page).to have_text 'Grace'
-  end
-
   def expect_property
-    expect(page).to have_text '2008'
+    expect(page).to have_text '63'
   end
 
-  describe 'appropiate properties message' do
+  describe 'appropriate properties message' do
     it 'displays message when client has no properties' do
       client_create id: 1
       visit '/clients_accounts/1'

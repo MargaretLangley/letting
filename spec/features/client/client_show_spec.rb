@@ -46,7 +46,7 @@ describe 'Client Show', type: :feature do
     expect(page.title).to eq 'Letting - Edit Client'
   end
 
-  describe 'appropiate properties message' do
+  describe 'appropriate properties message' do
     it 'displays message when client has no properties' do
       client_create id: 1
       visit '/clients/1'
