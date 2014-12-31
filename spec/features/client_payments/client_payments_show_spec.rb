@@ -13,7 +13,7 @@ describe 'Client Account Show', type: :feature do
                                   account: account_new(charges: [charge],
                                                        payment: payment))
 
-    visit '/clients_accounts/1'
+    visit '/client_payments/1'
     expect_title
     expect_client_ref
     expect_property
@@ -34,7 +34,7 @@ describe 'Client Account Show', type: :feature do
   describe 'appropriate properties message' do
     it 'displays message when client has no properties' do
       client_create id: 1
-      visit '/clients_accounts/1'
+      visit '/client_payments/1'
 
       expect(page.text).to match(/The client has no properties./i)
     end
@@ -45,7 +45,7 @@ describe 'Client Account Show', type: :feature do
       client_create(id: 1, human_ref: 87, entities: [Entity.new(name: 'Grace')])
         .properties << property_new(human_ref: 6008,
                                     account: account_new(credits: [credit]))
-      visit '/clients_accounts/1'
+      visit '/client_payments/1'
 
       expect(page).to_not have_text '6008'
       expect(page.text).to_not match(/The client has no properties./i)

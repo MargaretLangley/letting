@@ -1,15 +1,33 @@
-# ClientAccount
+# ClientPayment
 #
 # Returns the payments
 # rubocop: disable Metrics/MethodLength
 #
-class ClientAccount
-  # -- psql -d letting_development -f show.sql
+# To execute sql on postgres use the command line:
+# -- psql -d letting_development -f show.sql
+#
+class ClientPayment
+  attr_reader :client_id, :start_date, :end_date
+
+  def initialize(client_id:, start_date:, end_date:)
+    @client_id = client_id
+    @start_date = start_date
+    @end_date = end_date
+  end
+
   # TODO: remove HARDCODED mar/se months: d1.month = 3 and d2.month = 9
   #
-  def self.payments client_id: 1,
-                    start_date: '2014-01-01',
-                    end_date: '2015-01-01'
+  def self.query client_id: 1, start_date: '2014-01-01', end_date: '2015-01-01'
+    new(client_id: client_id, start_date: start_date, end_date: end_date)
+  end
+
+  def client
+    Client.find client_id
+  end
+
+  def payments client_id: 1,
+                start_date: '2014-01-01',
+                end_date: '2015-01-01'
     query = <<-SQL
       SELECT ac.id, ac.property_id as property_id, sum(py.amount) * -1 as amount
       FROM properties      as pr

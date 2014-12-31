@@ -38,7 +38,7 @@ class Permission < Struct.new(:user)
     %w(accounts
        arrears
        clients
-       clients_accounts
+       client_payments
        debits
        errors
        invoicings
