@@ -29,6 +29,8 @@ class Property < ActiveRecord::Base
   delegate :full_name, to: :entities
   delegate :text, to: :address, prefix: true
 
+  MAX_HOUSE_HUMAN_REF = 5_999
+
   def occupiers
     full_name
   end
@@ -69,6 +71,14 @@ class Property < ActiveRecord::Base
         address: {},
         agent: { methods: [:to_address], only: [:to_address] }
       })
+  end
+
+  def self.houses
+    where("human_ref <= #{MAX_HOUSE_HUMAN_REF}")
+  end
+
+  def self.quarter_day_in month
+    joins(account: [charges: [cycle: [:due_ons]]]).where('due_ons_count = 2 AND month = ?', month)
   end
 
   private

@@ -11,10 +11,6 @@
 #
 class ClientPaymentsController < ApplicationController
   def show
-    params[:start_date] ||= Date.new(2014, 1, 1)
-    params[:end_date] ||= Time.zone.today
-    @client_payment = ClientPayment.query client_id: params[:id],
-                                          start_date: params[:start_date],
-                                          end_date: params[:end_date]
+    @client_payment = ClientPayment.query client_id: params[:id], year: params[:years]
   end
 end

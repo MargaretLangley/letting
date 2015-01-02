@@ -12,14 +12,10 @@
       <%= @client_payment.client.full_name %>
     </div>
 
-    <%= form_tag client_path(@client_payment.client), method: 'get' do %>
-      <div class='col-5-24  grid-row  bottom-line-spacer'>Payments made between:</div>
+    <%= form_tag client_payment_path, id: 'client_payment', method: 'get' do %>
+      <div class='col-5-24  grid-row  bottom-line-spacer'>Payments made in:</div>
       <div class='col-19-24  bottom-line-spacer'>
-        <%= date_field_tag :start_date, params[:start_date], autofocus: true, class: 'width-9-24' %> and
-        <%= date_field_tag :end_date, params[:end_date], autofocus: true, class: 'width-9-24' %>
-        <button type='submit' class='width-4-24  no-print' id='credit_search' title='Credit Search'>
-          <%= fa_icon('search lg') %>
-        </button>
+        <%= select_tag 'years', options_for_select([["2014", 2014], ["2013", 2013]]), onchange: "$('#client_payment').submit();" %>
       </div>
     <% end %>
   </div> <!-- end of 1st column -->

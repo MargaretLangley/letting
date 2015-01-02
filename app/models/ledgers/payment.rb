@@ -52,6 +52,11 @@ class Payment < ActiveRecord::Base
     credits.clear_up
   end
 
+  # Client.first.properties.quarter_day_in(6).first.payments.date_range.sum(:amount)
+  def self.date_range(start_date: '2013-01-01', end_date: '2013-12-31')
+    where(booked_on: start_date...end_date)
+  end
+
   include Searchable
   # Elasticsearch uses generates JSON document for payment index
   def as_indexed_json(_options = {})
