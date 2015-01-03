@@ -30,8 +30,8 @@
       <div class='grid  shell  tab-content'>
 
         <div id="mar-sep" class="tab  active">
-          <h3>March/September Ground Rents</h3>
-          <%= render 'accounts_heading' %>
+          <h3>March/September Ground Rents <%= params[:years] %></h3>
+          <%= render 'accounts_heading', mar: true, sep: true %>
           <%= render 'payments_made', accounts: @client_payment.mar_sep,
                                       range_1: @client_payment.mar_range,
                                       range_2: @client_payment.sep_range %>
@@ -42,7 +42,7 @@
 
         <div id="jun-dec"  class="tab">
           <h3>June/December Ground Rents</h3>
-          <%= render 'accounts_heading' %>
+          <%= render 'accounts_heading', jun: true, dec: true %>
           <%= render 'payments_made', accounts: @client_payment.jun_dec,
                                       range_1: @client_payment.jun_range,
                                       range_2: @client_payment.dec_range %>

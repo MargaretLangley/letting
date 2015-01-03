@@ -14,10 +14,10 @@
       <%= property.address.town %>
     </div>
     <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
-      <%= number_with_precision(account.payments.date_range(range: range_1).sum(:amount), precision: 2) %>
+      <%= number_with_precision(account.payments.date_range(range: range_1).sum(:amount) * -1, precision: 2) %>
     </div>
     <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
-      <%= number_with_precision(account.payments.date_range(range: range_2).sum(:amount), precision: 2) %>
+      <%= number_with_precision(account.payments.date_range(range: range_2).sum(:amount) * -1, precision: 2) %>
     </div>
   </div>
 <% end %>
