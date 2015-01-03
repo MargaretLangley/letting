@@ -11,6 +11,7 @@
 #
 class ClientPaymentsController < ApplicationController
   def show
-    @client_payment = ClientPayment.query client_id: params[:id], year: params[:years]
+    @client_payment = ClientPayment
+                      .query client_id: params[:id], year: params[:years]
   end
 end

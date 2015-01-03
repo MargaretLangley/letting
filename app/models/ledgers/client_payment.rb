@@ -22,10 +22,10 @@ class ClientPayment
   end
 
   def mar_sep
-    client.properties.houses.quarter_day_in(3).map{|property| property.account }
+    client.properties.houses.quarter_day_in(3).map(&:account)
   end
 
   def jun_dec
-    client.properties.houses.quarter_day_in(6).map{|property| property.account }
+    client.properties.houses.quarter_day_in(6).map(&:account)
   end
 end

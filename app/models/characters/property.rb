@@ -78,7 +78,8 @@ class Property < ActiveRecord::Base
   end
 
   def self.quarter_day_in month
-    joins(account: [charges: [cycle: [:due_ons]]]).where('due_ons_count = 2 AND month = ?', month)
+    joins(account: [charges: [cycle: [:due_ons]]])
+      .where('due_ons_count = 2 AND month = ?', month)
   end
 
   private
