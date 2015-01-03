@@ -14,10 +14,22 @@
       <%= property.address.town %>
     </div>
     <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
-      <%= number_with_precision(account.payments.date_range(range: range_1).sum(:amount) * -1, precision: 2) %>
+      <%= number_with_precision(account.payments.date_range(range: client_payment.half_year_from(month: range_1)).sum(:amount) * -1, precision: 2) %>
     </div>
     <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
-      <%= number_with_precision(account.payments.date_range(range: range_2).sum(:amount) * -1, precision: 2) %>
+      <%= number_with_precision(account.payments.date_range(range: client_payment.half_year_from(month: range_2)).sum(:amount) * -1, precision: 2) %>
     </div>
   </div>
 <% end %>
+<div class='col-16-24  grid-row  vertical-spacer'>
+   &nbsp;
+</div>
+<div class='col-2-24  vertical-spacer'>
+   Total
+</div>
+<div class='col-3-24  vertical-spacer  r-align'>
+  <%= number_with_precision(client_payment.half_year_total(month: range_1), precision: 2) %>
+</div>
+<div class='col-3-24  vertical-spacer  r-align'>
+  <%= number_with_precision(client_payment.half_year_total(month: range_2), precision: 2) %>
+</div>

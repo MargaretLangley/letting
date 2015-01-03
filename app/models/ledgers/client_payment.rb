@@ -1,13 +1,21 @@
 # ClientPayment
 #
-# Returns the payments
+# Returns the payments made to a client for house ground rent.
 #
-# To execute sql on postgres use the command line:
-# -- psql -d letting_development -f show.sql
+# Clients have a number of properties that ground rent are charged on.
+# When a tenant pays money for this charge the client gets this money
+# minus handling fees.
+#
+# Houses are either divided into Mar/Sep and Jun/Dec. So, for each house
+# payments are broken into 6 month periods starting either Mar and Sep or
+# Jun and Dec - periods are always started on the 1st day of the month.
 #
 class ClientPayment
+  MAR = 3
+  JUN = 6
+  SEP = 9
+  DEC = 12
   attr_reader :client_id, :year
-
   def initialize(client_id:, year:)
     @client_id = client_id
     @year = year
@@ -26,30 +34,29 @@ class ClientPayment
   end
 
   def mar_sep
-    client.properties.houses.quarter_day_in(3).map(&:account)
+    quarter_day_accounts(month: MAR)
   end
 
   def jun_dec
-    client.properties.houses.quarter_day_in(6).map(&:account)
+    quarter_day_accounts(month: JUN)
   end
 
-  def mar_range
-    time = Time.zone.local(year, 3, 1)
+  def half_year_from(month:)
+    time = Time.zone.local(year, month, 1)
     time..(time + 6.months)
   end
 
-  def sep_range
-    time = Time.zone.local(year, 9, 1)
-    time..(time + 6.months)
+  def half_year_total(month:)
+    range = half_year_from(month: month)
+    Payment.where(booked_on: range.first...range.last)
+      .where(account_id: quarter_day_accounts(month: month).pluck(:account_id))
+      .pluck(:amount).sum * -1
   end
 
-  def jun_range
-    time = Time.zone.local(year, 6, 1)
-    time..(time + 6.months)
-  end
+  private
 
-  def dec_range
-    time = Time.zone.local(year, 12, 1)
-    time..(time + 6.months)
+  def quarter_day_accounts(month:)
+    Account.joins(:property)
+      .merge(client.properties.houses.quarter_day_in(month))
   end
 end
