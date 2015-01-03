@@ -1,20 +1,23 @@
 <% accounts.each do |account| %>
 <% property = account.property %>
   <div title='View' class='table-row' data-link='<%= property_path(property) %>'>
-    <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
+    <div class='col-2-24  grid-row  bottom-spacer  inherit-row  r-align'>
        <%= property.human_ref %>
     </div>
-    <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
+    <div class='col-2-24  bottom-spacer  inherit-row  r-align'>
       <%= format_empty_string_as_dash property.address.first_no %>
     </div>
     <div class='col-8-24  bottom-spacer  inherit-row'>
       <%= format_empty_string_as_dash property.address.first_text %>
     </div>
-    <div class='col-7-24  bottom-spacer  inherit-row  nowrap'>
+    <div class='col-6-24  bottom-spacer  inherit-row  nowrap'>
       <%= property.address.town %>
     </div>
     <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
-      <%= number_with_precision(account.payments.date_range.sum(:amount), precision: 2) %>
+      <%= number_with_precision(account.payments.date_range(range: range_1).sum(:amount), precision: 2) %>
+    </div>
+    <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
+      <%= number_with_precision(account.payments.date_range(range: range_2).sum(:amount), precision: 2) %>
     </div>
   </div>
 <% end %>

@@ -52,8 +52,8 @@ class Payment < ActiveRecord::Base
     credits.clear_up
   end
 
-  def self.date_range(start_date: '2013-01-01', end_date: '2013-12-31')
-    where(booked_on: start_date...end_date)
+  def self.date_range(range: '2013-01-01'..'2013-12-31')
+    where(booked_on: range.first...range.last)
   end
 
   include Searchable

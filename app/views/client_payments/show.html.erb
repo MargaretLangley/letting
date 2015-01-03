@@ -15,7 +15,7 @@
     <%= form_tag client_payment_path, id: 'client_payment', method: 'get' do %>
       <div class='col-5-24  grid-row  bottom-line-spacer'>Payments made in:</div>
       <div class='col-19-24  bottom-line-spacer'>
-        <%= select_tag 'years', options_for_select([["2014", 2014], ["2013", 2013]]), onchange: "$('#client_payment').submit();" %>
+        <%= select_tag 'years', options_for_select(@client_payment.years, selected: params[:years]), onchange: "$('#client_payment').submit();" %>
       </div>
     <% end %>
   </div> <!-- end of 1st column -->
@@ -32,7 +32,9 @@
         <div id="mar-sep" class="tab  active">
           <h3>March/September Ground Rents</h3>
           <%= render 'accounts_heading' %>
-          <%= render 'payments_made', accounts: @client_payment.mar_sep %>
+          <%= render 'payments_made', accounts: @client_payment.mar_sep,
+                                      range_1: @client_payment.mar_range,
+                                      range_2: @client_payment.sep_range %>
           <% if @client_payment.mar_sep.empty? %>
             <%= render 'information/grid', information: 'The Client has no Mar/Sep properties.' %>
           <% end %>
@@ -41,7 +43,9 @@
         <div id="jun-dec"  class="tab">
           <h3>June/December Ground Rents</h3>
           <%= render 'accounts_heading' %>
-          <%= render 'payments_made', accounts: @client_payment.jun_dec %>
+          <%= render 'payments_made', accounts: @client_payment.jun_dec,
+                                      range_1: @client_payment.jun_range,
+                                      range_2: @client_payment.dec_range %>
           <% if @client_payment.jun_dec.empty? %>
             <%= render 'information/grid', information: 'The Client has no Jun/Dec properties.' %>
           <% end %>

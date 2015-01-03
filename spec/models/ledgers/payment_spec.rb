@@ -109,5 +109,21 @@ describe Payment, :payment, :ledgers, type: :model do
         expect(payment.credits.first).to_not be_marked_for_destruction
       end
     end
+
+    describe '.date_range' do
+      it 'returns if in range' do
+        payment_create booked_on: '30/4/2013 01:00:00 +0100',
+                       account: account_create
+        payments = Payment.date_range range: '2013-01-01'..'2013-12-31'
+        expect(payments.size).to eq 1
+      end
+
+      it 'returns nothing if out of range' do
+        payment_create booked_on: '30/4/1999 01:00:00 +0100',
+                       account: account_create
+        payments = Payment.date_range range: '2013-01-01'..'2013-12-31'
+        expect(payments.size).to eq 0
+      end
+    end
   end
 end
