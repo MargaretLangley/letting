@@ -36,7 +36,8 @@ describe 'Client Account Show', type: :feature do
       client_create id: 1
       visit '/client_payments/1'
 
-      expect(page.text).to match(/The client has no properties./i)
+      expect(page.text).to match(/The Client has no Mar\/Sep properties./i)
+      expect(page.text).to match(/The Client has no Jun\/Dec properties./i)
     end
 
     it 'does not list properties above 5999' do
