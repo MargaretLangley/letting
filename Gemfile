@@ -63,7 +63,7 @@ gem 'seedbank'
 group :development do
   gem 'better_errors', '~> 2.0.0'
   gem 'binding_of_caller', '~> 0.7.2'
-  gem 'brakeman', '~>2.6.0', require: false
+  gem 'brakeman', '~>3.0.0', require: false
   gem 'bullet', '~>4.14.0'
   gem 'rails_best_practices', '~>1.15.1'
   gem 'rubocop', '~> 0.28.0', require: false
@@ -79,7 +79,7 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.0.0'
   gem 'capistrano-postgresql', '~> 2.0.0'
   gem 'capistrano-unicorn-nginx', github: 'BCS-io/capistrano-unicorn-nginx'
-  gem 'capistrano-rails-collection', '~> 0.0.2'
+  gem 'capistrano-rails-collection', '~> 0.0.3'
   gem 'capistrano-db-tasks', require: false
   gem 'mascherano', '~> 1.1.0'
 end
