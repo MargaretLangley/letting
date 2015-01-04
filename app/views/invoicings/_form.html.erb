@@ -3,6 +3,7 @@
 
   <fieldset id='invoicing' <%= invoicing.actionable? ? '' : disabled="disabled" %> class='grid  shell-1-25  overlay-parent'>
     <div class='col-1-2  spacer-column'>
+
       <div class='col-12-24  grid-row  bottom-spacer'>
         <h3 class='faded'>Search Terms</h3>
       </div>
@@ -32,6 +33,7 @@
     </div>
 
     <div class='col-1-2  spacer-column'>
+
       <div class='col-4-24  grid-row  bottom-spacer'>&nbsp;</div>
       <div class='col-16-24  top-double-line-spacer'>
         <%= render 'buttons/submit', f: f, disabled: !invoicing.actionable? %> or <%= link_to_if invoicing.actionable?, 'Cancel', new_invoicing_path, class: 'warn' %>

@@ -8,6 +8,7 @@
 
 <% invoice.products.each do |product| %>
   <% product_dec = ProductDecorator.new product %>
+
   <div class='col-2-24  grid-row'>     &nbsp;</div>
   <div class='col-3-24'>               <%= product_dec.date_due %></div>
   <div class='col-5-24'>               <%= product.charge_type %></div>
@@ -30,6 +31,7 @@
 <div class='col-2-24'>&nbsp;</div>
 
 <% invoice.comments.order(:id).each do |comment| %>
+
   <div class='col-5-24  grid-row  bottom-spacer'>&nbsp;</div>
   <div class='col-17-24  bottom-spacer'>    <%= comment.clarify %></div>
   <div class='col-2-24  bottom-spacer'>     &nbsp;</div>

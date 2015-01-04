@@ -2,6 +2,7 @@
 <% payment_dec = @payment %>
 
 <fieldset id='payment'  class='grid  shell-thin  overlay-parent'>
+
   <div class='col-12-24  grid-row  vertical-spacer'>
     <%= render 'payments/property_hero', payment_dec: payment_dec %>
   </div>
@@ -31,6 +32,7 @@
       <%= text_field_tag '', payment_dec.amount, disabled: true, class: 'r-align' %>
     </div>
     <div class='col-1-24  cell  pick-out'>&nbsp;</div>
+
     <!-- acts as padding on the bottom of the form -->
     <div class='col-15-24  grid-row'>&nbsp;</div>
     <div class='col-9-24  pick-out'>&nbsp;</div>

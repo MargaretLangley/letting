@@ -14,6 +14,7 @@
   <div class='col-8-24  bottom-spacer  grid-header'>Charge</div>
 
   <% account_debits.values.each do |account_debit| %>
+
     <div class='col-8-24  grid-row  bottom-spacer  grid-header'>
       <%= I18n.l account_debit.date_due, format: :short %>
     </div>

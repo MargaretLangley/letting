@@ -3,6 +3,7 @@
 
   <fieldset id='client' class='grid  shell-1-12'>
     <div class='col-22-24  vertical-spacer  spacer-column'>
+
       <div class='col-1-4  grid-row  bottom-spacer  faded'>
         <%= f.label :human_ref, 'Client ID', class: 'required' %>
       </div>
@@ -20,7 +21,8 @@
       <hr>
       <%= render 'addresses/form', f: f, parent: 'client', address: AddressDecorator.new(client.address) %>
       <hr>
-      <div class='col-1-4  gird-row  line-spacer  no-print'>&nbsp;</div>
+
+      <div class='col-1-4  grid-row  line-spacer  no-print'>&nbsp;</div>
       <div class='col-3-4  line-spacer  no-print  no-r-pad'>
         <%= render 'buttons/submit', f: f %>  or <%= link_to 'Cancel', clients_path, class: 'warn' %>
       </div>

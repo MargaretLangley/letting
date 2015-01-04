@@ -2,6 +2,7 @@
   <%= render 'shared/errors', object: property %>
 
   <div id='property' class='grid  shell'>
+
     <div class='col-22-24  grid-row  bottom-spacer  faded'>
       <h3>Property</h3>
 
@@ -40,6 +41,7 @@
       <% end %>
     </div>
     <hr>
+
     <div class='col-2-24  grid-row  no-print'>&nbsp;</div>
     <div class='col-20-24 c-align  no-print'>
       <%= render 'buttons/submit', f: f %> or <%= cancel_link path: properties_path %>

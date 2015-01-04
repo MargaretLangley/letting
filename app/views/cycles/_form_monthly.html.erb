@@ -34,6 +34,7 @@
       </div>
 
       <%= f.fields_for :due_ons, cycle.due_ons.first  do |builder| %>
+
         <div class='col-5-24  grid-row  bottom-spacer  faded'>Due On Day</div>
         <div class='col-2-24  bottom-spacer'>
           <%= builder.text_field :day, class: 'r-align' %>

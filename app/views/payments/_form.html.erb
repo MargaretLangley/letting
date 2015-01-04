@@ -2,6 +2,7 @@
   <%= render 'shared/errors', object: payment_dec.payment %>
 
   <fieldset id='payment' class='grid  shell-thin  overlay-parent'>
+
     <div class='col-12-24  grid-row'>    <!-- 1st column -->
         <%= render 'payments/property_hero', payment_dec: payment_dec %>
     </div>
@@ -17,6 +18,7 @@
       <div class='col-4-12  bottom-spacer  r-align'>
         <%= link_to payment_dec.last_amount, edit_payment_path(Payments.last), class: 'hover-link'%>
       </div>
+
       <div class='col-8-12  grid-row  bottom-line-spacer'>Day's Total</div>
       <div class='col-4-12  bottom-line-spacer  r-align'>
         <%= link_to payment_dec.todays_takings, payments_path, class: 'hover-link' %>
@@ -42,6 +44,7 @@
       </div>
       <div class='js-totalizer'>
         <%= render 'credits/form', credits_dec: payment_dec.credits_decorated, payment_form: payment_form %>
+
         <div class='col-12-24 grid-row'>&nbsp;</div>
         <div class='col-3-24  cell  r-align'><h3>Total</h3></div>
         <div class='col-1-24  cell  pick-out'>&nbsp;</div>

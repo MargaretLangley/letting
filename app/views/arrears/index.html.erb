@@ -5,6 +5,7 @@
 <div class='grid shell-1-25'>
 
   <%= form_tag arrears_path, method: 'get' do %>
+
     <div class='col-5-12  grid-row bottom-spacer'>Accounts with arrears in excess of:</div>
     <div class='col-5-12  bottom-spacer'>
       <%= text_field_tag :arrears_search, params[:arrears_search], autofocus: true, class: 'width-3-4' %>
@@ -31,6 +32,7 @@
       property = PropertyDecorator.new account.property %>
 
     <div title='View' class='table-row' data-link='<%= property_path(property.id) %>'>
+
       <div class='col-2-24  grid-row  bottom-spacer  inherit-row  r-align'>
         <%= property.human_ref %>
       </div>

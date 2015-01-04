@@ -11,6 +11,7 @@
     </div>
 
     <%= form_tag client_payment_path, id: 'client_payment', method: 'get' do %>
+
       <div class='col-4-24  grid-row  bottom-double-line-spacer  faded'>Payments in</div>
       <div class='col-20-24  bottom-double-line-spacer'>
         <%= select_tag 'years', options_for_select(@client_payment.years, selected: params[:years]), onchange: "$('#client_payment').submit();" %>
