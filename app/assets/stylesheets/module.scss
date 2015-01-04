@@ -102,6 +102,11 @@ a.grey{
   margin: 0 0 1em 0;
 }
 
+.bottom-double-line-spacer{
+  margin: 0 0 2em 0;
+}
+
+
 .vertical-spacer{
   margin: 0.8% 0 0.8% 0;
 }
@@ -138,6 +143,23 @@ a.grey{
   overflow: hidden;
   white-space: nowrap;
 }
+
+.grid-footer-text{
+  @extend .faded;
+  padding-top: 1%;
+  border-top: 1px solid $muted-border;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.grid-footer-number{
+  padding-top: 1%;
+  border-top: 1px solid $muted-border;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
 
 
 /*--------------------------------------------------*\

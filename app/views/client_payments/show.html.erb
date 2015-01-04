@@ -4,17 +4,15 @@
 
   <div class='col-21-24  grid-row  vertical-spacer'>  <!-- 1st column -->
 
-    <div class='col-1-4  grid-row  faded  bottom-line-spacer'>
-      Client ID and Name
-    </div>
-    <div class='col-1-4  bottom-line-spacer'><%= @client_payment.client.human_ref %></div>
-    <div class='col-2-4  bottom-line-spacer'>
-      <%= @client_payment.client.full_name %>
+    <div class='col-4-24  grid-row  faded  bottom-line-spacer'><h3>Client<h3></div>
+    <div class='col-2-24  bottom-line-spacer'><h3><%= @client_payment.client.human_ref %></h3></div>
+    <div class='col-18-24  bottom-line-spacer'>
+      <h3><%= @client_payment.client.full_name %></h3>
     </div>
 
     <%= form_tag client_payment_path, id: 'client_payment', method: 'get' do %>
-      <div class='col-5-24  grid-row  bottom-line-spacer'>Payments made in:</div>
-      <div class='col-19-24  bottom-line-spacer'>
+      <div class='col-4-24  grid-row  bottom-double-line-spacer  faded'>Payments in</div>
+      <div class='col-20-24  bottom-double-line-spacer'>
         <%= select_tag 'years', options_for_select(@client_payment.years, selected: params[:years]), onchange: "$('#client_payment').submit();" %>
       </div>
     <% end %>
@@ -30,7 +28,7 @@
       <div class='grid  shell  tab-content'>
 
         <div id="mar-sep" class="tab  active">
-          <h3>March/September Ground Rents <%= params[:years] %></h3>
+          <h3>Ground Rents Collected March/September <%= params[:years] %></h3>
           <%= render 'accounts_heading', mar: true, sep: true %>
           <%= render 'payments_made', accounts: @client_payment.mar_sep,
                                       client_payment: @client_payment,
@@ -42,7 +40,7 @@
         </div> <!-- close #mar-sep -->
 
         <div id="jun-dec"  class="tab">
-          <h3>June/December Ground Rents</h3>
+          <h3>Ground Rents Collected June/December <%= params[:years] %></h3>
           <%= render 'accounts_heading', jun: true, dec: true %>
           <%= render 'payments_made', accounts: @client_payment.jun_dec,
                                       client_payment: @client_payment,
