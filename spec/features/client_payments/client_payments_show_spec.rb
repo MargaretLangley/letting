@@ -20,7 +20,7 @@ describe 'Client Account Show', type: :feature do
   end
 
   def expect_title
-    expect(page.title).to eq 'Letting - Client Accounts'
+    expect(page.title).to eq 'Letting - Client Payments'
   end
 
   def expect_client_ref
