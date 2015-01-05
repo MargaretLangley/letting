@@ -35,7 +35,7 @@ module DB
     end
 
     def on_date
-      row[:on_date].to_datetime
+      Time.zone.parse(row[:on_date]).beginning_of_day
     end
 
     def description_to_charge
@@ -61,6 +61,7 @@ module DB
       row_charge.coming(on_date..on_date + 1.year - 1.day)
         .first
         .on_date
+        .beginning_of_day
     end
 
     def charge_type

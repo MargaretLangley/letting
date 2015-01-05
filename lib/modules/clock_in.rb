@@ -25,7 +25,7 @@ class ClockIn
     booked_time = Time.zone.today if booked_time.nil?
     if add_time
       booked_time = booked_time.to_date +
-                    Time.now.seconds_since_midnight.seconds
+                    Time.zone.now.seconds_since_midnight.seconds
     end
     return booked_time.end_of_day if at_least_yesterday? booked_time
     return booked_time.beginning_of_day if at_least_tomorrow? booked_time

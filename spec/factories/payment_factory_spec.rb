@@ -12,7 +12,7 @@ describe 'payment' do
     describe 'overrides' do
       it 'alters on date' do
         expect(payment_new(booked_on: '2012-03-25').booked_on)
-          .to eq Date.new(2012, 03, 25)
+          .to eq Time.zone.local(2012, 03, 25)
       end
       it('alters amount') { expect(payment_new(amount: 1).amount).to eq 1 }
     end
@@ -40,6 +40,7 @@ describe 'payment' do
       end
     end
     describe 'overrides' do
+      before { Time.zone = ActiveSupport::TimeZone['Riyadh'] }
       it 'alters amount' do
         expect(payment_create(account: account_new, amount: 35.50).amount)
           .to eq(-35.50)
@@ -54,13 +55,13 @@ describe 'payment' do
       # Easiest way is to freeze time.
       #
       it 'alters datetime' do
-        new_time = Time.zone.local(2013, 9, 30, 2, 5, 6)
+        new_time = Time.zone.local(2013, 9, 30, 10, 5, 6)
         Timecop.freeze(new_time)
 
         payment = payment_create account: account_new,
                                  booked_on: Time.zone.local(2013, 9, 30)
         expect(payment.booked_on)
-          .to eq Time.zone.local(2013, 9, 30, 2, 5, 6)
+          .to eq Time.zone.local(2013, 9, 30, 10, 5, 6)
 
         Timecop.return
       end

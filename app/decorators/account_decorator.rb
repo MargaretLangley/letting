@@ -30,7 +30,7 @@ class AccountDecorator
   # Transactions covering recent period (typically this year only)
   #
   def abbrev_items
-    date_of = Time.zone.today.at_beginning_of_year.to_time
+    date_of = Time.zone.local(Time.zone.now.year, 1, 1)
     running_balance [balance_bought_forward(date_of)] +
       ordered_items.select { |item| item.on_date >= date_of }
   end

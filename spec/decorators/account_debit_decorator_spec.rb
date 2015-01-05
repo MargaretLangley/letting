@@ -10,7 +10,7 @@ describe AccountDebitDecorator do
     end
 
     it 'date' do
-      expect(debit_dec.on_date).to eq Time.zone.local 2013, 3, 25, 0, 0, 0, '+0'
+      expect(debit_dec.on_date).to eq Time.zone.local 2013, 3, 25, 10, 0, 0
     end
 
     it 'due' do

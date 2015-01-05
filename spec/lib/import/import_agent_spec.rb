@@ -21,7 +21,7 @@ module DB
       expect(Agent.first.authorized).to be true
     end
 
-    # contact entites test suite in import_contact_entity_spec
+    # contact entities test suite in import_contact_entity_spec
     #
     it 'Property has two entities' do
       import_agent row

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe Payment, :payment, :ledgers, type: :model do
+  before { Time.zone = ActiveSupport::TimeZone['Riyadh'] }
   describe 'validates' do
     it('is valid') { expect(payment_new account: account_new).to be_valid }
     it 'requires account' do
@@ -38,7 +39,7 @@ describe Payment, :payment, :ledgers, type: :model do
       end
       it 'leaves defined booked_on intact' do
         payment = payment_create account: account_new,
-                                 booked_on: Time.zone.local(2013, 9, 30, 2, 0)
+                                 booked_on: Time.zone.local(2013, 9, 30, 10, 0)
         expect(payment.booked_on)
           .to eq Time.zone.local(2013, 9, 30, 2, 0)
       end

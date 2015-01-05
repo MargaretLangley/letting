@@ -93,7 +93,7 @@ describe Debit, :ledgers, type: :model do
         expect(debit_new(charge: charge_new).to_debitable)
           .to eq charge_type: ChargeTypes::GROUND_RENT,
                  automatic_payment: false,
-                 date_due: Time.zone.local(2013, 3, 25, 0, 0, 0, '+0'),
+                 date_due: Time.zone.local(2013, 3, 25, 10, 0, 0),
                  period: Date.new(2013, 3, 25)..Date.new(2013, 6, 30),
                  amount: 88.08
       end
