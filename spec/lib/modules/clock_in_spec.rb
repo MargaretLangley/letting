@@ -12,7 +12,8 @@ describe ClockIn do
         new_time = Time.local(2008, 9, 1, 12, 1, 6)
         Timecop.freeze(new_time)
 
-        time = ClockIn.new.recorded_as booked_time: Date.today, add_time: true
+        time = ClockIn.new.recorded_as booked_time: Time.zone.now.to_date,
+                                       add_time: true
 
         expect(time).to eq '2008-09-01 12:01:06.000000000 +0100'
 
@@ -23,7 +24,8 @@ describe ClockIn do
         new_time = Time.local(2008, 9, 1, 12, 1, 6)
         Timecop.freeze(new_time)
 
-        time = ClockIn.new.recorded_as booked_time: Date.today, add_time: false
+        time = ClockIn.new.recorded_as booked_time: Time.zone.now.to_date,
+                                       add_time: false
 
         expect(time).to eq Date.new(2008, 9, 1)
 
