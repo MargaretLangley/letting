@@ -58,5 +58,6 @@ class ClientPayment
   def quarter_day_accounts(month:)
     Account.joins(:property)
       .merge(client.properties.houses.quarter_day_in(month))
+      .order('properties.human_ref ASC')
   end
 end
