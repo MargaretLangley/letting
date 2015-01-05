@@ -47,9 +47,11 @@ class Payment < ActiveRecord::Base
     credits.push(*account.make_credits)
   end
 
+  # Created - form attributes come with booked_on as a date without a time.
+  #         - if the date is today we add the current time on.
   def clear_up
-    if self.new_record?
-      self.booked_on = ClockIn.new.recorded_as booked_time: booked_on,
+    if booked_on && self.new_record?
+      self.booked_on = ClockIn.new.recorded_as booked_time: booked_on.to_date,
                                                add_time: true
     end
     negate

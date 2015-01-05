@@ -9,7 +9,7 @@ describe ClockIn do
   describe '#recorded_as' do
     describe '#initialize add_time' do
       it 'applies time if required' do
-        new_time = Time.local(2008, 9, 1, 12, 1, 6)
+        new_time = Time.zone.local(2008, 9, 1, 12, 1, 6)
         Timecop.freeze(new_time)
 
         time = ClockIn.new.recorded_as booked_time: Time.zone.now.to_date,
@@ -21,7 +21,7 @@ describe ClockIn do
       end
 
       it 'leaves off if not required' do
-        new_time = Time.local(2008, 9, 1, 12, 1, 6)
+        new_time = Time.zone.local(2008, 9, 1, 12, 1, 6)
         Timecop.freeze(new_time)
 
         time = ClockIn.new.recorded_as booked_time: Time.zone.now.to_date,

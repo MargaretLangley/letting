@@ -49,6 +49,21 @@ describe 'payment' do
                               booked_on: '10/6/2014').booked_on.to_date)
           .to eq Date.new 2014, 6, 10
       end
+
+      # Payment works by adding a time to a date.
+      # Easiest way is to freeze time.
+      #
+      it 'alters datetime' do
+        new_time = Time.zone.local(2013, 9, 30, 2, 5, 6)
+        Timecop.freeze(new_time)
+
+        payment = payment_create account: account_new,
+                                 booked_on: Time.zone.local(2013, 9, 30)
+        expect(payment.booked_on)
+          .to eq Time.zone.local(2013, 9, 30, 2, 5, 6)
+
+        Timecop.return
+      end
     end
   end
 end

@@ -29,18 +29,18 @@ describe Payment, :payment, :ledgers, type: :model do
 
   describe 'initialize' do
     # changing for Date to DateTime - so I want test to fail if we use date
-    before { Timecop.travel Time.local(2013, 9, 30, 2, 0) }
+    before { Timecop.freeze Time.zone.local(2013, 9, 30, 2, 0) }
     after  { Timecop.return }
     describe 'booked_on' do
       it 'sets nil booked_on to today' do
         expect(payment_new(booked_on: nil).booked_on)
-          .to be_within(5.second).of Time.zone.now
+          .to eq Time.zone.now
       end
       it 'leaves defined booked_on intact' do
         payment = payment_create account: account_new,
-                                 booked_on: Time.local(2013, 9, 30, 2, 0)
+                                 booked_on: Time.zone.local(2013, 9, 30, 2, 0)
         expect(payment.booked_on)
-          .to be_within(5.second).of Time.local(2013, 9, 30, 2, 0)
+          .to eq Time.zone.local(2013, 9, 30, 2, 0)
       end
     end
     describe 'amount' do
