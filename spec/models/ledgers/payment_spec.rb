@@ -39,7 +39,8 @@ describe Payment, :payment, :ledgers, type: :model do
       it 'leaves defined booked_on intact' do
         payment = payment_create account: account_new,
                                  booked_on: Time.local(2013, 9, 30, 2, 0)
-        expect(payment.booked_on).to eq Time.local(2013, 9, 30, 2, 0)
+        expect(payment.booked_on)
+          .to be_within(0.5).of Time.local(2013, 9, 30, 2, 0)
       end
     end
     describe 'amount' do

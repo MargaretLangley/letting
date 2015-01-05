@@ -48,6 +48,10 @@ class Payment < ActiveRecord::Base
   end
 
   def clear_up
+    if self.new_record?
+      self.booked_on = ClockIn.new.recorded_as booked_time: booked_on,
+                                               add_time: true
+    end
     negate
     credits.clear_up
   end
