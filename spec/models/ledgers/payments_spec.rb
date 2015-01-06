@@ -33,8 +33,7 @@ describe Payments do
       it 'returns payments on queried day' do
         account = account_create property: property_new
         payment = payment_create account_id: account.id,
-                                 booked_on: '1/Sep/2014 16:29:30 +0100'
-                                            .to_datetime
+                                 booked_on: '2014-9-1 16:29:30'
         expect(Payments.on(date: '2014-09-01').to_a).to eq [payment]
       end
 
