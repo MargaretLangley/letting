@@ -5,6 +5,15 @@ require 'rails_helper'
 describe Account, :ledgers, type: :model do
   it('is valid') { expect(account_new).to be_valid }
 
+  describe 'validates' do
+    it 'requires charges below the maximum allowed' do
+      account = account_new
+      7.times { account.charges << charge_new }
+
+      expect(account).to_not be_valid
+    end
+  end
+
   describe 'methods' do
     before { Timecop.travel Date.new(2013, 1, 31) }
     after { Timecop.return }

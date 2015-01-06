@@ -36,5 +36,12 @@ module Entities
         each(&:destroy_form)
       end
     end
+    validate :maximum_entities
+
+    def maximum_entities
+      return if entities.blank?
+
+      errors.add(:entities, 'Too many entities') if entities.size > MAX_ENTITIES
+    end
   end
 end

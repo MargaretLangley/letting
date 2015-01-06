@@ -43,6 +43,7 @@ class Account < ActiveRecord::Base
   has_many :credits, dependent: :destroy
   accepts_nested_attributes_for :credits, allow_destroy: true
   has_many :payments, dependent: :destroy, inverse_of: :account
+  MAX_CHARGES = 6
   has_many :charges, dependent: :destroy do
     def prepare
       (size...MAX_CHARGES).each { build }
@@ -53,7 +54,12 @@ class Account < ActiveRecord::Base
       each(&:clear_up_form)
     end
   end
-  MAX_CHARGES = 6
+  validate :maximum_charges
+  def maximum_charges
+    return if charges.blank?
+
+    errors.add(:charges, 'Too many charges') if charges.size > MAX_CHARGES
+  end
   accepts_nested_attributes_for :charges, allow_destroy: true
 
   has_many :snapshots, dependent: :destroy, inverse_of: :account
