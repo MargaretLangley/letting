@@ -14,7 +14,7 @@ gem 'pg', '~>0.18.0'
 gem 'equalizer'
 
 # Use SCSS for style-sheets
-gem 'sass-rails', '~> 5.0.0'
+gem 'sass-rails', '~> 5.0.1'
 gem 'sprockets', '~>2.12.3'
 gem 'autoprefixer-rails'
 
