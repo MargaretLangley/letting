@@ -92,8 +92,6 @@ group :development, :test do
   # performance errors with tests
   # gem 'capybara-slow_finder_errors', '0.1.0'
   gem 'selenium-webdriver', '~>2.44.0'
-  gem 'guard'
-  gem 'guard-livereload'
   gem 'pry-rails', '~>0.3.2'
   gem 'rb-readline'
   gem 'pry-stack_explorer', '~>0.4.9.0'
