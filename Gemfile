@@ -9,7 +9,7 @@ gem 'dotenv-rails', '~> 0.11.1'
 gem 'dotenv-deployment', '~> 0.0.2'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~>0.17.0'
+gem 'pg', '~>0.18.0'
 
 gem 'equalizer'
 
