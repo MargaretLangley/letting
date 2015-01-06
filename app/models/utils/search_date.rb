@@ -24,14 +24,18 @@ class SearchDate
   end
 
   def day_range
-    date.to_datetime.beginning_of_day..date.to_datetime.end_of_day
+    parse_date.beginning_of_day..parse_date.end_of_day
   end
 
   private
 
   def parse_date?
-    DateTime.parse date
+    Time.zone.parse date
     rescue
       false
+  end
+
+  def parse_date
+    @parse_date ||= Time.zone.parse date
   end
 end

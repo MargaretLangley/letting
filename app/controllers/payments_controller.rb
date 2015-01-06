@@ -18,6 +18,7 @@
 class PaymentsController < ApplicationController
   def index
     params[:payment_search] ||= Payments.last_booked_on
+
     @records = Payments.on(date: params[:payment_search])
                .includes(joined_tables)
                .page(params[:page])
