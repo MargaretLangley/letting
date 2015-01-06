@@ -35,10 +35,10 @@ class ClockIn
   private
 
   def at_least_yesterday? booked_time
-    booked_time < booking_date.beginning_of_day
+    booked_time.beginning_of_day < booking_date.beginning_of_day
   end
 
   def at_least_tomorrow? booked_time
-    booked_time > booking_date.end_of_day
+    booked_time.beginning_of_day > booking_date.end_of_day
   end
 end

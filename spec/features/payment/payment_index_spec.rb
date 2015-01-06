@@ -45,7 +45,7 @@ describe 'Payment index', :ledgers, type: :feature do
 
   describe 'payment search' do
     it 'matches transactions on the same day' do
-      payment = payment_new(booked_on: '30/4/2013 01:00:00 +0100')
+      payment = payment_new(booked_on: '30/4/2013 01:00:00')
       property_create account: account_new(payment: payment)
       payment_index.enter
       payment_index.search Date.new(2013, 4, 30).to_s
@@ -53,7 +53,7 @@ describe 'Payment index', :ledgers, type: :feature do
     end
 
     it 'misses transactions on a different day' do
-      payment = payment_new(booked_on: '2014/01/25 01:00:00 +1000')
+      payment = payment_new(booked_on: '2014/01/25 01:00:00')
       property_create account: account_new(payment: payment)
       payment_index.enter
       payment_index.search '2000/01/01'

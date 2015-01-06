@@ -39,6 +39,7 @@ class PaymentsController < ApplicationController
   def create
     @payment = PaymentDecorator
                .new(Payment.new(payment_params.except(:human_ref)))
+    @payment.timestamp_booking
     if @payment.save
       @payment.negate
       redirect_to new_payment_path, flash: { save: created_message }

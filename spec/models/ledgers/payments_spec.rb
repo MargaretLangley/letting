@@ -18,11 +18,8 @@ describe Payments do
     end
 
     describe '.last_booked_on' do
-      before { Timecop.travel '2014-06-25' }
-      after { Timecop.return }
-
       it 'returns today if no payments at all (unlikely)' do
-        expect(Payments.last_booked_on).to eq '2014-06-25'
+        expect(Payments.last_booked_on).to eq Time.zone.today.to_s
       end
 
       it 'returns the last day a payment was made' do

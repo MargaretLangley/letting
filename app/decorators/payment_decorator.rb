@@ -41,6 +41,8 @@ class PaymentDecorator
     payment.account.property.human_ref
   end
 
+  # TODO: remove this method and call payment directly
+  #
   def prepare_for_form
     payment.prepare
   end

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Payment, :payment, :ledgers, type: :model do
-  before { Time.zone = ActiveSupport::TimeZone['Riyadh'] }
   describe 'validates' do
     it('is valid') { expect(payment_new account: account_new).to be_valid }
     it 'requires account' do
@@ -37,12 +36,6 @@ describe Payment, :payment, :ledgers, type: :model do
         expect(payment_new(booked_on: nil).booked_on)
           .to eq Time.zone.now
       end
-      it 'leaves defined booked_on intact' do
-        payment = payment_create account: account_new,
-                                 booked_on: Time.zone.local(2013, 9, 30, 10, 0)
-        expect(payment.booked_on)
-          .to eq Time.zone.local(2013, 9, 30, 2, 0)
-      end
     end
     describe 'amount' do
       it 'sets nil amount to 0' do
@@ -52,6 +45,43 @@ describe Payment, :payment, :ledgers, type: :model do
         payment = payment_create account: account_new, amount: 10.50
         expect(Payment.find(payment.id).amount).to eq(-10.50)
       end
+    end
+  end
+
+  describe '#timestamp_booking' do
+    # changing for Date to DateTime - so I want test to fail if we use date
+    before { Timecop.freeze Time.zone.local(2013, 9, 30, 2, 0) }
+    after  { Timecop.return }
+
+    it 'booking time is current time if booking today' do
+      payment = payment_new account: account_new,
+                            booked_on: Time.zone.local(2013, 9, 30, 10, 0)
+
+      payment.timestamp_booking
+
+      expect(payment.booked_on)
+        .to eq Time.zone.local(2013, 9, 30, 2, 0)
+    end
+
+    it 'booking time set to end of day if booking in past' do
+      payment = payment_new account: account_new,
+                            booked_on: Time.zone.local(2013, 9, 29, 10, 0)
+      payment.timestamp_booking
+
+      expect(payment.booked_on)
+        .to be_within(5.seconds)
+        .of(Time.zone.local(2013, 9, 29, 23, 59, 59, 999_999))
+    end
+
+    it 'booking time set to start of day if booking in future' do
+      payment = payment_new account: account_new,
+                            booked_on: Time.zone.local(2013, 10, 1, 10, 0)
+
+      payment.timestamp_booking
+
+      expect(payment.booked_on)
+        .to be_within(5.seconds)
+        .of(Time.zone.local(2013, 10, 1, 0, 0, 0))
     end
   end
 
@@ -100,14 +130,14 @@ describe Payment, :payment, :ledgers, type: :model do
       end
     end
 
-    describe '#clear_up' do
+    describe 'validation' do
       it 'removes credits with no amounts' do
-        (payment = payment_new credit: credit_new(amount: 0)).clear_up
+        (payment = payment_new credit: credit_new(amount: 0)).valid?
         expect(payment.credits.first).to be_marked_for_destruction
       end
 
       it 'saves credits with none-zero amount' do
-        (payment = payment_new credit: credit_new(amount: 1)).clear_up
+        (payment = payment_new credit: credit_new(amount: 1)).valid?
         expect(payment.credits.first).to_not be_marked_for_destruction
       end
     end

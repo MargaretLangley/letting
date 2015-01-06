@@ -21,15 +21,15 @@ describe ClockIn do
       end
 
       it 'leaves off if not required' do
-        new_time = Time.zone.local(2008, 9, 1, 12, 1, 6)
-        Timecop.freeze(new_time)
+        today = Time.zone.today
+        puts today
 
-        time = ClockIn.new.recorded_as booked_time: Time.zone.today,
+        time = ClockIn.new.recorded_as booked_time: today,
                                        add_time: false
 
-        expect(time).to eq Date.new 2008, 9, 1
-
-        Timecop.return
+        expect(time).to eq today
+        # expected: Tue, 06 Jan 2015
+        # got: 2015-01-06 23:59:59.999999999 -0100
       end
     end
 

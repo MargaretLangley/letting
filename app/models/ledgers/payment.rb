@@ -47,15 +47,12 @@ class Payment < ActiveRecord::Base
     credits.push(*account.make_credits)
   end
 
-  # Created - form attributes come with booked_on as a date without a time.
-  #         - if the date is today we add the current time on.
-  def clear_up
-    if booked_on && self.new_record?
-      self.booked_on = ClockIn.new.recorded_as booked_time: booked_on.to_date,
-                                               add_time: true
-    end
-    negate
-    credits.clear_up
+  # form attributes come with booked_on as a date without a time.
+  # if the date is today we add the current time on.
+  def timestamp_booking
+    return unless booked_on
+    self.booked_on = ClockIn.new.recorded_as booked_time: booked_on.to_date,
+                                             add_time: true
   end
 
   def self.date_range(range: '2013-01-01'..'2013-12-31')
@@ -69,5 +66,12 @@ class Payment < ActiveRecord::Base
       include: {
         account: { methods: [:holder, :address] }
       })
+  end
+
+  private
+
+  def clear_up
+    negate
+    credits.clear_up
   end
 end
