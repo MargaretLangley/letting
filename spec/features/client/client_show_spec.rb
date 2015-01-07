@@ -17,6 +17,7 @@ describe 'Client#show', type: :feature do
     expect(page).to have_text ref
   end
 
+<<<<<<< HEAD
   def expect_property_ref(ref:)
     expect(page).to have_text ref
   end

@@ -1,8 +1,28 @@
 <% @title='View Client' %>
 
-<div class='grid  shell-1-25'>
+<div class='grid  shell  js-toggle-selection'>
+  <div class='js-togglable'>
 
-  <div class='col-21-24  grid-row vertical-spacer'>  <!-- 1st column -->
+    <div class='col-3-4  grid-row'>
+      <h3 class='small-bottom'>Contact &hellip;</h3>
+    </div>
+    <div class='col-1-4  no-r-pad'>
+      <%= toggle_link direction: :down, size: '2x' %>
+      <%= edit_link @client, size: '2x' %>
+    </div>
+
+    abridged
+  </div>
+
+  <div class='js-togglable  js-revealable'>
+
+    <div class='col-3-4  grid-row'>
+      <h3 class='small-bottom'>Contact</h3>
+    </div>
+    <div class='col-1-4  bottom-spacer  no-r-pad'>
+      <%= toggle_link direction: :up, size: '2x'  %>
+      <%= edit_link @client, size: '2x' %>
+    </div>
 
     <div class='col-1-4  grid-row  bottom-spacer faded'>Client ID</div>
     <div class='col-3-4  bottom-spacer'><%= @client.human_ref %></div>
@@ -13,6 +33,30 @@
     <div class='col-1-4  grid-row  bottom-spacer  faded'>Address</div>
     <div class='col-3-4  bottom-line-spacer'>
       <%= simple_format(@client.address.text, {}, wrapper_tag: 'div') %>
+    </div>
+  </div>
+</div>
+
+<div class='grid  shell  js-toggle-selection'>
+  <div class='js-togglable'>
+
+    <div class='col-3-4  grid-row'>
+      <h3 class='small-bottom'>Properties &hellip;</h3>
+    </div>
+    <div class='col-1-4  no-r-pad'>
+      <%= toggle_link direction: :down, size: '2x'  %>
+    </div>
+
+    abridged properties
+  </div>
+
+  <div class='js-togglable  js-revealable'>
+
+    <div class='col-3-4  grid-row'>
+      <h3 class='small-bottom'>Properties</h3>
+    </div>
+    <div class='col-1-4  no-r-pad'>
+      <%= toggle_link direction: :up, size: '2x'   %>
     </div>
 
     <div class='col-1-1  grid-row  vertical-spacer  faded'>
@@ -54,8 +98,7 @@
       <%= render 'information/grid', information: 'The client has no properties.' %>
     <% end %>
   </div>
-
   <div class='col-3-24  vertical-spacer'>     <!-- 2nd column -->
     <%= edit_link @client %>
   </div>
-</div>
+</div>  <!-- grid  shell js-toggle-selection -->
