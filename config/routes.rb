@@ -15,7 +15,6 @@ Letting::Application.routes.draw do
   root 'properties#index'
   resources :arrears, only: [:index]
   resources :clients
-  resources :client_payments, only: [:show]
   resources :guides, only: [:index, :show, :edit, :update]
   resources :payments
   resources :properties, path: 'accounts'
