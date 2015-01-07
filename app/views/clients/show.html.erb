@@ -11,7 +11,14 @@
       <%= edit_link @client, size: '2x' %>
     </div>
 
-    abridged
+    <div class='col-1-3  grid-row  bottom-spacer  grid-header'>Client Id</div>
+    <div class='col-1-3  bottom-spacer  grid-header'>Occupier</div>
+    <div class='col-1-3  bottom-spacer  grid-header'>Address</div>
+
+
+    <div class='col-1-3  grid-row  bottom-spacer'><%= @client.human_ref %></div>
+    <div class='col-1-3  bottom-spacer'><%= @client.full_name %></div>
+    <div class='col-1-3  bottom-spacer'><%= @client.address.first_line %></div>
   </div>
 
   <div class='js-togglable  js-revealable'>
