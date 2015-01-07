@@ -58,7 +58,9 @@ describe Property, type: :feature   do
   it 'navigates to edit page' do
     property_create id: 1, account: account_new, client: client_new
     visit '/accounts/1'
+
     first(:link, 'Edit').click
+
     expect(page.title).to eq 'Letting - Edit Account'
   end
 
