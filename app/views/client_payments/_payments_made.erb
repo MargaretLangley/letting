@@ -23,6 +23,10 @@
   </div>
 <% end %>
 
+<% if accounts.empty? %>
+  <%= render 'information/grid', information: "The Client has no #{Date::ABBR_MONTHNAMES[range_1]}/#{Date::ABBR_MONTHNAMES[range_2]} properties." %>
+<% end %>
+
 <div class='col-15-24  grid-row  grid-footer-text  vertical-spacer'>
    &nbsp;
 </div>

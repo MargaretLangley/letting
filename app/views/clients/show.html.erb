@@ -194,28 +194,25 @@
 
         <div class='grid'>
 
-          <div id="mar-sep" class="tab  active">
-            <h4>Ground Rents Collected March/September <%= params[:years] %></h4>
-            <%= render 'client_payments/accounts_heading', mar: true, sep: true %>
+          <div id='mar-sep' class='tab  active  vertical-line-spacer'>
+            <h3>Ground Rents Collected March/September <%= params[:years] %></h3>
+            <%= render 'client_payments/accounts_heading', range_1: ClientPayment::MAR,
+                                                           range_2: ClientPayment::SEP %>
             <%= render 'client_payments/payments_made', accounts: @client_payment.mar_sep,
                                         client_payment: @client_payment,
                                         range_1: ClientPayment::MAR,
                                         range_2: ClientPayment::SEP %>
-            <% if @client_payment.mar_sep.empty? %>
-              <%= render 'information/grid', information: 'The Client has no Mar/Sep properties.' %>
-            <% end %>
+
           </div> <!-- close #mar-sep -->
 
-          <div id="jun-dec"  class="tab">
-            <h4>Ground Rents Collected June/December <%= params[:years] %></h4>
-            <%= render 'client_payments/accounts_heading', jun: true, dec: true %>
+          <div id='jun-dec'  class='tab   vertical-line-spacer'>
+            <h3>Ground Rents Collected June/December <%= params[:years] %></h3>
+            <%= render 'client_payments/accounts_heading', range_1: ClientPayment::JUN,
+                                                           range_2: ClientPayment::DEC  %>
             <%= render 'client_payments/payments_made', accounts: @client_payment.jun_dec,
                                         client_payment: @client_payment,
                                         range_1: ClientPayment::JUN,
                                         range_2: ClientPayment::DEC %>
-            <% if @client_payment.jun_dec.empty? %>
-              <%= render 'information/grid', information: 'The Client has no Jun/Dec properties.' %>
-            <% end %>
           </div> <!-- close #jun-dec -->
         </div> <!-- grid shell tab-content  -->
       </div> <!-- close tabs -->

@@ -1,8 +1,3 @@
- <% mar = false if local_assigns[:mar].nil? %>
- <% jun = false if local_assigns[:jun].nil? %>
- <% sep = false if local_assigns[:sep].nil? %>
- <% dec = false if local_assigns[:dec].nil? %>
-
 <div class='col-18-24 grid-row  bottom-spacer  r-align'>&nbsp;</div>
 <div class='col-5-24  bottom-spacer  c-align  faded'>Amount</div>
 
@@ -12,15 +7,5 @@
 <div class='col-2-24  grid-header  bottom-spacer  r-align'>No</div>
 <div class='col-7-24  grid-header  bottom-spacer'>Address</div>
 <div class='col-5-24  grid-header  bottom-spacer'>Town</div>
-<% if mar %>
-  <div class='col-3-24  grid-header  bottom-spacer  r-align'>£ Mar</div>
-<% end %>
-<% if jun %>
-  <div class='col-3-24  grid-header  bottom-spacer  r-align'>£ Jun</div>
-<% end %>
-<% if sep %>
-  <div class='col-3-24  grid-header  bottom-spacer  r-align'>£ Sep</div>
-<% end %>
-<% if dec %>
-  <div class='col-3-24  grid-header  bottom-spacer  r-align'>£ Dec</div>
-<% end %>
+<div class='col-3-24  grid-header  bottom-spacer  r-align'>£ <%= Date::ABBR_MONTHNAMES[range_1] %></div>
+<div class='col-3-24  grid-header  bottom-spacer  r-align'>£ <%= Date::ABBR_MONTHNAMES[range_2] %></div>
