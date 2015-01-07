@@ -7,8 +7,8 @@
       <h3 class='small-bottom'>Property &hellip;</h3>
     </div>
     <div class='col-1-4'>
-      <%= toggle_link direction: :down %>
-      <%= edit_link @property %>
+      <%= toggle_link direction: :down, size: '2x' %>
+      <%= edit_link @property, size: '2x' %>
     </div>
 
     <%= render 'properties/property_abridged', property: @property %>
@@ -20,7 +20,7 @@
       <h3 class='small-bottom'>Property</h3>
     </div>
     <div class='col-1-4  bottom-spacer'>
-      <%= toggle_link direction: :up %>
+      <%= toggle_link direction: :up, size: '2x'  %>
       <%= edit_link @property, size: '2x' %>
     </div>
     <%= render 'properties/property', property: @property %>
@@ -37,7 +37,9 @@
     <div class='col-3-4  grid-row'>
       <h3 class='small-bottom'>Accounts &hellip;</h3>
     </div>
-    <div class='col-1-4  no-r-pad'><%= toggle_link direction: :down %></div>
+    <div class='col-1-4  no-r-pad'>
+      <%= toggle_link direction: :down, size: '2x'  %>
+    </div>
 
     <%= render 'account_items/header' %>
     <%= render partial: 'account_items/account_item', collection: AccountDecorator.new(@property.account).abbrev_items %>
@@ -48,7 +50,9 @@
     <div class='col-3-4  grid-row'>
       <h3 class='small-bottom'>Accounts</h3>
     </div>
-    <div class='col-1-4  no-r-pad'><%= toggle_link direction: :up %></div>
+    <div class='col-1-4  no-r-pad'>
+      <%= toggle_link direction: :up, size: '2x'   %>
+    </div>
 
     <%= render 'account_items/header' %>
     <%= render partial: 'account_items/account_item', collection: AccountDecorator.new(@property.account).items %>
