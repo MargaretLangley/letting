@@ -26,7 +26,7 @@
     <div class='col-3-4  grid-row'>
       <h3 class='small-bottom'>Contact</h3>
     </div>
-    <div class='col-1-4  bottom-spacer  no-r-pad'>
+    <div class='col-1-4  no-r-pad'>
       <%= toggle_link direction: :up, size: '2x'  %>
       <%= edit_link @client, size: '2x' %>
     </div>
@@ -63,7 +63,7 @@
     <div class='col-4-24  grid-header  bottom-spacer'>Postcode</div>
     <div class='col-2-24  grid-header  bottom-spacer'>&nbsp;</div>
 
-    <% @client.properties.limit(3).each do |property| %>
+    <% @client.properties.limit(2).each do |property| %>
       <div title='View' class='table-row' data-link='<%= property_path(property) %>'>
         <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
            <%= property.human_ref %>
@@ -83,7 +83,7 @@
         <div class='col-2-24  bottom-spacer  inherit-row  nowrap'>&nbsp;</div>
       </div>
     <% end %>
-    <% if @client.properties.drop(3).present? %>
+    <% if @client.properties.drop(2).present? %>
       <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
         &hellip;
       </div>
@@ -154,3 +154,72 @@
     <%= edit_link @client %>
   </div>
 </div>  <!-- grid  shell js-toggle-selection -->
+
+<div class='grid  shell  js-toggle-selection'>
+  <div class='js-togglable'>
+
+    <div class='col-3-4  grid-row'>
+      <h3 class='small-bottom'>Payments &hellip;</h3>
+    </div>
+    <div class='col-1-4  no-r-pad'>
+      <%= toggle_link direction: :down, size: '2x'  %>
+    </div>
+
+    abridged Payments
+  </div>
+
+  <div class='js-togglable  js-revealable'>
+
+    <div class='col-3-4  grid-row'>
+      <h3 class='small-bottom'>Payments</h3>
+    </div>
+    <div class='col-1-4  no-r-pad'>
+      <%= toggle_link direction: :up, size: '2x'   %>
+    </div>
+
+    <%= form_tag client_path, class: 'no-print', id: 'client_payment', method: 'get' do %>
+
+      <div class='col-4-24  grid-row  bottom-double-line-spacer  faded'>Payments in</div>
+      <div class='col-20-24  bottom-double-line-spacer'>
+        <%= select_tag 'years', options_for_select(@client_payment.years, selected: params[:years]), onchange: "$('#client_payment').submit();" %>
+      </div>
+    <% end %>
+
+    <div class='col-1-1  grid-row'>
+      <div class='tabs'>
+        <ul class='tab-links  no-print'>
+           <li class='active'><a href="#mar-sep">March/September</a></li>
+           <li><a href="#jun-dec">June/December</a></li>
+        </ul>
+
+        <div class='grid'>
+
+          <div id="mar-sep" class="tab  active">
+            <h4>Ground Rents Collected March/September <%= params[:years] %></h4>
+            <%= render 'client_payments/accounts_heading', mar: true, sep: true %>
+            <%= render 'client_payments/payments_made', accounts: @client_payment.mar_sep,
+                                        client_payment: @client_payment,
+                                        range_1: ClientPayment::MAR,
+                                        range_2: ClientPayment::SEP %>
+            <% if @client_payment.mar_sep.empty? %>
+              <%= render 'information/grid', information: 'The Client has no Mar/Sep properties.' %>
+            <% end %>
+          </div> <!-- close #mar-sep -->
+
+          <div id="jun-dec"  class="tab">
+            <h4>Ground Rents Collected June/December <%= params[:years] %></h4>
+            <%= render 'client_payments/accounts_heading', jun: true, dec: true %>
+            <%= render 'client_payments/payments_made', accounts: @client_payment.jun_dec,
+                                        client_payment: @client_payment,
+                                        range_1: ClientPayment::JUN,
+                                        range_2: ClientPayment::DEC %>
+            <% if @client_payment.jun_dec.empty? %>
+              <%= render 'information/grid', information: 'The Client has no Jun/Dec properties.' %>
+            <% end %>
+          </div> <!-- close #jun-dec -->
+        </div> <!-- grid shell tab-content  -->
+      </div> <!-- close tabs -->
+
+    </div> <!-- close grid-row  for tabs -->
+  </div>
+</div> <!-- grid  shell js-toggle-selection -->

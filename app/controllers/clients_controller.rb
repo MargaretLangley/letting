@@ -17,6 +17,10 @@ class ClientsController < ApplicationController
 
   def show
     @client = Client.includes(properties: [:address]).find params[:id]
+
+    params[:years] ||= Time.zone.now.year
+    @client_payment = ClientPayment
+                      .query client_id: params[:id], year: params[:years]
   end
 
   def new
