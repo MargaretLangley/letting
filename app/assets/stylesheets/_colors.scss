@@ -75,9 +75,16 @@ $errors-background:        #FFC;                 // Yellow
 $warn:                     #DC3D3D;              // Red
 
 
+/*
+  :notice things are GOOD,    colour: green
+  :alert  things are NEUTRAL, colour: yellow.
+  :error  things are BAD,     colour: red.
+*/
+
 /* $FLASH */
 $flash-notice:             #DBFFDD;              // Pale Green
-$flash-alert:              #FFE1DE;              // Pink
+$flash-alert:              $COLOR-2;             // Yellow
+$flash-error:              #FFE1DE;              // Pink
 $flash-opacity:            0.85;
 
 

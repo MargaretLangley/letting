@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     user = user_from_email
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, flash: { info: 'Logged in!' }
+      redirect_to root_path, flash: { good: 'Logged in!' }
     else
       alert_authentication_failed
       render 'new'
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to login_path, flash: { info: 'Logged out!' }
+    redirect_to login_path, flash: { good: 'Logged out!' }
   end
 
   private
@@ -38,6 +38,6 @@ class SessionsController < ApplicationController
   end
 
   def alert_authentication_failed
-    flash.now.alert = 'Email or password is invalid'
+    flash.now[:problem] = 'Email or password is invalid'
   end
 end

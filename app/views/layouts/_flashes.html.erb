@@ -3,12 +3,14 @@
     <% case key.to_sym %>
     <% when :save %>
       <%= fa_icon 'save lg', title: 'save' %>
+    <% when :good %>
+      <%= fa_icon 'info lg', title: 'Information' %>
+    <% when :problem %>
+      <%= fa_icon 'question lg', title: 'Problem' %>
     <% when :delete %>
       <%= fa_icon 'trash lg', title: 'delete' %>
-    <% when :info %>
-      <%= fa_icon 'info lg', title: 'Information' %>
     <% else  %>
-      <%= fa_icon 'question lg', title: 'Unknown' %>
+      <%= fa_icon 'frown-o lg', title: 'Unknown' %>
     <% end  %>
     &nbsp;<%= content_tag(:message, value) %>
   </div>
