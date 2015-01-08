@@ -19,7 +19,7 @@ gem 'sprockets', '~>2.12.3'
 gem 'autoprefixer-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '~> 2.5.0'
+gem 'uglifier', '~> 2.6.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
