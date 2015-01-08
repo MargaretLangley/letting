@@ -10,11 +10,11 @@
 # payments are broken into 6 month periods starting either Mar and Sep or
 # Jun and Dec - periods are always started on the 1st day of the month.
 #
+# rubocop: disable  Metrics/LineLength
+#
 class ClientPayment
-  MAR = 3
-  JUN = 6
-  SEP = 9
-  DEC = 12
+  MAR_SEP = [3, 9]
+  JUN_DEC = [6, 12]
   attr_reader :client_id, :year
   def initialize(client_id:, year:)
     @client_id = client_id
@@ -33,31 +33,25 @@ class ClientPayment
     (Time.zone.now.year.downto(Time.zone.now.year - 4)).map(&:to_s)
   end
 
-  def mar_sep
-    quarter_day_accounts(month: MAR)
+  def quarter_day_accounts(charge_months:)
+    Account.joins(:property)
+      .merge(client.properties.houses.quarter_day_in(charge_months.first))
+      .order('properties.human_ref ASC')
   end
 
-  def jun_dec
-    quarter_day_accounts(month: JUN)
-  end
-
-  def half_year_from(month:)
+  # 6 months periods
+  # month - starting month
+  #
+  def total_period(month:)
     time = Time.zone.local(year, month, 1)
     time..(time + 6.months)
   end
 
-  def half_year_total(month:)
-    range = half_year_from(month: month)
-    Payment.where(booked_at: range.first...range.last)
-      .where(account_id: quarter_day_accounts(month: month).pluck(:account_id))
+  def total(period:)
+    Payment.where(booked_on: period.first...period.last)
+      .where(account_id: quarter_day_accounts(charge_months: period.first.month..
+                                                             period.last.month)
+        .pluck(:account_id))
       .pluck(:amount).sum * -1
-  end
-
-  private
-
-  def quarter_day_accounts(month:)
-    Account.joins(:property)
-      .merge(client.properties.houses.quarter_day_in(month))
-      .order('properties.human_ref ASC')
   end
 end

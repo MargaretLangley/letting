@@ -15,27 +15,14 @@
       <%= property.address.town %>
     </div>
     <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
-      <%= number_with_precision(account.payments.date_range(range: client_payment.half_year_from(month: range_1)).sum(:amount) * -1, precision: 2) %>
+      <%= number_with_precision(account.payments.date_range(range: client_payment.total_period(month: range.first)).sum(:amount) * -1, precision: 2) %>
     </div>
     <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
-      <%= number_with_precision(account.payments.date_range(range: client_payment.half_year_from(month: range_2)).sum(:amount) * -1, precision: 2) %>
+      <%= number_with_precision(account.payments.date_range(range: client_payment.total_period(month: range.last)).sum(:amount) * -1, precision: 2) %>
     </div>
   </div>
 <% end %>
 
 <% if accounts.empty? %>
-  <%= render 'information/grid', information: "The Client has no #{Date::ABBR_MONTHNAMES[range_1]}/#{Date::ABBR_MONTHNAMES[range_2]} properties." %>
+  <%= render 'information/grid', information: "The Client has no #{Date::ABBR_MONTHNAMES[range.first]}/#{Date::ABBR_MONTHNAMES[range.last]} properties." %>
 <% end %>
-
-<div class='col-15-24  grid-row  grid-footer-text  vertical-spacer'>
-   &nbsp;
-</div>
-<div class='col-2-24  grid-footer-text  vertical-spacer'>
-   Total
-</div>
-<div class='col-3-24  grid-footer-number  vertical-spacer  r-align'>
-  <%= number_with_precision(client_payment.half_year_total(month: range_1), precision: 2) %>
-</div>
-<div class='col-3-24  grid-footer-number  vertical-spacer  r-align'>
-  <%= number_with_precision(client_payment.half_year_total(month: range_2), precision: 2) %>
-</div>

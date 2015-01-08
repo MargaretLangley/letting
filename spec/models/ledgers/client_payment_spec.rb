@@ -6,9 +6,9 @@ describe ClientPayment, :ledgers do
     expect(payment.years).to eq %w(2015 2014 2013 2012 2011)
   end
 
-  it 'calculates #half_year_from' do
+  it 'calculates #total_period' do
     payment = ClientPayment.query(year: 2012)
-    expect(payment.half_year_from(month: ClientPayment::MAR))
+    expect(payment.total_period(month: ClientPayment::MAR_SEP.first))
       .to eq Time.zone.local(2012, 3, 1, 00, 00, 00)..
              Time.zone.local(2012, 9, 1, 00, 00, 00)
   end

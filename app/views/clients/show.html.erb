@@ -165,7 +165,11 @@
       <%= toggle_link direction: :down, size: '2x'  %>
     </div>
 
-    abridged Payments
+    <%= render 'client_payments/payments_total', client_payment: @client_payment,
+                                                 range: ClientPayment::MAR_SEP %>
+
+    <%= render 'client_payments/payments_total', client_payment: @client_payment,
+                                                 range: ClientPayment::JUN_DEC %>
   </div>
 
   <div class='js-togglable  js-revealable'>
@@ -196,23 +200,23 @@
 
           <div id='mar-sep' class='tab  active  vertical-line-spacer'>
             <h3>Ground Rents Collected March/September <%= params[:years] %></h3>
-            <%= render 'client_payments/accounts_heading', range_1: ClientPayment::MAR,
-                                                           range_2: ClientPayment::SEP %>
-            <%= render 'client_payments/payments_made', accounts: @client_payment.mar_sep,
-                                        client_payment: @client_payment,
-                                        range_1: ClientPayment::MAR,
-                                        range_2: ClientPayment::SEP %>
+            <%= render 'client_payments/accounts_heading', range: ClientPayment::MAR_SEP %>
+            <%= render 'client_payments/payments_made', accounts: @client_payment.quarter_day_accounts(charge_months: ClientPayment::MAR_SEP),
+                                                        client_payment: @client_payment,
+                                                        range: ClientPayment::MAR_SEP %>
+            <%= render 'client_payments/payments_total', client_payment: @client_payment,
+                                                        range: ClientPayment::MAR_SEP %>
 
           </div> <!-- close #mar-sep -->
 
           <div id='jun-dec'  class='tab   vertical-line-spacer'>
             <h3>Ground Rents Collected June/December <%= params[:years] %></h3>
-            <%= render 'client_payments/accounts_heading', range_1: ClientPayment::JUN,
-                                                           range_2: ClientPayment::DEC  %>
-            <%= render 'client_payments/payments_made', accounts: @client_payment.jun_dec,
-                                        client_payment: @client_payment,
-                                        range_1: ClientPayment::JUN,
-                                        range_2: ClientPayment::DEC %>
+            <%= render 'client_payments/accounts_heading', range: ClientPayment::JUN_DEC %>
+            <%= render 'client_payments/payments_made', accounts: @client_payment.quarter_day_accounts(charge_months: ClientPayment::JUN_DEC),
+                                                        client_payment: @client_payment,
+                                                        range: ClientPayment::JUN_DEC %>
+            <%= render 'client_payments/payments_total', client_payment: @client_payment,
+                                                        range: ClientPayment::JUN_DEC %>
           </div> <!-- close #jun-dec -->
         </div> <!-- grid shell tab-content  -->
       </div> <!-- close tabs -->
