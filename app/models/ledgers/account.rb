@@ -18,7 +18,8 @@
 # Associations
 # Provides queries for account records - required by Payment and debits.
 #
-# rubocop: disable Metrics/MethodLength
+# rubocop: disable Metrics/MethodLength, Metrics/LineLength
+#
 ####
 #
 class Account < ActiveRecord::Base
@@ -69,6 +70,8 @@ class Account < ActiveRecord::Base
     debits
   end
 
+  # Create the credits from the account's charges
+  #
   def make_credits
     charges.map { |charge| create_credit charge }
   end
@@ -83,8 +86,8 @@ class Account < ActiveRecord::Base
 
   delegate :clear_up_form, to: :charges
 
-  def balance to_date: Time.zone.today
-    credits.before(to_date).total + debits.before(to_date).total
+  def balance to_time: Time.zone.today
+    debits.until(to_time).total - credits.until(to_time).total
   end
 
   # Query to return significant balances for all accounts
@@ -95,7 +98,7 @@ class Account < ActiveRecord::Base
     #
     query = <<-SQL
       SELECT id, property_id, sum(amount) as amount FROM (
-        SELECT accounts.id, property_id, coalesce(credits.amount, 0) as amount
+        SELECT accounts.id, property_id, coalesce(credits.amount * -1, 0) as amount
         FROM "accounts"
         LEFT JOIN credits ON credits.account_id = accounts.id
         UNION
@@ -134,6 +137,6 @@ class Account < ActiveRecord::Base
   def create_credit charge
     credits.build charge: charge,
                   on_date: Time.zone.today,
-                  amount: -charge.amount
+                  amount: charge.amount
   end
 end
