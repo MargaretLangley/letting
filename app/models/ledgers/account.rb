@@ -27,22 +27,16 @@ class Account < ActiveRecord::Base
     property.occupiers
   end
 
-  def address
-    property.address.text
-  end
+  has_many :payments, dependent: :destroy, inverse_of: :account
+  has_many :credits, dependent: :destroy
   has_many :debits, dependent: :destroy, inverse_of: :account do
     def exclusive? query_debit
-      self.any? do |debit|
-        debit.charge_id == query_debit.charge_id &&
-          debit.on_date == query_debit.on_date
-      end
+      self.any? { |debit| debit.like? query_debit }
     end
   end
-
   accepts_nested_attributes_for :debits, allow_destroy: true
-  has_many :credits, dependent: :destroy
-  accepts_nested_attributes_for :credits, allow_destroy: true
-  has_many :payments, dependent: :destroy, inverse_of: :account
+  has_many :snapshots, dependent: :destroy, inverse_of: :account
+
   MAX_CHARGES = 6
   has_many :charges, dependent: :destroy do
     def prepare
@@ -61,8 +55,6 @@ class Account < ActiveRecord::Base
     errors.add(:charges, 'Too many charges') if charges.size > MAX_CHARGES
   end
   accepts_nested_attributes_for :charges, allow_destroy: true
-
-  has_many :snapshots, dependent: :destroy, inverse_of: :account
 
   # accounting_period - the date range that we generate debits for.
   # returns        - debits array with data required to bill the
@@ -100,12 +92,10 @@ class Account < ActiveRecord::Base
   end
 
   # Query to return significant balances for all accounts
-  #
   # greater_than - level above which we return accounts.
   #
   def self.balance_all greater_than: 0
     # Coalesce require if you want to see accounts with 0 balances
-    #
     #
     query = <<-SQL
       SELECT id, property_id, sum(amount) as amount FROM (

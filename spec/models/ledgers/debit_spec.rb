@@ -123,6 +123,26 @@ describe Debit, :ledgers, type: :model do
       end
     end
 
+    describe '#like' do
+      it 'is like' do
+        lhs = debit_new charge_id: 1, on_date: '2014-01-02'
+        rhs = debit_new charge_id: 1, on_date: '2014-01-02'
+        expect(lhs.like? rhs).to be true
+      end
+
+      it 'is not like when charge different' do
+        lhs = debit_new charge_id: 1, on_date: '2014-01-02'
+        rhs = debit_new charge_id: 2, on_date: '2014-01-02'
+        expect(lhs.like? rhs).to be false
+      end
+
+      it 'is not like when date different' do
+        lhs = debit_new charge_id: 1, on_date: '2014-01-02'
+        rhs = debit_new charge_id: 1, on_date: '2015-02-03'
+        expect(lhs.like? rhs).to be false
+      end
+    end
+
     describe '#to_s' do
       it 'without charge' do
         expect(debit_new.to_s)
