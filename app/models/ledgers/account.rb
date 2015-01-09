@@ -83,12 +83,8 @@ class Account < ActiveRecord::Base
 
   delegate :clear_up_form, to: :charges
 
-  # Maybe way to get balance from database
-  # Credit.group(:account_id).sum(:amount)
-  # Debit.group(:account_id).sum(:amount)
   def balance to_date: Time.zone.today
-    (credits + debits).select { |transaction| transaction.on_date <= to_date }
-      .map(&:amount).inject(0, :+)
+    credits.before(to_date).total + debits.before(to_date).total
   end
 
   # Query to return significant balances for all accounts

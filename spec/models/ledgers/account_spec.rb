@@ -70,28 +70,35 @@ describe Account, :ledgers, type: :model do
 
   describe '#balance' do
     it 'calculates balance to_date' do
+      charge = charge_create
       account = account_new
-      account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
-      account.credits.push credit_new on_date: '25/4/2012', amount: -11.00
-      expect(account.balance to_date: Date.new(2013, 1, 1)).to eq(-1.00)
+      account.debits << debit_new(on_date: '2011-3-25', amount: 10.00, charge: charge)
+      account.credits << credit_new(on_date: '2012-4-25', amount: -11.00, charge: charge)
+      account.save!
+
+      expect(account.balance to_date: '2013-1-1').to eq(-1.00)
     end
 
     it 'ignores entries after date' do
+      charge = charge_create
       account = account_new
-      account.debits.push debit_new on_date: '25/3/2011', amount: 10.00
-      account.credits.push credit_new on_date: '25/4/2012', amount: -5.50
-      expect(account.balance to_date: Date.new(2012, 4, 24)).to eq 10.00
+      account.debits << debit_new(on_date: '2011-3-25', amount: 10.00, charge: charge)
+      account.credits << credit_new(on_date: '2012-4-25', amount: -11.00, charge: charge)
+      account.save!
+
+      expect(account.balance to_date: '2012-4-24').to eq 10.00
     end
 
     it 'smoke test' do
-      debit_1 = debit_new amount: 10, on_date: Date.new(2012, 3, 4)
-      debit_2 = debit_new amount: 10, on_date: Date.new(2013, 3, 4)
-      credit_1 = credit_new amount: -30, on_date: Date.new(2012, 3, 4)
-      credit_2 = credit_new amount: -30, on_date: Date.new(2013, 3, 4)
-      account = account_new credits: [credit_1, credit_2],
-                            debits: [debit_1, debit_2]
+      charge = charge_create
+      account = account_new
+      account.debits << debit_new(on_date: '4/3/2012', amount: 10.00, charge: charge)
+      account.debits << debit_new(on_date: '4/3/2013', amount: 10.00, charge: charge)
+      account.credits << credit_new(on_date: '4/3/2012', amount: -30.00, charge: charge)
+      account.credits << credit_new(on_date: '4/3/2012', amount: -30.00, charge: charge)
+      account.save!
 
-      expect(account.balance to_date: Date.new(2013, 4, 1)).to eq(-40.00)
+      expect(account.balance to_date: '2013-4-1').to eq(-40.00)
     end
   end
 

@@ -74,6 +74,9 @@ class Debit < ActiveRecord::Base
     }
   end
 
+  scope :total, -> { sum(:amount)  }
+  scope :before, -> (until_date) { where('? >= on_date', until_date) }
+
   # charge_id - the charge's being queried for unpaid debits.
   # returns unpaid debits for the charge_id
   #

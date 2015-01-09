@@ -37,32 +37,38 @@ describe Credit, :ledgers, type: :model do
     end
   end
 
-  describe '.credited' do
-    it 'finds credit in given range' do
-      credit_create on_date: '2014-3-1', charge: charge_create
-
-      expect(Credit.credited(range: Date.new(2014, 2, 1)..Date.new(2014, 4, 1)).size)
-        .to eq 1
-    end
-    it 'finds credit out of range' do
-      credit_create on_date: '2014-5-1', charge: charge_create
-
-      expect(Credit.credited(range: Date.new(2014, 2, 1)..Date.new(2014, 4, 1)).size)
-        .to eq 0
-    end
-  end
-
-  describe '.income' do
+  describe '.total' do
     it 'finds income as negative amount' do
       credit_create charge: charge_create, amount: -30
-      expect(Credit.income).to eq(-30.0)
+      expect(Credit.total).to eq(-30.0)
     end
 
     it 'finds income with multiple numbers' do
       charge = charge_create
       credit_create charge: charge, amount: -20
       credit_create charge: charge, amount: -10
-      expect(Credit.income).to eq(-30.00)
+      expect(Credit.total).to eq(-30.00)
+    end
+  end
+
+  describe '.before' do
+    it 'finds charges earlier than a date' do
+      credit_create charge: charge_create, amount: -30, on_date: '2008-3-2'
+
+      expect(Credit.before('2008-3-2').size).to eq 1
+    end
+
+    it 'ignores charges later than a date' do
+      credit_create charge: charge_create, amount: -30, on_date: '2008-3-3'
+
+      expect(Credit.before('2008-3-2').size).to eq 0
+    end
+
+    it 'finds income with multiple numbers' do
+      charge = charge_create
+      credit_create charge: charge, amount: -20
+      credit_create charge: charge, amount: -10
+      expect(Credit.total).to eq(-30.00)
     end
   end
 
