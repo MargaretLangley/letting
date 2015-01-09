@@ -25,7 +25,7 @@ class Payment < ActiveRecord::Base
 
   accepts_nested_attributes_for :credits, allow_destroy: true
   validates :account, :booked_on, presence: true
-  validates :amount, amount: true
+  validates :amount, price_bound: true
 
   def init
     self.amount = 0 if amount.blank?

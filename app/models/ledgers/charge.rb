@@ -24,7 +24,7 @@ class Charge < ActiveRecord::Base
   delegate :monthly?, to: :cycle
   validates :charge_type, :cycle, presence: true
   validates :payment_type, inclusion: { in: PAYMENT_TYPE }
-  validates :amount, amount: true
+  validates :amount, price_bound: true
   validates :amount, numericality: { less_than: 100_000 }
 
   after_initialize :init

@@ -38,8 +38,7 @@ class Debit < ActiveRecord::Base
   end
 
   validates :charge, :on_date, presence: true
-  # custom validates - numericality did not think -99_000 > -100_000
-  validates :amount, amount: true
+  validates :amount, price_bound: true
   before_save :reconcile
 
   delegate :automatic_payment?, to: :charge
