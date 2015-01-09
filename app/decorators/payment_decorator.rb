@@ -73,7 +73,7 @@ class PaymentDecorator
 
   def last_amount
     return '-' if last_payment == :no_last_payment
-    number_to_currency last_payment.negate.amount
+    number_to_currency last_payment.amount
   end
 
   def last_human_ref
@@ -83,7 +83,6 @@ class PaymentDecorator
 
   def todays_takings
     number_to_currency Payments.on
-      .map(&:negate)
       .map(&:amount).inject(0, &:+)
   end
 

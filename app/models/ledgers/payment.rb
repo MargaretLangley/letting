@@ -15,10 +15,6 @@ class Payment < ActiveRecord::Base
     def clear_up
       each(&:clear_up)
     end
-
-    def negate
-      each(&:negate)
-    end
   end
   after_initialize :init
   before_validation :clear_up
@@ -34,12 +30,6 @@ class Payment < ActiveRecord::Base
 
   def account_exists?
     account.present?
-  end
-
-  def negate
-    self.amount *= -1
-    credits.negate
-    self
   end
 
   def prepare
@@ -71,7 +61,6 @@ class Payment < ActiveRecord::Base
   private
 
   def clear_up
-    negate
     credits.clear_up
   end
 end

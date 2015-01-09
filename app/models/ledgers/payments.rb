@@ -16,7 +16,7 @@ class Payments
   attr_reader :payments
 
   def initialize payments
-    @payments = payments.map(&:negate)
+    @payments = payments
   end
 
   def to_a

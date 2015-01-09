@@ -47,10 +47,6 @@ class Credit < ActiveRecord::Base
     outstanding.round(2).zero?
   end
 
-  def negate
-    self.amount *= -1
-  end
-
   scope :total, -> { sum(:amount)  }
   scope :before, -> (until_date) { where('? >= on_date', until_date) }
 

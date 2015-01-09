@@ -32,7 +32,7 @@ describe 'payment' do
           .to change(Payment, :count).by(1)
       end
       it 'has amount' do
-        expect(payment_create(account: account_new).amount).to eq(-88.08)
+        expect(payment_create(account: account_new).amount).to eq(88.08)
       end
       it 'has date' do
         expect(payment_create(account: account_new).booked_on.to_date)
@@ -42,7 +42,7 @@ describe 'payment' do
     describe 'overrides' do
       it 'alters amount' do
         expect(payment_create(account: account_new, amount: 35.50).amount)
-          .to eq(-35.50)
+          .to eq(35.50)
       end
       it 'alters date' do
         expect(payment_create(account: account_new,

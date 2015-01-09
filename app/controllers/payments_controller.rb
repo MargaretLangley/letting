@@ -26,7 +26,6 @@ class PaymentsController < ApplicationController
 
   def show
     @payment = PaymentDecorator.new Payment.find params[:id]
-    @payment.negate
   end
 
   # params[:id] is the account_id returned from search_controller
@@ -34,7 +33,6 @@ class PaymentsController < ApplicationController
     account = Account.find_by id: params[:id]
     @payment = PaymentDecorator.new(Payment.new account: account)
     @payment.prepare_for_form
-    @payment.negate
   end
 
   def create
@@ -42,24 +40,20 @@ class PaymentsController < ApplicationController
                .new(Payment.new(payment_params.except(:human_ref)))
     @payment.timestamp_booking
     if @payment.save
-      @payment.negate
       redirect_to new_payment_path, flash: { save: created_message }
     else
-      @payment.negate
       render :new
     end
   end
 
   def edit
     @payment = PaymentDecorator.new Payment.find params[:id]
-    @payment.negate
   end
 
   def update
     @payment = PaymentDecorator.new Payment.find params[:id]
     @payment.assign_attributes payment_params
     if @payment.save
-      @payment.negate
       redirect_to new_payment_path, flash: { save: updated_message }
     else
       render :edit

@@ -43,7 +43,7 @@ describe Payment, :payment, :ledgers, type: :model do
       end
       it 'leaves defined amounts intact' do
         payment = payment_create account: account_new, amount: 10.50
-        expect(Payment.find(payment.id).amount).to eq(-10.50)
+        expect(Payment.find(payment.id).amount).to eq(10.50)
       end
     end
   end
@@ -109,24 +109,6 @@ describe Payment, :payment, :ledgers, type: :model do
         allow(payment.account).to receive(:charges).and_return [charge_new]
         payment.prepare
         expect(payment.credits.size).to eq(1)
-      end
-    end
-
-    describe '#negate' do
-      it 'amount sign change' do
-        payment = payment_new amount: -10
-        payment.negate
-        expect(payment.amount).to eq 10
-      end
-      it 'amount double sign change' do
-        payment = payment_new amount: -10
-        payment.negate.negate
-        expect(payment.amount).to eq(-10)
-      end
-      it 'credit sign change' do
-        payment = payment_new credit: credit_new(amount: -10)
-        payment.negate
-        expect(payment.credits.first.amount).to eq 10
       end
     end
 

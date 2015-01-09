@@ -28,8 +28,8 @@ describe Payment, :ledgers, :payment, type: :feature do
     payment_page.pay
 
     expect(payment_page).to be_successful
-    expect(Credit.first.amount.to_d).to eq(-15.05)
-    expect(Payment.first.amount.to_d).to eq(-15.05)
+    expect(Credit.first.amount.to_d).to eq(15.05)
+    expect(Payment.first.amount.to_d).to eq(15.05)
   end
 
   it 'displays form errors' do
@@ -42,10 +42,5 @@ describe Payment, :ledgers, :payment, type: :feature do
     payment_page.credit = 100_000_000
     payment_page.pay
     expect(payment_page).to be_errored
-    credit_negated?
-  end
-
-  def credit_negated?
-    expect(payment_page.credit.to_i).to be > 0
   end
 end

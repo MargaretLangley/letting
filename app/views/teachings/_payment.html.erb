@@ -1,3 +1,3 @@
 <div class='shell  overlay  top-9-12'>
-  <%= t('teachings.payments.property_payment', property_id: link_to(t(Account.first.property.human_ref), search_path(search_terms: Account.first.property.human_ref, search_model: 'Payment')), owner: link_to('owner', search_path(search_terms: Account.first.holder, search_model: 'Payment')), amount: link_to('amount', search_path(search_terms: Payment.first.negate.amount, search_model: 'Payment')) ).html_safe if Payment.first %>
+  <%= t('teachings.payments.property_payment', property_id: link_to(t(Account.first.property.human_ref), search_path(search_terms: Account.first.property.human_ref, search_model: 'Payment')), owner: link_to('owner', search_path(search_terms: Account.first.holder, search_model: 'Payment')), amount: link_to('amount', search_path(search_terms: Payment.first.amount, search_model: 'Payment')) ).html_safe if Payment.first %>
 </div>
