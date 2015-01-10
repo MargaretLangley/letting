@@ -44,10 +44,12 @@ class Debit < ActiveRecord::Base
   delegate :automatic_payment?, to: :charge
   delegate :charge_type, to: :charge
 
+  # Amount left to pay off on the debit.
   def outstanding
     amount - settled
   end
 
+  # If the debit has been settled or not.
   def paid?
     amount.round(2) == settled.round(2)
   end
@@ -83,6 +85,10 @@ class Debit < ActiveRecord::Base
     where(charge_id: charge_id).order(:on_date).reject(&:paid?)
   end
 
+  def self.debt_on_charge charge_id
+    available(charge_id).to_a.sum(&:outstanding)
+  end
+
   def to_s
     "id: #{id || 'nil'}, " \
     "charge_id: #{charge_id || 'nil'}, " \
@@ -98,6 +104,8 @@ class Debit < ActiveRecord::Base
     settlements.pluck(:amount).inject(0, :+)
   end
 
+  # Called on save to see if a debit can be matched to a credit
+  #
   def reconcile
     Settlement.resolve(outstanding,
                        Credit.available(charge_id)) do |offset, pay|

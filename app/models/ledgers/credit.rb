@@ -60,6 +60,8 @@ class Credit < ActiveRecord::Base
 
   private
 
+  # Called on save to see if a debit can be matched to a credit
+  #
   def reconcile
     Settlement.resolve(outstanding, Debit.available(charge_id)) do |offset, pay|
       settlements.build debit: offset, amount: pay

@@ -84,6 +84,22 @@ describe Credit, :ledgers, type: :model do
 
   describe 'class method' do
     describe '.available' do
+      it 'a created debit is available' do
+        charge = charge_create
+        credit_1 = credit_create charge: charge, on_date: '2012-4-1', amount: 15
+
+        expect(Credit.available charge.id).to eq [credit_1]
+      end
+
+      it 'a debit settled by a credit is not available' do
+        charge = charge_create
+        credit  = credit_create charge: charge, on_date: '2012-5-1', amount: -15
+        debit_create charge: charge, on_date: '2012-4-1', amount: 15
+        expect(credit).to be_spent
+
+        expect(Credit.available charge.id).to eq []
+      end
+
       it 'orders credits by date' do
         last  = credit_new on_date: Date.new(2013, 4, 1)
         first = credit_new on_date: Date.new(2012, 4, 1)

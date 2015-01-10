@@ -46,6 +46,6 @@ class CreditDecorator
   private
 
   def charge_debt
-    Debit.available(charge_id).to_a.sum(&:outstanding)
+    Debit.debt_on_charge(charge_id)
   end
 end

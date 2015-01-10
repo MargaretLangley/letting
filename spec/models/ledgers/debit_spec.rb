@@ -38,12 +38,53 @@ describe Debit, :ledgers, type: :model do
 
   describe 'class method' do
     describe '.available' do
+      it 'a created debit is available' do
+        charge = charge_create
+        debit_1 = debit_create charge: charge, on_date: '2012-4-1', amount: 15
+
+        expect(Debit.available charge.id).to eq [debit_1]
+      end
+
+      it 'a debit settled by a credit is not available' do
+        charge = charge_create
+        debit = debit_create charge: charge, on_date: '2012-4-1', amount: 15
+        credit_create charge: charge, on_date: '2012-5-1', amount: -15
+        expect(debit).to be_paid
+
+        expect(Debit.available charge.id).to eq []
+      end
+
       it 'orders debits by date' do
         last  = debit_new on_date: Date.new(2013, 4, 1)
         first = debit_new on_date: Date.new(2012, 4, 1)
         charge = charge_create debits: [last, first]
 
         expect(Debit.available charge.id).to eq [first, last]
+      end
+    end
+
+    describe '.debt_on_charge' do
+      it 'a debit value is outstanding' do
+        charge = charge_create
+        debit_create charge: charge, on_date: '2012-4-1', amount: 15
+
+        expect(Debit.debt_on_charge charge.id).to eq 15
+      end
+
+      it 'a debit values are additive' do
+        charge = charge_create
+        debit_create charge: charge, on_date: '2012-4-1', amount: 15
+        debit_create charge: charge, on_date: '2013-4-1', amount: 7
+
+        expect(Debit.debt_on_charge charge.id).to eq 22
+      end
+
+      it 'a credit values are removed' do
+        charge = charge_create
+        debit_create charge: charge, on_date: '2012-4-1', amount: 15
+        credit_create charge: charge, on_date: '2012-5-1', amount: -5
+
+        expect(Debit.debt_on_charge charge.id).to eq 10
       end
     end
   end
