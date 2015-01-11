@@ -14,24 +14,6 @@ module DB
         .to change(Credit, :count).by 1
     end
 
-    # TODO: remove negates as it no longers changes sign
-    describe 'negates' do
-      it 'changes sign on payments' do
-        property_create human_ref: 89,
-                        account: account_new(charges: [charge_create])
-
-        ImportPayment.import parse credit_row human_ref: 89, amount: 50.5
-        expect(Payment.first.amount).to eq(50.5)
-      end
-      it 'changes sign on credits' do
-        property_create human_ref: 89,
-                        account: account_new(charges: [charge_create])
-
-        ImportPayment.import parse credit_row human_ref: 89, amount: 50.5
-        expect(Credit.first.amount).to eq(50.5)
-      end
-    end
-
     describe 'errors' do
       it 'double import raises error' do
         property_create human_ref: 89,
