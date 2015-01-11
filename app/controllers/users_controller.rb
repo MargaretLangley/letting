@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find params[:id]
+    @user = UserDecorator.new User.find params[:id]
   end
 
   def new
