@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
 
   def authorize
     return if current_permission.allow? params[:controller], params[:action]
-    redirect_to login_path, notice: not_logged_in_message
+    redirect_to login_path, flash: { problem: not_logged_in_message }
   end
 
   def not_logged_in_message
