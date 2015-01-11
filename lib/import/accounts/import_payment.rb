@@ -30,7 +30,7 @@ module DB
 
     def model_prepared
       @model_to_assign = Payment.where(account_id: row.account_id,
-                                       booked_on: row.on_date)
+                                       booked_at: row.on_date)
                          .first_or_initialize
       fail DB::NotIdempotent, import_not_idempotent_msg, caller \
         unless @model_to_assign.new_record?

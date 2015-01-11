@@ -21,8 +21,8 @@ describe Payment, :payment, :ledgers, type: :model do
     end
     it 'requires date' do
       payment = payment_new
-      # note: default_initialization for booked_on
-      payment.booked_on = nil
+      # note: default_initialization for booked_at
+      payment.booked_at = nil
       expect(payment).to_not be_valid
     end
   end
@@ -31,9 +31,9 @@ describe Payment, :payment, :ledgers, type: :model do
     # changing for Date to DateTime - so I want test to fail if we use date
     before { Timecop.freeze Time.zone.local(2013, 9, 30, 2, 0) }
     after  { Timecop.return }
-    describe 'booked_on' do
-      it 'sets nil booked_on to today' do
-        expect(payment_new(booked_on: nil).booked_on)
+    describe 'booked_at' do
+      it 'sets nil booked_at to today' do
+        expect(payment_new(booked_at: nil).booked_at)
           .to eq Time.zone.now
       end
     end
@@ -55,31 +55,31 @@ describe Payment, :payment, :ledgers, type: :model do
 
     it 'booking time is current time if booking today' do
       payment = payment_new account: account_new,
-                            booked_on: Time.zone.local(2013, 9, 30, 10, 0)
+                            booked_at: Time.zone.local(2013, 9, 30, 10, 0)
 
       payment.timestamp_booking
 
-      expect(payment.booked_on)
+      expect(payment.booked_at)
         .to eq Time.zone.local(2013, 9, 30, 2, 0)
     end
 
     it 'booking time set to end of day if booking in past' do
       payment = payment_new account: account_new,
-                            booked_on: Time.zone.local(2013, 9, 29, 10, 0)
+                            booked_at: Time.zone.local(2013, 9, 29, 10, 0)
       payment.timestamp_booking
 
-      expect(payment.booked_on)
+      expect(payment.booked_at)
         .to be_within(5.seconds)
         .of(Time.zone.local(2013, 9, 29, 23, 59, 59, 999_999))
     end
 
     it 'booking time set to start of day if booking in future' do
       payment = payment_new account: account_new,
-                            booked_on: Time.zone.local(2013, 10, 1, 10, 0)
+                            booked_at: Time.zone.local(2013, 10, 1, 10, 0)
 
       payment.timestamp_booking
 
-      expect(payment.booked_on)
+      expect(payment.booked_at)
         .to be_within(5.seconds)
         .of(Time.zone.local(2013, 10, 1, 0, 0, 0))
     end
@@ -126,14 +126,14 @@ describe Payment, :payment, :ledgers, type: :model do
 
     describe '.date_range' do
       it 'returns if in range' do
-        payment_create booked_on: '30/4/2013 01:00:00 +0100',
+        payment_create booked_at: '30/4/2013 01:00:00 +0100',
                        account: account_create
         payments = Payment.date_range range: '2013-01-01'..'2013-12-31'
         expect(payments.size).to eq 1
       end
 
       it 'returns nothing if out of range' do
-        payment_create booked_on: '30/4/1999 01:00:00 +0100',
+        payment_create booked_at: '30/4/1999 01:00:00 +0100',
                        account: account_create
         payments = Payment.date_range range: '2013-01-01'..'2013-12-31'
         expect(payments.size).to eq 0

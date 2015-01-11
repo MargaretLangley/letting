@@ -217,7 +217,7 @@ ActiveRecord::Schema.define(version: 20141129154746) do
 
   create_table "payments", force: :cascade do |t|
     t.integer  "account_id",                         null: false
-    t.datetime "booked_on",                          null: false
+    t.datetime "booked_at",                          null: false
     t.decimal  "amount",     precision: 8, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -36,9 +36,9 @@
       <div class='col-1-24  grid-row  cell  pick-out'>&nbsp;</div>
       <div class='col-12-24  cell  pick-out'>
         <% if payment_dec.new_record? %>
-          <%= payment_form.date_field :booked_on %>
+          <%= payment_form.date_field :booked_at %>
         <% else %>
-          <%= payment_form.text_field :booked_on, readonly: true %>
+          <%= payment_form.text_field :booked_at, readonly: true %>
         <% end %>
       </div>
       <div class='col-3-24  cell  pick-out'>&nbsp;</div>

@@ -17,7 +17,7 @@
 #
 class PaymentsController < ApplicationController
   def index
-    params[:payment_search] ||= Payments.last_booked_on
+    params[:payment_search] ||= Payments.last_booked_at
 
     @records = Payments.on(date: params[:payment_search])
                .includes(joined_tables)
@@ -79,7 +79,7 @@ class PaymentsController < ApplicationController
   end
 
   def payment_attributes
-    %i(id account_id booked_on amount human_ref)
+    %i(id account_id booked_at amount human_ref)
   end
 
   def credit_attributes

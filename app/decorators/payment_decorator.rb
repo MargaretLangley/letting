@@ -41,14 +41,14 @@ class PaymentDecorator
     payment.account.property.human_ref
   end
 
-  # booked_on_dec
-  # decorates booked on with date
+  # booked_at_dec
+  # decorates booked_at with date
   #
-  # booked_on => booked_on dec as booked_on used by form to get raw date data.
+  # booked_at => booked_at dec as booked_at used by form to get raw date data.
   #
-  def booked_on_dec
-    return nil unless payment.booked_on
-    I18n.l payment.booked_on, format: :human
+  def booked_at_dec
+    return nil unless payment.booked_at
+    I18n.l payment.booked_at, format: :human
   end
 
   def amount

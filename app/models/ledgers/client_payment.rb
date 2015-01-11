@@ -48,7 +48,7 @@ class ClientPayment
 
   def half_year_total(month:)
     range = half_year_from(month: month)
-    Payment.where(booked_on: range.first...range.last)
+    Payment.where(booked_at: range.first...range.last)
       .where(account_id: quarter_day_accounts(month: month).pluck(:account_id))
       .pluck(:amount).sum * -1
   end

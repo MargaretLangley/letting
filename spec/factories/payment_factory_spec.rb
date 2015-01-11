@@ -10,9 +10,9 @@ describe 'payment' do
     end
 
     describe 'overrides' do
-      it 'alters on date' do
-        expect(payment_new(booked_on: '2012-03-25').booked_on)
-          .to eq Time.zone.local(2012, 03, 25)
+      it 'alters at_time' do
+        expect(payment_new(booked_at: '2012-03-25 13:00:00').booked_at)
+          .to eq Time.zone.local(2012, 03, 25, 13, 0, 0)
       end
       it('alters amount') { expect(payment_new(amount: 1).amount).to eq 1 }
     end
@@ -35,7 +35,7 @@ describe 'payment' do
         expect(payment_create(account: account_new).amount).to eq(88.08)
       end
       it 'has date' do
-        expect(payment_create(account: account_new).booked_on.to_date)
+        expect(payment_create(account: account_new).booked_at.to_date)
           .to eq Date.new 2013, 4, 30
       end
     end
@@ -46,7 +46,7 @@ describe 'payment' do
       end
       it 'alters date' do
         expect(payment_create(account: account_new,
-                              booked_on: '10/6/2014').booked_on.to_date)
+                              booked_at: '10/6/2014').booked_at.to_date)
           .to eq Date.new 2014, 6, 10
       end
 
@@ -56,8 +56,8 @@ describe 'payment' do
       it 'alters datetime' do
         payment =
           payment_create account: account_new,
-                         booked_on: Time.zone.local(2013, 9, 30, 10, 5, 6)
-        expect(payment.booked_on)
+                         booked_at: Time.zone.local(2013, 9, 30, 10, 5, 6)
+        expect(payment.booked_at)
           .to eq Time.zone.local(2013, 9, 30, 10, 5, 6)
       end
     end

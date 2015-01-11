@@ -17,15 +17,15 @@ describe Payments do
       expect(payments.sum).to eq 30
     end
 
-    describe '.last_booked_on' do
+    describe '.last_booked_at' do
       it 'returns today if no payments at all (unlikely)' do
-        expect(Payments.last_booked_on).to eq Time.zone.today.to_s
+        expect(Payments.last_booked_at).to eq Time.zone.today.to_s
       end
 
       it 'returns the last day a payment was made' do
-        payment_create(account: account_new, booked_on: '2014-03-25')
-        payment_create(account: account_new, booked_on: '2014-06-25')
-        expect(Payments.last_booked_on).to eq '2014-06-25'
+        payment_create(account: account_new, booked_at: '2014-03-25')
+        payment_create(account: account_new, booked_at: '2014-06-25')
+        expect(Payments.last_booked_at).to eq '2014-06-25'
       end
     end
 
@@ -33,7 +33,7 @@ describe Payments do
       it 'returns payments on queried day' do
         account = account_create property: property_new
         payment = payment_create account_id: account.id,
-                                 booked_on: '2014-9-1 16:29:30'
+                                 booked_at: '2014-9-1 16:29:30'
         expect(Payments.on(date: '2014-09-01').to_a).to eq [payment]
       end
 

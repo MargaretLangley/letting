@@ -20,12 +20,12 @@ class Payment < ActiveRecord::Base
   before_validation :clear_up
 
   accepts_nested_attributes_for :credits, allow_destroy: true
-  validates :account, :booked_on, presence: true
+  validates :account, :booked_at, presence: true
   validates :amount, price_bound: true
 
   def init
     self.amount = 0 if amount.blank?
-    self.booked_on = DateTime.current if booked_on.blank?
+    self.booked_at = DateTime.current if booked_at.blank?
   end
 
   def account_exists?
@@ -37,16 +37,16 @@ class Payment < ActiveRecord::Base
     credits.push(*account.make_credits)
   end
 
-  # form attributes come with booked_on as a date without a time.
+  # form attributes come with booked_at as a date without a time.
   # if the date is today we add the current time on.
   def timestamp_booking
-    return unless booked_on
-    self.booked_on = ClockIn.new.recorded_as booked_time: booked_on.to_date,
+    return unless booked_at
+    self.booked_at = ClockIn.new.recorded_as booked_time: booked_at.to_date,
                                              add_time: true
   end
 
   def self.date_range(range: '2013-01-01'..'2013-12-31')
-    where(booked_on: range.first...range.last)
+    where(booked_at: range.first...range.last)
   end
 
   include Searchable

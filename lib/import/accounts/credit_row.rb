@@ -73,7 +73,7 @@ module DB
     def payment_attributes
       {
         account_id: account_id,
-        booked_on: on_date,
+        booked_at: on_date,
         amount: amount,
       }
     end
