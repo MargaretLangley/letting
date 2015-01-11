@@ -60,7 +60,7 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
 
         expect(ch.coming Date.new(2013, 3, 5)..Date.new(2013, 3, 5))
           .to eq [chargeable_new(charge_id: ch.id,
-                                 on_date: Date.new(2013, 3, 5))]
+                                 at_time: Date.new(2013, 3, 5))]
       end
 
       it 'returns charges in date order - regardless of crossing year'  do
@@ -69,9 +69,9 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
 
         expect(ch.coming Date.new(2010, 9, 5)..Date.new(2011, 9, 4))
           .to eq [chargeable_new(charge_id: ch.id,
-                                 on_date: Date.new(2010, 12, 30)),
+                                 at_time: Date.new(2010, 12, 30)),
                   chargeable_new(charge_id: ch.id,
-                                 on_date: Date.new(2011, 3, 5))]
+                                 at_time: Date.new(2011, 3, 5))]
       end
 
       it 'no charge if billing period misses all due_on' do
@@ -91,7 +91,7 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
 
         expect(ch.coming Date.new(2032, 3, 5)..Date.new(2032, 3, 5))
           .to eq [chargeable_new(charge_id: ch.id,
-                                 on_date: Date.new(2032, 3, 5))]
+                                 at_time: Date.new(2032, 3, 5))]
       end
     end
 

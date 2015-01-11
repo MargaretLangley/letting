@@ -14,8 +14,8 @@ describe Credit, :ledgers, type: :model do
         (credit = credit_new).valid?
         expect(credit.errors.first).to eq [:charge, "can't be blank"]
       end
-      it 'on_date' do
-        (credit = credit_new).on_date = nil
+      it 'at_time' do
+        (credit = credit_new).at_time = nil
         expect(credit).to_not be_valid
       end
     end
@@ -55,7 +55,7 @@ describe Credit, :ledgers, type: :model do
     it 'finds charges earlier than a date' do
       credit_create charge: charge_create,
                     amount: 30,
-                    on_date: Time.zone.local(2008, 3, 2, 0, 0, 0)
+                    at_time: Time.zone.local(2008, 3, 2, 0, 0, 0)
 
       expect(Credit.until(Time.zone.local(2008, 3, 2, 12, 0, 0)).size).to eq 1
     end
@@ -63,7 +63,7 @@ describe Credit, :ledgers, type: :model do
     it 'ignores charges later than a date' do
       credit_create charge: charge_create,
                     amount: 30,
-                    on_date: Time.zone.local(2008, 3, 2, 12, 0, 0)
+                    at_time: Time.zone.local(2008, 3, 2, 12, 0, 0)
 
       expect(Credit.until(Time.zone.local(2008, 3, 2, 0, 0, 0)).size).to eq 0
     end
@@ -80,8 +80,8 @@ describe Credit, :ledgers, type: :model do
     before { Timecop.travel Date.new(2013, 9, 30) }
     after { Timecop.return }
 
-    it 'has on_date' do
-      expect(credit_new(on_date: nil).on_date.to_s)
+    it 'has at_time' do
+      expect(credit_new(at_time: nil).at_time.to_s)
         .to eq Time.zone.local(2013, 9, 30, 0, 0, 0, '+1').to_s
     end
   end
@@ -90,23 +90,23 @@ describe Credit, :ledgers, type: :model do
     describe '.available' do
       it 'a created debit is available' do
         charge = charge_create
-        credit_1 = credit_create charge: charge, on_date: '2012-4-1', amount: 15
+        credit_1 = credit_create charge: charge, at_time: '2012-4-1', amount: 15
 
         expect(Credit.available charge.id).to eq [credit_1]
       end
 
       it 'a debit settled by a credit is not available' do
         charge = charge_create
-        credit  = credit_create charge: charge, on_date: '2012-5-1', amount: -15
-        debit_create charge: charge, on_date: '2012-4-1', amount: 15
+        credit  = credit_create charge: charge, at_time: '2012-5-1', amount: -15
+        debit_create charge: charge, at_time: '2012-4-1', amount: 15
         expect(credit).to be_spent
 
         expect(Credit.available charge.id).to eq []
       end
 
       it 'orders credits by date' do
-        last  = credit_new on_date: '2013-4-1'
-        first = credit_new on_date: '2012-4-1'
+        last  = credit_new at_time: '2013-4-1'
+        first = credit_new at_time: '2012-4-1'
         charge = charge_create credits: [last, first]
 
         expect(Credit.available charge.id).to eq [first, last]

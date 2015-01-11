@@ -44,17 +44,17 @@ module DB
       row[:charge_code]
     end
 
-    def on_date
+    def at_time
       # HACK: All legacy data comes in at midnight.
       #       by pushing forward the 'time' balance occurs before any debits.
-      row[:on_date].to_datetime + 3.hours
+      row[:at_time].to_datetime + 3.hours
     end
 
     def period
       period = charge(account: account(human_ref: human_ref),
                       charge_type: charge_type)
                .cycle
-               .bill_period(billed_on: on_date.to_date)
+               .bill_period(billed_on: at_time.to_date)
       fail PeriodUnknown,
            period_message,
            caller unless period != :missing_due_on
@@ -81,7 +81,7 @@ module DB
     def attributes
       {
         charge_id: charge_id,
-        on_date: on_date,
+        at_time: at_time,
         period: period,
         amount: amount,
       }
@@ -89,7 +89,7 @@ module DB
 
     def period_message
       "Period Unknown: Property #{human_ref} charge_code: #{charge_code} "\
-      "on_date: #{on_date}"
+      "at_time: #{at_time}"
     end
 
     private

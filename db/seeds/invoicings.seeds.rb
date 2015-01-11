@@ -7,8 +7,8 @@ after :invoice_texts do
 
   class << self
     def create_date months_ago
-        on_date = Time.zone.today - months_ago.months
-        "#{on_date.year}/#{on_date.month }/01"
+        at_time = Time.zone.today - months_ago.months
+        "#{at_time.year}/#{at_time.month }/01"
     end
 
     def create_debits
@@ -19,7 +19,7 @@ after :invoice_texts do
           account_id: 1,
           snapshot_id: 1,
           charge_id: 1,
-          on_date: create_date(17),
+          at_time: create_date(17),
           period:create_date(17)..create_date(14),
           amount: Charge.find(1).amount
         },
@@ -28,7 +28,7 @@ after :invoice_texts do
           account_id: 1,
           snapshot_id: 1,
           charge_id: 2,
-          on_date: create_date(5),
+          at_time: create_date(5),
           period:create_date(5)..create_date(2),
           amount: Charge.find(2).amount
         },

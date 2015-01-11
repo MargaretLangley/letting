@@ -136,7 +136,7 @@ class Account < ActiveRecord::Base
 
   def create_credit charge
     credits.build charge: charge,
-                  on_date: Time.zone.today,
+                  at_time: Time.zone.today,
                   amount: charge.amount
   end
 end

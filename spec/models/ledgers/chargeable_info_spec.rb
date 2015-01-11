@@ -4,7 +4,7 @@ describe Chargeable, :ledgers, type: :model do
   let(:chargeable) do
     Chargeable.from_charge charge_id: 1,
                            account_id: 2,
-                           on_date: Date.new(2013, 3, 25),
+                           at_time: Date.new(2013, 3, 25),
                            period: Date.new(2013, 3, 25)..Date.new(2013, 6, 30),
                            amount: 88.08
   end
@@ -12,7 +12,7 @@ describe Chargeable, :ledgers, type: :model do
   describe 'attributes' do
     it('account_id') { expect(chargeable.account_id).to eq 2 }
     it('charge_id') { expect(chargeable.charge_id).to eq 1 }
-    it('date') { expect(chargeable.on_date).to eq Date.new(2013, 3, 25) }
+    it('date') { expect(chargeable.at_time).to eq Date.new(2013, 3, 25) }
     it 'period' do
       expect(chargeable.period)
         .to eq Date.new(2013, 3, 25)..Date.new(2013, 6, 30)
@@ -25,7 +25,7 @@ describe Chargeable, :ledgers, type: :model do
       chargeable = Chargeable.from_charge \
                           account_id: 2,
                           charge_id: 1,
-                          on_date: Date.new(2013, 3, 25),
+                          at_time: Date.new(2013, 3, 25),
                           period:  Date.new(2013, 3, 25)..Date.new(2013, 6, 30),
                           amount: 88.08
       expect(chargeable.class).to be Chargeable
@@ -36,7 +36,7 @@ describe Chargeable, :ledgers, type: :model do
         expect(chargeable.to_hash)
           .to eq account_id: 2,
                  charge_id: 1,
-                 on_date: Date.new(2013, 3, 25),
+                 at_time: Date.new(2013, 3, 25),
                  period: Date.new(2013, 3, 25)..Date.new(2013, 6, 30),
                  amount: 88.08
       end

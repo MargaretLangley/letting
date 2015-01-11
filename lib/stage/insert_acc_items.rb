@@ -15,7 +15,7 @@ class InsertAccItems < Insert
     originals.sort_by! do |item|
       [item[:human_ref].to_i,
        item[:charge_type],
-       item[:on_date]]
+       item[:at_time]]
     end
   end
 end

@@ -37,7 +37,7 @@ class Debit < ActiveRecord::Base
     self.period_last  = bill_range.last
   end
 
-  validates :charge, :on_date, presence: true
+  validates :charge, :at_time, presence: true
   validates :amount, price_bound: true
   before_save :reconcile
 
@@ -56,33 +56,33 @@ class Debit < ActiveRecord::Base
 
   def <=> other
     return nil unless other.is_a?(self.class)
-    [charge_id, on_date, amount] <=>
-      [other.charge_id, other.on_date, other.amount]
+    [charge_id, at_time, amount] <=>
+      [other.charge_id, other.at_time, other.amount]
   end
 
   # has a debit with charge and date exist?
   def like? other
-    charge_id == other.charge_id && on_date == other.on_date
+    charge_id == other.charge_id && at_time == other.at_time
   end
 
   def to_debitable
     {
       charge_type: charge_type,
       automatic_payment: automatic_payment?,
-      date_due: on_date,
+      date_due: at_time,
       period: period,
       amount: amount,
     }
   end
 
   scope :total, -> { sum(:amount)  }
-  scope :until, -> (until_time) { where('? >= on_date', until_time) }
+  scope :until, -> (until_time) { where('? >= at_time', until_time) }
 
   # charge_id - the charge's being queried for unpaid debits.
   # returns unpaid debits for the charge_id
   #
   def self.available charge_id
-    where(charge_id: charge_id).order(:on_date).reject(&:paid?)
+    where(charge_id: charge_id).order(:at_time).reject(&:paid?)
   end
 
   # Calculation of the outstanding debt on a charge
@@ -94,7 +94,7 @@ class Debit < ActiveRecord::Base
   def to_s
     "id: #{id || 'nil'}, " \
     "charge_id: #{charge_id || 'nil'}, " \
-    "on_date: #{on_date.to_date}+t, " \
+    "at_time: #{at_time.to_date}+t, " \
     "period: #{period}, " \
     "outstanding: #{outstanding}, " \
     "amount: #{amount}, " +

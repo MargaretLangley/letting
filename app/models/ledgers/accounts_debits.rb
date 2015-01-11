@@ -44,7 +44,7 @@ class AccountsDebits
 
   def make_account_debits account
     account.debits_coming(debit_period).map do |debit|
-      AccountDebit.new(date_due: debit.on_date.to_date,
+      AccountDebit.new(date_due: debit.at_time.to_date,
                        charge_type: debit.charge_type,
                        property_ref: account.property.human_ref,
                        amount: debit.amount)

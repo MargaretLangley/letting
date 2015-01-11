@@ -22,13 +22,13 @@ class Credit < ActiveRecord::Base
   has_many :debits, through: :settlements
   has_many :settlements, dependent: :destroy
 
-  validates :charge, :on_date, presence: true
+  validates :charge, :at_time, presence: true
   validates :amount, price_bound: true
   after_initialize :init
   before_save :reconcile
 
   def init
-    self.on_date = Time.zone.today if on_date.blank?
+    self.at_time = Time.zone.today if at_time.blank?
   end
 
   def clear_up
@@ -48,16 +48,16 @@ class Credit < ActiveRecord::Base
   end
 
   scope :total, -> { sum(:amount)  }
-  scope :until, -> (until_time) { where('? >= on_date', until_time) }
+  scope :until, -> (until_time) { where('? >= at_time', until_time) }
 
   def self.available charge_id
-    where(charge_id: charge_id).order(:on_date).reject(&:spent?)
+    where(charge_id: charge_id).order(:at_time).reject(&:spent?)
   end
 
   def to_s
     "id: #{id || 'nil'}, " \
     "charge_id: #{charge_id || 'nil'}, " \
-    "on_date: #{on_date.to_date}+t, " \
+    "at_time: #{at_time.to_date}+t, " \
     "outstanding: #{outstanding}, " \
     "amount: #{amount}, " +
       charge_to_s

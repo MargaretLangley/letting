@@ -27,7 +27,7 @@ after 'charges', 'properties' do
       payment_id: 1,
       charge_id: 1,
       account_id: 1,
-      on_date: create_date(15),
+      at_time: create_date(15),
       amount: 88.08,
     },
   ]

@@ -45,7 +45,7 @@ describe InvoiceDecorator do
 
   describe '#earliest_date_due' do
     it 'set to product due_date if available' do
-      debit = debit_new on_date: '2010-03-25', charge: charge_new
+      debit = debit_new at_time: '2010-03-25', charge: charge_new
       snapshot = snapshot_new(account: account_new, debits: [debit])
 
       invoice_dec = InvoiceDecorator.new invoice_new invoice_date: '2000/1/1',

@@ -4,8 +4,8 @@ describe 'ChargeableFactory' do
   describe 'default' do
     it('has account_id') { expect(chargeable_new.account_id).to eq 2 }
     it('has charge_id') { expect(chargeable_new.charge_id).to eq 1 }
-    it 'has on_date' do
-      expect(chargeable_new.on_date).to eq Date.new(2013, 3, 25)
+    it 'has at_time' do
+      expect(chargeable_new.at_time).to eq Date.new(2013, 3, 25)
     end
     it 'has period' do
       expect(chargeable_new.period)

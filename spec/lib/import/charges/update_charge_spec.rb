@@ -21,8 +21,8 @@ module DB
       it 'updates start date when charge debited' do
         charge = charge_new start_date: DateDefaults::MIN,
                             end_date: DateDefaults::MAX,
-                            debits: [debit_new(on_date: '2013-3-25'),
-                                     debit_new(on_date: '2012-3-25')]
+                            debits: [debit_new(at_time: '2013-3-25'),
+                                     debit_new(at_time: '2012-3-25')]
         account_new(charges: [charge]).save!
 
         UpdateCharge.do
@@ -33,8 +33,8 @@ module DB
       it 'updates start and end of charge when charge has finished' do
         charge = charge_new start_date: DateDefaults::MIN,
                             end_date: DateDefaults::MAX,
-                            debits: [debit_new(on_date: '2012-3-25'),
-                                     debit_new(on_date: '2011-3-25')]
+                            debits: [debit_new(at_time: '2012-3-25'),
+                                     debit_new(at_time: '2011-3-25')]
         (account_new charges: [charge]).save!
 
         UpdateCharge.do

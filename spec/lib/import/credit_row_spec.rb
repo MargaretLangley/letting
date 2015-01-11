@@ -16,7 +16,7 @@ module DB
 
     it('human_ref') { expect(row(human_ref: 9).human_ref).to eq 9 }
     it('charge_code') { expect(row(charge_code: 'GR').charge_code).to eq 'GR' }
-    it('on_date') { expect(row.on_date).to eq '2012-03-25 12:00:00' }
+    it('at_time') { expect(row.at_time).to eq '2012-03-25 12:00:00' }
     it('amount') { expect(row(amount: '5.5').amount).to eq(5.5) }
 
     def parse_line row_string

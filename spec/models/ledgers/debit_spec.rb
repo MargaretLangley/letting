@@ -10,8 +10,8 @@ describe Debit, :ledgers, type: :model do
         (debit = debit_new).valid?
         expect(debit.errors.first).to eq [:charge, "can't be blank"]
       end
-      it 'on_date' do
-        debit.on_date = nil
+      it 'at_time' do
+        debit.at_time = nil
         expect(debit).to_not be_valid
       end
       it('amount') { debit_new amount: nil }
@@ -40,23 +40,23 @@ describe Debit, :ledgers, type: :model do
     describe '.available' do
       it 'a created debit is available' do
         charge = charge_create
-        debit_1 = debit_create charge: charge, on_date: '2012-4-1', amount: 15
+        debit_1 = debit_create charge: charge, at_time: '2012-4-1', amount: 15
 
         expect(Debit.available charge.id).to eq [debit_1]
       end
 
       it 'a debit settled by a credit is not available' do
         charge = charge_create
-        debit = debit_create charge: charge, on_date: '2012-4-1', amount: 15
-        credit_create charge: charge, on_date: '2012-5-1', amount: 15
+        debit = debit_create charge: charge, at_time: '2012-4-1', amount: 15
+        credit_create charge: charge, at_time: '2012-5-1', amount: 15
         expect(debit).to be_paid
 
         expect(Debit.available charge.id).to eq []
       end
 
       it 'orders debits by date' do
-        last  = debit_new on_date: Date.new(2013, 4, 1)
-        first = debit_new on_date: Date.new(2012, 4, 1)
+        last  = debit_new at_time: Date.new(2013, 4, 1)
+        first = debit_new at_time: Date.new(2012, 4, 1)
         charge = charge_create debits: [last, first]
 
         expect(Debit.available charge.id).to eq [first, last]
@@ -66,23 +66,23 @@ describe Debit, :ledgers, type: :model do
     describe '.debt_on_charge' do
       it 'a debit value is outstanding' do
         charge = charge_create
-        debit_create charge: charge, on_date: '2012-4-1', amount: 15
+        debit_create charge: charge, at_time: '2012-4-1', amount: 15
 
         expect(Debit.debt_on_charge charge.id).to eq 15
       end
 
       it 'a debit values are additive' do
         charge = charge_create
-        debit_create charge: charge, on_date: '2012-4-1', amount: 15
-        debit_create charge: charge, on_date: '2013-4-1', amount: 7
+        debit_create charge: charge, at_time: '2012-4-1', amount: 15
+        debit_create charge: charge, at_time: '2013-4-1', amount: 7
 
         expect(Debit.debt_on_charge charge.id).to eq 22
       end
 
       it 'a credit values are removed' do
         charge = charge_create
-        debit_create charge: charge, on_date: '2012-4-1', amount: 15
-        credit_create charge: charge, on_date: '2012-5-1', amount: 5
+        debit_create charge: charge, at_time: '2012-4-1', amount: 15
+        credit_create charge: charge, at_time: '2012-5-1', amount: 5
 
         expect(Debit.debt_on_charge charge.id).to eq 10
       end
@@ -145,20 +145,20 @@ describe Debit, :ledgers, type: :model do
 
     describe '#<=>' do
       it 'returns 0 when equal' do
-        lhs = debit_new charge_id: 1, on_date: '2014-01-02', amount: 5.00
-        rhs = debit_new charge_id: 1, on_date: '2014-01-02', amount: 5.00
+        lhs = debit_new charge_id: 1, at_time: '2014-01-02', amount: 5.00
+        rhs = debit_new charge_id: 1, at_time: '2014-01-02', amount: 5.00
         expect(lhs <=> rhs).to eq(0)
       end
 
       it 'returns 1 when lhs > rhs' do
-        lhs = debit_new charge_id: 1, on_date: '2014-01-02', amount: 6.00
-        rhs = debit_new charge_id: 1, on_date: '2014-01-02', amount: 5.00
+        lhs = debit_new charge_id: 1, at_time: '2014-01-02', amount: 6.00
+        rhs = debit_new charge_id: 1, at_time: '2014-01-02', amount: 5.00
         expect(lhs <=> rhs).to eq(1)
       end
 
       it 'returns -1 when lhs < rhs' do
-        lhs = debit_new charge_id: 1, on_date: '2014-01-02', amount: 5.00
-        rhs = debit_new charge_id: 2, on_date: '2014-01-02', amount: 5.00
+        lhs = debit_new charge_id: 1, at_time: '2014-01-02', amount: 5.00
+        rhs = debit_new charge_id: 2, at_time: '2014-01-02', amount: 5.00
         expect(lhs <=> rhs).to eq(-1)
       end
 
@@ -169,20 +169,20 @@ describe Debit, :ledgers, type: :model do
 
     describe '#like' do
       it 'is like' do
-        lhs = debit_new charge_id: 1, on_date: '2014-01-02'
-        rhs = debit_new charge_id: 1, on_date: '2014-01-02'
+        lhs = debit_new charge_id: 1, at_time: '2014-01-02'
+        rhs = debit_new charge_id: 1, at_time: '2014-01-02'
         expect(lhs.like? rhs).to be true
       end
 
       it 'is not like when charge different' do
-        lhs = debit_new charge_id: 1, on_date: '2014-01-02'
-        rhs = debit_new charge_id: 2, on_date: '2014-01-02'
+        lhs = debit_new charge_id: 1, at_time: '2014-01-02'
+        rhs = debit_new charge_id: 2, at_time: '2014-01-02'
         expect(lhs.like? rhs).to be false
       end
 
       it 'is not like when date different' do
-        lhs = debit_new charge_id: 1, on_date: '2014-01-02'
-        rhs = debit_new charge_id: 1, on_date: '2015-02-03'
+        lhs = debit_new charge_id: 1, at_time: '2014-01-02'
+        rhs = debit_new charge_id: 1, at_time: '2015-02-03'
         expect(lhs.like? rhs).to be false
       end
     end
@@ -192,7 +192,7 @@ describe Debit, :ledgers, type: :model do
         expect(debit_new(amount: 5).to_s)
           .to eq 'id: nil, ' \
                  'charge_id: nil, ' \
-                 'on_date: 2013-03-25+t, ' \
+                 'at_time: 2013-03-25+t, ' \
                  'period: 2013-03-25..2013-06-30, ' \
                  'outstanding: 5.0, ' \
                  'amount: 5.0, ' \

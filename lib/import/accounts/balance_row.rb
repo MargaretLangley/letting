@@ -34,8 +34,8 @@ module DB
       row[:charge_code]
     end
 
-    def on_date
-      Time.zone.parse(row[:on_date]).beginning_of_day
+    def at_time
+      Time.zone.parse(row[:at_time]).beginning_of_day
     end
 
     def description_to_charge
@@ -57,10 +57,10 @@ module DB
       row_charge.id
     end
 
-    def next_on_date
-      row_charge.coming(on_date..on_date + 1.year - 1.day)
+    def next_at_time
+      row_charge.coming(at_time..at_time + 1.year - 1.day)
         .first
-        .on_date
+        .at_time
         .beginning_of_day
     end
 
@@ -76,13 +76,13 @@ module DB
     end
 
     def period
-      DateDefaults::MIN..on_date
+      DateDefaults::MIN..at_time
     end
 
     def attributes
       {
         charge_id: charge_id,
-        on_date: next_on_date,
+        at_time: next_at_time,
         period: period,
         amount: amount,
       }

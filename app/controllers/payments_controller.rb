@@ -83,7 +83,7 @@ class PaymentsController < ApplicationController
   end
 
   def credit_attributes
-    %i(id account_id charge_id debit_id on_date amount)
+    %i(id account_id charge_id debit_id at_time amount)
   end
 
   def identity

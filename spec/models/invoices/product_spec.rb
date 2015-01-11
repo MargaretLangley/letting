@@ -27,7 +27,7 @@ RSpec.describe Product, type: :model do
 
   describe '.arrears' do
     it 'creates arrears given arguments' do
-      debit = debit_new on_date: '1999/01/01', amount: 8, charge: charge_new
+      debit = debit_new at_time: '1999/01/01', amount: 8, charge: charge_new
 
       arrears = Product.arrears account: account_create(debits: [debit]),
                                 date_due: '2001/01/30'

@@ -29,8 +29,8 @@ module DB
 
     it('human_ref') { expect(row(human_ref: 9).human_ref).to eq 9 }
     it('charge_code') { expect(row(charge_code: 'GR').charge_code).to eq 'GR' }
-    it 'on_date' do
-      expect(row(date: '2012-03-20 00:00:00').on_date)
+    it 'at_time' do
+      expect(row(date: '2012-03-20 00:00:00').at_time)
         .to eq Time.zone.local(2012, 3, 20, 0, 0, 0)
     end
     it('amount') { expect(row(amount: 5.5).amount).to eq(5.5) }
@@ -40,7 +40,7 @@ module DB
       property_create human_ref: 9, account: account_new(charges: [charge])
       row = row(charge_code: 'Ins', amount: 3.05)
       expect(row.attributes[:charge_id]).to eq charge.id
-      expect(row.attributes[:on_date]).to eq Time.zone.local(2012, 3, 25, 0, 0, 0)
+      expect(row.attributes[:at_time]).to eq Time.zone.local(2012, 3, 25, 0, 0, 0)
       expect(row.attributes[:amount]).to eq 3.05
     end
 
@@ -71,23 +71,23 @@ module DB
         end
       end
 
-      describe '#next_on_date' do
-        it 'finds next on_date' do
+      describe '#next_at_time' do
+        it 'finds next at_time' do
           cycle = cycle_new(due_ons: [DueOn.new(month: 4, day: 1)])
           charge = charge_new charge_type: GROUND_RENT,
                               cycle: cycle
           property_create human_ref: 9, account: account_new(charges: [charge])
 
-          expect(row.next_on_date).to eq Time.zone.local(2012, 4, 1, 0, 0, 0)
+          expect(row.next_at_time).to eq Time.zone.local(2012, 4, 1, 0, 0, 0)
         end
 
-        it 'finds next on_date even if same as due_date' do
+        it 'finds next at_time even if same as due_date' do
           cycle = cycle_new(due_ons: [DueOn.new(month: 3, day: 24)])
           charge = charge_new charge_type: GROUND_RENT,
                               cycle: cycle
           property_create human_ref: 9, account: account_new(charges: [charge])
 
-          expect(row.next_on_date).to eq Time.zone.local(2012, 3, 24, 0, 0, 0)
+          expect(row.next_at_time).to eq Time.zone.local(2012, 3, 24, 0, 0, 0)
         end
       end
     end

@@ -26,7 +26,7 @@ class AccountDebitDecorator
   delegate :charge_type, to: :debit
 
   def date
-    I18n.l debit.on_date, format: :short
+    I18n.l debit.at_time, format: :short
   end
 
   def description

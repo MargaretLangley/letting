@@ -25,8 +25,8 @@ module DB
 
     it('human_ref') { expect(row(human_ref: 9).human_ref).to eq 9 }
     it('charge_code') { expect(row(charge_code: 'GR').charge_code).to eq 'GR' }
-    it 'on_date' do
-      expect(row(date: '2012-03-20 00:00:00').on_date)
+    it 'at_time' do
+      expect(row(date: '2012-03-20 00:00:00').at_time)
         .to eq '2012-03-20 03:00:00'
     end
     it('amount') { expect(row(amount: 5.5).amount).to eq(5.5) }
@@ -47,7 +47,7 @@ module DB
       row = row(charge_code: 'Ins', amount: 3.05)
 
       expect(row.attributes[:charge_id]).to eq charge.id
-      expect(row.attributes[:on_date]).to eq '2012-03-25 03:00:00'
+      expect(row.attributes[:at_time]).to eq '2012-03-25 03:00:00'
       expect(row.attributes[:amount]).to eq 3.05
     end
 

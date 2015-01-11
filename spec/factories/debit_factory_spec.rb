@@ -8,7 +8,7 @@ describe 'Debit Factory' do
         expect(debit_new charge: charge_new).to be_valid
       end
       it 'has date' do
-        expect(debit_new.on_date)
+        expect(debit_new.at_time)
           .to eq Time.zone.local(2013, 3, 25, 10, 0, 0)
       end
       it 'has period' do
@@ -21,9 +21,9 @@ describe 'Debit Factory' do
       it 'alters amount' do
         expect(debit_new(amount: 35.50).amount).to eq(35.50)
       end
-      it('nils date') { expect(debit_new on_date: nil).to_not be_valid }
+      it('nils date') { expect(debit_new at_time: nil).to_not be_valid }
       it 'alters date' do
-        expect(debit_new(on_date: '10/6/2014').on_date)
+        expect(debit_new(at_time: '10/6/2014').at_time)
           .to eq Time.zone.local(2014, 6, 10, 0, 0, 0)
       end
       it 'alters period' do
@@ -50,7 +50,7 @@ describe 'Debit Factory' do
         expect(debit_create(charge: charge).amount).to eq(88.08)
       end
       it 'has date' do
-        expect(debit_create(charge: charge).on_date)
+        expect(debit_create(charge: charge).at_time)
           .to eq Time.zone.local(2013, 3, 25, 10, 0, 0)
       end
     end
@@ -59,7 +59,7 @@ describe 'Debit Factory' do
         expect(debit_create(charge: charge, amount: 35.50).amount).to eq(35.50)
       end
       it 'alters date' do
-        expect(debit_create(charge: charge, on_date: '10/6/2014').on_date)
+        expect(debit_create(charge: charge, at_time: '10/6/2014').at_time)
           .to eq Time.zone.local(2014, 6, 10, 0, 0, 0)
       end
     end

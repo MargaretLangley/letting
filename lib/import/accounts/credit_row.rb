@@ -44,8 +44,8 @@ module DB
       row[:charge_code]
     end
 
-    def on_date
-      row[:on_date]
+    def at_time
+      row[:at_time]
     end
 
     # credits decrease an account balance.
@@ -73,7 +73,7 @@ module DB
     def payment_attributes
       {
         account_id: account_id,
-        booked_at: on_date,
+        booked_at: at_time,
         amount: amount,
       }
     end

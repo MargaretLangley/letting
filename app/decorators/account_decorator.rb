@@ -31,7 +31,7 @@ class AccountDecorator
   #
   def abbrev_items
     running_balance [forward_balance(start_of_year)] +
-      dec_items.select { |item| item.on_date >= start_of_year }
+      dec_items.select { |item| item.at_time >= start_of_year }
   end
 
   private
@@ -47,7 +47,7 @@ class AccountDecorator
   def dec_items
     [*account.debits.map { |debit| AccountDebitDecorator.new debit },
      *account.credits.map { |credit| AccountCreditDecorator.new credit }]
-      .sort_by(&:on_date)
+      .sort_by(&:at_time)
   end
 
   # Assigns a running_balance attribute to the credit / debit item

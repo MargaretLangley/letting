@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 20141129154746) do
     t.integer  "account_id",                         null: false
     t.integer  "charge_id",                          null: false
     t.integer  "payment_id",                         null: false
-    t.datetime "on_date",                            null: false
+    t.datetime "at_time",                            null: false
     t.decimal  "amount",     precision: 8, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 20141129154746) do
     t.integer  "account_id",                           null: false
     t.integer  "snapshot_id"
     t.integer  "charge_id",                            null: false
-    t.datetime "on_date",                              null: false
+    t.datetime "at_time",                              null: false
     t.date     "period_first",                         null: false
     t.date     "period_last",                          null: false
     t.decimal  "amount",       precision: 8, scale: 2, null: false
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 20141129154746) do
   end
 
   add_index "debits", ["account_id"], name: "index_debits_on_account_id", using: :btree
-  add_index "debits", ["charge_id", "on_date"], name: "index_debits_on_charge_id_and_on_date", unique: true, using: :btree
+  add_index "debits", ["charge_id", "at_time"], name: "index_debits_on_charge_id_and_at_time", unique: true, using: :btree
   add_index "debits", ["charge_id"], name: "index_debits_on_charge_id", using: :btree
   add_index "debits", ["snapshot_id"], name: "index_debits_on_snapshot_id", using: :btree
 

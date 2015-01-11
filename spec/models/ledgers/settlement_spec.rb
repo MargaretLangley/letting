@@ -25,8 +25,8 @@ describe Settlement, :ledgers, type: :model do
 
       it 'handles summed debits being offset' do
         chrge = charge_new
-        offsets = [debit_create(charge: chrge, on_date: '25/3/2013', amount: 3),
-                   debit_create(charge: chrge, on_date: '25/3/2014', amount: 3)]
+        offsets = [debit_create(charge: chrge, at_time: '25/3/2013', amount: 3),
+                   debit_create(charge: chrge, at_time: '25/3/2014', amount: 3)]
         expect { |b| Settlement.resolve(6.00, offsets, &b) }
           .to yield_successive_args([offsets[0], 3.00], [offsets[1], 3.00])
       end

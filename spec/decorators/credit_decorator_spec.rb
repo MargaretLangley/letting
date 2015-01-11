@@ -13,8 +13,8 @@ describe CreditDecorator do
 
     it 'sums debit' do
       charge = charge_new
-      debit_create charge: charge, on_date: '2013-03-30', amount: 50.08
-      debit_create charge: charge, on_date: '2013-06-30', amount: 50.00
+      debit_create charge: charge, at_time: '2013-03-30', amount: 50.08
+      debit_create charge: charge, at_time: '2013-06-30', amount: 50.00
       credit_dec = CreditDecorator.new credit_new charge: charge
       expect(credit_dec.owing).to eq '100.08'
     end

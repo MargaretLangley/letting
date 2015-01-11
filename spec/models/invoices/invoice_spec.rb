@@ -88,7 +88,7 @@ RSpec.describe Invoice, type: :model do
       it 'finds the earliest due_date' do
         invoice_text_create id: 1
         property = property_create account: account_new
-        debit = debit_new on_date: '2000-01-01', charge: charge_new
+        debit = debit_new at_time: '2000-01-01', charge: charge_new
 
         (invoice = Invoice.new)
           .prepare invoice_date: '2014-06-30',

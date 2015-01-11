@@ -18,7 +18,7 @@ module DB
   #
   class FileHeader
     def self.account
-      %w(human_ref, charge_code on_date description debit credit balance)
+      %w(human_ref, charge_code at_time description debit credit balance)
     end
 
     def self.client
@@ -40,7 +40,7 @@ module DB
     def self.charge
       %w(human_ref updated charge_type charged_in amount payment_type) +
         %w(day_1 month_1 day_2 month_2 day_3 month_3 day_4 month_4) +
-        %w(escalation_date escaltion_new_rent)
+        %w(escalatiat_time escaltion_new_rent)
     end
 
     def self.user

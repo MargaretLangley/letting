@@ -73,7 +73,7 @@ class Charge < ActiveRecord::Base
   #
   def make_chargeable matched_cycle
     Chargeable.from_charge charge_id:  id,
-                           on_date:    matched_cycle.spot,
+                           at_time:    matched_cycle.spot,
                            amount:     amount,
                            account_id: account_id,
                            period:     matched_cycle.period

@@ -26,7 +26,7 @@ class AccountCreditDecorator
   delegate :charge_type, to: :credit
 
   def date
-    I18n.l credit.on_date, format: :short
+    I18n.l credit.at_time, format: :short
   end
 
   def description

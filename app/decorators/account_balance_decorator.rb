@@ -11,11 +11,11 @@ class AccountBalanceDecorator
   include ActionView::Helpers::NumberHelper
 
   attr_accessor :running_balance
-  attr_reader :on_date
+  attr_reader :at_time
 
   def initialize running_balance, date
     @running_balance = running_balance
-    @on_date = date
+    @at_time = date
   end
 
   def amount
@@ -35,7 +35,7 @@ class AccountBalanceDecorator
   end
 
   def date
-    I18n.l on_date, format: :short
+    I18n.l at_time, format: :short
   end
 
   def due

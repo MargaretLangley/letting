@@ -15,13 +15,13 @@
 ####
 #
 class Chargeable
-  include Equalizer.new(:account_id, :charge_id, :on_date, :amount)
-  attr_reader :account_id, :charge_id, :on_date, :period, :amount
+  include Equalizer.new(:account_id, :charge_id, :at_time, :amount)
+  attr_reader :account_id, :charge_id, :at_time, :period, :amount
 
-  def self.from_charge(account_id:, charge_id:, on_date:, period:, amount:)
+  def self.from_charge(account_id:, charge_id:, at_time:, period:, amount:)
     new account_id: account_id,
         charge_id:  charge_id,
-        on_date:    on_date,
+        at_time:    at_time,
         period:     period,
         amount:     amount
   end
@@ -35,10 +35,10 @@ class Chargeable
 
   private
 
-  def initialize(account_id:, charge_id:, on_date:, period:, amount:)
+  def initialize(account_id:, charge_id:, at_time:, period:, amount:)
     @account_id = account_id
     @charge_id  = charge_id
-    @on_date    = on_date
+    @at_time    = at_time
     @period     = period
     @amount     = amount
   end

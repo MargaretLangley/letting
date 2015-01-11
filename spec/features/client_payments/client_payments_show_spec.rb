@@ -42,7 +42,7 @@ describe 'Client Account Show', type: :feature do
 
     it 'does not list properties above 5999' do
       skip 'Not Yet Implemented'
-      credit = credit_new on_date: '2014-3-1', charge: charge_create
+      credit = credit_new at_time: '2014-3-1', charge: charge_create
       client_create(id: 1, human_ref: 87, entities: [Entity.new(name: 'Grace')])
         .properties << property_new(human_ref: 6008,
                                     account: account_new(credits: [credit]))
