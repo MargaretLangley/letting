@@ -32,7 +32,7 @@ class PaymentsController < ApplicationController
   def new
     account = Account.find_by id: params[:id]
     @payment = PaymentDecorator.new(Payment.new account: account)
-    @payment.prepare_for_form
+    @payment.prepare
   end
 
   def create
