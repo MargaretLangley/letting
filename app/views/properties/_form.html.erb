@@ -42,9 +42,9 @@
     </div>
     <hr>
 
-    <div class='col-2-24  grid-row  no-print'>&nbsp;</div>
-    <div class='col-20-24 c-align  no-print'>
-      <%= render 'buttons/submit', f: f %> or <%= cancel_link path: properties_path %>
+    <div class='col-2-24  grid-row  top-line-spacer  no-print'>&nbsp;</div>
+    <div class='col-20-24  top-line-spacer  c-align  no-print'>
+      <%= render 'forms/buttons', f: f, path: properties_path  %>
     </div>
     <div class='col-2-24  no-print'>&nbsp;</div>
   </div> <!-- grid shell -->

@@ -20,11 +20,10 @@
 
       <hr>
       <%= render 'addresses/form', f: f, parent: 'client', address: AddressDecorator.new(client.address) %>
-      <hr>
 
-      <div class='col-1-4  grid-row  line-spacer  no-print'>&nbsp;</div>
-      <div class='col-3-4  line-spacer  no-print  no-r-pad'>
-        <%= render 'buttons/submit', f: f %>  or <%= link_to 'Cancel', clients_path, class: 'warn' %>
+      <div class='col-1-4  grid-row  top-line-spacer  no-print'>&nbsp;</div>
+      <div class='col-3-4  top-line-spacer  no-print  no-r-pad'>
+        <%= render 'forms/buttons', f: f, path: clients_path %>
       </div>
     </div>
     <div class='col-2-24  spacer-column'>
