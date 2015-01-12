@@ -1,6 +1,8 @@
 ###
 # Snapshot
 #
+# The generation of a set of debts onto a single account.
+#
 # Link between the invoices, up to 2, and the debits which the
 # invoices are responsible. The idea is to only delete the
 # debits if both invoices are deleted.

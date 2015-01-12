@@ -13,14 +13,22 @@ Main success scenario
 5. The system validates, creates the invoices, and messages success.
 
 
-3.a. warns when the range excludes all properties.
+3.a. errors when the range excludes all properties.
 1. The system displays error message
 2. The use case continues at step 1.
 
-3.b. warns when the range excludes any property that can be billed for the period.
+3.b. errors when the range excludes any property that can be billed for the period.
 1. The system displays error message detailing property's charges.
 2. The use case continues at step 1.
 
-3.c. does not invoice properties that would be in credit after bill applied.
+3.c. does not invoice properties that would be in credit after bill applied. **(TODO:)
 1. The system lists these properties under retained.
+2. The system continues to 4.
+
+3.c warns on retaining mail to properties that only have standing order charges.
+1. The system lists these properties under retained.
+2. The system continues to 4.
+
+3.c forgets mail to properties that have no charges.  **(TODO:)
+1. The system lists these properties under forgotten.
 2. The system continues to 4.

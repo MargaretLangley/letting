@@ -48,11 +48,11 @@ class InvoicingPage
     has_content? /created|updated/i
   end
 
-  def delivered?
+  def none_delivered?
     has_content? /No invoices will be delivered./i
   end
 
-  def retained?
+  def none_retained?
     has_content? /No invoices will be retained./i
   end
 
@@ -73,10 +73,20 @@ describe Invoicing, type: :feature do
   end
   after  { Timecop.return }
 
-  # Similar to Disabled are retain and deliver
-  # retain and deliver tested in invoicing_show_spec
-  # The code uses the same partial so I am not retesting.
-  #
+  it 'invoices an account that matches the search' do
+    cycle = cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
+    account_create property: property_new(human_ref: 87, client: client_new),
+                   charges: [charge_new(cycle: cycle)]
+    invoice_text_create id: 1
+
+    invoicing_page.enter
+
+    invoicing_page.search_term('87').search
+    invoicing_page.create
+
+    expect(invoicing_page).to be_success
+  end
+
   describe 'disabled' do
     it 'disables fieldset on first visit' do
       invoicing_page.enter
@@ -95,21 +105,7 @@ describe Invoicing, type: :feature do
     end
   end
 
-  it 'invoices an account that matches the search' do
-    cycle = cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
-    account_create property: property_new(human_ref: 87, client: client_new),
-                   charges: [charge_new(cycle: cycle)]
-    invoice_text_create id: 1
-
-    invoicing_page.enter
-
-    invoicing_page.search_term('87').search
-    invoicing_page.create
-
-    expect(invoicing_page).to be_success
-  end
-
-  describe 'warns when' do
+  describe 'errors when' do
     it 'the range excludes all properties' do
       invoicing_page.enter
       invoicing_page.search_term('87').search
@@ -127,6 +123,38 @@ describe Invoicing, type: :feature do
       invoicing_page.search_term('87').search
 
       expect(invoicing_page).to be_actionable
+    end
+  end
+
+  describe 'warns on' do
+    describe 'retains mail' do
+      it 'to properties that only have standing order charges.' do
+        cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
+        account_create property: property_new(human_ref: 9, client: client_new),
+                       charges: [charge_new(payment_type: 'standing_order',
+                                            cycle: cycle)]
+        invoice_text_create id: 1
+        invoicing_page.enter
+        invoicing_page.search_term('9').search
+
+        expect(invoicing_page).to_not be_none_retained
+      end
+
+      # The test for retaining mail is the absence of a string, a weak test.
+      # This test is to bolster the weak test with one the tests for a string's
+      # presence.
+      #
+      it 'will not retain when cash payment due' do
+        cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
+        account_create property: property_new(human_ref: 9, client: client_new),
+                       charges: [charge_new(payment_type: 'payment',
+                                            cycle: cycle)]
+        invoice_text_create id: 1
+        invoicing_page.enter
+        invoicing_page.search_term('9').search
+
+        expect(invoicing_page).to be_none_retained
+      end
     end
   end
 end
