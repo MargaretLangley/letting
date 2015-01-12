@@ -12,20 +12,6 @@ RSpec.describe Snapshot, type: :model do
     expect(snapshot).to be_valid
   end
 
-  describe '#debits?' do
-    it 'knows if it has debits' do
-      snapshot = Snapshot.new
-      snapshot.debited debits: [debit_new(amount: 10, charge: charge_new)]
-      expect(snapshot).to be_debits
-    end
-
-    it 'knows when it has no debits' do
-      snapshot = Snapshot.new
-      snapshot.debited debits: []
-      expect(snapshot).to_not be_debits
-    end
-  end
-
   describe '#state' do
     it 'forgets if no debits' do
       snapshot = Snapshot.new

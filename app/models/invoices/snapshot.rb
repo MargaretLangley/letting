@@ -30,10 +30,6 @@ class Snapshot < ActiveRecord::Base
     self.debits = debits
   end
 
-  def debits?
-    debits.any?
-  end
-
   def state
     return :forget if debits.empty?
     retain? ? :retain : :mail
