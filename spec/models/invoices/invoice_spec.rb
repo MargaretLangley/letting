@@ -171,12 +171,14 @@ RSpec.describe Invoice, type: :model do
 
     describe '#actionable?' do
       it 'returns true if in debt' do
-        invoice = Invoice.new products: [product_new(amount: 30)]
+        invoice = Invoice.new deliver: 'mail'
+
         expect(invoice).to be_actionable
       end
 
       it 'returns false if not in debt' do
-        invoice = Invoice.new products: [product_new(amount: 0)]
+        invoice = Invoice.new deliver: 'forget'
+
         expect(invoice).to_not be_actionable
       end
     end

@@ -28,14 +28,14 @@ RSpec.describe Invoicing, type: :model do
 
   describe '#actionable?' do
     it 'can be actionable' do
-      invoice = Invoice.new products: [Product.new(amount: 40)]
+      invoice = Invoice.new deliver: 'mail'
       (invoicing = Invoicing.new).runs = [Run.new(invoices: [invoice])]
 
       expect(invoicing.actionable?).to be true
     end
 
     it 'can not be actionable' do
-      invoice = Invoice.new products: [Product.new(amount: 0)]
+      invoice = Invoice.new deliver: 'forget'
       (invoicing = Invoicing.new).runs = [Run.new(invoices: [invoice])]
 
       expect(invoicing.actionable?).to be false

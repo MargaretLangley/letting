@@ -55,6 +55,14 @@ class InvoicingPage
   def retained?
     has_content? /No invoices will be retained./i
   end
+
+  def actionable?
+    has_content? /No property is chargeable for the range of properties/i
+  end
+
+  def excluded?
+    has_content? /No properties in the range/i
+  end
 end
 
 describe Invoicing, type: :feature do
@@ -97,6 +105,7 @@ describe Invoicing, type: :feature do
 
     invoicing_page.search_term('87').search
     invoicing_page.create
+
     expect(invoicing_page).to be_success
   end
 
@@ -105,8 +114,7 @@ describe Invoicing, type: :feature do
       invoicing_page.enter
       invoicing_page.search_term('87').search
 
-      expect(invoicing_page.has_content? /No properties in the range/)
-        .to be true
+      expect(invoicing_page).to be_excluded
     end
 
     it 'the range excludes any property that can be billed for the period' do
@@ -117,7 +125,8 @@ describe Invoicing, type: :feature do
 
       invoicing_page.enter
       invoicing_page.search_term('87').search
-      expect(invoicing_page.has_content? /Upcoming Charges/).to be true
+
+      expect(invoicing_page).to be_actionable
     end
   end
 end

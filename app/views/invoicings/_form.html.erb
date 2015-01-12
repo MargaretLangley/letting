@@ -56,7 +56,7 @@
 
   <% else %>
     <%= render partial: 'teachings/invoicing' %>
-    <%= render 'account_debits/show', search_terms: params[:search_terms], start_date: params[:start_date] if params[:search_terms] %>
+    <%= render 'account_debits/show', search_terms: params[:search_terms], start_date: params[:start_date], end_date: params[:end_date] if params[:search_terms] %>
   <% end %>
   </fieldset> <!-- grid  shell -->
 <% end %> <!-- form -->

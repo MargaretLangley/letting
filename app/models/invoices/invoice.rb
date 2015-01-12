@@ -107,8 +107,7 @@ class Invoice < ActiveRecord::Base
   # be affected by a charge.
   #
   def actionable?
-    products.balanced
-    products.total_arrears > 0
+    mail? || retain?
   end
 
   def to_s
