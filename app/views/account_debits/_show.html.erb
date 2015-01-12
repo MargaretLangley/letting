@@ -1,7 +1,7 @@
 <% start_date = Time.zone.today.to_s if local_assigns[:start_date].nil? %>
 <% search_terms = '' if local_assigns[:search_terms].nil? %>
 
-<% account_debits = AccountsDebits.new(property_range: search_terms, debit_period: start_date..(start_date.to_date + 1.year).to_s ).make_list.list %>
+<% account_debits = AccountsDebits.new(property_range: search_terms, debit_period: start_date..(start_date.to_date + 1.year).to_s ).list %>
 
 <div class='col-1-24  grid-row  top-spacer'>&nbsp;</div>
 <div class='col-16-24  top-spacer'><h3>Upcoming Charges</h3></div>

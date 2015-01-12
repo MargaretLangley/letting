@@ -103,8 +103,8 @@ class Invoice < ActiveRecord::Base
   end
 
   # actionable?
-  # Is it worth printing out an invoice for this record?
-  # products have to be created before this method returns expected values
+  # Is it worth invoicing or not. Must be one or more property that will
+  # be affected by a charge.
   #
   def actionable?
     products.balanced

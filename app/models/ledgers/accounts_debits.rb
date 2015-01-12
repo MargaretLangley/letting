@@ -5,7 +5,6 @@
 # Ideally this should be an SQL statement. However, the due dates are held as
 # month, day combinations which makes doing SQL queries tricky.
 #
-# rubocop: disable Style/TrivialAccessors
 #
 class AccountsDebits
   attr_reader :property_range, :debit_period
@@ -14,13 +13,8 @@ class AccountsDebits
     @debit_period = debit_period
   end
 
-  def make_list
-    make
-    self
-  end
-
   def list
-    @account_debits
+    @list ||= make
   end
 
   private
@@ -30,15 +24,24 @@ class AccountsDebits
   end
 
   def make
-    @account_debits = Hash.new { [] }
+    made = Hash.new { [] }
     accounts.each do |account|
-      make_account_debits(account).each do |account_debits|
-        if @account_debits.key? account_debits.key
-          @account_debits[account_debits.key].merge account_debits
-        else
-          @account_debits[account_debits.key] = account_debits
-        end
+      make_account_debits(account).each do |account_debit|
+        mix collection: made, includee: account_debit
       end
+    end
+    made
+  end
+
+  # Add a element into a collection
+  # If key present, we merge it to the already present key's value
+  # Else, if not present, we assign it to the collection under the unknown key.
+  #
+  def mix(collection:, includee:)
+    if collection.key? includee.key
+      collection[includee.key].merge includee
+    else
+      collection[includee.key] = includee
     end
   end
 

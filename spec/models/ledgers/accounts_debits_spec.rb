@@ -16,7 +16,6 @@ RSpec.describe AccountsDebits, type: :model do
       debits = AccountsDebits.new(property_range: '2',
                                   debit_period: Date.new(2013, 3, 5)..
                                                 Date.new(2013, 3, 5))
-      debits.make_list
       expect(debits.list).to eq [Date.new(2013, 3, 5), 'Ground Rent'] =>
                                   AccountDebit.new(date_due: Date.new(2013, 3, 5),
                                                    charge_type: 'Ground Rent',
@@ -36,7 +35,6 @@ RSpec.describe AccountsDebits, type: :model do
       debits = AccountsDebits.new(property_range: '2',
                                   debit_period: Date.new(2013, 1, 1)..
                                                 Date.new(2014, 1, 1))
-      debits.make_list
       expect(debits.list).to eq [Date.new(2013, 2, 5), 'Service Charge'] =>
                                   AccountDebit.new(date_due: Date.new(2013, 2, 5),
                                                    charge_type: 'Service Charge',
