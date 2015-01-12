@@ -36,7 +36,7 @@
 
       <div class='col-4-24  grid-row  bottom-spacer'>&nbsp;</div>
       <div class='col-16-24  top-double-line-spacer'>
-        <%= render 'buttons/submit', f: f, disabled: !invoicing.actionable? %> or <%= link_to_if invoicing.actionable?, 'Cancel', new_invoicing_path, class: 'warn' %>
+        <%= render 'forms/buttons', f: f, path: new_invoicing_path %>
       </div>
     </div>
 
@@ -51,7 +51,9 @@
     </div>
 
   <% if invoicing.actionable? %>
+
     <%= render 'invoices/invoices', run: invoicing.runs.last, action: false %>
+
   <% else %>
     <%= render partial: 'teachings/invoicing' %>
     <%= render 'account_debits/show', search_terms: params[:search_terms], start_date: params[:start_date] if params[:search_terms] %>
