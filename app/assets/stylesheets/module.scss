@@ -98,6 +98,10 @@ a.grey{
   margin: 0 0 0.8% 0;
 }
 
+.bottom-half-line-spacer{
+  margin: 0 0 0.5em 0;
+}
+
 .bottom-line-spacer{
   margin: 0 0 1em 0;
 }
@@ -553,6 +557,8 @@ $search-height: 35px;
     }
     &:hover,
     &:active{
+      background: $disabled-background;
+      color: white;
     }
   }
 
