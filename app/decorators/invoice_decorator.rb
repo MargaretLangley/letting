@@ -28,10 +28,6 @@ class InvoiceDecorator
     I18n.l invoice.invoice_date, format: :short
   end
 
-  def property_address_one_line
-    invoice.property_address.gsub("\n", ', ')
-  end
-
   def billing_agent
     invoice.billing_address.lines.first
   end

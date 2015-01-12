@@ -13,12 +13,6 @@ describe InvoiceDecorator do
       .to eq "Edgbaston Road\nBirmingham\nWest Midlands"
   end
 
-  it '#property_address_one_line' do
-    invoice_dec = InvoiceDecorator.new invoice_new
-    expect(invoice_dec.property_address_one_line)
-      .to eq 'Edgbaston Road, Birmingham, West Midlands'
-  end
-
   it '#billing_agent' do
     invoice_dec = InvoiceDecorator.new invoice_new
     expect(invoice_dec.billing_agent).to eq "Mr W. G. Grace\n"
