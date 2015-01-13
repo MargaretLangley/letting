@@ -12,7 +12,7 @@
           <button type='submit' id='search' title='Search'>
             <%= fa_icon('search lg') %>
           </button>
-          <% if controller.controller_name == 'invoicings' && controller.action_name == 'new' %>
+          <% if controller.new_invoicing? %>
             <%= render 'invoicings/search' %>
           <% end %>
         <% end %>
