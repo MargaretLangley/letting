@@ -9,8 +9,6 @@ describe Invoicing, type: :feature do
       visit '/invoices/1'
 
       expect(page.title).to eq 'Letting - Invoice View'
-      expect(page).to have_text 'Harry'
-      expect(page).to have_text '1984'
       expect(page).to have_text '30/06/2014'
     end
 
@@ -18,10 +16,10 @@ describe Invoicing, type: :feature do
       it 'displays back page with ground rent, uses invoice_text 2' do
         charge = charge_new charge_type: ChargeTypes::GROUND_RENT
         setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
-
         visit '/invoices/1'
 
-        expect(page).to have_text 'Ground Rent'
+        # TODO: write page wrapper
+        # Tests showing the page has been loaded
         expect(page).to have_text 'Act 2002'
       end
 
@@ -30,8 +28,8 @@ describe Invoicing, type: :feature do
         setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
         visit '/invoices/1'
 
-        expect(page).to have_text '1984'
-        expect(page).to have_text 'Service Charge'
+        # TODO: write page wrapper
+        # Tests showing the page has been loaded
         expect(page).to_not have_text 'Act 2002'
       end
     end

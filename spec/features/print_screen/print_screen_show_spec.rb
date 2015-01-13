@@ -8,9 +8,7 @@ describe 'PrintScreenShow', type: :feature do
       setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
       visit '/prints_screens/1'
 
-      expect(page).to have_text 'Hattie'
       expect(page).to have_text 'Low'
-      expect(page).to have_text '1984'
       expect(page).to have_text '30/06/2014'
     end
 
@@ -20,8 +18,8 @@ describe 'PrintScreenShow', type: :feature do
         setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
         visit '/prints_screens/1'
 
-        # the second page information includes legal act (Act 2002)'
-        expect(page).to have_text 'Garage Ground Rent'
+        # TODO: write page wrapper
+        # Tests showing the page has been loaded
         expect(page).to have_text 'Act 2002'
       end
 
@@ -30,8 +28,8 @@ describe 'PrintScreenShow', type: :feature do
         setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
         visit '/prints_screens/1'
 
-        expect(page).to have_text '1984'
-        expect(page).to have_text 'Insurance'
+        # TODO: write page wrapper
+        # Tests showing the page has been loaded
         expect(page).to_not have_text 'Act 2002'
       end
     end
