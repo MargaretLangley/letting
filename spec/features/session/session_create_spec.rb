@@ -15,6 +15,14 @@ describe 'Session', type: :feature do
     expect_failure
   end
 
+  it 'displays admin panel' do
+    user_create admin: true
+    navigates_to_create_page
+    fill_in_login
+
+    expect(page).to have_text 'Admin'
+  end
+
   def navigates_to_create_page
     visit '/login/'
   end
