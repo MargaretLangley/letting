@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <%= render 'layouts/head' %>
+  <%= render 'layouts/head', title: @title %>
   <body onLoad='print_n_ret()'>
-    <%= render 'layouts/trunk' %>
+    <%= render 'layouts/trunk', title: @title %>
   </body>
 </html>
