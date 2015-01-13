@@ -6,22 +6,22 @@
     <fieldset id='login' class='shell-1-12'>
       <%= form_tag sessions_path do %>
         <div class='grid'>
-          <div class='col-1-4  vertical-line-spacer faded'>
+          <div class='col-1-4  grid-row  vertical-line-spacer faded'>
             <%= label_tag :email %>
           </div>
-          <div class='col-3-4  vertical-line-spacer  no-r-pad'>
+          <div class='col-3-4  vertical-line-spacer'>
             <%= text_field_tag :email, params[:email], autofocus: true %>
           </div>
 
-          <div class='col-1-4  bottom-spacer  faded'>
+          <div class='col-1-4  grid-row  bottom-spacer  faded'>
             <%= label_tag :password %>
           </div>
-          <div class='col-3-4  bottom-spacer  no-r-pad'>
+          <div class='col-3-4  bottom-spacer'>
             <%= password_field_tag :password %>
           </div>
 
-          <div class='col-1-4  bottom-spacer'>&nbsp;</div>
-          <div class='col-3-4  vertical-line-spacer  no-r-pad'>
+          <div class='col-1-4  grid-row  bottom-spacer'>&nbsp;</div>
+          <div class='col-3-4  vertical-line-spacer'>
             <%= submit_tag "Log In", class: 'primary plain-button' %>
           </div>
         </div>
