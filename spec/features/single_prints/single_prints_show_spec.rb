@@ -9,9 +9,7 @@ describe 'PrintShow', type: :feature do
 
       visit '/single_prints/1'
       expect(page.title).to eq 'Letting - Invoicing Single Print'
-      expect(page).to have_text 'Harry'
       expect(page).to have_text '1984'
-      expect(page).to have_text '30/06/2014'
     end
 
     describe 'back page is used for Ground Rents & Garage Ground Rents only' do
@@ -20,7 +18,8 @@ describe 'PrintShow', type: :feature do
         setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
         visit '/single_prints/1'
 
-        expect(page).to have_text 'Garage Ground Rent'
+        # TODO: write page wrapper
+        # Tests showing the page has been loaded
         expect(page).to have_text 'Act 2002'
       end
 
@@ -29,8 +28,8 @@ describe 'PrintShow', type: :feature do
         setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
         visit '/single_prints/1'
 
-        expect(page).to have_text '1984'
-        expect(page).to have_text 'Insurance'
+        # TODO: write page wrapper
+        # Tests showing the page has been loaded
         expect(page).to_not have_text 'Act 2002'
       end
     end
