@@ -12,9 +12,9 @@ describe User, type: :model do
         expect(user).to_not be_valid
       end
 
-      it 'is unique' do
+      it 'is unique - regardless of case' do
         User.create! user_attributes email: 'user@example.com'
-        expect { User.create! user_attributes email: 'user@example.com' }
+        expect { User.create! user_attributes email: 'user@ExamPle.com' }
           .to raise_error ActiveRecord::RecordInvalid
       end
 

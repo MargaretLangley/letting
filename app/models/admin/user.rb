@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates :nickname, presence: true
   validates :email, presence: true,
                     format: { with: /\A.*@.*\z/ },
-                    uniqueness: true
+                    uniqueness: { case_sensitive: false }
   validates :password_digest, presence: true
   validates :password, presence: true, on: :create
 end
