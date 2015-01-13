@@ -48,6 +48,14 @@ class InvoicingPage
     has_content? /created|updated/i
   end
 
+  def actionable?
+    has_content? /Deliver/i
+  end
+
+  def not_actionable?
+    has_content? /No property is chargeable for the range of properties/i
+  end
+
   def none_delivered?
     has_content? /No invoices will be delivered./i
   end
@@ -56,8 +64,8 @@ class InvoicingPage
     has_content? /No invoices will be retained./i
   end
 
-  def actionable?
-    has_content? /No property is chargeable for the range of properties/i
+  def none_ignored?
+    has_content? /No invoices will be ignored./i
   end
 
   def excluded?
@@ -69,75 +77,95 @@ describe Invoicing, type: :feature do
   let(:invoicing_page) { InvoicingPage.new }
   before do
     log_in
-    Timecop.travel Date.new(2013, 6, 1)
+    invoice_text_create id: 1
   end
-  after  { Timecop.return }
 
   it 'invoices an account that matches the search' do
+    Timecop.travel '2013-6-1'
+
     cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 24)]
     account_create property: property_new(human_ref: 87, client: client_new),
                    charges: [charge_new(cycle: cycle)]
-    invoice_text_create id: 1
-
     invoicing_page.enter
 
     invoicing_page.search_term('87').search
     invoicing_page.create
 
     expect(invoicing_page).to be_success
+
+    Timecop.return
   end
 
   describe 'disabled' do
     it 'disables fieldset on first visit' do
+      Timecop.travel '2013-6-1'
+
       invoicing_page.enter
       expect(invoicing_page.form).to be_disabled
+
+      Timecop.return
     end
 
     it 'enables fieldset when able to do invoicing' do
+      Timecop.travel '2013-6-1'
+
       cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 24)]
       account_create property: property_new(human_ref: 87, client: client_new),
                      charges: [charge_new(cycle: cycle)]
-      invoice_text_create id: 1
 
       invoicing_page.enter
       invoicing_page.search_term('87').search
+
       expect(invoicing_page.form).to_not be_disabled
+
+      Timecop.return
     end
   end
 
   describe 'errors when the property range' do
     it 'excludes all existing properties' do
+      Timecop.travel '2013-6-1'
+
       invoicing_page.enter
       invoicing_page.search_term('87').search
 
       expect(invoicing_page).to be_excluded
+
+      Timecop.return
     end
 
     it 'does not include a chargeable property for the billing-period' do
+      Timecop.travel '2013-6-1'
+
       cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
       account_create property: property_new(human_ref: 87, client: client_new),
                      charges: [charge_new(cycle: cycle)]
-      invoice_text_create id: 1
 
       invoicing_page.enter
       invoicing_page.search_term('87').search
 
-      expect(invoicing_page).to be_actionable
+      expect(invoicing_page).to be_not_actionable
+
+      Timecop.return
     end
   end
 
   describe 'warns on' do
     describe 'retains mail' do
       it 'to properties that only have standing order charges.' do
+        Timecop.travel '2013-6-1'
+
         cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
         account_create property: property_new(human_ref: 9, client: client_new),
                        charges: [charge_new(payment_type: 'standing_order',
                                             cycle: cycle)]
-        invoice_text_create id: 1
         invoicing_page.enter
         invoicing_page.search_term('9').search
 
+        expect(invoicing_page).to be_actionable
         expect(invoicing_page).to_not be_none_retained
+
+        Timecop.return
       end
 
       # The test for retaining mail is the absence of a string, a weak test.
@@ -145,15 +173,56 @@ describe Invoicing, type: :feature do
       # presence.
       #
       it 'will not retain when cash payment due' do
+        Timecop.travel '2013-6-1'
+
         cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
         account_create property: property_new(human_ref: 9, client: client_new),
                        charges: [charge_new(payment_type: 'payment',
                                             cycle: cycle)]
-        invoice_text_create id: 1
         invoicing_page.enter
         invoicing_page.search_term('9').search
 
+        expect(invoicing_page).to be_actionable
         expect(invoicing_page).to be_none_retained
+
+        Timecop.return
+      end
+    end
+
+
+    describe 'ignoring mail' do
+      it 'to properties that have no charges in billing-period.' do
+        Timecop.travel '2013-6-1'
+
+        ignored_cycle = cycle_new due_ons: [DueOn.new(month: 5, day: 31)]
+        account_create property: property_new(human_ref: 8, client: client_new),
+                       charges: [charge_new(cycle: ignored_cycle)]
+
+        deliver_cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
+        account_create property: property_new(human_ref: 9, client: client_new),
+                       charges: [charge_new(cycle: deliver_cycle)]
+        invoicing_page.enter
+        invoicing_page.search_term('8-9').search
+
+        expect(invoicing_page).to be_actionable
+        expect(invoicing_page).to_not be_none_ignored
+
+        Timecop.return
+      end
+
+      it 'displays none if every property can be charged.' do
+        Timecop.travel '2013-6-1'
+
+        cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
+        account_create property: property_new(human_ref: 9, client: client_new),
+                       charges: [charge_new(cycle: cycle)]
+        invoicing_page.enter
+        invoicing_page.search_term('9').search
+
+        expect(invoicing_page).to be_actionable
+        expect(invoicing_page).to be_none_ignored
+
+        Timecop.return
       end
     end
   end

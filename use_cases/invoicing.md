@@ -29,6 +29,6 @@ Main success scenario
 1. The system lists these properties under retained.
 2. The system continues to 4.
 
-3.c forgets mail to properties that have no charges.  **(TODO:)
+3.c warns on ignoring mail to properties that have no charges in billing-period.
 1. The system lists these properties under forgotten.
 2. The system continues to 4.
