@@ -10,7 +10,7 @@
       <%= view_link invoice_text, size: '2x' %>
     </div>
 
-    <% if invoice_text == InvoiceText.first %>
+    <% if invoice_text.page1? %>
       <%= render 'name_phone', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
       <%= render 'addresses/form', f: f, parent: 'invoice_text', address: AddressDecorator.new(invoice_text.address) %>
       <%= render 'text_fields', f: f, parent: 'invoice_text', invoice_text: invoice_text %>

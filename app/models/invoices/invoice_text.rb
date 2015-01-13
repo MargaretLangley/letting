@@ -32,4 +32,8 @@ class InvoiceText < ActiveRecord::Base
   accepts_nested_attributes_for :guides, allow_destroy: true
   has_many :invoices, through: :letters
   has_many :letters, dependent: :destroy
+
+  def page1?
+    self == InvoiceText.first
+  end
 end

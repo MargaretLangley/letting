@@ -4,8 +4,7 @@
   <div class='col-12-24  bottom-spacer'>
     <%= edit_link @invoice_text, size: '2x' %>
   </div>
-
-  <% if @invoice_text == InvoiceText.first %>
+  <% if @invoice_text.page1? %>
     <%= render 'page1', invoice_text_page1: @invoice_text %>
   <% else %>
     <%= render 'page2', invoice_text_page2: @invoice_text %>
