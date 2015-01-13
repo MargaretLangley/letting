@@ -9,13 +9,13 @@
   <div class='tabs'>
     <ul class='tab-links'>
      <% @invoicing.runs.each_with_index do |run, index|  %>
-       <li class="<%= run == @invoicing.runs.last ? ' active' : '' %>"><a href="#tab<%= index + 1 %>">Invoice <%= I18n.l run.invoice_date, format: :short %></a></li>
+       <li class="<%= run.last? ? ' active' : '' %>"><a href="#tab<%= index + 1 %>">Invoice <%= I18n.l run.invoice_date, format: :short %></a></li>
      <% end %>
    </ul>
 
     <div class='grid  shell  tab-content'>
     <% @invoicing.runs.each_with_index do |run, index|  %>
-      <div id="tab<%= index + 1 %>" class="tab <%= run == @invoicing.runs.last ? ' active' : '' %> ">
+      <div id="tab<%= index + 1 %>" class="tab <%= run.last? ? ' active' : '' %> ">
         <%= render 'invoices/invoices', run: run, action: true %>
       </div>  <!-- close tab -->
     <% end %>

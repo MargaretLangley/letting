@@ -35,4 +35,21 @@ RSpec.describe Run, type: :model do
         .to eq 0
     end
   end
+
+  describe '#last?' do
+    it 'can be last' do
+      last = Run.new(invoices: [invoice_new])
+      Invoicing.new.runs = [last]
+
+      expect(last).to be_last
+    end
+
+    it 'can not be last' do
+      first = Run.new(invoices: [invoice_new])
+      last = Run.new(invoices: [invoice_new])
+      Invoicing.new.runs = [first, last]
+
+      expect(first).to_not be_last
+    end
+  end
 end

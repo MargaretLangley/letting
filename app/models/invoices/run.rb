@@ -51,8 +51,10 @@ class Run < ActiveRecord::Base
     invoices.select(&:forget?)
   end
 
-  def finished?
-    invoices.present?
+  # Is run the last one (so far)?
+  #
+  def last?
+    self == invoicing.runs.last
   end
 
   private

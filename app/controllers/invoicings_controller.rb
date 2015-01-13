@@ -50,7 +50,7 @@ class InvoicingsController < ApplicationController
 
   def edit
     @invoicing =
-      Invoicing.includes(runs: [invoices: [account: [debits: [:charge]]]])
+      Invoicing.includes(runs: [invoices: [snapshot: [debits: [:charge]]]])
       .find params[:id]
     @invoicing.generate if @invoicing.valid_arguments?
   end
