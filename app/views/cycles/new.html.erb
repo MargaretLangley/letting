@@ -1,4 +1,4 @@
-<% if @cycle.cycle_type == 'monthly' %>
+<% if @cycle.monthly? %>
   <% @title='New Monthly Cycle' %>
   <%= render 'form_monthly', cycle: @cycle %>
 <% else %>
