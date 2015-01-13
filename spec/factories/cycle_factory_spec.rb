@@ -20,7 +20,7 @@ describe 'Cycle Factory', :cycle, :ledgers do
         cycle_new cycle_type: ''
       end
       it 'changes due ons' do
-        cycle = cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
+        cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 24)]
         expect(cycle.due_ons[0].month).to eq 6
       end
     end
@@ -39,9 +39,9 @@ describe 'Cycle Factory', :cycle, :ledgers do
 
       describe 'adds' do
         it 'due date due_ons' do
-          cycle_create due_ons: [DueOn.new(day: 2, month: 3)]
-          expect(Cycle.first.due_ons.first)
-            .to eq DueOn.new(day: 2, month: 3)
+          cycle_create due_ons: [DueOn.new(month: 6, day: 24)]
+
+          expect(Cycle.first.due_ons.first).to eq DueOn.new(month: 6, day: 24)
         end
 
         it 'per month due_ons' do
@@ -57,8 +57,9 @@ describe 'Cycle Factory', :cycle, :ledgers do
       it('id') { expect((cycle_create id: 7).id).to eq 7 }
 
       it 'due on' do
-        cycle_create due_ons: [DueOn.new(day: 6, month: 10)]
-        expect(DueOn.first).to eq DueOn.new(day: 6, month: 10)
+        cycle_create due_ons: [DueOn.new(month: 6, day: 24)]
+
+        expect(DueOn.first).to eq DueOn.new(month: 6, day: 24)
       end
     end
 

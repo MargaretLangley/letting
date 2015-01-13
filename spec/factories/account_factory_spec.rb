@@ -22,7 +22,7 @@ describe 'Account Factory' do
       it 'can add due_on' do
         expect(account_new(charges: [charge_new])
           .charges[0].cycle.due_ons[0])
-          .to eq DueOn.new(day: 25, month: 3)
+          .to eq DueOn.new(month: 3, day: 25)
       end
       it 'can add debit' do
         expect(account_new(debits: [debit_new(amount: 17)]).debits[0].amount)

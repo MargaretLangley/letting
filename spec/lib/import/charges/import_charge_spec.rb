@@ -78,13 +78,13 @@ module DB
       it 'imports a single row' do
         property_create human_ref: 80, account: account_new
         cycle_create charged_in: charged_in_create(id: MODERN_ARREARS),
-                     due_ons: [DueOn.new(day: 7, month: 0)]
+                     due_ons: [DueOn.new(month: 0, day: 7)]
 
         expect do
           import_charge row human_ref: 80,
                             charged_in: LEGACY_ARREARS,
-                            day: 7,
-                            month: 0
+                            month: 0,
+                            day: 7
         end.to change(Charge, :count).by 1
       end
     end

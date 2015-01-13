@@ -7,20 +7,20 @@ describe Cycle, :ledgers, type: :feature do
                  name: 'Jan/July',
                  order: 11,
                  cycle_type: 'term',
-                 due_ons: [DueOn.new(day: 6, month: 10)]
+                 due_ons: [DueOn.new(month: 1, day: 6),
+                           DueOn.new(month: 7, day: 6)]
   end
 
   it 'has basic details' do
     visit '/cycles/3'
+
     expect(page.title).to eq 'Letting - View Cycle'
     expect(page).to have_text 'Jan/July'
-    expect(page).to have_text '11'
-    expect(page).to have_text '6'
-    expect(page).to have_text '10'
   end
 
   it 'has edit link' do
     visit '/cycles/3'
+
     click_on('Edit')
     expect(page.title).to eq 'Letting - Edit Cycle'
   end
@@ -30,10 +30,9 @@ describe Cycle, :ledgers, type: :feature do
                  name: 'Every Month',
                  order: 6,
                  cycle_type: 'monthly',
-                 due_ons: [DueOn.new(day: 4, month: 5)]
+                 due_ons: [DueOn.new(month: 5, day: 4)]
     visit '/cycles/2'
+
     expect(page).to have_text 'Every Month'
-    expect(page).to have_text '20'
-    expect(page).to have_text '4'
   end
 end

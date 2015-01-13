@@ -74,7 +74,7 @@ describe Invoicing, type: :feature do
   after  { Timecop.return }
 
   it 'invoices an account that matches the search' do
-    cycle = cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
+    cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 24)]
     account_create property: property_new(human_ref: 87, client: client_new),
                    charges: [charge_new(cycle: cycle)]
     invoice_text_create id: 1
@@ -94,7 +94,7 @@ describe Invoicing, type: :feature do
     end
 
     it 'enables fieldset when able to do invoicing' do
-      cycle = cycle_new due_ons: [DueOn.new(day: 25, month: 6)]
+      cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 24)]
       account_create property: property_new(human_ref: 87, client: client_new),
                      charges: [charge_new(cycle: cycle)]
       invoice_text_create id: 1
@@ -105,16 +105,16 @@ describe Invoicing, type: :feature do
     end
   end
 
-  describe 'errors when' do
-    it 'the range excludes all properties' do
+  describe 'errors when the property range' do
+    it 'excludes all existing properties' do
       invoicing_page.enter
       invoicing_page.search_term('87').search
 
       expect(invoicing_page).to be_excluded
     end
 
-    it 'the range excludes any property that can be billed for the period' do
-      cycle = cycle_new due_ons: [DueOn.new(day: 25, month: 5)]
+    it 'does not include a chargeable property for the billing-period' do
+      cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
       account_create property: property_new(human_ref: 87, client: client_new),
                      charges: [charge_new(cycle: cycle)]
       invoice_text_create id: 1

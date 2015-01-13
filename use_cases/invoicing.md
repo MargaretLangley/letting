@@ -13,11 +13,11 @@ Main success scenario
 5. The system validates, creates the invoices, and messages success.
 
 
-3.a. errors when the range excludes all properties.
+3.a. errors when the property range excludes all existing properties.
 1. The system displays error message
 2. The use case continues at step 1.
 
-3.b. errors when the range excludes any property that can be billed for the period.
+3.b. errors when the property range does not include a chargeable property for the billing-period.
 1. The system displays error message detailing property's charges.
 2. The use case continues at step 1.
 

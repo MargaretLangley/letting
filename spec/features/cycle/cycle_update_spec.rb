@@ -8,21 +8,23 @@ describe 'Cycle Update', :ledgers, type: :feature do
   context 'Term' do
     it 'edits term' do
       cycle_create id: 1,
-                   name: 'Jan/July',
+                   name: 'Mar/Sep',
                    charged_in: charged_in_create(id: 1, name: 'Arrears'),
                    order: 11,
                    cycle_type: 'term',
-                   due_ons: [DueOn.new(day: 6, month: 10)]
+                   due_ons: [DueOn.new(month: 3, day: 25)]
       cycle_page = CyclePage.new type: :term, action: :edit
 
       cycle_page.enter
       expect(page.title).to eq 'Letting - Edit Cycle'
-      cycle_page.name = 'April/Nov'
+      cycle_page.name = 'Jun/Dec'
       cycle_page.choose 'Arrears'
       cycle_page.order = '44'
-      cycle_page.due_on(day: 10, month: 2)
+      cycle_page.due_on(month: 6, day: 24)
       cycle_page.do 'Update Cycle'
+
       expect(cycle_page).to be_success
+      expect(Cycle.first.name).to eq 'Jun/Dec'
     end
   end
 
@@ -33,7 +35,7 @@ describe 'Cycle Update', :ledgers, type: :feature do
                    charged_in: charged_in_create(id: 1, name: 'Arrears'),
                    order: 22,
                    cycle_type: 'monthly',
-                   due_ons: [DueOn.new(day: 8, month: 1)]
+                   due_ons: [DueOn.new(month: 1, day: 8)]
       cycle_page = CyclePage.new type: :monthly, action: :edit
 
       cycle_page.enter
@@ -43,7 +45,9 @@ describe 'Cycle Update', :ledgers, type: :feature do
       cycle_page.order = '21'
       cycle_page.due_on day: 12, month: 0
       cycle_page.do 'Update Cycle'
+
       expect(cycle_page).to be_success
+      expect(Cycle.first.name).to eq 'New Monthly'
     end
   end
 

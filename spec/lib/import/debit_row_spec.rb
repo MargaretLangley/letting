@@ -53,12 +53,12 @@ module DB
 
     describe '#period' do
       it 'returns when available' do
-        cycle = cycle_new due_ons: [DueOn.new(day: 20, month: 3)]
+        cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 24)]
         charge = charge_new cycle: cycle
         property_create human_ref: 9, account: account_new(charges: [charge])
 
-        expect(row(date: Date.new(2012, 3, 20)).period)
-          .to eq Date.new(2012, 3, 20)..Date.new(2013, 3, 19)
+        expect(row(date: Date.new(2012, 6, 24)).period)
+          .to eq Date.new(2012, 6, 24)..Date.new(2013, 6, 23)
       end
     end
 

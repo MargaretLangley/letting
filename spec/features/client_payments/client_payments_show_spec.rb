@@ -5,8 +5,8 @@ describe 'Client Account Show', type: :feature do
 
   it '#show' do
     charge =
-      charge_create cycle: cycle_new(due_ons: [DueOn.new(day: 25, month: 3),
-                                               DueOn.new(day: 30, month: 9)])
+      charge_create cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25),
+                                               DueOn.new(month: 9, day: 30)])
     payment = payment_new booked_at: '2014-3-1', amount: 17
     client_create(id: 1, human_ref: 87, entities: [Entity.new(name: 'Grace')])
       .properties << property_new(human_ref: 63,

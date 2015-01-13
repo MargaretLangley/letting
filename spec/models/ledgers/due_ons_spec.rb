@@ -20,7 +20,7 @@ describe DueOns, :ledgers, :cycle, type: :model do
   describe 'methods' do
     describe '#between' do
       it 'returns date when range in due date' do
-        cycle = cycle_new due_ons: [DueOn.new(day: 4, month: 4)]
+        cycle = cycle_new due_ons: [DueOn.new(month: 4, day: 4)]
         expect(cycle.due_ons.between Date.new(2015, 4, 4)..Date.new(2015, 4, 4))
           .to eq [MatchedDueOn.new(Date.new(2015, 4, 4), Date.new(2015, 4, 4))]
       end
@@ -58,8 +58,8 @@ describe DueOns, :ledgers, :cycle, type: :model do
     describe 'creating, saving and loading' do
       context 'term' do
         it 'new on date' do
-          (cycle = cycle_new due_ons: [DueOn.new(day: 24, month: 6),
-                                       DueOn.new(day: 25, month: 12)])
+          (cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 24),
+                                       DueOn.new(month: 12, day: 25)])
             .prepare
           expect(cycle.due_ons.size).to eq(4)
           cycle.save!
@@ -67,7 +67,7 @@ describe DueOns, :ledgers, :cycle, type: :model do
         end
 
         it 'updates on_date' do
-          cycle_create due_ons: [DueOn.new(id: 1, day: 24, month: 6)]
+          cycle_create due_ons: [DueOn.new(id: 1, month: 6, day: 24)]
           (cycle = Cycle.first).prepare
           cycle.due_ons[0].day = 23
           cycle.save!
@@ -75,7 +75,7 @@ describe DueOns, :ledgers, :cycle, type: :model do
         end
 
         it 'adds on_date' do
-          cycle_create due_ons: [DueOn.new(day: 24, month: 6)]
+          cycle_create due_ons: [DueOn.new(month: 6, day: 24)]
           (cycle = Cycle.first).prepare
           cycle.due_ons[1].attributes =  { 'day' => '14', 'month' => '9' }
           cycle.save!
@@ -83,8 +83,8 @@ describe DueOns, :ledgers, :cycle, type: :model do
         end
 
         it 'removes on_date' do
-          cycle_create due_ons: [DueOn.new(day: 24, month: 6),
-                                 DueOn.new(day: 25, month: 12)]
+          cycle_create due_ons: [DueOn.new(month: 6, day: 24),
+                                 DueOn.new(month: 12, day: 25)]
           (cycle = Cycle.first).prepare
           cycle.due_ons[1].attributes =  { 'day' => '', 'month' => '' }
           cycle.save!
@@ -112,8 +112,9 @@ describe DueOns, :ledgers, :cycle, type: :model do
     end
     describe '#to_s' do
       it 'outputs the due_ons array' do
-        cycle = cycle_new due_ons: [DueOn.new(day: 25, month: 3),
-                                    DueOn.new(day: 30, month: 9)]
+        cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25),
+                                    DueOn.new(month: 9, day: 30)]
+
         expect(cycle.due_ons.to_s).to eq 'due_ons: [Mar 25], [Sep 30]'
       end
     end

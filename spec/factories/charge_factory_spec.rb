@@ -13,7 +13,7 @@ describe 'ChargeFactory' do
       end
       it 'has due ons' do
         expect(charge_new.cycle.due_ons[0])
-          .to eq DueOn.new(day: 25, month: 3)
+          .to eq DueOn.new(month: 3, day: 25)
       end
       describe 'makes' do
         it 'creates cycle' do

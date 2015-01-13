@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe CycleDecorator do
   it 'returns cycles' do
-    cycle_create id: 1, name: 'Year', due_ons: [DueOn.new(day: 2, month: 3)]
+    cycle_create id: 1, name: 'Year', due_ons: [DueOn.new(month: 3, day: 2)]
     cycle_create id: 2, name: 'Half', due_ons: [DueOn.new(month: 1, day: 1),
                                                 DueOn.new(month: 3, day: 2)]
     cycle_create id: 3, name: 'Quart', due_ons: [DueOn.new(month: 1, day: 1),
@@ -25,11 +25,11 @@ describe CycleDecorator do
     cycle_create id: 1,
                  name: 'Mar',
                  order: 2,
-                 due_ons: [DueOn.new(day: 2, month: 3)]
+                 due_ons: [DueOn.new(month: 3, day: 2)]
     cycle_create id: 2,
                  name: 'Sep',
                  order: 1,
-                 due_ons: [DueOn.new(day: 2, month: 3)]
+                 due_ons: [DueOn.new(month: 9, day: 2)]
     expect(CycleDecorator.for_select).to eq 'Frequent' => [],
                                             'Half Year' => [],
                                             'Quarterly' => [],

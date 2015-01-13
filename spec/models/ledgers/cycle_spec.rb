@@ -37,7 +37,7 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
 
   describe '#between' do
     it 'returns the date of the matching due_on' do
-      cycle = cycle_new due_ons: [DueOn.new(day: 1, month: 1)]
+      cycle = cycle_new due_ons: [DueOn.new(month: 1, day: 1)]
       expect(cycle.between(Date.new(1980, 1, 1)..Date.new(1980, 1, 2)))
         .to eq [MatchedCycle.new(Date.new(1980, 1, 1),
                                  Date.new(1980, 1, 1)..Date.new(1980, 12, 31))]
@@ -98,58 +98,58 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
 
   describe '#<=>' do
     it 'returns 0 when equal' do
-      cycle = Cycle.new charged_in_id: 0, due_ons: [DueOn.new(day: 25, month: 3)]
-      other = Cycle.new charged_in_id: 0, due_ons: [DueOn.new(day: 25, month: 3)]
+      cycle = Cycle.new charged_in_id: 0, due_ons: [DueOn.new(month: 3, day: 25)]
+      other = Cycle.new charged_in_id: 0, due_ons: [DueOn.new(month: 3, day: 25)]
       expect(cycle <=> other).to eq 0
     end
 
     it 'equality is order independent' do
-      cycle = Cycle.new charged_in_id: 0, due_ons: [DueOn.new(day: 1, month: 1),
-                                                    DueOn.new(day: 6, month: 6)]
+      cycle = Cycle.new charged_in_id: 0, due_ons: [DueOn.new(month: 1, day: 1),
+                                                    DueOn.new(month: 6, day: 6)]
 
-      other = Cycle.new charged_in_id: 0, due_ons: [DueOn.new(day: 6, month: 6),
-                                                    DueOn.new(day: 1, month: 1)]
+      other = Cycle.new charged_in_id: 0, due_ons: [DueOn.new(month: 6, day: 6),
+                                                    DueOn.new(month: 1, day: 1)]
       expect(cycle <=> other).to eq 0
     end
 
     it 'ignores cycle name in matching' do
-      cycle = cycle_new name: 'Mar/Sep', due_ons: [DueOn.new(day: 1, month: 1)]
-      other = cycle_new name: 'Jan/Dec', due_ons: [DueOn.new(day: 1, month: 1)]
+      cycle = cycle_new name: 'Mar/Sep', due_ons: [DueOn.new(month: 1, day: 1)]
+      other = cycle_new name: 'Jan/Dec', due_ons: [DueOn.new(month: 1, day: 1)]
       expect(cycle <=> other).to eq 0
     end
 
     it 'uses charged_id in matching' do
-      cycle = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(day: 1, month: 1)]
-      other = Cycle.new charged_in_id: 2, due_ons: [DueOn.new(day: 1, month: 1)]
+      cycle = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(month: 1, day: 1)]
+      other = Cycle.new charged_in_id: 2, due_ons: [DueOn.new(month: 1, day: 1)]
       expect(cycle <=> other).to eq(-1)
     end
 
     it 'returns 1 when lhs > rhs for due_ons' do
-      lhs = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(day: 6, month: 6)]
-      rhs = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(day: 1, month: 1)]
+      lhs = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(month: 6, day: 6)]
+      rhs = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(month: 1, day: 1)]
       expect(lhs <=> rhs).to eq(1)
     end
 
     it 'returns 1 when lhs > rhs for charged_in' do
-      lhs = Cycle.new charged_in_id: 2, due_ons: [DueOn.new(day: 6, month: 6)]
-      rhs = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(day: 6, month: 6)]
+      lhs = Cycle.new charged_in_id: 2, due_ons: [DueOn.new(month: 6, day: 6)]
+      rhs = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(month: 6, day: 6)]
       expect(lhs <=> rhs).to eq(1)
     end
 
     it 'returns -1 when lhs < rhs' do
-      lhs = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(day: 1, month: 1)]
-      rhs = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(day: 6, month: 6)]
+      lhs = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(month: 1, day: 1)]
+      rhs = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(month: 6, day: 6)]
       expect(lhs <=> rhs).to eq(-1)
     end
 
     it 'returns -1 when lhs < rhs for charged_in' do
-      lhs = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(day: 6, month: 6)]
-      rhs = Cycle.new charged_in_id: 2, due_ons: [DueOn.new(day: 6, month: 6)]
+      lhs = Cycle.new charged_in_id: 1, due_ons: [DueOn.new(month: 6, day: 6)]
+      rhs = Cycle.new charged_in_id: 2, due_ons: [DueOn.new(month: 6, day: 6)]
       expect(lhs <=> rhs).to eq(-1)
     end
 
     it 'returns nil when not comparable' do
-      expect(Cycle.new(charged_in_id: 1, due_ons: [DueOn.new(day: 6, month: 6)]) <=> 37).to be_nil
+      expect(Cycle.new(charged_in_id: 1, due_ons: [DueOn.new(month: 6, day: 6)]) <=> 37).to be_nil
     end
   end
 
@@ -164,7 +164,7 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
 
       it '#clear_up_form destroys children' do
         cycle = cycle_new cycle_type: 'term',
-                          due_ons: [DueOn.new(day: 25, month: 3)]
+                          due_ons: [DueOn.new(month: 3, day: 25)]
         cycle.prepare
         cycle.valid?
         expect(cycle.due_ons.reject(&:marked_for_destruction?).size).to eq(1)
@@ -188,7 +188,7 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
 
       it '#clear_up_form destroys children if empty' do
         cycle = cycle_new cycle_type: 'monthly',
-                          due_ons: [DueOn.new(day: 25, month: 3)]
+                          due_ons: [DueOn.new(month: 3, day: 25)]
         cycle.prepare
         cycle.valid?
         expect(cycle.due_ons.reject(&:marked_for_destruction?).size).to eq(12)
