@@ -1,21 +1,21 @@
 <div class='js-toggle-selection  invoicings-padded'>
-  <div class='js-togglable  c-align'>
-    <h4>Search for new charges within the next 8 weeks
+  <div class='js-togglable  c-align  <%= expose_if_invoicing_dates_default %>'>
+    <h4>Search for new charges within the next 7 weeks
       <%= link_to 'or choose dates', '#',title: 'Choose Dates with calendar', class: 'js-toggle  inverted-link' %>&nbsp;
       <%= link_to fa_icon('calendar lg'), '#',title: 'Choose Dates with calendar', class: 'js-toggle  inverted-link' %>
     </h4>
   </div>
-  <div class='js-togglable  js-revealable'>
+  <div class='js-togglable  <%= hide_if_invoicing_dates_default %>'>
     <h4 class='c-align'>Search for new charges within chosen dates
-      <%= link_to ' or default to the next 8 weeks', '#',title: 'default dates', class: 'js-toggle  inverted-link' %>
+      <%= link_to ' or default to the next 7 weeks', '#',title: 'default dates', class: 'js-toggle  inverted-link' %>
     </h4>
     <div class='col-1-2'>
       <%= label_tag :start_date %>
-      <%= date_field_tag :start_date, params[:start_date] || Time.zone.today  %>
+      <%= date_field_tag :start_date, invoicing_start_date  %>
     </div>
     <div class='col-1-2'>
       <%= label_tag :end_date %>
-      <%= date_field_tag :end_date, params[:end_date] || Time.zone.today + 8.weeks %>
+      <%= date_field_tag :end_date, invoicing_end_date %>
     </div>
   </div>
 </div>
