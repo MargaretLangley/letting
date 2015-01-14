@@ -6,6 +6,7 @@
   Used mainly in Invoice for both screen and print
   and where print requirements hidden from screen and
   screen requirements hidden from print
+
 \*------------------------------------------------*/
 
 @media all{
@@ -13,12 +14,11 @@
   .page-break {
     display: none;
   }
-
 }
 
 /*------------------------------------------------*\
 
-  Invoice Screen Values
+  INVOICES SCREEN VALUES
 
 \*------------------------------------------------*/
 
@@ -39,9 +39,29 @@
 
 /*------------------------------------------------*\
 
-  Invoice Page 1 Screen
+ INVOICES SCREEN MARGINS
 
 \*------------------------------------------------*/
+
+ /* used on Page 2*/
+ .wide-margin{
+    margin-left: 6em;
+  }
+
+  .narrow-margin{
+    margin-left: 3em;
+  }
+
+/*------------------------------------------------*\
+
+  INVOICES SCREEN FONTS
+
+\*------------------------------------------------*/
+
+  /* used for sissors line, page 1, above return slip */
+  .sissors{
+    font-size: 1.5em;
+  }
 
   /* F&L Adams heading */
   .h1print{
@@ -49,62 +69,40 @@
     font-size: 1em;
   }
 
-  /* inv-bold-headings
-     Used for adam's address in heading,
-     Invoice line and Property addresses. */
+  .large-font{
+   font-size: 1em;
+  }
 
-  .inv-bold-headings{
+  /* medium-bold-headings. Used for adam's address
+   in heading, Invoice line and Property addresses. */
+
+  .medium-bold-headings{
     font-weight: bold;
     font-size: .8em;
     line-height: 130%;
   }
 
-/* inv-advice
+/* small-font
  Notice for Leaseholders & Remittance Advice
 */
-  .inv-advice{
+  .small-font{
     font-weight: normal;
     font-size: .8em;
   }
 
-  .inv-advice-bold{
+  .small-font-bold{
     font-weight: bold;
     font-size: 1em;
   }
 
-  /* used for sissors line, page 1, above return slip */
-  .sissors{
-    font-size: 1.5em;
-  }
-
-/*------------------------------------------------*\
-
-  $PAGE
-
-\*------------------------------------------------*/
-
- /* used on Page 2*/
- .widemargin{
-    margin-left: 6em;
-  }
-
-  .insert-margin{
-    margin-left: 10px;
-  }
-
- .insert-font{
+  .smallest-font{
     font-size: .7em;
-  }
-
- .instruct-font{
-    font-size: 1em;
   }
 }
 
 /*------------------------------------------------*\
 
-  Invoice Page 2 Print
-
+  INVOICES PRINT
 
 \*------------------------------------------------*/
 
@@ -156,9 +154,29 @@
 
 /*------------------------------------------------*\
 
-  Invoice Page 1 Print
+  INVOICES PRINT MARGINS
 
 \*------------------------------------------------*/
+
+  /* wide-margin on 2nd inv page */
+  .wide-margin{
+    margin-left: 2cm;
+  }
+
+ .narrow-margin{
+    margin-left: .2cm;
+  }
+
+/*------------------------------------------------*\
+
+  INVOICES PRINT FONTS
+
+\*------------------------------------------------*/
+
+  /* used for sissors line, page 1, above return slip */
+  .sissors{
+    font-size: 20pt;
+  }
 
   /* F&L Adams heading */
   .h1print{
@@ -166,57 +184,32 @@
     font-size: 18pt;
   }
 
-  /* inv-bold-headings
+ .large-font{
+    font-size: 14pt;
+  }
+
+  /* medium-bold-headings
      Used for adam's address in heading,
      Invoice line and Property addresses. */
 
-  .inv-bold-headings{
+  .medium-bold-headings{
     font-weight: bold;
     font-size: 12pt;
     line-height: 130%;
   }
 
-/* in-advice
- Notice for Leaseholders & Remittance Advice
-*/
-  .inv-advice{
+  .small-font{
     font-weight: normal;
     font-size: 11pt;
   }
 
-  .inv-advice-bold{
+  .small-font-bold{
     font-weight: bold;
     font-size: 11pt;
   }
 
-  /* used for sissors line, page 1, above return slip */
-  .sissors{
-    font-size: 20pt;
-  }
-
-/*------------------------------------------------*\
-
-  Invoice Page 2 Print
-
-\*------------------------------------------------*/
-
-  /* widemargin on 2nd inv page */
-  .widemargin{
-    margin-left: 2cm;
-  }
-
-  /* insert used for notes in brackets in lefthand margin , small font */
-
- .insert-margin{
-    margin-left: .2cm;
-  }
-
- .insert-font{
+  /* smallest-font used for notes in brackets in lefthand margin */
+  .smallest-font{
     font-size: 10pt;
   }
-
- .instruct-font{
-    font-size: 14pt;
-  }
-
 }

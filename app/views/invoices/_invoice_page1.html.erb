@@ -3,13 +3,13 @@
   <%= render 'invoice_texts/heading_page1', invoice_text_page1: invoice_dec.invoice_texts.first %>
 
   <div class='col-2-24  grid-row'>&nbsp;</div>
-  <div class='col-7-24  inv-bold-headings'>
+  <div class='col-7-24  medium-bold-headings'>
     <%= invoice_dec.invoice_texts.first.heading2 %>
   </div>
-  <div class='col-8-24  inv-bold-headings'>
+  <div class='col-8-24  medium-bold-headings'>
     Property Ref: <%= invoice_dec.property_ref %>
   </div>
-  <div class='col-5-24  inv-bold-headings'>
+  <div class='col-5-24  medium-bold-headings'>
     Date: <%= l invoice.invoice_date %>
   </div>
   <div class='col-2-24'>&nbsp;</div>
@@ -20,20 +20,20 @@
   </div>
 
   <div class='col-2-24  grid-row  bottom-spacer'>&nbsp;</div>
-  <div class='col-22-24  inv-bold-headings'>
+  <div class='col-22-24  medium-bold-headings'>
     Property Address: <%= invoice_dec.property_address %>
   </div>
 
   <%= render partial:'products/products',locals: { invoice: invoice } %>
 
-  <div class='col-2-24  grid-row'>&nbsp;</div>
-  <div class='col-20-24  inv-advice'>
+  <div class='col-2-24  grid-row  top-spacer'>&nbsp;</div>
+  <div class='col-20-24  small-font  top-spacer'>
     We <%= invoice_dec.invoice_texts.first.invoice_name.upcase %> ON BEHALF OF YOUR LANDLORD
     <div class='vertical-spacer'><%= invoice_dec.client_address %></div>
     <%= invoice_dec.invoice_texts.first.advice1 %>
     <%= invoice_dec.invoice_texts.first.address.text %>
 
-    <div class = 'grid-row  inv-advice-bold  vertical-spacer'>
+    <div class = 'grid-row  small-font-bold  vertical-spacer'>
       Remittance Advice
     </div>
     <%= invoice_dec.invoice_texts.first.advice2 %>
@@ -42,16 +42,16 @@
   <div class='col-2-24'>&nbsp;</div>
 
   <div class='col-2-24  grid-row  bottom-spacer'>&nbsp;</div>
-  <div class='col-20-24  inv-bold-headings'>
+  <div class='col-20-24  medium-bold-headings'>
     Property Address: <%= invoice_dec.property_address %>
   </div>
   <div class='col-2-24'>&nbsp;</div>
 
   <div class='col-2-24  grid-row  bottom-spacer'>&nbsp;</div>
-  <div class='col-10-24  inv-bold-headings'>
+  <div class='col-10-24  medium-bold-headings'>
     Ref: <%= invoice_dec.property_ref %>
   </div>
-  <div class='col-10-24  inv-bold-headings'>
+  <div class='col-10-24  medium-bold-headings'>
     Due Date <%= invoice_dec.earliest_date_due %>
   </div>
   <div class='col-2-24'>&nbsp;</div>
