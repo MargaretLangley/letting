@@ -24,10 +24,10 @@
 \*----------------------------------------------------*/
 
 
-$COLOR-1:                  #237BBE;             // Blue
-$COLOR-2:                  #FFED20;             // Washed Yellow
-$COLOR-3:                  #EA1E63;             // Pink (washed)
-$COLOR-4:                  #0B4B7C;             // Darker Blue (variant)
+$color-1:                  #237bbe;             // Blue
+$color-2:                  #ffed20;             // Washed Yellow
+$color-3:                  #ea1e63;             // Pink (washed)
+$color-4:                  #0b4b7c;             // Darker Blue (variant)
 
 
 
@@ -40,18 +40,18 @@ $COLOR-4:                  #0B4B7C;             // Darker Blue (variant)
 \*----------------------------------------------------*/
 
 
-/* $BASE */
-$neutral:                  #F8F8F8;             // off white
-$neutral-print:            #FFF;                // white
+/* $base */
+$neutral:                  #f8f8f8;             // off white
+$neutral-print:            #fff;                // white
 
-$primary-background:       $COLOR-1;            // Light blue
-$secondary-background:     $COLOR-4;            // Darker blue
-$muted-border:             #DDD;                // Grey
+$primary-background:       $color-1;            // Light blue
+$secondary-background:     $color-4;            // Darker blue
+$muted-border:             #ddd;                // Grey
 $disabled-background:      Gainsboro;           // Grey
 
 $fieldset:   lighten($primary-background, 50%); // Egg shell Blue
 
-$shadow:                   #AAA;                // Grey
+$shadow:                   #aaa;                // Grey
 
 
 /* $TYPOGRAPHY */
@@ -61,18 +61,18 @@ $secondary-print-text:     #5c5858;             // Light dolphin
 
 
 /* $LINKS */
-$primary-link:             #2E6AA0;              // Dark Blue
-$secondary-link: darken($primary-link, 60%);     // Dark blue
-$muted-link:               #A1B9ED;              // light grey
+$primary-link:             #2e6aa0;             // Dark Blue
+$secondary-link: darken($primary-link, 60%);    // Dark blue
+$muted-link:               #a1b9ed;             // light grey
 
 
 /* $BUTTON */
-$primary-button:           $COLOR-3;              // Red
-$secondary-button:         $COLOR-2;              // Yellow
+$primary-button:           $color-3;            // Red
+$secondary-button:         $color-2;            // Yellow
 
 /* $ERROR */
-$errors-background:        #FFC;                 // Yellow
-$warn:                     #DC3D3D;              // Red
+$errors-background:        #ffc;                // Yellow
+$warn:                     #dc3d3d;             // Red
 
 
 /*
@@ -82,10 +82,10 @@ $warn:                     #DC3D3D;              // Red
 */
 
 /* $FLASH */
-$flash-notice:             #DBFFDD;              // Pale Green
-$flash-alert:              $COLOR-2;             // Yellow
-$flash-error:              #FFE1DE;              // Pink
-$flash-opacity:            0.85;
+$flash-notice:             #dbffdd;             // Pale Green
+$flash-alert:              $color-2;            // Yellow
+$flash-error:              #ffe1de;             // Pink
+$flash-opacity:            .85;
 
 
 @mixin inverted-color {
