@@ -9,7 +9,9 @@ Rails.application.load_tasks
 if %w(development test).include? Rails.env
   require 'rubocop/rake_task'
   RuboCop::RakeTask.new
+  require 'scss_lint/rake_task'
+  SCSSLint::RakeTask.new
 
   task(:default).clear
-  task default: ['spec:all', :rubocop]
+  task default: ['spec:all', :rubocop, :scss_lint]
 end
