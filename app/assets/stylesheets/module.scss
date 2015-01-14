@@ -324,7 +324,6 @@ li.active a, li.active a:hover {
   display:block;
 }
 
-
 /*-----------------------------------------------*\
 
    $CONTENT
@@ -378,12 +377,43 @@ li.active a, li.active a:hover {
 
 @media print{
 
-  .shell{
+  @mixin inside-shell{
     width: 20cm;
-    border: 0px;
+    border: 0;
+  }
+
+  .shell{
+    @include inside-shell;
+  }
+
+  .shell-thin{
+    margin: 0 0 2% 0;
+    padding: 0;
+    @include inside-shell;
+    @include clearfix;
+  }
+
+  .shell-1-25{
+    margin: 0 0 2% 0;
+    padding: 1% 4% 2% 4%;
+    @include inside-shell;
+    @include clearfix;
+  }
+
+  .shell-1-12{
+    margin: 0 0 2% 0;
+    padding: 2% 8.3333% 2% 8.3333%;
+    @include inside-shell;
+    @include clearfix;
+  }
+
+  .shell-1-6{
+    margin: 0 0 2% 0;
+    padding: 2% 16.6666% 2% 16.6666%;
+    @include inside-shell;
+    @include clearfix;
   }
 }
-
 
 /*-----------------------------------------------*\
 
@@ -421,7 +451,6 @@ li.active a, li.active a:hover {
     text-decoration: inherit;
     background-color: inherit;
   }
-
 
 /*--------------------------------------------------*\
 
@@ -463,9 +492,6 @@ input[type=submit].primary{
 .folded, .hidden{
  display: none;
 }
-
-
-
 
 /*--------------------------------------------------*\
 
@@ -575,7 +601,6 @@ $search-height: 35px;
   }
 }
 
-
 /*--------------------------------------------------*\
 
    $ERROR
@@ -656,7 +681,6 @@ $search-height: 35px;
   @include error;
 }
 
-
 /*
   trying to get close x into top right it isn't nice code
 */
@@ -672,7 +696,6 @@ $search-height: 35px;
   $OVERLAY
 
 \*--------------------------------------------------*/
-
 
 .overlay-parent{
   position: relative;
