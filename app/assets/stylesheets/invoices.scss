@@ -1,18 +1,22 @@
-@import "colors";
+@import 'colors';
 
 /*------------------------------------------------*\
 
-  Invoice Css
+  Invoice CSS
   Used mainly in Invoice for both screen and print
   and where print requirements hidden from screen and
   screen requirements hidden from print
 
 \*------------------------------------------------*/
 
-@media all{
+@media all {
 
   .page-break {
     display: none;
+  }
+
+  .bold {
+    font-weight: bold;
   }
 }
 
@@ -22,18 +26,18 @@
 
 \*------------------------------------------------*/
 
-@media screen{
+@media screen {
 
   .print-only,
-  .vi{
+  .vi {
     display: none;
   }
 
-  .side-wrap{
+  .side-wrap {
     width: 100pt;
   }
 
-  .wrap-print{
+  .wrap-print {
     width: 500pt;
   }
 
@@ -43,12 +47,12 @@
 
 \*------------------------------------------------*/
 
- /* used on Page 2*/
- .wide-margin{
+  /* used on Page 2*/
+  .wide-margin {
     margin-left: 6em;
   }
 
-  .narrow-margin{
+  .narrow-margin {
     margin-left: 3em;
   }
 
@@ -58,44 +62,44 @@
 
 \*------------------------------------------------*/
 
-  /* used for sissors line, page 1, above return slip */
-  .sissors{
+  /* used for scissors line, page 1, above return slip */
+  .scissors {
     font-size: 1.5em;
   }
 
-  /* F&L Adams heading */
-  .h1print{
+  /* Company Banner heading */
+  .h1-print {
+    font-size: 1em;
     font-weight: bold;
+  }
+
+  .large-font {
     font-size: 1em;
   }
 
-  .large-font{
-   font-size: 1em;
-  }
-
-  /* medium-bold-headings. Used for adam's address
+  /* medium-bold-headings. Used for the company's address
    in heading, Invoice line and Property addresses. */
 
-  .medium-bold-headings{
-    font-weight: bold;
+  .medium-bold-headings {
     font-size: .8em;
+    font-weight: bold;
     line-height: 130%;
   }
 
 /* small-font
  Notice for Leaseholders & Remittance Advice
 */
-  .small-font{
-    font-weight: normal;
+  .small-font {
     font-size: .8em;
+    font-weight: normal;
   }
 
-  .small-font-bold{
-    font-weight: bold;
+  .small-font-bold {
     font-size: 1em;
+    font-weight: bold;
   }
 
-  .smallest-font{
+  .smallest-font {
     font-size: .7em;
   }
 }
@@ -106,13 +110,14 @@
 
 \*------------------------------------------------*/
 
-@media print{
+@media print {
 
-  .page-break{
-   display: block; page-break-after: always;
+  .page-break {
+    display: block;
+    page-break-after: always;
   }
 
-/* Buttons and main heading need to be invisible in printouts. Fonts are in pt. */
+  /* Buttons and main heading need to be invisible in printouts. Fonts are in pt. */
 
   .button,
   footer,
@@ -123,7 +128,7 @@
   .no-print,
   .overlay,
   .search,
-  .plain-button{
+  .plain-button {
     display: none;
   }
 
@@ -134,22 +139,22 @@
 
 \*------------------------------------------------*/
 
-  body{
-    margin-top: 0cm;
-    margin-right: 0.20cm;
-    margin-left: 0.20cm;
-    width: 22cm;
+  body {
     background-color: $neutral-print;
+    margin-left: .20cm;
+    margin-right: .20cm;
+    margin-top: 0;
+    width: 22cm;
   }
 
 /*This sets printed page to A4 width*/
 
-  .printbody{
-    margin-top: 0cm;
-    margin-right: 0.20cm;
-    margin-left: 0.20cm;
-    width: 22cm;
+  .print-body {
     background-color: $neutral-print;
+    margin-left: .20cm;
+    margin-right: .20cm;
+    margin-top: 0;
+    width: 22cm;
   }
 
 /*------------------------------------------------*\
@@ -159,11 +164,12 @@
 \*------------------------------------------------*/
 
   /* wide-margin on 2nd inv page */
-  .wide-margin{
+
+  .wide-margin {
     margin-left: 2cm;
   }
 
- .narrow-margin{
+  .narrow-margin {
     margin-left: .2cm;
   }
 
@@ -173,43 +179,43 @@
 
 \*------------------------------------------------*/
 
-  /* used for sissors line, page 1, above return slip */
-  .sissors{
+  /* used for scissors line, page 1, above return slip */
+  .scissors {
     font-size: 20pt;
   }
 
-  /* F&L Adams heading */
-  .h1print{
-    font-weight: bold;
+  /* Company Banner heading */
+  .h1-print {
     font-size: 18pt;
+    font-weight: bold;
   }
 
- .large-font{
+  .large-font {
     font-size: 14pt;
   }
 
   /* medium-bold-headings
-     Used for adam's address in heading,
+     Used for Company's address in heading,
      Invoice line and Property addresses. */
 
-  .medium-bold-headings{
-    font-weight: bold;
+  .medium-bold-headings {
     font-size: 12pt;
+    font-weight: bold;
     line-height: 130%;
   }
 
-  .small-font{
-    font-weight: normal;
+  .small-font {
     font-size: 11pt;
+    font-weight: normal;
   }
 
-  .small-font-bold{
-    font-weight: bold;
+  .small-font-bold {
     font-size: 11pt;
+    font-weight: bold;
   }
 
   /* smallest-font used for notes in brackets in lefthand margin */
-  .smallest-font{
+  .smallest-font {
     font-size: 10pt;
   }
 }
