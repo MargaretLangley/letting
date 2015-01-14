@@ -1,7 +1,6 @@
 scss_files: 'app/assets/stylesheets/**/*.css.scss'
 
 exclude:
-  - 'app/assets/stylesheets/base.scss'
   - 'app/assets/stylesheets/layout.scss'
   - 'app/assets/stylesheets/module.scss'
   - 'app/assets/stylesheets/normalize.scss'
@@ -9,3 +8,15 @@ exclude:
 linters:
   Comment:
     enabled: false
+
+  ColorKeyword:
+    enabled: false
+
+  QualifyingElement:
+    enabled: false
+
+
+  # Linters we want to enable
+  VendorPrefixes:
+    enabled: false
+
