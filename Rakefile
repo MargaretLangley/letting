@@ -13,5 +13,8 @@ if %w(development test).include? Rails.env
   SCSSLint::RakeTask.new
 
   task(:default).clear
-  task default: [:scss_lint, :rubocop, 'spec:all']
+  # HACK
+  # scss_lint does not stop rake from continuing on error.
+  # Added it to the start and end to maximize chance of seeing it.
+  task default: [:scss_lint, :rubocop, 'spec:all', :scss_lint]
 end
