@@ -50,7 +50,7 @@
         <div class='col-2-24  vertical-spacer  faded  r-align'>Month</div>
         <div class='col-2-24  vertical-spacer  faded  r-align'>Day</div>
         <div class='col-1-24  vertical-spacer'>&nbsp</div>
-        <div class='col-6-24  vertical-spacer  faded'>Action</div>
+        <div class='col-6-24  vertical-spacer  faded  no-print'>Action</div>
 
         <%= f.fields_for :due_ons do |builder| %>
           <div class='grid  js-enclosed-toggle <%= "#{hide_extra_new_records record: builder.object, index: builder.index }" %>'>
