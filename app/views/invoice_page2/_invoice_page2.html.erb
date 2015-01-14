@@ -1,5 +1,5 @@
 <% invoice_dec = InvoiceDecorator.new(invoice) %>
-<div class='printbody'>
+<div class='print-body'>
 
   <% invoice_text_page1 = InvoiceText.first %>
   <%= render 'invoice_texts/heading_page2_address' %>
@@ -10,7 +10,7 @@
     <%= invoice_page2.heading1 %>
   </div>
 
-  <div class='grid-row  c-align  h1print  bottom-spacer'>
+  <div class='grid-row  c-align  h1-print  bottom-spacer'>
     <%= invoice_page2.heading2 %> <%= invoice_dec.property_ref %>
   </div>
 
