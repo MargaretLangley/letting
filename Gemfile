@@ -69,6 +69,7 @@ group :development do
   gem 'rubocop', '~> 0.28.0', require: false
   gem 'rubycritic', require: false
   gem 'traceroute'
+  gem 'scss-lint'
 end
 
 # Use Capistrano for deployment

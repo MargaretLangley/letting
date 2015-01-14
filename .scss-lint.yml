@@ -1,0 +1,13 @@
+scss_files: 'app/assets/stylesheets/**/*.css.scss'
+
+exclude:
+  - 'app/assets/stylesheets/base.scss'
+  - 'app/assets/stylesheets/_colors.scss'
+  - 'app/assets/stylesheets/invoices'
+  - 'app/assets/stylesheets/layout.scss'
+  - 'app/assets/stylesheets/module.scss'
+  - 'app/assets/stylesheets/normalize.scss'
+
+linters:
+  Comment:
+    enabled: false

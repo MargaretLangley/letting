@@ -346,6 +346,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    scss-lint (0.32.0)
+      rainbow (~> 2.0)
+      sass (~> 3.4.1)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -478,6 +481,7 @@ DEPENDENCIES
   rubocop (~> 0.28.0)
   rubycritic
   sass-rails (~> 5.0.1)
+  scss-lint
   sdoc (~> 0.4.0)
   seedbank
   selenium-webdriver (~> 2.44.0)
