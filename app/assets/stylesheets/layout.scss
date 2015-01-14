@@ -1,4 +1,4 @@
-@import "colors";
+@import 'colors';
 
 /*
   A clearfix is a way for an element to automatically clear its child elements,
@@ -12,16 +12,15 @@
 
 @mixin clearfix {
   &:after {
-    content: "";
-    display: table;
     clear: both;
+    content: '';
+    display: table;
   }
 }
 
 .clearfix { @include clearfix; }
 
-@media screen{
-
+@media screen {
 
   /*------------------------------------------------*\
 
@@ -29,28 +28,27 @@
 
   \*------------------------------------------------*/
 
-  header{
+  header {
     @include inverted-color;
-    width: 100%;
     height: 75px;
+    width: 100%;
   }
 
-  .page-wrapper{
+  .page-wrapper {
     margin: 0 auto;
     width: 97.5%;
   }
 
-  .view-wrapper{
-    width: 900px ;
-    margin-left: auto ;
-    margin-right: auto ;
+  .view-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
   }
 
-  footer{
+  footer {
     clear: both;
     color: $secondary-text;
   }
-
 
   /*--------------------------------------*\
 
@@ -58,64 +56,60 @@
 
   \*--------------------------------------*/
 
-  .float-left{
+  .float-left {
     float: left;
   }
 
-  .float-right{
+  .float-right {
     float: right;
   }
 }
 
-
-
-@media all{
+@media all {
 
 /*----------------------------------------------------*\
 
-   $BASIC-SIZES
+ $BASIC-SIZES
 
 \*----------------------------------------------------*/
 
-.top-1-12{ top:  8.33333333%; }
-.top-2-12{ top: 16.66666666%; }
-.top-3-12{ top: 25.0%; }
-.top-4-12{ top: 33.33333333%; }
-.top-5-12{ top: 41.66666667%; }
-.top-6-12{ top: 50.0%; }
-.top-7-12{ top: 58.33333334%; }
-.top-8-12{ top: 66.66666666%; }
-.top-9-12{ top: 75.0%; }
-.top-10-12{ top: 83.3333333%; }
-.top-11-12{ top: 91.6666666%; }
-.top-12-12{ top: 100.0%; }
+  .top-1-12 { top: 8.33333333%; }
+  .top-2-12 { top: 16.66666666%; }
+  .top-3-12 { top: 25%; }
+  .top-4-12 { top: 33.33333333%; }
+  .top-5-12 { top: 41.66666667%; }
+  .top-6-12 { top: 50%; }
+  .top-7-12 { top: 58.33333334%; }
+  .top-8-12 { top: 66.66666666%; }
+  .top-9-12 { top: 75%; }
+  .top-10-12 { top: 83.3333333%; }
+  .top-11-12 { top: 91.6666666%; }
+  .top-12-12 { top: 100%; }
 
-.width-1-24{ width: 4.166667%; }
-.width-2-24, .width-1-12{ width: 8.333333%; }
-.width-3-24, .width-1-8{ width: 12.5%; }
-.width-4-24, .width-2-12, .width-1-6{ width: 16.666667%; }
-.width-5-24{ width: 20.833333%; }
-.width-6-24, .width-3-12, .width-2-8, .width-1-4{ width: 25%; }
-.width-7-24{ width: 29.166667%; }
-.width-8-24, .width-4-12, .width-2-6, .width-1-3{ width: 33.333333%; }
-.width-9-24, .width-3-8{ width: 37.5%; }
-.width-10-24, .width-5-12{ width: 41.666667%; }
-.width-11-24{ width: 45.833333%; }
-.width-12-24, .width-6-12, .width-4-8, .width-3-6, .width-2-4, .width-1-2{ width: 50%; }
-.width-13-24{ width: 54.166667%; }
-.width-14-24, .width-7-12{ width: 58.333333%; }
-.width-15-24, .width-5-8{ width: 62.5%; }
-.width-16-24, .width-8-12, .width-4-6, .width-2-3{ width: 66.666666%; }
-.width-17-24{ width: 70.833333%;}
-.width-18-24, .width-9-12, .width-6-8, .width-3-4{ width: 75%; }
-.width-19-24{ width: 79.166666%;}
-.width-20-24, .width-10-12, .width-5-6{ width: 83.333333%; }
-.width-21-24, .width-7-8{ width: 87.5%; }
-.width-22-24, .width-11-12{ width: 91.6666%; }
-.width-23-24{ width: 95.83333%; }
-.width-24-24, .width-12-12, .width-8-8, .width-6-6, .width-4-4, .width-3-3, .width-2-2, .width-1-1{ width: 100%; }
-
-
+  .width-1-24 { width: 4.166667%; }
+  .width-2-24, .width-1-12 { width: 8.333333%; }
+  .width-3-24, .width-1-8 { width: 12.5%; }
+  .width-4-24, .width-2-12, .width-1-6 { width: 16.666667%; }
+  .width-5-24 { width: 20.833333%; }
+  .width-6-24, .width-3-12, .width-2-8, .width-1-4 { width: 25%; }
+  .width-7-24 { width: 29.166667%; }
+  .width-8-24, .width-4-12, .width-2-6, .width-1-3 { width: 33.333333%; }
+  .width-9-24, .width-3-8 { width: 37.5%; }
+  .width-10-24, .width-5-12 { width: 41.666667%; }
+  .width-11-24 { width: 45.833333%; }
+  .width-12-24, .width-6-12, .width-4-8, .width-3-6, .width-2-4, .width-1-2 { width: 50%; }
+  .width-13-24 { width: 54.166667%; }
+  .width-14-24, .width-7-12 { width: 58.333333%; }
+  .width-15-24, .width-5-8 { width: 62.5%; }
+  .width-16-24, .width-8-12, .width-4-6, .width-2-3 { width: 66.666666%; }
+  .width-17-24 { width: 70.833333%;}
+  .width-18-24, .width-9-12, .width-6-8, .width-3-4 { width: 75%; }
+  .width-19-24 { width: 79.166666%;}
+  .width-20-24, .width-10-12, .width-5-6 { width: 83.333333%; }
+  .width-21-24, .width-7-8 { width: 87.5%; }
+  .width-22-24, .width-11-12 { width: 91.6666%; }
+  .width-23-24 { width: 95.83333%; }
+  .width-24-24, .width-12-12, .width-8-8, .width-6-6, .width-4-4, .width-3-3, .width-2-2, .width-1-1 { width: 100%; }
 
 /*----------------------------------------------------------------------------*\
 
@@ -133,7 +127,6 @@
 
 \*----------------------------------------------------------------------------*/
 
-
   $pad: 1em;
 
   .grid {
@@ -141,29 +134,29 @@
     margin: 0;
   }
 
-  [class*='col-']{
+  [class*='col-'] {
     float: left;
     padding-right: $pad;
   }
 
-  .no-r-pad{
+  .no-r-pad {
     padding-right: 0;
   }
 
-  .r-pad{
+  .r-pad {
     padding-right: 10px;
   }
 
-  .hide{
+  .hide {
     white-space: nowrap;
   }
 
-  .l-pad{
+  .l-pad {
     padding-left: 10px;
   }
 
-  .grid-pad{
-    padding: 0.5em 0 0.5em $pad;
+  .grid-pad {
+    padding: 5em 0 5em $pad;
   }
 
   /*
@@ -171,41 +164,39 @@
     TODO: Don't know why it is padding against top of outer box
           and not the search box?
   */
-  .invoicings-padded{
-    padding: 2.2em 0.5em 0.5em 0.5em;
+  .invoicings-padded {
+    padding: 2.2em .5em .5em;
   }
 
+  // 24 grid and all the factors (1,2,3,4,6,8,12) //
 
-  /* 24 grid and all the factors (1,2,3,4,6,8,12) */
+  .col-1-24 { @extend .width-1-24; }
+  .col-2-24, .col-1-12 { @extend .width-2-24; }
+  .col-3-24, .col-1-8 { @extend .width-3-24; }
+  .col-4-24, .col-2-12, .col-1-6 { @extend .width-4-24; }
+  .col-5-24 { @extend .width-5-24; }
+  .col-6-24, .col-3-12, .col-2-8, .col-1-4 { @extend .width-6-24; }
+  .col-7-24 { @extend .width-7-24; }
+  .col-8-24, .col-4-12, .col-2-6, .col-1-3 { @extend .width-8-24; }
+  .col-9-24, .col-3-8 { @extend .width-9-24; }
+  .col-10-24, .col-5-12 { @extend .width-10-24; }
+  .col-11-24 { @extend .width-11-24; }
+  .col-12-24, .col-6-12, .col-4-8, .col-3-6, .col-2-4, .col-1-2 { @extend .width-12-24; }
+  .col-13-24 { @extend .width-13-24; }
+  .col-14-24, .col-7-12 { @extend .width-14-24; }
+  .col-15-24, .col-5-8 { @extend .width-15-24; }
+  .col-16-24, .col-8-12, .col-4-6, .col-2-3 { @extend .width-16-24; }
+  .col-17-24 { @extend .width-17-24; }
+  .col-18-24, .col-9-12, .col-6-8, .col-3-4 { @extend .width-18-24; }
+  .col-19-24 { @extend .width-19-24; }
+  .col-20-24, .col-10-12, .col-5-6 { @extend .width-20-24; }
+  .col-21-24, .col-7-8 { @extend .width-21-24; }
+  .col-22-24, .col-11-12 { @extend .width-22-24; }
+  .col-23-24 { @extend .width-23-24; }
+  .col-24-24, .col-12-12, .col-8-8, .col-6-6, .col-4-4, .col-3-3, .col-2-2, .col-1-1 { @extend .width-24-24; }
 
-  .col-1-24{ @extend .width-1-24; }
-  .col-2-24, .col-1-12{ @extend .width-2-24; }
-  .col-3-24, .col-1-8{ @extend .width-3-24; }
-  .col-4-24, .col-2-12, .col-1-6{ @extend .width-4-24; }
-  .col-5-24{ @extend .width-5-24; }
-  .col-6-24, .col-3-12, .col-2-8, .col-1-4{ @extend .width-6-24; }
-  .col-7-24{ @extend .width-7-24; }
-  .col-8-24, .col-4-12, .col-2-6, .col-1-3{ @extend .width-8-24; }
-  .col-9-24, .col-3-8{ @extend .width-9-24; }
-  .col-10-24, .col-5-12{ @extend .width-10-24; }
-  .col-11-24{ @extend .width-11-24; }
-  .col-12-24, .col-6-12, .col-4-8, .col-3-6, .col-2-4, .col-1-2{ @extend .width-12-24; }
-  .col-13-24{ @extend .width-13-24; }
-  .col-14-24, .col-7-12{ @extend .width-14-24; }
-  .col-15-24, .col-5-8{ @extend .width-15-24; }
-  .col-16-24, .col-8-12, .col-4-6, .col-2-3{ @extend .width-16-24; }
-  .col-17-24{ @extend .width-17-24; }
-  .col-18-24, .col-9-12, .col-6-8, .col-3-4{ @extend .width-18-24; }
-  .col-19-24{ @extend .width-19-24; }
-  .col-20-24, .col-10-12, .col-5-6{ @extend .width-20-24; }
-  .col-21-24, .col-7-8{ @extend .width-21-24; }
-  .col-22-24, .col-11-12{ @extend .width-22-24; }
-  .col-23-24{ @extend .width-23-24; }
-  .col-24-24, .col-12-12, .col-8-8, .col-6-6, .col-4-4, .col-3-3, .col-2-2, .col-1-1{ @extend .width-24-24; }
+  .col-action { width: 16%; }
 
-  .col-action{ width: 16%; }
-
-  /* When you want a column for structure but don't want it to take up any space(padding)  */
+  // When you want a column for structure but don't want it to take up any space(padding)  //
   .spacer-column { padding: 0; }
 }
-

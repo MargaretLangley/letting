@@ -1,7 +1,6 @@
 scss_files: 'app/assets/stylesheets/**/*.css.scss'
 
 exclude:
-  - 'app/assets/stylesheets/layout.scss'
   - 'app/assets/stylesheets/module.scss'
   - 'app/assets/stylesheets/normalize.scss'
 
@@ -15,6 +14,11 @@ linters:
   QualifyingElement:
     enabled: false
 
+  SingleLinePerSelector:
+     enabled: false
+
+  PlaceholderInExtend:
+     enabled: false
 
   # Linters we want to enable
   VendorPrefixes:
