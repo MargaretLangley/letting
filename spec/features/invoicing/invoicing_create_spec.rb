@@ -83,9 +83,8 @@ describe Invoicing, type: :feature do
   it 'invoices an account that matches the search' do
     Timecop.travel '2013-6-1'
 
-    cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 24)]
-    account_create property: property_new(human_ref: 87, client: client_new),
-                   charges: [charge_new(cycle: cycle)]
+    create_account human_ref: 87,
+                   cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
     invoicing_page.enter
 
     invoicing_page.search_term('87').search
@@ -109,9 +108,8 @@ describe Invoicing, type: :feature do
     it 'enables fieldset when able to do invoicing' do
       Timecop.travel '2013-6-1'
 
-      cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 24)]
-      account_create property: property_new(human_ref: 87, client: client_new),
-                     charges: [charge_new(cycle: cycle)]
+      create_account human_ref: 87,
+                     cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
 
       invoicing_page.enter
       invoicing_page.search_term('87').search
@@ -137,9 +135,8 @@ describe Invoicing, type: :feature do
     it 'does not include a chargeable property for the billing-period' do
       Timecop.travel '2013-6-1'
 
-      cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25)]
-      account_create property: property_new(human_ref: 87, client: client_new),
-                     charges: [charge_new(cycle: cycle)]
+      create_account human_ref: 87,
+                     cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25)])
 
       invoicing_page.enter
       invoicing_page.search_term('87').search
@@ -189,18 +186,15 @@ describe Invoicing, type: :feature do
       end
     end
 
-
     describe 'ignoring mail' do
       it 'to properties that have no charges in billing-period.' do
         Timecop.travel '2013-6-1'
 
-        ignored_cycle = cycle_new due_ons: [DueOn.new(month: 5, day: 31)]
-        account_create property: property_new(human_ref: 8, client: client_new),
-                       charges: [charge_new(cycle: ignored_cycle)]
+        create_account human_ref: 8,
+                       cycle: cycle_new(due_ons: [DueOn.new(month: 5, day: 1)])
+        create_account human_ref: 9,
+                       cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 25)])
 
-        deliver_cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
-        account_create property: property_new(human_ref: 9, client: client_new),
-                       charges: [charge_new(cycle: deliver_cycle)]
         invoicing_page.enter
         invoicing_page.search_term('8-9').search
 
@@ -213,9 +207,9 @@ describe Invoicing, type: :feature do
       it 'displays none if every property can be charged.' do
         Timecop.travel '2013-6-1'
 
-        cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
-        account_create property: property_new(human_ref: 9, client: client_new),
-                       charges: [charge_new(cycle: cycle)]
+        create_account human_ref: 9,
+                       cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 25)])
+
         invoicing_page.enter
         invoicing_page.search_term('9').search
 
@@ -225,5 +219,11 @@ describe Invoicing, type: :feature do
         Timecop.return
       end
     end
+  end
+
+  def create_account(human_ref:, cycle:)
+    account_create property: property_new(human_ref: human_ref,
+                                          client: client_new),
+                   charges: [charge_new(cycle: cycle)]
   end
 end
