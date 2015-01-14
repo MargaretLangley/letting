@@ -1,7 +1,6 @@
 scss_files: 'app/assets/stylesheets/**/*.css.scss'
 
 exclude:
-  - 'app/assets/stylesheets/module.scss'
   - 'app/assets/stylesheets/normalize.scss'
 
 linters:
@@ -24,3 +23,5 @@ linters:
   VendorPrefixes:
     enabled: false
 
+  MergeableSelector:
+    enabled: false
