@@ -47,7 +47,7 @@
 
 \*------------------------------------------------*/
 
-  /* used on Page 2*/
+  // used on Page 2
   .wide-margin {
     margin-left: 6em;
   }
@@ -62,12 +62,12 @@
 
 \*------------------------------------------------*/
 
-  /* used for scissors line, page 1, above return slip */
+  // used for scissors line, page 1, above return slip
   .scissors {
     font-size: 1.5em;
   }
 
-  /* Company Banner heading */
+  // Company Banner heading
   .h1-print {
     font-size: 1em;
     font-weight: bold;
@@ -77,8 +77,8 @@
     font-size: 1em;
   }
 
-  /* medium-bold-headings. Used for the company's address
-   in heading, Invoice line and Property addresses. */
+  // medium-bold-headings. Used for the company's address
+  // in heading, Invoice line and Property addresses.
 
   .medium-bold-headings {
     font-size: .8em;
@@ -86,9 +86,7 @@
     line-height: 130%;
   }
 
-/* small-font
- Notice for Leaseholders & Remittance Advice
-*/
+  // small-font (Notice for Leaseholders & Remittance Advice)
   .small-font {
     font-size: .8em;
     font-weight: normal;
@@ -117,7 +115,7 @@
     page-break-after: always;
   }
 
-  /* Buttons and main heading need to be invisible in printouts. Fonts are in pt. */
+  // Buttons and main heading need to be invisible in printouts. Fonts are in pt.
 
   .button,
   footer,
@@ -147,7 +145,7 @@
     width: 22cm;
   }
 
-/*This sets printed page to A4 width*/
+  // This sets printed page to A4 width
 
   .print-body {
     background-color: $neutral-print;
@@ -163,7 +161,7 @@
 
 \*------------------------------------------------*/
 
-  /* wide-margin on 2nd inv page */
+  // wide-margin on 2nd inv page
 
   .wide-margin {
     margin-left: 2cm;
@@ -179,12 +177,12 @@
 
 \*------------------------------------------------*/
 
-  /* used for scissors line, page 1, above return slip */
+  // used for scissors line, page 1, above return slip
   .scissors {
     font-size: 20pt;
   }
 
-  /* Company Banner heading */
+  // Company Banner heading
   .h1-print {
     font-size: 18pt;
     font-weight: bold;
@@ -194,9 +192,9 @@
     font-size: 14pt;
   }
 
-  /* medium-bold-headings
-     Used for Company's address in heading,
-     Invoice line and Property addresses. */
+  // medium-bold-headings
+  // Used for Company's address in heading,
+  // Invoice line and Property addresses.
 
   .medium-bold-headings {
     font-size: 12pt;
@@ -214,7 +212,7 @@
     font-weight: bold;
   }
 
-  /* smallest-font used for notes in brackets in lefthand margin */
+  // smallest-font used for notes in brackets in lefthand margin
   .smallest-font {
     font-size: 10pt;
   }

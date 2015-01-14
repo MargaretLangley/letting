@@ -40,7 +40,7 @@ $color-4:                  #0b4b7c;             // Darker Blue (variant)
 \*----------------------------------------------------*/
 
 
-/* $base */
+// $base
 $neutral:                  #f8f8f8;             // off white
 $neutral-print:            #fff;                // white
 
@@ -54,34 +54,32 @@ $fieldset:   lighten($primary-background, 50%); // Egg shell Blue
 $shadow:                   #aaa;                // Grey
 
 
-/* $TYPOGRAPHY */
+// $TYPOGRAPHY
 $primary-text:             #444;                // Very Dark grey
 $secondary-text:           #777;                // Light grey
 $secondary-print-text:     #5c5858;             // Light dolphin
 
 
-/* $LINKS */
+// $LINKS
 $primary-link:             #2e6aa0;             // Dark Blue
 $secondary-link: darken($primary-link, 60%);    // Dark blue
 $muted-link:               #a1b9ed;             // light grey
 
 
-/* $BUTTON */
+// $BUTTON
 $primary-button:           $color-3;            // Red
 $secondary-button:         $color-2;            // Yellow
 
-/* $ERROR */
+// $ERROR
 $errors-background:        #ffc;                // Yellow
 $warn:                     #dc3d3d;             // Red
 
 
-/*
-  :notice things are GOOD,    colour: green
-  :alert  things are NEUTRAL, colour: yellow.
-  :error  things are BAD,     colour: red.
-*/
+//  :notice things are GOOD,    colour: green
+//  :alert  things are NEUTRAL, colour: yellow.
+//  :error  things are BAD,     colour: red.
 
-/* $FLASH */
+// $FLASH
 $flash-notice:             #dbffdd;             // Pale Green
 $flash-alert:              $color-2;            // Yellow
 $flash-error:              #ffe1de;             // Pink
