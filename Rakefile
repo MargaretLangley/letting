@@ -13,5 +13,5 @@ if %w(development test).include? Rails.env
   SCSSLint::RakeTask.new
 
   task(:default).clear
-  task default: ['spec:all', :rubocop, :scss_lint]
+  task default: [:scss_lint, :rubocop, 'spec:all']
 end
