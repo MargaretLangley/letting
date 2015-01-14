@@ -1,4 +1,4 @@
-@import "colors";
+@import 'colors';
 @import 'layout';
 
 /*----------------------------------------------------*\
@@ -7,48 +7,43 @@
 
 \*----------------------------------------------------*/
 
-
-.hover-link{
+.hover-link {
   text-decoration: none;
   white-space: nowrap;
+
   &:active,
-  &:hover{
+  &:hover {
     text-decoration: underline;
   }
 }
 
-
-a.inverted-link{
+a.inverted-link {
   @include inverted-color;
 }
 
-
-a.warn{
+a.warn {
   color: $warn;
 
   &:hover,
-  &:active{
+  &:active {
     background-color: $warn;
     color: white;
   }
 }
 
-/* UJS are hidden from clicking. I have added a hidden dot for use with
-   the testing driver Capybara */
+// UJS are hidden from clicking. Hidden dot for use with testing driver Capybara
 
-a.view-testing-link{
+a.view-testing-link {
+  color: $fieldset;
   text-decoration: none;
   white-space: nowrap;
-  color: $fieldset;
 }
 
-/*  disabled link
-    used disabled a lot   */
+//  disabled link used disabled a lot
 
-a.grey{
+a.grey {
   color: grey;
 }
-
 
 /*--------------------------------------------------*\
 
@@ -56,18 +51,17 @@ a.grey{
 
 \*--------------------------------------------------*/
 
-
 /*http://stackoverflow.com/questions/4785871/css-vertical-align*/
 @mixin vertical-align-hack {
   height: 3em;
   line-height: 3em;
 }
 
-.grid-row{
+.grid-row {
   clear: both;
 }
 
-.cell{
+.cell {
   @include vertical-align-hack;
   color: $primary-text;
 }
@@ -78,93 +72,89 @@ a.grey{
    Only used on payment
 */
 
-.pick-out{
+.pick-out {
   background-color: darken($fieldset, 5%);
 }
 
-.top-spacer{
-  margin: 0.8% 0 0 0;
+.top-spacer {
+  margin: .8% 0 0;
 }
 
-.top-line-spacer{
-  margin: 1em 0 0 0;
+.top-line-spacer {
+  margin: 1em 0 0;
 }
 
-.top-double-line-spacer{
-  margin: 2em 0 0 0;
+.top-double-line-spacer {
+  margin: 2em 0 0;
 }
 
-.bottom-spacer{
-  margin: 0 0 0.8% 0;
+.bottom-spacer {
+  margin: 0 0 .8%;
 }
 
-.bottom-half-line-spacer{
-  margin: 0 0 0.5em 0;
+.bottom-half-line-spacer {
+  margin: 0 0 .5em;
 }
 
-.bottom-line-spacer{
-  margin: 0 0 1em 0;
+.bottom-line-spacer {
+  margin: 0 0 1em;
 }
 
-.bottom-double-line-spacer{
-  margin: 0 0 2em 0;
+.bottom-double-line-spacer {
+  margin: 0 0 2em;
 }
 
-
-.vertical-spacer{
-  margin: 0.8% 0 0.8% 0;
+.vertical-spacer {
+  margin: .8% 0;
 }
 
-.vertical-line-spacer{
-  margin: 1em 0 1em 0;
+.vertical-line-spacer {
+  margin: 1em 0;
 }
 
-.top-line-padder{
-  padding: 1em 0 0 0;
+.top-line-padder {
+  padding: 1em 0 0;
 }
 
-.bottom-line-padder{
-  padding: 0 0 1em 0;
+.bottom-line-padder {
+  padding: 0 0 1em;
 }
-
 
 /* To change heading color for printing change
    $secondary-print-text in _colors.scss.
    faded holds the switch. grid-header uses faded
    extended. */
 
-.grid-header{
+.grid-header {
   @extend .faded;
-  padding-top: 1%; /* added for new_payment */
   border-bottom: 1px solid $muted-border;
   overflow: hidden;
+  padding-top: 1%; // added for new_payment
   white-space: nowrap;
 }
 
-.grid-pick-header{
-  padding-top: 1%; /* added for new_payment */
+.grid-pick-header {
   border-bottom: 1px solid darken($muted-border, 2%);
   overflow: hidden;
+  padding-top: 1%; // added for new_payment
   white-space: nowrap;
 }
 
-.grid-footer-text{
+.grid-footer-text {
   @extend .faded;
-  padding-top: 1%;
   border-top: 1px solid $muted-border;
   overflow: hidden;
+  padding-top: 1%;
   white-space: nowrap;
 }
 
-.grid-footer-number{
-  padding-top: 1%;
+.grid-footer-number {
   border-top: 1px solid $muted-border;
-  overflow: hidden;
-  white-space: nowrap;
   font-weight: bold;
+  overflow: hidden;
+  padding-top: 1%;
+  white-space: nowrap;
 }
-
-
 
 /*--------------------------------------------------*\
 
@@ -172,19 +162,19 @@ a.grey{
 
 \*--------------------------------------------------*/
 
-.small-bottom{
-  margin-bottom: 0.2em;
+.small-bottom {
+  margin-bottom: .2em;
 }
 
-.r-align{
+.r-align {
   text-align: right;
 }
 
-.c-align{
+.c-align {
   text-align: center;
 }
 
-.no-warp{
+.no-warp {
   white-space: nowrap;
 }
 
@@ -192,22 +182,19 @@ a.grey{
    To change heading color for printing change
    $secondary-print-text in _colors.scss.  */
 
-.faded{
+.faded {
   color: $secondary-text;
   @media print {
-        color: $secondary-print-text;
+    color: $secondary-print-text;
   }
 }
 
-/*
-  Charge using a special class so I can test it if a dormant charge has been
-  faded. The css 'faded' class is already used on the page for headings.
-*/
+// Charge using a special class to test for dormant charge has been faded.
+// The css 'faded' class is already used on the page for headings.
 
-.deemphasized{
+.deemphasized {
   @extend .faded;
 }
-
 
 /*-----------------------------------------------*\
 
@@ -215,113 +202,109 @@ a.grey{
 
 \*------------------------------------------------*/
 
-
-nav{
+nav {
   float: right;
 }
 
-
-.nav-shell{
+.nav-shell {
   margin-top: 15%;
   width: 100%;
 }
 
-li a{
+li a {
+  background-color: $fieldset;
+  border-bottom: 1px solid $neutral;
   display: block;
   padding: 4%;
-  border-bottom: 1px solid $neutral;
-  background-color: $fieldset;
 }
 
-/* navigation */
+// navigation
 
-
-/* extra class selectivity required override 'li a' with li.<class> a */
+// extra class selectivity required override 'li a' with li.<class> a
 
 @mixin menu-style($background, $border) {
   border: 1px solid darken($fieldset, $background);
   border-radius: 5px;
   background-color: darken($fieldset, $border);
+
   &:hover,
-  &:active{
+  &:active {
     background-color: $secondary-background;
     color: white;
   }
 }
 
-li.inactive-nav a{
+li.inactive-nav a {
   @include menu-style(0%, 5%);
 }
 
-li.active-nav a{
-  @include menu-style(15%, 25%);
+li.active-nav a {
+  @include menu-style (15%, 25%);
 }
 
-li.active-subnav a{
+li.active-subnav a {
   @include menu-style(5%, 15%);
 }
 
-
 /*-----------------------------------------------*\
 
-   $TABS
+  $TABS
 
-http://inspirationalpixels.com/tutorials/creating-tabs-with-html-css-and-jquery
+  http://inspirationalpixels.com/tutorials/creating-tabs-with-html-css-and-jquery
 
 \*-----------------------------------------------*/
 
 
 /*----- Tabs -----*/
 .tabs {
-  width:100%;
-  display:inline-block;
+  display: inline-block;
+  width: 100%;
 }
 
 /*----- Tab Links -----*/
 /* Clearfix */
 .tab-links:after {
-  display:block;
-  clear:both;
-  content:'';
+  clear: both;
+  content: '';
+  display: block;
 }
 
 .tab-links li {
-  margin:0px 5px;
-  float:left;
-  list-style:none;
+  float: left;
+  list-style: none;
+  margin: 0 5px;
 }
 
 .tab-links a {
-  padding:9px 15px;
-  display:inline-block;
   @include menu-style(0%, 5%);
-  border-radius: 5px 5px 0px 0px;
-  transition:all linear 0.15s;
+  border-radius: 5px 5px 0 0;
+  display: inline-block;
+  padding: 9px 15px;
+  transition: all linear .15s;
 }
 
 .tab-links a:hover {
-  background:#a7cce5;
-  text-decoration:none;
+  background: #a7cce5;
+  text-decoration: none;
 }
 
 li.active a, li.active a:hover {
   @include menu-style(15%, 25%);
 }
 
-/*----- Content of Tabs -----*/
 .tab-content {
-  padding:15px;
-  border-radius:3px;
-  box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
-  background:#fff;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: -1px 1px 1px rgba(0, 0, 0, .15);
+  padding: 15px;
 }
 
 .tab {
-  display:none;
+  display: none;
 }
 
 .tab.active {
-  display:block;
+  display: block;
 }
 
 /*-----------------------------------------------*\
@@ -330,127 +313,127 @@ li.active a, li.active a:hover {
 
 \*-----------------------------------------------*/
 
-@media screen{
+@media screen {
 
-  @mixin inside-shell{
+  @mixin inside-shell {
     border: 1px solid lighten($fieldset, 20%);
     border-radius: 12px;
     background-color: $fieldset;
     box-shadow: $shadow 0 0 8px;
   }
 
-  .shell{
-    margin: 0 0 2% 0;
+  .shell {
+    @include inside-shell;
+    @include clearfix;
+    margin: 0 0 2%;
     padding: 1%;
-    @include inside-shell;
-    @include clearfix;
   }
 
-  .shell-thin{
-    margin: 0 0 2% 0;
+  .shell-thin {
+    @include inside-shell;
+    @include clearfix;
+    margin: 0 0 2%;
     padding: 0;
-    @include inside-shell;
-    @include clearfix;
   }
 
-  .shell-1-25{
-    margin: 0 0 2% 0;
-    padding: 1% 4% 2% 4%;
+  .shell-1-25 {
     @include inside-shell;
     @include clearfix;
+    margin: 0 0 2%;
+    padding: 1% 4% 2%;
   }
 
-  .shell-1-12{
-    margin: 0 0 2% 0;
-    padding: 2% 8.3333% 2% 8.3333%;
+  .shell-1-12 {
     @include inside-shell;
     @include clearfix;
+    margin: 0 0 2%;
+    padding: 2% 8.3333%;
   }
 
-  .shell-1-6{
-    margin: 0 0 2% 0;
-    padding: 2% 16.6666% 2% 16.6666%;
+  .shell-1-6 {
     @include inside-shell;
     @include clearfix;
+    margin: 0 0 2%;
+    padding: 2% 16.6666%;
   }
 }
 
-@media print{
+@media print {
 
-  @mixin inside-shell{
+  @mixin inside-shell {
     width: 20cm;
     border: 0;
   }
 
-  .shell{
+  .shell {
     @include inside-shell;
   }
 
-  .shell-thin{
-    margin: 0 0 2% 0;
+  .shell-thin {
+    @include inside-shell;
+    @include clearfix;
+    margin: 0 0 2%;
     padding: 0;
-    @include inside-shell;
-    @include clearfix;
   }
 
-  .shell-1-25{
-    margin: 0 0 2% 0;
-    padding: 1% 4% 2% 4%;
+  .shell-1-25 {
     @include inside-shell;
     @include clearfix;
+    margin: 0 0 2%;
+    padding: 1% 4% 2%;
   }
 
-  .shell-1-12{
-    margin: 0 0 2% 0;
-    padding: 2% 8.3333% 2% 8.3333%;
+  .shell-1-12 {
     @include inside-shell;
     @include clearfix;
+    margin: 0 0 2%;
+    padding: 2% 8.3333%;
   }
 
-  .shell-1-6{
-    margin: 0 0 2% 0;
-    padding: 2% 16.6666% 2% 16.6666%;
+  .shell-1-6 {
     @include inside-shell;
     @include clearfix;
+    margin: 0 0 2%;
+    padding: 2% 16.6666%;
   }
 }
 
 /*-----------------------------------------------*\
 
-   $table rows
+  $table rows
 
-   Grid simulating tables
+  Grid simulating tables
 
-   1 - Outer div around which the part of the row will have hover.
-     has:
-     1.1 class='table-row'
-     1.2 data-link='<%= property_path(property.id) %>
-     1.3 the data is used by visit-data-link.js
-   2 - columns within the outer dive that we want to see table-row styles in
-       we add class='inherit-row'
-   3 - visit-data-link.js must be present - in one of the columns
-   4 - Hidden link added to column in the table for testing purposes
-     4.1 link_to '.', property_path(property.id), class: 'view-testing-link';
-     4.2 spec with: find('.view-testing-link', visible: false).click
+  1 - Outer div around which the part of the row will have hover.
+   has:
+   1.1 class='table-row'
+   1.2 data-link='<%= property_path(property.id) %>
+   1.3 the data is used by visit-data-link.js
+  2 - columns within the outer dive that we want to see table-row styles in
+     we add class='inherit-row'
+  3 - visit-data-link.js must be present - in one of the columns
+  4 - Hidden link added to column in the table for testing purposes
+   4.1 link_to '.', property_path(property.id), class: 'view-testing-link';
+   4.2 spec with: find('.view-testing-link', visible: false).click
 
   5 - Committed these changes for clients table under:
-      'grid simulating table - client'
-       git log --oneline | grep 'grid simulating table - client'
+    'grid simulating table - client'
+     git log --oneline | grep 'grid simulating table - client'
 
 \*-----------------------------------------------*/
 
-  .table-row{
-    &:hover,
-    &:active{
-      text-decoration: underline;
-      background-color: darken($fieldset, 5%);
-    }
+.table-row {
+  &:hover,
+  &:active {
+    background-color: darken($fieldset, 5%);
+    text-decoration: underline;
   }
+}
 
-  .inherit-row{
-    text-decoration: inherit;
-    background-color: inherit;
-  }
+.inherit-row {
+  background-color: inherit;
+  text-decoration: inherit;
+}
 
 /*--------------------------------------------------*\
 
@@ -468,29 +451,29 @@ label {
   @include ellipsis-text;
 }
 
-.required{
+.required {
   font-weight: bold;
+
   &:after {
     content: ' *';
   }
 }
 
-input[type=submit].primary{
-  width: 60%;
+input[type=submit].primary {
   padding: 2%;
+  width: 60%;
 }
 
+// js revealable element
 
-/* js revealable element */
-
-.js-revealable{
+.js-revealable {
   display: none;
 }
 
-/* js is not used to reveal element */
+// js is not used to reveal element
 
-.folded, .hidden{
- display: none;
+.folded, .hidden {
+  display: none;
 }
 
 /*--------------------------------------------------*\
@@ -503,34 +486,34 @@ $search-height: 35px;
 
 .form-wrapper {
   @include clearfix;
+  background-color: $primary-background;
   border: 3px solid lighten($primary-background, 5%);
   border-radius: 10px;
-  background-color: $primary-background;
 }
 
 .form-wrapper input {
   @extend .width-5-6;
-  float: left;
-  padding: 0 0 0 0.5em;
   border: 1px solid darken($primary-button, 10%);
-  border-right: 0;
   border-radius: 5px 0 0 5px;
+  border-right: 0;
+  float: left;
   height: $search-height;
+  padding: 0 0 0 .5em;
 }
 
 .form-wrapper button {
   @extend .width-1-6;
-  float: left;
-  overflow: visible;
+  background-color: $primary-button;
   border: 1px solid darken($primary-button, 15%);
   border-radius: 0 5px 5px 0;
-  background-color: $primary-button;
   color: white;
-  text-transform: uppercase;
+  float: left;
   height: $search-height;
+  overflow: visible;
+  text-transform: uppercase;
 }
 
-.form-wrapper button:hover{
+.form-wrapper button:hover {
   background-color: darken($primary-button, 8%);
 }
 
@@ -540,7 +523,7 @@ $search-height: 35px;
 
 \*--------------------------------------------------*/
 
-@media screen{
+@media screen {
 
   @mixin base-button {
     margin: 1% 1% 1% 0;
@@ -549,52 +532,57 @@ $search-height: 35px;
     border-radius: 5px;
     box-shadow: $shadow 0 0 4px;
     font-size: 1.2em;
+
     &:hover,
-    &:active{
+    &:active {
       background: $secondary-background;
       color: white;
     }
   }
 
-  .plain-button{
+  .plain-button {
     @include base-button;
-    color: black;
     background: white;
+    color: black;
 
-    /* Required to override base.css a:link's color and background-color;*/
+    // Required to override base.css a:link color and background-color;
     &:link,
-    &:visited{
+    &:visited {
       background: white;
       color: black;
     }
   }
 
-  .plain-button[disabled]{
+  .plain-button[disabled] {
     @include base-button;
     background: $disabled-background;
     color: white;
     text-decoration: none;
 
-    /* Required to override base.css a:link's color and background-color;*/
+    // Required to override base.css a:link color and background-color;
+
     &:link,
-    &:visited{
+    &:visited {
       background: $disabled-background;
       color: white;
     }
+
     &:hover,
-    &:active{
+    &:active {
       background: $disabled-background;
       color: white;
     }
   }
 
-  .warn-button{
+  .warn-button {
     @include base-button;
-    color: $warn;
     background: white;
-    /* Required to override base.css a:link's color and background-color;*/
+    color: $warn;
+
+    // Required to override base.css a:link color and background-color;
+
     &:link,
-    &:visited{
+    &:visited {
       background: white;
       color: $warn;
     }
@@ -607,21 +595,23 @@ $search-height: 35px;
 
 \*--------------------------------------------------*/
 
-.warn{
+.warn {
   color: $warn;
 }
 
-.error-shell{
+.error-shell {
   @extend .shell;
   background-color: $errors-background;
 }
 
-.field_with_errors{
+// Does not appear to be being used //
+.field-with-errors {
   label {
     color: $warn;
   }
+
   input,
-  textarea{
+  textarea {
     background-color: $errors-background;
   }
 }
@@ -632,15 +622,15 @@ $search-height: 35px;
 
 \*--------------------------------------------------*/
 
-.flash{
-  width: 40%;
-  margin: 0 20% 0 20%;
-  position: absolute;
-  padding: 1.5% 2% 1.5% 2%;
+.flash {
   border-radius: 12px;
   box-shadow: $shadow 0 0 8px;
   cursor: pointer;
+  margin: 0 20%;
+  padding: 1.5% 2%;
+  position: absolute;
   text-align: center;
+  width: 40%;
 }
 
 /*
@@ -649,46 +639,43 @@ $search-height: 35px;
   :error  things are BAD,     colour: red.
 */
 
-@mixin notice{
+@mixin notice {
   border: 1px solid lighten($flash-notice, 20%);
   background-color: rgba($flash-notice, $flash-opacity);
 }
 
-@mixin alert{
+@mixin alert {
   border: 1px solid lighten($flash-alert, 20%);
   background-color: rgba($flash-alert, $flash-opacity);
 }
 
-@mixin error{
+@mixin error {
   border: 1px solid lighten($flash-error, 20%);
   background-color: rgba($flash-error, $flash-opacity);
 }
 
-
-.save{
+.save {
   @include notice;
 }
 
-.good{
+.good {
   @include notice;
 }
 
-.problem{
+.problem {
   @include alert;
 }
 
-.delete{
+.delete {
   @include error;
 }
 
-/*
-  trying to get close x into top right it isn't nice code
-*/
+// trying to get close x into top right it isn't nice code
 
-.flash-close{
+.flash-close {
+  cursor: pointer;
   position: relative;
   top: -10px;
-  cursor: pointer;
 }
 
 /*--------------------------------------------------*\
@@ -697,7 +684,7 @@ $search-height: 35px;
 
 \*--------------------------------------------------*/
 
-.overlay-parent{
+.overlay-parent {
   position: relative;
 }
 
@@ -708,17 +695,17 @@ $search-height: 35px;
   margin-right: auto;
   margin-left: auto;
   width: 80%;
-  border: 1px solid lighten(rgb(184,184,184), 20%);
-  background-color: rgba(184,184,184,0.85);
+  border: 1px solid lighten(rgb(184, 184, 184), 20%);
+  background-color: rgba(184, 184, 184, .85);
   color: $primary-text;
-  font-size:1.4em;
+  font-size: 1.4em;
 }
 
-.overlay{
+.overlay {
   @include base-overlay;
 }
 
-.low-overlay{
+.low-overlay {
   @include base-overlay;
   top: 100%;
 }
@@ -729,11 +716,11 @@ $search-height: 35px;
 
 \*--------------------------------------------------*/
 
-.ui-menu .ui-menu-item a{
+.ui-menu .ui-menu-item a {
   background-color: darken($fieldset, 5%);
-  color: black;
-  border-radius: 5px;
   border: 1px solid darken($fieldset, 10%);
+  border-radius: 5px;
+  color: black;
 }
 
 /*--------------------------------------------------*\
