@@ -1,6 +1,15 @@
 # rubocop:disable LineLength
 require 'rails_helper'
 
+# PrintShow
+#
+# Printing the entire print run, where a print run is a collection of invoices
+# selected in an invoicing to be printed.
+#
+# Printing route for printing the run directly without going through the view
+# first.
+#
+#
 describe 'PrintShow', type: :feature do
   describe '#show' do
     it 'basic' do
@@ -8,8 +17,8 @@ describe 'PrintShow', type: :feature do
       setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
       visit '/prints/1'
 
-      expect(page).to have_text 'High'
-      expect(page).to have_text '30/06/2014'
+      expect(page.title).to eq 'Letting - Invoicing'
+      expect(page).to have_text '1984'
     end
 
     describe 'back page is used for Ground Rents & Garage Ground Rents only' do
@@ -36,14 +45,11 @@ describe 'PrintShow', type: :feature do
 
     def setup(snapshot:)
       log_in admin_attributes
-      invoice_text_create id: 1,
-                          invoice_name: 'Harry',
-                          address: address_new(road: 'High')
+      invoice_text_create id: 1
       invoice_text_create id: 2, heading1: 'Act 2002'
       (1..7).each { |guide_id| guide_create id: guide_id, instruction: 'inst' }
 
-      property = property_create(human_ref: 1984,
-                                 occupiers: [Entity.new(name: 'Smiths')])
+      property = property_create human_ref: 1984
 
       run_create id: 1, invoices: [invoice_create(property: property, snapshot: snapshot)]
     end
