@@ -13,18 +13,18 @@ Letting::Application.routes.draw do
   resources :search_suggestions, only: [:index]
 
   root 'properties#index'
-  resources :properties, path: 'accounts'
   resources :arrears, only: [:index]
   resources :clients
   resources :client_payments, only: [:show]
+  resources :guides, only: [:index, :show, :edit, :update]
   resources :payments
+  resources :properties, path: 'accounts'
   resources :invoicings
+  resources :invoice_texts, only: [:index, :show, :edit, :update]
   resources :invoices, only: [:show]
   resources :prints, only: [:show]
-  resources :prints_screens, only: [:show]
+  resources :runs, only: [:show]
   resources :single_prints, only: [:show]
-  resources :invoice_texts, only: [:index, :show, :edit, :update]
-  resources :guides, only: [:index, :show, :edit, :update]
 
   # Admin
   resources :cycles

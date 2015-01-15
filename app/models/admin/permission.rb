@@ -46,7 +46,7 @@ class Permission < Struct.new(:user)
        payments
        properties
        prints
-       prints_screens
+       runs
        search
        search_suggestions
        single_prints)

@@ -1,19 +1,16 @@
 # rubocop:disable LineLength
 require 'rails_helper'
 
-# PrintScreenShow#show
-# TODO: Rename to Run#show
-#  -
-#  - print_screen_show_spec => run_show_spec
+# Run#show
 #
-# Displays the invoicing run onto the screen. Formatted for printing.
+# Displays the invoicing run onto the screen. Formatted ready for printing.
 #
-describe 'PrintScreenShow', type: :feature do
+describe 'RunShow', type: :feature do
   describe '#show' do
     it 'basic' do
       charge = charge_new charge_type: ChargeTypes::GROUND_RENT
       setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
-      visit '/prints_screens/1'
+      visit '/runs/1'
 
       expect(page.title).to eq 'Letting - Invoicing'
       expect(page).to have_text '1984'
@@ -23,7 +20,7 @@ describe 'PrintScreenShow', type: :feature do
       it 'displays back page with garage ground rent, uses invoice_text 2' do
         charge = charge_new charge_type: ChargeTypes::GARAGE_GROUND_RENT
         setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
-        visit '/prints_screens/1'
+        visit '/runs/1'
 
         # TODO: write page wrapper
         # Tests showing the page has been loaded
@@ -33,7 +30,7 @@ describe 'PrintScreenShow', type: :feature do
       it 'is left blank without ground rent' do
         charge = charge_new charge_type: ChargeTypes::INSURANCE
         setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
-        visit '/prints_screens/1'
+        visit '/runs/1'
 
         # TODO: write page wrapper
         # Tests showing the page has been loaded
@@ -48,6 +45,7 @@ describe 'PrintScreenShow', type: :feature do
       (1..7).each { |guide_id| guide_create id: guide_id, instruction: 'inst' }
 
       property = property_create human_ref: 1984
+
       run_create id: 1, invoices: [invoice_create(property: property, snapshot: snapshot)]
     end
   end
