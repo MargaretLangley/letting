@@ -1,13 +1,13 @@
 <% @title='View Cycle' %>
 
-<div class='grid shell-1-6'>
+<div class='grid  shell-1-12'>
 
-  <div class='col-18-24  grid-row  bottom-spacer'>    <!-- 1st column -->
+  <div class='col-19-24  grid-row  bottom-spacer'>    <!-- 1st column -->
 
-    <div class='col-4-24  grid-row  bottom-half-line-spacer  faded'>Name</div>
-    <div class='col-13-24 bottom-half-line-spacer'><%= @cycle.name %></div>
+    <div class='col-5-24  grid-row  bottom-half-line-spacer  faded'>Name</div>
+    <div class='col-14-24 bottom-half-line-spacer'><%= @cycle.name %></div>
 
-    <div class='col-4-24  grid-row  bottom-half-line-spacer  faded'>Order</div>
+    <div class='col-5-24  grid-row  bottom-half-line-spacer  faded'>Order</div>
     <div class='col-3-24  bottom-half-line-spacer'><%= @cycle.order %></div>
 
     <% if @cycle.monthly? %>
@@ -17,7 +17,7 @@
     <% end %>
   </div>
 
-  <div class='col-6-24'>  <!-- 2nd column -->
+  <div class='col-5-24'>  <!-- 2nd column -->
     <%= edit_link @cycle, size: '2x' %>
   </div>
 </div> <!-- grid shell -->
