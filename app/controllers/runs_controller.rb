@@ -1,10 +1,6 @@
 ####
 #
-# Prints_Screens Controller
-#
-# Rename to RunsController
-# Search PrintsScreens and prints_screens (rename in routes and permission)
-#
+# Runs Controller
 #
 # Controller for printing a run of invoices to the screen.
 #
@@ -13,7 +9,7 @@
 #
 ####
 #
-class PrintsScreensController < ApplicationController
+class RunsController < ApplicationController
   layout 'view_layout'
 
   def show
