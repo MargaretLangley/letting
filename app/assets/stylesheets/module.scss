@@ -292,11 +292,22 @@ li.active a, li.active a:hover {
   @include menu-style(15%, 25%);
 }
 
-.tab-content {
-  background: #fff;
-  border-radius: 3px;
-  box-shadow: -1px 1px 1px rgba(0, 0, 0, .15);
-  padding: 15px;
+@media screen {
+
+  .tab-content {
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: -1px 1px 1px rgba(0, 0, 0, .15);
+    padding: 15px;
+  }
+}
+
+@media print {
+
+  .tab-content {
+    background: #fff;
+    padding: 15px;
+  }
 }
 
 .tab {
