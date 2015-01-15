@@ -15,8 +15,8 @@ module InvoicingHelper
   end
 
   def invoicing_using_default_dates?
-    params[:start_date] == invoicing_default_start_date &&
-      params[:end_date] == invoicing_default_end_date
+    invoicing_start_date == invoicing_default_start_date &&
+      invoicing_end_date == invoicing_default_end_date
   end
 
   def invoicing_start_date
