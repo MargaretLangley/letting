@@ -1,18 +1,18 @@
 # rubocop:disable LineLength
 require 'rails_helper'
 
-# SinglePrints#show
+# PrintInvoices#show
 #
 # Printing out a single invoice (bypassing viewing the letter on the screen.)
 #
 #
-describe 'SinglePrints#show', type: :feature do
+describe 'PrintInvoices#show', type: :feature do
   it 'basic' do
     charge = charge_new charge_type: ChargeTypes::GROUND_RENT
     setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
 
-    visit '/single_prints/1'
-    expect(page.title).to eq 'Letting - Invoicing Single Print'
+    visit '/print_invoices/1'
+    expect(page.title).to eq 'Letting - Print Invoices'
     expect(page).to have_text '1984'
   end
 
@@ -20,7 +20,7 @@ describe 'SinglePrints#show', type: :feature do
     it 'displays back page for ground rents and garage ground rent only' do
       charge = charge_new charge_type: ChargeTypes::GARAGE_GROUND_RENT
       setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
-      visit '/single_prints/1'
+      visit '/print_invoices/1'
 
       # TODO: write page wrapper
       # Tests showing the page has been loaded
@@ -30,7 +30,7 @@ describe 'SinglePrints#show', type: :feature do
     it 'is left blank without ground rent' do
       charge = charge_new charge_type: ChargeTypes::INSURANCE
       setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
-      visit '/single_prints/1'
+      visit '/print_invoices/1'
 
       # TODO: write page wrapper
       # Tests showing the page has been loaded

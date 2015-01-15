@@ -46,10 +46,10 @@ class Permission < Struct.new(:user)
        payments
        properties
        prints
+       print_invoices
        runs
        search
-       search_suggestions
-       single_prints)
+       search_suggestions)
   end
 
   def admin_controllers
