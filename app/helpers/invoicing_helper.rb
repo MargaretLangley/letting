@@ -6,6 +6,20 @@
 ####
 #
 module InvoicingHelper
+  def default_date_link
+    link_to " or default to the next #{Invoicing::WEEKS_AHEAD} weeks",
+            '#',
+            title: 'default dates',
+            class: 'js-toggle  inverted-link'
+  end
+
+  def choosing_dates_link
+    link_to 'or choose dates',
+            '#',
+            title: 'Choose Dates with calendar',
+            class: 'js-toggle  inverted-link'
+  end
+
   def hide_if_invoicing_dates_default
     invoicing_using_default_dates? ? ' js-revealable ' : ''
   end
@@ -32,6 +46,6 @@ module InvoicingHelper
   end
 
   def invoicing_default_end_date
-    (Time.zone.today + 7.weeks).to_s
+    (Time.zone.today + Invoicing::WEEKS_AHEAD.weeks).to_s
   end
 end

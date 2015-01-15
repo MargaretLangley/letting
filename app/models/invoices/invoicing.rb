@@ -13,6 +13,7 @@
 # during the time period of the invoice.
 #
 class Invoicing < ActiveRecord::Base
+  WEEKS_AHEAD = 7
   has_many :runs, dependent: :destroy, inverse_of: :invoicing
   validates :property_range, :period_first, :period_last, :runs, presence: true
   scope :default, -> { order(period_first: :desc) }
