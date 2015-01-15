@@ -23,8 +23,8 @@ Letting::Application.routes.draw do
   resources :invoice_texts, only: [:index, :show, :edit, :update]
   resources :invoices, only: [:show]
   resources :prints, only: [:show]
+  resources :print_invoices, only: [:show]
   resources :runs, only: [:show]
-  resources :single_prints, only: [:show]
 
   # Admin
   resources :cycles
