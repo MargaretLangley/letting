@@ -138,8 +138,9 @@ class Invoice < ActiveRecord::Base
     self.client_address = client_address
   end
 
-  # If we destroy the invoice we destroy the associated snapshot if there is
-  # no other invoice reference to it.
+  # Destroy the associated snapshot if it has no other invoice reference left.
+  # (wanted snapshot to destroy itself if there were no other invoice but
+  #  didn't get it working.)
   #
   def destroy_orphaned_snapshot
     snapshot.invoices.empty? && snapshot.destroy

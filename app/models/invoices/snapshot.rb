@@ -3,9 +3,9 @@
 #
 # The generation of a set of debts onto a single account.
 #
-# Link between the invoices, up to 2, and the debits which the
-# invoices are responsible. The idea is to only delete the
-# debits if both invoices are deleted.
+# Link between the many invoices, normally 1 or 2, and the debits which the
+# invoices are responsible. The idea is to only delete the debits if both
+# invoices are deleted.
 #
 # http://stackoverflow.com/questions/6301054/check-all-associations-before-destroy-in-rails
 # http://stackoverflow.com/questions/4054112/how-do-i-prevent-deletion-of-parent-if-it-has-child-records
@@ -39,16 +39,15 @@ class Snapshot < ActiveRecord::Base
     @products ||= product_arrears(invoice_date: invoice_date) + product_debits
   end
 
+  # match
+  #
+  # fails to match on the first invoicing run.
+  # matches on the second and subsequent runs.
+  #
   def self.match(account:, period:)
     where account: account, period_first: period.first, period_last: period.last
   end
 
-  # invoice destruction query
-  #
-  # Plan A - Want to be able to destroy an invoice and not destroy
-  #   snapshot if it has another invoice already. (doesn't work)
-  # Plan B - test if I should delete snapshot when deleting invoice
-  #   (Working)
   def only_one_invoice?
     invoices.size <= 1
   end
