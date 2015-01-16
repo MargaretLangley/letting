@@ -19,9 +19,7 @@
       <div class='col-2-24  bottom-spacer  faded'>
         <%= f.radio_button :charged_in_id, ChargedInDefaults::MODERN_ADVANCE.to_s %>
       </div>
-      <div class='col-1-24  bottom-spacer'>
-        &nbsp;
-      </div>
+      <div class='col-1-24  bottom-spacer'>&nbsp;</div>
       <div class='col-3-24  bottom-spacer  faded'>
         <%= f.label :charged_in_id, 'Arrears', value: ChargedInDefaults::MODERN_ARREARS.to_s %>
       </div>
@@ -46,8 +44,8 @@
         </div>
       <% end %>
 
-      <div class='col-5-24  grid-row  vertical-line-spacerf  no-print'>&nbsp;</div>
-      <div class='col-18-24  top-line-spacer  no-print'>
+      <div class='col-5-24  grid-row  vertical-line-spacer'>&nbsp;</div>
+      <div class='col-18-24  top-line-spacer'>
         <%= render 'forms/buttons', f: f, path: cycles_path  %>
       </div>
     </div>
