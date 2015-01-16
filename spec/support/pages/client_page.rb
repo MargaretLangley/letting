@@ -3,7 +3,7 @@
 #
 # Encapsulates the Client Page (new and edit)
 #
-# The layer hides the capybara calls to make the functional rspec tests that
+# The layer hides the Capybara calls to make the functional RSpec tests that
 # use this class simpler.
 #
 # rubocop: disable Metrics/ParameterLists
@@ -11,14 +11,12 @@
 class ClientPage
   include Capybara::DSL
 
-  def new
-    visit '/clients/new'
-    self
-  end
-
-  def edit
-    visit '/clients/'
-    click_on 'Edit'
+  def load id: nil
+    if id.nil?
+      visit '/clients/new'
+    else
+      visit "/clients/#{id}/edit"
+    end
     self
   end
 
@@ -53,8 +51,8 @@ class ClientPage
     fill_in 'Postcode', with: postcode
   end
 
-  def expect_ref(page, client_id)
-    page.expect(find_field('Client ID').value).to page.have_text client_id
+  def ref
+    find_field('Client ID').value.to_i
   end
 
   def entity(order:)

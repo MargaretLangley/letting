@@ -14,8 +14,8 @@ describe 'Client#update', type: :feature do
 
   context 'with one entity' do
     before(:each) do
-      client_create human_ref: 301
-      client_page.edit
+      client_create id: 1, human_ref: 301
+      client_page.load id: 1
     end
 
     it 'opens valid page', js: true  do
@@ -31,8 +31,9 @@ describe 'Client#update', type: :feature do
       client_page.fill_in_address address_attributes town: 'York'
       client_page.button 'Update'
       expect(client_page).to be_successful
-      client_page.edit
-      client_page.expect_ref self, 278
+
+      client_page.load id: Client.first.id
+      expect(client_page.ref).to eq 278
 
       expect(client_page.entity(order: 0)).to eq 'Mrs J Smit'
       client_page.expect_address self, address_attributes(town: 'York')
@@ -49,7 +50,7 @@ describe 'Client#update', type: :feature do
       client_page.fill_in_entity order: 1, **add_person(name: 'Cook')
       client_page.button 'Update'
       expect(client_page).to be_successful
-      client_page.edit
+      client_page.load id: 1
 
       expect(client_page.entity(order: 1)).to eq 'Mr A Cook'
     end
@@ -65,22 +66,26 @@ describe 'Client#update', type: :feature do
 
   context 'with two entity' do
     it 'deletes second entity', js: true do
-      client_create human_ref: 301, entities: [Entity.new(name: 'Bell'),
-                                               Entity.new(name: 'Prior')]
-      client_page.edit
+      client_create \
+        id: 1,
+        human_ref: 301,
+        entities: [Entity.new(name: 'Bell'), Entity.new(name: 'Prior')]
+      client_page.load id: 1
 
       client_page.click 'Delete Person'
       client_page.button 'Update'
-      client_page.edit
+      client_page.load id: 1
       client_page.click 'Add Person'
 
       expect(client_page.entity(order: 1)).to eq ''
     end
 
     it 'does not add a third entity', js: true do
-      client_create human_ref: 301, entities: [Entity.new(name: 'Bell'),
-                                               Entity.new(name: 'Prior')]
-      client_page.edit
+      client_create \
+        id: 1,
+        human_ref: 301,
+        entities: [Entity.new(name: 'Bell'), Entity.new(name: 'Prior')]
+      client_page.load id: 1
       client_page.click 'Add Person'
 
       expect(page).to have_css '.spec-entity-count', count: 2

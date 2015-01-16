@@ -15,13 +15,13 @@ describe 'Client navigate', type: :feature do
     end
 
     it 'to edit client' do
-      client_create human_ref: 111
+      client_create id: 1, human_ref: 111
       visit '/clients/'
 
       first(:link, 'Edit').click
 
       expect(page.title).to eq 'Letting - Edit Client'
-      expect(find_field('Client ID').value).to have_text '111'
+      expect(ClientPage.new.ref).to eq 111
     end
   end
 
@@ -44,8 +44,8 @@ describe 'Client navigate', type: :feature do
   describe 'from edit page' do
     it 'to view page' do
       client_create id: 1
-      visit '/clients/1/edit'
-      expect(page.title).to eq 'Letting - Edit Client'
+      (client_page = ClientPage.new).load id: 1
+      expect(client_page.title).to eq 'Letting - Edit Client'
 
       click_on 'View file'
 
