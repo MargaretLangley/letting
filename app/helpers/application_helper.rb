@@ -63,7 +63,7 @@ module ApplicationHelper
   end
 
   def print_link model, title: 'Print', css: 'float-right'
-    app_link icon: 'print', path: print_path(model), css: css, title: title
+    app_link icon: 'print', path: print_run_path(model), css: css, title: title
   end
 
   def toggle_link direction:, size: 'lg'

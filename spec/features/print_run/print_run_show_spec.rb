@@ -15,7 +15,7 @@ describe 'PrintShow', type: :feature do
     it 'basic' do
       charge = charge_new charge_type: ChargeTypes::GROUND_RENT
       setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
-      visit '/prints/1'
+      visit '/print_runs/1'
 
       expect(page.title).to eq 'Letting - Invoicing'
       expect(page).to have_text '1984'
@@ -25,7 +25,7 @@ describe 'PrintShow', type: :feature do
       it 'displays back page with ground rent, uses invoice_text 2' do
         charge = charge_new charge_type: ChargeTypes::GARAGE_GROUND_RENT
         setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
-        visit '/prints/1'
+        visit '/print_runs/1'
 
         # TODO: write page wrapper
         # Tests showing the page has been loaded
@@ -35,7 +35,7 @@ describe 'PrintShow', type: :feature do
       it 'is left blank without ground rent' do
         charge = charge_new charge_type: ChargeTypes::SERVICE_CHARGE
         setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
-        visit '/prints/1'
+        visit '/print_runs/1'
 
         # TODO: write page wrapper
         # Tests showing the page has been loaded

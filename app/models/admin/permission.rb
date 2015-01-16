@@ -45,8 +45,8 @@ class Permission < Struct.new(:user)
        invoices
        payments
        properties
-       prints
        print_invoices
+       print_runs
        runs
        search
        search_suggestions)
