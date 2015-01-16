@@ -24,7 +24,7 @@ class ClientPage
     click_on "#{action} Client"
   end
 
-  def click(choice)
+  def click choice
     click_on choice, exact: true
   end
 
@@ -32,7 +32,7 @@ class ClientPage
     fill_in 'Client ID', with: client_id
   end
 
-  def fill_in_entity(order:, title:, initials:, name:)
+  def fill_in_entity(order:, title: '', initials: '', name:)
     id_stem = "client_entities_attributes_#{order}"
     fill_in "#{id_stem}_title", with: title
     fill_in "#{id_stem}_initials", with: initials
@@ -62,16 +62,8 @@ class ClientPage
     "#{find_field("#{id_stem}_name").value}".strip
   end
 
-  def expect_address(page, flat_no:, house_name:, road_no:, road:,
-                            town:, district:, county:, postcode:)
-    page.expect(find_field('Flat no').value).to page.have_text flat_no
-    page.expect(find_field('House name').value).to page.have_text house_name
-    page.expect(find_field('Road no').value).to page.have_text road_no
-    page.expect(find_field('Road').value).to page.have_text road
-    page.expect(find_field('District').value).to page.have_text district
-    page.expect(find_field('Town').value).to page.have_text town
-    page.expect(find_field('County').value).to page.have_text county
-    page.expect(find_field('Postcode').value).to page.have_text postcode
+  def town
+    find_field('Town').value
   end
 
   def successful?

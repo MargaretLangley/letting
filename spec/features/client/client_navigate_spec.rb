@@ -20,7 +20,7 @@ describe 'Client navigate', type: :feature do
 
       first(:link, 'Edit').click
 
-      expect(page.title).to eq 'Letting - Edit Client'
+      expect(ClientPage.new.title).to eq 'Letting - Edit Client'
       expect(ClientPage.new.ref).to eq 111
     end
   end
