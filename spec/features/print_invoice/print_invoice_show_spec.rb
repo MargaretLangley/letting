@@ -12,7 +12,7 @@ describe 'PrintInvoices#show', type: :feature do
     setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
 
     visit '/print_invoices/1'
-    expect(page.title).to eq 'Letting - Print Invoices'
+    expect(page.title).to eq 'Letting - Invoice View'
     expect(page).to have_text '1984'
   end
 
