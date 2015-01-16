@@ -2,6 +2,17 @@
 <html>
   <%= render 'layouts/head', title: @title %>
   <body>
-    <%= render 'layouts/trunk_view', title: @title %>
+    <%= render 'layouts/header' %>
+    <div class='view-wrapper'>
+      <% if content_for?(:heading) %>
+        <%= yield :heading %>
+      <% else %>
+        <h2 class = 'no-print'><%= @title %></h2>
+      <% end %>
+      <%= yield %>
+      <div class = 'side-wrap  float-right'>
+        <%= render 'layouts/sidebar' %>
+      </div>
+    </div>
   </body>
 </html>
