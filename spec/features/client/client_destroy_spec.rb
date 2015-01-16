@@ -1,12 +1,11 @@
 require 'rails_helper'
 
-describe Client, type: :feature do
-  before(:each) do
-    log_in
-    client_create
-  end
+describe 'Client#destroys', type: :feature do
+  before(:each) { log_in }
 
-  it '#destroys' do
+  it 'completes basic' do
+    client_create
+
     visit '/clients'
     expect(page).to have_text '354'
     expect { click_on 'Delete' }.to change(Client, :count).by(-1)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Client Update', type: :feature do
+describe 'Client#update', type: :feature do
   before(:each) { log_in }
   let(:client_page) { ClientPage.new }
 
@@ -60,12 +60,6 @@ describe 'Client Update', type: :feature do
 
       expect(client_page.title).to eq 'Letting - Clients'
       expect(page).to_not have_text 'Smit'
-    end
-
-    it 'navigates to view page' do
-      click_on 'View file'
-
-      expect(client_page.title).to eq 'Letting - View Client'
     end
   end
 

@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-describe 'Client Show', type: :feature do
+describe 'Client#show', type: :feature do
   before(:each) { log_in }
 
-  it '#show' do
+  it 'completes basic' do
     credit = credit_new at_time: '2014-3-1', charge: charge_create
     client_create(id: 1, human_ref: 87, entities: [Entity.new(name: 'Grace')])
       .properties << property_new(human_ref: 2008,
@@ -30,20 +30,6 @@ describe 'Client Show', type: :feature do
 
   def expect_property
     expect(page).to have_text '2008'
-  end
-
-  it 'navigates to index page' do
-    client_create id: 1
-    visit '/clients/1'
-    click_on 'Clients'
-    expect(page.title).to eq 'Letting - Clients'
-  end
-
-  it 'navigates to edit page' do
-    client_create id: 1
-    visit '/clients/1'
-    click_on 'Edit'
-    expect(page.title).to eq 'Letting - Edit Client'
   end
 
   describe 'appropriate properties message' do
