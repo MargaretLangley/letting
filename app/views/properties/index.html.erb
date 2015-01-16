@@ -11,7 +11,7 @@
   <div class='col-1-24  bottom-spacer  grid-header  r-align'>No</div>
   <div class='col-5-24  bottom-spacer  grid-header'>Address</div>
   <div class='col-4-24  bottom-spacer  grid-header'>Town</div>
-  <div class='col-5-24  bottom-spacer  grid-header  no-print  no-r-pad'>
+  <div class='col-5-24  bottom-spacer  grid-header  no-r-pad  no-print'>
     Actions
   </div>
 
@@ -39,17 +39,17 @@
         <%= property.address.town %>
       </div>
     </div>
-    <div class='col-1-24  bottom-spacer  no-print'>
+    <div class='col-1-24  bottom-spacer'>
       <%= payment_link path: new_payment_path(id: property.account.id) %>
     </div>
-    <div class='col-1-24  bottom-spacer  no-print'>
+    <div class='col-1-24  bottom-spacer'>
       <%= edit_link property %>
     </div>
-    <div class='col-1-24  bottom-spacer  no-print'>&nbsp;</div>
-    <div class='col-1-24  bottom-spacer  no-print'>
+    <div class='col-1-24  bottom-spacer'>&nbsp;</div>
+    <div class='col-1-24  bottom-spacer'>
       <%= delete_link path: property %>
     </div>
-    <div class='col-1-24  bottom-spacer  no-print'>&nbsp;</div>
+    <div class='col-1-24  bottom-spacer'>&nbsp;</div>
   <% end %>
 </div>
 
