@@ -4,32 +4,21 @@ describe 'Client#show', type: :feature do
   before(:each) { log_in }
 
   it 'completes basic' do
-    credit = credit_new at_time: '2014-3-1', charge: charge_create
-    client_create(id: 1, human_ref: 87, entities: [Entity.new(name: 'Grace')])
-      .properties << property_new(human_ref: 2008,
-                                  account: account_new(credits: [credit]))
+    client_create(id: 1, human_ref: 87)
+      .properties << property_new(human_ref: 2008)
     visit '/clients/1'
 
-    expect_correct_title
-    expect_client_entity
-    expect_client_address
-    expect_property
-  end
-
-  def expect_correct_title
     expect(page.title).to eq 'Letting - View Client'
+    expect_client_ref ref: 87
+    expect_property_ref ref: 2008
   end
 
-  def expect_client_address
-    expect(page).to have_text '87'
+  def expect_client_ref(ref:)
+    expect(page).to have_text ref
   end
 
-  def expect_client_entity
-    expect(page).to have_text 'Grace'
-  end
-
-  def expect_property
-    expect(page).to have_text '2008'
+  def expect_property_ref(ref:)
+    expect(page).to have_text ref
   end
 
   describe 'appropriate properties message' do
@@ -37,18 +26,16 @@ describe 'Client#show', type: :feature do
       client_create id: 1
       visit '/clients/1'
 
-      expect(page.text).to match(/The client has no properties./i)
+      expect(page).to have_content /The client has no properties./i
     end
 
-    it 'can list properties above 5999' do
-      credit = credit_new at_time: '2014-3-1', charge: charge_create
-      client_create(id: 1, human_ref: 87, entities: [Entity.new(name: 'Grace')])
-        .properties << property_new(human_ref: 6008,
-                                    account: account_new(credits: [credit]))
+    it 'displays no message when client has properties' do
+      client_create(id: 1)
+        .properties << property_new(human_ref: 6008, account: account_new)
       visit '/clients/1'
 
       expect(page).to have_text '6008'
-      expect(page.text).to_not match(/The client has no properties./i)
+      expect(page).to_not have_content /The client has no properties./i
     end
   end
 end

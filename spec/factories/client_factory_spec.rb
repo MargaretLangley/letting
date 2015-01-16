@@ -26,8 +26,8 @@ describe 'Client Factory' do
       end
 
       it 'properties' do
-        expect(client_new(property: property_new).properties.first.human_ref)
-          .to eq 2002
+        expect(client_new(properties: [property_new])
+                 .properties.first.human_ref).to eq 2002
       end
     end
   end
@@ -41,7 +41,7 @@ describe 'Client Factory' do
 
     describe 'adds' do
       it 'properties' do
-        expect { client_create property: property_new }
+        expect { client_create properties: [property_new] }
           .to change(Property, :count).by(1)
       end
     end

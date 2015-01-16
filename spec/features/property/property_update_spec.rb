@@ -6,8 +6,9 @@ describe 'Account Update', type: :feature  do
   context 'Agentless' do
     before(:each) do
       log_in
-      client_create human_ref: 90,
-                    property:  property_new(human_ref: 80, account: account_new)
+      client_create \
+        human_ref: 90,
+        properties: [property_new(human_ref: 80, account: account_new)]
     end
 
     it 'opens valid page', js: true  do
@@ -112,7 +113,7 @@ describe 'Account Update', type: :feature  do
       log_in
       agent = agent_new entities: [Entity.new(name: 'Willis')],
                         address: address_new(road: 'Wiggiton')
-      client_create property: property_new(account: account_new, agent: agent)
+      client_create properties: property_new(account: account_new, agent: agent)
       account.edit
     end
 

@@ -5,12 +5,12 @@ def client_new(
   human_ref: 354,
   address: address_new,
   entities: [Entity.new(title: 'Mr', initials: 'M', name: 'Prior')],
-  property: nil)
+  properties: nil)
   client = Client.new id: id,
                       human_ref: human_ref,
                       address: address,
                       entities: entities
-  client.properties << property if property
+  client.properties << properties if properties
   client
 end
 
@@ -19,12 +19,12 @@ def client_create(
   human_ref: 354,
   address: address_new,
   entities: [Entity.new(title: 'Mr', initials: 'M', name: 'Prior')],
-  property: nil)
+  properties: nil)
   client = client_new id: id,
                       human_ref: human_ref,
                       address: address,
                       entities: entities,
-                      property: property
+                      properties: properties
   client.save!
   client
 end
