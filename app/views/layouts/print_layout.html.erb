@@ -2,6 +2,18 @@
 <html>
   <%= render 'layouts/head', title: @title %>
   <body onLoad='print_n_ret()'>
-    <%= render 'layouts/trunk', title: @title %>
+    <%= render 'layouts/header' %>
+    <div class='page-wrapper'>
+      <div class='grid'>
+        <div class='col-21-24'>
+          <% if content_for?(:heading) %>
+            <%= yield :heading %>
+          <% else %>
+            <h2 class ='no-print'><%= @title %></h2>
+          <% end %>
+        </div>
+      </div>
+      <%= yield %>
+    </div>
   </body>
 </html>
