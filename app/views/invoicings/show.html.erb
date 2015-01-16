@@ -2,11 +2,6 @@
 
 <div class='grid  shell'>
 
-  <%= render 'invoicings/invoicing_header' %>
-  <%= render 'invoicing_to_view', invoicing: @invoicing %>
-
-  <hr class='faded'>
-
   <div class='tabs'>
     <ul class='tab-links'>
       <% @invoicing.runs.each_with_index do |run, index|  %>
@@ -18,9 +13,12 @@
    </ul>
 
     <div class='grid  shell  tab-content'>
+
       <% @invoicing.runs.each_with_index do |run, index|  %>
         <% run_dec = RunDecorator.new run %>
         <div id="tab<%= index + 1 %>" class="tab <%= run_dec.activity %> ">
+          <%= render 'invoicings/invoicing_header' %>
+          <%= render 'invoicing_to_view', invoicing: @invoicing, run: run %>
           <%= render 'invoices/invoices', run: run, action: true %>
         </div>  <!-- close tab -->
       <% end %>
