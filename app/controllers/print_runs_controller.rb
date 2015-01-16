@@ -1,6 +1,6 @@
 ####
 #
-# Prints Controller
+# Print Runs Controller
 #
 # Printing the entire print run, where a print run is a collection of invoices
 # selected in an invoicing to be printed.
@@ -10,7 +10,7 @@
 #
 ####
 #
-class PrintsController < ApplicationController
+class PrintRunsController < ApplicationController
   layout 'print_layout'
 
   def show
