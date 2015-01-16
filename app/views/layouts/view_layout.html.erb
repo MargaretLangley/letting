@@ -4,11 +4,7 @@
   <body>
     <%= render 'layouts/header' %>
     <div class='view-wrapper'>
-      <% if content_for?(:heading) %>
-        <%= yield :heading %>
-      <% else %>
-        <h2 class = 'no-print'><%= @title %></h2>
-      <% end %>
+      <h2 class = 'no-print'><%= @title %></h2>
       <%= yield %>
       <div class = 'side-wrap  float-right'>
         <%= render 'layouts/sidebar' %>
