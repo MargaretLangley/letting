@@ -1,2 +1,12 @@
 <% @title='Edit Invoicing' %>
+<div class='tabs'>
+  <ul class='tab-links'>
+    <% @invoicing.runs.each_with_index do |run, index|  %>
+      <% run_dec = RunDecorator.new run %>
+      <li class='<%= run_dec.activity %>'>
+        <%= link_to "Invoice #{run_dec.invoice_date}", @invoicing %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 <%= render 'invoicings/form', invoicing: @invoicing %>

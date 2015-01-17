@@ -7,17 +7,13 @@
   <div class='col-5-24  inherit-row  bottom-line-spacer'>
     <%= invoicing_dec.created_at %>
   </div>
-  <div class='col-6-24  inherit-row  bottom-line-spacer'>
+  <div class='col-7-24  inherit-row  bottom-line-spacer'>
     <%= invoicing_dec.period_between %>
   </div>
   <div class='col-1-24  bottom-line-spacer'>
     <%= print_link invoicing.runs.last %>
   </div>
-  <div class='col-1-24  bottom-line-spacer'>&nbsp;</div>
-  <div class='col-1-24  bottom-line-spacer'>
-    <%= link_to fa_icon('edit lg'), [:edit, invoicing], title: 'Edit (Create Red Invoice)', class: 'float-right  warn-button' %>
-  </div>
-  <div class='col-1-24  bottom-line-spacer'>&nbsp;</div>
+  <div class='col-2-24  bottom-line-spacer'>&nbsp;</div>
   <div class='col-1-24  bottom-line-spacer'>
     <%= delete_link path: invoicing %>
   </div>

@@ -10,16 +10,16 @@
      <div class='col-5-24  grid-row  bottom-spacer  inherit-row'>
        <%= invoicing_dec.property_range %>
      </div>
-     <div class='col-6-24  bottom-spacer  inherit-row'>
+     <div class='col-5-24  bottom-spacer  inherit-row'>
        <%= invoicing_dec.created_at %>
      </div>
-     <div class='col-8-24  bottom-spacer  inherit-row'>
+     <div class='col-7-24  bottom-spacer  inherit-row'>
        <%= invoicing_dec.period_between %>
      </div>
      <div class='col-1-24  bottom-spacer'><%= print_link invoicing %></div>
      <div class='col-1-24  bottom-spacer'>&nbsp;</div>
      <div class='col-1-24  bottom-spacer'>
-       <%= link_to fa_icon('edit lg'), [:edit, invoicing], title: 'Edit (Create Red Invoice)', class: 'float-right  warn-button' %>
+       <%= link_to fa_icon('plus lg'), [:edit, invoicing], title: 'Edit (Create Red Invoice)', class: 'float-right' %>
      </div>
      <div class='col-1-24  bottom-spacer'>&nbsp;</div>
      <div class='col-1-24  bottom-spacer'><%= delete_link path: invoicing %></div>

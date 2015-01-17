@@ -8,6 +8,9 @@
         <a href='#tab<%= index + 1 %>'>Invoice <%= run_dec.invoice_date %></a>
       </li>
     <% end %>
+    <li>
+      <%= link_to fa_icon('plus lg'), [:edit, @invoicing], title: '(Create Red Invoice)' %>
+    </li>
   </ul>
 
   <div class='grid  shell  tab-content'>
