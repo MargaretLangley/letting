@@ -1,28 +1,23 @@
 <% @title='View Invoicing' %>
 
-<div class='grid  shell'>
+<div class='tabs'>
+  <ul class='tab-links'>
+    <% @invoicing.runs.each_with_index do |run, index|  %>
+      <% run_dec = RunDecorator.new run %>
+      <li class='<%= run_dec.activity %>'>
+        <a href='#tab<%= index + 1 %>'>Invoice <%= run_dec.invoice_date %></a>
+      </li>
+    <% end %>
+  </ul>
 
-  <div class='tabs'>
-    <ul class='tab-links'>
-      <% @invoicing.runs.each_with_index do |run, index|  %>
-        <% run_dec = RunDecorator.new run %>
-        <li class="<%= run_dec.activity %>">
-          <a href="#tab<%= index + 1 %>">Invoice <%= run_dec.invoice_date %></a>
-        </li>
-      <% end %>
-   </ul>
-
-    <div class='grid  shell  tab-content'>
-
-      <% @invoicing.runs.each_with_index do |run, index|  %>
-        <% run_dec = RunDecorator.new run %>
-        <div id="tab<%= index + 1 %>" class="tab <%= run_dec.activity %> ">
-          <%= render 'invoicings/invoicing_header' %>
-          <%= render 'invoicing_to_view', invoicing: @invoicing, run: run %>
-          <%= render 'invoices/invoices', run: run, action: true %>
-        </div>  <!-- close tab -->
-      <% end %>
-    </div> <!-- close grid  shell  tab-content -->
-  </div> <!-- close tabs -->
-
-</div> <!-- close grid -->
+  <div class='grid  shell  tab-content'>
+    <% @invoicing.runs.each_with_index do |run, index|  %>
+      <% run_dec = RunDecorator.new run %>
+      <div id='tab<%= index + 1 %>' class='tab <%= run_dec.activity %> '>
+        <%= render 'invoicings/invoicing_header' %>
+        <%= render 'invoicing_to_view', invoicing: @invoicing, run: run %>
+        <%= render 'invoices/invoices', run: run, action: true %>
+      </div>  <!-- close tab -->
+    <% end %>
+  </div> <!-- close grid  shell  tab-content -->
+</div> <!-- close tabs -->
