@@ -248,6 +248,91 @@ li.active-subnav a {
 
 /*-----------------------------------------------*\
 
+  $JQUERY DROPDOWN MENU
+
+  http://www.webchief.co.uk/blog/simple-jquery-dropdown-menu/
+
+  <ul class='my-menu'>
+    <li>
+      <a href='#'>main menu item</a>
+      <ul>
+        <li><a href='?'>submenu item</a></li>
+        <li><a href='?'>submenu item</a></li>
+      </ul>
+    </li>
+    <li>
+      .. another main menu item
+    </li>
+  </ul>
+
+\*-----------------------------------------------*/
+
+// To keep the menu at the same y origin as the heading search control
+.my-menu-wrapper {
+  @include clearfix;
+  border-top: 3px solid $primary-background;
+}
+
+// menu root
+.my-menu {
+  margin: 0;
+  padding: 0;
+}
+
+// menu list item
+.my-menu li {
+  float: right;
+  list-style: none;
+  margin-right: .3em;
+
+  a {
+    @include menu-style (15%, 25%);
+    &:link,
+    &:visited {
+      background-color: $fieldset;
+      border-right: 1px solid #fff;
+      color: $secondary-background;
+      display: block;
+      margin: 0;
+      padding: .5em 2em;
+      text-decoration: none;
+    }
+
+    &:hover,
+    &:active {
+      @include menu-style(0%, 5%);
+    }
+  }
+}
+
+// sub menu wrapper
+ul .my-sub-menu {
+  border-top: 1px solid white;
+  height: 1em;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  visibility: hidden;
+}
+
+// sub menu item
+.my-sub-menu li {
+  display: inline;
+  float: none;
+  margin: 0;
+  padding: 0;
+
+  a {
+    &:link,
+    &:visited {
+      width: auto;
+    }
+  }
+}
+
+
+/*-----------------------------------------------*\
+
   $TABS
 
   http://inspirationalpixels.com/tutorials/creating-tabs-with-html-css-and-jquery

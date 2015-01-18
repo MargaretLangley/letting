@@ -5,7 +5,7 @@
       <h2><%= link_to 'Adams Lettings', root_path, class: 'hover-link inverted-link' %></h2>
     </div>
 
-    <div class='col-12-24  top-line-spacer  no-print'>
+    <div class='col-12-24'>
       <div class='form-wrapper  clearfix'>
           <%= form_tag search_path, method: 'get' do %>
           <%= text_field_tag :search_terms, params[:search_terms], placeholder: 'Search here...', title: 'Search', data: {autocomplete_source: search_path}, autofocus:true %>
@@ -19,19 +19,32 @@
       </div>
     </div>
 
-    <div class='col-6-24'>
-      <nav>
-        <% if current_user %>
-          <%= fa_icon 'user lg', title: 'User', class: 'vertical-line-spacer' %>
-          &nbsp;
-          <%= current_user.nickname %>
-          &nbsp;
-          <%= link_to fa_icon('sign-out  lg'), logout_path, id: 'logout', title: 'Log Out', class: 'inverted-link  vertical-line-spacer  r-pad' %>
-        <% else %>
-          <%= link_to fa_icon('sign-in  lg'), logout_path, title: 'Log In', class: 'inverted-link  vertical-line-spacer  r-pad' %>
-        <% end %>
-        <%= link_to fa_icon('print  lg'), '#',title: 'Print', class: 'js-print  inverted-link  vertical-line-spacer  r-pad' %>
-      </nav>
-    </div>
+    <nav class='col-6-24  r-align  no-r-pad'>
+      <div class='my-menu-wrapper  clearfix'>
+        <ul class='my-menu'>
+          <% if current_user %>
+            <li>
+               <%= link_to fa_icon('print  lg'), '#',title: 'Print', class: 'js-print  inverted-link' %>
+            </li>
+            <li><a href="#">
+                  <%= fa_icon 'user lg', title: 'User', class: '' %>&nbsp;
+                  <%= current_user.nickname %>
+                </a>
+              <ul class='my-sub-menu'>
+                <li>
+                  <a href='<%= logout_path %>'>
+                    logout&nbsp;&nbsp;<%= fa_icon('sign-out  lg') %>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          <% else %>
+            <li>
+               <%= link_to fa_icon('sign-in  lg'), logout_path, title: 'Log In', class: 'inverted-link  r-pad' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
   </div>
 </header>
