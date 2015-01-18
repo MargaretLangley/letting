@@ -20,15 +20,31 @@ module ApplicationHelper
     Charge::PAYMENT_TYPE.map { |type| [type.humanize, type] }
   end
 
-  def view_link model, size: '2x'
+  def view_link model, size: '2x', css: 'float-right'
     if model.new_record?
-      app_link icon: 'file-o', size: size, disabled: true, title: 'View file'
+      app_link icon: 'file-o',
+               size: size,
+               disabled: true,
+               css: css,
+               title: 'View file'
     else
-      app_link icon: 'file-o', size: size, path: model, title: 'View file'
+      app_link icon: 'file-o',
+               size: size,
+               path: model,
+               css: css,
+               title: 'View file'
     end
   end
 
-  def edit_link model, size: 'lg'
+  def edit_link model, size: '2x', css: 'float-right'
+    app_link icon: 'edit',
+             size: size,
+             path: [:edit, model],
+             css: css,
+             title: 'Edit file'
+  end
+
+  def edit_index_link model, size: 'lg'
     app_link icon: 'edit', size: size, path: [:edit, model], title: 'Edit file'
   end
 
@@ -36,11 +52,11 @@ module ApplicationHelper
     app_link icon: 'plus-circle', size: size, css: css, title: title
   end
 
-  def delete_link(path: '#', css: 'float-right', title: 'Delete File')
+  def delete_link(path: '#', title: 'Delete File')
     link_to fa_icon('trash-o lg'),
             path,
             method: :delete,
-            class: "plain-button  #{css}",
+            class: 'plain-button',
             data: { confirm: 'Are you sure you want to delete?' },
             title: title
   end
@@ -89,7 +105,7 @@ module ApplicationHelper
   def app_link(icon:,
                size: 'lg',
                path: '#',
-               css: 'float-right',
+               css: '',
                title:,
                disabled: false)
     link_to fa_icon("#{icon} #{size}"),

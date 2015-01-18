@@ -2,7 +2,7 @@
 <div id='invoice_text'  class='shell-1-12'>
   <div class='col-12-24  bottom-spacer'>&nbsp;</div>
   <div class='col-12-24  bottom-spacer'>
-    <%= edit_link @invoice_text, size: '2x' %>
+    <%= edit_link @invoice_text %>
   </div>
   <% if @invoice_text.page1? %>
     <%= render 'page1', invoice_text_page1: @invoice_text %>
