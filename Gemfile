@@ -44,6 +44,7 @@ gem 'bcrypt', '~> 3.1.9'
 
 # font icon
 gem 'font-awesome-rails'
+gem 'rails-env-favicon'
 
 # Search Gems
 gem 'elasticsearch', '~> 1.0.6'

@@ -271,6 +271,9 @@ GEM
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
+    rails-env-favicon (0.0.5)
+      railties (>= 3.1)
+      tinycon-rails
     rails-html-sanitizer (1.0.1)
       loofah (~> 2.0)
     rails_best_practices (1.15.4)
@@ -393,6 +396,8 @@ GEM
     tilt (1.4.1)
     timecop (0.7.1)
     tins (0.13.2)
+    tinycon-rails (0.0.1)
+      railties (>= 3.1)
     traceroute (0.4.0)
       rails (>= 3.0.0)
     turbolinks (2.5.3)
@@ -474,6 +479,7 @@ DEPENDENCIES
   rack-dev-mark (~> 0.7.0)
   rack-mini-profiler (~> 0.9.0)
   rails (= 4.2.0)
+  rails-env-favicon
   rails_best_practices (~> 1.15.1)
   rake (~> 10.4.0)
   rb-readline
