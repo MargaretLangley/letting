@@ -1,12 +1,12 @@
 <div class='js-toggle-selection  invoicings-padded'>
   <div class='js-togglable  c-align  <%= expose_if_invoicing_dates_default %>'>
-    <h4>Search for new charges within the next <%= Invoicing::WEEKS_AHEAD %> weeks
+    <h4>Search within the next <%= Invoicing::WEEKS_AHEAD %> weeks
       <%= choosing_dates_link %>&nbsp;
       <%= link_to fa_icon('calendar lg'), '#',title: 'Choose Dates with calendar', class: 'js-toggle  inverted-link' %>
     </h4>
   </div>
   <div class='js-togglable  <%= hide_if_invoicing_dates_default %>'>
-    <h4 class='c-align'>Search for new charges within chosen dates
+    <h4 class='c-align'>Search within chosen dates
       <%= default_date_link %>
     </h4>
     <div class='col-1-2'>
