@@ -7,3 +7,12 @@ RailsEnvFavicon.setup do |config|
   config.text_color = '#ffffff'
   config.background_color = '#000'
 end
+
+# MonkeyPatch RailsEnvFavicon so that it does not modify the icon
+# during a test (which breaks tests as it changes the page's title)
+# https://github.com/accessd/rails-env-favicon
+module RailsEnvFavicon
+  def self.applicable?
+    !(::Rails.env.production? || ::Rails.env.test?)
+  end
+end
