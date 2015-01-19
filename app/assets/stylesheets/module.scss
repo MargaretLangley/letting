@@ -156,6 +156,7 @@ a.grey {
   white-space: nowrap;
 }
 
+
 /*--------------------------------------------------*\
 
   $TYPOGRAPHY
@@ -395,12 +396,14 @@ li.active a, li.active a:hover {
 @media screen {
 
   .tab-content {
-    background: #fff;
-    border-radius: 3px;
+    background-color: lighten($fieldset, 3%);
+    border-radius: 5px;
     box-shadow: -1px 1px 1px rgba(0, 0, 0, .15);
-    padding: 15px;
+    padding: 1%;
   }
 }
+
+
 
 @media print {
 
@@ -833,6 +836,7 @@ $search-height: 35px;
   border-radius: 5px;
   color: black;
 }
+
 
 /*--------------------------------------------------*\
 

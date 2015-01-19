@@ -82,11 +82,11 @@ module ApplicationHelper
     app_link icon: 'print', path: print_run_path(model), css: css, title: title
   end
 
-  def toggle_link direction:, size: 'lg'
+  def toggle_link direction:, size: 'lg', title: ''
     app_link icon: "chevron-circle-#{direction}",
              size: size,
              css: 'js-toggle  float-right',
-             title: 'Full Property'
+             title: title
   end
 
   # Used when there is no physical link to click on

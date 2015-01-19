@@ -1,6 +1,6 @@
 <% @title='View Client' %>
 
-<div class='grid  shell  js-toggle-selection'>
+<div class='grid  shell-1-25  js-toggle-selection'>
   <div class='js-togglable'>
 
     <div class='col-3-4  grid-row'>
@@ -44,7 +44,7 @@
   </div>
 </div>
 
-<div class='grid  shell  js-toggle-selection'>
+<div class='grid  shell-1-25  js-toggle-selection'>
   <div class='js-togglable'>
 
     <div class='col-3-4  grid-row'>
@@ -152,8 +152,8 @@
   </div>
 </div>  <!-- grid  shell js-toggle-selection -->
 
-<div class='grid  shell  js-toggle-selection'>
-  <div class='js-togglable'>
+<div class='grid  shell-1-25  js-toggle-selection'>
+  <div class='js-togglable <%= payments_contracted_visible %>'>
 
     <div class='col-3-4  grid-row'>
       <h3 class='small-bottom'>Payments &hellip;</h3>
@@ -162,14 +162,10 @@
       <%= toggle_link direction: :down, size: '2x'  %>
     </div>
 
-    <%= render 'client_payments/payments_total', client_payment: @client_payment,
-                                                 range: ClientPayment::MAR_SEP %>
-
-    <%= render 'client_payments/payments_total', client_payment: @client_payment,
-                                                 range: ClientPayment::JUN_DEC %>
+    <%= render 'client_payments/totals', client_payment: @client_payment %>
   </div>
 
-  <div class='js-togglable  js-revealable'>
+  <div class='js-togglable  <%= payments_expanded_visible %>'>
 
     <div class='col-3-4  grid-row'>
       <h3 class='small-bottom'>Payments</h3>
@@ -178,11 +174,18 @@
       <%= toggle_link direction: :up, size: '2x'   %>
     </div>
 
+    <%= render 'client_payments/totals', client_payment: @client_payment %>
+
+    <div class='col-1-1  grid-row  top-double-line-spacer'>
+      <h3>Itemised Ground Rent Payments</h3>
+    </div>
+
     <%= form_tag client_path, class: 'no-print', id: 'client_payment', method: 'get' do %>
 
-      <div class='col-4-24  grid-row  bottom-double-line-spacer  faded'>Payments in</div>
-      <div class='col-20-24  bottom-double-line-spacer'>
+      <div class='col-4-24  grid-row  vertical-line-spacer  faded'>Payments in</div>
+      <div class='col-20-24  vertical-line-spacer'>
         <%= select_tag 'years', options_for_select(@client_payment.years, selected: params[:years]), onchange: "$('#client_payment').submit();" %>
+        <%= hidden_field_tag :selected, 'true' %>
       </div>
     <% end %>
 
@@ -193,10 +196,10 @@
            <li><a href="#jun-dec">June/December</a></li>
         </ul>
 
-        <div class='grid'>
+        <div class='grid  tab-content'>
 
           <div id='mar-sep' class='tab  active  vertical-line-spacer'>
-            <h3>Ground Rents Collected March/September <%= params[:years] %></h3>
+            <h3>Collected March/September <%= params[:years] %></h3>
             <%= render 'client_payments/accounts_heading', range: ClientPayment::MAR_SEP %>
             <%= render 'client_payments/payments_made', accounts: @client_payment.quarter_day_accounts(charge_months: ClientPayment::MAR_SEP),
                                                         client_payment: @client_payment,
@@ -207,7 +210,7 @@
           </div> <!-- close #mar-sep -->
 
           <div id='jun-dec'  class='tab   vertical-line-spacer'>
-            <h3>Ground Rents Collected June/December <%= params[:years] %></h3>
+            <h3>Collected June/December <%= params[:years] %></h3>
             <%= render 'client_payments/accounts_heading', range: ClientPayment::JUN_DEC %>
             <%= render 'client_payments/payments_made', accounts: @client_payment.quarter_day_accounts(charge_months: ClientPayment::JUN_DEC),
                                                         client_payment: @client_payment,

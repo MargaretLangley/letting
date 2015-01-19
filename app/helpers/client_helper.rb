@@ -17,4 +17,17 @@ module ClientHelper
       }
     end
   end
+
+  # Payments Panel visibility
+  # Visibility of abbreviated payments
+  #
+  def payments_contracted_visible
+    params[:selected].present?  ? 'js-revealable' : ''
+  end
+
+  # Visibility of full payments
+  #
+  def payments_expanded_visible
+    params[:selected].present?  ? '' : 'js-revealable'
+  end
 end

@@ -15,14 +15,13 @@
 class ClientPayment
   MAR_SEP = [3, 9]
   JUN_DEC = [6, 12]
-  attr_reader :client_id, :year
-  def initialize(client_id:, year:)
+  attr_reader :client_id
+  def initialize(client_id:)
     @client_id = client_id
-    @year = year
   end
 
-  def self.query(client_id: 1, year:)
-    new(client_id: client_id, year: year)
+  def self.query(client_id: 1)
+    new(client_id: client_id)
   end
 
   def client
@@ -42,7 +41,7 @@ class ClientPayment
   # 6 months periods
   # month - starting month
   #
-  def total_period(month:)
+  def total_period(year:, month:)
     time = Time.zone.local(year, month, 1)
     time..(time + 6.months)
   end

@@ -20,7 +20,7 @@ class ClientsController < ApplicationController
 
     params[:years] ||= Time.zone.now.year
     @client_payment = ClientPayment
-                      .query client_id: params[:id], year: params[:years]
+                      .query client_id: params[:id]
   end
 
   def new

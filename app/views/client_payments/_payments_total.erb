@@ -5,8 +5,8 @@
    Total
 </div>
 <div class='col-3-24  grid-footer-number  vertical-spacer  r-align'>
-  <%= number_with_precision(client_payment.total(period: client_payment.total_period(month: range.first)), precision: 2) %>
+  <%= number_with_precision(client_payment.total(period: client_payment.total_period(year: params[:years], month: range.first)), precision: 2) %>
 </div>
 <div class='col-3-24  grid-footer-number  vertical-spacer  r-align'>
-  <%= number_with_precision(client_payment.total(period: client_payment.total_period(month: range.last)), precision: 2) %>
+  <%= number_with_precision(client_payment.total(period: client_payment.total_period(year: params[:years], month: range.last)), precision: 2) %>
 </div>
