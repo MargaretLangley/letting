@@ -13,6 +13,20 @@ describe 'Client#show', type: :feature do
     expect_property_ref ref: 2008
   end
 
+  it '#show payments' do
+    skip 'add show payments expect'
+    charge =
+      charge_create cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25),
+                                               DueOn.new(month: 9, day: 30)])
+    payment = payment_new booked_at: '2014-3-1', amount: 17
+    client_create(id: 1, human_ref: 87, entities: [Entity.new(name: 'Grace')])
+      .properties << property_new(human_ref: 63,
+                                  account: account_new(charges: [charge],
+                                                       payment: payment))
+
+    visit '/clients/1'
+  end
+
   def expect_client_ref(ref:)
     expect(page).to have_text ref
   end
@@ -36,6 +50,14 @@ describe 'Client#show', type: :feature do
 
       expect(page).to have_text '6008'
       expect(page).to_not have_content /The client has no properties./i
+    end
+
+    it 'displays message when client has no properties' do
+      client_create id: 1
+      visit '/clients/1'
+
+      expect(page.text).to match(/The Client has no Mar\/Sep properties./i)
+      expect(page.text).to match(/The Client has no Jun\/Dec properties./i)
     end
   end
 end

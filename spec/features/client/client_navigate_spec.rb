@@ -36,7 +36,7 @@ describe 'Client navigate', type: :feature do
     it 'to edit page' do
       client_create id: 1
       visit '/clients/1'
-      click_on 'Edit'
+      first(:link, 'Edit').click
       expect(page.title).to eq 'Letting - Edit Client'
     end
   end

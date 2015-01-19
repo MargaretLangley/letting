@@ -1,3 +1,6 @@
+#
+# TODO: are we using ChargePeriod 19/01/2015 - cannot find reference
+#
 class ChargePeriod
   attr_reader :first, :last
 

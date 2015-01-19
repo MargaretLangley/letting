@@ -48,10 +48,10 @@ class ClientPayment
   end
 
   def total(period:)
-    Payment.where(booked_on: period.first...period.last)
+    Payment.where(booked_at: period.first...period.last)
       .where(account_id: quarter_day_accounts(charge_months: period.first.month..
                                                              period.last.month)
         .pluck(:account_id))
-      .pluck(:amount).sum * -1
+      .pluck(:amount).sum
   end
 end
