@@ -14,5 +14,6 @@ class PrintInvoicesController < ApplicationController
 
   def show
     @invoice = Invoice.find params[:id]
+    render 'invoices/show'
   end
 end
