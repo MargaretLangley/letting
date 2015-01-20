@@ -52,12 +52,14 @@ module ApplicationHelper
     app_link icon: 'plus-circle', size: size, css: "#{css}", title: title
   end
 
-  def delete_link(path: '#', title: 'Delete File')
+  def delete_link(path: '#',
+                  title: 'Delete File',
+                  confirm: 'Are you sure you want to delete?')
     link_to fa_icon('trash-o lg'),
             path,
             method: :delete,
             class: 'plain-button  hvr-grow',
-            data: { confirm: 'Are you sure you want to delete?' },
+            data: { confirm: confirm },
             title: title
   end
 

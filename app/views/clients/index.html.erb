@@ -30,7 +30,7 @@
     </div>
     <div class='col-1-24  bottom-spacer'><%= edit_index_link client %></div>
     <div class='col-1-24  bottom-spacer'>&nbsp;</div>
-    <div class='col-1-24  bottom-spacer'><%= delete_link path: client %></div>
+    <div class='col-1-24  bottom-spacer'><%= delete_link path: client, confirm: "Deleting a client also deletes its properties. If you are sure press 'OK' to delete?" %></div>
     <div class='col-2-24  bottom-spacer'>&nbsp;</div>
   <% end %>
 </div>
