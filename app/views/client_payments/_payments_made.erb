@@ -1,4 +1,4 @@
-<% accounts.each do |account| %>
+<% (accounts = client_payment.quarter_day_accounts(charge_months: batch_months.range)).each do |account| %>
 <% property = account.property %>
   <div title='View' class='table-row' data-link='<%= property_path(property) %>'>
 
@@ -16,15 +16,11 @@
     </div>
     <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
       <!-- charge_period.first_period  (6 months date_range) -->
-      <%= to_decimal account.payments.date_range(range: client_payment.total_period(year: params[:years], month: range.first)).sum(:amount) %>
-    </div>
-    <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
-      <!-- charge_period.last_period  (6 months date_range) -->
-      <%= to_decimal account.payments.date_range(range: client_payment.total_period(year: params[:years], month: range.last)).sum(:amount) %>
+      <%= to_decimal account.payments.date_range(range: client_payment.total_period(year: params[:years], month: batch_months.now)).sum(:amount) %>
     </div>
   </div>
 <% end %>
 
 <% if accounts.empty? %>
-  <%= render 'information/grid', information: "The Client has no #{Date::ABBR_MONTHNAMES[range.first]}/#{Date::ABBR_MONTHNAMES[range.last]} properties." %>
+  <%= render 'information/grid', information: "The Client has no #{batch_months.to_s} properties." %>
 <% end %>

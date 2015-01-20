@@ -192,32 +192,75 @@
     <div class='col-1-1  grid-row'>
       <div class='tabs'>
         <ul class='tab-links  no-print'>
-           <li class='active'><%= link_to 'March/September', "#mar-sep" %></li>
-           <li><%= link_to 'June/December', "#jun-dec" %></li>
+          <li class='active'>
+            <%= link_to "#mar" do %>
+              <h4><b>Mar</b>/Sep</h4>
+            <% end %>
+          </li>
+          <li><%= link_to "#sep" do %><h4>Mar/<b>Sep</b></h4><% end %></li>
+          <li><%= link_to "#jun" do %><h4><b>Jun</b>/Dec</h4><% end %></li>
+          <li><%= link_to "#dec" do %><h4>Jun/<b>Dec</b></h4><% end %></li>
         </ul>
 
         <div class='grid  tab-content'>
 
-          <div id='mar-sep' class='tab  active  vertical-line-spacer'>
-            <h3>Collected March/September <%= params[:years] %></h3>
-            <%= render 'client_payments/accounts_heading', range: ClientPayment::MAR_SEP %>
-            <%= render 'client_payments/payments_made', accounts: @client_payment.quarter_day_accounts(charge_months: ClientPayment::MAR_SEP),
-                                                        client_payment: @client_payment,
-                                                        range: ClientPayment::MAR_SEP %>
-            <%= render 'client_payments/payments_total', client_payment: @client_payment,
-                                                        range: ClientPayment::MAR_SEP %>
+          <div id='mar' class='tab  active  vertical-line-spacer'>
+            <h3>Payments Collected <b>March</b>/September <%= params[:years] %></h3>
+            <% batch_months = BatchMonths.new(first: BatchMonths::MAR,
+                                              last: BatchMonths::SEP,
+                                              now: BatchMonths::MAR) %>
+            <%= render 'client_payments/accounts_heading' %>
+            <%= render 'client_payments/payments_made',
+                         client_payment: @client_payment,
+                         batch_months: batch_months %>
+            <%= render 'client_payments/payments_total',
+                         client_payment: @client_payment,
+                         batch_months: batch_months %>
 
-          </div> <!-- close #mar-sep -->
+          </div> <!-- close #mar -->
 
-          <div id='jun-dec'  class='tab   vertical-line-spacer'>
-            <h3>Collected June/December <%= params[:years] %></h3>
-            <%= render 'client_payments/accounts_heading', range: ClientPayment::JUN_DEC %>
-            <%= render 'client_payments/payments_made', accounts: @client_payment.quarter_day_accounts(charge_months: ClientPayment::JUN_DEC),
-                                                        client_payment: @client_payment,
-                                                        range: ClientPayment::JUN_DEC %>
-            <%= render 'client_payments/payments_total', client_payment: @client_payment,
-                                                        range: ClientPayment::JUN_DEC %>
-          </div> <!-- close #jun-dec -->
+          <div id='sep' class='tab  vertical-line-spacer'>
+            <h3>Payments Collected March/<b>September</b> <%= params[:years] %></h3>
+            <% batch_months = BatchMonths.new(first: BatchMonths::MAR,
+                                              last: BatchMonths::SEP,
+                                              now: BatchMonths::SEP) %>
+            <%= render 'client_payments/accounts_heading' %>
+            <%= render 'client_payments/payments_made',
+                         client_payment: @client_payment,
+                         batch_months: batch_months %>
+            <%= render 'client_payments/payments_total',
+                         client_payment: @client_payment,
+                         batch_months: batch_months %>
+
+          </div> <!-- close #sep -->
+
+          <div id='jun'  class='tab   vertical-line-spacer'>
+            <h3>Payments Collected <b>June</b>/December <%= params[:years] %></h3>
+            <% batch_months = BatchMonths.new(first: BatchMonths::JUN,
+                                              last: BatchMonths::DEC,
+                                              now: BatchMonths::JUN) %>
+            <%= render 'client_payments/accounts_heading' %>
+            <%= render 'client_payments/payments_made',
+                         client_payment: @client_payment,
+                         batch_months: batch_months %>
+            <%= render 'client_payments/payments_total',
+                         client_payment: @client_payment,
+                         batch_months: batch_months %>
+          </div> <!-- close #jun -->
+
+          <div id='dec'  class='tab   vertical-line-spacer'>
+            <h3>Payments Collected June/<b>December</b> <%= params[:years] %></h3>
+            <% batch_months = BatchMonths.new(first: BatchMonths::JUN,
+                                              last: BatchMonths::DEC,
+                                              now: BatchMonths::DEC) %>
+            <%= render 'client_payments/accounts_heading' %>
+            <%= render 'client_payments/payments_made',
+                         client_payment: @client_payment,
+                         batch_months: batch_months %>
+            <%= render 'client_payments/payments_total',
+                         client_payment: @client_payment,
+                         batch_months: batch_months %>
+          </div> <!-- close #dec -->
         </div> <!-- grid shell tab-content  -->
       </div> <!-- close tabs -->
 
