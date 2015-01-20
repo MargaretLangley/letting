@@ -27,6 +27,7 @@ class PaymentDecorator
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
   include ActionView::Helpers::NumberHelper
+  include NumberFormattingHelper
 
   def payment
     @source
@@ -52,7 +53,7 @@ class PaymentDecorator
   end
 
   def amount
-    number_with_precision(payment.amount, precision: 2)
+    to_decimal payment.amount
   end
 
   def credits_decorated

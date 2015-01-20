@@ -10,6 +10,7 @@
 class ProductDecorator
   include MethodMissing
   include ActionView::Helpers::NumberHelper
+  include NumberFormattingHelper
 
   def product
     @source
@@ -30,7 +31,7 @@ class ProductDecorator
   end
 
   def amount
-    number_with_precision(product.amount, precision: 2)
+    to_decimal product.amount
   end
 
   def amount_on_time
@@ -38,6 +39,6 @@ class ProductDecorator
   end
 
   def balance
-    number_with_precision(product.balance, precision: 2)
+    to_decimal product.balance
   end
 end

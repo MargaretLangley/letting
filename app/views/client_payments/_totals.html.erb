@@ -30,16 +30,16 @@
     <%= year %>
   </div>
   <div class='col-2-12  bottom-spacer  r-align'>
-    <%= client_payment.total(period: client_payment.total_period(year: year, month: 3)) %>
+    <%= to_decimal client_payment.total(period: client_payment.total_period(year: year, month: 3)) %>
   </div>
   <div class='col-2-12  bottom-spacer  r-align'>
-    <%= client_payment.total(period: client_payment.total_period(year: year, month: 9)) %>
+    <%= to_decimal client_payment.total(period: client_payment.total_period(year: year, month: 9)) %>
   </div>
   <div class='col-2-12   bottom-spacer  r-align'>
-    <%= client_payment.total(period: client_payment.total_period(year: year, month: 6)) %>
+    <%= to_decimal client_payment.total(period: client_payment.total_period(year: year, month: 6)) %>
   </div>
   <div class='col-2-12  bottom-spacer  r-align  no-r-pad'>
-    <%= client_payment.total(period: client_payment.total_period(year: year, month: 12)) %>
+    <%= to_decimal client_payment.total(period: client_payment.total_period(year: year, month: 12)) %>
   </div>
 <% end %>
 <div class='col-9-12  r-align  grid-footer-number  no-r-pad'>

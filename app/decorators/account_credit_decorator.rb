@@ -12,6 +12,7 @@ require_relative '../../lib/modules/method_missing'
 class AccountCreditDecorator
   include MethodMissing
   include ActionView::Helpers::NumberHelper
+  include NumberFormattingHelper
 
   attr_accessor :running_balance
 
@@ -38,7 +39,7 @@ class AccountCreditDecorator
   end
 
   def payment
-    number_with_precision(credit.amount, precision: 2)
+    to_decimal credit.amount
   end
 
   def balance

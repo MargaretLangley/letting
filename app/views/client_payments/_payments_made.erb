@@ -16,11 +16,11 @@
     </div>
     <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
       <!-- charge_period.first_period  (6 months date_range) -->
-      <%= number_with_precision(account.payments.date_range(range: client_payment.total_period(year: params[:years], month: range.first)).sum(:amount), precision: 2) %>
+      <%= to_decimal account.payments.date_range(range: client_payment.total_period(year: params[:years], month: range.first)).sum(:amount) %>
     </div>
     <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
       <!-- charge_period.last_period  (6 months date_range) -->
-      <%= number_with_precision(account.payments.date_range(range: client_payment.total_period(year: params[:years], month: range.last)).sum(:amount), precision: 2) %>
+      <%= to_decimal account.payments.date_range(range: client_payment.total_period(year: params[:years], month: range.last)).sum(:amount) %>
     </div>
   </div>
 <% end %>

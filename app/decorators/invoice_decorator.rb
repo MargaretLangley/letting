@@ -15,6 +15,7 @@ require_relative '../../lib/modules/method_missing'
 class InvoiceDecorator
   include ActionView::Helpers::NumberHelper
   include MethodMissing
+  include NumberFormattingHelper
 
   def invoice
     @source
@@ -40,8 +41,7 @@ class InvoiceDecorator
     return 'No charges' if invoice.products.drop_arrears.size.zero?
 
     invoice.products.drop_arrears.first(2).map do |product|
-      "#{product.charge_type} "\
-        "£#{number_with_precision(product.amount, precision: 2)}"
+      "#{product.charge_type} £#{to_decimal product.amount }"
     end.join ', '
   end
 

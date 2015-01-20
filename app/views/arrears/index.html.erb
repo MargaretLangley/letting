@@ -53,7 +53,7 @@
         <%= property.address.town %>
       </div>
       <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
-        <%= number_with_precision(account.amount, precision: 2, delimiter: ',') %>
+        <%= to_decimal account.amount %>
       </div>
     </div>
   <% end %>

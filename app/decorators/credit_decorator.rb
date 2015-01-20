@@ -14,6 +14,7 @@ require_relative '../../lib/modules/method_missing'
 class CreditDecorator
   include ActionView::Helpers::NumberHelper
   include MethodMissing
+  include NumberFormattingHelper
 
   def credit
     @source
@@ -27,11 +28,11 @@ class CreditDecorator
   end
 
   def amount
-    number_with_precision(credit.amount, precision: 2)
+    to_decimal credit.amount
   end
 
   def owing
-    number_with_precision(charge_debt, precision: 2)
+    to_decimal charge_debt
   end
 
   # payment

@@ -53,7 +53,7 @@
         <div class='col-3-24  cell  r-align'><h3>Total</h3></div>
         <div class='col-1-24  cell  pick-out'>&nbsp;</div>
         <div class='col-7-24  cell  pick-out  r-align'>
-          <%= payment_form.text_field :amount, value: number_with_precision(payment_form.object.amount, precision: 2), readonly: true, class: 'js-total-payment  r-align  width-1-1' %>
+          <%= payment_form.text_field :amount, value: to_decimal(payment_form.object.amount), readonly: true, class: 'js-total-payment  r-align  width-1-1' %>
         </div>
         <div class='col-1-24  cell  pick-out'>&nbsp;</div>
         <!-- acts as padding on the bottom of the form -->
