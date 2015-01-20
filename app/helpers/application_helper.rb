@@ -20,7 +20,7 @@ module ApplicationHelper
     Charge::PAYMENT_TYPE.map { |type| [type.humanize, type] }
   end
 
-  def view_link model, size: '2x', css: 'float-right'
+  def view_link model, size: '2x', css: 'float-right  hvr-grow'
     if model.new_record?
       app_link icon: 'file-o',
                size: size,
@@ -49,21 +49,21 @@ module ApplicationHelper
   end
 
   def add_link(size: 'lg', css:, title:)
-    app_link icon: 'plus-circle', size: size, css: css, title: title
+    app_link icon: 'plus-circle', size: size, css: "#{css}", title: title
   end
 
   def delete_link(path: '#', title: 'Delete File')
     link_to fa_icon('trash-o lg'),
             path,
             method: :delete,
-            class: 'plain-button',
+            class: 'plain-button  hvr-grow',
             data: { confirm: 'Are you sure you want to delete?' },
             title: title
   end
 
   def delete_charge(record:)
     app_link icon: 'trash-o',
-             css: "float-right #{hide_or_destroy record: record}",
+             css: "float-right  hvr-grow  #{hide_or_destroy record: record}",
              title: 'Delete charge'
   end
 
@@ -85,7 +85,7 @@ module ApplicationHelper
   def toggle_link direction:, size: 'lg', title: ''
     app_link icon: "chevron-circle-#{direction}",
              size: size,
-             css: 'js-toggle  float-right',
+             css: "js-toggle  float-right #{hover direction: direction } ",
              title: title
   end
 
@@ -108,10 +108,15 @@ module ApplicationHelper
                css: '',
                title:,
                disabled: false)
+
     link_to fa_icon("#{icon} #{size}"),
             path,
-            class: "plain-button  #{css}",
+            class: "plain-button  hvr-grow  #{css}",
             title: "#{title}#{disabled ? ' (disabled)' : '' }",
             disabled: disabled
+  end
+
+  def hover(direction:)
+    direction == :down ? 'hvr-sink' : 'hvr-float'
   end
 end
