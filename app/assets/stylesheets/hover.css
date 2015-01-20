@@ -27,8 +27,8 @@
   transition-property: transform;
 }
 .hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 /* Shrink */
@@ -353,8 +353,8 @@
   transition-timing-function: ease-out;
 }
 .hvr-float:hover, .hvr-float:focus, .hvr-float:active {
-  -webkit-transform: translateY(-8px);
-  transform: translateY(-8px);
+  -webkit-transform: translateY(-6px);
+  transform: translateY(-6px);
 }
 
 /* Sink */
@@ -375,8 +375,8 @@
   transition-timing-function: ease-out;
 }
 .hvr-sink:hover, .hvr-sink:focus, .hvr-sink:active {
-  -webkit-transform: translateY(8px);
-  transform: translateY(8px);
+  -webkit-transform: translateY(6px);
+  transform: translateY(6px);
 }
 
 /* Bob */
