@@ -24,25 +24,19 @@
         <ul class='my-menu'>
           <% if current_user %>
             <li>
-              <a href='#'>
-                <%= fa_icon 'print  lg', title: 'Print', class: 'js-print  inverted-link' %>&nbsp;Print
-              </a>
+              <%= link_to fa_icon('print lg', text: 'Print'), '#', class: 'js-print' %>
             </li>
-            <li><a href="#">
-                  <%= fa_icon 'user lg', title: 'User', class: '' %>&nbsp;
-                  <%= current_user.nickname %>
-                </a>
+            <li>
+              <%= link_to fa_icon('user lg', text: current_user.nickname, title: 'User'), '#' %>
               <ul class='my-sub-menu'>
                 <li>
-                  <a href='<%= logout_path %>'>
-                    logout&nbsp;&nbsp;<%= fa_icon('sign-out  lg') %>
-                  </a>
+                  <%= link_to fa_icon('sign-out  lg', text: 'logout'), logout_path %>
                 </li>
               </ul>
             </li>
           <% else %>
             <li>
-               <%= link_to fa_icon('sign-in  lg'), logout_path, title: 'Log In', class: 'inverted-link  r-pad' %>
+               <%= link_to fa_icon('sign-in  lg', text: 'Log In'), logout_path, title: 'Log In' %>
             </li>
           <% end %>
         </ul>
