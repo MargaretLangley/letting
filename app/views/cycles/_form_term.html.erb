@@ -76,7 +76,7 @@
               <% if first_record? index: builder.index %>
                 <%= link_to fa_icon('trash-o'), '#', class:"plain-button", title: 'Delete Due Date (disabled)', disabled: true %>
               <% else %>
-                <%= link_to fa_icon('trash-o'), '#', class:"plain-button #{hide_or_destroy record: builder.object}", title: 'Delete Due Date' %>
+                <%= link_to fa_icon('trash-o'), '#', class:"plain-button  hvr-grow #{hide_or_destroy record: builder.object}", title: 'Delete Due Date' %>
               <% end %>
             </div>
           </div>  <!-- js-enclosed-toggle -->
