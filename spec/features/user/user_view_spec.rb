@@ -7,8 +7,8 @@ describe User, type: :feature do
       visit '/users/'
       expect(current_path).to eq '/users/'
       find('.view-testing-link', visible: false).click
-      expect(page).to have_text 'admin@example.com'
-      expect(page).to have_text 'Admin'
+      expect(page).to have_text 'system@example.com'
+      expect(page).to have_text 'system'
     end
   end
 end

@@ -72,8 +72,8 @@ end
 
 def admin_attributes **overrides
   {
-    nickname: 'admin',
-    email: 'admin@example.com',
+    nickname: 'system',
+    email: 'system@example.com',
     password: 'password',
     password_confirmation: 'password',
     admin: true

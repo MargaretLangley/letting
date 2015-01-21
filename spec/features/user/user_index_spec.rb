@@ -6,7 +6,7 @@ describe 'User index', type: :feature do
     user_create email: 'george@example.com'
     visit '/users/'
     expect(current_path).to eq '/users/'
-    expect(page).to have_text 'admin@example.com'
+    expect(page).to have_text 'system@example.com'
     expect(page).to have_text 'george@example.com'
     expect(page).to have_link 'Edit'
   end
