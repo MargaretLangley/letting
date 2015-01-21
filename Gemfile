@@ -117,5 +117,8 @@ group :test do
 end
 
 group :test do
-  gem 'rake', '~> 10.4.0'
+  # rake versions after this break args options code in
+  # import rake (used for setting range and test user logins)
+  # TODO: fix for being able to read in args
+  gem 'rake', '10.3.2'
 end
