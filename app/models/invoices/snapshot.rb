@@ -36,7 +36,7 @@ class Snapshot < ActiveRecord::Base
   end
 
   def products(invoice_date:)
-    @products ||= product_arrears(invoice_date: invoice_date) + product_debits
+    @products ||= get_products(invoice_date: invoice_date)
   end
 
   # match
@@ -54,6 +54,12 @@ class Snapshot < ActiveRecord::Base
 
   private
 
+  def get_products(invoice_date:)
+    products = product_arrears(invoice_date: invoice_date) + product_debits
+    products = apply_balance totalables: products
+    products
+  end
+
   def retain?
     debits.to_a.count { |debit| !debit.automatic_payment? }.zero?
   end
@@ -66,6 +72,14 @@ class Snapshot < ActiveRecord::Base
   def product_debits
     debits.map do |debit|
       Product.new debit.to_debitable
+    end
+  end
+
+  def apply_balance(totalables:)
+    sum = 0
+    totalables.map do |totalable|
+      totalable.balance = sum += totalable.amount
+      totalable
     end
   end
 end

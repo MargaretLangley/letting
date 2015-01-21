@@ -32,6 +32,50 @@ RSpec.describe Snapshot, type: :model do
     end
   end
 
+  describe '#products' do
+    describe '#balance' do
+      it 'returns a balance' do
+        charge = charge_create
+        debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
+        account = account_create charges: [charge], debits: [debit_1]
+        snapshot = snapshot_new account: account
+        snapshot.debited debits: [debit_1]
+
+        products = snapshot.products invoice_date: '1999-1-1'
+
+        expect(products.first.balance).to eq 10
+      end
+
+      it 'includes arrears in the balance' do
+        charge = charge_create
+        debit_1 = debit_new charge: charge, at_time: '1999-1-1', amount: 10
+        debit_2 = debit_new charge: charge, at_time: '2003-1-1', amount: 20
+        account = account_create charges: [charge], debits: [debit_1, debit_2]
+        snapshot = snapshot_new account: account
+        snapshot.debited debits: [debit_2]
+
+        products = snapshot.products invoice_date: '2001-1-1'
+
+        expect(products.first.balance).to eq 10
+        expect(products.second.balance).to eq 30
+      end
+
+      it 'sums products balance (with 0 arrears)' do
+        charge = charge_create
+        debit_1 = debit_new charge: charge, at_time: '2002-1-1', amount: 10
+        debit_2 = debit_new charge: charge, at_time: '2003-1-1', amount: 20
+        account = account_create charges: [charge], debits: [debit_1, debit_2]
+        snapshot = snapshot_new account: account
+        snapshot.debited debits: [debit_1, debit_2]
+
+        products = snapshot.products invoice_date: '2001-1-1'
+
+        expect(products.first.balance).to eq 10
+        expect(products.second.balance).to eq 30
+      end
+    end
+  end
+
   describe '#only_one_invoice?' do
     it 'is not invoiced if empty' do
       snapshot = Snapshot.new

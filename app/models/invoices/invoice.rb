@@ -36,14 +36,6 @@ class Invoice < ActiveRecord::Base
       map(&:date_due).min
     end
 
-    def balanced
-      total = 0 # if product != 0 then the first product is the balance.
-      each_with_index do |product, _index|
-        product.balance = total += product.amount
-        product
-      end
-    end
-
     def drop_arrears
       reject { |product| product.charge_type == 'Arrears' }
     end
@@ -61,11 +53,7 @@ class Invoice < ActiveRecord::Base
   after_destroy :destroy_orphaned_snapshot
 
   delegate :earliest_date_due, to: :products
-
-  def total_arrears
-    products.balanced
-    products.total_arrears
-  end
+  delegate :total_arrears, to: :products
 
   # prepare
   # Assigns the attributes required in an invoice

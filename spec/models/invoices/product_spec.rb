@@ -34,7 +34,7 @@ RSpec.describe Product, type: :model do
       expect(arrears.to_s).to eq 'charge_type: Arrears ' \
                                  'date_due: 2001-01-30 ' \
                                  'amount: 8.0 ' \
-                                 'period: .., balance: '
+                                 'period: .., balance: 8.0'
     end
 
     it 'returns zero if no debt' do
@@ -43,7 +43,7 @@ RSpec.describe Product, type: :model do
       expect(arrears.to_s).to eq 'charge_type: Arrears ' \
                                  'date_due: 2001-01-30 ' \
                                  'amount: 0.0 ' \
-                                 'period: .., balance: '
+                                 'period: .., balance: 0.0'
     end
   end
 
@@ -170,6 +170,6 @@ RSpec.describe Product, type: :model do
     product = product_new charge_type: 'Rent'
     expect(product.to_s)
       .to eq 'charge_type: Rent date_due: 2014-06-07 amount: 30.05 '\
-             'period: 2010-09-30..2011-03-25, balance: '
+             'period: 2010-09-30..2011-03-25, balance: 30.05'
   end
 end

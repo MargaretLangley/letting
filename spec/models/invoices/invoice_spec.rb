@@ -101,7 +101,7 @@ RSpec.describe Invoice, type: :model do
 
       it 'prepares invoice total_arrears' do
         invoice = Invoice.new
-        invoice.products = [product_new(amount: 10)]
+        invoice.products = [product_new(balance: 10)]
         expect(invoice.total_arrears).to eq 10
       end
 

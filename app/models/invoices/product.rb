@@ -24,11 +24,6 @@ class Product < ActiveRecord::Base
     self.period_last  = bill_range.last
   end
 
-  def balance
-    invoice.products.balanced if invoice
-    @balance
-  end
-
   # Wrapper for the arguments required for an Arrears product item.
   # All the other product items are taken from the debit.
   #
@@ -36,7 +31,8 @@ class Product < ActiveRecord::Base
     Product.new charge_type: ChargeTypes::ARREARS,
                 date_due: date_due,
                 automatic_payment: false,
-                amount: account.balance(to_time: date_due)
+                amount: account.balance(to_time: date_due),
+                balance: account.balance(to_time: date_due)
   end
 
   # Scope to return products that trigger the back page of the invoice
@@ -47,8 +43,6 @@ class Product < ActiveRecord::Base
                         ChargeTypes::GARAGE_GROUND_RENT])
       .order(charge_type: :desc).first
   end
-
-  attr_writer :balance
 
   # Does the product require additional explanation typically
   # on the back page of the invoice.
