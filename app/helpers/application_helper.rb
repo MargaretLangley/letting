@@ -98,10 +98,6 @@ module ApplicationHelper
     link_to '', path, class: 'view-testing-link'
   end
 
-  def todo_link(path:, size: 'lg', title: 'todo')
-    app_link icon: 'wrench', size: size, path: path, title: title
-  end
-
   private
 
   def app_link(icon:,
