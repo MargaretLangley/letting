@@ -21,7 +21,7 @@ Main success scenario
 1. The system displays error message detailing property's charges.
 2. The use case continues at step 1.
 
-3.c. does not invoice properties that would be in credit after bill applied. **(TODO:)
+3.c. does not invoice properties that would be in credit after billing.
 1. The system lists these properties under retained.
 2. The system continues to 4.
 

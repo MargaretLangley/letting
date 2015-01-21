@@ -67,8 +67,8 @@ class Invoice < ActiveRecord::Base
     letters.build invoice_text: InvoiceText.first
     self.property = property
     self.snapshot = snapshot
-    self.products = snapshot.products invoice_date: invoice_date
-    self.deliver = snapshot.state
+    self.products = snapshot.make_products(invoice_date: invoice_date).products
+    self.deliver = snapshot.make_products(invoice_date: invoice_date).state
     self.invoice_date = invoice_date
     self.comments = generate_comments comments: comments
     self

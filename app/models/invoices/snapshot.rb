@@ -30,13 +30,10 @@ class Snapshot < ActiveRecord::Base
     self.debits = debits
   end
 
-  def state
-    return :forget if debits.empty?
-    retain? ? :retain : :mail
-  end
-
-  def products(invoice_date:)
-    @products ||= get_products(invoice_date: invoice_date)
+  def make_products(invoice_date:)
+    MakeProducts.new(account: account,
+                     debits: debits,
+                     invoice_date: invoice_date)
   end
 
   # match
@@ -50,36 +47,5 @@ class Snapshot < ActiveRecord::Base
 
   def only_one_invoice?
     invoices.size <= 1
-  end
-
-  private
-
-  def get_products(invoice_date:)
-    products = product_arrears(invoice_date: invoice_date) + product_debits
-    products = apply_balance totalables: products
-    products
-  end
-
-  def retain?
-    debits.to_a.count { |debit| !debit.automatic_payment? }.zero?
-  end
-
-  def product_arrears(invoice_date:)
-    product_arrears = Product.arrears(account: account, date_due: invoice_date)
-    product_arrears.amount.nonzero? ? [product_arrears] : []
-  end
-
-  def product_debits
-    debits.map do |debit|
-      Product.new debit.to_debitable
-    end
-  end
-
-  def apply_balance(totalables:)
-    sum = 0
-    totalables.map do |totalable|
-      totalable.balance = sum += totalable.amount
-      totalable
-    end
   end
 end

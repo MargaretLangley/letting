@@ -147,6 +147,26 @@ describe Invoicing, type: :feature do
     end
   end
 
+  it 'does not invoice properties that would be in credit after billing' do
+      Timecop.travel '2013-6-1'
+
+      cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
+      charge = charge_new(payment_type: 'payment', cycle: cycle)
+      account_create property: property_new(human_ref: 9, client: client_new),
+                     charges: [charge],
+                     credits: [credit_new(charge: charge,
+                                          at_time: '2000-1-1',
+                                          amount: 100)]
+      invoicing_page.enter
+      invoicing_page.search_term('9').search
+
+      expect(invoicing_page).to be_actionable
+      expect(invoicing_page).to be_none_delivered
+
+      Timecop.return
+  end
+
+
   describe 'warns on' do
     describe 'retains mail' do
       it 'to properties that only have standing order charges.' do
