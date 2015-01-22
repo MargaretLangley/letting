@@ -3,36 +3,40 @@
 <div class='grid  shell  js-toggle-selection'>
   <div class='js-togglable'>
 
-    <div class='col-1-4  grid-row'>
-      <h3 class='small-bottom  faded'>Property &hellip;</h3>
+    <div class='col-6-24  grid-row  faded'>
+      <h3>Property &hellip;</h3>
     </div>
-    <div class='col-1-2'>
+    <div class='col-16-24'>
       <h3>
         <%= @property.address.first_no %>
         <%= @property.address.first_text %>
       <h3>
     </div>
-    <div class='col-1-4  no-r-pad'>
-      <%= toggle_link direction: :down, size: '2x' %>
+    <div class='col-1-24'>
       <%= edit_link @property %>
+    </div>
+    <div class='col-1-24  no-r-pad'>
+      <%= toggle_link direction: :down, size: '2x' %>
     </div>
     <%= render 'properties/property_abridged', property: @property %>
   </div>
 
   <div class='js-togglable  js-revealable'>
 
-    <div class='col-1-4  grid-row'>
-      <h3 class='small-bottom  faded'>Property</h3>
+    <div class='col-6-24  grid-row  faded'>
+      <h3>Property</h3>
     </div>
-    <div class='col-1-2'>
+    <div class='col-16-24'>
       <h3>
         <%= @property.address.first_no %>
         <%= @property.address.first_text %>
       <h3>
     </div>
-    <div class='col-1-4  bottom-spacer  no-r-pad'>
-      <%= toggle_link direction: :up, size: '2x'  %>
+    <div class='col-1-24'>
       <%= edit_link @property %>
+    </div>
+    <div class='col-1-24  no-r-pad'>
+      <%= toggle_link direction: :up, size: '2x'  %>
     </div>
     <%= render 'properties/property', property: @property %>
   </div>
@@ -45,10 +49,10 @@
 <div class='grid  shell  js-toggle-selection'>
   <div class='js-togglable'>
 
-    <div class='col-3-4  grid-row'>
-      <h3 class='small-bottom'>Accounts &hellip;</h3>
+    <div class='col-23-24  grid-row  faded'>
+      <h3>Accounts &hellip;</h3>
     </div>
-    <div class='col-1-4  no-r-pad'>
+    <div class='col-1-24  no-r-pad'>
       <%= toggle_link direction: :down, size: '2x'  %>
     </div>
 
@@ -58,10 +62,10 @@
 
   <div class='js-togglable  js-revealable'>
 
-    <div class='col-3-4  grid-row'>
-      <h3 class='small-bottom'>Accounts</h3>
+    <div class='col-23-24  grid-row  faded'>
+      <h3>Accounts</h3>
     </div>
-    <div class='col-1-4  no-r-pad'>
+    <div class='col-1-24  no-r-pad'>
       <%= toggle_link direction: :up, size: '2x'   %>
     </div>
 

@@ -10,28 +10,20 @@
 ####
 #
 module LinkHelper
-  def view_link model, size: '2x', css: 'float-right  hvr-grow'
+  def view_link model, icon: 'file-o', css: '', title: 'View file'
     if model.new_record?
-      app_link icon: 'file-o',
-               size: size,
-               disabled: true,
-               css: css,
-               title: 'View file'
+      app_link icon: icon, size: '2x', disabled: true, css: css, title: title
     else
-      app_link icon: 'file-o',
-               size: size,
-               path: model,
-               css: css,
-               title: 'View file'
+      app_link icon: icon, size: '2x', path: model, css: css, title: title
     end
   end
 
-  def edit_link model, size: '2x', css: 'float-right'
+  def edit_link model, size: '2x', css: '', title: 'Edit File'
     app_link icon: 'edit',
              size: size,
              path: [:edit, model],
              css: css,
-             title: 'Edit file'
+             title: title
   end
 
   def edit_index_link model, size: 'lg'
@@ -42,43 +34,43 @@ module LinkHelper
     app_link icon: 'plus-circle', size: size, css: "#{css}", title: title
   end
 
-  def delete_link(path: '#',
-                  title: 'Delete File',
-                  confirm: 'Are you sure you want to delete?')
-    link_to fa_icon('trash-o lg'),
-            path,
-            method: :delete,
-            class: 'plain-button  hvr-grow',
-            data: { confirm: confirm },
-            title: title
-  end
-
-  def delete_charge(record:)
+  def delete_link path: '#',
+                  confirm: 'Are you sure you want to delete?',
+                  title: 'Delete File'
     app_link icon: 'trash-o',
-             css: "float-right  hvr-grow  #{hide_or_destroy record: record}",
-             title: 'Delete charge'
+             path: path,
+             method: :delete,
+             data: { confirm: confirm },
+             title: title
   end
 
-  def cancel_link(path:)
-    link_to 'Cancel', path, class: 'warn'
+  def delete_charge(css:)
+    app_link icon: 'trash-o', css: "#{css}", title: 'Delete charge'
   end
 
-  # payment should be nested in accounts but is not
-  # we have to force the path rather than pass in parent object
+  # passing model object did not work.
   #
-  def payment_link path:, size: 'lg'
+  def payment_link(size: 'lg', path:)
     app_link icon: 'gbp', size: size, path: path, title: 'Add New Payment'
   end
 
-  def print_link model, title: 'Print', css: 'float-right'
-    app_link icon: 'print', path: print_run_path(model), css: css, title: title
+  def print_link model, title: 'Print'
+    app_link icon: 'print', path: print_run_path(model), title: title
   end
 
   def toggle_link direction:, size: 'lg', title: ''
     app_link icon: "chevron-circle-#{direction}",
              size: size,
-             css: "js-toggle  float-right #{hover direction: direction } ",
+             css: "js-toggle  #{hover direction: direction } ",
              title: title
+  end
+
+  #
+  # None Standard links that we haven't called app_link on
+  #
+
+  def cancel_link(path:)
+    link_to 'Cancel', path, class: 'warn'
   end
 
   # Used when there is no physical link to click on
@@ -94,6 +86,8 @@ module LinkHelper
                size: 'lg',
                path: '#',
                css: '',
+               data: nil,
+               method: nil,
                title:,
                disabled: false)
 
@@ -101,6 +95,8 @@ module LinkHelper
             path,
             class: "plain-button  hvr-grow  #{css}",
             title: "#{title}#{disabled ? ' (disabled)' : '' }",
+            data: data,
+            method: method,
             disabled: disabled
   end
 

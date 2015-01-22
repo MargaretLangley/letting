@@ -1,9 +1,9 @@
 <%= form_for cycle do |f| %>
   <%= render 'shared/errors', object: cycle %>
 
-  <fieldset id='cycle' class='grid  shell-1-6'>
+  <fieldset id='cycle' class='grid  shell-1-12'>
 
-    <div class='col-22-24  grid-row  vertical-spacer  spacer-column'>
+    <div class='col-23-24  grid-row  vertical-spacer  spacer-column'>  <!-- column 1 -->
 
       <%= f.hidden_field :cycle_type, cycle_type: 'term' %>
 
@@ -94,7 +94,7 @@
       </div>
     </div>
 
-    <div class='col-2-24  spacer-column'>
+    <div class='col-1-24  spacer-column no-r-pad'>  <!-- column 2 -->
       <%= view_link cycle %>
     </div>
   </fieldset>
