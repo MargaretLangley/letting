@@ -9,14 +9,14 @@ describe 'RunShow#show', type: :feature do
   it 'basic' do
     charge = charge_new charge_type: ChargeTypes::GROUND_RENT
     setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
-    visit '/runs/1'
 
+    visit '/runs/1'
     expect(page.title).to eq 'Letting - Run View'
     expect(page).to have_text '1984'
   end
 
   describe 'back page is used for Ground Rents & Garage Ground Rents only' do
-    it 'displays back page with garage ground rent, uses invoice_text 2' do
+    it 'displays back page for ground rents and garage ground rent only' do
       charge = charge_new charge_type: ChargeTypes::GARAGE_GROUND_RENT
       setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
       visit '/runs/1'
@@ -45,6 +45,6 @@ describe 'RunShow#show', type: :feature do
 
     property = property_create human_ref: 1984
 
-    run_create id: 1, invoices: [invoice_create(property: property, snapshot: snapshot)]
+    run_create id: 1, invoices: [invoice_create(id: 1, property: property, snapshot: snapshot)]
   end
 end
