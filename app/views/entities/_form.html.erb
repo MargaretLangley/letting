@@ -17,13 +17,13 @@
         <% if first_record? index: builder.index %>
           <%= delete_link title: 'Delete Person', disabled: true %>
         <% else %>
-          <%= delete_link title: 'Delete Person', css: hide_or_destroy(record: builder.object), method: nil, data: false %>
+          <%= delete_link title: 'Delete Person', js_css: hide_or_destroy(record: builder.object), method: nil, data: false %>
         <% end %>
       </div>
     </div> <!-- js-enclosed-toggle -->
   <% end %>
 
   <div class='col-3-24  grid-row  bottom-spacer'>
-    <%= add_link css: 'js-reveal-link', title: 'Add Person' %>
+    <%= add_link js_css: 'js-reveal-link', title: 'Add Person' %>
   </div>
 </div> <!-- js-group-toggle -->

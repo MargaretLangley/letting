@@ -76,7 +76,7 @@
               <% if first_record? index: builder.index %>
                 <%= delete_link title: 'Delete Due Date', disabled: true %>
               <% else %>
-                <%= delete_link title: 'Delete Due Date', css: hide_or_destroy(record: builder.object), method: nil, data: false %>
+                <%= delete_link title: 'Delete Due Date', js_css: hide_or_destroy(record: builder.object), method: nil, data: false %>
               <% end %>
             </div>
           </div>  <!-- js-enclosed-toggle -->
@@ -84,7 +84,7 @@
 
         <div class='col-5-24  grid-row  bottom-line-spacer'>&nbsp;</div>
         <div class='col-4-24  bottom-line-spacer'>
-          <%= add_link css: 'js-reveal-link', title: 'Add Due Date' %>
+          <%= add_link js_css: 'js-reveal-link', title: 'Add Due Date' %>
         </div>
       </div>  <!-- js-group-toggle -->
 

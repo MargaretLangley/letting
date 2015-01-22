@@ -8,8 +8,8 @@
         <%= link_to "Invoice #{run_dec.invoice_date}", "#tab#{index + 1}" %>
       </li>
     <% end %>
-    <li>
-      <%= add_link path: [:edit, @invoicing], title: '(Create Red Invoice)' %>
+    <li class='tab-links-warn'>
+      <%= add_link path: [:edit, @invoicing], title: '(Create Red Invoice)', css: 'warn-button' %>
     </li>
   </ul>
 

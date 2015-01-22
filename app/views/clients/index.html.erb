@@ -6,17 +6,17 @@
   <div class='col-3-24  grid-row  bottom-spacer  grid-header  r-align'>
     Client ID
   </div>
-  <div class='col-7-24  bottom-spacer  grid-header'>Name</div>
+  <div class='col-9-24  bottom-spacer  grid-header'>Name</div>
   <div class='col-2-24  bottom-spacer  grid-header  r-align'>No</div>
   <div class='col-7-24  bottom-spacer  grid-header'>Road</div>
-  <div class='col-5-24  bottom-spacer  grid-header  no-print'>Actions</div>
+  <div class='col-3-24  bottom-spacer  grid-header  no-print'>Actions</div>
 
   <% clients.each do |client| %>
     <div title='View' class='table-row' data-link='<%= client_path(client.id) %>'>
       <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
         <%= client.human_ref %>
       </div>
-      <div class='col-7-24  bottom-spacer  inherit-row'>
+      <div class='col-9-24  bottom-spacer  inherit-row'>
         <%= client.full_name %>
       </div>
 
@@ -31,7 +31,6 @@
     <div class='col-1-24  bottom-spacer'><%= edit_link client, size: 'lg' %></div>
     <div class='col-1-24  bottom-spacer'>&nbsp;</div>
     <div class='col-1-24  bottom-spacer'><%= delete_link path: client, confirm: "Deleting a client also deletes its properties. If you are sure press 'OK' to delete?" %></div>
-    <div class='col-2-24  bottom-spacer'>&nbsp;</div>
   <% end %>
 </div>
 

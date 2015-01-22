@@ -5,7 +5,7 @@
 #
 # Shared helper methods
 #
-# rubocop: disable Metrics/MethodLength,  Metrics/ParameterLists
+# rubocop: disable Metrics/LineLength, Metrics/MethodLength,  Metrics/ParameterLists
 #
 ####
 #
@@ -22,12 +22,12 @@ module LinkHelper
     app_link icon: 'edit', size: size, path: [:edit, model], title: 'Edit File'
   end
 
-  def add_link(icon: 'plus-circle', size: 'lg', path: '#', css: '', title:)
-    app_link icon: icon, size: size, path: path, css: css, title: title
+  def add_link(icon: 'plus-circle', size: 'lg', path: '#', css: '', js_css: '', title:)
+    app_link icon: icon, size: size, path: path, css: css, js_css: js_css, title: title
   end
 
   def delete_link path: '#',
-                  css: '',
+                  js_css: '',
                   method: :delete,
                   data: true,
                   confirm: 'Are you sure you want to delete?',
@@ -35,15 +35,15 @@ module LinkHelper
                   disabled: false
     app_link icon: 'trash-o',
              path: path,
-             css: css,
              method: method,
+             js_css: js_css,
              data: data ? { confirm: confirm } : nil,
              title: title,
              disabled: disabled
   end
 
-  def delete_charge(css:)
-    app_link icon: 'trash-o', css: "#{css}", title: 'Delete charge'
+  def delete_charge(js_css:)
+    app_link icon: 'trash-o', js_css: js_css, title: 'Delete charge'
   end
 
   # passing model object did not work.
@@ -52,14 +52,14 @@ module LinkHelper
     app_link icon: 'gbp', path: path, title: 'Add New Payment'
   end
 
-  def print_link path:, size: 'lg', title: 'Print'
+  def print_link path:, title: 'Print'
     app_link icon: 'print', path: path, size: 'lg', title: title
   end
 
   def toggle_link direction:, size: 'lg', title: ''
     app_link icon: "chevron-circle-#{direction}",
              size: size,
-             css: "js-toggle  #{hover direction: direction } ",
+             js_css: "js-toggle  #{hover direction: direction } ",
              title: title
   end
 
@@ -83,7 +83,8 @@ module LinkHelper
   def app_link(icon:,
                size: 'lg',
                path: '#',
-               css: '',
+               css: 'plain-button',
+               js_css: '',
                data: nil,
                method: nil,
                title:,
@@ -91,7 +92,7 @@ module LinkHelper
 
     link_to fa_icon("#{icon} #{size}"),
             path,
-            class: "plain-button  hvr-grow  #{css}",
+            class: "hvr-grow  #{css}  #{js_css}",
             title: "#{title}#{disabled ? ' (disabled)' : '' }",
             method: method,
             data: data,
@@ -101,5 +102,4 @@ module LinkHelper
   def hover(direction:)
     direction == :down ? 'hvr-sink' : 'hvr-float'
   end
-
 end

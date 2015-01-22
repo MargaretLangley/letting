@@ -382,12 +382,29 @@ ul .my-sub-menu {
   display: inline-block;
   padding: 9px 15px;
   transition: all linear .15s;
+
+  &:hover {
+    background: #a7cce5;
+    text-decoration: none;
+  }
 }
 
-.tab-links a:hover {
-  background: #a7cce5;
-  text-decoration: none;
+/*TODO: refactor*/
+
+.tab-links-warn a {
+  @include menu-style(0%, 5%);
+  border-radius: 5px 5px 0 0;
+  display: inline-block;
+  padding: 9px 15px;
+  transition: all linear .15s;
+
+  &:hover {
+    background: lighten($color-3, 10%);
+    color: white;
+    text-decoration: none;
+  }
 }
+
 
 li.active a, li.active a:hover {
   @include menu-style(15%, 25%);
@@ -645,7 +662,7 @@ $search-height: 35px;
     border: 1px solid darken($secondary-button, 15%);
     border-radius: 5px;
     box-shadow: $shadow 0 0 4px;
-    font-size: 1.2em;
+    font-size: 1em;
 
     &:hover,
     &:active {
@@ -690,15 +707,15 @@ $search-height: 35px;
 
   .warn-button {
     @include base-button;
-    background: white;
-    color: $warn;
+    background: $color-3;
+    color: white;
 
     // Required to override base.css a:link color and background-color;
 
     &:link,
     &:visited {
-      background: white;
-      color: $warn;
+      background: $color-3;
+      color: white;
     }
   }
 }

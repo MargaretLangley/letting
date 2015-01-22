@@ -34,6 +34,8 @@ body {
   background-color: $neutral;
   color: $primary-text;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* font size left alone and all sizes are relative using em
+     argument to go for rem (size of font relative to html element) */
 }
 
 /*------------------------------------------------------------------*\
