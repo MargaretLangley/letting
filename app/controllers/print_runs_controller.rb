@@ -15,5 +15,6 @@ class PrintRunsController < ApplicationController
 
   def show
     @run = Run.includes(invoices: [:snapshot]).find params[:id]
+    render 'runs/show'
   end
 end
