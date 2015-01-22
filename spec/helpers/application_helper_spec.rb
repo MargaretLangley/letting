@@ -10,15 +10,6 @@ describe ApplicationHelper, type: :helper do
       expect(format_empty_string_as_dash('Test')).to eq 'Test'
     end
   end
-  describe '#view_link' do
-    it 'disables new records' do
-      expect(view_link(property_new)).to include 'disabled'
-    end
-
-    it 'enables persisted records' do
-      expect(view_link(property_create)).to_not include 'disabled'
-    end
-  end
 
   describe '#salient_date_range' do
     it 'includes salient_date interface' do
