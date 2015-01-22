@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Guide, type: :feature do
-  describe '#view' do
+  describe '#show' do
     it 'finds guide data' do
       log_in admin_attributes
       invoice_text_create id: 1
