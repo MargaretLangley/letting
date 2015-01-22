@@ -11,7 +11,7 @@
     <%= invoicing_dec.period_between %>
   </div>
   <div class='col-1-24  bottom-line-spacer'>
-    <%= print_link invoicing.runs.last %>
+    <%= print_link path: print_run_path(invoicing.runs.last)  %>
   </div>
   <div class='col-2-24  bottom-line-spacer'>&nbsp;</div>
   <div class='col-1-24  bottom-line-spacer'>

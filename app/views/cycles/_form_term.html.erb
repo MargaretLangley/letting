@@ -74,9 +74,9 @@
             <div class='col-2-24  bottom-spacer'>
               <%= builder.hidden_field :_destroy %>
               <% if first_record? index: builder.index %>
-                <%= link_to fa_icon('trash-o'), '#', class:"plain-button", title: 'Delete Due Date (disabled)', disabled: true %>
+                <%= delete_link title: 'Delete Due Date', disabled: true %>
               <% else %>
-                <%= link_to fa_icon('trash-o'), '#', class:"plain-button  hvr-grow #{hide_or_destroy record: builder.object}", title: 'Delete Due Date' %>
+                <%= delete_link title: 'Delete Due Date', css: hide_or_destroy(record: builder.object), method: nil, data: false %>
               <% end %>
             </div>
           </div>  <!-- js-enclosed-toggle -->

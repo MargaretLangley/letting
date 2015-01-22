@@ -33,14 +33,14 @@
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad  js-toggle-selection'>
     <div class='col-4-24  js-togglable   js-clear  <%= address.add_district_visiblity %> '>
-      <%= add_link size: '', css: 'js-toggle  float-left', title: 'Add district' %>
+      <%= add_link css: 'js-toggle', title: 'Add district' %>
     </div>
     <div class='js-togglable  js-clear  <%= address.district_visiblity %>'>
       <div class='col-20-24  bottom-spacer  no-r-pad'>
         <%= b.text_field :district, class: 'v_district' %>
       </div>
       <div class='col-4-24'>
-        <%= link_to fa_icon('trash-o'), '#', class: 'js-toggle  plain-button  float-right  hvr-grow', title: 'Delete Line' %>
+        <%= delete_link title: 'Delete Line', css: 'js-toggle', method: nil, data: false %>
       </div>
     </div>
   </div>
@@ -68,14 +68,14 @@
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad  js-toggle-selection'>
     <div class='js-togglable  js-clear <%= address.add_nation_visiblity %> col-4-24'>
-      <%= add_link size: '', css: 'js-toggle  float-left', title: 'Add a nation line to the address' %>
+      <%= add_link css: 'js-toggle', title: 'Add a nation line to the address' %>
     </div>
     <div class='js-togglable  js-clear <%= address.nation_visiblity %>'>
       <div class='col-20-24  bottom-spacer  no-r-pad'>
         <%= b.text_field :nation, class: 'v_nation' %>
       </div>
       <div class='col-4-24'>
-        <%= link_to fa_icon('trash-o'), '#', class: 'js-toggle  plain-button  float-right  hvr-grow', title: 'Delete Line' %>
+        <%= delete_link title: 'Delete Line', css: 'js-toggle', method: nil, data: false %>
       </div>
     </div>
   </div>
