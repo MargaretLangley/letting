@@ -11,18 +11,18 @@
         <%= f.text_field :human_ref, autofocus: true, class: 'width-1-1' %>
       </div>
 
-      <div class='col-1-4  grid-row  top-line-spacer'>
+      <div class='col-1-4  grid-row  top-1-line-spacer'>
         <%= f.label :name, class: 'required  faded' %>
       </div>
-      <div class='col-3-4  top-line-spacer'>
+      <div class='col-3-4  top-1-line-spacer'>
         <%= render 'entities/form', f: f, entitieable: client %>
       </div>
 
       <hr>
       <%= render 'addresses/form', f: f, parent: 'client', address: AddressDecorator.new(client.address) %>
 
-      <div class='col-1-4  grid-row  top-line-spacer'>&nbsp;</div>
-      <div class='col-3-4  top-line-spacer'>
+      <div class='col-1-4  grid-row  top-1-line-spacer'>&nbsp;</div>
+      <div class='col-3-4  top-1-line-spacer'>
         <%= render 'forms/buttons', f: f, path: clients_path %>
       </div>
     </div>

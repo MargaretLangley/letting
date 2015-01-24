@@ -3,7 +3,7 @@
 
   <fieldset id='cycle' class='grid  shell-1-12'>
 
-    <div class='col-23-24  grid-row  bottom-line-spacer  spacer-column'>
+    <div class='col-23-24  grid-row  bottom-1-line-spacer  spacer-column'>
       <%= f.hidden_field :cycle_type, cycle_type: 'monthly' %>
 
       <div class='col-5-24  grid-row  bottom-spacer faded'><%= f.label :name %></div>
@@ -45,11 +45,11 @@
       <% end %>
 
       <div class='col-5-24  grid-row  vertical-line-spacer'>&nbsp;</div>
-      <div class='col-18-24  top-line-spacer'>
+      <div class='col-18-24  top-1-line-spacer'>
         <%= render 'forms/buttons', f: f, path: cycles_path  %>
       </div>
     </div>
-    <div class='col-1-24  spacer-column  bottom-line-spacer no-r-pad'>
+    <div class='col-1-24  spacer-column  bottom-1-line-spacer no-r-pad'>
       <%= view_link cycle %>
     </div>
   </fieldset>

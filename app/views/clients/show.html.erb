@@ -42,7 +42,7 @@
     <div class='col-3-4  bottom-spacer'><%= @client.full_name %></div>
 
     <div class='col-1-4  grid-row  bottom-spacer  faded'>Address</div>
-    <div class='col-3-4  bottom-line-spacer'>
+    <div class='col-3-4  bottom-1-line-spacer'>
       <%= simple_format(@client.address.text, {}, wrapper_tag: 'div') %>
     </div>
   </div>
@@ -180,7 +180,7 @@
 
     <%= render 'client_payments/totals', client_payment: @client_payment %>
 
-    <div class='col-1-1  grid-row  top-double-line-spacer'>
+    <div class='col-1-1  grid-row  top-2-line-spacer'>
       <h2>Itemised Ground Rent Payments</h2>
     </div>
 
