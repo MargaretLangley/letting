@@ -83,7 +83,9 @@ describe 'ChargeFactory' do
         expect(Charge.first.charge_type).to eq 'Garage'
       end
 
-      it('flips dormant') { expect(charge_create dormant: true).to be_dormant }
+      it 'flips activity dormant' do
+        expect(charge_create activity: 'dormant').to be_dormant
+      end
     end
 
     describe 'adds' do

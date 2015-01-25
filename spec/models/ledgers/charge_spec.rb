@@ -82,7 +82,7 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
 
       it 'excludes dormant charges from billing'  do
         ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
-        ch.dormant = true
+        ch.activity = 'dormant'
         expect(ch.coming Date.new(2013, 3, 5)..Date.new(2013, 3, 5)).to eq []
       end
 

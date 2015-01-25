@@ -14,6 +14,7 @@
 ####
 #
 class Charge < ActiveRecord::Base
+  enum activity: [:active, :dormant]
   include PaymentTypeDefaults
   belongs_to :account
   has_many :credits, dependent: :destroy, inverse_of: :charge
@@ -38,7 +39,7 @@ class Charge < ActiveRecord::Base
   # returns        - chargable_info array with data required to bill the
   #                  associated account. Empty array if nothing billed.
   def coming billing_period
-    return [] if dormant
+    return [] if dormant?
     cycle.between(billing_period).map do |matched_cycle|
       make_chargeable(matched_cycle)
     end.compact
@@ -86,6 +87,6 @@ class Charge < ActiveRecord::Base
   end
 
   def ignored_attrs
-    %w(id account_id start_date end_date created_at updated_at)
+    %w(id account_id activity start_date end_date created_at updated_at)
   end
 end

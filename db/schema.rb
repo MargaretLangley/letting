@@ -58,14 +58,14 @@ ActiveRecord::Schema.define(version: 20141129154746) do
   end
 
   create_table "charges", force: :cascade do |t|
-    t.string   "charge_type",                                          null: false
-    t.integer  "cycle_id",                                             null: false
-    t.boolean  "dormant",                              default: false, null: false
-    t.string   "payment_type",                                         null: false
-    t.decimal  "amount",       precision: 8, scale: 2,                 null: false
-    t.date     "start_date",                                           null: false
-    t.date     "end_date",                                             null: false
-    t.integer  "account_id",                                           null: false
+    t.string   "charge_type",                                      null: false
+    t.integer  "account_id",                                       null: false
+    t.integer  "cycle_id",                                         null: false
+    t.string   "payment_type",                                     null: false
+    t.decimal  "amount",       precision: 8, scale: 2,             null: false
+    t.date     "start_date",                                       null: false
+    t.date     "end_date",                                         null: false
+    t.integer  "activity",                             default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

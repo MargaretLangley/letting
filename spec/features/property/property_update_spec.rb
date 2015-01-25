@@ -95,16 +95,17 @@ describe 'Account Update', type: :feature  do
     end
 
     it 'can be set to dormant', js: true do
-      charged_in = charged_in_create(id: 2, name: 'Advance')
-      charge = charge_new cycle: cycle_new(id: 1, charged_in: charged_in)
-      property_create human_ref: 80, account: account_new(charges: [charge])
+      property_create account:
+                        account_new(charges: [charge_new(activity: 'active')])
       account.edit
-      expect(page).to have_css('.spec-charge-count', count: 1)
-      dormant_checkbox =
-      '//*[@id="property_account_attributes_charges_attributes_0_dormant"]'
-      find(:xpath, dormant_checkbox).set(true)
+      activity =
+        '//*[@id="property_account_attributes_charges_attributes_0_activity"]'
+      expect(find(:xpath, activity).value).to eq 'active'
+
+      find(:xpath, activity).select 'dormant'
+
       account.button('Update').successful?(self).edit
-      expect(find(:xpath, dormant_checkbox)).to be_checked
+      expect(find(:xpath, activity).value).to eq 'dormant'
     end
   end
 

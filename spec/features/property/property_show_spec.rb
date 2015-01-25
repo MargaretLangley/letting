@@ -39,12 +39,13 @@ describe Property, type: :feature   do
   end
 
   it 'shows charges as dormant' do
-    property_create id: 1,
-                    account: account_new(charges: [charge_new(dormant: true)]),
-                    client: client_new
+    property_create \
+      id: 1,
+      account: account_new(charges: [charge_new(activity: 'dormant')]),
+      client: client_new
     visit '/accounts/1'
     within 'div#charge' do
-      expect(page).to have_text 'Yes'
+      expect(page).to have_text 'dormant'
     end
   end
 
