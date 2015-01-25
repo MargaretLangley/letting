@@ -28,22 +28,6 @@ describe LiteralSearch, type: :model do
       end
     end
 
-    describe 'invoicing query' do
-      it 'returns matching accounts' do
-        ac_1 = account_create(property: property_new(human_ref: '100')).id
-        ac_2 = account_create(property: property_new(human_ref: '200')).id
-        expect(LiteralSearch.search(type: 'Invoicing', query: '100-200')
-                            .go[:record_id])
-          .to eq [ac_1, ac_2]
-      end
-
-      it 'returns empty when no match' do
-        expect(LiteralSearch.search(type: 'Invoicing', query: '100-200')
-                            .go[:record_id])
-          .to eq []
-      end
-    end
-
     describe 'payment query' do
       it 'returns an exact account' do
         account = account_create property: property_new(human_ref: '100')

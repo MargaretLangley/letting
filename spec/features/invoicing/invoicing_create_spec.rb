@@ -4,19 +4,23 @@ require 'rails_helper'
 #
 # InvoicingPage
 #
-# Encapsulates the page so tests can work at a higher abstraction than capybara
+# Encapsulates the page so tests can work at a higher abstraction than Capybara
 # will allow.
 #
 class InvoicingPage
   include Capybara::DSL
 
-  def enter
-    visit '/invoicings/new'
+  def enter invoicing: nil
+    if invoicing
+      visit "/invoicings/#{invoicing.id}"
+    else
+      visit '/invoicings/new'
+    end
     self
   end
 
   def search_term term
-    fill_in 'search_terms', with: term
+    fill_in 'Property range', with: term
     self
   end
 
@@ -53,7 +57,7 @@ class InvoicingPage
   end
 
   def not_actionable?
-    has_content? /No property is chargeable for the range of properties/i
+    has_content? /has no account that can be charged for the period./i
   end
 
   def none_delivered?
@@ -69,7 +73,7 @@ class InvoicingPage
   end
 
   def excluded?
-    has_content? /No properties in the range/i
+    has_content? /does not match any accounts./i
   end
 end
 
@@ -87,8 +91,7 @@ describe Invoicing, type: :feature do
                    cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
     invoicing_page.enter
 
-    invoicing_page.search_term('87').search
-    invoicing_page.create
+    invoicing_page.search_term('87').create
 
     expect(invoicing_page).to be_success
 
@@ -100,7 +103,7 @@ describe Invoicing, type: :feature do
       Timecop.travel '2013-6-1'
 
       invoicing_page.enter
-      invoicing_page.search_term('87').search
+      invoicing_page.search_term('87').create
 
       expect(invoicing_page).to be_excluded
 
@@ -114,7 +117,7 @@ describe Invoicing, type: :feature do
                      cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25)])
 
       invoicing_page.enter
-      invoicing_page.search_term('87').search
+      invoicing_page.search_term('87').create
 
       expect(invoicing_page).to be_not_actionable
 
@@ -133,7 +136,8 @@ describe Invoicing, type: :feature do
                                         at_time: '2000-1-1',
                                         amount: 100)]
     invoicing_page.enter
-    invoicing_page.search_term('9').search
+    invoicing_page.search_term('9').create
+    invoicing_page.enter invoicing: Invoicing.first
 
     expect(invoicing_page).to be_actionable
     expect(invoicing_page).to be_none_delivered
@@ -151,7 +155,8 @@ describe Invoicing, type: :feature do
                        charges: [charge_new(payment_type: 'standing_order',
                                             cycle: cycle)]
         invoicing_page.enter
-        invoicing_page.search_term('9').search
+        invoicing_page.search_term('9').create
+        invoicing_page.enter invoicing: Invoicing.first
 
         expect(invoicing_page).to be_actionable
         expect(invoicing_page).to_not be_none_retained
@@ -171,7 +176,8 @@ describe Invoicing, type: :feature do
                        charges: [charge_new(payment_type: 'payment',
                                             cycle: cycle)]
         invoicing_page.enter
-        invoicing_page.search_term('9').search
+        invoicing_page.search_term('9').create
+        invoicing_page.enter invoicing: Invoicing.first
 
         expect(invoicing_page).to be_actionable
         expect(invoicing_page).to be_none_retained
@@ -190,7 +196,8 @@ describe Invoicing, type: :feature do
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 25)])
 
         invoicing_page.enter
-        invoicing_page.search_term('8-9').search
+        invoicing_page.search_term('8-9').create
+        invoicing_page.enter invoicing: Invoicing.first
 
         expect(invoicing_page).to be_actionable
         expect(invoicing_page).to_not be_none_ignored
@@ -205,7 +212,8 @@ describe Invoicing, type: :feature do
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 25)])
 
         invoicing_page.enter
-        invoicing_page.search_term('9').search
+        invoicing_page.search_term('9').create
+        invoicing_page.enter invoicing: Invoicing.first
 
         expect(invoicing_page).to be_actionable
         expect(invoicing_page).to be_none_ignored

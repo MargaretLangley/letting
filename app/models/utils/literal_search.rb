@@ -44,12 +44,6 @@ class LiteralSearch
         action: 'show',
         record_id: id_or_nil(Client.find_by human_ref: query)
       }
-    when 'Invoicing'
-      {
-        controller: 'invoicings',
-        action: 'new',
-        record_id: Account.between?(query).pluck(:id)
-      }
     when 'Payment'
       {
         process_empty: process_empty(query),

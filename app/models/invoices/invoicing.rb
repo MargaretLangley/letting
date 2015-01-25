@@ -40,6 +40,15 @@ class Invoicing < ActiveRecord::Base
     errors.add(:invoice_accounts, 'does not match any accounts.')
   end
 
+  validate :valid_run
+  def valid_run
+    return if actionable?
+
+    errors.add(:property_range,
+               ", #{property_range}, has no account that can" \
+               " be charged for the period #{period.first} to #{period.last}.")
+  end
+
   # valid_arguments?
   # Does this invoicing have enough arguments to call generate on?
   # Nil values for property_range and period are nil cause problems.
