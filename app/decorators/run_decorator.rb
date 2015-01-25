@@ -21,7 +21,7 @@ class RunDecorator
     @source = run
   end
 
-  def activity
+  def style_activity
     run.last? ? ' active' : ''
   end
 

@@ -3,7 +3,7 @@
   <ul class='tab-links'>
     <% @invoicing.runs.each_with_index do |run, index|  %>
       <% run_dec = RunDecorator.new run %>
-      <li class='<%= run_dec.activity %>'>
+      <li class='<%= run_dec.style_activity %>'>
         <%= link_to "Invoice #{run_dec.invoice_date}", @invoicing %>
       </li>
     <% end %>

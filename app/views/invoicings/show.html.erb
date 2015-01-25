@@ -4,7 +4,7 @@
   <ul class='tab-links'>
     <% @invoicing.runs.each_with_index do |run, index|  %>
       <% run_dec = RunDecorator.new run %>
-      <li class='<%= run_dec.activity %>'>
+      <li class='<%= run_dec.style_activity %>'>
         <%= link_to "Invoice #{run_dec.invoice_date}", "#tab#{index + 1}" %>
       </li>
     <% end %>
@@ -16,7 +16,7 @@
   <div class='grid  shell  tab-content'>
     <% @invoicing.runs.each_with_index do |run, index|  %>
       <% run_dec = RunDecorator.new run %>
-      <div id='tab<%= index + 1 %>' class='tab <%= run_dec.activity %> '>
+      <div id='tab<%= index + 1 %>' class='tab <%= run_dec.style_activity %> '>
         <%= render 'invoicings/invoicing_header' %>
         <%= render 'invoicing_to_view', invoicing: @invoicing, run: run %>
         <%= render 'invoices/invoices', run: run, action: true %>
