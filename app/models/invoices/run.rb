@@ -32,8 +32,7 @@ class Run < ActiveRecord::Base
 
   #
   # actionable?
-  # Are the accounts invoiceable?
-  # prepare must be called before actionable will return correct result
+  # Are the accounts chargeable? At least one account can be mailed or retained.
   #
   def actionable?
     invoices.select(&:actionable?).present?
