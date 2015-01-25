@@ -1,5 +1,3 @@
-require_relative '../../lib/modules/salient_date'
-
 ####
 #
 # ApplicationHelper
@@ -9,7 +7,6 @@ require_relative '../../lib/modules/salient_date'
 ####
 #
 module ApplicationHelper
-  include SalientDate
   def format_empty_string_as_dash a_string
     a_string.blank? ? '-'  : a_string
   end
