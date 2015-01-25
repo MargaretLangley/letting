@@ -6,13 +6,13 @@
         <%= builder.text_field :title, class: 'js-clear  width-1-1' %>
       </div>
 
-      <div class='col-5-24  bottom-spacer'>
+      <div class='col-4-24  bottom-spacer'>
         <%= builder.text_field :initials, class: 'js-clear  width-1-1' %>
       </div>
       <div class='col-11-24  bottom-spacer'>
         <%= builder.text_field :name, class: 'js-clear  width-1-1' %>
       </div>
-      <div class='col-2-24  bottom-spacer  no-r-pad'>
+      <div class='col-3-24  bottom-spacer  no-r-pad'>
         <%= builder.hidden_field :_destroy %>
         <% if first_record? index: builder.index %>
           <%= delete_link title: 'Delete Person', disabled: true %>
