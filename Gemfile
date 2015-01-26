@@ -34,6 +34,7 @@ gem 'turbolinks', '~> 2.5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.2.0'
 
+# Must be include before elasticsearch
 gem 'kaminari', '~> 0.16.1'
 
 # bundle exec rake doc:rails generates the API under doc/api.
