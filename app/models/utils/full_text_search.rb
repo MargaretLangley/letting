@@ -13,6 +13,7 @@
 ####
 #
 class FullTextSearch
+  attr_reader :query, :type
   def self.search(type:, query:)
     new(type: type, query: query)
   end
@@ -27,12 +28,12 @@ class FullTextSearch
   end
 
   # Instantiate class from name string
-  # Object.const_get(@type).search(@query)
+  # Object.const_get(type).search(query)
   def results
-    case @type
+    case type
     when 'Client'
       success = true
-      records = Client.search(@query).records.order(:human_ref)
+      records = Client.search(query).records.order(:human_ref)
       if records.count.zero?
         success = false
         records = Client.all
@@ -40,7 +41,7 @@ class FullTextSearch
       { success: success, records: records, render: 'clients/index' }
     when 'Payment'
       success = true
-      records = Payment.search(@query).records
+      records = Payment.search(query).records
       if records.count.zero?
         success = false
         records = Payment.all
@@ -50,7 +51,7 @@ class FullTextSearch
         render: 'payments/add_new_payment_index' }
     else
       success = true
-      records = Property.search(@query).records.order(:human_ref)
+      records = Property.search(query).records.order(:human_ref)
       if records.count.zero?
         success = false
         records = Property.all
