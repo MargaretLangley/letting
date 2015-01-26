@@ -166,6 +166,14 @@ describe Address, type: :model do
                               road: 'Edge Rd'
         expect(address.first_text).to eq 'Edge Rd'
       end
+
+      it 'shows road number and address if house name missing' do
+        address = Address.new flat_no: 37,
+                              house_name: nil,
+                              road_no: '8',
+                              road: 'Edge Rd'
+        expect(address.first_text).to eq '8 Edge Rd'
+      end
     end
   end
 end

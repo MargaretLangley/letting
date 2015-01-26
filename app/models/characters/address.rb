@@ -62,7 +62,11 @@ class Address < ActiveRecord::Base
   end
 
   def first_text
-    flat_house_line.present? ? house_name : road
+    if flat_house_line.present?
+      house_name.present? ? house_name : address_lines.second
+    else
+      road
+    end
   end
 
   def clear_up_form
