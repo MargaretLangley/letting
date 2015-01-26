@@ -15,7 +15,7 @@ describe PaymentDecorator, :payment do
         payment = PaymentDecorator.new payment_new
         payment.account_id = property.account.id
 
-        expect(payment.property_decorator.source).to eq property
+        expect(payment.property_decorator.property).to eq property
       end
     end
     context 'without account' do

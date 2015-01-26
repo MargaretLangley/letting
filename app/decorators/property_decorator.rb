@@ -8,11 +8,16 @@ require_relative '../../lib/modules/method_missing'
 # Used when the property has need for behaviour outside of the core
 # of the model. Specifically for display information.
 #
+# rubocop: disable Style/TrivialAccessors
+#
 ####
 #
 class PropertyDecorator
   include MethodMissing
-  attr_reader :source
+
+  def property
+    @source
+  end
 
   def initialize property
     @source = property
@@ -23,16 +28,16 @@ class PropertyDecorator
   end
 
   def agent_name
-    if source.agent.authorized?
-      source.agent.full_name
+    if property.agent.authorized?
+      property.agent.full_name
     else
       'None'
     end
   end
 
   def agent_address_lines
-    if source.agent.authorized?
-      source.agent.address.text
+    if property.agent.authorized?
+      property.agent.address.text
     else
       '-'
     end
