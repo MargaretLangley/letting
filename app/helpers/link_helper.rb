@@ -29,6 +29,10 @@ module LinkHelper
     app_link icon: icon, size: size, path: path, css: css, js_css: js_css, title: title
   end
 
+  def delete_charge js_css:, title: 'Delete Charge'
+    delete_link method: nil, js_css: js_css, data: false, title: title
+  end
+
   def delete_link path: '#',
                   js_css: '',
                   method: :delete,
@@ -45,10 +49,6 @@ module LinkHelper
              disabled: disabled
   end
 
-  def delete_charge(js_css:)
-    app_link icon: 'trash-o', js_css: js_css, title: 'Delete charge'
-  end
-
   # passing model object did not work.
   #
   def payment_link(path:)
@@ -56,7 +56,7 @@ module LinkHelper
   end
 
   def print_link path:, title: 'Print'
-    app_link icon: 'print', path: path, size: 'lg', title: title
+    app_link icon: 'print', path: path, title: title
   end
 
   def toggle_link direction:, size: 'lg', title: ''
