@@ -32,7 +32,7 @@ class FullTextSearch
     case @type
     when 'Client'
       success = true
-      records = Client.search(@query).records
+      records = Client.search(@query).records.order(:human_ref)
       if records.count.zero?
         success = false
         records = Client.all
@@ -50,7 +50,7 @@ class FullTextSearch
         render: 'payments/add_new_payment_index' }
     else
       success = true
-      records = Property.search(@query).records
+      records = Property.search(@query).records.order(:human_ref)
       if records.count.zero?
         success = false
         records = Property.all
