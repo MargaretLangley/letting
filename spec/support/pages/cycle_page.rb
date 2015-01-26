@@ -38,7 +38,7 @@ class CyclePage
   end
 
   def do value
-    click_on value
+    click_on value, exact: true
     self
   end
 

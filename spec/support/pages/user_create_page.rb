@@ -15,7 +15,7 @@ class UserCreatePage
   end
 
   def click
-    click_on('Create User')
+    click_on 'Create User', exact: true
   end
 
   def fill_form(nickname, email, password, confirmation = password)

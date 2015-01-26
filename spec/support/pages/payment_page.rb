@@ -40,12 +40,12 @@ class PaymentPage
   end
 
   def search
-    click_on 'Search'
+    click_on 'Search', exact: true
     self
   end
 
   def pay
-    click_on 'submit'
+    click_on 'submit', exact: true
     self
   end
 

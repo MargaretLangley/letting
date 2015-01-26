@@ -42,4 +42,11 @@ class PropertyDecorator
       '-'
     end
   end
+
+  # The edited property is visually known as an Account
+  #
+  #
+  def class
+    Account
+  end
 end

@@ -11,11 +11,11 @@ class AddressPage
   include Capybara::DSL
 
   def add_district
-    click_on 'Add district'
+    click_on 'Add district', exact: true
   end
 
   def delete_district
-    click_on 'Delete'
+    click_on 'Delete', exact: true
   end
 
   # v_district - only used for spec testing
@@ -32,7 +32,7 @@ class AddressPage
   end
 
   def add_nation
-    click_on 'Add a nation line to the address'
+    click_on 'Add a nation line to the address', exact: true
   end
 
   # v_nation only used for spec testing

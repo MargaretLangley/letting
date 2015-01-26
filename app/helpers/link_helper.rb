@@ -18,8 +18,11 @@ module LinkHelper
     end
   end
 
-  def edit_link model, size: '2x'
-    app_link icon: 'edit', size: size, path: [:edit, model], title: 'Edit File'
+  def edit_link model, size: '2x', title: title
+    app_link icon: 'edit',
+             size: size,
+             path: [:edit, model],
+             title: "Edit #{model.class.name}"
   end
 
   def add_link(icon: 'plus-circle', size: 'lg', path: '#', css: '', js_css: '', title:)

@@ -23,17 +23,17 @@ class AccountPage
 
   def edit
     visit '/accounts/'
-    click_on 'Edit'
+    click_on 'Edit Account', exact: true
     self
   end
 
   def button action
-    click_on "#{action} Account"
+    click_on "#{action} Account", exact: true
     self
   end
 
-  def click(choice)
-    click_on choice
+  def click choice
+    click_on choice, exact: true
   end
 
   def expect_property(spec, property_id:, client_id:)
