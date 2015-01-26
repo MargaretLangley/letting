@@ -15,7 +15,6 @@ class InvoicingIndexDecorator
   include ActionView::Helpers::NumberHelper
   include SalientDate
   include MethodMissing
-  attr_reader :source
 
   def invoicing
     @source
