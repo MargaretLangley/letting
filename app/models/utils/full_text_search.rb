@@ -4,9 +4,9 @@
 #
 # Returns the full-text search results for a query
 #
-# Interface between the full-text-search app (elasticsearch)
+# Interface between the full-text-search application (Elasticsearch)
 # and the application. Calls search methods which are generated
-# by the elasticsearch gem and the searchable moddule.
+# by the Elasticsearch gem and the searchable module.
 #
 # rubocop: disable Metrics/MethodLength
 #
