@@ -62,6 +62,14 @@ class Property < ActiveRecord::Base
     address.name_and_address name: occupiers
   end
 
+  def next
+    Property.where('human_ref > ?', human_ref).first
+  end
+
+  def prev
+    Property.where('human_ref < ?', human_ref).last
+  end
+
   include Searchable
   # Elasticsearch uses generates JSON document for property index
   def as_indexed_json(_options = {})
