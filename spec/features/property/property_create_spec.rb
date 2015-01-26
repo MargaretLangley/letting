@@ -1,6 +1,9 @@
 require 'rails_helper'
 
-describe Property, type: :feature do
+#
+# Property's route path is to account
+#
+describe 'Property#create', type: :feature do
   let(:account) { AccountPage.new }
   before(:each) { log_in }
 

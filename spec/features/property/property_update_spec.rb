@@ -1,6 +1,9 @@
 require 'rails_helper'
 
-describe 'Account Update', type: :feature  do
+#
+# Property's route path is to account
+#
+describe 'Property#Update', type: :feature  do
   let(:account) { AccountPage.new }
 
   context 'Agentless' do
@@ -49,12 +52,6 @@ describe 'Account Update', type: :feature  do
       account.expect_entity self,
                             type: 'property_agent_attributes',
                             **company_attributes
-    end
-
-    it 'navigates to accounts view page' do
-      account.edit
-      click_on 'View file'
-      expect(page.title).to eq 'Letting - View Account'
     end
 
     it 'adds date charge' do

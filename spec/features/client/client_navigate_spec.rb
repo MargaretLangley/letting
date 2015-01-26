@@ -4,7 +4,7 @@ describe 'Client navigate', type: :feature do
   before(:each) { log_in }
 
   describe 'from index page' do
-    it 'to view client' do
+    it 'goes to view' do
       client_create human_ref: 111
       visit '/clients/'
 
@@ -14,7 +14,7 @@ describe 'Client navigate', type: :feature do
       expect(page.title).to eq 'Letting - View Client'
     end
 
-    it 'to edit client' do
+    it 'goes to edit' do
       client_create id: 1, human_ref: 111
       visit '/clients/'
 

@@ -1,9 +1,12 @@
 require 'rails_helper'
 
-describe Property, type: :feature   do
+#
+# Property's route path is to account
+#
+describe 'Property#show', type: :feature   do
   before(:each) { log_in }
 
-  it 'shows record' do
+  it 'shows basic' do
     property_create id: 1,
                     human_ref: 1000,
                     agent: agent_new(entities: [Entity.new(name: 'Bell')],
@@ -47,22 +50,6 @@ describe Property, type: :feature   do
     within 'div#charge' do
       expect(page).to have_text 'dormant'
     end
-  end
-
-  it 'navigates to index page' do
-    property_create id: 1, account: account_new, client: client_new
-    visit '/accounts/1'
-    click_on 'Accounts'
-    expect(page.title).to eq 'Letting - Accounts'
-  end
-
-  it 'navigates to edit page' do
-    property_create id: 1, account: account_new, client: client_new
-    visit '/accounts/1'
-
-    first(:link, 'Edit').click
-
-    expect(page.title).to eq 'Letting - Edit Account'
   end
 
   describe 'no charges message' do
