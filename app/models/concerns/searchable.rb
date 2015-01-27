@@ -5,16 +5,19 @@
 # Configures the Elasticsearch searching method
 #
 # Adds a 'search' method to any class it is included into allowing full-text
-# search - currently only used in Client and Property.
+# search - currently Client, Payment and Property.
 #
 # NGrams don't always seem to work - seems to occasional match whole word but
 # not the ngrame (so for London: matches London and not Lond)
 #
-# Always works (see also Readme):
-# rails c
-# Property.import force: true, refresh: true
-# Client.import force: true, refresh: true
-# Payment.import force: true, refresh: true
+# To sync Elasticsearch with main database:
+# rake elasticsearch:sync
+#
+# def self.search(query, sort)
+# The code comes from the issue request:
+# https://github.com/elasticsearch/elasticsearch-rails/issues/206
+#
+# rubocop: disable Metrics/MethodLength
 #
 ####
 #
@@ -68,9 +71,23 @@ module Searchable
       indexes :updated_at, index: :not_analyzed
     end
 
-    def self.search(query)
-      __elasticsearch__.search(
-        query: {
+    # The search code follows code I found in Elasticsearch issue
+    # (see above)
+    #
+    def self.search(query, sort: '')
+      @search_definition = {
+        query: {},
+        filter: {},
+      }
+
+      if query.blank?
+        @search_definition[:query] = { match_all: {} }
+        @search_definition[:size]  = 100
+        @search_definition[:sort]  = [
+          { sort.to_sym => { order: 'asc' } }
+        ]
+      else
+        @search_definition[:query] = {
           match: {
             _all: {
               query: query,
@@ -78,25 +95,23 @@ module Searchable
             }
           }
         }
-      )
+        @search_definition[:size]  = 100
+      end
+      __elasticsearch__.search(@search_definition)
     end
   end
 end
 
 # Console Management
 #
-# Create
-# Property.__elasticsearch__.create_index! force: true
-# Create None-standard index
-# Property.__elasticsearch__.client.indices.create  index: Property.index_name,
-#   body: { settings: Property.settings.to_hash,
-#            mappings: Property.mappings.to_hash }
+# Full re-import
+# rake elasticsearch:sync
 #
 # Read
-# GET /properties/_settings
-# Property.settings.to_hash
-# GET /properties/_mapping
-# pp Property.mappings.to_hash
+# GET /development_properties/_settings
+# rails c; Property.settings.to_hash
+# GET /development_properties/_mapping
+# rails c; pp Property.mappings.to_hash
 #
 # Update (Refresh)
 # Property.__elasticsearch__.refresh_index!

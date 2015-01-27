@@ -32,31 +32,14 @@ class FullTextSearch
   def results
     case type
     when 'Client'
-      success = true
-      records = Client.search(query).records.order(:human_ref)
-      if records.count.zero?
-        success = false
-        records = Client.all
-      end
-      { success: success, records: records, render: 'clients/index' }
+      records = Client.search(query, sort: 'human_ref').records
+      { records: records, render: 'clients/index' }
     when 'Payment'
-      success = true
-      records = Payment.search(query).records
-      if records.count.zero?
-        success = false
-        records = Payment.all
-      end
-      { success: success,
-        records: records,
-        render: 'payments/add_new_payment_index' }
+      records = Payment.search(query, sort: 'booked_at').records
+      { records: records, render: 'payments/add_new_payment_index' }
     else
-      success = true
-      records = Property.search(query).records.order(:human_ref)
-      if records.count.zero?
-        success = false
-        records = Property.all
-      end
-      { success: success, records: records, render: 'properties/index' }
+      records = Property.search(query, sort: 'human_ref').records
+      { records: records, render: 'properties/index' }
     end
   end
 end

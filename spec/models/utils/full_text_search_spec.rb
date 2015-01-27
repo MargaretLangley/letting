@@ -7,8 +7,7 @@ describe FullTextSearch, type: :model do
       Property.import force: true, refresh: true
 
       results = FullTextSearch.search(type: 'Property', query: 'Batt').go
-      expect(results[:success]).to eq false
-      expect(results[:records].count).to eq 1
+      expect(results[:records].count).to eq 0
       expect(results[:render]).to eq 'properties/index'
       Property.__elasticsearch__.delete_index!
     end
@@ -18,7 +17,6 @@ describe FullTextSearch, type: :model do
       Property.import force: true, refresh: true
 
       results = FullTextSearch.search(type: 'Property', query: 'Edg').go
-      expect(results[:success]).to eq true
       expect(results[:records].first.class).to eq Property
       expect(results[:render]).to eq 'properties/index'
       Property.__elasticsearch__.delete_index!
@@ -29,7 +27,6 @@ describe FullTextSearch, type: :model do
       Client.import force: true, refresh: true
 
       results = FullTextSearch.search(type: 'Client', query: '30').go
-      expect(results[:success]).to eq true
       expect(results[:records].first.class).to eq Client
       expect(results[:render]).to eq 'clients/index'
       Client.__elasticsearch__.delete_index!
@@ -41,7 +38,6 @@ describe FullTextSearch, type: :model do
       Payment.import force: true, refresh: true
 
       results = FullTextSearch.search(type: 'Payment', query: '40.35').go
-      expect(results[:success]).to eq true
       expect(results[:records].first.class).to eq Payment
       expect(results[:records].first.amount).to eq 40.35
       expect(results[:render]).to eq 'payments/add_new_payment_index'

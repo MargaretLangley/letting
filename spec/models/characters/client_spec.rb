@@ -29,7 +29,7 @@ describe Client, type: :model do
   describe '#search', :search do
     before(:each) do
       client_create \
-        human_ref: '8008',
+        human_ref: '80',
         entities: [Entity.new(title: 'Mr', initials: 'I', name: 'Bell')],
         address: address_new(house_name: 'Hill', road: 'Edge', town: 'Birm')
 
@@ -37,7 +37,7 @@ describe Client, type: :model do
     end
     after(:each) { Client.__elasticsearch__.delete_index! }
 
-    it('finds human_id') { expect(Client.search('8008').results.total).to eq 1 }
+    it('finds human_id') { expect(Client.search('80').results.total).to eq 1 }
     it('finds names') { expect(Client.search('Bell').results.total).to eq 1 }
     it('finds houses') { expect(Client.search('Hil').results.total).to eq 1 }
     it('finds roads') { expect(Client.search('Edg').results.total).to eq 1 }

@@ -77,7 +77,8 @@ class Property < ActiveRecord::Base
       methods: :occupiers,
       include: {
         address: {},
-        agent: { methods: [:full_name, :to_address], only: [:full_name, :to_address] }
+        agent: { methods: [:full_name, :to_address],
+                 only: [:full_name, :to_address] }
       })
   end
 

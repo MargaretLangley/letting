@@ -64,7 +64,7 @@ class SearchController < ApplicationController
     results = FullTextSearch.search(type: session[:search_model],
                                     query: params[:search_terms]).go
     flash.now[:problem] = 'No Matches found. Search again.' \
-      if results[:success] == false && params[:search_terms].present?
+      if params[:search_terms].present? && results[:records].count == 0
     results
   end
 end
