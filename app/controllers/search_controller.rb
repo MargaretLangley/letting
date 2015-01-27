@@ -16,8 +16,9 @@
 class SearchController < ApplicationController
   def index
     session[:search_model] = referer unless referer == 'Search'
-    if literal_search_hit? literal_search
-      redirect_to redirect_params(literal_search).merge(repack_search_params)
+    if literal_search.found?
+      redirect_to literal_search.redirect_params
+        .merge(repack_search_params)
     else
       @records = full_text_search[:records].page(params[:page])
       render full_text_search[:render]
@@ -31,13 +32,10 @@ class SearchController < ApplicationController
       .classify
   end
 
-  def literal_search_hit? match
-    match[:record_id] || match[:process_empty] == 'true'
-  end
-
   def literal_search
     @literal_search ||= LiteralSearch.search(type:  session[:search_model],
                                              query: params[:search_terms]).go
+    @literal_search
   end
 
   def redirect_params match
@@ -49,11 +47,7 @@ class SearchController < ApplicationController
   end
 
   def repack_search_params
-    {
-      search_terms: params[:search_terms],
-      start_date:   params[:start_date],
-      end_date:     params[:end_date]
-    }
+    { search_terms: params[:search_terms] }
   end
 
   def full_text_search
