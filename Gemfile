@@ -117,9 +117,7 @@ group :test do
   gem 'timecop', '~>0.7.0'
 end
 
-group :test do
-  # rake versions after this break args options code in
-  # import rake (used for setting range and test user logins)
-  # TODO: fix for being able to read in args
-  gem 'rake', '10.3.2'
-end
+# rake versions after this break args options code in
+# import rake (used for setting range and test user logins)
+# TODO: fix for being able to read in args
+gem 'rake', '10.1.0'
