@@ -72,13 +72,7 @@ Repeat each time you want to delete and restore the database.
 6.  Import Data Into Elasticsearch Indexes
      `ssh <server>`
      `cd ~/apps/letting_<environment>/current`
-     `bundle exec rails c production`
-    `Property.import force: true, refresh: true`
-    `Client.import force: true, refresh: true`
-    `Payment.import force: true, refresh: true`
-    or
-    `rake elasticsearch:sync`
-
+     ` RAILS_ENV=production bundle exec rake elasticsearch:sync`
 
 
 [Demo](http://letting.bcs.io)
