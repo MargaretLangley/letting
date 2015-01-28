@@ -122,7 +122,7 @@ module DB
     end
 
     def true_every_n_counts(n:)
-      n % 100 == 0 && n != 0
+      (n % 100).zero? && n.nonzero?
     end
   end
 end

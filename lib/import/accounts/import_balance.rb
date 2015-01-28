@@ -33,7 +33,7 @@ module DB
     end
 
     def filtered?
-      return true if row.amount == 0
+      return true if row.amount.zero?
       false
     end
   end

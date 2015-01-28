@@ -25,7 +25,7 @@ class PriceBoundValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return if value &&
               (value.is_a? Numeric) &&
-              (value != 0 && value > -100_000 && value < 100_000)
+              (value.nonzero? && value > -100_000 && value < 100_000)
 
     record.errors.add attribute, error_message(value)
   end

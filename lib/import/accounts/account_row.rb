@@ -52,11 +52,11 @@ module DB
     end
 
     def credit?
-      row[:credit].to_f != 0
+      row[:credit].to_f.nonzero?
     end
 
     def debit?
-      row[:debit].to_f != 0 || row[:credit].to_f < 0
+      row[:debit].to_f.nonzero? || row[:credit].to_f < 0
     end
 
     def account_type_unknown_msg
