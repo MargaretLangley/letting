@@ -285,10 +285,10 @@ ActiveRecord::Schema.define(version: 20141129154746) do
   add_index "snapshots", ["account_id"], name: "index_snapshots_on_account_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "nickname",        null: false
-    t.string   "email",           null: false
-    t.string   "password_digest", null: false
-    t.boolean  "admin",           null: false
+    t.string   "nickname",                    null: false
+    t.string   "email",                       null: false
+    t.string   "password_digest",             null: false
+    t.integer  "role",            default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

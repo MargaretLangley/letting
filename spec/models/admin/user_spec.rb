@@ -1,26 +1,24 @@
 require 'rails_helper'
 
 describe User, type: :model do
-  let(:user) { User.new user_attributes }
-
   describe 'validations' do
-    it('is valid') { expect(user).to be_valid }
+    it('is valid') { expect(user_create).to be_valid }
 
     describe '#email' do
       it 'present' do
-        user.email = nil
-        expect(user).to_not be_valid
+        expect { user_create email: nil }
+          .to raise_error ActiveRecord::RecordInvalid
       end
 
       it 'is unique - regardless of case' do
-        User.create! user_attributes email: 'user@example.com'
-        expect { User.create! user_attributes email: 'user@ExamPle.com' }
+        user_create email: 'user@example.com'
+        expect { user_create email: 'user@ExamPle.com' }
           .to raise_error ActiveRecord::RecordInvalid
       end
 
       it 'requires @' do
-        user.email = 'noat'
-        expect(user).to_not be_valid
+        expect { user_create email: 'noat' }
+          .to raise_error ActiveRecord::RecordInvalid
       end
     end
 
@@ -34,15 +32,19 @@ describe User, type: :model do
       end
 
       it 'must equal confirmation' do
-        user.password = 'something'
-        user.password_confirmation = 'orother'
-        expect(user).to_not be_valid
+        expect do
+          user_create password: 'something',
+                      password_confirmation: 'orother'
+        end
+          .to raise_error ActiveRecord::RecordInvalid
       end
 
       it 'errors with blank confirmation' do
-        user.password = 'something'
-        user.password_confirmation = ''
-        expect(user).to_not be_valid
+        expect do
+          user_create password: 'something',
+                      password_confirmation: ''
+        end
+          .to raise_error ActiveRecord::RecordInvalid
       end
     end
   end

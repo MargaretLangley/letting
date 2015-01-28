@@ -11,6 +11,7 @@
 ####
 #
 class User < ActiveRecord::Base
+  enum role: [:user, :admin]
   scope :default, -> { order(:nickname) }
 
   has_secure_password

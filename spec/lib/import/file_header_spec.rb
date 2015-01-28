@@ -51,7 +51,7 @@ module DB
     end
 
     it 'user' do
-      fields = %w(nickname email password admin)
+      fields = %w(nickname email password role)
       expect(FileHeader.user).to eq fields
     end
   end

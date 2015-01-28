@@ -31,7 +31,7 @@ module DB
                                        email:    row[:email],
                                        password: row[:password],
                                        password_confirmation: row[:password],
-                                       admin:    row[:admin]
+                                       role:    row[:role]
     end
   end
 end

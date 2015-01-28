@@ -33,14 +33,14 @@ namespace :db do
           email: 'admin@example.com',
           password: 'password',
           password_confirmation: 'password',
-          admin: true
+          role: 'admin'
         },
         {
           nickname: 'user',
           email: 'user@example.com',
           password: 'password',
           password_confirmation: 'password',
-          admin: false
+          role: 'user'
         }
       ]
     end

@@ -44,7 +44,7 @@ module DB
     end
 
     def self.user
-      %w(nickname email password admin)
+      %w(nickname email password role)
     end
 
     def self.entities

@@ -16,7 +16,7 @@ describe 'Session', type: :feature do
   end
 
   it 'displays admin panel' do
-    user_create admin: true
+    user_create role: 'admin'
     navigates_to_create_page
     fill_in_login
 

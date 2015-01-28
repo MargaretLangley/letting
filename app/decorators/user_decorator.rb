@@ -20,8 +20,4 @@ class UserDecorator
   def initialize user
     @source = user
   end
-
-  def admin
-    user.admin? ? 'Yes' : 'No'
-  end
 end

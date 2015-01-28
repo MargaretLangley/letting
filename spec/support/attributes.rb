@@ -66,7 +66,7 @@ def user_attributes **overrides
     email: 'user@example.com',
     password: 'password',
     password_confirmation: 'password',
-    admin: false
+    role: 'user'
   }.merge overrides
 end
 
@@ -76,7 +76,7 @@ def admin_attributes **overrides
     email: 'system@example.com',
     password: 'password',
     password_confirmation: 'password',
-    admin: true
+    role: 'admin'
   }.merge overrides
 end
 

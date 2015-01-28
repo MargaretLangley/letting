@@ -1,3 +1,4 @@
+require 'csv'
 require 'rails_helper'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_user'
@@ -6,7 +7,7 @@ require_relative '../../../lib/import/import_user'
 module DB
   describe ImportUser, :import do
     def row
-      %q("Rich", richard.wigley@gmail.com,  password,  TRUE)
+      %q(Rich, richard.wigley@gmail.com,  password,  admin)
     end
 
     it 'One row' do

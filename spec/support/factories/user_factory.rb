@@ -4,12 +4,12 @@ def user_create nickname: 'user',
                  email: 'user@example.com',
                  password: 'password',
                  password_confirmation: 'password',
-                 admin: false
+                 role: 'user'
   user = User.new nickname: nickname,
                   email: email,
                   password: password,
                   password_confirmation: password_confirmation,
-                  admin: admin
+                  role: role
   user.save!
   user
 end

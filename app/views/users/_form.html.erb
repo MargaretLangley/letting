@@ -29,9 +29,9 @@
       </div>
 
       <div class='col-8-24  grid-row  bottom-spacer  faded'>
-        <%= f.label :admin, 'Admin Status' %>
+        <%= f.label :role, 'Admin Status' %>
       </div>
-      <div class='col-16-24  bottom-spacer'><%= f.check_box :admin %></div>
+      <div class='col-16-24  bottom-spacer'><%= f.select :role, User.roles.keys.to_a %></div>
 
       <div class='col-8-24  grid-row  top-1-line-spacer'>&nbsp;</div>
       <div class='col-16-24  top-1-line-spacer'>
