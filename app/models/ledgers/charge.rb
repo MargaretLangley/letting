@@ -28,13 +28,6 @@ class Charge < ActiveRecord::Base
   validates :amount, price_bound: true
   validates :amount, numericality: { less_than: 100_000 }
 
-  after_initialize :init
-
-  def init
-    self.start_date = Date.parse DateDefaults::MIN if start_date.blank?
-    self.end_date = Date.parse DateDefaults::MAX if end_date.blank?
-  end
-
   # billing_period - the date range that we generate charges for.
   # returns        - chargable_info array with data required to bill the
   #                  associated account. Empty array if nothing billed.
@@ -81,12 +74,10 @@ class Charge < ActiveRecord::Base
   end
 
   def empty?
-    attributes.except(*ignored_attrs).values.all?(&:blank?) &&
-      start_date == Date.parse(DateDefaults::MIN) &&
-      end_date == Date.parse(DateDefaults::MAX)
+    attributes.except(*ignored_attrs).values.all?(&:blank?)
   end
 
   def ignored_attrs
-    %w(id account_id activity start_date end_date created_at updated_at)
+    %w(id account_id activity created_at updated_at)
   end
 end

@@ -82,8 +82,6 @@ module DB
         cycle_id: cycle_id,
         amount: amount,
         payment_type: payment_type,
-        start_date: start_date,
-        end_date: end_date,
       }
     end
 
@@ -136,14 +134,6 @@ module DB
 
     def charged_in_code
       row[:charged_in]
-    end
-
-    def start_date
-      Date.parse DateDefaults::MIN
-    end
-
-    def end_date
-      Date.parse DateDefaults::MAX
     end
 
     def charge_code_message

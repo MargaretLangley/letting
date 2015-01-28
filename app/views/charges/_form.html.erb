@@ -22,8 +22,6 @@
       </div>
       <div class='col-3-24  bottom-spacer  r-align'>
         <%= f.text_field :amount, class: 'r-align' %>
-        <%= f.hidden_field :start_date %>
-        <%= f.hidden_field :end_date %>
       </div>
       <div class='col-2-24  bottom-spacer'>
         <%= f.select :activity, Charge.activities.keys.to_a %>

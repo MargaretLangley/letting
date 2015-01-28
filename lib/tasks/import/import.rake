@@ -42,8 +42,6 @@ namespace :db do
     logger.info 'db:import::accounts'
     Rake::Task['db:import:accounts'].invoke(human_ref_range)
     puts
-    logger.info 'db:import::update_charges'
-    Rake::Task['db:import:update_charges'].invoke
     exit 0
   end
 

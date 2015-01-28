@@ -6,8 +6,6 @@ class CreateCharges < ActiveRecord::Migration
       t.belongs_to :cycle, null: false, index: true
       t.string :payment_type, null: false
       t.decimal :amount, precision: 8, scale: 2, null:false
-      t.date :start_date, null: false
-      t.date :end_date, null: false
       t.integer  :activity, default: 0, null: false
       t.timestamps null: true
     end
