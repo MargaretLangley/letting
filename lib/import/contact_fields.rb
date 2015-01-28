@@ -16,7 +16,7 @@ module DB
   #
   class ContactFields
     include MethodMissing
-    attr_reader :entities
+    attr_reader :entities, :row
 
     def initialize row
       @row = row
@@ -38,21 +38,21 @@ module DB
 
     def address_attributes
       {
-        flat_no:    @row[:flat_no],
-        house_name: @row[:house_name],
-        road_no:    @row[:road_no],
-        road:       @row[:road],
-        district:   @row[:district],
+        flat_no:    row[:flat_no],
+        house_name: row[:house_name],
+        road_no:    row[:road_no],
+        road:       row[:road],
+        district:   row[:district],
         town:       town,
-        county:     @row[:county],
-        postcode:   @row[:postcode],
-        nation:     @row[:nation],
+        county:     row[:county],
+        postcode:   row[:postcode],
+        nation:     row[:nation],
       }
     end
 
     def town
-      return if @row[:town].nil?
-      @row[:town].titleize
+      return if row[:town].nil?
+      row[:town].titleize
     end
   end
 end

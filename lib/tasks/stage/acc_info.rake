@@ -18,7 +18,7 @@ namespace :db do
       Stage.new(file_name: 'import_data/staging/staging_acc_info.csv',
                 input: acc_infos_legacy,
                 instructions: [PatchAccInfo.new(patch: patch_acc_info),
-                               InsertAccInfo.new(insert: insert_acc_info)]
+                               InsertAccInfo.new(insert: restore_acc_info)]
                ).stage
     end
 
@@ -32,7 +32,9 @@ namespace :db do
                            headers: DB::FileHeader.charge).to_a
     end
 
-    def insert_acc_info
+    # rows that should not have been deleted
+    #
+    def restore_acc_info
       DB::CSVTransform.new(file_name: 'import_data/patch/acc_info_restore.csv',
                            headers: DB::FileHeader.charge).to_a
     end
