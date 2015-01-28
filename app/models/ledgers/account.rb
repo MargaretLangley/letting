@@ -39,7 +39,7 @@ class Account < ActiveRecord::Base
   has_many :snapshots, dependent: :destroy, inverse_of: :account
 
   MAX_CHARGES = 6
-  has_many :charges, dependent: :destroy do
+  has_many :charges, -> { order(:charge_type) }, dependent: :destroy do
     def prepare
       (size...MAX_CHARGES).each { build }
       each(&:prepare)
