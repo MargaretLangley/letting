@@ -34,7 +34,7 @@ module DB
     # false allows
     #
     def filtered?
-      @range.exclude? row[:human_ref].to_i
+      range.exclude? row[:human_ref].to_i
     end
 
     def model_assignment

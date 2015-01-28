@@ -38,11 +38,11 @@ module DB
 
     def import_row specialized_row = row
       SPECIALIZED_CLASSES[specialized_row.type]
-        .import [specialized_row], range: @range
+        .import [specialized_row], range: range
     end
 
     def filtered?
-      @range.exclude? row.human_ref
+      range.exclude? row.human_ref
     end
   end
 end

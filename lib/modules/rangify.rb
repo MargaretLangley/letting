@@ -2,7 +2,7 @@
 #
 # Rangify
 #
-# Class for coping with range string represenation
+# Class for coping with range string representation
 #
 # Rangify is used for the rake tasks to handle string representations of ranges
 # Used to turn strings with dashes (-) into integer arrays.

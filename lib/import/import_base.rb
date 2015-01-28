@@ -19,13 +19,12 @@ module DB
   # model_prepared, but otherwise mostly use the defaults.
   #
   # Errors do not go to logger
-  # rubocop: disable Rails/Output
-  # rubocop: disable Metrics/MethodLength
+  # rubocop: disable Rails/Output, Metrics/MethodLength
   #
   ####
   #
   class ImportBase
-    attr_accessor :row, :model_to_assign, :model_to_save
+    attr_accessor :model_to_assign, :model_to_save, :range, :row
 
     # contents - data to be imported - array of arrays indexed
     #            by row no and header symbols.
@@ -42,7 +41,7 @@ module DB
         begin
           self.row = file_row
           import_row if allowed?
-          show_running index
+          show_alive index
         rescue => e
           puts
           warn "Exception: #{e.message}"
@@ -101,20 +100,24 @@ module DB
       "#{model_class} human_ref: #{row[:human_ref]} - Not found"
     end
 
+    # Output Error when import continues but a warning is raised
+    #
     def show_error
       output_error(model_persist)
     end
 
-    def show_running index
-      print '.' if on_100th_iteration index
-    end
-
-    def on_100th_iteration index
-      index % 100 == 0 && index != 0
-    end
-
     def output_error model
       warn "human_ref: #{row[:human_ref]} -  #{model.errors.full_messages}"
+    end
+
+    # output alive count of '.' every n imported rows
+    #
+    def show_alive index
+      print '.' if true_every_n_counts n: index
+    end
+
+    def true_every_n_counts(n:)
+      n % 100 == 0 && n != 0
     end
   end
 end
