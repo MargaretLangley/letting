@@ -9,7 +9,7 @@
 # Literal controller is responsible for exact matches.
 # FullTextSearch is responsible for the fuzzy searching.
 #
-# rubocop: disable Lint/AssignmentInCondition, Style/AccessorMethodName
+# rubocop: disable Style/AccessorMethodName
 #
 ####
 #
@@ -17,8 +17,7 @@ class SearchController < ApplicationController
   def index
     session[:search_model] = referer unless referer == 'Search'
     if literal_search.found?
-      redirect_to literal_search.redirect_params
-        .merge(repack_search_params)
+      redirect_to literal_search.redirect_params.merge(repack_search_params)
     else
       @records = full_text_search[:records].page(params[:page])
       render full_text_search[:render]
@@ -35,15 +34,6 @@ class SearchController < ApplicationController
   def literal_search
     @literal_search ||= LiteralSearch.search(type:  session[:search_model],
                                              query: params[:search_terms]).go
-    @literal_search
-  end
-
-  def redirect_params match
-    {
-      controller:   match[:controller],
-      action:       match[:action],
-      id:           match[:record_id],
-    }
   end
 
   def repack_search_params

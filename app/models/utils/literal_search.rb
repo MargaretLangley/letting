@@ -6,10 +6,6 @@
 #
 # Used by search Controller
 #
-# rubocop: disable  Metrics/MethodLength
-# TODO: remove CyclomaticComplexity
-# rubocop: disable Metrics/CyclomaticComplexity
-#
 ####
 #
 class LiteralSearch
