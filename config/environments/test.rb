@@ -47,4 +47,8 @@ Rails.application.configure do
   # longer be suppressed. Instead, the errors will propagate normally
   # just like in other Active Record callbacks.
   config.active_record.raise_in_transactional_callbacks = true
+
+  # TODO: On the next patch upgrade 4.2 this should be removed
+  #
+  ActiveSupport::Deprecation.silenced = true
 end
