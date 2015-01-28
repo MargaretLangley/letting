@@ -29,7 +29,7 @@ module DB
 
     def model_prepared
       super
-      model_to_assign.prepare_for_form
+      model_imported.prepare_for_form
     end
 
     def find_model model_class
@@ -44,14 +44,14 @@ module DB
     end
 
     def model_assignment
-      model_to_assign.assign_attributes human_ref: row.human_ref,
-                                        client_id: row.client_id
-      model_to_assign.agent.authorized = false if model_is_new
-      ContactFields.new(row).update_for model_to_assign
+      model_imported.assign_attributes human_ref: row.human_ref,
+                                       client_id: row.client_id
+      model_imported.agent.authorized = false if model_is_new
+      ContactFields.new(row).update_for model_imported
     end
 
     def model_is_new
-      model_to_assign.new_record?
+      model_imported.new_record?
     end
   end
 end

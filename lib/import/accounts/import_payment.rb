@@ -29,23 +29,23 @@ module DB
     end
 
     def model_prepared
-      @model_to_assign = Payment.where(account_id: row.account_id,
-                                       booked_at: row.at_time)
-                         .first_or_initialize
+      @model_imported = Payment.where(account_id: row.account_id,
+                                      booked_at: row.at_time)
+                        .first_or_initialize
       fail DB::NotIdempotent, import_not_idempotent_msg, caller \
-        unless model_to_assign.new_record?
+        unless model_imported.new_record?
     end
 
     def model_assignment
-      @model_to_assign.attributes = row.payment_attributes
+      @model_imported.attributes = row.payment_attributes
       model_assignment_credits
     end
 
     def model_assignment_credits
-      model_to_assign.credits.build account_id: row.account_id,
-                                    charge_id: row.charge_id,
-                                    at_time: row.at_time,
-                                    amount: row.amount
+      model_imported.credits.build account_id: row.account_id,
+                                   charge_id: row.charge_id,
+                                   at_time: row.at_time,
+                                   amount: row.amount
     end
 
     private

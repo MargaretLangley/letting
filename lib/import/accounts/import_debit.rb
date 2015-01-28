@@ -29,8 +29,8 @@ module DB
     end
 
     def model_prepared
-      @model_to_save = find_model!(Property).first
-      @model_to_assign = model_to_save.account.debits.build
+      @model_parent = find_model!(Property).first
+      @model_imported = model_parent.account.debits.build
     end
 
     def find_model model_class
@@ -38,7 +38,7 @@ module DB
     end
 
     def model_assignment
-      model_to_assign.attributes = row.attributes
+      model_imported.attributes = row.attributes
     end
   end
 end

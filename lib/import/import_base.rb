@@ -24,7 +24,12 @@ module DB
   ####
   #
   class ImportBase
-    attr_accessor :model_to_assign, :model_to_save, :range, :row
+    # model_imported - the model from the reading in the file_row
+    # model_parent - sometimes we need to know the parent of the imported row
+    #                in these cases we need to call save on parent and not
+    #                model_imported
+    #
+    attr_accessor :model_imported, :model_parent, :range, :row
 
     # contents - data to be imported - array of arrays indexed
     #            by row no and header symbols.
@@ -73,7 +78,7 @@ module DB
     end
 
     def model_prepared
-      @model_to_assign = find_model(@klass).first_or_initialize
+      @model_imported = find_model(@klass).first_or_initialize
     end
 
     private
@@ -89,7 +94,7 @@ module DB
     end
 
     def model_persist
-      model_to_save || model_to_assign
+      model_parent || model_imported
     end
 
     def fail_parent_record_not_found model_class

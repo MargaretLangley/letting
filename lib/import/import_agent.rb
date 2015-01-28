@@ -21,9 +21,9 @@ module DB
     end
 
     def model_prepared
-      @model_to_save = find_model!(Property).first
-      model_to_save.prepare_for_form
-      @model_to_assign = AgentWithId.new model_to_save.agent
+      @model_parent = find_model!(Property).first
+      model_parent.prepare_for_form
+      @model_imported = AgentWithId.new model_parent.agent
     end
 
     def find_model model_class
@@ -38,9 +38,9 @@ module DB
     end
 
     def model_assignment
-      model_to_assign.assign_attributes authorized: true
-      model_to_assign.human_ref = row[:human_ref].to_i
-      ContactFields.new(row).update_for model_to_assign
+      model_imported.assign_attributes authorized: true
+      model_imported.human_ref = row[:human_ref].to_i
+      ContactFields.new(row).update_for model_imported
     end
   end
 end

@@ -34,12 +34,12 @@ module DB
     end
 
     def model_prepared
-      @model_to_save = find_model!(Property).first
-      @model_to_assign =
+      @model_parent = find_model!(Property).first
+      @model_imported =
         ChargesMatcher
-        .new(model_to_save.account.charges)
+        .new(model_parent.account.charges)
         .first_or_initialize row.charge_type
-      model_to_save.prepare_for_form
+      model_parent.prepare_for_form
     end
 
     def find_model model_class
@@ -60,7 +60,7 @@ module DB
     end
 
     def model_assignment
-      model_to_assign.assign_attributes row.attributes
+      model_imported.assign_attributes row.attributes
     end
   end
 end
