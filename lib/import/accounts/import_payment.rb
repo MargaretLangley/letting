@@ -33,7 +33,7 @@ module DB
                                        booked_at: row.at_time)
                          .first_or_initialize
       fail DB::NotIdempotent, import_not_idempotent_msg, caller \
-        unless @model_to_assign.new_record?
+        unless model_to_assign.new_record?
     end
 
     def model_assignment
@@ -42,10 +42,10 @@ module DB
     end
 
     def model_assignment_credits
-      @model_to_assign.credits.build account_id: row.account_id,
-                                     charge_id: row.charge_id,
-                                     at_time: row.at_time,
-                                     amount: row.amount
+      model_to_assign.credits.build account_id: row.account_id,
+                                    charge_id: row.charge_id,
+                                    at_time: row.at_time,
+                                    amount: row.amount
     end
 
     private

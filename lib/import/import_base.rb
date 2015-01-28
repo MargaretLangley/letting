@@ -25,7 +25,7 @@ module DB
   ####
   #
   class ImportBase
-    attr_accessor :row
+    attr_accessor :row, :model_to_assign, :model_to_save
 
     # contents - data to be imported - array of arrays indexed
     #            by row no and header symbols.
@@ -54,7 +54,7 @@ module DB
     def import_row
       model_prepared
       model_assignment
-      model_to_save.save || show_error
+      model_persist.save || show_error
     end
 
     def allowed?
@@ -89,8 +89,8 @@ module DB
       model
     end
 
-    def model_to_save
-      @model_to_save || @model_to_assign
+    def model_persist
+      model_to_save || model_to_assign
     end
 
     def fail_parent_record_not_found model_class
@@ -102,7 +102,7 @@ module DB
     end
 
     def show_error
-      output_error(model_to_save)
+      output_error(model_persist)
     end
 
     def show_running index
