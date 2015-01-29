@@ -20,7 +20,7 @@ RSpec.describe Product, type: :model do
       end
 
       it 'requires automatic_payment' do
-        expect(product_new(automatic_payment: nil)).to_not be_valid
+        expect(product_new(payment_type: nil)).to_not be_valid
       end
     end
   end

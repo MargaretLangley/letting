@@ -48,7 +48,7 @@ class MakeProducts
   end
 
   def no_invoice_required?
-    product_debits.to_a.count { |debit| !debit.automatic_payment? }.zero?
+    product_debits.to_a.count { |debit| !debit.automatic? }.zero?
   end
 
   def final_balance

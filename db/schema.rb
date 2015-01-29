@@ -224,14 +224,14 @@ ActiveRecord::Schema.define(version: 20141129154746) do
   add_index "payments", ["account_id"], name: "index_payments_on_account_id", using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.integer  "invoice_id",                                null: false
-    t.string   "charge_type",                               null: false
-    t.date     "date_due",                                  null: false
-    t.boolean  "automatic_payment",                         null: false
+    t.integer  "invoice_id",                           null: false
+    t.string   "charge_type",                          null: false
+    t.date     "date_due",                             null: false
+    t.integer  "payment_type",                         null: false
     t.date     "period_first"
     t.date     "period_last"
-    t.decimal  "amount",            precision: 8, scale: 2, null: false
-    t.decimal  "balance",           precision: 8, scale: 2, null: false
+    t.decimal  "amount",       precision: 8, scale: 2, null: false
+    t.decimal  "balance",      precision: 8, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

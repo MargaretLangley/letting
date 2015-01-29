@@ -41,7 +41,8 @@ class Debit < ActiveRecord::Base
   validates :amount, price_bound: true
   before_save :reconcile
 
-  delegate :automatic_payment?, to: :charge
+  delegate :payment_type, to: :charge
+  delegate :automatic?, to: :charge
   delegate :charge_type, to: :charge
 
   # Amount left to pay off on the debit.
@@ -68,7 +69,7 @@ class Debit < ActiveRecord::Base
   def to_debitable
     {
       charge_type: charge_type,
-      automatic_payment: automatic_payment?,
+      payment_type: payment_type,
       date_due: at_time,
       period: period,
       amount: amount,
@@ -119,7 +120,7 @@ class Debit < ActiveRecord::Base
   def charge_to_s
     if charge
       "charge_type: #{charge_type || 'nil' } " \
-      "auto: #{automatic_payment? || 'nil' } "
+      "auto: #{payment_type || 'nil' } "
     else
       'charge: nil'
     end
