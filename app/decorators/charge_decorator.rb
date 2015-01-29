@@ -33,6 +33,6 @@ class ChargeDecorator
   #
   #
   def pay
-    automatic? ? 'Automatic' : 'Payment'
+    automatic? ? 'Automatic' : 'Manual'
   end
 end

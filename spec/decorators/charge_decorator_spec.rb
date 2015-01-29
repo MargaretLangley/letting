@@ -31,7 +31,7 @@ RSpec.describe ChargeDecorator do
     it 'returns payment' do
       charge = ChargeDecorator
                .new charge_new payment_type: Charge::MANUAL
-      expect(charge.pay).to eq 'Payment'
+      expect(charge.pay).to eq 'Manual'
     end
   end
 end
