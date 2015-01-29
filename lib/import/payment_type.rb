@@ -12,7 +12,7 @@ module DB
   class PaymentType
     def self.to_symbol code
       case code
-      when :S      then Charge::STANDING_ORDER
+      when :S      then Charge::AUTOMATIC
       when :P, :L  then Charge::PAYMENT
       else         Charge::UNKNOWN_PAYMENT_TYPE
       end

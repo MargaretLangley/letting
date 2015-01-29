@@ -41,7 +41,7 @@ RSpec.describe MakeProducts, type: :model do
       end
 
       it 'retain if the only debits are automated' do
-        charge = charge_create payment_type: Charge::STANDING_ORDER
+        charge = charge_create payment_type: Charge::AUTOMATIC
         debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
         account = account_create charges: [charge], debits: [debit_1]
 

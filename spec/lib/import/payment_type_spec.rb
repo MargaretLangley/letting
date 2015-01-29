@@ -7,7 +7,7 @@ module DB
   describe PaymentType, :import do
     describe '.to_symbol' do
       it 'maps standing order' do
-        expect(PaymentType.to_symbol 'S'.to_sym).to eq STANDING_ORDER
+        expect(PaymentType.to_symbol 'S'.to_sym).to eq AUTOMATIC
       end
 
       it 'maps payments P' do

@@ -147,12 +147,12 @@ describe Invoicing, type: :feature do
 
   describe 'warns on' do
     describe 'retains mail' do
-      it 'to properties that only have standing order charges.' do
+      it 'to properties that only have automatic charges.' do
         Timecop.travel '2013-6-1'
 
         cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
         account_create property: property_new(human_ref: 9, client: client_new),
-                       charges: [charge_new(payment_type: 'standing_order',
+                       charges: [charge_new(payment_type: 'automatic',
                                             cycle: cycle)]
         invoicing_page.enter
         invoicing_page.search_term('9').create

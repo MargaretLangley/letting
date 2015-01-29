@@ -91,7 +91,7 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
 
     describe '#automatic_payment?' do
       it 'returns automatic payment when standing order' do
-        charge = charge_new payment_type: Charge::STANDING_ORDER
+        charge = charge_new payment_type: Charge::AUTOMATIC
         expect(charge).to be_automatic_payment
       end
 

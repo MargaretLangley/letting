@@ -25,7 +25,7 @@ RSpec.describe ChargeDecorator do
   describe '#pay' do
     it 'returns automatic' do
       charge = ChargeDecorator
-               .new charge_new payment_type: Charge::STANDING_ORDER
+               .new charge_new payment_type: Charge::AUTOMATIC
       expect(charge.pay).to eq 'Automatic'
     end
     it 'returns payment' do

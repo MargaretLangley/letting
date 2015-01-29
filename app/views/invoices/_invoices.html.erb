@@ -10,7 +10,7 @@
 <div class='col-1-1  grid-row  top-1-line-spacer  faded'>
   <h3>Retain</h3>
 </div>
-<%= render 'invoices/header', action: false, payment: :standing_order %>
+<%= render 'invoices/header', action: false, payment: :automatic %>
 <% run.retain.each do |invoice| %>
   <%= render 'invoices/invoice', invoice: invoice %>
 <% end %>

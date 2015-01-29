@@ -15,7 +15,7 @@
 #
 class Charge < ActiveRecord::Base
   # enum payment_type[:manual, :automatic] where we are going
-  enum payment_type: [:payment, :standing_order]
+  enum payment_type: [:payment, :automatic]
   enum activity: [:active, :dormant]
   include PaymentTypeDefaults
   belongs_to :account
@@ -49,7 +49,7 @@ class Charge < ActiveRecord::Base
   end
 
   def automatic_payment?
-    payment_type == STANDING_ORDER
+    payment_type == AUTOMATIC
   end
 
   def to_s
