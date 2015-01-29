@@ -80,7 +80,7 @@ class Credit < ActiveRecord::Base
   def charge_to_s
     if charge
       "charge_type: #{charge_type || 'nil' } " \
-      "auto: #{automatic_payment? || 'nil' } "
+      "auto: #{automatic? || 'nil' } "
     else
       'charge: nil'
     end

@@ -14,9 +14,9 @@
 ####
 #
 class Charge < ActiveRecord::Base
+  include PaymentTypeDefaults
   enum payment_type: [:manual, :automatic]
   enum activity: [:active, :dormant]
-  include PaymentTypeDefaults
   belongs_to :account
   has_many :credits, dependent: :destroy, inverse_of: :charge
   has_many :debits, dependent: :destroy, inverse_of: :charge
@@ -25,7 +25,7 @@ class Charge < ActiveRecord::Base
                      inverse_of: :charges
   delegate :monthly?, to: :cycle
   validates :charge_type, :cycle, presence: true
-  validates :payment_type, inclusion: { in: PAYMENT_TYPE }
+  validates :payment_type, inclusion: { in: payment_types.keys }
   validates :amount, price_bound: true
   validates :amount, numericality: { less_than: 100_000 }
 
@@ -45,10 +45,6 @@ class Charge < ActiveRecord::Base
 
   def clear_up_form
     mark_for_destruction unless edited?
-  end
-
-  def automatic_payment?
-    payment_type == AUTOMATIC
   end
 
   def to_s
