@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Client#create', type: :feature do
-  before(:each) { log_in }
+  before { log_in }
   let(:client_page) { ClientPage.new }
 
   it 'opens valid page', js: true  do

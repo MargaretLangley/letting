@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Client#index', type: :feature do
-  before(:each) { log_in }
+  before { log_in }
 
   it 'basic' do
     client_create  \

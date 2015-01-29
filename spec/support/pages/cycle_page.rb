@@ -12,14 +12,17 @@ class CyclePage
   include Capybara::DSL
   attr_reader :action, :type
 
-  def initialize type: :term, action: :create
+  def initialize type: :term
     @type = type
     @action = action
   end
 
-  def enter
-    visit "/cycles/new?cycle_type=#{type}" if action == :create
-    visit '/cycles/1/edit' if action == :edit
+  def load id: nil
+    if id.nil?
+      visit "/cycles/new?cycle_type=#{type}"
+    else
+      visit "/cycles/#{id}/edit"
+    end
     self
   end
 
@@ -52,11 +55,6 @@ class CyclePage
     fill_in "#{id_stem}_show_month", with: show_month if show_month
     fill_in "#{id_stem}_show_day", with: show_day if show_day
     self
-  end
-
-  def association arrears: false, advance: false
-    check 'Arrears' if arrears
-    check 'Advance' if advance
   end
 
   def errored?

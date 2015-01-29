@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe 'Client#destroy', type: :feature do
-  before(:each) { log_in }
+  before { log_in }
 
-  it 'completes basic' do
+  it '#destroys' do
     client_create
     visit '/clients'
     expect(page).to have_text '354'
@@ -12,6 +12,7 @@ describe 'Client#destroy', type: :feature do
 
     expect(page).to have_text '354'
     expect(page).to have_text 'deleted!'
-    expect(current_path).to eq '/clients'
+
+    expect(page.title).to eq 'Letting - Clients'
   end
 end

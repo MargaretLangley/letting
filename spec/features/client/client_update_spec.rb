@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Client#update', type: :feature do
-  before(:each) { log_in }
+  before { log_in }
   let(:client_page) { ClientPage.new }
 
   context 'with one entity' do

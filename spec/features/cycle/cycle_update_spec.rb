@@ -2,25 +2,24 @@ require 'rails_helper'
 
 require_relative '../../support/pages/cycle_page'
 
-describe 'Cycle Update', :ledgers, type: :feature do
+describe 'Cycle#update', :ledgers, type: :feature do
   before { log_in admin_attributes }
 
   context 'Term' do
     it 'edits term' do
       cycle_create id: 1,
-                   name: 'Mar/Sep',
+                   name: 'Mar',
                    charged_in: 'arrears',
-                   order: 11,
                    cycle_type: 'term',
                    due_ons: [DueOn.new(month: 3, day: 25)]
-      cycle_page = CyclePage.new type: :term, action: :edit
+      cycle_page = CyclePage.new type: :term
 
-      cycle_page.enter
+      cycle_page.load id: 1
       expect(page.title).to eq 'Letting - Edit Cycle'
       cycle_page.name = 'Jun/Dec'
       cycle_page.choose 'Arrears'
       cycle_page.order = '44'
-      cycle_page.due_on(month: 6, day: 24)
+      cycle_page.due_on month: 6, day: 24
       cycle_page.do 'Update Cycle'
 
       expect(cycle_page).to be_success
@@ -33,12 +32,11 @@ describe 'Cycle Update', :ledgers, type: :feature do
       cycle_create id: 1,
                    name: 'Regular',
                    charged_in: 'arrears',
-                   order: 22,
                    cycle_type: 'monthly',
                    due_ons: [DueOn.new(month: 1, day: 8)]
-      cycle_page = CyclePage.new type: :monthly, action: :edit
+      cycle_page = CyclePage.new type: :monthly
 
-      cycle_page.enter
+      cycle_page.load id: 1
       expect(page).to have_text 'Monthly'
       cycle_page.name = 'New Monthly'
       cycle_page.choose 'Arrears'
@@ -53,9 +51,9 @@ describe 'Cycle Update', :ledgers, type: :feature do
 
   it 'aborts on Cancel' do
     cycle_create id: 1
-    cycle_page = CyclePage.new action: :edit
+    cycle_page = CyclePage.new
 
-    cycle_page.enter
+    cycle_page.load id: 1
     cycle_page.do 'Cancel'
     expect(page.title).to eq 'Letting - Cycles'
   end
@@ -63,8 +61,8 @@ describe 'Cycle Update', :ledgers, type: :feature do
   it 'can error' do
     cycle_create id: 1, name: 'Jan/July'
 
-    cycle_page = CyclePage.new action: :edit
-    cycle_page.enter
+    cycle_page = CyclePage.new
+    cycle_page.load id: 1
     cycle_page.name = ''
     cycle_page.do 'Update Cycle'
     expect(cycle_page).to be_errored

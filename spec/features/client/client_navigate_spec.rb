@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Client navigate', type: :feature do
-  before(:each) { log_in }
+  before { log_in }
 
   describe 'from index page' do
     it 'goes to view' do

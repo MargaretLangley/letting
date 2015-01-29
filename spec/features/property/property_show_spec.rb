@@ -6,7 +6,7 @@ require 'rails_helper'
 describe 'Property#show', type: :feature   do
   before(:each) { log_in }
 
-  it 'shows basic' do
+  it 'has basic details' do
     property_create id: 1,
                     human_ref: 1000,
                     agent: agent_new(entities: [Entity.new(name: 'Bell')],

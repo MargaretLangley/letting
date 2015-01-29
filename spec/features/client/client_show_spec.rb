@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe 'Client#show', type: :feature do
-  before(:each) { log_in }
+  before { log_in }
 
-  it 'completes basic' do
+  it 'has basic details' do
     client_create(id: 1, human_ref: 87)
       .properties << property_new(human_ref: 2008)
     visit '/clients/1'
