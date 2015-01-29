@@ -1,0 +1,9 @@
+
+/* <%=  fa_icon "home" %>*/
+
+.fa.fa {
+  padding: 4px,;
+  font-size: 30px;
+  background-color: $color-4;
+  colour: white;
+}
