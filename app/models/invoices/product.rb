@@ -10,12 +10,13 @@
 ####
 #
 class Product < ActiveRecord::Base
-  enum payment_type: [:manual, :automatic]
   include Comparable
+  enum payment_type: [:manual, :automatic]
   belongs_to :invoice, inverse_of: :products
 
   validates :amount, :charge_type, :date_due, presence: true
   validates :payment_type, inclusion: { in: payment_types.keys }
+
   def period
     (period_first..period_last)
   end

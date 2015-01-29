@@ -20,9 +20,8 @@ class Charge < ActiveRecord::Base
   belongs_to :account
   has_many :credits, dependent: :destroy, inverse_of: :charge
   has_many :debits, dependent: :destroy, inverse_of: :charge
-  belongs_to :cycle, class_name: 'Cycle',
-                     foreign_key: 'cycle_id',
-                     inverse_of: :charges
+  belongs_to :cycle, inverse_of: :charges
+
   delegate :monthly?, to: :cycle
   validates :charge_type, :cycle, presence: true
   validates :payment_type, inclusion: { in: payment_types.keys }
