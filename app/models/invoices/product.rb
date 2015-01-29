@@ -26,6 +26,10 @@ class Product < ActiveRecord::Base
     self.period_last  = bill_range.last
   end
 
+  def arrears?
+    charge_type == ChargeTypes::ARREARS
+  end
+
   # Wrapper for the arguments required for an Arrears product item.
   # All the other product items are taken from the debit.
   #

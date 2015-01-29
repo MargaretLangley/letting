@@ -37,7 +37,7 @@ class Invoice < ActiveRecord::Base
     end
 
     def drop_arrears
-      reject { |product| product.charge_type == 'Arrears' }
+      reject(&:arrears?)
     end
 
     def total_arrears
