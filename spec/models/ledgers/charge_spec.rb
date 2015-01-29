@@ -18,12 +18,6 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
         expect(charge_new payment_type: Charge::PAYMENT).to be_valid
       end
       it('rejects nil') { expect(charge_new payment_type: nil).to_not be_valid }
-      it 'rejects unknown' do
-        expect(charge_new payment_type: 'unknown').to_not be_valid
-      end
-      it 'rejects humanized' do
-        expect(charge_new payment_type: 'Payment').to_not be_valid
-      end
     end
     describe 'amount' do
       it('is a number') { expect(charge_new amount: 'nn').to_not be_valid }

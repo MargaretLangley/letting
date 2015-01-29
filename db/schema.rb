@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20141129154746) do
     t.string   "charge_type",                                      null: false
     t.integer  "account_id",                                       null: false
     t.integer  "cycle_id",                                         null: false
-    t.string   "payment_type",                                     null: false
+    t.integer  "payment_type",                                     null: false
     t.decimal  "amount",       precision: 8, scale: 2,             null: false
     t.integer  "activity",                             default: 0, null: false
     t.datetime "created_at"
