@@ -12,7 +12,7 @@ RSpec.describe MakeProducts, type: :model do
       end
 
       it 'mails if it has debit' do
-        charge = charge_create payment_type: Charge::PAYMENT
+        charge = charge_create payment_type: Charge::MANUAL
         debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
         account = account_create charges: [charge], debits: [debit_1]
 
@@ -24,7 +24,7 @@ RSpec.describe MakeProducts, type: :model do
       end
 
       it 'retains if it has debit but account remains in credit' do
-        charge = charge_create payment_type: Charge::PAYMENT
+        charge = charge_create payment_type: Charge::MANUAL
         debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
         account =
           account_create charges: [charge],

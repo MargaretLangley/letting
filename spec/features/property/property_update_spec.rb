@@ -57,7 +57,7 @@ describe 'Property#Update', type: :feature  do
     it 'adds date charge' do
       charged_in = charged_in_create id: 2, name: 'Advance'
       charge = charge_create cycle: cycle_new(id: 1, charged_in: charged_in),
-                             payment_type: 'payment'
+                             payment_type: 'manual'
       account.edit
       account.charge charge: charge
       account.button('Update').successful?(self).edit

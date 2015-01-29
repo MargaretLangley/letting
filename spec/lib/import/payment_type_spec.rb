@@ -11,11 +11,11 @@ module DB
       end
 
       it 'maps payments P' do
-        expect(PaymentType.to_symbol 'P'.to_sym).to eq PAYMENT
+        expect(PaymentType.to_symbol 'P'.to_sym).to eq MANUAL
       end
 
       it 'maps payments L' do
-        expect(PaymentType.to_symbol 'L'.to_sym).to eq PAYMENT
+        expect(PaymentType.to_symbol 'L'.to_sym).to eq MANUAL
       end
 
       it 'maps unknown payments' do

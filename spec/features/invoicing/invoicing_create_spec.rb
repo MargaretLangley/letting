@@ -129,7 +129,7 @@ describe Invoicing, type: :feature do
     Timecop.travel '2013-6-1'
 
     cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
-    charge = charge_new(payment_type: 'payment', cycle: cycle)
+    charge = charge_new(payment_type: 'manual', cycle: cycle)
     account_create property: property_new(human_ref: 9, client: client_new),
                    charges: [charge],
                    credits: [credit_new(charge: charge,
@@ -173,7 +173,7 @@ describe Invoicing, type: :feature do
 
         cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
         account_create property: property_new(human_ref: 9, client: client_new),
-                       charges: [charge_new(payment_type: 'payment',
+                       charges: [charge_new(payment_type: 'manual',
                                             cycle: cycle)]
         invoicing_page.enter
         invoicing_page.search_term('9').create

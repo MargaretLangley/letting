@@ -13,7 +13,7 @@ module DB
     def self.to_symbol code
       case code
       when :S      then Charge::AUTOMATIC
-      when :P, :L  then Charge::PAYMENT
+      when :P, :L  then Charge::MANUAL
       else         Charge::UNKNOWN_PAYMENT_TYPE
       end
     end
