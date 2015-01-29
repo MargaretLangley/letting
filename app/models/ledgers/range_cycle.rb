@@ -15,7 +15,7 @@ module RangeCycle
   }
 
   def self.for(name:, dates:)
-    (SPECIALIZED_CLASSES[name] || DEFAULT_CLASS)
+    SPECIALIZED_CLASSES[name]
       .new repeat_dates: dates.map { |date| RepeatDate.new date: date }
   end
 end
