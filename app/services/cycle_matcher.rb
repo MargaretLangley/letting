@@ -16,9 +16,9 @@ require_relative '../../lib/import/errors'
 #
 class CycleMatcher
   attr_reader :unidentified
-  def initialize(charged_in_id:, due_on_importables:)
+  def initialize(charged_in:, due_on_importables:)
     @unidentified = Cycle.new name: 'unknown',
-                              charged_in_id: charged_in_id
+                              charged_in: charged_in
     due_on_importables.each do |due_on_importable|
       @unidentified.due_ons.build day: due_on_importable.day,
                                   month: due_on_importable.month,

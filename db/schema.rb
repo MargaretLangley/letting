@@ -51,12 +51,6 @@ ActiveRecord::Schema.define(version: 20141129154746) do
 
   add_index "agents", ["property_id"], name: "index_agents_on_property_id", using: :btree
 
-  create_table "charged_ins", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "charges", force: :cascade do |t|
     t.string   "charge_type",                                      null: false
     t.integer  "account_id",                                       null: false
@@ -102,15 +96,13 @@ ActiveRecord::Schema.define(version: 20141129154746) do
 
   create_table "cycles", force: :cascade do |t|
     t.string   "name",                      null: false
-    t.integer  "charged_in_id",             null: false
+    t.integer  "charged_in",                null: false
     t.integer  "order",                     null: false
     t.string   "cycle_type",                null: false
     t.integer  "due_ons_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "cycles", ["charged_in_id"], name: "index_cycles_on_charged_in_id", using: :btree
 
   create_table "debits", force: :cascade do |t|
     t.integer  "account_id",                           null: false

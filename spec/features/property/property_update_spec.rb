@@ -55,8 +55,7 @@ describe 'Property#Update', type: :feature  do
     end
 
     it 'adds date charge' do
-      charged_in = charged_in_create id: 2, name: 'Advance'
-      charge = charge_create cycle: cycle_new(id: 1, charged_in: charged_in),
+      charge = charge_create cycle: cycle_new(id: 1, charged_in: 'advance'),
                              payment_type: 'manual'
       account.edit
       account.charge charge: charge
@@ -66,8 +65,7 @@ describe 'Property#Update', type: :feature  do
 
     it 'deletes charge' do
       skip 'While the charge is deleted the test does not pass'
-      charged_in = charged_in_create id: 2, name: 'Advance'
-      charge = charge_create cycle: cycle_new(id: 1, charged_in: charged_in)
+      charge = charge_create cycle: cycle_new(id: 1, charged_in: 'advance')
       Account.first.charges << charge
       account.edit
       expect(Account.first.charges.size).to eq 1

@@ -3,7 +3,7 @@
 
 def cycle_new id: nil,
                   name: 'Mar',
-                  charged_in: charged_in_create,
+                  charged_in: 'advance',
                   order: 1,
                   cycle_type: 'term',
                   due_ons: [DueOn.new(month: 3, day: 25)],
@@ -21,7 +21,7 @@ end
 
 def cycle_create id: 1,
                      name: 'Mar',
-                     charged_in: charged_in_create,
+                     charged_in: 'advance',
                      order: 1,
                      cycle_type: 'term',
                      due_ons: [DueOn.new(month: 3, day: 25)],
@@ -39,14 +39,14 @@ end
 
 def cycle_monthly_create id: 1,
                          name: 'First',
-                         charged_in: charged_in_create,
+                         charged_in: 'advance',
                          order: 1,
                          cycle_type: 'monthly',
                          day: 1,
                          prepare: false
   cycle = Cycle.new id: id,
                     name: name,
-                    charged_in_id: charged_in,
+                    charged_in: charged_in,
                     order: order,
                     cycle_type: cycle_type
   (1..12).each { |month| cycle.due_ons << [DueOn.new(month: month, day: day)] }

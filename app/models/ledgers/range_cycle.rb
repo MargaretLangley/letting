@@ -10,8 +10,8 @@
 module RangeCycle
   DEFAULT_CLASS = Advance
   SPECIALIZED_CLASSES = {
-    'Advance' => Advance,
-    'Arrears' => Arrears,
+    'advance' => Advance,
+    'arrears' => Arrears,
   }
 
   def self.for(name:, dates:)

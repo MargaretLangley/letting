@@ -9,7 +9,7 @@ describe 'Cycle Update', :ledgers, type: :feature do
     it 'edits term' do
       cycle_create id: 1,
                    name: 'Mar/Sep',
-                   charged_in: charged_in_create(id: 1, name: 'Arrears'),
+                   charged_in: 'arrears',
                    order: 11,
                    cycle_type: 'term',
                    due_ons: [DueOn.new(month: 3, day: 25)]
@@ -32,7 +32,7 @@ describe 'Cycle Update', :ledgers, type: :feature do
     it 'edits monthly' do
       cycle_create id: 1,
                    name: 'Regular',
-                   charged_in: charged_in_create(id: 1, name: 'Arrears'),
+                   charged_in: 'arrears',
                    order: 22,
                    cycle_type: 'monthly',
                    due_ons: [DueOn.new(month: 1, day: 8)]

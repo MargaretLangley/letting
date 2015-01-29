@@ -44,7 +44,7 @@ module DB
       charge
     end
 
-    def charged_in_id
+    def charged_in
       LegacyChargedInFields.new(charged_in_code: charged_in_code,
                                 charge_type: charge_type).modern_id
       rescue KeyError
@@ -52,7 +52,7 @@ module DB
     end
 
     def cycle_id
-      CycleMatcher.new(charged_in_id: charged_in_id,
+      CycleMatcher.new(charged_in: charged_in,
                        due_on_importables: day_months).id
       rescue CycleUnknown
         warn "Property #{human_ref} charge row does not match a cycle" \

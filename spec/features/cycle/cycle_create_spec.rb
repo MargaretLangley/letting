@@ -7,7 +7,6 @@ describe Cycle, :cycle, :ledgers, type: :feature do
 
   context 'Term' do
     it 'creates a cycle' do
-      charged_in_create id: 2, name: 'Advance'
       cycle_page = CyclePage.new type: :term, action: :create
       cycle_page.enter
       expect(page.title).to eq 'Letting - New Term Cycle'
@@ -29,7 +28,6 @@ describe Cycle, :cycle, :ledgers, type: :feature do
 
   context 'Monthly' do
     it 'creates a cycle' do
-      charged_in_create id: 1, name: 'Arrears'
       cycle_page = CyclePage.new type: :monthly, action: :create
       cycle_page.enter
       expect(page.title).to eq 'Letting - New Monthly Cycle'

@@ -16,6 +16,6 @@ module ChargedInDefaults
   LEGACY_ADVANCE = '1'
   LEGACY_MID_TERM = 'M'
 
-  MODERN_ARREARS = 1
-  MODERN_ADVANCE = 2
+  MODERN_ARREARS = 'arrears'
+  MODERN_ADVANCE = 'advance'
 end

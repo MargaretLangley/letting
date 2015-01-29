@@ -13,13 +13,13 @@
 #
 class Cycle < ActiveRecord::Base
   include Comparable
+  enum charged_in: [:arrears, :advance]
   has_many :charges, inverse_of: :cycle
-  belongs_to :charged_in, inverse_of: :cycles
 
   validates :name, presence: true
   validates :order, presence: true
   validates :cycle_type, inclusion: { in: %w(term monthly) }
-  validates :cycle_type, :charged_in_id, presence: true
+  validates :charged_in, inclusion: { in: charged_ins.keys }
   validates :due_ons, presence: true
   include DueOns
   accepts_nested_attributes_for :due_ons, allow_destroy: true
@@ -44,18 +44,18 @@ class Cycle < ActiveRecord::Base
 
   # required to be public for importing accounts information
   def bill_period(billed_on:)
-    RangeCycle.for(name: charged_in.name,
+    RangeCycle.for(name: charged_in,
                    dates: show_dates(year: billed_on.year))
       .duration within: billed_on
   end
 
   def <=> other
     return nil unless other.is_a?(self.class)
-    [charged_in_id, due_ons.sort] <=> [other.charged_in_id, other.due_ons.sort]
+    [charged_in, due_ons.sort] <=> [other.charged_in, other.due_ons.sort]
   end
 
   def to_s
-    "cycle: #{name}, type: #{cycle_type}, charged_in: #{charged_in_id}, " +
+    "cycle: #{name}, type: #{cycle_type}, charged_in: #{charged_in}, " +
       due_ons.to_s
   end
 

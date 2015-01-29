@@ -21,7 +21,7 @@
 //
 // js-dynamic-result
 //
-// <select class="js-dynamic-result" name="property[account_attributes][charges_attributes][0][charged_in_id]">
+// <select class="js-dynamic-result" name="property[account_attributes][charges_attributes][0][charged_in]">
 //   <option value=""></option>
 //   <optgroup label="Mar 25th / Sep 29th">
 //     <option selected="selected" value="1">Arrears</option>

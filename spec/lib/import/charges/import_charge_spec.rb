@@ -23,7 +23,7 @@ module DB
     describe 'import characteristics' do
       before do
         property_create human_ref: 80, account: account_new
-        cycle_create charged_in: charged_in_create(id: MODERN_ARREARS),
+        cycle_create charged_in: MODERN_ARREARS,
                      due_ons: [DueOn.new(month: 3, day: 5)]
       end
 
@@ -68,7 +68,7 @@ module DB
     context 'on_date cycle' do
       it 'imports a single row' do
         property_create human_ref: 80, account: account_new
-        cycle_create charged_in: charged_in_create(id: MODERN_ARREARS),
+        cycle_create charged_in: MODERN_ARREARS,
                      due_ons: [DueOn.new(month: 3, day: 5)]
         expect { import_charge row }.to change(Charge, :count).by 1
       end
@@ -77,7 +77,7 @@ module DB
     context 'monthly cycle' do
       it 'imports a single row' do
         property_create human_ref: 80, account: account_new
-        cycle_create charged_in: charged_in_create(id: MODERN_ARREARS),
+        cycle_create charged_in: MODERN_ARREARS,
                      due_ons: [DueOn.new(month: 0, day: 7)]
 
         expect do

@@ -66,7 +66,7 @@ class CyclesController < ApplicationController
   end
 
   def cycle_attributes
-    %i(name charged_in_id order cycle_type)
+    %i(name charged_in order cycle_type)
   end
 
   def due_ons_attributes

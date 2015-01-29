@@ -24,7 +24,7 @@ module DB
         %(1901-01-01, 0)
     end
     describe 'attribute' do
-      it('amount') do
+      it 'amount' do
         expect(ChargeRow.new(parse_line charge_row).amount).to eq 50.5
       end
     end
@@ -41,17 +41,17 @@ module DB
         end
       end
 
-      describe '#charged_in_id' do
+      describe '#charged_in' do
         it 'returns valid id' do
           row = charge_row(charged_in: 0)
-          expect(ChargeRow.new(parse_line row).charged_in_id)
-            .to eq 1
+          expect(ChargeRow.new(parse_line row).charged_in)
+            .to eq MODERN_ARREARS
         end
 
         # insurance must have an advance charged_in - think about it ;-)
         it 'overrides when charge must be in advance' do
           row = ChargeRow.new parse_line charge_row(code: 'Ins', charged_in: 0)
-          expect(row.charged_in_id).to eq 2
+          expect(row.charged_in).to eq MODERN_ADVANCE
         end
 
         it 'overrides due_on when charged_in is Mid-term' do
@@ -63,14 +63,14 @@ module DB
 
         it 'errors on invalid' do
           row = ChargeRow.new parse_line charge_row(charged_in: 'BAD')
-          expect { row.charged_in_id }.to raise_error ChargedInCodeUnknown
+          expect { row.charged_in }.to raise_error ChargedInCodeUnknown
         end
       end
 
       describe '#cycle_id' do
         it 'returns valid id' do
           cycle_create id: 3,
-                       charged_in: charged_in_create(id: MODERN_ARREARS),
+                       charged_in: MODERN_ARREARS,
                        due_ons: [DueOn.new(month: 3, day: 25)]
           row = ChargeRow.new parse_line \
                                 charge_row charged_in: LEGACY_ARREARS,
@@ -82,7 +82,7 @@ module DB
         it 'returns valid mid_term id' do
           cycle_create \
             id: 3,
-            charged_in: charged_in_create(id: MODERN_ARREARS),
+            charged_in: MODERN_ARREARS,
             due_ons: [DueOn.new(month: 3, day: 25, show_month: 6, show_day: 24),
                       DueOn.new(month: 9, day: 29, show_month: 12, show_day: 12)]
           row = ChargeRow.new parse_line \
@@ -102,7 +102,7 @@ module DB
 
         it 'messages on unknown cycle dates' do
           cycle_create id: 3,
-                       charged_in: charged_in_create(id: MODERN_ADVANCE),
+                       charged_in: MODERN_ADVANCE,
                        due_ons: [DueOn.new(month: 10, day: 10)]
           row = ChargeRow.new parse_line charge_row \
                                            charged_in: LEGACY_ARREARS,
@@ -115,7 +115,7 @@ module DB
 
         it 'messages on unknown charged_in' do
           cycle_create id: 3,
-                       charged_in: charged_in_create(id: MODERN_ARREARS),
+                       charged_in: MODERN_ARREARS,
                        due_ons: [DueOn.new(month: 3, day: 25)]
           row = ChargeRow.new parse_line charge_row \
                                            charged_in: 'UNKNOWN',

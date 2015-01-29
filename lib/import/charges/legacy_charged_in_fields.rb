@@ -21,7 +21,7 @@ module DB
   #
   #    Legacy "0" =>  Modern 1
   #    Legacy "1" =>  Modern 2
-  #    Legacy "M" =>  Modern 3
+  #    Legacy "M" =>  Modern 2  (mid-term is converted to arrears)
   #####
   #
   class LegacyChargedInFields
@@ -38,7 +38,7 @@ module DB
     end
 
     # returns the modern application's id
-    # so: "0" => 1, "1" => 2, "M" => 3
+    # so: "0" => 1, "1" => 2, "M" => 2
     #
     def modern_id
       # The Only mid-term charge is in arrears

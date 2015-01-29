@@ -13,13 +13,12 @@
 
 class << self
   def create_charges
-    Rake::Task['db:import:charged_ins'].invoke
     create_cycle
 
     Charge.create! [
-      { id: 1, charge_type: 'Ground Rent',    cycle_id: 1, payment_type: 'payment', amount: '88.08',  account_id: 1 },
+      { id: 1, charge_type: 'Ground Rent',    cycle_id: 1, payment_type: 'manual', amount: '88.08',  account_id: 1 },
       { id: 2, charge_type: 'Service Charge', cycle_id: 1, payment_type: 'automatic', amount: '125.08', account_id: 1 },
-      { id: 3, charge_type: 'Ground Rent',    cycle_id: 1, payment_type: 'payment', amount: '70.00',  account_id: 2 },
+      { id: 3, charge_type: 'Ground Rent',    cycle_id: 1, payment_type: 'manual', amount: '70.00',  account_id: 2 },
       { id: 4, charge_type: 'Service Charge', cycle_id: 1, payment_type: 'automatic', amount: '70.00',  account_id: 3 },
     ]
   end
@@ -33,9 +32,9 @@ class << self
       { id: 5, month: 4,  day: 1,  cycle_id: 3 },
     ]
     Cycle.create! [
-      { id: 1,  name: 'Mar/Sep', charged_in_id: 1, order: 1, cycle_type: 'term' },
-      { id: 2,  name: 'Jun/Dec', charged_in_id: 1, order: 2, cycle_type: 'term' },
-      { id: 3,  name: 'Apr',     charged_in_id: 1, order: 3, cycle_type: 'term' },
+      { id: 1,  name: 'Mar/Sep', charged_in: 'arrears', order: 1, cycle_type: 'term' },
+      { id: 2,  name: 'Jun/Dec', charged_in: 'arrears', order: 2, cycle_type: 'term' },
+      { id: 3,  name: 'Apr',     charged_in: 'arrears', order: 3, cycle_type: 'term' },
     ]
     Cycle.all.each { |cycle| Cycle.reset_counters(cycle.id, :due_ons) }
   end

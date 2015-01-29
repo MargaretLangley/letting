@@ -23,20 +23,20 @@ module DB
         it 'returns charged_in code' do
           charged = LegacyChargedInFields.new charged_in_code: LEGACY_ARREARS,
                                               charge_type: 'unknown'
-          expect(charged.modern_id).to eq 1
+          expect(charged.modern_id).to eq MODERN_ARREARS
         end
 
         it 'returns arrears when charged_in_code mid-term' do
           charged = LegacyChargedInFields.new charged_in_code: LEGACY_MID_TERM,
                                               charge_type: 'unknown'
-          expect(charged.modern_id).to eq 1
+          expect(charged.modern_id).to eq MODERN_ARREARS
         end
 
         it 'returns charge_type code over charged_in_code' do
           charged = LegacyChargedInFields
                     .new charged_in_code: LEGACY_ARREARS,
                          charge_type: INSURANCE
-          expect(charged.modern_id).to eq 2
+          expect(charged.modern_id).to eq MODERN_ADVANCE
         end
       end
       context 'invalid legacy code' do
@@ -49,7 +49,7 @@ module DB
         it 'returns charge_type code over charged_in_code' do
           charged = LegacyChargedInFields.new charged_in_code: 'U',
                                               charge_type: INSURANCE
-          expect(charged.modern_id).to eq 2
+          expect(charged.modern_id).to eq MODERN_ADVANCE
         end
       end
     end

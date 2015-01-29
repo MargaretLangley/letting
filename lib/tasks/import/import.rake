@@ -23,7 +23,6 @@ namespace :db do
     logger.info 'db:import basic system files'
     Rake::Task['db:import:users'].invoke(options[:test])
     Rake::Task['db:import:due_ons'].invoke
-    Rake::Task['db:import:charged_ins'].invoke
     Rake::Task['db:import:cycle'].invoke
     Rake::Task['db:import:invoice_text_address'].invoke
     Rake::Task['db:import:invoice_texts'].invoke

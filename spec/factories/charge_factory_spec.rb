@@ -68,9 +68,6 @@ describe 'ChargeFactory' do
       end
 
       describe 'makes' do
-        it 'creates charged_in' do
-          expect { charge_create }.to change(ChargedIn, :count).by(1)
-        end
         it 'creates cycle' do
           expect { charge_create }.to change(Cycle, :count).by(1)
         end
