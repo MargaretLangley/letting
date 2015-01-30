@@ -1,0 +1,39 @@
+require 'rails_helper'
+
+describe 'Cycle#create', :ledgers, type: :feature do
+  before { log_in admin_attributes }
+
+
+  context 'Term' do
+   it 'adds due date', js: true do
+      cycle_page = CyclePage.new type: :term
+      cycle_create id: 1, due_ons: [DueOn.new(month: 3, day: 25)]
+      expect(Cycle.first.due_ons.count).to eq 1
+
+      cycle_page.load id: 1
+      expect(page.title).to eq 'Letting - Edit Cycle'
+      cycle_page.do 'Add Due Date'
+      cycle_page.due_on order:1, month: 9, day: 29
+      cycle_page.do 'Update Cycle'
+
+      expect(cycle_page).to be_success
+      expect(Cycle.first.due_ons.count).to eq 2
+    end
+
+    it 'removes due_date', js: true do
+      cycle_page = CyclePage.new type: :term
+      cycle_create id: 1, due_ons: [DueOn.new(month: 6, day: 24),
+                                    DueOn.new(month: 12, day: 25)]
+      expect(Cycle.first.due_ons.count).to eq 2
+
+      cycle_page.load id: 1
+      expect(page.title).to eq 'Letting - Edit Cycle'
+      cycle_page.do 'Delete Due Date'
+      cycle_page.do 'Update Cycle'
+
+      expect(cycle_page).to be_success
+      expect(Cycle.first.due_ons.count).to eq 1
+    end
+  end
+
+end

@@ -70,7 +70,7 @@ class CyclesController < ApplicationController
   end
 
   def due_ons_attributes
-    [:id, :cycle_id, :month, :day, :show_month, :show_day, :year]
+    [:id, :cycle_id, :month, :day, :show_month, :show_day, :year, :_destroy]
   end
 
   def identity
