@@ -10,12 +10,12 @@
 class AddressPage
   include Capybara::DSL
 
-  def add_district
-    click_on 'Add district', exact: true
+  def add(line:)
+    click_on "Add #{line}", exact: true
   end
 
-  def delete_district
-    click_on 'Delete', exact: true
+  def delete(line:)
+    click_on "Delete #{line}", exact: true
   end
 
   # v_district - only used for spec testing
