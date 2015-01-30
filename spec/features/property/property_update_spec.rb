@@ -64,7 +64,7 @@ describe 'Property#Update', type: :feature  do
       account.expect_charge self, charge: charge
     end
 
-    it 'deletes charge' do
+    it 'deletes charge', js: true do
       skip 'While the charge is deleted the test does not pass'
       charge = charge_create cycle: cycle_new(id: 1, charged_in: 'advance')
       Account.first.charges << charge
