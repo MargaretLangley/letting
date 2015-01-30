@@ -40,6 +40,7 @@ describe 'Client#update', type: :feature do
     it 'adds a second entity', js: true do
       client_page.click 'Add Person'
       client_page.fill_in_entity order: 1, name: 'Cook'
+
       client_page.button 'Update'
 
       expect(client_page).to be_successful
@@ -66,11 +67,12 @@ describe 'Client#update', type: :feature do
       client_page.load id: 1
 
       client_page.click 'Delete Person'
-      client_page.button 'Update'
-      client_page.load id: 1
-      client_page.click 'Add Person'
 
-      expect(client_page.entity(order: 1)).to eq ''
+      client_page.button 'Update'
+      expect(client_page).to be_successful
+      # expect be_successful required - think allows system to complete update
+
+      expect(Client.first.entities.size).to eq 1
     end
 
     it 'does not add a third entity', js: true do
