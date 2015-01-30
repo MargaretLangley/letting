@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-describe 'InvoiceText Update', type: :feature do
+describe 'InvoiceText#update', type: :feature do
   before(:each) do
     log_in admin_attributes
   end
 
-  describe '#update page 1' do
+  describe 'page 1' do
     it 'finds data on 1st page' do
       invoice_text_create id: 1, vat: '89', address: address_new(road: 'High')
       visit '/invoice_texts/1/edit'
@@ -25,7 +25,7 @@ describe 'InvoiceText Update', type: :feature do
     end
   end
 
-  describe '#update page 2' do
+  describe 'page 2' do
     it 'finds data on 2nd page and succeeds' do
       invoice_text_create id: 1
       invoice_text_create id: 2
@@ -37,16 +37,16 @@ describe 'InvoiceText Update', type: :feature do
       click_on 'Update Invoice Text'
       expect(page).to have_text /created|updated/i
     end
-  end
 
-  it 'finds data on 2nd page and errors' do
-    invoice_text_create id: 2
-    guide_create instruction: 'ins2'
-    visit '/invoice_texts/2/edit'
+    it 'finds data on 2nd page and errors' do
+      invoice_text_create id: 2
+      guide_create instruction: 'ins2'
+      visit '/invoice_texts/2/edit'
 
-    expect(page.title).to eq 'Letting - Edit Invoice Text'
-    fill_in 'Main Heading', with: ''
-    click_on 'Update Invoice Text'
-    expect(page).to have_css '[data-role="errors"]'
+      expect(page.title).to eq 'Letting - Edit Invoice Text'
+      fill_in 'Main Heading', with: ''
+      click_on 'Update Invoice Text'
+      expect(page).to have_css '[data-role="errors"]'
+    end
   end
 end

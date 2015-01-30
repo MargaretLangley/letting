@@ -11,11 +11,11 @@ describe 'Property#Update', type: :feature  do
       log_in
       client_create \
         human_ref: 90,
-        properties: [property_new(human_ref: 80, account: account_new)]
+        properties: [property_new(id: 1, human_ref: 80, account: account_new)]
     end
 
     it 'opens valid page', js: true  do
-      account.edit
+      account.load id: 1
       expect(page.title).to eq 'Letting - Edit Account'
       account.expect_property self, property_id: '80', client_id: '90'
       account.expect_address self,
@@ -26,11 +26,11 @@ describe 'Property#Update', type: :feature  do
     end
 
     it 'updates account', js: true do
-      account.edit
+      account.load id: 1
       account.property self, property_id: '81', client_id: '90'
       account.address selector: '#property_address', address: address_new
       account.entity type: 'property', **company_attributes
-      account.button('Update').successful?(self).edit
+      account.button('Update').successful?(self).load id: 1
       account.expect_property self, property_id: '81', client_id: '90'
       account.expect_address self,
                              type: '#property_address',
@@ -39,12 +39,12 @@ describe 'Property#Update', type: :feature  do
     end
 
     it 'adds agent', js: true do
-      account.edit
+      account.load id: 1
       check 'Agent'
       account.address selector: '#agent', address: address_new
       account.entity type: 'property_agent_attributes', **company_attributes
 
-      account.button('Update').successful?(self).edit
+      account.button('Update').successful?(self).load id: 1
       expect(find_field('Agent')).to be_checked
       account.expect_address self,
                              type: '#property_agent_address',
@@ -57,9 +57,10 @@ describe 'Property#Update', type: :feature  do
     it 'adds date charge' do
       charge = charge_create cycle: cycle_new(id: 1, charged_in: 'advance'),
                              payment_type: 'manual'
-      account.edit
+      account.load id: 1
+
       account.charge charge: charge
-      account.button('Update').successful?(self).edit
+      account.button('Update').successful?(self).load id: 1
       account.expect_charge self, charge: charge
     end
 
@@ -67,15 +68,17 @@ describe 'Property#Update', type: :feature  do
       skip 'While the charge is deleted the test does not pass'
       charge = charge_create cycle: cycle_new(id: 1, charged_in: 'advance')
       Account.first.charges << charge
-      account.edit
+      account.load id: 1
+
       expect(Account.first.charges.size).to eq 1
       account.charge order: 0, delete: true
-      account.button('Update').successful?(self).edit
+      account.button('Update').successful?(self).load id: 1
       expect(Account.first.charges.size).to eq 0
     end
 
     it 'displays form errors' do
-      account.edit
+      account.load id: 1
+
       account.address selector: '#property_address',
                       address: address_new(road: '')
       account.button 'Update'
@@ -90,16 +93,16 @@ describe 'Property#Update', type: :feature  do
     end
 
     it 'can be set to dormant', js: true do
-      property_create account:
-                        account_new(charges: [charge_new(activity: 'active')])
-      account.edit
+      property_create \
+        id: 1, account: account_new(charges: [charge_new(activity: 'active')])
+      account.load id: 1
       activity =
         '//*[@id="property_account_attributes_charges_attributes_0_activity"]'
       expect(find(:xpath, activity).value).to eq 'active'
 
       find(:xpath, activity).select 'dormant'
 
-      account.button('Update').successful?(self).edit
+      account.button('Update').successful?(self).load id: 1
       expect(find(:xpath, activity).value).to eq 'dormant'
     end
   end
@@ -109,8 +112,9 @@ describe 'Property#Update', type: :feature  do
       log_in
       agent = agent_new entities: [Entity.new(name: 'Willis')],
                         address: address_new(road: 'Wiggiton')
-      client_create properties: property_new(account: account_new, agent: agent)
-      account.edit
+      client_create \
+        properties: property_new(id: 1, account: account_new, agent: agent)
+      account.load id: 1
     end
 
     it 'opens property with agent', js: true  do
@@ -127,7 +131,7 @@ describe 'Property#Update', type: :feature  do
       account.address(selector: '#agent', address: address_new)
       account.entity(type: 'property_agent_attributes', **company_attributes)
 
-      account.button('Update').successful?(self).edit
+      account.button('Update').successful?(self).load id: 1
       account.expect_address self,
                              type: '#property_agent_address',
                              address: address_new
@@ -138,7 +142,7 @@ describe 'Property#Update', type: :feature  do
 
     it 'removes agent' do
       uncheck 'Agent'
-      account.button('Update').successful?(self).edit
+      account.button('Update').successful?(self).load id: 1
       expect(find_field('Agent')).to_not be_checked
     end
   end

@@ -8,7 +8,7 @@ describe 'Property#create', type: :feature do
   before(:each) { log_in }
 
   it 'opens valid page', js: true  do
-    account.new
+    account.load
     expect(page.title).to eq 'Letting - New Account'
     expect(page).to have_css('.spec-entity-count', count: 1)
   end
@@ -17,10 +17,10 @@ describe 'Property#create', type: :feature do
     client_create human_ref: 8008
     charge = charge_create cycle: cycle_new(id: 1, charged_in: 'arrears')
 
-    account.new
+    account.load
     fill_in_account property_ref: 278, client_ref: 8008, charge: charge
     fill_in_agent address: address_new
-    account.button('Create').successful?(self).edit
+    account.button('Create').successful?(self).load id: Property.first.id
     expect_account property_ref: '278', client_ref: 8008, charge: charge
     expect_agent
   end
@@ -29,16 +29,16 @@ describe 'Property#create', type: :feature do
     client_create human_ref: 8008
     charge = charge_create cycle: cycle_new(id: 1, charged_in: 'advance')
 
-    account.new
+    account.load
     fill_in_account property_ref: 278, client_ref: '8008', charge: charge
-    account.button('Create').successful?(self).edit
+    account.button('Create').successful?(self).load id: Property.first.id
     expect_account property_ref: '278', client_ref: 8008, charge: charge
   end
 
   it '#create has validation', js: true do
     client_create human_ref: 8008
 
-    account.new
+    account.load
     account.property self, property_id: '-278', client_id: 8008
     account.button 'Create'
     expect(page.title).to eq 'Letting - New Account'
@@ -46,14 +46,14 @@ describe 'Property#create', type: :feature do
   end
 
   it 'adds charges', js: true do
-    account.new
+    account.load
     expect(page).to have_css('.spec-charge-count', count: 1)
     3.times { click_on 'Add Charge' }
     expect(page).to have_css('.spec-charge-count', count: 4)
   end
 
   it 'displays form errors' do
-    account.new
+    account.load
     account.button 'Create'
     expect(page).to have_css '[data-role="errors"]'
   end

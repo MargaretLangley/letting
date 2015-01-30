@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Search index', type: :feature do
-  before(:each) { log_in }
+  before { log_in }
 
   describe 'index', :search do
     it 'visits literal matches' do

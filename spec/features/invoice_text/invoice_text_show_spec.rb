@@ -1,25 +1,23 @@
 require 'rails_helper'
 
-describe 'InvoiceText View', type: :feature do
+describe 'InvoiceText#show', type: :feature do
   before(:each) do
     log_in admin_attributes
     invoice_text_create id: 1,
                         address: address_new(road: 'High')
   end
 
-  context '#view' do
-    it 'finds view 1st page' do
-      visit '/invoice_texts/1'
+  it 'shows the 1st page' do
+    visit '/invoice_texts/1'
 
-      expect(page.title). to eq 'Letting - View Invoice Text'
-    end
+    expect(page.title). to eq 'Letting - View Invoice Text'
+  end
 
-    it 'has edit link' do
-      visit '/invoice_texts/1'
+  it 'has edit link' do
+    visit '/invoice_texts/1'
 
-      expect(page.title).to eq 'Letting - View Invoice Text'
-      click_on('Edit')
-      expect(page.title).to eq 'Letting - Edit Invoice Text'
-    end
+    expect(page.title).to eq 'Letting - View Invoice Text'
+    click_on('Edit')
+    expect(page.title).to eq 'Letting - Edit Invoice Text'
   end
 end

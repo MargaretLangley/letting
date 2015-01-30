@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-require_relative '../../support/pages/cycle_page'
-
 describe 'Cycle#update', :ledgers, type: :feature do
   before { log_in admin_attributes }
 

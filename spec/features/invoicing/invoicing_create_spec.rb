@@ -77,7 +77,7 @@ class InvoicingPage
   end
 end
 
-describe Invoicing, type: :feature do
+describe 'Invoicing#create', type: :feature do
   let(:invoicing_page) { InvoicingPage.new }
   before do
     log_in

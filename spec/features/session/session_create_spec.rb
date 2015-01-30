@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Session', type: :feature do
-  it '#creates' do
+describe 'Session#creates', type: :feature do
+  it 'completes basic' do
     user_create user_attributes
     navigates_to_create_page
     fill_in_login
@@ -9,7 +9,7 @@ describe 'Session', type: :feature do
     logs_out
   end
 
-  it '#creates - fails' do
+  it 'can fail' do
     navigates_to_create_page
     fill_in_login
     expect_failure

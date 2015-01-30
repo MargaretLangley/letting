@@ -16,14 +16,12 @@
 class AccountPage
   include Capybara::DSL
 
-  def new
-    visit '/accounts/new'
-    self
-  end
-
-  def edit
-    visit '/accounts/'
-    click_on 'Edit Account', exact: true
+  def load id: nil
+    if id.nil?
+      visit '/accounts/new'
+    else
+      visit "/accounts/#{id}/edit"
+    end
     self
   end
 
