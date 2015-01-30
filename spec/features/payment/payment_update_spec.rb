@@ -1,9 +1,9 @@
 require 'rails_helper'
 # rubocop: disable Style/Documentation
 
-describe Payment, :ledgers, :payment, type: :feature do
+describe 'Payment#update', :ledgers, type: :feature do
+  before { log_in }
   let(:payment_page) { PaymentPage.new }
-  before(:each) { log_in }
 
   it 'editing original payment - no double payments', js: true do
     charge = charge_create debits: [debit_new(amount: 30)]
@@ -13,7 +13,7 @@ describe Payment, :ledgers, :payment, type: :feature do
                    property: property_create(human_ref: 2003)
 
     # editing the above original payment
-    payment_page.visit_edit payment.id
+    payment_page.load id: payment.id
     payment_page.credit = 20.00
     payment_page.pay
     expect(payment_page).to be_successful
@@ -27,7 +27,7 @@ describe Payment, :ledgers, :payment, type: :feature do
                    charges: [charge],
                    property: property_create(human_ref: 2003)
 
-    payment_page.visit_edit payment.id
+    payment_page.load id: payment.id
     payment_page.credit = 100_000_000
     payment_page.pay
     expect(payment_page).to be_errored

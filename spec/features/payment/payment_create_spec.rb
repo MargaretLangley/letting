@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-describe Payment, :ledgers, :payment, type: :feature do
+describe 'Payment#create', :ledgers, type: :feature do
+  before { log_in }
   let(:payment_page) { PaymentPage.new }
-  before(:each) { log_in }
 
   it 'opens payment page as expected' do
     account_create property: property_create(human_ref: 2003),
                    charges: [charge_new(debits: [debit_new(amount: 20.05)])]
 
-    payment_page.visit_new
+    payment_page.load
     payment_page.human_ref('2003').search
 
     expect(payment_page).to be_populated_search
@@ -19,7 +19,7 @@ describe Payment, :ledgers, :payment, type: :feature do
     account_create property: property_create(human_ref: 2003),
                    charges: [charge_new(debits: [debit_new(amount: 20.05)])]
 
-    payment_page.visit_new
+    payment_page.load
     payment_page.human_ref('2003').search
 
     expect(payment_page.credit).to eq 20.05
@@ -36,7 +36,7 @@ describe Payment, :ledgers, :payment, type: :feature do
     account_create property: property_create(human_ref: 2003),
                    charges: [charge_new(debits: [debit_new])]
 
-    payment_page.visit_new
+    payment_page.load
     payment_page.human_ref('2003').search
 
     payment_page.credit = 100_000_000

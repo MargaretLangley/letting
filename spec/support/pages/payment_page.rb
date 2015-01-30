@@ -12,13 +12,12 @@
 class PaymentPage
   include Capybara::DSL
 
-  def visit_new
-    visit '/payments/new'
-    self
-  end
-
-  def visit_edit payment_id
-    visit "/payments/#{payment_id}/edit"
+  def load id: nil
+    if id.nil?
+      visit '/payments/new'
+    else
+      visit "/payments/#{id}/edit"
+    end
     self
   end
 

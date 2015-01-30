@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Payment, type: :feature do
-  before(:each) { log_in }
+  before { log_in }
 
   it 'shows record' do
     property_create \
