@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Cycle#destroy', :ledgers, type: :feature do
   before { log_in admin_attributes }
 
-  it '#destroys' do
+  it 'destroys' do
     cycle_create id: 3, name: 'Jan', order: 6, cycle_type: 'term'
     visit '/cycles/'
 

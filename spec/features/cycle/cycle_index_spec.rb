@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Cycle#index', :ledgers, type: :feature do
   before { log_in admin_attributes }
 
-  it 'basic' do
+  it 'completes basic' do
     cycle_create id: 1, name: 'Jan', order: 6, cycle_type: 'term'
     visit '/cycles/'
 

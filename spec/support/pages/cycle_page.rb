@@ -10,11 +10,10 @@
 #
 class CyclePage
   include Capybara::DSL
-  attr_reader :action, :type
+  attr_reader :type
 
   def initialize type: :term
     @type = type
-    @action = action
   end
 
   def load id: nil

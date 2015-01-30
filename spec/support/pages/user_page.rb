@@ -1,26 +1,26 @@
 ######
-# UseEditPage
+# UserPage
 #
-# Encapsulates the User Page (edit)
+# Encapsulates the User Page
 #
-# The layer hides the capybara calls to make the functional rspec tests that
+# The layer hides the Capybara calls to make the functional rspec tests that
 # use this class simpler.
 #####
 #
-class UserEditPage
+class UserPage
   include Capybara::DSL
 
-  def visit_index_page
-    visit '/users'
+  def load id: nil
+    if id.nil?
+      visit '/users/new'
+    else
+      visit "/users/#{id}/edit"
+    end
     self
   end
 
-  def click_edit
-    click_on('Edit')
-  end
-
-  def click_update_user
-    click_on('Update User')
+  def button(action:)
+    click_on "#{action} User", exact: true
   end
 
   def fill_form(nickname, email, password, confirmation = password)

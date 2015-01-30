@@ -1,5 +1,4 @@
-# rubocop: disable Metrics/MethodLength
-# rubocop: disable Metrics/ParameterLists
+# rubocop: disable Metrics/MethodLength, Metrics/ParameterLists
 
 def property_new \
   id: nil,
