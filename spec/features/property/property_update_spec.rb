@@ -65,14 +65,15 @@ describe 'Property#Update', type: :feature  do
     end
 
     it 'deletes charge', js: true do
-      skip 'While the charge is deleted the test does not pass'
       charge = charge_create cycle: cycle_new(id: 1, charged_in: 'advance')
       Account.first.charges << charge
       account.load id: 1
-
       expect(Account.first.charges.size).to eq 1
-      account.charge order: 0, delete: true
-      account.button('Update').successful?(self).load id: 1
+
+      account.click 'Delete Charge'
+
+      account.button('Update').successful?(self)
+
       expect(Account.first.charges.size).to eq 0
     end
 
