@@ -62,15 +62,12 @@ class CyclesController < ApplicationController
 
   def cycles_params
     params.require(:cycle)
-      .permit cycle_attributes, due_ons_attributes: due_ons_attributes
+      .permit %i(id name charged_in order cycle_type),
+              due_ons_attributes: due_ons_params
   end
 
-  def cycle_attributes
-    %i(name charged_in order cycle_type)
-  end
-
-  def due_ons_attributes
-    [:id, :cycle_id, :month, :day, :show_month, :show_day, :year, :_destroy]
+  def due_ons_params
+    %i(id cycle_id month day show_month show_day year _destroy)
   end
 
   def identity

@@ -79,11 +79,9 @@ class InvoicingsController < ApplicationController
   private
 
   def invoicing_params
-    params.require(:invoicing).permit invoicing_attributes
-  end
-
-  def invoicing_attributes
-    %i(property_range period_first period_last)
+    params
+      .require(:invoicing)
+      .permit %i(property_range period_first period_last)
   end
 
   def identity

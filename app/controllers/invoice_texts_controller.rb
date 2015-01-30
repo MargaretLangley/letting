@@ -4,12 +4,10 @@
 #
 # Restful actions on the InvoiceText resource
 #
-# InvoiceTexts are used to create invoices,
-# they hold data needed to produce heading,
-# F&L Adam's address, notes and items on invoice and
-# notice of rent due.
-# Front page is page 1 used by all invoices
-# Ground Rents also have age 2, back page, for legal advice
+# InvoiceTexts are used to create invoices, they hold data needed to produce
+# heading, business address, notes and items on invoice and notice of rent due.
+# Front page is page 1 used by all invoices Ground Rents also have page 2,
+# back page, for legal advice
 ####
 #
 class InvoiceTextsController < ApplicationController
@@ -37,13 +35,10 @@ class InvoiceTextsController < ApplicationController
   private
 
   def invoice_texts_params
-    params.require(:invoice_text).permit invoice_text_attributes,
-                                         address_attributes: address_params,
-                                         guides_attributes: guides_params
-  end
-
-  def invoice_text_attributes
-    %i(description invoice_name phone vat heading1 heading2 advice1 advice2)
+    params.require(:invoice_text).permit \
+      %i(description invoice_name phone vat heading1 heading2 advice1 advice2),
+      address_attributes: address_params,
+      guides_attributes: guides_params
   end
 
   def guides_params
