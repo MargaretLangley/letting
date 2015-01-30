@@ -41,6 +41,8 @@ namespace :db do
     logger.info 'db:import::accounts'
     Rake::Task['db:import:accounts'].invoke(human_ref_range)
     puts
+    logger.info 'db:set_autoincrement'
+    Rake::Task['db:set_autoincrement'].invoke
     exit 0
   end
 
