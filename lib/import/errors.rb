@@ -13,4 +13,5 @@ module DB
   class NotIdempotent < Error; end
   class PeriodUnknown < Error; end
   class PropertyRefUnknown < Error; end
+  class MonthUnknown < Error; end
 end

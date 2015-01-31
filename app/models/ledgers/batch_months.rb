@@ -11,10 +11,8 @@ class BatchMonths
   SEP = 9
   DEC = 12
 
-  def initialize(first:, last:, now:)
-    @first = first
-    @last = last
-    @now = now
+  def self.make(month:)
+    BatchMonths.new BatchMonths.batch_arguments(month: month)
   end
 
   def now_to_s
@@ -33,7 +31,27 @@ class BatchMonths
     Date::ABBR_MONTHNAMES[last]
   end
 
+  def mar?
+    now == MAR
+  end
+
   def to_s join: '/'
     "#{first_to_s}#{join}#{last_to_s}"
+  end
+
+  def self.batch_arguments(month:)
+    return { first: MAR, last: SEP, now: MAR  } if month == MAR
+    return { first: JUN, last: DEC, now: JUN  } if month == JUN
+    return { first: MAR, last: SEP, now: SEP  } if month == SEP
+    return { first: JUN, last: DEC, now: DEC  } if month == DEC
+    fail MonthUnknown, "Month argument #{month} is unknown"
+  end
+
+  private
+
+  def initialize(first:, last:, now:)
+    @first = first
+    @last = last
+    @now = now
   end
 end
