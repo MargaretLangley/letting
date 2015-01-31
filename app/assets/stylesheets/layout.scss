@@ -159,15 +159,6 @@
     padding: .3em 0 .3em $pad;
   }
 
-  /*
-    header padding of calendar element for invoicings
-    TODO: Don't know why it is padding against top of outer box
-          and not the search box?
-  */
-  .invoicings-padded {
-    padding: 2.2em .5em .5em;
-  }
-
   // 24 grid and all the factors (1,2,3,4,6,8,12) //
 
   .col-1-24 { @extend .width-1-24; }
