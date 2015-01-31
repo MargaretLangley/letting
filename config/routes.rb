@@ -14,6 +14,7 @@ Letting::Application.routes.draw do
 
   root 'properties#index'
   resources :arrears, only: [:index]
+  resources :client_payments, only: [:show]
   resources :clients
   resources :guides, only: [:index, :show, :edit, :update]
   resources :payments

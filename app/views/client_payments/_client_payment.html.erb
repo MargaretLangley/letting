@@ -1,8 +1,6 @@
 <% batch_months = BatchMonths.make(month: month) %>
 
-<h3>Payments collected <b><%= batch_months.now_to_s %></b> (<%= batch_months.first_to_s %>/<%= batch_months.last_to_s %>)
-                            <%= params[:years] %></h3>
-<%= render 'client_payments/accounts_heading' %>
+<%= render 'client_payments/accounts_heading', client_payment: client_payment, batch_months: batch_months %>
 <%= render 'client_payments/payments_made',
                client_payment: client_payment,
                batch_months: batch_months %>

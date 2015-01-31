@@ -26,11 +26,6 @@ class SearchController < ApplicationController
 
   private
 
-  def referer
-    (Rails.application.routes.recognize_path(request.referrer)[:controller])
-      .classify
-  end
-
   def literal_search
     @literal_search ||= LiteralSearch.search(type:  session[:search_model],
                                              query: params[:search_terms]).go

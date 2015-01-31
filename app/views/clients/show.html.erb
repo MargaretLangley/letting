@@ -1,4 +1,5 @@
 <% @title='View Client' %>
+<% client = @client_payment.client %>
 
 <div class='grid  shell-1-25  js-toggle-selection'>
   <div class='js-togglable'>
@@ -7,7 +8,7 @@
       <h3>Contact &hellip;</h3>
     </div>
     <div class='col-1-24'>
-      <%= edit_link @client, size: '2x' %>
+      <%= edit_link client, size: '2x' %>
     </div>
     <div class='col-1-24  no-r-pad'>
       <%= toggle_link direction: :down, size: '2x' %>
@@ -18,9 +19,9 @@
     <div class='col-1-3  bottom-spacer  grid-header'>Address</div>
 
 
-    <div class='col-1-3  grid-row  bottom-spacer'><%= @client.human_ref %></div>
-    <div class='col-1-3  bottom-spacer'><%= @client.full_name %></div>
-    <div class='col-1-3  bottom-spacer'><%= @client.address.first_line %></div>
+    <div class='col-1-3  grid-row  bottom-spacer'><%= client.human_ref %></div>
+    <div class='col-1-3  bottom-spacer'><%= client.full_name %></div>
+    <div class='col-1-3  bottom-spacer'><%= client.address.first_line %></div>
   </div>
 
   <div class='js-togglable  js-revealable'>
@@ -29,21 +30,21 @@
       <h3>Contact</h3>
     </div>
     <div class='col-1-24'>
-      <%= edit_link @client, size: '2x' %>
+      <%= edit_link client, size: '2x' %>
     </div>
     <div class='col-1-24  no-r-pad'>
       <%= toggle_link direction: :up, size: '2x'  %>
     </div>
 
     <div class='col-1-4  grid-row  bottom-spacer faded'>Client ID</div>
-    <div class='col-3-4  bottom-spacer'><%= @client.human_ref %></div>
+    <div class='col-3-4  bottom-spacer'><%= client.human_ref %></div>
 
     <div class='col-1-4  grid-row  bottom-spacer  faded'>Name</div>
-    <div class='col-3-4  bottom-spacer'><%= @client.full_name %></div>
+    <div class='col-3-4  bottom-spacer'><%= client.full_name %></div>
 
     <div class='col-1-4  grid-row  bottom-spacer  faded'>Address</div>
     <div class='col-3-4  bottom-1-line-spacer'>
-      <%= simple_format(@client.address.text, {}, wrapper_tag: 'div') %>
+      <%= simple_format(client.address.text, {}, wrapper_tag: 'div') %>
     </div>
   </div>
 </div>
@@ -52,7 +53,7 @@
   <div class='js-togglable'>
 
     <div class='col-23-24  grid-row'>
-      <h3 class='small-bottom'>Client's Properties <%= "(#{@client.properties.count})"  %> &hellip;</h3>
+      <h3 class='small-bottom'>Client's Properties <%= "(#{client.properties.count})"  %> &hellip;</h3>
     </div>
     <div class='col-1-24  no-r-pad'>
       <%= toggle_link direction: :down, size: '2x'  %>
@@ -67,7 +68,7 @@
     <div class='col-4-24  grid-header  bottom-spacer'>Postcode</div>
     <div class='col-2-24  grid-header  bottom-spacer'>&nbsp;</div>
 
-    <% @client.properties.limit(2).each do |property| %>
+    <% client.properties.limit(2).each do |property| %>
       <div title='View' class='table-row' data-link='<%= property_path(property) %>'>
         <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
            <%= property.human_ref %>
@@ -87,7 +88,7 @@
         <div class='col-2-24  bottom-spacer  inherit-row  nowrap'>&nbsp;</div>
       </div>
     <% end %>
-    <% if @client.properties.drop(2).present? %>
+    <% if client.properties.drop(2).present? %>
       <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
         &hellip;
       </div>
@@ -105,7 +106,7 @@
       </div>
     <% end %>
 
-    <% if @client.properties.empty? %>
+    <% if client.properties.empty? %>
       <%= render 'information/grid', information: 'The client has no properties.' %>
     <% end %>
   </div>
@@ -128,7 +129,7 @@
     <div class='col-4-24  grid-header  bottom-spacer'>Postcode</div>
     <div class='col-2-24  grid-header  bottom-spacer'>&nbsp;</div>
 
-    <% @client.properties.each do |property| %>
+    <% client.properties.each do |property| %>
       <div title='View' class='table-row' data-link='<%= property_path(property) %>'>
 
         <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
@@ -150,7 +151,7 @@
       </div>
     <% end %>
 
-    <% if @client.properties.empty? %>
+    <% if client.properties.empty? %>
       <%= render 'information/grid', information: 'The client has no properties.' %>
     <% end %>
   </div>
@@ -212,8 +213,7 @@
 
             <% batch_months = BatchMonths.make(month: month) %>
             <div id='<%= batch_months.now_to_s %>' class='tab <%= 'active' if batch_months.mar? %> vertical-line-spacer'>
-
-              <%= render 'client_payments/show', client_payment: @client_payment, month: month %>
+              <%= render 'client_payments/client_payment', client_payment: @client_payment, month: month %>
             </div> <!-- close #Mon -->
 
           <% end %>

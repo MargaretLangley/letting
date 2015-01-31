@@ -27,6 +27,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def referer
+    (Rails.application.routes.recognize_path(request.referrer)[:controller])
+      .classify
+  end
+
   def address_params
     %i(county district flat_no house_name nation road road_no town type \
        postcode)
