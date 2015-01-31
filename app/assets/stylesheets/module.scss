@@ -767,6 +767,7 @@ $search-height: 35px;
   position: absolute;
   text-align: center;
   width: 40%;
+  z-index: 10;   /*cannot think why flash shouldn't be on the top*/
 }
 
 /*
