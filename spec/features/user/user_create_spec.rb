@@ -8,7 +8,7 @@ describe 'User#create', type: :feature do
     user_page.load
 
     user_page.fill_form 'newuser', 'newuser@example.com', 'password', 'password'
-    user_page.button action: 'Create'
+    user_page.button 'Create'
     expect(user_page).to be_successful
     expect(page).to have_text 'newuser@example.com'
   end
@@ -16,7 +16,7 @@ describe 'User#create', type: :feature do
   it 'displays form errors' do
     user_page.load
 
-    user_page.button action: 'Create'
+    user_page.button 'Create'
     expect(user_page).to be_errored
   end
 end

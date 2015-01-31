@@ -19,8 +19,9 @@ class UserPage
     self
   end
 
-  def button(action:)
+  def button action
     click_on "#{action} User", exact: true
+    self
   end
 
   def fill_form(nickname, email, password, confirmation = password)

@@ -22,6 +22,7 @@ class ClientPage
 
   def button action
     click_on "#{action} Client", exact: true
+    self
   end
 
   def click choice

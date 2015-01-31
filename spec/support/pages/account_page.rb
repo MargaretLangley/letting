@@ -30,8 +30,8 @@ class AccountPage
     self
   end
 
-  def click choice
-    click_on choice, exact: true
+  def delete_charge
+    click_on 'Delete Charge', exact: true
   end
 
   def expect_property(spec, property_id:, client_id:)

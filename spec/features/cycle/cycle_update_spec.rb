@@ -18,7 +18,7 @@ describe 'Cycle#update', :ledgers, type: :feature do
       cycle_page.choose 'Arrears'
       cycle_page.order = '44'
       cycle_page.due_on month: 6, day: 24
-      cycle_page.do 'Update Cycle'
+      cycle_page.button 'Update Cycle'
 
       expect(cycle_page).to be_success
       expect(Cycle.first.name).to eq 'Jun/Dec'
@@ -40,7 +40,7 @@ describe 'Cycle#update', :ledgers, type: :feature do
       cycle_page.choose 'Arrears'
       cycle_page.order = '21'
       cycle_page.due_on day: 12, month: 0
-      cycle_page.do 'Update Cycle'
+      cycle_page.button 'Update Cycle'
 
       expect(cycle_page).to be_success
       expect(Cycle.first.name).to eq 'New Monthly'
@@ -52,7 +52,7 @@ describe 'Cycle#update', :ledgers, type: :feature do
     cycle_page = CyclePage.new
 
     cycle_page.load id: 1
-    cycle_page.do 'Cancel'
+    cycle_page.button 'Cancel'
     expect(page.title).to eq 'Letting - Cycles'
   end
 
@@ -62,7 +62,7 @@ describe 'Cycle#update', :ledgers, type: :feature do
     cycle_page = CyclePage.new
     cycle_page.load id: 1
     cycle_page.name = ''
-    cycle_page.do 'Update Cycle'
+    cycle_page.button 'Update Cycle'
     expect(cycle_page).to be_errored
   end
 end

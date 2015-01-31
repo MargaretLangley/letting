@@ -10,7 +10,7 @@ describe 'User#update', type: :feature do
     expect(page.title).to eq 'Letting - Edit User'
 
     user_page.fill_form 'nother', 'nother@example.com', 'pass', 'pass'
-    user_page.button action: 'Update'
+    user_page.button 'Update'
     expect(user_page).to be_successful
   end
 
@@ -18,7 +18,7 @@ describe 'User#update', type: :feature do
     user_create id: 4
     user_page.load id: 4
     user_page.fill_form 'nother', 'nother&example.com', 'pass', 'pass'
-    user_page.button action: 'Update'
+    user_page.button 'Update'
     expect(user_page).to be_errored
   end
 end

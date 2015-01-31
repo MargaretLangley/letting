@@ -3,7 +3,7 @@
 #
 # Encapsulates the Address Page (new/create/edit/update)
 #
-# The layer hides the capybara calls to make the functional rspec tests that
+# The layer hides the Capybara calls to make the functional rspec tests that
 # use this class simpler.
 #####
 #

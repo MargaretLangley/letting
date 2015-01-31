@@ -70,7 +70,7 @@ describe 'Property#Update', type: :feature  do
       account.load id: 1
       expect(Account.first.charges.size).to eq 1
 
-      account.click 'Delete Charge'
+      account.delete_charge
 
       account.button('Update').successful?(self)
 

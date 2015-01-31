@@ -25,6 +25,11 @@ class CyclePage
     self
   end
 
+  def button action
+    click_on action, exact: true
+    self
+  end
+
   def name= value
     fill_in 'Name', with: value
     self
@@ -36,11 +41,6 @@ class CyclePage
 
   def order= value
     fill_in 'Order', with: value
-    self
-  end
-
-  def do value
-    click_on value, exact: true
     self
   end
 
