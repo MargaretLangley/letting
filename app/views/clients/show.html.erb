@@ -188,9 +188,13 @@
     <%= form_tag client_path, class: 'no-print', id: 'client_payment', method: 'get' do %>
 
       <div class='col-3-24  grid-row  vertical-line-spacer  faded'>Payments in</div>
-      <div class='col-21-24  vertical-line-spacer'>
+      <div class='col-16-24  vertical-line-spacer'>
         <%= select_tag 'years', options_for_select(@client_payment.years, selected: params[:years]), onchange: "$('#client_payment').submit();" %>
         <%= hidden_field_tag :selected, 'true' %>
+      </div>
+      <div class='col-3-24 vertical-line-spacer'>
+
+         <%= link_to 'print', '#', class: 'js-print_section' %>
       </div>
     <% end %>
 
@@ -207,7 +211,9 @@
           <li><%= link_to "#Dec" do %><h4>Jun/<b>Dec</b></h4><% end %></li>
         </ul>
 
-        <div class='grid  tab-content'>
+
+          <div id='print-account'  class='grid  tab-content'>
+
 
           <% [BatchMonths::MAR, BatchMonths::SEP, BatchMonths::JUN, BatchMonths::DEC].each do |month| %>
 

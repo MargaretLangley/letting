@@ -1,0 +1,13 @@
+
+div#for_screen_display {
+  display:none;
+}
+
+div#for_print_display {
+  display:print;
+  font-size: 3.369em;
+}
+
+div#grid {
+float: left;
+color: blue;}
