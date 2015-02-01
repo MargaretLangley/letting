@@ -14,7 +14,7 @@
 #
 class CyclesController < ApplicationController
   def index
-    @cycles = Cycle.order(:order)
+    @cycles = Cycle.by_order
   end
 
   def show

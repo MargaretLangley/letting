@@ -54,6 +54,8 @@ class Cycle < ActiveRecord::Base
     [charged_in, due_ons.sort] <=> [other.charged_in, other.due_ons.sort]
   end
 
+  scope :by_order, -> { order(order: :asc) }
+
   def to_s
     "cycle: #{name}, type: #{cycle_type}, charged_in: #{charged_in}, " +
       due_ons.to_s
