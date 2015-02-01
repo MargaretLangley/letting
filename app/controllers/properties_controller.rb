@@ -16,9 +16,7 @@
 #
 class PropertiesController < ApplicationController
   def index
-    @records = Property.includes(:account,
-                                 :address,
-                                 :client).page(params[:page]).load
+    @records = Property.by_human_ref.page(params[:page]).load
   end
 
   def show

@@ -81,6 +81,10 @@ class Property < ActiveRecord::Base
       })
   end
 
+  def self.by_human_ref
+    order(:human_ref).includes(:account, :address, :client)
+  end
+
   def self.houses
     where("human_ref <= #{MAX_HOUSE_HUMAN_REF}")
   end
