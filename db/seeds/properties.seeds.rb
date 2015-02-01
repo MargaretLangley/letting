@@ -8,7 +8,7 @@
 # 3  3003      2       3  Prop Mr    J W    Hearne
 # 4  4004      3       4  Prop Mr    J D B  Robertson
 
-after 'agents' do
+after 'clients', 'agents' do
 
   class << self
     def create_entities
