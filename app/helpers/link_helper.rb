@@ -103,7 +103,6 @@ module LinkHelper
             disabled: disabled
   end
 
-
   def hover_grow(disabled:)
     return '' if disabled
     'hvr-grow'

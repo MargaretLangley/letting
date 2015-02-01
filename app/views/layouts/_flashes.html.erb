@@ -1,17 +1,21 @@
-<% flash.each do |key, value| %>
-  <div class="js-slow-time flash <%= key %>">
-    <% case key.to_sym %>
-    <% when :save %>
-      <%= fa_icon 'save lg', title: 'save' %>
-    <% when :good %>
-      <%= fa_icon 'info lg', title: 'Information' %>
-    <% when :problem %>
-      <%= fa_icon 'question lg', title: 'Problem' %>
-    <% when :delete %>
-      <%= fa_icon 'trash lg', title: 'delete' %>
-    <% else  %>
-      <%= fa_icon 'frown-o lg', title: 'Unknown' %>
-    <% end  %>
-    &nbsp;<%= content_tag(:message, value) %>
+<% flash.each do |state, message| %>
+  <div class="js-slow-time flash <%= state %>">
+    <div class='col-2-24  grid-row'>
+      <% case state.to_sym %>
+      <% when :save %>
+        <%= fa_icon 'save 2x', title: 'save' %>
+      <% when :good %>
+        <%= fa_icon 'info-circle 2x', title: 'Information' %>
+      <% when :problem %>
+        <%= fa_icon 'question 2x', title: 'Problem' %>
+      <% when :delete %>
+        <%= fa_icon 'trash 2x', title: 'delete' %>
+      <% else  %>
+        <%= fa_icon 'frown-o 2x', title: 'Unknown' %>
+      <% end  %>
+    </div>
+    <div class='col-22-24'>
+      <%= content_tag(:message, message) %>
+    </div>
   </div>
 <% end %>
