@@ -27,6 +27,10 @@ class Client < ActiveRecord::Base
 
   delegate :clear_up_form, to: :entities
 
+  def self.by_human_ref
+    order(:human_ref).includes(:address)
+  end
+
   def to_s
     address.name_and_address name: full_name
   end
