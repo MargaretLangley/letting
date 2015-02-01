@@ -5,9 +5,9 @@ describe 'User#update', type: :feature do
   before(:each) { log_in admin_attributes }
 
   it 'completes basic' do
-    user_create id: 3
-    user_page.load id: 3
-    expect(page.title).to eq 'Letting - Edit User'
+    user = user_create
+    user_page.load id: user.id
+    expect(user_page.title).to eq 'Letting - Edit User'
 
     user_page.fill_form 'nother', 'nother@example.com', 'pass', 'pass'
     user_page.button 'Update'
@@ -15,8 +15,8 @@ describe 'User#update', type: :feature do
   end
 
   it 'displays form errors' do
-    user_create id: 4
-    user_page.load id: 4
+    user = user_create
+    user_page.load id: user.id
     user_page.fill_form 'nother', 'nother&example.com', 'pass', 'pass'
     user_page.button 'Update'
     expect(user_page).to be_errored
