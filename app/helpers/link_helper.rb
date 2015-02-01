@@ -85,6 +85,7 @@ module LinkHelper
 
   def app_link(icon:,
                size: 'lg',
+               text: '',
                path: '#',
                css: 'plain-button',
                js_css: '',
@@ -93,13 +94,19 @@ module LinkHelper
                title:,
                disabled: false)
 
-    link_to fa_icon("#{icon} #{size}"),
+    link_to fa_icon("#{icon} #{size}", text: text),
             path,
-            class: "hvr-grow  #{css}  #{js_css}",
+            class: "#{hover_grow(disabled: disabled)}  #{css}  #{js_css}",
             title: "#{title}#{disabled ? ' (disabled)' : '' }",
             method: method,
             data: data,
             disabled: disabled
+  end
+
+
+  def hover_grow(disabled:)
+    return '' if disabled
+    'hvr-grow'
   end
 
   def hover(direction:)
