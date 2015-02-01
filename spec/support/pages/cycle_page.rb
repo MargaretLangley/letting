@@ -50,9 +50,9 @@ class CyclePage
     if type == :term
       fill_in "#{id_stem}_month", with: month
       fill_in "#{id_stem}_year", with: year
+      fill_in "#{id_stem}_show_month", with: show_month if show_month
+      fill_in "#{id_stem}_show_day", with: show_day if show_day
     end
-    fill_in "#{id_stem}_show_month", with: show_month if show_month
-    fill_in "#{id_stem}_show_day", with: show_day if show_day
     self
   end
 
