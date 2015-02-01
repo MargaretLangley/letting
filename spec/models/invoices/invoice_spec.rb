@@ -37,7 +37,7 @@ RSpec.describe Invoice, type: :model do
     describe '#prepare' do
       it 'prepares invoice_date' do
         invoice_text_create id: 1
-        property = property_create account: account_new, client: client_create
+        property = property_create account: account_new
 
         (invoice = Invoice.new)
           .prepare invoice_date: '2014-06-30',

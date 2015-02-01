@@ -88,10 +88,7 @@ describe 'Property#Update', type: :feature  do
   end
 
   context 'Agentless with charge' do
-    before(:each) do
-      log_in
-      client_create
-    end
+    before { log_in }
 
     it 'can be set to dormant', js: true do
       property_create \
@@ -113,8 +110,8 @@ describe 'Property#Update', type: :feature  do
       log_in
       agent = agent_new entities: [Entity.new(name: 'Willis')],
                         address: address_new(road: 'Wiggiton')
-      client_create \
-        properties: property_new(id: 1, account: account_new, agent: agent)
+
+      property_create id: 1, account: account_new, agent: agent
       account.load id: 1
     end
 

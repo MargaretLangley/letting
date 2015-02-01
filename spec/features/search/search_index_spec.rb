@@ -20,13 +20,17 @@ describe 'Search index', type: :feature do
     end
 
     it 'indexes full-text search' do
+      client = client_create
       property_create human_ref: 111,
+                      client: client,
                       account: account_new,
                       address: address_new(county: 'Worcester')
       property_create human_ref: 222,
+                      client: client,
                       account: account_new,
                       address: address_new(county: 'West Midlands')
       property_create human_ref: 333,
+                      client: client,
                       account: account_new,
                       address: address_new(county: 'West Midlands')
       Property.import force: true, refresh: true

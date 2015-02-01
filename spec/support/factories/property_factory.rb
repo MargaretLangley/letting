@@ -6,7 +6,7 @@ def property_new \
   occupiers: [Entity.new(title: 'Mr', initials: 'W G', name: 'Grace')],
   address: address_new,
   account: nil,
-  client: nil,
+  client: client_new,
   agent: nil,
   prepare: false
 
@@ -27,7 +27,7 @@ def property_create \
   occupiers: [Entity.new(title: 'Mr', initials: 'W G', name: 'Grace')],
   address: address_new,
   account: nil,
-  client: nil,
+  client: client_create,
   agent: nil,
   prepare: false
 

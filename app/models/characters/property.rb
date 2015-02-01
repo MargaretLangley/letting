@@ -20,7 +20,7 @@ class Property < ActiveRecord::Base
   accepts_nested_attributes_for :agent, allow_destroy: true
 
   validates :human_ref, numericality: true, uniqueness: true
-  validates :agent, :entities, presence: true
+  validates :client, :agent, :entities, presence: true
   before_validation :clear_up_form
 
   delegate :abridged_text, to: :address

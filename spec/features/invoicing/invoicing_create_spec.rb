@@ -130,7 +130,7 @@ describe 'Invoicing#create', type: :feature do
 
     cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
     charge = charge_new(payment_type: 'manual', cycle: cycle)
-    account_create property: property_new(human_ref: 9, client: client_new),
+    account_create property: property_new(human_ref: 9),
                    charges: [charge],
                    credits: [credit_new(charge: charge,
                                         at_time: '2000-1-1',
@@ -151,7 +151,7 @@ describe 'Invoicing#create', type: :feature do
         Timecop.travel '2013-6-1'
 
         cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
-        account_create property: property_new(human_ref: 9, client: client_new),
+        account_create property: property_new(human_ref: 9),
                        charges: [charge_new(payment_type: 'automatic',
                                             cycle: cycle)]
         invoicing_page.enter
@@ -172,7 +172,7 @@ describe 'Invoicing#create', type: :feature do
         Timecop.travel '2013-6-1'
 
         cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
-        account_create property: property_new(human_ref: 9, client: client_new),
+        account_create property: property_new(human_ref: 9),
                        charges: [charge_new(payment_type: 'manual',
                                             cycle: cycle)]
         invoicing_page.enter
@@ -224,8 +224,7 @@ describe 'Invoicing#create', type: :feature do
   end
 
   def create_account(human_ref:, cycle:)
-    account_create property: property_new(human_ref: human_ref,
-                                          client: client_new),
+    account_create property: property_new(human_ref: human_ref),
                    charges: [charge_new(cycle: cycle)]
   end
 end

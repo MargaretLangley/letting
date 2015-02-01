@@ -7,9 +7,10 @@ describe 'Property#index', type: :feature do
   before(:each) { log_in }
 
   it 'basic' do
-    property_create human_ref: 111, account: account_new
-    property_create human_ref: 222, account: account_new
-    property_create human_ref: 333, account: account_new
+    client = client_create
+    property_create human_ref: 111, client: client, account: account_new
+    property_create human_ref: 222, client: client, account: account_new
+    property_create human_ref: 333, client: client, account: account_new
 
     visit '/accounts/'
     # shows more than one row

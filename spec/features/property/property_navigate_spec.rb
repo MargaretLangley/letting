@@ -31,14 +31,14 @@ describe 'Property navigate', type: :feature do
 
   describe 'from show page' do
     it 'goes to index page' do
-      property_create id: 1, account: account_new, client: client_new
+      property_create id: 1, account: account_new
       visit '/accounts/1'
       click_on 'Accounts'
       expect(page.title).to eq 'Letting - Accounts'
     end
 
     it 'goes to edit page' do
-      property_create id: 1, account: account_new, client: client_new
+      property_create id: 1, account: account_new
       visit '/accounts/1'
 
       first(:link, 'Edit').click
