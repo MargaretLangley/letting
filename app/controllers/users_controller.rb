@@ -14,7 +14,7 @@
 #
 class UsersController < ApplicationController
   def index
-    @users = User.default.page(params[:page]).load
+    @users = User.by_nickname.page(params[:page]).load
   end
 
   def show

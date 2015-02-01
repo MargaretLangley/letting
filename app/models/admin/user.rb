@@ -12,7 +12,7 @@
 #
 class User < ActiveRecord::Base
   enum role: [:user, :admin]
-  scope :default, -> { order(:nickname) }
+  scope :by_nickname, -> { order(:nickname) }
 
   has_secure_password
   validates :nickname, presence: true
