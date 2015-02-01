@@ -13,7 +13,7 @@ describe 'Cycle#update', :ledgers, type: :feature do
       cycle_page = CyclePage.new type: :term
 
       cycle_page.load id: 1
-      expect(page.title).to eq 'Letting - Edit Cycle'
+      expect(cycle_page.title).to eq 'Letting - Edit Cycle'
       cycle_page.name = 'Jun/Dec'
       cycle_page.choose 'Arrears'
       cycle_page.order = '44'
@@ -53,7 +53,7 @@ describe 'Cycle#update', :ledgers, type: :feature do
 
     cycle_page.load id: 1
     cycle_page.button 'Cancel'
-    expect(page.title).to eq 'Letting - Cycles'
+    expect(cycle_page.title).to eq 'Letting - Cycles'
   end
 
   it 'can error' do

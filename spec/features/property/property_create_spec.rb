@@ -9,7 +9,7 @@ describe 'Property#create', type: :feature do
 
   it 'opens valid page', js: true  do
     account.load
-    expect(page.title).to eq 'Letting - New Account'
+    expect(account.title).to eq 'Letting - New Account'
     expect(page).to have_css('.spec-entity-count', count: 1)
   end
 
@@ -41,7 +41,7 @@ describe 'Property#create', type: :feature do
     account.load
     account.property self, property_id: '-278', client_id: 8008
     account.button 'Create'
-    expect(page.title).to eq 'Letting - New Account'
+    expect(account.title).to eq 'Letting - New Account'
     expect(page).to have_text 'The property could not be saved.'
   end
 

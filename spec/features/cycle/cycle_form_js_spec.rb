@@ -10,7 +10,7 @@ describe 'Cycle#create', :ledgers, type: :feature do
       expect(Cycle.first.due_ons.count).to eq 1
 
       cycle_page.load id: 1
-      expect(page.title).to eq 'Letting - Edit Cycle'
+      expect(cycle_page.title).to eq 'Letting - Edit Cycle'
       cycle_page.button 'Add Due Date'
       cycle_page.due_on order: 1, month: 9, day: 29
       cycle_page.button 'Update Cycle'
@@ -26,7 +26,7 @@ describe 'Cycle#create', :ledgers, type: :feature do
       expect(Cycle.first.due_ons.count).to eq 2
 
       cycle_page.load id: 1
-      expect(page.title).to eq 'Letting - Edit Cycle'
+      expect(cycle_page.title).to eq 'Letting - Edit Cycle'
       cycle_page.button 'Delete Due Date'
       cycle_page.button 'Update Cycle'
 

@@ -7,7 +7,7 @@ describe 'Cycle#create', :ledgers, type: :feature do
     it 'creates a cycle' do
       cycle_page = CyclePage.new type: :term
       cycle_page.load
-      expect(page.title).to eq 'Letting - New Term Cycle'
+      expect(cycle_page.title).to eq 'Letting - New Term Cycle'
       cycle_page.name = 'April'
       cycle_page.choose 'Advance'
       cycle_page.order = '44'
@@ -28,7 +28,7 @@ describe 'Cycle#create', :ledgers, type: :feature do
     it 'creates a cycle' do
       cycle_page = CyclePage.new type: :monthly
       cycle_page.load
-      expect(page.title).to eq 'Letting - New Monthly Cycle'
+      expect(cycle_page.title).to eq 'Letting - New Monthly Cycle'
       cycle_page.name = 'Monthly'
       cycle_page.choose 'Arrears'
       cycle_page.order = '44'

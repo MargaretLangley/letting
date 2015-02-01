@@ -16,7 +16,7 @@ describe 'Property#Update', type: :feature  do
 
     it 'opens valid page', js: true  do
       account.load id: 1
-      expect(page.title).to eq 'Letting - Edit Account'
+      expect(account.title).to eq 'Letting - Edit Account'
       account.expect_property self, property_id: '80', client_id: '90'
       account.expect_address self,
                              type: '#property_address',
