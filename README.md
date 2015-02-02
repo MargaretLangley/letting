@@ -151,6 +151,15 @@ these commands completely remove it. (Rebooting the box, if applicable, restores
 3. Listing all databases: `\list`
 4. Connect to a database: `\c db_name`
 
+Elasticsearch
+
+1) Forced Re-index:    rake elasticsearch:sync
+1) Find Cluster name:  curl -XGET 'http://localhost:9200/_nodes'
+2) Find All indexes:   curl -XGET "localhost:9200/_stats/indices?pretty=true"
+                       example: development_properties
+3) Index Structure:    curl -XGET 'http://127.0.0.1:9200/my_index/_mapping?pretty=1'
+4) Return Records:     curl -XGET "localhost:9200/my_index/_search?pretty=true"
+
 ===
 
 ####5 Production Client
