@@ -6,11 +6,11 @@
     <div class='col-23-24  grid-row  bottom-1-line-spacer  spacer-column'>
       <%= f.hidden_field :cycle_type, cycle_type: 'monthly' %>
 
-      <div class='col-5-24  grid-row  bottom-spacer faded'><%= f.label :name %></div>
+      <div class='col-5-24  grid-row  bottom-spacer faded'><%= f.label :name, class: 'required' %></div>
       <div class='col-13-24  bottom-spacer'><%= f.text_field :name %></div>
 
       <div class='col-5-24  grid-row  bottom-spacer  faded'>
-        <%= f.label :charged_in %>
+        <%= f.label :charged_in, class: 'required' %>
         <%= f.hidden_field :cycle_type, cycle_type: 'term' %>
       </div>
       <div class='col-3-24  bottom-spacer  faded'>
@@ -26,19 +26,25 @@
       <div class='col-2-24  bottom-spacer  faded'>
         <%= f.radio_button :charged_in, ChargedInDefaults::MODERN_ARREARS.to_s %>
       </div>
-      <div class='col-5-24  grid-row  bottom-spacer  faded'><%= f.label :order %></div>
+      <div class='col-5-24  grid-row  bottom-spacer  faded'>
+        <%= f.label :order, class: 'required' %>
+      </div>
       <div class='col-2-24  bottom-spacer '>
-        <%= f.text_field :order, class: 'r-align'%>
+        <%= f.text_field :order, class: 'r-align' %>
       </div>
 
       <%= f.fields_for :due_ons, cycle.due_ons.first  do |builder| %>
 
-        <div class='col-5-24  grid-row  bottom-spacer  faded'>Due On Day</div>
+        <div class='col-5-24  grid-row  bottom-spacer  faded  required'>
+          Due On Day
+        </div>
         <div class='col-2-24  bottom-spacer'>
           <%= builder.text_field :day, class: 'r-align' %>
         </div>
         <div class='col-1-24  bottom-spacer'>&nbsp;</div>
-        <div class='col-5-24  bottom-spacer  faded'>Shown On Day</div>
+        <div class='col-5-24  bottom-spacer  faded  required'>
+          Shown On Day
+        </div>
         <div class='col-2-24  bottom-spacer'>
           <%= builder.text_field :show_day, class: 'r-align' %>
         </div>

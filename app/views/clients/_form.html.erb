@@ -11,8 +11,8 @@
         <%= f.text_field :human_ref, autofocus: true, class: 'width-1-1' %>
       </div>
 
-      <div class='col-1-4  grid-row  top-1-line-spacer'>
-        <%= f.label :name, class: 'required  faded' %>
+      <div class='col-1-4  grid-row  top-1-line-spacer  faded'>
+        <%= f.label :name, class: 'required' %>
       </div>
       <div class='col-3-4  top-1-line-spacer'>
         <%= render 'entities/form', f: f, entitieable: client %>

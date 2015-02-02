@@ -7,11 +7,13 @@
 
       <%= f.hidden_field :cycle_type, cycle_type: 'term' %>
 
-      <div class='col-5-24  grid-row  bottom-spacer  faded'><%= f.label :name %></div>
+      <div class='col-5-24  grid-row  bottom-spacer  faded'>
+        <%= f.label :name,  class: 'required' %>
+      </div>
       <div class='col-13-24  bottom-spacer'><%= f.text_field :name %></div>
 
       <div class='col-5-24  grid-row  vertical-spacer faded'>
-        <%= f.label :charged_in %>
+        <%= f.label :charged_in,  class: 'required' %>
         <%= f.hidden_field :cycle_type, cycle_type: 'term' %>
       </div>
       <div class='col-3-24  vertical-spacer  faded'>
@@ -28,16 +30,18 @@
         <%= f.radio_button :charged_in, ChargedInDefaults::MODERN_ARREARS.to_s %>
       </div>
 
-      <div class='col-5-24  grid-row  vertical-spacer  faded'><%= f.label :order %></div>
-      <div class='col-2-24  vertical-spacer'>
-        <%= f.text_field :order, class: 'r-align' %>
+      <div class='col-5-24  grid-row  vertical-spacer  faded'>
+        <%= f.label :order,  class: 'required' %>
+      </div>
+      <div class='col-2-24  vertical-spacer  r-align'>
+        <%= f.text_field :order %>
       </div>
 
       <div class='js-group-toggle'>
 
         <div class='col-5-24  grid-row  top-1-line-spacer  faded'>Due On</div>
-        <div class='col-8-24  top-1-line-spacer  faded  c-align'>Due Dates</div>
-        <div class='col-6-24  top-1-line-spacer  faded  c-align'>Shown Dates</div>
+        <div class='col-8-24  top-1-line-spacer  faded  c-align  required'>Due Dates</div>
+        <div class='col-6-24  top-1-line-spacer  faded  c-align  required'>Shown Dates</div>
         <div class='col-5-24  top-1-line-spacer'>&nbsp;</div>
 
         <div class='col-5-24  grid-row  vertical-spacer'>&nbsp;</div>
@@ -64,6 +68,7 @@
               <%= builder.text_field :year, class: 'r-align  width-1-1  js-clear' %>
             </div>
             <div class='col-1-24  bottom-spacer'>&nbsp;</div>
+
             <div class='col-2-24  bottom-spacer'>
               <%= builder.text_field :show_month, class: 'r-align  width-1-1  js-clear' %>
             </div>
