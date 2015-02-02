@@ -40,8 +40,8 @@
       <div class='js-group-toggle'>
 
         <div class='col-5-24  grid-row  top-1-line-spacer  faded'>Due On</div>
-        <div class='col-8-24  top-1-line-spacer  faded  c-align  required'>Due Dates</div>
-        <div class='col-6-24  top-1-line-spacer  faded  c-align  required'>Shown Dates</div>
+        <div class='col-8-24  top-1-line-spacer  faded  c-align'>Due Dates</div>
+        <div class='col-6-24  top-1-line-spacer  faded  c-align'>Shown Dates</div>
         <div class='col-5-24  top-1-line-spacer'>&nbsp;</div>
 
         <div class='col-5-24  grid-row  vertical-spacer'>&nbsp;</div>
@@ -68,7 +68,8 @@
               <%= builder.text_field :year, class: 'r-align  width-1-1  js-clear' %>
             </div>
             <div class='col-1-24  bottom-spacer'>&nbsp;</div>
-            <div class='col-2-24  bottom-spacer'>
+
+            <div class='col-3-24  bottom-spacer'>
               <%= builder.text_field :show_month, class: 'r-align  width-1-1  js-clear' %>
             </div>
             <div class='col-3-24  bottom-spacer'>
