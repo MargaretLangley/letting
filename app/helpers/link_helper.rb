@@ -93,14 +93,21 @@ module LinkHelper
                method: nil,
                title:,
                disabled: false)
-
-    link_to fa_icon("#{icon} #{size}", text: text),
-            path,
-            class: "#{hover_grow(disabled: disabled)}  #{css}  #{js_css}",
-            title: "#{title}#{disabled ? ' (disabled)' : '' }",
-            method: method,
-            data: data,
-            disabled: disabled
+    if disabled == false
+      link_to fa_icon("#{icon} #{size}", text: text),
+              path,
+              class: "#{hover_grow(disabled: disabled)}  #{css}  #{js_css}",
+              title: "#{title}#{disabled ? ' (disabled)' : '' }",
+              method: method,
+              data: data,
+              disabled: disabled
+    else
+      fa_icon("#{icon} #{size}",
+              text: text,
+              class: 'plain-button',
+              disabled: true,
+              title: "#{title} (disabled)")
+    end
   end
 
   def hover_grow(disabled:)
