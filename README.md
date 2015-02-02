@@ -11,14 +11,17 @@ This document covers the following sections
 
 ####Content
 1. Project Setup
-  1. Development
-  2. Production
+  1. Development Setup
+  2. Server Setup
 2. Commands
   1. rake db:import
 3. Troubleshooting
-  1. Reset the database
-  2. Running rails console in production
-  3. Cheatsheet
+  1. Cleaning Production Setup
+  2. Reset the database
+  3. Running rails console in production
+  4. Disabling the Firewall
+4. Cheatsheet
+5. Production Client
 
 
 ===
@@ -80,19 +83,6 @@ Repeat each time you want to delete and restore the database.
 My Reference: Webserver alias: `ssh arran`
 
 
-####1.2. Cleaning Production Setup
-
-1. `sudo rm -rf ~/apps/`
-2. `sudo rm /tmp/unicorn.letting_*.sock`
-3. `sudo -u postgres psql`
-4. `postgres=# drop database letting_<environment>;`
-4.1 if you have outstanding backend connections:
-    `SELECT pid FROM pg_stat_activity where pid <> pg_backend_pid();`
-    Then for each connection:
-    `SELECT pg_terminate_backend($1);`
-5. System can then have Production setup again
-
-===
 
 ####2. COMMANDS
 
@@ -115,7 +105,22 @@ My Reference: Webserver alias: `ssh arran`
 
 ####3. TROUBLESHOOTING
 
-####3.1. Reset the database
+####3.1. Cleaning Production Setup
+
+1. `sudo rm -rf ~/apps/`
+2. `sudo rm /tmp/unicorn.letting_*.sock`
+3. `sudo -u postgres psql`
+4. `postgres=# drop database letting_<environment>;`
+4.1 if you have outstanding backend connections:
+    `SELECT pid FROM pg_stat_activity where pid <> pg_backend_pid();`
+    Then for each connection:
+    `SELECT pg_terminate_backend($1);`
+5. System can then have Production setup again
+
+===
+
+
+####3.2. Reset the database
 Sometimes when you are changing a project the database will not allow you to delete it due to open connections to it. If you cannot close the connections you will have to reset the database. If this is the case follow this:
 
 1. `cap production rails:rake:db:drop`
@@ -127,10 +132,10 @@ Sometimes when you are changing a project the database will not allow you to del
 4. `cap <environment> db:push`
   1. The data has been deleted by the drop this puts it back.
 
-####3.2 Running rails console in production
+####3.3 Running rails console in production
 `bundle exec rails c production`
 
-####3.3 Disabling the Firewall
+####3.4 Disabling the Firewall
 
 If an operation is not completing and you suspect a firewall issue
 these commands completely remove it. (Rebooting the box, if applicable, restores the firewall)
@@ -140,10 +145,13 @@ these commands completely remove it. (Rebooting the box, if applicable, restores
     iptables -P FORWARD ACCEPT
     iptables -F
 
-####3.4 Cheatsheet
+####4 Cheatsheet
 1. change to Postgres user and open psql prompt `sudo -u postgres psql postgres`
 2. Listing Users (roles) and attributes: `\du`
 3. Listing all databases: `\list`
 4. Connect to a database: `\c db_name`
 
 ===
+
+####5 Production Client
+On release of the version go through the checklist in docs/production_checklist
