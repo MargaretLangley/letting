@@ -2,7 +2,7 @@
   <h3>Payments collected <b><%= batch_months.now_to_s %></b> (<%= batch_months.first_to_s %>/<%= batch_months.last_to_s %>)
                             <%= params[:years] %></h3>
 </div>
-<div class='col-4-24  bottom-spacer'>
+<div class='col-4-24  bottom-spacer  no-print'>
   <%= link_to fa_icon('print lg', text: "Print #{batch_months.now_to_s}"), client_payment_path(client_payment.client_id, month: batch_months.now, selected: true), class: 'float-right' %>
 </div>
 
