@@ -26,9 +26,16 @@ module Searchable
 
   included do
     include Elasticsearch::Model
-    include Elasticsearch::Model::Callbacks
     # collection is pluralized version of the model_name
     index_name [Rails.env, model_name.collection.gsub(/\//, '-')].join('_')
+
+    after_commit on: [:create, :update] do
+      __elasticsearch__.index_document
+    end
+
+    after_commit on: [:destroy] do
+      __elasticsearch__.delete_document
+    end
 
     settings(
       index: {
