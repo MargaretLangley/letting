@@ -17,6 +17,7 @@ module PropertyHelper
   # Create client information from property
   #
   def client_to_s property
-    "#{property.client.try(:human_ref)} #{property.client.try(:entities).try(:full_name)}".strip
+    "#{property.client.try(:human_ref)}" \
+      " #{property.client.try(:entities).try(:full_name)}".strip
   end
 end
