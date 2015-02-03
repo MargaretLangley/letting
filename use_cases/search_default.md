@@ -1,5 +1,5 @@
 Actors: User
-Goal: Default search results for Cycles, Users, Invoice Text
+Goal: Default search results for Arrear, Cycle, User, InvoiceText
 
 Main success scenario
 

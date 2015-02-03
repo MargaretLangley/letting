@@ -30,7 +30,7 @@ class LiteralSearch
     when 'Client' then client(query)
     when 'Payment' then payment(query)
     when 'Property' then property(query)
-    when 'Cycle', 'User', 'InvoiceText' then LiteralResult.missing
+    when 'Arrear', 'Cycle', 'User', 'InvoiceText' then LiteralResult.missing
     else
       fail NotImplementedError, "Missing type: #{type}"
     end
