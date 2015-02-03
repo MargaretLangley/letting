@@ -27,11 +27,10 @@ class LiteralSearch
 
   def type_query
     case type
-    when 'Cycle' then cycle(query)
     when 'Client' then client(query)
     when 'Payment' then payment(query)
     when 'Property' then property(query)
-    when 'User' then user(query)
+    when 'Cycle', 'User', 'InvoiceText' then LiteralResult.missing
     else
       fail NotImplementedError, "Missing type: #{type}"
     end
@@ -42,13 +41,7 @@ class LiteralSearch
   def client query
     LiteralResult.new action: 'show',
                       controller: 'clients',
-                      id: id_or_nil(Client.find_by human_ref: query)
-  end
-
-  def cycle query
-    LiteralResult.new action: 'show',
-                      controller: 'cycles',
-                      id: id_or_nil(Cycle.find_by name: query)
+                      id: id_or_nil(Client.find_by_human_ref query)
   end
 
   def payment query
@@ -61,13 +54,7 @@ class LiteralSearch
   def property query
     LiteralResult.new action: 'show',
                       controller: 'properties',
-                      id: id_or_nil(Property.find_by human_ref: query)
-  end
-
-  def user query
-    LiteralResult.new action: 'show',
-                      controller: 'users',
-                      id: id_or_nil(User.find_by nickname: query)
+                      id: id_or_nil(Property.find_by_human_ref query)
   end
 
   def id_or_nil record

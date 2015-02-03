@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative '../../../lib/modules/string_utils'
 
 describe Client, type: :model do
   describe 'validations' do
@@ -19,11 +20,26 @@ describe Client, type: :model do
     end
   end
 
-  describe 'method' do
-    it 'returns client as text' do
-      expect(client_new.to_s)
-        .to eq "Mr M. Prior\nEdgbaston Road\nBirmingham\nWest Midlands"
+  describe '.find_by_human_ref' do
+    it 'finds client by human_ref' do
+      client_create human_ref: 10
+      expect(Client.find_by_human_ref(10).human_ref).to eq 10
     end
+
+    it 'does not finds client when missing human_ref' do
+      expect(Client.find_by_human_ref 10).to be_nil
+    end
+
+    it 'does not finds client when missing human_ref' do
+      client_create human_ref: 10
+
+      expect(Client.find_by_human_ref '10 High Street').to be_nil
+    end
+  end
+
+  it '#to_s returns client as text' do
+    expect(client_new.to_s)
+      .to eq "Mr M. Prior\nEdgbaston Road\nBirmingham\nWest Midlands"
   end
 
   describe '#search', :search do

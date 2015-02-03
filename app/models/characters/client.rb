@@ -1,3 +1,6 @@
+
+require_relative '../../../lib/modules/string_utils'
+
 ####
 #
 # Client
@@ -12,6 +15,7 @@
 #
 class Client < ActiveRecord::Base
   include Contact
+  include StringUtils
   has_many :properties, dependent: :destroy
   before_validation :clear_up_form
 
@@ -26,6 +30,12 @@ class Client < ActiveRecord::Base
   end
 
   delegate :clear_up_form, to: :entities
+
+  def self.find_by_human_ref human_ref
+    return nil unless num? human_ref
+
+    find_by human_ref: human_ref
+  end
 
   def self.by_human_ref
     order(:human_ref).includes(:address)

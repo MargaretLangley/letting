@@ -12,6 +12,7 @@
 ####
 #
 class Property < ActiveRecord::Base
+  include StringUtils
   belongs_to :client
   has_one :account, dependent: :destroy, inverse_of: :property
   accepts_nested_attributes_for :account, allow_destroy: true
@@ -79,6 +80,12 @@ class Property < ActiveRecord::Base
         agent: { methods: [:full_name, :to_address],
                  only: [:full_name, :to_address] }
       })
+  end
+
+  def self.find_by_human_ref human_ref
+    return nil unless num? human_ref
+
+    find_by human_ref: human_ref
   end
 
   def self.by_human_ref

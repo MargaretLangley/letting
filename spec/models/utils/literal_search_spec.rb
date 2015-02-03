@@ -16,20 +16,6 @@ describe LiteralSearch, type: :model do
       end
     end
 
-    describe 'cycle query' do
-      it 'returns an exact cycle' do
-        cycle = cycle_create name: 'Mar'
-
-        expect(LiteralSearch.search(type: 'Cycle', query: 'Mar').go.id)
-          .to eq cycle.id
-      end
-
-      it 'return nil when no match' do
-        expect(LiteralSearch.search(type: 'Cycle', query: 'Mar').go.id)
-          .to be_nil
-      end
-    end
-
     describe 'payment query' do
       it 'returns an exact account' do
         account = account_create property: property_new(human_ref: '100')
@@ -54,20 +40,6 @@ describe LiteralSearch, type: :model do
 
       it 'return nil when no match' do
         expect(LiteralSearch.search(type: 'Property', query: '100').go.id)
-          .to be_nil
-      end
-    end
-
-    describe 'user query' do
-      it 'returns an exact user' do
-        user = user_create nickname: 'sam'
-
-        expect(LiteralSearch.search(type: 'User', query: 'sam').go.id)
-          .to eq user.id
-      end
-
-      it 'return nil when no match' do
-        expect(LiteralSearch.search(type: 'User', query: 'sam').go.id)
           .to be_nil
       end
     end

@@ -121,7 +121,6 @@ module LinkHelper
               disabled: true,
               title: "#{title} (disabled)"
     end
-
   end
 
   def hover_grow(disabled:)
