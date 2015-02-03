@@ -154,11 +154,27 @@ these commands completely remove it. (Rebooting the box, if applicable, restores
 Elasticsearch
 
 1) Forced Re-index:    rake elasticsearch:sync
-1) Find Cluster name:  curl -XGET 'http://localhost:9200/_nodes'
-2) Find All indexes:   curl -XGET "localhost:9200/_stats/indices?pretty=true"
+2) Find Cluster name:  curl -XGET 'http://localhost:9200/_nodes'
+3) Document Mapping: curl -XGET "localhost:9200/development_properties/_mapping?pretty=true"
+4) Find All indexes:   curl -XGET "localhost:9200/_stats/indices?pretty=true"
                        example: development_properties
-3) Index Structure:    curl -XGET 'http://127.0.0.1:9200/my_index/_mapping?pretty=1'
-4) Return Records:     curl -XGET "localhost:9200/my_index/_search?pretty=true"
+5) Index Structure:    curl -XGET 'http://127.0.0.1:9200/my_index/_mapping?pretty=1'
+6) Return Records:     curl -XGET "localhost:9200/my_index/_search?pretty=true"
+7) 'Simple' Query
+
+````
+    GET development_properties/_search
+    {
+       "query": {
+          "match": {
+              "_all": {
+                  "query": "35 Beau",
+                  "operator": "and"
+              }
+          }
+       }
+    }
+````
 
 ===
 
