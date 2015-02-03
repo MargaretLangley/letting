@@ -102,19 +102,6 @@ module LinkHelper
               data: data,
               disabled: disabled
     else
-      # A solution that gives the wrong size - the content_tag
-      # is added to allow for no-print
-      # content_tag :div, class: "no-print" do
-      #   fa_icon("#{icon} 2x",
-      #        text: text,
-      #        class: 'plain-button',
-      #        disabled: true,
-      #        title: "#{title} (disabled)")
-      # end
-
-      # This is a solution which is most similar to the golden path
-      # EXCEPT the part of the icon above 1 line height does not get
-      # a background
       link_to fa_icon("#{icon} #{size}", text: text),
               '#',
               class: 'plain-button',

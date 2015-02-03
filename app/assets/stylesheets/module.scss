@@ -661,8 +661,9 @@ $search-height: 35px;
 @media screen {
 
   @mixin base-button {
+    display: inline-block;
     margin: 1% 1% 1% 0;
-    padding: 2%;
+    padding: 3%;
     border: 1px solid darken($secondary-button, 15%);
     border-radius: 5px;
     box-shadow: $shadow 0 0 4px;
