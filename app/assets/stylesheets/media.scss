@@ -2,7 +2,7 @@
 
 /*------------------------------------------------*\
 
-  Invoice CSS
+  Media CSS
   Used mainly in Invoice for both screen and print
   and where print requirements hidden from screen and
   screen requirements hidden from print
@@ -138,22 +138,23 @@
 
 \*------------------------------------------------*/
 
-  body {
+  @mixin bodyprint {
     background-color: $neutral-print;
+    color: $primary-text;
     margin-left: .20cm;
     margin-right: .20cm;
     margin-top: 0;
     width: 22cm;
   }
 
+  body {
+    @include bodyprint;
+  }
+
   // This sets printed page to A4 width
 
   .print-body {
-    background-color: $neutral-print;
-    margin-left: .20cm;
-    margin-right: .20cm;
-    margin-top: 0;
-    width: 22cm;
+    @include bodyprint;
   }
 
 /*------------------------------------------------*\
