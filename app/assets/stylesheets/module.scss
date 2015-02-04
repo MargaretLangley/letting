@@ -194,6 +194,10 @@ a.grey {
   }
 }
 
+.normal-text {
+  color: $primary-text;
+}
+
 // Charge using a special class to test for dormant charge has been faded.
 // The css 'faded' class is already used on the page for headings.
 

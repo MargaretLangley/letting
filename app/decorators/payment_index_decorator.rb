@@ -36,6 +36,11 @@ class PaymentIndexDecorator
     I18n.l payment.booked_at, format: :human
   end
 
+  def booked_on
+    return '' unless payment
+    I18n.l payment.booked_at.to_date, format: :short
+  end
+
   def amount
     number_to_currency payment.amount
   end

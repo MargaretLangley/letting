@@ -49,6 +49,13 @@ class Payment < ActiveRecord::Base
     where(booked_at: range.first...range.last)
   end
 
+  def self.by_booked_at_date
+    order('DATE(booked_at) desc').group('DATE(booked_at)')
+      .pluck('DATE(booked_at) as booked_on,'\
+             ' count(amount) as payments_count, ' \
+             ' sum(amount) as payment_sum')
+  end
+
   include Searchable
   # Elasticsearch uses generates JSON document for payment index
   def as_indexed_json(_options = {})

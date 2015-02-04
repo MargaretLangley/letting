@@ -43,24 +43,6 @@ describe 'Payment#index', :ledgers, type: :feature do
     expect(payment_index).to be_having_payment
   end
 
-  describe 'payment search' do
-    it 'matches transactions on the same day' do
-      payment = payment_new(booked_at: '30/4/2013 01:00:00')
-      property_create account: account_new(payment: payment)
-      payment_index.load
-      payment_index.search Date.new(2013, 4, 30).to_s
-      expect(payment_index).to be_having_payment
-    end
-
-    it 'misses transactions on a different day' do
-      payment = payment_new(booked_at: '2014/01/25 01:00:00')
-      property_create account: account_new(payment: payment)
-      payment_index.load
-      payment_index.search '2000/01/01'
-      expect(payment_index).to be_without_payment
-    end
-  end
-
   it '#destroys a property' do
     property_create account: account_new(payment: payment_new)
     payment_index.load

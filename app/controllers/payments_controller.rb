@@ -17,11 +17,11 @@
 #
 class PaymentsController < ApplicationController
   def index
-    params[:payment_search] ||= Payments.last_booked_at
+    params[:date] ||= Payments.last_booked_at
 
-    @records = Payments.on(date: params[:payment_search])
-               .includes(joined_tables)
-               .page(params[:page])
+    @records = Payments.on(date: params[:date]).load
+
+    @payments_by_dates = Payment.by_booked_at_date
   end
 
   def show

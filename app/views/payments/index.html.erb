@@ -1,63 +1,13 @@
 <% @title='Payments' %>
 
-<div class='grid  shell'>
+<div class='grid'>
 
-  <%= form_tag payments_path, method: 'get' do %>
-    <div class='col-3-12  bottom-spacer'>Payments booked on:</div>
-    <div class='col-5-12  bottom-spacer'>
-      <%= date_field_tag :payment_search, params[:payment_search], autofocus: true,  class: 'width-3-4' %>
-      <button type='submit' class='width-1-6  no-print'  id='payment-search'  title='Payment Search'>
-        <%= fa_icon('search lg') %>
-      </button>
-    </div>
-    <div class='col-4-12  bottom-spacer'>&nbsp;</div>
-  <% end %>
+  <div class='col-7-24  shell  grid-row  vertical-spacer  faded'>
+    <%= render 'payments_by_dates/payments_by_dates', payments_by_dates: @payments_by_dates %>
+  </div> <!-- column 1 -->
+  <div class='col-1-24  vertical-spacer'>&nbsp;</div> <!-- column 2 -->
+  <div class='col-16-24  shell vertical-spacer'>
+    <%= render 'payments/payments', records: @records, date: params[:date] %>
+  </div>  <!-- column 2 -->
 
-  <div class='col-3-24  grid-row  vertical-spacer  grid-header  r-align'>
-    Property ID
-  </div>
-  <div class='col-6-24  vertical-spacer  grid-header'>Name</div>
-  <div class='col-5-24  vertical-spacer  grid-header'>Booked At</div>
-  <div class='col-2-24  vertical-spacer  grid-header  r-align'>Amount</div>
-  <div class='col-4-24  vertical-spacer  grid-header  r-align'>Balance</div>
-  <div class='col-1-24  vertical-spacer  grid-header'>&nbsp;</div>
-  <div class='col-3-24  vertical-spacer  grid-header  no-print'>Actions</div>
-
-  <% payments = Payments.new(@records)
-    payments.to_a.each do |payment|
-      payment_dec = PaymentIndexDecorator.new payment %>
-
-    <div title='View' class='table-row' data-link='<%= payment_path(payment.id) %>'>
-      <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
-         <%= payment_dec.property_ref %>
-      </div>
-      <div class='col-6-24  bottom-spacer inherit-row'>
-        <%= payment_dec.full_name %>
-      </div>
-      <div class='col-5-24  bottom-spacer  inherit-row'>
-        <%= payment_dec.booked_at %>
-      </div>
-      <div class='col-2-24  bottom-spacer  inherit-row  r-align'>
-        <%= payment_dec.amount %>
-      </div>
-      <div class='col-4-24  bottom-spacer  inherit-row  r-align'>
-        <%= payment_dec.balance %>
-      </div>
-    </div>
-    <div class='col-1-24  bottom-spacer'>&nbsp;</div>
-    <div class='col-1-24  bottom-spacer'>
-      <%= edit_link payment, size: 'lg' %>
-    </div>
-    <div class='col-1-24  bottom-spacer'>&nbsp;</div>
-    <div class='col-1-24  bottom-spacer'>
-      <%= delete_link path: payment %>
-    </div>
-  <% end %>
-
-  <div class='col-9-24  grid-row  grid-footer-text  bottom-spacer  r-align'>&nbsp;</div>
-  <div class='col-5-24  grid-footer-text  bottom-spacer'>Total</div>
-  <div class='col-2-24  grid-footer-number  bottom-spacer  r-align'>
-    <%= number_to_currency payments.sum %>
-  </div>
-  <div class='col-8-24  grid-footer-text  bottom-spacer  r-align'>&nbsp;</div>
-</div>
+</div>  <!-- grid -->
