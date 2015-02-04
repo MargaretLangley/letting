@@ -12,7 +12,7 @@
 #
 class ClientsController < ApplicationController
   def index
-    @records = Client.by_human_ref.page(params[:page]).load
+    @records = Client.includes(:entities).by_human_ref.page(params[:page]).load
   end
 
   def show
