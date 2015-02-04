@@ -74,9 +74,8 @@ class Property < ActiveRecord::Base
   # Elasticsearch uses generates JSON document for property index
   def as_indexed_json(_options = {})
     as_json(
-      methods: :occupiers,
+      methods: [:occupiers, :address_text],
       include: {
-        address: {},
         agent: { methods: [:full_name, :to_address],
                  only: [:full_name, :to_address] }
       })
