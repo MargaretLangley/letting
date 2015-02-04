@@ -15,7 +15,7 @@
  *= require base
  *= require layout
  *= require module
- *= require invoices
+ *= require media
  *= require jquery.ui.all
  *= require font-awesome
  *= require hover
