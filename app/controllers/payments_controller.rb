@@ -19,7 +19,7 @@ class PaymentsController < ApplicationController
   def index
     params[:date] ||= Payments.last_booked_at
 
-    @records = Payments.on(date: params[:date]).load
+    @records = Payments.on(date: params[:date]).includes(joined_tables).load
 
     @payments_by_dates = Payment.by_booked_at_date
   end
@@ -70,7 +70,7 @@ class PaymentsController < ApplicationController
   private
 
   def joined_tables
-    [:credits, account: [:credits, :debits, :property]]
+    [account: [property: [:entities]]]
   end
 
   def payment_params
