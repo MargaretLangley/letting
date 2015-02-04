@@ -53,10 +53,20 @@ describe Client, type: :model do
     end
     after(:each) { Client.__elasticsearch__.delete_index! }
 
-    it('finds human_id') { expect(Client.search('80').results.total).to eq 1 }
-    it('finds names') { expect(Client.search('Bell').results.total).to eq 1 }
-    it('finds houses') { expect(Client.search('Hil').results.total).to eq 1 }
-    it('finds roads') { expect(Client.search('Edg').results.total).to eq 1 }
-    it('finds towns') { expect(Client.search('Bir').results.total).to eq 1 }
+    it 'finds human_id' do
+      expect(Client.search('80', sort: 'human_ref').count).to eq 1
+    end
+    it 'finds names' do
+      expect(Client.search('Bell', sort: 'human_ref').count).to eq 1
+    end
+    it 'finds houses' do
+      expect(Client.search('Hil', sort: 'human_ref').count).to eq 1
+    end
+    it 'finds roads' do
+      expect(Client.search('Edg', sort: 'human_ref').count).to eq 1
+    end
+    it 'finds towns' do
+      expect(Client.search('Bir', sort: 'human_ref').count).to eq 1
+    end
   end
 end

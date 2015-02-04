@@ -78,7 +78,9 @@ class Property < ActiveRecord::Base
       include: {
         agent: { methods: [:full_name, :to_address],
                  only: [:full_name, :to_address] }
-      })
+      },
+      except: [:id, :created_at, :updated_at]
+      )
   end
 
   def self.find_by_human_ref human_ref

@@ -70,11 +70,21 @@ describe Property, type: :model do
     after(:each) { Property.__elasticsearch__.delete_index! }
 
     describe '.search' do
-      it('human id') { expect(Property.search('2002').results.total).to eq 1 }
-      it('names') { expect(Property.search('Grac').results.total).to eq 1 }
-      it('house') { expect(Property.search('Hil').results.total).to eq 1 }
-      it('roads') { expect(Property.search('Edg').results.total).to eq 1 }
-      it('towns') { expect(Property.search('Bir').results.total).to eq 1 }
+      it 'human id' do
+        expect(Property.search('2002', sort: 'human_ref').results.total).to eq 1
+      end
+      it 'names'  do
+        expect(Property.search('Grac', sort: 'human_ref').count).to eq 1
+      end
+      it 'house'  do
+        expect(Property.search('Hil', sort: 'human_ref').count).to eq 1
+      end
+      it 'roads'  do
+        expect(Property.search('Edg', sort: 'human_ref').count).to eq 1
+      end
+      it 'towns'  do
+        expect(Property.search('Bir', sort: 'human_ref').count).to eq 1
+      end
     end
   end
 end
