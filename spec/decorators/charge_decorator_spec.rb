@@ -1,6 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe ChargeDecorator do
+  it '#charged_in - returns capitalized string' do
+    charge = ChargeDecorator
+             .new charge_new cycle: cycle_new(charged_in: 'advance')
+    expect(charge.charged_in).to eq 'Advance'
+  end
+
+  it '#payment returns capitalized string' do
+    charge = ChargeDecorator.new charge_new payment_type: Charge::AUTOMATIC
+    expect(charge.payment).to eq 'Automatic'
+  end
+
+  it '#activity - returns capitalized string' do
+    charge = ChargeDecorator.new charge_new activity: 'active'
+    expect(charge.activity).to eq 'Active'
+  end
+
   describe '#emphasis' do
     it 'can be emphasized' do
       charge = ChargeDecorator.new charge_new activity: 'active'
@@ -10,28 +26,6 @@ RSpec.describe ChargeDecorator do
     it 'can be deemphasized' do
       charge = ChargeDecorator.new charge_new activity: 'dormant'
       expect(charge.emphasis).to eq 'deemphasized'
-    end
-  end
-  describe '#dormant' do
-    it 'returns true' do
-      charge = ChargeDecorator.new charge_new activity: 'active'
-      expect(charge.dormant).to eq 'No'
-    end
-    it 'returns false' do
-      charge = ChargeDecorator.new charge_new activity: 'dormant'
-      expect(charge.dormant).to eq 'Yes'
-    end
-  end
-  describe '#pay' do
-    it 'returns automatic' do
-      charge = ChargeDecorator
-               .new charge_new payment_type: Charge::AUTOMATIC
-      expect(charge.pay).to eq 'Automatic'
-    end
-    it 'returns payment' do
-      charge = ChargeDecorator
-               .new charge_new payment_type: Charge::MANUAL
-      expect(charge.pay).to eq 'Manual'
     end
   end
 end

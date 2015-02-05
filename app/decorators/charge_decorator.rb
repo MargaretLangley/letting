@@ -15,24 +15,28 @@ class ChargeDecorator
     @source = charge
   end
 
-  # Charges that are dormant should appear different from active charges.
-  # This changes the style class for dormant charges.
-  #
-  def emphasis
-    charge.dormant? ? 'deemphasized' : ''
-  end
-
-  # If the charge is active or dormant
-  # Active charges are generating new debts, dormant charges do not.
-  #
-  def dormant
-    charge.dormant? ? 'Yes' : 'No'
+  def charged_in
+    charge.charged_in.capitalize
   end
 
   # If payments happen without requiring an invoice reminder.
   #
   #
-  def pay
-    automatic? ? 'Automatic' : 'Manual'
+  def payment
+    charge.payment_type.capitalize
+  end
+
+  # If the charge is active or dormant
+  # Active charges are generating new debts, dormant charges do not.
+  #
+  def activity
+    charge.activity.capitalize
+  end
+
+  # Charges that are dormant should appear different from active charges.
+  # This changes the style class for dormant charges.
+  #
+  def emphasis
+    charge.dormant? ? 'deemphasized' : ''
   end
 end
