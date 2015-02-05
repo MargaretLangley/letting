@@ -1,7 +1,7 @@
 scss_files: 'app/assets/stylesheets/**/*.css.scss'
 
 exclude:
-  - 'app/assets/stylesheets/normalize.scss'
+  - 'app/assets/stylesheets/normalize.css'
 
 linters:
   Comment:
