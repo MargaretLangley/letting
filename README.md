@@ -176,6 +176,34 @@ Elasticsearch
     }
 ````
 
+When Elasticsearch Breaks the build during testing:
+
+````
+   Failure/Error: Client.import force: true, refresh: true
+       Faraday::ConnectionFailed:
+         Connection refused - connect(2) for "localhost" port 9200
+````
+
+Reset Elasticsearch
+
+````
+sudo service elasticsearch restart
+````
+
+Somtimes it won't delete the Elasticsearch pid file.
+
+````
+    Stopping elasticsearch...PID file found, but no matching process running?
+    Removing PID file...
+    rm: cannot remove ‘/usr/local/var/run/10_0_0_101.pid’: Permission denied
+
+    To Remove
+    sudo rm /usr/local/var/run/10_0_0_101.pid
+
+    Repeat Restart
+
+````
+
 ===
 
 ####5 Production Client
