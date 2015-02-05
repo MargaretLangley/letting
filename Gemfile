@@ -16,7 +16,7 @@ gem 'equalizer'
 # Use SCSS for style-sheets
 gem 'sass-rails', '~> 5.0.1'
 gem 'sprockets', '~>2.12.3'
-gem 'autoprefixer-rails', '~> 4.0.0'
+gem 'autoprefixer-rails', '~> 5.1.3.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 2.7.0'
@@ -89,6 +89,7 @@ end
 
 group :development, :test do
   gem 'capybara', '~> 2.4.0'
+  # Capybara-webkit 1.4.1 causes 2 errors (maybe worth investigating why)
   gem 'capybara-webkit', '~>1.3.0'
   gem 'capybara-screenshot'
   # 0.1.1 seems to introduce errors - Use this gem occasionally to weed out
@@ -113,6 +114,10 @@ end
 
 group :test do
   gem 'coveralls', '~>0.7.0', require: false
+
+  # v1.4.0 cleans the 'schema_migrations'
+  # https://github.com/DatabaseCleaner/database_cleaner/issues/317
+  # Do not upgrade until there is a fix  version > 1.4.0
   gem 'database_cleaner', '~> 1.3.0'
   gem 'timecop', '~>0.7.0'
 end
