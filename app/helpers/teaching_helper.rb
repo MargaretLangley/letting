@@ -23,17 +23,4 @@ module TeachingHelper
     link_to 'amount',
             search_path(search_terms: amount, search_model: 'Payment')
   end
-
-  # Invoicing Teaching Page
-  #
-  def invoicing_range account_range: Account.first..Account.second,
-                      period: '2014-09-23'..'2014-11-18'
-    link_to(
-      t('Example'),
-      search_path(search_terms: "#{account_range.first.property.human_ref}-"\
-                                "#{account_range.last.property.human_ref}",
-                  start_date: period.first,
-                  end_date: period.last)
-    )
-  end
 end

@@ -21,10 +21,6 @@ class ApplicationController < ActionController::Base
   delegate :allow?, to: :current_permission
   helper_method :allow?
 
-  def new_invoicing?
-    controller_name == 'invoicings' && action_name == 'new'
-  end
-
   protected
 
   def referer

@@ -20,19 +20,6 @@ module InvoicingHelper
             class: 'js-toggle  inverted-link'
   end
 
-  def hide_if_invoicing_dates_default
-    invoicing_using_default_dates? ? ' js-revealable ' : ''
-  end
-
-  def expose_if_invoicing_dates_default
-    invoicing_using_default_dates? ? '' : ' js-revealable '
-  end
-
-  def invoicing_using_default_dates?
-    invoicing_start_date == invoicing_default_start_date &&
-      invoicing_end_date == invoicing_default_end_date
-  end
-
   def invoicing_start_date
     invoicing_default_start_date
   end
