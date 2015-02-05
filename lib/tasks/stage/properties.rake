@@ -23,7 +23,7 @@ namespace :db do
     def properties_legacy
       DB::CSVTransform.new file_name: 'import_data/legacy/properties.csv',
                            headers: DB::FileHeader.property,
-                           drop_rows: 34
+                           drop_rows: 32
     end
 
     def patch_properties
