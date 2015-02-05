@@ -21,4 +21,5 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :password_digest, presence: true
   validates :password, presence: true, on: :create
+  validates :role, inclusion: { in: roles.keys }
 end

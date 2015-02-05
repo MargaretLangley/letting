@@ -46,6 +46,7 @@ class Invoice < ActiveRecord::Base
       last.balance
     end
   end
+  validates :deliver, inclusion: { in: delivers.keys }
   validates :invoice_date, :property_ref, :property_address, presence: true
   has_many :invoice_texts, through: :letters
   has_many :letters, dependent: :destroy
