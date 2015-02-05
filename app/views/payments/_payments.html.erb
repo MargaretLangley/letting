@@ -2,7 +2,7 @@
    payment_dec = PaymentIndexDecorator.new payments.to_a.first %>
 
 <div class='col-16-24  grid-row  vertical-spacer  faded'>
-  <h2>Payments on Date (<%= payment_dec.booked_on %>)
+  <h2>Payments on (<%= payment_dec.booked_on %>)
 </div>
 <div class='col-8-24  vertical-spacer  r-align'>
   <h2><%= number_to_currency payments.sum %></h2>
