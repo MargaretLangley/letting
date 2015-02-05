@@ -45,7 +45,7 @@ describe 'Property#show', type: :feature   do
       account: account_new(charges: [charge_new(activity: 'dormant')])
     visit '/accounts/1'
     within 'div#charge' do
-      expect(page).to have_text 'dormant'
+      expect(page).to have_text 'Dormant'
     end
   end
 

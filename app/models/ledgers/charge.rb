@@ -22,11 +22,13 @@ class Charge < ActiveRecord::Base
   has_many :debits, dependent: :destroy, inverse_of: :charge
   belongs_to :cycle, inverse_of: :charges
 
-  delegate :monthly?, to: :cycle
   validates :charge_type, :cycle, presence: true
   validates :payment_type, inclusion: { in: payment_types.keys }
   validates :amount, price_bound: true
   validates :amount, numericality: { less_than: 100_000 }
+
+  delegate :monthly?, to: :cycle
+  delegate :charged_in, to: :cycle
 
   # billing_period - the date range that we generate charges for.
   # returns        - chargable_info array with data required to bill the
