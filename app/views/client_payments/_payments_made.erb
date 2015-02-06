@@ -16,7 +16,7 @@
     </div>
     <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
       <!-- charge_period.first_period  (6 months date_range) -->
-      <%= to_decimal account.payments.date_range(range: client_payment.total_period(year: params[:years], month: batch_months.now)).sum(:amount) %>
+      <%= to_decimal account.payments.date_range(range: client_payment.total_period(year: client_payment_year, month: batch_months.now)).sum(:amount) %>
     </div>
   </div>
 <% end %>

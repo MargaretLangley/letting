@@ -161,7 +161,7 @@
   <div class='js-togglable <%= payments_contracted_visible %>'>
 
     <div class='col-23-24  grid-row'>
-      <h3 class='small-bottom'>Payments &hellip;</h3>
+      <h3 class='small-bottom'>Ground Rent Payments &hellip;</h3>
     </div>
     <div class='col-1-24  no-r-pad'>
       <%= toggle_link direction: :down, size: '2x'  %>
@@ -173,7 +173,7 @@
   <div class='js-togglable  <%= payments_expanded_visible %>'>
 
     <div class='col-23-24  grid-row'>
-      <h3 class='small-bottom'>Payments</h3>
+      <h2 class='small-bottom'>Ground Rent Payments</h2>
     </div>
     <div class='col-1-24  no-r-pad'>
       <%= toggle_link direction: :up, size: '2x'   %>
@@ -181,15 +181,15 @@
 
     <%= render 'client_payments/totals', client_payment: @client_payment %>
 
-    <div class='col-1-1  grid-row  top-2-line-spacer'>
-      <h2>Itemised Ground Rent Payments</h2>
+    <div class='col-1-1  grid-row'>
+      <h3>Itemised</h3>
     </div>
 
     <%= form_tag client_path, class: 'no-print', id: 'client_payment', method: 'get' do %>
 
       <div class='col-3-24  grid-row  vertical-line-spacer  faded'>Payments in</div>
       <div class='col-21-24  vertical-line-spacer'>
-        <%= select_tag 'years', options_for_select(@client_payment.years, selected: params[:years]), onchange: "$('#client_payment').submit();" %>
+        <%= select_tag 'client_payment_year', options_for_select(@client_payment.years, selected: client_payment_year), onchange: "$('#client_payment').submit();" %>
         <%= hidden_field_tag :selected, 'true' %>
       </div>
     <% end %>

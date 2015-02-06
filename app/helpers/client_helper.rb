@@ -21,4 +21,8 @@ module ClientHelper
   def payments_expanded_visible
     params[:selected].present?  ? '' : 'js-revealable'
   end
+
+  def client_payment_year
+    params[:client_payment_year] ||= Time.zone.now.year
+  end
 end
