@@ -1,12 +1,5 @@
 $(function () {
 
-  // charges-due-on toggle: on-date => every-month
-  // change month input to -1
-  //
-  $('.js-every-month').on('change', function() {
-    $(this).next('input[type=hidden]').val('-1');
-  });
-
   // server side writes out the client options under a data tag
   // This is the readable by this JavaScript.
   // data-autocomplete-source= [
