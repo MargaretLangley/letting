@@ -10,11 +10,11 @@ require 'rails_helper'
 class InvoicingPage
   include Capybara::DSL
 
-  def enter invoicing: nil
-    if invoicing
-      visit "/invoicings/#{invoicing.id}"
-    else
+  def load invoicing: nil
+    if invoicing.nil?
       visit '/invoicings/new'
+    else
+      visit "/invoicings/#{invoicing.id}"
     end
     self
   end
@@ -31,6 +31,15 @@ class InvoicingPage
 
   def choose_dates
     click_on 'or choose dates'
+    self
+  end
+
+  def invoice_date
+    find_field('invoice_date').value
+  end
+
+  def invoice_date= date
+    fill_in 'invoice_date', with: date
     self
   end
 
@@ -89,7 +98,7 @@ describe 'Invoicing#create', type: :feature do
 
     create_account human_ref: 87,
                    cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
-    invoicing_page.enter
+    invoicing_page.load
 
     invoicing_page.search_term('87').create
 
@@ -98,11 +107,43 @@ describe 'Invoicing#create', type: :feature do
     Timecop.return
   end
 
+  describe 'invoice_date' do
+    it 'defaults to today' do
+      Timecop.travel '2013-6-1'
+
+      create_account human_ref: 87,
+                     cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
+      invoicing_page.load
+
+      expect(invoicing_page.invoice_date).to eq Time.zone.today.to_s
+
+      Timecop.return
+    end
+
+    it 'saves date between invoicings' do
+      Timecop.travel '2013-6-1'
+
+      create_account human_ref: 87,
+                     cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
+      invoicing_page.load
+
+      invoicing_page.invoice_date = Time.zone.tomorrow.to_s
+
+      invoicing_page.search_term('87').create
+
+      invoicing_page.load
+
+      expect(invoicing_page.invoice_date).to eq Time.zone.tomorrow.to_s
+
+      Timecop.return
+    end
+  end
+
   describe 'errors when the property range' do
     it 'excludes all existing properties' do
       Timecop.travel '2013-6-1'
 
-      invoicing_page.enter
+      invoicing_page.load
       invoicing_page.search_term('87').create
 
       expect(invoicing_page).to be_excluded
@@ -116,7 +157,7 @@ describe 'Invoicing#create', type: :feature do
       create_account human_ref: 87,
                      cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25)])
 
-      invoicing_page.enter
+      invoicing_page.load
       invoicing_page.search_term('87').create
 
       expect(invoicing_page).to be_not_actionable
@@ -135,9 +176,9 @@ describe 'Invoicing#create', type: :feature do
                    credits: [credit_new(charge: charge,
                                         at_time: '2000-1-1',
                                         amount: 100)]
-    invoicing_page.enter
+    invoicing_page.load
     invoicing_page.search_term('9').create
-    invoicing_page.enter invoicing: Invoicing.first
+    invoicing_page.load invoicing: Invoicing.first
 
     expect(invoicing_page).to be_actionable
     expect(invoicing_page).to be_none_delivered
@@ -154,9 +195,9 @@ describe 'Invoicing#create', type: :feature do
         account_create property: property_new(human_ref: 9),
                        charges: [charge_new(payment_type: 'automatic',
                                             cycle: cycle)]
-        invoicing_page.enter
+        invoicing_page.load
         invoicing_page.search_term('9').create
-        invoicing_page.enter invoicing: Invoicing.first
+        invoicing_page.load invoicing: Invoicing.first
 
         expect(invoicing_page).to be_actionable
         expect(invoicing_page).to_not be_none_retained
@@ -175,9 +216,9 @@ describe 'Invoicing#create', type: :feature do
         account_create property: property_new(human_ref: 9),
                        charges: [charge_new(payment_type: 'manual',
                                             cycle: cycle)]
-        invoicing_page.enter
+        invoicing_page.load
         invoicing_page.search_term('9').create
-        invoicing_page.enter invoicing: Invoicing.first
+        invoicing_page.load invoicing: Invoicing.first
 
         expect(invoicing_page).to be_actionable
         expect(invoicing_page).to be_none_retained
@@ -195,9 +236,9 @@ describe 'Invoicing#create', type: :feature do
         create_account human_ref: 9,
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 25)])
 
-        invoicing_page.enter
+        invoicing_page.load
         invoicing_page.search_term('8-9').create
-        invoicing_page.enter invoicing: Invoicing.first
+        invoicing_page.load invoicing: Invoicing.first
 
         expect(invoicing_page).to be_actionable
         expect(invoicing_page).to_not be_none_ignored
@@ -211,9 +252,9 @@ describe 'Invoicing#create', type: :feature do
         create_account human_ref: 9,
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 25)])
 
-        invoicing_page.enter
+        invoicing_page.load
         invoicing_page.search_term('9').create
-        invoicing_page.enter invoicing: Invoicing.first
+        invoicing_page.load invoicing: Invoicing.first
 
         expect(invoicing_page).to be_actionable
         expect(invoicing_page).to be_none_ignored

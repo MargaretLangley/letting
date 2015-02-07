@@ -4,6 +4,7 @@
 #
 # Invoicing for batches of invoices.
 #
+# rubocop: disable Style/AccessorMethodName
 ####
 #
 class InvoicingsController < ApplicationController
@@ -25,6 +26,7 @@ class InvoicingsController < ApplicationController
                    property_range: SpaceOut.process(params[:search_terms]),
                    period: invoicing_start_date..invoicing_end_date
     @invoicing.generate if @invoicing.valid_arguments?
+    set_invoice_date date: get_invoice_date
   end
 
   # create
@@ -38,15 +40,15 @@ class InvoicingsController < ApplicationController
   #
   def create
     @invoicing = Invoicing.new invoicing_params
-    if @invoicing.valid_arguments?
-      @invoicing.generate invoice_date: params[:invoice_date],
-                          comments: params[:comment]
-    end
+    @invoicing.generate invoice_date: params[:invoice_date],
+                        comments: params[:comment] \
+      if @invoicing.valid_arguments?
     if @invoicing.save
       redirect_to new_invoicing_path, flash: { save: created_message }
     else
       render :new
     end
+    set_invoice_date date: params[:invoice_date]
   end
 
   def edit
@@ -54,19 +56,20 @@ class InvoicingsController < ApplicationController
       Invoicing.includes(runs: [invoices: [snapshot: [debits: [:charge]]]])
       .find params[:id]
     @invoicing.generate if @invoicing.valid_arguments?
+    set_invoice_date date: get_invoice_date
   end
 
   def update
     @invoicing = Invoicing.find params[:id]
-    if @invoicing.valid_arguments?
-      @invoicing.generate invoice_date: params[:invoice_date],
-                          comments: params[:comment]
-    end
+    @invoicing.generate invoice_date: params[:invoice_date],
+                        comments: params[:comment] \
+      if @invoicing.valid_arguments?
     if @invoicing.save
       redirect_to invoicings_path, flash: { save: updated_message }
     else
       render :edit
     end
+    set_invoice_date date: params[:invoice_date]
   end
 
   def destroy
@@ -77,6 +80,19 @@ class InvoicingsController < ApplicationController
   end
 
   private
+
+  # Invoice_date is a date that appears on the top of an invoice
+  # The value is not used for anything else.
+  #
+  def get_invoice_date
+    session[:invoicings_invoice_date] ||= Time.zone.today
+  end
+
+  # All invoice_date
+  #
+  def set_invoice_date(date:)
+    session[:invoicings_invoice_date] = params[:invoicings_invoice_date] = date
+  end
 
   def invoicing_params
     params
