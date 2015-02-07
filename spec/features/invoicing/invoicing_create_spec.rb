@@ -137,6 +137,18 @@ describe 'Invoicing#create', type: :feature do
 
       Timecop.return
     end
+
+    it 'saves date when it errors' do
+      Timecop.travel '2013-6-1'
+
+      invoicing_page.load
+      invoicing_page.invoice_date = Time.zone.tomorrow.to_s
+      invoicing_page.search_term('87').create
+
+      expect(invoicing_page.invoice_date).to eq Time.zone.tomorrow.to_s
+
+      Timecop.return
+    end
   end
 
   describe 'errors when the property range' do

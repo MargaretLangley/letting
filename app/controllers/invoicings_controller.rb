@@ -39,6 +39,7 @@ class InvoicingsController < ApplicationController
   #            of a number of invoices.
   #
   def create
+    set_invoice_date date: params[:invoice_date]
     @invoicing = Invoicing.new invoicing_params
     @invoicing.generate invoice_date: params[:invoice_date],
                         comments: params[:comment] \
@@ -48,7 +49,6 @@ class InvoicingsController < ApplicationController
     else
       render :new
     end
-    set_invoice_date date: params[:invoice_date]
   end
 
   def edit
@@ -60,6 +60,7 @@ class InvoicingsController < ApplicationController
   end
 
   def update
+    set_invoice_date date: params[:invoice_date]
     @invoicing = Invoicing.find params[:id]
     @invoicing.generate invoice_date: params[:invoice_date],
                         comments: params[:comment] \
@@ -69,7 +70,6 @@ class InvoicingsController < ApplicationController
     else
       render :edit
     end
-    set_invoice_date date: params[:invoice_date]
   end
 
   def destroy
