@@ -83,15 +83,19 @@ class InvoicingsController < ApplicationController
 
   # Invoice_date is a date that appears on the top of an invoice
   # The value is not used for anything else.
+  # invoice_date returns today's date if the session gets set to nil or ""
   #
   def get_invoice_date
-    session[:invoicings_invoice_date] ||= Time.zone.today
+    return session[:invoicings_invoice_date] \
+      unless session[:invoicings_invoice_date].blank?
+
+    session[:invoicings_invoice_date] = Time.zone.today
   end
 
   # All invoice_date
   #
   def set_invoice_date(date:)
-    session[:invoicings_invoice_date] = params[:invoicings_invoice_date] = date
+    session[:invoicings_invoice_date] = params[:invoice_date] = date
   end
 
   def invoicing_params
