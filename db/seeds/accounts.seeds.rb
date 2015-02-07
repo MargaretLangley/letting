@@ -3,7 +3,7 @@
 after 'charges', 'properties' do
   class << self
     def create_date months_ago
-      DateTime.current - months_ago.months
+      Time.zone.today - months_ago.months
     end
 
     def create_payment

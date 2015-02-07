@@ -35,13 +35,13 @@ class PaymentsController < ApplicationController
     account = Account.find_by id: params[:id]
     @payment = PaymentDecorator.new(Payment.new account: account)
     @payment.prepare
-    @payment.booked_at = get_payment_booked_on
+    @payment.booked_at = get_booked_on
   end
 
   def create
     @payment = PaymentDecorator
                .new(Payment.new(payment_params.except(:human_ref)))
-    set_payment_booked_on date: @payment.booked_at
+    set_booked_on date: @payment.booked_at
     @payment.timestamp_booking
     if @payment.save
       redirect_to new_payment_path, flash: { save: created_message }
@@ -73,12 +73,12 @@ class PaymentsController < ApplicationController
 
   private
 
-  def get_payment_booked_on
-    session[:payment_booked_on] ||= DateTime.current
+  def get_booked_on
+    session[:payments_booked_on] ||= Time.zone.today
   end
 
-  def set_payment_booked_on(date:)
-    session[:payment_booked_on] = date
+  def set_booked_on(date:)
+    session[:payments_booked_on] = date
   end
 
   def joined_tables

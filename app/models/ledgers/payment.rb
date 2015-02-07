@@ -25,7 +25,7 @@ class Payment < ActiveRecord::Base
 
   def init
     self.amount = 0 if amount.blank?
-    self.booked_at = DateTime.current if booked_at.blank?
+    self.booked_at = Time.zone.now if booked_at.blank?
   end
 
   def account_exists?
