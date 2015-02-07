@@ -26,6 +26,14 @@ class PaymentPage
     self
   end
 
+  def booked_at
+    find_field('payment_booked_at').value
+  end
+
+  def booked_at= date
+    fill_in 'payment_booked_at', with: date
+  end
+
   def credit= amount
     fill_in 'payment_credits_attributes_0_amount', with: amount
   end
