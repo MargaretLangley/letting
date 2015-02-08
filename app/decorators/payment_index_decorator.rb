@@ -11,7 +11,7 @@ class PaymentIndexDecorator
   extend ActiveModel::Callbacks
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
-  include ActionView::Helpers::NumberHelper
+  include DateHelper
 
   def payment
     @source
@@ -33,12 +33,12 @@ class PaymentIndexDecorator
   end
 
   def booked_at
-    I18n.l payment.booked_at, format: :human
+    format_date payment.booked_at
   end
 
   def booked_on
     return '' unless payment
-    I18n.l payment.booked_at.to_date, format: :short
+    format_short_date payment.booked_at.to_date
   end
 
   def amount

@@ -9,7 +9,7 @@
 #
 class ProductDecorator
   include MethodMissing
-  include ActionView::Helpers::NumberHelper
+  include DateHelper
   include NumberFormattingHelper
 
   def product
@@ -21,13 +21,13 @@ class ProductDecorator
   end
 
   def date_due
-    I18n.l product.date_due, format: :short
+    format_short_date product.date_due
   end
 
   def period
     return '&nbsp;'.html_safe unless product.period.first && product.period.last
-    "#{I18n.l product.period.first, format: :short} - "\
-    "#{I18n.l product.period.last, format: :short}"
+    "#{format_short_date product.period.first} - "\
+    "#{format_short_date product.period.last}"
   end
 
   def amount

@@ -8,7 +8,7 @@
 # rubocop: disable Style/TrivialAccessors
 #
 class AccountBalanceDecorator
-  include ActionView::Helpers::NumberHelper
+  include DateHelper
 
   attr_accessor :running_balance
   attr_reader :at_time
@@ -35,7 +35,7 @@ class AccountBalanceDecorator
   end
 
   def date
-    I18n.l at_time, format: :short
+    format_short_date at_time
   end
 
   def due

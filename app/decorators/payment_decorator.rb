@@ -26,7 +26,7 @@ class PaymentDecorator
   extend ActiveModel::Callbacks
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
-  include ActionView::Helpers::NumberHelper
+  include DateHelper
   include NumberFormattingHelper
 
   def payment
@@ -49,7 +49,8 @@ class PaymentDecorator
   #
   def booked_at_dec
     return nil unless payment.booked_at
-    I18n.l payment.booked_at, format: :human
+
+    format_date payment.booked_at
   end
 
   def amount

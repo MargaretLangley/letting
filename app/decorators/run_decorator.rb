@@ -12,6 +12,7 @@ require_relative '../../lib/modules/method_missing'
 #
 class RunDecorator
   include MethodMissing
+  include DateHelper
 
   def run
     @source
@@ -26,6 +27,6 @@ class RunDecorator
   end
 
   def invoice_date
-    I18n.l run.invoice_date, format: :short
+    format_short_date run.invoice_date
   end
 end

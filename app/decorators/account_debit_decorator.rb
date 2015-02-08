@@ -11,7 +11,7 @@ require_relative '../../lib/modules/method_missing'
 #
 class AccountDebitDecorator
   include MethodMissing
-  include ActionView::Helpers::NumberHelper
+  include DateHelper
   include NumberFormattingHelper
 
   attr_accessor :running_balance
@@ -27,12 +27,12 @@ class AccountDebitDecorator
   delegate :charge_type, to: :debit
 
   def date
-    I18n.l debit.at_time, format: :short
+    format_short_date debit.at_time
   end
 
   def description
-    "#{I18n.l debit.period.first, format: :short} to "\
-    "#{I18n.l debit.period.last, format: :short}"
+    "#{format_short_date debit.period.first} to "\
+    "#{format_short_date debit.period.last}"
   end
 
   def due

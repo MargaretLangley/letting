@@ -13,7 +13,7 @@ require_relative '../../lib/modules/method_missing'
 ####
 #
 class InvoiceDecorator
-  include ActionView::Helpers::NumberHelper
+  include DateHelper
   include MethodMissing
   include NumberFormattingHelper
 
@@ -26,7 +26,7 @@ class InvoiceDecorator
   end
 
   def invoice_date
-    I18n.l invoice.invoice_date, format: :short
+    format_short_date invoice.invoice_date
   end
 
   def billing_agent
@@ -47,7 +47,7 @@ class InvoiceDecorator
 
   def earliest_date_due
     if invoice.earliest_date_due
-      I18n.l invoice.earliest_date_due, format: :short
+      format_short_date invoice.earliest_date_due
     else
       invoice_date
     end

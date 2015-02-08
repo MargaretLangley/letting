@@ -11,7 +11,7 @@ require_relative '../../lib/modules/method_missing'
 #
 class AccountCreditDecorator
   include MethodMissing
-  include ActionView::Helpers::NumberHelper
+  include DateHelper
   include NumberFormattingHelper
 
   attr_accessor :running_balance
@@ -27,7 +27,7 @@ class AccountCreditDecorator
   delegate :charge_type, to: :credit
 
   def date
-    I18n.l credit.at_time, format: :short
+    format_short_date credit.at_time
   end
 
   def description

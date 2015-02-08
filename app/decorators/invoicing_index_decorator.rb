@@ -12,7 +12,7 @@ require_relative '../../lib/modules/method_missing'
 ####
 #
 class InvoicingIndexDecorator
-  include ActionView::Helpers::NumberHelper
+  include DateHelper
   include SalientDate
   include MethodMissing
 
@@ -25,7 +25,7 @@ class InvoicingIndexDecorator
   end
 
   def created_at
-    I18n.l invoicing.created_at, format: :human
+    format_date invoicing.created_at
   end
 
   def period_between
