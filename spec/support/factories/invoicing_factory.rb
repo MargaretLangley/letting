@@ -5,9 +5,9 @@ def invoicing_new id: nil,
                   period_last: '2014/08/30',
                   runs: [run_new(invoicing: nil)]
   invoicing = Invoicing.new id: id,
-                            property_range: property_range,
-                            period_first: period_first,
-                            period_last: period_last
+                            property_range: property_range
+  invoicing.period_first = period_first
+  invoicing.period_last = period_last
   invoicing.runs = runs if runs
   invoicing
 end

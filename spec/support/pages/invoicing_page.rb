@@ -32,12 +32,27 @@ class InvoicingPage
     self
   end
 
+  def or_default
+    click_on 'or default to the next 7 weeks'
+    self
+  end
+
   def invoice_date
     find_field('invoice_date').value
   end
 
   def invoice_date= date
     fill_in 'invoice_date', with: date
+    self
+  end
+
+  def period
+    find_field('Start date').value..find_field('End date').value
+  end
+
+  def period=(range)
+    fill_in 'Start date', with: range.first
+    fill_in 'End date', with: range.last
     self
   end
 

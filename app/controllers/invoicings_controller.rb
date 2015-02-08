@@ -7,6 +7,9 @@
 # rubocop: disable Style/AccessorMethodName
 # rubocop error to avoid get_ and set_ methods
 #
+# TODO: remove the following rubocop errors
+# rubocop: disable Metrics/ClassLength, Metrics/MethodLength
+#
 ####
 #
 class InvoicingsController < ApplicationController
@@ -25,9 +28,9 @@ class InvoicingsController < ApplicationController
   def new
     @invoicing = Invoicing.new \
                    property_range: SpaceOut.process(params[:search_terms]),
-                   period: invoicing_start_date..invoicing_end_date
+                   period: get_period_first..get_period_last
     @invoicing.generate if @invoicing.valid_arguments?
-    set_invoice_date date: get_invoice_date
+    set_session
   end
 
   # create
@@ -40,14 +43,17 @@ class InvoicingsController < ApplicationController
   #            of a number of invoices.
   #
   def create
-    set_invoice_date date: params[:invoice_date]
+    set_session_from_params
     @invoicing = Invoicing.new invoicing_params
+    @invoicing.period_first = get_period_first
+    @invoicing.period_last = get_period_last
     @invoicing.generate invoice_date: params[:invoice_date],
                         comments: params[:comment] \
       if @invoicing.valid_arguments?
     if @invoicing.save
       redirect_to new_invoicing_path, flash: { save: created_message }
     else
+      set_session
       render :new
     end
   end
@@ -79,6 +85,55 @@ class InvoicingsController < ApplicationController
   end
 
   private
+
+  def set_session_from_params
+    set_default_dates !params[:default_dates]
+    set_period_first date: params[:period_first] if params[:period_first]
+    set_period_last date: params[:period_last] if params[:period_last]
+    set_invoice_date date: params[:invoice_date]
+  end
+
+  def set_session
+    set_default_dates get_default_dates?
+    set_period_first date: get_period_first
+    set_period_last date: get_period_last
+    set_invoice_date date: get_invoice_date
+  end
+
+  helper_method :get_default_dates?
+
+  # Are we using the default dates (looking 7 weeks ahead or not?)
+  #
+  def get_default_dates?
+    return session[:invoicings_default_dates] \
+      unless session[:invoicings_default_dates].nil?
+    session[:invoicings_default_dates] = true
+  end
+
+  def set_default_dates(chosen)
+    session[:invoicings_default_dates] = params[:default_dates] = chosen
+  end
+
+  def get_period_first
+    return session[:invoicings_period_first] \
+      unless session[:invoicings_period_first].blank?
+    session[:invoicings_period_first] = (Time.zone.today).to_s
+  end
+
+  def set_period_first(date:)
+    session[:invoicings_period_first] = params[:period_first] = date
+  end
+
+  def get_period_last
+    return session[:invoicings_period_last] \
+      unless session[:invoicings_period_last].blank?
+    session[:invoicings_period_last] =
+      (Time.zone.today + Invoicing::WEEKS_AHEAD.weeks).to_s
+  end
+
+  def set_period_last(date:)
+    session[:invoicings_period_last] = params[:period_last] = date
+  end
 
   # Invoice_date is a date that appears on the top of an invoice
   # The value is not used for anything else.

@@ -44,4 +44,8 @@ $( document ).ready(function() {
   $('.js-clear').on('toggleEventHandler', function() {
     $(this).find(':input').val('');
   });
+
+  $('.js-disable').on('toggleEventHandler', function() {
+    $(this).closest('.js-toggle-selection').find(':input').prop('disabled', function(i, v) { return !v; });
+  });
 });

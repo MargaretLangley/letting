@@ -27,6 +27,12 @@ class Invoicing < ActiveRecord::Base
     self.period_last  = billing.last
   end
 
+  after_initialize :init
+  def init
+    self.period_first = Time.zone.today if period_first.blank?
+    self.period_last = Time.zone.today + WEEKS_AHEAD.weeks if period_last.blank?
+  end
+
   # converts property_range into account objects.
   #
   def accounts
