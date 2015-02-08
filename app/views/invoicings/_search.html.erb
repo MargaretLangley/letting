@@ -9,12 +9,12 @@
   <div class='col-16-24  js-togglable  js-revealable   bottom-half-line-spacer'>
     <%= default_date_link %>
     <div class='col-1-2'>
-      <%= label_tag :start_date %>
-      <%= f.date_field :period_first  %>
+      <%= f.label :period_first, 'Start date' %>
+      <%= f.text_field :period_first  %>
     </div>
     <div class='col-1-2'>
-      <%= label_tag :end_date %>
-      <%= f.date_field :period_last %>
+      <%= f.label :period_last, 'End date' %>
+      <%= f.text_field :period_last %>
     </div>
   </div>
 </div>
