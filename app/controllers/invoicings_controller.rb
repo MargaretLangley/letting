@@ -5,12 +5,13 @@
 # Invoicing for batches of invoices.
 #
 # rubocop: disable Style/AccessorMethodName
+# rubocop error to avoid get_ and set_ methods
+#
 ####
 #
 class InvoicingsController < ApplicationController
   include InvoicingHelper
-  # Print button on index allows printing of complete run
-  #
+
   def index
     @invoicings = Invoicing.page(params[:page]).default.load
   end
@@ -52,9 +53,7 @@ class InvoicingsController < ApplicationController
   end
 
   def edit
-    @invoicing =
-      Invoicing.includes(runs: [invoices: [snapshot: [debits: [:charge]]]])
-      .find params[:id]
+    @invoicing = Invoicing.includes(including).find params[:id]
     @invoicing.generate if @invoicing.valid_arguments?
     set_invoice_date date: get_invoice_date
   end
@@ -102,6 +101,10 @@ class InvoicingsController < ApplicationController
     params
       .require(:invoicing)
       .permit %i(property_range period_first period_last)
+  end
+
+  def including
+    { runs: [invoices: [snapshot: [debits: [:charge]]]] }
   end
 
   def identity
