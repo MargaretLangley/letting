@@ -24,9 +24,6 @@ class CreditDecorator
     @source = credit
   end
 
-  def prepare_for_form
-  end
-
   def amount
     to_decimal credit.amount
   end
@@ -41,7 +38,11 @@ class CreditDecorator
   # When editing we take the amount already paid.
   #
   def payment
-    credit.new_record? ? owing : amount
+    if credit.new_record?
+      to_decimal_edit charge_debt
+    else
+      to_decimal_edit credit.amount
+    end
   end
 
   private

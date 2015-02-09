@@ -32,5 +32,11 @@ describe CreditDecorator do
       credit = credit_create(amount: 30, charge: charge_new)
       expect(CreditDecorator.new(credit).payment).to eq '30.00'
     end
+
+    it 'does not use commas for editing numbers' do
+      charge = charge_create
+      credit = credit_create(amount: 3000, charge: charge)
+      expect(CreditDecorator.new(credit).payment).to eq '3000.00'
+    end
   end
 end
