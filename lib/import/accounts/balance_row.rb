@@ -89,7 +89,7 @@ module DB
     end
 
     def message
-      "Property #{human_ref} charge_code: #{charge_code}"
+      "\nProperty #{human_ref} charge_code: #{charge_code}\n"
     end
 
     private
