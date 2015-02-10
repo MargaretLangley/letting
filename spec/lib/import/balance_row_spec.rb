@@ -41,6 +41,11 @@ module DB
         .to eq Time.zone.local(2012, 3, 20, 0, 0, 0)
     end
 
+    it 'creates datetime period' do
+      expect(row(date: '2012-03-20 00:00:00').period)
+        .to eq Date.new(2000, 1, 1)..Date.new(2012, 3, 20)
+    end
+
     describe 'methods' do
       describe 'charge_type' do
         context 'balance with description' do
