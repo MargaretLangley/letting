@@ -17,6 +17,18 @@ describe AccountDebitDecorator do
       expect(debit_dec.due).to eq '88.08'
     end
 
+    describe 'description' do
+      it 'returns a date range string' do
+        expect(debit_dec.description).to eq '25/Mar/13 to 30/Jun/13'
+      end
+
+      it 'returns arrears description when start date is a minimum date' do
+        dec = AccountDebitDecorator.new \
+          debit_new period: Time.zone.local(2000, 1, 1)..Date.new(2013, 6, 30)
+        expect(dec.description).to eq 'Arrears'
+      end
+    end
+
     it 'payment' do
       expect(debit_dec.payment).to eq ''
     end

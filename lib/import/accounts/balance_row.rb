@@ -76,7 +76,7 @@ module DB
     # The dates over which the balance is said to have applied.
     #
     def period
-      DateDefaults::MIN..at_time
+      DateDefaults::MIN..at_time.to_date
     end
 
     # debits are positive amounts that increase an account balance.

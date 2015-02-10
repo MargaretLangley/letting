@@ -6,6 +6,5 @@
 #
 ####
 module DateDefaults
-  MIN  = '2000-01-01'
-  MAX  = '2100-01-01' # Somewhat optimistic
+  MIN = Time.zone.local(2000, 1, 1).to_date
 end
