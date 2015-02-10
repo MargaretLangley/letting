@@ -27,14 +27,6 @@ module DB
       %(#{human_ref}, #{charge_code}, #{date}, #{description}, #{amount}, 0, #{balance_amount})
     end
 
-    it('human_ref') { expect(row(human_ref: 9).human_ref).to eq 9 }
-    it('charge_code') { expect(row(charge_code: 'GR').charge_code).to eq 'GR' }
-    it 'at_time' do
-      expect(row(date: '2012-03-20 00:00:00').at_time)
-        .to eq Time.zone.local(2012, 3, 20, 0, 0, 0)
-    end
-    it('amount') { expect(row(amount: 5.5).amount).to eq(5.5) }
-
     it 'rows attributes are returned' do
       charge = charge_new charge_type: INSURANCE
       property_create human_ref: 9, account: account_new(charges: [charge])
@@ -42,6 +34,11 @@ module DB
       expect(row.attributes[:charge_id]).to eq charge.id
       expect(row.attributes[:at_time]).to eq Time.zone.local(2012, 3, 25, 0, 0, 0)
       expect(row.attributes[:amount]).to eq 3.05
+    end
+
+    it 'at_time' do
+      expect(row(date: '2012-03-20 00:00:00').at_time)
+        .to eq Time.zone.local(2012, 3, 20, 0, 0, 0)
     end
 
     describe 'methods' do
@@ -59,15 +56,16 @@ module DB
             expect(spec_row.charge_type).to eq 'Ground Rent'
           end
         end
-      end
-      describe '#description_to_charge' do
-        it 'returns ' do
-          spec_row = row(description: 'Balance Service Charge')
-          expect(spec_row.description_to_charge).to eq 'Service Charge'
-        end
-        it 'returns ' do
-          spec_row = row(description: 'Service Charge 2012/13')
-          expect(spec_row.description_to_charge).to eq 'Service Charge'
+
+        context 'uses description to find charge' do
+          it 'returns ' do
+            spec_row = row(charge_code: 'Bal', description: 'Balance Service Charge')
+            expect(spec_row.charge_type).to eq 'Service Charge'
+          end
+          it 'returns ' do
+            spec_row = row(charge_code: 'Bal', description: 'Service Charge 2012/13')
+            expect(spec_row.charge_type).to eq 'Service Charge'
+          end
         end
       end
 
