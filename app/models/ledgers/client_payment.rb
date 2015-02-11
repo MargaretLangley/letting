@@ -48,6 +48,27 @@ class ClientPayment
       .order('properties.human_ref ASC')
   end
 
+  # Client account payments for one of the charge_month periods.
+  #
+  def period_total(year:, month:)
+    period = total_period(year: year, month: month)
+    Payment.where(booked_at: period.first...period.last)
+      .where(account_id: quarter_day_accounts(charge_months: period.first.month..
+                                                             period.last.month)
+        .pluck(:account_id))
+      .pluck(:amount).sum
+  end
+
+  # client payments for one account
+  #
+  def account_period_total(account:, year:, month:)
+    period = total_period(year: year, month: month)
+    Payment.where(booked_at: period.first...period.last)
+      .where(account_id: account.id).pluck(:amount).sum
+  end
+
+  private
+
   # Calculates the 6 months periods for input into total method
   # Arguments:
   # year  - starting year
@@ -56,15 +77,5 @@ class ClientPayment
   def total_period(year:, month:)
     time = Time.zone.local(year, month, 1)
     time..(time + 6.months)
-  end
-
-  # Client account payments for one of the charge_month periods.
-  #
-  def total(period:)
-    Payment.where(booked_at: period.first...period.last)
-      .where(account_id: quarter_day_accounts(charge_months: period.first.month..
-                                                             period.last.month)
-        .pluck(:account_id))
-      .pluck(:amount).sum
   end
 end

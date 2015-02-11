@@ -5,5 +5,5 @@
    Total
 </div>
 <div class='col-3-24  grid-footer-number  vertical-spacer  r-align'>
-  <%= to_decimal client_payment.total(period: client_payment.total_period(year: year, month: batch_months.now)) %>
+  <%= to_decimal client_payment.period_total(year: year, month: batch_months.now) %>
 </div>
