@@ -24,21 +24,33 @@ class ClientPayment
     new(client_id: client_id)
   end
 
+  # the client object of used to initialize
+  #
   def client
     Client.find client_id
   end
 
+  # Arbitrary range of years of payments to cover
+  #
   def years
     (Time.zone.now.year.downto(Time.zone.now.year - 4)).map(&:to_s)
   end
 
+  # Accounts grouped by charge_months:
+  # charge_months has two main groups: Mar/Sep and Jun/Dec
+  # Mar/Sep which has sub-groups (Mar and Sep)
+  # Jun/Dec which has sub-groups (Jun and Dec)
+  # Argument: charge_months: MAR_SEP = [3, 9] or JUN_DEC = [6, 12]
+  #
   def quarter_day_accounts(charge_months:)
     Account.joins(:property)
       .merge(client.properties.houses.quarter_day_in(charge_months.first))
       .order('properties.human_ref ASC')
   end
 
-  # 6 months periods
+  # Calculates the 6 months periods for input into total method
+  # Arguments:
+  # year  - starting year
   # month - starting month
   #
   def total_period(year:, month:)
@@ -46,6 +58,8 @@ class ClientPayment
     time..(time + 6.months)
   end
 
+  # Client account payments for one of the charge_month periods.
+  #
   def total(period:)
     Payment.where(booked_at: period.first...period.last)
       .where(account_id: quarter_day_accounts(charge_months: period.first.month..
