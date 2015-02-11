@@ -8,7 +8,6 @@
 #
 #
 module RangeCycle
-  DEFAULT_CLASS = Advance
   SPECIALIZED_CLASSES = {
     'advance' => Advance,
     'arrears' => Arrears,
