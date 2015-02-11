@@ -31,7 +31,8 @@ class AccountDebitDecorator
   end
 
   def description
-    return ChargeTypes::ARREARS if debit.period.first == DateDefaults::MIN.to_date
+    return ChargeTypes::ARREARS \
+      if debit.period.first == DateDefaults::MIN.to_date
 
     "#{format_short_date debit.period.first} to "\
     "#{format_short_date debit.period.last}"
