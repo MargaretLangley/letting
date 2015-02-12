@@ -19,7 +19,7 @@ describe DueOns, :ledgers, :cycle, type: :model do
 
   describe 'methods' do
     describe '#between' do
-      it 'returns date when range in due date' do
+      it 'returns MatchedDueOn when range in due date' do
         cycle = cycle_new due_ons: [DueOn.new(month: 4, day: 4)]
         expect(cycle.due_ons.between Date.new(2015, 4, 4)..Date.new(2015, 4, 4))
           .to eq [MatchedDueOn.new(Date.new(2015, 4, 4), Date.new(2015, 4, 4))]

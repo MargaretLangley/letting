@@ -41,12 +41,17 @@ module DueOns
     has_many :due_ons, -> { order(:created_at) },
              inverse_of: :cycle,
              dependent: :destroy do
+      #
+      # between billing_period
+      # billing_period - range of dates over which we ask the due_on
+      #                  'do you cover?'
+      #
+      # returns MatchedDueOn - pair comprising of due date and shown date
+      #                        of that due_on - the year added to the
+      #                        due on day and month.
+      #
       def between billing_period
         map { |due_on| due_on.between billing_period }.flatten.sort
-      end
-
-      def between? billing_period
-        select { |due_on| due_on.between? billing_period }
       end
 
       def prepare(type:)

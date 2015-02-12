@@ -35,20 +35,20 @@ describe DueOn, :ledgers, :cycle, type: :model do
 
   describe 'methods' do
     describe '#between' do
-      it 'returns the date of the matching spot and display dates' do
+      it 'returns the MatchedDueOn when date within spot_date range' do
         expect(due_on_new(month: 3, day: 25)
           .between Date.new(2013, 3, 25)..Date.new(2013, 3, 25))
           .to eq [MatchedDueOn.new(Date.new(2013, 3, 25), Date.new(2013, 3, 25))]
       end
 
-      it 'handles date time' do
+      it 'handles date time argument' do
         expect(due_on_new(month: 3, day: 25)
           .between Time.zone.local(2007, 8, 17, 11, 56, 00)..
                    Time.zone.local(2008, 8, 16, 11, 56, 00))
           .to eq [MatchedDueOn.new(Date.new(2008, 3, 25), Date.new(2008, 3, 25))]
       end
 
-      it 'handles multi-year' do
+      it 'handles multi-year argument' do
         expect(due_on_new(month: 3, day: 5)
           .between Date.new(2010, 3, 1)..Date.new(2012, 3, 6))
           .to eq [MatchedDueOn.new(Date.new(2010, 3, 5), Date.new(2010, 3, 5)),
@@ -56,30 +56,9 @@ describe DueOn, :ledgers, :cycle, type: :model do
                   MatchedDueOn.new(Date.new(2012, 3, 5), Date.new(2012, 3, 5))]
       end
 
-      it 'returns nothing on mismatching spot_date' do
+      it 'returns empty array when date outside spot_date range' do
         expect(due_on_new(month: 1, day: 1)
           .between Date.new(2013, 3, 25)..Date.new(2013, 3, 25)).to eq []
-      end
-    end
-
-    describe '#between?' do
-      it 'returns true when matched' do
-        expect(due_on_new(month: 3, day: 25)
-          .between? Time.zone.local(2007, 8, 17, 11, 56, 00)..
-                   Time.zone.local(2008, 8, 16, 11, 56, 00))
-          .to eq true
-      end
-
-      it 'returns false when no match' do
-        expect(due_on_new(month: 1, day: 1)
-          .between? Date.new(2013, 3, 25)..Date.new(2013, 3, 25)).to eq false
-      end
-    end
-
-    describe '#make_date' do
-      it 'displays date' do
-        expect(due_on_new(month: 3, day: 25).make_date(year: 1980))
-          .to eq Date.new 1980, 3, 25
       end
     end
 
