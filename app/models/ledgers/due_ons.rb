@@ -42,7 +42,7 @@ module DueOns
              inverse_of: :cycle,
              dependent: :destroy do
       #
-      # between billing_period
+      # between billing_period - MatchedDueOns covering the billing_period
       # billing_period - range of dates over which we ask the due_on
       #                  'do you cover?'
       #

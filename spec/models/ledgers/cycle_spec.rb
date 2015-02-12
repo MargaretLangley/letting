@@ -74,21 +74,52 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
   end
 
   describe '#billed_period' do
-    it 'displays due_date range by default' do
-      due_on = DueOn.new month: 3, day: 5
-      cycle = cycle_new due_ons: [due_on]
-      expect(cycle.bill_period billed_on: Date.new(2000, 3, 5))
-        .to eq Date.new(2000, 3, 5)..Date.new(2001, 3, 4)
+    describe 'bounding' do
+      it 'matches when billed_on is at start of bill_period' do
+        cycle = cycle_new charged_in: 'advance',
+                          due_ons: [DueOn.new(month: 3, day: 5)]
+
+        expect(cycle.bill_period billed_on: Date.new(2000, 3, 5))
+          .to eq Date.new(2000, 3, 5)..Date.new(2001, 3, 4)
+      end
+
+      it 'matches when billed_on is within bill_period' do
+        cycle = cycle_new charged_in: 'advance',
+                          due_ons: [DueOn.new(month: 3, day: 5)]
+
+        expect(cycle.bill_period billed_on: Date.new(2000, 12, 12))
+          .to eq Date.new(2000, 3, 5)..Date.new(2001, 3, 4)
+      end
+
+      # THIS FAILS to match as the billed_on date leads to creation of 2001
+      # dates (in cycle.show_dates) when only 2000 dates would match.
+      #
+      # When we get a billed_on we need to get the year at the start of the
+      # range not the year of the date passed into method.
+      #
+      # This requirement would only be useful for importing balance row
+      # charges so for now it is left as an optional requirement.
+      #
+      # it 'matches when billed_on is at end of bill_period' do
+      #   skip 'TODO: fix this'
+      #   cycle = cycle_new charged_in: 'advance',
+      #                     due_ons: [DueOn.new(month: 3, day: 5)]
+
+      #   expect(cycle.bill_period billed_on: Date.new(2001, 3, 4))
+      #     .to eq Date.new(2000, 3, 5)..Date.new(2001, 3, 4)
+      # end
     end
 
     it 'displays show range when present' do
       due_on = DueOn.new month: 3, day: 5, show_month: 4, show_day: 10
-      cycle = cycle_new due_ons: [due_on]
+      cycle = cycle_new charged_in: 'advance',
+                        due_ons: [due_on]
+
       expect(cycle.bill_period billed_on: Date.new(2000, 4, 10))
         .to eq Date.new(2000, 4, 10)..Date.new(2001, 4, 9)
     end
 
-    it 'errors when show range present and billed_date past due_date ' do
+    it 'errors when show range present and billed_on past due_date ' do
       due_on = DueOn.new month: 3, day: 5, show_month: 4, show_day: 10
       cycle = cycle_new due_ons: [due_on]
       expect(cycle.bill_period billed_on: Date.new(2000, 3, 5))

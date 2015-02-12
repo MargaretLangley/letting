@@ -36,6 +36,10 @@ class Cycle < ActiveRecord::Base
     due_ons.prepare type: cycle_type
   end
 
+  # between billing_period
+  # billing_period - range of dates covering the time we wish to charge for
+  # returns: MatchedCycle - matched due_date and billing_period date range parings
+  #
   def between billing_period
     due_ons.between(billing_period).map do |match|
       MatchedCycle.new(match.spot, bill_period(billed_on: match.show))
@@ -43,9 +47,13 @@ class Cycle < ActiveRecord::Base
   end
 
   # required to be public for importing accounts information
+  # billed_on: date within the billing period
+  #            anchored by the billed_on's year.
+  #
+  # returns:   range covering the billing period
+  #
   def bill_period(billed_on:)
-    RangeCycle.for(name: charged_in,
-                   dates: show_dates(year: billed_on.year))
+    RangeCycle.for(name: charged_in, dates: show_dates(year: billed_on.year))
       .duration within: billed_on
   end
 
