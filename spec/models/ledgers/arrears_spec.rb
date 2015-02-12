@@ -9,6 +9,30 @@ describe Arrears, :ledgers, :range do
   end
 
   describe '#duration returns period bounding date' do
+    context 'one period' do
+      describe 'bounding' do
+        it 'matches start period' do
+          repeat = Arrears.new repeat_dates: [RepeatDate.new(year: 2025, month: 3, day: 25)]
+
+          expect(repeat.duration(within: Date.new(2024, 3, 26)))
+            .to eq Date.new(2024, 3, 26)..Date.new(2025, 3, 25)
+        end
+
+        it 'matches in period' do
+          repeat = Arrears.new repeat_dates: [RepeatDate.new(year: 2025, month: 3, day: 25)]
+
+          expect(repeat.duration(within: Date.new(2024, 10, 26)))
+            .to eq Date.new(2024, 3, 26)..Date.new(2025, 3, 25)
+        end
+
+        it 'matches end period' do
+          repeat = Arrears.new repeat_dates: [RepeatDate.new(year: 2025, month: 3, day: 25)]
+
+          expect(repeat.duration(within: Date.new(2025, 3, 25)))
+            .to eq Date.new(2024, 3, 26)..Date.new(2025, 3, 25)
+        end
+      end
+    end
     context 'two periods' do
       it 'returns expected period' do
         repeat = Arrears.new repeat_dates: [RepeatDate.new(year: 2025, month: 3, day: 25),

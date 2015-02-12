@@ -10,10 +10,24 @@ describe Advance, :ledgers, :range do
 
   describe '#duration returns period bounding date' do
     context 'one period' do
-      it 'returns expected period' do
-        repeat = Advance.new repeat_dates: [RepeatDate.new(year: 2024, month: 9, day: 3)]
-        expect(repeat.duration(within: Date.new(2024, 9, 3)))
-          .to eq Date.new(2024, 9, 3)..Date.new(2025, 9, 2)
+      describe 'bounding' do
+        it 'matches start period' do
+          repeat = Advance.new repeat_dates: [RepeatDate.new(year: 2024, month: 9, day: 3)]
+          expect(repeat.duration(within: Date.new(2024, 9, 3)))
+            .to eq Date.new(2024, 9, 3)..Date.new(2025, 9, 2)
+        end
+
+        it 'matches in period' do
+          repeat = Advance.new repeat_dates: [RepeatDate.new(year: 2024, month: 9, day: 3)]
+          expect(repeat.duration(within: Date.new(2025, 1, 1)))
+            .to eq Date.new(2024, 9, 3)..Date.new(2025, 9, 2)
+        end
+
+        it 'matches end period' do
+          repeat = Advance.new repeat_dates: [RepeatDate.new(year: 2024, month: 9, day: 3)]
+          expect(repeat.duration(within: Date.new(2025, 9, 2)))
+            .to eq Date.new(2024, 9, 3)..Date.new(2025, 9, 2)
+        end
       end
 
       it 'returns expect period through a leap day' do
