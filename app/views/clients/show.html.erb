@@ -157,69 +157,15 @@
   </div>
 </div>  <!-- grid  shell js-toggle-selection -->
 
-<div class='grid  shell-1-25  js-toggle-selection'>
-  <div class='js-togglable <%= payments_contracted_visible %>'>
+  <div class='grid  shell-1-25'>
 
-    <div class='col-23-24  grid-row'>
+    <div class='col-1-1  grid-row'>
       <h3 class='small-bottom'>Ground Rent Payments &hellip;</h3>
     </div>
-    <div class='col-1-24  no-r-pad'>
-      <%= toggle_link direction: :down, size: '2x'  %>
-    </div>
 
     <%= render 'client_payments/totals', client_payment: @client_payment %>
   </div>
 
-  <div class='js-togglable  <%= payments_expanded_visible %>'>
 
-    <div class='col-23-24  grid-row'>
-      <h2 class='small-bottom'>Ground Rent Payments</h2>
-    </div>
-    <div class='col-1-24  no-r-pad'>
-      <%= toggle_link direction: :up, size: '2x'   %>
-    </div>
 
-    <%= render 'client_payments/totals', client_payment: @client_payment %>
 
-    <div class='col-1-1  grid-row'>
-      <h3>Itemised</h3>
-    </div>
-
-    <%= form_tag client_path, class: 'no-print', id: 'client_payment', method: 'get' do %>
-
-      <div class='col-3-24  grid-row  vertical-line-spacer  faded'>Payments in</div>
-      <div class='col-21-24  vertical-line-spacer'>
-        <%= select_tag 'client_payment_year', options_for_select(@client_payment.years, selected: client_payment_year), onchange: "$('#client_payment').submit();" %>
-        <%= hidden_field_tag :selected, 'true' %>
-      </div>
-    <% end %>
-
-    <div class='col-1-1  grid-row'>
-      <div class='tabs'>
-        <ul class='tab-links  no-print'>
-          <li class='active'>
-            <%= link_to "#Mar" do %>
-              <h4><b>Mar</b>/Sep</h4>
-            <% end %>
-          </li>
-          <li><%= link_to "#Sep" do %><h4>Mar/<b>Sep</b></h4><% end %></li>
-          <li><%= link_to "#Jun" do %><h4><b>Jun</b>/Dec</h4><% end %></li>
-          <li><%= link_to "#Dec" do %><h4>Jun/<b>Dec</b></h4><% end %></li>
-        </ul>
-
-        <div class='grid  tab-content'>
-
-          <% [BatchMonths::MAR, BatchMonths::SEP, BatchMonths::JUN, BatchMonths::DEC].each do |month| %>
-
-            <% batch_months = BatchMonths.make(month: month) %>
-            <div id='<%= batch_months.now_to_s %>' class='tab <%= 'active' if batch_months.mar? %> vertical-line-spacer'>
-              <%= render 'client_payments/client_payment', client_payment: @client_payment, month: month %>
-            </div> <!-- close #Mon -->
-
-          <% end %>
-        </div> <!-- grid shell tab-content  -->
-      </div> <!-- close tabs -->
-
-    </div> <!-- close grid-row  for tabs -->
-  </div>
-</div> <!-- grid  shell js-toggle-selection -->

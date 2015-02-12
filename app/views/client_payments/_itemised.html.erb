@@ -1,0 +1,7 @@
+ <div class='grid  tab-content'>
+
+  <% batch_months = BatchMonths.make(month: month) %>
+  <%= render 'client_payments/client_payment', client_payment: @client_payment, month: month %>
+
+
+</div> <!-- grid shell tab-content  -->

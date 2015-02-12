@@ -1,3 +1,4 @@
 <% @title='Client Payment' %>
+
 <% month = params[:month].to_i unless params[:month].nil? %>
-<%= render 'client_payments/client_payment', client_payment: @client_payment, month: month %>
+<%= render 'client_payments/client_payment', client_payment: @client_payment, month: @client_payment.month, year: @client_payment.year %>

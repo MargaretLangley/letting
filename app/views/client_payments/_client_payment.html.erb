@@ -1,11 +1,14 @@
-<% batch_months = BatchMonths.make(month: month) %>
+<% batch_months = BatchMonths.make(month: client_payment.month) %>
 
 <%= render 'client_payments/accounts_heading', client_payment: client_payment, batch_months: batch_months %>
 <%= render 'client_payments/payments_made',
                client_payment: client_payment,
                batch_months: batch_months,
-               year: client_payment_year %>
+               year: client_payment.year %>
 <%= render 'client_payments/payments_total',
                client_payment: client_payment,
                batch_months: batch_months,
-               year: client_payment_year %>
+               year: client_payment.year %>
+
+
+

@@ -15,7 +15,7 @@
 class ClientPayment
   MAR_SEP = [3, 9]
   JUN_DEC = [6, 12]
-  attr_reader :client_id
+  attr_reader :client_id, :year, :month
   def initialize(client_id:)
     @client_id = client_id
   end
@@ -27,7 +27,12 @@ class ClientPayment
   # the client object of used to initialize
   #
   def client
-    Client.find client_id
+    @client ||= Client.find client_id
+  end
+
+  def details(year:, month:)
+    @year = year
+    @month = month
   end
 
   # Arbitrary range of years of payments to cover
@@ -65,6 +70,14 @@ class ClientPayment
     period = total_period(year: year, month: month)
     Payment.where(booked_at: period.first...period.last)
       .where(account_id: account.id).pluck(:amount).sum
+  end
+
+  def detailed_period_total
+    period_total year: year, month: month
+  end
+
+  def detailed_account_period_total(account:)
+    account_period_total account: account, year: year, month: month
   end
 
   private

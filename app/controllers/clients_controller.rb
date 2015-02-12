@@ -55,6 +55,11 @@ class ClientsController < ApplicationController
     redirect_to clients_path, flash: { delete: cached_message }
   end
 
+  def payment
+    @client_payment = ClientPayment.query client_id: params[:id]
+    @client_payment.details year: params[:year].to_i, month: params[:month].to_i
+  end
+
   private
 
   def clients_params
