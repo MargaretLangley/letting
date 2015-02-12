@@ -60,8 +60,7 @@ module DB
     # The next datetime that a charge would become due
     # Allows us to put a balance at the start of a charge period
     #
-    # TODO:
-    # May-never happen
+    # TODO: May-never happen
     # IF I can work out the start of the date range from a given
     # at_time I can wind back a blance_row to the start of the
     # period.

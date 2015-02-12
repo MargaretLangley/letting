@@ -38,7 +38,8 @@ class Cycle < ActiveRecord::Base
 
   # between billing_period
   # billing_period - range of dates covering the time we wish to charge for
-  # returns: MatchedCycle - matched due_date and billing_period date range parings
+  # returns: MatchedCycle - matched due_date and billing_period date range
+  #          parings
   #
   def between billing_period
     due_ons.between(billing_period).map do |match|
