@@ -38,18 +38,17 @@ class DueOn < ActiveRecord::Base
     date_range = to_date_range datetime_range
     matched = date_range.to_a
               .map(&:year)
-              .uniq.map { |year| make_date year: year }
+              .uniq.map { |year| Date.new(year, month, day) }
               .sort & date_range.to_a
     matched.map { |date| MatchedDueOn.new date, show_date(year: date.year) }
   end
 
-  def make_date(year:)
-    Date.new year, month, day
-  end
-
+  # show_date(year:)
+  # year - year which the date will be given
+  #
   def show_date(year:)
     if show_month.nil? && show_day.nil?
-      make_date year: year
+      Date.new year, month, day
     else
       Date.new year, show_month, show_day
     end
