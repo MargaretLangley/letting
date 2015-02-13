@@ -68,7 +68,7 @@ Repeat each time you want to delete and restore the database.
 
 4. Configure Elasticsearch memory limit (a memory greedy application)
    `sudo nano /usr/local/etc/elasticsearch/elasticsearch-env.sh`
-   1. Change ES_HEAP_SIZE=1g, -Xms1g, -Xmx1g
+   1. Change: ES_HEAP_SIZE=1g, -Xms1g, -Xmx1g
   `sudo service elasticsearch restart`
   2. verify as it also says 'ok' when it fails.   `sudo service elasticsearch restart`
 
