@@ -20,7 +20,11 @@ This document covers the following sections
   2. Reset the database
   3. Running rails console in production
   4. Disabling the Firewall
+  5. Truncating a file without changing ownership
 4. Cheatsheet
+  1. Postgresql
+  2. Elasticsearch
+  3. QEMU
 5. Production Client
 
 
@@ -115,7 +119,7 @@ My Reference: Webserver alias: `ssh arran`
     `SELECT pid FROM pg_stat_activity where pid <> pg_backend_pid();`
     Then for each connection:
     `SELECT pg_terminate_backend($1);`
-5. System can then have Production setup again
+5. Start Server Setup
 
 ===
 
@@ -139,19 +143,30 @@ Sometimes when you are changing a project the database will not allow you to del
 
 If an operation is not completing and you suspect a firewall issue
 these commands completely remove it. (Rebooting the box, if applicable, restores the firewall)
+
+````
     sudo su
     iptables -P INPUT ACCEPT
     iptables -P OUTPUT ACCEPT
     iptables -P FORWARD ACCEPT
     iptables -F
+````
+
+####3.5 Truncating a file without changing ownership
+
+````
+cat /dev/null > /file/you/want/to/wipe-out
+`````
 
 ####4 Cheatsheet
+
+#####4.1 Postgresql
 1. change to Postgres user and open psql prompt `sudo -u postgres psql postgres`
 2. Listing Users (roles) and attributes: `\du`
 3. Listing all databases: `\list`
 4. Connect to a database: `\c db_name`
 
-Elasticsearch
+#####4.2 Elasticsearch
 
 1) Forced Re-index:    rake elasticsearch:sync
 2) Find Cluster name:  curl -XGET 'http://localhost:9200/_nodes'
@@ -205,6 +220,31 @@ Somtimes it won't delete the Elasticsearch pid file.
 ````
 
 ===
+
+#####4.3 QEMU
+
+````
+virsh list --all     -  List running virtual servers
+
+virsh reboot <name>  - restarts the virtual server
+virsh shutdown <name> - quit of virtual server
+virsh destroy <name> - forced quit of virtual server
+
+virsh start <name> - start guest
+````
+
+######4.3.2 Removing an instance from
+
+Removing an instance called vmX
+
+`````
+  virsh destroy vmX
+  lvremove /dev/<instance name>/vmX -f
+  virsh undefine vmX
+  rm -rf /var/lib/libvirt/images/vmX
+  sudo reboot - otherwise temporary files prevent you from reusing the vm name
+`````
+
 
 ####5 Production Client
 On release of the version go through the checklist in docs/production_checklist
