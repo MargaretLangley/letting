@@ -25,7 +25,9 @@ gem 'uglifier', '~> 2.7.0'
 gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 3.1.0'
+gem 'jquery-rails', '~> 4.0.0'
+
+# Latest ui (5.0.3) causes CapybaraHelper to fail
 gem 'jquery-ui-rails', '~> 4.1.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
