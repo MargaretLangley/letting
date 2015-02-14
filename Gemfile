@@ -37,7 +37,7 @@ gem 'turbolinks', '~> 2.5.0'
 gem 'jbuilder', '~> 2.2.0'
 
 # Must be include before elasticsearch
-gem 'kaminari', '~> 0.16.1'
+gem 'kaminari', '~> 0.16.0'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
