@@ -15,7 +15,7 @@ describe ExtractRef, :stage do
   it 'deletes when id match' do
     input = [row(human_ref: 10, value: 4)]
     extract = ExtractRef.new \
-              extracts: [row(human_ref: 10, value: 8)]
+      extracts: [row(human_ref: 10, value: 8)]
     extract.cleanse originals: input
     expect(input).to eq []
   end

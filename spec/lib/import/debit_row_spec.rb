@@ -20,7 +20,7 @@ module DB
             date: '2012-03-25 00:00:00',
             amount: 50.5
       DebitRow.new parse_line \
-      %(#{human_ref}, #{charge_code}, #{date}, Insurance, #{amount}, 0, 0)
+        %(#{human_ref}, #{charge_code}, #{date}, Insurance, #{amount}, 0, 0)
     end
 
     it('human_ref') { expect(row(human_ref: 9).human_ref).to eq 9 }

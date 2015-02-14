@@ -24,7 +24,7 @@ module DB
             amount: 5,
             balance_amount: 5
       BalanceRow.new parse_line \
-      %(#{human_ref}, #{charge_code}, #{date}, #{description}, #{amount}, 0, #{balance_amount})
+        %(#{human_ref}, #{charge_code}, #{date}, #{description}, #{amount}, 0, #{balance_amount})
     end
 
     it 'rows attributes are returned' do

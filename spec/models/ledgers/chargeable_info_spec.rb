@@ -23,11 +23,11 @@ describe Chargeable, :ledgers, type: :model do
   describe 'methods' do
     it 'self.from_charge generates chargeable' do
       chargeable = Chargeable.from_charge \
-                          account_id: 2,
-                          charge_id: 1,
-                          at_time: Date.new(2013, 3, 25),
-                          period:  Date.new(2013, 3, 25)..Date.new(2013, 6, 30),
-                          amount: 88.08
+        account_id: 2,
+        charge_id: 1,
+        at_time: Date.new(2013, 3, 25),
+        period:  Date.new(2013, 3, 25)..Date.new(2013, 6, 30),
+        amount: 88.08
       expect(chargeable.class).to be Chargeable
     end
 

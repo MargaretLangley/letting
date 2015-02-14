@@ -8,7 +8,7 @@ describe InsertAccInfo, :stage do
   it 'inserts' do
     input = [row(human_ref: 5, charge_type: 'Rent', value: 1)]
     insert = InsertAccInfo.new \
-              insert: [row(human_ref: 10, charge_type: 'Rent', value: 2)]
+      insert: [row(human_ref: 10, charge_type: 'Rent', value: 2)]
     expect(insert.cleanse originals: input)
       .to eq [row(human_ref: 5, charge_type: 'Rent', value: 1),
               row(human_ref: 10, charge_type: 'Rent', value: 2)]
@@ -19,7 +19,7 @@ describe InsertAccInfo, :stage do
       input = [row(human_ref: 10, charge_type: 'Rent'),
                row(human_ref: 1, charge_type: 'Rent')]
       insert = InsertAccInfo.new \
-                insert: [row(human_ref: 5, charge_type: 'Rent')]
+        insert: [row(human_ref: 5, charge_type: 'Rent')]
       insert.cleanse originals: input
       expect(input).to eq [row(human_ref: 1, charge_type: 'Rent'),
                            row(human_ref: 5, charge_type: 'Rent'),
@@ -30,7 +30,7 @@ describe InsertAccInfo, :stage do
       input = [row(human_ref: 1, charge_type: 'Rent'),
                row(human_ref: 1, charge_type: 'Vent')]
       insert = InsertAccInfo.new \
-                insert: [row(human_ref: 1, charge_type: 'Sent')]
+        insert: [row(human_ref: 1, charge_type: 'Sent')]
       expect(insert.cleanse originals: input)
         .to eq [row(human_ref: 1, charge_type: 'Rent'),
                 row(human_ref: 1, charge_type: 'Sent'),
@@ -41,7 +41,7 @@ describe InsertAccInfo, :stage do
       input = [row(human_ref: 1, charge_type: 'Vent'),
                row(human_ref: 2, charge_type: 'Sent')]
       insert = InsertAccInfo.new \
-                insert: [row(human_ref: 3, charge_type: 'Rent')]
+        insert: [row(human_ref: 3, charge_type: 'Rent')]
       expect(insert.cleanse originals: input)
         .to eq [row(human_ref: 1, charge_type: 'Vent'),
                 row(human_ref: 2, charge_type: 'Sent'),

@@ -20,7 +20,7 @@ module DB
             description: ChargeTypes::GROUND_RENT,
             debit_amount: 0
       AccountRow.new parse_line \
-      %(#{human_ref}, #{charge_code}, #{date}, #{description}, #{debit_amount}, #{credit_amount}, 0)
+        %(#{human_ref}, #{charge_code}, #{date}, #{description}, #{debit_amount}, #{credit_amount}, 0)
     end
 
     describe 'attributes' do

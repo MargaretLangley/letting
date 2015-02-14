@@ -15,8 +15,8 @@ namespace :db do
 
     def staging_accounts
       DB::CSVTransform.new(
-         file_name: 'import_data/staging/staging_acc_items.csv',
-         headers: DB::FileHeader.account).to_a
+        file_name: 'import_data/staging/staging_acc_items.csv',
+        headers: DB::FileHeader.account).to_a
     end
   end
 end

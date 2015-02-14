@@ -12,9 +12,9 @@ describe AccountDecorator do
       account.credits.push credit_new at_time: '25/9/2014', amount: 12.00
       expect(account.all_items.map(&:running_balance)).to \
         contain_exactly \
-           5.00,
-           15.00,
-           3.00
+          5.00,
+          15.00,
+          3.00
     end
   end
 
@@ -39,10 +39,10 @@ describe AccountDecorator do
     it 'orders abbrev-items by date' do
       expect(account.abbrev_items.map(&:at_time)).to \
         contain_exactly \
-        Time.zone.local(2013, 1, 1,  0, 0, 0),
-        Time.zone.local(2013, 3, 25, 0, 0, 0),
-        Time.zone.local(2013, 4, 30, 0, 0, 0),
-        Time.zone.local(2013, 9, 25, 0, 0, 0)
+          Time.zone.local(2013, 1, 1,  0, 0, 0),
+          Time.zone.local(2013, 3, 25, 0, 0, 0),
+          Time.zone.local(2013, 4, 30, 0, 0, 0),
+          Time.zone.local(2013, 9, 25, 0, 0, 0)
     end
   end
 

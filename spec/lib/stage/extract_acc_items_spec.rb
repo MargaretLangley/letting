@@ -17,10 +17,10 @@ describe ExtractAccItems, :stage do
                  at_time: Date.new(2014, 3, 8),
                  value: 4)]
     extract = ExtractAccItems.new \
-              extracts: [row(human_ref: 20,
-                             charge_code: 'GR',
-                             at_time: Date.new(2014, 3, 8),
-                             value: 8)]
+      extracts: [row(human_ref: 20,
+                     charge_code: 'GR',
+                     at_time: Date.new(2014, 3, 8),
+                     value: 8)]
     extract.cleanse originals: input
     expect(input).to eq [row(human_ref: 10,
                              charge_code: 'GR',
@@ -34,10 +34,10 @@ describe ExtractAccItems, :stage do
                  at_time: Date.new(2014, 3, 8),
                  value: 4)]
     extract = ExtractAccItems.new \
-              extracts: [row(human_ref: 10,
-                             charge_code: 'GR',
-                             at_time: Date.new(2014, 3, 8),
-                             value: 8)]
+      extracts: [row(human_ref: 10,
+                     charge_code: 'GR',
+                     at_time: Date.new(2014, 3, 8),
+                     value: 8)]
     extract.cleanse originals: input
     expect(input).to eq []
   end

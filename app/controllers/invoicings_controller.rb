@@ -27,8 +27,8 @@ class InvoicingsController < ApplicationController
 
   def new
     @invoicing = Invoicing.new \
-                   property_range: SpaceOut.process(params[:search_terms]),
-                   period: get_period_first..get_period_last
+      property_range: SpaceOut.process(params[:search_terms]),
+      period: get_period_first..get_period_last
     @invoicing.generate if @invoicing.valid_arguments?
     set_session
   end

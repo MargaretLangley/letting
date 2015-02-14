@@ -16,9 +16,9 @@ describe InsertAccItems, :stage do
                  charge_type: 'Rent',
                  at_time: Date.new(2014, 3, 8))]
     insert = InsertAccItems.new \
-              insert: [row(human_ref: 10,
-                           charge_type: 'Rent',
-                           at_time: Date.new(2014, 3, 9))]
+      insert: [row(human_ref: 10,
+                   charge_type: 'Rent',
+                   at_time: Date.new(2014, 3, 9))]
     expect(insert.cleanse originals: input)
       .to eq [row(human_ref: 5,
                   charge_type: 'Rent',

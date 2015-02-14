@@ -33,10 +33,10 @@ describe PatchAccItems, :stage do
                  at_time: Date.new(2014, 3, 8),
                  value: 4)]
     patch = PatchAccItems.new \
-              patch: [row(human_ref: 10,
-                          charge_type: 'Rent',
-                          at_time: Date.new(2014, 3, 8),
-                          value: 8)]
+      patch: [row(human_ref: 10,
+                  charge_type: 'Rent',
+                  at_time: Date.new(2014, 3, 8),
+                  value: 8)]
     expect(patch.cleanse originals: input)
       .to eq [row(human_ref: 10,
                   charge_type: 'Rent',

@@ -8,7 +8,7 @@ describe PatchAccInfo, :stage do
   it 'returns unmatched data unmolested' do
     input = [row(human_ref: 10, charge_type: 'Rent', value: 4)]
     patch = PatchAccInfo.new \
-              patch: [row(human_ref: 20, charge_type: 'Rent', value: 8)]
+      patch: [row(human_ref: 20, charge_type: 'Rent', value: 8)]
     expect(patch.cleanse originals: input)
       .to eq [row(human_ref: 10, charge_type: 'Rent', value: 4)]
   end
@@ -16,7 +16,7 @@ describe PatchAccInfo, :stage do
   it 'returns patch data when id match' do
     input = [row(human_ref: 10, charge_type: 'Rent', value: 4)]
     patch = PatchAccInfo.new \
-              patch: [row(human_ref: 10, charge_type: 'Rent', value: 8)]
+      patch: [row(human_ref: 10, charge_type: 'Rent', value: 8)]
     expect(patch.cleanse originals: input)
       .to eq [row(human_ref: 10, charge_type: 'Rent', value: 8)]
   end

@@ -18,8 +18,8 @@ describe 'Property navigate', type: :feature do
 
     it 'goes to edit' do
       client_create \
-      human_ref: 90,
-      properties: [property_new(human_ref: 80, account: account_new)]
+        human_ref: 90,
+        properties: [property_new(human_ref: 80, account: account_new)]
       visit '/accounts/'
 
       first(:link, 'Edit').click
@@ -49,8 +49,8 @@ describe 'Property navigate', type: :feature do
 
   it 'from edit page to view page' do
     client_create \
-        human_ref: 90,
-        properties: [property_new(id: 1, human_ref: 80, account: account_new)]
+      human_ref: 90,
+      properties: [property_new(id: 1, human_ref: 80, account: account_new)]
 
     AccountPage.new.load id: 1
     click_on 'View file'

@@ -73,9 +73,9 @@ module DB
                        charged_in: MODERN_ARREARS,
                        due_ons: [DueOn.new(month: 3, day: 25)]
           row = ChargeRow.new parse_line \
-                                charge_row charged_in: LEGACY_ARREARS,
-                                           month_1: 3,
-                                           day_1: 25
+            charge_row charged_in: LEGACY_ARREARS,
+                       month_1: 3,
+                       day_1: 25
           expect(row.cycle_id).to eq 3
         end
 
@@ -86,11 +86,11 @@ module DB
             due_ons: [DueOn.new(month: 3, day: 25, show_month: 6, show_day: 24),
                       DueOn.new(month: 9, day: 29, show_month: 12, show_day: 12)]
           row = ChargeRow.new parse_line \
-                                charge_row charged_in: LEGACY_MID_TERM,
-                                           # Legacy data uses wrong dates
-                                           # we continue this practice
-                                           month_1: 6,  day_1: 24,
-                                           month_2: 12, day_2: 25
+            charge_row charged_in: LEGACY_MID_TERM,
+                       # Legacy data uses wrong dates
+                       # we continue this practice
+                       month_1: 6,  day_1: 24,
+                       month_2: 12, day_2: 25
           expect(row.cycle_id).to eq 3
         end
 
@@ -105,9 +105,9 @@ module DB
                        charged_in: MODERN_ADVANCE,
                        due_ons: [DueOn.new(month: 10, day: 10)]
           row = ChargeRow.new parse_line charge_row \
-                                           charged_in: LEGACY_ARREARS,
-                                           month_1: 3,
-                                           day_1: 25
+            charged_in: LEGACY_ARREARS,
+            month_1: 3,
+            day_1: 25
           expect { warn 'charge row does not match a cycle' }
             .to output.to_stderr
           row.cycle_id
@@ -118,9 +118,9 @@ module DB
                        charged_in: MODERN_ARREARS,
                        due_ons: [DueOn.new(month: 3, day: 25)]
           row = ChargeRow.new parse_line charge_row \
-                                           charged_in: 'UNKNOWN',
-                                           month_1: 3,
-                                           day_1: 25
+            charged_in: 'UNKNOWN',
+            month_1: 3,
+            day_1: 25
           expect { row.cycle_id }.to raise_error DB::ChargedInCodeUnknown
         end
       end
