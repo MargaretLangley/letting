@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/BCS-io/capistrano-unicorn-nginx.git
-  revision: 4b4966de3e31765cf8a77285189eb7313a0de095
+  revision: 3b2a001659ce4fd72f252dbad551f4053907aecb
   specs:
-    capistrano-unicorn-nginx (2.0.0)
+    capistrano-unicorn-nginx (3.3.0)
       capistrano (>= 3.1)
       sshkit (>= 1.2.0)
 
