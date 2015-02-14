@@ -57,7 +57,6 @@ GEM
     autoprefixer-rails (5.1.5)
       execjs
       json
-    awesome_print (1.6.1)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -278,9 +277,8 @@ GEM
       tinycon-rails
     rails-html-sanitizer (1.0.1)
       loofah (~> 2.0)
-    rails_best_practices (1.15.4)
+    rails_best_practices (1.15.6)
       activesupport
-      awesome_print
       code_analyzer (>= 0.4.3)
       colored
       erubis
@@ -480,7 +478,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 0.9.0)
   rails (= 4.2.0)
   rails-env-favicon
-  rails_best_practices (~> 1.15.1)
+  rails_best_practices (~> 1.15.0)
   rake (= 10.1.0)
   rb-readline
   rspec-rails (~> 3.2.0)

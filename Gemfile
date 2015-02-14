@@ -69,7 +69,7 @@ group :development do
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'brakeman', '~>3.0.0', require: false
   gem 'bullet', '~>4.14.0'
-  gem 'rails_best_practices', '~>1.15.1'
+  gem 'rails_best_practices', '~>1.15.0'
   gem 'rubocop', '~> 0.29.0', require: false
   gem 'rubycritic', require: false
   gem 'traceroute'
