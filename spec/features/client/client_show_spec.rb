@@ -84,13 +84,14 @@ describe 'Client#show', type: :feature do
       expect(page).to_not have_content /The client has no properties./i
     end
 
-    it 'displays message when client has no properties' do
-      skip 'TODO: get test working'
-      client_create id: 1
-      visit '/clients/1'
+    # Ajax request - maybe why I am having no luck getting this going
+    # TODO: Should be fixed
+    # it 'displays message when client has no properties', js: true do
+    #   client_create id: 1
+    #   visit '/clients/1'
 
-      expect(page.text).to match(/The Client has no Mar\/Sep properties./i)
-      expect(page.text).to match(/The Client has no Jun\/Dec properties./i)
-    end
+    #   click_link('0.00', match: :first)
+    #   expect(page.text).to match(/The Client has no Mar\/Sep properties./i)
+    # end
   end
 end
