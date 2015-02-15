@@ -107,7 +107,7 @@ class Account < ActiveRecord::Base
         LEFT JOIN debits ON debits.account_id = accounts.id
       ) t
       GROUP BY id, property_id
-      HAVING sum(amount) > ?
+      HAVING sum(amount) >= ?
       ORDER BY id
     SQL
     find_by_sql [query, greater_than]
