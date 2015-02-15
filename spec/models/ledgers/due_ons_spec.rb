@@ -21,6 +21,7 @@ describe DueOns, :ledgers, :cycle, type: :model do
     describe '#between' do
       it 'returns MatchedDueOn when range in due date' do
         cycle = cycle_new due_ons: [DueOn.new(month: 4, day: 4)]
+
         expect(cycle.due_ons.between Date.new(2015, 4, 4)..Date.new(2015, 4, 4))
           .to eq [MatchedDueOn.new(Date.new(2015, 4, 4), Date.new(2015, 4, 4))]
       end
@@ -39,6 +40,31 @@ describe DueOns, :ledgers, :cycle, type: :model do
         cycle = cycle_new due_ons: [DueOn.new(month: 2, day: 1)]
         expect(cycle.due_ons.between Date.new(2013, 4, 4)..Date.new(2013, 5, 2))
           .to eq []
+      end
+    end
+
+    describe '#show?' do
+      it 'displays true when show date' do
+        cycle = cycle_new due_ons: [DueOn.new(month: 4, day: 4,
+                                              show_month: 1, show_day: 1)]
+
+        expect(cycle.due_ons).to be_show
+      end
+
+      it 'displays true when when any show date' do
+        cycle = cycle_new due_ons: [DueOn.new(month: 4, day: 4,
+                                              show_month: nil, show_day: nil),
+                                    DueOn.new(month: 4, day: 4,
+                                              show_month: 1, show_day: 1)]
+
+        expect(cycle.due_ons).to be_show
+      end
+
+      it 'displays false when no show date' do
+        cycle = cycle_new due_ons: [DueOn.new(month: 4, day: 4,
+                                              show_month: nil, show_day: nil)]
+
+        expect(cycle.due_ons).to_not be_show
       end
     end
 

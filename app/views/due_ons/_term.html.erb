@@ -1,12 +1,32 @@
-<div class='col-5-24  grid-row  faded'>Due On</div>
-<div class='col-3-24  faded'>Day</div>
-<div class='col-3-24  faded  r-align'>Month</div>
-<div class='col-4-24  faded  r-align'>Year</div>
+<div class='col-5-24  grid-row  top-1-line-spacer  faded'>Due On</div>
+<div class='col-6-24  top-1-line-spacer  faded  c-align'>Due Dates</div>
+<div class='col-1-24  top-1-line-spacer'>&nbsp;</div>
+<div class='col-4-24  top-1-line-spacer  faded  c-align'>Shown Dates</div>
+<div class='col-5-24  top-1-line-spacer'>&nbsp;</div>
 
-<% cycle.due_ons.each  do |due_on| %>
+<div class='col-5-24  grid-row  vertical-spacer'>&nbsp;</div>
+<div class='col-2-24  vertical-spacer  grid-header'>Day</div>
+<div class='col-2-24  vertical-spacer  grid-header  r-align'>Month</div>
+<div class='col-2-24  vertical-spacer  grid-header  r-align'>Year</div>
+<div class='col-1-24  vertical-spacer  grid-header'>&nbsp;</div>
+<div class='col-2-24  vertical-spacer  grid-header  r-align'>Month</div>
+<div class='col-2-24  vertical-spacer  grid-header  r-align'>Day</div>
+
+<% cycle.due_ons.each_with_index  do |due_on, index| %>
 
   <div class='col-5-24  grid-row  bottom-spacer'>&nbsp;</div>
-  <div class='col-3-24  bottom-spacer  '><%= due_on.day %></div>
-  <div class='col-3-24  bottom-spacer  r-align'><%= due_on.month %></div>
-  <div class='col-4-24  bottom-spacer  r-align'><%= due_on.year %></div>
+  <div class='col-2-24  bottom-spacer  '><%= due_on.day %></div>
+  <div class='col-2-24  bottom-spacer  r-align'><%= due_on.month %></div>
+  <div class='col-2-24  bottom-spacer  r-align'><%= due_on.year %></div>
+  <div class='col-1-24  bottom-spacer'>&nbsp;</div>
+  <% if cycle.show? %>
+    <div class='col-2-24  bottom-spacer  r-align'><%= due_on.show_month %></div>
+    <div class='col-2-24  bottom-spacer  r-align'><%= due_on.show_day %></div>
+  <% else %>
+    <% if index == 0 %>
+      <div class='col-4-24  bottom-spacer'>Same as Due Dates</div>
+    <% else %>
+      <div class='col-4-24  bottom-spacer'>&nbsp;</div>
+    <% end %>
+  <% end %>
 <% end %>

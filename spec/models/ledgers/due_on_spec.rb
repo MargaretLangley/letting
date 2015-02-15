@@ -74,6 +74,28 @@ describe DueOn, :ledgers, :cycle, type: :model do
       end
     end
 
+    describe '#show' do
+      it 'displays true when show dates' do
+        expect(due_on_new(month: 3, day: 25, show_month: 2, show_day: 3))
+          .to be_show
+      end
+
+      it 'displays true when either show dates true' do
+        expect(due_on_new(month: 3, day: 25, show_month: 2, show_day: nil))
+          .to be_show
+      end
+
+      it 'displays true when either show dates true' do
+        expect(due_on_new(month: 3, day: 25, show_month: nil, show_day: 2))
+          .to be_show
+      end
+
+      it 'returns false when no show dates' do
+        expect(due_on_new(month: 3, day: 25, show_month: nil, show_day: nil))
+          .to_not be_show
+      end
+    end
+
     describe '#clear_up_form' do
       context 'new' do
         it 'saveable when valid' do

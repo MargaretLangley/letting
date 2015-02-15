@@ -25,6 +25,7 @@ class Cycle < ActiveRecord::Base
   accepts_nested_attributes_for :due_ons, allow_destroy: true
   before_validation :clear_up_form
 
+  delegate :show?, to: :due_ons
   delegate :clear_up_form, to: :due_ons
 
   def monthly?

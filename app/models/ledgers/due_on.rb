@@ -58,6 +58,10 @@ class DueOn < ActiveRecord::Base
     end
   end
 
+  def show?
+    !(show_month.nil? && show_day.nil?)
+  end
+
   def clear_up_form
     mark_for_destruction if empty?
   end
