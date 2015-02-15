@@ -420,7 +420,9 @@ li.active a, li.active a:hover {
 
 @media screen {
 
+  // Also used on client payment's details which isn't tab-content
   .tab-content {
+    @include clearfix;
     background-color: lighten($fieldset, 3%);
     border-radius: 5px;
     box-shadow: -1px 1px 1px rgba(0, 0, 0, .15);

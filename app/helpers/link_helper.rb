@@ -55,8 +55,8 @@ module LinkHelper
     app_link icon: 'gbp', path: path, title: 'Add New Payment'
   end
 
-  def print_link path:, title: 'Print'
-    app_link icon: 'print', path: path, title: title
+  def print_link text: '', path:, title: 'Print'
+    app_link icon: 'print', text: text, path: path, title: title
   end
 
   def toggle_link direction:, size: 'lg', title: ''
