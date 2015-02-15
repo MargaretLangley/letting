@@ -101,7 +101,7 @@ class Account < ActiveRecord::Base
         SELECT accounts.id, property_id, coalesce(credits.amount * -1, 0) as amount
         FROM "accounts"
         LEFT JOIN credits ON credits.account_id = accounts.id
-        UNION
+        UNION ALL
         SELECT accounts.id, property_id, coalesce(debits.amount, 0) as amount
         FROM "accounts"
         LEFT JOIN debits ON debits.account_id = accounts.id
