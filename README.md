@@ -165,6 +165,7 @@ cat /dev/null > /file/you/want/to/wipe-out
 2. Listing Users (roles) and attributes: `\du`
 3. Listing all databases: `\list`
 4. Connect to a database: `\c db_name`
+5. Execute SQL file:  `psql -f thefile.sql letting_<envionrment>`
 
 #####4.2 Elasticsearch
 
