@@ -2,6 +2,7 @@ scss_files: 'app/assets/stylesheets/**/*.css.scss'
 
 exclude:
   - 'app/assets/stylesheets/normalize.css'
+  - 'tmp/rubycritic/assets/stylesheets/*.css'
 
 linters:
   Comment:
