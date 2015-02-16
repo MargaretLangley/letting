@@ -16,16 +16,13 @@ class Cycle < ActiveRecord::Base
   enum charged_in: [:arrears, :advance]
   has_many :charges, inverse_of: :cycle
 
-  validates :name, presence: true
-  validates :order, presence: true
+  validates :name, :order, :due_ons, presence: true
   validates :cycle_type, inclusion: { in: %w(term monthly) }
   validates :charged_in, inclusion: { in: charged_ins.keys }
-  validates :due_ons, presence: true
   include DueOns
   accepts_nested_attributes_for :due_ons, allow_destroy: true
   before_validation :clear_up_form
 
-  delegate :show?, to: :due_ons
   delegate :clear_up_form, to: :due_ons
 
   def monthly?

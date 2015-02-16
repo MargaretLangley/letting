@@ -43,31 +43,6 @@ describe DueOns, :ledgers, :cycle, type: :model do
       end
     end
 
-    describe '#show?' do
-      it 'displays true when show date' do
-        cycle = cycle_new due_ons: [DueOn.new(month: 4, day: 4,
-                                              show_month: 1, show_day: 1)]
-
-        expect(cycle.due_ons).to be_show
-      end
-
-      it 'displays true when when any show date' do
-        cycle = cycle_new due_ons: [DueOn.new(month: 4, day: 4,
-                                              show_month: nil, show_day: nil),
-                                    DueOn.new(month: 4, day: 4,
-                                              show_month: 1, show_day: 1)]
-
-        expect(cycle.due_ons).to be_show
-      end
-
-      it 'displays false when no show date' do
-        cycle = cycle_new due_ons: [DueOn.new(month: 4, day: 4,
-                                              show_month: nil, show_day: nil)]
-
-        expect(cycle.due_ons).to_not be_show
-      end
-    end
-
     describe 'form life cycle' do
       describe '#empty?' do
         it 'is empty when nothing in it' do
