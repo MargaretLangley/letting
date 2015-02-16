@@ -78,6 +78,6 @@ en:
   teachings:
     invoicing: "To invoice properties, search by entering a property range, two property IDs with a hyphen '-' between them 109-123. %{property_id_range}."
     payments:
-      property_payment: "To book a payment against a property, search for the property in the above box. This easiest way is by property identifier, %{property_id}, but %{owner} and %{amount} are also supported."
+      property_payment: "To book a payment against a property, search for the property in the above box by property identifier, %{property_id}."
     properties:
       agent:          "Billing is currently to the occupiers address. If the bill should go to an agent click the 'Agent' checkbox and fill in the agent's details."
