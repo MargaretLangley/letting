@@ -33,6 +33,9 @@ describe DueOn, :ledgers, :cycle, type: :model do
     end
 
     describe 'show month' do
+      it 'is required'   do
+        expect(due_on_new show_month: nil, show_day: 1).to_not be_valid
+      end
       it('is numeric')    { expect(due_on_new show_month: 'a').to_not be_valid }
       it('is an integer') { expect(due_on_new show_month: 8.3).to_not be_valid }
       it('is > -1')       { expect(due_on_new show_month: -2).to_not be_valid }
@@ -40,6 +43,9 @@ describe DueOn, :ledgers, :cycle, type: :model do
     end
 
     describe 'show_day' do
+      it 'is required'   do
+        expect(due_on_new show_month: 1, show_day: nil).to_not be_valid
+      end
       it('is numeric')    { expect(due_on_new show_day: 'a').to_not be_valid }
       it('is an integer') { expect(due_on_new show_day: 8.3).to_not be_valid }
       it('is > 0')        { expect(due_on_new show_day: 0).to_not be_valid }

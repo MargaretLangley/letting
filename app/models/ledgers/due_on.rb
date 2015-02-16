@@ -41,6 +41,7 @@ class DueOn < ActiveRecord::Base
                                          greater_than: 0,
                                          less_than: 32 },
                          allow_nil: true
+  validates :show_month, :show_day, presence: true, if: :show?
 
   # between range - MatchedDueOn's for the given date range
   # range - date range (but converts datetime to date range)
