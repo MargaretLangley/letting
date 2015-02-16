@@ -20,4 +20,16 @@ module PropertyHelper
     "#{property.client.try(:human_ref)}" \
       " #{property.client.try(:entities).try(:full_name)}".strip
   end
+
+  def property_prev
+    return '' unless @property.prev
+
+    @property.prev.human_ref
+  end
+
+  def property_next
+    return '' unless @property.next
+
+    @property.next.human_ref
+  end
 end

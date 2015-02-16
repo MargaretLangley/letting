@@ -1,6 +1,15 @@
 <% @title='View Account' %>
 
-<div class='grid  shell  js-toggle-selection'>
+<div class='col-17-24  grid-row'>
+  &nbsp;
+</div>
+<div class='col-2-24'>
+    <%= chevron_link direction: 'left', text: property_prev, path: @property.prev, title: 'prev' %>
+</div>
+<div class='col-2-24  r-align'>
+    <%= chevron_link direction: 'right', text: property_next, path: @property.next, title: 'next' %>
+</div>
+<div class='grid-row  shell  js-toggle-selection'>
   <div class='js-togglable'>
 
     <div class='col-6-24  grid-row  faded'>

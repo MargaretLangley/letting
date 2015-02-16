@@ -59,6 +59,15 @@ module LinkHelper
     app_link icon: 'print', text: text, path: path, title: title
   end
 
+  def chevron_link(direction:, text: '', path: '#', css: '', title:)
+    app_link icon: "chevron-#{direction}",
+             text: text,
+             direction: direction == 'right' ? true : false,
+             path: path,
+             title: title,
+             disabled: path ? false : true
+  end
+
   def toggle_link direction:, size: 'lg', title: ''
     app_link icon: "chevron-circle-#{direction}",
              size: size,
@@ -86,6 +95,7 @@ module LinkHelper
   def app_link(icon:,
                size: 'lg',
                text: '',
+               direction: false,
                path: '#',
                css: 'plain-button',
                js_css: '',
@@ -94,7 +104,7 @@ module LinkHelper
                title:,
                disabled: false)
     if disabled == false
-      link_to fa_icon("#{icon} #{size}", text: text),
+      link_to fa_icon("#{icon} #{size}", text: text, right: direction),
               path,
               class: "#{hover_grow(disabled: disabled)}  #{css}  #{js_css}",
               title: title,
@@ -102,7 +112,7 @@ module LinkHelper
               data: data,
               disabled: disabled
     else
-      link_to fa_icon("#{icon} #{size}", text: text),
+      link_to fa_icon("#{icon} #{size}", text: text, right: direction),
               '#',
               class: 'plain-button',
               disabled: true,
@@ -112,6 +122,7 @@ module LinkHelper
 
   def hover_grow(disabled:)
     return '' if disabled
+
     'hvr-grow'
   end
 
