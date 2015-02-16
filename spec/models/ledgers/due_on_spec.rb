@@ -31,6 +31,20 @@ describe DueOn, :ledgers, :cycle, type: :model do
       it('is >= 1990')    { expect(due_on_new year: 1989).to_not be_valid }
       it('is < 2030')     { expect(due_on_new year: 2030).to_not be_valid }
     end
+
+    describe 'show month' do
+      it('is numeric')    { expect(due_on_new show_month: 'a').to_not be_valid }
+      it('is an integer') { expect(due_on_new show_month: 8.3).to_not be_valid }
+      it('is > -1')       { expect(due_on_new show_month: -2).to_not be_valid }
+      it('is < 13')       { expect(due_on_new show_month: 13).to_not be_valid }
+    end
+
+    describe 'show_day' do
+      it('is numeric')    { expect(due_on_new show_day: 'a').to_not be_valid }
+      it('is an integer') { expect(due_on_new show_day: 8.3).to_not be_valid }
+      it('is > 0')        { expect(due_on_new show_day: 0).to_not be_valid }
+      it('is < 32')       { expect(due_on_new show_day: 32).to_not be_valid }
+    end
   end
 
   describe 'methods' do

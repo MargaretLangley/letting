@@ -21,18 +21,26 @@
 class DueOn < ActiveRecord::Base
   include Comparable
   belongs_to :cycle, counter_cache: true, inverse_of: :due_ons
-  validates :day, :month, presence: true
-  validates :day,   numericality: { only_integer: true,
-                                    greater_than: 0,
-                                    less_than: 32 }
   validates :month, numericality: { only_integer: true,
                                     greater_than: -2,
                                     less_than: 13 }
+  validates :day,   numericality: { only_integer: true,
+                                    greater_than: 0,
+                                    less_than: 32 }
 
   validates :year, numericality: { only_integer: true,
                                    greater_than: 1990,
                                    less_than: 2030 },
                    allow_nil: true
+
+  validates :show_month, numericality: { only_integer: true,
+                                         greater_than: -2,
+                                         less_than: 13 },
+                         allow_nil: true
+  validates :show_day,   numericality: { only_integer: true,
+                                         greater_than: 0,
+                                         less_than: 32 },
+                         allow_nil: true
 
   # between range - MatchedDueOn's for the given date range
   # range - date range (but converts datetime to date range)
