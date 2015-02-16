@@ -42,3 +42,14 @@ set :db_remote_clean, true
 # This directory must be in your shared directory on the server
 set :assets_dir, %w(public/assets public/att)
 set :local_assets_dir, %w(public/assets public/att)
+
+desc 'Invoke a rake command on the remote server'
+task :invoke, [:command] => 'deploy:set_rails_env' do |_task, args|
+  on primary(:app) do
+    within current_path do
+      with rails_env: fetch(:rails_env) do
+        rake args[:command]
+      end
+    end
+  end
+end

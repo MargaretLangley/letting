@@ -16,11 +16,12 @@ This document covers the following sections
 2. Commands
   1. rake db:import
 3. Troubleshooting
-  1. Cleaning Production Setup
-  2. Reset the database
-  3. Running rails console in production
-  4. Disabling the Firewall
-  5. Truncating a file without changing ownership
+  1. Running Rake Tasks on Production Server
+  2. Cleaning Production Setup
+  3. Reset the database
+  4. Running rails console in production
+  5. Disabling the Firewall
+  6. Truncating a file without changing ownership
 4. Cheatsheet
   1. Postgresql
   2. Elasticsearch
@@ -77,9 +78,7 @@ Repeat each time you want to delete and restore the database.
   `cap <environment> db:push`
 
 6.  Import Data Into Elasticsearch Indexes
-     `ssh <server>`
-     `cd ~/apps/letting_<environment>/current`
-     ` RAILS_ENV=<environment> bundle exec rake elasticsearch:sync`
+     `cap <environment> 'invoke[elasticsearch:sync]'`
 
 
 [Demo](http://letting.bcs.io)
@@ -109,7 +108,14 @@ My Reference: Webserver alias: `ssh arran`
 
 ####3. TROUBLESHOOTING
 
-####3.1. Cleaning Production Setup
+####3.1 Running Rake Tasks on Production Server
+
+  `ssh <server>`
+  `cd ~/apps/letting_<environment>/current`
+  ` RAILS_ENV=<environment> bundle exec rake <method name>`
+
+
+####3.2. Cleaning Production Setup
 
 1. `sudo rm -rf ~/apps/`
 2. `sudo rm /tmp/unicorn.letting_*.sock`
@@ -124,7 +130,7 @@ My Reference: Webserver alias: `ssh arran`
 ===
 
 
-####3.2. Reset the database
+####3.3. Reset the database
 Sometimes when you are changing a project the database will not allow you to delete it due to open connections to it. If you cannot close the connections you will have to reset the database. If this is the case follow this:
 
 1. `cap production rails:rake:db:drop`
@@ -136,10 +142,10 @@ Sometimes when you are changing a project the database will not allow you to del
 4. `cap <environment> db:push`
   1. The data has been deleted by the drop this puts it back.
 
-####3.3 Running rails console in production
+####3.4 Running rails console in production
 `bundle exec rails c production`
 
-####3.4 Disabling the Firewall
+####3.5 Disabling the Firewall
 
 If an operation is not completing and you suspect a firewall issue
 these commands completely remove it. (Rebooting the box, if applicable, restores the firewall)
@@ -152,7 +158,7 @@ these commands completely remove it. (Rebooting the box, if applicable, restores
     iptables -F
 ````
 
-####3.5 Truncating a file without changing ownership
+####3.6 Truncating a file without changing ownership
 
 ````
 cat /dev/null > /file/you/want/to/wipe-out
