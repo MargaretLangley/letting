@@ -8,7 +8,7 @@
     <div class='page-wrapper'>
       <div class='grid'>
         <article class='col-21-24'>
-          <h2><%= @title %> <span class = 'print-only'><%= "#{safe_date(date: Time.zone.today, format: :short)}"%></span> </h2>
+          <%= render 'layouts/title' %>
           <%= yield %>
         </article>
         <aside class='col-3-24  no-r-pad'>
