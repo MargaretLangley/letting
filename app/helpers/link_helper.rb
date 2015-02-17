@@ -59,7 +59,7 @@ module LinkHelper
     app_link icon: 'print', text: text, path: path, title: title
   end
 
-  def chevron_link(direction:, text: '', path: '#', css: '', title:)
+  def chevron_link(direction:, text: '', path: '#', title:)
     app_link icon: "chevron-#{direction}",
              text: text,
              direction: direction == 'right' ? true : false,
