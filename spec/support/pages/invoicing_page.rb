@@ -12,7 +12,7 @@ class InvoicingPage
     if invoicing.nil?
       visit '/invoicings/new'
     else
-      visit "/invoicings/#{invoicing.id}"
+      visit "/invoicings/#{invoicing.id}/edit"
     end
     self
   end
@@ -61,8 +61,8 @@ class InvoicingPage
     find('#invoicing')
   end
 
-  def create
-    click_on 'Create Invoicing'
+  def button action
+    click_on "#{action} Invoicing", exact: true
     self
   end
 

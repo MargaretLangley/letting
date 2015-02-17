@@ -71,7 +71,7 @@ class InvoicingsController < ApplicationController
                         comments: params[:comment] \
       if @invoicing.valid_arguments?
     if @invoicing.save
-      redirect_to invoicings_path, flash: { save: updated_message }
+      redirect_to invoicing_path(@invoicing), flash: { save: updated_message }
     else
       render :edit
     end

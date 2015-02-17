@@ -14,7 +14,7 @@ describe 'Invoicing#create', type: :feature do
                    cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
     invoicing_page.load
 
-    invoicing_page.search_term('87').create
+    invoicing_page.search_term('87').button 'Create'
 
     expect(invoicing_page).to be_success
     expect(invoicing_page.title).to eq 'Letting - View Invoicing'
@@ -36,7 +36,7 @@ describe 'Invoicing#create', type: :feature do
     end
 
     it 'remembers toggle state', js: true  do
-      invoicing_page.load.choose_dates.create
+      invoicing_page.load.choose_dates.button 'Create'
       invoicing_page.load
 
       expect(invoicing_page).to have_link('or default to the next 7 weeks')
@@ -53,7 +53,7 @@ describe 'Invoicing#create', type: :feature do
 
       expect(invoicing_page.period).to eq '2013-06-01'..'2013-07-20'
 
-      invoicing_page.search_term('87').create
+      invoicing_page.search_term('87').button 'Create'
       expect(invoicing_page).to be_success
 
       expect(Invoicing.first.period.to_s).to eq '2013-06-01..2013-07-20'
@@ -69,7 +69,7 @@ describe 'Invoicing#create', type: :feature do
       invoicing_page.load.choose_dates
       invoicing_page.period = '2013-05-10'..'2013-06-24'
 
-      invoicing_page.search_term('87').create
+      invoicing_page.search_term('87').button 'Create'
       expect(invoicing_page).to be_success
 
       expect(Invoicing.first.period.to_s).to eq '2013-05-10..2013-06-24'
@@ -87,7 +87,7 @@ describe 'Invoicing#create', type: :feature do
 
       invoicing_page.or_default
 
-      invoicing_page.search_term('87').create
+      invoicing_page.search_term('87').button 'Create'
       expect(invoicing_page).to be_success
 
       expect(Invoicing.first.period.to_s).to eq '2013-06-01..2013-07-20'
@@ -131,7 +131,7 @@ describe 'Invoicing#create', type: :feature do
 
       invoicing_page.invoice_date = Time.zone.tomorrow.to_s
 
-      invoicing_page.search_term('87').create
+      invoicing_page.search_term('87').button 'Create'
 
       invoicing_page.load
 
@@ -145,7 +145,7 @@ describe 'Invoicing#create', type: :feature do
 
       invoicing_page.load
       invoicing_page.invoice_date = Time.zone.tomorrow.to_s
-      invoicing_page.search_term('87').create
+      invoicing_page.search_term('87').button 'Create'
 
       expect(invoicing_page.invoice_date).to eq Time.zone.tomorrow.to_s
 
@@ -158,7 +158,7 @@ describe 'Invoicing#create', type: :feature do
       Timecop.travel '2013-6-1'
 
       invoicing_page.load
-      invoicing_page.search_term('87').create
+      invoicing_page.search_term('87').button 'Create'
 
       expect(invoicing_page).to be_excluded
 
@@ -172,7 +172,7 @@ describe 'Invoicing#create', type: :feature do
                      cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25)])
 
       invoicing_page.load
-      invoicing_page.search_term('87').create
+      invoicing_page.search_term('87').button 'Create'
 
       expect(invoicing_page).to be_not_actionable
 
@@ -191,8 +191,7 @@ describe 'Invoicing#create', type: :feature do
                                         at_time: '2000-1-1',
                                         amount: 100)]
     invoicing_page.load
-    invoicing_page.search_term('9').create
-    invoicing_page.load invoicing: Invoicing.first
+    invoicing_page.search_term('9').button 'Create'
 
     expect(invoicing_page).to be_actionable
     expect(invoicing_page).to be_none_delivered
@@ -210,8 +209,7 @@ describe 'Invoicing#create', type: :feature do
                        charges: [charge_new(payment_type: 'automatic',
                                             cycle: cycle)]
         invoicing_page.load
-        invoicing_page.search_term('9').create
-        invoicing_page.load invoicing: Invoicing.first
+        invoicing_page.search_term('9').button 'Create'
 
         expect(invoicing_page).to be_actionable
         expect(invoicing_page).to_not be_none_retained
@@ -231,8 +229,7 @@ describe 'Invoicing#create', type: :feature do
                        charges: [charge_new(payment_type: 'manual',
                                             cycle: cycle)]
         invoicing_page.load
-        invoicing_page.search_term('9').create
-        invoicing_page.load invoicing: Invoicing.first
+        invoicing_page.search_term('9').button 'Create'
 
         expect(invoicing_page).to be_actionable
         expect(invoicing_page).to be_none_retained
@@ -251,8 +248,7 @@ describe 'Invoicing#create', type: :feature do
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 25)])
 
         invoicing_page.load
-        invoicing_page.search_term('8-9').create
-        invoicing_page.load invoicing: Invoicing.first
+        invoicing_page.search_term('8-9').button 'Create'
 
         expect(invoicing_page).to be_actionable
         expect(invoicing_page).to_not be_none_ignored
