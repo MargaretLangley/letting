@@ -70,6 +70,15 @@ class Invoicing < ActiveRecord::Base
     runs.present? && runs.last.actionable?
   end
 
+  # deliverable?
+  # Anything to print?
+  #
+  def deliverable?
+    return false unless runs.present?
+
+    runs.last.deliver.present?
+  end
+
   # generate
   # makes a run - assigning the invoices given the invoicing arguments.
   #

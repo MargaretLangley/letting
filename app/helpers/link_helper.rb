@@ -55,8 +55,13 @@ module LinkHelper
     app_link icon: 'gbp', path: path, title: 'Add New Payment'
   end
 
-  def print_link text: '', path:, title: 'Print'
-    app_link icon: 'print', text: text, path: path, title: title
+  def print_link text: '', id: nil, path:, title: 'Print', disabled: false
+    app_link icon: 'print',
+             id: id,
+             text: text,
+             path: path,
+             title: title,
+             disabled: disabled
   end
 
   def chevron_link(direction:, text: '', path: '#', title:)
@@ -97,6 +102,7 @@ module LinkHelper
                text: '',
                direction: false,
                path: '#',
+               id: nil,
                css: 'plain-button',
                js_css: '',
                data: nil,
@@ -106,6 +112,7 @@ module LinkHelper
     if disabled == false
       link_to fa_icon("#{icon} #{size}", text: text, right: direction),
               path,
+              id: id,
               class: "#{hover_grow(disabled: disabled)}  #{css}  #{js_css}",
               title: title,
               method: method,
@@ -114,6 +121,7 @@ module LinkHelper
     else
       link_to fa_icon("#{icon} #{size}", text: text, right: direction),
               '#',
+              id: id,
               class: 'plain-button',
               disabled: true,
               title: "#{title} (disabled)"

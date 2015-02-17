@@ -10,11 +10,11 @@ Main success scenario
 
 Extensions
 
-1.a. System prints warning if there is nothing to be printed and disables printing.
+1.a. Deliver message: informs user, if no invoice delivered and disables printing.
   1. System disables the print button.
   2. System displays informational information - nothing for the user to do.
 
-1.b. System prints warning if there is nothing to be retained.
+1.b. Retained Message: Informs user, if no invoice retained.
   1. System displays warning message
   2. System continues at main step 2.
 
