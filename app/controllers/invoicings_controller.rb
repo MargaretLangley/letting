@@ -51,7 +51,7 @@ class InvoicingsController < ApplicationController
                         comments: params[:comment] \
       if @invoicing.valid_arguments?
     if @invoicing.save
-      redirect_to new_invoicing_path, flash: { save: created_message }
+      redirect_to invoicing_path(@invoicing), flash: { save: created_message }
     else
       set_session
       render :new

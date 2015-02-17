@@ -17,6 +17,7 @@ describe 'Invoicing#create', type: :feature do
     invoicing_page.search_term('87').create
 
     expect(invoicing_page).to be_success
+    expect(invoicing_page.title).to eq 'Letting - View Invoicing'
 
     Timecop.return
   end
