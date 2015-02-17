@@ -16,11 +16,12 @@
 <% end %>
 <%= render 'information/lacking', objects: run.retain, message: 'No invoices will be retained.' %>
 
-<div class='col-1-1  grid-row  top-1-line-spacer  faded'>
-  <h3>Ignore</h3>
-</div>
-<%= render 'invoices/header', action: false %>
-<% run.forget.each do |invoice| %>
-  <%= render 'invoices/invoice', invoice: invoice %>
+<% if run.forget.present? %>
+  <div class='col-1-1  grid-row  top-1-line-spacer  faded'>
+    <h3>Ignore</h3>
+  </div>
+  <%= render 'invoices/header', action: false %>
+  <% run.forget.each do |invoice| %>
+    <%= render 'invoices/invoice', invoice: invoice %>
+  <% end %>
 <% end %>
-<%= render 'information/lacking', objects: run.forget, message: 'No invoices will be ignored.' %>

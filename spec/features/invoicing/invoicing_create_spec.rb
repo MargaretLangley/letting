@@ -259,24 +259,6 @@ describe 'Invoicing#create', type: :feature do
 
         Timecop.return
       end
-
-      # opposite test to (3.e.) to bolster test
-      #
-      it 'displays none if every property can be charged.' do
-        Timecop.travel '2013-6-1'
-
-        create_account human_ref: 9,
-                       cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 25)])
-
-        invoicing_page.load
-        invoicing_page.search_term('9').create
-        invoicing_page.load invoicing: Invoicing.first
-
-        expect(invoicing_page).to be_actionable
-        expect(invoicing_page).to be_none_ignored
-
-        Timecop.return
-      end
     end
   end
 
