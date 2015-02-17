@@ -20,8 +20,9 @@ This document covers the following sections
   2. Cleaning Production Setup
   3. Reset the database
   4. Running rails console in production
-  5. Disabling the Firewall
-  6. Truncating a file without changing ownership
+  5. Capistrano failing to deploy - with github.com port-22
+  6. Disabling the Firewall
+  7. Truncating a file without changing ownership
 4. Cheatsheet
   1. Postgresql
   2. Elasticsearch
@@ -145,7 +146,17 @@ Sometimes when you are changing a project the database will not allow you to del
 ####3.4 Running rails console in production
 `bundle exec rails c production`
 
-####3.5 Disabling the Firewall
+####3.5 Capistrano failing to deploy - with github.com port-22
+
+Occasionally a deployment fails with an unable to connect to github.
+Any network service is not completely reliable. Wait for a while and try again.
+
+````
+DEBUG [44051a0f]  ssh: connect to host github.com port 22: Connection timed out
+DEBUG [44051a0f]  fatal: Could not read from remote repository.
+````
+
+####3.6 Disabling the Firewall
 
 If an operation is not completing and you suspect a firewall issue
 these commands completely remove it. (Rebooting the box, if applicable, restores the firewall)
@@ -158,11 +169,12 @@ these commands completely remove it. (Rebooting the box, if applicable, restores
     iptables -F
 ````
 
-####3.6 Truncating a file without changing ownership
+####3.7 Truncating a file without changing ownership
 
 ````
 cat /dev/null > /file/you/want/to/wipe-out
 `````
+
 
 ####4 Cheatsheet
 
