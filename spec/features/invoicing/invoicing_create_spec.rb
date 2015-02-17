@@ -153,7 +153,7 @@ describe 'Invoicing#create', type: :feature do
   end
 
   describe 'errors when the property range' do
-    it 'excludes all existing properties' do
+    it 'excludes all existing properties (3.a.)' do
       Timecop.travel '2013-6-1'
 
       invoicing_page.load
@@ -164,7 +164,7 @@ describe 'Invoicing#create', type: :feature do
       Timecop.return
     end
 
-    it 'does not include a chargeable property for the billing-period' do
+    it 'does not include a chargeable property for the billing-period (3.b.)' do
       Timecop.travel '2013-6-1'
 
       create_account human_ref: 87,
@@ -179,7 +179,7 @@ describe 'Invoicing#create', type: :feature do
     end
   end
 
-  it 'does not invoice properties that would be in credit after billing' do
+  it 'does not invoice properties that remain in credit after billing (3.c.)' do
     Timecop.travel '2013-6-1'
 
     cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
@@ -200,8 +200,8 @@ describe 'Invoicing#create', type: :feature do
   end
 
   describe 'warns on' do
-    describe 'retains mail' do
-      it 'to properties that only have automatic charges.' do
+    describe 'retaining mail' do
+      it 'to properties that only have automatic charges. (3.d.)' do
         Timecop.travel '2013-6-1'
 
         cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
@@ -220,7 +220,7 @@ describe 'Invoicing#create', type: :feature do
 
       # The test for retaining mail is the absence of a string, a weak test.
       # This test is to bolster the weak test with one the tests for a string's
-      # presence.
+      # presence (3.d.).
       #
       it 'will not retain when cash payment due' do
         Timecop.travel '2013-6-1'
@@ -241,7 +241,7 @@ describe 'Invoicing#create', type: :feature do
     end
 
     describe 'ignoring mail' do
-      it 'to properties that have no charges in billing-period.' do
+      it 'to properties that have no charges in billing-period. (3.e.)' do
         Timecop.travel '2013-6-1'
 
         create_account human_ref: 8,
@@ -259,6 +259,8 @@ describe 'Invoicing#create', type: :feature do
         Timecop.return
       end
 
+      # opposite test to (3.e.) to bolster test
+      #
       it 'displays none if every property can be charged.' do
         Timecop.travel '2013-6-1'
 

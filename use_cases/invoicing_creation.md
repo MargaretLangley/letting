@@ -10,7 +10,7 @@ Main success scenario
    charges).
 4. The user can optionally fill in invoice date and comments before creating the
    invoice.
-5. The system validates, creates the invoices, and messages success.
+5. The system validates, creates the invoices, and messages success, and continues to invoicing_view.
 
 
 3.a. errors when the property range excludes all existing properties.
@@ -21,14 +21,14 @@ Main success scenario
 1. The system displays error message detailing property's charges.
 2. The use case continues at step 1.
 
-3.c. does not invoice properties that would be in credit after billing.
+3.c. does not invoice properties that remain in credit after billing.
 1. The system lists these properties under retained.
 2. The system continues to 4.
 
-3.c warns on retaining mail to properties that only have standing order charges.
+3.d. warns on retaining mail to properties that only have automatic charges.
 1. The system lists these properties under retained.
 2. The system continues to 4.
 
-3.c warns on ignoring mail to properties that have no charges in billing-period.
+3.e. warns on ignoring mail to properties that have no charges in billing-period.
 1. The system lists these properties under forgotten.
 2. The system continues to 4.
