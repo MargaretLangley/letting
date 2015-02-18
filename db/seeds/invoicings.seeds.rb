@@ -82,6 +82,7 @@ after :invoice_texts do
       Invoice.create! [
         { id: 1,
           run_id: 1,
+          color: 'blue',
           snapshot_id: 1,
           deliver: 'mail',
           invoice_date: create_date(5),
