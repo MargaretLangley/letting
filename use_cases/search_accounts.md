@@ -7,6 +7,8 @@ Main success scenario
 2. User enters property reference number and presses search button.
 3. System displays single property matching reference number.
 
+Extensions
+
 2.a. User enters property address string and presses search button
 1. displays property list of search query matches
 

@@ -7,6 +7,8 @@ Main success scenario
 2. User enters client reference number and presses search button.
 3. System displays single client matching reference number.
 
+Extensions
+
 2.a. User enters address string and presses search button.
 1 displays client list of matching the search query.
 
