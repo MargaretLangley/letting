@@ -15,10 +15,11 @@
 # comments     - information string to be applied to the invoice.
 #
 class InvoicesMaker
-  attr_reader :comments, :invoice_date, :invoicing
+  attr_reader :color, :comments, :invoice_date, :invoicing
 
-  def initialize invoicing:, invoice_date: Time.zone.today, comments: []
+  def initialize invoicing:, color:, invoice_date: Time.zone.today, comments: []
     @invoicing = invoicing
+    @color = color
     @invoice_date = invoice_date
     @comments = comments
   end
@@ -26,7 +27,9 @@ class InvoicesMaker
   def invoices
     @invoices ||= invoicing
                   .accounts
-                  .map { |account| make_invoice(account: account) }
+                  .map do |account|
+                    make_invoice(account: account)
+                  end
   end
 
   private
@@ -34,6 +37,7 @@ class InvoicesMaker
   def make_invoice(account:)
     (invoice = Invoice.new)
       .prepare property: account.property.invoice,
+               color: color,
                snapshot: make_snapshot(account),
                invoice_date: invoice_date,
                comments: comments

@@ -89,16 +89,42 @@ RSpec.describe Invoicing, type: :model do
       expect(invoicing.runs.first.invoices.first.snapshot).to_not be_nil
     end
 
-    it 'creates more than one run' do
-      account_setup property_ref: 20, charge_month: 3, charge_day: 25
+    context 'first runs' do
+      it 'creates blue invoices' do
+        account_setup property_ref: 20, charge_month: 3, charge_day: 25
 
-      invoicing = Invoicing.new property_range: '20',
-                                period: Date.new(2010, 3, 1)..
-                                        Date.new(2010, 5, 1)
-      invoicing.generate
-      invoicing.generate
+        invoicing = Invoicing.new property_range: '20',
+                                  period: Date.new(2010, 3, 1)..
+                                          Date.new(2010, 5, 1)
+        invoicing.generate
 
-      expect(invoicing.runs.size).to eq 2
+        expect(invoicing.runs.last.invoices.first).to be_blue
+      end
+    end
+
+    context 'second runs' do
+      it 'creates more than one run' do
+        account_setup property_ref: 20, charge_month: 3, charge_day: 25
+
+        invoicing = Invoicing.new property_range: '20',
+                                  period: Date.new(2010, 3, 1)..
+                                          Date.new(2010, 5, 1)
+        invoicing.generate
+        invoicing.generate
+
+        expect(invoicing.runs.size).to eq 2
+      end
+
+      it 'creates red invoices' do
+        account_setup property_ref: 20, charge_month: 3, charge_day: 25
+
+        invoicing = Invoicing.new property_range: '20',
+                                  period: Date.new(2010, 3, 1)..
+                                          Date.new(2010, 5, 1)
+        invoicing.generate
+        invoicing.generate
+        expect(invoicing.runs.last.invoices.first).to be_red
+      end
     end
 
     it 'uses comments given to it to make invoices' do

@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(version: 20141129154746) do
   create_table "invoices", force: :cascade do |t|
     t.integer  "run_id",           null: false
     t.integer  "snapshot_id",      null: false
+    t.integer  "color",            null: false
     t.integer  "deliver",          null: false
     t.date     "invoice_date",     null: false
     t.integer  "property_ref",     null: false

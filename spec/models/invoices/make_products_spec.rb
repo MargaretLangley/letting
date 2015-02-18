@@ -3,35 +3,14 @@ require 'rails_helper'
 RSpec.describe MakeProducts, type: :model do
   describe '#products' do
     describe '#state' do
-      it 'forgets if no debits' do
-        make_products = MakeProducts.new account: account_create,
-                                         debits: [],
-                                         invoice_date: '1999-1-1'
-
-        expect(make_products.state).to eq :forget
-      end
-
-      it 'mails if it has debit' do
+      it 'retains if the account settled' do
         charge = charge_create payment_type: Charge::MANUAL
         debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
-        account = account_create charges: [charge], debits: [debit_1]
-
-        make_products = MakeProducts.new account: account,
-                                         debits: [debit_1],
-                                         invoice_date: '1999-1-1'
-
-        expect(make_products.state).to eq :mail
-      end
-
-      it 'retains if it has debit but account remains in credit' do
-        charge = charge_create payment_type: Charge::MANUAL
-        debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
-        account =
-          account_create charges: [charge],
-                         debits: [debit_1],
-                         credits: [credit_new(at_time: '1998-1-1',
-                                              charge: charge,
-                                              amount: 100)]
+        account = account_create charges: [charge],
+                                 debits: [debit_1],
+                                 credits: [credit_new(at_time: '1998-1-1',
+                                                      charge: charge,
+                                                      amount: 100)]
 
         make_products = MakeProducts.new account: account,
                                          debits: [debit_1],
@@ -40,16 +19,54 @@ RSpec.describe MakeProducts, type: :model do
         expect(make_products.state).to eq :retain
       end
 
-      it 'retain if the only debits are automated' do
-        charge = charge_create payment_type: Charge::AUTOMATIC
-        debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
-        account = account_create charges: [charge], debits: [debit_1]
-
-        make_products = MakeProducts.new account: account,
-                                         debits: [debit_1],
+      it 'forgets if no debits' do
+        make_products = MakeProducts.new account: account_create,
+                                         debits: [],
                                          invoice_date: '1999-1-1'
 
-        expect(make_products.state).to eq :retain
+        expect(make_products.state).to eq :forget
+      end
+
+      context 'red invoice' do
+        it 'mails provided there are debits' do
+          charge = charge_create payment_type: Charge::AUTOMATIC
+          debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
+          account = account_create charges: [charge], debits: [debit_1]
+
+          make_products = MakeProducts.new account: account,
+                                           debits: [debit_1],
+                                           invoice_date: '1999-1-1',
+                                           color: :red
+
+          expect(make_products.state).to eq :mail
+        end
+      end
+
+      context 'blue invoice' do
+        it 'retain if the only debits are automated' do
+          charge = charge_create payment_type: Charge::AUTOMATIC
+          debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
+          account = account_create charges: [charge], debits: [debit_1]
+
+          make_products = MakeProducts.new account: account,
+                                           debits: [debit_1],
+                                           invoice_date: '1999-1-1',
+                                           color: :blue
+
+          expect(make_products.state).to eq :retain
+        end
+
+        it 'mails if it has debit' do
+          charge = charge_create payment_type: Charge::MANUAL
+          debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
+          account = account_create charges: [charge], debits: [debit_1]
+
+          make_products = MakeProducts.new account: account,
+                                           debits: [debit_1],
+                                           invoice_date: '1999-1-1'
+
+          expect(make_products.state).to eq :mail
+        end
       end
     end
 

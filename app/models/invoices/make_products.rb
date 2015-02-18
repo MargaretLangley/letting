@@ -2,11 +2,12 @@
 # Creates Products required, finally, for invoices
 #
 class MakeProducts
-  attr_reader :account, :debits, :invoice_date
-  def initialize(account:, debits:, invoice_date:)
+  attr_reader :account, :color, :debits, :invoice_date
+  def initialize(account:, debits:, invoice_date:, color: :blue)
     @account = account
     @invoice_date = invoice_date
     @debits = debits
+    @color = color
   end
 
   def products
@@ -14,8 +15,9 @@ class MakeProducts
   end
 
   def state
-    return :retain if final_balance < 0
     return :forget if debits.empty?
+    return :retain if settled
+    return :mail if color == :red
 
     no_invoice_required? ? :retain : :mail
   end
@@ -55,5 +57,9 @@ class MakeProducts
     return 0 if products.empty?
 
     products.last.balance
+  end
+
+  def settled
+    final_balance <= 0
   end
 end

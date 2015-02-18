@@ -30,10 +30,11 @@ class Snapshot < ActiveRecord::Base
     self.debits = debits
   end
 
-  def make_products(invoice_date:)
+  def make_products(invoice_date:, color:)
     MakeProducts.new(account: account,
                      debits: debits,
-                     invoice_date: invoice_date)
+                     invoice_date: invoice_date,
+                     color: color)
   end
 
   # find

@@ -8,6 +8,7 @@
 
 def invoice_new id: nil,
                 run_id: 5,
+                color: :blue,
                 invoice_date: '2014/06/30',
                 account: account_create,
                 property: property_new,
@@ -19,6 +20,7 @@ def invoice_new id: nil,
   invoice = Invoice.new id: id, run_id: run_id
   invoice.snapshot = snapshot
   invoice.prepare invoice_date: invoice_date,
+                  color: color,
                   property: account.property.invoice,
                   snapshot: snapshot,
                   comments: comments

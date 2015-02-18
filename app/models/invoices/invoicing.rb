@@ -90,7 +90,15 @@ class Invoicing < ActiveRecord::Base
 
   def invoices_maker invoice_date, comments
     InvoicesMaker.new invoicing: self,
+                      color: color,
                       invoice_date: invoice_date,
                       comments: comments
+  end
+
+  # note:
+  # size works with memory loaded vs count which is the database count
+  #
+  def color
+    runs.size <= 1 ? :blue : :red
   end
 end
