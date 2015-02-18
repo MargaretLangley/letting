@@ -36,13 +36,16 @@ class Snapshot < ActiveRecord::Base
                      invoice_date: invoice_date)
   end
 
-  # match
+  # find
   #
   # fails to match on the first invoicing run.
   # matches on the second and subsequent runs.
   #
-  def self.match(account:, period:)
-    where account: account, period_first: period.first, period_last: period.last
+  def self.find(account:, period:)
+    where(account: account,
+          period_first: period.first,
+          period_last: period.last)
+      .first
   end
 
   def only_one_invoice?

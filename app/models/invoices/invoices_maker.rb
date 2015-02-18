@@ -26,27 +26,27 @@ class InvoicesMaker
   def invoices
     @invoices ||= invoicing
                   .accounts
-                  .map { |account| invoice_maker(account: account) }
+                  .map { |account| make_invoice(account: account) }
   end
 
   private
 
-  def invoice_maker(account:)
+  def make_invoice(account:)
     (invoice = Invoice.new)
       .prepare property: account.property.invoice,
-               snapshot: snapshot_maker(account),
+               snapshot: make_snapshot(account),
                invoice_date: invoice_date,
                comments: comments
     invoice
   end
 
   # snapshot - the debits created during the invoicing period
+  #   finds a snapshot (if any), Otherwise creates a snapshot.
   #
-  def snapshot_maker(account)
-    snapshot = Snapshot.match(account: account, period: invoicing.period).first
-    snapshot = SnapshotMaker.new(account: account,
-                                 debit_period: invoicing.period)
-               .invoice unless snapshot
-    snapshot
+  def make_snapshot(account)
+    snapshot = Snapshot.find(account: account, period: invoicing.period)
+    return snapshot if snapshot
+
+    SnapshotMaker.new(account: account, debit_period: invoicing.period).invoice
   end
 end

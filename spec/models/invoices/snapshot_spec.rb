@@ -37,17 +37,17 @@ RSpec.describe Snapshot, type: :model do
       account = account_create
       snapshot_create account: account, period: '2001/01/01'..'2001/03/01'
 
-      snap = Snapshot.match account: account, period: '2001/01/01'..'2001/03/01'
+      snap = Snapshot.find account: account, period: '2001/01/01'..'2001/03/01'
 
-      expect(snap.size).to eq 1
+      expect(snap).to_not be_nil
     end
 
     it 'returns nothing when missing' do
       account = account_create
 
-      snap = Snapshot.match account: account, period: '2001/01/01'..'2001/03/01'
+      snap = Snapshot.find account: account, period: '2001/01/01'..'2001/03/01'
 
-      expect(snap.size).to eq 0
+      expect(snap).to be_nil
     end
   end
 end

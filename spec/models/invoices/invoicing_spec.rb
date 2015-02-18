@@ -45,7 +45,7 @@ RSpec.describe Invoicing, type: :model do
     end
   end
 
-   describe '#deliverable?' do
+  describe '#deliverable?' do
     it 'can be deliverable' do
       invoice = Invoice.new deliver: 'mail'
       (invoicing = Invoicing.new).runs = [Run.new(invoices: [invoice])]
@@ -60,7 +60,6 @@ RSpec.describe Invoicing, type: :model do
       expect(invoicing.deliverable?).to be false
     end
   end
-
 
   describe '#valid_arguments?' do
     it 'can be true' do
