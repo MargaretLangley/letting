@@ -37,7 +37,7 @@
     </div>
     <div class='js-togglable  js-clear  <%= address.district_visiblity %>'>
       <div class='col-20-24  bottom-spacer  no-r-pad'>
-        <%= b.text_field :district, class: 'v_district' %>
+        <%= b.text_field :district, class: 't-district' %>
       </div>
       <div class='col-4-24'>
         <%= delete_link title: 'Delete district', js_css: 'js-toggle', method: nil, data: false %>
@@ -72,7 +72,7 @@
     </div>
     <div class='js-togglable  js-clear <%= address.nation_visiblity %>'>
       <div class='col-20-24  bottom-spacer  no-r-pad'>
-        <%= b.text_field :nation, class: 'v_nation' %>
+        <%= b.text_field :nation, class: 't-nation' %>
       </div>
       <div class='col-4-24'>
         <%= delete_link title: 'Delete nation', js_css: 'js-toggle', method: nil, data: false %>
