@@ -14,6 +14,18 @@ describe 'Invoicing#show', type: :feature do
     expect(page).to have_text '2-100'
   end
 
+  it 'disables delete run' do
+    log_in
+    property_create human_ref: 2, account: account_new
+    invoicing_create id: 1,
+                     property_range: '2-100',
+                     period_first: '2014/06/30',
+                     period_last: '2014/08/30'
+    visit '/invoicings/1'
+
+    expect(find '#delete-run').to be_disabled
+  end
+
   describe 'Deliver message' do
     # Deliver: false then: Not delivering. Mail Message, Invoice under Retain.
     #

@@ -5,7 +5,7 @@
     <% @invoicing.runs.each_with_index do |run, index|  %>
       <% run_dec = RunDecorator.new run %>
       <li class='<%= run_dec.style_activity %>'>
-        <%= link_to "Invoice #{run_dec.invoice_date}", "#tab#{index + 1}" %>
+        <%= link_to "Run #{run_dec.invoice_date}", "#tab#{index + 1}" %>
       </li>
     <% end %>
     <li class='tab-links-warn'>
@@ -17,8 +17,21 @@
     <% @invoicing.runs.each_with_index do |run, index|  %>
       <% run_dec = RunDecorator.new run %>
       <div id='tab<%= index + 1 %>' class='tab <%= run_dec.style_activity %> '>
-        <%= render 'invoicings/invoicing_header' %>
-        <%= render 'invoicing_to_view', invoicing: @invoicing, run: run %>
+        <div class='panel  pick-out'>
+          <h2>Invoicing</h2>
+          <%= render 'invoicings/invoicing_header' %>
+          <%= render 'invoicing_to_view', invoicing: @invoicing, run: run %>
+        </div>
+        <div class='col-8-24  grid-row  top-half-line-spacer  faded'>
+          <h2>Run <%= run_dec.invoice_date %></h2>
+        </div>
+        <div  class='col-4-24  top-1-line-spacer'>
+          <% if index.nonzero? %>
+            <%= delete_link text: 'Delete Run', path: run, title: 'Delete Run', id: 'delete-run' %>
+          <% else %>
+            <%= delete_link text: 'Delete Run', path: run, title: 'Delete Run', disabled: true, id: 'delete-run' %>
+          <% end %>
+        </div>
         <%= render 'invoices/invoices', run: run, action: true %>
       </div>  <!-- close tab -->
     <% end %>

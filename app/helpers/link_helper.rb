@@ -33,7 +33,9 @@ module LinkHelper
     delete_link method: nil, js_css: js_css, data: false, title: title
   end
 
-  def delete_link path: '#',
+  def delete_link text: '',
+                  id: nil,
+                  path: '#',
                   js_css: '',
                   method: :delete,
                   data: true,
@@ -41,6 +43,8 @@ module LinkHelper
                   title: 'Delete File',
                   disabled: false
     app_link icon: 'trash-o',
+             text: text,
+             id: id,
              path: path,
              method: method,
              js_css: js_css,

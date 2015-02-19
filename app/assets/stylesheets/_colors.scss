@@ -50,6 +50,7 @@ $muted-border:             #ddd;                // Grey
 $disabled-background:      Gainsboro;           // Grey
 
 $fieldset:   lighten($primary-background, 50%); // Egg shell Blue
+$pick-out:   darken($fieldset, 5%);             // Darker Egg shell Blue
 
 $shadow:                   #aaa;                // Grey
 

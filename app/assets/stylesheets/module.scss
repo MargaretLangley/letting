@@ -73,7 +73,7 @@ a.grey {
 */
 
 .pick-out {
-  background-color: darken($fieldset, 5%);
+  background-color: $pick-out;
 }
 
 .top-spacer {
@@ -164,6 +164,19 @@ a.grey {
   white-space: nowrap;
 }
 
+/*--------------------------------------------------*\
+
+  $PANEL
+
+\*--------------------------------------------------*/
+
+
+.panel {
+  @include clearfix;
+  border: 1px darken($pick-out, 5%);
+  border-radius: 10px;
+  padding: 1%;
+}
 
 /*--------------------------------------------------*\
 
@@ -430,7 +443,7 @@ li.active a, li.active a:hover {
     background-color: lighten($fieldset, 3%);
     border-radius: 5px;
     box-shadow: -1px 1px 1px rgba(0, 0, 0, .15);
-    padding: 1%;
+    padding: 0;
   }
 }
 
