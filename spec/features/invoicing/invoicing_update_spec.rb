@@ -13,8 +13,7 @@ describe 'Invoicing#update', type: :feature do
     create_account human_ref: 87,
                    cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
     invoicing = Invoicing.new property_range: '87',
-                              period: Date.new(2010, 6, 1)..
-                                      Date.new(2010, 7, 1)
+                              period: '2010-6-1'..'2010-8-1'
     invoicing.generate
     invoicing.save!
     invoicing_page.load invoicing: invoicing

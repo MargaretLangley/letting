@@ -23,7 +23,7 @@ describe Account, :ledgers, type: :model do
         ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
         account = account_new charges: [ch]
 
-        expect(account.debits_coming Date.new(2013, 3, 5)..Date.new(2013, 3, 5))
+        expect(account.debits_coming '2013-3-5'..'2013-3-5')
           .to eq [Debit.new(at_time: Date.new(2013, 3, 5), amount: 88.08)]
       end
 
@@ -31,8 +31,7 @@ describe Account, :ledgers, type: :model do
         ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
         account = account_new charges: [ch]
 
-        expect(account.debits_coming Date.new(2013, 4, 6)..Date.new(2013, 4, 6))
-          .to eq []
+        expect(account.debits_coming '2013-4-6'..'2013-4-6').to eq []
       end
     end
 

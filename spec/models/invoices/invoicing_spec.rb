@@ -9,11 +9,8 @@ RSpec.describe Invoicing, type: :model do
     it 'property_range' do
       expect(invoicing_new property_range: nil).to_not be_valid
     end
-    it 'period_first' do
-      expect(invoicing_new period_first: nil).to_not be_valid
-    end
-    it 'period_last' do
-      expect(invoicing_new period_last: nil).to_not be_valid
+    it 'period' do
+      expect(invoicing_new period: nil..nil).to_not be_valid
     end
     it('runs') { expect(invoicing_new runs: nil).to_not be_valid }
   end
@@ -69,8 +66,7 @@ RSpec.describe Invoicing, type: :model do
       expect(invoicing_new property_range: nil).to_not be_valid_arguments
     end
     it 'can be false if period false' do
-      expect(invoicing_new period_first: nil, period_last: nil)
-        .to_not be_valid_arguments
+      expect(invoicing_new period: nil..nil).to_not be_valid_arguments
     end
   end
 
@@ -79,8 +75,7 @@ RSpec.describe Invoicing, type: :model do
       account_setup property_ref: 20, charge_month: 3, charge_day: 25
 
       invoicing = Invoicing.new property_range: '20',
-                                period: Date.new(2010, 3, 1)..
-                                        Date.new(2010, 5, 1)
+                                period: '2010-3-1'..'2010-5-1'
       expect(invoicing.runs.size).to eq 0
       invoicing.generate
 
@@ -94,8 +89,7 @@ RSpec.describe Invoicing, type: :model do
         account_setup property_ref: 20, charge_month: 3, charge_day: 25
 
         invoicing = Invoicing.new property_range: '20',
-                                  period: Date.new(2010, 3, 1)..
-                                          Date.new(2010, 5, 1)
+                                  period: '2010-3-1'..'2010-5-1'
         invoicing.generate
 
         expect(invoicing.runs.last.invoices.first).to be_blue
@@ -107,8 +101,7 @@ RSpec.describe Invoicing, type: :model do
         account_setup property_ref: 20, charge_month: 3, charge_day: 25
 
         invoicing = Invoicing.new property_range: '20',
-                                  period: Date.new(2010, 3, 1)..
-                                          Date.new(2010, 5, 1)
+                                  period: '2010-3-1'..'2010-5-1'
         invoicing.generate
         invoicing.generate
 
@@ -119,8 +112,7 @@ RSpec.describe Invoicing, type: :model do
         account_setup property_ref: 20, charge_month: 3, charge_day: 25
 
         invoicing = Invoicing.new property_range: '20',
-                                  period: Date.new(2010, 3, 1)..
-                                          Date.new(2010, 5, 1)
+                                  period: '2010-3-1'..'2010-5-1'
         invoicing.generate
         invoicing.generate
         expect(invoicing.runs.last.invoices.first).to be_red
@@ -131,8 +123,7 @@ RSpec.describe Invoicing, type: :model do
       account_setup property_ref: 20, charge_month: 3, charge_day: 25
 
       invoicing = Invoicing.new property_range: '20',
-                                period: Date.new(2010, 3, 1)..
-                                        Date.new(2010, 5, 1)
+                                period: '2010-3-1'..'2010-5-1'
       invoicing.generate
       invoicing.generate comments: ['a comment']
       expect(invoicing.runs.last.invoices.first.comments.first.clarify)
@@ -144,8 +135,7 @@ RSpec.describe Invoicing, type: :model do
         account_setup property_ref: 6, charge_month: 3, charge_day: 25
 
         invoicing = Invoicing.new property_range: '20',
-                                  period: Date.new(2010, 3, 1)..
-                                          Date.new(2010, 5, 1)
+                                  period: '2010-3-1'..'2010-5-1'
         invoicing.generate
         expect(invoicing.runs.first.invoices).to eq []
       end

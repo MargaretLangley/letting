@@ -8,8 +8,7 @@ describe 'Invoicing#index', type: :feature do
   it 'basic' do
     property_create human_ref: 2, account: account_new
     invoicing_create property_range: '1-200',
-                     period_first: '2013/06/30',
-                     period_last: '2013/08/30'
+                     period: '2013-6-30'..'2013-8-30'
     visit '/invoicings/'
 
     expect(page.title).to eq 'Letting - Invoicing'
@@ -20,8 +19,8 @@ describe 'Invoicing#index', type: :feature do
   it 'deletes' do
     property_create human_ref: 2, account: account_new
     invoicing_create property_range: '1-200',
-                     period_first: "#{Time.zone.now.year}/06/30",
-                     period_last: "#{Time.zone.now.year}/08/30"
+                     period: "#{Time.zone.now.year}-6-30"..
+                             "#{Time.zone.now.year}-8-30"
     visit '/invoicings/'
 
     expect { click_on 'Delete' }.to change(Invoicing, :count)

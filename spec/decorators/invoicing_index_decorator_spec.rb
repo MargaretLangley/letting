@@ -13,8 +13,7 @@ describe InvoicingIndexDecorator do
 
   it '#period_between - displays formatted date' do
     invoicing_dec = InvoicingIndexDecorator.new \
-      invoicing_new period_first: Date.new(2010, 3, 25),
-                    period_last: Date.new(2010, 6, 25)
+      invoicing_new period: '2010-3-25'..'2010-6-25'
     expect(invoicing_dec.period_between).to eq '25/Mar/10 - 25/Jun/10'
   end
 end

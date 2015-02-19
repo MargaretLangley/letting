@@ -8,8 +8,7 @@ describe 'ChargeableFactory' do
       expect(chargeable_new.at_time).to eq Date.new(2013, 3, 25)
     end
     it 'has period' do
-      expect(chargeable_new.period)
-        .to eq Date.new(2013, 3, 25)..Date.new(2013, 6, 30)
+      expect(chargeable_new.period.to_s).to eq '2013-03-25..2013-06-30'
     end
     it('has amount') { expect(chargeable_new.amount).to eq 88.08 }
   end

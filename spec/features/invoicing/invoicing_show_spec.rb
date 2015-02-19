@@ -6,8 +6,7 @@ describe 'Invoicing#show', type: :feature do
     property_create human_ref: 2, account: account_new
     invoicing_create id: 1,
                      property_range: '2-100',
-                     period_first: '2014/06/30',
-                     period_last: '2014/08/30'
+                     period: '2014/06/30'..'2014/08/30'
     visit '/invoicings/1'
 
     expect(page.title).to eq 'Letting - View Invoicing'
@@ -17,10 +16,7 @@ describe 'Invoicing#show', type: :feature do
   it 'disables delete run' do
     log_in
     property_create human_ref: 2, account: account_new
-    invoicing_create id: 1,
-                     property_range: '2-100',
-                     period_first: '2014/06/30',
-                     period_last: '2014/08/30'
+    invoicing_create id: 1, property_range: '2', period: '2014-6-30'..'2014-8-1'
     visit '/invoicings/1'
 
     expect(find '#delete-run').to be_disabled
