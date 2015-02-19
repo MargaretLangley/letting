@@ -39,7 +39,7 @@
  *= require module.table-row
  *= require module.typography
  *= require module.overlay
+ *= require menu
  *= require media
  *= require jquery.ui.all
  *= require font-awesome
- */

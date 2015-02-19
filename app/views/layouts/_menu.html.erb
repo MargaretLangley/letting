@@ -1,0 +1,54 @@
+<div id="accordian">
+  <ul>
+    <li class="fun">
+      <h3><span class="icon-dashboard"></span>Accounts</h3>
+      <ul>
+        <li><%= link_to 'Accounts', properties_path %></li>
+        <li><%= link_to 'New Account', new_property_path %></li>
+        <li><%= link_to 'Arrears List', arrears_path %></li>
+      </ul>
+    </li>
+    <li>
+      <h3><span class="active"></span>Clients</h3>
+      <ul>
+        <li><%= link_to 'Clients', clients_path %></li>
+        <li><%= link_to 'New Client', new_client_path %></li>
+       </ul>
+    </li>
+    <li>
+      <h3>Invoicing</h3>
+      <ul>
+        <li><%= link_to 'Invoicing', invoicings_path %></li>
+        <li><%= link_to 'New Invoicing', new_invoicing_path %></li>
+        </ul>
+    </li>
+    <li>
+    <li>
+      <h3><span class="icon-heart"></span>Payments</h3>
+      <ul>
+        <li><%= link_to 'Payments', payments_path %></li>
+        <li><%= link_to 'New Payment', new_payment_path %></li>
+      </ul>
+    </li>
+      <h3><span class="icon-heart"></span>Cycles</h3>
+      <ul>
+        <li><%= link_to 'Cycles', cycles_path %></li>
+        <li><%= link_to 'New Term Cycle', new_cycle_path(cycle_type: 'term') %></li>
+        <li><%= link_to 'Monthly Cycle', new_cycle_path(cycle_type: 'monthly' %></li>
+      </ul>
+    </li>
+   <li>
+      <h3>Users</h3>
+      <ul>
+        <li><%= link_to 'Users', users_path %></li>
+        <li><%= link_to 'New User', new_user_path %></li>
+       </ul>
+    </li>
+    <li>
+      <h3><span class="icon-heart"></span>Invoice Text</h3>
+      <ul>
+        <li><%= link_to 'Invoice Text', invoice_texts_path %></li>
+      </ul>
+    </li>
+  </ul>
+</div>
