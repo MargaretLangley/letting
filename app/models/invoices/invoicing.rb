@@ -17,6 +17,7 @@ class Invoicing < ActiveRecord::Base
   has_many :runs, dependent: :destroy, inverse_of: :invoicing
   validates :property_range, :period_first, :period_last, :runs, presence: true
   scope :default, -> { order(period_first: :desc) }
+  scope :blue_invoicies, -> { where('runs_count = 1') }
 
   def period
     (period_first..period_last)

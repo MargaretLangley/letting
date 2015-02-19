@@ -13,7 +13,7 @@
 ####
 #
 class Run < ActiveRecord::Base
-  belongs_to :invoicing, inverse_of: :runs
+  belongs_to :invoicing, counter_cache: true, inverse_of: :runs
   has_many :invoices, dependent: :destroy, inverse_of: :run
 
   validates :invoice_date, :invoices, presence: true

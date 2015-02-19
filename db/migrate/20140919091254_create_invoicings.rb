@@ -4,6 +4,7 @@ class CreateInvoicings < ActiveRecord::Migration
       t.string :property_range, null: false
       t.date   :period_first,      null: false
       t.date   :period_last,       null: false
+      t.integer :runs_count, default: 0
       t.timestamps null: true
     end
   end

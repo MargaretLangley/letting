@@ -20,8 +20,9 @@
     <li class="active-subnav <%= sub_menu_state ['properties', 'arrears'] %>"><%= link_to 'Arrears List', arrears_path %></li>
     <li class="<%= main_menu_active? ['clients', 'client_payments'] %>"><%= link_to 'Clients', clients_path %></li>
     <li class="active-subnav <%= sub_menu_state ['clients', 'client_payments'] %>"><%= link_to 'New Client', new_client_path %></li>
-    <li class="<%= main_menu_active? ['invoicings','invoices'] %>"><%= link_to 'Invoicing', invoicings_path %></li>
-    <li class="active-subnav <%= sub_menu_state ['invoicings','invoices'] %>"><%= link_to 'New Invoicing', new_invoicing_path %></li>
+    <li class="<%= main_menu_active? ['invoicings', 'blue_invoicings', 'invoices'] %>"><%= link_to 'Invoicing', invoicings_path %></li>
+    <li class="active-subnav <%= sub_menu_state ['invoicings', 'blue_invoicings', 'invoices'] %>"><%= link_to 'New Invoicing', new_invoicing_path %></li>
+    <li class="active-subnav <%= sub_menu_state ['invoicings', 'blue_invoicings', 'invoices'] %>"><%= link_to 'Blue invoicings', blue_invoicings_path %></li>
     <li class="<%= main_menu_active? ['payments'] %>"><%= link_to 'Payments', payments_path %></li>
     <li class="active-subnav <%= sub_menu_state ['payments'] %>"><%= link_to 'New Payment', new_payment_path %></li>
   </ul>

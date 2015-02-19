@@ -24,6 +24,7 @@ Letting::Application.routes.draw do
   resources :payments
   resources :properties, path: 'accounts'
   resources :invoicings
+  resources :blue_invoicings, only: [:index, :destroy]
   resources :invoice_texts, only: [:index, :show, :edit, :update]
   resources :invoices, only: [:show]
   resources :print_invoices, only: [:show]

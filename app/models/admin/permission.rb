@@ -37,6 +37,7 @@ Permission = Struct.new(:user) do
   def user_controllers
     %w(accounts
        arrears
+       blue_invoicings
        client_payments
        clients
        debits

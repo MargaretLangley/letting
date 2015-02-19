@@ -189,9 +189,10 @@ ActiveRecord::Schema.define(version: 20141129154746) do
   add_index "invoices", ["snapshot_id"], name: "index_invoices_on_snapshot_id", using: :btree
 
   create_table "invoicings", force: :cascade do |t|
-    t.string   "property_range", null: false
-    t.date     "period_first",   null: false
-    t.date     "period_last",    null: false
+    t.string   "property_range",             null: false
+    t.date     "period_first",               null: false
+    t.date     "period_last",                null: false
+    t.integer  "runs_count",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
