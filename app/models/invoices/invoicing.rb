@@ -84,6 +84,7 @@ class Invoicing < ActiveRecord::Base
   #
   def generate(invoice_date: Time.zone.today, comments: [])
     runs.build.prepare invoices_maker: invoices_maker(invoice_date, comments)
+    self
   end
 
   private

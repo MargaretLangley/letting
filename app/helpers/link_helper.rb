@@ -26,7 +26,7 @@ module LinkHelper
   end
 
   def add_link(icon: 'plus-circle', size: 'lg', path: '#', css: '', js_css: '', title:)
-    app_link icon: icon, size: size, path: path, css: css, js_css: js_css, title: title
+    app_link icon: icon, size: size, path: path, css: "plain-button  #{css}", js_css: js_css, title: title
   end
 
   def delete_charge js_css:, title: 'Delete Charge'
@@ -36,6 +36,7 @@ module LinkHelper
   def delete_link text: '',
                   id: nil,
                   path: '#',
+                  css: '',
                   js_css: '',
                   method: :delete,
                   data: true,
@@ -46,8 +47,9 @@ module LinkHelper
              text: text,
              id: id,
              path: path,
-             method: method,
+             css: "plain-button  #{css}",
              js_css: js_css,
+             method: method,
              data: data ? { confirm: confirm } : nil,
              title: title,
              disabled: disabled
@@ -126,7 +128,7 @@ module LinkHelper
       link_to fa_icon("#{icon} #{size}", text: text, right: direction),
               '#',
               id: id,
-              class: 'plain-button',
+              class: css,
               disabled: true,
               title: "#{title} (disabled)"
     end

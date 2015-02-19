@@ -13,13 +13,33 @@ describe 'Invoicing#show', type: :feature do
     expect(page).to have_text '2-100'
   end
 
-  it 'disables delete run' do
-    log_in
-    property_create human_ref: 2, account: account_new
-    invoicing_create id: 1, property_range: '2', period: '2014-6-30'..'2014-8-1'
-    visit '/invoicings/1'
+  describe 'deletion of runs' do
+    it 'disables first deletion' do
+      log_in
+      property_create human_ref: 2, account: account_new
+      invoicing_create id: 1,
+                       property_range: '2',
+                       period: '2014-6-30'..'2014-8-1'
+      visit '/invoicings/1'
 
-    expect(find '#delete-run').to be_disabled
+      within '.t-run-delete-0' do
+        expect(find '.t-delete-run').to be_disabled
+      end
+    end
+
+    it 'enable subsequent deletions' do
+      log_in
+      property_create human_ref: 2, account: account_new
+      invoicing_create id: 1, property_range: '2',
+                       period: '2014-6-30'..'2014-8-1',
+                       runs: [run_new(invoices: [invoice_new]),
+                              run_new(invoices: [invoice_new])]
+      visit '/invoicings/1'
+
+      within '.t-run-delete-1' do
+        expect(find '.t-delete-run').to_not be_disabled
+      end
+    end
   end
 
   describe 'Deliver message' do

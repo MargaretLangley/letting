@@ -25,11 +25,11 @@
         <div class='col-8-24  grid-row  top-half-line-spacer  faded'>
           <h2>Run <%= run_dec.invoice_date %></h2>
         </div>
-        <div  class='col-4-24  top-1-line-spacer'>
+        <div class='col-4-24  top-1-line-spacer  t-run-delete-<%= index %> '>
           <% if index.nonzero? %>
-            <%= delete_link text: 'Delete Run', path: run, title: 'Delete Run', id: 'delete-run' %>
+            <%= delete_link text: 'Delete Run', path: run, title: 'Delete Run', css: 't-delete-run', disabled: false %>
           <% else %>
-            <%= delete_link text: 'Delete Run', path: run, title: 'Delete Run', disabled: true, id: 'delete-run' %>
+            <%= delete_link text: 'Delete Run', path: run, title: 'Delete Run', css: 't-delete-run', disabled: true %>
           <% end %>
         </div>
         <%= render 'invoices/invoices', run: run, action: true %>

@@ -14,8 +14,7 @@ describe 'Invoicing#update', type: :feature do
                    cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
     invoicing = Invoicing.new property_range: '87',
                               period: '2010-6-1'..'2010-8-1'
-    invoicing.generate
-    invoicing.save!
+    invoicing.generate.save!
     invoicing_page.load invoicing: invoicing
 
     invoicing_page.button 'Update'
