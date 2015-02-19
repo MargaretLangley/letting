@@ -1,7 +1,7 @@
 <% invoicing_dec = InvoicingIndexDecorator.new invoicing %>
 <div title='View invoice run' class='table-row' data-link='<%= run_path(run) %>'>
 
-  <div class='col-5-24  grid-row  inherit-row'>
+  <div class='col-5-24  grid-row  inherit-row  bottom-1-line-spacer'>
     <%= invoicing_dec.property_range %>
   </div>
   <div class='col-5-24  inherit-row  bottom-1-line-spacer'>
@@ -13,9 +13,8 @@
   <div class='col-1-24  inherit-row  bottom-1-line-spacer'>
     <%= print_link path: print_run_path(invoicing.runs.last), id: 'print-link', disabled: !invoicing.deliverable?  %>
   </div>
-  <div class='col-2-24  inherit-row  bottom-1-line-spacer'>&nbsp;</div>
-  <div class='col-1-24  inherit-row  bottom-1-line-spacer'>
-    <%= delete_link path: invoicing, title: 'Delete entire invoicing' %>
+  <div class='col-1-24  inherit-row  bottom-1-line-spacer'>&nbsp;</div>
+  <div class='col-5-24  inherit-row  bottom-1-line-spacer'>
+    <%= delete_link text: 'Delete invoicing', path: invoicing, title: 'Delete entire invoicing' %>
   </div>
-  <div class='col-3-24  inherit-row  bottom-1-line-spacer'>&nbsp;</div>
 </div>
