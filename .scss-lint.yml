@@ -19,6 +19,3 @@ linters:
 
   PlaceholderInExtend:
      enabled: false
-
-  MergeableSelector:
-    enabled: false

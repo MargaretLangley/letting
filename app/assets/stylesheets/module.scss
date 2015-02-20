@@ -314,12 +314,6 @@ li.active-subnav a {
   border-top: 3px solid $primary-background;
 }
 
-// menu root
-.my-menu {
-  margin: 0;
-  padding: 0;
-}
-
 // menu list item
 .my-menu li {
   float: right;
@@ -331,10 +325,8 @@ li.active-subnav a {
     &:link,
     &:visited {
       background-color: $fieldset;
-      border-right: 1px solid #fff;
       color: $secondary-background;
       display: block;
-      margin: 0;
       padding: .5em 2em;
       text-decoration: none;
     }
@@ -459,11 +451,12 @@ li.active a, li.active a:hover {
 
 .tab {
   display: none;
+
+  &.active {
+    display: block;
+  }
 }
 
-.tab.active {
-  display: block;
-}
 
 /*-----------------------------------------------*\
 
