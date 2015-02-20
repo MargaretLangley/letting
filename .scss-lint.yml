@@ -20,9 +20,5 @@ linters:
   PlaceholderInExtend:
      enabled: false
 
-  # Linters we want to enable
-  VendorPrefixes:
-    enabled: false
-
   MergeableSelector:
     enabled: false
