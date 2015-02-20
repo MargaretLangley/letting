@@ -423,7 +423,8 @@ ul .my-sub-menu {
 }
 
 
-li.active a, li.active a:hover {
+li.active a,
+li.active a:hover {
   @include menu-style(15%, 25%);
 }
 
@@ -623,7 +624,8 @@ input[type=submit].primary {
 
 // js is not used to reveal element
 
-.folded, .hidden {
+.folded,
+.hidden {
   display: none;
 }
 

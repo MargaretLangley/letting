@@ -11,11 +11,13 @@ linters:
   ColorKeyword:
     enabled: false
 
-  QualifyingElement:
-    enabled: false
+  # Worth Enabling
 
   SingleLinePerSelector:
-     enabled: false
+    enabled: false
+
+  QualifyingElement:
+    enabled: false
 
   PlaceholderInExtend:
      enabled: false
