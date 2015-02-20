@@ -16,7 +16,7 @@ gem 'equalizer'
 # Use SCSS for style-sheets
 gem 'sass-rails', '~> 5.0.1'
 gem 'sprockets', '~>2.12.3'
-gem 'autoprefixer-rails', '~> 5.1.5.0'
+gem 'autoprefixer-rails', '~> 5.1.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 2.7.0'
