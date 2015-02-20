@@ -1,0 +1,42 @@
+
+/*--------------------------------------------------*\
+
+  $FORMS
+
+\*--------------------------------------------------*/
+
+@mixin ellipsis-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+label {
+  @include ellipsis-text;
+}
+
+.required {
+  font-weight: bold;
+
+  &:after {
+    content: ' *';
+  }
+}
+
+input[type=submit].primary {
+  padding: 2%;
+  width: 60%;
+}
+
+// js revealable element
+
+.js-revealable {
+  display: none;
+}
+
+// js is not used to reveal element
+
+.folded,
+.hidden {
+  display: none;
+}

@@ -1,0 +1,35 @@
+/*--------------------------------------------------*\
+
+  $TYPOGRAPHY
+
+\*--------------------------------------------------*/
+
+@import 'colors';
+
+.small-bottom {
+  margin-bottom: .2em;
+}
+
+.r-align {
+  text-align: right;
+}
+
+.c-align {
+  text-align: center;
+}
+
+.no-warp {
+  white-space: nowrap;
+}
+
+
+.normal-text {
+  color: $primary-text;
+}
+
+// Charge using a special class to test for dormant charge has been faded.
+// The css 'faded' class is already used on the page for headings.
+
+.deemphasized {
+  @extend .faded;
+}

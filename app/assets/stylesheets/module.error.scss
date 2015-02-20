@@ -1,0 +1,25 @@
+
+/*--------------------------------------------------*\
+
+   $ERROR
+
+\*--------------------------------------------------*/
+
+@import 'colors';
+
+.warn {
+  color: $warn;
+}
+
+// Does not appear to be being used //
+.field-with-errors {
+  label {
+    color: $warn;
+  }
+
+  input,
+  textarea {
+    background-color: $errors-background;
+  }
+}
+

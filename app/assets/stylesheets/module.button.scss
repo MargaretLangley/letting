@@ -1,0 +1,76 @@
+
+/*--------------------------------------------------*\
+
+  $BUTTON
+
+\*--------------------------------------------------*/
+
+@import 'colors';
+
+@media screen {
+
+  @mixin base-button {
+    display: inline-block;
+    margin: 1% 1% 1% 0;
+    padding: 3%;
+    border: 1px solid darken($secondary-button, 15%);
+    border-radius: 5px;
+    box-shadow: $shadow 0 0 4px;
+    font-size: 1em;
+
+    &:hover,
+    &:active {
+      background: $secondary-background;
+      color: white;
+    }
+  }
+
+  .plain-button {
+    @include base-button;
+    background: white;
+    color: black;
+
+    // Required to override base.css a:link color and background-color;
+    &:link,
+    &:visited {
+      background: white;
+      color: black;
+      text-decoration: none;
+    }
+  }
+
+  .plain-button[disabled] {
+    @include base-button;
+    background: $disabled-background;
+    color: white;
+    text-decoration: none;
+
+    // Required to override base.css a:link color and background-color;
+
+    &:link,
+    &:visited {
+      background: $disabled-background;
+      color: white;
+    }
+
+    &:hover,
+    &:active {
+      background: $disabled-background;
+      color: white;
+    }
+  }
+
+  .warn-button {
+    @include base-button;
+    background: $color-3;
+    color: white;
+
+    // Required to override base.css a:link color and background-color;
+
+    &:link,
+    &:visited {
+      background: $color-3;
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+
+/*-----------------------------------------------*\
+
+  $table rows
+
+  Grid simulating tables
+
+  1 - Outer div around which the part of the row will have hover.
+   has:
+   1.1 class='table-row'
+   1.2 data-link='<%= property_path(property.id) %>
+   1.3 the data is used by visit-data-link.js
+  2 - columns within the outer dive that we want to see table-row styles in
+     we add class='inherit-row'
+  3 - visit-data-link.js must be present - in one of the columns
+  4 - Hidden link added to column in the table for testing purposes
+   4.1 link_to '.', property_path(property.id), class: 'view-testing-link';
+   4.2 spec with: find('.view-testing-link', visible: false).click
+
+  5 - Committed these changes for clients table under:
+    'grid simulating table - client'
+     git log --oneline | grep 'grid simulating table - client'
+
+\*-----------------------------------------------*/
+
+@import 'colors';
+
+.table-row {
+  &:hover,
+  &:active {
+    background-color: darken($fieldset, 5%);
+    text-decoration: underline;
+  }
+}
+
+.inherit-row {
+  background-color: inherit;
+  text-decoration: inherit;
+}
+

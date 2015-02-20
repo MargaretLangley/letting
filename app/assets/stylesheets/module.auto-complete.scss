@@ -1,0 +1,15 @@
+
+/*--------------------------------------------------*\
+
+  $AUTO-COMPLETE
+
+\*--------------------------------------------------*/
+
+@import 'colors';
+
+.ui-menu .ui-menu-item a {
+  background-color: darken($fieldset, 5%);
+  border: 1px solid darken($fieldset, 10%);
+  border-radius: 5px;
+  color: black;
+}

@@ -91,3 +91,14 @@ $flash-opacity:            .85;
   color: $neutral-print;
   background-color: $primary-background;
 }
+
+/* faded holds the switch for printing.
+   To change heading color for printing change
+   $secondary-print-text in _colors.scss.  */
+
+.faded {
+  color: $secondary-text;
+  @media print {
+    color: $secondary-print-text;
+  }
+}

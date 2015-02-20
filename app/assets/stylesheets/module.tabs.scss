@@ -1,0 +1,96 @@
+/*-----------------------------------------------*\
+
+  $TABS
+
+  http://inspirationalpixels.com/tutorials/creating-tabs-with-html-css-and-jquery
+
+\*-----------------------------------------------*/
+
+@import 'colors';
+@import 'tools.mixins';
+@import 'layout';
+
+/*----- Tabs -----*/
+.tabs {
+  display: inline-block;
+  width: 100%;
+}
+
+/*----- Tab Links -----*/
+/* Clearfix */
+.tab-links:after {
+  clear: both;
+  content: '';
+  display: block;
+}
+
+.tab-links li {
+  float: left;
+  list-style: none;
+  margin: 0 5px;
+}
+
+.tab-links a {
+  @include menu-style(0%, 5%);
+  border-radius: 5px 5px 0 0;
+  display: inline-block;
+  padding: 9px 15px;
+  transition: all linear .15s;
+
+  &:hover {
+    background: #a7cce5;
+    text-decoration: none;
+  }
+}
+
+/*TODO: refactor*/
+
+.tab-links-warn a {
+  @include menu-style(0%, 5%);
+  border-radius: 5px 5px 0 0;
+  display: inline-block;
+  padding: 9px 15px;
+  transition: all linear .15s;
+
+  &:hover {
+    background: lighten($color-3, 10%);
+    color: white;
+    text-decoration: none;
+  }
+}
+
+
+li.active a,
+li.active a:hover {
+  @include menu-style(15%, 25%);
+}
+
+@media screen {
+
+  // Also used on client payment's details which isn't tab-content
+  .tab-content {
+    @include clearfix;
+    background-color: lighten($fieldset, 3%);
+    border-radius: 5px;
+    box-shadow: -1px 1px 1px rgba(0, 0, 0, .15);
+    padding: 0;
+  }
+}
+
+
+
+@media print {
+
+  .tab-content {
+    background: #fff;
+    padding: 15px;
+  }
+}
+
+.tab {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}

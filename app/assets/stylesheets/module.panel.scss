@@ -1,0 +1,16 @@
+/*--------------------------------------------------*\
+
+  $PANEL
+
+\*--------------------------------------------------*/
+
+@import 'colors';
+@import 'tools.mixins';
+
+
+.panel {
+  @include clearfix;
+  border: 1px darken($pick-out, 5%);
+  border-radius: 10px;
+  padding: 1%;
+}
