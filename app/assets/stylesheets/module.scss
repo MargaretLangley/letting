@@ -642,14 +642,14 @@ input[type=submit].primary {
 
 $search-height: 35px;
 
-.form-wrapper {
+.search-wrapper {
   @include clearfix;
   background-color: $primary-background;
   border: 3px solid lighten($primary-background, 5%);
   border-radius: 10px;
 }
 
-.form-wrapper input {
+.search-box {
   @extend .width-5-6;
   border: 1px solid darken($primary-button, 10%);
   border-radius: 5px 0 0 5px;
@@ -659,21 +659,23 @@ $search-height: 35px;
   padding: 0 0 0 .5em;
 }
 
-.form-wrapper button {
+.search-button {
   @extend .width-1-6;
   background-color: $primary-button;
-  border: 1px solid darken($primary-button, 15%);
+  border: 1px solid darken($primary-button, 10%);
   border-radius: 0 5px 5px 0;
   color: white;
   float: left;
   height: $search-height;
   overflow: visible;
   text-transform: uppercase;
+
+  &:hover {
+    background-color: darken($primary-button, 8%);
+  }
 }
 
-.form-wrapper button:hover {
-  background-color: darken($primary-button, 8%);
-}
+
 
 /*--------------------------------------------------*\
 

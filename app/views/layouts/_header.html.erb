@@ -6,10 +6,10 @@
     </div>
 
     <div class='col-10-24'>
-      <div class='form-wrapper  clearfix'>
+      <div class='search-wrapper'>
           <%= form_tag search_path, method: 'get' do %>
-          <%= text_field_tag :search_terms, params[:search_terms], placeholder: 'Search here...', title: 'Search', data: {autocomplete_source: search_path}, autofocus:true %>
-          <button type='submit' id='search' title='Search'>
+          <%= text_field_tag :search_terms, params[:search_terms], placeholder: 'Search here...', title: 'Search', data: {autocomplete_source: search_path}, autofocus:true, class: 'search-box' %>
+          <button type='submit' id='search' title='Search' class='search-button'>
             <%= fa_icon('search lg') %>
           </button>
         <% end %>
