@@ -1,0 +1,69 @@
+@import 'colors';
+
+/* This is main box, border radus, width, colors here set all the unopened boxes */
+/* top & bottom edging on main menu/shell, set to match main menu */
+
+.accord {
+  background: $menu-background;
+  border-radius: 10px;
+  box-shadow: $shadow 0 0 8px;
+  color: $menu-color;
+  font-size: 16px;
+  line-height: 35px;
+  margin-top: 2.7em;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  width: 190px;
+}
+
+/*heading styles these are the main boxes, h3 is the icon and main heading line*/
+
+.accord-header {
+  background-color: $menu-background;    /* main menu unopened  #E6F1FA; */
+  border-width: 0;
+  cursor: pointer;
+  font-size: 1em;
+  line-height: 36px;                     /* height of block boxes */
+  margin: 0;
+  padding: 0 15px;                       /* sets left & right margins */
+
+  &:hover {
+    text-shadow: 0 0 1px rgba(255, 255, 255, .7);
+  }
+}
+
+/*links  for both active & non-active*/
+
+.accord ul li a {
+  background-color: $menu-links-background; /* close to $fieldset */
+  border-bottom: 1px solid $menu-border-bottom;
+  color: $primary-link;
+  display: block;
+  padding: 0 15px;
+  text-decoration: none;
+  /*transition for smooth hover animation*/
+  transition: all .5s;
+
+  &:hover {
+    background: $secondary-background;
+    border-left: 5px solid $menu-border-left;
+    color: $neutral-print;
+  }
+}
+
+/* hide the non active LIs by default*/
+
+.accord ul ul {
+  border-bottom: 1px solid $menu-border-bottom;
+  display: none;
+}
+
+.accord li.active ul {
+  background-color: $shadow;
+  border-bottom: 1px solid $menu-border-bottom;
+  display: block;
+}
+
+.icon-spacer {
+  margin-right: .4em;
+}
