@@ -74,3 +74,11 @@
     }
   }
 }
+
+
+@media print {
+
+  .plain-button {
+    display: none;
+  }
+}

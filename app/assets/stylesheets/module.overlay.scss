@@ -4,7 +4,7 @@
 
 \*--------------------------------------------------*/
 
-@import 'layout';
+@import 'module.layout';
 
 .overlay-parent {
   position: relative;
@@ -23,8 +23,19 @@
   font-size: 1.4em;
 }
 
-.overlay {
-  @include base-overlay;
+@media screen {
+
+  .overlay {
+    @include base-overlay;
+  }
+
+}
+
+@media print {
+
+  .overlay {
+    display: none;
+  }
 }
 
 .low-overlay {
