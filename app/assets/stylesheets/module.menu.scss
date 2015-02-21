@@ -11,8 +11,7 @@
   font-size: 16px;
   line-height: 35px;
   margin-top: 2.7em;
-  padding-bottom: 20px;
-  padding-top: 20px;
+  padding: .5em 0 .5em 0;
 }
 
 /*heading styles these are the main boxes, h3 is the icon and main heading line*/
@@ -24,7 +23,7 @@
   font-size: 1em;
   line-height: 36px;                     /* height of block boxes */
   margin: 0;
-  padding: 0 15px;                       /* sets left & right margins */
+  padding: 0 .5em;                       /* sets left & right margins */
 
   &:hover {
     text-shadow: 0 0 1px rgba(255, 255, 255, .7);
