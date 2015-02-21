@@ -1,8 +1,8 @@
-<div class="accord" >
+<div class="accordion" >
   <% if allow? "users", "" %>
-    <h3 class='c-align  accord-header'>Admin Menu</h3>
+    <h3 class='c-align  accordion-header'>Admin Menu</h3>
     <ul>
-      <h3 class='accord-header'><span class='fa fa-calendar icon-spacer'></span> Cycles</h3>
+      <h3 class='accordion-header'><span class='fa fa-calendar icon-spacer'></span> Cycles</h3>
         <ul>
           <li><%= link_to 'Cycles', cycles_path %></li>
           <li><%= link_to 'New Term Cycle', new_cycle_path(cycle_type: 'term') %></li>
@@ -10,14 +10,14 @@
         </ul>
       </li>
       <li>
-        <h3 class='accord-header'><span class='fa fa-home user icon-spacer'></span> Users</h3>
+        <h3 class='accordion-header'><span class='fa fa-home user icon-spacer'></span> Users</h3>
         <ul>
           <li><%= link_to 'User', users_path %></li>
           <li><%= link_to 'New User',  new_user_path(cycle_type: 'term') %></li>
         </ul>
       </li>
       <li>
-        <h3 class='accord-header'><span class='fa fa-file-text-o icon-spacer'></span> Invoice Text</h3>
+        <h3 class='accordion-header'><span class='fa fa-file-text-o icon-spacer'></span> Invoice Text</h3>
         <ul>
           <li><%= link_to 'Invoice Text', invoice_texts_path %></li>
         </ul>
@@ -26,11 +26,11 @@
   <% end %>
 </div>
 
-<div class="accord" >
-  <h3 class='c-align  accord-header'>Menu</h3>
+<div class="accordion" >
+  <h3 class='c-align  accordion-header'>Menu</h3>
   <ul >
-    <li class='active'>
-      <h3 class='accord-header'><span class='fa fa-book icon-spacer'></span> Accounts</h3>
+    <li>
+      <h3 class='accordion-header'><span class='fa fa-book icon-spacer'></span> Accounts</h3>
       <ul>
         <li><%= link_to 'Accounts', properties_path %></li>
         <li><%= link_to 'New Account', new_property_path %></li>
@@ -38,14 +38,14 @@
       </ul>
     </li>
     <li>
-      <h3 class='accord-header'><span class='fa fa-folder icon-spacer'></span> Clients</h3>
+      <h3 class='accordion-header'><span class='fa fa-folder icon-spacer'></span> Clients</h3>
       <ul>
         <li><%= link_to 'Clients', clients_path %></li>
         <li><%= link_to 'New Client', new_client_path %></li>
        </ul>
     </li>
     <li>
-      <h3 class='accord-header'><span class='fa fa-envelope-o icon-spacer'></span> Invoicing</h3>
+      <h3 class='accordion-header'><span class='fa fa-envelope-o icon-spacer'></span> Invoicing</h3>
       <ul>
         <li><%= link_to 'Invoicing', invoicings_path %></li>
         <li><%= link_to 'New Invoicing', new_invoicing_path %></li>
@@ -54,7 +54,7 @@
     </li>
     <li>
     <li>
-      <h3 class='accord-header'><span class='fa fa-money icon-spacer'></span> Payments</h3>
+      <h3 class='accordion-header'><span class='fa fa-money icon-spacer'></span> Payments</h3>
       <ul>
         <li><%= link_to 'Payments', payments_path %></li>
         <li><%= link_to 'New Payment', new_payment_path %></li>

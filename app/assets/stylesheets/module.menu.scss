@@ -3,7 +3,7 @@
 /* This is main box, border radus, width, colors here set all the unopened boxes */
 /* top & bottom edging on main menu/shell, set to match main menu */
 
-.accord {
+.accordion {
   background: $menu-background;
   border-radius: 10px;
   box-shadow: $shadow 0 0 8px;
@@ -17,7 +17,7 @@
 
 /*heading styles these are the main boxes, h3 is the icon and main heading line*/
 
-.accord-header {
+.accordion-header {
   background-color: $menu-background;    /* main menu unopened  #E6F1FA; */
   border-width: 0;
   cursor: pointer;
@@ -33,7 +33,7 @@
 
 /*links  for both active & non-active*/
 
-.accord ul li a {
+.accordion ul li a {
   background-color: $menu-links-background; /* close to $fieldset */
   border-bottom: 1px solid $menu-border-bottom;
   color: $primary-link;
@@ -52,12 +52,12 @@
 
 /* hide the non active LIs by default*/
 
-.accord ul ul {
+.accordion ul ul {
   border-bottom: 1px solid $menu-border-bottom;
   display: none;
 }
 
-.accord li.active ul {
+.accordion li.active ul {
   background-color: $shadow;
   border-bottom: 1px solid $menu-border-bottom;
   display: block;
