@@ -33,6 +33,7 @@
  *= require module.navigation
  *= require module.panel
  *= require module.shell
+ *= require module.size
  *= require module.search
  *= require module.tabs
  *= require module.table-row
