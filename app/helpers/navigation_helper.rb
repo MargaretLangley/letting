@@ -18,9 +18,9 @@
 module NavigationHelper
   def main_menu_active? controller
     if controller.include? controller_name
-      'active-nav'     # darker colour
+      'active-menu'     # Menu items displayed
     else
-      'inactive-nav'   # lighter colour
+      'inactive-menu'   # Menu items hidden (no css)
     end
   end
 
