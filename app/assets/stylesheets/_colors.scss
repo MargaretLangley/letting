@@ -8,7 +8,6 @@
 \*----------------------------------------------------*/
 
 
-
 /*---------------------------------------------------*\
 
   $COLORSCHEME
@@ -23,13 +22,11 @@
 
 \*----------------------------------------------------*/
 
-
 $color-1:                  #237bbe;             // Blue
 $color-2:                  #ffed20;             // Washed Yellow
 $color-3:                  #ea1e63;             // Pink (washed)
 $color-4:                  #0b4b7c;             // Darker Blue (variant)
-
-
+$color-5:                  #2e6aa0;             // Medium dark Blue
 
 /*---------------------------------------------------*\
 
@@ -39,12 +36,12 @@ $color-4:                  #0b4b7c;             // Darker Blue (variant)
 
 \*----------------------------------------------------*/
 
-
 // $base
 $neutral:                  #f8f8f8;             // off white
 $neutral-print:            #fff;                // white
 
 $primary-background:       $color-1;            // Light blue
+/* used as text color and hover background in menu */
 $secondary-background:     $color-4;            // Darker blue
 $muted-border:             #ddd;                // Grey
 $disabled-background:      Gainsboro;           // Grey
@@ -54,18 +51,23 @@ $pick-out:   darken($fieldset, 5%);             // Darker Egg shell Blue
 
 $shadow:                   #aaa;                // Grey
 
-
 // $TYPOGRAPHY
 $primary-text:             #444;                // Very Dark grey
 $secondary-text:           #777;                // Light grey
 $secondary-print-text:     #5c5858;             // Light dolphin
 
-
 // $LINKS
-$primary-link:             #2e6aa0;             // Dark Blue
+/* used as text color in link and as bottom border in menu */
+$primary-link:             $color-5;            // Medium dark Blue
 $secondary-link: darken($primary-link, 60%);    // Dark blue
 $muted-link:               #a1b9ed;             // light grey
 
+// $MENU
+$menu-background:           #e6f1fa;            // Very light blue
+$menu-border-left:          #90ee90;            // lightgreen
+$menu-border-bottom:        $color-5;           // Medium dark Blue
+$menu-color:                $color-4;           // Darker blue
+$menu-links-background:     #a5cfee;            // light to medium blue
 
 // $BUTTON
 $primary-button:           $color-3;            // Pink
@@ -74,7 +76,6 @@ $secondary-button:         $color-2;            // Yellow
 // $ERROR
 $errors-background:        #ffc;                // Yellow
 $warn:                     #dc3d3d;             // Red
-
 
 //  :notice things are GOOD,    colour: green
 //  :alert  things are NEUTRAL, colour: yellow.
@@ -85,7 +86,6 @@ $flash-notice:             #dbffdd;             // Pale Green
 $flash-alert:              $color-2;            // Yellow
 $flash-error:              #ffe1de;             // Pink
 $flash-opacity:            .85;
-
 
 @mixin inverted-color {
   color: $neutral-print;

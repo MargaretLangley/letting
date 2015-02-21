@@ -30,6 +30,7 @@
  *= require module.font-awesome
  *= require module.form
  *= require module.hover
+ *= require module.menu
  *= require module.navigation
  *= require module.panel
  *= require module.shell
@@ -39,7 +40,7 @@
  *= require module.table-row
  *= require module.typography
  *= require module.overlay
- *= require menu
  *= require media
  *= require jquery.ui.all
  *= require font-awesome
+ */
