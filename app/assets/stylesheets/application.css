@@ -18,13 +18,13 @@
  *= require base.list
  *= require base.page
  *= require base.typography
- *= require layout
  *= require module.auto-complete
  *= require module.button
  *= require module.debug
  *= require module.drop-down-menu
  *= require module.error
  *= require module.grid
+ *= require module.layout
  *= require module.link
  *= require module.flash
  *= require module.font-awesome
@@ -35,6 +35,7 @@
  *= require module.shell
  *= require module.size
  *= require module.search
+ *= require module.spacer
  *= require module.tabs
  *= require module.table-row
  *= require module.typography

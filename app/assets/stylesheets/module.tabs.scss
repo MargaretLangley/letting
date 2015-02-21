@@ -17,29 +17,25 @@
 }
 
 /*----- Tab Links -----*/
-/* Clearfix */
-.tab-links:after {
-  clear: both;
-  content: '';
-  display: block;
-}
+.tab-links {
+  @include clearfix;
 
-.tab-links li {
-  float: left;
-  list-style: none;
-  margin: 0 5px;
-}
+  li {
+    float: left;
+    list-style: none;
+    margin: 0 5px;
+  }
 
-.tab-links a {
-  @include menu-style(0%, 5%);
-  border-radius: 5px 5px 0 0;
-  display: inline-block;
-  padding: 9px 15px;
-  transition: all linear .15s;
+  a {
+    @include menu-style(0%, 5%);
+    border-radius: 5px 5px 0 0;
+    display: inline-block;
+    padding: 9px 15px;
+    transition: all linear .15s;
 
-  &:hover {
-    background: #a7cce5;
-    text-decoration: none;
+    &:hover {
+      background: $secondary-background;
+    }
   }
 }
 
@@ -55,14 +51,20 @@
   &:hover {
     background: lighten($color-3, 10%);
     color: white;
-    text-decoration: none;
   }
 }
-
 
 li.active a,
 li.active a:hover {
   @include menu-style(15%, 25%);
+}
+
+.tab {
+  display: none;
+
+  &.active {
+    display: block;
+  }
 }
 
 @media screen {
@@ -73,24 +75,15 @@ li.active a:hover {
     background-color: lighten($fieldset, 3%);
     border-radius: 5px;
     box-shadow: -1px 1px 1px rgba(0, 0, 0, .15);
-    padding: 0;
   }
 }
-
-
 
 @media print {
 
   .tab-content {
-    background: #fff;
+    @include clearfix;
+    background-color: white;
+    border-radius: 5px;
     padding: 15px;
-  }
-}
-
-.tab {
-  display: none;
-
-  &.active {
-    display: block;
   }
 }
