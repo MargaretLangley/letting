@@ -12,12 +12,6 @@
 
   \*------------------------------------------------*/
 
-  header {
-    @include inverted-color;
-    height: 3em;
-    width: 100%;
-  }
-
   .page-wrapper {
     margin: 0 auto;
     width: 97.5%;
@@ -27,11 +21,6 @@
     margin-left: auto;
     margin-right: auto;
     width: 900px;
-  }
-
-  footer {
-    clear: both;
-    color: $secondary-text;
   }
 
   /*--------------------------------------*\

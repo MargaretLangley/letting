@@ -32,6 +32,27 @@ body {
      argument to go for rem (size of font relative to html element) */
 }
 
+@media screen {
+
+  header {
+    @include inverted-color;
+    height: 3em;
+    width: 100%;
+  }
+
+  footer {
+    clear: both;
+    color: $secondary-text;
+  }
+}
+
+@media print {
+
+  footer,
+  header {
+    display: none;
+  }
+}
 
 /*--------------------------------------------------*\
 
