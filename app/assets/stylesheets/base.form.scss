@@ -1,0 +1,51 @@
+/*---------------------------------------------------*\
+
+  $FORM
+
+\*---------------------------------------------------*/
+
+@import 'colors';
+
+input,
+textarea {
+  border: 1px solid $muted-border;
+  border-radius: 5px;
+  outline: none;
+  width: 95%;
+}
+
+input[type=submit] {
+  padding: 2%;
+}
+
+input[readonly='readonly'] {
+  background-color: $disabled-background;
+  color: $primary-text;
+}
+
+input[type='checkbox'] {
+  height: 20px;
+  width: 20px;
+}
+
+// placeholder text-align
+
+::-webkit-input-placeholder {
+  text-align: center;
+}
+
+:-ms-input-placeholder {
+  text-align: center;
+}
+
+@media print {
+// h2 is the title and is used in almost every page printout.
+// Change to a realistic size for heading and date.
+
+  h2 {
+    font-size: 1.2em;
+    margin-bottom: .2em;
+    margin-top: .2em;
+    text-align: center;
+  }
+}

@@ -11,8 +11,13 @@
  * file per style scope.
  *
  *= require_self
+ *= require generic.box-sizing
  *= require generic.normalize
- *= require base
+ *= require base.form
+ *= require base.link
+ *= require base.list
+ *= require base.page
+ *= require base.typography
  *= require layout
  *= require module.auto-complete
  *= require module.button
