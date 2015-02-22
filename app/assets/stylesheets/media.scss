@@ -1,4 +1,5 @@
 @import 'colors';
+@import 'tools.mixins';
 
 /*------------------------------------------------*\
 
@@ -132,23 +133,11 @@
 
 \*------------------------------------------------*/
 
-  @mixin bodyprint {
-    background-color: $neutral-print;
-    color: $primary-text;
-    margin-left: .20cm;
-    margin-right: .20cm;
-    margin-top: 0;
-    width: 22cm;
-  }
-
-  body {
-    @include bodyprint;
-  }
 
   // This sets printed page to A4 width
 
   .print-body {
-    @include bodyprint;
+    @include body-print;
   }
 
 /*------------------------------------------------*\
