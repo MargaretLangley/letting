@@ -26,8 +26,7 @@
 
 @media screen {
 
-  .print-only,
-  .vi {
+  .print-only {
     display: none;
   }
 
@@ -57,7 +56,6 @@
   // Buttons and main heading need to be invisible in printouts. Fonts are in pt.
 
   .button,
-  nav,
   .flash,
   .no-print,
   .overlay {
