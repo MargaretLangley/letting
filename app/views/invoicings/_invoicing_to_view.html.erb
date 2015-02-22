@@ -10,10 +10,6 @@
   <div class='col-7-24  inherit-row  bottom-1-line-spacer'>
     <%= invoicing_dec.period_between %>
   </div>
-  <div class='col-1-24  inherit-row  bottom-1-line-spacer'>
-    <%= print_link path: print_run_path(invoicing.runs.last), id: 'print-link', disabled: !invoicing.deliverable?  %>
-  </div>
-  <div class='col-1-24  inherit-row  bottom-1-line-spacer'>&nbsp;</div>
   <div class='col-5-24  inherit-row  bottom-1-line-spacer'>
     <%= delete_link text: 'Delete invoicing', path: invoicing, title: 'Delete entire invoicing' %>
   </div>

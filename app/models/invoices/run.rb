@@ -38,6 +38,13 @@ class Run < ActiveRecord::Base
     invoices.select(&:actionable?).present?
   end
 
+  # deliverable?
+  # Anything to print?
+  #
+  def deliverable?
+    deliver.present?
+  end
+
   def deliver
     invoices.select(&:mail?)
   end

@@ -12,6 +12,20 @@ RSpec.describe Run, type: :model do
     end
   end
 
+  describe '#deliverable?' do
+    it 'can be deliverable' do
+      run = Run.new invoices: [Invoice.new(deliver: 'mail')]
+
+      expect(run.deliverable?).to be true
+    end
+
+    it 'can not be deliverable' do
+      run = Run.new invoices: [Invoice.new(deliver: 'retain')]
+
+      expect(run.deliverable?).to be false
+    end
+  end
+
   describe '#deliver' do
     it 'sends invoice that has deliver attribute true' do
       expect(run_new(invoices: [invoice_new(deliver: 'mail')]).deliver.size)

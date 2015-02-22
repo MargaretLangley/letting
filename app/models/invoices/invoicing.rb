@@ -77,7 +77,7 @@ class Invoicing < ActiveRecord::Base
   def deliverable?
     return false unless runs.present?
 
-    runs.last.deliver.present?
+    runs.last.deliverable?
   end
 
   # generate
