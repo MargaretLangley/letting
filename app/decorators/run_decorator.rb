@@ -23,7 +23,7 @@ class RunDecorator
   end
 
   def style_activity
-    run.last? ? ' active-tab' : ''
+    run.last? ? ' js-active-tab' : ''
   end
 
   def invoice_date

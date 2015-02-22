@@ -48,7 +48,7 @@
     <li class=<%= main_menu_active? ['invoicings', 'blue_invoicings', 'invoices'] %>>
       <h3 class='menu-header'><span class='fa fa-envelope-o icon-spacer'></span> Invoicing</h3>
       <ul class='menu'>
-        <li class=<%=current_path?(invoicings_path)%>><%= link_to 'Invoicing', invoicings_path, class: 'menu-item' %></li>
+        <li class=<%=current_path?(invoicings_path)%>><%= link_to 'Invoicings', invoicings_path, class: 'menu-item' %></li>
         <li class=<%=current_path?(new_invoicing_path)%>><%= link_to 'New Invoicing', new_invoicing_path, class: 'menu-item' %></li>
         <li class=<%=current_path?(blue_invoicings_path)%>><%= link_to 'Blue invoicings', blue_invoicings_path, class: 'menu-item' %></li>
       </ul>
