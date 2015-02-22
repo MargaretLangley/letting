@@ -13,8 +13,5 @@ linters:
 
   # Worth Enabling
 
-  QualifyingElement:
-    enabled: false
-
   PlaceholderInExtend:
      enabled: false

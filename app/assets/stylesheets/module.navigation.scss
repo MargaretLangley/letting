@@ -38,16 +38,3 @@ li a {
     color: white;
   }
 }
-
-li.inactive-nav a {
-  @include menu-style(0%, 5%);
-}
-
-li.active-nav a {
-  @include menu-style (15%, 25%);
-}
-
-li.active-subnav a {
-  @include menu-style(5%, 15%);
-}
-

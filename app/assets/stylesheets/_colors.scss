@@ -96,8 +96,12 @@ $flash-error:              #ffe1de;             // Pink
 $flash-opacity:            .85;
 
 @mixin inverted-color {
-  color: $neutral-print;
+  color: $neutral;
   background-color: $primary-background;
+}
+
+.inverted-color {
+  @include inverted-color;
 }
 
 /* faded holds the switch for printing.

@@ -23,7 +23,9 @@ label {
   }
 }
 
-input[type=submit].primary {
+// Primary 'submit' button on the form
+//
+.primary {
   padding: 2%;
   width: 60%;
 }

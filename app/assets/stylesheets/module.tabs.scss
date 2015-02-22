@@ -54,15 +54,15 @@
   }
 }
 
-li.active a,
-li.active a:hover {
+.js-active-tab a,
+.js-active-tab a:hover {
   @include menu-style(15%, 25%);
 }
 
 .tab {
   display: none;
 
-  &.active {
+  &.active-tab {
     display: block;
   }
 }

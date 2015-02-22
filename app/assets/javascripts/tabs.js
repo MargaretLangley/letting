@@ -7,7 +7,7 @@ $(document).ready(function() {
     $('.tabs ' + currentAttrValue).fadeIn(400).siblings().hide();
 
     // Change/remove current tab to active
-    $(this).parent('li').addClass('active').siblings().removeClass('active');
+    $(this).parent('li').addClass('js-active-tab').siblings().removeClass('js-active-tab');
 
     event.preventDefault();
   });

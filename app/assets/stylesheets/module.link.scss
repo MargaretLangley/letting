@@ -7,17 +7,16 @@
 
 @import 'colors';
 
-a.inverted-link {
-  @include inverted-color;
-}
-
-a.warn {
-  color: $warn;
+ // Without the &: modifiers the base.link overrides the properties
+.inverted-link {
+  &:link,
+  &:visited {
+    @include inverted-color;
+  }
 
   &:hover,
   &:active {
-    background-color: $warn;
-    color: white;
+    @include inverted-color;
   }
 }
 

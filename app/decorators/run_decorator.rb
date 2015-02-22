@@ -23,7 +23,7 @@ class RunDecorator
   end
 
   def style_activity
-    run.last? ? ' active' : ''
+    run.last? ? ' active-tab' : ''
   end
 
   def invoice_date
