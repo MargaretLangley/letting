@@ -1,9 +1,13 @@
-/*jQuery time*/
+// Works with module.menu.css
+// Hiding and unhiding menus
+//
 $(document).ready(function(){
-  $(".accordion h3").click(function(){
-    //slide up all the link lists
-    $(".accordion ul ul").slideUp();
-    //slide down the link list below the h3 clicked - only if its closed
+  $(".menu-header").click(function(){
+    // slide up inactive-menus
+    if($(this).parent().is(".inactive-menu")) {
+      $(this).parent().find(".menu").slideUp();
+    }
+    // slide down invisible menus - only
     if(!$(this).next().is(":visible"))
     {
       $(this).next().slideDown('fast');

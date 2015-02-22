@@ -24,11 +24,11 @@ module NavigationHelper
     end
   end
 
-  def sub_menu_state controller
-    if controller.include? controller_name
-      'flatten'   # no css
+  def current_path? path
+    if current_page? path
+      'active-item'   # css
     else
-      'folded'    # hidden
+      'inactive-item' # no css
     end
   end
 end

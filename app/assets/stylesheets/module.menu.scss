@@ -8,7 +8,7 @@ Accordion HTML
      <li class=active-menu>
       <h3 class='menu-header'>Accounts</h3>
       <ul class="menu">
-        <li><a class="menu-item" href="/accounts">Accounts</a></li>
+        <li class='active-item'><a class="menu-item" href="/accounts">Accounts</a></li>
         <li><a class="menu-item" href="/accounts/new">New Account</a></li>
       </ul>
     </li>
@@ -96,6 +96,15 @@ Accordion HTML
     border-left: 5px solid $menu-border-left;
     color: $neutral-print;
   }
+}
+
+// Menu
+// Active: Active menus are displayed
+//
+.active-item .menu-item {
+  background: $secondary-background;
+  border-left: 5px solid $menu-border-left;
+  color: $neutral-print;
 }
 
 .icon-spacer {
