@@ -55,10 +55,7 @@
 
   // Buttons and main heading need to be invisible in printouts. Fonts are in pt.
 
-  .button,
-  .flash,
-  .no-print,
-  .overlay {
+  .no-print {
     display: none;
   }
 }

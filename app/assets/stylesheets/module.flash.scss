@@ -6,60 +6,71 @@
 
 @import 'module.layout';
 
-.flash {
-  border-radius: 12px;
-  box-shadow: $shadow 0 0 8px;
-  cursor: pointer;
-  margin: 0 20%;
-  padding: 1.5% 2%;
-  position: absolute;
-  text-align: center;
-  width: 40%;
-  z-index: 10;   /*cannot think why flash shouldn't be on the top*/
+@media screen {
+
+  .flash {
+    border-radius: 12px;
+    box-shadow: $shadow 0 0 8px;
+    cursor: pointer;
+    margin: 0 20%;
+    padding: 1.5% 2%;
+    position: absolute;
+    text-align: center;
+    width: 40%;
+    z-index: 10;   /*cannot think why flash shouldn't be on the top*/
+  }
+
+  /*
+    :notice things are GOOD,    colour: green
+    :alert  things are NEUTRAL, colour: yellow.
+    :error  things are BAD,     colour: red.
+  */
+
+  @mixin notice {
+    border: 1px solid lighten($flash-notice, 20%);
+    background-color: rgba($flash-notice, $flash-opacity);
+  }
+
+  @mixin alert {
+    border: 1px solid lighten($flash-alert, 20%);
+    background-color: rgba($flash-alert, $flash-opacity);
+  }
+
+  @mixin error {
+    border: 1px solid lighten($flash-error, 20%);
+    background-color: rgba($flash-error, $flash-opacity);
+  }
+
+  .save {
+    @include notice;
+  }
+
+  .good {
+    @include notice;
+  }
+
+  .problem {
+    @include alert;
+  }
+
+  .delete {
+    @include error;
+  }
+
+  // trying to get close x into top right it isn't nice code
+
+  .flash-close {
+    cursor: pointer;
+    position: relative;
+    top: -10px;
+  }
 }
 
-/*
-  :notice things are GOOD,    colour: green
-  :alert  things are NEUTRAL, colour: yellow.
-  :error  things are BAD,     colour: red.
-*/
 
-@mixin notice {
-  border: 1px solid lighten($flash-notice, 20%);
-  background-color: rgba($flash-notice, $flash-opacity);
-}
+@media print {
 
-@mixin alert {
-  border: 1px solid lighten($flash-alert, 20%);
-  background-color: rgba($flash-alert, $flash-opacity);
-}
-
-@mixin error {
-  border: 1px solid lighten($flash-error, 20%);
-  background-color: rgba($flash-error, $flash-opacity);
-}
-
-.save {
-  @include notice;
-}
-
-.good {
-  @include notice;
-}
-
-.problem {
-  @include alert;
-}
-
-.delete {
-  @include error;
-}
-
-// trying to get close x into top right it isn't nice code
-
-.flash-close {
-  cursor: pointer;
-  position: relative;
-  top: -10px;
+  .flash {
+    display: none;
+  }
 }
 
