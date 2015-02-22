@@ -1,0 +1,160 @@
+@import 'colors';
+@import 'tools.mixins';
+
+
+@media screen {
+
+/*------------------------------------------------*\
+
+  INVOICES SCREEN VALUES
+
+\*------------------------------------------------*/
+
+
+/*------------------------------------------------*\
+
+ INVOICES SCREEN MARGINS
+
+\*------------------------------------------------*/
+
+  // used on Page 2
+  .wide-margin {
+    margin-left: 6em;
+  }
+
+  .narrow-margin {
+    margin-left: 3em;
+  }
+
+/*------------------------------------------------*\
+
+  INVOICES SCREEN FONTS
+
+\*------------------------------------------------*/
+
+  // used for scissors line, page 1, above return slip
+  .scissors {
+    font-size: 1.5em;
+  }
+
+  // Company Banner heading
+  .h1-print {
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  .large-font {
+    font-size: 1em;
+  }
+
+  // medium-bold-headings. Used for the company's address
+  // in heading, Invoice line and Property addresses.
+
+  .medium-bold-headings {
+    font-size: .8em;
+    font-weight: bold;
+    line-height: 130%;
+  }
+
+  // small-font (Notice for Leaseholders & Remittance Advice)
+  .small-font {
+    font-size: .8em;
+    font-weight: normal;
+  }
+
+  .small-font-bold {
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  .smallest-font {
+    font-size: .7em;
+  }
+}
+
+
+@media print {
+
+/*------------------------------------------------*\
+
+  INVOICES PRINT
+
+\*------------------------------------------------*/
+
+/*------------------------------------------------*\
+
+  Printing for invoice
+  SETTING WIDTH A4 is 210.0mm
+
+\*------------------------------------------------*/
+
+
+  // Do we need this as already applied to body?
+  // This sets printed page to A4 width
+
+  .print-body {
+    @include body-print;
+  }
+
+/*------------------------------------------------*\
+
+  INVOICES PRINT MARGINS
+
+\*------------------------------------------------*/
+
+  // wide-margin on 2nd inv page
+
+  .wide-margin {
+    margin-left: 2cm;
+  }
+
+  .narrow-margin {
+    margin-left: .2cm;
+  }
+
+/*------------------------------------------------*\
+
+  INVOICES PRINT FONTS
+
+\*------------------------------------------------*/
+
+  // used for scissors line, page 1, above return slip
+  .scissors {
+    font-size: 20pt;
+  }
+
+  // Company Banner heading
+  .h1-print {
+    font-size: 18pt;
+    font-weight: bold;
+  }
+
+  .large-font {
+    font-size: 14pt;
+  }
+
+  // medium-bold-headings
+  // Used for Company's address in heading,
+  // Invoice line and Property addresses.
+
+  .medium-bold-headings {
+    font-size: 12pt;
+    font-weight: bold;
+    line-height: 130%;
+  }
+
+  .small-font {
+    font-size: 11pt;
+    font-weight: normal;
+  }
+
+  .small-font-bold {
+    font-size: 11pt;
+    font-weight: bold;
+  }
+
+  // smallest-font used for notes in brackets in lefthand margin
+  .smallest-font {
+    font-size: 10pt;
+  }
+}
