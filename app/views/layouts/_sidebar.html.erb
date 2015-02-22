@@ -1,63 +1,63 @@
-<% if allow? "users", "" %>
-  <div class="accordion" >
+<% if allow? 'users', '' %>
+  <div class='accordion' >
     <h3 class='c-align  accordion-header'>Admin Menu</h3>
     <ul>
       <li class=<%= main_menu_active? ['cycles'] %>>
-        <h3 class='accordion-header'><span class='fa fa-calendar icon-spacer'></span> Cycles</h3>
-        <ul>
-          <li><%= link_to 'Cycles', cycles_path %></li>
-          <li><%= link_to 'New Term Cycle', new_cycle_path(cycle_type: 'term') %></li>
-          <li><%= link_to 'New Monthly Cycle', new_cycle_path(cycle_type: 'monthly') %></li>
+        <h3 class='menu-header'><span class='fa fa-calendar icon-spacer'></span> Cycles</h3>
+        <ul class='menu'>
+          <li><%= link_to 'Cycles', cycles_path, class: 'menu-item' %></li>
+          <li><%= link_to 'New Term Cycle', new_cycle_path(cycle_type: 'term'), class: 'menu-item' %></li>
+          <li><%= link_to 'New Monthly Cycle', new_cycle_path(cycle_type: 'monthly'), class: 'menu-item' %></li>
         </ul>
       </li>
       <li class=<%= main_menu_active? ['users'] %>>
-        <h3 class='accordion-header'><span class='fa fa-home user icon-spacer'></span> Users</h3>
-        <ul>
-          <li><%= link_to 'User', users_path %></li>
-          <li><%= link_to 'New User',  new_user_path(cycle_type: 'term') %></li>
+        <h3 class='menu-header'><span class='fa fa-home user icon-spacer'></span> Users</h3>
+        <ul class='menu'>
+          <li><%= link_to 'User', users_path, class: 'menu-item' %></li>
+          <li><%= link_to 'New User',  new_user_path(cycle_type: 'term'), class: 'menu-item' %></li>
         </ul>
       </li>
       <li class=<%= main_menu_active? ['invoice_texts'] %>>
-        <h3 class='accordion-header'><span class='fa fa-file-text-o icon-spacer'></span> Invoice Text</h3>
-        <ul>
-          <li><%= link_to 'Invoice Text', invoice_texts_path %></li>
+        <h3 class='menu-header'><span class='fa fa-file-text-o icon-spacer'></span> Invoice Text</h3>
+        <ul class='menu'>
+          <li><%= link_to 'Invoice Text', invoice_texts_path, class: 'menu-item' %></li>
         </ul>
       </li>
     </ul>
   </div>
 <% end %>
 
-<div class="accordion" >
+<div class='accordion' >
   <h3 class='c-align  accordion-header'>Menu</h3>
   <ul >
     <li class=<%= main_menu_active? ['properties', 'arrears'] %>>
-      <h3 class='accordion-header'><span class='fa fa-book icon-spacer'></span> Accounts</h3>
-      <ul>
-        <li><%= link_to 'Accounts', properties_path %></li>
-        <li><%= link_to 'New Account', new_property_path %></li>
-        <li><%= link_to 'Arrears List', arrears_path %></li>
+      <h3 class='menu-header'><span class='fa fa-book icon-spacer'></span> Accounts</h3>
+      <ul class='menu'>
+        <li><%= link_to 'Accounts', properties_path, class: 'menu-item' %></li>
+        <li><%= link_to 'New Account', new_property_path, class: 'menu-item' %></li>
+        <li><%= link_to 'Arrears List', arrears_path, class: 'menu-item' %></li>
       </ul>
     </li>
     <li class=<%= main_menu_active? ['clients', 'client_payments'] %>>
-      <h3 class='accordion-header'><span class='fa fa-folder icon-spacer'></span> Clients</h3>
-      <ul>
-        <li><%= link_to 'Clients', clients_path %></li>
-        <li><%= link_to 'New Client', new_client_path %></li>
+      <h3 class='menu-header'><span class='fa fa-folder-open-o icon-spacer'></span> Clients</h3>
+      <ul class='menu'>
+        <li><%= link_to 'Clients', clients_path, class: 'menu-item' %></li>
+        <li><%= link_to 'New Client', new_client_path, class: 'menu-item' %></li>
       </ul>
     </li>
     <li class=<%= main_menu_active? ['invoicings', 'blue_invoicings', 'invoices'] %>>
-      <h3 class='accordion-header'><span class='fa fa-envelope-o icon-spacer'></span> Invoicing</h3>
-      <ul>
-        <li><%= link_to 'Invoicing', invoicings_path %></li>
-        <li><%= link_to 'New Invoicing', new_invoicing_path %></li>
-        <li><%= link_to 'Blue invoicings', blue_invoicings_path %></li>
+      <h3 class='menu-header'><span class='fa fa-envelope-o icon-spacer'></span> Invoicing</h3>
+      <ul class='menu'>
+        <li><%= link_to 'Invoicing', invoicings_path, class: 'menu-item' %></li>
+        <li><%= link_to 'New Invoicing', new_invoicing_path, class: 'menu-item' %></li>
+        <li><%= link_to 'Blue invoicings', blue_invoicings_path, class: 'menu-item' %></li>
       </ul>
     </li>
     <li class=<%= main_menu_active? ['payments'] %>>
-      <h3 class='accordion-header'><span class='fa fa-money icon-spacer'></span> Payments</h3>
-      <ul>
-        <li><%= link_to 'Payments', payments_path %></li>
-        <li><%= link_to 'New Payment', new_payment_path %></li>
+      <h3 class='menu-header'><span class='fa fa-gbp icon-spacer'></span> Payments</h3>
+      <ul class='menu'>
+        <li><%= link_to 'Payments', payments_path, class: 'menu-item' %></li>
+        <li><%= link_to 'New Payment', new_payment_path, class: 'menu-item' %></li>
       </ul>
     </li>
   </ul>

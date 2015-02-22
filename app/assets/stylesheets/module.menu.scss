@@ -1,3 +1,29 @@
+/**************************************************************\
+
+Accordion HTML
+
+<div class='accordion' >
+  <h3 class='accordion-header'>Menu</h3>
+  <ul>
+     <li class=active-menu>
+      <h3 class='menu-header'>Accounts</h3>
+      <ul class="menu">
+        <li><a class="menu-item" href="/accounts">Accounts</a></li>
+        <li><a class="menu-item" href="/accounts/new">New Account</a></li>
+      </ul>
+    </li>
+    <li class=inactive-menu>
+      <h3 class='menu-header'>Clients</h3>
+      <ul class="menu">
+        <li><a class="menu-item" href="/clients">Clients</a></li>
+        <li><a class="menu-item" href="/clients/new">New Client</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+\****************************************************************/
+
 @import 'colors';
 
 /* This is main box, border radus, width, colors here set all the unopened boxes */
@@ -11,12 +37,17 @@
   font-size: 16px;
   line-height: 35px;
   margin-top: 2.7em;
-  padding: .5em 0 .5em 0;
+  padding: .5em 0;
 }
 
-/*heading styles these are the main boxes, h3 is the icon and main heading line*/
+// The header at the top of a group of menus
+//
+.accordion-header,
 
-.accordion-header {
+//
+// menu-header - The header above each menu
+//
+.menu-header {
   background-color: $menu-background;    /* main menu unopened  #E6F1FA; */
   border-width: 0;
   cursor: pointer;
@@ -30,9 +61,27 @@
   }
 }
 
-/*links  for both active & non-active*/
+// Menu
+// Default: Menus are hidden by default
+//
+.menu {
+  border-bottom: 1px solid $menu-border-bottom;
+  display: none;
+}
 
-.accordion ul li a {
+// Menu
+// Active: Active menus are displayed
+//
+.active-menu .menu {
+  background-color: $shadow;
+  border-bottom: 1px solid $menu-border-bottom;
+  display: block;
+}
+
+// menu-item - lowest level of the accordion
+//           - class for marking the menu rows
+//
+.menu-item {
   background-color: $menu-links-background; /* close to $fieldset */
   border-bottom: 1px solid $menu-border-bottom;
   color: $primary-link;
@@ -47,19 +96,6 @@
     border-left: 5px solid $menu-border-left;
     color: $neutral-print;
   }
-}
-
-/* hide the non active LIs by default*/
-
-.accordion ul ul {
-  border-bottom: 1px solid $menu-border-bottom;
-  display: none;
-}
-
-.accordion li.active-menu ul {
-  background-color: $shadow;
-  border-bottom: 1px solid $menu-border-bottom;
-  display: block;
 }
 
 .icon-spacer {
