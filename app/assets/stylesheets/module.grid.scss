@@ -8,6 +8,8 @@
 
 \*--------------------------------------------------*/
 
+// scss-lint:disable SingleLinePerSelector
+
 /*http://stackoverflow.com/questions/4785871/css-vertical-align*/
 @mixin vertical-align-hack {
   height: 3em;
@@ -159,3 +161,5 @@ $pad: 1em;
 
 // When you want a column for structure but don't want it to take up any space(padding)  //
 .spacer-column { padding: 0; }
+// Required extra disable at the end ??
+// scss-lint:disable SingleLinePerSelector
