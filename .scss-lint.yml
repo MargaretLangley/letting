@@ -5,13 +5,10 @@ exclude:
   - 'tmp/rubycritic/assets/stylesheets/*.css'
 
 linters:
+  # Use // everywhere
   Comment:
     enabled: false
 
+  # write white as #FFF etc
   ColorKeyword:
     enabled: false
-
-  # Worth Enabling
-
-  PlaceholderInExtend:
-     enabled: false
