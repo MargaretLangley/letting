@@ -65,6 +65,12 @@ $secondary-print-text:     $color-grey-5;       // Fairly Dark Grey dolphin
 
 // $LINKS
 
+$basic-link-color:                   $secondary-background;    // Blue
+$basic-link-active-background:       $secondary-background;    // Blue
+$basic-link-active-color:            white;
+
+
+
 // $plain-link-background:           initial;  // Could not get this to work.
 $plain-link-color:                   $color-venice-blue;    // Blue
 $plain-link-active-background:       $color-venice-blue;    // Blue

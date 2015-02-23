@@ -1,17 +1,21 @@
-/*---------------------------------------------------*\
+/*-------------------------------------------------------------*\
 
   $LINK
 
-\*---------------------------------------------------*/
+  Examples of basic link BCS_limited in footer and (possibly to)
+  be removed - link in Invoicing#show - tab menu
+
+\*--------------------------------------------------------------*/
 
 @import 'colors';
 
 a {
   text-decoration: underline;
+  color: $basic-link-color;
 
   &:hover,
   &:active {
-    background-color: $secondary-background;
-    color: white;
+    background-color: $basic-link-active-background;
+    color: $basic-link-active-color;
   }
 }
