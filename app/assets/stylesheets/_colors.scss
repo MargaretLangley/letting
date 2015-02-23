@@ -51,10 +51,10 @@ $secondary-background:     $color-venice-blue;            // Darker blue
 $muted-border:             $color-grey-1;       // Very Pale Grey
 $disabled-background:      $color-grey-2;       // dcdcdc Grey
 
-$fieldset:   lighten($primary-background, 50%); // Egg shell Blue
-$pick-out:   darken($fieldset, 5%);             // Darker Egg shell Blue
+$fieldset:                 lighten($primary-background, 50%); // Egg shell Blue
+$pick-out:                 darken($fieldset, 5%);             // Darker Egg shell Blue
 
-$shadow:                   $color-grey-3;       //  Light Grey
+$shadow:                   $color-grey-3;       // box-shadows on all the controls
 
 // $TYPOGRAPHY
 $primary-text:             $color-grey-6;       // Very Dark Grey
