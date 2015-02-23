@@ -62,6 +62,8 @@
     &:visited {
       background: $primary-button-background;
       color: $primary-button-color;
+      color: red;
+      background-color: red;
     }
 
     &:hover,
