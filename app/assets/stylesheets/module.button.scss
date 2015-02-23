@@ -1,9 +1,12 @@
 
-/*--------------------------------------------------*\
+/*--------------------------------------------------------------------*\
 
   $BUTTON
 
-\*--------------------------------------------------*/
+  icon-button - action buttons and Invoicing Show buttons
+  primary-button - submit action buttons on form pages and search form
+
+\*--------------------------------------------------------------------*/
 
 @import 'colors';
 
@@ -19,35 +22,47 @@
     padding: .2em;
   }
 
-  .plain-button {
+  .icon-button {
     @extend %base-button;
-    background: $plain-button-background;
-    color: $plain-button-color;
+
+    &:link,
+    &:visited {
+      background: $icon-button-background;
+      color: $icon-button-color;
+    }
 
     &:hover,
     &:active {
-      background: $plain-button-active-background;
-      color: $plain-button-active-color;
+      background: $icon-button-active-background;
+      color: $icon-button-active-color;
     }
   }
 
-  .plain-button[disabled] {
+  .icon-button[disabled] {
     @extend %base-button;
-    background: $plain-button-disabled-background;
-    color: $plain-button-disabled-color;
-    text-decoration: none;
+
+    &:link,
+    &:visited {
+      background: $icon-button-disabled-background;
+      color: $icon-button-disabled-color;
+      text-decoration: none;
+    }
 
     &:hover,
     &:active {
-      background: $plain-button-disabled-background;
-      color: $plain-button-disabled-color;
+      background: $icon-button-disabled-background;
+      color: $icon-button-disabled-color;
     }
   }
 
   .primary-button, .warn-button {
     @extend %base-button;
-    background: $primary-button-background;
-    color: $primary-button-color;
+
+    &:link,
+    &:visited {
+      background: $primary-button-background;
+      color: $primary-button-color;
+    }
 
     &:hover,
     &:active {
@@ -60,7 +75,7 @@
 
 @media print {
 
-  .plain-button, .primary-button, .warn-button {
+  .icon-button, .primary-button, .warn-button {
     display: none;
   }
 }
