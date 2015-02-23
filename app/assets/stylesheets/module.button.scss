@@ -9,68 +9,50 @@
 
 @media screen {
 
-  @mixin base-button {
-    display: inline-block;
-    margin: 1% 1% 1% 0;
-    padding: 3%;
-    border: 1px solid darken($secondary-button, 15%);
+  %base-button {
+    border: 1px solid darken($button-border, 15%);
     border-radius: 5px;
     box-shadow: $shadow 0 0 4px;
+    display: inline-block;
     font-size: 1em;
-
-    &:hover,
-    &:active {
-      background: $secondary-background;
-      color: white;
-    }
+    margin: 0;
+    padding: .2em;
   }
 
   .plain-button {
-    @include base-button;
-    background: white;
-    color: black;
+    @extend %base-button;
+    background: $plain-button-background;
+    color: $plain-button-color;
 
-    // Required to override base.css a:link color and background-color;
-    &:link,
-    &:visited {
-      background: white;
-      color: black;
-      text-decoration: none;
+    &:hover,
+    &:active {
+      background: $plain-button-active-background;
+      color: $plain-button-active-color;
     }
   }
 
   .plain-button[disabled] {
-    @include base-button;
-    background: $disabled-background;
-    color: white;
+    @extend %base-button;
+    background: $plain-button-disabled-background;
+    color: $plain-button-disabled-color;
     text-decoration: none;
-
-    // Required to override base.css a:link color and background-color;
-
-    &:link,
-    &:visited {
-      background: $disabled-background;
-      color: white;
-    }
 
     &:hover,
     &:active {
-      background: $disabled-background;
-      color: white;
+      background: $plain-button-disabled-background;
+      color: $plain-button-disabled-color;
     }
   }
 
-  .warn-button {
-    @include base-button;
-    background: $color-amaranth;
-    color: white;
+  .primary-button, .warn-button {
+    @extend %base-button;
+    background: $primary-button-background;
+    color: $primary-button-color;
 
-    // Required to override base.css a:link color and background-color;
-
-    &:link,
-    &:visited {
-      background: $color-amaranth;
-      color: white;
+    &:hover,
+    &:active {
+      background: $primary-button-active-background;
+      color: $primary-button-active-color;
     }
   }
 }
@@ -78,7 +60,7 @@
 
 @media print {
 
-  .plain-button {
+  .plain-button, .primary-button, .warn-button {
     display: none;
   }
 }

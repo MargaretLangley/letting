@@ -9,11 +9,6 @@
 a {
   text-decoration: underline;
 
-  &:link,
-  &:visited {
-    color: $primary-link;
-  }
-
   &:hover,
   &:active {
     background-color: $secondary-background;
