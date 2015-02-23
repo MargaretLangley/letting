@@ -22,19 +22,3 @@ li a {
   display: block;
   padding: 4%;
 }
-
-// navigation
-
-// extra class selectivity required override 'li a' with li.<class> a
-
-@mixin menu-style($background, $border) {
-  border: 1px solid darken($fieldset, $background);
-  border-radius: 5px;
-  background-color: darken($fieldset, $border);
-
-  &:hover,
-  &:active {
-    background-color: $secondary-background;
-    color: white;
-  }
-}
