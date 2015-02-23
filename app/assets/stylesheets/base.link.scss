@@ -10,8 +10,8 @@
 @import 'colors';
 
 a {
-  text-decoration: underline;
   color: $basic-link-color;
+  text-decoration: underline;
 
   &:hover,
   &:active {

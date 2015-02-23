@@ -5,14 +5,14 @@
 
 \*--------------------------------------------------*/
 
-@mixin ellipsis-text {
+%ellipsis-text {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 label {
-  @include ellipsis-text;
+  @extend %ellipsis-text;
 }
 
 .required {
