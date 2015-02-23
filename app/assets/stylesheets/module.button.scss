@@ -62,14 +62,14 @@
 
   .warn-button {
     @include base-button;
-    background: $color-3;
+    background: $color-amaranth;
     color: white;
 
     // Required to override base.css a:link color and background-color;
 
     &:link,
     &:visited {
-      background: $color-3;
+      background: $color-amaranth;
       color: white;
     }
   }

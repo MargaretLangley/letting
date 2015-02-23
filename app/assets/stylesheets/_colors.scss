@@ -20,13 +20,16 @@
   http://paletton.com/#uid=33w0Z0krWE7hbNgmGHXBHy3BFoJ
   Chose triad and added darker variant .... maybe should calculate it?
 
+  Color naming hexidecimal from:
+  http://chir.ag/projects/name-that-color/#237BBE
+
 \*----------------------------------------------------*/
 
-$color-1:                  #237bbe;             // Blue
-$color-2:                  #ffed20;             // Washed Yellow
-$color-3:                  #ea1e63;             // Pink (washed)
-$color-4:                  #0b4b7c;             // Darker Blue (variant)
-$color-5:                  #2e6aa0;             // Medium dark Blue
+$color-mariner:            #237bbe;             // Blue
+$color-broom:              #ffed20;             // Washed Yellow
+$color-amaranth:           #ea1e63;             // Pink (washed)
+$color-venice-blue:        #0b4b7c;             // Darker Blue (variant)
+$color-azure:              #2e6aa0;             // Medium dark Blue
 
 $color-grey-1:             #ddd;                // Very Pale Grey
 $color-grey-2:             #dcdcdc;             // Pale Grey Gainsbro
@@ -46,9 +49,9 @@ $color-grey-6:             #444;                // Very Dark Grey
 $neutral:                  #f8f8f8;             // off white
 $neutral-print:            #fff;                // white
 
-$primary-background:       $color-1;            // Light blue
+$primary-background:       $color-mariner;            // Light blue
 /* used as text color and hover background in menu */
-$secondary-background:     $color-4;            // Darker blue
+$secondary-background:     $color-venice-blue;            // Darker blue
 
 $muted-border:             $color-grey-1;       // Very Pale Grey
 $disabled-background:      $color-grey-2;       // dcdcdc Grey
@@ -66,20 +69,20 @@ $secondary-print-text:     $color-grey-5;       // Fairly Dark Grey dolphin
 
 // $LINKS
 /* used as text color in link and as bottom border in menu */
-$primary-link:             $color-5;            // Medium dark Blue
+$primary-link:             $color-azure;            // Medium dark Blue
 $secondary-link: darken($primary-link, 60%);    // Dark blue
 $muted-link:               #a1b9ed;             // light Blue
 
 // $MENU
 $menu-background:           #e6f1fa;            // Very light blue
 $menu-border-left:          #90ee90;            // lightgreen
-$menu-border-bottom:        $color-5;           // Medium dark Blue
-$menu-color:                $color-4;           // Darker blue
+$menu-border-bottom:        $color-azure;           // Medium dark Blue
+$menu-color:                $color-venice-blue;           // Darker blue
 $menu-links-background:     #a5cfee;            // light to medium blue
 
 // $BUTTON
-$primary-button:           $color-3;            // Pink
-$secondary-button:         $color-2;            // Yellow
+$primary-button:           $color-amaranth;            // Pink
+$secondary-button:         $color-broom;            // Yellow
 
 // $ERROR
 $errors-background:        #ffc;                // Yellow
@@ -91,7 +94,7 @@ $warn:                     #dc3d3d;             // Red
 
 // $FLASH
 $flash-notice:             #dbffdd;             // Pale Green
-$flash-alert:              $color-2;            // Yellow
+$flash-alert:              $color-broom;            // Yellow
 $flash-error:              #ffe1de;             // Pink
 $flash-opacity:            .85;
 
