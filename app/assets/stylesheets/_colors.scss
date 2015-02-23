@@ -5,11 +5,6 @@
 
   Defined colors
 
-\*----------------------------------------------------*/
-
-
-/*---------------------------------------------------*\
-
   $COLORSCHEME
 
   Color schemes only reside in this colors file.
@@ -67,11 +62,22 @@ $secondary-text:           $color-grey-4;       // Mediumum Dark Grey
 $secondary-print-text:     $color-grey-5;       // Fairly Dark Grey dolphin
 
 
+
 // $LINKS
-/* used as text color in link and as bottom border in menu */
-$primary-link:             $color-azure;            // Medium dark Blue
-$secondary-link: darken($primary-link, 60%);    // Dark blue
-$muted-link:               #a1b9ed;             // light Blue
+
+// $plain-link-background:           initial;  // Could not get this to work.
+$plain-link-color:                   $color-venice-blue;    // Blue
+$plain-link-active-background:       $color-venice-blue;    // Blue
+$plain-link-active-color:            white;
+
+
+// $inverted-link-background:           initial;  // Could not get this to work.
+$inverted-link-color:                   white;
+$inverted-link-active-background:       initial;    // Blue
+$inverted-link-active-color:            white;
+
+
+
 
 // $MENU
 $menu-background:           #e6f1fa;            // Very light blue
@@ -79,6 +85,7 @@ $menu-border-left:          #90ee90;            // lightgreen
 $menu-border-bottom:        $color-azure;           // Medium dark Blue
 $menu-color:                $color-venice-blue;           // Darker blue
 $menu-links-background:     #a5cfee;            // light to medium blue
+$menu-item-color:           $color-azure;            // Medium dark Blue
 
 
 
