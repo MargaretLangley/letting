@@ -19,17 +19,14 @@
     display: inline-block;
     font-size: 1em;
     margin: 0;
-    padding: .2em;
   }
 
   .icon-button {
     @extend %base-button;
 
-    &:link,
-    &:visited {
-      background: $icon-button-background;
-      color: $icon-button-color;
-    }
+    background: $icon-button-background;
+    color: $icon-button-color;
+    padding: .2em;
 
     &:hover,
     &:active {
@@ -41,12 +38,10 @@
   .icon-button[disabled] {
     @extend %base-button;
 
-    &:link,
-    &:visited {
-      background: $icon-button-disabled-background;
-      color: $icon-button-disabled-color;
-      text-decoration: none;
-    }
+    background: $icon-button-disabled-background;
+    color: $icon-button-disabled-color;
+    text-decoration: none;
+    padding: .2em;
 
     &:hover,
     &:active {
@@ -58,13 +53,9 @@
   .primary-button, .warn-button {
     @extend %base-button;
 
-    &:link,
-    &:visited {
-      background: $primary-button-background;
-      color: $primary-button-color;
-      color: red;
-      background-color: red;
-    }
+    background: $primary-button-background;
+    color: $primary-button-color;
+    padding: 1em;
 
     &:hover,
     &:active {
