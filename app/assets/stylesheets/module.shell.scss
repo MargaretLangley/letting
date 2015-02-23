@@ -9,43 +9,47 @@
 
 @media screen {
 
-  @mixin inside-shell {
+  %inside-shell-screen {
+    background-color: $fieldset;
     border: 1px solid lighten($fieldset, 20%);
     border-radius: 12px;
-    background-color: $fieldset;
     box-shadow: $shadow 0 0 8px;
   }
 
   .shell {
-    @include inside-shell;
+    @extend %inside-shell-screen;
     @include clearfix;
     margin: 0 0 2%;
     padding: 1%;
+
+    .error-shell {
+      background-color: $errors-background;
+    }
   }
 
   .shell-thin {
-    @include inside-shell;
+    @extend %inside-shell-screen;
     @include clearfix;
     margin: 0 0 2%;
     padding: 0;
   }
 
   .shell-1-25 {
-    @include inside-shell;
+    @extend %inside-shell-screen;
     @include clearfix;
     margin: 0 0 2%;
     padding: 1% 4% 2%;
   }
 
   .shell-1-12 {
-    @include inside-shell;
+    @extend %inside-shell-screen;
     @include clearfix;
     margin: 0 0 2%;
     padding: 2% 8.3333%;
   }
 
   .shell-1-6 {
-    @include inside-shell;
+    @extend %inside-shell-screen;
     @include clearfix;
     margin: 0 0 2%;
     padding: 2% 16.6666%;
@@ -54,46 +58,40 @@
 }
 
 
-.error-shell {
-  @extend .shell;
-  background-color: $errors-background;
-}
-
-
 @media print {
 
-  @mixin inside-shell {
-    width: 20cm;
+  %inside-shell-print {
     border: 0;
+    width: 20cm;
   }
 
   .shell {
-    @include inside-shell;
+    @extend %inside-shell-print;
   }
 
   .shell-thin {
-    @include inside-shell;
+    @extend %inside-shell-print;
     @include clearfix;
     margin: 0 0 2%;
     padding: 0;
   }
 
   .shell-1-25 {
-    @include inside-shell;
+    @extend %inside-shell-print;
     @include clearfix;
     margin: 0 0 2%;
     padding: 1% 4% 2%;
   }
 
   .shell-1-12 {
-    @include inside-shell;
+    @extend %inside-shell-print;
     @include clearfix;
     margin: 0 0 2%;
     padding: 2% 8.3333%;
   }
 
   .shell-1-6 {
-    @include inside-shell;
+    @extend %inside-shell-print;
     @include clearfix;
     margin: 0 0 2%;
     padding: 2% 16.6666%;
