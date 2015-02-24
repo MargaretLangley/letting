@@ -5,12 +5,12 @@
 
   http://www.webchief.co.uk/blog/simple-jquery-dropdown-menu/
 
-  <ul class='my-menu'>
-    <li>
-      <a href='#'>main menu item</a>
-      <ul>
-        <li><a href='?'>submenu item</a></li>
-        <li><a href='?'>submenu item</a></li>
+  <ul class='drop-down'>
+    <li class='drop-down-menu'>
+      <a class='drop-down-link' href='#'>main menu item</a>
+      <ul class='drop-down-sub-menu'>
+        <li class='drop-down-sub-menu'><a class='drop-down-link' href='?'>submenu item</a></li>
+        <li class='drop-down-sub-menu'><a class='drop-down-link' href='?'>submenu item</a></li>
       </ul>
     </li>
     <li>
@@ -24,58 +24,47 @@
 @import 'tools.mixins';
 
 // To keep the menu at the same y origin as the heading search control
-.my-menu-wrapper {
+.drop-down {
   @include clearfix;
   border-top: 3px solid $primary-background;
 }
 
 // menu list item
-.my-menu li {
+.drop-down-menu {
   float: right;
   list-style: none;
   margin-right: .3em;
+}
 
-  a {
-    @include menu-style (15%, 25%);
-    &:link,
-    &:visited {
-      background-color: $fieldset;
-      color: $secondary-background;
-      display: block;
-      padding: .5em 2em;
-      text-decoration: none;
-    }
+.drop-down-link {
+  border: 1px solid darken($drop-down-link-background, 15%);
+  border-radius: 5px;
+  padding: .5em 2em;
 
-    &:hover,
-    &:active {
-      @include menu-style(0%, 5%);
-    }
+  &:link,
+  &:visited {
+    background-color: $drop-down-link-background;
+    color: $drop-down-link-color;
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $drop-down-link-active-background;
+    color: $drop-down-link-active-color;
   }
 }
 
 // sub menu wrapper
-ul .my-sub-menu {
-  border-top: 1px solid white;
+.drop-down-sub-menu {
+  border-top: 0;
   height: 1em;
-  margin: 0;
-  padding: 0;
   position: absolute;
   visibility: hidden;
 }
 
 // sub menu item
-.my-sub-menu li {
+.drop-down-sub-menu-item {
   display: inline;
   float: none;
-  margin: 0;
-  padding: 0;
-
-  a {
-    &:link,
-    &:visited {
-      width: auto;
-    }
-  }
 }
-
-

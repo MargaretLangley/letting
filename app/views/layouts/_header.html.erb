@@ -17,23 +17,23 @@
     </div>
 
     <nav class='col-8-24  r-align  no-r-pad'>
-      <div class='my-menu-wrapper  clearfix'>
-        <ul class='my-menu'>
+      <div class='drop-down'>
+        <ul>
           <% if current_user %>
-            <li>
-              <%= link_to fa_icon('print lg', text: 'Print'), '#', class: 'js-print' %>
+            <li class='drop-down-menu'>
+              <%= link_to fa_icon('print lg', text: 'Print'), '#', class: 'drop-down-link  js-print' %>
             </li>
-            <li>
-              <%= link_to fa_icon('user lg', text: current_user.nickname, title: 'User'), '#' %>
-              <ul class='my-sub-menu'>
-                <li>
-                  <%= link_to fa_icon('sign-out  lg', text: 'logout'), logout_path %>
+            <li class='drop-down-menu'>
+              <%= link_to fa_icon('user lg', text: current_user.nickname, title: 'User'), '#', class: 'drop-down-link' %>
+              <ul class='drop-down-sub-menu'>
+                <li class='drop-down-sub-menu-item'>
+                  <%= link_to fa_icon('sign-out  lg', text: 'logout'), logout_path, class: 'drop-down-link' %>
                 </li>
               </ul>
             </li>
           <% else %>
-            <li>
-               <%= link_to fa_icon('sign-in  lg', text: 'Log In'), logout_path, title: 'Log In' %>
+            <li class='drop-down-menu'>
+               <%= link_to fa_icon('sign-in  lg', text: 'Log In'), logout_path, title: 'Log In', class: 'drop-down-link' %>
             </li>
           <% end %>
         </ul>
