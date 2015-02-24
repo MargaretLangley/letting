@@ -16,6 +16,9 @@
 
   applies clearfix in an :after pseudo element. clearfix affects the NEXT floated
   element and not the element you have applied the clearfix to.
+
+  This is a mixin because extending code across different media queries is
+  complicated.
 */
 
 @mixin clearfix {
