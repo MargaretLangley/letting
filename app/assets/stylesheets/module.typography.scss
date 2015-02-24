@@ -8,9 +8,7 @@
 
 @import 'colors';
 
-.small-bottom {
-  margin-bottom: .2em;
-}
+// Text Alignment
 
 .r-align {
   text-align: right;
@@ -25,13 +23,27 @@
 }
 
 
+// Text coloring
+
 .normal-text {
   color: $primary-text;
 }
 
-// Charge using a special class to test for dormant charge has been faded.
-// The css 'faded' class is already used on the page for headings.
-
+// Fading text - without using common markup to aid testing
 .deemphasized {
   @extend .faded;
+}
+
+
+// Clipping text - hides the end of the line
+.line-clip {
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+
+// Headers - reduces bottom margin to fit more into page
+.small-bottom {
+  margin-bottom: .2em;
 }
