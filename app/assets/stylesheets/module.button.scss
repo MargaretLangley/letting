@@ -53,14 +53,14 @@
   .primary-button, .warn-button {
     @extend %base-button;
 
-    background: $primary-button-background;
-    color: $primary-button-color;
+    background: $primary-action-background;
+    color: $primary-action-color;
     padding: 1em;
 
     &:hover,
     &:active {
-      background: $primary-button-active-background;
-      color: $primary-button-active-color;
+      background: $primary-action-active-background;
+      color: $primary-action-active-color;
     }
   }
 }

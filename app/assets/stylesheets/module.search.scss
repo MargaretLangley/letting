@@ -21,7 +21,7 @@ $search-height: 35px;
 
 .search-box {
   @extend .width-5-6;
-  border: 1px solid darken($primary-button-background, 10%);
+  border: 1px solid darken($primary-action-background, 10%);
   border-radius: 5px 0 0 5px;
   border-right: 0;
   float: left;
@@ -31,8 +31,8 @@ $search-height: 35px;
 
 .search-button {
   @extend .width-1-6;
-  background-color: $primary-button-background;
-  border: 1px solid darken($primary-button-background, 10%);
+  background-color: $primary-action-background;
+  border: 1px solid darken($primary-action-background, 10%);
   border-radius: 0 5px 5px 0;
   color: white;
   float: left;
@@ -41,7 +41,7 @@ $search-height: 35px;
   text-transform: uppercase;
 
   &:hover {
-    background-color: darken($primary-button-background, 8%);
+    background-color: darken($primary-action-background, 8%);
   }
 }
 
