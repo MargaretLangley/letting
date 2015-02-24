@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('.tabs .tab-links a').on('click', function(event)  {
+  $('.tab-index-a').on('click', function(event)  {
     var currentAttrValue = $(this).attr('href');
 
     // Show/Hide Tabs
@@ -7,7 +7,7 @@ $(document).ready(function() {
     $('.tabs ' + currentAttrValue).fadeIn(400).siblings().hide();
 
     // Change/remove current tab to active
-    $(this).parent('li').addClass('js-active-tab').siblings().removeClass('js-active-tab');
+    $(this).parent('.tab-index-li').addClass('js-active-tab').siblings().removeClass('js-active-tab');
 
     event.preventDefault();
   });

@@ -1,22 +1,22 @@
 <% @title='View Invoicing' %>
 
 <div class='tabs'>
-  <ul class='tab-links'>
+  <ul class='tab-indexes'>
     <% @invoicing.runs.each_with_index do |run, index|  %>
       <% run_dec = RunDecorator.new run %>
-      <li class='<%= run_dec.style_activity %>'>
-        <%= link_to "Run #{run_dec.invoice_date}", "#tab#{index}" %>
+      <li class='tab-index-li  <%= run_dec.style_activity %>'>
+        <%= link_to "Run #{run_dec.invoice_date}", "#tab-content#{index}", class: 'tab-index-a  tab-index-a-default' %>
       </li>
     <% end %>
-    <li class='tab-links-warn'>
-      <%= add_link path: [:edit, @invoicing], title: '(Create Red Invoice)', css: 'warn-button' %>
+    <li class='tab-index-li'>
+      <%= add_link path: [:edit, @invoicing], title: '(Create Red Invoice)', css: 'tab-index-a  tab-index-a-warn' %>
     </li>
   </ul>
 
-  <div class='grid  shell  tab-content'>
+  <div class='grid  shell  tab-contents'>
     <% @invoicing.runs.each_with_index do |run, index|  %>
       <% run_dec = RunDecorator.new run %>
-      <div id='tab<%= index %>' class='tab <%= run_dec.style_activity %> '>
+      <div id='tab-content<%= index %>' class='tab-content <%= run_dec.style_activity %> '>
         <div class='panel  pick-out'>
           <h2>Invoicing</h2>
           <%= render 'invoicings/invoicing_header' %>

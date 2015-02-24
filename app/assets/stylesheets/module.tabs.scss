@@ -2,75 +2,119 @@
 
   $TABS
 
-  http://inspirationalpixels.com/tutorials/creating-tabs-with-html-css-and-jquery
+  Tab control is made of the following:
+
+  .tabs - tab component
+  .tab-indexes - collection of tab-index
+  .tab-index - is the tab notches
+  .tab-contents - collection of tab-content
+  .tab-content - panel where the tab's information can be found.
+
+  <div class='tabs'>
+    <ul class='tabs-indexes'>
+
+      <li class='tab-index-li'>
+        <a class="tab-index-a  tab-index-a-default" href="#tab-content0">tab header text 1</a>
+      </li>
+      <li class='tab-index-li  js-active-tab'>
+        <a class="tab-index-a  tab-index-a-default" href="#tab-content1">tab header text 2</a>
+      </li>
+      <li class='tab-index-li'>
+        <a class="tab-index-a  tab-index-a-warn" href="#tab-content3">tab header text 3</a>
+      </li>
+
+    </ul>
+
+    <div class='tab-contents'>
+
+      <div id='tab0' class='js-tab-content'>
+         Content 1 Here
+      </div>
+      <div id='tab2' class='js-tab-content  js-active-tab'>
+         Content 2 Here
+      </div>
+      <div id='tab3' class='js-tab-content'>
+         Content 3 Here
+      </div>
+
+    </div>
+  </div>
 
 \*-----------------------------------------------*/
-
 @import 'colors';
 @import 'tools.mixins';
 @import 'module.layout';
 
-/*----- Tabs -----*/
+// a tab component
 .tabs {
   display: inline-block;
   width: 100%;
 }
 
-/*----- Tab Links -----*/
-.tab-links {
+// a collection of tab-index
+.tab-indexes {
   @include clearfix;
-
-  li {
-    float: left;
-    list-style: none;
-    margin: 0 5px;
-  }
-
-  a {
-    @include menu-style(0%, 5%);
-    border-radius: 5px 5px 0 0;
-    display: inline-block;
-    padding: 9px 15px;
-    transition: all linear .15s;
-
-    &:hover {
-      background: $secondary-background;
-    }
-  }
 }
 
-/*TODO: refactor*/
+.tab-index-li {
+  float: left;
+  list-style: none;
+  margin: 0 5px;
+}
 
-.tab-links-warn a {
-  @include menu-style(0%, 5%);
+// tab-index-a structure
+.tab-index-a {
   border-radius: 5px 5px 0 0;
   display: inline-block;
   padding: 9px 15px;
   transition: all linear .15s;
+}
+
+// the style that gets applied when the tab becomes active
+.js-active-tab  .tab-index-a {
+  border: 1px solid darken($fieldset, 15%);
+  background-color: darken($fieldset, 25%);
+
+  &:hover,
+  &:active {
+    background-color: $secondary-background;
+    color: $secondary-color;
+  }
+}
+
+// tab-index-a skin
+.tab-index-a-default {
+  border: 1px solid darken($fieldset, 0);
+  background-color: darken($fieldset, 5%);
 
   &:hover {
-    background: lighten($color-amaranth, 10%);
-    color: white;
+    background: $secondary-background;
+    color: $secondary-color;
   }
 }
 
-.js-active-tab a,
-.js-active-tab a:hover {
-  @include menu-style(15%, 25%);
-}
+// tab-index-a skin
+.tab-index-a-warn {
+  border: 1px solid darken($primary-button-background, 0);
+  background-color: darken($primary-button-background, 5%);
+  color: $primary-button-color;
 
-.tab {
-  display: none;
-
-  &.js-active-tab {
-    display: block;
+  &:hover {
+    background: lighten($primary-button-background, 10%);
+    color: $primary-button-color;
   }
 }
+
+
+
+//
+// Tab content
+//
 
 @media screen {
 
-  // Also used on client payment's details which isn't tab-content
-  .tab-content {
+  // Wrapper around content panels
+  .tab-contents {
     @include clearfix;
     background-color: lighten($fieldset, 3%);
     border-radius: 5px;
@@ -80,10 +124,19 @@
 
 @media print {
 
-  .tab-content {
+  // Wrapper around content panels
+  .tab-contents {
     @include clearfix;
     background-color: white;
     border-radius: 5px;
-    padding: 15px;
+  }
+}
+
+// display of information associated with the tab
+.tab-content {
+  display: none;
+
+  &.js-active-tab {
+    display: block;
   }
 }
