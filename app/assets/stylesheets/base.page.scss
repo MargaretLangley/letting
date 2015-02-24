@@ -49,10 +49,6 @@ body {
 
 @media print {
 
-  body {
-    @include body-print;
-  }
-
   footer,
   header,
   nav {

@@ -1,13 +1,3 @@
-@mixin body-print {
-  background-color: $neutral-print;
-  color: $primary-text;
-  margin-left: .20cm;
-  margin-right: .20cm;
-  margin-top: 0;
-  width: 22cm;
-}
-
-
 /*
   A clearfix is a way for an element to automatically clear its child elements,
   so that you don't need to add additional markup. It's generally used in float
