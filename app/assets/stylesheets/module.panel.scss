@@ -14,3 +14,29 @@
   border-radius: 10px;
   padding: 1%;
 }
+
+
+//
+// Displaying content on the screen
+// Given lighter, or in the case of printing white background, to make
+// figures as clear as possible.
+//
+
+@media screen {
+
+  .content {
+    @include clearfix;
+    background-color: $neutral;
+    border-radius: 5px;
+    box-shadow: -1px 1px 1px rgba(0, 0, 0, .15);
+  }
+}
+
+@media print {
+
+  .content {
+    @include clearfix;
+    background-color: white;
+    border-radius: 5px;
+  }
+}
