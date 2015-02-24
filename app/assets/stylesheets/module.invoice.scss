@@ -88,12 +88,14 @@
 
 \*------------------------------------------------*/
 
-
-  // Do we need this as already applied to body?
   // This sets printed page to A4 width
 
-  .print-body {
-    @include body-print;
+  .print-set {
+    background-color: $neutral-print;
+    margin-left: .15cm;
+    margin-right: .15cm;
+    margin-top: 0;
+    width: 22cm;
   }
 
 /*------------------------------------------------*\

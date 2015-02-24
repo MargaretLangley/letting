@@ -1,5 +1,5 @@
 <% invoice_dec = InvoiceDecorator.new(invoice) %>
-<div class='print-body'>
+<div class='print-set'>
   <%= render 'invoice_texts/heading_page1', invoice_text_page1: invoice_dec.invoice_texts.first %>
 
   <div class='col-2-24  grid-row'>&nbsp;</div>
