@@ -72,8 +72,8 @@
 
 // the style that gets applied when the tab becomes active
 .js-active-tab  .tab-index-a {
-  border: 1px solid darken($fieldset, 15%);
   background-color: darken($fieldset, 25%);
+  border: 1px solid darken($fieldset, 15%);
 
   &:hover,
   &:active {
@@ -84,8 +84,8 @@
 
 // tab-index-a skin
 .tab-index-a-default {
-  border: 1px solid darken($fieldset, 0);
   background-color: darken($fieldset, 5%);
+  border: 1px solid darken($fieldset, 0);
 
   &:hover {
     background: $secondary-background;
@@ -95,8 +95,8 @@
 
 // tab-index-a skin
 .tab-index-a-warn {
-  border: 1px solid darken($primary-action-background, 0);
   background-color: darken($primary-action-background, 5%);
+  border: 1px solid darken($primary-action-background, 0);
   color: $primary-action-color;
 
   &:hover {
