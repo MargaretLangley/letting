@@ -84,8 +84,9 @@
 
 // tab-index-a skin
 .tab-index-a-default {
-  background-color: darken($fieldset, 5%);
-  border: 1px solid darken($fieldset, 0);
+  background-color: $fieldset;
+  border: 1px solid darken($fieldset, 5%);
+  border-bottom: 0;
 
   &:hover {
     background: $secondary-background;
@@ -127,7 +128,7 @@
   // Wrapper around content panels
   .tab-contents {
     @include clearfix;
-    background-color: white;
+    background-color: $neutral;
     border-radius: 5px;
   }
 }
