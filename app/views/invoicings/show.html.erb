@@ -17,7 +17,7 @@
     <% @invoicing.runs.each_with_index do |run, index|  %>
       <% run_dec = RunDecorator.new run %>
       <div id='tab-content<%= index %>' class='tab-content <%= run_dec.style_activity %> '>
-        <div class='panel  pick-out'>
+        <div class='panel'>
           <h2>Invoicing</h2>
           <%= render 'invoicings/invoicing_header' %>
           <%= render 'invoicing_to_view', invoicing: @invoicing, run: run %>

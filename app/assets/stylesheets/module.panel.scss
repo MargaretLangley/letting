@@ -8,9 +8,15 @@
 @import 'settings.colors';
 @import 'tools.mixins';
 
-
+//
+// panel
+//
+// Only used on invoicings-show - think concept could be used in application
+// more often
+//
 .panel {
   @include clearfix;
+  background-color: $pick-out;
   border: 1px darken($pick-out, 5%);
   border-radius: $border-radius;
   padding: 1%;

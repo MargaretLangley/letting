@@ -91,7 +91,7 @@
 // tab-index-a skin
 .tab-index-a-default {
   background-color: $fieldset;
-  border: 1px solid darken($fieldset, 5%);
+  border: 1px solid darken($fieldset, $border-color-darken);
   border-bottom: 0;
 
   &:hover {
@@ -102,8 +102,8 @@
 
 // tab-index-a skin
 .tab-index-a-warn {
-  background-color: darken($primary-action-background, 5%);
-  border: 1px solid darken($primary-action-background, 0);
+  background-color: $primary-action-background;
+  border: 1px solid darken($primary-action-background, $border-color-darken);
   color: $primary-action-color;
 
   &:hover {

@@ -14,7 +14,7 @@
 @media screen {
 
   %base-button {
-    border: 1px solid darken($button-border, 15%);
+    border: 1px solid darken($button-border, $border-color-darken);
     border-radius: $border-radius;
     box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
     display: inline-block;

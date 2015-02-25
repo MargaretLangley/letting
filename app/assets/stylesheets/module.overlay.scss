@@ -4,6 +4,7 @@
 
 \*--------------------------------------------------*/
 
+@import 'settings.globals';
 @import 'module.layout';
 
 .overlay-parent {
@@ -17,7 +18,7 @@
   margin-right: auto;
   margin-left: auto;
   width: 80%;
-  border: 1px solid lighten(rgb(184, 184, 184), 20%);
+  border: 1px solid darken(rgb(184, 184, 184), $border-color-darken);
   background-color: rgba(184, 184, 184, .85);
   color: $primary-text;
   font-size: 1.4em;
