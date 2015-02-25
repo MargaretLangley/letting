@@ -35,17 +35,6 @@ describe 'Property#create', type: :feature do
     expect_account property_ref: '278', client_ref: 8008, charge: charge
   end
 
-  it '#create has validation', js: true do
-    client_create human_ref: 8008
-
-    account.load
-    account.property self, property_id: '-278', client_id: 8008
-    account.button 'Create'
-
-    expect(account.title).to eq 'Letting - New Account'
-    expect(page).to have_css '[data-role="errors"]'
-  end
-
   it 'adds charges', js: true do
     account.load
     expect(page).to have_css('.spec-charge-count', count: 1)

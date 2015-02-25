@@ -31,10 +31,11 @@ describe 'Client#update', type: :feature do
       expect(client_page.town).to eq 'York'
     end
 
-    it 'has validation' do
+    it 'displays form errors' do
       client_page.fill_in_client_id(-1) # invalidate_page
       client_page.button 'Update'
-      expect(page).to have_text /The client could not be saved./i
+
+      expect(page).to have_css '[data-role="errors"]'
     end
 
     it 'adds a second entity', js: true do
