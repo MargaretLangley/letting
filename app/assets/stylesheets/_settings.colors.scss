@@ -70,7 +70,7 @@ $secondary-print-text:                $color-scorpion;          // Fairly Dark G
 
 $primary-action-background:           $color-amaranth;     // Pink
 $primary-action-color:                white;
-$primary-action-active-background:    $color-venice-blue;  // Blue
+$primary-action-active-background:    lighten($primary-action-background, 5%);  // Blue
 $primary-action-active-color:         white;
 
 

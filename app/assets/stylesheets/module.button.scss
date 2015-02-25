@@ -36,6 +36,20 @@
     }
   }
 
+  .icon-button-action {
+    @extend %base-button;
+
+    background: $primary-action-background;
+    color: $primary-action-color;
+    padding: .3em;
+
+    &:hover,
+    &:active {
+      background: $primary-action-active-background;
+      color: $primary-action-active-color;
+    }
+  }
+
   .icon-button[disabled] {
     @extend %base-button;
 

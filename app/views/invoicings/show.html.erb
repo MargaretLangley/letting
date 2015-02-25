@@ -27,7 +27,7 @@
         </div>
 
         <div class='col-4-24  inherit-row  top-1-line-spacer'>
-          <%= print_link text: 'Print Run', path: print_run_path(run), id: 'print-link', disabled: !run.deliverable?  %>
+          <%= print_link text: 'Print Run', path: print_run_path(run), id: 'print-link', css: 'icon-button-action', title: 'Print Run', disabled: !run.deliverable?  %>
         </div>
         <div class='col-4-24  top-1-line-spacer  t-run-delete-<%= index %> '>
           <% if index.nonzero? %>

@@ -19,7 +19,7 @@
      <div class='col-1-24  bottom-spacer'><%= print_link path: print_run_path(invoicing), title: 'Print Last Invoice', disabled: !invoicing.deliverable? %></div>
      <div class='col-1-24  bottom-spacer'>&nbsp;</div>
      <div class='col-1-24  bottom-spacer'>
-       <%= add_link path: [:edit, invoicing], title: 'Send New Invoice (Create Red Invoice)', css: 'warn-button' %>
+       <%= add_link path: [:edit, invoicing], title: 'Send New Invoice (Create Red Invoice)', css: 'icon-button-action' %>
      </div>
      <div class='col-1-24  bottom-spacer'>&nbsp;</div>
      <div class='col-1-24  bottom-spacer'><%= delete_link path: blue_invoicing_path(invoicing) %></div>
