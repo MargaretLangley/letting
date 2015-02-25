@@ -29,10 +29,10 @@ $color-venice-blue:        #0b4b7c;             // Darker Blue (variant)
 $color-azure:              #2e6aa0;             // Medium dark Blue
 
 $color-grey-alto:          #dcdcdc;             // Pale Grey Gainsbro
-$color-grey-3:             #aaa;                // Light Grey
-$color-grey-4:             #777;                // Mediumum Dark Grey
-$color-grey-5:             #5c5858;             // Fairly Dark Grey
-$color-grey-6:             #444;                // Very Dark Grey
+$color-silver-chalice:     #aaaaaa;             // Light Grey
+$color-boulder:            #777777;             // Mediumum Dark Grey
+$color-scorpion:           #5c5858;             // Fairly Dark Grey
+$color-tundora:            #444444;             // Very Dark Grey
 
 
 
@@ -58,12 +58,12 @@ $disabled-background:                 $color-grey-alto;        // Very Pale
 $fieldset:                            lighten($primary-background, 50%);  // Egg shell Blue
 $pick-out:                            darken($fieldset, 5%);   // Darker Egg shell Blue
 
-$shadow:                              $color-grey-3;           // box-shadows on all the controls
+$shadow:                              $color-silver-chalice;           // box-shadows on all the controls
 
 // $TYPOGRAPHY
-$primary-text:                        $color-grey-6;           // Very Dark
-$secondary-text:                      $color-grey-4;           // Mediumum Dark
-$secondary-print-text:                $color-grey-5;           // Fairly Dark Grey dolphin
+$primary-text:                        $color-tundora;           // Very Dark
+$secondary-text:                      $color-boulder;           // Mediumum Dark
+$secondary-print-text:                $color-scorpion;          // Fairly Dark Grey dolphin
 
 
 // Primary action colors
