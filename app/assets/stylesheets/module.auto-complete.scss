@@ -5,11 +5,12 @@
 
 \*--------------------------------------------------*/
 
+@import 'settings.globals';
 @import 'settings.colors';
 
 .ui-menu .ui-menu-item a {
   background-color: $neutral;
   border: 1px solid darken($neutral, 5%);
-  border-radius: 5px;
+  border-radius: $border-radius;
   color: $primary-text;
 }

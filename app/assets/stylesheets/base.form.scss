@@ -4,12 +4,13 @@
 
 \*---------------------------------------------------*/
 
+@import 'settings.globals';
 @import 'settings.colors';
 
 input,
 textarea {
   border: 1px solid $muted-border;
-  border-radius: 5px;
+  border-radius: $border-radius;
   outline: none;
   width: 95%;
 }

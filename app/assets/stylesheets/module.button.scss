@@ -15,7 +15,7 @@
 
   %base-button {
     border: 1px solid darken($button-border, 15%);
-    border-radius: 5px;
+    border-radius: $border-radius;
     box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
     display: inline-block;
     font-size: 1em;

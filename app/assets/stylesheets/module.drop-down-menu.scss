@@ -20,6 +20,7 @@
 
 \*-----------------------------------------------*/
 
+@import 'settings.globals';
 @import 'settings.colors';
 @import 'tools.mixins';
 
@@ -38,7 +39,7 @@
 
 .drop-down-link {
   border: 1px solid darken($drop-down-link-background, 15%);
-  border-radius: 5px;
+  border-radius: $border-radius;
   padding: .5em 2em;
 
   &:link,
