@@ -24,15 +24,13 @@
 $color-alabaster:          #f8f8f8;             // off-white
 $color-cream:              #ffc;                // ffffcc Cream
 
+
 // Pallet Colors
 $color-mariner:            #237bbe;             // Blue
 $color-broom:              #ffed20;             // Washed Yellow
 $color-amaranth:           #ea1e63;             // Pink (washed)
 $color-venice-blue:        #0b4b7c;             // Darker Blue (variant)
-$color-azure:              #2e6aa0;             // Medium dark Blue
-
-// Process these colors into pallet
-// Currently none!
+$color-azure:              #2e6aa0;             // Medium Dark Blue
 
 
 // Greys
@@ -42,6 +40,14 @@ $color-boulder:            #777;                // Mediumum Dark Grey
 $color-tundora:            #444;                // Very Dark Grey
 
 
+// Process these colors into pallet
+// Currently none!
+
+$color-link-water:         #e6f1fa;             // Very Light Blue
+$color-cornflower:         #a5cfee;             // Light to Medium Blue
+// Flash Colors
+$color-snowy-mint:        #dbffdd;               // Pale Green
+$color-pippin:            #ffe1de;               // Pink
 
 /*---------------------------------------------------*\
 
@@ -54,18 +60,18 @@ $color-tundora:            #444;                // Very Dark Grey
 // $base
 $neutral:                             $color-alabaster;        // off white
 
-$primary-background:                  $color-mariner;          // Light blue
+$primary-background:                  $color-mariner;          // Light Blue
 /* used as text color and hover background in menu */
-$secondary-background:                $color-venice-blue;      // Darker blue
+$secondary-background:                $color-venice-blue;      // Darker Blue
 $secondary-color:                     white;
 
-$muted-border:                        $color-grey-alto;        // Very Pale
-$disabled-background:                 $color-grey-alto;        // Very Pale
+$muted-border:                        $color-grey-alto;        // Very Pale Grey
+$disabled-background:                 $color-grey-alto;        // Very Pale Grey
 
 $fieldset:                            lighten($primary-background, 50%);  // Egg shell Blue
 $pick-out:                            darken($fieldset, 5%);   // Darker Egg shell Blue
 
-$shadow:                              $color-silver-chalice;           // box-shadows on all the controls
+$shadow:                              $color-silver-chalice;   // box-shadows on all the controls
 
 // $TYPOGRAPHY
 $primary-text:                        $color-tundora;           // Very Dark
@@ -74,7 +80,7 @@ $secondary-text:                      $color-boulder;           // Mediumum Dark
 
 // Primary action colors
 
-$primary-action-background:           $color-amaranth;     // Pink
+$primary-action-background:           $color-amaranth;           // Pink
 $primary-action-color:                white;
 $primary-action-active-background:    lighten($primary-action-background, 5%);  // Blue
 $primary-action-active-color:         white;
@@ -87,14 +93,13 @@ $basic-link-active-background:        $secondary-background;    // Blue
 $basic-link-active-color:             white;
 
 
-
-// $plain-link-background:            initial;               // Could not get this to work.
-$plain-link-color:                    $color-venice-blue;    // Blue
-$plain-link-active-background:        $color-venice-blue;    // Blue
+// $plain-link-background:            initial;                  // Could not get this to work.
+$plain-link-color:                    $color-venice-blue;       // Blue
+$plain-link-active-background:        $color-venice-blue;       // Blue
 $plain-link-active-color:             white;
 
 
-// $inverted-link-background:         initial;               // Could not get this to work.
+// $inverted-link-background:         initial;                  // Could not get this to work.
 $inverted-link-color:                 white;
 $inverted-link-active-background:     initial;
 $inverted-link-active-color:          white;
@@ -108,13 +113,12 @@ $drop-down-link-active-color:         $fieldset;
 
 
 // $MENU
-$menu-background:                     #e6f1fa;               // Very light blue
-$menu-border-left:                    $color-amaranth;       // pink
-$menu-border-bottom:                  $color-azure;          // Medium dark Blue
-$menu-color:                          $color-venice-blue;    // Darker blue
-$menu-links-background:               #a5cfee;               // light to medium blue
-$menu-item-color:                     $color-azure;          // Medium dark Blue
-
+$menu-background:                     $color-link-water;        // Very Light Blue
+$menu-border-left:                    $color-amaranth;          // Pink
+$menu-border-bottom:                  $color-azure;             // Medium Dark Blue
+$menu-color:                          $color-venice-blue;       // Darker blue
+$menu-links-background:               $color-cornflower;        // Light to Medium Blue
+$menu-item-color:                     $color-azure;             // Medium Dark Blue
 
 
 // $BUTTONS
@@ -127,20 +131,20 @@ $icon-button-active-color:            white;
 
 // Plain Disabled
 // No 'active/hover' changes
-$icon-button-disabled-background:     $disabled-background;   // grey
+$icon-button-disabled-background:     $disabled-background;     // Grey
 $icon-button-disabled-color:          white;
 
-$button-border:                       $color-broom;           // Yellow
 
+$button-border:                       $color-broom;             // Yellow
 
 // $ERROR
-$errors-background:                   $color-cream;           // ffffcc Cream
+$errors-background:                   $color-cream;              // ffffcc Cream
 $warn:                                $color-amaranth;           // Red
 
 // $FLASH
-$flash-notice:                        #dbffdd;                // Pale Green :good
-$flash-alert:                         $color-broom;           // Yellow     :netural
-$flash-error:                         #ffe1de;                // Pink       :bad
+$flash-notice:                        $color-snowy-mint;         // Pale Green :good
+$flash-alert:                         $color-broom;              // Yellow     :netural
+$flash-error:                         $color-pippin;             // Pink       :bad
 $flash-opacity:                       .85;
 
 // $Debug
