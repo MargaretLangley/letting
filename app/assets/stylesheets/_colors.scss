@@ -16,9 +16,11 @@
   Chose triad and added darker variant .... maybe should calculate it?
 
   Color naming hexidecimal from:
-  http://chir.ag/projects/name-that-color/#237BBE
+  http://chir.ag/projects/name-that-color/
 
 \*----------------------------------------------------*/
+
+$color-alabaster:          #f8f8f8;             // off-white
 
 $color-mariner:            #237bbe;             // Blue
 $color-broom:              #ffed20;             // Washed Yellow
@@ -26,12 +28,14 @@ $color-amaranth:           #ea1e63;             // Pink (washed)
 $color-venice-blue:        #0b4b7c;             // Darker Blue (variant)
 $color-azure:              #2e6aa0;             // Medium dark Blue
 
-$color-grey-1:             #ddd;                // Very Pale Grey
-$color-grey-2:             #dcdcdc;             // Pale Grey Gainsbro
+$color-grey-alto:          #dcdcdc;             // Pale Grey Gainsbro
 $color-grey-3:             #aaa;                // Light Grey
 $color-grey-4:             #777;                // Mediumum Dark Grey
 $color-grey-5:             #5c5858;             // Fairly Dark Grey
 $color-grey-6:             #444;                // Very Dark Grey
+
+
+
 /*---------------------------------------------------*\
 
   $COLORVARIABLES
@@ -41,69 +45,69 @@ $color-grey-6:             #444;                // Very Dark Grey
 \*----------------------------------------------------*/
 
 // $base
-$neutral:                  #f8f8f8;             // off white
+$neutral:                             $color-alabaster;        // off white
 
-$primary-background:       $color-mariner;            // Light blue
+$primary-background:                  $color-mariner;          // Light blue
 /* used as text color and hover background in menu */
-$secondary-background:     $color-venice-blue;            // Darker blue
-$secondary-color:          white;
+$secondary-background:                $color-venice-blue;      // Darker blue
+$secondary-color:                     white;
 
-$muted-border:             $color-grey-1;       // Very Pale Grey
-$disabled-background:      $color-grey-2;       // dcdcdc Grey
+$muted-border:                        $color-grey-alto;        // Very Pale
+$disabled-background:                 $color-grey-alto;        // Very Pale
 
-$fieldset:                 lighten($primary-background, 50%); // Egg shell Blue
-$pick-out:                 darken($fieldset, 5%);             // Darker Egg shell Blue
+$fieldset:                            lighten($primary-background, 50%);  // Egg shell Blue
+$pick-out:                            darken($fieldset, 5%);   // Darker Egg shell Blue
 
-$shadow:                   $color-grey-3;       // box-shadows on all the controls
+$shadow:                              $color-grey-3;           // box-shadows on all the controls
 
 // $TYPOGRAPHY
-$primary-text:             $color-grey-6;       // Very Dark Grey
-$secondary-text:           $color-grey-4;       // Mediumum Dark Grey
-$secondary-print-text:     $color-grey-5;       // Fairly Dark Grey dolphin
+$primary-text:                        $color-grey-6;           // Very Dark Grey
+$secondary-text:                      $color-grey-4;           // Mediumum Dark Grey
+$secondary-print-text:                $color-grey-5;           // Fairly Dark Grey dolphin
 
 
 // Primary action colors
 
-$primary-action-background:            $color-amaranth;     // Pink
-$primary-action-color:                 white;
-$primary-action-active-background:     $color-venice-blue;  // Blue
-$primary-action-active-color:          white;
+$primary-action-background:           $color-amaranth;     // Pink
+$primary-action-color:                white;
+$primary-action-active-background:    $color-venice-blue;  // Blue
+$primary-action-active-color:         white;
 
 
 // $LINKS
 
-$basic-link-color:                   $secondary-background;    // Blue
-$basic-link-active-background:       $secondary-background;    // Blue
-$basic-link-active-color:            white;
+$basic-link-color:                    $secondary-background;    // Blue
+$basic-link-active-background:        $secondary-background;    // Blue
+$basic-link-active-color:             white;
 
 
 
-// $plain-link-background:           initial;  // Could not get this to work.
-$plain-link-color:                   $color-venice-blue;    // Blue
-$plain-link-active-background:       $color-venice-blue;    // Blue
-$plain-link-active-color:            white;
+// $plain-link-background:            initial;               // Could not get this to work.
+$plain-link-color:                    $color-venice-blue;    // Blue
+$plain-link-active-background:        $color-venice-blue;    // Blue
+$plain-link-active-color:             white;
 
 
-// $inverted-link-background:           initial;  // Could not get this to work.
-$inverted-link-color:                   white;
-$inverted-link-active-background:       initial;    // Blue
-$inverted-link-active-color:            white;
+// $inverted-link-background:         initial;               // Could not get this to work.
+$inverted-link-color:                 white;
+$inverted-link-active-background:     initial;
+$inverted-link-active-color:          white;
 
 
 // $Drop Down Menu
-$drop-down-link-background:                 $fieldset;
-$drop-down-link-color:                      $secondary-background;
-$drop-down-link-active-background:          $secondary-background;
-$drop-down-link-active-color:               $fieldset;
+$drop-down-link-background:           $fieldset;
+$drop-down-link-color:                $secondary-background;
+$drop-down-link-active-background:    $secondary-background;
+$drop-down-link-active-color:         $fieldset;
 
 
 // $MENU
-$menu-background:           #e6f1fa;            // Very light blue
-$menu-border-left:          $color-amaranth;            // pink
-$menu-border-bottom:        $color-azure;           // Medium dark Blue
-$menu-color:                $color-venice-blue;           // Darker blue
-$menu-links-background:     #a5cfee;            // light to medium blue
-$menu-item-color:           $color-azure;            // Medium dark Blue
+$menu-background:                     #e6f1fa;               // Very light blue
+$menu-border-left:                    $color-amaranth;       // pink
+$menu-border-bottom:                  $color-azure;          // Medium dark Blue
+$menu-color:                          $color-venice-blue;    // Darker blue
+$menu-links-background:               #a5cfee;               // light to medium blue
+$menu-item-color:                     $color-azure;          // Medium dark Blue
 
 
 
@@ -111,8 +115,8 @@ $menu-item-color:           $color-azure;            // Medium dark Blue
 
 // Plain
 $icon-button-background:              white;
-$icon-button-color:                   $color-venice-blue;        // Blue
-$icon-button-active-background:       $color-venice-blue;  // Blue
+$icon-button-color:                   $color-venice-blue;
+$icon-button-active-background:       $color-venice-blue;
 $icon-button-active-color:            white;
 
 // Plain Disabled
@@ -120,26 +124,18 @@ $icon-button-active-color:            white;
 $icon-button-disabled-background:     $disabled-background;   // grey
 $icon-button-disabled-color:          white;
 
-$button-border:                        $color-broom;            // Yellow
-
-
-
-
+$button-border:                       $color-broom;           // Yellow
 
 
 // $ERROR
-$errors-background:        #ffc;                // Yellow
-$warn:                     #dc3d3d;             // Red
-
-//  :notice things are GOOD,    colour: green
-//  :alert  things are NEUTRAL, colour: yellow.
-//  :error  things are BAD,     colour: red.
+$errors-background:                   #ffc;                   // Yellow
+$warn:                                #dc3d3d;                // Red
 
 // $FLASH
-$flash-notice:             #dbffdd;             // Pale Green
-$flash-alert:              $color-broom;            // Yellow
-$flash-error:              #ffe1de;             // Pink
-$flash-opacity:            .85;
+$flash-notice:                        #dbffdd;                // Pale Green :good
+$flash-alert:                         $color-broom;           // Yellow     :netural
+$flash-error:                         #ffe1de;                // Pink       :bad
+$flash-opacity:                       .85;
 
 @mixin inverted-color {
   color: $neutral;

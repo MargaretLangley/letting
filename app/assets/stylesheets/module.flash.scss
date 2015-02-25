@@ -2,6 +2,10 @@
 
   $FLASH
 
+  :notice things are GOOD,    colour: green
+  :alert  things are NEUTRAL, colour: yellow.
+  :error  things are BAD,     colour: red.
+
 \*--------------------------------------------------*/
 
 @import 'module.layout';
@@ -20,22 +24,20 @@
     z-index: 10;   /*cannot think why flash shouldn't be on the top*/
   }
 
-  /*
-    :notice things are GOOD,    colour: green
-    :alert  things are NEUTRAL, colour: yellow.
-    :error  things are BAD,     colour: red.
-  */
+  // notice things are GOOD,    colour: green
 
   @mixin notice {
     border: 1px solid lighten($flash-notice, 20%);
     background-color: rgba($flash-notice, $flash-opacity);
   }
 
+  // alert  things are NEUTRAL, colour: yellow.
   @mixin alert {
     border: 1px solid lighten($flash-alert, 20%);
     background-color: rgba($flash-alert, $flash-opacity);
   }
 
+  // :error  things are BAD,     colour: red.
   @mixin error {
     border: 1px solid lighten($flash-error, 20%);
     background-color: rgba($flash-error, $flash-opacity);
