@@ -7,5 +7,5 @@
 ####
 #
 module VersionHelper
-  VERSION = '0.0.55.staging-only'
+  VERSION = '0.0.56'
 end

@@ -8,94 +8,56 @@
 @import 'settings.colors';
 @import 'tools.mixins';
 
-@media screen {
 
-  %inside-shell-screen {
+%inside-shell-screen {
+  @media screen {
     background-color: $fieldset;
     border: 1px solid lighten($fieldset, 20%);
     border-radius: 12px;
     box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
-   }
-
-  .shell {
-    @extend %inside-shell-screen;
-    @include clearfix;
-    margin: 0 0 2%;
-    padding: 1%;
-
-    .error-shell {
-      background-color: $errors-background;
-    }
   }
 
-  .shell-thin {
-    @extend %inside-shell-screen;
-    @include clearfix;
-    margin: 0 0 2%;
-    padding: 0;
-  }
-
-  .shell-1-25 {
-    @extend %inside-shell-screen;
-    @include clearfix;
-    margin: 0 0 2%;
-    padding: 1% 4% 2%;
-  }
-
-  .shell-1-12 {
-    @extend %inside-shell-screen;
-    @include clearfix;
-    margin: 0 0 2%;
-    padding: 2% 8.3333%;
-  }
-
-  .shell-1-6 {
-    @extend %inside-shell-screen;
-    @include clearfix;
-    margin: 0 0 2%;
-    padding: 2% 16.6666%;
-  }
-
-}
-
-
-@media print {
-
-  %inside-shell-print {
+  @media print {
     border: 0;
     width: 20cm;
   }
+}
 
-  .shell {
-    @extend %inside-shell-print;
+.shell {
+  @extend %inside-shell-screen;
+  @include clearfix;
+  margin: 0 0 2%;
+  padding: 1%;
+
+  .error-shell {
+    background-color: $errors-background;
   }
+}
 
-  .shell-thin {
-    @extend %inside-shell-print;
-    @include clearfix;
-    margin: 0 0 2%;
-    padding: 0;
-  }
+.shell-thin {
+  @extend %inside-shell-screen;
+  @include clearfix;
+  margin: 0 0 2%;
+  padding: 0;
+}
 
-  .shell-1-25 {
-    @extend %inside-shell-print;
-    @include clearfix;
-    margin: 0 0 2%;
-    padding: 1% 4% 2%;
-  }
+.shell-1-25 {
+  @extend %inside-shell-screen;
+  @include clearfix;
+  margin: 0 0 2%;
+  padding: 1% 4% 2%;
+}
 
-  .shell-1-12 {
-    @extend %inside-shell-print;
-    @include clearfix;
-    margin: 0 0 2%;
-    padding: 2% 8.3333%;
-  }
+.shell-1-12 {
+  @extend %inside-shell-screen;
+  @include clearfix;
+  margin: 0 0 2%;
+  padding: 2% 8.3333%;
+}
 
-  .shell-1-6 {
-    @extend %inside-shell-print;
-    @include clearfix;
-    margin: 0 0 2%;
-    padding: 2% 16.6666%;
-  }
-
+.shell-1-6 {
+  @extend %inside-shell-screen;
+  @include clearfix;
+  margin: 0 0 2%;
+  padding: 2% 16.6666%;
 }
