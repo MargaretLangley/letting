@@ -44,11 +44,6 @@
   padding: 0 0 1em;
 }
 
-/* To change heading color for printing change
-   $secondary-print-text in _colors.scss.
-   faded holds the switch. grid-header uses faded
-   extended. */
-
 .grid-header {
   @extend .faded;
   border-bottom: 1px solid $muted-border;
