@@ -94,7 +94,7 @@ Accordion HTML
   &:hover {
     background: $secondary-background;
     border-left: 5px solid $menu-border-left;
-    color: $neutral-print;
+    color: $neutral;
   }
 }
 
@@ -104,7 +104,7 @@ Accordion HTML
 .active-item .menu-item {
   background: $secondary-background;
   border-left: 5px solid $menu-border-left;
-  color: $neutral-print;
+  color: $neutral;
 }
 
 .icon-spacer {
