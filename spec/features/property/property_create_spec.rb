@@ -41,8 +41,9 @@ describe 'Property#create', type: :feature do
     account.load
     account.property self, property_id: '-278', client_id: 8008
     account.button 'Create'
+
     expect(account.title).to eq 'Letting - New Account'
-    expect(page).to have_text 'The property could not be saved.'
+    expect(page).to have_css '[data-role="errors"]'
   end
 
   it 'adds charges', js: true do

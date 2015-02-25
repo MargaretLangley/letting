@@ -1,7 +1,7 @@
 <% if object.errors.any? %>
-  <section class='error-shell' data-role='errors'>
+  <section class='shell  shell-error' data-role='errors'>
     <h2 class='warn'>
-      Oops Invalid! The <%= object.class.model_name.human.downcase %> could not be saved.
+      Oh dear, the <%= object.class.model_name.human.downcase %> could not be saved.
     </h2>
     <h3>
       Please correct the following <%= pluralize(object.errors.count, "error") %>:
