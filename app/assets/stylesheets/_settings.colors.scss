@@ -20,18 +20,25 @@
 
 \*----------------------------------------------------*/
 
+// Whites
 $color-alabaster:          #f8f8f8;             // off-white
+$color-cream:              #ffc;                // ffffcc Cream
 
+// Pallet Colors
 $color-mariner:            #237bbe;             // Blue
 $color-broom:              #ffed20;             // Washed Yellow
 $color-amaranth:           #ea1e63;             // Pink (washed)
 $color-venice-blue:        #0b4b7c;             // Darker Blue (variant)
 $color-azure:              #2e6aa0;             // Medium dark Blue
 
+// Process these colors into pallet
+$color-punch:              #dc3d3d;             // Red
+
+
+// Greys
 $color-grey-alto:          #dcdcdc;             // Pale Grey Gainsbro
 $color-silver-chalice:     #aaa;                // Light Grey
 $color-boulder:            #777;                // Mediumum Dark Grey
-$color-scorpion:           #5c5858;             // Fairly Dark Grey
 $color-tundora:            #444;                // Very Dark Grey
 
 
@@ -63,7 +70,6 @@ $shadow:                              $color-silver-chalice;           // box-sh
 // $TYPOGRAPHY
 $primary-text:                        $color-tundora;           // Very Dark
 $secondary-text:                      $color-boulder;           // Mediumum Dark
-$secondary-print-text:                $color-scorpion;          // Fairly Dark Grey dolphin
 
 
 // Primary action colors
@@ -128,8 +134,8 @@ $button-border:                       $color-broom;           // Yellow
 
 
 // $ERROR
-$errors-background:                   #ffc;                   // Yellow
-$warn:                                #dc3d3d;                // Red
+$errors-background:                   $color-cream;           // ffffcc Cream
+$warn:                                $color-punch;           // Red
 
 // $FLASH
 $flash-notice:                        #dbffdd;                // Pale Green :good
@@ -150,13 +156,7 @@ $color-debug:                         black;
   @include inverted-color;
 }
 
-/* faded holds the switch for printing.
-   To change heading color for printing change
-   $secondary-print-text in _colors.scss.  */
-
+// Used in forms
 .faded {
   color: $secondary-text;
-  @media print {
-    color: $secondary-print-text;
-  }
 }
