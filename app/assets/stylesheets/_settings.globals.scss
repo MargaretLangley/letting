@@ -1,0 +1,18 @@
+//
+// Global variables required throughout the application
+//
+//
+// none-zero requires px, without which all the shadows disappear without warning
+// scss-lint:disable ZeroUnit
+
+//
+// box-shadow variables
+//
+
+$shadow-offset-x:    0px;
+$shadow-offset-y:    0px;
+$shadow-blur:        8px;
+$shadow-spread:      0px;
+
+
+$shadow-blur-content:    2px;

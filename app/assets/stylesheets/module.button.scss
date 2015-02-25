@@ -8,6 +8,7 @@
 
 \*--------------------------------------------------------------------*/
 
+@import 'settings.globals';
 @import 'settings.colors';
 
 @media screen {
@@ -15,7 +16,7 @@
   %base-button {
     border: 1px solid darken($button-border, 15%);
     border-radius: 5px;
-    box-shadow: $shadow 0 0 4px;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
     display: inline-block;
     font-size: 1em;
     margin: 0;

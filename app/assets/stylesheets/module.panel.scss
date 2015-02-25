@@ -4,6 +4,7 @@
 
 \*--------------------------------------------------*/
 
+@import 'settings.globals';
 @import 'settings.colors';
 @import 'tools.mixins';
 
@@ -22,21 +23,12 @@
 // figures as clear as possible.
 //
 
-@media screen {
+.content {
+  @include clearfix;
+  background-color: $neutral;
+  border-radius: 5px;
 
-  .content {
-    @include clearfix;
-    background-color: $neutral;
-    border-radius: 5px;
-    box-shadow: -1px 1px 1px rgba(0, 0, 0, .15);
-  }
-}
-
-@media print {
-
-  .content {
-    @include clearfix;
-    background-color: $neutral;
-    border-radius: 5px;
+  @media screen {
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur-content $shadow-spread $shadow;
   }
 }

@@ -8,13 +8,14 @@
 
 \*--------------------------------------------------*/
 
+@import 'settings.globals';
 @import 'module.layout';
 
 @media screen {
 
   .flash {
     border-radius: 12px;
-    box-shadow: $shadow 0 0 8px;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
     cursor: pointer;
     margin: 0 20%;
     padding: 1.5% 2%;

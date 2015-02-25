@@ -41,15 +41,21 @@
   </div>
 
 \*-----------------------------------------------*/
+@import 'settings.globals';
 @import 'settings.colors';
 @import 'tools.mixins';
 @import 'module.layout';
+
 
 // a tab component
 .tabs {
   display: inline-block;
   width: 100%;
 }
+
+//
+// Tab index
+//
 
 // a collection of tab-index
 .tab-indexes {
@@ -107,29 +113,18 @@
 }
 
 
-
 //
 // Tab content
 //
 
-@media screen {
+// Wrapper around content panels
+.tab-contents {
+  @include clearfix;
+  background-color: lighten($fieldset, 3%);
+  border-radius: 5px;
 
-  // Wrapper around content panels
-  .tab-contents {
-    @include clearfix;
-    background-color: lighten($fieldset, 3%);
-    border-radius: 5px;
-    box-shadow: -1px 1px 1px rgba(0, 0, 0, .15);
-  }
-}
-
-@media print {
-
-  // Wrapper around content panels
-  .tab-contents {
-    @include clearfix;
-    background-color: $neutral;
-    border-radius: 5px;
+  @media screen {
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
   }
 }
 

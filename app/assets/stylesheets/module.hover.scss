@@ -12,22 +12,15 @@
  */
 /* 2D TRANSITIONS */
 
-
-@media print {
-
-  .hvr-grow,
-  .hvr-sink,
-  .hvr-float {
-    display: none;
-  }
-}
+@import 'settings.globals';
+@import 'settings.colors';
 
 @media screen {
 
   /* Grow */
   .hvr-grow {
     backface-visibility: hidden;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
     display: inline-block;
     -moz-osx-font-smoothing: grayscale;
     transform: translateZ(0);
@@ -43,7 +36,7 @@
   /* Float */
   .hvr-float {
     backface-visibility: hidden;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
     display: inline-block;
     -moz-osx-font-smoothing: grayscale;
     transform: translateZ(0);
@@ -60,7 +53,7 @@
   /* Sink */
   .hvr-sink {
     backface-visibility: hidden;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
     display: inline-block;
     -moz-osx-font-smoothing: grayscale;
     transform: translateZ(0);
@@ -72,5 +65,14 @@
 
   .hvr-sink:hover {
     transform: translateY(6px);
+  }
+}
+
+@media print {
+
+  .hvr-grow,
+  .hvr-sink,
+  .hvr-float {
+    display: none;
   }
 }
