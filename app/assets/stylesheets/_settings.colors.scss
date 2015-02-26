@@ -124,15 +124,15 @@ $menu-item-color:                     $color-azure;             // Medium Dark B
 // $BUTTONS
 
 // Plain
-$icon-button-background:              white;
-$icon-button-color:                   $color-venice-blue;
-$icon-button-active-background:       $color-venice-blue;
-$icon-button-active-color:            white;
+$button-icon-background:              white;
+$button-icon-color:                   $color-venice-blue;
+$button-icon-active-background:       $color-venice-blue;
+$button-icon-active-color:            white;
 
 // Plain Disabled
 // No 'active/hover' changes
-$icon-button-disabled-background:     $disabled-background;     // Grey
-$icon-button-disabled-color:          white;
+$button-icon-disabled-background:     $disabled-background;     // Grey
+$button-icon-disabled-color:          white;
 
 
 $button-border:                       $color-broom;             // Yellow

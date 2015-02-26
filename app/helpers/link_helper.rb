@@ -26,7 +26,7 @@ module LinkHelper
   end
 
   def add_link(icon: 'plus-circle', size: 'lg', path: '#', css: '', js_css: '', title:)
-    app_link icon: icon, size: size, path: path, css: "icon-button  #{css}", js_css: js_css, title: title
+    app_link icon: icon, size: size, path: path, css: "button-icon  #{css}", js_css: js_css, title: title
   end
 
   def delete_charge js_css:, title: 'Delete Charge'
@@ -47,7 +47,7 @@ module LinkHelper
              text: text,
              id: id,
              path: path,
-             css: "icon-button  #{css}",
+             css: "button-icon  #{css}",
              js_css: js_css,
              method: method,
              data: data ? { confirm: confirm } : nil,
@@ -61,7 +61,7 @@ module LinkHelper
     app_link icon: 'gbp', path: path, title: 'Add New Payment'
   end
 
-  def print_link text: '', id: nil, path:, css: 'icon-button', title: 'Print', disabled: false
+  def print_link text: '', id: nil, path:, css: 'button-icon', title: 'Print', disabled: false
     app_link icon: 'print',
              id: id,
              text: text,
@@ -110,7 +110,7 @@ module LinkHelper
                direction: false,
                path: '#',
                id: nil,
-               css: 'icon-button',
+               css: 'button-icon',
                js_css: '',
                data: nil,
                method: nil,
