@@ -8,6 +8,6 @@
 #
 module PaymentHelper
   def payment_date(date:)
-    params[:date] == date.to_s  ? 'pick-out  normal-text' : ''
+    params[:date] == date.to_s  ? 'pick-out  text-normal' : ''
   end
 end
