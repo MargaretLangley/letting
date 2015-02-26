@@ -14,9 +14,8 @@
 @media screen {
 
   %base-button {
-    border: 1px solid darken($button-border, $border-color-darken);
     border-radius: $border-radius;
-    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-button-blur $shadow-spread $shadow;
     display: inline-block;
     font-size: 1em;
     margin: 0;
@@ -26,6 +25,7 @@
     @extend %base-button;
 
     background: $button-icon-background;
+    border: 1px solid darken($button-icon-background, $border-color-darken);
     color: $button-icon-color;
     padding: .2em;
 
@@ -40,6 +40,7 @@
     @extend %base-button;
 
     background: $primary-action-background;
+    border: 1px solid darken($primary-action-background, $border-color-darken);
     color: $primary-action-color;
     padding: .3em;
 
@@ -54,6 +55,7 @@
     @extend %base-button;
 
     background: $button-icon-disabled-background;
+    border: 1px solid darken($button-icon-disabled-background, $border-color-darken);
     color: $button-icon-disabled-color;
     padding: .2em;
     text-decoration: none;
@@ -69,6 +71,7 @@
     @extend %base-button;
 
     background: $primary-action-background;
+    border: 1px solid darken($primary-action-background, $border-color-darken);
     color: $primary-action-color;
     padding: 1em;
 
