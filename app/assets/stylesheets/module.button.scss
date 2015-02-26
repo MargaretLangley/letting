@@ -3,8 +3,8 @@
 
   $BUTTON
 
-  icon-button - action buttons and Invoicing Show buttons
-  primary-button - submit action buttons on form pages and search form
+  button-icon - action buttons and Invoicing Show buttons
+  button-primary - submit action buttons on form pages and search form
 
 \*--------------------------------------------------------------------*/
 
@@ -22,21 +22,21 @@
     margin: 0;
   }
 
-  .icon-button {
+  .button-icon {
     @extend %base-button;
 
-    background: $icon-button-background;
-    color: $icon-button-color;
+    background: $button-icon-background;
+    color: $button-icon-color;
     padding: .2em;
 
     &:hover,
     &:active {
-      background: $icon-button-active-background;
-      color: $icon-button-active-color;
+      background: $button-icon-active-background;
+      color: $button-icon-active-color;
     }
   }
 
-  .icon-button-action {
+  .button-icon-action {
     @extend %base-button;
 
     background: $primary-action-background;
@@ -50,22 +50,22 @@
     }
   }
 
-  .icon-button[disabled] {
+  .button-icon[disabled] {
     @extend %base-button;
 
-    background: $icon-button-disabled-background;
-    color: $icon-button-disabled-color;
+    background: $button-icon-disabled-background;
+    color: $button-icon-disabled-color;
     padding: .2em;
     text-decoration: none;
 
     &:hover,
     &:active {
-      background: $icon-button-disabled-background;
-      color: $icon-button-disabled-color;
+      background: $button-icon-disabled-background;
+      color: $button-icon-disabled-color;
     }
   }
 
-  .primary-button, .warn-button {
+  .button-primary, .button-warn {
     @extend %base-button;
 
     background: $primary-action-background;
@@ -83,7 +83,7 @@
 
 @media print {
 
-  .icon-button, .primary-button, .warn-button {
+  .button-icon, .button-primary, .button-warn {
     display: none;
   }
 }
