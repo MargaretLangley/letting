@@ -73,9 +73,13 @@ $pick-out:                            darken($fieldset, 5%);   // Darker Egg she
 
 $shadow:                              $color-silver-chalice;   // box-shadows on all the controls
 
+$color-faded:                         $color-boulder;          // Mediumum Dark
+
 // $TYPOGRAPHY
 $primary-text:                        $color-tundora;           // Very Dark
-$secondary-text:                      $color-boulder;           // Mediumum Dark
+
+
+
 
 
 // Primary action colors
@@ -160,5 +164,5 @@ $color-debug:                         black;
 
 // Used in forms
 .faded {
-  color: $secondary-text;
+  color: $color-faded;
 }
