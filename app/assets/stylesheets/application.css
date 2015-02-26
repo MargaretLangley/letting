@@ -37,7 +37,7 @@
  *= require module.shell
  *= require module.size
  *= require module.search
- *= require module.spacer
+ *= require module.spacing
  *= require module.tabs
  *= require module.table-row
  *= require module.typography

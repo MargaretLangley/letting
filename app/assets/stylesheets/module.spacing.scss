@@ -1,8 +1,12 @@
-/*--------------------------------------------------*\
+/*------------------------------------------------------------*\
 
-  $SPACER
+  $SPACING
 
-\*--------------------------------------------------*/
+  When elements require white space - especially used on grids#
+  spacer - are for margin
+  padding - are for padding
+
+\*-------------------------------------------------------------*/
 
 .top-spacer {
   margin: .8% 0 0;
@@ -46,4 +50,17 @@
 
 .vertical-line-spacer {
   margin: 1em 0;
+}
+
+
+//
+// Padding
+//
+
+.top-line-padder {
+  padding: 1em 0 0;
+}
+
+.bottom-line-padder {
+  padding: 0 0 1em;
 }

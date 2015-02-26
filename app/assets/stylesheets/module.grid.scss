@@ -1,82 +1,3 @@
-@import 'settings.colors';
-@import 'module.layout';
-@import 'module.size';
-
-/*--------------------------------------------------*\
-
-  $GRID
-
-\*--------------------------------------------------*/
-
-// scss-lint:disable SingleLinePerSelector, PlaceholderInExtend
-
-/*http://stackoverflow.com/questions/4785871/css-vertical-align*/
-@mixin vertical-align-hack {
-  height: 3em;
-  line-height: 3em;
-}
-
-.grid-row {
-  clear: both;
-}
-
-.cell {
-  @include vertical-align-hack;
-  color: $primary-text;
-}
-
-/* Wanted to emphasise the payment column in new_payment. However it looks odd
-   if elements are at the point the colour changes. So I have avoided text near
-   the color change. Note: margins do not have background color.
-   Only used on payment
-*/
-
-.pick-out {
-  background-color: $pick-out;
-}
-
-
-.top-line-padder {
-  padding: 1em 0 0;
-}
-
-.bottom-line-padder {
-  padding: 0 0 1em;
-}
-
-.grid-header {
-  @extend .faded;
-  border-bottom: 1px solid $muted-border;
-  overflow: hidden;
-  padding-top: 1%; // added for new_payment
-  white-space: nowrap;
-}
-
-.grid-pick-header {
-  border-bottom: 1px solid darken($muted-border, 2%);
-  overflow: hidden;
-  padding-top: 1%; // added for new_payment
-  white-space: nowrap;
-}
-
-.grid-footer-text {
-  @extend .faded;
-  border-top: 1px solid $muted-border;
-  overflow: hidden;
-  padding-top: 1%;
-  white-space: nowrap;
-}
-
-.grid-footer-number {
-  border-top: 1px solid $muted-border;
-  font-weight: bold;
-  overflow: hidden;
-  padding-top: 1%;
-  white-space: nowrap;
-}
-
-
-
 /*----------------------------------------------------------------------------*\
 
   $GRID
@@ -93,34 +14,63 @@
 
 \*----------------------------------------------------------------------------*/
 
+// scss-lint:disable SingleLinePerSelector, PlaceholderInExtend
+
+@import 'settings.colors';
+@import 'module.layout';
+@import 'module.size';
+
+//
+// default padding between column cells
+//
 $pad: 1em;
 
+//
+// Instatiation of grid object
+// Required before the first row
+//
 .grid {
   @include clearfix;
   margin: 0;
 }
 
+//
+// Applied to the first column in row - the clear means that this row starts
+// underneath the last rown.
+//
+.grid-row {
+  clear: both;
+}
+
+//
+// matches any grid column, which have the form, col-1-2
+//
 [class*='col-'] {
   float: left;
   padding-right: $pad;
 }
 
-.no-r-pad {
-  padding-right: 0;
-}
-
+//
+// default is all cells get r-pad
+//
 .r-pad {
   padding-right: 10px;
 }
 
-.hide {
-  white-space: nowrap;
+//
+// Column at the end of the row does not need padding
+// so typically no-r-pad is found on the last column
+//
+.no-r-pad {
+  padding-right: 0;
 }
 
-.l-pad {
-  padding-left: 10px;
-}
 
+//
+// Padding onto the grid (optional)
+//   - used on outer most grid to give 'margin' edges to the page.
+//   - no other grid has it - we are space hungry
+//
 .grid-pad {
   padding: .3em 0 .3em $pad;
 }
@@ -154,7 +104,78 @@ $pad: 1em;
 
 .col-action { width: 16%; }
 
+//
+// Adding a column around other columns - don't want
+// it using the space up more than necessary
+//
 // When you want a column for structure but don't want it to take up any space(padding)  //
 .spacer-column { padding: 0; }
-// Required extra disable at the end ??
-// scss-lint:disable SingleLinePerSelector
+
+
+
+//
+// Cell Modifiers
+//
+
+
+//
+// grid specialised heading and footer cells
+//   - normally faded to keep eyes away from head and foot and on the data
+//
+
+.grid-header {
+  @extend .faded;
+  border-bottom: 1px solid $muted-border;
+  overflow: hidden;
+  padding-top: 1%; // added for new_payment
+  white-space: nowrap;
+}
+
+.grid-pick-header {
+  border-bottom: 1px solid darken($muted-border, 2%);
+  overflow: hidden;
+  padding-top: 1%; // added for new_payment
+  white-space: nowrap;
+}
+
+.grid-footer-text {
+  @extend .faded;
+  border-top: 1px solid $muted-border;
+  overflow: hidden;
+  padding-top: 1%;
+  white-space: nowrap;
+}
+
+.grid-footer-number {
+  border-top: 1px solid $muted-border;
+  font-weight: bold;
+  overflow: hidden;
+  padding-top: 1%;
+  white-space: nowrap;
+}
+
+
+//
+// Information that needs to be vertically centered within a grid cell
+//
+
+/*http://stackoverflow.com/questions/4785871/css-vertical-align*/
+@mixin vertical-align-hack {
+  height: 3em;
+  line-height: 3em;
+}
+
+.cell {
+  @include vertical-align-hack;
+  color: $primary-text;
+}
+
+
+// Emphasise a cell by picking out background.
+// Note: there is no padding so text looks as text is near color change
+// Note: margins do not have background color - if using text try padding.
+// Used on: payment
+//
+.pick-out {
+  background-color: $pick-out;
+}
