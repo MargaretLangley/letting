@@ -92,7 +92,7 @@ module LinkHelper
   #
 
   def cancel_link(path:)
-    link_to 'Cancel', path, class: 'warn'
+    link_to 'Cancel', path, class: 'text-warn'
   end
 
   # Used when there is no physical link to click on

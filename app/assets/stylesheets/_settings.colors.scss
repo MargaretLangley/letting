@@ -26,9 +26,9 @@ $color-cream:              #ffc;                // ffffcc Cream
 
 
 // Pallet Colors
-$color-mariner:            #237bbe;             // Blue
-$color-broom:              #ffed20;             // Washed Yellow
-$color-amaranth:           #ea1e63;             // Pink (washed)
+$color-mariner:            #227dbe;             // Blue
+$color-broom:              #ffec20;             // Washed Yellow
+$color-amaranth:           #ea1e65;             // Pink (washed)
 $color-venice-blue:        #0b4b7c;             // Darker Blue (variant)
 $color-azure:              #2e6aa0;             // Medium Dark Blue
 
@@ -138,8 +138,8 @@ $icon-button-disabled-color:          white;
 $button-border:                       $color-broom;             // Yellow
 
 // $ERROR
-$errors-background:                   $color-cream;              // ffffcc Cream
-$warn:                                $color-amaranth;           // Red
+$errors-background:                   $color-broom;              // ffffcc Cream
+$errors-warn:                         $color-amaranth;           // Red
 
 // $FLASH
 $flash-notice:                        $color-snowy-mint;         // Pale Green :good

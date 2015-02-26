@@ -29,6 +29,10 @@
   color: $primary-text;
 }
 
+.text-warn {
+  color: $errors-warn;
+}
+
 // Fading text - without using common markup to aid testing
 .deemphasized {
   @extend .faded;
