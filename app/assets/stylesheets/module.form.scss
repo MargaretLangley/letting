@@ -5,6 +5,8 @@
 
 \*--------------------------------------------------*/
 
+@import 'settings.colors';
+
 %ellipsis-text {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -23,15 +25,30 @@ label {
   }
 }
 
-// js revealable element
 
+//
+// Hidden Elements
+//
+
+// js revealable element
+//
 .js-revealable {
   display: none;
 }
 
-// js is not used to reveal element
-
-.folded,
+// none-js to reveal element
+//
 .hidden {
   display: none;
+}
+
+
+//
+// Disableable
+//
+
+// reveal.js uses class
+//
+.js-color-disabled {
+  color: $pair-disabled-foreground;
 }

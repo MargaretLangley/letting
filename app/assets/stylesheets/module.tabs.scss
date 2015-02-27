@@ -93,6 +93,7 @@
   background-color: $tab-index-default-background;
   border: 1px solid darken($tab-index-default-background, $border-color-darken);
   border-bottom: 0;
+  color: $tab-index-default-color;
 
   &:hover {
     background: $tab-index-default-active-background;

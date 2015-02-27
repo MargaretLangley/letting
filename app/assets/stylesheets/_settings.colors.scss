@@ -80,17 +80,35 @@ $color-cornflower:         #a5cfee;             // Light to Medium Blue
 $color-snowy-mint:         #dbffdd;             // Pale Green
 
 
-/*----------------------------------------------------------------------------*\
 
-  $PALETTE COLORS 'OPPOSITES'
+//
+// $TYPOGRAPHY
+//
+$primary-text:                        $color-tundora;              // Very Dark
 
-  Given the palette color as background what should be the foreground?
-  Given the palette color as foreground what should be the background?
 
-\*----------------------------------------------------------------------------*/
+//
+// Contrasting Pairs 'Opposites'
+// Given the palette color as background what should be the foreground?
+// Given the palette color as foreground what should be the background?
+//
 
-$color-primary-shade-0-text:         white;
-$color-primary-shade-4-text:         white;
+// light
+$pair-light-background:        white;
+$pair-light-foreground:        $color-tundora;
+
+// dark
+$pair-dark-background:         $color-primary-shade-0;
+$pair-dark-foreground:         white;
+
+// active
+$pair-active-background:       $color-primary-shade-4;
+$pair-active-foreground:       white;
+
+// disabled
+$pair-disabled-background:     $color-grey-alto;           // Very Pale Grey
+$pair-disabled-foreground:     $primary-text;
+
 
 
 /*----------------------------------------------------------------------------*\
@@ -105,20 +123,21 @@ $color-primary-shade-4-text:         white;
 $neutral:                             $color-alabaster;           // off white
 
 $muted-border:                        $color-grey-alto;           // Very Pale Grey
-$disabled-background:                 $color-grey-alto;           // Very Pale Grey
 
 $fieldset:                            lighten($color-primary-shade-0, 50%);  // Egg shell Blue
+
 $pick-out:                            $color-primary-shade-1;
 
 $shadow:                              $color-silver-chalice;      // box-shadows on all the controls
 $color-faded:                         $color-boulder;             // Mediumum Dark
 
-// $TYPOGRAPHY
-$primary-text:                        $color-tundora;              // Very Dark
 
 
 
+//
 // Primary action colors
+// module.buttons, module.search, module.tabs
+//
 
 $primary-action-background:           $color-ternary-shade-0;                   // Pink
 $primary-action-color:                white;
@@ -126,17 +145,65 @@ $primary-action-active-background:    lighten($primary-action-background, 5%);  
 $primary-action-active-color:         white;
 
 
-// $LINKS
 
-$basic-link-color:                    $color-primary-shade-4;    // Blue
-$basic-link-active-background:        $color-primary-shade-4;    // Blue
-$basic-link-active-color:             white;
+//
+// $module.buttons
+//
 
+// Plain
+$button-icon-background:              white;
+$button-icon-color:                   $color-primary-shade-4;    // venice-blue
+$button-icon-active-background:       $pair-active-background;    // venice-blue
+$button-icon-active-color:            $pair-active-foreground;
+
+
+// Plain Disabled
+// No 'active/hover' changes
+$button-icon-disabled-background:     $pair-disabled-background;     // Grey
+$button-icon-disabled-color:          $pair-disabled-foreground;
+
+
+//
+// $module.debug
+//
+
+$color-debug:                         black;
+
+
+
+//
+// $module.error
+//
+
+$errors-background:                   $color-secondary-shade-4;
+$errors-warn:                         $color-ternary-shade-0;      // Pink
+
+
+
+//
+// $module.flash
+//
+
+$flash-notice:                        $color-snowy-mint;           // Pale Green :good
+$flash-alert:                         $color-secondary-shade-4;    // Yellow     :netural
+$flash-error:                         $color-ternary-shade-4;      // Pink       :bad
+$flash-opacity:                       .85;
+
+
+
+//
+// $module.form
+
+
+
+//
+// $module.links
+//
 
 // $plain-link-background:            initial;                      // Could not get this to work.
 $plain-link-color:                    $color-primary-shade-4;       // venice-blue
-$plain-link-active-background:        $color-primary-shade-4;       // venice-blue
-$plain-link-active-color:             $color-primary-shade-4-text;
+$plain-link-active-background:        $pair-active-background;      // venice-blue
+$plain-link-active-color:             $pair-active-foreground;
 
 
 // $inverted-link-background:         initial;                      // Could not get this to work.
@@ -165,58 +232,24 @@ $menu-item-color:                     $color-primary-shade-4;         // Medium 
 // $TABS
 
 // index default
-$tab-index-default-background:        $color-primary-shade-1;
-$tab-index-default-border-color:      darken($color-primary-shade-1, 15%);
-$tab-index-default-active-background: $color-primary-shade-4;
-$tab-index-default-active-color:      $color-primary-shade-4-text;
+$tab-index-default-background:        $pair-dark-background;
+$tab-index-default-color:             $pair-dark-foreground;
+$tab-index-default-active-background: $pair-active-background;
+$tab-index-default-active-color:      $pair-active-foreground;
+
 
 // index focus
 $tab-index-focus-background:          $color-complimentary-shade-0;
 $tab-index-focus-border-color:        $color-complimentary-shade-3;
-$tab-index-focus-active-background:   $color-primary-shade-4;
-$tab-index-focus-active-color:        $color-primary-shade-4-text;
+$tab-index-focus-active-background:   $pair-active-background;
+$tab-index-focus-active-color:        $pair-active-foreground;
 
-// $BUTTONS
-
-// Plain
-$button-icon-background:              white;
-$button-icon-color:                   $color-primary-shade-4;    // venice-blue
-$button-icon-active-background:       $color-primary-shade-4;    // venice-blue
-$button-icon-active-color:            white;
-
-// Plain Disabled
-// No 'active/hover' changes
-$button-icon-disabled-background:     $disabled-background;     // Grey
-$button-icon-disabled-color:          white;
-
-
-// $ERROR
-$errors-background:                   $color-secondary-shade-4;
-$errors-warn:                         $color-ternary-shade-0;      // Pink
-
-// $FLASH
-$flash-notice:                        $color-snowy-mint;           // Pale Green :good
-$flash-alert:                         $color-secondary-shade-4;    // Yellow     :netural
-$flash-error:                         $color-ternary-shade-4;      // Pink       :bad
-$flash-opacity:                       .85;
 
 
 // $SEARCH
 $search-wrapper-background:           $color-primary-shade-0;
 
 
-// $Debug
-$color-debug:                         black;
-
-
-@mixin inverted-color {
-  color: $neutral;
-  background-color: $color-primary-shade-0;
-}
-
-.inverted-color {
-  @include inverted-color;
-}
 
 // Used in forms
 .faded {

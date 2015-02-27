@@ -10,7 +10,7 @@ $( document ).ready(function() {
     if ($(this).closest('.js-group-toggle')
            .children('.js-revealable:hidden')
            .length < 1) {
-      $(this).addClass('js-grey');
+      $(this).addClass('js-color-disabled');
       $(this).prop('Enabled', "False");
     }
   });
@@ -28,7 +28,7 @@ $( document ).ready(function() {
 
     $(this).closest('.js-group-toggle')
            .find('.js-reveal-link')
-           .removeClass('js-grey');
+           .removeClass('js-color-disabled');
   });
 
   // Destroying a link - we set the _destroy field to true and
