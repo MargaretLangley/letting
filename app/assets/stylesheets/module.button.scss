@@ -3,8 +3,8 @@
 
   $BUTTON
 
-  button-icon - action buttons and Invoicing Show buttons
-  button-primary - submit action buttons on form pages and search form
+  ButtonIcon - action buttons and Invoicing Show buttons
+  Button  ButtonPrimary - submit action buttons on form pages and search form
 
 \*--------------------------------------------------------------------*/
 
@@ -13,7 +13,7 @@
 
 @media screen {
 
-  %base-button {
+  .Button {
     border-radius: $border-radius;
     box-shadow: $shadow-offset-x $shadow-offset-y $shadow-button-blur $shadow-spread $shadow;
     display: inline-block;
@@ -21,9 +21,7 @@
     margin: 0;
   }
 
-  .button-icon {
-    @extend %base-button;
-
+  .ButtonIcon {
     background: $button-icon-background;
     border: 1px solid darken($button-icon-background, $border-color-darken);
     color: $button-icon-color;
@@ -36,9 +34,7 @@
     }
   }
 
-  .button-icon-action {
-    @extend %base-button;
-
+  .ButtonIcon-action {
     background: $primary-action-background;
     border: 1px solid darken($primary-action-background, $border-color-darken);
     color: $primary-action-color;
@@ -51,9 +47,7 @@
     }
   }
 
-  .button-icon[disabled] {
-    @extend %base-button;
-
+  .ButtonIcon[disabled] {
     background: $button-icon-disabled-background;
     border: 1px solid darken($button-icon-disabled-background, $border-color-darken);
     color: $button-icon-disabled-color;
@@ -67,9 +61,7 @@
     }
   }
 
-  .button-primary, .button-warn {
-    @extend %base-button;
-
+  .ButtonPrimary {
     background: $primary-action-background;
     border: 1px solid darken($primary-action-background, $border-color-darken);
     color: $primary-action-color;
@@ -86,7 +78,7 @@
 
 @media print {
 
-  .button-icon, .button-primary, .button-warn {
+  .Button, .ButtonIcon, .ButtonPrimary {
     display: none;
   }
 }

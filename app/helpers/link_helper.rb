@@ -61,7 +61,7 @@ module LinkHelper
     app_link icon: 'gbp', path: path, title: 'Add New Payment'
   end
 
-  def print_link text: '', id: nil, path:, css: 'button-icon', title: 'Print', disabled: false
+  def print_link text: '', id: nil, path:, css: 'Button  ButtonIcon', title: 'Print', disabled: false
     app_link icon: 'print',
              id: id,
              text: text,
@@ -110,7 +110,7 @@ module LinkHelper
                direction: false,
                path: '#',
                id: nil,
-               css: 'button-icon',
+               css: 'Button  ButtonIcon',
                js_css: '',
                data: nil,
                method: nil,
