@@ -23,41 +23,12 @@
   }
 }
 
-.shell {
+.Shell {
   @extend %inside-shell-screen;
   @include clearfix;
   margin: 0 0 2%;
-  padding: 1%;
 }
 
-.shell-error {
+.Shell--error {
   background-color: $errors-background;
-}
-
-.shell-thin {
-  @extend %inside-shell-screen;
-  @include clearfix;
-  margin: 0 0 2%;
-  padding: 0;
-}
-
-.shell-1-25 {
-  @extend %inside-shell-screen;
-  @include clearfix;
-  margin: 0 0 2%;
-  padding: 1% 4% 2%;
-}
-
-.shell-1-12 {
-  @extend %inside-shell-screen;
-  @include clearfix;
-  margin: 0 0 2%;
-  padding: 2% 8.3333%;
-}
-
-.shell-1-6 {
-  @extend %inside-shell-screen;
-  @include clearfix;
-  margin: 0 0 2%;
-  padding: 2% 16.6666%;
 }

@@ -1,6 +1,6 @@
 <% @title='View Invoicing' %>
 
-<div class='grid  shell'>
+<div class='grid  Shell'>
   <div class='col-1-1  grid-row  panel'>
     <h2>Invoicing</h2>
     <%= render 'invoicings/invoicing_header' %>
@@ -19,7 +19,7 @@
         </li>
       </ul>
 
-      <div class='grid  shell  tab-contents'>
+      <div class='grid  Shell  u-padding-1-100 tab-contents'>
         <% @invoicing.runs.each_with_index do |run, index|  %>
           <% run_dec = RunDecorator.new run %>
           <div id='tab-content<%= index %>' class='tab-content <%= run_dec.style_activity %> '>
@@ -43,4 +43,4 @@
       </div> <!-- close  tab-content -->
     </div> <!-- close tabs -->
   </div> <!-- close panel -->
-</div> <!-- grid  shell -->
+</div> <!-- grid  Shell  u-padding-1-100-->

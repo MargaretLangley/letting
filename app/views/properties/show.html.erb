@@ -9,7 +9,7 @@
 <div class='col-2-24  r-align'>
     <%= chevron_link direction: 'right', text: property_next, path: @property.next, title: 'next' %>
 </div>
-<div class='grid-row  shell  js-toggle-selection'>
+<div class='grid-row  Shell  u-padding-1-100 js-toggle-selection'>
   <div class='js-togglable'>
 
     <div class='col-6-24  grid-row  faded'>
@@ -51,11 +51,11 @@
   </div>
 </div>
 
-<div id='charge' class='grid  shell'>
+<div id='charge' class='grid  Shell  u-padding-1-100'>
   <%= render 'charges/charges', charges: @property.account.charges %>
 </div>
 
-<div class='grid  shell  js-toggle-selection'>
+<div class='grid  Shell  u-padding-1-100 js-toggle-selection'>
   <div class='js-togglable'>
 
     <div class='col-23-24  grid-row  faded'>
@@ -81,4 +81,4 @@
     <%= render 'account_items/header' %>
     <%= render partial: 'account_items/account_item', collection: AccountDecorator.new(@property.account).all_items %>
   </div>
-</div> <!-- grid  shell js-toggle-selection -->
+</div> <!-- grid  Shell  u-padding-1-100js-toggle-selection -->
