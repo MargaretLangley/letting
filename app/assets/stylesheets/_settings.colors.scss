@@ -1,5 +1,5 @@
 
-/*---------------------------------------------------*\
+/*----------------------------------------------------------------------------*\
 
   $COLORS
 
@@ -18,19 +18,49 @@
   Color naming hexidecimal from:
   http://chir.ag/projects/name-that-color/
 
-\*----------------------------------------------------*/
+\*----------------------------------------------------------------------------*/
+
+
+// Pallet Colors
+
+// Primary color, Blue, and shades
+$color-primary-shade-0:      #227dbe;    // $color-mariner
+$color-primary-shade-1:      #6babd8;    // $color-danube
+$color-primary-shade-2:      #4391c9;    // $color-Shakespeare
+$color-primary-shade-3:      #0867a9;    // $color-bahama-blue
+$color-primary-shade-4:      #064d7e;    // $color-venice-blue
+
+// Secondary Color 1, Yellow, and shades
+$color-secondary-shade-0:    #ffec20;    // $color-broom
+$color-secondary-shade-1:    #fff376;    // $color-paris-daisy
+$color-secondary-shade-2:    #fff04a;    // $color-gorse
+$color-secondary-shade-3:    #ffe900;    // $color-turbo
+$color-secondary-shade-4:    #c5b400;    // $color-buddha-gold
+
+
+// Secondary Color 2 (calling tenary otherwise too close a name), Red/Pink
+$color-ternary-shade-0:      #e81e65;    // $color-amaranth
+$color-ternary-shade-1:      #f1709e;    // $color-froly
+$color-ternary-shade-2:      #ec4580;    // $color-french-rose
+$color-ternary-shade-3:      #e10050;    // $color-razzmatazz
+$color-ternary-shade-4:      #ad003d;    // $color-shiraz
+
+
+// Complimentary color, Orange
+$color-complimentary-shade-0: #ff9e20;     // $color-tree-poppy
+$color-complimentary-shade-1: #ffc376;     // $color-macaroni-and-cheese
+$color-complimentary-shade-2: #ffb04a;     // $color-yellow-orange
+$color-complimentary-shade-3: #ff9000;     // $color-pizass
+$color-complimentary-shade-4: #c56f00;     // $color-indochine
+
+
+//
+// Neutral Colors
+//
 
 // Whites
 $color-alabaster:          #f8f8f8;             // off-white
 $color-cream:              #ffc;                // ffffcc Cream
-
-
-// Pallet Colors
-$color-mariner:            #227dbe;             // Blue
-$color-broom:              #ffec20;             // Washed Yellow
-$color-amaranth:           #ea1e65;             // Pink (washed)
-$color-venice-blue:        #0b4b7c;             // Darker Blue (variant)
-$color-azure:              #2e6aa0;             // Medium Dark Blue
 
 
 // Greys
@@ -40,51 +70,57 @@ $color-boulder:            #777;                // Mediumum Dark Grey
 $color-tundora:            #444;                // Very Dark Grey
 
 
+
 // Process these colors into pallet
 // Currently none!
 
 $color-link-water:         #e6f1fa;             // Very Light Blue
 $color-cornflower:         #a5cfee;             // Light to Medium Blue
 // Flash Colors
-$color-snowy-mint:        #dbffdd;               // Pale Green
-$color-pippin:            #ffe1de;               // Pink
+$color-snowy-mint:         #dbffdd;             // Pale Green
 
-/*---------------------------------------------------*\
+
+/*----------------------------------------------------------------------------*\
+
+  $PALETTE COLORS 'OPPOSITES'
+
+  Given the palette color as background what should be the foreground?
+  Given the palette color as foreground what should be the background?
+
+\*----------------------------------------------------------------------------*/
+
+$color-primary-shade-0-text:         white;
+$color-primary-shade-4-text:         white;
+
+
+/*----------------------------------------------------------------------------*\
 
   $COLORVARIABLES
 
   Color variables are referenced throughout the application
 
-\*----------------------------------------------------*/
+\*----------------------------------------------------------------------------*/
 
 // $base
-$neutral:                             $color-alabaster;        // off white
+$neutral:                             $color-alabaster;           // off white
 
-$primary-background:                  $color-mariner;          // Light Blue
-/* used as text color and hover background in menu */
-$secondary-background:                $color-venice-blue;      // Darker Blue
-$secondary-color:                     white;
+$muted-border:                        $color-grey-alto;           // Very Pale Grey
+$disabled-background:                 $color-grey-alto;           // Very Pale Grey
 
-$muted-border:                        $color-grey-alto;        // Very Pale Grey
-$disabled-background:                 $color-grey-alto;        // Very Pale Grey
+$fieldset:                            lighten($color-primary-shade-0, 50%);  // Egg shell Blue
+$pick-out:                            $color-primary-shade-1;
 
-$fieldset:                            lighten($primary-background, 50%);  // Egg shell Blue
-$pick-out:                            darken($fieldset, 5%);   // Darker Egg shell Blue
-
-$shadow:                              $color-silver-chalice;   // box-shadows on all the controls
-
-$color-faded:                         $color-boulder;          // Mediumum Dark
+$shadow:                              $color-silver-chalice;      // box-shadows on all the controls
+$color-faded:                         $color-boulder;             // Mediumum Dark
 
 // $TYPOGRAPHY
-$primary-text:                        $color-tundora;           // Very Dark
-
-
+$primary-text:                        $color-tundora;              // Very Dark
 
 
 
 // Primary action colors
 
-$primary-action-background:           $color-amaranth;           // Pink
+$primary-action-background:           $color-ternary-shade-0;                   // Pink
 $primary-action-color:                white;
 $primary-action-active-background:    lighten($primary-action-background, 5%);  // Blue
 $primary-action-active-color:         white;
@@ -92,45 +128,60 @@ $primary-action-active-color:         white;
 
 // $LINKS
 
-$basic-link-color:                    $secondary-background;    // Blue
-$basic-link-active-background:        $secondary-background;    // Blue
+$basic-link-color:                    $color-primary-shade-4;    // Blue
+$basic-link-active-background:        $color-primary-shade-4;    // Blue
 $basic-link-active-color:             white;
 
 
-// $plain-link-background:            initial;                  // Could not get this to work.
-$plain-link-color:                    $color-venice-blue;       // Blue
-$plain-link-active-background:        $color-venice-blue;       // Blue
-$plain-link-active-color:             white;
+// $plain-link-background:            initial;                      // Could not get this to work.
+$plain-link-color:                    $color-primary-shade-4;       // venice-blue
+$plain-link-active-background:        $color-primary-shade-4;       // venice-blue
+$plain-link-active-color:             $color-primary-shade-4-text;
 
 
-// $inverted-link-background:         initial;                  // Could not get this to work.
+// $inverted-link-background:         initial;                      // Could not get this to work.
 $inverted-link-color:                 white;
 $inverted-link-active-background:     initial;
 $inverted-link-active-color:          white;
 
 
 // $Drop Down Menu
+$drop-down-border:                    $color-primary-shade-0;
 $drop-down-link-background:           $fieldset;
-$drop-down-link-color:                $secondary-background;
-$drop-down-link-active-background:    $secondary-background;
+$drop-down-link-color:                $color-primary-shade-4;
+$drop-down-link-active-background:    $color-primary-shade-4;
 $drop-down-link-active-color:         $fieldset;
 
 
 // $MENU
-$menu-background:                     $color-link-water;        // Very Light Blue
-$menu-border-left:                    $color-amaranth;          // Pink
-$menu-border-bottom:                  $color-azure;             // Medium Dark Blue
-$menu-color:                          $color-venice-blue;       // Darker blue
-$menu-links-background:               $color-cornflower;        // Light to Medium Blue
-$menu-item-color:                     $color-azure;             // Medium Dark Blue
+$menu-background:                     $color-link-water;              // Very Light Blue
+$menu-border-left:                    $color-ternary-shade-0;         // Pink
+$menu-border-bottom:                  $color-primary-shade-2;         // Medium Dark Blue
+$menu-color:                          $color-primary-shade-4;         // venice-blue
+$menu-links-background:               lighten($color-primary-shade-1, 10%);    // Light to Medium Blue
+$menu-item-color:                     $color-primary-shade-4;         // Medium Dark Blue
 
+
+// $TABS
+
+// index default
+$tab-index-default-background:        $color-primary-shade-1;
+$tab-index-default-border-color:      darken($color-primary-shade-1, 15%);
+$tab-index-default-active-background: $color-primary-shade-4;
+$tab-index-default-active-color:      $color-primary-shade-4-text;
+
+// index focus
+$tab-index-focus-background:          $color-complimentary-shade-0;
+$tab-index-focus-border-color:        $color-complimentary-shade-3;
+$tab-index-focus-active-background:   $color-primary-shade-4;
+$tab-index-focus-active-color:        $color-primary-shade-4-text;
 
 // $BUTTONS
 
 // Plain
 $button-icon-background:              white;
-$button-icon-color:                   $color-venice-blue;
-$button-icon-active-background:       $color-venice-blue;
+$button-icon-color:                   $color-primary-shade-4;    // venice-blue
+$button-icon-active-background:       $color-primary-shade-4;    // venice-blue
 $button-icon-active-color:            white;
 
 // Plain Disabled
@@ -140,14 +191,19 @@ $button-icon-disabled-color:          white;
 
 
 // $ERROR
-$errors-background:                   $color-broom;              // ffffcc Cream
-$errors-warn:                         $color-amaranth;           // Red
+$errors-background:                   $color-secondary-shade-4;
+$errors-warn:                         $color-ternary-shade-0;      // Pink
 
 // $FLASH
-$flash-notice:                        $color-snowy-mint;         // Pale Green :good
-$flash-alert:                         $color-broom;              // Yellow     :netural
-$flash-error:                         $color-pippin;             // Pink       :bad
+$flash-notice:                        $color-snowy-mint;           // Pale Green :good
+$flash-alert:                         $color-secondary-shade-4;    // Yellow     :netural
+$flash-error:                         $color-ternary-shade-4;      // Pink       :bad
 $flash-opacity:                       .85;
+
+
+// $SEARCH
+$search-wrapper-background:           $color-primary-shade-0;
+
 
 // $Debug
 $color-debug:                         black;
@@ -155,7 +211,7 @@ $color-debug:                         black;
 
 @mixin inverted-color {
   color: $neutral;
-  background-color: $primary-background;
+  background-color: $color-primary-shade-0;
 }
 
 .inverted-color {

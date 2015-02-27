@@ -27,7 +27,7 @@
 // To keep the menu at the same y origin as the heading search control
 .drop-down {
   @include clearfix;
-  border-top: 3px solid $primary-background;
+  border-top: 3px solid $drop-down-border;
 }
 
 // menu list item

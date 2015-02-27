@@ -15,8 +15,8 @@ $search-height: 35px;
 
 .search-wrapper {
   @include clearfix;
-  background-color: $primary-background;
-  border: 3px solid lighten($primary-background, 5%);
+  background-color: $search-wrapper-background;
+  border: 3px solid lighten($search-wrapper-background, 5%);
   border-radius: $border-radius;
 }
 
