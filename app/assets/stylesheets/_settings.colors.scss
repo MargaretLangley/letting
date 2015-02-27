@@ -175,7 +175,7 @@ $color-debug:                         black;
 // $module.error
 //
 
-$errors-background:                   $color-secondary-shade-4;
+$errors-background:                   $color-secondary-shade-2;
 $errors-warn:                         $color-ternary-shade-0;      // Pink
 
 
@@ -185,7 +185,7 @@ $errors-warn:                         $color-ternary-shade-0;      // Pink
 //
 
 $flash-notice:                        $color-snowy-mint;           // Pale Green :good
-$flash-alert:                         $color-secondary-shade-4;    // Yellow     :netural
+$flash-alert:                         $color-secondary-shade-3;    // Yellow     :netural
 $flash-error:                         $color-ternary-shade-4;      // Pink       :bad
 $flash-opacity:                       .85;
 
