@@ -1,10 +1,10 @@
 <% @title='Edit Invoicing' %>
 <div class='tabs'>
-  <ul class='tab-links'>
+  <ul class='tab-indexes'>
     <% @invoicing.runs.each_with_index do |run, index|  %>
       <% run_dec = RunDecorator.new run %>
-      <li class='<%= run_dec.style_activity %>'>
-        <%= link_to "Invoice #{run_dec.invoice_date}", @invoicing %>
+      <li class='tab-index-li  <%= run_dec.style_activity %>'>
+        <%= link_to "Invoice #{run_dec.invoice_date}", @invoicing, class: 'tab-index-a  tab-index-a-default' %>
       </li>
     <% end %>
   </ul>
@@ -15,7 +15,7 @@
 <%= form_for invoicing do |f| %>
   <%= render 'shared/errors', object: invoicing %>
 
-  <fieldset id='invoicing' class='grid  Shell  u-padding-1-25'>
+  <fieldset id='invoicing' class='grid  Shell  u-padding-1-25  tab-contents'>
     <div class='col-2-3  spacer-column'>  <!-- column 1 -->
 
       <div class='col-12-24  grid-row  bottom-half-line-spacer  faded'>
