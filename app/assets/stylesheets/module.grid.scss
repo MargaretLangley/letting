@@ -161,8 +161,8 @@ $pad: 1em;
 
 /*http://stackoverflow.com/questions/4785871/css-vertical-align*/
 @mixin vertical-align-hack {
-  height: 3em;
-  line-height: 3em;
+  height: 2.5em;
+  line-height: 2.5em;
 }
 
 .cell {
