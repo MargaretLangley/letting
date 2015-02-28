@@ -15,7 +15,7 @@
         <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort } %>
       </div>
       <div class='col-8-24  bottom-spacer'>
-        <%= f.select :cycle_id, grouped_options_for_select(CycleDecorator.for_select), { prompt: 'Please select'}  %>
+        <%= f.select :cycle_id, grouped_options_for_select(CycleDecorator.for_select, f.object.cycle_id), { prompt: 'Please select'}  %>
       </div>
       <div class='col-4-24  bottom-spacer'>
         <%= f.select :payment_type, payment_types, { prompt: 'Please select'}  %>
