@@ -127,21 +127,21 @@ $pad: 1em;
   @extend .faded;
   border-bottom: 1px solid $muted-border;
   overflow: hidden;
-  padding-top: 1%; // added for new_payment
+  padding-top: 1%;
   white-space: nowrap;
 }
 
 .grid-pick-header {
   border-bottom: 1px solid darken($muted-border, 2%);
   overflow: hidden;
-  padding-top: 1%; // added for new_payment
+  padding-top: 1%;
   white-space: nowrap;
 }
 
 .grid-focus-header {
   border-bottom: 1px solid $pair-focus-shadow;
   overflow: hidden;
-  padding-top: 1%; // added for new_payment
+  padding-top: 1%;
   white-space: nowrap;
 }
 
