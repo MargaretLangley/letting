@@ -82,8 +82,8 @@ Accordion HTML
 //           - class for marking the menu rows
 //
 .menu-item {
-  background-color: $menu-links-background;
-  border: 1px solid $menu-border-bottom;
+  background-color: $menu-item-background;
+  border: 1px solid $menu-item-border;
   border-top: 0;
   color: $menu-item-color;
   display: block;
@@ -94,7 +94,7 @@ Accordion HTML
 
   &:hover {
     background: $scheme-active-background;
-    border-left: 5px solid $menu-border-left;
+    border-left: 5px solid $menu-item-active-border-left;
     color: $scheme-active-foreground;
   }
 }
@@ -104,7 +104,7 @@ Accordion HTML
 //
 .active-item .menu-item {
   background: $scheme-active-background;
-  border-left: 5px solid $menu-border-left;
+  border-left: 5px solid $menu-item-focus-border-left;
   color: $scheme-active-foreground;
 }
 

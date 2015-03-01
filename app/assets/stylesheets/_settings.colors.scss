@@ -22,11 +22,16 @@
 
 @import 'settings.globals';
 
+
+
+
 /*----------------------------------------------------------------------------*\
+
 
   $PALLET COLORS
 
   The list of colors used in the application.
+
 
 \*----------------------------------------------------------------------------*/
 
@@ -85,11 +90,15 @@ $color-snowy-mint:         #dbffdd;             // Pale Green
 // -  Currently none!
 
 
+
+
 /*----------------------------------------------------------------------------*\
+
 
   $COLORVARIABLES
 
   Color variables are referenced throughout the application
+
 
 \*----------------------------------------------------------------------------*/
 
@@ -105,7 +114,6 @@ $color-shadow:                        $color-silver-chalice;      // box-shadows
 //
 $color-text-primary:                  $color-tundora;    // Very Dark Gray
 $color-text-faded:                    $color-boulder;    // Medium Gray
-
 
 
 // Scheme
@@ -142,6 +150,7 @@ $scheme-active-foreground:       white;
 //
 $scheme-fieldset-background:    lighten($color-primary-shade-0, 50%);    // Egg Shell
 $scheme-fieldset-border:        darken($scheme-fieldset-background, $border-color-darken);
+$scheme-fieldset-color:         $color-primary-shade-4;
 
 // Darker background color
 // - emphasise over field color
@@ -197,14 +206,12 @@ $button-icon-disabled-color:          $scheme-disabled-foreground;
 $color-debug:                         black;
 
 
-
 //
 // $module.error
 //
 
 $errors-background:                   $color-secondary-shade-2;
 $errors-warn:                         $color-ternary-shade-0;      // Pink
-
 
 
 //
@@ -215,7 +222,6 @@ $flash-notice:                        $color-snowy-mint;           // Pale Green
 $flash-alert:                         $color-secondary-shade-3;    // Yellow     :netural
 $flash-error:                         $color-ternary-shade-4;      // Pink       :bad
 $flash-opacity:                       .85;
-
 
 
 //
@@ -242,12 +248,16 @@ $drop-down-link-active-color:         $scheme-fieldset-background;
 
 
 // $MENU
-$menu-background:                     $scheme-fieldset-background;              // Very Light Blue
-$menu-border-left:                    $color-ternary-shade-0;         // Pink
-$menu-border-bottom:                  $color-primary-shade-2;         // Medium Dark Blue
-$menu-color:                          $color-primary-shade-4;         // venice-blue
-$menu-links-background:               lighten($color-primary-shade-1, 10%);    // Light to Medium Blue
+$menu-background:                     $scheme-fieldset-background;   // Very Light Blue
+$menu-border-bottom:                  $scheme-fieldset-border;       // Medium Dark Blue
+$menu-color:                          $scheme-fieldset-color;        // venice-blue
+
+// $MENU-ITEM
+$menu-item-background:                lighten($color-primary-shade-1, 10%);    // Light to Medium Blue
+$menu-item-border:                    darken($menu-item-background, 10%);
 $menu-item-color:                     $color-primary-shade-4;         // Medium Dark Blue
+$menu-item-active-border-left:        $color-secondary-shade-0;       // Pink
+$menu-item-focus-border-left:         $color-complimentary-shade-0;
 
 
 // $TABS
@@ -264,7 +274,6 @@ $tab-index-focus-background:          $color-complimentary-shade-0;
 $tab-index-focus-border-color:        $color-complimentary-shade-3;
 $tab-index-focus-active-background:   $scheme-active-background;
 $tab-index-focus-active-color:        $scheme-active-foreground;
-
 
 
 // $SEARCH
