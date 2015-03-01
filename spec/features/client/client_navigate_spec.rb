@@ -8,7 +8,7 @@ describe 'Client navigate', type: :feature do
       client_create human_ref: 111
       visit '/clients/'
 
-      first('.view-testing-link', visible: false).click
+      first('.link-view-testing', visible: false).click
 
       expect(page).to have_text '111'
       expect(page.title).to eq 'Letting - View Client'

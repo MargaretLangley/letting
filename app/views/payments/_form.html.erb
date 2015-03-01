@@ -16,12 +16,12 @@
         Last Property ID&nbsp;(<%= payment_dec.last_human_ref %>)
       </div>
       <div class='col-4-12  bottom-spacer  r-align'>
-        <%= link_to payment_dec.last_amount, edit_payment_path(Payments.last), class: 'hover-link  plain-link'%>
+        <%= link_to payment_dec.last_amount, edit_payment_path(Payments.last), class: 'link-hover  link-plain'%>
       </div>
 
       <div class='col-8-12  grid-row  bottom-1-line-spacer'>Day's Total</div>
       <div class='col-4-12  bottom-1-line-spacer  r-align'>
-        <%= link_to payment_dec.todays_takings, payments_path, class: 'hover-link  plain-link' %>
+        <%= link_to payment_dec.todays_takings, payments_path, class: 'link-hover  link-plain' %>
       </div>
     </div>
     <div class='col-1-24'>    <!-- 4th column -->

@@ -212,16 +212,16 @@ $flash-opacity:                       .85;
 // $module.links
 //
 
-// $plain-link-background:            initial;                      // Could not get this to work.
-$plain-link-color:                    $color-primary-shade-4;       // venice-blue
-$plain-link-active-background:        $scheme-active-background;      // venice-blue
-$plain-link-active-color:             $scheme-active-foreground;
+// $link-plain-background:            initial;                      // Could not get this to work.
+$link-plain-color:                    $color-primary-shade-4;       // venice-blue
+$link-plain-active-background:        $scheme-active-background;      // venice-blue
+$link-plain-active-color:             $scheme-active-foreground;
 
+// $link-inverted-background:         initial;                      // Could not get this to work.
+$link-inverted-color:                 white;
+$link-inverted-active-background:     initial;
+$link-inverted-active-color:          white;
 
-// $inverted-link-background:         initial;                      // Could not get this to work.
-$inverted-link-color:                 white;
-$inverted-link-active-background:     initial;
-$inverted-link-active-color:          white;
 
 
 // $Drop Down Menu

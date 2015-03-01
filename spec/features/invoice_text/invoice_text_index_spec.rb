@@ -25,7 +25,7 @@ describe 'InvoiceText#index', type: :feature do
     invoice_text_create
     visit '/invoice_texts/'
 
-    first('.view-testing-link', visible: false).click
+    first('.link-view-testing', visible: false).click
     expect(page.title).to eq 'Letting - View Invoice Text'
   end
 

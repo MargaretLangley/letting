@@ -10,7 +10,7 @@ describe 'Property navigate', type: :feature do
         properties: [property_new(human_ref: 80, account: account_new)]
       visit '/accounts/'
 
-      first('.view-testing-link', visible: false).click
+      first('.link-view-testing', visible: false).click
 
       expect(page).to have_text '80'
       expect(page.title).to eq 'Letting - View Account'

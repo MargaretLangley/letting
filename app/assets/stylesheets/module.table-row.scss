@@ -14,8 +14,8 @@
      we add class='inherit-row'
   3 - visit-data-link.js must be present - in one of the columns
   4 - Hidden link added to column in the table for testing purposes
-   4.1 link_to '.', property_path(property.id), class: 'view-testing-link';
-   4.2 spec with: find('.view-testing-link', visible: false).click
+   4.1 link_to '.', property_path(property.id), class: 'link-view-testing';
+   4.2 spec with: find('.link-view-testing', visible: false).click
 
   5 - Committed these changes for clients table under:
     'grid simulating table - client'

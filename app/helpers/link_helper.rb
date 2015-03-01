@@ -99,7 +99,7 @@ module LinkHelper
   # In the case of index - grid row has no view button.
   #
   def testing_link(path:)
-    link_to '', path, class: 'view-testing-link'
+    link_to '', path, class: 'link-view-testing'
   end
 
   private
