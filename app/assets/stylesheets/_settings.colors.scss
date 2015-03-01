@@ -66,7 +66,7 @@ $color-cream:              #ffc;                // ffffcc Cream
 // Greys
 $color-grey-alto:          #dcdcdc;             // Pale Grey Gainsbro
 $color-silver-chalice:     #aaa;                // Light Grey
-$color-boulder:            #777;                // Mediumum Dark Grey
+$color-boulder:            #777;                // Medium Dark Grey
 $color-tundora:            #444;                // Very Dark Grey
 
 
@@ -84,8 +84,8 @@ $color-snowy-mint:         #dbffdd;             // Pale Green
 //
 // $TYPOGRAPHY
 //
-$primary-text:                        $color-tundora;    // Very Dark
-$color-text-faded:                    $color-boulder;
+$color-text-primary:                  $color-tundora;    // Very Dark Gray
+$color-text-faded:                    $color-boulder;    // Medium Gray
 
 
 
@@ -126,7 +126,7 @@ $scheme-focus-shadow:           $color-complimentary-shade-4;
 
 // disabled
 $scheme-disabled-background:     $color-grey-alto;           // Very Pale Grey
-$scheme-disabled-foreground:     $primary-text;
+$scheme-disabled-foreground:     $color-text-primary;
 
 
 
@@ -262,12 +262,6 @@ $tab-index-focus-active-color:        $scheme-active-foreground;
 // $SEARCH
 $search-wrapper-background:           $color-primary-shade-0;
 
-
-
-// Used in forms
-.faded {
-  color: $color-faded;
-}
 
 .focus {
   background:   $scheme-focus-background;

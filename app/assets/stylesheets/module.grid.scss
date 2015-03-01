@@ -178,7 +178,7 @@ $pad: 1em;
 
 .cell {
   @include vertical-align-hack;
-  color: $primary-text;
+  color: $color-text-primary;
 }
 
 

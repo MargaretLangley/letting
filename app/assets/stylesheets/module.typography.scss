@@ -26,7 +26,7 @@
 // Text coloring
 
 .text-normal {
-  color: $primary-text;
+  color: $color-text-primary;
 }
 
 .text-warn {
@@ -35,7 +35,7 @@
 
 // Fading text - without using common markup to aid testing
 .deemphasized {
-  @extend .faded;
+  color: $color-text-faded
 }
 
 
