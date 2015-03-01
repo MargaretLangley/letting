@@ -356,7 +356,7 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     seedbank (0.3.0)
-    selenium-webdriver (2.44.0)
+    selenium-webdriver (2.45.0)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
@@ -487,7 +487,7 @@ DEPENDENCIES
   scss-lint
   sdoc (~> 0.4.0)
   seedbank
-  selenium-webdriver (~> 2.44.0)
+  selenium-webdriver (~> 2.45.0)
   spring
   spring-commands-rspec
   sprockets (~> 2.12.3)

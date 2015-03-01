@@ -97,7 +97,7 @@ group :development, :test do
   # 0.1.1 seems to introduce errors - Use this gem occasionally to weed out
   # performance errors with tests
   # gem 'capybara-slow_finder_errors', '0.1.0'
-  gem 'selenium-webdriver', '~>2.44.0'
+  gem 'selenium-webdriver', '~>2.45.0'
   gem 'pry-rails', '~>0.3.0'
   gem 'rb-readline'
   gem 'pry-stack_explorer', '~>0.4.9.0'
