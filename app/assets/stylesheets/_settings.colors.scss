@@ -20,6 +20,7 @@
 
 \*----------------------------------------------------------------------------*/
 
+@import 'settings.globals';
 
 // Pallet Colors
 
@@ -80,6 +81,20 @@ $color-cornflower:         #a5cfee;             // Light to Medium Blue
 $color-snowy-mint:         #dbffdd;             // Pale Green
 
 
+/*----------------------------------------------------------------------------*\
+
+  $COLORVARIABLES
+
+  Color variables are referenced throughout the application
+
+\*----------------------------------------------------------------------------*/
+
+
+$neutral:                             $color-alabaster;           // off white
+
+$color-line:                          $color-grey-alto;           // Very Pale Grey
+$color-shadow:                        $color-silver-chalice;      // box-shadows on all the controls
+
 
 //
 // $TYPOGRAPHY
@@ -113,9 +128,15 @@ $scheme-dark-foreground:         white;
 // 2) $button-icon-active-*
 // 3) $tab-index-plain-active-*
 // 4) $tab-index-focus-active-*
-
+//
 $scheme-active-background:       $color-primary-shade-4;
 $scheme-active-foreground:       white;
+
+//
+// Form Field Color
+//
+$scheme-fieldset-background:    lighten($color-primary-shade-0, 50%);    // Egg Shell
+$scheme-fieldset-border:        darken($scheme-fieldset-background, $border-color-darken);
 
 // Darker background color
 // - emphasise over field color
@@ -132,24 +153,6 @@ $scheme-focus-shadow:           $color-complimentary-shade-4;
 // disabled
 $scheme-disabled-background:     $color-grey-alto;           // Very Pale Grey
 $scheme-disabled-foreground:     $color-text-primary;
-
-
-
-/*----------------------------------------------------------------------------*\
-
-  $COLORVARIABLES
-
-  Color variables are referenced throughout the application
-
-\*----------------------------------------------------------------------------*/
-
-// $base
-$neutral:                             $color-alabaster;           // off white
-
-$color-line:                          $color-grey-alto;           // Very Pale Grey
-$color-shadow:                        $color-silver-chalice;      // box-shadows on all the controls
-
-$fieldset:                            lighten($color-primary-shade-0, 50%);  // Egg Shell  u-padding-1-100Blue
 
 
 
@@ -227,10 +230,10 @@ $link-text-white-active-color:        white;
 
 // $Drop Down Menu
 $drop-down-border:                    $color-primary-shade-0;
-$drop-down-link-background:           $fieldset;
+$drop-down-link-background:           $scheme-fieldset-background;
 $drop-down-link-color:                $color-primary-shade-4;
 $drop-down-link-active-background:    $color-primary-shade-4;
-$drop-down-link-active-color:         $fieldset;
+$drop-down-link-active-color:         $scheme-fieldset-background;
 
 
 // $MENU

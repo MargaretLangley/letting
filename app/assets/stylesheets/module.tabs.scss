@@ -41,7 +41,6 @@
   </div>
 
 \*-----------------------------------------------*/
-@import 'settings.globals';
 @import 'settings.colors';
 @import 'tools.mixins';
 @import 'module.layout';
@@ -121,7 +120,7 @@
 // Wrapper around content panels
 .tab-contents {
   @include clearfix;
-  background-color: lighten($fieldset, 3%);
+  background-color: $scheme-fieldset-background;
   border-radius: $border-radius;
 
   @media screen {

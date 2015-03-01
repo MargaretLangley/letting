@@ -28,7 +28,7 @@
 .table-row {
   &:hover,
   &:active {
-    background-color: darken($fieldset, 5%);
+    background-color: $scheme-pick-out-background;
     text-decoration: underline;
   }
 }
