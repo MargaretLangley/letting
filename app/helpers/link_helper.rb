@@ -47,7 +47,7 @@ module LinkHelper
              text: text,
              id: id,
              path: path,
-             css: "button-icon  #{css}",
+             css: "Button ButtonIcon  #{css}",
              js_css: js_css,
              method: method,
              data: data ? { confirm: confirm } : nil,
