@@ -1,34 +1,34 @@
 <%= f.fields_for :address do |b| %>
 
 <div id='<%= parent %>_address'>
-  <div class='col-1-1  faded  no-r-pad'>
+  <div class='col-1-1  grid-label  no-r-pad'>
     <h3>Address</h3>
   </div>
-  <div class='col-1-4  bottom-spacer  faded'>
+  <div class='col-1-4  bottom-spacer  grid-label'>
     <%= b.label :flat_no %>
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad'>
     <%= b.text_field :flat_no %>
   </div>
-  <div class='col-1-4  bottom-spacer  faded'>
+  <div class='col-1-4  bottom-spacer  grid-label'>
     <%= b.label :house_name %>
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad'>
     <%= b.text_field :house_name, data: { autocomplete_source: Address.uniq.pluck(:house_name).reject(&:blank?).sort }  %>
   </div>
-  <div class='col-1-4  bottom-spacer  faded'>
+  <div class='col-1-4  bottom-spacer  grid-label'>
     <%= b.label :road_no %>
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad'>
     <%= b.text_field :road_no %>
   </div>
-  <div class='col-1-4  bottom-spacer  faded'>
+  <div class='col-1-4  bottom-spacer  grid-label'>
     <%= b.label :road, class: 'required' %>
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad'>
     <%= b.text_field :road, data: { autocomplete_source: Address.uniq.pluck(:road).reject(&:blank?).sort } %>
   </div>
-  <div class='col-1-4  bottom-spacer  faded'>
+  <div class='col-1-4  bottom-spacer  grid-label'>
     <%= b.label :district %>
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad  js-toggle-selection'>
@@ -45,25 +45,25 @@
     </div>
   </div>
 
-  <div class='col-1-4  grid-row  bottom-spacer  faded'>
+  <div class='col-1-4  grid-row  bottom-spacer  grid-label'>
     <%= b.label :town %>
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad'>
     <%= b.text_field :town, data: { autocomplete_source: Address.uniq.pluck(:town).reject(&:blank?).sort } %>
   </div>
-  <div class='col-1-4  bottom-spacer  faded'>
+  <div class='col-1-4  bottom-spacer  grid-label'>
     <%= b.label :county, class: 'required' %>
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad'>
     <%= b.text_field :county, data: { autocomplete_source: Address.uniq.pluck(:county).reject(&:blank?).sort }  %>
   </div>
-  <div class='col-1-4  bottom-spacer  faded'>
+  <div class='col-1-4  bottom-spacer  grid-label'>
     <%= b.label :postcode %>
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad'>
     <%= b.text_field :postcode %>
   </div>
-  <div class='col-1-4  bottom-spacer  faded'>
+  <div class='col-1-4  bottom-spacer  grid-label'>
     <%= b.label :nation %>
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad  js-toggle-selection'>

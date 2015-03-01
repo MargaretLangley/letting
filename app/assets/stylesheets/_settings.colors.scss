@@ -84,7 +84,9 @@ $color-snowy-mint:         #dbffdd;             // Pale Green
 //
 // $TYPOGRAPHY
 //
-$primary-text:                        $color-tundora;              // Very Dark
+$primary-text:                        $color-tundora;    // Very Dark
+$color-text-faded:                    $color-boulder;
+
 
 
 // Scheme
@@ -146,7 +148,7 @@ $fieldset:                            lighten($color-primary-shade-0, 50%);  // 
 $pick-out:                            $color-primary-shade-1;
 
 $shadow:                              $color-silver-chalice;      // box-shadows on all the controls
-$color-faded:                         $color-boulder;             // Mediumum Dark
+$color-faded:                         $color-boulder;             // Medium Dark
 
 
 

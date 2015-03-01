@@ -23,7 +23,7 @@
         <% @invoicing.runs.each_with_index do |run, index|  %>
           <% run_dec = RunDecorator.new run %>
           <div id='tab-content<%= index %>' class='tab-content <%= run_dec.style_activity %> '>
-            <div class='col-8-24  grid-row  top-half-line-spacer  faded'>
+            <div class='col-8-24  grid-row  top-half-line-spacer  grid-label'>
               <h2>Run <%= run_dec.invoice_date %></h2>
             </div>
 

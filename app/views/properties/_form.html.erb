@@ -3,17 +3,17 @@
 
   <div id='property' class='grid  Shell  u-padding-1-100'>
 
-    <div class='col-23-24  grid-row  bottom-spacer  faded'>
+    <div class='col-23-24  grid-row  bottom-spacer  grid-label'>
       <h3>Property</h3>
 
-      <div class='col-1-4  grid-row  bottom-spacer  faded'>
+      <div class='col-1-4  grid-row  bottom-spacer  grid-label'>
         <%= f.label :human_ref,'Property ID', class: 'required' %>
       </div>
       <div class='col-3-4  bottom-spacer  no-r-pad'>
         <%= f.text_field :human_ref, autofocus: true %>
       </div>
 
-      <div class='col-1-4  grid-row  faded'>
+      <div class='col-1-4  grid-row  grid-label'>
         <%= f.label :client_ref, 'Client ID', class: 'required' %>
       </div>
       <div class='col-3-4  no-r-pad'>
@@ -21,13 +21,13 @@
         <%= f.hidden_field :client_id, id: 'client_id' %>
       </div>
     </div>
-    <div class='col-1-24  bottom-spacer  faded  no-r-pad'>
+    <div class='col-1-24  bottom-spacer  grid-label  no-r-pad'>
       <%= view_link property %>
     </div>
     <hr>
 
     <div class='col-12-24  grid-row'>
-      <h3 class='faded'>Occupier</h3>
+      <h3 class='grid-label'>Occupier</h3>
       <%= render 'entities/form', f: f, entitieable: property %>
       <%= render 'addresses/form', f: f, parent: 'property', address: AddressDecorator.new(property.address) %>
     </div>

@@ -124,7 +124,7 @@ $pad: 1em;
 //
 
 .grid-header {
-  @extend .faded;
+  color: $color-text-faded;
   border-bottom: 1px solid $muted-border;
   overflow: hidden;
   padding-top: 1%;
@@ -147,7 +147,7 @@ $pad: 1em;
 
 
 .grid-footer-text {
-  @extend .faded;
+  color: $color-text-faded;
   border-top: 1px solid $muted-border;
   overflow: hidden;
   padding-top: 1%;
@@ -162,6 +162,9 @@ $pad: 1em;
   white-space: nowrap;
 }
 
+.grid-label {
+  color:  $color-text-faded;
+}
 
 //
 // Information that needs to be vertically centered within a grid cell

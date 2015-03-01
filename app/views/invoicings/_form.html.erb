@@ -4,11 +4,11 @@
   <fieldset id='invoicing' class='grid  Shell  u-padding-1-25'>
     <div class='col-2-3  spacer-column'>  <!-- column 1 -->
 
-      <div class='col-12-24  grid-row  bottom-half-line-spacer  faded'>
+      <div class='col-12-24  grid-row  bottom-half-line-spacer  grid-label'>
         <h3>Search Terms</h3>
       </div>
 
-      <div class='col-6-24  grid-row  bottom-half-line-spacer  faded'>
+      <div class='col-6-24  grid-row  bottom-half-line-spacer  grid-label'>
         <%= f.label :property_range, class: 'required' %>
       </div>
       <div class='col-16-24  bottom-half-line-spacer'>
@@ -17,7 +17,7 @@
 
       <%= render 'invoicings/search', f: f %>
 
-      <div class='col-6-24  grid-row  bottom-half-line-spacer  faded'>
+      <div class='col-6-24  grid-row  bottom-half-line-spacer  grid-label'>
         Invoice Date
       </div>
       <div class='col-16-24  bottom-half-line-spacer'>
@@ -33,13 +33,13 @@
 
     <!-- across page -->
 
-    <div class='col-4-24  grid-row  bottom-spacer  faded'>Comments</div>
-    <div class='col-16-24  bottom-spacer  faded'>
+    <div class='col-4-24  grid-row  bottom-spacer  grid-label'>Comments</div>
+    <div class='col-16-24  bottom-spacer  grid-label'>
       <%= text_field_tag 'comment[]' %>
     </div>
 
-    <div class='col-4-24  grid-row  bottom-spacer  faded'>&nbsp;</div>
-    <div class='col-16-24  bottom-spacer  faded'>
+    <div class='col-4-24  grid-row  bottom-spacer  grid-label'>&nbsp;</div>
+    <div class='col-16-24  bottom-spacer  grid-label'>
       <%= text_field_tag 'comment[]' %>
     </div>
 

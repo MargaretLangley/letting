@@ -4,7 +4,7 @@
 <div class='grid  Shell  u-padding-1-25  js-toggle-selection'>
   <div class='js-togglable'>
 
-    <div class='col-22-24  grid-row  faded'>
+    <div class='col-22-24  grid-row  grid-label'>
       <h3>Contact &hellip;</h3>
     </div>
     <div class='col-1-24'>
@@ -26,7 +26,7 @@
 
   <div class='js-togglable  js-revealable'>
 
-    <div class='col-22-24  grid-row  faded'>
+    <div class='col-22-24  grid-row  grid-label'>
       <h3>Contact</h3>
     </div>
     <div class='col-1-24'>
@@ -36,13 +36,13 @@
       <%= toggle_link direction: :up, size: '2x'  %>
     </div>
 
-    <div class='col-1-4  grid-row  bottom-spacer  faded'>Client ID</div>
+    <div class='col-1-4  grid-row  bottom-spacer  grid-label'>Client ID</div>
     <div class='col-3-4  bottom-spacer'><%= client.human_ref %></div>
 
-    <div class='col-1-4  grid-row  bottom-spacer  faded'>Name</div>
+    <div class='col-1-4  grid-row  bottom-spacer  grid-label'>Name</div>
     <div class='col-3-4  bottom-spacer'><%= client.full_name %></div>
 
-    <div class='col-1-4  grid-row  bottom-spacer  faded'>Address</div>
+    <div class='col-1-4  grid-row  bottom-spacer  grid-label'>Address</div>
     <div class='col-3-4  bottom-1-line-spacer'>
       <%= simple_format(client.address.text, {}, wrapper_tag: 'div') %>
     </div>

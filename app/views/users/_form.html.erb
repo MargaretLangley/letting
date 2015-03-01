@@ -4,31 +4,31 @@
   <fieldset id='user' class='grid  Shell  u-padding-1-12'>
     <div class='col-23-24  vertical-spacer spacer-column'>
 
-      <div class='col-8-24  grid-row  bottom-spacer  faded'>
+      <div class='col-8-24  grid-row  bottom-spacer  grid-label'>
         <%= f.label :nickname, class: 'required' %>
       </div>
       <div class='col-16-24  bottom-spacer'><%= f.text_field :nickname %></div>
 
-      <div class='col-8-24  grid-row  bottom-spacer  faded'>
+      <div class='col-8-24  grid-row  bottom-spacer  grid-label'>
         <%= f.label :email, class: 'required' %>
       </div>
       <div class='col-16-24  bottom-spacer'><%= f.text_field :email %></div>
 
-      <div class='col-8-24  grid-row  bottom-spacer  faded'>
+      <div class='col-8-24  grid-row  bottom-spacer  grid-label'>
         <%= f.label :password, class: 'required' %>
       </div>
       <div class='col-16-24  bottom-spacer'>
         <%= f.password_field :password %>
       </div>
 
-      <div class='col-8-24  grid-row  bottom-spacer  faded'>
+      <div class='col-8-24  grid-row  bottom-spacer  grid-label'>
           <%= f.label :password_confirmation, class: 'required' %>
       </div>
       <div class='col-16-24  bottom-spacer'>
         <%= f.password_field :password_confirmation %>
       </div>
 
-      <div class='col-8-24  grid-row  bottom-spacer  faded'>
+      <div class='col-8-24  grid-row  bottom-spacer  grid-label'>
         <%= f.label :role, 'Admin Status',  class: 'required' %>
       </div>
       <div class='col-16-24  bottom-spacer'><%= f.select :role, User.roles.keys.to_a %></div>
