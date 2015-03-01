@@ -26,8 +26,8 @@
 \*------------------------------------------------------------------*/
 
 body {
-  background-color: $pair-light-background;
-  color: $pair-light-foreground;
+  background-color: $scheme-light-background;
+  color: $scheme-light-foreground;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   /* font size left alone and all sizes are relative using em
      argument to go for rem (size of font relative to html element) */
@@ -36,8 +36,8 @@ body {
 @media screen {
 
   header {
-    background-color: $pair-dark-background;
-    color: $pair-dark-foreground;
+    background-color: $scheme-dark-background;
+    color: $scheme-dark-foreground;
     height: 3em;
     width: 100%;
   }

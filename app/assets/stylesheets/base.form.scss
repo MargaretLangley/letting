@@ -22,8 +22,8 @@ input[type=submit] {
 }
 
 input[readonly='readonly'] {
-  background-color: $pair-disabled-background;
-  color: $pair-disabled-foreground;
+  background-color: $scheme-disabled-background;
+  color: $scheme-disabled-foreground;
 }
 
 input[type='checkbox'] {

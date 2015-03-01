@@ -99,27 +99,27 @@ $primary-text:                        $color-tundora;              // Very Dark
 //
 
 // light
-$pair-light-background:        white;
-$pair-light-foreground:        $color-tundora;
+$scheme-light-background:        white;
+$scheme-light-foreground:        $color-tundora;
 
 // dark
-$pair-dark-background:         $color-primary-shade-0;
-$pair-dark-foreground:         white;
+$scheme-dark-background:         $color-primary-shade-0;
+$scheme-dark-foreground:         white;
 
 // active
-$pair-active-background:       $color-primary-shade-4;
-$pair-active-foreground:       white;
+$scheme-active-background:       $color-primary-shade-4;
+$scheme-active-foreground:       white;
 
 
 // focus
-$pair-focus-background:       $color-complimentary-shade-0;
-$pair-focus-foreground:       $color-tundora;
-$pair-focus-shadow:           $color-complimentary-shade-4;
+$scheme-focus-background:       $color-complimentary-shade-0;
+$scheme-focus-foreground:       $color-tundora;
+$scheme-focus-shadow:           $color-complimentary-shade-4;
 
 
 // disabled
-$pair-disabled-background:     $color-grey-alto;           // Very Pale Grey
-$pair-disabled-foreground:     $primary-text;
+$scheme-disabled-background:     $color-grey-alto;           // Very Pale Grey
+$scheme-disabled-foreground:     $primary-text;
 
 
 
@@ -165,14 +165,14 @@ $primary-action-active-color:         white;
 // Plain
 $button-icon-background:              white;
 $button-icon-color:                   $color-primary-shade-4;    // venice-blue
-$button-icon-active-background:       $pair-active-background;    // venice-blue
-$button-icon-active-color:            $pair-active-foreground;
+$button-icon-active-background:       $scheme-active-background;    // venice-blue
+$button-icon-active-color:            $scheme-active-foreground;
 
 
 // Plain Disabled
 // No 'active/hover' changes
-$button-icon-disabled-background:     $pair-disabled-background;     // Grey
-$button-icon-disabled-color:          $pair-disabled-foreground;
+$button-icon-disabled-background:     $scheme-disabled-background;     // Grey
+$button-icon-disabled-color:          $scheme-disabled-foreground;
 
 
 //
@@ -214,8 +214,8 @@ $flash-opacity:                       .85;
 
 // $plain-link-background:            initial;                      // Could not get this to work.
 $plain-link-color:                    $color-primary-shade-4;       // venice-blue
-$plain-link-active-background:        $pair-active-background;      // venice-blue
-$plain-link-active-color:             $pair-active-foreground;
+$plain-link-active-background:        $scheme-active-background;      // venice-blue
+$plain-link-active-color:             $scheme-active-foreground;
 
 
 // $inverted-link-background:         initial;                      // Could not get this to work.
@@ -244,17 +244,17 @@ $menu-item-color:                     $color-primary-shade-4;         // Medium 
 // $TABS
 
 // index default
-$tab-index-default-background:        $pair-dark-background;
-$tab-index-default-color:             $pair-dark-foreground;
-$tab-index-default-active-background: $pair-active-background;
-$tab-index-default-active-color:      $pair-active-foreground;
+$tab-index-default-background:        $scheme-dark-background;
+$tab-index-default-color:             $scheme-dark-foreground;
+$tab-index-default-active-background: $scheme-active-background;
+$tab-index-default-active-color:      $scheme-active-foreground;
 
 
 // index focus
 $tab-index-focus-background:          $color-complimentary-shade-0;
 $tab-index-focus-border-color:        $color-complimentary-shade-3;
-$tab-index-focus-active-background:   $pair-active-background;
-$tab-index-focus-active-color:        $pair-active-foreground;
+$tab-index-focus-active-background:   $scheme-active-background;
+$tab-index-focus-active-color:        $scheme-active-foreground;
 
 
 
@@ -269,6 +269,6 @@ $search-wrapper-background:           $color-primary-shade-0;
 }
 
 .focus {
-  background:   $pair-focus-background;
-  color:        $pair-focus-foreground;
+  background:   $scheme-focus-background;
+  color:        $scheme-focus-foreground;
 }
