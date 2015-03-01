@@ -23,7 +23,7 @@ input[type=submit] {
 
 input[readonly='readonly'] {
   background-color: $pair-disabled-background;
-  color: $pair-active-foreground;
+  color: $pair-disabled-foreground;
 }
 
 input[type='checkbox'] {
