@@ -34,7 +34,7 @@
 // data the star.
 //
 .Panel-Content {
-  background-color: $neutral;
+  background-color: $scheme-light-background;
 
   @media screen {
     box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur-content $shadow-spread $color-shadow;

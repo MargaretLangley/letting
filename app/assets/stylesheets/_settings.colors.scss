@@ -90,7 +90,7 @@ $color-snowy-mint:         #dbffdd;             // Pale Green
 \*----------------------------------------------------------------------------*/
 
 
-$neutral:                             $color-alabaster;           // off white
+$color-neutral:                       $color-alabaster;           // off white
 
 $color-line:                          $color-grey-alto;           // Very Pale Grey
 $color-shadow:                        $color-silver-chalice;      // box-shadows on all the controls
@@ -116,7 +116,8 @@ $color-text-faded:                    $color-boulder;    // Medium Gray
 //
 
 // light
-$scheme-light-background:        white;
+$scheme-light-background:        $color-neutral;
+$scheme-light-border:            darken($color-neutral, $border-color-darken);
 $scheme-light-foreground:        $color-tundora;
 
 // dark

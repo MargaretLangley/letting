@@ -8,8 +8,8 @@
 @import 'settings.colors';
 
 .ui-menu .ui-menu-item a {
-  background-color: $neutral;
-  border: 1px solid darken($neutral, $border-color-darken);
+  background-color: $scheme-light-background;
+  border: 1px solid $scheme-light-border;
   border-radius: $border-radius;
-  color: $color-text-primary;
+  color: $scheme-light-foreground;
 }
