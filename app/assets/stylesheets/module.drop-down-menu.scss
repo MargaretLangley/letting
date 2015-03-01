@@ -39,6 +39,7 @@
 .drop-down-link {
   border: 1px solid darken($drop-down-link-background, $border-color-darken);
   border-radius: $border-radius;
+  display: block;
   padding: .5em 2em;
 
   &:link,
