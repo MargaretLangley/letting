@@ -106,7 +106,12 @@ $scheme-light-foreground:        $color-tundora;
 $scheme-dark-background:         $color-primary-shade-0;
 $scheme-dark-foreground:         white;
 
-// active
+// active   (color: white, back dark-blue)
+// 1) $link-plain-active-*
+// 2) $button-icon-active-*
+// 3) $tab-index-plain-active-*
+// 4) $tab-index-focus-active-*
+
 $scheme-active-background:       $color-primary-shade-4;
 $scheme-active-foreground:       white;
 
@@ -120,6 +125,7 @@ $scheme-focus-shadow:           $color-complimentary-shade-4;
 // disabled
 $scheme-disabled-background:     $color-grey-alto;           // Very Pale Grey
 $scheme-disabled-foreground:     $primary-text;
+
 
 
 
@@ -244,10 +250,10 @@ $menu-item-color:                     $color-primary-shade-4;         // Medium 
 // $TABS
 
 // index default
-$tab-index-default-background:        $scheme-dark-background;
-$tab-index-default-color:             $scheme-dark-foreground;
-$tab-index-default-active-background: $scheme-active-background;
-$tab-index-default-active-color:      $scheme-active-foreground;
+$tab-index-plain-background:        $scheme-dark-background;
+$tab-index-plain-color:             $scheme-dark-foreground;
+$tab-index-plain-active-background: $scheme-active-background;
+$tab-index-plain-active-color:      $scheme-active-foreground;
 
 
 // index focus

@@ -90,14 +90,14 @@
 
 // tab-index-a skin
 .tab-index-a-default {
-  background-color: $tab-index-default-background;
-  border: 1px solid darken($tab-index-default-background, $border-color-darken);
+  background-color: $tab-index-plain-background;
+  border: 1px solid darken($tab-index-plain-background, $border-color-darken);
   border-bottom: 0;
-  color: $tab-index-default-color;
+  color: $tab-index-plain-color;
 
   &:hover {
-    background: $tab-index-default-active-background;
-    color: $tab-index-default-active-color;
+    background: $tab-index-plain-active-background;
+    color: $tab-index-plain-active-color;
   }
 }
 
