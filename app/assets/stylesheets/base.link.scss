@@ -10,12 +10,11 @@
 @import 'settings.colors';
 
 a {
-  color: $link-plain-color;
+  color: $link-text-primary-color;
   text-decoration: underline;
 
   &:hover,
   &:active {
-    background-color: $link-plain-active-background;
-    color: $link-plain-active-color;
+    color: $link-text-primary-active-color;
   }
 }

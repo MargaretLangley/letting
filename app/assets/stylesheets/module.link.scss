@@ -7,25 +7,45 @@
 
 @import 'settings.colors';
 
-.link-plain {
+//
+// Text Link Primary
+// Text changes - Background same
+//
+
+//
+// Text Link Primary
+//
+.link-text-primary {
   &:link,
   &:visited, {
-    background-color: initial;
-    color: $link-plain-color;
+    color: $link-text-primary-color;
   }
 
   &:hover,
   &:active {
-    background-color: $link-plain-active-background;
-    color: $link-plain-active-color;
+    color: $link-text-primary-active-color;
   }
 }
 
+//
+// White Link
+//
+.link-text-white {
+  &:link,
+  &:visited {
+    color: $link-text-white-color;
+  }
 
-// Structure - Does not add color
-// Most links should have underline to be obvious to the user
-// A few links are not obvious and we help mouse users by telling
-// them they are over a link
+  &:hover,
+  &:active {
+    color: $link-text-white-active-color;
+  }
+}
+
+//
+// link-hover
+//
+// Adds underline on rollover
 //
 .link-hover {
   text-decoration: none;
@@ -37,25 +57,8 @@
   }
 }
 
-
 //
-// Dark background link
-//
-.link-inverted {
-  &:link,
-  &:visited {
-    background-color: initial;
-    color: $link-inverted-color;
-  }
-
-  &:hover,
-  &:active {
-    background-color: $link-inverted-active-background;
-    color: $link-inverted-active-color;
-  }
-}
-
-
+// link view testing
 // UJS are hidden from clicking. Hidden dot for use with testing driver Capybara
 // Last resort as tests should try to replicate a user experience.
 //

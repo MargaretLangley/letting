@@ -107,7 +107,7 @@ $scheme-dark-background:         $color-primary-shade-0;
 $scheme-dark-foreground:         white;
 
 // active   (color: white, back dark-blue)
-// 1) $link-plain-active-*
+// 1) $link-text-primary-active-*
 // 2) $button-icon-active-*
 // 3) $tab-index-plain-active-*
 // 4) $tab-index-focus-active-*
@@ -125,7 +125,6 @@ $scheme-focus-shadow:           $color-complimentary-shade-4;
 // disabled
 $scheme-disabled-background:     $color-grey-alto;           // Very Pale Grey
 $scheme-disabled-foreground:     $primary-text;
-
 
 
 
@@ -217,17 +216,11 @@ $flash-opacity:                       .85;
 //
 // $module.links
 //
+$link-text-primary-color:             $color-primary-shade-4;       // venice-blue
+$link-text-primary-active-color:      $color-primary-shade-2;
 
-// $link-plain-background:            initial;                      // Could not get this to work.
-$link-plain-color:                    $color-primary-shade-4;       // venice-blue
-$link-plain-active-background:        $scheme-active-background;      // venice-blue
-$link-plain-active-color:             $scheme-active-foreground;
-
-// $link-inverted-background:         initial;                      // Could not get this to work.
-$link-inverted-color:                 white;
-$link-inverted-active-background:     initial;
-$link-inverted-active-color:          white;
-
+$link-text-white-color:               $color-alabaster;
+$link-text-white-active-color:        white;
 
 
 // $Drop Down Menu
