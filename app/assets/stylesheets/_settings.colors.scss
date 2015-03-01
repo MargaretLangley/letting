@@ -22,7 +22,13 @@
 
 @import 'settings.globals';
 
-// Pallet Colors
+/*----------------------------------------------------------------------------*\
+
+  $PALLET COLORS
+
+  The list of colors used in the application.
+
+\*----------------------------------------------------------------------------*/
 
 // Primary color, Blue, and shades
 $color-primary-shade-0:      #227dbe;    // $color-mariner
@@ -71,14 +77,12 @@ $color-boulder:            #777;                // Medium Dark Grey
 $color-tundora:            #444;                // Very Dark Grey
 
 
-
-// Process these colors into pallet
-// Currently none!
-
-$color-link-water:         #e6f1fa;             // Very Light Blue
-$color-cornflower:         #a5cfee;             // Light to Medium Blue
 // Flash Colors
 $color-snowy-mint:         #dbffdd;             // Pale Green
+
+
+// Process these colors into pallet
+// -  Currently none!
 
 
 /*----------------------------------------------------------------------------*\
@@ -238,7 +242,7 @@ $drop-down-link-active-color:         $scheme-fieldset-background;
 
 
 // $MENU
-$menu-background:                     $color-link-water;              // Very Light Blue
+$menu-background:                     $scheme-fieldset-background;              // Very Light Blue
 $menu-border-left:                    $color-ternary-shade-0;         // Pink
 $menu-border-bottom:                  $color-primary-shade-2;         // Medium Dark Blue
 $menu-color:                          $color-primary-shade-4;         // venice-blue
