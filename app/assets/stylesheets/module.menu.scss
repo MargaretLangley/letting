@@ -33,7 +33,7 @@ Accordion HTML
 .accordion {
   background: $menu-background;
   border-radius: $border-radius;
-  box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
+  box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $color-shadow;
   color: $menu-color;
   font-size: 16px;
   line-height: 35px;
@@ -74,7 +74,7 @@ Accordion HTML
 // Active: Active menus are displayed
 //
 .active-menu .menu {
-  background-color: $shadow;
+  background-color: $color-shadow;
   border-bottom: 1px solid $menu-border-bottom;
   display: block;
 }

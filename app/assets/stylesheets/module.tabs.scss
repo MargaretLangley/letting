@@ -125,7 +125,7 @@
   border-radius: $border-radius;
 
   @media screen {
-    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $color-shadow;
   }
 }
 

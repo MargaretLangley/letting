@@ -9,32 +9,35 @@
 @import 'tools.mixins';
 
 //
-// panel
+// Panel
 //
 // Only used on invoicings-show - think concept could be used in application
 // more often
 //
-.panel {
+.Panel {
   @include clearfix;
-  background-color: $pick-out;
-  border: 1px darken($pick-out, 5%);
   border-radius: $border-radius;
   padding: 1%;
 }
 
 
 //
+// Darkend 'emphaisised' Color
+//
+.Panel-PickOut {
+  background-color: $scheme-pick-out-background;
+  border: 1px solid $scheme-pick-out-border;
+}
+
+//
 // Displaying content on the screen
 // Given lighter, or in the case of printing white background, to make
-// figures as clear as possible.
+// data the star.
 //
-
-.content {
-  @include clearfix;
+.Panel-Content {
   background-color: $neutral;
-  border-radius: $border-radius;
 
   @media screen {
-    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur-content $shadow-spread $shadow;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur-content $shadow-spread $color-shadow;
   }
 }

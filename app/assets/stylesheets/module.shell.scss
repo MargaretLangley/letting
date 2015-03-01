@@ -14,7 +14,7 @@
     background-color: $fieldset;
     border: 1px solid darken($fieldset, $border-color-darken);
     border-radius: $border-radius;
-    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $color-shadow;
   }
 
   @media print {

@@ -124,7 +124,7 @@ $pad: 1em;
 //
 
 .grid-header {
-  border-bottom: 1px solid $muted-border;
+  border-bottom: 1px solid $color-line;
   color: $color-text-faded;
   overflow: hidden;
   padding-top: 1%;
@@ -132,7 +132,7 @@ $pad: 1em;
 }
 
 .grid-pick-header {
-  border-bottom: 1px solid darken($muted-border, 2%);
+  border-bottom: 1px solid darken($color-line, 2%);
   overflow: hidden;
   padding-top: 1%;
   white-space: nowrap;
@@ -147,7 +147,7 @@ $pad: 1em;
 
 
 .grid-footer-text {
-  border-top: 1px solid $muted-border;
+  border-top: 1px solid $color-line;
   color: $color-text-faded;
   overflow: hidden;
   padding-top: 1%;
@@ -155,7 +155,7 @@ $pad: 1em;
 }
 
 .grid-footer-number {
-  border-top: 1px solid $muted-border;
+  border-top: 1px solid $color-line;
   font-weight: bold;
   overflow: hidden;
   padding-top: 1%;
@@ -188,5 +188,5 @@ $pad: 1em;
 // Used on: payment
 //
 .pick-out {
-  background-color: $pick-out;
+  background-color: $scheme-pick-out-background;
 }

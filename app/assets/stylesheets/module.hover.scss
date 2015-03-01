@@ -20,7 +20,7 @@
   /* Grow */
   .hvr-grow {
     backface-visibility: hidden;
-    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $color-shadow;
     display: inline-block;
     -moz-osx-font-smoothing: grayscale;
     transform: translateZ(0);
@@ -36,7 +36,7 @@
   /* Float */
   .hvr-float {
     backface-visibility: hidden;
-    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $color-shadow;
     display: inline-block;
     -moz-osx-font-smoothing: grayscale;
     transform: translateZ(0);
@@ -53,7 +53,7 @@
   /* Sink */
   .hvr-sink {
     backface-visibility: hidden;
-    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $shadow;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $color-shadow;
     display: inline-block;
     -moz-osx-font-smoothing: grayscale;
     transform: translateZ(0);

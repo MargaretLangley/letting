@@ -117,6 +117,11 @@ $scheme-dark-foreground:         white;
 $scheme-active-background:       $color-primary-shade-4;
 $scheme-active-foreground:       white;
 
+// Darker background color
+// - emphasise over field color
+//
+$scheme-pick-out-background:     $color-primary-shade-1;
+$scheme-pick-out-border:         darken($scheme-pick-out-background, 5%);
 
 // focus
 $scheme-focus-background:       $color-complimentary-shade-0;
@@ -141,13 +146,11 @@ $scheme-disabled-foreground:     $color-text-primary;
 // $base
 $neutral:                             $color-alabaster;           // off white
 
-$muted-border:                        $color-grey-alto;           // Very Pale Grey
+$color-line:                          $color-grey-alto;           // Very Pale Grey
+$color-shadow:                        $color-silver-chalice;      // box-shadows on all the controls
 
 $fieldset:                            lighten($color-primary-shade-0, 50%);  // Egg Shell  u-padding-1-100Blue
 
-$pick-out:                            $color-primary-shade-1;
-
-$shadow:                              $color-silver-chalice;      // box-shadows on all the controls
 
 
 //

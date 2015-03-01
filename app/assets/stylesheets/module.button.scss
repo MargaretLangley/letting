@@ -15,7 +15,7 @@
 
   .Button {
     border-radius: $border-radius;
-    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-button-blur $shadow-spread $shadow;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-button-blur $shadow-spread $color-shadow;
     display: inline-block;
     font-size: 1em;
     margin: 0;
