@@ -148,9 +148,6 @@ $fieldset:                            lighten($color-primary-shade-0, 50%);  // 
 $pick-out:                            $color-primary-shade-1;
 
 $shadow:                              $color-silver-chalice;      // box-shadows on all the controls
-$color-faded:                         $color-boulder;             // Medium Dark
-
-
 
 
 //
@@ -264,6 +261,6 @@ $search-wrapper-background:           $color-primary-shade-0;
 
 
 .focus {
-  background:   $scheme-focus-background;
-  color:        $scheme-focus-foreground;
+  background: $scheme-focus-background;
+  color: $scheme-focus-foreground;
 }
