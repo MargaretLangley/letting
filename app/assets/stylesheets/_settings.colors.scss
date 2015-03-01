@@ -87,10 +87,15 @@ $color-snowy-mint:         #dbffdd;             // Pale Green
 $primary-text:                        $color-tundora;              // Very Dark
 
 
+// Scheme
 //
+// Colors which work together.
+//
+// Contains
 // Contrasting Pairs 'Opposites'
-// Given the palette color as background what should be the foreground?
-// Given the palette color as foreground what should be the background?
+// - Given the palette color as background what should be the foreground?
+// - Given the palette color as foreground what should be the background?
+// Shadow color used for low-lighting, borders
 //
 
 // light
@@ -104,6 +109,13 @@ $pair-dark-foreground:         white;
 // active
 $pair-active-background:       $color-primary-shade-4;
 $pair-active-foreground:       white;
+
+
+// focus
+$pair-focus-background:       $color-complimentary-shade-0;
+$pair-focus-foreground:       $color-tundora;
+$pair-focus-shadow:           $color-complimentary-shade-4;
+
 
 // disabled
 $pair-disabled-background:     $color-grey-alto;           // Very Pale Grey
@@ -254,4 +266,9 @@ $search-wrapper-background:           $color-primary-shade-0;
 // Used in forms
 .faded {
   color: $color-faded;
+}
+
+.focus {
+  background:   $pair-focus-background;
+  color:        $pair-focus-foreground;
 }

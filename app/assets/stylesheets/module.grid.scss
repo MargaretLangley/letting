@@ -138,6 +138,14 @@ $pad: 1em;
   white-space: nowrap;
 }
 
+.grid-focus-header {
+  border-bottom: 1px solid $pair-focus-shadow;
+  overflow: hidden;
+  padding-top: 1%; // added for new_payment
+  white-space: nowrap;
+}
+
+
 .grid-footer-text {
   @extend .faded;
   border-top: 1px solid $muted-border;
