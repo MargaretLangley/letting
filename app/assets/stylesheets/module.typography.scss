@@ -39,6 +39,13 @@
 }
 
 
+// Text decoration
+
+.text-overline {
+  text-decoration: overline;
+}
+
+
 // Clipping text - hides the end of the line
 .text-clip {
   overflow: hidden;
@@ -63,5 +70,3 @@
     text-align: center;
   }
 }
-
-
