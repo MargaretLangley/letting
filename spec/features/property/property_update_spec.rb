@@ -9,9 +9,10 @@ describe 'Property#Update', type: :feature  do
   context 'Agentless' do
     before(:each) do
       log_in
-      client_create \
-        human_ref: 90,
-        properties: [property_new(id: 1, human_ref: 80, account: account_new)]
+      property_create id: 1,
+                      human_ref: 80,
+                      account: account_new,
+                      client: client_new(human_ref: 90)
     end
 
     it 'opens valid page', js: true  do
