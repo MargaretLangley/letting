@@ -11,9 +11,13 @@
 #
 class Payment < ActiveRecord::Base
   belongs_to :account, inverse_of: :payments
-  has_many :credits, dependent: :destroy do
+  has_many :credits, inverse_of: :payment, dependent: :destroy do
     def clear_up
       each(&:clear_up)
+    end
+
+    def register_booking payment
+      each { |credit| credit.register_booking(payment) }
     end
   end
   after_initialize :init
@@ -37,12 +41,17 @@ class Payment < ActiveRecord::Base
     credits.push(*account.make_credits)
   end
 
-  # form attributes come with booked_at as a date without a time.
-  # if the date is today we add the current time on.
-  def timestamp_booking
+  # register_booking
+  #
+  # record the booked_at time.
+  #   - form attributes come with booked_at as a date without a time.
+  #     if the date is today we add the current time on.
+  def register_booking
     return unless booked_at
+
     self.booked_at = ClockIn.new.recorded_as booked_time: booked_at.to_date,
                                              add_time: true
+    credits.register_booking(self)
   end
 
   def self.date_range(range: '2013-01-01'..'2013-12-31')

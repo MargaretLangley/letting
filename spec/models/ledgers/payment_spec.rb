@@ -48,7 +48,7 @@ describe Payment, :payment, :ledgers, type: :model do
     end
   end
 
-  describe '#timestamp_booking' do
+  describe '#register_booking' do
     # changing for Date to DateTime - so I want test to fail if we use date
     before { Timecop.freeze Time.zone.local(2013, 9, 30, 2, 0) }
     after  { Timecop.return }
@@ -57,7 +57,7 @@ describe Payment, :payment, :ledgers, type: :model do
       payment = payment_new account: account_new,
                             booked_at: Time.zone.local(2013, 9, 30, 10, 0)
 
-      payment.timestamp_booking
+      payment.register_booking
 
       expect(payment.booked_at)
         .to eq Time.zone.local(2013, 9, 30, 2, 0)
@@ -66,7 +66,7 @@ describe Payment, :payment, :ledgers, type: :model do
     it 'booking time set to end of day if booking in past' do
       payment = payment_new account: account_new,
                             booked_at: Time.zone.local(2013, 9, 29, 10, 0)
-      payment.timestamp_booking
+      payment.register_booking
 
       expect(payment.booked_at)
         .to be_within(5.seconds)
@@ -77,7 +77,7 @@ describe Payment, :payment, :ledgers, type: :model do
       payment = payment_new account: account_new,
                             booked_at: Time.zone.local(2013, 10, 1, 10, 0)
 
-      payment.timestamp_booking
+      payment.register_booking
 
       expect(payment.booked_at)
         .to be_within(5.seconds)

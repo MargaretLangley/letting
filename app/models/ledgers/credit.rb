@@ -14,7 +14,7 @@
 ####
 #
 class Credit < ActiveRecord::Base
-  belongs_to :payment
+  belongs_to :payment, inverse_of: :credits
   belongs_to :account
   belongs_to :charge, inverse_of: :credits
   delegate :charge_type, to: :charge
@@ -45,6 +45,12 @@ class Credit < ActiveRecord::Base
 
   def spent?
     outstanding.round(2).zero?
+  end
+
+  # set the time of the credit as the payment time
+  #
+  def register_booking payment
+    self.at_time = payment.booked_at
   end
 
   scope :total, -> { sum(:amount)  }

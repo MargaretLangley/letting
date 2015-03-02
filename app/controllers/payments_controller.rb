@@ -42,7 +42,7 @@ class PaymentsController < ApplicationController
     @payment = PaymentDecorator
                .new(Payment.new(payment_params.except(:human_ref)))
     set_booked_on date: @payment.booked_at
-    @payment.timestamp_booking
+    @payment.register_booking
     if @payment.save
       redirect_to new_payment_path, flash: { save: created_message }
     else
