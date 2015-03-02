@@ -1,7 +1,7 @@
 <div class='js-group-toggle'>
   <%= render 'entities/header' %>
   <%= f.fields_for :entities do |builder| %>
-    <div id='<%= entity_field_id(entitieable, builder.index) %>' class='js-enclosed-toggle <%= "#{hide_extra_new_records record: builder.object, index: builder.index} " %>' >
+    <div id='<%= entity_field_id(entitieable, builder.index) %>' class='js-enclosed-toggle <%= "#{hide_empty_records_after_first record: builder.object, index: builder.index} " %>' >
       <div class='col-6-24  grid-row  bottom-spacer  spec-entity-count'>
         <%= builder.text_field :title, class: 'js-clear  width-1-1' %>
       </div>

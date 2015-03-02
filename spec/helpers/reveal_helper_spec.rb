@@ -1,25 +1,25 @@
 require 'rails_helper'
 
 describe RevealHelper, type: :helper do
-  describe '#hide_extra_new_records' do
-    it 'display if new and first' do
+  describe '#hide_empty_records_after_first' do
+    it 'display if empty and first' do
       object = double
-      allow(object).to receive('new_record?').and_return true
-      expect(hide_extra_new_records record: object, index: 0)
-        .to be_blank
+      allow(object).to receive('empty?').and_return true
+      expect(hide_empty_records_after_first record: object, index: 0)
+        .to eq ''
     end
 
-    it 'hide if new and not first' do
+    it 'hide if empty and not first' do
       object = double
-      allow(object).to receive('new_record?').and_return true
-      expect(hide_extra_new_records(record: object, index: 1))
+      allow(object).to receive('empty?').and_return true
+      expect(hide_empty_records_after_first(record: object, index: 1))
         .to eq 'js-revealable'
     end
 
-    it 'displays if valid' do
+    it 'displays if not empty' do
       object = double
-      allow(object).to receive('new_record?').and_return false
-      expect(hide_extra_new_records(record: object, index: 0)).to be_blank
+      allow(object).to receive('empty?').and_return false
+      expect(hide_empty_records_after_first(record: object, index: 0)).to eq ''
     end
   end
 

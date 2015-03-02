@@ -29,8 +29,8 @@ module LinkHelper
     app_link icon: icon, size: size, path: path, css: "button-icon  #{css}", js_css: js_css, title: title
   end
 
-  def delete_charge js_css:, title: 'Delete Charge'
-    delete_link method: nil, js_css: js_css, data: false, title: title
+  def delete_charge css: '', js_css:, title: 'Delete Charge'
+    delete_link method: nil, css: css, js_css: js_css, data: false, title: title
   end
 
   def delete_link text: '',

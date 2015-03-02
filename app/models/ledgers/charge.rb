@@ -49,6 +49,10 @@ class Charge < ActiveRecord::Base
     mark_for_destruction if empty?
   end
 
+  def empty?
+    attributes.except(*ignored_attrs).values.all?(&:blank?)
+  end
+
   def to_s
     "charge: #{charge_type}, #{cycle}"
   end
@@ -66,10 +70,6 @@ class Charge < ActiveRecord::Base
                            amount:     amount,
                            account_id: account_id,
                            period:     matched_cycle.period
-  end
-
-  def empty?
-    attributes.except(*ignored_attrs).values.all?(&:blank?)
   end
 
   def ignored_attrs

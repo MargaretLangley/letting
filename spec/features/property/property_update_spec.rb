@@ -2,6 +2,8 @@ require 'rails_helper'
 
 #
 # Property's route path is to account
+# Tests for creating charges onto a property have been moved to
+# charge_create_spec.rb
 #
 describe 'Property#Update', type: :feature  do
   let(:account) { AccountPage.new }
@@ -23,7 +25,6 @@ describe 'Property#Update', type: :feature  do
                              type: '#property_address',
                              address: address_new
       account.expect_entity self, type: 'property', **person_attributes
-      # charge?
     end
 
     it 'updates account', js: true do
@@ -53,33 +54,6 @@ describe 'Property#Update', type: :feature  do
       account.expect_entity self,
                             type: 'property_agent_attributes',
                             **company_attributes
-    end
-
-    it 'adds date charge' do
-      charge = charge_create cycle: cycle_new(id: 1, charged_in: 'advance'),
-                             payment_type: 'manual'
-      account.load id: 1
-
-      account.charge charge: charge
-      account.button('Update').successful?(self).load id: 1
-
-      expect(account.expect_charge(order: 0).charge_type)
-        .to eq charge.charge_type
-      expect(account.expect_charge(order: 0).cycle_id).to eq charge.cycle.id
-      expect(account.expect_charge(order: 0).amount).to eq charge.amount
-    end
-
-    it 'deletes charge', js: true do
-      charge = charge_create cycle: cycle_new(id: 1, charged_in: 'advance')
-      Account.first.charges << charge
-      account.load id: 1
-      expect(Account.first.charges.size).to eq 1
-
-      account.delete_charge
-
-      account.button('Update').successful?(self)
-
-      expect(Account.first.charges.size).to eq 0
     end
 
     it 'displays form errors' do

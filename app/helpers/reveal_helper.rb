@@ -12,28 +12,48 @@
 # When you 'add (make visible)' an element we find the closest js-group-toggle
 # from the add button and the reveal the first hidden element.
 #
-# When you 'delete (hide)' an element we find the closest js-enclosed box
-# hide it, clear it.
+# When you 'hide' an element we find the closest js-enclosed box
+# hide it, clear it - by adding the js-clear class to the element.
+#
+# When you 'delete' an element we find the closest js-enclosed box
+# hide it, and flag to delete and disable the element
+#   - stopping resuse is by adding the js-clear class to the element.
 #
 ####
 #
 module RevealHelper
-  # First items cannot be hidden - everything else can.
-  # Wrapping css style - js-revealable is alias for hidden.
-  def hide_extra_new_records(record:, index:)
-    record.new_record? && index > 0 ? 'js-revealable' : ''
+  # hide_empty_records_after_first
+  #
+  # First empty row is visible - subsequent empty rows are hidden.
+  #  - css class .js-revealable is an alias for hidden
+  #
+  # All other, full, rows are initialised as visible
+  #
+  def hide_empty_records_after_first(record:, index:)
+    return '' unless record.empty?
+
+    index > 0 ? 'js-revealable' : ''
   end
 
+  # first_record?(index:)
+  # sometimes we want to do something special for the first row.
+  # args
+  # index - the row's index
+  #
   def first_record?(index:)
     return false if index > 0
     true
   end
 
-  # If we are deleting a record do we hide it or do we destroy it
-  # - New records have not been persisted and can be hidden and
-  # revealed without worrying about destroying the record.
-  # - Records that have been saved previously - will need to be
-  # flagged to be deleted.
+  # hide_or_destroy
+  #
+  # if we are deleting a record do we hide it or do we destroy it?
+  # - new records are in memory only and can be cleared and hidden
+  #   and then added and reused all within js
+  #   - this has no further effect
+  # - Persisted Records are flagged to be deleted.
+  # args
+  # record - record to be hidden or destroyed
   #
   # Functionality all handled by js - currently reveal.js
   #
