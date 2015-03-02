@@ -46,7 +46,7 @@ class Charge < ActiveRecord::Base
   end
 
   def clear_up_form
-    mark_for_destruction unless edited?
+    mark_for_destruction if empty?
   end
 
   def to_s
@@ -54,10 +54,6 @@ class Charge < ActiveRecord::Base
   end
 
   private
-
-  def edited?
-    !empty?
-  end
 
   # Converts a Charge object into a Chargeable object.
   # matched_cycle - struct of date the charge becomes due, spot, and
