@@ -69,7 +69,10 @@ describe 'Property#create', type: :feature do
                            type: '#property_address',
                            address: address_new
     account.expect_entity self, type: 'property', **person_attributes
-    account.expect_charge self, charge: charge
+
+    expect(account.expect_charge(order: 0).charge_type).to eq charge.charge_type
+    expect(account.expect_charge(order: 0).cycle_id).to eq charge.cycle.id
+    expect(account.expect_charge(order: 0).amount).to eq charge.amount
   end
 
   def expect_agent

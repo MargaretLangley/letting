@@ -61,7 +61,10 @@ describe 'Property#Update', type: :feature  do
 
       account.charge charge: charge
       account.button('Update').successful?(self).load id: 1
-      account.expect_charge self, charge: charge
+
+      expect(account.expect_charge(order: 0).charge_type).to eq charge.charge_type
+      expect(account.expect_charge(order: 0).cycle_id).to eq charge.cycle.id
+      expect(account.expect_charge(order: 0).amount).to eq charge.amount
     end
 
     it 'deletes charge', js: true do

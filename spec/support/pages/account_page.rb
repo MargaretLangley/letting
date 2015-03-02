@@ -97,14 +97,13 @@ class AccountPage
     fill_in "#{id_stem}_amount", with: charge.amount
   end
 
-  def expect_charge spec, order: 0, charge: charge
+  def expect_charge order: 0
+    charge = Charge.new
     id_stem = "property_account_attributes_charges_attributes_#{order}"
-    spec.expect(find_field("#{id_stem}_charge_type").value)
-      .to spec.have_text charge.charge_type
-    spec.expect(find_field("#{id_stem}_cycle_id"))
-      .to spec.have_text charge.cycle.name
-    spec.expect(find_field("#{id_stem}_amount").value)
-      .to spec.have_text charge.amount
+    charge.charge_type = find_field("#{id_stem}_charge_type").value
+    charge.cycle_id = find_field("#{id_stem}_cycle_id").value
+    charge.amount = find_field("#{id_stem}_amount").value
+    charge
   end
 
   def successful? spec
