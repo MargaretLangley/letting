@@ -19,7 +19,7 @@ $( document ).ready(function() {
            .children('.js-revealable:hidden')
            .length < 1) {
       $(this).addClass('js-color-disabled');
-      $(this).prop('Enabled', "False");
+      $(this).prop('Enabled', 'False');
     }
   });
 
