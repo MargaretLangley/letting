@@ -83,6 +83,7 @@
   &:hover,
   &:active {
     background-color: $tab-index-focus-active-background;
+    border: 1px solid $tab-index-focus-active-border;
     color: $tab-index-focus-active-color;
   }
 }

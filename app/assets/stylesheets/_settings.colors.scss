@@ -143,6 +143,7 @@ $scheme-dark-foreground:         white;
 // 4) $tab-index-focus-active-*
 //
 $scheme-active-background:       $color-primary-shade-4;
+$scheme-active-border:           darken($scheme-active-background, $border-color-darken);
 $scheme-active-foreground:       white;
 
 //
@@ -273,6 +274,7 @@ $tab-index-plain-active-color:      $scheme-active-foreground;
 $tab-index-focus-background:          $color-complimentary-shade-0;
 $tab-index-focus-border-color:        $color-complimentary-shade-3;
 $tab-index-focus-active-background:   $scheme-active-background;
+$tab-index-focus-active-border:       $scheme-active-border;
 $tab-index-focus-active-color:        $scheme-active-foreground;
 
 
