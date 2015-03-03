@@ -1,7 +1,7 @@
 <% @title='View Invoicing' %>
 
 <div class='grid  Shell'>
-  <div class='col-1-1  grid-row  Panel  Panel-PickOut'>
+  <div class='col-1-1  grid-row  Panel  Panel-PickOut  u-padding-1-100'>
     <h2>Invoicing</h2>
     <%= render 'invoicings/invoicing_header' %>
     <%= render 'invoicing_to_view', invoicing: @invoicing, run: @invoicing.runs.first %>

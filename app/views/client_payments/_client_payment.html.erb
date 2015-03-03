@@ -1,6 +1,6 @@
 <% batch_months = BatchMonths.make(month: client_payment.month) %>
 
-<div class='Panel  Panel-Content'>
+<div class='Panel  Panel-Content  u-padding-1-100'>
   <%= render 'client_payments/accounts_heading', client_payment: client_payment, batch_months: batch_months %>
   <%= render 'client_payments/payments_made',
                  client_payment: client_payment,
