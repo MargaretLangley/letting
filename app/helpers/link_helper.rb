@@ -25,7 +25,7 @@ module LinkHelper
              title: "Edit #{model.class.name}"
   end
 
-  def add_link(icon: 'plus-circle', size: 'lg', path: '#', css: '', js_css: '', title:)
+  def add_link(icon: 'plus', size: 'lg', path: '#', css: '', js_css: '', title:)
     app_link icon: icon, size: size, path: path, css: "button-icon  #{css}", js_css: js_css, title: title
   end
 

@@ -21,19 +21,19 @@
         <ul>
           <% if current_user %>
             <li class='drop-down-menu'>
-              <%= link_to fa_icon('print lg', text: 'Print'), '#', class: 'drop-down-link  js-print' %>
+              <%= link_to fa_icon('print', text: 'Print'), '#', class: 'drop-down-link  js-print' %>
             </li>
             <li class='drop-down-menu'>
-              <%= link_to fa_icon('user lg', text: current_user.nickname, title: 'User'), '#', class: 'drop-down-link' %>
+              <%= link_to fa_icon('user', text: current_user.nickname, title: 'User'), '#', class: 'drop-down-link' %>
               <ul class='drop-down-sub-menu'>
                 <li class='drop-down-sub-menu-item'>
-                  <%= link_to fa_icon('sign-out  lg', text: 'logout'), logout_path, class: 'drop-down-link' %>
+                  <%= link_to fa_icon('sign-out', text: 'logout'), logout_path, class: 'drop-down-link' %>
                 </li>
               </ul>
             </li>
           <% else %>
             <li class='drop-down-menu'>
-               <%= link_to fa_icon('sign-in  lg', text: 'Log In'), logout_path, title: 'Log In', class: 'drop-down-link' %>
+               <%= link_to fa_icon('sign-in', text: 'Log In'), logout_path, title: 'Log In', class: 'drop-down-link' %>
             </li>
           <% end %>
         </ul>
