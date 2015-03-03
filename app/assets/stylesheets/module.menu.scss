@@ -44,8 +44,8 @@ Accordion HTML
 //
 .accordion-header {
   background-color: $menu-background;    /* main menu unopened  #E6F1FA; */
-  color: $menu-color;
   border-width: 0;
+  color: $menu-color;
   font-size: 1em;
   line-height: 1.5em;                     /* height of block boxes */
 }
@@ -55,8 +55,8 @@ Accordion HTML
 //
 .menu-header {
   background-color: $menu-background;    /* main menu unopened  #E6F1FA; */
-  color: $menu-color;
   border-width: 0;
+  color: $menu-color;
   cursor: pointer;
   font-size: 1em;
   line-height: 2em;                     /* height of block boxes */
@@ -64,7 +64,6 @@ Accordion HTML
   padding: 0 .5em;                       /* sets left & right margins */
 
   &:hover {
-    text-shadow: 0 0 1px rgba(255, 255, 255, .7);
     background-color: $menu-active-background;
     color: $menu-active-color;
   }

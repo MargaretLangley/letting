@@ -35,8 +35,8 @@
 
       <%= render 'payments/received_header' %>
 
-      <div class='col-1-24  grid-row  cell  focus'>&nbsp;</div>
-      <div class='col-5-24  cell  focus'>
+      <div class='col-1-24  grid-row  cell  pair-focus'>&nbsp;</div>
+      <div class='col-5-24  cell  pair-focus'>
         <% if payment_dec.new_record? %>
           <%= payment_form.date_field :booked_at %>
         <% else %>
