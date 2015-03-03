@@ -21,9 +21,11 @@ class LiteralResult
     @empty = empty
   end
 
-  # Has the results been returned or not?
+  # concluded?
+  # Has the search completed - normally returning a record but it
+  # doesn't have to and still considered concluded.
   #
-  def found?
+  def concluded?
     id.present? || empty
   end
 

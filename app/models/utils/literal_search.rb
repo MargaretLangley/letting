@@ -25,7 +25,7 @@ class LiteralSearch
   #
   def go
     captured = type_query
-    captured = default_ordered_query unless captured.found?
+    captured = default_ordered_query unless captured.concluded?
     captured
   end
 
@@ -72,8 +72,8 @@ class LiteralSearch
   end
 
   def default_ordered_query
-    return property(query) if property(query).found?
-    return client(query) if client(query).found?
+    return property(query) if property(query).concluded?
+    return client(query) if client(query).concluded?
 
     LiteralResult.missing
   end
