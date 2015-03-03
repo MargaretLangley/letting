@@ -26,7 +26,7 @@ module LinkHelper
   end
 
   def add_link(icon: 'plus', size: 'lg', path: '#', css: '', js_css: '', title:)
-    app_link icon: icon, size: size, path: path, css: "button-icon  #{css}", js_css: js_css, title: title
+    app_link icon: icon, size: size, path: path, css: "Button  ButtonIcon  #{css}", js_css: js_css, title: title
   end
 
   def delete_charge css: '', js_css:, title: 'Delete Charge'
