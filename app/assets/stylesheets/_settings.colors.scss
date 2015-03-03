@@ -114,7 +114,7 @@ $color-shadow:                        $color-silver-chalice;      // box-shadows
 //
 $color-text-primary:                  $color-tundora;    // Very Dark Gray
 $color-text-faded:                    $color-boulder;    // Medium Gray
-
+$color-text-black:                    black;
 
 // Scheme
 //
@@ -220,7 +220,7 @@ $errors-warn:                         $color-ternary-shade-0;      // Pink
 
 $flash-notice:                        $color-snowy-mint;           // Pale Green :good
 $flash-alert:                         $color-secondary-shade-3;    // Yellow     :netural
-$flash-error:                         $color-ternary-shade-4;      // Pink       :bad
+$flash-error:                         $color-ternary-shade-1;      // Pink       :bad
 $flash-opacity:                       .85;
 
 

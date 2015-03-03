@@ -16,6 +16,7 @@
   .flash {
     border-radius: $border-radius;
     box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $color-shadow;
+    color: $color-text-black;
     cursor: pointer;
     margin: 0 20%;
     padding: 1.5% 2%;

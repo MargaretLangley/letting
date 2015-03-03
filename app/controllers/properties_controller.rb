@@ -91,6 +91,6 @@ class PropertiesController < ApplicationController
 
   def identity
     property = PropertyDecorator.new @property
-    "Property #{property.human_ref}, #{property.abridged_text}"
+    "Property: #{property.human_ref},  Address: #{property.abridged_text}"
   end
 end
