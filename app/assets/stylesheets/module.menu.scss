@@ -34,30 +34,39 @@ Accordion HTML
   border-radius: $border-radius;
   box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $color-shadow;
   color: $menu-color;
-  font-size: 16px;
-  line-height: 35px;
+  font-size: 1em;
+  line-height: 2em;
   margin-top: 2.7em;
   padding: .5em 0;
 }
 
 // The header at the top of a group of menus
 //
-.accordion-header,
+.accordion-header {
+  background-color: $menu-background;    /* main menu unopened  #E6F1FA; */
+  color: $menu-color;
+  border-width: 0;
+  font-size: 1em;
+  line-height: 1.5em;                     /* height of block boxes */
+}
 
 //
 // menu-header - The header above each menu
 //
 .menu-header {
   background-color: $menu-background;    /* main menu unopened  #E6F1FA; */
+  color: $menu-color;
   border-width: 0;
   cursor: pointer;
   font-size: 1em;
-  line-height: 36px;                     /* height of block boxes */
+  line-height: 2em;                     /* height of block boxes */
   margin: 0;
   padding: 0 .5em;                       /* sets left & right margins */
 
   &:hover {
     text-shadow: 0 0 1px rgba(255, 255, 255, .7);
+    background-color: $menu-active-background;
+    color: $menu-active-color;
   }
 }
 

@@ -152,6 +152,8 @@ $scheme-active-foreground:       white;
 $scheme-fieldset-background:    lighten($color-primary-shade-0, 50%);    // Egg Shell
 $scheme-fieldset-border:        darken($scheme-fieldset-background, $border-color-darken);
 $scheme-fieldset-color:         $color-primary-shade-4;
+$scheme-fieldset-active-background: darken($scheme-fieldset-background, $border-color-darken);
+$scheme-fieldset-active-color: darken($scheme-fieldset-color, $border-color-darken);
 
 // Darker background color
 // - emphasise over field color
@@ -252,6 +254,8 @@ $drop-down-link-active-color:         $scheme-fieldset-background;
 $menu-background:                     $scheme-fieldset-background;   // Very Light Blue
 $menu-border-bottom:                  $scheme-fieldset-border;       // Medium Dark Blue
 $menu-color:                          $scheme-fieldset-color;        // venice-blue
+$menu-active-background:              $scheme-fieldset-active-background;
+$menu-active-color:                   $scheme-fieldset-active-color;
 
 // $MENU-ITEM
 $menu-item-background:                lighten($color-primary-shade-1, 10%);    // Light to Medium Blue
