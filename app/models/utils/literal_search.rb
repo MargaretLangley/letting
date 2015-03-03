@@ -10,19 +10,30 @@
 #
 class LiteralSearch
   attr_reader :type, :query
+
+  # type: the type, or model, of the query being executed - one of Client,
+  #       Payment, Property or Arrear
+  # query: the search terms being queried on the model
+  #
   def self.search(type:, query:)
     new(type: type, query: query)
   end
 
-  def initialize(type:, query:)
-    @type = type
-    @query = query
-  end
-
+  # go
+  # Executes the query
+  # returns LiteralResult - a wrapper for the search results
+  #
   def go
     captured = type_query
     captured = default_ordered_query unless captured.found?
     captured
+  end
+
+  private
+
+  def initialize(type:, query:)
+    @type = type
+    @query = query
   end
 
   def type_query
@@ -36,8 +47,6 @@ class LiteralSearch
       fail NotImplementedError, "Missing type: #{type}"
     end
   end
-
-  private
 
   def client query
     LiteralResult.new action: 'show',
