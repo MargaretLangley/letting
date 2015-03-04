@@ -108,6 +108,7 @@ $color-neutral:                       $color-alabaster;           // off white
 $color-line:                          $color-grey-alto;           // Very Pale Grey
 $color-shadow:                        $color-silver-chalice;      // box-shadows on all the controls
 
+$transparent:                         transparent;
 
 //
 // $TYPOGRAPHY
@@ -171,6 +172,10 @@ $scheme-focus-shadow:           $color-complimentary-shade-4;
 $scheme-disabled-background:     $color-grey-alto;           // Very Pale Grey
 $scheme-disabled-foreground:     $color-text-primary;
 
+// help
+$scheme-help-background:         $color-alabaster;
+$scheme-help-border:             $color-primary-shade-4;
+$scheme-help-foreground:         $color-text-primary;
 
 
 //

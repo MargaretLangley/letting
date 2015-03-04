@@ -42,7 +42,7 @@ describe 'Session#creates', type: :feature do
   end
 
   def logs_out
-    click_on('logout')
+    click_on('Logout')
     expect(page).to have_text /Logged out!/i
     expect(page).to have_title 'Letting - Login'
   end
