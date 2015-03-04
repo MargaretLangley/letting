@@ -29,7 +29,7 @@ en:
 
       client:
         human_ref: Client ID
-        entities: 'Person or Company Name'
+        entities: 'Name, which is either a person or company,'
 
       address:
         road: Road
