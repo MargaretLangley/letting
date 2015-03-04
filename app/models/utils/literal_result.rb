@@ -4,21 +4,21 @@
 # Wraps up the search results
 #
 class LiteralResult
-  attr_reader :action, :controller, :id, :empty
+  attr_reader :action, :controller, :id, :completes
 
   # initialize
   # args:
   #   action: - rest action
   #   controller - controller the action is called on
   #   id - record id returned
-  #   empty - return you have not found anything when you have actually
+  #   completes - return you have not found anything when you have actually
   #           returned id
   #
-  def initialize(action:, controller:, id:, empty: false)
+  def initialize(action:, controller:, id:, completes: false)
     @action = action
     @controller = controller
     @id = id
-    @empty = empty
+    @completes = completes
   end
 
   # concluded?
@@ -26,7 +26,13 @@ class LiteralResult
   # doesn't have to and still considered concluded.
   #
   def concluded?
-    id.present? || empty
+    id.present? || completes
+  end
+
+  # The search not only completed but it also found a result.
+  #
+  def found?
+    id.present?
   end
 
   # redirect_params
@@ -38,7 +44,7 @@ class LiteralResult
 
   # self.missing
   #
-  # Empty LiteralResult - will return found of false
+  # completes LiteralResult - will return found of false
   #
   def self.missing
     LiteralResult.new action: '', controller: '', id: nil

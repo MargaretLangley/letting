@@ -58,7 +58,7 @@ class LiteralSearch
     LiteralResult.new action: 'new',
                       controller: 'payments',
                       id: id_or_nil(Account.find_by_human_ref query),
-                      empty: query.blank? ? 'true' : 'false'
+                      completes: true
   end
 
   def property query

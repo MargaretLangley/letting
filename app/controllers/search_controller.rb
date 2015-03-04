@@ -17,6 +17,8 @@ class SearchController < ApplicationController
   def index
     session[:search_model] = referer unless referer == 'Search'
     if literal_search.concluded?
+      return redirect_with_no_match_flash unless literal_search.found?
+
       redirect_to literal_search.redirect_params.merge(repack_search_params)
     else
       @records = full_text_search[:records].page(params[:page])
@@ -45,5 +47,10 @@ class SearchController < ApplicationController
     flash.now[:problem] = 'No Matches found. Search again.' \
       if params[:search_terms].present? && results[:records].count.zero?
     results
+  end
+
+  def redirect_with_no_match_flash
+    redirect_to literal_search.redirect_params.merge(repack_search_params),
+                flash: { problem: 'No Matches found. Search again.' }
   end
 end
