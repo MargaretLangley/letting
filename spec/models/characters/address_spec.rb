@@ -16,6 +16,9 @@ describe Address, type: :model do
       it 'has max' do
         expect(address_new house_name: 'a' *  (MAX_STRING + 1)).to_not be_valid
       end
+      it 'has min' do
+        expect(address_new house_name: 'a' * (MIN_STRING - 1)).to_not be_valid
+      end
     end
 
     describe 'road no' do
@@ -30,6 +33,9 @@ describe Address, type: :model do
       it 'has max' do
         expect(address_new road: 'a' * (MAX_STRING + 1)).to_not be_valid
       end
+      it 'has min' do
+        expect(address_new road: 'a' * (MIN_STRING - 1)).to_not be_valid
+      end
     end
 
     describe 'district' do
@@ -38,7 +44,7 @@ describe Address, type: :model do
         expect(address_new district: 'a' * (MAX_STRING + 1)).to_not be_valid
       end
       it 'has min' do
-        expect(address_new district: 'a'  * (MIN_STRING - 1)).to_not be_valid
+        expect(address_new district: 'a' * (MIN_STRING - 1)).to_not be_valid
       end
     end
 
