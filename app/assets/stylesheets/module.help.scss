@@ -1,0 +1,152 @@
+//
+// $HELP
+//
+//
+//
+@import 'settings.colors';
+
+@media all {
+
+  .hide {
+    display: none;
+  }
+
+  .help-button {
+    border: 1px solid $color-tundora;
+    border-radius: 3px;
+    color: $color-tundora;
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 15px;
+  }
+
+  .Bubble-down {
+    position: relative;
+    right: 0;
+    top: -50px;
+  }
+
+  .Bubble-point-right {
+    position: relative;
+    right: 175px;
+    top: -45px;
+  }
+
+  .Bubble-print {
+    left: 55px;
+    position: relative;
+    top: 18px;
+  }
+
+  .Bubble-log {
+    position: relative;
+    right: 200px;
+    top: 40px;
+  }
+
+  .Bubble-view {
+    left: 300px;
+    position: relative;
+  }
+
+
+  @mixin bubblet {
+    background-color: $scheme-help-background;
+    border: 2px solid $color-ternary-shade-0;
+    border-radius: $border-radius;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread  $color-shadow;
+    color: $scheme-help-foreground;
+    height: 78px;
+    padding: 7px;
+    position: absolute;
+    text-align: center;
+    width: 165px;
+    z-index: 900;
+  }
+
+/*Main speech bubble pointing down or up */
+  .bubble {
+    @include bubblet;
+    height: 120px;
+    width: 165px;
+  }
+
+/*Speech bubble pointing right */
+  .pt-right {
+    @include bubblet;
+    height: 128px;
+    vertical-align: middle;
+    width: 160px;
+  }
+
+  @mixin triangle {
+    border-style: solid;
+    content: ' ';
+    display: block;
+    height: 0;
+    position: absolute;
+    width: 0;
+  }
+
+
+
+/*Used in down pointing bubble with bubble. This is outside triangle */
+
+  .speech:before {
+    @include triangle;
+    border-color: $color-ternary-shade-0 $transparent; /*colour should be the same as bubble border set above*/
+    border-width: 24px 24px 0; /*size of the traingle*/
+    bottom: -24px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
+    left: 31px; /*horizontal position of the triangle*/
+  }
+
+/*Used in down pointing bubble with bubble. This is inside triangle */
+
+  .speech:after {
+    @include triangle;
+    border-color: $scheme-help-background $transparent; /*colour should be the same as the container background*/
+    border-width: 20px 20px 0;
+    bottom: -20px; /* value = -(border-top-width - border-bottom-width) */
+    left: 35px; /* value = (:before left) + (:before border-left) - (:after border-left) */
+  }
+
+/*Used in up pointing bubble with bubble. This is outside triangle */
+
+  .speech-up:before {
+    @include triangle;
+    border-color: $color-ternary-shade-0 $transparent; /*colour should be the same as bubble border set above*/
+    border-width: 0 24px 24px; /*size of the triangle*/
+    bottom: 116px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
+    left: 81px; /*horizontal position of the triangle*/
+  }
+
+/*Used in up pointing bubble with bubble. This is inside triangle */
+
+  .speech-up:after {
+    @include triangle;
+    border-color: $scheme-help-background $transparent; /*colour should be the same as the container background*/
+    border-width: 0 20px 20px;
+    bottom: 116px; /* value = -(border-top-width - border-bottom-width) */
+    left: 85px; /* value = (:before left) + (:before border-left) - (:after border-left) */
+  }
+
+ /*Used in right pointing bubble with pt-right. This is outside triangle */
+
+  .speech-right:before {
+    @include triangle;
+    border-color: $transparent  $color-ternary-shade-0; /*colour should be the same as bubble border set above*/
+    border-width: 12px 0 12px 12px; /*size of the triangle*/
+    bottom: 83px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
+    left: 156px; /*horizontal position of the triangle*/
+  }
+
+/*Used in right pointing bubble with pt-right. This is inside triangle */
+
+  .speech-right:after {
+    @include triangle;
+    border-color: $transparent  $scheme-help-background; /*colour should be the same as bubble border set above*/
+    border-width: 10px 0 10px 10px; /*size of the triangle*/
+    bottom: 85px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
+    left: 156px; /*horizontal position of the triangle*/
+  }
+}
