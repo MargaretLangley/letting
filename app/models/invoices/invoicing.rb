@@ -51,6 +51,7 @@ class Invoicing < ActiveRecord::Base
   def valid_run
     return if actionable?
 
+    return if property_range.blank? # blank covered by presence
     errors.add(:property_range,
                ", #{property_range}, has no account that can" \
                " be charged for the period #{period.first} to #{period.last}.")
