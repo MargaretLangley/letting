@@ -26,6 +26,7 @@
  *= require module.grid
  *= require module.layout
  *= require module.link
+ *= require module.line
  *= require module.flash
  *= require module.font-awesome
  *= require module.form

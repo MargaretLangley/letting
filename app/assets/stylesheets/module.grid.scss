@@ -131,6 +131,15 @@ $pad: 1em;
   white-space: nowrap;
 }
 
+.grid-header-print {
+  border-bottom: 1px solid $color-text-primary;
+  color: $color-text-primary;
+  overflow: hidden;
+  padding-top: 1%;
+  white-space: nowrap;
+}
+
+
 .grid-pick-header {
   border-bottom: 1px solid darken($color-line, 2%);
   overflow: hidden;
