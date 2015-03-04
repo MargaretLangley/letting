@@ -1,13 +1,14 @@
 <%= form_for invoice_text do |f| %>
-  <div id='invoice_text' class='Shell  u-padding-1-12'>
+  <%= render 'shared/errors', object: invoice_text %>
 
-    <%= render 'shared/errors', object: invoice_text %>
+  <div id='invoice_text' class='Shell  u-padding-1-12'>
 
     <div class='col-23-24  grid-row  grid-label'>
       <h2><%= invoice_text.description %></h2>
     </div>
     <div class='col-1-24  no-r-pad'>
       <%= view_link invoice_text %>
+      <div class='Bubble-point-right'><%= render 'bubbles/pt_2_view' %></div>
     </div>
 
     <% if invoice_text.page1? %>
