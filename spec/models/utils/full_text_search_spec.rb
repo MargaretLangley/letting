@@ -31,17 +31,5 @@ describe FullTextSearch, type: :model do
       expect(results[:render]).to eq 'clients/index'
       Client.__elasticsearch__.delete_index!
     end
-
-    it 'returns payment' do
-      property_create human_ref: 9,
-                      account: account_new(payment: payment_new(amount: 40.35))
-      Payment.import force: true, refresh: true
-
-      results = FullTextSearch.search(type: 'Payment', query: '40.35').go
-      expect(results[:records].first.class).to eq Payment
-      expect(results[:records].first.amount).to eq 40.35
-      expect(results[:render]).to eq 'payments/add_new_payment_index'
-      Payment.__elasticsearch__.delete_index!
-    end
   end
 end

@@ -34,9 +34,6 @@ class FullTextSearch
     when 'Client'
       records = Client.search(query, sort: 'human_ref').records
       { records: records, render: 'clients/index' }
-    when 'Payment'
-      records = Payment.search(query, sort: 'booked_at').records
-      { records: records, render: 'payments/add_new_payment_index' }
     else
       records = Property.search(query, sort: 'human_ref').records
       { records: records, render: 'properties/index' }
