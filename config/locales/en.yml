@@ -24,12 +24,12 @@ en:
     attributes:
       property:
         human_ref: 'Property ID'
-        client_id: Client ID
-        entities: 'Person or Company Name'
+        client:    'Client ID'
+        entities: 'Occupier, which is either a person or a company, '
 
       client:
         human_ref: Client ID
-        entities: 'Person or Company Name'
+        entities: 'Name, which is either a person or company,'
 
       address:
         road: Road

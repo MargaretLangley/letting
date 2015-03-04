@@ -16,16 +16,13 @@
 class Address < ActiveRecord::Base
   include AddressDefaults
   belongs_to :addressable, polymorphic: true
-  validates :county, :road, presence: true
   validates :flat_no, :road_no,
             length: { maximum: MAX_NUMBER },
             allow_blank: true
-  validates :house_name, length: { maximum: MAX_STRING }, allow_blank: true
-  validates :road,       length: { maximum: MAX_STRING }
-  validates :district, :nation, :town,
+  validates :house_name, :district, :nation, :town,
             length: { minimum: MIN_STRING, maximum: MAX_STRING },
             allow_blank: true
-  validates :county,   length: { minimum: MIN_STRING, maximum: MAX_STRING }
+  validates :road, :county, length: { minimum: MIN_STRING, maximum: MAX_STRING }
   validates :postcode,
             length: { minimum: MIN_POSTCODE, maximum: MAX_POSTCODE },
             allow_blank: true
