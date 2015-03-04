@@ -191,6 +191,7 @@ $primary-action-active-color:         white;
 
 // Icon
 $button-icon-background:              white;
+$button-icon-border:                  darken($button-icon-background, $border-color-icon-darken);
 $button-icon-color:                   $color-primary-shade-4;    // venice-blue
 $button-icon-active-background:       $scheme-active-background;    // venice-blue
 $button-icon-active-color:            $scheme-active-foreground;
