@@ -16,3 +16,9 @@ linters:
   # ButtonIcon => .button-icon
   SelectorFormat:
     enabled: false
+
+  # Could not disable this on per file basis
+  # rgba( 65, 255, 255, 1)
+  #      ^
+  SpaceBetweenParens:
+    enabled: false
