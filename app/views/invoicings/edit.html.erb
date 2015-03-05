@@ -2,9 +2,9 @@
 <div class='tabs'>
   <ul class='tab-indexes'>
     <% @invoicing.runs.each_with_index do |run, index|  %>
-      <% run_dec = RunDecorator.new run %>
+      <% run_dec = RunDecorator.new run, index %>
       <li class='tab-index-li  <%= run_dec.style_activity %>'>
-        <%= link_to "Invoice #{run_dec.invoice_date}", @invoicing, class: 'tab-index-a  tab-index-a-default' %>
+        <%= link_to run_dec.tab_index_name, @invoicing, class: 'tab-index-a  tab-index-a-default' %>
       </li>
     <% end %>
   </ul>
