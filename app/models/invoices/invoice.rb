@@ -32,7 +32,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :run, inverse_of: :invoices
   belongs_to :snapshot, autosave: true, inverse_of: :invoices
   has_many :comments, dependent: :destroy
-  has_many :products, -> { order(:created_at) }, dependent: :destroy, inverse_of: :invoice do # rubocop: disable Metrics/LineLength
+  has_many :products, dependent: :destroy, inverse_of: :invoice do
     def earliest_date_due
       map(&:date_due).min
     end

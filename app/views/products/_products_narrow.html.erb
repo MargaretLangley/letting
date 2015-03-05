@@ -1,4 +1,4 @@
-<% invoice.products.each do |product| %>
+<% invoice.products.order_by_date_then_charge.each do |product| %>
 
   <% product_dec = ProductDecorator.new product %>
 

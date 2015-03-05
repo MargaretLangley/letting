@@ -6,7 +6,7 @@
 <div class='col-3-24  grid-header-print  bottom-quarter-line-spacer  r-align'> Balance</div>
 <div class='col-2-24'>          &nbsp;</div>
 
-<% invoice.products.each do |product| %>
+<% invoice.products.order_by_date_then_charge.each do |product| %>
   <% product_dec = ProductDecorator.new product %>
 
   <div class='col-2-24  grid-row'>     &nbsp;</div>
