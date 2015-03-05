@@ -26,6 +26,8 @@
 </div>
 <div class='col-2-24'>&nbsp;</div>
 
+<div class='col-1-1 <%= blankers used_lines: invoice.products.count %>'>&nbsp;</div>
+
 <% invoice.comments.order(:id).each do |comment| %>
 
   <div class='col-5-24  grid-row  bottom-spacer'>&nbsp;</div>
