@@ -12,14 +12,20 @@
   </div>
   <div class='col-1-24'>
     &nbsp;
-    <div class='Bubble-down'><%= render 'bubbles/pt_down_pay' %></div>
+    <div class='Bubble-down'>
+      <%= render 'bubbles/pt_down', line1:'Pay Button', line2: 'Makes a new payment' %>
+    </div>
   </div>
   <div class='col-1-24'>
     &nbsp;
-    <div class='Bubble-down'><%= render 'bubbles/pt_down_edit' %></div>
+    <div class='Bubble-down'>
+      <%= render 'bubbles/pt_down_edit', line1:'Edit Button', line2: 'Edits this account' %>
+    </div>
   </div>
   <div class='col-1-24'>&nbsp;
-    <div class='Bubble-down'> <%= render 'bubbles/pt_down_delete' %></div>
+    <div class='Bubble-down'>
+      <%= render 'bubbles/pt_down_delete', line2: 'Deletes this property details and its account' %>
+    </div>
   </div>
 
   <div class='col-2-24  grid-row  bottom-spacer  grid-header r-align'>
