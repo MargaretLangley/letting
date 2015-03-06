@@ -165,26 +165,25 @@ $scheme-fieldset-active-color: darken($scheme-fieldset-color, $border-color-dark
 $scheme-pick-out-background:     $color-primary-shade-1;
 $scheme-pick-out-border:         darken($scheme-pick-out-background, 5%);
 
+// disabled
+$scheme-disabled-background:     $color-grey-alto;           // Very Pale Grey
+$scheme-disabled-foreground:     $color-text-primary;
+
 // focus
 $scheme-focus-background:       $color-complimentary-shade-0;
 $scheme-focus-foreground:       $color-tundora;
 $scheme-focus-shadow:           $color-complimentary-shade-4;
 
-
-// disabled
-$scheme-disabled-background:     $color-grey-alto;           // Very Pale Grey
-$scheme-disabled-foreground:     $color-text-primary;
+// help
+$scheme-help-background:         $color-alabaster;
+$scheme-help-border:             $color-ternary-shade-0;
+$scheme-help-color:              $color-text-primary;
+$scheme-help-icon:               $color-primary-shade-4;
 
 // Overlay
 $schme-overlay-background:       $color-silver-chalice-opaque;
 $schme-overlay-border:           darken($color-silver-chalice-opaque, $border-color-darken);
 $schme-overlay-color:            $color-text-primary;
-
-// help
-$scheme-help-background:         $color-alabaster;
-$scheme-help-border:             $color-primary-shade-4;
-$scheme-help-foreground:         $color-text-primary;
-
 
 //
 // Primary action colors
