@@ -1,5 +1,6 @@
 // Grid row click simulation
-// see $table rows in module.css.scss
+//
+// see $module-table-row in app/assets/stylesheets for more information.
 //
 $(document).ready(function() {
   $("div[data-link]").click(function() {

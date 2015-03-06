@@ -68,24 +68,23 @@ class PaymentDecorator
   end
 
   def last_amount
-    return '-' if last_payment == :no_last_payment
-    number_to_currency last_payment.amount
+    return '-' if payment_last_created_at == :no_last_payment
+    number_to_currency payment_last_created_at.amount
   end
 
   def last_human_ref
-    return '-' if last_payment == :no_last_payment
-    last_payment.account.property.human_ref
+    return '-' if payment_last_created_at == :no_last_payment
+    payment_last_created_at.account.property.human_ref
   end
 
   def todays_takings
-    number_to_currency Payments.on
+    number_to_currency Payments.created_on
       .map(&:amount).inject(0, &:+)
   end
 
   private
 
-  def last_payment
-    return :no_last_payment if Payments.last == :no_last_payment
-    Payments.last
+  def payment_last_created_at
+    Payments.last_created_at
   end
 end
