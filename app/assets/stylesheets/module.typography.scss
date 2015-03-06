@@ -39,13 +39,6 @@
 }
 
 
-// Text decoration
-
-.text-overline {
-  text-decoration: overline;
-}
-
-
 // Clipping text - hides the end of the line
 .text-clip {
   overflow: hidden;
@@ -53,12 +46,6 @@
   white-space: nowrap;
 }
 
-    /*<div class='wrapped-text'>
-         <%= "hello\n\n\n\n\n\n\n\nworld" %>
-       </div>*/
-.wrapped-text {
-  white-space: pre-wrap;
-}
 
 // Headers - reduces bottom margin to fit more into page
 .small-bottom {
