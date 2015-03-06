@@ -33,11 +33,11 @@ $( document ).ready(function() {
       break;
       case 2:
         $('#help-1')[0].style.display = 'none';
-        $('#help-pay')[0].style.display = 'block';
+        $('#help-2')[0].style.display = 'block';
       break;
       case 3:
         $('#help-1')[0].style.display = 'none';
-        $('#help-pay')[0].style.display = 'none';
+        $('#help-2')[0].style.display = 'none';
         $('#help-edit')[0].style.display = 'block';
       break;
       case 4:
@@ -75,7 +75,7 @@ $( document ).ready(function() {
 
     $('#help-1')[0].style.display = 'none';
     $('#help-edit')[0].style.display = 'none';
-    $('#help-pay')[0].style.display = 'none';
+    $('#help-2')[0].style.display = 'none';
     $('#help-delete')[0].style.display = 'none';
     $('#help-pr')[0].style.display = 'none';
     $('#help-log')[0].style.display = 'none';

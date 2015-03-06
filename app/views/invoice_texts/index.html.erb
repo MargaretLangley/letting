@@ -8,21 +8,15 @@
     <div  id='help-me', data-skip='2',class='Bubble-down'>
       <%= render 'bubbles/pt_down_view' %>
     </div>
-    <%= render 'bubbles/pt_down_pay' %>
+    <%= render 'bubbles/pt_down', line1: '*', line2: '*' %>
   </div>
   <div class='col-1-24'>
-    <div class='Bubble-down'><%= render 'bubbles/pt_down_edit' %></div>
-    <%= render 'bubbles/pt_down_delete' %>
- </div>
+    &nbsp;
+     <div class='Bubble-down'>
+      <%= render 'bubbles/pt_down_edit', line1:'Edit Button', line2: 'Edits this page details' %>
+    </div>
+  </div>
 
-  <div class='col-4-24  grid-row  bottom-spacer  grid-header  r-align'>
-    Page number
-  </div>
-  <div class='col-17-24  grid-header'>Required by</div>
-  <div class='col-3-24  grid-header  no-print'>Action
-   <div class='Bubble-down'><%= render 'bubbles/pt_down_edit' %></div>
-    <%= render 'bubbles/pt_down_delete' %>
-  </div>
 
   <% if @invoice_texts.present? %>
     <% @invoice_texts.each do |invoice_text| %>
