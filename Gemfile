@@ -62,6 +62,8 @@ gem 'unicorn', '~> 4.8.0'
 # corner banner on staging environment
 gem 'rack-dev-mark', '~> 0.7.0'
 
+gem 'whenever', require: false
+
 gem 'seedbank'
 
 group :development do
