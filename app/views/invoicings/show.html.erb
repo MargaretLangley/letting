@@ -9,9 +9,9 @@
     <div class='col-1-1  grid-row  tabs'>
       <ul class='tab-indexes'>
         <% @invoicing.runs.each_with_index do |run, index|  %>
-          <% run_dec = RunDecorator.new run, index %>
+          <% run_dec = RunDecorator.new run %>
           <li class='tab-index-li  <%= run_dec.style_activity %>'>
-            <%= link_to run_dec.tab_index_name, run_dec.tab_index_id, class: 'tab-index-a  tab-index-a-default' %>
+            <%= link_to "Run #{run_dec.invoice_date}", "#tab-content#{index}", class: 'tab-index-a  tab-index-a-default' %>
           </li>
         <% end %>
         <li class='tab-index-li'>
@@ -21,8 +21,8 @@
 
       <div class='grid  Shell  u-padding-1-100 tab-contents'>
         <% @invoicing.runs.each_with_index do |run, index|  %>
-          <% run_dec = RunDecorator.new run, index %>
-          <div id=<%= run_dec.tab_index_id %> class='tab-content <%= run_dec.style_activity %> '>
+          <% run_dec = RunDecorator.new run %>
+          <div id='tab-content<%= index %>' class='tab-content <%= run_dec.style_activity %> '>
             <div class='col-8-24  grid-row  top-half-line-spacer  grid-label'>
               <h2>Run <%= run_dec.invoice_date %></h2>
             </div>
