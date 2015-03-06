@@ -11,19 +11,25 @@
     display: none;
   }
 
+  .help-icon {
+    color: $color-primary-shade-4;
+    padding: 10px;
+  }
+
   .help-button {
-    border: 1px solid $color-tundora;
+    border: 1px solid $scheme-help-color;
     border-radius: 3px;
-    color: $color-tundora;
+    color: $color-ternary-shade-0;
     display: inline-block;
     margin-left: 10px;
-    margin-top: 15px;
+    margin-top: 20px;
+    padding: 8px;
   }
 
   .Bubble-down {
     position: relative;
     right: 0;
-    top: -4.2em;
+    top: 0;
   }
 
   .Bubble-point-right {
@@ -34,12 +40,13 @@
 
   .Bubble-print {
     position: relative;
-    right: 3em;
+    right: 6em;
     top: 1.5em;
   }
 
   .Bubble-log {
     position: relative;
+    right: 1em;
     top: 1.5em;
   }
 
@@ -48,14 +55,12 @@
     position: relative;
   }
 
-
   @mixin bubblet {
     background-color: $scheme-help-background;
-    border: 2px solid $color-ternary-shade-0;
+    border: 2px solid $scheme-help-border;
     border-radius: $border-radius;
     box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread  $color-shadow;
-    color: $scheme-help-foreground;
-    height: 78px;
+    color: $scheme-help-color;
     padding: 7px;
     position: absolute;
     text-align: center;
@@ -66,8 +71,8 @@
 /*Main speech bubble pointing down or up */
   .bubble {
     @include bubblet;
-    height: 120px;
-    width: 165px;
+    height: 200px;
+    width: 220px;
   }
 
 /*Speech bubble pointing right */
@@ -93,7 +98,7 @@
 
   .speech:before {
     @include triangle;
-    border-color: $color-ternary-shade-0 $transparent; /*colour should be the same as bubble border set above*/
+    border-color: $scheme-help-border $transparent; /*colour should be the same as bubble border set above*/
     border-width: 24px 24px 0; /*size of the traingle*/
     bottom: -24px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
     left: 31px; /*horizontal position of the triangle*/
@@ -113,9 +118,9 @@
 
   .speech-up:before {
     @include triangle;
-    border-color: $color-ternary-shade-0 $transparent; /*colour should be the same as bubble border set above*/
+    border-color: $scheme-help-border $transparent; /*colour should be the same as bubble border set above*/
     border-width: 0 24px 24px; /*size of the triangle*/
-    bottom: 116px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
+    bottom: 196px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
     left: 81px; /*horizontal position of the triangle*/
   }
 
@@ -125,7 +130,7 @@
     @include triangle;
     border-color: $scheme-help-background $transparent; /*colour should be the same as the container background*/
     border-width: 0 20px 20px;
-    bottom: 116px; /* value = -(border-top-width - border-bottom-width) */
+    bottom: 196px; /* value = -(border-top-width - border-bottom-width) */
     left: 85px; /* value = (:before left) + (:before border-left) - (:after border-left) */
   }
 
@@ -133,7 +138,7 @@
 
   .speech-right:before {
     @include triangle;
-    border-color: $transparent  $color-ternary-shade-0; /*colour should be the same as bubble border set above*/
+    border-color: $transparent  scheme-help-border; /*colour should be the same as bubble border set above*/
     border-width: 12px 0 12px 12px; /*size of the triangle*/
     bottom: 83px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
     left: 156px; /*horizontal position of the triangle*/
