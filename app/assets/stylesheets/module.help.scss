@@ -38,8 +38,20 @@
 
   .Bubble-point-right {
     position: relative;
-    right: 320px;
-    top: -85px;
+    right: 19.5em;
+    top: -5em;
+  }
+
+  .Bubble-right {
+    position: relative;
+    right: 19.7em;
+    top: -2.3em;
+  }
+
+  .Bubble-anchor {
+    position: relative;
+    right: 19.7em;
+    top: 0;
   }
 
   .Bubble-print {
@@ -75,8 +87,8 @@
 /*Main speech bubble pointing down or up */
   .bubble {
     @include bubblet;
-    height: 200px;
-    width: 220px;
+    height: 180px;
+    width: 290px;
   }
 
 /*Speech bubble pointing right */
@@ -125,7 +137,7 @@
     @include triangle;
     border-color: $scheme-help-border $transparent; /*colour should be the same as bubble border set above*/
     border-width: 0 24px 24px; /*size of the triangle*/
-    bottom: 196px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
+    bottom: 176px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
     left: 81px; /*horizontal position of the triangle*/
   }
 
@@ -135,7 +147,7 @@
     @include triangle;
     border-color: $scheme-help-background $transparent; /*colour should be the same as the container background*/
     border-width: 0 20px 20px;
-    bottom: 196px; /* value = -(border-top-width - border-bottom-width) */
+    bottom: 176px; /* value = -(border-top-width - border-bottom-width) */
     left: 85px; /* value = (:before left) + (:before border-left) - (:after border-left) */
   }
 

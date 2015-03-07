@@ -11,20 +11,18 @@
   </div>
   <div class='col-2-24'>
     &nbsp;
-    <div class='Bubble-down'><%= render 'bubbles/pt_down', line1:'Print Button', line2: 'Prints complete run of invoices' %></div>
+    <div class='Bubble-anchor'><%= render 'bubbles/pay_box', line1:'Print Button', line2: 'Prints complete run of invoices' %></div>
+
   </div>
   <div class='col-2-24'>
     &nbsp;
-    <div class='Bubble-down'><%= render 'bubbles/pt_down_edit', iconstring: "fa fa-edit  fa-lg  help-icon", line1:'2nd Invoice Button', line2: 'Creates blue run of invoices' %></div>
+    <div class='Bubble-anchor'><%= render 'bubbles/pt_down_edit', iconstring: "fa fa-edit  fa-lg  help-icon", line1:'2nd Invoice Button', line2: 'Creates blue run of invoices' %></div>
   </div>
   <div class='col-1-24'>&nbsp;
-    <div class='Bubble-down'> <%= render 'bubbles/pt_down_delete', line2: 'Deletes all invoices in this run' %></div>
+    <div class='Bubble-anchor'> <%= render 'bubbles/pt_down_delete', line2: 'Deletes all invoices in this run' %></div>
   </div>
 
-
  <%= render 'invoicings/invoicing_header' %>
-
-
  <% @invoicings.each do |invoicing| %>
    <% invoicing_dec = InvoicingIndexDecorator.new invoicing %>
    <div title='View run list' class='table-row' data-link='<%= invoicing_path(invoicing) %>'>
