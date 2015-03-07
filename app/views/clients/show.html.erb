@@ -10,7 +10,9 @@
     </div>
     <div class='col-1-24'>
       <%= edit_link client, size: '2x' %>
-      <div class='Bubble-point-right'><%= render 'bubbles/pt_2_edit'%></div>
+      <div class='Bubble-point-right'>
+        <%= render 'bubbles/pt_2_edit', line1:'Edit Button', line2: 'Edits this client details'%>
+      </div>
     </div>
     <div class='col-1-24  no-r-pad'>
       <%= toggle_link direction: :down, size: '2x' %>

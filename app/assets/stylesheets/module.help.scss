@@ -16,6 +16,10 @@
     padding: 10px;
   }
 
+  .help-heading {
+    color: $color-primary-shade-4;
+  }
+
   .help-button {
     border: 1px solid $scheme-help-color;
     border-radius: 3px;
@@ -34,8 +38,8 @@
 
   .Bubble-point-right {
     position: relative;
-    right: 175px;
-    top: -45px;
+    right: 320px;
+    top: -85px;
   }
 
   .Bubble-print {
@@ -78,9 +82,9 @@
 /*Speech bubble pointing right */
   .pt-right {
     @include bubblet;
-    height: 128px;
+    height: 180px;
     vertical-align: middle;
-    width: 160px;
+    width: 290px;
   }
 
   @mixin triangle {
@@ -114,6 +118,7 @@
     left: 35px; /* value = (:before left) + (:before border-left) - (:after border-left) */
   }
 
+
 /*Used in up pointing bubble with bubble. This is outside triangle */
 
   .speech-up:before {
@@ -134,23 +139,23 @@
     left: 85px; /* value = (:before left) + (:before border-left) - (:after border-left) */
   }
 
- /*Used in right pointing bubble with pt-right. This is outside triangle */
+ /*Used in right pointing bubble with pt-right. This is the outside triangle */
 
   .speech-right:before {
     @include triangle;
-    border-color: $transparent  scheme-help-border; /*colour should be the same as bubble border set above*/
-    border-width: 12px 0 12px 12px; /*size of the triangle*/
-    bottom: 83px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
-    left: 156px; /*horizontal position of the triangle*/
+    border-color: $transparent  $color-ternary-shade-0; /*colour should be the same as bubble border set above*/
+    border-width: 20px 0 20px 20px; /*size of the triangle*/
+    bottom: 98px;  /* value = -(border-top-width) - (border-bottom-width)*/
+    left: 286px; /*horizontal position of the triangle*/
   }
 
-/*Used in right pointing bubble with pt-right. This is inside triangle */
+/*Used in right pointing bubble with pt-right. This is the inside triangle */
 
   .speech-right:after {
     @include triangle;
-    border-color: $transparent  $scheme-help-background; /*colour should be the same as bubble border set above*/
-    border-width: 10px 0 10px 10px; /*size of the triangle*/
-    bottom: 85px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
-    left: 156px; /*horizontal position of the triangle*/
+    border-color: $transparent  $scheme-help-background; /*colour should be the same as background*/
+    border-width: 18px 0 18px 18px; /*size of the triangle, 2px less than outside triangle*/
+    bottom: 100px;  /* value = -(border-top-width) - (border-bottom-width)*/
+    left: 286px; /*horizontal position of the triangle, inside & outside triangles same value*/
   }
 }
