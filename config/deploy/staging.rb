@@ -16,5 +16,3 @@ server '10.0.0.35', user: 'deployer', roles: %w(web app db), primary: true
 set :rails_env, :staging
 
 set :nginx_server_name, 'letting-staging.local.bcs.io'
-
-set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
