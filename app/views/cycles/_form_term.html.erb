@@ -100,7 +100,9 @@
 
     <div class='col-1-24  spacer-column'>  <!-- column 2 -->
       <%= view_link cycle %>
-      <div class='Bubble-point-right'><%= render 'bubbles/pt_2_view' %></div>
+      <div class='Bubble-point-right'>
+        <%= render 'bubbles/pt_2_view', line1:'View Button', line2: 'Views this cycle details' %>
+      </div>
     </div>
   </fieldset>
 <% end %>
