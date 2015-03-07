@@ -10,6 +10,55 @@
 # payments are broken into 6 month periods starting either Mar and Sep or
 # Jun and Dec - periods are always started on the 1st day of the month.
 #
+#
+# Client Payment uses an Ajax Request
+#
+# Got Ajax request by using: GoRails
+# https://gorails.com/episodes/jquery-ujs-and-ajax
+#
+# 1) Create an additional route which Ajax can query the back-end with.
+#
+# resources :clients do
+#   member do
+#     patch :payment
+#   end
+# end
+#
+#
+# 2) Add a link to the additional patched route
+#
+# _account_heading.erb
+#
+# client_payment_path(client_id, year: year, month: month)
+# link_to 'my ajax', payment_client_path(client_id, year: year, month: month)
+#                  , method: :patch
+#                  , remote: true
+#
+# This create a link: data-method="patch" and href="/clients/5/payment?.."
+#
+#
+# 3) This is applied an action on the clients_controller
+#
+# class ClientsController < ApplicationController
+#   def payment
+#     @client_payment  = ( new assignment to be redisplayed )
+#   end
+#
+#
+# 4) The link_to is a remote Ajax call which is satisfied by: payment.js.erb
+#
+# views/clients/payment.js.erb
+#
+# $('.js-payment-details').html("<%= escape_javascript(render partial:
+#   "client_payments/client_payment",
+#   locals: { client_payment: @client_payment }) %>");
+#
+#
+# 5) Add link which the Ajax will add content to:
+#    <div class='js-payment-details'>
+#      content written here
+#    </div>
+#
 # rubocop: disable  Metrics/LineLength
 #
 class ClientPayment
