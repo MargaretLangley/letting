@@ -8,7 +8,9 @@
     </div>
     <div class='col-1-24  no-r-pad'>
       <%= view_link invoice_text %>
-      <div class='Bubble-point-right'><%= render 'bubbles/pt_2_view' %></div>
+      <div class='Bubble-point-right'>
+        <%= render 'bubbles/pt_2_view', line1:'View Button', line2: 'Views this page details' %>
+      </div>
     </div>
 
     <% if invoice_text.page1? %>

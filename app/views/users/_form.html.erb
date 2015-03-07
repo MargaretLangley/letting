@@ -42,7 +42,9 @@
     </div>
     <div class='col-1-24  spacer-column'>
       <%= view_link user %>
-      <div class='Bubble-point-right'><%= render 'bubbles/pt_2_view' %></div>
+      <div class='Bubble-point-right'>
+        <%= render 'bubbles/pt_2_view', line1:'View Button', line2: 'Views this user details' %>
+      </div>
     </div>
   </fieldset>
 <% end %>
