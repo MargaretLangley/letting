@@ -1,6 +1,8 @@
   <% @title='View Client' %>
 <% client = @client_payment.client %>
 
+<!-- Client Contact -->
+
 <div class='grid  Shell  u-padding-1-25  js-toggle-selection'>
   <div class='js-togglable'>
     <div class='col-22-24  grid-row  grid-label'>
@@ -47,6 +49,9 @@
     </div>
   </div>
 </div>
+
+
+<!-- Client Properties Closed -->
 
 <div class='grid  Shell  u-padding-1-25  js-toggle-selection'>
   <div class='js-togglable'>
@@ -110,6 +115,9 @@
     <% end %>
   </div>
 
+
+  <!-- Client Properties Open -->
+
   <div class='js-togglable  js-revealable'>
 
     <div class='col-23-24  grid-row'>
@@ -156,18 +164,16 @@
   </div>
 </div>  <!-- grid  Shell  u-padding-1-100  js-toggle-selection -->
 
-  <div class='grid  Shell  u-padding-1-25'>
+<!-- Client Payments -- Ground Rent Payments -->
+<div class='grid  Shell  u-padding-1-25'>
 
-    <div class='col-1-1  grid-row'>
-      <h3 class='small-bottom'>Ground Rent Payments &hellip;</h3>
-    </div>
-
-    <%= render 'client_payments/totals', client_payment: @client_payment %>
-    <div class='col-1-1  js-payment-details'>
-    <h4>Click on the above grid for details <%= fa_icon 'long-arrow-up' %></h4>
-    </div>
+  <div class='col-1-1  grid-row'>
+    <h3 class='small-bottom'>Ground Rent Payments &hellip;</h3>
   </div>
 
+  <%= render 'client_payments/aggregate_totals', client_payment: @client_payment %>
 
-
-
+  <div class='col-1-1  js-payment-details'>
+    <h4>Click on the above grid for details <%= fa_icon 'long-arrow-up' %></h4>
+  </div>
+</div>

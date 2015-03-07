@@ -64,7 +64,7 @@ class ClientPayment
       .pluck(:amount).sum
   end
 
-  # client payments for one account
+  # client payments for one account for a year and month
   #
   def account_period_total(account:, year:, month:)
     period = total_period(year: year, month: month)
