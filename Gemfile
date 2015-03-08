@@ -69,13 +69,13 @@
 # b) bundle install
 #
 
-
 #
 # GEMS THAT BREAK THE BUILD
 #
 # There are a number of Gems that if you update you break the build.
 # Keep a list of them here - details why next to the gem inclusion below:
 #
+# gem 'capistrano-db-tasks', require: false
 # gem 'capybara-webkit',  '~>1.3.0'
 # gem 'database_cleaner', '~> 1.3.0'
 # gem 'rake', '10.1.0'
@@ -169,6 +169,9 @@ group :development do
   gem 'capistrano-postgresql', '~> 2.0.0'
   gem 'capistrano-unicorn-nginx', github: 'BCS-io/capistrano-unicorn-nginx'
   gem 'capistrano-rails-collection', '~> 0.0.3'
+  #
+  # Upgrading to 0.4.0 caused
+  # createdb: database creation failed: ERROR:  permission denied to create
   gem 'capistrano-db-tasks', require: false
   gem 'mascherano', '~> 1.1.0'
 end
