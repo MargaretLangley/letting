@@ -1,8 +1,13 @@
 #
 # BatchMonths
 #
-# Encapsulate the payment periods - which are 6 month
-# periods.
+# Encapsulate the payment periods - which are 6 month periods.
+#
+# charge_months has two main groups: Mar/Sep and Jun/Dec
+# Mar/Sep which has sub-groups (Mar and Sep)
+# Jun/Dec which has sub-groups (Jun and Dec)
+#
+#
 #
 class BatchMonths
   attr_reader :first, :last, :now

@@ -30,16 +30,16 @@
     <%= year %>
   </div>
   <div class='col-2-12  bottom-spacer  r-align'>
-    <%= link_to to_decimal(client_payment.period_total(year: year, month: 3)), payments_itemized_client_path(client_payment.client_id, year: year, month: 3), method: :patch, remote: true  %>
+    <%= link_to to_decimal(client_payment.period_totals(year: year, month: 3)), payments_itemized_client_path(client_payment.client_id, year: year, month: 3), method: :patch, remote: true  %>
   </div>
   <div class='col-2-12  bottom-spacer  r-align'>
-    <%= link_to to_decimal(client_payment.period_total(year: year, month: 9)), payments_itemized_client_path(client_payment.client_id, year: year, month: 9), method: :patch, remote: true %>
+    <%= link_to to_decimal(client_payment.period_totals(year: year, month: 9)), payments_itemized_client_path(client_payment.client_id, year: year, month: 9), method: :patch, remote: true %>
   </div>
   <div class='col-2-12   bottom-spacer  r-align'>
-    <%= link_to to_decimal(client_payment.period_total(year: year, month: 6)),  payments_itemized_client_path(client_payment.client_id, year: year, month: 6), method: :patch, remote: true %>
+    <%= link_to to_decimal(client_payment.period_totals(year: year, month: 6)),  payments_itemized_client_path(client_payment.client_id, year: year, month: 6), method: :patch, remote: true %>
   </div>
   <div class='col-2-12  bottom-spacer  r-align  no-r-pad'>
-    <%= link_to to_decimal(client_payment.period_total(year: year, month: 12)), payments_itemized_client_path(client_payment.client_id, year: year, month: 12), method: :patch, remote: true  %>
+    <%= link_to to_decimal(client_payment.period_totals(year: year, month: 12)), payments_itemized_client_path(client_payment.client_id, year: year, month: 12), method: :patch, remote: true  %>
   </div>
 <% end %>
 <div class='col-9-12  r-align  grid-footer-number  no-r-pad'>

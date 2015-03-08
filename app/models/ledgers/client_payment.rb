@@ -62,8 +62,6 @@
 # rubocop: disable  Metrics/LineLength
 #
 class ClientPayment
-  MAR_SEP = [3, 9]
-  JUN_DEC = [6, 12]
   attr_reader :client_id, :year, :month
   def initialize(client_id:)
     @client_id = client_id
@@ -102,31 +100,30 @@ class ClientPayment
       .order('properties.human_ref ASC')
   end
 
-  # Client account payments for one of the charge_month periods.
+  # client payments from one account for a year given start month
   #
-  def period_total(year:, month:)
+  # account: - account to total
+  # year:    - the year the payments will be summed over
+  # month:   - the period of payment governed by start month
+  #
+  def period_total_by_account(account:, year:, month:)
+    period = total_period(year: year, month: month)
+    Payment.where(booked_at: period.first...period.last)
+      .where(account_id: account.id).pluck(:amount).sum
+  end
+
+  # client payments for one of the charge_month periods.
+  #
+  # year:    - the year the payments will be summed over
+  # month:   - the period of payment governed by start month
+  #
+  def period_totals(year:, month:)
     period = total_period(year: year, month: month)
     Payment.where(booked_at: period.first...period.last)
       .where(account_id: quarter_day_accounts(charge_months: period.first.month..
                                                              period.last.month)
         .pluck(:account_id))
       .pluck(:amount).sum
-  end
-
-  # client payments for one account for a year and month
-  #
-  def account_period_total(account:, year:, month:)
-    period = total_period(year: year, month: month)
-    Payment.where(booked_at: period.first...period.last)
-      .where(account_id: account.id).pluck(:amount).sum
-  end
-
-  def detailed_period_total
-    period_total year: year, month: month
-  end
-
-  def detailed_account_period_total(account:)
-    account_period_total account: account, year: year, month: month
   end
 
   private
