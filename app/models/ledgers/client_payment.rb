@@ -121,14 +121,6 @@ class ClientPayment
       .where(account_id: account.id).pluck(:amount).sum
   end
 
-  def detailed_period_total
-    period_total year: year, month: month
-  end
-
-  def detailed_account_period_total(account:)
-    account_period_total account: account, year: year, month: month
-  end
-
   private
 
   # Calculates the 6 months periods for input into total method
