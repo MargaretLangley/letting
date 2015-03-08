@@ -8,79 +8,103 @@ $( document ).ready(function() {
 
   });
 
-
   $('.js-help').click(function() {
 
     skip =  $("#help-me").attr('data-skip');
     if (hcount == 1) {
-      if (skip != 0) {
-        hcount+=1;
-      }
+      if (skip == 1) { hcount =  2; }
+      if (skip == 4) { hcount =  skip; }
     }
-    hcount+=1;
+    hcount++;
 
-    if (hcount == 4) {
-      if (skip == 2) {
-        hcount+=2;
-      }
-    }
+    clearaway(skip);
 
     switch( hcount) {
 
       case 1:
-        $('#help-log')[0].style.display = 'none';
         $('#help-1')[0].style.display = 'block';
       break;
       case 2:
-        $('#help-1')[0].style.display = 'none';
-        $('#help-2')[0].style.display = 'block';
+        show2();
       break;
       case 3:
-        $('#help-1')[0].style.display = 'none';
-        $('#help-2')[0].style.display = 'none';
-        $('#help-edit')[0].style.display = 'block';
+        show3();
       break;
       case 4:
-        $('#help-edit')[0].style.display = 'none';
-        $('#help-delete')[0].style.display = 'block';
+        show4();
       break;
       case 5:
-        $('#help-edit')[0].style.display = 'none';
-        $('#help-delete')[0].style.display = 'none';
         $('#help-pr')[0].style.display = 'block';
       break;
       case 6:
-        $('#help-pr')[0].style.display = 'none';
         $('#help-log')[0].style.display = 'block';
         hcount = 0;
       break;
 
       default:
-        $('#help-delete')[0].style.display = 'none';
       break;
     }
-    return false;
-
-  });
-
-  $('.js-help-short').click(function() {
-
-    $('#help-1')[0].style.display = 'none';
-    $('#help-pr')[0].style.display = 'block';
     return false;
 
   });
 
   $('.js-cancel-help').click(function() {
 
-    $('#help-1')[0].style.display = 'none';
-    $('#help-edit')[0].style.display = 'none';
-    $('#help-2')[0].style.display = 'none';
-    $('#help-delete')[0].style.display = 'none';
-    $('#help-pr')[0].style.display = 'none';
-    $('#help-log')[0].style.display = 'none';
+    clearaway(skip);
 
     return false;
+   });
 
-  });
 });
+
+
+function show2() {
+
+  $('#help-2')[0].style.display = 'block';
+
+  return false;
+}
+
+function show3() {
+
+  $('#help-edit')[0].style.display = 'block';
+
+  return false;
+}
+function show4() {
+
+  $('#help-delete')[0].style.display = 'block';
+
+  return false;
+}
+
+// These delete the help boxes before next box set up
+
+function clearaway(skip) {
+
+  $('#help-1')[0].style.display = 'none';
+  $('#help-pr')[0].style.display = 'none';
+  $('#help-log')[0].style.display = 'none';
+
+  if (skip == 0) { clearskip0(); }
+  if (skip == 1) { clearskip1(); }
+
+  return false;
+}
+
+function clearskip0() {
+
+  $('#help-2')[0].style.display = 'none';
+  $('#help-edit')[0].style.display = 'none';
+  $('#help-delete')[0].style.display = 'none';
+
+  return false;
+}
+
+function clearskip1() {
+
+  $('#help-edit')[0].style.display = 'none';
+  $('#help-delete')[0].style.display = 'none';
+
+  return false;
+}
