@@ -88,53 +88,39 @@ class ClientPayment
     (Time.zone.now.year.downto(Time.zone.now.year - 4)).map(&:to_s)
   end
 
-  # Accounts grouped by charge_months:
-  # charge_months has two main groups: Mar/Sep and Jun/Dec
-  # Mar/Sep which has sub-groups (Mar and Sep)
-  # Jun/Dec which has sub-groups (Jun and Dec)
-  # Argument: charge_months: MAR_SEP = [3, 9] or JUN_DEC = [6, 12]
+  # Accounts which include a particular batch_month:
   #
-  def quarter_day_accounts(charge_months:)
+  # Argument
+  # batch_months: - period which payments are summed over
+  #
+  def accounts_with_period(batch_months:)
     Account.joins(:property)
-      .merge(client.properties.houses.quarter_day_in(charge_months.first))
+      .merge(client.properties.houses.quarter_day_in(batch_months.first))
       .order('properties.human_ref ASC')
   end
 
-  # client payments from one account for a year given start month
+  # client payments from one account for a year given batch_month
   #
-  # account: - account to total
-  # year:    - the year the payments will be summed over
-  # month:   - the period of payment governed by start month
+  # account:      - account to total
+  # year:         - the year the payments will be summed over
+  # batch_months: - period which payments are summed over
   #
-  def period_total_by_account(account:, year:, month:)
-    period = total_period(year: year, month: month)
+  def period_total_by_account(account:, year:, batch_months:)
+    period = batch_months.period(year: year)
     Payment.where(booked_at: period.first...period.last)
       .where(account_id: account.id).pluck(:amount).sum
   end
 
-  # client payments for one of the charge_month periods.
+  # client payments summed for all accounts for a year given batch_month
   #
   # year:    - the year the payments will be summed over
   # month:   - the period of payment governed by start month
   #
-  def period_totals(year:, month:)
-    period = total_period(year: year, month: month)
+  def period_totals(year:, batch_months:)
+    period = batch_months.period(year: year)
     Payment.where(booked_at: period.first...period.last)
-      .where(account_id: quarter_day_accounts(charge_months: period.first.month..
-                                                             period.last.month)
+      .where(account_id: accounts_with_period(batch_months: batch_months)
         .pluck(:account_id))
       .pluck(:amount).sum
-  end
-
-  private
-
-  # Calculates the 6 months periods for input into total method
-  # Arguments:
-  # year  - starting year
-  # month - starting month
-  #
-  def total_period(year:, month:)
-    time = Time.zone.local(year, month, 1)
-    time..(time + 6.months)
   end
 end

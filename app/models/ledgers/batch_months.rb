@@ -36,7 +36,6 @@ class BatchMonths
     Date::ABBR_MONTHNAMES[last]
   end
 
-
   # Calculates the 6 months periods for input into total method
   # Arguments:
   # year  - starting year
