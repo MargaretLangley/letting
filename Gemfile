@@ -5,28 +5,41 @@
 # is an important maintenance task.
 #
 # 1) Which Gems are out of date?
-# 2) Versioning
-# 3) Importance of a Gem to the Application
-# 4) Resetting Gems back to the original version
-# 5) Breaking Gem List
+# 2) Update a Gem
+# 3) Gemfile.lock
+# 4) Versioning
+# 5) Importance of a Gem to the Application
+# 6) Resetting Gems back to the original version
+# 7) Breaking Gem List
 #
 #
 # 1) Which Gems are out of date?
 #
 # bundle outdated  or use https://gemnasium.com/BCS-io/letting
 #
-# Update a single Gem using bundle update < gem name >
-# - example of pg: bundle update gp
 #
-# If a gem has not changed check what restrictions are present
+# 2) Update a Gem
+#
+#  Update a single Gem using bundle update < gem name >
+#    - example of pg: bundle update gp
+#
+# If a gem has not changed check what restrictions the Gemfile specifies
 # Taking pg as an example again. We can update to 0.18.1, 0.18.2, 0.18.3
-# but not update to 0.19.1. To update to 0.19.1 you need to change statement
+# but not update to 0.19.1. To update to 0.19.1 you need to change the Gem
+# statement in this file and then run bundle update as above.
 #
 # gem 'pg', '~>0.18.0'     =>      gem 'pg', '~>0.19.0'
 #
 # After updating a gem run rake though and if it passes before pushing up.
 #
-# 2) Versioning
+#
+# 3) Gemfile.lock
+#
+# You should never change Gemfile.lock directly. By changing Gemfile and
+# running bundle commands you change Gemfile.lock indirectly.
+#
+#
+# 4) Versioning
 #
 # Most Gems follow Semantic Versioning:  http://semver.org/
 #
@@ -36,7 +49,8 @@
 #                                functionality.
 # High:       0.18 = > 1.0.0   - Breaking changes with past code.
 #
-# 3) Importance of a Gem to the Application
+#
+# 5) Importance of a Gem to the Application
 #
 # Gems which are within development will not affect the production application:
 #
@@ -47,14 +61,17 @@
 # Gems without a block will affect the production application and you should be
 # more careful with the update.
 #
-# 4) Resetting Gems back to the original version
+#
+# 6) Resetting Gems back to the original version
 #
 # If you need to return your Gems to original version.
 # a) git checkout .
 # b) bundle install
 #
+
+
 #
-# 5) Breaking Gem List
+# GEMS THAT BREAK THE BUILD
 #
 # There are a number of Gems that if you update you break the build.
 # Keep a list of them here - details why next to the gem inclusion below:
