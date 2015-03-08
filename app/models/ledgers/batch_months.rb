@@ -42,11 +42,7 @@ class BatchMonths
   #
   def period(year:)
     time = Time.zone.local(year, now, 1)
-    time..(time + 6.months)
-  end
-
-  def mar?
-    now == MAR
+    time.to_date..(time + 6.months - 1.day).to_date
   end
 
   def to_s join: '/'

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe BatchMonths, :ledgers do
-  describe 'month as id' do
+  describe 'make month as id' do
     it 'can return now' do
       batch_months = BatchMonths.make month: BatchMonths::MAR
       expect(batch_months.now).to eq 3
@@ -44,5 +44,13 @@ describe BatchMonths, :ledgers do
     batch_months = BatchMonths.make month: BatchMonths::MAR
 
     expect(batch_months.to_s).to eq 'Mar/Sep'
+  end
+
+  describe 'period' do
+    it 'includes start of period' do
+      batch_months = BatchMonths.make month: BatchMonths::MAR
+
+      expect(batch_months.period(year: 1984).to_s).to eq '1984-03-01..1984-08-31'
+    end
   end
 end
