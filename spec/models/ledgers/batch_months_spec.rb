@@ -50,7 +50,8 @@ describe BatchMonths, :ledgers do
     it 'includes start of period' do
       batch_months = BatchMonths.make month: BatchMonths::MAR
 
-      expect(batch_months.period(year: 1984).to_s).to eq '1984-03-01..1984-08-31'
+      expect(batch_months.period(year: 1984).to_s)
+        .to eq '1984-03-01..1984-08-31'
     end
   end
 end

@@ -90,8 +90,11 @@ class ClientPayment
 
   # Accounts which include a particular batch_month:
   #
-  # Argument
+  # Arg:
   # batch_months: - period which payments are summed over
+  #               - either Mar/Sep or Jun/Dec
+  # returns: accounts which have charges in Mar/Sep or Jun/Dec
+  #          - accounts can be in one, both, or neither.
   #
   def accounts_with_period(batch_months:)
     Account.joins(:property)

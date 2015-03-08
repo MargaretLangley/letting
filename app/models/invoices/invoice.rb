@@ -140,7 +140,7 @@ class Invoice < ActiveRecord::Base
   # First Invoice for a set of debited charges (red invoice is the second)
   #
   def blue_invoice?
-    snapshot.only_one_invoice?
+    snapshot.first_invoice? self
   end
 
   def generate_comments(comments:)
