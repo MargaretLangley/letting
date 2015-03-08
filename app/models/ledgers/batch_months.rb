@@ -36,6 +36,16 @@ class BatchMonths
     Date::ABBR_MONTHNAMES[last]
   end
 
+
+  # Calculates the 6 months periods for input into total method
+  # Arguments:
+  # year  - starting year
+  #
+  def period(year:)
+    time = Time.zone.local(year, now, 1)
+    time..(time + 6.months)
+  end
+
   def mar?
     now == MAR
   end
