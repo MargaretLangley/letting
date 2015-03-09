@@ -14,6 +14,7 @@
 ####
 #
 class Credit < ActiveRecord::Base
+  include ActAsFakeDeletable
   belongs_to :payment, inverse_of: :credits
   belongs_to :account
   belongs_to :charge, inverse_of: :credits

@@ -3,6 +3,51 @@ require 'rails_helper'
 # rubocop: disable Metrics/LineLength
 
 describe AccountDetails, :ledgers, type: :model do
+  describe '.balanced' do
+    it 'returns accounts that were balanced a time ago' do
+      charge = charge_create
+      account = account_new id: 3, property: property_new(id: 4)
+      account.debits.push debit_new at_time: '25/3/2010',
+                                    amount: 11.00,
+                                    charge: charge
+      account.credits.push credit_new at_time: '25/4/2011',
+                                      amount: 11.00,
+                                      charge: charge
+      account.save!
+
+      expect(AccountDetails.balanced.count(:account_id).size).to eq 1
+    end
+
+    it 'does not return accounts that were imbalanced a time ago' do
+      charge = charge_create
+      account = account_new id: 3, property: property_new(id: 4)
+      account.debits.push debit_new at_time: '25/3/2010',
+                                    amount: 11.00,
+                                    charge: charge
+
+      account.save!
+
+      expect(AccountDetails.balanced.count(:account_id).size).to eq 0
+    end
+
+    it 'ignores recent transactions' do
+      Timecop.travel Date.new(2013, 1, 31)
+
+      charge = charge_create
+      account = account_new id: 3, property: property_new(id: 4)
+      account.debits.push debit_new at_time: '25/3/2010',
+                                    amount: 11.00,
+                                    charge: charge
+      account.credits.push credit_new at_time: '1/1/2013',
+                                      amount: 11.00,
+                                      charge: charge
+      account.save!
+
+      expect(AccountDetails.balanced.count(:account_id).size).to eq 0
+
+      Timecop.return
+    end
+  end
   describe '.balance_all' do
     it 'calculates simple balance' do
       charge = charge_create
