@@ -109,6 +109,15 @@ class Account < ActiveRecord::Base
       .order('properties.human_ref')
   end
 
+  #
+  # Accounts that are paid off after each charge is good for the business
+  # but creates white noise.
+  #
+  def self.hide_monotonous_account_details
+    Credit.all.each { |credit| credit.fake_delete }
+    # Debit.all.delete
+  end
+
   private
 
   def create_credit charge

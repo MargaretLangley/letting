@@ -8,12 +8,8 @@ module ActAsFakeDeletable
   extend ActiveSupport::Concern
   included do
     # override the model actions
-    def delete
-      update_attributes(deleted_at: DateTime.current)
-    end
-
-    def destroy
-      update_attributes(deleted_at: DateTime.current)
+    def fake_delete
+      update_columns(deleted_at: DateTime.current)
     end
 
     # define new scopes
