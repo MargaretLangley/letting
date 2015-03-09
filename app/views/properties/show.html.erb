@@ -1,4 +1,5 @@
 <% @title='View Account' %>
+<%= render 'bubbles/search_account' %>
 
 <div class='col-17-24  grid-row'>
   &nbsp;
@@ -25,7 +26,7 @@
     <div class='col-1-24'>
       <%= edit_link @property %>
       <div  id='help-me', data-skip='4', class='Bubble-point-right'>
-        <%= render 'bubbles/pt_2_edit', line1:'Edit Button', line2: 'Edits this page details' %>
+        <%= render 'bubbles/pt_2_edit', line1:'Account Edit Button', line2: "Use to edit this account's details" %>
       </div>
     </div>
     <div class='col-1-24  no-r-pad'>

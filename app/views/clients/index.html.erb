@@ -1,5 +1,8 @@
 <% @title='Clients' %>
 <% clients = @records %>
+<div class='Bubble-search'>
+  <%= render 'bubbles/search', line1: 'Client Search Box', line2: 'Search by number, name or part address' %>
+</div>
 
 <div class='grid  Shell  u-padding-1-25'>
 
@@ -7,19 +10,19 @@
   <div class='col-18-24'>
     &nbsp;
     <div  id='help-me', data-skip='1',class='Bubble-down'>
-      <%= render 'bubbles/pt_down_view' %>
+      <%= render 'bubbles/pt_down_view', line1: 'View Client Details', line2: "Click on a client row for that client's details" %>
     </div>
   </div>
   <div class='col-2-24'>
     &nbsp;
      <div class='Bubble-anchor'>
-      <%= render 'bubbles/pt_down_edit', line2: 'Edits this client details' %>
+      <%= render 'bubbles/pt_down_edit', line2: "Edits a client's details" %>
     </div>
   </div>
   <div class='col-1-24'>
     <div class='Bubble-anchor'>
       &nbsp;
-      <%= render 'bubbles/pt_down_delete' , line2: 'Deletes this client and all its accounts' %>
+      <%= render 'bubbles/pt_down_delete' , line2: 'Deletes a client record and all its accounts' %>
     </div>
   </div>
 

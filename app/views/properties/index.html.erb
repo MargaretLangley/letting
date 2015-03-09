@@ -1,5 +1,6 @@
 <% @title='Accounts' %>
 <% properties = @records %>
+<%= render 'bubbles/search_account' %>
 
 <div class='grid  Shell  u-padding-1-100'>
 
@@ -7,19 +8,19 @@
   <div class='col-18-24'>
     &nbsp;
     <div  id='help-me', data-skip='0',class='Bubble-down'>
-      <%= render 'bubbles/pt_down_view' %>
+      <%= render 'bubbles/pt_down_view', line1: 'View Account Details', line2: "Click on an account row for that account's details" %>
     </div>
   </div>
   <div class='col-1-24'>
     &nbsp;
     <div class='Bubble-anchor'>
-      <%= render 'bubbles/pay_box', line2: 'Use to make a new payment' %>
+      <%= render 'bubbles/pay_box' %>
     </div>
   </div>
   <div class='col-1-24'>
     &nbsp;
     <div class='Bubble-anchor'>
-      <%= render 'bubbles/pt_down_edit', line1:'Edit Button', line2: 'Edits this account' %>
+      <%= render 'bubbles/pt_down_edit', line2: "Edits an account's details" %>
     </div>
   </div>
   <div class='col-1-24'>&nbsp;
