@@ -52,4 +52,8 @@ class Snapshot < ActiveRecord::Base
   def only_one_invoice?
     invoices.size <= 1
   end
+
+  def first_invoice? invoice
+    invoices.first == invoice
+  end
 end

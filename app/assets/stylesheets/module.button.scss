@@ -22,9 +22,9 @@
 
   .ButtonIcon {
     background: $button-icon-background;
-    border: 1px solid darken($button-icon-background, $border-color-darken);
+    border: 1px solid $button-icon-border;
     color: $button-icon-color;
-    padding: .2em;
+    padding: .3em;
 
     &:hover,
     &:active {

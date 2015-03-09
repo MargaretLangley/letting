@@ -5,6 +5,6 @@
 class ArrearsController < ApplicationController
   def index
     params[:arrears_search] ||= '100.00'
-    @records = Account.balance_all(greater_than: params[:arrears_search])
+    @records = AccountDetails.balance_all(greater_than: params[:arrears_search])
   end
 end

@@ -1,7 +1,8 @@
-<%= form_for user do |f| %>
-  <%= render 'shared/errors', object: user %>
+<%= render 'shared/errors', object: user %>
 
-  <fieldset id='user' class='grid  Shell  u-padding-1-12'>
+<fieldset id='user' class='grid  Shell  u-padding-1-12'>
+
+  <%= form_for user do |f| %>
     <div class='col-23-24  vertical-spacer spacer-column'>
 
       <div class='col-8-24  grid-row  bottom-spacer  grid-label'>
@@ -39,8 +40,12 @@
       </div>
 
     </div>
-    <div class='col-1-24  spacer-column'>
-      <%= view_link user %>
+  <% end %>
+
+  <div class='col-1-24  spacer-column'>
+    <%= view_link user %>
+    <div  id='help-me', data-skip='4', class='Bubble-point-right'>
+      <%= render 'bubbles/pt_2_view', line1:'View Button', line2: 'Views this user details' %>
     </div>
-  </fieldset>
-<% end %>
+  </div>
+</fieldset>

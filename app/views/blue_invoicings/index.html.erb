@@ -1,8 +1,28 @@
 <% @title='Blue Invoicing' %>
 
 <div class='grid  Shell  u-padding-1-25'>
- <%= render 'invoicings/invoicing_header' %>
 
+  <div class='col-4-24  grid-row  r-align'> &nbsp;</div>
+  <div class='col-12-24'>
+    &nbsp;
+    <div  id='help-me', data-skip='0',class='Bubble-down'>
+      <%= render 'bubbles/pt_down_view' %>
+    </div>
+  </div>
+  <div class='col-2-24'>
+    &nbsp;
+    <div class='Bubble-anchor'><%= render 'bubbles/pay_box', line1:'Print Button', line2: 'Prints complete run of invoices' %></div>
+
+  </div>
+  <div class='col-2-24'>
+    &nbsp;
+    <div class='Bubble-anchor'><%= render 'bubbles/pt_down_edit', iconstring: "fa fa-edit  fa-lg  help-icon", line1:'2nd Invoice Button', line2: 'Creates blue run of invoices' %></div>
+  </div>
+  <div class='col-1-24'>&nbsp;
+    <div class='Bubble-anchor'> <%= render 'bubbles/pt_down_delete', line2: 'Deletes all invoices in this run' %></div>
+  </div>
+
+ <%= render 'invoicings/invoicing_header' %>
  <% @invoicings.each do |invoicing| %>
    <% invoicing_dec = InvoicingIndexDecorator.new invoicing %>
    <div title='View run list' class='table-row' data-link='<%= invoicing_path(invoicing) %>'>

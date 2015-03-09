@@ -9,10 +9,10 @@
 
   Color schemes only reside in this colors file.
   Variables that are used in the application should be
-  expressed in terms of the colour scheme where approriate.
+  expressed in terms of the colour scheme where appropriate.
 
   Colors from:
-  http://paletton.com/#uid=33w0Z0krWE7hbNgmGHXBHy3BFoJ
+  http://paletton.com/#uid=43w0Z0krWE7hbNgmGHXBHy3BFoJ
   Chose triad and added darker variant .... maybe should calculate it?
 
   Color naming hexidecimal from:
@@ -32,38 +32,39 @@
 
   The list of colors used in the application.
 
-
 \*----------------------------------------------------------------------------*/
 
+// scss-lint:disable SpaceAfterComma, SpaceBetweenParens
+
 // Primary color, Blue, and shades
-$color-primary-shade-0:      #227dbe;    // $color-mariner
-$color-primary-shade-1:      #6babd8;    // $color-danube
-$color-primary-shade-2:      #4391c9;    // $color-Shakespeare
-$color-primary-shade-3:      #0867a9;    // $color-bahama-blue
-$color-primary-shade-4:      #064d7e;    // $color-venice-blue
+$color-primary-shade-0:        rgba( 34, 125, 190, 1);    // $color-mariner
+$color-primary-shade-1:        rgba(107, 171, 216, 1);    // $color-danube
+$color-primary-shade-2:        rgba( 67, 145, 201, 1);    // $color-Shakespeare
+$color-primary-shade-3:        rgba(  8, 103, 169, 1);    // $color-bahama-blue
+$color-primary-shade-4:        rgba(  6,  77, 126, 1);    // $color-venice-blue
 
 // Secondary Color 1, Yellow, and shades
-$color-secondary-shade-0:    #ffec20;    // $color-broom
-$color-secondary-shade-1:    #fff376;    // $color-paris-daisy
-$color-secondary-shade-2:    #fff04a;    // $color-gorse
-$color-secondary-shade-3:    #ffe900;    // $color-turbo
-$color-secondary-shade-4:    #c5b400;    // $color-buddha-gold
+$color-secondary-shade-0:      rgba(255, 236,  32, 1);    // $color-broom
+$color-secondary-shade-1:      rgba(255, 243, 118, 1);    // $color-paris-daisy
+$color-secondary-shade-2:      rgba(255, 240,  74, 1);    // $color-gorse
+$color-secondary-shade-3:      rgba(255, 233,   0, 1);    // $color-turbo
+$color-secondary-shade-4:      rgba(197, 180,   0, 1);    // $color-buddha-gold
 
 
 // Secondary Color 2 (calling tenary otherwise too close a name), Red/Pink
-$color-ternary-shade-0:      #e81e65;    // $color-amaranth
-$color-ternary-shade-1:      #f1709e;    // $color-froly
-$color-ternary-shade-2:      #ec4580;    // $color-french-rose
-$color-ternary-shade-3:      #e10050;    // $color-razzmatazz
-$color-ternary-shade-4:      #ad003d;    // $color-shiraz
+$color-ternary-shade-0:        rgba(232,  30, 101 ,1);    // $color-amaranth
+$color-ternary-shade-1:        rgba(241, 112, 158 ,1);    // $color-froly
+$color-ternary-shade-2:        rgba(236,  69, 128, 1);    // $color-french-rose
+$color-ternary-shade-3:        rgba(225,   0,  80, 1);    // $color-razzmatazz
+$color-ternary-shade-4:        rgba(173,   0,  61, 1);    // $color-shiraz
 
 
 // Complimentary color, Orange
-$color-complimentary-shade-0: #ff9e20;     // $color-tree-poppy
-$color-complimentary-shade-1: #ffc376;     // $color-macaroni-and-cheese
-$color-complimentary-shade-2: #ffb04a;     // $color-yellow-orange
-$color-complimentary-shade-3: #ff9000;     // $color-pizass
-$color-complimentary-shade-4: #c56f00;     // $color-indochine
+$color-complimentary-shade-0:  rgba(255, 158,  32, 1);     // $color-tree-poppy
+$color-complimentary-shade-1:  rgba(255, 195, 118, 1);     // $color-macaroni-and-cheese
+$color-complimentary-shade-2:  rgba(255, 176,  74, 1);     // $color-yellow-orange
+$color-complimentary-shade-3:  rgba(255, 144,   0, 1);     // $color-pizass
+$color-complimentary-shade-4:  rgba(197, 111,   0, 1);     // $color-indochine
 
 
 //
@@ -71,19 +72,20 @@ $color-complimentary-shade-4: #c56f00;     // $color-indochine
 //
 
 // Whites
-$color-alabaster:          #f8f8f8;             // off-white
-$color-cream:              #ffc;                // ffffcc Cream
+$color-alabaster:              rgba(248, 248, 248, 1);      // off-white
+$color-cream:                  rgba(255, 255, 204, 1);      // ffffcc Cream
 
 
 // Greys
-$color-grey-alto:          #dcdcdc;             // Pale Grey Gainsbro
-$color-silver-chalice:     #aaa;                // Light Grey
-$color-boulder:            #777;                // Medium Dark Grey
-$color-tundora:            #444;                // Very Dark Grey
+$color-grey-alto:              rgba(220, 220, 220, 1);      // Pale Grey Gainsbro
+$color-silver-chalice:         rgba(170, 170, 170, 1);      // Light Grey
+$color-silver-chalice-opaque:  rgba(170, 170, 170, .85);
+$color-boulder:                rgba(119, 119, 119, 1);      // Medium Dark Grey
+$color-tundora:                rgba(68, 68, 68, 1);         // Very Dark Grey
 
 
 // Flash Colors
-$color-snowy-mint:         #dbffdd;             // Pale Green
+$color-snowy-mint:             rgba(219, 255, 221, 1);      // Pale Green
 
 
 // Process these colors into pallet
@@ -106,8 +108,10 @@ $color-snowy-mint:         #dbffdd;             // Pale Green
 $color-neutral:                       $color-alabaster;           // off white
 
 $color-line:                          $color-grey-alto;           // Very Pale Grey
+$color-line-print:                    black;                      // When printing out we want black
 $color-shadow:                        $color-silver-chalice;      // box-shadows on all the controls
 
+$transparent:                         transparent;
 
 //
 // $TYPOGRAPHY
@@ -161,17 +165,25 @@ $scheme-fieldset-active-color: darken($scheme-fieldset-color, $border-color-dark
 $scheme-pick-out-background:     $color-primary-shade-1;
 $scheme-pick-out-border:         darken($scheme-pick-out-background, 5%);
 
+// disabled
+$scheme-disabled-background:     $color-grey-alto;           // Very Pale Grey
+$scheme-disabled-foreground:     $color-text-primary;
+
 // focus
 $scheme-focus-background:       $color-complimentary-shade-0;
 $scheme-focus-foreground:       $color-tundora;
 $scheme-focus-shadow:           $color-complimentary-shade-4;
 
+// help
+$scheme-help-background:         $scheme-light-background;
+$scheme-help-border:             $color-ternary-shade-0;
+$scheme-help-color:              $color-text-primary;
+$scheme-help-icon:               $color-primary-shade-4;
 
-// disabled
-$scheme-disabled-background:     $color-grey-alto;           // Very Pale Grey
-$scheme-disabled-foreground:     $color-text-primary;
-
-
+// Overlay
+$schme-overlay-background:       $color-silver-chalice-opaque;
+$schme-overlay-border:           darken($color-silver-chalice-opaque, $border-color-darken);
+$schme-overlay-color:            $color-text-primary;
 
 //
 // Primary action colors
@@ -191,6 +203,7 @@ $primary-action-active-color:         white;
 
 // Icon
 $button-icon-background:              white;
+$button-icon-border:                  darken($button-icon-background, $border-color-icon-darken);
 $button-icon-color:                   $color-primary-shade-4;    // venice-blue
 $button-icon-active-background:       $scheme-active-background;    // venice-blue
 $button-icon-active-color:            $scheme-active-foreground;
@@ -220,11 +233,16 @@ $errors-warn:                         $color-ternary-shade-0;      // Pink
 //
 // $module.flash
 //
-
-$flash-notice:                        $color-snowy-mint;           // Pale Green :good
-$flash-alert:                         $color-secondary-shade-3;    // Yellow     :netural
-$flash-error:                         $color-ternary-shade-1;      // Pink       :bad
 $flash-opacity:                       .85;
+$flash-notice-background:             rgba($color-snowy-mint, $flash-opacity);         // Pale Green :good
+$flash-notice-border:                 darken($flash-notice-background, $border-color-darken);
+
+$flash-alert-background:              rgba($color-secondary-shade-3, $flash-opacity);  // Yellow     :netural
+$flash-alert-border:                  darken($flash-alert-background, $border-color-darken);
+
+$flash-error-background:              rgba($color-ternary-shade-1, $flash-opacity);    // Pink       :bad
+$flash-error-border:                  darken($flash-error-background, $border-color-darken);
+
 
 
 //

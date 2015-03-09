@@ -1,14 +1,19 @@
-<%= form_for invoice_text do |f| %>
-  <div id='invoice_text' class='Shell  u-padding-1-12'>
+<%= render 'shared/errors', object: invoice_text %>
 
-    <%= render 'shared/errors', object: invoice_text %>
+<div id='invoice_text' class='Shell  u-padding-1-12'>
 
-    <div class='col-23-24  grid-row  grid-label'>
-      <h2><%= invoice_text.description %></h2>
+  <div class='col-23-24  grid-row  grid-label'>
+    <h2><%= invoice_text.description %></h2>
+  </div>
+
+  <div class='col-1-24  no-r-pad'>
+    <%= view_link invoice_text %>
+    <div  id='help-me', data-skip='4', class='Bubble-point-right'>
+      <%= render 'bubbles/pt_2_view', line1:'View Button', line2: 'Views this page details' %>
     </div>
-    <div class='col-1-24  no-r-pad'>
-      <%= view_link invoice_text %>
-    </div>
+  </div>
+
+  <%= form_for invoice_text do |f| %>
 
     <% if invoice_text.page1? %>
       <%= render 'name_phone', f: f, parent: 'invoice_text', invoice_text: invoice_text %>
@@ -24,5 +29,5 @@
     <div class='col-18-24  top-1-line-spacer'>
       <%= render 'forms/buttons', f: f, path: invoice_texts_path %>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

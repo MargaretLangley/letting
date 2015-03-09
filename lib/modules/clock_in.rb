@@ -4,7 +4,7 @@
 #
 # Recording information to the nearest possible accuracy.
 #
-# We are using this to book datetimes when we may not know the actual time.
+# We are using this to register datetimes when we may not know the actual time.
 #
 # If we are recording time there are 3 possibilities.
 # We are recording a datetime that is today - we keep this faithfully.

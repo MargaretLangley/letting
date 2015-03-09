@@ -1,4 +1,4 @@
-lock '3.3.5'
+lock '3.4.0'
 
 #
 # Application variables
@@ -26,6 +26,8 @@ set :tests, ['spec']
 # house keeping
 set :keep_releases, 3
 
+set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
+
 #
 # db-tasks (and assets)
 # sgruhier/capistrano-db-tasks
@@ -42,6 +44,7 @@ set :db_remote_clean, true
 # This directory must be in your shared directory on the server
 set :assets_dir, %w(public/assets public/att)
 set :local_assets_dir, %w(public/assets public/att)
+# Whenever a cron scheduler
 
 desc 'Invoke a rake command on the remote server'
 task :invoke, [:command] => 'deploy:set_rails_env' do |_task, args|

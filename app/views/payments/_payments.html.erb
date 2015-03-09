@@ -8,6 +8,26 @@
   <h2><%= number_to_currency payments.sum %></h2>
 </div>
 
+  <div class='col-6-24  grid-row  r-align'> &nbsp;</div>
+
+  <div class='col-7-24'>
+    &nbsp;
+    <div class='Bubble-down'>
+      <%= render 'bubbles/pay_box', line2: 'Makes a new payment' %>
+    </div>
+  </div>
+
+  <div class='col-2-24'>
+    &nbsp;
+    <div class='Bubble-down'>
+      <%= render 'bubbles/pt_down_edit',  line2: 'Edits this payment' %>
+    </div>
+  </div>
+  <div class='col-1-24'>&nbsp;
+    <div class='Bubble-down'>
+      <%= render 'bubbles/pt_down_delete', line2: 'Deletes this payment from the accounts' %>
+    </div>
+  </div>
 
 <div class='col-3-24  grid-row  vertical-spacer  grid-header  r-align'>
   Property ID

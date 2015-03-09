@@ -29,20 +29,20 @@
   // notice things are GOOD,    colour: green
 
   @mixin notice {
-    border: 1px solid darken($flash-notice, $border-color-darken);
-    background-color: rgba($flash-notice, $flash-opacity);
+    border: 1px solid $flash-notice-border;
+    background-color: $flash-notice-background;
   }
 
   // alert  things are NEUTRAL, colour: yellow.
   @mixin alert {
-    border: 1px solid darken($flash-alert, $border-color-darken);
-    background-color: rgba($flash-alert, $flash-opacity);
+    border: 1px solid $flash-alert-border;
+    background-color: $flash-alert-background;
   }
 
   // :error  things are BAD,     colour: red.
   @mixin error {
-    border: 1px solid darken($flash-error, $border-color-darken);
-    background-color: rgba($flash-error, $flash-opacity);
+    border: 1px solid $flash-error-border;
+    background-color: $flash-error-background;
   }
 
   .save {

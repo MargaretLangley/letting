@@ -50,6 +50,12 @@ class Product < ActiveRecord::Base
       .order(charge_type: :desc).first
   end
 
+  # ordering line item charges on the first page of the invoice.
+  #
+  def self.order_by_date_then_charge
+    order(date_due: :asc, charge_type: :asc)
+  end
+
   # Does the product require additional explanation typically
   # on the back page of the invoice.
   #

@@ -1,6 +1,6 @@
 # STAGING
 #
-# Capisrano environment settings
+# Capistrano environment settings
 #
 set :stage, :staging
 set :branch, 'release_after_nigel_demonstration'

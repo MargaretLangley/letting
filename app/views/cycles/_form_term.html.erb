@@ -1,10 +1,8 @@
-<%= form_for cycle do |f| %>
-  <%= render 'shared/errors', object: cycle %>
+<%= render 'shared/errors', object: cycle %>
 
-  <fieldset id='cycle' class='grid  Shell  u-padding-1-12'>
-
+<fieldset id='cycle' class='grid  Shell  u-padding-1-12'>
+  <%= form_for cycle do |f| %>
     <div class='col-23-24  grid-row  vertical-spacer  spacer-column'>  <!-- column 1 -->
-
       <%= f.hidden_field :cycle_type, cycle_type: 'term' %>
 
       <div class='col-5-24  grid-row  bottom-spacer  grid-label'>
@@ -98,9 +96,12 @@
         <%= render 'forms/buttons', f: f, path: cycles_path  %>
       </div>
     </div>
+  <% end %>
 
-    <div class='col-1-24  spacer-column  no-r-pad'>  <!-- column 2 -->
-      <%= view_link cycle %>
+  <div class='col-1-24  spacer-column'>  <!-- column 2 -->
+    <%= view_link cycle %>
+    <div  id='help-me', data-skip='4', class='Bubble-point-right'>
+      <%= render 'bubbles/pt_2_view', line1:'View Button', line2: 'Views this cycle details, unless greyed out when it is disabled' %>
     </div>
-  </fieldset>
-<% end %>
+  </div>
+</fieldset>

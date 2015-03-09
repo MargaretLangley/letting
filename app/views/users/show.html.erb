@@ -14,7 +14,10 @@
     <div class='col-4-6  bottom-1-line-spacer'><%= @user.role %></div>
   </div>
 
-  <div class='col-1-24  bottom-spacer'>     <!-- 2nd column -->
+   <div class='col-1-24  bottom-spacer'>     <!-- 2nd column -->
     <%= edit_link @user %>
+    <div  id='help-me', data-skip='4', class='Bubble-point-right'>
+      <%= render 'bubbles/pt_2_edit', line1:'Edit Button', line2: 'Edits this user details' %>
+    </div>
   </div>
 </div> <!-- grid  Shell  u-padding-1-100 -->

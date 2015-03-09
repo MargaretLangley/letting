@@ -12,23 +12,20 @@ RSpec.describe Snapshot, type: :model do
     expect(snapshot).to be_valid
   end
 
-  describe '#only_one_invoice?' do
-    it 'is not invoiced if empty' do
-      snapshot = Snapshot.new
-      snapshot.invoices = []
-      expect(snapshot).to be_only_one_invoice
-    end
-
+  describe '#first_invoice?' do
     it 'is not invoiced if one invoice' do
+      invoice = invoice_new
       snapshot = Snapshot.new
-      snapshot.invoices = [invoice_new]
-      expect(snapshot).to be_only_one_invoice
+      snapshot.invoices = [invoice]
+
+      expect(snapshot).to be_first_invoice invoice
     end
 
     it 'has been invoiced if more than one invoice' do
+      second_invoice = invoice_new
       snapshot = Snapshot.new
-      snapshot.invoices = [invoice_new, invoice_new]
-      expect(snapshot).to_not be_only_one_invoice
+      snapshot.invoices = [invoice_new, second_invoice]
+      expect(snapshot).to_not be_first_invoice second_invoice
     end
   end
 

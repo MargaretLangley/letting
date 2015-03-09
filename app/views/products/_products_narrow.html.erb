@@ -1,4 +1,4 @@
-<% invoice.products.each do |product| %>
+<% invoice.products.order_by_date_then_charge.each do |product| %>
 
   <% product_dec = ProductDecorator.new product %>
 
@@ -8,8 +8,10 @@
   <div class='col-3-24  r-align'>   <%= product_dec.balance %></div>
 <% end %>
 
-<div class='col-4-24  grid-row'>    &nbsp;</div>
-<div class='col-10-24'>              Total now Owing</div>
-<div class='col-5-24  text-overline  r-align'>
-  <%= to_decimal invoice.total_arrears %>
+<div class='col-4-24  grid-row  top-half-line-spacer'>    &nbsp;</div>
+<div class='col-10-24  top-half-line-spacer'>              Total now Owing</div>
+<div class='col-5-24  top-half-line-spacer  r-align'>
+  <span class='line-total'>
+    <%= to_decimal invoice.total_arrears %>
+  </spn>
 </div>

@@ -17,7 +17,7 @@ Letting::Application.routes.draw do
   resources :client_payments, only: [:show]
   resources :clients do
     member do
-      patch :payment
+      patch :payments_itemized
     end
   end
   resources :guides, only: [:index, :show, :edit, :update]

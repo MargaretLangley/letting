@@ -11,6 +11,7 @@ require 'capistrano/rails/collection'
 require 'capistrano-db-tasks'
 # manage dotenv
 require 'mascherano/env'
+require 'whenever/capistrano'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }

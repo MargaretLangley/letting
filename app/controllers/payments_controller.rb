@@ -21,7 +21,8 @@ class PaymentsController < ApplicationController
   def index
     params[:date] ||= Payments.last_booked_at
 
-    @records = Payments.on(date: params[:date]).includes(joined_tables).load
+    @records = Payments.booked_on(date: params[:date]).includes(joined_tables)
+               .load
 
     @payments_by_dates = Payment.by_booked_at_date
   end

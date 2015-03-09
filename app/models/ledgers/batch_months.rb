@@ -1,8 +1,13 @@
 #
 # BatchMonths
 #
-# Encapsulate the payment periods - which are 6 month
-# periods.
+# Encapsulate the payment periods - which are 6 month periods.
+#
+# charge_months has two main groups: Mar/Sep and Jun/Dec
+# Mar/Sep which has sub-groups (Mar and Sep)
+# Jun/Dec which has sub-groups (Jun and Dec)
+#
+#
 #
 class BatchMonths
   attr_reader :first, :last, :now
@@ -31,8 +36,13 @@ class BatchMonths
     Date::ABBR_MONTHNAMES[last]
   end
 
-  def mar?
-    now == MAR
+  # Calculates the 6 months periods for input into total method
+  # Arguments:
+  # year  - starting year
+  #
+  def period(year:)
+    time = Time.zone.local(year, now, 1)
+    time.to_date..(time + 6.months - 1.day).to_date
   end
 
   def to_s join: '/'
