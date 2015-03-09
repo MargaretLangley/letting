@@ -2,7 +2,7 @@ $( document ).ready(function() {
 
   $('.js-start-help').click(function() {
 
-    $('#help-1')[0].style.display = 'block';
+    $('#help-search')[0].style.display = 'block';
     hcount = 1;
     return false;
 
@@ -11,21 +11,25 @@ $( document ).ready(function() {
   $('.js-help').click(function() {
 
     skip =  $("#help-me").attr('data-skip');
-    if (hcount == 1) {
-      if (skip == 1) { hcount =  2; }
-      if (skip == 4) { hcount =  skip; }
+     if (hcount == 2) {
+       if (skip == 1) { hcount++; }
+       if (skip == 2) { hcount++; }
+       if (skip == 4) { hcount =  5; }
     }
+
     hcount++;
+
+    if (hcount == 5 && skip ==2) { hcount =  6; }
 
     clearaway(skip);
 
     switch( hcount) {
 
       case 1:
-        $('#help-1')[0].style.display = 'block';
+        $('#help-search')[0].style.display = 'block';
       break;
       case 2:
-        show2();
+        $('#help-2')[0].style.display = 'block';
       break;
       case 3:
         show3();
@@ -34,9 +38,12 @@ $( document ).ready(function() {
         show4();
       break;
       case 5:
-        $('#help-pr')[0].style.display = 'block';
+        show5();
       break;
       case 6:
+        $('#help-pr')[0].style.display = 'block';
+      break;
+      case 7:
         $('#help-log')[0].style.display = 'block';
         hcount = 0;
       break;
@@ -58,20 +65,20 @@ $( document ).ready(function() {
 });
 
 
-function show2() {
+function show3() {
 
-  $('#help-2')[0].style.display = 'block';
+  $('#help-3')[0].style.display = 'block';
 
   return false;
 }
 
-function show3() {
+function show4() {
 
   $('#help-edit')[0].style.display = 'block';
 
   return false;
 }
-function show4() {
+function show5() {
 
   $('#help-delete')[0].style.display = 'block';
 
@@ -82,19 +89,21 @@ function show4() {
 
 function clearaway(skip) {
 
-  $('#help-1')[0].style.display = 'none';
+  $('#help-search')[0].style.display = 'none';
+  $('#help-2')[0].style.display = 'none';
   $('#help-pr')[0].style.display = 'none';
   $('#help-log')[0].style.display = 'none';
 
   if (skip == 0) { clearskip0(); }
   if (skip == 1) { clearskip1(); }
+  if (skip == 2) { clearskip2(); }
 
   return false;
 }
 
 function clearskip0() {
 
-  $('#help-2')[0].style.display = 'none';
+  $('#help-3')[0].style.display = 'none';
   $('#help-edit')[0].style.display = 'none';
   $('#help-delete')[0].style.display = 'none';
 
@@ -105,6 +114,13 @@ function clearskip1() {
 
   $('#help-edit')[0].style.display = 'none';
   $('#help-delete')[0].style.display = 'none';
+
+  return false;
+}
+
+function clearskip2() {
+
+  $('#help-edit')[0].style.display = 'none';
 
   return false;
 }
