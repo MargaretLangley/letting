@@ -3,7 +3,7 @@
 # Capistrano environment settings
 #
 set :stage, :staging
-set :branch, 'account_details'
+set :branch, 'master'
 
 # Simple Role Syntax
 role :app, %w(deployer@10.0.0.35)
