@@ -22,6 +22,7 @@
 #
 class Debit < ActiveRecord::Base
   include Comparable
+  include ActAsFakeDeletable
   belongs_to :account, inverse_of: :debits
   has_many :credits, through: :settlements
   has_many :settlements, dependent: :destroy
