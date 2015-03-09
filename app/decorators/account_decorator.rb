@@ -45,8 +45,8 @@ class AccountDecorator
   end
 
   def dec_items
-    [*account.debits.map { |debit| AccountDebitDecorator.new debit },
-     *account.credits.map { |credit| AccountCreditDecorator.new credit }]
+    [*account.debits.kept.map { |debit| AccountDebitDecorator.new debit },
+     *account.credits.kept.map { |credit| AccountCreditDecorator.new credit }]
       .sort_by(&:at_time)
   end
 
