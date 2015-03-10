@@ -4,14 +4,16 @@ $( document ).ready(function() {
 
     $('#help-search')[0].style.display = 'block';
     hcount = 1;
+    skip =  parseInt($("#help-me").attr('data-skip'));
+    // pay =  parseInt($("#help-me").attr('data-pay'));
+
     return false;
 
   });
 
   $('.js-help').click(function() {
 
-    skip =  $("#help-me").attr('data-skip');
-     if (hcount == 2) {
+    if (hcount == 2) {
        if (skip == 1) { hcount++; }
        if (skip == 2) { hcount++; }
        if (skip == 4) { hcount =  5; }
