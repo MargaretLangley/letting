@@ -115,16 +115,15 @@ class Account < ActiveRecord::Base
   #
   def self.hide_monotonous_account_details
     delete_before = (Time.zone.now - 2.years).to_date
-    account_ids = AccountDetails.balanced.map {|ad| ad.account.id }
+    account_ids = AccountDetails.balanced.map { |ad| ad.account.id }
 
-    human_ref = AccountDetails.balanced.map {|ad| ad.account.property.human_ref }
     Credit.where('account_id in (?)', account_ids)
-          .where('at_time < ?', delete_before)
-          .each { |credit| credit.fake_delete }
+      .where('at_time < ?', delete_before)
+      .each(&:fake_delete)
 
     Debit.where('account_id in (?)', account_ids)
-          .where('at_time < ?', delete_before)
-          .each { |debit| debit.fake_delete }
+      .where('at_time < ?', delete_before)
+      .each(&:fake_delete)
   end
 
   private

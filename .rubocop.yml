@@ -14,6 +14,7 @@ AllCops:
   Exclude:
     - db/**/*
     - bin/**/*
+    - tmp/**/*
 
 #
 # Ignored Styles
