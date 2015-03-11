@@ -30,11 +30,11 @@ module DB
     end
 
     def self.agent
-      %w(human_ref) + entities + address
+      %w(human_ref) + entities + address + %w(nation)
     end
 
     def self.agent_patch
-      agent + %w(nation override)
+      agent + %w(override)
     end
 
     def self.charge
