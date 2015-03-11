@@ -16,6 +16,7 @@ class InvoiceDecorator
   include DateHelper
   include MethodMissing
   include NumberFormattingHelper
+  PAD_TO_LINES = 7
 
   def invoice
     @source
@@ -35,6 +36,14 @@ class InvoiceDecorator
 
   def billing_first_address_line
     invoice.billing_address.lines.second
+  end
+
+  #
+  # Requirement to have billing address on invoice padded out to 7 so that
+  # invoices remain the same length.
+  #
+  def billing_address
+    invoice.billing_address.lines.in_groups_of(PAD_TO_LINES, "\n ").join
   end
 
   def products_display
