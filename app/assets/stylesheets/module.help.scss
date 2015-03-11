@@ -213,3 +213,11 @@
     left: 284px; /*horizontal position of the triangle, inside & outside triangles same value*/
   }
 }
+@media print {
+
+  .Button, .Bubble-anchor, .ButtonIcon, .Bubble-log, .Bubble-point-right,  .ButtonPrimary, .Bubble-print, .Bubble-search {
+    display: none;
+  }
+}
+
+
