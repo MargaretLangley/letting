@@ -52,7 +52,7 @@ module DB
     end
 
     def top_punctuation sanitize
-      sanitize.sub(/^[,&]?/, '')
+      sanitize.sub(/^[,&-]?/, '')
     end
 
     def tail_punctuation sanitize
