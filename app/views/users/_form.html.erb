@@ -1,4 +1,5 @@
 <%= render 'shared/errors', object: user %>
+<%= render 'bubbles/search_account' %>
 
 <fieldset id='user' class='grid  Shell  u-padding-1-12'>
 
@@ -44,8 +45,8 @@
 
   <div class='col-1-24  spacer-column'>
     <%= view_link user %>
-    <div  id='help-me', data-skip='4', class='Bubble-point-right'>
-      <%= render 'bubbles/pt_2_view', line1:'View Button', line2: 'Views this user details' %>
+    <div  id='help-me',  data-skip='3',  data-pay='1',  data-itext='0', class='Bubble-point-right'>
+      <%= render 'bubbles/pt_2_view', line1:'User View Button', line2: "Use to view this user's details" %>
     </div>
   </div>
 </fieldset>

@@ -184,6 +184,7 @@ cat /dev/null > /file/you/want/to/wipe-out
 3. Listing all databases: `\list`
 4. Connect to a database: `\c db_name`
 5. Execute SQL file:  `psql -f thefile.sql letting_<envionrment>`
+6. Logging In: `psql -d letting_<envionment> -U letting_<environment>`
 
 #####4.2 Elasticsearch
 

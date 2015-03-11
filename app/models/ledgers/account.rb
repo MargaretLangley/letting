@@ -109,6 +109,23 @@ class Account < ActiveRecord::Base
       .order('properties.human_ref')
   end
 
+  #
+  # Accounts that are paid off after each charge is good for the business
+  # but creates white noise.
+  #
+  def self.hide_monotonous_account_details
+    delete_before = (Time.zone.now - 2.years).to_date
+    account_ids = AccountDetails.balanced.map { |ad| ad.account.id }
+
+    Credit.where('account_id in (?)', account_ids)
+      .where('at_time < ?', delete_before)
+      .each(&:fake_delete)
+
+    Debit.where('account_id in (?)', account_ids)
+      .where('at_time < ?', delete_before)
+      .each(&:fake_delete)
+  end
+
   private
 
   def create_credit charge

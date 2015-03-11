@@ -23,6 +23,26 @@ describe InvoiceDecorator do
     expect(invoice_dec.billing_first_address_line).to eq "Edgbaston Road\n"
   end
 
+  describe 'billing address' do
+    it 'pads address' do
+      property = property_new(address: address_new)
+      invoice_dec  = InvoiceDecorator.new invoice_new(property: property)
+
+      expect(invoice_dec.billing_address.lines.count).to eq 8
+    end
+
+    it 'pads address' do
+      property = property_new(address:
+                   address_new(house_name: 'a',
+                               district: 'b',
+                               postcode: 'NW1 1AA',
+                               nation: 'Spain'))
+      invoice_dec  = InvoiceDecorator.new invoice_new(property: property)
+
+      expect(invoice_dec.billing_address.lines.count).to eq 8
+    end
+  end
+
   describe '#products_display' do
     it 'returns products if it has debits' do
       debit = debit_new(amount: 8, charge: charge_new)

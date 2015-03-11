@@ -1,4 +1,5 @@
 <%= render 'shared/errors', object: cycle %>
+<%= render 'bubbles/search_account' %>
 
 <fieldset id='cycle' class='grid  Shell  u-padding-1-12'>
   <%= form_for cycle do |f| %>
@@ -100,7 +101,7 @@
 
   <div class='col-1-24  spacer-column'>  <!-- column 2 -->
     <%= view_link cycle %>
-    <div  id='help-me', data-skip='4', class='Bubble-point-right'>
+    <div  id='help-me', data-skip='3',  data-pay='1',  data-itext ='0', class='Bubble-point-right'>
       <%= render 'bubbles/pt_2_view', line1:'View Button', line2: 'Views this cycle details, unless greyed out when it is disabled' %>
     </div>
   </div>

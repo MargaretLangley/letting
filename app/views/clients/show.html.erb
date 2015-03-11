@@ -1,5 +1,8 @@
-  <% @title='View Client' %>
+<% @title='View Client' %>
 <% client = @client_payment.client %>
+<div class='Bubble-search'>
+  <%= render 'bubbles/search', line1: 'Client Search Box', line2: 'Search by number, name or part address' %>
+</div>
 
 <!-- Client Contact -->
 
@@ -10,8 +13,8 @@
     </div>
     <div class='col-1-24'>
       <%= edit_link client, size: '2x' %>
-      <div  id='help-me', data-skip='4', class='Bubble-point-right'>
-        <%= render 'bubbles/pt_2_edit', line1:'Edit Button', line2: 'Edits this client details'%>
+      <div  id='help-me',  data-skip='3',  data-pay='1'  data-itext ='0',  class='Bubble-point-right'>
+        <%= render 'bubbles/pt_2_edit', line1:'Client Edit Button', line2: "Use to edit this client's details" %>
       </div>
     </div>
     <div class='col-1-24  no-r-pad'>

@@ -16,7 +16,7 @@ class AccountDetails < ActiveRecord::Base
   #
   def self.balanced at_time: (Time.now - 2.years).to_date
     AccountDetails.select('account_id, property_id')
-      .where('at_time <= ?', at_time)
+      .where('at_time < ?', at_time)
       .group(:account_id, :property_id, :human_ref)
       .having('Sum(amount) = 0')
       .order(:human_ref)

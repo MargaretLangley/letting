@@ -6,15 +6,15 @@ describe AccountDecorator do
 
   describe 'running-balance' do
     it 'keeps a working balance' do
-      account = AccountDecorator.new account_new charges: [charge_new]
-      account.debits.push debit_new at_time: '25/9/2012', amount: 5.00
-      account.debits.push debit_new at_time: '25/9/2013', amount: 10.00
-      account.credits.push credit_new at_time: '25/9/2014', amount: 12.00
-      expect(account.all_items.map(&:running_balance)).to \
-        contain_exactly \
-          5.00,
-          15.00,
-          3.00
+      charge = charge_new
+      d1 = debit_new at_time: '25/9/2012', amount: 5.00, charge: charge
+      d2 = debit_new at_time: '25/9/2013', amount: 10.00, charge: charge
+      c1 = credit_new at_time: '25/9/2014', amount: 12.00, charge: charge
+      ac = account_create charges: [charge_new], debits: [d1, d2], credits: [c1]
+      account_dec = AccountDecorator.new ac
+
+      expect(account_dec.all_items.map(&:running_balance))
+        .to contain_exactly 5.00, 15.00, 3.00
     end
   end
 
