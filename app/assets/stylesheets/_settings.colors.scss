@@ -162,8 +162,9 @@ $scheme-fieldset-active-color: darken($scheme-fieldset-color, $border-color-dark
 // Darker background color
 // - emphasise over field color
 //
-$scheme-pick-out-background:     $color-primary-shade-1;
-$scheme-pick-out-border:         darken($scheme-pick-out-background, 5%);
+$scheme-pick-out-background:     lighten($color-primary-shade-1, 20%);    // Light to Medium Blue
+$scheme-pick-out-border:         darken($scheme-pick-out-background, 10%);
+$scheme-pick-out-foreground:     $color-primary-shade-4;
 
 // disabled
 $scheme-disabled-background:     $color-grey-alto;           // Very Pale Grey
