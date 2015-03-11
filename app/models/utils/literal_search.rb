@@ -9,14 +9,14 @@
 ####
 #
 class LiteralSearch
-  attr_reader :type, :query
+  attr_reader :model, :query
 
-  # type: the type, or model, of the query being executed - one of Client,
-  #       Payment, Property or Arrear
+  # model: the model type of the query being executed - one of Client,
+  #       Payment, Property, Arrear or Invoice.
   # query: the search terms being queried on the model
   #
-  def self.search(type:, query:)
-    new(type: type, query: query)
+  def self.search(model:, query:)
+    new(model: model, query: query)
   end
 
   # go
@@ -24,27 +24,27 @@ class LiteralSearch
   # returns LiteralResult - a wrapper for the search results
   #
   def go
-    captured = type_query
+    captured = query_for_model
     captured = default_ordered_query unless captured.concluded?
     captured
   end
 
   private
 
-  def initialize(type:, query:)
-    @type = type
+  def initialize(model:, query:)
+    @model = model
     @query = query
   end
 
-  def type_query
-    case type
+  def query_for_model
+    case model
     when 'Client' then client(query)
     when 'Payment' then payment(query)
     when 'Property' then property(query)
-    when 'Arrear', 'Cycle', 'User', 'InvoiceText', 'Invoicing'
-      LiteralResult.missing
+    when 'Arrear', 'Cycle', 'User', 'InvoiceText', 'Invoicing', 'Invoice'
+      LiteralResult.without_a_search
     else
-      fail NotImplementedError, "Missing type: #{type}"
+      fail NotImplementedError, "Missing model: #{model}"
     end
   end
 
@@ -75,6 +75,6 @@ class LiteralSearch
     return property(query) if property(query).concluded?
     return client(query) if client(query).concluded?
 
-    LiteralResult.missing
+    LiteralResult.no_record_found
   end
 end

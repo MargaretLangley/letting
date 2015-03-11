@@ -123,6 +123,7 @@
   @include clearfix;
   background-color: $scheme-fieldset-background;
   border-radius: $border-radius;
+  color: $color-text-primary;
 
   @media screen {
     box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $color-shadow;

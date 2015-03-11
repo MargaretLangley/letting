@@ -44,6 +44,19 @@ module DB
         expect(entity.title).to eq 'Mr'
       end
 
+      describe 'title hyphen' do
+        it 'eliminates single hyphen title' do
+          entity = EntityFields.new '-', 'A D', 'Man,'
+          expect(entity.title).to eq ''
+        end
+
+        # Don't see this ever happening!
+        it 'keeps hyphened-title' do
+          entity = EntityFields.new 'Mr-', 'A D', 'Man,'
+          expect(entity.title).to eq 'Mr-'
+        end
+      end
+
       it 'concats initials to company names' do
         entity = EntityFields.new '', 'A D', 'BCS Ltd'
         expect(entity.name).to eq 'A D BCS Ltd'
