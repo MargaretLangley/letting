@@ -29,7 +29,7 @@ class SearchController < ApplicationController
   private
 
   def literal_search
-    @literal_search ||= LiteralSearch.search(type:  session[:search_model],
+    @literal_search ||= LiteralSearch.search(model: session[:search_model],
                                              query: params[:search_terms]).go
   end
 

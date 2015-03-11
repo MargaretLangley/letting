@@ -42,11 +42,20 @@ class LiteralResult
     { action: action, controller:  controller, id: id }
   end
 
-  # self.missing
+  # self.without_a_search
   #
-  # completes LiteralResult - will return found of false
+  # The model does not have any literal search query find any specific record.
   #
-  def self.missing
+  def self.without_a_search
+    LiteralResult.new action: '', controller: '', id: nil
+  end
+
+  # self.no_record_found
+  #
+  # completes LiteralResult - no literal match has been found
+  # Same as without_a_search but makes more sense when reading code.
+  #
+  def self.no_record_found
     LiteralResult.new action: '', controller: '', id: nil
   end
 end
