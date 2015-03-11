@@ -4,26 +4,39 @@ $( document ).ready(function() {
 
     $('#help-search')[0].style.display = 'block';
     hcount = 1;
+    pay =  parseInt($("#help-me").attr('data-pay'));
     skip =  parseInt($("#help-me").attr('data-skip'));
-    // pay =  parseInt($("#help-me").attr('data-pay'));
+    itext =  parseInt($("#help-me").attr('data-itext'));
 
     return false;
-
   });
 
   $('.js-help').click(function() {
 
-    if (hcount == 2) {
-       if (skip == 1) { hcount++; }
-       if (skip == 2) { hcount++; }
-       if (skip == 4) { hcount =  5; }
+    if (skip == 3 )
+    {
+      hcount++;
+      if (hcount == 2 ) { hcount= hcount +3; }
+    }
+    else
+    {
+      // hcount will become 3 + whatever jump needed
+      // pay is 0 when payment help box needed, 1 to jump over case 3
+      // skip is 0 when case4 is needed
+      if (hcount == 2) { hcount = hcount + pay + skip; }
+
+      //  // When hcount is 2 this gives index view
+      hcount++;
+
+      // // itext added for invoice texts to jump over delete
+      if (hcount == 5 ) { hcount = hcount + itext; }
+
+      // alert('Finally hcount is '+hcount+'  pay is '+pay+'  skip is '+skip+'  itext is '+itext);
+
+      clearrest();
     }
 
-    hcount++;
-
-    if (hcount == 5 && skip ==2) { hcount =  6; }
-
-    clearaway(skip);
+    clearmain();
 
     switch( hcount) {
 
@@ -59,11 +72,12 @@ $( document ).ready(function() {
 
   $('.js-cancel-help').click(function() {
 
-    clearaway(skip);
-
+    clearmain();
+    clearrest();
+    clearpay();
     return false;
-   });
 
+  });
 });
 
 
@@ -76,53 +90,39 @@ function show3() {
 
 function show4() {
 
-  $('#help-edit')[0].style.display = 'block';
+  $('#help-4')[0].style.display = 'block';
 
   return false;
 }
+
 function show5() {
 
-  $('#help-delete')[0].style.display = 'block';
+  $('#help-5')[0].style.display = 'block';
 
   return false;
 }
 
 // These delete the help boxes before next box set up
 
-function clearaway(skip) {
+function clearmain() {
 
   $('#help-search')[0].style.display = 'none';
-  $('#help-2')[0].style.display = 'none';
+  if (itext==0) {  $('#help-5')[0].style.display = 'none'; }
   $('#help-pr')[0].style.display = 'none';
   $('#help-log')[0].style.display = 'none';
 
-  if (skip == 0) { clearskip0(); }
-  if (skip == 1) { clearskip1(); }
-  if (skip == 2) { clearskip2(); }
-
   return false;
 }
 
-function clearskip0() {
+function clearrest() {
 
+  $('#help-2')[0].style.display = 'none';
+  $('#help-4')[0].style.display = 'none';
+  if (pay == 0) { clearpay(); }
+  return false;
+}
+
+function clearpay() {
   $('#help-3')[0].style.display = 'none';
-  $('#help-edit')[0].style.display = 'none';
-  $('#help-delete')[0].style.display = 'none';
-
-  return false;
-}
-
-function clearskip1() {
-
-  $('#help-edit')[0].style.display = 'none';
-  $('#help-delete')[0].style.display = 'none';
-
-  return false;
-}
-
-function clearskip2() {
-
-  $('#help-edit')[0].style.display = 'none';
-
   return false;
 }

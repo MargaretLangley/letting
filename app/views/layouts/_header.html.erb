@@ -22,11 +22,11 @@
           <% if current_user %>
             <li class='drop-down-menu'>
               <%= link_to fa_icon('print', text: 'Print'), '#', class: 'drop-down-link  js-print' %>
-              <div class='Bubble-print'><%= render 'bubbles/pt_up_print' %></div>
+              <div class='Bubble-print'><%= render 'bubbles/print' %></div>
             </li>
             <li class='drop-down-menu'>
               <%= link_to fa_icon('user', text: current_user.nickname, title: 'User'), '#', class: 'drop-down-link' %>
-                <div class='Bubble-log'><%= render 'bubbles/pt_up_log' %></div>
+                <div class='Bubble-log'><%= render 'bubbles/log' %></div>
               <ul class='drop-down-sub-menu'>
                 <li class='drop-down-sub-menu-item'>
                   <%= link_to fa_icon('info-circle', text: ' Help'), '#', title: 'Help', class: 'drop-down-link  js-start-help' %>

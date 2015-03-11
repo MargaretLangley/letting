@@ -22,15 +22,28 @@
     color: $color-primary-shade-4;
   }
 
-  .help-button {
-    border: 1px solid $scheme-help-color;
-    border-radius: 3px;
+
+  @mixin buttonlet {
     color: $color-ternary-shade-0;
     display: inline-block;
     margin-left: 10px;
     margin-top: 20px;
     padding: 8px;
   }
+
+  .help-button {
+    @include buttonlet;
+    border: 1px solid $scheme-help-color;
+    border-radius: 3px;
+  }
+
+  .cancel-button {
+    @include buttonlet;
+    background-color: $scheme-help-background;
+    border: 0;
+    text-decoration: underline;
+  }
+
 
 // These are the positions for the bubbles
 
