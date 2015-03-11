@@ -121,13 +121,12 @@
     width: 290px;
   }
 
-/*Wider speech bubble pointing down or up */
+/*Wider speech bubble */
   .bubble-wide {
     @include bubblet;
     height: 180px;
     width: 350px;
   }
-
 
 /*Speech bubble pointing right */
   .pt-right {
@@ -215,7 +214,15 @@
 }
 @media print {
 
-  .Button, .Bubble-anchor, .ButtonIcon, .Bubble-log, .Bubble-point-right,  .ButtonPrimary, .Bubble-print, .Bubble-search {
+  .Button,
+  .Bubble-anchor,
+  .ButtonIcon,
+  .Bubble-log,
+  .Bubble-point-right,
+  .ButtonPrimary,
+  .Bubble-print,
+  .Bubble-search,
+  .Bubble-up {
     display: none;
   }
 }
