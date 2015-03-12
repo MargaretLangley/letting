@@ -29,6 +29,7 @@ Letting::Application.routes.draw do
   resources :invoices, only: [:show]
   resources :print_invoices, only: [:show]
   resources :print_runs, only: [:show]
+  resources :property_lists, only: [:index]
   resources :runs, only: [:show, :destroy]
 
   # Admin
