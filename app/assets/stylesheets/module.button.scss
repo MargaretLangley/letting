@@ -72,6 +72,19 @@
       color: $primary-action-active-color;
     }
   }
+
+  .ButtonPrimary[disabled] {
+    background: $button-icon-disabled-background;
+    border: 1px solid darken($button-icon-disabled-background, $border-color-darken);
+    color: $button-icon-disabled-color;
+    padding: 1.3em;
+
+    &:hover,
+    &:active {
+      background: $button-icon-disabled-background;
+      color: $button-icon-disabled-color;
+    }
+  }
 }
 
 
