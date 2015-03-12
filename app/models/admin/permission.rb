@@ -46,6 +46,7 @@ Permission = Struct.new(:user) do
        invoices
        payments
        properties
+       property_lists
        print_invoices
        print_runs
        runs
