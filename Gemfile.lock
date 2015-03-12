@@ -247,6 +247,8 @@ GEM
     pry-stack_explorer (0.4.9.2)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.0)
     rack-dev-mark (0.7.3)
       rack (>= 1.1)
@@ -474,6 +476,7 @@ DEPENDENCIES
   pg (~> 0.18.0)
   pry-rails (~> 0.3.0)
   pry-stack_explorer (~> 0.4.9.0)
+  quiet_assets
   rack-dev-mark (~> 0.7.0)
   rack-mini-profiler (~> 0.9.0)
   rails (= 4.2.0)

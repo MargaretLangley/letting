@@ -149,6 +149,7 @@ gem 'whenever', require: false
 gem 'seedbank'
 
 group :development do
+  gem 'quiet_assets'
   gem 'better_errors', '~> 2.1.0'
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'brakeman', '~>3.0.0', require: false
