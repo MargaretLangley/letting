@@ -19,20 +19,24 @@ This document covers the following sections
 2. Commands
   1. rake db:import
 3. Troubleshooting
-  1. Running Rake Tasks on Production Server
-  2. Cleaning Production Setup
-  3. Reset the database
-  4. Running rails console in production
-  5. Capistrano failing to deploy - with github.com port-22
-  6. Firewalls
-    6.1 Listing Firewall
-    6.2 Disabling the Firewall
+  1. Net::SSH::HostKeyMismatch
+  2. Running Rake Tasks on Production Server
+  3. Cleaning Production Setup
+  4. Reset the database
+  5. Running rails console in production
+  6. Capistrano failing to deploy - with github.com port-22
   7. Truncating a file without changing ownership
 4. Cheatsheet
-  1. Chef
-  2. Postgresql
-  3. Elasticsearch
-  4. QEMU
+  1. Firewalls
+    .1 Listing Firewall
+    .2 Adding Ranges to the firewall
+    .3 Disabling the Firewall
+  2. Chef
+  3. Postgresql
+  4. Elasticsearch
+  5. QEMU
+    5.1 Basic Commands
+    5.2 Removing an instance from
 5. Production Client
 
 
@@ -124,14 +128,29 @@ My Reference: Webserver alias: `ssh arran`
 
 ####3. TROUBLESHOOTING
 
-####3.1 Running Rake Tasks on Production Server
+####3.1 Net::SSH::HostKeyMismatch
+
+Error seen as something like:
+
+fingerprint d2:82:b0:34:3c:df etc does not match for "193.183.99.251" Copy the workstation public key to the server.
+
+Problem:
+Computers keep a unique identifier of servers they have connected with so that they can prevent a bad actor pretending they are that server. However, sometimes the ID of the server changes in which case you need to reset the server.
+
+Solution
+
+`ssh-keygen -R <ip address> | <name>`
+
+
+
+####3.2 Running Rake Tasks on Production Server
 
   `ssh <server>`
   `cd ~/apps/letting_<environment>/current`
   ` RAILS_ENV=<environment> bundle exec rake <method name>`
 
 
-####3.2. Cleaning Production Setup
+####3.3. Cleaning Production Setup
 
 1. `sudo rm -rf ~/apps/`
 2. `sudo rm /tmp/unicorn.letting_*.sock`
@@ -146,7 +165,7 @@ My Reference: Webserver alias: `ssh arran`
 ===
 
 
-####3.3. Reset the database
+####3.4. Reset the database
 Sometimes when you are changing a project the database will not allow you to delete it due to open connections to it. If you cannot close the connections you will have to reset the database. If this is the case follow this:
 
 1. `cap production rails:rake:db:drop`
@@ -158,10 +177,10 @@ Sometimes when you are changing a project the database will not allow you to del
 4. `cap <environment> db:push`
   1. The data has been deleted by the drop this puts it back.
 
-####3.4 Running rails console in production
+####3.5 Running rails console in production
 `bundle exec rails c production`
 
-####3.5 Capistrano failing to deploy - with github.com port-22
+####3.6 Capistrano failing to deploy - with github.com port-22
 
 Occasionally a deployment fails with an unable to connect to github.
 Any network service is not completely reliable. Wait for a while and try again.
@@ -171,13 +190,33 @@ DEBUG [44051a0f]  ssh: connect to host github.com port 22: Connection timed out
 DEBUG [44051a0f]  fatal: Could not read from remote repository.
 ````
 
-####3.6 Firewall
+####3.7 Truncating a file without changing ownership
 
-#####3.6.1 Listing Firewall
+````
+cat /dev/null > /file/you/want/to/wipe-out
+`````
+
+
+####4 Cheatsheet
+
+####4.1 Firewall
+
+#####4.1.1 Listing Firewall
 
 `sudo iptables --list`
 
-#####3.6.2 Disabling the Firewall
+#####4.1.2 Adding Ranges to the wall
+
+1. ssh to the server which is having packets blocked.
+2. What address is being blocked? `cat /var/log/kern.log`
+  1. The logs contains blocked ip packets - to summarize the import things. DST is the ip address of the server we have been blocked to getting and DPT is the port number. We want to allow this combination through.
+  Mar 13 ... iptables denied: IN= OUT=eth0 ... DST=23.23.181.189 ... DPT=443
+3. What range does the blocked ip address belong to?
+  1. Install whois if not already installed
+  2. whois 23.23.181.189
+  3. Add the CIDR range to the firewall, in this case Amazon's 23.20.0.0/14
+
+#####4.1.3 Disabling the Firewall
 
 If an operation is not completing and you suspect a firewall issue
 these commands completely remove it. (Rebooting the box, if applicable, restores the firewall)
@@ -190,18 +229,9 @@ these commands completely remove it. (Rebooting the box, if applicable, restores
     iptables -F
 ````
 
-####3.7 Truncating a file without changing ownership
+#####4.2 Chef
 
-````
-cat /dev/null > /file/you/want/to/wipe-out
-`````
-
-
-####4 Cheatsheet
-
-#####4.1 Chef
-
-######4.1.1 Updating a cookbook
+######4.2.1 Updating a cookbook
 
 1. Clone the cookbook to the local machine under ~/code/chef/
 2. Make changes to the cookbook increment the version in the meta data and commit and push back.
@@ -209,9 +239,20 @@ cat /dev/null > /file/you/want/to/wipe-out
   1. Confirm the version number has changed to the one you used in 2.
 4. Update the cookbook by revendoring `berks vendor ./cookbooks/`
 5. Apply the cookbook again: `knife solo bootstrap deployer@example.com`
+  1. Don't bother around 5 - 11 pm in the evening as you get failed to connect.
 
 
-#####4.2 Postgresql
+######4.2.2 Updating a server
+
+Chef is installed on servers - I've seen this get out of date. Removing it and then doing a knife solo bootstrap puts on a later version. Running chef on existing server may have firewall problems.
+
+1. Confirm situation: `dpkg --list | grep chef` and `sudo find / -name chef`
+2. Remove package: `sudo apt-get purge chef`
+3. Run chef again: `knife solo bootstrap root@example.com`
+4. Step 1 confirm situation.
+
+
+#####4.3 Postgresql
 1. change to Postgres user and open psql prompt `sudo -u postgres psql postgres`
 2. Listing Users (roles) and attributes: `\du`
 3. Listing all databases: `\list`
@@ -219,7 +260,7 @@ cat /dev/null > /file/you/want/to/wipe-out
 5. Execute SQL file:  `psql -f thefile.sql letting_<envionrment>`
 6. Logging In: `psql -d letting_<envionment> -U letting_<environment>`
 
-#####4.3 Elasticsearch
+#####4.4 Elasticsearch
 
 1) Forced Re-index:    rake elasticsearch:sync
 2) Find Cluster name:  curl -XGET 'http://localhost:9200/_nodes'
@@ -274,7 +315,10 @@ Somtimes it won't delete the Elasticsearch pid file.
 
 ===
 
-#####4.4 QEMU
+#####4.5 QEMU
+
+
+######4.5.1 Basic Commands
 
 ````
 virsh list --all     -  List running virtual servers
@@ -286,7 +330,7 @@ virsh destroy <name> - forced quit of virtual server
 virsh start <name> - start guest
 ````
 
-######4.3.2 Removing an instance from
+######4.5.2 Removing an instance from
 
 Removing an instance called vmX
 
