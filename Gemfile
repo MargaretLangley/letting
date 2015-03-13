@@ -132,7 +132,7 @@ gem 'font-awesome-rails'
 gem 'rails-env-favicon'
 
 # Search Gems
-gem 'elasticsearch', '~> 1.0.6'
+gem 'elasticsearch', '~> 1.0.0'
 gem 'elasticsearch-model', '~> 0.1.6'
 gem 'elasticsearch-rails', '~> 0.1.6'
 # Create es test node
