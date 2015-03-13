@@ -11,6 +11,7 @@ require 'capistrano/rails/collection'
 require 'capistrano-db-tasks'
 # manage dotenv
 require 'mascherano/env'
+require 'airbrussh/capistrano'
 require 'whenever/capistrano'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
