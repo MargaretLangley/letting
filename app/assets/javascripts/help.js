@@ -1,128 +1,116 @@
+// note summit is top value because top is not a suitable js name
+
 $( document ).ready(function() {
 
   $('.js-start-help').click(function() {
-
     $('#help-search')[0].style.display = 'block';
-    hcount = 1;
-    pay =  parseInt($("#help-me").attr('data-pay'));
-    skip =  parseInt($("#help-me").attr('data-skip'));
-    itext =  parseInt($("#help-me").attr('data-itext'));
-
+    box = 1;
+    summit =  parseInt($("#help-me").attr('data-summit'));
     return false;
   });
 
+//Summit values are normally set to 4 or 6
+
   $('.js-help').click(function() {
 
-    if (skip == 3 )
-    {
-      hcount++;
-      if (hcount == 2 ) { hcount= hcount +3; }
-    }
-    else
-    {
-      // hcount will become 3 + whatever jump needed
-      // pay is 0 when payment help box needed, 1 to jump over case 3
-      // skip is 0 when case4 is needed
-      if (hcount == 2) { hcount = hcount + pay + skip; }
+  box++;
 
-      //  // When hcount is 2 this gives index view
-      hcount++;
+//alert('box is '+box+' summit is '+summit)
 
-      // // itext added for invoice texts to jump over delete
-      if (hcount == 5 ) { hcount = hcount + itext; }
+  if (box == summit )
+ {
+   clear();
+   if (summit < 3 ) {clearall(); }
+      $('#help-pr')[0].style.display = 'block';
+  }
 
-      // alert('Finally hcount is '+hcount+'  pay is '+pay+'  skip is '+skip+'  itext is '+itext);
+ if (box > summit )
+ {
+   $('#help-pr')[0].style.display = 'none';
+   $('#help-log')[0].style.display = 'block';
+   box = 0;
+  }
 
-      clearrest();
-    }
+  if (box == 1 )
+ {
+   $('#help-log')[0].style.display = 'none';
+   $('#help-search')[0].style.display = 'block';
+  }
 
-    clearmain();
+ if (box == 2 )
+ {
+   $('#help-search')[0].style.display = 'none';
+   $('#help-2')[0].style.display = 'block';
+  }
 
-    switch( hcount) {
+  if (box == 3 )
+  {
+   $('#help-2')[0].style.display = 'none';
+   $('#help-3')[0].style.display = 'block';
+  }
 
-      case 1:
-        $('#help-search')[0].style.display = 'block';
-      break;
-      case 2:
-        $('#help-2')[0].style.display = 'block';
-      break;
-      case 3:
-        show3();
-      break;
-      case 4:
-        show4();
-      break;
-      case 5:
-        show5();
-      break;
-      case 6:
-        $('#help-pr')[0].style.display = 'block';
-      break;
-      case 7:
-        $('#help-log')[0].style.display = 'block';
-        hcount = 0;
-      break;
+  if (box == 4 )
+  {
+   $('#help-3')[0].style.display = 'none';
+   $('#help-4')[0].style.display = 'block';
+  }
 
-      default:
-      break;
-    }
+  if (box == 5 )
+  {
+   $('#help-4')[0].style.display = 'none';
+   $('#help-5')[0].style.display = 'block';
+  }
+
     return false;
 
   });
 
   $('.js-cancel-help').click(function() {
 
-    clearmain();
-    clearrest();
-    clearpay();
-    return false;
+  clear();
+  if (summit < 3 ) {clearall(); }
+  return false;
 
   });
-});
+ });
 
-
-function show3() {
-
-  $('#help-3')[0].style.display = 'block';
-
-  return false;
-}
-
-function show4() {
-
-  $('#help-4')[0].style.display = 'block';
-
-  return false;
-}
-
-function show5() {
-
-  $('#help-5')[0].style.display = 'block';
-
-  return false;
-}
-
-// These delete the help boxes before next box set up
-
-function clearmain() {
+// If an id which does not exist is set to none the js blows.
+// The short summits, value 3, have help boxes to 2
+function clear() {
 
   $('#help-search')[0].style.display = 'none';
-  if (itext==0) {  $('#help-5')[0].style.display = 'none'; }
   $('#help-pr')[0].style.display = 'none';
   $('#help-log')[0].style.display = 'none';
-
-  return false;
-}
-
-function clearrest() {
-
   $('#help-2')[0].style.display = 'none';
-  $('#help-4')[0].style.display = 'none';
-  if (pay == 0) { clearpay(); }
+
   return false;
 }
 
-function clearpay() {
+// Cannot callup any id in function which is not know to page
+// This makes for rather messy cancellation
+// Dummy boxes are also clumsy
+function clearall() {
+
   $('#help-3')[0].style.display = 'none';
+  if (summit==6){clear6 ;}
+  if (summit==7)
+  {
+    clear6 ;
+    clear7 ;
+  }
+  return false;
+}
+
+function clear6() {
+
+  $('#help-4')[0].style.display = 'none';
+  $('#help-5')[0].style.display = 'none';
+
+  return false;
+}
+
+function clear7() {
+
+  $('#help-6')[0].style.display = 'none';
   return false;
 }

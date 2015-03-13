@@ -7,23 +7,17 @@
 <div class='grid  Shell  u-padding-1-25'>
 
   <div class='col-10-24  grid-row  r-align'> &nbsp;</div>
-  <div class='col-11-24  Bubble-anchor'>
+  <div  id='help-me',  data-summit='5',  class='col-11-24  Bubble-anchor'>
+    <%= render 'bubbles/help_2',  pic: 'fa fa-file-o  fa-lg',  line1: 'View Client Details',  line2: "Click on a client row for that client's details" %>
     &nbsp;
-    <div  id='help-me',  data-skip='0',  data-pay='1',  data-itext ='0'>
-      <%= render 'bubbles/help_2_view', line1: 'View Client Details', line2: "Click on a client row for that client's details" %>
-    </div>
   </div>
-  <div class='col-2-24'>
+  <div class='col-2-24  Bubble-anchor'>
+    <%= render 'bubbles/help_3',  pic: 'fa fa-edit  fa-lg', line1: 'Edit Button',  line2: "Edits a client's details" %>
     &nbsp;
-    <div class='Bubble-anchor'>
-      <%= render 'bubbles/help_4_edit', line1: 'Edit Button',  line2: "Edits a client's details" %>
-    </div>
   </div>
-  <div class='col-1-24'>
-    <div class='Bubble-anchor'>
-      &nbsp;
-      <%= render 'bubbles/pt_down_delete' , line2: 'Deletes a client record and all its accounts' %>
-    </div>
+  <div class='col-1-24  Bubble-anchor'>
+    <%= render 'bubbles/help_4',  pic: 'fa fa-trash-o  fa-lg', line1: 'Delete Button', line2: 'Deletes a client record and all its accounts' %>
+    &nbsp;
   </div>
 
   <div class='col-3-24  grid-row  bottom-spacer  grid-header  r-align'>
