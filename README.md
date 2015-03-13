@@ -13,6 +13,9 @@ This document covers the following sections
 1. Project Setup
   1. Development Setup
   2. Server Setup
+    1. Install Ubuntu Linux 14.04 LTS
+    2. Deploy the Software stack using Chef
+    3. Deploy the application
 2. Commands
   1. rake db:import
 3. Troubleshooting
@@ -21,12 +24,15 @@ This document covers the following sections
   3. Reset the database
   4. Running rails console in production
   5. Capistrano failing to deploy - with github.com port-22
-  6. Disabling the Firewall
+  6. Firewalls
+    6.1 Listing Firewall
+    6.2 Disabling the Firewall
   7. Truncating a file without changing ownership
 4. Cheatsheet
-  1. Postgresql
-  2. Elasticsearch
-  3. QEMU
+  1. Chef
+  2. Postgresql
+  3. Elasticsearch
+  4. QEMU
 5. Production Client
 
 
@@ -63,23 +69,32 @@ Repeat each time you want to delete and restore the database.
 
 ####1.2. Server Setup
 
-1. `cap <environment> setup`
-2. `cap <environment> env:upload`
-  1. .env file uploaded to shared directory
-3. `cap <environment> deploy`
+1. Install Ubuntu Linux 14.04 LTS
 
-4. Configure Elasticsearch memory limit (a memory greedy application)
-   `sudo nano /usr/local/etc/elasticsearch/elasticsearch-env.sh`
-   1. Change: ES_HEAP_SIZE=1503m  => ES_HEAP_SIZE=1g, -Xms1g, -Xmx1g
-  `sudo service elasticsearch restart`
-  2. verify as it also says 'ok' when it fails.   `sudo service elasticsearch restart`
+2. Deploy the Software stack using Chef
+  1. `cd ~/code/chef/repo`
+  2. `knife solo bootstrap root@example.com'
+    1. Once complete reboot box before webserver working
+    2. Once System set up use `knife solo cook deployer@example.com' for further updates.
 
-5. Add Data
-  On your *local* system Add Data (see 1.1.6 above). Then copy to the server.
-  `cap <environment> db:push`
+3. Deploy the application
+  1. `cap <environment> setup`
+  2. `cap <environment> env:upload`
+    1. .env file uploaded to shared directory
+  3. `cap <environment> deploy`
 
-6.  Import Data Into Elasticsearch Indexes
-     `cap <environment> 'invoke[elasticsearch:sync]'`
+  4. Configure Elasticsearch memory limit (a memory greedy application)
+     `sudo nano /usr/local/etc/elasticsearch/elasticsearch-env.sh`
+     1. Change: ES_HEAP_SIZE=1503m  => ES_HEAP_SIZE=1g, -Xms1g, -Xmx1g
+    `sudo service elasticsearch restart`
+    2. verify as it also says 'ok' when it fails.   `sudo service elasticsearch restart`
+
+  5. Add Data
+    On your *local* system Add Data (see 1.1.6 above). Then copy to the server.
+    `cap <environment> db:push`
+
+  6.  Import Data Into Elasticsearch Indexes
+       `cap <environment> 'invoke[elasticsearch:sync]'`
 
 
 [Demo](http://letting.bcs.io)
@@ -156,7 +171,13 @@ DEBUG [44051a0f]  ssh: connect to host github.com port 22: Connection timed out
 DEBUG [44051a0f]  fatal: Could not read from remote repository.
 ````
 
-####3.6 Disabling the Firewall
+####3.6 Firewall
+
+#####3.6.1 Listing Firewall
+
+`sudo iptables --list`
+
+#####3.6.2 Disabling the Firewall
 
 If an operation is not completing and you suspect a firewall issue
 these commands completely remove it. (Rebooting the box, if applicable, restores the firewall)
@@ -178,7 +199,19 @@ cat /dev/null > /file/you/want/to/wipe-out
 
 ####4 Cheatsheet
 
-#####4.1 Postgresql
+#####4.1 Chef
+
+######4.1.1 Updating a cookbook
+
+1. Clone the cookbook to the local machine under ~/code/chef/
+2. Make changes to the cookbook increment the version in the meta data and commit and push back.
+3. Under the repo directory update the reference `berks update <cookbook-name>`
+  1. Confirm the version number has changed to the one you used in 2.
+4. Update the cookbook by revendoring `berks vendor ./cookbooks/`
+5. Apply the cookbook again: `knife solo bootstrap deployer@example.com`
+
+
+#####4.2 Postgresql
 1. change to Postgres user and open psql prompt `sudo -u postgres psql postgres`
 2. Listing Users (roles) and attributes: `\du`
 3. Listing all databases: `\list`
@@ -186,7 +219,7 @@ cat /dev/null > /file/you/want/to/wipe-out
 5. Execute SQL file:  `psql -f thefile.sql letting_<envionrment>`
 6. Logging In: `psql -d letting_<envionment> -U letting_<environment>`
 
-#####4.2 Elasticsearch
+#####4.3 Elasticsearch
 
 1) Forced Re-index:    rake elasticsearch:sync
 2) Find Cluster name:  curl -XGET 'http://localhost:9200/_nodes'
@@ -241,7 +274,7 @@ Somtimes it won't delete the Elasticsearch pid file.
 
 ===
 
-#####4.3 QEMU
+#####4.4 QEMU
 
 ````
 virsh list --all     -  List running virtual servers
