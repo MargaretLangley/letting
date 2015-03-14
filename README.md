@@ -155,7 +155,7 @@ Solution
 2. Create a .env file in the root of the project
 3. Add SECRET_KEY_BASE:  and copy the output from 1.
 4. `cap production env:upload`
-5. Restart the server
+5. Restart the server - another deployment did this otherwise `sudo service unicorn_<name of process> reload` worth trying.
 
 
 ####3.2 Running Rake Tasks on Production Server
