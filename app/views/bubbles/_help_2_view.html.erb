@@ -1,7 +1,10 @@
 <div id = 'help-2' class='hide  bubble  speech'>
   <h3 class='help-heading'>
-  <i class='fa fa-eye  fa-lg  help-icon'></i>
+  <i class='<%= pic %>  help-icon'></i>
   <%= line1 %></h3>
   <%= line2 %><br>
-  <%= render 'bubbles/box' %>
+  <button  class='js-cancel-help  cancel-button'>cancel</button>
+  <button  class='js-help  help-button' >
+  next <i class="fa fa-arrow-right"></i>
+  </button>
 </div>

@@ -6,21 +6,21 @@
   <div class='col-4-24  grid-row  r-align'> &nbsp;</div>
   <div class='col-12-24'>
     &nbsp;
-      <div  id='help-me',  data-skip='0', data-pay='0', data-itext ='0', class='Bubble-down'>
-        <%= render 'bubbles/pt_down_view', line1: 'View Invoice Run Details', line2: "Click on a run row for that run's details" %>
+      <div  id='help-me',  data-summit='3', class='Bubble-down'>
+        <%= render 'bubbles/help_2',  pic: 'fa fa-file-o  fa-lg' , line1: 'View Invoice Run Details',  line2: "Click on a run row for that run's details" %>
       </div>
   </div>
   <div class='col-2-24'>
     &nbsp;
-    <div class='Bubble-anchor'><%= render 'bubbles/help_3_pay_box', line1:'Print Button', line2: 'Prints complete run of invoices' %></div>
+    <div class='Bubble-anchor'><%= render 'bubbles/help_3',  pic: 'fa fa-print  fa-lg', line1:'Print Button',  line2: 'Prints complete run of invoices' %></div>
 
   </div>
   <div class='col-2-24'>
     &nbsp;
-    <div class='Bubble-anchor'><%= render 'bubbles/pt_down_edit', iconstring: "fa fa-edit  fa-lg  help-icon", line1:'2nd Invoice Button', line2: 'Creates blue run of invoices' %></div>
+    <div class='Bubble-anchor'><%= render 'bubbles/help_4',  pic: 'fa fa-print  fa-lg',  line1:'2nd Invoice Button', line2: 'Creates blue run of invoices' %></div>
   </div>
   <div class='col-1-24'>&nbsp;
-    <div class='Bubble-anchor'> <%= render 'bubbles/pt_down_delete', line2: 'Deletes all invoices in this run' %></div>
+    <div class='Bubble-anchor'><%= render 'bubbles/help_5',  pic: 'fa fa-trash-o  fa-lg', line1: 'Delete Button', line2: 'Deletes all invoices in this run' %></div>
   </div>
 
  <%= render 'invoicings/invoicing_header' %>
