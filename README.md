@@ -142,6 +142,21 @@ Solution
 `ssh-keygen -R <ip address> | <name>`
 
 
+####3.2 secret_key_base
+
+Without the secret_key being set - nothing works 2 diagnostics:
+1. cat unicorn.stderr.log - app error: Missing `secret_key_base` ... set this value in `config/secrets.yml
+2. current/.env is missing
+3. Do not add the file into version control, git.
+
+Solution
+
+1. run `rake secret` and copy the output
+2. Create a .env file in the root of the project
+3. Add SECRET_KEY_BASE:  and copy the output from 1.
+4. `cap production env:upload`
+5. Restart the server
+
 
 ####3.2 Running Rake Tasks on Production Server
 
