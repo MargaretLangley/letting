@@ -88,7 +88,6 @@ gem 'rails', '4.2.0'
 
 # configuration - needs to be at the top!
 gem 'dotenv-rails', '~> 1.0.0'
-gem 'dotenv-deployment', '~> 0.2.0'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~>0.18.0'
