@@ -3,9 +3,13 @@
 $( document ).ready(function() {
 
   $('.js-start-help').click(function() {
-    $('#help-search')[0].style.display = 'block';
     box = 1;
     summit =  parseInt($("#help-me").attr('data-summit'));
+    clear();
+    $('#help-search')[0].style.display = 'block';
+
+
+
     return false;
   });
 
@@ -18,57 +22,61 @@ $( document ).ready(function() {
 //alert('box is '+box+' summit is '+summit)
 
   if (box == summit )
- {
-   clear();
-   if (summit < 3 ) {clearall(); }
+   {
+      clear();
       $('#help-pr')[0].style.display = 'block';
-  }
+    }
 
- if (box > summit )
- {
-   $('#help-pr')[0].style.display = 'none';
-   $('#help-log')[0].style.display = 'block';
-   box = 0;
+  if (box > summit )
+  {
+    $('#help-pr')[0].style.display = 'none';
+    $('#help-log')[0].style.display = 'block';
+  box = 0;
   }
 
   if (box == 1 )
- {
-   $('#help-log')[0].style.display = 'none';
-   $('#help-search')[0].style.display = 'block';
+  {
+    $('#help-log')[0].style.display = 'none';
+    $('#help-search')[0].style.display = 'block';
   }
 
- if (box == 2 )
- {
-   $('#help-search')[0].style.display = 'none';
-   $('#help-2')[0].style.display = 'block';
+  if (box == 2 )
+  {
+    $('#help-search')[0].style.display = 'none';
+    $('#help-2')[0].style.display = 'block';
   }
 
   if (box == 3 )
   {
-   $('#help-2')[0].style.display = 'none';
-   $('#help-3')[0].style.display = 'block';
+    $('#help-2')[0].style.display = 'none';
+    $('#help-3')[0].style.display = 'block';
   }
 
   if (box == 4 )
   {
-   $('#help-3')[0].style.display = 'none';
-   $('#help-4')[0].style.display = 'block';
+    $('#help-3')[0].style.display = 'none';
+    $('#help-4')[0].style.display = 'block';
   }
 
   if (box == 5 )
   {
-   $('#help-4')[0].style.display = 'none';
-   $('#help-5')[0].style.display = 'block';
+    $('#help-4')[0].style.display = 'none';
+    $('#help-5')[0].style.display = 'block';
   }
 
-    return false;
+  if (box == 6 )
+  {
+    $('#help-5')[0].style.display = 'none';
+    $('#help-6')[0].style.display = 'block';
+  }
+
+  return false;
 
   });
 
   $('.js-cancel-help').click(function() {
 
   clear();
-  if (summit < 3 ) {clearall(); }
   return false;
 
   });
@@ -82,7 +90,7 @@ function clear() {
   $('#help-pr')[0].style.display = 'none';
   $('#help-log')[0].style.display = 'none';
   $('#help-2')[0].style.display = 'none';
-
+  if (summit>3){clearall();}
   return false;
 }
 
@@ -92,24 +100,27 @@ function clear() {
 function clearall() {
 
   $('#help-3')[0].style.display = 'none';
-  if (summit==6){clear6 ;}
-  if (summit==7)
-  {
-    clear6 ;
-    clear7 ;
-  }
+
+  if (summit>=5){clear4();}
+  if (summit>=6){clear5();}
+  if (summit>=7){clear6();}
+
+  return false;
+}
+
+function clear4() {
+
+  $('#help-4')[0].style.display = 'none';
+  return false;
+}
+
+function clear5() {
+
+  $('#help-5')[0].style.display = 'none';
   return false;
 }
 
 function clear6() {
-
-  $('#help-4')[0].style.display = 'none';
-  $('#help-5')[0].style.display = 'none';
-
-  return false;
-}
-
-function clear7() {
 
   $('#help-6')[0].style.display = 'none';
   return false;

@@ -44,49 +44,61 @@
     text-decoration: underline;
   }
 
-
 // These are the positions for the bubbles
-
-  .Bubble-down {
-    position: relative;
-    right: 50em;
-    top: 0;
-  }
-
-  .Bubble-point-right {
-    position: relative;
-    right: 19.5em;
-    top: -5em;
-  }
-
-  .Bubble-right {
-    position: relative;
-    right: 19.7em;
-    top: -2.3em;
-  }
-
-  .Bubble-up {
-    position: relative;
-    right: 0;
-    top: -5em;
-  }
-
 
 // Positions box further to the left of column position to make
 // it point in correct place.
 // Increasing the right value moves box futher left
 // Increasing the top value moves box futher down
+// Use em values to keep position independent of page size
 
+// Used in properties index for big red print button
+  .Bubble-allprint {
+    position: relative;
+    right: 16em;
+    top: -1.9em;
+  }
+
+// This places box to point exactly where it is set up,
+// moving over to left
   .Bubble-anchor {
     position: relative;
     right: 19.7em;
     top: 0;
   }
 
-  .Bubble-search {
-    left: 40em;
+// Used in blue invoicing
+  .Bubble-blue {
     position: relative;
-    top: -2em;
+    right: 19.7em;
+    top: 1em;
+  }
+
+  .Bubble-log {
+    position: relative;
+    right: 1em;
+    top: 1.5em;
+  }
+
+ // Used in properties index
+  .Bubble-move-right {
+    position: relative;
+    right: 4.6em;
+    top: 5em;
+  }
+
+// Used in payments
+  .Bubble-pt-down {
+    position: relative;
+    right: 29em;
+    top: 5em;
+  }
+
+// Bubble-point-right used in most shows & forms
+  .Bubble-point-right {
+    position: relative;
+    right: 19.5em;
+    top: -5em;
   }
 
   .Bubble-print {
@@ -95,10 +107,10 @@
     top: 1.5em;
   }
 
-  .Bubble-log {
+  .Bubble-search {
+    left: 40em;
     position: relative;
-    right: 1em;
-    top: 1.5em;
+    top: -2em;
   }
 
   @mixin bubblet {
@@ -217,10 +229,11 @@
   .Button,
   .Bubble-anchor,
   .Bubble-log,
+  .Bubble-move-right,
+  .Bubble-pt-down,
   .Bubble-point-right,
   .Bubble-print,
-  .Bubble-search,
-  .Bubble-up {
+  .Bubble-search {
     display: none;
   }
 }
