@@ -95,6 +95,7 @@ Repeat each time you want to delete and restore the database.
   5. Add Data
     On your *local* system Add Data (see 1.1.6 above). Then copy to the server.
     `cap <environment> db:push`
+    or `cap internet rails:rake:db:seed`
 
   6. Import Data Into Elasticsearch Indexes
     `cap <environment> 'invoke[elasticsearch:sync]'`

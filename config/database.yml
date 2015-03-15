@@ -13,6 +13,12 @@ test:
   <<: *default
   database: letting_test
 
+internet:
+  <<: *default
+  database: letting_internet
+  username: letting
+  password: ENTER_PASSWORD
+
 production:
   <<: *default
   database: letting_production
