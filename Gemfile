@@ -82,44 +82,34 @@
 # gem 'rake', '10.1.0'
 #
 
-#
-# Production
-#
 source 'https://rubygems.org'
 ruby '2.1.2'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.0'
-
-# configuration - needs to be at the top!
-gem 'dotenv-rails', '~> 1.0.0'
+#
+# Production
+#
+gem 'dotenv-rails', '~> 1.0.0'  # needs to be at the top!
 
 gem 'autoprefixer-rails', '~> 5.1.0'
 gem 'bcrypt', '~> 3.1.9'
 gem 'coffee-rails', '~> 4.1.0'
-
-# Search Gems
 gem 'elasticsearch', '~> 1.0.0'
 gem 'elasticsearch-model', '~> 0.1.6'
 gem 'elasticsearch-rails', '~> 0.1.6'
 gem 'equalizer'
-
-# font icon
 gem 'font-awesome-rails'
+gem 'jbuilder', '~> 2.2.0'
 gem 'jquery-rails', '~> 4.0.0'
 
 # BREAKING GEM
-# Latest ui (5.0.3) causes CapybaraHelper to fail
+# 5.0.3 - causes CapybaraHelper to fail
 gem 'jquery-ui-rails', '~> 4.1.0'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.2.0'
-
-# Must be included before elasticsearch
+# Kaminari before elasticsearch
 gem 'kaminari', '~> 0.16.0'
 gem 'pg', '~>0.18.0'
-# corner banner on staging environment
-gem 'rack-dev-mark', '~> 0.7.0'
+gem 'rails', '4.2.0'
+gem 'rack-dev-mark', '~> 0.7.0'     # corner banner on staging environment
 gem 'rails-env-favicon'
 
 # BREAKING GEM
@@ -128,30 +118,14 @@ gem 'rails-env-favicon'
 # TODO: fix for being able to read in args
 # Using this version of the gem because it is the same as on production system
 gem 'rake', '10.1.0'
-gem 'seedbank'
 gem 'sass-rails', '~> 5.0.1'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'seedbank'
 gem 'sprockets', '~>2.12.3'
 gem 'turbolinks', '~> 2.5.0'
 gem 'uglifier', '~> 2.7.0'
 gem 'unicorn', '~> 4.8.0'
 gem 'whenever', require: false
-
-#
-# Development only
-#
-group :development do
-  gem 'quiet_assets'
-  gem 'better_errors', '~> 2.1.0'
-  gem 'binding_of_caller', '~> 0.7.2'
-  gem 'brakeman', '~>3.0.0', require: false
-  gem 'bullet', '~>4.14.0'
-  gem 'rails_best_practices', '~>1.15.0'
-  gem 'rubocop', '~> 0.29.0', require: false
-  gem 'rubycritic', require: false
-  gem 'traceroute'
-  gem 'scss-lint'
-end
 
 #
 # Capistrano deployment
@@ -174,6 +148,22 @@ group :development do
 end
 
 #
+# Development only
+#
+group :development do
+  gem 'better_errors', '~> 2.1.0'
+  gem 'binding_of_caller', '~> 0.7.2'
+  gem 'brakeman', '~>3.0.0', require: false
+  gem 'bullet', '~>4.14.0'
+  gem 'quiet_assets'
+  gem 'rails_best_practices', '~>1.15.0'
+  gem 'rubocop', '~> 0.29.0', require: false
+  gem 'rubycritic', require: false
+  gem 'scss-lint'
+  gem 'traceroute'
+end
+
+#
 # Development and testing
 #
 group :development, :test do
@@ -191,14 +181,11 @@ group :development, :test do
   # gem 'capybara-slow_finder_errors', '0.1.0'
   gem 'meta_request'
   gem 'pry-rails', '~>0.3.0'
-  gem 'rb-readline'
   gem 'pry-stack_explorer', '~>0.4.9.0'
   gem 'rack-mini-profiler', '~>0.9.0'
+  gem 'rb-readline'
   gem 'rspec-rails', '~> 3.2.0'
   gem 'selenium-webdriver', '~>2.45.0'
-
-  # Spring speeds up development by keeping your application running in the
-  # background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'table_print'
@@ -218,11 +205,11 @@ group :test do
   # BREAKING GEM
   # v1.4.0 cleans the 'schema_migrations'
   # https://github.com/DatabaseCleaner/database_cleaner/issues/317
-  # Do not upgrade until there is a fix  version > 1.4.0
+  # Do not upgrade until there is a fix for version > 1.4.0
   #
   gem 'database_cleaner', '~> 1.3.0'
 
-  # Create es test node
-  gem 'elasticsearch-extensions', group: :test
+  # Create e.s. test node
+  gem 'elasticsearch-extensions'
   gem 'timecop', '~>0.7.0'
 end
