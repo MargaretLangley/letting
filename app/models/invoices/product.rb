@@ -60,8 +60,7 @@ class Product < ActiveRecord::Base
   # on the back page of the invoice.
   #
   def page2?
-    [ChargeTypes::GROUND_RENT, ChargeTypes::GARAGE_GROUND_RENT]
-      .include? charge_type
+    charge_type.in? [ChargeTypes::GROUND_RENT, ChargeTypes::GARAGE_GROUND_RENT]
   end
 
   def <=> other
