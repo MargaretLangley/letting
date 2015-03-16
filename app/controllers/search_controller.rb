@@ -15,7 +15,6 @@
 #
 class SearchController < ApplicationController
   def index
-    session[:search_model] = referer unless referer == 'Search'
     if literal_search.concluded?
       return redirect_with_no_match_flash unless literal_search.found?
 
@@ -29,7 +28,7 @@ class SearchController < ApplicationController
   private
 
   def literal_search
-    @literal_search ||= LiteralSearch.search(model: session[:search_model],
+    @literal_search ||= LiteralSearch.search(referrer: referrer,
                                              query: params[:search_terms]).go
   end
 

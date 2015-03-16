@@ -9,14 +9,14 @@
 ####
 #
 class LiteralSearch
-  attr_reader :model, :query
+  attr_reader :referrer, :query
 
-  # model: the model type of the query being executed - one of Client,
-  #       Payment, Property, Arrear or Invoice.
+  # referrer: the model and action of the query being executed - one of Client,
+  #           Payment, Property, Arrear or Invoice and any of the actions.
   # query: the search terms being queried on the model
   #
-  def self.search(model:, query:)
-    new(model: model, query: query)
+  def self.search(referrer:, query:)
+    new(referrer: referrer, query: query)
   end
 
   # go
@@ -24,27 +24,27 @@ class LiteralSearch
   # returns LiteralResult - a wrapper for the search results
   #
   def go
-    captured = query_for_model
+    captured = query_by_referrer
     captured = default_ordered_query unless captured.concluded?
     captured
   end
 
   private
 
-  def initialize(model:, query:)
-    @model = model
+  def initialize(referrer:, query:)
+    @referrer = referrer
     @query = query
   end
 
-  def query_for_model
-    case model
-    when 'Client' then client(query)
-    when 'Payment' then payment(query)
-    when 'Property' then property(query)
-    when 'Arrear', 'Cycle', 'User', 'InvoiceText', 'Invoicing', 'Invoice'
+  def query_by_referrer
+    case referrer.controller
+    when 'clients' then client(query)
+    when 'payments' then payment(query)
+    when 'properties' then property(query)
+    when 'arrears', 'cycles', 'users', 'invoice_texts', 'invoicings', 'invoices'
       LiteralResult.without_a_search
     else
-      fail NotImplementedError, "Missing model: #{model}"
+      fail NotImplementedError, "Missing: #{referrer}"
     end
   end
 

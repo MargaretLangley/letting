@@ -23,9 +23,21 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def referer
-    (Rails.application.routes.recognize_path(request.referrer)[:controller])
-      .classify
+  #
+  # Which controller did this come from originally?
+  # If you keep 'searching' this value becomes 'search'
+  # However, to complete a search we need to know the controller.
+  #
+  def referrer
+    referrer = Rails.application.routes.recognize_path(request.referrer)
+
+    unless referrer[:controller] == 'search'
+      session[:search_controller] = referrer[:controller]
+      session[:search_action] = referrer[:action]
+    end
+
+    Referrer.new controller: session[:search_controller],
+                 action: session[:search_action]
   end
 
   def address_params
