@@ -2,7 +2,12 @@
 <%= render 'bubbles/search_account' %>
 
 <div id='invoice_text'  class='Shell  u-padding-1-12'>
-  <div class='col-23-24  bottom-spacer'>&nbsp;</div>
+
+  <div class='col-23-24  bottom-spacer Bubble-search'>
+    &nbsp;
+    <%= render 'bubbles/help_main',  pic: 'fa fa-eye  fa-lg', line1: 'The Invoice Text View', line2: 'The text details of the page are shown here.', line3: 'The  edit button allows editing and the print button allows printing of this page.', line4: 'The search box at the top of the page is for account searches.', line5: 'Using the next button in this box will point you to the different buttons on this page and their usage.'%>
+  </div>
+
   <div class='col-1-24  bottom-spacer'>
     <%= edit_link @invoice_text %>
     <div  id='help-me',  data-summit='3',  class='Bubble-point-right'>
