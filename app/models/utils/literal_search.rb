@@ -25,8 +25,9 @@ class LiteralSearch
   #
   def go
     captured = query_by_referrer
-    captured = default_ordered_query unless captured.concluded?
-    captured
+    return captured if captured.found?
+
+    default_ordered_query
   end
 
   private
@@ -38,9 +39,10 @@ class LiteralSearch
 
   def query_by_referrer
     case referrer.controller
-    when 'clients' then client(query)
-    when 'payments' then payment(query)
-    when 'properties' then property(query)
+    when 'clients' then client_search(query)
+    when 'payments' then
+      LiteralResult.no_record_found
+    when 'properties' then property_search(query)
     when 'arrears', 'cycles', 'users', 'invoice_texts', 'invoicings', 'invoices'
       LiteralResult.without_a_search
     else
@@ -48,20 +50,13 @@ class LiteralSearch
     end
   end
 
-  def client query
+  def client_search query
     LiteralResult.new action: 'show',
                       controller: 'clients',
                       id: id_or_nil(Client.find_by_human_ref query)
   end
 
-  # def payment query
-  #   LiteralResult.new action: 'new',
-  #                     controller: 'payments',
-  #                     id: id_or_nil(Account.find_by_human_ref query),
-  #                     completes: true
-  # end
-
-  def property query
+  def property_search query
     LiteralResult.new action: 'show',
                       controller: 'properties',
                       id: id_or_nil(Property.find_by_human_ref query)
@@ -72,8 +67,8 @@ class LiteralSearch
   end
 
   def default_ordered_query
-    return property(query) if property(query).concluded?
-    return client(query) if client(query).concluded?
+    return property_search(query) if property_search(query).found?
+    return client_search(query) if client_search(query).found?
 
     LiteralResult.no_record_found
   end

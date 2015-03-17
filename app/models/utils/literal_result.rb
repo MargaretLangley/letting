@@ -4,32 +4,27 @@
 # Wraps up the search results
 #
 class LiteralResult
-  attr_reader :action, :controller, :id, :completes
+  attr_reader :action, :controller, :id, :no_search
 
   # initialize
   # args:
   #   action: - rest action
   #   controller - controller the action is called on
   #   id - record id returned
-  #   use_defaults - we can fill results with the defaults
+  #   no_search - do not search
   #
-  def initialize(action:, controller:, id:)
+  def initialize(action:, controller:, id:, no_search: false)
     @action = action
     @controller = controller
     @id = id
-  end
-
-  # concluded?
-  # Has the search completed - normally returning a record but it
-  # doesn't have to and still considered concluded.
-  #
-  def concluded?
-    id.present?
+    @no_search = no_search
   end
 
   # The search not only completed but it also found a result.
   #
   def found?
+    return false if no_search
+
     id.present?
   end
 
@@ -54,6 +49,6 @@ class LiteralResult
   # Same as without_a_search but makes more sense when reading code.
   #
   def self.no_record_found
-    LiteralResult.new action: '', controller: '', id: nil
+    LiteralResult.new action: '', controller: '', id: nil, no_search: true
   end
 end
