@@ -15,8 +15,8 @@
 #
 class SearchController < ApplicationController
   def index
-    if literal_search.found?
-      redirect_to literal_search.redirect_params.merge(repack_search_params)
+    if literal_search.go.found?
+      redirect_to literal_search.go.to_params.merge(repack_search_params)
     else
       @records = full_text_search[:records].page(params[:page])
       render full_text_search[:render]
@@ -27,7 +27,7 @@ class SearchController < ApplicationController
 
   def literal_search
     @literal_search ||= LiteralSearch.search(referrer: referrer,
-                                             query: params[:search_terms]).go
+                                             query: params[:search_terms])
   end
 
   def repack_search_params

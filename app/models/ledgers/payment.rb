@@ -65,6 +65,13 @@ class Payment < ActiveRecord::Base
              ' sum(amount) as payment_sum')
   end
 
+  # human_ref - the id of the account / property to return
+  #
+  def self.human_ref human_ref
+    Payment.includes(account: [:property])
+      .where(properties: { human_ref: human_ref })
+  end
+
   include Searchable
   # Elasticsearch uses generates JSON document for payment index
   def as_indexed_json(_options = {})

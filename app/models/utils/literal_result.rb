@@ -28,10 +28,10 @@ class LiteralResult
     id.present?
   end
 
-  # redirect_params
+  # to_params
   # returns - action, controller, id - enough information to redirect
   #
-  def redirect_params
+  def to_params
     { action: action, controller:  controller, id: id }
   end
 
