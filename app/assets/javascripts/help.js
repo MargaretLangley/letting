@@ -5,8 +5,8 @@ $( document ).ready(function() {
   $('.js-start-help').click(function() {
     box = 0;
     summit =  parseInt($("#help-me").attr('data-summit'));
-    // alert('box is '+box+' summit is '+summit)
-    clear();
+   //  alert('*box is '+box+' summit is '+summit);
+    cover();
     $('#help-main')[0].style.display = 'block';
     return false;
   });
@@ -21,7 +21,7 @@ $( document ).ready(function() {
 
     if (box == summit )
     {
-      clear();
+      cover();
       $('#help-pr')[0].style.display = 'block';
     }
 
@@ -55,56 +55,29 @@ $( document ).ready(function() {
 
   $('.js-cancel-help').click(function() {
 
-    clear();
+    cover();
+    coverall();
     return false;
-
   });
  });
 
 // If an id which does not exist is set to none the js blows.
 // The short summits, value 3, have help boxes to 2
-function clear() {
+function cover() {
 
   $('#help-main')[0].style.display = 'none';
-  $('#help-1')[0].style.display = 'none';
   $('#help-pr')[0].style.display = 'none';
   $('#help-log')[0].style.display = 'none';
-  $('#help-2')[0].style.display = 'none';
-  if (summit>3){clearall();}
   return false;
 }
 
 // Cannot callup any id in function which is not know to page
-// This makes for rather messy cancellation
-// Dummy boxes are also clumsy
-function clearall() {
+// used by cancel button. Note js does not accept help-box
+function coverall() {
 
-  $('#help-3')[0].style.display = 'none';
-
-  if (summit>=5){clear4();}
-  if (summit>=6){clear5();}
-  if (summit>=7){clear6();}
-
-  return false;
-}
-
-//
-// TODO: add argument to clear functaion and remove the clearX variants
-//
-function clear4() {
-
-  $('#help-4')[0].style.display = 'none';
-  return false;
-}
-
-function clear5() {
-
-  $('#help-5')[0].style.display = 'none';
-  return false;
-}
-
-function clear6() {
-
-  $('#help-6')[0].style.display = 'none';
+  for (help_box = 1;  help_box < summit;  help_box++)
+  {
+    $('#help-' + help_box)[0].style.display = 'none';
+  }
   return false;
 }
