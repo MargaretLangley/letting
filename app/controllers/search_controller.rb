@@ -39,7 +39,7 @@ class SearchController < ApplicationController
   end
 
   def get_full_text_search
-    results = FullTextSearch.search(type: session[:search_model],
+    results = FullTextSearch.search(referrer: referrer,
                                     query: params[:search_terms]).go
     flash.now[:problem] = 'No Matches found. Search again.' \
       if params[:search_terms].present? && results[:records].count.zero?

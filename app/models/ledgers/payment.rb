@@ -70,7 +70,7 @@ class Payment < ActiveRecord::Base
   def as_indexed_json(_options = {})
     as_json(
       include: {
-        account: { methods: [:holder, :address] }
+        account: { methods: [:human_ref, :holder, :address] }
       })
   end
 

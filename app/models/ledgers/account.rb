@@ -24,6 +24,8 @@
 #
 class Account < ActiveRecord::Base
   belongs_to :property, inverse_of: :account
+  delegate :human_ref, to: :property
+
   def holder
     property.occupiers
   end
