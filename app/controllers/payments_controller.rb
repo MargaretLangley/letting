@@ -33,7 +33,7 @@ class PaymentsController < ApplicationController
 
   # params[:id] is the account_id returned from search_controller
   def new
-    account = Account.find_by id: params[:id]
+    account = Account.find_by_human_ref params[:account_payment_search]
     @payment = PaymentDecorator.new(Payment.new account: account)
     @payment.prepare
     @payment.booked_at = get_booked_on

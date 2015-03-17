@@ -22,7 +22,7 @@ class PaymentPage
   end
 
   def human_ref property
-    fill_in 'search_terms', with: property
+    fill_in 'account_payment_search', with: property
     self
   end
 
@@ -47,7 +47,7 @@ class PaymentPage
   end
 
   def search
-    click_on 'Search', exact: true
+    click_on 'Payment Search', exact: true
     self
   end
 

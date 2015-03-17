@@ -7,17 +7,22 @@
 
       <!-- Partialized Property Description -->
 
-      <div class='col-2-24  grid-row  top-1-line-spacer'>&nbsp;</div>
-      <div class='col-9-24  top-1-line-spacer'>  <!-- 1st column -->
-        <h3 class='grid-label'>Property ID</h3>
-        <h1><%= payment_dec.human_ref %></h1>
-      </div>
-      <div class='col-13-24  top-1-line-spacer'>  <!-- 2nd column -->
-        <h3 class='grid-label'>Occupier</h3>
-        <% if payment_dec.account_exists? %>
-          <%= render 'addresses/abridged', property: payment_dec.property_decorator %>
-          <% end %>
-      </div>
+      <%= form_tag new_payment_path, method: 'get' do %>
+        <div class='col-2-24  grid-row  top-1-line-spacer'>&nbsp;</div>
+        <div class='col-9-24  top-1-line-spacer'>  <!-- 1st column -->
+          <h3 class='grid-label'>Property ID</h3>
+          <%= text_field_tag :account_payment_search, params[:account_payment_search], class: 'width-9-12' %>
+          <button type='submit' class='width-2-12  Button  ButtonIcon-action' id='payment-search' title='Payment Search'>
+            <%= fa_icon 'search lg' %>
+          </button>
+        </div>
+        <div class='col-13-24  top-1-line-spacer'>  <!-- 2nd column -->
+          <h3 class='grid-label'>Occupier</h3>
+          <% if payment_dec.account_exists? %>
+            <%= render 'addresses/abridged', property: payment_dec.property_decorator %>
+            <% end %>
+        </div>
+      <% end %>
     </div>
     <div class='col-2-24'>    <!-- 2nd column -->
       &nbsp;
