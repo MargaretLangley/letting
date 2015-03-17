@@ -54,12 +54,12 @@ class LiteralSearch
                       id: id_or_nil(Client.find_by_human_ref query)
   end
 
-  def payment query
-    LiteralResult.new action: 'new',
-                      controller: 'payments',
-                      id: id_or_nil(Account.find_by_human_ref query),
-                      completes: true
-  end
+  # def payment query
+  #   LiteralResult.new action: 'new',
+  #                     controller: 'payments',
+  #                     id: id_or_nil(Account.find_by_human_ref query),
+  #                     completes: true
+  # end
 
   def property query
     LiteralResult.new action: 'show',

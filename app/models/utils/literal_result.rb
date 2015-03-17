@@ -11,14 +11,12 @@ class LiteralResult
   #   action: - rest action
   #   controller - controller the action is called on
   #   id - record id returned
-  #   completes - return you have not found anything when you have actually
-  #           returned id
+  #   use_defaults - we can fill results with the defaults
   #
-  def initialize(action:, controller:, id:, completes: false)
+  def initialize(action:, controller:, id:)
     @action = action
     @controller = controller
     @id = id
-    @completes = completes
   end
 
   # concluded?
@@ -26,7 +24,7 @@ class LiteralResult
   # doesn't have to and still considered concluded.
   #
   def concluded?
-    id.present? || completes
+    id.present?
   end
 
   # The search not only completed but it also found a result.
