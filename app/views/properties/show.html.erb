@@ -1,9 +1,7 @@
 <% @title='View Account' %>
 <%= render 'bubbles/search_account' %>
 
-<div class='col-17-24  grid-row'>
-  &nbsp;
-</div>
+<div class='col-17-24  grid-row'>&nbsp;</div>
 <div class='col-2-24'>
     <%= chevron_link direction: 'left', text: property_prev, path: @property.prev, title: 'prev' %>
 </div>
@@ -14,6 +12,10 @@
 <div class='grid-row  Shell  u-padding-1-100 js-toggle-selection'>
   <div class='js-togglable'>
 
+    <div  id='help-me',  data-summit='3',  class='col-2-24  grid-row  Bubble-search'>
+      <%= render 'bubbles/help_main',  pic: 'fa fa-eye  fa-lg', line1: 'The Accounts View', line2: 'The search box at the top of the page is for account searches. Any searches made by occupier name, agent name or property address will be listed on this page.', line3: '', line4: '.', line5: 'Using the next button in this box will point you to the different buttons on this page and their usage.'%>
+      &nbsp;
+    </div>
     <div class='col-6-24  grid-row  grid-label'>
       <h3>Property &hellip;</h3>
     </div>
@@ -25,7 +27,7 @@
     </div>
     <div class='col-1-24'>
       <%= edit_link @property %>
-      <div  id='help-me',  data-summit='3', class='Bubble-point-right'>
+      <div  class='Bubble-point-right'>
         <%= render 'bubbles/help_2', pic: 'fa fa-edit  fa-lg',  line1:'Account Edit Button',  line2: "Use to edit this account's details" %>
       </div>
     </div>
