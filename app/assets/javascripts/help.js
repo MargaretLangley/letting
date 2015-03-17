@@ -5,9 +5,9 @@ $( document ).ready(function() {
   $('.js-start-help').click(function() {
     box = 0;
     summit =  parseInt($("#help-me").attr('data-summit'));
-   //  alert('*box is '+box+' summit is '+summit);
+    // alert('*box is '+box+' summit is '+summit);
     cover();
-    $('#help-main')[0].style.display = 'block';
+    $('#help-0')[0].style.display = 'block';
     return false;
   });
 
@@ -17,7 +17,7 @@ $( document ).ready(function() {
 
     box++;
 
-    // alert('box is '+box+' summit is '+summit)
+    // alert('box is '+box+' summit is '+summit);
 
     if (box == summit )
     {
@@ -35,16 +35,10 @@ $( document ).ready(function() {
     if (box == 0 )
     {
       $('#help-log')[0].style.display = 'none';
-      $('#help-main')[0].style.display = 'block';
+      $('#help-0')[0].style.display = 'block';
     }
 
-    if (box == 1 )
-    {
-      $('#help-main')[0].style.display = 'none';
-      $('#help-1')[0].style.display = 'block';
-    }
-
-    if(box >= 2)
+    if(box >= 1)
     {
       $('#help-' + (box - 1) )[0].style.display = 'none';
       $('#help-' + box)[0].style.display = 'block';
@@ -65,7 +59,6 @@ $( document ).ready(function() {
 // The short summits, value 3, have help boxes to 2
 function cover() {
 
-  $('#help-main')[0].style.display = 'none';
   $('#help-pr')[0].style.display = 'none';
   $('#help-log')[0].style.display = 'none';
   return false;
@@ -75,7 +68,7 @@ function cover() {
 // used by cancel button. Note js does not accept help-box
 function coverall() {
 
-  for (help_box = 1;  help_box < summit;  help_box++)
+  for (help_box = 0;  help_box < summit;  help_box++)
   {
     $('#help-' + help_box)[0].style.display = 'none';
   }
