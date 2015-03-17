@@ -22,6 +22,10 @@
     color: $color-primary-shade-4;
   }
 
+  .text-in-box {
+    margin-left: 1em;
+    text-align: left;
+  }
 
   @mixin buttonlet {
     color: $color-ternary-shade-0;
@@ -64,7 +68,7 @@
   .Bubble-anchor {
     position: relative;
     right: 19.7em;
-    top: 0;
+    top: 1em;
   }
 
 // Used in blue invoicing
@@ -103,12 +107,12 @@
 
   .Bubble-print {
     position: relative;
-    right: 6em;
+    right: 7em;
     top: 1.5em;
   }
 
   .Bubble-search {
-    left: 40em;
+    left: 30em;
     position: relative;
     top: -2em;
   }
@@ -126,11 +130,18 @@
     z-index: 900;
   }
 
-/*Main speech bubble pointing down or up */
+/*Speech bubble pointing down or up */
   .bubble {
     @include bubblet;
     height: 180px;
     width: 290px;
+  }
+
+/*Main speech bubble used for intro*/
+  .bubble-intro {
+    @include bubblet;
+    height: 400px;
+    width: 500px;
   }
 
 /*Wider speech bubble */
@@ -228,6 +239,7 @@
 
   .Button,
   .Bubble-anchor,
+  .Bubble-intro,
   .Bubble-log,
   .Bubble-move-right,
   .Bubble-pt-down,
