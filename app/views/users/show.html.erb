@@ -5,20 +5,22 @@
 
   <div class='col-23-24  grid-row  bottom-spacer'>     <!-- 1st column -->
 
-    <div class='col-2-6  grid-row  bottom-1-line-spacer  grid-label'>Nickname</div>
+    <div  id='help-me',  data-summit='3',  class='col-2-6  grid-row  bottom-1-line-spacer  grid-label'>Nickname
+    </div>
     <div class='col-4-6  bottom-1-line-spacer'><%= @user.nickname %></div>
-
     <div class='col-2-6  grid-row  bottom-1-line-spacer  grid-label'>email</div>
     <div class='col-4-6  bottom-1-line-spacer'><%= @user.email %></div>
-
     <div class='col-2-6  grid-row  bottom-1-line-spacer  grid-label'>Role</div>
     <div class='col-4-6  bottom-1-line-spacer'><%= @user.role %></div>
+    <div class='Bubble-search'>
+      <%= render 'bubbles/help_main',  pic: 'fa fa-eye  fa-lg', line1: "The User's View", line2: "This screen gives details of the user, nickname, email and role. Passwords cannot be seen. With an admin role the admin menu is available", line3: 'The print button allows printing of this page, but passwords cannot be seen, either in view or print.', line4: 'The search box at the top of the page is for account searches.', line5: 'Using the next button in this box will point you to the different buttons on this page and their usage.'%>
+    </div>
   </div>
 
    <div class='col-1-24  bottom-spacer'>     <!-- 2nd column -->
     <%= edit_link @user %>
-    <div  id='help-me',  data-skip='3',  data-pay='1',  data-itext='0', class='Bubble-point-right'>
-      <%= render 'bubbles/pt_2_edit', line1:'User Edit Button', line2: "Use to edit this user's details" %>
-    </div>
+    <div  id='help-me',  data-summit='3',  class='Bubble-point-right'>
+      <%= render 'bubbles/help_2',  pic: 'fa fa-edit  fa-lg',  line1:'User Edit Button',  line2: "Use to edit this user's details" %>
+     </div>
   </div>
 </div> <!-- grid  Shell  u-padding-1-100 -->

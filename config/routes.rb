@@ -22,6 +22,7 @@ Letting::Application.routes.draw do
   end
   resources :guides, only: [:index, :show, :edit, :update]
   resources :payments
+  resources :payments_by_dates, only: [:index, :destroy]
   resources :properties, path: 'accounts'
   resources :invoicings
   resources :blue_invoicings, only: [:index, :destroy]
@@ -29,6 +30,7 @@ Letting::Application.routes.draw do
   resources :invoices, only: [:show]
   resources :print_invoices, only: [:show]
   resources :print_runs, only: [:show]
+  resources :property_lists, only: [:index]
   resources :runs, only: [:show, :destroy]
 
   # Admin

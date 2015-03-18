@@ -1,11 +1,11 @@
 require 'rails_helper'
 # rubocop: disable Style/Documentation
 
-class PaymentsPage
+class PaymentByDatesPage
   include Capybara::DSL
 
   def load
-    visit '/payments'
+    visit '/payments_by_dates'
     self
   end
 
@@ -33,22 +33,21 @@ class PaymentsPage
   end
 end
 
-describe 'Payment#index', :ledgers, type: :feature do
-  let(:payments_page) { PaymentsPage.new }
+describe 'PaymentByDate#index', :ledgers, type: :feature do
+  let(:payment_by_dates_page) { PaymentByDatesPage.new }
   before { log_in }
 
   it 'all' do
     property_create account: account_new(payment: payment_new)
-    payments_page.load
-    expect(payments_page).to be_having_payment
+    payment_by_dates_page.load
+    expect(payment_by_dates_page).to be_having_payment
   end
 
   it '#destroys a payment' do
     property_create account: account_new(payment: payment_new)
-    payments_page.load
-    expect { payments_page.delete }.to change(Payment, :count).by(-1)
-    expect(payments_page).to be_deleted
-
-    expect(payments_page.title).to eq 'Letting - Payments'
+    payment_by_dates_page.load
+    expect { payment_by_dates_page.delete }.to change(Payment, :count).by(-1)
+    expect(payment_by_dates_page).to be_deleted
+    expect(payment_by_dates_page.title).to eq 'Letting - Payments by Date'
   end
 end

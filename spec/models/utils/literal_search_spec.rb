@@ -5,27 +5,36 @@ describe LiteralSearch, type: :model do
     describe 'client query' do
       it 'returns an exact client' do
         client = client_create human_ref: '8'
+        referrer = Referrer.new controller: 'clients', action: ''
 
-        expect(LiteralSearch.search(model: 'Client', query: '8').go.id)
+        expect(LiteralSearch.search(referrer: referrer, query: '8').go.id)
           .to eq client.id
       end
 
       it 'returns nil when no match' do
-        expect(LiteralSearch.search(model: 'Client', query: '8').go.id)
+        referrer = Referrer.new controller: 'clients', action: ''
+
+        expect(LiteralSearch.search(referrer: referrer, query: '8').go.id)
           .to be_nil
       end
     end
 
     describe 'payment query' do
       it 'returns an exact account' do
-        account = account_create property: property_new(human_ref: '100')
+        payment = payment_new credit: credit_new(amount: 30, charge: charge_new)
+        account_create property: property_new(human_ref: '10'), payment: payment
+        referrer = Referrer.new controller: 'payments', action: ''
 
-        expect(LiteralSearch.search(model: 'Payment', query: '100').go.id)
-          .to eq account.id
+        expect(LiteralSearch.search(referrer: referrer,
+                                    query: '10').go.records.size)
+          .to eq 1
       end
 
       it 'returns nil when no match' do
-        expect(LiteralSearch.search(model: 'Payment', query: '100').go.id)
+        referrer = Referrer.new controller: 'payments', action: ''
+
+        expect(LiteralSearch.search(referrer: referrer,
+                                    query: '10').go.records)
           .to be_nil
       end
     end
@@ -33,19 +42,24 @@ describe LiteralSearch, type: :model do
     describe 'property query' do
       it 'returns an exact property' do
         property = property_create human_ref: '100'
+        referrer = Referrer.new controller: 'properties', action: ''
 
-        expect(LiteralSearch.search(model: 'Property', query: '100').go.id)
+        expect(LiteralSearch.search(referrer: referrer, query: '100').go.id)
           .to eq property.id
       end
 
       it 'return nil when no match' do
-        expect(LiteralSearch.search(model: 'Property', query: '100').go.id)
+        referrer = Referrer.new controller: 'properties', action: ''
+
+        expect(LiteralSearch.search(referrer: referrer, query: '100').go.id)
           .to be_nil
       end
     end
 
     it 'errors on unknown type' do
-      expect { LiteralSearch.search(model: 'X', query: 'y').go.id }
+      referrer = Referrer.new controller: 'X', action: ''
+
+      expect { LiteralSearch.search(referrer: referrer, query: 'y').go.id }
         .to raise_error NotImplementedError
     end
   end
@@ -54,16 +68,18 @@ describe LiteralSearch, type: :model do
     it 'searches for the queried type before any other type' do
       property_create human_ref: '100'
       client = client_create human_ref: '100'
+      referrer = Referrer.new controller: 'clients', action: ''
 
-      expect(LiteralSearch.search(model: 'Client', query: '100').go.id)
+      expect(LiteralSearch.search(referrer: referrer, query: '100').go.id)
         .to eq client.id
     end
 
     it 'returns default if queried type does not have that value.' do
       client_create human_ref: '100'
       not_a_client = property_create human_ref: '101'
+      referrer = Referrer.new controller: 'clients', action: ''
 
-      expect(LiteralSearch.search(model: 'Client', query: '101').go.id)
+      expect(LiteralSearch.search(referrer: referrer, query: '101').go.id)
         .to eq not_a_client.id
     end
   end

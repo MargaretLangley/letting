@@ -3,10 +3,15 @@
   <h2>Payments by Date</h2>
 </div>
 
- <div class='col-2-24  grid-row  r-align'> &nbsp;</div>
-    <div  id='help-me',  data-skip='0',  data-pay='0',  data-itext='0', class='no-print'>
-      <%= render 'bubbles/help_2_view', line1: 'Payment Details', line2: 'Click on a date row for details of payments made on that date' %>
+  <div  id='help-me',  data-summit='6',  class='col-2-24  grid-row  Bubble-search'>
+    <%= render 'bubbles/help_main',  pic: 'fa fa-eye  fa-lg', line1: 'Payments Index', line2: 'Payments can be found, by date, and edited on this page', line3: 'Clicking on a date in the Payments by date list will set up all payments made on that list in right hand block.', line4: 'Clicking on the list goes to a view of the payment. Edit and delete are available via their buttons', line5: 'Using the next button in this box will point you to the different buttons on this page and their usage.'%>
+    &nbsp;
   </div>
+
+<div   class='no-print'>
+  <%= render 'bubbles/help_2_down',  pic: 'fa fa-file-o  fa-lg',  line1: 'Payment Details',  line2: 'Click on a date row for details of payments made on that date' %>
+</div>
+
 
 <div class='col-10-24  grid-row  vertical-spacer  grid-header'>
   Booked At

@@ -12,20 +12,20 @@
 
   <div class='col-15-24'>
     &nbsp;
-    <div class='Bubble-anchor'>
-      <%= render 'bubbles/help_3_payments', line2: 'Click on line to view a payment' %>
+    <div class='Bubble-pt-down'>
+      <%= render 'bubbles/help_3',  pic: 'fa fa-file-o  fa-lg', line1:  'View Payments', line2:  'Click on line for payment details' %>
     </div>
   </div>
 
   <div class='col-2-24'>
     &nbsp;
     <div class='Bubble-anchor'>
-      <%= render 'bubbles/help_4_edit', line1: 'Edit Payment Button', line2: 'Edits this payment' %>
+      <%= render 'bubbles/help_4',  pic: 'fa fa-edit  fa-lg', line1: 'Edit Payment Button', line2:  'Edits this payment' %>
     </div>
   </div>
   <div class='col-1-24'>&nbsp;
     <div class='Bubble-anchor'>
-      <%= render 'bubbles/pt_down_delete', line2: 'Deletes this payment from the accounts' %>
+      <%= render 'bubbles/help_5',  pic: 'fa fa-trash-o  fa-lg',  line1: 'Delete Button',  line2: 'Deletes this payment from the accounts' %>
     </div>
   </div>
 
@@ -60,7 +60,7 @@
     <%= edit_link payment, size: 'lg' %>
   </div>
   <div class='col-1-24  bottom-spacer'>
-    <%= delete_link path: payment %>
+    <%= delete_link path: payments_by_date_path(payment) %>
   </div>
 <% end %>
 

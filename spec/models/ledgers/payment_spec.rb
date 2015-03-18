@@ -139,5 +139,23 @@ describe Payment, :payment, :ledgers, type: :model do
         expect(payments.size).to eq 0
       end
     end
+
+    describe '.human_ref' do
+      it 'returns if in range' do
+        payment_create \
+          booked_at: '30/4/2013 01:00:00 +0100',
+          account: account_create(property: property_new(human_ref: 10))
+        payments = Payment.human_ref 10
+        expect(payments.size).to eq 1
+      end
+
+      it 'returns nothing out of range' do
+        payment_create \
+          booked_at: '30/4/2013 01:00:00 +0100',
+          account: account_create(property: property_new(human_ref: 10))
+        payments = Payment.human_ref 5
+        expect(payments.size).to eq 0
+      end
+    end
   end
 end

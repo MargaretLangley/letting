@@ -54,6 +54,8 @@ class Payment < ActiveRecord::Base
     credits.register_booking(self)
   end
 
+  scope :by_booked_at, -> { order(booked_at: :desc) }
+
   def self.date_range(range: '2013-01-01'..'2013-12-31')
     where(booked_at: range.first...range.last)
   end
@@ -65,12 +67,19 @@ class Payment < ActiveRecord::Base
              ' sum(amount) as payment_sum')
   end
 
+  # human_ref - the id of the account / property to return
+  #
+  def self.human_ref human_ref
+    Payment.includes(account: [:property])
+      .where(properties: { human_ref: human_ref })
+  end
+
   include Searchable
   # Elasticsearch uses generates JSON document for payment index
   def as_indexed_json(_options = {})
     as_json(
       include: {
-        account: { methods: [:holder, :address] }
+        account: { methods: [:human_ref, :holder, :address] }
       })
   end
 

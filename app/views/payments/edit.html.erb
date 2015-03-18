@@ -1,2 +1,6 @@
 <% @title='Edit Payment' %>
+<div class='Bubble-search  no-print'>
+  <%= render 'bubbles/wide_search', line1: 'Payments Search Box', line2: 'Give the account number, to edit a payment' %>
+</div>
+
 <%= render 'payments/form', payment_dec: @payment %>

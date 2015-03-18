@@ -36,7 +36,7 @@ describe 'Session#creates', type: :feature do
   end
 
   def expect_to
-    expect(current_path).to eq '/'
+    expect(current_path).to eq '/accounts'
     expect(page).to have_text /Logged in!/i
     expect(page).to have_text /user/i
   end

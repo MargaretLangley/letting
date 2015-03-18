@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     user = user_from_email
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, flash: { good: 'Logged in!' }
+      redirect_to properties_path, flash: { good: 'Logged in!' }
     else
       alert_authentication_failed
       render 'new'

@@ -14,12 +14,12 @@
     <div class='col-1-2'>
       <%= label_tag :period_first, 'Start date' %>
       <%= date_field_tag :period_first, params[:period_first], disabled: get_default_dates? %>
-      <%= f.hidden_field :period_first %>
+      <%= form.hidden_field :period_first %>
     </div>
     <div class='col-1-2'>
       <%= label_tag :period_last, 'End date' %>
       <%= date_field_tag :period_last, params[:period_last] , disabled: get_default_dates? %>
-      <%= f.hidden_field :period_last %>
+      <%= form.hidden_field :period_last %>
     </div>
   </div>
 </div>

@@ -16,8 +16,8 @@
 module NavigationHelper
   # main_menu_active?
   #
-  def main_menu_active? controller
-    if controller.include? controller_name
+  def main_menu_active? controllers
+    if controller_name.in? controllers
       'active-menu'     # Menu items displayed
     else
       'inactive-menu'   # Menu items hidden (no css)

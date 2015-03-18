@@ -1,10 +1,28 @@
-<%= form_for payment_dec do |payment_form| %>
-  <%= render 'shared/errors', object: payment_dec.payment %>
 
-  <fieldset id='payment' class='grid  Shell  overlay-parent'>
 
-    <div class='col-12-24  grid-row'>    <!-- 1st column -->
-        <%= render 'payments/property_hero', payment_dec: payment_dec %>
+  <div class='grid  Shell-thin'>
+
+
+    <div class='col-12-24  grid-row  clearfix'>    <!-- 1st column -->
+
+      <!-- Partialized Property Description -->
+
+      <%= form_tag new_payment_path, method: 'get' do %>
+        <div class='col-2-24  grid-row  top-1-line-spacer'>&nbsp;</div>
+        <div class='col-9-24  top-1-line-spacer'>  <!-- 1st column -->
+          <h3 class='grid-label'>Property ID</h3>
+          <%= text_field_tag :account_payment_search, params[:account_payment_search], class: 'width-9-12' %>
+          <button type='submit' class='width-2-12  Button  ButtonIcon-action' id='payment-search' title='Payment Search'>
+            <%= fa_icon 'search lg' %>
+          </button>
+        </div>
+        <div class='col-13-24  top-1-line-spacer'>  <!-- 2nd column -->
+          <h3 class='grid-label'>Occupier</h3>
+          <% if payment_dec.account_exists? %>
+            <%= render 'addresses/abridged', property: payment_dec.property_decorator %>
+            <% end %>
+        </div>
+      <% end %>
     </div>
     <div class='col-2-24'>    <!-- 2nd column -->
       &nbsp;
@@ -15,6 +33,10 @@
       <div class='table-link-row' data-link='<%= edit_payment_path(Payments.last_created_at) %>'>
         <div class='col-8-12  grid-row  bottom-half-line-spacer  inherit-row'>
           Last Payment&nbsp;(<%= payment_dec.last_human_ref %>)
+          <div  class='col-14-24  Bubble-pt-right'>
+            <%= render 'bubbles/help_2',  pic: 'fa fa-gbp fa-lg', line1: 'Last Payment', line2: "Last item entered on data base"%>
+            &nbsp;
+          </div>
         </div>
         <div class='col-4-12  bottom-half-line-spacer  inherit-row  r-align'>
           <%= payment_dec.last_amount %>
@@ -32,6 +54,11 @@
     <div class='col-1-24   top-spacer  r-align'>    <!-- 5th column -->
       <%= view_link payment_dec.payment %>
     </div>
+  </div>
+  <fieldset id='payment' class='grid  Shell  overlay-parent'>
+
+    <%= form_for payment_dec do |payment_form| %>
+      <%= render 'shared/errors', object: payment_dec.payment %>
 
     <% if payment_dec.account_exists? %>
 

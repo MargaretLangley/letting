@@ -19,12 +19,8 @@
 #
 class PaymentsController < ApplicationController
   def index
-    params[:date] ||= Payments.last_booked_at
-
-    @records = Payments.booked_on(date: params[:date]).includes(joined_tables)
+    @records = Payment.includes(joined_tables).by_booked_at.page(params[:page])
                .load
-
-    @payments_by_dates = Payment.by_booked_at_date
   end
 
   def show
@@ -33,7 +29,7 @@ class PaymentsController < ApplicationController
 
   # params[:id] is the account_id returned from search_controller
   def new
-    account = Account.find_by id: params[:id]
+    account = Account.find_by_human_ref params[:account_payment_search]
     @payment = PaymentDecorator.new(Payment.new account: account)
     @payment.prepare
     @payment.booked_at = get_booked_on

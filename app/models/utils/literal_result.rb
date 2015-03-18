@@ -4,42 +4,55 @@
 # Wraps up the search results
 #
 class LiteralResult
-  attr_reader :action, :controller, :id, :completes
+  attr_reader :action, :controller, :id, :no_search, :records
 
   # initialize
   # args:
   #   action: - rest action
   #   controller - controller the action is called on
-  #   id - record id returned
-  #   completes - return you have not found anything when you have actually
-  #           returned id
+  #   id - record id returned - when one record is returned
+  #   records - when more than one record is being returned
+  #   no_search - do not search
   #
-  def initialize(action:, controller:, id:, completes: false)
+  def initialize(action:, controller:, id: nil, records: nil, no_search: false)
     @action = action
     @controller = controller
     @id = id
-    @completes = completes
-  end
-
-  # concluded?
-  # Has the search completed - normally returning a record but it
-  # doesn't have to and still considered concluded.
-  #
-  def concluded?
-    id.present? || completes
+    @records = records
+    @no_search = no_search
   end
 
   # The search not only completed but it also found a result.
   #
   def found?
-    id.present?
+    return false if no_search
+
+    id.present? || records.present?
   end
 
-  # redirect_params
+  # to_params
   # returns - action, controller, id - enough information to redirect
   #
-  def redirect_params
-    { action: action, controller:  controller, id: id }
+  def to_params
+    params = { action: action, controller:  controller }
+    params.merge!(id: id) if id
+    params.merge!(records: records) if records
+    params
+  end
+
+  #
+  # Rendering requires we have the view to render
+  # returns: the view to render
+  #
+  def to_render
+    "#{controller}/#{action}"
+  end
+
+  #
+  # If we are displaying a single record
+  #
+  def single_record?
+    id.present?
   end
 
   # self.without_a_search
@@ -56,6 +69,6 @@ class LiteralResult
   # Same as without_a_search but makes more sense when reading code.
   #
   def self.no_record_found
-    LiteralResult.new action: '', controller: '', id: nil
+    LiteralResult.new action: '', controller: '', id: nil, no_search: true
   end
 end

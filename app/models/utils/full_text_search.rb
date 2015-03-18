@@ -13,13 +13,13 @@
 ####
 #
 class FullTextSearch
-  attr_reader :query, :type
-  def self.search(type:, query:)
-    new(type: type, query: query)
+  attr_reader :query, :referrer
+  def self.search(referrer:, query:)
+    new(referrer: referrer, query: query)
   end
 
-  def initialize(type:, query:)
-    @type = type
+  def initialize(referrer:, query:)
+    @referrer = referrer
     @query = query
   end
 
@@ -30,10 +30,13 @@ class FullTextSearch
   # Instantiate class from name string
   # Object.const_get(type).search(query)
   def results
-    case type
-    when 'Client'
+    case referrer.controller
+    when 'clients'
       records = Client.search(query, sort: 'human_ref').records
       { records: records, render: 'clients/index' }
+    when 'payments'
+      records = Payment.search(query, sort: 'booked_at').records
+      { records: records, render: 'payments/index' }
     else
       records = Property.search(query, sort: 'human_ref').records
       { records: records, render: 'properties/index' }

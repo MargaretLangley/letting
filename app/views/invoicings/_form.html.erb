@@ -1,4 +1,4 @@
-<%= form_for invoicing do |f| %>
+<%= form_for invoicing do |form| %>
   <%= render 'shared/errors', object: invoicing %>
 
   <fieldset id='invoicing' class='grid  Shell  u-padding-1-25'>
@@ -9,13 +9,13 @@
       </div>
 
       <div class='col-6-24  grid-row  bottom-half-line-spacer  grid-label'>
-        <%= f.label :property_range, class: 'required' %>
+        <%= form.label :property_range, class: 'required' %>
       </div>
       <div class='col-16-24  bottom-half-line-spacer'>
-        <%= f.text_field :property_range %>
+        <%= form.text_field :property_range %>
       </div>
 
-      <%= render 'invoicings/search', f: f %>
+      <%= render 'invoicings/search_dates', form: form %>
 
       <div class='col-6-24  grid-row  bottom-half-line-spacer  grid-label'>
         Invoice Date
@@ -27,7 +27,7 @@
 
     <div class='col-1-3  spacer-column'>  <!-- column 2 -->
       <div class='top-2-line-spacer'>
-        <%= render 'forms/buttons', f: f, path: new_invoicing_path %>
+        <%= render 'forms/buttons', f: form, path: new_invoicing_path %>
       </div>
     </div>
 

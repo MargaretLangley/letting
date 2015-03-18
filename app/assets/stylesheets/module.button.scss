@@ -60,11 +60,10 @@
     }
   }
 
-  .ButtonPrimary {
+  @mixin redbutton {
     background: $primary-action-background;
     border: 1px solid darken($primary-action-background, $border-color-darken);
     color: $primary-action-color;
-    padding: 1.3em;
 
     &:hover,
     &:active {
@@ -72,8 +71,30 @@
       color: $primary-action-active-color;
     }
   }
-}
 
+  .ButtonPrimary {
+    @include redbutton;
+    padding: 1.3em;
+  }
+
+  .ButtonSecondary {
+    @include redbutton;
+    padding: .5em;
+  }
+
+  .ButtonPrimary[disabled] {
+    background: $button-icon-disabled-background;
+    border: 1px solid darken($button-icon-disabled-background, $border-color-darken);
+    color: $button-icon-disabled-color;
+    padding: 1.3em;
+
+    &:hover,
+    &:active {
+      background: $button-icon-disabled-background;
+      color: $button-icon-disabled-color;
+    }
+  }
+}
 
 @media print {
 

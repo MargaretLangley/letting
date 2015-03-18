@@ -51,7 +51,7 @@ class PropertiesController < ApplicationController
   def update
     @property = Property.find params[:id]
     if @property.update property_params
-      redirect_to properties_path, flash: { save: updated_message }
+      redirect_on_update @property
     else
       render :edit
     end
@@ -65,6 +65,16 @@ class PropertiesController < ApplicationController
   end
 
   private
+
+  def redirect_on_update property
+    if params[:previous]
+      redirect_to [:edit, property.prev], flash: { save: updated_message }
+    elsif params[:next]
+      redirect_to [:edit, property.next], flash: { save: updated_message }
+    else
+      redirect_to properties_path, flash: { save: updated_message }
+    end
+  end
 
   def property_params
     params.require(:property)

@@ -15,11 +15,14 @@
 #
 class SearchController < ApplicationController
   def index
-    session[:search_model] = referer unless referer == 'Search'
-    if literal_search.concluded?
-      return redirect_with_no_match_flash unless literal_search.found?
-
-      redirect_to literal_search.redirect_params.merge(repack_search_params)
+    if literal_search.go.found?
+      if literal_search.go.single_record?
+        # repack search params otherwise the search is 'forgotten'
+        redirect_to literal_search.go.to_params.merge(repack_search_params)
+      else
+        @records = literal_search.go.records
+        render literal_search.go.to_render
+      end
     else
       @records = full_text_search[:records].page(params[:page])
       render full_text_search[:render]
@@ -29,8 +32,8 @@ class SearchController < ApplicationController
   private
 
   def literal_search
-    @literal_search ||= LiteralSearch.search(model: session[:search_model],
-                                             query: params[:search_terms]).go
+    @literal_search ||= LiteralSearch.search(referrer: referrer,
+                                             query: params[:search_terms])
   end
 
   def repack_search_params
@@ -42,15 +45,10 @@ class SearchController < ApplicationController
   end
 
   def get_full_text_search
-    results = FullTextSearch.search(type: session[:search_model],
+    results = FullTextSearch.search(referrer: referrer,
                                     query: params[:search_terms]).go
     flash.now[:problem] = 'No Matches found. Search again.' \
       if params[:search_terms].present? && results[:records].count.zero?
     results
-  end
-
-  def redirect_with_no_match_flash
-    redirect_to literal_search.redirect_params.merge(repack_search_params),
-                flash: { problem: 'No Matches found. Search again.' }
   end
 end

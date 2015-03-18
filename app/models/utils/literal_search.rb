@@ -9,14 +9,14 @@
 ####
 #
 class LiteralSearch
-  attr_reader :model, :query
+  attr_reader :referrer, :query
 
-  # model: the model type of the query being executed - one of Client,
-  #       Payment, Property, Arrear or Invoice.
+  # referrer: the model and action of the query being executed - one of Client,
+  #           Payment, Property, Arrear or Invoice and any of the actions.
   # query: the search terms being queried on the model
   #
-  def self.search(model:, query:)
-    new(model: model, query: query)
+  def self.search(referrer:, query:)
+    new(referrer: referrer, query: query)
   end
 
   # go
@@ -24,44 +24,44 @@ class LiteralSearch
   # returns LiteralResult - a wrapper for the search results
   #
   def go
-    captured = query_for_model
-    captured = default_ordered_query unless captured.concluded?
-    captured
+    captured = query_by_referrer
+    return captured if captured.found?
+
+    default_ordered_query
   end
 
   private
 
-  def initialize(model:, query:)
-    @model = model
+  def initialize(referrer:, query:)
+    @referrer = referrer
     @query = query
   end
 
-  def query_for_model
-    case model
-    when 'Client' then client(query)
-    when 'Payment' then payment(query)
-    when 'Property' then property(query)
-    when 'Arrear', 'Cycle', 'User', 'InvoiceText', 'Invoicing', 'Invoice'
+  def query_by_referrer
+    case referrer.controller
+    when 'clients' then client_search(query)
+    when 'payments' then payments_search(query)
+    when 'properties' then property_search(query)
+    when 'arrears', 'cycles', 'users', 'invoice_texts', 'invoicings', 'invoices'
       LiteralResult.without_a_search
     else
-      fail NotImplementedError, "Missing model: #{model}"
+      fail NotImplementedError, "Missing: #{referrer}"
     end
   end
 
-  def client query
+  def client_search query
     LiteralResult.new action: 'show',
                       controller: 'clients',
                       id: id_or_nil(Client.find_by_human_ref query)
   end
 
-  def payment query
-    LiteralResult.new action: 'new',
+  def payments_search query
+    LiteralResult.new action: 'index',
                       controller: 'payments',
-                      id: id_or_nil(Account.find_by_human_ref query),
-                      completes: true
+                      records: Payment.human_ref(query).by_booked_at
   end
 
-  def property query
+  def property_search query
     LiteralResult.new action: 'show',
                       controller: 'properties',
                       id: id_or_nil(Property.find_by_human_ref query)
@@ -72,8 +72,8 @@ class LiteralSearch
   end
 
   def default_ordered_query
-    return property(query) if property(query).concluded?
-    return client(query) if client(query).concluded?
+    return property_search(query) if property_search(query).found?
+    return client_search(query) if client_search(query).found?
 
     LiteralResult.no_record_found
   end
