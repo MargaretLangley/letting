@@ -19,22 +19,25 @@ describe LiteralSearch, type: :model do
       end
     end
 
-    # describe 'payment query' do
-    #   it 'returns an exact account' do
-    #     account = account_create property: property_new(human_ref: '100')
-    #     referrer = Referrer.new controller: 'payments', action: ''
+    describe 'payment query' do
+      it 'returns an exact account' do
+        payment = payment_new credit: credit_new(amount: 30, charge: charge_new)
+        account_create property: property_new(human_ref: '10'), payment: payment
+        referrer = Referrer.new controller: 'payments', action: ''
 
-    #     expect(LiteralSearch.search(referrer: referrer, query: '100').go.id)
-    #       .to eq account.id
-    #   end
+        expect(LiteralSearch.search(referrer: referrer,
+                                    query: '10').go.records.size)
+          .to eq 1
+      end
 
-    #   it 'returns nil when no match' do
-    #     referrer = Referrer.new controller: 'payments', action: ''
+      it 'returns nil when no match' do
+        referrer = Referrer.new controller: 'payments', action: ''
 
-    #     expect(LiteralSearch.search(referrer: referrer, query: '100').go.id)
-    #       .to be_nil
-    #   end
-    # end
+        expect(LiteralSearch.search(referrer: referrer,
+                                    query: '10').go.records)
+          .to be_nil
+      end
+    end
 
     describe 'property query' do
       it 'returns an exact property' do

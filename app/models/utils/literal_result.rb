@@ -4,19 +4,21 @@
 # Wraps up the search results
 #
 class LiteralResult
-  attr_reader :action, :controller, :id, :no_search
+  attr_reader :action, :controller, :id, :no_search, :records
 
   # initialize
   # args:
   #   action: - rest action
   #   controller - controller the action is called on
-  #   id - record id returned
+  #   id - record id returned - when one record is returned
+  #   records - when more than one record is being returned
   #   no_search - do not search
   #
-  def initialize(action:, controller:, id:, no_search: false)
+  def initialize(action:, controller:, id: nil, records: nil, no_search: false)
     @action = action
     @controller = controller
     @id = id
+    @records = records
     @no_search = no_search
   end
 
@@ -25,7 +27,7 @@ class LiteralResult
   def found?
     return false if no_search
 
-    id.present?
+    id.present? || records.present?
   end
 
   # to_params
@@ -34,6 +36,7 @@ class LiteralResult
   def to_params
     params = { action: action, controller:  controller }
     params.merge!(id: id) if id
+    params.merge!(records: records) if records
     params
   end
 
