@@ -6,12 +6,12 @@ $( document ).ready(function() {
     boxReveal = 0;
     summit =  parseInt($("#help-me").attr('data-summit'));
     // alert('boxReveal is '+boxReveal+' summit is '+summit);
-    cover();
+    cover(summit);
     $('#help_0')[0].style.display = 'block';
     return false;
   });
 
-//Summit values are normally set to 4 or 6
+  //Summit values are normally set to 4 or 6
 
   $('.js-help').click(function() {
 
@@ -21,7 +21,7 @@ $( document ).ready(function() {
 
     if (boxReveal >= summit )
     {
-      cover();
+      cover(summit);
       $('#help_-2')[0].style.display = 'block';
       boxReveal = -2;
     }
@@ -36,17 +36,16 @@ $( document ).ready(function() {
   });
 
   $('.js-cancel-help').click(function() {
-
-    cover();
+    cover(summit);
     return false;
   });
  });
 
 // If an id which does not exist is set to none the js blows.
 // Note js does not accept help-box
-function cover() {
+function cover(lastBox) {
 
-  for (helpBox = -2;  helpBox < summit;  helpBox++)
+  for (helpBox = -2;  helpBox < lastBox;  helpBox++)
   {
     $('#help_' + helpBox)[0].style.display = 'none';
   }
