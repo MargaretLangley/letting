@@ -3,11 +3,11 @@
 $( document ).ready(function() {
 
   $('.js-start-help').click(function() {
-    box = 0;
+    boxReveal = 0;
     summit =  parseInt($("#help-me").attr('data-summit'));
-    // alert('*box is '+box+' summit is '+summit);
+    // alert('boxReveal is '+boxReveal+' summit is '+summit);
     cover();
-    $('#help-0')[0].style.display = 'block';
+    $('#help_0')[0].style.display = 'block';
     return false;
   });
 
@@ -15,33 +15,21 @@ $( document ).ready(function() {
 
   $('.js-help').click(function() {
 
-    box++;
+    boxReveal++;
 
-    // alert('box is '+box+' summit is '+summit);
+    // alert('boxReveal is '+boxReveal+' summit is '+summit);
 
-    if (box == summit )
+    if (boxReveal >= summit )
     {
       cover();
-      $('#help-pr')[0].style.display = 'block';
+      $('#help_-2')[0].style.display = 'block';
+      boxReveal = -2;
     }
 
-    if (box > summit )
+    if(boxReveal >= -1)
     {
-      $('#help-pr')[0].style.display = 'none';
-      $('#help-log')[0].style.display = 'block';
-      box = -1;
-    }
-
-    if (box == 0 )
-    {
-      $('#help-log')[0].style.display = 'none';
-      $('#help-0')[0].style.display = 'block';
-    }
-
-    if(box >= 1)
-    {
-      $('#help-' + (box - 1) )[0].style.display = 'none';
-      $('#help-' + box)[0].style.display = 'block';
+      $('#help_' + (boxReveal - 1) )[0].style.display = 'none';
+      $('#help_' + boxReveal)[0].style.display = 'block';
     }
     return false;
 
@@ -50,27 +38,17 @@ $( document ).ready(function() {
   $('.js-cancel-help').click(function() {
 
     cover();
-    coverall();
     return false;
   });
  });
 
 // If an id which does not exist is set to none the js blows.
-// The short summits, value 3, have help boxes to 2
+// Note js does not accept help-box
 function cover() {
 
-  $('#help-pr')[0].style.display = 'none';
-  $('#help-log')[0].style.display = 'none';
-  return false;
-}
-
-// Cannot callup any id in function which is not know to page
-// used by cancel button. Note js does not accept help-box
-function coverall() {
-
-  for (help_box = 0;  help_box < summit;  help_box++)
+  for (helpBox = -2;  helpBox < summit;  helpBox++)
   {
-    $('#help-' + help_box)[0].style.display = 'none';
+    $('#help_' + helpBox)[0].style.display = 'none';
   }
   return false;
 }
