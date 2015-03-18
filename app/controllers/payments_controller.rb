@@ -19,12 +19,12 @@
 #
 class PaymentsController < ApplicationController
   def index
-    params[:date] ||= Payments.last_booked_at
+    # params[:date] ||= Payments.last_booked_at
 
-    @records = Payments.booked_on(date: params[:date]).includes(joined_tables)
-               .load
+    # @records = Payments.booked_on(date: params[:date]).includes(joined_tables)
+    #            .load
 
-    @payments_by_dates = Payment.by_booked_at_date
+    # @payments_by_dates = Payment.by_booked_at_date
   end
 
   def show
@@ -80,10 +80,6 @@ class PaymentsController < ApplicationController
 
   def set_booked_on(date:)
     session[:payments_booked_on] = date
-  end
-
-  def joined_tables
-    [account: [property: [:entities]]]
   end
 
   def payment_params
