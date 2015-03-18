@@ -167,7 +167,7 @@ end
 # Development and testing
 #
 group :development, :test do
-  gem 'byebug', '~> 3.5.0'
+  gem 'byebug', '~> 4.0.0'
   gem 'capybara', '~> 2.4.0'
 
   #
