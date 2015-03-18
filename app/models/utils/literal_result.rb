@@ -32,7 +32,9 @@ class LiteralResult
   # returns - action, controller, id - enough information to redirect
   #
   def to_params
-    { action: action, controller:  controller, id: id }
+    params = { action: action, controller:  controller }
+    params.merge!(id: id) if id
+    params
   end
 
   # self.without_a_search
