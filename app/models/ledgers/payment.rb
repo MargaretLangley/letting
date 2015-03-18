@@ -54,6 +54,8 @@ class Payment < ActiveRecord::Base
     credits.register_booking(self)
   end
 
+  scope :by_booked_at, -> { order(booked_at: :desc) }
+
   def self.date_range(range: '2013-01-01'..'2013-12-31')
     where(booked_at: range.first...range.last)
   end
