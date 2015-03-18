@@ -40,6 +40,21 @@ class LiteralResult
     params
   end
 
+  #
+  # Rendering requires we have the view to render
+  # returns: the view to render
+  #
+  def to_render
+    "#{controller}/#{action}"
+  end
+
+  #
+  # If we are displaying a single record
+  #
+  def single_record?
+    id.present?
+  end
+
   # self.without_a_search
   #
   # The model does not have any literal search query find any specific record.

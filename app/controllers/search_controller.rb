@@ -16,7 +16,13 @@
 class SearchController < ApplicationController
   def index
     if literal_search.go.found?
-      redirect_to literal_search.go.to_params.merge(repack_search_params)
+      if literal_search.go.single_record?
+        # repack search params otherwise the search is 'forgotten'
+        redirect_to literal_search.go.to_params.merge(repack_search_params)
+      else
+        @records = literal_search.go.records
+        render literal_search.go.to_render
+      end
     else
       @records = full_text_search[:records].page(params[:page])
       render full_text_search[:render]

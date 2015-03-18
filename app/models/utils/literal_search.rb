@@ -58,7 +58,7 @@ class LiteralSearch
   def payments_search query
     LiteralResult.new action: 'index',
                       controller: 'payments',
-                      records: Payment.human_ref(query)
+                      records: Payment.human_ref(query).by_booked_at
   end
 
   def property_search query
