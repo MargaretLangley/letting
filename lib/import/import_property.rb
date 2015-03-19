@@ -36,8 +36,8 @@ module DB
       model_class.where human_ref: row.human_ref
     end
 
-    # true filters
-    # false allows
+    # filtered?
+    # Either import row, filtered? false, or ignored filtered? true
     #
     def filtered?
       range.exclude? row.human_ref

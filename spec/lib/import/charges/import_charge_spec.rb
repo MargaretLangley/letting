@@ -27,6 +27,20 @@ module DB
                      due_ons: [DueOn.new(month: 3, day: 5)]
       end
 
+      describe 'activity' do
+        it 'is active is there is an amount' do
+          import_charge row amount: 20
+
+          expect(Charge.first).to be_active
+        end
+
+        it 'is active is there is an amount' do
+          import_charge row amount: 0
+
+          expect(Charge.first).to be_dormant
+        end
+      end
+
       it 'does not double import' do
         import_charge row human_ref: 80
         expect { import_charge row human_ref: 80 }.to_not change(Charge, :count)
@@ -52,15 +66,6 @@ module DB
         it 'filters when outside range' do
           expect { import_charge row(human_ref: 80), range: 10..79 }
             .to change(Charge, :count).by 0
-        end
-
-        it 'filters when charge amount 0' do
-          expect { import_charge row amount: 0 }.to change(Charge, :count).by 0
-        end
-
-        it 'warns about filtering a charge with 0 amount.' do
-          expect { warn 'Filtering charge with amount 0' }.to output.to_stderr
-          import_charge row human_ref: 80, amount: 0
         end
       end
     end

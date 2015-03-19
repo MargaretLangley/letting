@@ -51,11 +51,7 @@ module DB
     #
     def filtered?
       return true if range.exclude? row.human_ref
-      if row.amount.zero?
-        warn "Filtering charge with amount 0 for Property: #{row.human_ref} "\
-             "charge_type: #{row.charge_type}"
-        return true
-      end
+
       false
     end
 
