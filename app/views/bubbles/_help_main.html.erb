@@ -1,14 +1,30 @@
 <div id='help_0'  class='hide  bubble-intro'>
-  <h3 class='help-heading'>
-    <i class='<%= pic %> fa-lg  help-icon'></i>
-    <%= line1 %>
-  </h3>
-
+  <p>
+    <h3 class='help-heading'>&nbsp; &nbsp;
+      <i class="fa fa-info-circle fa-lg"></i>
+      <%= line1 %>
+    </h3>
+  </p>
   <div class='text-in-box'>
     <p><%= line2 %></p>
     <p><%= line3 %></p>
     <p><%= line4 %></p>
-    <p><%= line5 %></p>
+  </div>
+
+ <div class='icons-in-box'>
+  <p><i class='fa fa-print fa-lg  ButtonIcon-inactive'></i>&nbsp; Prints page</p>
+  <p>
+    <i class='fa fa-edit fa-lg  ButtonIcon-inactive'></i>
+    &nbsp; Edits <%= content %>
+  </p>
+  <p><i class='fa fa-trash-o fa-lg  ButtonIcon-inactive'></i>
+   Deletes <%= content %></p>
+  </div>
+
+  <p class='text-in-box'>
+    Using the next button in this box will point you to the different buttons on this page and their usage.
+  </p>
+  <div class = 'buttons-in-box'>
     <%= render 'bubbles/box' %>
   </div>
 </div>

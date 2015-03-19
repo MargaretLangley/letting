@@ -18,8 +18,14 @@ require_relative '../../../../lib/import/charges/due_on_importable'
 module DB
   include ChargedInDefaults
   describe ChargeRow, :import do
-    def charge_row code: 'GR', charged_in: 0, month_1: 3, day_1: 25, month_2: 0, day_2: 0
-      %(89, 2006-12-30, #{code}, #{charged_in}, 50.5, S,) +
+    def charge_row code: 'GR',
+                   charged_in: 0,
+                   amount: 50.5,
+                   month_1: 3,
+                   day_1: 25,
+                   month_2: 0,
+                   day_2: 0
+      %(89, 2006-12-30, #{code}, #{charged_in}, #{amount}, S,) +
         %(#{day_1}, #{month_1}, #{day_2}, #{month_2}, 0, 0, 0, 0,) +
         %(1901-01-01, 0)
     end
@@ -173,6 +179,18 @@ module DB
         expect(row.attributes[:charge_type]).to eq 'Ground Rent'
         expect(row.attributes[:amount]).to eq 50.5
         expect(row.attributes[:payment_type]).to eq Charge::AUTOMATIC
+      end
+    end
+
+    describe 'activity' do
+      it 'is active is there is an amount' do
+        charge = charge_row amount: 20
+        expect(ChargeRow.new(parse_line charge).activity).to eq 'active'
+      end
+
+      it 'is active is there is an amount' do
+        charge = charge_row amount: 0
+        expect(ChargeRow.new(parse_line charge).activity).to eq 'dormant'
       end
     end
 

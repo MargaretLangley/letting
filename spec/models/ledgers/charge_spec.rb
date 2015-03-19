@@ -8,6 +8,14 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
     describe 'presence' do
       it('charge type') { expect(charge_new charge_type: nil).to_not be_valid }
       it('amount') { expect(charge_new amount: nil).to_not be_valid }
+      describe 'amount when zero' do
+        it 'rejects active' do
+          expect(charge_new amount: 0, activity: 'active').to_not be_valid
+        end
+        it 'allows dormant' do
+          expect(charge_new amount: 0, activity: 'dormant').to be_valid
+        end
+      end
       it('cycle') { expect(charge_new cycle: nil).to_not be_valid }
     end
     describe 'payment type' do

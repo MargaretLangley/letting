@@ -20,11 +20,22 @@
 
   .help-heading {
     color: $color-primary-shade-4;
+    text-align: center;
   }
 
   .text-in-box {
-    margin-left: 1em;
+    margin-left: 1.5em;
     text-align: left;
+  }
+
+  .buttons-in-box {
+    margin-left: .5em;
+    text-align: center;
+  }
+
+  .icons-in-box {
+    margin-left: 11em;
+    padding-right: 1em;
   }
 
 
@@ -126,7 +137,6 @@
     color: $scheme-help-color;
     padding: 7px;
     position: absolute;
-    text-align: center;
     width: 165px;
     z-index: 900;
   }
@@ -135,20 +145,22 @@
   .bubble {
     @include bubblet;
     height: 180px;
+    text-align: center;
     width: 290px;
   }
 
 /*Main speech bubble used for intro*/
   .bubble-intro {
     @include bubblet;
-    height: 400px;
-    width: 500px;
+    height: 580px;
+    width: 580px;
   }
 
 /*Wider speech bubble */
   .bubble-wide {
     @include bubblet;
     height: 180px;
+    text-align: center;
     width: 350px;
   }
 
@@ -156,6 +168,7 @@
   .pt-right {
     @include bubblet;
     height: 180px;
+    text-align: center;
     vertical-align: middle;
     width: 290px;
   }

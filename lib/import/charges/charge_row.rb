@@ -76,12 +76,17 @@ module DB
       day_months
     end
 
+    def activity
+      amount.zero? ? 'dormant' : 'active'
+    end
+
     def attributes
       {
         charge_type: charge_type,
         cycle_id: cycle_id,
         amount: amount,
         payment_type: payment_type,
+        activity: activity,
       }
     end
 
