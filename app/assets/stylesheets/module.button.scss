@@ -60,6 +60,13 @@
     }
   }
 
+  .ButtonIcon-inactive {
+    background: $button-icon-background;
+    border: 1px solid $button-icon-border;
+    color: $button-icon-color;
+    padding: .3em;
+  }
+
   @mixin redbutton {
     background: $primary-action-background;
     border: 1px solid darken($primary-action-background, $border-color-darken);
@@ -98,7 +105,7 @@
 
 @media print {
 
-  .Button, .ButtonIcon, .ButtonPrimary {
+  .Button, .ButtonIcon, .ButtonIcon-inactive, .ButtonPrimary {
     display: none;
   }
 }
