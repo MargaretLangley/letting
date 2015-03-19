@@ -90,6 +90,13 @@ module DB
       }
     end
 
+    def to_s
+      "charge_type: #{charge_type}, " \
+      "Cycle ID: #{cycle_id}, " \
+      "amount: #{amount}, " \
+      "activity: #{activity}"
+    end
+
     private
 
     def payment_type
