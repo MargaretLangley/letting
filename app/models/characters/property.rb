@@ -26,13 +26,13 @@ class Property < ActiveRecord::Base
 
   delegate :abridged_text, to: :address
   delegate :bill_to, to: :agent
-  delegate :full_name, to: :entities
+  delegate :full_names, to: :entities
   delegate :text, to: :address, prefix: true
 
   MAX_HOUSE_HUMAN_REF = 5_999
 
   def occupiers
-    full_name
+    full_names
   end
 
   def prepare_for_form

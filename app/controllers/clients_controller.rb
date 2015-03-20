@@ -74,6 +74,6 @@ class ClientsController < ApplicationController
   end
 
   def identity
-    "Client #{@client.human_ref}, #{@client.full_name}"
+    "Client #{@client.human_ref}, #{@client.full_names}"
   end
 end

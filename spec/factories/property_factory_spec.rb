@@ -64,7 +64,7 @@ describe 'Property Factory' do
 
       it 'can add agent' do
         property_create agent: agent_new(entities: [Entity.new(name: 'Prior')])
-        expect(Property.first.agent.full_name).to eq 'Prior'
+        expect(Property.first.agent.full_names).to eq 'Prior'
       end
     end
   end
