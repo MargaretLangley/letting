@@ -1,7 +1,7 @@
 <div id='help_0'  class='hide  bubble-intro'>
   <p>
     <h3 class='help-heading'>&nbsp; &nbsp;
-      <i class="fa fa-info-circle fa-lg"></i>
+      <i class='fa fa-info-circle fa-lg'></i>
       <%= line1 %>
     </h3>
   </p>
@@ -11,14 +11,38 @@
     <p><%= line4 %></p>
   </div>
 
- <div class='icons-in-box'>
-  <p><i class='fa fa-print fa-lg  ButtonIcon-inactive'></i>&nbsp; Prints page</p>
-  <p>
-    <i class='fa fa-edit fa-lg  ButtonIcon-inactive'></i>
-    &nbsp; Edits <%= content %>
-  </p>
-  <p><i class='fa fa-trash-o fa-lg  ButtonIcon-inactive'></i>
-   Deletes <%= content %></p>
+  <div class='icons-in-box'>
+
+    <p><i class='fa fa-print fa-lg  ButtonIcon-inactive'></i>&nbsp; Prints page</p>
+
+    <% if icon2 != '' %>
+      <p>
+        <i class='<%= icon2 %> fa-lg   ButtonIcon-inactive'></i>
+        &nbsp; <%= icon_line2 %>
+      </p>
+    <% end %>
+
+    <% if icon3 != '' %>
+      <p>
+        <i class='<%= icon3 %> fa-lg   ButtonIcon-inactive'></i>
+        &nbsp; <%= icon_line3 %>
+      </p>
+    <% end %>
+
+    <% if icon4 != '' %>
+      <p>
+        <i class='<%= icon4 %> fa-lg   ButtonIcon-inactive'></i>
+        &nbsp; <%= icon_line4 %>
+      </p>
+    <% end %>
+
+    <% if icon5 != '' %>
+      <p>
+        <i class='<%= icon5 %> fa-lg   ButtonIcon-inactive'></i>
+        &nbsp; <%= icon_line5 %>
+      </p>
+    <% end %>
+
   </div>
 
   <p class='text-in-box'>

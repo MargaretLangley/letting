@@ -5,14 +5,13 @@
 <div class='grid  Shell  u-padding-1-100'>
 
   <div  id='help-me',  data-summit='7',  class='col-2-24  grid-row  Bubble-search'>
-    <%= render 'bubbles/help_main',  content: 'account', line1: 'The Accounts Index', line2: 'This is the home page as well as the account index. The search box at the top of the page is for account searches. Any searches made by occupier name, agent name or property address will be listed on this page.', line3: 'Clicking on a name or address in the list  will lead you to visit those account details.', line4: 'To get a complete list printed out of all properties on the data base use the big, red full property list button. The print button, at the top right-hand corner, will print out the page. The edit button takes you through to the edit form.'%>
+    <%= render 'properties/index_help' %>
     &nbsp;
   </div>
   <div class='col-13-24  Bubble-pt-right'>
     <%= render 'bubbles/help_2_down',  pic: 'fa fa-file-o  fa-lg', line1: 'View Account Details', line2: "Click on an account row for that account's details"%>
     &nbsp;
   </div>
-
 
   <div class='col-1-24  Bubble-move-right'>
     <%= render 'bubbles/help_3',  pic: 'fa fa-gbp fa-lg',  line1: 'Payment Button',  line2: 'Use to make a new payment'%>
