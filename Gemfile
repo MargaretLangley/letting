@@ -109,7 +109,7 @@ gem 'jquery-ui-rails', '~> 4.1.0'
 gem 'kaminari', '~> 0.16.0'
 gem 'lograge'
 gem 'pg', '~>0.18.0'
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.1'
 gem 'rack-dev-mark', '~> 0.7.0'     # corner banner on staging environment
 gem 'rails-env-favicon'
 
