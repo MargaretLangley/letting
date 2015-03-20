@@ -1,32 +1,28 @@
 <% @title='Payments' %>
-<div class='Bubble-search'>
-  <%= render 'bubbles/wide_search', line1: 'New Payments Search Box', line2: 'Give the account number,to create the new payment' %>
-</div>
+<%= render 'bubbles/search_account' %>
 
 <% payments = Payments.new(@records)
    payment_dec = PaymentIndexDecorator.new payments.to_a.first %>
 
 <div class='Shell'>
-    <div class='col-6-24  grid-row  r-align'> &nbsp;</div>
 
-    <div class='col-15-24'>
+  <div  id='help-me',  data-summit='5',  class='col-9-24  grid-row  Bubble-search'>
+    <%= render 'index_help' %>
       &nbsp;
-      <div class='Bubble-pt-down'>
-        <%= render 'bubbles/help_3',  pic: 'fa fa-file-o  fa-lg', line1:  'View Payments', line2:  'Click on line for payment details' %>
-      </div>
-    </div>
+  </div>
+  <div class='col-12-24   Bubble-anchor'>
+    <%= render 'bubbles/help_2_down',  pic: 'fa fa-file-o  fa-lg', line1: 'View Payment Details', line2: 'Click on line for payment details' %>
+    &nbsp;
+  </div>
 
-    <div class='col-2-24'>
-      &nbsp;
-      <div class='Bubble-anchor'>
-        <%= render 'bubbles/help_4',  pic: 'fa fa-edit  fa-lg', line1: 'Edit Payment Button', line2:  'Edits this payment' %>
-      </div>
-    </div>
-    <div class='col-1-24'>&nbsp;
-      <div class='Bubble-anchor'>
-        <%= render 'bubbles/help_5',  pic: 'fa fa-trash-o  fa-lg',  line1: 'Delete Button',  line2: 'Deletes this payment from the accounts' %>
-      </div>
-    </div>
+  <div class='col-2-24  Bubble-anchor'>
+    <%= render 'bubbles/help_3',  pic: 'fa fa-edit  fa-lg', line1: 'Edit Payment Button', line2:  'Edits this payment' %>
+    &nbsp;
+  </div>
+  <div class='col-1-24  Bubble-anchor'>&nbsp;
+    <%= render 'bubbles/help_4',  pic: 'fa fa-trash-o  fa-lg',  line1: 'Delete Button',  line2: 'Deletes this payment from the accounts' %>
+    &nbsp;
+  </div>
 
   <div class='col-3-24  grid-row  vertical-spacer  grid-header  r-align'>
     Property ID
