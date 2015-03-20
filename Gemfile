@@ -107,6 +107,7 @@ gem 'jquery-ui-rails', '~> 4.1.0'
 
 # Kaminari before elasticsearch
 gem 'kaminari', '~> 0.16.0'
+gem 'lograge'
 gem 'pg', '~>0.18.0'
 gem 'rails', '4.2.0'
 gem 'rack-dev-mark', '~> 0.7.0'     # corner banner on staging environment
@@ -155,7 +156,6 @@ group :development do
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'brakeman', '~>3.0.0', require: false
   gem 'bullet', '~>4.14.0'
-  gem 'quiet_assets'
   gem 'rails_best_practices', '~>1.15.0'
   gem 'rubocop', '~> 0.29.0', require: false
   gem 'rubycritic', require: false
