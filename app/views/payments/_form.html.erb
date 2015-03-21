@@ -1,7 +1,8 @@
-
+<div id='help-me',  data-summit='3'></div>
+<%= render 'bubbles/search_account' %>
+<%= render 'form_help' %>
 
   <div class='grid  Shell-thin'>
-
 
     <div class='col-12-24  grid-row  clearfix'>    <!-- 1st column -->
 
@@ -26,6 +27,7 @@
     </div>
     <div class='col-2-24'>    <!-- 2nd column -->
       &nbsp;
+      <%= render 'bubbles/help_2',  pic: 'fa fa-file-o  fa-lg', line1:'Payments View Button', line2: "Use this button to view user's details. Gray button cannot be viewed." %>
     </div>
     <div class='col-8-24  Shell  u-padding-1-100'>    <!-- 3rd column -->
       <h4>Payment Summary</h4>
