@@ -49,8 +49,10 @@
 
   .help-button {
     @include buttonlet;
+    background-color: $scheme-fieldset-background;
     border: 1px solid $scheme-help-color;
     border-radius: 3px;
+    color: $link-text-primary-color;
   }
 
   .cancel-button {
@@ -124,7 +126,7 @@
   }
 
   .Bubble-search {
-    left: 30em;
+    left: 40em;
     position: relative;
     top: -2em;
   }
@@ -133,6 +135,12 @@
     left: 20em;
     position: relative;
     top: 3em;
+  }
+
+  .Bubble-arrears {
+    left: 6.5em;
+    position: relative;
+    top: -5em;
   }
 
   @mixin bubblet {
