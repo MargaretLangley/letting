@@ -1,12 +1,11 @@
 <% @title='Users' %>
+<div id='help-me',  data-summit='5'></div>
+<%= render 'index_help' %>
 <%= render 'bubbles/search_account' %>
 
 <div class='grid  Shell  u-padding-1-12'>
 
-  <div  id='help-me',  data-summit='5',  class='col-4-24  grid-row  Bubble-search'>
-    <%= render 'index_help' %>
-    &nbsp;
-  </div>
+  <div class='col-4-24  grid-row'>&nbsp;</div>
   <div class='col-14-24  Bubble-pt-right'>
     <%= render 'bubbles/help_2_down',  pic: 'fa fa-file-o  fa-lg', line1: 'View User Details', line2: "Click on a user row for that user's details"%>
     &nbsp;
