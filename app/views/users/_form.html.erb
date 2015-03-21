@@ -1,8 +1,7 @@
 <%= render 'shared/errors', object: user %>
+<div id='help-me',  data-summit='3'></div>
 <%= render 'bubbles/search_account' %>
-<div class='Bubble-search'>
-  <%= render 'form_help' %>
-</div>
+<%= render 'form_help' %>
 
 <fieldset id='user' class='grid  Shell  u-padding-1-12'>
 
@@ -48,7 +47,7 @@
 
   <div class='col-1-24  spacer-column'>
     <%= view_link user %>
-    <div  id='help-me',  data-summit='3', class='Bubble-point-right'>
+    <div class='Bubble-point-right'>
       <%= render 'bubbles/help_2',  pic: 'fa fa-file-o  fa-lg', line1:'User View Button', line2: "Use this button to view user's details. Gray button cannot be viewed." %>
     </div>
   </div>
