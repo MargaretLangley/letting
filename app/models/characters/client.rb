@@ -23,7 +23,7 @@ class Client < ActiveRecord::Base
   validates :human_ref, uniqueness: true
   validates :entities, presence: true
 
-  delegate :full_name, to: :entities
+  delegate :full_names, to: :entities
 
   def prepare_for_form
     prepare_contact
@@ -42,7 +42,7 @@ class Client < ActiveRecord::Base
   end
 
   def to_s
-    address.name_and_address name: full_name
+    address.name_and_address name: full_names
   end
 
   include Searchable

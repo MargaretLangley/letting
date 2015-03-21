@@ -19,7 +19,7 @@ module Entities
   included do
     has_many :entities, -> { order(:created_at) }, dependent: :destroy,
                                                    as: :entitieable do
-      def full_name
+      def full_names
         reject(&:empty?).map(&:full_name).join(' & ')
       end
 

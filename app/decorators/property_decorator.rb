@@ -29,7 +29,7 @@ class PropertyDecorator
 
   def agent_name
     if property.agent.authorized?
-      property.agent.full_name
+      property.agent.full_names
     else
       'None'
     end

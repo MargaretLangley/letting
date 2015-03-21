@@ -25,7 +25,7 @@ module DB
     #
     it 'Property has two entities' do
       import_agent row
-      expect(Agent.first.full_name).to \
+      expect(Agent.first.full_names).to \
         eq 'Mr B. P. Example & Mrs A. N. Other'
     end
 

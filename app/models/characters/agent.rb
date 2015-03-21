@@ -15,7 +15,7 @@ class Agent < ActiveRecord::Base
   validates :entities, presence: true, if: :authorized?
   before_validation :clear_up_form
 
-  delegate :full_name, to: :entities
+  delegate :full_names, to: :entities
   delegate :text, to: :address, prefix: true
 
   def bill_to
@@ -24,7 +24,7 @@ class Agent < ActiveRecord::Base
 
   def to_billing
     return unless authorized
-    address.name_and_address name: full_name
+    address.name_and_address name: full_names
   end
 
   def prepare_for_form

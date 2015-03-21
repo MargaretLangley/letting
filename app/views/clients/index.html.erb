@@ -7,7 +7,7 @@
 <div class='grid  Shell  u-padding-1-25'>
 
   <div  id='help-me',  data-summit='5',  class='col-3-24  grid-row  Bubble-search'>
-    <%= render 'bubbles/help_main',  content: 'client', line1: 'Client Index', line2: 'The search box at the top of the page is for client searches. Any searches made by client name or client id will be listed on this page.', line3: 'Clicking on a name or address will lead you to visit those client details.', line4: 'The print button, at the top right-hand corner, will print out the page. The edit button takes you through to the edit form.'%>
+    <%= render 'index_help' %>
     &nbsp;
   </div>
   <div class='col-18-24  Bubble-pt-right'>
@@ -37,7 +37,7 @@
         <%= client.human_ref %>
       </div>
       <div class='col-9-24  bottom-spacer  inherit-row'>
-        <%= client.full_name %>
+        <%= client.full_names %>
       </div>
       <div class='col-2-24  bottom-spacer  inherit-row  r-align'>
         <%= format_empty_string_as_dash client.address.first_no %>
