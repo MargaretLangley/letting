@@ -1,4 +1,6 @@
 <% @title='Payments' %>
+<div  id='help-me',  data-summit='5'></div>
+<%= render 'index_help' %>
 <%= render 'bubbles/search_account' %>
 
 <% payments = Payments.new(@records)
@@ -6,10 +8,7 @@
 
 <div class='Shell'>
 
-  <div  id='help-me',  data-summit='5',  class='col-9-24  grid-row  Bubble-search'>
-    <%= render 'index_help' %>
-      &nbsp;
-  </div>
+  <div class='col-9-24  grid-row'>&nbsp;</div>
   <div class='col-12-24   Bubble-anchor'>
     <%= render 'bubbles/help_2_down',  pic: 'fa fa-file-o  fa-lg', line1: 'View Payment Details', line2: 'Click on line for payment details' %>
     &nbsp;

@@ -129,6 +129,12 @@
     top: -2em;
   }
 
+  .Bubble-main {
+    left: 20em;
+    position: relative;
+    top: 3em;
+  }
+
   @mixin bubblet {
     background-color: $scheme-help-background;
     border: 3px solid $scheme-help-border;

@@ -1,15 +1,14 @@
 <% @title='Clients' %>
 <% clients = @records %>
+<div  id='help-me',  data-summit='5'></div>
+<%= render 'index_help' %>
 <div class='Bubble-search'>
   <%= render 'bubbles/search', line1: 'Client Search Box', line2: 'Search by number, name or part address' %>
 </div>
 
 <div class='grid  Shell  u-padding-1-25'>
 
-  <div  id='help-me',  data-summit='5',  class='col-3-24  grid-row  Bubble-search'>
-    <%= render 'index_help' %>
-    &nbsp;
-  </div>
+  <div class='col-3-24  grid-row'>&nbsp;</div>
   <div class='col-18-24  Bubble-pt-right'>
     <%= render 'bubbles/help_2_down',  pic: 'fa fa-file-o  fa-lg',  line1: 'View Client Details',  line2: "Click on a client row for that client's details" %>
     &nbsp;
