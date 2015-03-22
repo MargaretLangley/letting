@@ -19,14 +19,15 @@ This document covers the following sections
 2. Commands
   1. rake db:import
 3. Cheatsheet
-  1. Firewalls
+  1. SSH
+  2. Firewalls
     .1 Listing Firewall
     .2 Adding Ranges to the firewall
     .3 Disabling the Firewall
-  2. Chef
-  3. Postgresql
-  4. Elasticsearch
-  5. QEMU
+  3. Chef
+  4. Postgresql
+  5. Elasticsearch
+  6. QEMU
     5.1 Basic Commands
     5.2 Removing an instance from
 4. Troubleshooting
@@ -47,7 +48,7 @@ This document covers the following sections
 ####1.1. Development Setup
 
 1. `git clone git@github.com:BCS-io/letting.git`
-2. sudo apt-get install libqt4-dev libqtwebkit-dev -y
+2. sudo apt-get install liƒbqt4-dev libqtwebkit-dev -y
   1. Required for Capybara-webkit
 3. `bundle install --verbose`
   1. this can take a while and verbose gives feedback.
@@ -127,9 +128,15 @@ My Reference: Webserver alias: `ssh arran`
 
 ###3 Cheatsheet
 
-####3.1 Firewall
+####3.1 SSH
 
-#####3.1.1 Listing Firewall
+1. brew install ssh-copy-id
+2. ssh-copy-id deployer@example.com
+3. ssh deployer@example.com  (verify)
+
+####3.2 Firewall
+
+#####3.2.1 Listing Firewall
 
 `sudo iptables --list`
 
@@ -144,7 +151,7 @@ My Reference: Webserver alias: `ssh arran`
   2. whois 23.23.181.189
   3. Add the CIDR range to the firewall, in this case Amazon's 23.20.0.0/14
 
-#####3.1.3 Disabling the Firewall
+#####3.2.3 Disabling the Firewall
 
 If an operation is not completing and you suspect a firewall issue
 these commands completely remove it. (Rebooting the box, if applicable, restores the firewall)
@@ -157,9 +164,9 @@ these commands completely remove it. (Rebooting the box, if applicable, restores
     iptables -F
 ````
 
-#####3.2 Chef
+#####3.3 Chef
 
-######3.2.1 Updating a cookbook
+######3.3.1 Updating a cookbook
 
 1. Clone the cookbook to the local machine under ~/code/chef/
 2. Make changes to the cookbook increment the version in the meta data and commit and push back.
@@ -170,7 +177,7 @@ these commands completely remove it. (Rebooting the box, if applicable, restores
   1. Don't bother around 5 - 11 pm in the evening as you get failed to connect.
 
 
-######3.2.2 Updating a server
+######3.3.2 Updating a server
 
 Chef is installed on servers - I've seen this get out of date. Removing it and then doing a knife solo bootstrap puts on a later version. Running chef on existing server may have firewall problems.
 
@@ -180,7 +187,7 @@ Chef is installed on servers - I've seen this get out of date. Removing it and t
 4. Step 1 confirm situation.
 
 
-#####3.3 Postgresql
+#####3.4 Postgresql
 1. change to Postgres user and open psql prompt `sudo -u postgres psql postgres`
 2. Listing Users (roles) and attributes: `\du`
 3. Listing all databases: `\list`
@@ -188,7 +195,7 @@ Chef is installed on servers - I've seen this get out of date. Removing it and t
 5. Execute SQL file:  `psql -f thefile.sql letting_<envionrment>`
 6. Logging In: `psql -d letting_<envionment> -U letting_<environment>`
 
-#####3.4 Elasticsearch
+#####3.5 Elasticsearch
 
 1) Forced Re-index:   `rake elasticsearch:sync` <br>
 2) Find Cluster name: `curl -XGET 'http://localhost:9200/_nodes'`  <br>
@@ -241,31 +248,98 @@ Somtimes it won't delete the Elasticsearch pid file.
 
 ````
 
-#####3.5 QEMU
+#####3.6 QEMU
 
-######3.5.1 Basic Commands
+######3.6.1 Basic Commands
 
 ````
 virsh list --all     -  List running virtual servers
 
-virsh reboot <name>  - restarts the virtual server
-virsh shutdown <name> - quit of virtual server
-virsh destroy <name> - forced quit of virtual server
+virsh reboot <vm-name>  - restarts the virtual server
+virsh shutdown <vm-name> - quit of virtual server
+virsh destroy <vm-name> - forced quit of virtual server
 
-virsh start <name> - start guest
+virsh start <vm-name> - start guest
 ````
 
-######3.5.2 Removing an instance from
+######3.6.2 Displaying Logical Volume
 
-Removing an instance called vmX
+`lvdisplay -v /dev/<volume-group-name>`
+* `lvdisplay -v /dev/fla2014-vg`
+
+######3.6.3 Removing an instance from
+
+Removing an instance called <vm-name>
 
 `````
-  virsh destroy vmX
-  lvremove /dev/<instance name>/vmX -f
-  virsh undefine vmX
-  rm -rf /var/lib/libvirt/images/vmX
+  virsh destroy <vm-name>
+
+  lvremove /dev/<volume-group-name>/<vm-name> -f
+    * lvremove /dev/fla-2014/papa -f
+
+  virsh undefine <vm-name>
+  rm -rf /var/lib/libvirt/images/<vm-name>
   sudo reboot - otherwise temporary files prevent you from reusing the vm name
 `````
+
+######3.6.4 Creating an instance from
+
+Removing an instance called <vm-name>
+
+`````
+  sudo su
+  mkdir -p /var/lib/libvirt/images/<vm-name>
+  nano builder_script
+  Insert builder script (Scripts saved in repository: bcs-network under: /configs/vm)
+  chmod +x builder_script
+`````
+
+Creating the diskspace - 7GB Root(/), 3GB Swap, 9GB /var
+
+````
+cat > vmbuilder.partition  <<EOF
+root 7000
+swap 3000
+/var 9000
+EOF
+````
+
+Run the builder script
+
+`./builder_script`
+
+Edit the product of the builder script
+
+`nano /etc/libvirt/qemu/<vm-name>.xml`
+
+Changing
+
+1. Driver from 'qcow2' to 'raw'   (a => b)
+  a. <driver name='qemu' type='qcow2'/>
+  b. <driver name='qemu' type='raw'/>
+
+2. source file from qcow's to vm-name (a => b)
+  a. <source file='/var/lib/libvirt/images/scarp/ubuntu-kvm/tmpd6ojfe.qcow2'/>
+  b. <source file='/dev/<volume-group-name>/<vm-name>'>
+    1. <source file='/dev/fla2014-vg/scarp'
+
+
+Create the logical volume
+
+`lvcreate -L 20G --name <vm-name> <volume-group-name>`
+ 1. `lvcreate -L 20G --name scarp fla2014-vg`
+
+Conversion
+
+`qemu­-img convert /var/lib/libvirt/images/<vm-name>/ubuntu-kvm/tmp???????.qcow2 ­-O raw /dev/<volume-group-name>/<vm-name>`
+
+Configuration
+`virsh autostart <vm-name>`
+`virsh start <vm-name>`
+
+Verify
+`ping 10.0.0.X`
+`ssh deployer@10.0.0.x`
 
 ===
 
