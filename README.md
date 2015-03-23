@@ -340,6 +340,7 @@ Configuration
 Verify
 `ping 10.0.0.X`
 `ssh deployer@10.0.0.x`
+  `ping 8.8.8.8`
 
 ===
 
