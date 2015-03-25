@@ -11,7 +11,7 @@ class PaymentsByDatesController < ApplicationController
                .booked_on(date: params[:date]).includes(joined_tables)
                .load
 
-    @payments_by_dates = Payment.by_booked_at_date
+    @payments_by_dates = Payment.recent.by_booked_at_date
   end
 
   def destroy
