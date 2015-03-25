@@ -96,6 +96,15 @@ class Payment < ActiveRecord::Base
     Payment.order('booked_at DESC').first.booked_at.to_date.to_s
   end
 
+  # The date a payment was last created_at
+  # created_at - is the date a payment was entered and is unaffected by any
+  #              booked_at date.
+  #
+  def self.last_created_at
+    return :no_last_payment if Payment.count.zero?
+    Payment.order('created_at DESC').first
+  end
+
   # human_ref - the id of the account / property to return
   #
   def self.human_ref human_ref

@@ -32,7 +32,7 @@
     <div class='col-8-24  Shell  u-padding-1-100'>    <!-- 3rd column -->
       <h4>Payment Summary</h4>
 
-      <div class='table-link-row' data-link='<%= edit_payment_path(Payments.last_created_at) %>'>
+      <div class='table-link-row' data-link='<%= edit_payment_path(Payment.last_created_at) %>'>
         <div class='col-8-12  grid-row  bottom-half-line-spacer  inherit-row'>
           Last Payment&nbsp;(<%= payment_dec.last_human_ref %>)
           <div  class='col-14-24  Bubble-pt-right'>
