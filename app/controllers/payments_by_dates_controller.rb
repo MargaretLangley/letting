@@ -5,7 +5,7 @@
 #
 class PaymentsByDatesController < ApplicationController
   def index
-    params[:date] ||= Payments.last_booked_at
+    params[:date] ||= Payment.last_booked_at
 
     @records = Payment.date_range(range: 2.years.ago..Time.zone.now)
                .booked_on(date: params[:date]).includes(joined_tables)

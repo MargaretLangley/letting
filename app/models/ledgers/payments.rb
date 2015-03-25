@@ -2,14 +2,10 @@
 #
 # Payments
 #
-# Class for handling the payments index
+# Class for handling the collection of payments
 #
-# The index of payments requires collecting the payments that occur on a day
-# and performing operations on them: negating and summation.
-#
-# created_at = the day a record was created
-# booked_at  = an accounting term to be the day a record was considered added
-#              to the accounts.
+# to_a - converting to an array
+# sum  - summing over the array
 #
 #####
 #
@@ -26,24 +22,6 @@ class Payments
 
   def sum
     payments.map(&:amount).inject(0, &:+)
-  end
-
-  # Search for payments created on this date.
-  # created_on - is the date a payment was created - not user settable.
-  #
-  def self.created_on date: Time.zone.today.to_s
-    return Payment.none unless SearchDate.new(date).valid_date?
-
-    Payment.includes(account: [:property])
-      .where(created_at: SearchDate.new(date).day_range)
-  end
-
-  # The date a payment was last booked_at
-  # booked_at is an accounting date and does not have to be the created_at date.
-  #
-  def self.last_booked_at
-    return Time.zone.today.to_s if Payment.count.zero?
-    Payment.order('booked_at DESC').first.booked_at.to_date.to_s
   end
 
   # The date a payment was last created_at
