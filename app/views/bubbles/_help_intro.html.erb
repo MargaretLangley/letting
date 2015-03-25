@@ -16,32 +16,10 @@
 
     <p><i class='fa fa-print fa-lg  ButtonIcon-inactive'></i>&nbsp; Prints page</p>
 
-    <% if icon2 != '' %>
-      <p>
-        <i class='<%= icon2 %> fa-lg   ButtonIcon-inactive'></i>
-        &nbsp; <%= icon_line2 %>
-      </p>
-    <% end %>
-
-    <% if icon3 != '' %>
-      <p>
-        <i class='<%= icon3 %> fa-lg   ButtonIcon-inactive'></i>
-        &nbsp; <%= icon_line3 %>
-      </p>
-    <% end %>
-
-    <% if icon4 != '' %>
-      <p>
-        <i class='<%= icon4 %> fa-lg   ButtonIcon-inactive'></i>
-        &nbsp; <%= icon_line4 %>
-      </p>
-    <% end %>
-
-    <% if icon5 != '' %>
-      <p>
-        <i class='<%= icon5 %> fa-lg   ButtonIcon-inactive'></i>
-        &nbsp; <%= icon_line5 %>
-      </p>
+    <% ikon.each do |ikon| %>
+        <p>
+          <i class='<%= ikon %> fa-lg  help-icon'></i>
+        </p>
     <% end %>
 
   </div>
