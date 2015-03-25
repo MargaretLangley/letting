@@ -161,6 +161,22 @@ describe Payment, :payment, :ledgers, type: :model do
       end
     end
 
+    describe '.recent' do
+      it 'returns payments within range' do
+        account = account_create property: property_new
+        payment = payment_create account_id: account.id,
+                                 booked_at: Time.now - 2.year
+        expect(Payment.recent.to_a).to eq [payment]
+      end
+
+      it 'ignores payments outside range' do
+        account = account_create property: property_new
+        payment = payment_create account_id: account.id,
+                                 booked_at: Time.now - 2.year - 1.day
+        expect(Payment.recent.to_a).to eq []
+      end
+    end
+
     describe '.last_booked_at' do
       it 'returns today if no payments at all (unlikely)' do
         expect(Payment.last_booked_at).to eq Time.zone.today.to_s
