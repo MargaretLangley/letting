@@ -7,9 +7,8 @@
 module TeachingHelper
   # Payment Teaching Page
   #
-  def pay_human_ref human_ref: Account.first.property.human_ref
-    link_to t(human_ref),
-            search_path(search_terms: human_ref, search_model: 'Payment')
+  def pay_human_ref
+    Account.first.property.human_ref
   end
 
   def pay_owner owner: Account.first.holder
