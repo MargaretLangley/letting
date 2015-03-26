@@ -20,20 +20,20 @@
 class PaymentsController < ApplicationController
   def index
     @records = Payment.includes(include_account)
-                      .by_booked_at
-                      .page(params[:page])
-                      .load
+               .by_booked_at
+               .page(params[:page])
+               .load
   end
 
   def show
     @payment = PaymentDecorator.new Payment.includes(include_payment_tables)
-                                           .find params[:id]
+               .find params[:id]
   end
 
   # params[:id] is the account_id returned from search_controller
   def new
     account = Account.includes(include_property)
-                     .find_by_human_ref params[:account_payment_search]
+              .find_by_human_ref params[:account_payment_search]
     @payment = PaymentDecorator.new(Payment.new account: account)
     @payment.prepare
     @payment.booked_at = get_booked_on

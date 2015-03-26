@@ -98,7 +98,7 @@ class ClientPayment
   #
   def accounts_with_period(batch_months:)
     Account.joins(:property)
-           .includes(:property)
+      .includes(:property)
       .merge(client.properties.houses.quarter_day_in(batch_months.first))
       .order('properties.human_ref ASC')
   end
