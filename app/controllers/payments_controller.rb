@@ -34,7 +34,7 @@ class PaymentsController < ApplicationController
   def new
     account = Account.includes(include_property)
               .find_by_human_ref params[:account_payment_search]
-    set_focus_property_search !account
+    set_focus account ? 'submit' : 'payment_search'
     @payment = PaymentDecorator.new(Payment.new account: account)
     @payment.prepare
     @payment.booked_at = get_booked_on
@@ -73,14 +73,14 @@ class PaymentsController < ApplicationController
     redirect_to payments_path, flash: { delete: cached_message }
   end
 
-  helper_method :get_focus_property_search
+  helper_method :focus?
 
-  def get_focus_property_search
-    params[:focus_property_search]
+  def focus? focus
+    params[:focus_control] == focus
   end
 
-  def set_focus_property_search focus
-    params[:focus_property_search] = focus
+  def set_focus focus
+    params[:focus_control] = focus
   end
 
   private
