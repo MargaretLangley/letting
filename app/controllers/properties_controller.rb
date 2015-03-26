@@ -22,10 +22,7 @@ class PropertiesController < ApplicationController
 
   def show
     @property = PropertyDecorator.new \
-      Property.includes(account: [charges: [:cycle],
-                                  credits: [:charge],
-                                  debits:  [:charge]])
-                .find params[:id]
+      Property.includes(include_property).find params[:id]
   end
 
   def new
@@ -74,6 +71,11 @@ class PropertiesController < ApplicationController
     else
       redirect_to properties_path, flash: { save: updated_message }
     end
+  end
+
+  def include_property
+    [client: [:entities],
+     account: [charges: [:cycle], credits: [:charge], debits:  [:charge]]]
   end
 
   def property_params

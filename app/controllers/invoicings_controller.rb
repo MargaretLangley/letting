@@ -22,7 +22,8 @@ class InvoicingsController < ApplicationController
   # show lists out each invoice from an invoice run
   #
   def show
-    @invoicing = Invoicing.find params[:id]
+    @invoicing = Invoicing.includes(runs: [invoices: [:products]])
+                 .find params[:id]
   end
 
   def new

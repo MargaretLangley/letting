@@ -84,6 +84,6 @@ class PaymentDecorator
   private
 
   def payment_last_created_at
-    Payment.last_created_at
+    Payment.includes(account: [:property]).last_created_at
   end
 end

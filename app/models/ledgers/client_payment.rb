@@ -74,7 +74,7 @@ class ClientPayment
   # the client object of used to initialize
   #
   def client
-    @client ||= Client.find client_id
+    @client ||= Client.includes(properties: [:address]).find client_id
   end
 
   def details(year:, month:)
@@ -98,6 +98,7 @@ class ClientPayment
   #
   def accounts_with_period(batch_months:)
     Account.joins(:property)
+           .includes(:property)
       .merge(client.properties.houses.quarter_day_in(batch_months.first))
       .order('properties.human_ref ASC')
   end
