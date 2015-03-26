@@ -71,7 +71,7 @@
       </div>
     </div>
     <div class='col-1-24  bottom-spacer'>
-      <%= payment_link path: new_payment_path(id: property.account.id) %>
+      <%= payment_link path: new_payment_path(account_payment_search: property.human_ref) %>
     </div>
     <div class='col-1-24  bottom-spacer'>
       <%= edit_link property, size: 'lg' %>

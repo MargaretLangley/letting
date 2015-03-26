@@ -27,6 +27,18 @@ describe 'Property navigate', type: :feature do
       expect(page.title).to eq 'Letting - Edit Account'
       expect(find_field('Property ID').value.to_i).to eq 80
     end
+
+    it 'goes to payment' do
+      client_create \
+        human_ref: 90,
+        properties: [property_new(human_ref: 80, account: account_new)]
+      visit '/accounts/'
+
+      first(:link, 'Add New Payment').click
+
+      expect(page.title).to eq 'Letting - New Payment'
+      expect(find_field(:account_payment_search).value.to_i).to eq 80
+    end
   end
 
   describe 'from show page' do
