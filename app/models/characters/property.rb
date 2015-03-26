@@ -90,7 +90,7 @@ class Property < ActiveRecord::Base
   end
 
   def self.by_human_ref
-    order(:human_ref).includes(:account, :address, :client)
+    order(:human_ref)
   end
 
   def self.houses
