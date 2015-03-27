@@ -75,7 +75,7 @@
 # There are a number of Gems that if you update you break the build.
 # Keep a list of them here - details why next to the gem inclusion below:
 #
-# gem 'byebug', '-> 4.0.0'  # 4.0.3 has regression - waiting for fix
+# gem 'byebug', '-> 3.5.1'  # 4.0.3 has regression - waiting for fix
 # gem 'capistrano-db-tasks', require: false
 # gem 'capybara-webkit',  '~>1.3.0'
 # gem 'database_cleaner', '~> 1.3.0'
@@ -168,7 +168,11 @@ end
 # Development and testing
 #
 group :development, :test do
-  gem 'byebug', '~> 4.0.0'
+  #
+  # BREAKING GEM
+  # Throwing exceptions when it hits breakpoints
+  #
+  gem 'byebug', '3.5.1'
   gem 'capybara', '~> 2.4.0'
 
   #
