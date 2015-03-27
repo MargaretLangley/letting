@@ -139,7 +139,7 @@ group :development do
   # Upgrading to 0.4.0 caused
   # createdb: database creation failed: ERROR:  permission denied to create
   gem 'capistrano-db-tasks', '0.3', require: false
-  gem 'capistrano-postgresql', '~> 2.0.0'
+  gem 'capistrano-postgresql', '~> 4.2.0'
   gem 'capistrano-rails', '~> 1.1.2'
   gem 'capistrano-rbenv', '~> 2.0.0'
   gem 'capistrano-rails-collection', '~> 0.0.3'
