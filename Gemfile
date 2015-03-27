@@ -77,7 +77,6 @@
 # Gem                     Using      Last tested   Gem Bug
 # byebug                  3.5.1            4.0.3         Y
 # capistrano-db-tasks       0.3              0.4         Y
-# capybara-webkit         1.3.1            1.4.1         N
 # jquery-ui-rails         4.1.2            5.0.3         N
 # rake                   10.1.0           10.4.2         ?
 #
@@ -174,11 +173,7 @@ group :development, :test do
   gem 'byebug', '3.5.1'
   gem 'capybara', '~> 2.4.0'
 
-  #
-  # BREAKING GEM
-  # Capybara-webkit 1.4.1 causes 2 errors (maybe worth investigating why)
-  #
-  gem 'capybara-webkit', '1.3.1'
+  gem 'capybara-webkit', '~> 1.4.1'
   gem 'capybara-screenshot'
   # 0.1.1 seems to introduce errors - Use this gem occasionally to weed out
   # performance errors with tests
