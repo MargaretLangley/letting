@@ -34,6 +34,7 @@
  *= require module.invoice
  *= require module.menu
  *= require module.navigation
+ *= require module.number-clear
  *= require module.panel
  *= require module.shell
  *= require module.size
