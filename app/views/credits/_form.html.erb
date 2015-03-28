@@ -31,7 +31,8 @@
           <%= credit_form.hidden_field :account_id %>
           <%= credit_form.hidden_field :charge_id %>
           <%= credit_form.hidden_field :at_time %>
-          <%= credit_form.text_field :amount, value: credit_dec.payment, class: 'js-credit-payment  r-align  width-1-1' %>
+          <%= credit_form.text_field :amount, value: credit_dec.payment, class: 'js-credit-payment  r-align  width-1-1  number-clear' %>
+          <button class='close-icon  js-number-clear'></button>
         </div>
         <div class='col-1-24  cell  pick-out'>&nbsp;</div>
       </div>

@@ -4,7 +4,19 @@
 
 $(document).ready(function() {
   calculateTotal($(this).find('.js-credit-payment'));
+
+  // Clicking the X on credit number
+  // fires this function that clears the value.
+  //
+  $('.js-number-clear').click(function(event) {
+    event.preventDefault();
+
+    $(this).prev('input').val('0.00')
+    calculateTotal(this);
+  });
+
 });
+
 
 // updates the total when amount edited.
 $(function () {

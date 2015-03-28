@@ -72,6 +72,7 @@ $color-complimentary-shade-4:  rgba(197, 111,   0, 1);     // $color-indochine
 //
 
 // Whites
+$color-white:                  white;
 $color-alabaster:              rgba(248, 248, 248, 1);      // off-white
 $color-cream:                  rgba(255, 255, 204, 1);      // ffffcc Cream
 
@@ -244,6 +245,12 @@ $flash-alert-border:                  darken($flash-alert-background, $border-co
 $flash-error-background:              rgba($color-ternary-shade-1, $flash-opacity);    // Pink       :bad
 $flash-error-border:                  darken($flash-error-background, $border-color-darken);
 
+
+//
+// $module.number-clear
+//
+$number-clear-opacity:                 .85;
+$number-clear-background:              rgba($color-ternary-shade-1, $number-clear-opacity);    // Pink
 
 
 //
