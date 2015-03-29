@@ -11,7 +11,7 @@
         <% @invoicing.runs.each_with_index do |run, index|  %>
           <% run_dec = RunDecorator.new run %>
           <li class='tab-index-li  <%= run_dec.style_activity %>'>
-            <%= link_to "Run #{run_dec.invoice_date}", "#tab-content#{index}", class: 'tab-index-a  tab-index-a-default' %>
+            <%= link_to "#{(index + 1).ordinalize} Run", "#tab-content#{index}", class: 'tab-index-a  tab-index-a-default' %>
           </li>
         <% end %>
         <li class='tab-index-li'>
@@ -24,7 +24,7 @@
           <% run_dec = RunDecorator.new run %>
           <div id='tab-content<%= index %>' class='tab-content <%= run_dec.style_activity %> '>
             <div class='col-8-24  grid-row  top-half-line-spacer  grid-label'>
-              <h2>Run <%= run_dec.invoice_date %></h2>
+              <h2><%= "#{(index + 1).ordinalize} Run (#{run_dec.invoice_date})" %></h2>
             </div>
 
             <div class='col-9-24'>&nbsp;</div>
