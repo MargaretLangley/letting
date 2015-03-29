@@ -25,13 +25,13 @@ Letting::Application.routes.draw do
   resources :payments_by_dates, only: [:index, :destroy]
   resources :properties, path: 'accounts'
   resources :invoicings
-  resources :blue_invoicings, only: [:index, :destroy]
   resources :invoice_texts, only: [:index, :show, :edit, :update]
   resources :invoices, only: [:show]
   resources :print_invoices, only: [:show]
   resources :print_runs, only: [:show]
   resources :property_lists, only: [:index]
   resources :runs, only: [:show, :destroy]
+  resources :second_runs_needed, only: [:index, :destroy]
 
   # Admin
   resources :cycles

@@ -2,7 +2,7 @@
 # Controller for viewing Account Arrears
 #
 #
-class BlueInvoicingsController < ApplicationController
+class SecondRunsNeededController < ApplicationController
   def index
     @invoicings = Invoicing.blue_invoicies.page(params[:page]).default.load
   end
@@ -11,7 +11,7 @@ class BlueInvoicingsController < ApplicationController
     @invoicing = Invoicing.find params[:id]
     cached_message = deleted_message
     @invoicing.destroy
-    redirect_to blue_invoicings_path, flash: { delete: cached_message }
+    redirect_to second_runs_needed_index_path, flash: { delete: cached_message }
   end
 
   def identity
