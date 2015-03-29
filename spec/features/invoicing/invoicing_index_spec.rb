@@ -11,7 +11,7 @@ describe 'Invoicing#index', type: :feature do
                      period: '2013-6-30'..'2013-8-30'
     visit '/invoicings/'
 
-    expect(page.title).to eq 'Letting - Invoicing'
+    expect(page.title).to eq 'Letting - Invoicings'
     expect(page).to have_text '1-200'
     expect(page).to have_text '30/Jun/13'
   end
@@ -24,7 +24,7 @@ describe 'Invoicing#index', type: :feature do
     visit '/invoicings/'
 
     expect { click_on 'Delete' }.to change(Invoicing, :count)
-    expect(page.title).to eq 'Letting - Invoicing'
+    expect(page.title).to eq 'Letting - Invoicings'
 
     expect(page).to \
       have_text 'Range 1-200, Period 30/Jun - 30/Aug, deleted!'

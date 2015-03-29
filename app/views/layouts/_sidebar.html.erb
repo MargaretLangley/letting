@@ -46,12 +46,12 @@
         <li class=<%=current_path?(new_client_path)%>><%= link_to 'New Client', new_client_path, class: 'menu-item' %></li>
       </ul>
     </li>
-    <li class=<%= main_menu_active? ['invoicings', 'blue_invoicings', 'invoices'] %>>
+    <li class=<%= main_menu_active? ['invoicings', 'second_runs_needed', 'invoices'] %>>
       <h3 class='menu-header'><span class='fa fa-envelope-o icon-spacer'></span> Invoicing</h3>
       <ul class='menu'>
         <li class=<%=current_path?(invoicings_path)%>><%= link_to 'Invoicings', invoicings_path, class: 'menu-item' %></li>
-        <li class=<%=current_path?(new_invoicing_path)%>><%= link_to 'New Invoicing', new_invoicing_path, class: 'menu-item' %></li>
-        <li class=<%=current_path?(blue_invoicings_path)%>><%= link_to 'Blue invoicings', blue_invoicings_path, class: 'menu-item' %></li>
+        <li class=<%=current_path?(new_invoicing_path)%>><%= link_to '1st Run', new_invoicing_path, class: 'menu-item' %></li>
+        <li class=<%=current_path?(second_runs_needed_index_path)%>><%= link_to '2nd Runs Needed', second_runs_needed_index_path, class: 'menu-item' %></li>
       </ul>
     </li>
     <li class=<%= main_menu_active? ['payments', 'payments_by_dates'] %>>

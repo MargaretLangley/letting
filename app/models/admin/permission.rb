@@ -37,7 +37,6 @@ Permission = Struct.new(:user) do
   def user_controllers
     %w(accounts
        arrears
-       blue_invoicings
        client_payments
        clients
        debits
@@ -52,7 +51,8 @@ Permission = Struct.new(:user) do
        print_runs
        runs
        search
-       search_suggestions)
+       search_suggestions
+       second_runs_needed)
   end
 
   def admin_controllers

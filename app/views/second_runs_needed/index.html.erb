@@ -1,4 +1,4 @@
-<% @title='Blue Invoicing' %>
+<% @title='Invoicing - Second Runs Needed' %>
 <div  id='help-me',  data-summit='6'></div>
 <%= render 'index_help' %>
 <%= render 'bubbles/search_account' %>
@@ -40,11 +40,11 @@
      <div class='col-1-24  bottom-spacer'><%= print_link path: print_run_path(invoicing), title: 'Print Last Invoice', disabled: !invoicing.deliverable? %></div>
      <div class='col-1-24  bottom-spacer'>&nbsp;</div>
      <div class='col-1-24  bottom-spacer'>
-       <%= add_link path: [:edit, invoicing], title: 'Send New Invoice (Create Red Invoice)', css: 'Button  ButtonIcon-action' %>
+       <%= add_link path: [:edit, invoicing], title: 'New Run (Create 2nd Invoice)', css: 'Button  ButtonIcon-action' %>
      </div>
      <div class='col-1-24  bottom-spacer'>&nbsp;</div>
-     <div class='col-1-24  bottom-spacer'><%= delete_link path: blue_invoicing_path(invoicing) %></div>
+     <div class='col-1-24  bottom-spacer'><%= delete_link path: second_runs_needed_path(invoicing) %></div>
    </div>
  <% end %>
- <%= render 'information/lacking', objects: @invoicings, message: 'No invoicings waiting for a red invoice.' %>
+ <%= render 'information/lacking', objects: @invoicings, message: 'No invoicings waiting for a second run.' %>
 </div>
