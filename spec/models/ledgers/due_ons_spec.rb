@@ -97,7 +97,7 @@ describe DueOns, :ledgers, :cycle, type: :model do
         it 'new monthly' do
           (cycle = cycle_new cycle_type: 'monthly', due_ons: nil)
             .prepare
-          cycle.due_ons[0].update day: 5
+          cycle.due_ons.day_of_month day: 5
           cycle.save!
           expect(Cycle.first.due_ons.size).to eq(12)
         end
@@ -105,7 +105,7 @@ describe DueOns, :ledgers, :cycle, type: :model do
         it 'changes to different monthly' do
           cycle = cycle_monthly_create day: 2, prepare: true
           cycle.prepare
-          cycle.due_ons[0].day = 3
+          cycle.due_ons.day_of_month day: 3
           cycle.save!
           expect(Cycle.first.due_ons[11].day).to eq(3)
         end

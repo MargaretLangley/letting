@@ -16,6 +16,8 @@ def cycle_new id: nil,
   cycle.due_ons = due_ons if due_ons
   cycle.charged_in = charged_in if charged_in
   cycle.prepare if prepare
+  cycle.due_ons.day_of_month day: cycle.due_ons[0].day \
+    if cycle.monthly? && cycle.due_ons.present?
   cycle
 end
 

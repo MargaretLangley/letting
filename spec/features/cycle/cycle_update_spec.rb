@@ -31,7 +31,8 @@ describe 'Cycle#update', :ledgers, type: :feature do
                    name: 'Regular',
                    charged_in: 'arrears',
                    cycle_type: 'monthly',
-                   due_ons: [DueOn.new(month: 1, day: 8)]
+                   due_ons: [DueOn.new(month: 1, day: 8)],
+                   prepare: true
       cycle_page = CyclePage.new type: :monthly
 
       cycle_page.load id: 1

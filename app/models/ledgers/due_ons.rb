@@ -60,12 +60,18 @@ module DueOns
       end
 
       def clear_up_form
-        to_monthly if monthly? && self[0].day
         each(&:clear_up_form)
       end
 
       def empty?
         self.all?(&:empty?)
+      end
+
+      def day_of_month(day:)
+        (0...MAX_DUE_ONS).each_with_index do |item, index|
+          self[item].day = day
+          self[item].month = index + 1
+        end
       end
 
       def to_s
@@ -80,13 +86,6 @@ module DueOns
 
       def find_max_size
         monthly? ?  MAX_DUE_ONS  :  MAX_DISPLAYED_DUE_ONS
-      end
-
-      def to_monthly
-        (0...MAX_DUE_ONS).each do |item|
-          self[item].day = self[0].day
-          self[item].month = item + 1
-        end
       end
     end
 

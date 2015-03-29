@@ -29,6 +29,7 @@ class CyclesController < ApplicationController
   def create
     @cycle = Cycle.new cycles_params
     @cycle.prepare
+    @cycle.due_ons.day_of_month day: params[:day] if @cycle.monthly?
     if @cycle.save
       redirect_to cycles_path, flash: { save: created_message }
     else
@@ -44,6 +45,7 @@ class CyclesController < ApplicationController
   def update
     @cycle = Cycle.find params[:id]
     @cycle.assign_attributes cycles_params
+    @cycle.due_ons.day_of_month day: params[:day] if @cycle.monthly?
     if @cycle.save
       redirect_to cycles_path, flash: { save: updated_message }
     else
@@ -62,8 +64,8 @@ class CyclesController < ApplicationController
 
   def cycles_params
     params.require(:cycle)
-      .permit %i(id name charged_in order cycle_type),
-              due_ons_attributes: due_ons_params
+      .permit %i(id name charged_in order cycle_type) +
+        [due_ons_attributes: due_ons_params]
   end
 
   def due_ons_params

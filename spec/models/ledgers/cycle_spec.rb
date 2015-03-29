@@ -27,11 +27,11 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
 
   describe '#monthly?' do
     it 'is monthly when initialized monthly' do
-      expect(cycle_new(cycle_type: 'monthly')).to be_monthly
+      expect(cycle_new(cycle_type: 'monthly', prepare: true)).to be_monthly
     end
 
     it 'is not monthly when initialized term' do
-      expect(cycle_new(cycle_type: 'term')).to_not be_monthly
+      expect(cycle_new(cycle_type: 'term', prepare: true)).to_not be_monthly
     end
   end
 
@@ -215,14 +215,6 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
         cycle.prepare
         cycle.valid?
         expect(cycle.due_ons.reject(&:marked_for_destruction?).size).to eq(0)
-      end
-
-      it '#clear_up_form destroys children if empty' do
-        cycle = cycle_new cycle_type: 'monthly',
-                          due_ons: [DueOn.new(month: 3, day: 25)]
-        cycle.prepare
-        cycle.valid?
-        expect(cycle.due_ons.reject(&:marked_for_destruction?).size).to eq(12)
       end
     end
   end

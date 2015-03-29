@@ -18,7 +18,8 @@ describe 'Cycle#show', :ledgers, type: :feature do
     cycle_create id: 2,
                  name: 'Every Month',
                  cycle_type: 'monthly',
-                 due_ons: [DueOn.new(month: 5, day: 4)]
+                 due_ons: [DueOn.new(month: 5, day: 4)],
+                 prepare: true
     visit '/cycles/2'
 
     expect(page.title).to eq 'Letting - View Cycle'
