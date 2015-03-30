@@ -60,6 +60,17 @@ class Payment < ActiveRecord::Base
     where(booked_at: range.first...range.last)
   end
 
+  # Search for payments booked on this date
+  # booked_on - is the date you want a payment to appear in the accounts
+  #             user settable.
+  #
+  def self.booked_on date: Time.zone.today.to_s
+    return Payment.none unless SearchDate.new(date).valid_date?
+
+    Payment.includes(account: [:property])
+      .where(booked_at: SearchDate.new(date).day_range)
+  end
+
   def self.by_booked_at_date
     order('DATE(booked_at) desc').group('DATE(booked_at)')
       .pluck('DATE(booked_at) as booked_on,'\

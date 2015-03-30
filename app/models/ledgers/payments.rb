@@ -28,17 +28,6 @@ class Payments
     payments.map(&:amount).inject(0, &:+)
   end
 
-  # Search for payments booked on this date
-  # booked_on - is the date you want a payment to appear in the accounts
-  #             user settable.
-  #
-  def self.booked_on date: Time.zone.today.to_s
-    return Payment.none unless SearchDate.new(date).valid_date?
-
-    Payment.includes(account: [:property])
-      .where(booked_at: SearchDate.new(date).day_range)
-  end
-
   # Search for payments created on this date.
   # created_on - is the date a payment was created - not user settable.
   #

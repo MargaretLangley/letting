@@ -18,27 +18,31 @@ This document covers the following sections
     3. Deploy the application
 2. Commands
   1. rake db:import
-3. Cheatsheet
-  1. SSH
-  2. Firewalls
+3. Monitoring
+  1. Monit
+4. Cheatsheet
+  1. QEMU
+    1.1 Basic Commands
+    1.2 Removing an instance from
+  2. SSH
+  3. Firewalls
     .1 Listing Firewall
     .2 Adding Ranges to the firewall
     .3 Disabling the Firewall
-  3. Chef
-  4. Postgresql
-  5. Elasticsearch
-  6. QEMU
-    5.1 Basic Commands
-    5.2 Removing an instance from
-4. Troubleshooting
+  4. Chef
+  5. Postgresql
+  6. Elasticsearch
+5. Troubleshooting
   1. Net::SSH::HostKeyMismatch
-  2. Running Rake Tasks on Production Server
-  3. Cleaning Production Setup
-  4. Reset the database
-  5. Running rails console in production
-  6. Capistrano failing to deploy - with github.com port-22
-  7. Truncating a file without changing ownership
-5. Production Client
+  2. How to fix duplicate source.list entry
+  3. Missing secret_key_base
+  4. Running Rake Tasks on Production Server
+  5. Cleaning Production Setup
+  6. Reset the database
+  7. Running rails console in production
+  8. Capistrano failing to deploy - with github.com port-22
+  9. Truncating a file without changing ownership
+6. Production Client
 
 
 ===
@@ -48,13 +52,18 @@ This document covers the following sections
 ####1.1. Development Setup
 
 1. `git clone git@github.com:BCS-io/letting.git`
+
 2. sudo apt-get install liƒbqt4-dev libqtwebkit-dev -y
   1. Required for Capybara-webkit
+
 3. `bundle install --verbose`
   1. this can take a while and verbose gives feedback.
+
 4. `rake db:create`
+
 5. Clone the *private* repository into the import_data directory
   1. `git clone git@bitbucket.org:bcsltd/letting_import_data.git  ~/code/letting/import_data`
+
 6. Create .env file - for data not kept in the repository
   1. `cp ~/code/letting/.env.example  .env`
   2. `rake secret`  and copy the generated key into .env
@@ -62,13 +71,25 @@ This document covers the following sections
 Repeat each time you want to delete and restore the database.
 
 7. `rake db:reboot` - drops the database (if any), creates and runs migrations.
+
 8. Add Data
   Use either seed data or import production data
   1. Seed data: `rake db:seed`
   2. import data: `rake db:import -- -t`
     .1 -t includes test user and passwords.
-9. Re-index Elasticsearch
-   `rake elasticsearch:sync`
+
+9. Elasticsearch
+  1. If not chef configured
+    1. Configure Elasticsearch memory limit (a memory greedy application)
+     `sudo nano /usr/local/etc/elasticsearch/elasticsearch-env.sh`
+      1. Change: ES_HEAP_SIZE=1503m  => ES_HEAP_SIZE=1g, -Xms1g, -Xmx1g
+      2. Change: ES_JAVA_OPS => -Xms1500m - Xmx1500m =>  -Xms1g -Xmx1g
+    2. `sudo service elasticsearch restart`
+      * verify as it also says 'ok' when it fails.   `sudo service elasticsearch restart`
+      * Not unusual pid file (see Elasticsearch configuration below)
+
+  2. Re-index Elasticsearch
+     `rake elasticsearch:sync`
 
 
 ####1.2. Server Setup
@@ -87,18 +108,12 @@ Repeat each time you want to delete and restore the database.
     1. .env file uploaded to shared directory
   3. `cap <environment> deploy`
 
-  4. Configure Elasticsearch memory limit (a memory greedy application)
-     `sudo nano /usr/local/etc/elasticsearch/elasticsearch-env.sh`
-    1. Change: ES_HEAP_SIZE=1503m  => ES_HEAP_SIZE=1g, -Xms1g, -Xmx1g
-    `sudo service elasticsearch restart`
-    2. verify as it also says 'ok' when it fails.   `sudo service elasticsearch restart`
-
-  5. Add Data
+  4. Add Data
     On your *local* system Add Data (see 1.1.6 above). Then copy to the server.
     `cap <environment> db:push`
     or `cap internet rails:rake:db:seed`
 
-  6. Import Data Into Elasticsearch Indexes
+  5. Import Data Into Elasticsearch Indexes
     `cap <environment> 'invoke[elasticsearch:sync]'`
 
 
@@ -125,132 +140,22 @@ My Reference: Webserver alias: `ssh arran`
 
 ===
 
+###3 Monitoring
 
-###3 Cheatsheet
+#####4.1 Monit
 
-####3.1 SSH
-
-1. brew install ssh-copy-id
-2. ssh-copy-id deployer@example.com
-3. ssh deployer@example.com  (verify)
-
-####3.2 Firewall
-
-#####3.2.1 Listing Firewall
-
-`sudo iptables --list`
-
-#####3.1.2 Adding Ranges to the wall
-
-1. ssh to the server which is having packets blocked.
-2. What address is being blocked? `cat /var/log/kern.log`
-  1. The logs contains blocked ip packets - to summarize the import things. DST is the ip address of the server we have been blocked to getting and DPT is the port number. We want to allow this combination through.
-  Mar 13 ... iptables denied: IN= OUT=eth0 ... DST=23.23.181.189 ... DPT=443
-3. What range does the blocked ip address belong to?
-  1. Install whois if not already installed
-  2. whois 23.23.181.189
-  3. Add the CIDR range to the firewall, in this case Amazon's 23.20.0.0/14
-
-#####3.2.3 Disabling the Firewall
-
-If an operation is not completing and you suspect a firewall issue
-these commands completely remove it. (Rebooting the box, if applicable, restores the firewall)
-
-````
-    sudo su
-    iptables -P INPUT ACCEPT
-    iptables -P OUTPUT ACCEPT
-    iptables -P FORWARD ACCEPT
-    iptables -F
-````
-
-#####3.3 Chef
-
-######3.3.1 Updating a cookbook
-
-1. Clone the cookbook to the local machine under ~/code/chef/
-2. Make changes to the cookbook increment the version in the meta data and commit and push back.
-3. Under the repo directory update the reference `berks update <cookbook-name>`
-  1. Confirm the version number has changed to the one you used in 2.
-4. Update the cookbook by revendoring `berks vendor ./cookbooks/`
-5. Apply the cookbook again: `knife solo bootstrap deployer@example.com`
-  1. Don't bother around 5 - 11 pm in the evening as you get failed to connect.
+Monit connection: http://<ip-address>:2812
+* Connection Must be from BCS Network
+* Connection Uses the ['monit']['web_interface'] user/password as defined in letting-<environment>
 
 
-######3.3.2 Updating a server
+===
 
-Chef is installed on servers - I've seen this get out of date. Removing it and then doing a knife solo bootstrap puts on a later version. Running chef on existing server may have firewall problems.
+###4 Cheatsheet
 
-1. Confirm situation: `dpkg --list | grep chef` and `sudo find / -name chef`
-2. Remove package: `sudo apt-get purge chef`
-3. Run chef again: `knife solo bootstrap root@example.com`
-4. Step 1 confirm situation.
+#####4.1 QEMU
 
-
-#####3.4 Postgresql
-1. change to Postgres user and open psql prompt `sudo -u postgres psql postgres`
-2. Listing Users (roles) and attributes: `\du`
-3. Listing all databases: `\list`
-4. Connect to a database: `\c db_name`
-5. Execute SQL file:  `psql -f thefile.sql letting_<envionrment>`
-6. Logging In: `psql -d letting_<envionment> -U letting_<environment>`
-
-#####3.5 Elasticsearch
-
-1) Forced Re-index:   `rake elasticsearch:sync` <br>
-2) Find Cluster name: `curl -XGET 'http://localhost:9200/_nodes'`  <br>
-3) Document Mapping:  `curl -XGET "localhost:9200/development_properties/_mapping?pretty=true"`  <br>
-4) Find All indexes:   `curl -XGET "localhost:9200/_stats/indices?pretty=true"`  <br>
-                       example: development_properties<br>
-5) Index Structure:    `curl -XGET 'http://127.0.0.1:9200/my_index/_mapping?pretty=1'` <br>
-6) Return Records:     `curl -XGET "localhost:9200/my_index/_search?pretty=true"`  <br>
-7) 'Simple' Query
-
-````
-    GET development_properties/_search
-    {
-       "query": {
-          "match": {
-              "_all": {
-                  "query": "35 Beau",
-                  "operator": "and"
-              }
-          }
-       }
-    }
-````
-
-When Elasticsearch Breaks the build during testing:
-
-````
-   Failure/Error: Client.import force: true, refresh: true
-       Faraday::ConnectionFailed:
-         Connection refused - connect(2) for "localhost" port 9200
-````
-
-Reset Elasticsearch
-
-````
-sudo service elasticsearch restart
-````
-
-Somtimes it won't delete the Elasticsearch pid file.
-
-````
-    Stopping elasticsearch...PID file found, but no matching process running?
-    Removing PID file...
-    rm: cannot remove ‘/usr/local/var/run/10_0_0_101.pid’: Permission denied
-
-    To Remove
-    sudo rm /usr/local/var/run/10_0_0_101.pid
-
-    Repeat Restart
-
-````
-
-#####3.6 QEMU
-
-######3.6.1 Basic Commands
+######4.1.1 Basic Commands
 
 ````
 virsh list --all     -  List running virtual servers
@@ -262,12 +167,12 @@ virsh destroy <vm-name> - forced quit of virtual server
 virsh start <vm-name> - start guest
 ````
 
-######3.6.2 Displaying Logical Volume
+######4.1.2 Displaying Logical Volume
 
 `lvdisplay -v /dev/<volume-group-name>`
 * `lvdisplay -v /dev/fla2014-vg`
 
-######3.6.3 Removing an instance from
+######4.1.3 Removing an instance from
 
 Removing an instance called <vm-name>
 
@@ -282,7 +187,7 @@ Removing an instance called <vm-name>
   sudo reboot - otherwise temporary files prevent you from reusing the vm name
 `````
 
-######3.6.4 Creating an instance from
+######4.1.4 Creating an instance from
 
 Removing an instance called <vm-name>
 
@@ -344,9 +249,162 @@ Verify
 
 ===
 
-###4. TROUBLESHOOTING
 
-####4.1 Net::SSH::HostKeyMismatch
+####4.2 SSH
+
+1. brew install ssh-copy-id
+2. ssh-copy-id deployer@example.com
+3. ssh deployer@example.com  (verify)
+
+####4.3 Firewall
+
+#####4.3.1 Listing Firewall
+
+`sudo iptables --list`
+
+#####4.3.2 Adding Ranges to the wall
+
+1. ssh to the server which is having packets blocked.
+2. What address is being blocked? `cat /var/log/kern.log`
+  1. The logs contains blocked ip packets - to summarize the import things. DST is the ip address of the server we have been blocked to getting and DPT is the port number. We want to allow this combination through.
+  Mar 13 ... iptables denied: IN= OUT=eth0 ... DST=23.23.181.189 ... DPT=443
+3. What range does the blocked ip address belong to?
+  1. Install whois if not already installed
+  2. whois 23.23.181.189
+  3. Add the CIDR range to the firewall, in this case Amazon's 23.20.0.0/14
+
+#####4.3.3 Disabling the Firewall
+
+If an operation is not completing and you suspect a firewall issue
+these commands completely remove it. (Rebooting the box, if applicable, restores the firewall)
+
+````
+    sudo su
+    iptables -P INPUT ACCEPT
+    iptables -P OUTPUT ACCEPT
+    iptables -P FORWARD ACCEPT
+    iptables -F
+````
+
+#####4.4 Chef
+
+######4.4.1 Updating a cookbook
+
+1. Clone the cookbook to the local machine under ~/code/chef/
+2. Make changes to the cookbook increment the version in the meta data and commit and push back.
+3. Under the repo directory update the reference `berks update <cookbook-name>`
+  1. Confirm the version number has changed to the one you used in 2.
+4. Update the cookbook by revendoring `berks vendor ./cookbooks/`
+5. Apply the cookbook again: `knife solo bootstrap deployer@example.com`
+  1. Don't bother around 5 - 11 pm in the evening as you get failed to connect.
+
+
+######4.4.2 Updating a server
+
+Chef is installed on servers - I've seen this get out of date. Removing it and then doing a knife solo bootstrap puts on a later version. Running chef on existing server may have firewall problems.
+
+1. Confirm situation: `dpkg --list | grep chef` and `sudo find / -name chef`
+2. Remove package: `sudo apt-get purge chef`
+3. Run chef again: `knife solo bootstrap root@example.com`
+4. Step 1 confirm situation.
+
+
+#####4.5 Postgresql
+1. change to Postgres user and open psql prompt `sudo -u postgres psql postgres`
+2. Listing Users (roles) and attributes: `\du`
+3. Listing all databases: `\list`
+4. Connect to a database: `\c db_name`
+5. Execute SQL file:  `psql -f thefile.sql letting_<envionrment>`
+6. Logging In: `psql -d letting_<envionment> -U letting_<environment>`
+
+#####4.6 Elasticsearch
+
+* Java application that improves usability of Lucene. [1]
+* Recommend giving half of heap to Elasticsearch - Lucene will use the rest. [2]
+
+1. Configuration
+  Init script: `/etc/init.d/elasticsearch` sets
+    1. Set pid:  PIDFILE='/usr/local/var/run/<server-name>.pid'
+      * Mention this as it is inconsistent with normal conventions
+    2. Set ENV: ES_INCLUDE='/usr/local/etc/elasticsearch/elasticsearch-env.sh'
+
+  1. Directory: ES_HOME/config: /usr/local/etc/elasticsearch/
+    1. JVM Configuration: elasticsearch-env.sh
+      * ES_HEAP_SIZE - to half of the available memory
+      * `ES_HEAP_SIZE=1g`
+      I also move ES_JAVA_OPTS to 1000m to keep consistency with the default configuration.
+      ES_JAVA_OPTS="...
+                   -Xms1000m
+                   -Xmx1000m
+                   ...
+                   "
+      See further reading [3] on memory Q and A.
+
+    2. Settings: elasticsearch.yml
+
+  Once changes made: `sudo service elasticsearch restart`
+
+
+2. Forced Re-index:   `rake elasticsearch:sync` <br>
+3. Find Cluster name: `curl -XGET 'http://localhost:9200/_nodes'`  <br>
+4. Document Mapping:  `curl -XGET "localhost:9200/development_properties/_mapping?pretty=true"`  <br>
+5. Find All indexes:   `curl -XGET "localhost:9200/_stats/indices?pretty=true"`  <br>
+                       example: development_properties<br>
+6. Index Structure:    `curl -XGET 'http://127.0.0.1:9200/my_index/_mapping?pretty=1'` <br>
+7. Return Records:     `curl -XGET "localhost:9200/my_index/_search?pretty=true"`  <br>
+8. 'Simple' Query
+
+````
+    GET development_properties/_search
+    {
+       "query": {
+          "match": {
+              "_all": {
+                  "query": "35 Beau",
+                  "operator": "and"
+              }
+          }
+       }
+    }
+````
+
+When Elasticsearch Breaks the build during testing:
+
+````
+   Failure/Error: Client.import force: true, refresh: true
+       Faraday::ConnectionFailed:
+         Connection refused - connect(2) for "localhost" port 9200
+````
+
+Reset Elasticsearch
+
+````
+sudo service elasticsearch restart
+````
+
+Somtimes it won't delete the Elasticsearch pid file.
+
+````
+    Stopping elasticsearch...PID file found, but no matching process running?
+    Removing PID file...
+    rm: cannot remove ‘/usr/local/var/run/10_0_0_101.pid’: Permission denied
+
+    To Remove
+    sudo rm /usr/local/var/run/10_0_0_101.pid
+
+    Repeat Restart
+
+````
+
+Further Reading
+
+[1] http://exploringelasticsearch.com/overview.html
+[2] http://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html
+[3] http://zapone.org/benito/2015/01/21/elasticsearch-reports-default-heap-memory-size-after-setting-environment-variable/
+
+###5. TROUBLESHOOTING
+
+####5.1 Net::SSH::HostKeyMismatch
 
 Error seen as something like:
 
@@ -360,7 +418,32 @@ Solution
 `ssh-keygen -R <ip address> | <name>`
 
 
-####4.2 Missing secret_key_base
+####5.2 How to fix duplicate source.list entry
+
+Format of Repository Source List found in `/etc/apt/sources.list` and `/etc/apt/sources.list.d/`
+`<type of repository>  <location>  <dist-name> <components>`
+
+Example
+`deb http://archive.ubuntu.com/ubuntu precise main`
+
+
+Example of a duplicate
+* In the example 'universe' has been duplicated
+
+````
+deb http://archive.ubuntu.com/ubuntu precise universe
+deb http://archive.ubuntu.com/ubuntu precise main universe
+````
+
+* Fix - this is equivalent
+````
+deb http://archive.ubuntu.com/ubuntu precise main universe
+````
+
+Further Reading
+http://askubuntu.com/questions/120621/how-to-fix-duplicate-sources-list-entry
+
+####5.3 Missing secret_key_base
 
 Without the secret_key being set - nothing works 2 diagnostics:
 1. cat unicorn.stderr.log - app error: Missing `secret_key_base` ... set this value in `config/secrets.yml
@@ -376,14 +459,14 @@ Solution
 5. Restart the server - another deployment did this otherwise `sudo service unicorn_<name of process> reload` worth trying.
 
 
-####4.2 Running Rake Tasks on Production Server
+####5.4 Running Rake Tasks on Production Server
 
   `ssh <server>`
   `cd ~/apps/letting_<environment>/current`
   ` RAILS_ENV=<environment> bundle exec rake <method name>`
 
 
-####4.3. Cleaning Production Setup
+####5.5. Cleaning Production Setup
 
 1. `sudo rm -rf ~/apps/`
 2. `sudo rm /tmp/unicorn.letting_*.sock`
@@ -398,7 +481,7 @@ Solution
 ===
 
 
-####4.4. Reset the database
+####5.6. Reset the database
 Sometimes when you are changing a project the database will not allow you to delete it due to open connections to it. If you cannot close the connections you will have to reset the database. If this is the case follow this:
 
 1. `cap production rails:rake:db:drop`
@@ -410,10 +493,10 @@ Sometimes when you are changing a project the database will not allow you to del
 4. `cap <environment> db:push`
   1. The data has been deleted by the drop this puts it back.
 
-####4.5 Running rails console in production
+####5.7 Running rails console in production
 `bundle exec rails c production`
 
-####4.6 Capistrano failing to deploy - with github.com port-22
+####5.8 Capistrano failing to deploy - with github.com port-22
 
 Occasionally a deployment fails with an unable to connect to github.
 Any network service is not completely reliable. Wait for a while and try again.
@@ -423,12 +506,12 @@ DEBUG [44051a0f]  ssh: connect to host github.com port 22: Connection timed out
 DEBUG [44051a0f]  fatal: Could not read from remote repository.
 ````
 
-####4.7 Truncating a file without changing ownership
+####5.9 Truncating a file without changing ownership
 
 ````
 cat /dev/null > /file/you/want/to/wipe-out
 `````
 
 
-####5 Production Client
+####6 Production Client
 On release of the version go through the checklist in docs/production_checklist
