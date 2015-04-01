@@ -163,19 +163,19 @@ describe Payment, :payment, :ledgers, type: :model do
         account = account_create property: property_new
         payment = payment_create account_id: account.id,
                                  booked_at: '2014-9-1 16:29:30'
-        expect(Payments.booked_on(date: '2014-09-01').to_a).to eq [payment]
+        expect(Payment.booked_on(date: '2014-09-01').to_a).to eq [payment]
       end
 
       it 'returns nothing on days without a transaction.' do
         account = account_create property: property_new
         payment_create account_id: account.id
-        expect(Payments.booked_on(date: '2000-1-1').to_a).to eq []
+        expect(Payment.booked_on(date: '2000-1-1').to_a).to eq []
       end
 
       it 'returns nothing if invalid date' do
         account = account_create property: property_new
         payment_create account_id: account.id
-        expect(Payments.booked_on date: '2012-x').to eq []
+        expect(Payment.booked_on date: '2012-x').to eq []
       end
     end
   end
