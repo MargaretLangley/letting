@@ -11,39 +11,40 @@ This document covers the following sections
 
 ####Content
 1. Project Setup
-  1. Development Setup
-  2. Server Setup
-    1. Install Ubuntu Linux 14.04 LTS
-    2. Deploy the Software stack using Chef
-    3. Deploy the application
+  * 1\. Development Setup
+  * 2\. Server Setup
+    * 1\. Install Ubuntu Linux 14.04 LTS
+    * 2\. Deploy the Software stack using Chef
+    * 3\. Deploy the application
 2. Commands
-  1. rake db:import
+  * 1\. rake db:import
 3. Monitoring
-  1. Monit
+  * 1\. Monit
 4. Cheatsheet
-  1. QEMU
-    1.1 Basic Commands
-    1.2 Removing an instance from
-  2. SSH
-  3. Firewalls
-    .1 Listing Firewall
-    .2 Adding Ranges to the firewall
-    .3 Disabling the Firewall
-  4. Chef
-  5. Postgresql
-  6. Elasticsearch
+  * 1\. QEMU
+    * 1\. Basic Commands
+    * 2\. Removing an instance from
+  * 2\. SSH
+  * 3\. Firewalls
+    * 1\. Listing Firewall
+    * 2\. Adding Ranges to the firewall
+    * 3\. Disabling the Firewall
+  * 4\. Chef
+  * 5\. Postgresql
+  * 6\. Elasticsearch
 5. Troubleshooting
-  1. Net::SSH::HostKeyMismatch
-  2. How to fix duplicate source.list entry
-  3. Missing secret_key_base
-  4. Running Rake Tasks on Production Server
-  5. Cleaning Production Setup
-  6. Reset the database
-  7. Running rails console in production
-  8. Capistrano failing to deploy - with github.com port-22
-  9. Truncating a file without changing ownership
+  * 1\. Net::SSH::HostKeyMismatch
+  * 2\. How to fix duplicate source.list entry
+  * 3\. Capistrano
+    * 1\. Capistrano failing to deploy - with github.com port-22
+  * 3\. Missing secret_key_base
+  * 4\. Running Rake Tasks on Production Server
+  * 5\. Cleaning Production Setup
+  * 6\. Reset the database
+  * 7\. Running rails console in production
+  * 8\. Truncating a file without changing ownership
 6. Production Client
-
+<br><br><br>
 
 ===
 
@@ -53,71 +54,75 @@ This document covers the following sections
 
 1. `git clone git@github.com:BCS-io/letting.git`
 
-2. sudo apt-get install liƒbqt4-dev libqtwebkit-dev -y
-  1. Required for Capybara-webkit
+2. `sudo apt-get install libqt4-dev libqtwebkit-dev -y`
+  * Capybara-webkit requirement
 
 3. `bundle install --verbose`
-  1. this can take a while and verbose gives feedback.
+  * this can take a while and verbose gives feedback.
 
 4. `rake db:create`
+5. `git clone git@bitbucket.org:bcsltd/letting_import_data.git  ~/code/letting/import_data`
+    * Clone the *private* data repository into the import_data directory
+    * Can be imported into the database
 
-5. Clone the *private* repository into the import_data directory
-  1. `git clone git@bitbucket.org:bcsltd/letting_import_data.git  ~/code/letting/import_data`
+6. Create .env file - for *private* application data - not kept in the repository
+  * 1\. `cp ~/code/letting/.env.example  .env`
+  * 2\. `rake secret`  and copy the generated key into .env
 
-6. Create .env file - for data not kept in the repository
-  1. `cp ~/code/letting/.env.example  .env`
-  2. `rake secret`  and copy the generated key into .env
+7. `rake db:reboot`
+  * drops the database (if any), creates and runs migrations.
+  * Repeat each time you want to delete and restore the database.
 
-Repeat each time you want to delete and restore the database.
+8. Elasticsearch (chef configures this)
+  * 1\. Configure Elasticsearch memory limit (a memory greedy application)
+    `sudo nano /usr/local/etc/elasticsearch/elasticsearch-env.sh`
+    1. Change: ES_HEAP_SIZE=1503m  => ES_HEAP_SIZE=1g, -Xms1g, -Xmx1g
+    2. Change: ES_JAVA_OPS => -Xms1500m - Xmx1500m =>  -Xms1g -Xmx1g
+  * 2\. `sudo service elasticsearch restart`
+    * verify as it also says 'ok' when it fails.   `sudo service elasticsearch restart`
+    * Not unusual pid file (see Elasticsearch configuration below)
 
-7. `rake db:reboot` - drops the database (if any), creates and runs migrations.
+9. Add Data - using *one* of:
+  * 1\. Seed data: `rake db:seed`
+  * 2\. import data: `rake db:import -- -t`
+    * -t includes test user and passwords.
+  * 3\. Pull data from server: `cap <environment> db:pull`
 
-8. Add Data
-  Use either seed data or import production data
-  1. Seed data: `rake db:seed`
-  2. import data: `rake db:import -- -t`
-    .1 -t includes test user and passwords.
-
-9. Elasticsearch
-  1. If not chef configured
-    1. Configure Elasticsearch memory limit (a memory greedy application)
-     `sudo nano /usr/local/etc/elasticsearch/elasticsearch-env.sh`
-      1. Change: ES_HEAP_SIZE=1503m  => ES_HEAP_SIZE=1g, -Xms1g, -Xmx1g
-      2. Change: ES_JAVA_OPS => -Xms1500m - Xmx1500m =>  -Xms1g -Xmx1g
-    2. `sudo service elasticsearch restart`
-      * verify as it also says 'ok' when it fails.   `sudo service elasticsearch restart`
-      * Not unusual pid file (see Elasticsearch configuration below)
-
-  2. Re-index Elasticsearch
-     `rake elasticsearch:sync`
-
+10. `rake elasticsearch:sync`
+  * Re-index Elasticsearch
+<br><br>
 
 ####1.2. Server Setup
 
 1. Install Ubuntu Linux 14.04 LTS
 
-2. Deploy the Software stack using Chef
-  1. `cd ~/code/chef/repo`
-  2. `knife solo bootstrap root@example.com'
-    1. Once complete reboot box before webserver working
-    2. Once System set up use `knife solo cook deployer@example.com' for further updates.
+2. Provision the software stack with Chef
+  * change to a machine configured for Chef Solo
+  * 1\. `cd ~/code/chef/repo`
+  * 2\. `knife solo bootstrap root@example.com'
+    * 1\. Once complete reboot box before webserver working
+    * 2\. Once System set up use `knife solo cook deployer@example.com' for further updates.
+  * 3\. `ssh deployer@example.com`
+    * Verify you can passwordlessly log on.
 
-3. Deploy the application
-  1. `cap <environment> setup`
-  2. `cap <environment> env:upload`
-    1. .env file uploaded to shared directory
-  3. `cap <environment> deploy`
+3. Deploy the application with Capistrano
+  * 1\. `cap <environment> setup`
+  * 2\. `cap <environment> env:upload`
+    * 1\. .env file uploaded to shared directory
+  * 3\. `cap <environment> deploy`
 
-  4. Add Data
-    On your *local* system Add Data (see 1.1.6 above). Then copy to the server.
+4. Add Data
+    On your *local* system Add Data (see 1.1.9 above). Then copy to the server.
     `cap <environment> db:push`
-    or `cap internet rails:rake:db:seed`
+    or use fake data `cap <environment> rails:rake:db:seed`
 
-  5. Import Data Into Elasticsearch Indexes
-    `cap <environment> 'invoke[elasticsearch:sync]'`
+5. `cap <environment> 'invoke[elasticsearch:sync]'`
+  * Import Data Into Elasticsearch Indexes
+
 
 
 My Reference: Webserver alias: `ssh arran`
+<br><br><br>
 
 ===
 
@@ -131,23 +136,23 @@ My Reference: Webserver alias: `ssh arran`
 #####options
   To add an option -- is needed after db:import to bypass the rake argument parsing.
   1. -r Range of properties to import: `rake db:import -- -r 1-200`
-    1. Default is import all properties
+    * Default is import all properties
   2. -t Adding test passwords for easy login: `rake db:import -- -t`
-    1. Default is *no* test passwords
-    2. Import creates an admin from the application.yml's user and password (see above).
+    * 1\. Default is *no* test passwords
+    * 2\. Import creates an admin from the application.yml's user and password (see above).
   3. -h Help displays help and exits `rake db:import -- -h`
-
+<br><br><br>
 
 ===
 
 ###3 Monitoring
 
-#####4.1 Monit
+#####3.1 Monit
 
 Monit connection: http://<ip-address>:2812
 * Connection Must be from BCS Network
 * Connection Uses the ['monit']['web_interface'] user/password as defined in letting-<environment>
-
+<br><br><br>
 
 ===
 
@@ -219,14 +224,18 @@ Edit the product of the builder script
 
 Changing
 
-1. Driver from 'qcow2' to 'raw'   (a => b)
-  a. <driver name='qemu' type='qcow2'/>
-  b. <driver name='qemu' type='raw'/>
+1. Driver from 'qcow2' to 'raw'
+  * Before
+    `<driver name='qemu' type='qcow2'/>`
+  * After
+    `<driver name='qemu' type='raw'/>`
 
-2. source file from qcow's to vm-name (a => b)
-  a. <source file='/var/lib/libvirt/images/scarp/ubuntu-kvm/tmpd6ojfe.qcow2'/>
-  b. <source file='/dev/<volume-group-name>/<vm-name>'>
-    1. <source file='/dev/fla2014-vg/scarp'
+2. source file from qcow's to vm-name
+  * Before
+    * `<source file='/var/lib/libvirt/images/scarp/ubuntu-kvm/tmpd6ojfe.qcow2'/>`
+  * After
+    * `<source file='/dev/<volume-group-name>/<vm-name>'>`
+      * Example: `<source file='/dev/fla2014-vg/scarp'>`
 
 
 Create the logical volume
@@ -401,6 +410,8 @@ Further Reading
 [1] http://exploringelasticsearch.com/overview.html
 [2] http://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html
 [3] http://zapone.org/benito/2015/01/21/elasticsearch-reports-default-heap-memory-size-after-setting-environment-variable/
+<br><br><br>
+===
 
 ###5. TROUBLESHOOTING
 
@@ -442,6 +453,33 @@ deb http://archive.ubuntu.com/ubuntu precise main universe
 
 Further Reading
 http://askubuntu.com/questions/120621/how-to-fix-duplicate-sources-list-entry
+
+
+####5.8 Capistrano
+
+####1. SSH Doctor
+
+Diagnostic tool
+
+````
+cap production ssh:doctor
+````
+
+````
+The agent has no identities.
+````
+
+####2. Capistrano failing to deploy - with github.com port-22
+
+Occasionally a deployment fails with an unable to connect to github.
+Any network service is not completely reliable. Wait for a while and try again.
+
+````
+DEBUG [44051a0f]  ssh: connect to host github.com port 22: Connection timed out
+DEBUG [44051a0f]  fatal: Could not read from remote repository.
+````
+
+
 
 ####5.3 Missing secret_key_base
 
@@ -496,17 +534,8 @@ Sometimes when you are changing a project the database will not allow you to del
 ####5.7 Running rails console in production
 `bundle exec rails c production`
 
-####5.8 Capistrano failing to deploy - with github.com port-22
 
-Occasionally a deployment fails with an unable to connect to github.
-Any network service is not completely reliable. Wait for a while and try again.
-
-````
-DEBUG [44051a0f]  ssh: connect to host github.com port 22: Connection timed out
-DEBUG [44051a0f]  fatal: Could not read from remote repository.
-````
-
-####5.9 Truncating a file without changing ownership
+####5.8 Truncating a file without changing ownership
 
 ````
 cat /dev/null > /file/you/want/to/wipe-out
