@@ -16,6 +16,27 @@ describe 'Payment#create', :ledgers, type: :feature do
     expect(payment_page).to be_receivables # receivables eq debts
   end
 
+  describe 'autofocus' do
+    it 'the next step', js: true do
+      account_create property: property_create(human_ref: 2003),
+                     charges: [charge_new(debits: [debit_new(amount: 20.05)])]
+
+      payment_page.load
+      expect(find_field(:account_payment_search)[:autofocus]).to be_present
+      payment_page.human_ref('2003').search
+      expect(find('#submit')[:autofocus]).to be_present
+      payment_page.pay
+      expect(find_field(:account_payment_search)[:autofocus]).to be_present
+    end
+
+    it 'stays on search when no account found', js: true do
+      payment_page.load
+      payment_page.human_ref('2004').search
+
+      expect(find_field(:account_payment_search)[:autofocus]).to be_present
+    end
+  end
+
   describe 'booked_at' do
     it 'defaults to today' do
       account_create property: property_create(human_ref: 2003),

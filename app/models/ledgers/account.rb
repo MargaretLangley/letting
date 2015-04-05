@@ -104,6 +104,7 @@ class Account < ActiveRecord::Base
   #
   def self.between? human_ref_range
     return Account.none if human_ref_range.nil?
+
     human_refs = human_ref_range.split('-')
     human_refs << human_refs.first if human_refs.size == 1
     Account.includes(:property)
