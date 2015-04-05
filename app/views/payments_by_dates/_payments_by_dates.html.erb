@@ -20,7 +20,7 @@
 <div class='col-10-24  vertical-spacer  grid-header  r-align'>Amount</div>
 
 <% payments_by_dates.each do |payments_on_date| %>
-  <div title='View' class='table-row  <%= payment_date date: payments_on_date[0] %> ' data-link='<%= payments_path(date: payments_on_date[0]) %>'>
+  <div title='View' class='table-row  <%= payment_date date: payments_on_date[0] %> ' data-link='<%= payments_by_dates_path(date: payments_on_date[0]) %>'>
     <div class='col-10-24  grid-row  bottom-spacer  inherit-row'>
       <%= format_short_date payments_on_date[0] %>
     </div>
