@@ -72,16 +72,15 @@
 #
 # GEMS THAT BREAK THE BUILD
 #
-# There are a number of Gems that if you update you break the build.
-# Keep a list of them here - details why next to the gem inclusion below:
+# A list of Gems that if updated will break the application.
 #
-# gem 'capistrano-db-tasks', require: false
-# gem 'capybara-webkit',  '~>1.3.0'
-# gem 'database_cleaner', '~> 1.3.0'
-# gem 'jquery-ui-rails', '~> 4.1.0'    # causes capybara to fail
-# gem 'rake', '10.1.0'
+# Gem                     Using      Last tested   Gem Bug
+# byebug                  3.5.1            4.0.3         Y
+# capistrano-db-tasks       0.3              0.4         Y
+# jquery-ui-rails         4.1.2            5.0.3         N
+# rake                   10.1.0           10.4.2         ?
 #
-
+#
 source 'https://rubygems.org'
 ruby '2.1.2'
 
@@ -103,7 +102,7 @@ gem 'jquery-rails', '~> 4.0.0'
 
 # BREAKING GEM
 # 5.0.3 - causes CapybaraHelper to fail
-gem 'jquery-ui-rails', '~> 4.1.0'
+gem 'jquery-ui-rails', '4.1.2'
 
 # Kaminari before elasticsearch
 gem 'kaminari', '~> 0.16.0'
@@ -139,8 +138,8 @@ group :development do
   #
   # Upgrading to 0.4.0 caused
   # createdb: database creation failed: ERROR:  permission denied to create
-  gem 'capistrano-db-tasks', require: false
-  gem 'capistrano-postgresql', '~> 2.0.0'
+  gem 'capistrano-db-tasks', '0.3', require: false
+  gem 'capistrano-postgresql', '~> 4.2.0'
   gem 'capistrano-rails', '~> 1.1.2'
   gem 'capistrano-rbenv', '~> 2.0.0'
   gem 'capistrano-rails-collection', '~> 0.0.3'
@@ -167,14 +166,14 @@ end
 # Development and testing
 #
 group :development, :test do
-  gem 'byebug', '~> 4.0.0'
-  gem 'capybara', '~> 2.4.0'
-
   #
   # BREAKING GEM
-  # Capybara-webkit 1.4.1 causes 2 errors (maybe worth investigating why)
+  # Throwing exceptions when it hits breakpoints
   #
-  gem 'capybara-webkit', '~>1.3.0'
+  gem 'byebug', '3.5.1'
+  gem 'capybara', '~> 2.4.0'
+
+  gem 'capybara-webkit', '~> 1.4.1'
   gem 'capybara-screenshot'
   # 0.1.1 seems to introduce errors - Use this gem occasionally to weed out
   # performance errors with tests
@@ -200,14 +199,7 @@ end
 #
 group :test do
   gem 'coveralls', '~>0.7.0', require: false
-
-  #
-  # BREAKING GEM
-  # v1.4.0 cleans the 'schema_migrations'
-  # https://github.com/DatabaseCleaner/database_cleaner/issues/317
-  # Do not upgrade until there is a fix for version > 1.4.0
-  #
-  gem 'database_cleaner', '~> 1.3.0'
+  gem 'database_cleaner', '~> 1.4.0'
 
   # Create e.s. test node
   gem 'elasticsearch-extensions'
