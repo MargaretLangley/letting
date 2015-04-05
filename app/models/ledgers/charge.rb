@@ -14,7 +14,6 @@
 ####
 #
 class Charge < ActiveRecord::Base
-  include PaymentTypeDefaults
   enum payment_type: [:manual, :automatic]
   enum activity: [:dormant, :active]
   belongs_to :account

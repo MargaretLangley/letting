@@ -24,7 +24,7 @@
         <%= f.text_field :amount, class: 'r-align  js-clear' %>
       </div>
       <div class='col-2-24  bottom-spacer'>
-        <%= f.select :activity, Charge.activities.keys.to_a, class: 'js-clear' %>
+        <%= f.select :activity, Charge.activities.keys, class: 'js-clear' %>
       </div>
       <div class='col-2-24  bottom-spacer  no-r-pad  r-align'>
         <%= f.hidden_field :_destroy %>

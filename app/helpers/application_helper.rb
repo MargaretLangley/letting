@@ -12,6 +12,6 @@ module ApplicationHelper
   end
 
   def payment_types
-    Charge::PAYMENT_TYPE.map { |type| [type.humanize, type] }
+    Charge.payment_types.keys.map { |type| [type.humanize, type] }
   end
 end
