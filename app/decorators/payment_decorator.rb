@@ -78,13 +78,12 @@ class PaymentDecorator
   end
 
   def todays_takings
-    number_to_currency Payments.created_on
-      .map(&:amount).inject(0, &:+)
+    number_to_currency Payment.created_on.map(&:amount).inject(0, &:+)
   end
 
   private
 
   def payment_last_created_at
-    Payments.last_created_at
+    Payment.last_created_at
   end
 end

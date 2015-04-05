@@ -16,17 +16,5 @@ describe Payments do
       payments = Payments.new [payment1, payment2]
       expect(payments.sum).to eq 30
     end
-
-    describe '.last_booked_at' do
-      it 'returns today if no payments at all (unlikely)' do
-        expect(Payments.last_booked_at).to eq Time.zone.today.to_s
-      end
-
-      it 'returns the last day a payment was made' do
-        payment_create(account: account_new, booked_at: '2014-03-25')
-        payment_create(account: account_new, booked_at: '2014-06-25')
-        expect(Payments.last_booked_at).to eq '2014-06-25'
-      end
-    end
   end
 end

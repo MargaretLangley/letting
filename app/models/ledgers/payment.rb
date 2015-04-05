@@ -71,11 +71,38 @@ class Payment < ActiveRecord::Base
       .where(booked_at: SearchDate.new(date).day_range)
   end
 
+  # Search for payments created on this date.
+  # created_on - is the date a payment was created - not user settable.
+  #
+  def self.created_on date: Time.zone.today.to_s
+    return Payment.none unless SearchDate.new(date).valid_date?
+
+    Payment.includes(account: [:property])
+      .where(created_at: SearchDate.new(date).day_range)
+  end
+
   def self.by_booked_at_date
     order('DATE(booked_at) desc').group('DATE(booked_at)')
       .pluck('DATE(booked_at) as booked_on,'\
              ' count(amount) as payments_count, ' \
              ' sum(amount) as payment_sum')
+  end
+
+  # The date a payment was last booked_at
+  # booked_at is an accounting date and does not have to be the created_at date.
+  #
+  def self.last_booked_at
+    return Time.zone.today.to_s if Payment.count.zero?
+    Payment.order('booked_at DESC').first.booked_at.to_date.to_s
+  end
+
+  # The date a payment was last created_at
+  # created_at - is the date a payment was entered and is unaffected by any
+  #              booked_at date.
+  #
+  def self.last_created_at
+    return :no_last_payment if Payment.count.zero?
+    Payment.order('created_at DESC').first
   end
 
   # human_ref - the id of the account / property to return
