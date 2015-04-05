@@ -1,3 +1,5 @@
+require_relative '../modules/payment_type_defaults'
+
 module DB
   ####
   #
@@ -10,11 +12,12 @@ module DB
   ####
   #
   class PaymentType
+    include PaymentTypeDefaults
     def self.to_symbol code
       case code
-      when :S      then Charge::AUTOMATIC
-      when :P, :L  then Charge::MANUAL
-      else         Charge::UNKNOWN_PAYMENT_TYPE
+      when :S      then AUTOMATIC
+      when :P, :L  then MANUAL
+      else         UNKNOWN_PAYMENT_TYPE
       end
     end
   end
