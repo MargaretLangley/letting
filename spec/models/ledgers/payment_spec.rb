@@ -171,8 +171,9 @@ describe Payment, :payment, :ledgers, type: :model do
 
       it 'ignores payments outside range' do
         account = account_create property: property_new
-        payment = payment_create account_id: account.id,
-                                 booked_at: Time.now - 2.year - 1.day
+        payment_create account_id: account.id,
+                       booked_at: Time.now - 2.year - 1.day
+
         expect(Payment.recent.to_a).to eq []
       end
     end

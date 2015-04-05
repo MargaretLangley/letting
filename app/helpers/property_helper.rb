@@ -6,7 +6,7 @@
 #
 module PropertyHelper
   def client_list
-    Client.order(:human_ref).map do |client|
+    Client.includes(:entities).order(:human_ref).map do |client|
       {
         label: "#{client.human_ref} #{client.full_names}",
         value: client.id
