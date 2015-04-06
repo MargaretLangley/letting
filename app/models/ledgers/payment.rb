@@ -56,10 +56,6 @@ class Payment < ActiveRecord::Base
 
   scope :by_booked_at, -> { order(booked_at: :desc) }
 
-  def self.date_range(range: '2013-01-01'..'2013-12-31')
-    where(booked_at: range.first...range.last)
-  end
-
   # Search for payments booked on this date
   # booked_on - is the date you want a payment to appear in the accounts
   #             user settable.
